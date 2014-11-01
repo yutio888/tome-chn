@@ -2,9 +2,9 @@ birthCHN = {}
 birthCHN["Doombringer"] = {
 	chname = "毁灭使者",
 	desc = {
-		"Weapon in hand and sheathed in flame, a Doombringer is a terrifying force in combat.",
-		"Doombringers are engines of war, cleaving and burning their way through entire armies.",
-		"The most powerful Doombringers can harness the full power of their demonic ties and transform themselves into a gigantic demon.",
+		"利 刃 在 手 ， 烈 焰 匿 踪 , 毁 灭 使 者 是 战 斗 中 的 强 大 力 量 。 ",
+		"毁 灭 使 者 是 纯 粹 的 战 争 机 器 ， 使 用 利 刃 和 烈 焰 直 接 凿 穿 敌 人 的 军 队 。 ",
+		"最 强 大 的 毁 灭 使 者 可 以 全 面 激 发 恶 魔 血 脉 ， 变 身 成 为 巨 大 的 恶 魔 。 ",
 		"Their most important stats are: Strength and Magic",
 		"#GOLD#Stat modifiers:",
 		"#LIGHT_BLUE# * +4 Strength, +0 Dexterity, +2 Constitution",

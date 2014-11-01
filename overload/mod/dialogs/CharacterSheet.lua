@@ -587,7 +587,8 @@ function _M:drawDialog(kind, actor_to_compare)
 					name = e.desc
 					long_desc = e.long_desc
 			end
-			
+			local temp = long_desc
+			if type(temp)=="string" then long_desc = function(a,b) return temp end end
 			local desc = long_desc(player, p)
 			if e.status == "detrimental" then
 				self:mouseTooltip(desc, s:drawColorStringBlended(self.font, ("#LIGHT_RED#%s"):format(name), w, h, 255, 255, 255, true)) h = h + self.font_h

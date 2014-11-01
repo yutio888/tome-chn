@@ -2646,20 +2646,164 @@ objects:addObjects({
 	chDesc = "这顶金色的王冠属于传说之城雅尔丹之王——Veluca。【待翻译】他比他的任何亲戚活得都长，在生命的最后日子里，他行走在早期的世界上，教育人们反抗黑暗。临死前，这顶王冠交给了他的继任者，一同交付的还有他的遗言——勿惧邪恶",
 })
 
+objects:addObjects({
+	unique = true,
+	enName = "Blackfire Aegis",
+	chName = "黑炎石盾",
+	unIdedName = "黑色的石质盾牌",
+	chDesc = "这个坚固的石盾闪烁着漆黑的火焰。",
+})
 
+objects:addObjects({
+	unique = true,
+	enName = "Will of Ul'Gruth",
+	chName = "Ul'Gruth的意志",
+	unIdedName = "巨型金属手套",
+	chDesc = "这双巨大的手套曾经属于一个名叫Ul'Gruth的强大的恶魔。据说，这个怪物一挥手就能将一座城市夷为平地。",
+})
+objects:addObjects({
+	unique = true,
+	enName = "Fearfire Mantle",
+	chName = "恐惧之焰",
+	unIdedName = "火焰般的斗篷",
+	chDesc = "黑色的火焰从漆黑的心脏中涌出。",
+})
+objects:addObjects({
+	unique = true,
+	enName = "Plague-Fire Sceptre",
+	chName = "疫火权杖",
+	unIdedName = "黑色的法杖",
+	chDesc = "Mal'Rok的火焰比一般的火焰更加顽强。当它们无物可燃时，它们知道去哪里寻找。",
+})
+objects:addObjects({
+	unique = true,
+	enName = "Dethblyd",
+	chName = "Dethblyd",
+	unIdedName = "黑色的剑",
+	chDesc = "毁灭者Grushgore以头脑简单四肢发达闻名。他从不擅长谋略，但他的力量无以伦比。",
+})
+objects:addObjects({
+	unique = true,
+	enName = "Quasit's Skull",
+	chName = "夸塞魔之颅",
+	unIdedName = "岩石头盔",
+	chDesc = "一些有魄力的冒险者已经注意到了夸塞魔的皮肤其实比大多数金属都要坚硬，这个头盔就是一个夸塞魔的颅骨制成的。呣，气味浓郁。",
+})
+objects:addObjects({
+	unique = true,
+	enName = "Blackfire Aegis",
+	chName = "黑炎石盾",
+	unIdedName = "黑色的石质盾牌",
+	chDesc = "这个坚固的石盾闪烁着漆黑的火焰。",
+})
+objects:addObjects({
+	unique = true,
+	enName = "Revenant",
+	chName = "亡魂",
+	unIdedName = "不断变形的胸甲",
+	chDesc = "关节不祥的咯吱作响，骨架弯曲突起的呼吸。划痕与裂纹是金属的低语，有关苦楚、失去、坚持与复仇。",
+})
+objects:addObjects({
+	unique = true,
+	enName = "Imp Claw",
+	chName = "小鬼之爪",
+	unIdedName = "红色的爪子",
+	chDesc = "这是一只火焰小鬼留下的满是伤痕的爪子。它还燃烧着不自然的火焰。",
+})
+objects:addObjects({
+	unique = true,
+	enName = "Wheel of Fate,
+	chName = "命运之轮",
+	unIdedName = "",
+	chDesc = "This isn't what I wished for! - Howar Muransk, Cornac demonologist.
 
+This band of gothic obsidian menaces with an embossed image of a grinning skull. It beckons you to tempt fate and put it on. Do you?",
+})
 
+objects:addObjects({
+	unique = true,
+	enName = "Helm of the Dominated",
+	chName = "支配头盔",
+	unIdedName = "长角的头盔",
+	chDesc = "这个头盔是为了提高Doom Elf的能力，而作为实验产品被制造出来。",
+})
+objects:addObjects({
+	unique = true,
+	enName = "The Black Crown",
+	chName = "黑之冠",
+	unIdedName = "破碎的黑曜石头盔",
+	chDesc = "魔中之魔，加冕为王",
+})
 
-
-
-
-
-
-
-
-
-
-
-
+objects:addObjects({
+	unique = true,
+	enName = "The Black Core",
+	chName = "黑之核",
+	unIdedName = "黑色的宝石",
+	chDesc = "锁住灵魂，死亡莫及。",
+})
+objects:addObjects({
+	unique = true,
+	enName = "The Black Spike",
+	chName = "黑之钉",
+	unIdedName = "很薄的黑色短剑",
+	chDesc = "世界之心，终将刺穿",
+})
+objects:addObjects({
+	unique = true,
+	enName = "The Black Ring",
+	chName = "黑之戒",
+	unIdedName = "黑曜石戒指",
+	chDesc = "勿视其中，安然无恙",
+})
+objects:addObjects({
+	unique = true,
+	enName = "The Black Boots",
+	chName = "黑之靴",
+	unIdedName = "黑色的靴子",
+	chDesc = "背叛之路，直通天际",
+})
+objects:addObjects({
+	unique = true,
+	enName = "The Black Plate",
+	chName = "黑之铠,
+	unIdedName = "黑曜石胸甲",
+	chDesc = "己身若残，何物能存?",
+})
+objects:addObjects({
+	unique = true,
+	enName = "The Black Maul",
+	chName = "黑之锤",
+	unIdedName = "巨大的黑曜石战锤",
+	chDesc = "冠军之锤，举重若轻",
+})
+objects:addObjects({
+	unique = true,
+	enName = "The Black Maul",
+	chName = "黑之锤",
+	unIdedName = "巨大的黑曜石战锤",
+	chDesc = "冠军之锤，举重若轻",
+})
+objects:addObjects({
+	unique = true,
+	enName = "The Black Wall",
+	chName = "黑之墙",
+	unIdedName = "巨大的黑曜石盾牌",
+	chDesc = "披坚持盾，众莫能伤",
+})
+objects:addObjects({
+	unique = true,
+	enName = "Planar Beacon",
+	chName = "空间信标",
+	unIdedName = "闪光的红色球体",
+	chDesc = "从恶魔手里拿到的奇怪的球体，它正闪耀着超现实的红光。",
+})
+objects:addObjects({
+	unique = true,
+	enName = "Jaw of Rogroth",
+	chName = "Rogroth的下颚",
+	unIdedName = "布满尖齿的腰带",
+	chDesc = "真有趣，灵魂吞噬者Rogroth的嘴巴正好和你的腰一样大。",
+})
 
 

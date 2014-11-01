@@ -2712,12 +2712,10 @@ objects:addObjects({
 })
 objects:addObjects({
 	unique = true,
-	enName = "Wheel of Fate,
+	enName = "Wheel of Fate",
 	chName = "命运之轮",
 	unIdedName = "",
-	chDesc = "This isn't what I wished for! - Howar Muransk, Cornac demonologist.
-
-This band of gothic obsidian menaces with an embossed image of a grinning skull. It beckons you to tempt fate and put it on. Do you?",
+	chDesc = "This isn't what I wished for! - Howar Muransk, Cornac demonologist.\nThis band of gothic obsidian menaces with an embossed image of a grinning skull. It beckons you to tempt fate and put it on. Do you?",
 })
 
 objects:addObjects({
@@ -2766,7 +2764,7 @@ objects:addObjects({
 objects:addObjects({
 	unique = true,
 	enName = "The Black Plate",
-	chName = "黑之铠,
+	chName = "黑之铠",
 	unIdedName = "黑曜石胸甲",
 	chDesc = "己身若残，何物能存?",
 })

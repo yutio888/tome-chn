@@ -1,6 +1,6 @@
 ﻿t_talent_name["T_OBLITERATING_SMASH"] = "歼灭挥斩"
 talentInfoCHN["T_OBLITERATING_SMASH"] = function(self, t)
-	return ([[用 无 与 伦 比 的 力 量 挥 动 武 器 ， 打 击 正 面 半 圆 范 围 内 所 有 敌 对 生 物 ， 对 所 有 目 标 造 成 %d%% 武 器 伤 害。
+	return ([[用 无 与 伦 比 的 力 量 挥 动 武 器 ， 打 击 正 面 半 圆 %d 码 范 围 内 所 有 敌 对 生 物 ， 对 所 有 目 标 造 成 %d%% 武 器 伤 害。
 	技 能 5 级 时 ， 被 击 中 敌 对 生 物 的 护 甲 和 豁 免 会 降 低 %d 点。
 	此 攻 击 必 中。]]):
 	format(self:getTalentRange(t), 100 * t.getDamage(self, t), t.getSunder(self, t))

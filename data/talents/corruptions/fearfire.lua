@@ -7,7 +7,7 @@ talentInfoCHN["T_FEARSCAPE_SHIFT"] = function(self, t)
 	穿 越 空 间 增 强 了 你 的 直 觉 ， 让 你 能 够 在 3 回 合 内 觉 察 到 %d 码 内 的 所 有 敌 对 生 物 。 
  
 	伤 害 受 法 术 强 度 加 成 ， 范 围 随 技 能 等 级 增 大。]]):
-	format(damage, damage,self:getTalentRadius(t), t.getVision(self, t))
+	format(damage, self:getTalentRadius(t),damage, t.getVision(self, t))
 end
 
 t_talent_name["T_CAUTERIZE_SPIRIT"] = "灵魂焚净"

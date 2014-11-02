@@ -15,7 +15,7 @@ end
 
 t_talent_name["T_INFERNO_NEXUS"] = "狱火之核"
 talentInfoCHN["T_INFERNO_NEXUS"] = function(self, t)
-	return ([[火 焰 在 你 四 周 怒 吼 激 荡 。 每 回 合 对 10 码 内 所 有 燃 烧 敌 对 生 物 造 成 %d 码 范 围 的 AOE 伤 害 。
+	return ([[火 焰 在 你 四 周 怒 吼 激 荡 。 每 回 合 对 10 码 内 所 有 燃 烧 敌 对 生 物 造 成 %0.2f点 %d 码 范 围 的 AOE 伤 害 。
 	无 论 敌 对 生 物 周  围 有 多 少 个 燃 烧 敌 对 生 物 ， 每 个 敌 对 生 物 只 会 被 伤 害 一 次。 ]]):	format( t.getDam(self, t), t.getRange(self, t))
 end
 	

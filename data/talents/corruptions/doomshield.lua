@@ -4,14 +4,14 @@ talentInfoCHN["T_OSMOSIS_SHIELD"] = function(self, t)
 		 治 疗 量 等 于 5+ %d%% 格 挡 值 （当 前 %d 点 ）。
 		 技 能 等 级 3 时 ，如 果 伤 害 在 治 疗 量 两 倍 以 上 ，有 %d%% 几 率 解 除 你 一 个 负 面 物 理 状 态 。
 		 在 休 息 和 跑 步 时 ，该 技 能 自 动 终 止 。
-		#{bold}#开 启 护 盾 不 消 耗 时 间 ，关 闭 护 盾 消 耗 时 间 。#{normal}#]])
+		#{bold}#开 启 护 盾 不 消 耗 时 间 ，关 闭 护 盾 消 耗 时 间 。#{normal}#]])
 		:format(self:combatTalentLimit(t, 50, 15, 40), t.getAbsorb(self, t), t.getChance(self, t))
 	end
 
 t_talent_name["T_HARDENED_CORE"] = "硬化之核"
 talentInfoCHN["T_HARDENED_CORE"] = function(self, t)
 		return ([[从 恶 魔 家 乡 中 学 习 ，强 化 自 身 。
-		 增 加 10 + %d%% 总 护 甲 值 ,每 点 力 量 提 供 %d%%法 术 强 度 。]]):
+		 增 加 10 + %d%% 总 护 甲 值 ,每 点 力 量 提 供 %d%% 法 术 强 度 。]]):
 		format((self:combatTalentScale(t, 1.1, 1.6)-1) * 100, self:combatTalentScale(t, 20, 40, 0.75))
 	end
 

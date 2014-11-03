@@ -1462,7 +1462,7 @@ t_talent_name["T_MENTAL_TYRANNY"] = "灵魂之怒"
 
 
 --Stone Waren
-t_talent_name["T_DWARVEN_HALF_EARTHEN_MISSILES"] = "岩石飞弹"
+--[[t_talent_name["T_DWARVEN_HALF_EARTHEN_MISSILES"] = "岩石飞弹"
 t_talent_name["T_ELEMENTAL_SPLIT"] = "元素分裂"
 t_talent_name["T_POWER_CORE"] = "能量核心"
 t_talent_name["T_DWARVEN_UNITY"] = "矮人的团结"
@@ -1493,4 +1493,4 @@ t_talent_name["T_ELDRITCH_SLAM"] = "奥术猛击"
 t_talent_name["T_STONE_SPIKES"] = "岩石尖刺"
 t_talent_name["T_POISONED_SPIKES"] = "剧毒尖刺"
 t_talent_name["T_ELDRITCH_SPIKES"] = "奥术尖刺"
-t_talent_name["T_IMPALING_SPIKES"] = "穿透尖刺"
+t_talent_name["T_IMPALING_SPIKES"] = "穿透尖刺"]]

@@ -10,7 +10,7 @@ end
 
 t_talent_name["T_MASS_HYSTERIA"] = "恐惧之潮"
 talentInfoCHN["T_MASS_HYSTERIA"] = function(self, t)
-	return ([[增 强 目 标 的 恐 惧 ， 目 标 身 上 每 有 一 次 恐 惧 叠 加 ，效 果 增 强 %d%%， 持 续 时 间 增 大 到 %d 回 合 。 增 强 后 的 恐 惧 效 果 影 响 %d 码 内 所 有 敌 对 生 物。]]):format(t.getPowerBonus(self, t), t.getDurationBonus(self, t), self:getTalentRadius(t))
+	return ([[增 强 目 标 的 恐 惧 ， 目 标 身 上 每 有 一 次 恐 惧 叠 加 ，效 果 增 强 %d%% ， 持 续 时 间 增 大 到 %d 回 合 。 增 强 后 的 恐 惧 效 果 影 响 %d 码 内 所 有 敌 对 生 物。]]):format(t.getPowerBonus(self, t), t.getDurationBonus(self, t), self:getTalentRadius(t))
 	end
 
 t_talent_name["T_FEARFEAST"] = "恐惧盛宴"

@@ -309,3 +309,55 @@ timeEffectCHN:newEffect{
 	type = "魔法",
 	subtype = "枯萎/奥术",
 }
+
+timeEffectCHN:newEffect{
+	id = "STONE_VINE",
+	enName = "Stone Vine",
+	chName = "岩石藤蔓",
+	desc = function(self, eff) return ("岩 石 藤 蔓 将 目 标 钉 在 地 上 ， 每 回 合 造 成 %0.1f 点 物 理 %s 伤 害。"):format(eff.dam, eff.arcanedam and (" 和 %0.1f 点 奥 术 "):format(eff.arcanedam) or "") end,
+	type = "物理",
+	subtype = "大地/定身",
+}
+
+timeEffectCHN:newEffect{
+	id = "DWARVEN_RESILIENCE",
+	enName = "Dwarven Resilience",
+	chName = "矮人防御",
+	desc = function(self, eff)
+		if eff.mid_ac then
+			return (" 目 标 皮 肤 石 化， 提 升 %d 护 甲 值， 提 升 %d 物 理 豁 免 和 %d 法 术 豁 免。同 时 所 有 非 物 理 伤 害 减 免 %d 点。"):format(eff.armor, eff.physical, eff.spell, eff.mid_ac)
+		else
+			return (" 目 标 皮 肤 石 化， 提 升 %d 护 甲 值， 提 升 %d 物 理 豁 免 和 %d 法 术 豁 免。"):format(eff.armor, eff.physical, eff.spell)
+		end
+	end,
+	type = "物理",
+	subtype = "大地",
+}
+timeEffectCHN:newEffect{
+	id = "ELDRITCH_STONE",
+	enName = "Eldritch Stone Shield",
+	chName = "岩石护盾",
+	desc = function(self, eff)
+		return ("目 标 被 一 层 岩 石 护 盾 围 绕 ， 吸 收 %d/%d 伤 害 。 当 护 盾 消 失 时 ， 破 碎 的 岩 石会 产 生 一 次 爆 炸 ， 造 成 至 多 %d（当 前 %d）点 伤 害 ， 爆 炸 半 径 为 %d。"):
+		format(eff.power, eff.max, eff.maxdam, math.min(eff.maxdam, self:getEquilibrium() - self:getMinEquilibrium()), eff.radius)
+	end,
+	type = "魔法",
+	subtype = "大地/护盾",
+}
+timeEffectCHN:newEffect{
+	id = "STONE_LINK_SOURCE",
+	enName = "Stone Link",
+	chName = "岩石链接",
+	desc = function(self, eff) return ("目 标 保 护 身 边 半 径 %d 内 所 有 友 方 生 物，将 伤 害 转 移 至 自 身。"):format(eff.rad) end,
+	type = "魔法",
+	subtype = "大地/护盾",
+}
+timeEffectCHN:newEffect{
+	id = "DEEPROCK_FORM",
+	enName = "Deeprock Form",
+	chName = "深岩形态",
+	desc = function(self, eff) return ("目 标 保 护 身 边 半 径 %d 内 所 有 友 方 生 物，将 伤 害 转 移 至 自 身。"):format(eff.rad) end,
+	type = "魔法",
+	subtype = "大地/元素",
+}
+

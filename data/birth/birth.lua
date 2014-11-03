@@ -2,14 +2,14 @@ birthCHN = {}
 birthCHN["Doombringer"] = {
 	chname = "毁灭使者",
 	desc = {
-		"利 刃 在 手 ， 烈 焰 匿 踪 , 毁 灭 使 者 是 战 斗 中 的 强 大 力 量 。 ",
-		"毁 灭 使 者 是 纯 粹 的 战 争 机 器 ， 使 用 利 刃 和 烈 焰 直 接 凿 穿 敌 人 的 军 队 。 ",
-		"最 强 大 的 毁 灭 使 者 可 以 全 面 激 发 恶 魔 血 脉 ， 变 身 成 为 巨 大 的 恶 魔 。 ",
-		"Their most important stats are: Strength and Magic",
-		"#GOLD#Stat modifiers:",
-		"#LIGHT_BLUE# * +4 Strength, +0 Dexterity, +2 Constitution",
-		"#LIGHT_BLUE# * +2 Magic, +0 Willpower, +1 Cunning",
-		"#GOLD#Life per level:#LIGHT_BLUE# +3",
+		"	利 刃 在 手 ， 烈 焰 匿 踪 , 毁 灭 使 者 是 战 斗 中 的 强 大 力 量 。 ",
+		"	毁 灭 使 者 是 纯 粹 的 战 争 机 器 ， 使 用 利 刃 和 烈 焰 直 接 凿 穿 敌 人 的 军 队 。 ",
+		"	最 强 大 的 毁 灭 使 者 可 以 全 面 激 发 恶 魔 血 脉 ， 变 身 成 为 巨 大 的 恶 魔 。 ",
+		"他 们 最 重 要 的 属 性 是： 力 量 和 魔 法。",
+		"#GOLD#属 性 修 正 ：",
+		"#LIGHT_BLUE# * +4 力 量, +0 敏 捷, +2 体 质",
+		"#LIGHT_BLUE# * +2 魔 法, +0 意 志, +1 灵 巧",
+		"#GOLD#每 等 级 生 命 加 值：#LIGHT_BLUE# +3",
 	},
 }
 
@@ -17,14 +17,25 @@ birthCHN["Demonologist"] = {
 	chname = "恶魔使者",
 	locked_desc = "Most simply run, but I understand: a distant planet, ravaged and damned. Burnt creations seek righteous vengeance, Urh'Rok's ashes, now destruction's engines. Harness their power! Capture and tame! I call on you, demons - UNLEASH THE FLAMES!",
 	desc = {
-		"Contrary to popular beliefs Demonologists are not the pawns of demons, they enact pacts with them but always very carefully.",
-		"They use those demonic powers for their own purpose, often evil but a few have been known to use demonic powers to fight demons.",
-		"Demonologists are melee fighters, bashing their foes skulls with their shields while calling down rains of fire and darkness.",
-		"#GOLD#Stat modifiers:",
-		"#LIGHT_BLUE# * +3 Strength, +0 Dexterity, +2 Constitution",
-		"#LIGHT_BLUE# * +4 Magic, +0 Willpower, +0 Cunning",
-		"#GOLD#Life per level:#LIGHT_BLUE# +2",
+		"	不 同 于 众 人 所 相 信 的 ， 恶 魔 使 者 并 非 恶 魔 的 走 卒 。 他 们 只 是 小 心 谨 慎 地 与 恶 魔 签 订 契 约 。",
+		"	他 们 利 用 恶 魔 之 力 达 成 所 愿，无 论 善 恶，亦 有 少 数 人 以 此 反 击 恶 魔 。",
+		"	恶 魔 使 者 是 近 身 格 斗 的 战 士 ，用 盾 牌 击 碎 敌 人 的 头 颅， 同 时 能 呼 唤 黑 暗 与 火 焰 之 力。",
+		"#GOLD#属 性 修 正 ：",
+		"#LIGHT_BLUE# * +3 力 量, +0 敏 捷, +2 体 质",
+		"#LIGHT_BLUE# * +4 魔 法, +0 意 志, +0 灵 巧",
+		"#GOLD#每 等 级 生 命 加 值：#LIGHT_BLUE# +2",
 	},
 
 }
-
+birthCHN["Stone Warden"] = {
+	chname = "岩石守卫",
+	desc = {
+		"岩 石 守 卫 是 那 些 同 时 训 练 魔 法 技 艺 与 自 然 力 量 的 矮 人。",
+		"在 其 他 种 族 受 困 于 自 然 和 魔 法 天 生 对 立 的 偏 见 时 ， 矮 人 们 已 经 找 到 方 法 让 这 两 种 力 量 和 谐 共 存 。",
+		"岩 石 守 卫 是 身 着 重 甲 的 战 士 ，双 持 盾 牌 来 施 展 技 艺 。",
+		"#GOLD#属 性 修 正 ：",
+		"#LIGHT_BLUE# * +2 力 量, +0 敏 捷, +0 体 质",
+		"#LIGHT_BLUE# * +4 魔 法, +3 意 志, +0 灵 巧",
+		"#GOLD#每 等 级 生 命 加 值：#LIGHT_BLUE# +2",
+	},
+}

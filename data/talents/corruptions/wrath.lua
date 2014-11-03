@@ -16,7 +16,7 @@ end
 t_talent_name["T_VORACIOUS_BLADE"] = "饕餮之刃"
 talentInfoCHN["T_VORACIOUS_BLADE"] = function(self, t)
 	return ([[你 的 利 刃 充 满 着 对 杀 戮 的 渴 望。
-	在 技 能 冷 却 完 毕 后， 当 杀 死 敌 人 时，接 下 来 6 回 合 内 的 %d 次 近 战 攻 击 必 定 暴 击 ， 在 持 续 时 间 内 ，暴 击 系 数 增 加%d%%。
+	在 技 能 冷 却 完 毕 后， 当 杀 死 敌 人 时，接 下 来 6 回 合 内 的 %d 次 近 战 攻 击 必 定 暴 击 ， 在 持 续 时 间 内 ，暴 击 系 数 增 加 %d%% 。
 	另 外 ， 每 次 击 杀 时 额 外 获 得 %d 点 活 力。]]):format(t.getHits(self, t), t.getMult(self, t), t.vimBonus(self, t))
 end
 	
@@ -24,13 +24,14 @@ t_talent_name["T_DESTROYER"] = "毁灭者"
 talentInfoCHN["T_DESTROYER"] = function(self, t)
 		local dest = t.getDestroy(self, t)
 		return ([[恶 魔 空 间 的 力 量 充 溢 了 你 的 身 体 ， 将 你 转 换 成 一 个 强 大 的 恶魔  ， 持 续 %d 回 合 。 
-	变 身 期 间 ， 体 力 恢 复 和 物 理 强 度 增 加 %d， 缴 械 和 震 慑 抗 性 增加 %d%%。
+	变 身 期 间 ， 体 力 恢 复 和 物 理 强 度 增 加 %d ， 缴 械 和 震 慑 抗 性 增加 %d%% 。
 	物 理 强 度 ， 体 力 恢 复 ， 状 态 抗 性 加 值 受 法 力 强 度 加 成。
 	变 身 期 间 ， 其 他 技 能 也 受 到 强 化：
-	汲 魂 痛 击 ： 冷 却 时 间 减 少 %d。
+	汲 魂 痛 击 ： 冷 却 时 间 减 少 %d 。
 	舍 身 一 击 ： 增 加 %d%% 全 体 抗 性 穿 透 ，持 续 %d 回 合。
+	歼 灭 挥 斩 ： 增 加 半 径 %d 。
 	锁 魂 之 链 ： 如 果 命 中 ， 额 外 附 加 %d 次 40%% 武 器 伤 害 的 攻 击。
-	焚 尽 强 击 ： 增 加 额 外 伤 害 几 率 至 %d%%。
+	焚 尽 强 击 ： 增 加 额 外 伤 害 几 率 至 %d%% 。
 	恐 惧 盛 宴 ： 每 汲 取 一 层 叠 加 的 恐 惧 ， 获 得 %0.1f 点 活 力。
 	地 狱 光 环 ： 范 围 增 加 %d 码。]]):
 	format(t.getDuration(self, t),

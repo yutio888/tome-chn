@@ -6,7 +6,7 @@ end
 
 t_talent_name["T_SURGE_OF_POWER"] = "力量之潮"
 talentInfoCHN["T_SURGE_OF_POWER"] = function(self, t)
-	return ([[你 使 用 体 内 蕴 藏 的 活 力 强 化 自 己 的 身 体 ， 恢 复 %d%% 最 大 体 力 值（%d 点）和 %d%% 最 大 生 命 值 （%d 点）。
+	return ([[你 使 用 体 内 蕴 藏 的 活 力 强 化 自 己 的 身 体 ， 恢 复 %d%% 最 大 体 力 值（ %d 点）和 %d%% 最 大 生 命 值 （ %d 点）。
 	同 时 让 你 在 -%d 生 命 时 才 会 死 亡 ， 此 效 果 持 续 8 回 合。
 	此 技 能 瞬 发 ， 恢 复 值 受 法 术 强 度 加 成。]]):
 	format(t.stamValue(self, t) * 100, t.stamValue(self, t) * self.max_stamina,  t.getHeal(self, t)*100, t.getHeal(self, t) * self.max_life, t.getPower(self, t))
@@ -15,7 +15,7 @@ end
 t_talent_name["T_DEMONIC_BLOOD"] = "恶魔之血"
 talentInfoCHN["T_DEMONIC_BLOOD"] = function(self, t)
 	return ([[你 体 内 涌 动 着 恶 魔 之 血 ，增 加 %d 点 法 术 强 度 和 %d 点 活 力 上 限。
-	同 时 获 得 相 当 于 当 前 活 力 %d%% 的 全 伤 害 加 成 （ 当 前 %d%%） 。]]):
+	同 时 获 得 相 当 于 当 前 活 力 %d%% 的 全 伤 害 加 成 （ 当 前 %d%% ） 。]]):
 	format(t.statBonus(self, t),t.vimBonus(self, t),(t.atkBonus(self, t)),(t.atkBonus(self, t)/100)*self:getVim())
 end
 

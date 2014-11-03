@@ -914,7 +914,7 @@ timeEffectCHN:newEffect{
 }
 
 
---岩石守卫状态效果
+--[[岩石守卫状态效果
 timeEffectCHN:newEffect{
 	id = "STONE_VINE",
 	enName = "Stone Vine",
@@ -942,5 +942,5 @@ timeEffectCHN:newEffect{
 	chName = "深岩形态",
 	type = "魔法",
 	subtype = "大地/元素",
-}
+}]]
 

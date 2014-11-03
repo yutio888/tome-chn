@@ -220,14 +220,30 @@ t_talent_type_name = {}
 	t_talent_type_name["Buckler Training"] = "盾牌训练系"
 	t_talent_type_name["Skirmisher - Slings"] = "散兵-投石索系"
 	t_talent_type_name["Tireless Combatant"] = "不倦战斗系"
---stone warden
+--[[stone warden
 	t_talent_type_name["dwarven nature"] = "矮人之自然力量"	
 	t_talent_type_name["earthen power"] = "大地力量"
 	t_talent_type_name["earthen vines"] = "岩石藤蔓"
 	t_talent_type_name["eldritch shield"] = "魔力盾牌"
 	t_talent_type_name["eldritch stone"] = "魔法岩石"
-	t_talent_type_name["deep rock"] = "深岩形态"
+	t_talent_type_name["deeprock"] = "深岩形态"]]
+--[[DLC
+	t_talent_type_name["demon-seeds"] = "恶魔之种"
+	t_talent_type_name["demonic pact"] = "恶魔契约"
+	t_talent_type_name["infernal combat"] = "地狱格斗"
+	t_talent_type_name["black-magic"] = "黑暗魔法"
+	t_talent_type_name["doom shield"] = "毁灭之盾"
+	t_talent_type_name["doom covenant"] = "末日协定"
+	t_talent_type_name["spellblaze"] = "魔法大爆炸"
 
+	t_talent_type_name["brutality"] = "残暴"
+	t_talent_type_name["torture"] = "折磨"
+	t_talent_type_name["wrath"] = "愤怒"
+	t_talent_type_name["Fearfire"] = "恐惧之炎"
+	t_talent_type_name["Heart of Fire"] = "狱火之核"
+	t_talent_type_name["demonic strength"] = "恶魔之力"
+	t_talent_type_name["Oppression"] = "压制"]]
+	
 --技能大分类名称	
 t_talent_cat = {}
 

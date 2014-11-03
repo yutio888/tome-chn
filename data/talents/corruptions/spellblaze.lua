@@ -10,7 +10,7 @@ talentInfoCHN["T_RAIN_OF_FIRE"] = function(self, t)
 t_talent_name["T_ONLY_ASHES_LEFT"] = "唯余灰烬"
 talentInfoCHN["T_ONLY_ASHES_LEFT"] = function(self, t)
 		return ([[通 过 引 发 魔 法 大 爆 炸 最 黑 暗 的 时 候 的 场 景 ，你 加 速 了 敌 人 的 死 亡 。
-		 每 次 你 对 半 径 %d 内 的 生 物 造 成 伤 害 后 ，如 果 它 生 命 值 低 于 33%%，将 会 承 受 魔 法 大 爆 炸 的 力 量 。
+		 每 次 你 对 半 径 %d 内 的 生 物 造 成 伤 害 后 ，如 果 它 生 命 值 低 于 33%% ，将 会 承 受 魔 法 大 爆 炸 的 力 量 。
 		 受 影 响 的 敌 人 每 回 合 将 受 到 %0.2f 暗 影 伤 害 ，直 到 死 亡 或 者 离 开 范 围 。
 		 伤 害 受 法 术 强 度 加 成 。]]):
 		format(self:getTalentRadius(t), t.getDam(self, t), self:getTalentRadius(t))
@@ -19,7 +19,7 @@ talentInfoCHN["T_ONLY_ASHES_LEFT"] = function(self, t)
 t_talent_name["T_SHATTERED_MIND"] = "精神破碎"
 talentInfoCHN["T_SHATTERED_MIND"] = function(self, t)
 		return ([[当 你 格 挡 攻 击 时 ，你 能 将 魔 法 大 爆 炸 的 力 量 传 导 至 攻 击 者 的 精 神 中 ，持 续 5 回 合 。
-		 受 影 响 的 生 物 每 次 使 用 技 能 时 有 %d%%几 率 失 败 ，同 时 全 体 豁 免 下 降 %d 点 。 ]]):
+		 受 影 响 的 生 物 每 次 使 用 技 能 时 有 %d%% 几 率 失 败 ，同 时 全 体 豁 免 下 降 %d 点 。 ]]):
 		format(t.getFail(self, t), t.getSaves(self, t))
 	end
 

@@ -69,7 +69,7 @@ talentInfoCHN["T_DEMON_SEED_BLOOD_SHIELD"] = function(self, t)
 	end
 
 
-t_talent_name["T_DEMON_SEED_SILENCE"] = "沉默",
+t_talent_name["T_DEMON_SEED_SILENCE"] = "沉默"
 talentInfoCHN["T_DEMON_SEED_SILENCE"] = function(self, t)
 		return ([[腐 化 目 标 ， 使 之 沉 默 %d 回 合。]]):
 		format(t.getDuration(self, t))

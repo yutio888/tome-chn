@@ -7,3 +7,6 @@ function talentCHN:getinfo(id,self,t)
 end
 
 dofile("data-chn123/talents/corruptions/corruptions.lua")
+dofile("data-chn123/talents/misc/misc.lua")
+dofile("data-chn123/talents/gifts/gifts.lua")
+dofile("data-chn123/talents/spells/spells.lua")

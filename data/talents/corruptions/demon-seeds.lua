@@ -88,7 +88,7 @@ talentInfoCHN["T_DEMON_SEED_DOOM_TENDRILS"] = function(self, t)
 		return ([[你 化 身 为 末 日 之 柱 ，在 周 围 2 码 的 范 围 内 产 生 火 焰 触 须 。
 		 被 火 焰 触 须 击 中 的 敌 人 每 回 合 受 到 %0.2f 火 焰 伤 害 。
 		 受 到 伤 害 的 生 物 同 时 会 被 定 身 。]]):
-		format(self,t.getDamage(self, t))
+		format(t.getDamage(self, t))
 	end
 
 

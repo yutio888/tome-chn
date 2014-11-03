@@ -3,7 +3,7 @@
 	t_talent_type_name["infernal combat"] = "地狱格斗"
 	t_talent_type_name["black-magic"] = "黑暗魔法"
 	t_talent_type_name["doom shield"] = "毁灭之盾"
-	t_talent_type_name["doom covenant"] = "末日协定"
+	t_talent_type_name["doom covenant"] = "末日降临"
 	t_talent_type_name["spellblaze"] = "魔法大爆炸"
 
 	t_talent_type_name["brutality"] = "残暴"

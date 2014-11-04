@@ -872,7 +872,7 @@ function _M:alterMakeMapObject(tiles, mo, z, lastmo)
 	local tex, texx, texy, pos_x, pos_y = tiles:get("", 0, 0, 0, 0, 0, 0, "invis.png", false, false, true)
 	submo:texture(0, tex, false, texx, texy, pos_x, pos_y)
 	submo:chain(mo)
-	if lastmo == mo then lastmo = submo end
+	--if lastmo == mo then lastmo = submo end
 	mo = submo
 	self._mo = mo
 
@@ -5968,7 +5968,7 @@ function _M:canUseTinker(tinker)
 	if not tinker.is_tinker then return nil, "not an attachable item" end
 	if not self.can_tinker then return nil, "can not use attachements" end
 	if not self.can_tinker[tinker.is_tinker] then return nil, "can not use attachements of this type" end
-	if tinker:tinker_allow_attach() then return nil, tinker:tinker_allow_attach() end
+	if tinker.tinker_allow_attach and tinker:tinker_allow_attach() then return nil, tinker:tinker_allow_attach() end
 	return true
 end
 

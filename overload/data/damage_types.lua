@@ -1032,6 +1032,21 @@ newDamageType{
 	end,
 }
 
+-- Drain Life... with fire!
+newDamageType{
+	name = "devouring flames", type = "FIRE_DRAIN", text_color = "#LIGHT_RED#",
+	projector = function(src, x, y, type, dam)
+		if _G.type(dam) == "number" then dam = {dam=dam, healfactor=0.1} end
+		local target = game.level.map(x, y, Map.ACTOR) -- Get the target first to make sure we heal even on kill
+		local realdam = DamageType:get(DamageType.FIRE).projector(src, x, y, DamageType.FIRE, dam.dam)
+		if target and realdam > 0 then
+			src:heal(realdam * dam.healfactor, target)
+			src:logCombat(target, "#Source# drains life from #Target#!")
+		end
+		return realdam
+	end,
+}
+
 -- Darkness but not over minions
 newDamageType{
 	name = "darkness", type = "MINION_DARKNESS",

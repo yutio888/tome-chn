@@ -1,3 +1,6 @@
+t_talent_name = t_talent_name or {}
+t_talent_type_name = t_talent_type_name or {}
+t_talent_type_description = t_talent_type_description or {}
 talentCHN = {}
 talentInfoCHN = {}
 function talentCHN:getinfo(id,self,t)

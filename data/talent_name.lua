@@ -244,7 +244,7 @@ t_talent_name["T_DARK_SURPRISE"] = "黑暗连击"
 t_talent_name["T_WRAITHFORM"] = "鬼魂形态"
 t_talent_name["T_DARKFIRE"] = "黑暗之炎"
 t_talent_name["T_FLAME_OF_URH_ROK"] = "乌鲁洛克之焰"
-t_talent_name["T_DEMON_PLANE"] = "恶魔空间"
+t_talent_name["T_DEMON_PLANE"] = "恐惧空间"
 
 --corruptions/torment
 t_talent_name["T_WILLFUL_TORMENTER"] = "施虐之心"

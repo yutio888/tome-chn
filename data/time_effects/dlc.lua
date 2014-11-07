@@ -356,7 +356,19 @@ timeEffectCHN:newEffect{
 	id = "DEEPROCK_FORM",
 	enName = "Deeprock Form",
 	chName = "深岩形态",
-	desc = function(self, eff) return ("目 标 保 护 身 边 半 径 %d 内 所 有 友 方 生 物，将 伤 害 转 移 至 自 身。"):format(eff.rad) end,
+	desc = function(self, eff)
+		local xs = ""
+		if eff.arcaneDam and eff.arcanePen then
+			xs = xs..(", %d%% 奥 术 伤 害 与 %d%% 奥 术 抗 性 穿 透 "):format(eff.arcaneDam, eff.arcanePen)
+		end
+		if eff.natureDam and eff.naturePen then
+			xs = (", %d%% 自 然 伤 害 与 %d%% 自 然 抗 性 穿 透"):format(eff.natureDam, eff.naturePen)..xs
+		end
+		if eff.immune then
+			xs = (", %d%% 流 血 、 毒 素 、 疾 病 和 震 慑 免 疫"):format(eff.immune*100)..xs
+		end
+		return ("目 标 变 成 巨 型 深 岩 元 素， 增 加 两 点 体 型%s，%d%% 物 理 伤 害 与 %d%% 物 理 抗 性 穿 透。%s"):format(xs, eff.dam, eff.pen, eff.useResist and " 同 时，将 使 用 物 理 抗 性 代 替 所 有 伤 害 抗 性。" or "")
+	end,
 	type = "魔法",
 	subtype = "大地/元素",
 }

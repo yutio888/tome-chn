@@ -102,7 +102,7 @@ newTalent{
 		return true
 	end,
 	info = function(self, t)
-		return ([[ 每 次 造 成 元 素 伤 害 时 获 得 以 下 效 果：
+		return ([[ 每 次 受 到 元 素 伤 害 时 对 造 成 伤 害 的 生 物 触 发 以 下 效 果：
 		- 火 焰：灼 烧 目 标 5 回 合 ，造 成 %0.2f 火 焰 伤 害 。
 		- 寒 冷：冻 结 目 标 3 回 合 ，冰 块 强 度 %d 。
 		- 酸 性：致 盲 %d 回 合 。

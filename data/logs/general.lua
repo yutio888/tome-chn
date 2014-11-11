@@ -686,3 +686,24 @@ logCHN:newLog{
 	end,
 }
 
+logCHN:newLog{
+	log = "#RED#The ring refuses to be removed!",
+	fct = function()
+		return "#RED#戒指拒绝被卸下！"
+	end,
+}
+
+logCHN:newLog{
+	log = "#RED#The ring does not react.",
+	fct = function()
+		return "#RED#戒指没有反应。"
+	end,
+}
+
+logCHN:newLog{
+	log = "#GREEN#The skull embossed in the ring twists around momentarily. ...Did it just laugh?",
+	fct = function()
+		return "#GREEN#戒指里的头骨似乎扭曲了一瞬间……它刚才笑了么？"
+	end,
+}
+

@@ -46,8 +46,7 @@ newTalent{
 		return true
 	end,
 	info = function(self, t)
-		return ([[对 你 而 言， 生 死 之 别 变 的 模 糊， 你 只 有 在 生 命 值 下 降 到 -%d 时 才 会 死 亡。 
-		 但 是 当 你 生 命 值 降 到 0 时， 你 无 法 看 到 你 还 剩 多 少 生 命 值。]]):
+		return ([[对 你 而 言， 生 死 之 别 变 的 模 糊， 你 只 有 在 生 命 值 下 降 到 -%d 时 才 会 死 亡。 ]]):
 		format(t.lifeBonus(self, t))
 	end,
 }

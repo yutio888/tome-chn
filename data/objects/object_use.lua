@@ -97,6 +97,11 @@ objUse["strike with your weapon as 100% light damage, up to 4 spaces away, heali
 objUse["slow all units within 5 spaces (including yourself) by 40%"]="半径5内的所有目标减速40%（包括自己）"
 objUse["drain blood from all units within 5 spaces, causing them to bleed for 120 physical damage over 4 turns. For every unit (up to 10) drained, the armor's stats increase, but decrease over 10 turns until back to normal"]="半径5内的所有目标流血4回合，受到合计120物理伤害。\n每有一个流血目标，该护甲的属性增加（最多计算10个）。\n10回合后效果降低直至还原"
 objUse["intensify your winter storm creating unbreakable ice walls in each space"]="强化冰风暴，制造不能破坏的冰墙"
+
+objUse["fire a bolt of plaguefire, dealing damage over time based on your magic stat"]="发射疫火之球，造成持续伤害，伤害受魔法加成。"
+
+objUse["re-generate the item with random stats. Can only be done three levels after the last reroll. Cannot be unequipped unless a reroll is available, or you are level 50"] = "重置戒指属性。每3级能重置一次。\n除非有重置机会或者人物50级，否则不能解除装备。"
+objUse["deal darkness damage equal to your spellpower to a target, and, if it kills the target, restores 15% of max hp and all resources (except paradox and equilibrium)"] = "造成等于法术强度的暗影伤害。\n如果杀死目标，则恢复15%%全资源（失衡值和紊乱值除外）。"
 --护符技能
 --wands powers
 objUse["reveal the area around you dispelling darkness and detecting the presence of nearby creatures (rad %d)"] = "照明并侦查你附近的生物（半径范围 %d）"

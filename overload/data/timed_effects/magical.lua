@@ -1966,7 +1966,7 @@ newEffect{
 newEffect{
 	name = "OUT_OF_PHASE", image = "talents/phase_door.png",
 	desc = "Out of Phase",
-	long_desc = function(self, eff) return ("目 标 脱 离 了 相 位 现 实， 增 加 %d 闪 避， %d%% 所 有 抵 抗 以 及 %d%% 回 合 所 有 状 态 的 持 续 时 间"):
+	long_desc = function(self, eff) return ("目 标 脱 离 了 相 位 现 实， 增 加 %d 闪 避， %d%% 所 有 抵 抗 以 及 %d%% 所 有 负 面 状 态 的 持 续 时 间"):
 	format(eff.defense or 0, eff.resists or 0, eff.effect_reduction or 0) end,
 	type = "magical",
 	subtype = { teleport=true },

@@ -328,6 +328,22 @@ objDesc["Trails fire behind you, dealing damage based on spellpower."]="在你�
 objDesc["Damage shields have +1 duration and +15% power"] = "伤害护盾增加一回合持续时间和15%强度"
 objDesc["% chance to summon an orc spirit"] = "% 几率召唤一个兽人灵魂"
 objDesc["Storm Duration: "] = "风暴持续时间："
+objDesc["Your Obliterating Smash can destroy walls."] = "你的歼灭挥斩能摧毁墙壁"
+objDesc["All nearby enemies take 20 fire damage each turn and healing you for 10% of the damage dealt."] = "附近的敌人每回合受到20火焰伤害。\n你受到10%%伤害值的治疗"
+objDesc["Plaguefire detonates when its victim dies, spreading to other enemies up to two times."] = "疫火感染的生物死亡时，疫火将传播到附近的敌人。\n至多传播2次。"
+objDesc["Status resistances shift over time to match the statuses you are being hit by."] = "依据你中的负面状态改变你的状态免疫"
+objDesc["Can be unequipped, can't be rerolled."] = "能解除装备，不能重置"
+objDesc["Can be unequipped or rerolled."] = "能解除装备或重置"
+objDesc["You can control the location of Haste of the Doomed to within 3 tiles."] = "你能控制你的种族技能“加速”的误差到3码"
+objDesc["Increases all saves by your Shadow Power."] = "每点“阴影强度”增加1点全豁免"
+objDesc["Grants spellpower equal to your Shadow Power."] = "每点“阴影强度”增加1点法术强度"
+objDesc["Increases all damage penetration by 1% for each point of your Shadow Power."] = "每点“阴影强度”增加1%%抗性穿透"
+objDesc["Grants 2.5% movement speed for each point of Shadow Power."] = "每点“阴影强度”增加2.5%%移动速度"
+objDesc["Grants spell-crit equal to half of your Shadow Power."] = "每点“阴影强度”增加0.5%%法术暴击率"
+objDesc["Grants physical power equal to your Shadow Power."] = "每点“阴影强度”增加1%%点物理强度"
+
+objDesc["Increases all damage by 1% for each point of your Shadow Power."] = "每点“阴影强度”增加1%%全体伤害加成"
+objDesc["Increases all resists by 0.4% for each point of your Shadow Power."] = "每点“阴影强度”增加0.4%%全体抗性"
 --替换特殊攻击效果/绿字效果
 
 special_t = {}
@@ -388,10 +404,9 @@ special_t = {}
 	special_t["swallows the victim's soul, gaining a new power"]="吞噬受害者的灵魂，得到新的能力"                
 	special_t["Enter a Rampage (Shared 30 turn cooldown)."]= "进入暴走状态（共享30回合冷却）" 
 	special_t["Random elemental explosion"] = "随机元素爆炸"
+	special_t["releases a burst of dark fire, dealing damage equal to your magic stat"] = "释放黑暗之火\n造成等于魔法属性的伤害"
+	special_t["Increases all damage dealt, and reduces all damage taken, by 1%, stacking up to 10 times. Resets after 10 turns without attacking."] = "增加全体伤害并减少受到的伤害各1%%\n效果持续10回合，最多叠加至10层\n"
 
---objDesc[""] = ""
---objDesc[""] = ""
---objDesc[""] = ""
 
 --装备鼠标提示汉化替换
 function getObjectDescCHN(desc)
@@ -485,6 +500,9 @@ function getObjectDescCHN(desc)
 
 				elseif desc[i]:find("When your effective movement speed")  then
 					desc[i] ="当你的有效移动速度小于100%%时，\n获得等于差值的百分比减伤，\n但最多减少至30%%"
+					
+				elseif desc[i]:find("Cannot be unequipped or rerolled until level") then 
+					desc[i] = desc[i]:gsub("Cannot be unequipped or rerolled until level","不能解除装备也不能重置，直到等级")
 				else--if desc[i]:find("Special effect on block:") then
 					desc[i] = desc[i]:gsub("Special effect on block:","格挡特效：")
 							:gsub("Chance that a blast of icy cold water will spray at the target.","有30%几率朝目标喷射冰冷的水流")

@@ -2714,8 +2714,8 @@ objects:addObjects({
 	unique = true,
 	enName = "Wheel of Fate",
 	chName = "命运之轮",
-	unIdedName = "",
-	chDesc = "This isn't what I wished for! - Howar Muransk, Cornac demonologist.\nThis band of gothic obsidian menaces with an embossed image of a grinning skull. It beckons you to tempt fate and put it on. Do you?",
+	unIdedName = "命运之轮",
+	chDesc = "这不是我想要的结果！- Howar	Muransk,普通人类恶魔学家。\nThis band of gothic obsidian menaces with an embossed image of a grinning skull. It beckons you to tempt fate and put it on. Do you?",
 })
 
 objects:addObjects({

@@ -334,7 +334,7 @@ objDesc["Plaguefire detonates when its victim dies, spreading to other enemies u
 objDesc["Status resistances shift over time to match the statuses you are being hit by."] = "依据你中的负面状态改变你的状态免疫"
 objDesc["Can be unequipped, can't be rerolled."] = "能解除装备，不能重置"
 objDesc["Can be unequipped or rerolled."] = "能解除装备或重置"
-objDesc["You can control the location of Haste of the Doomed to within 3 tiles."] = "你能控制你的种族技能“加速”的误差到3码"
+objDesc["Increases the range of Haste of the Doomed by 1."] = "增加种族技能“加速”的范围1码"
 objDesc["Increases all saves by your Shadow Power."] = "每点“阴影强度”增加1点全豁免"
 objDesc["Grants spellpower equal to your Shadow Power."] = "每点“阴影强度”增加1点法术强度"
 objDesc["Increases all damage penetration by 1% for each point of your Shadow Power."] = "每点“阴影强度”增加1%%抗性穿透"

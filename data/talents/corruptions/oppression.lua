@@ -15,8 +15,9 @@ talentInfoCHN["T_MASS_HYSTERIA"] = function(self, t)
 
 t_talent_name["T_FEARFEAST"] = "恐惧盛宴"
 talentInfoCHN["T_FEARFEAST"] = function(self, t)
-	return ([[汲 取 %d 码 内 敌 对 生 物 身 上 的 恐 惧 ， 每 汲 取 一 层 恐 惧 ， 恢 复 %d 生 命 并 获 得 %0.1f%% 额 外 回 合。]])
-	:format(self:getTalentRadius(t), t.getHeal(self, t), t.getEnergyDrain(self, t)*0.1)
+	return ([[汲 取 %d 码 内 敌 对 生 物 身 上 的 恐 惧 ， 每 汲 取 一 层 恐 惧 ， 恢 复 %d 生 命 并 获 得 %0.1f%% 额 外 回 合。
+	至 多 能 获 得 %0.1f 个 额 外 回 合。]])
+	:format(self:getTalentRadius(t), t.getHeal(self, t), t.getEnergyDrain(self, t)*0.1, t.getEnergyCap(self, t) / 1000)
 end
 	
 t_talent_name["T_HOPE_WANES"] = "绝望碾压"

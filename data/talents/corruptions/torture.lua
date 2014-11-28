@@ -1,12 +1,13 @@
 ﻿t_talent_name["T_INCINERATING_BLOWS"] = "焚尽强击"
 talentInfoCHN["T_INCINERATING_BLOWS"] = function(self, t)
 	return ([[恶 魔 空 间 的 力 量 注 入 你 的 武 器 ： 你 的 近 战 攻 击 在 3 回 合 内 造 成 %0.2f 点 火 焰 伤 害。
-	另 外 ， 每 次 攻 击 时 有 %d%% 几 率 释 放 强 烈 的 火 焰 爆 发 ， 造 成 %0.2f 点 火 焰 伤 害 ， 伤 害 %d 码 内 所 有 敌 人 ， 同 时 敌 人 会 震 慑 %d 回 合。
+	另 外 ， 每 次 攻 击 时 有 %d%% 几 率 在 %d 码 范 围 释 放 强 烈 的 火 焰 爆 发 ， 造 成 持 续 %d 回 合 的 %0.2f 点 火 焰 伤 害 。
+	若 该 技 能 冷 却 完 毕 ， 则 火 焰 爆 发 将 聚 集 在 %d 码 范 围 内 ， 并 产 生 火 焰 震 慑 效 果。
 	进 行 震 慑 判 定 时 ， 额 外 增 加 %d 点 法 术 强 度。
 	伤 害 受 法 术 强 度 加 成。]]):
-	format(	t.damBonus(self, t),t.getChance(self, t),t.bigBonus(self, t),self:getTalentRadius(t),t.getDur(self, t),t.getPowerbonus(self, t))
+	format(t.damBonus(self, t),t.getChance(self, t),self:getTalentRadius(t),t.getDur(self, t),t.bigBonus(self, t),t.getStunRad(self,t),t.getPowerbonus(self, t))
 end
-	
+
 t_talent_name["T_ABDUCTION"] = "锁魂之链"
 talentInfoCHN["T_ABDUCTION"] = function(self, t)
 	return ([[对 目 标 攻 击 ，造 成 %d%% 武 器 伤 害。

@@ -21,5 +21,6 @@ end
 t_talent_name["T_SHARE_THE_PAIN"] = "以眼还眼"
 talentInfoCHN["T_SHARE_THE_PAIN"] = function(self, t)
 	return ([[你 沉 迷 于 战 争 的 狂 热 。 当 一 个 近 身 的 敌 对 生 物 伤 害 你 时，有 %d%% 几 率 自 动 反 击，造 成 %d%% 武 器 伤 害。
-	此 效 果  每 回 合 只 能  触 发 %d 次 。]]):format(math.min(100, t.getChance(self,t)), t.getHit(self,t)*100, t.getHitCount(self,t))
+	此 效 果  每 回 合 对 同 一 目 标 触 发 一 次。]]):format(math.min(100, t.getChance(self,t)), t.getHit(self,t)*100)
 end
+

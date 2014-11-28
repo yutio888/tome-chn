@@ -23,8 +23,8 @@ talentInfoCHN["T_DEMON_SEED_FARSTRIKE"] = function(self, t)
 t_talent_name["T_DEMON_SEED_CORROSIVE_SLASHES"] = "腐蚀鞭笞"
 talentInfoCHN["T_DEMON_SEED_CORROSIVE_SLASHES"] = function(self, t)
 		return ([[用 酸 液 覆 盖 武 器，近 战 伤 害 转 变 为 酸 性。
-		近 战 攻 击 无 视 护 甲。]]):
-		format()
+		近 战 攻 击 获 得 %d 护 甲 穿 透。]]):
+		format(t.getArmorPen(self, t))
 	end
 
 t_talent_name["T_DEMON_SEED_ACIDIC_BATH"] = "酸浴"
@@ -63,7 +63,7 @@ talentInfoCHN["T_DEMON_SEED_SHADOWMELD"] = function(self, t)
 
 t_talent_name["T_DEMON_SEED_BLOOD_SHIELD"] = "鲜血护盾"
 talentInfoCHN["T_DEMON_SEED_BLOOD_SHIELD"] = function(self, t)
-		return ([[在 盾 牌 中 引 导 毁 灭 之 力 ，使 你 受 到 的 全 体 伤 害 减 少 35%% 格 挡 值 。
+		return ([[在 盾 牌 中 引 导 毁 灭 之 力 ，使 你 受 到 的 全 体 伤 害 减 少 15%% 格 挡 值 。
 		 每 次 你 被 近 战 攻 击 命 中 时 ，你 的 盾 牌 会 自 动 反 击 ，造 成 %d%% 格 挡 值 的 火 焰 暗 影 混 合 伤 害 。]]):
 		format(0.35 * t.getPercent(self, t))
 	end

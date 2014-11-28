@@ -1,7 +1,8 @@
 ﻿t_talent_name["T_HASTE_OF_THE_DOOMED"] = "加速"
 talentInfoCHN["T_HASTE_OF_THE_DOOMED"] = function(self, t)
 		local v = t.getPower(self, t)
-		return ([[加 速 自 身 ， 以 至 于 脱 离 空 间 ， 在 半 径 %d 范 围 内 随 机 传 送 。
+		return ([[加 速 自 身 ， 以 至 于 脱 离 空 间 ， 传 送 半 径 %d 。
+		你 在 同 一 回 合 内 至 多 连 用 两 次 该 技 能，且 第 二 次 使 用 会 消 耗 时 间。
 		之 后 ， 你 停 留 在 相 位 外 5 回 合 ， 闪 避 增 加 %d , 全 体 抗 性 增 加 %d%% 。
 		效 果 受 意 志 加 成。]]):
 		format(self:getTalentRange(t), v, v)

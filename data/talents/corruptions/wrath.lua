@@ -30,10 +30,10 @@ talentInfoCHN["T_DESTROYER"] = function(self, t)
 	汲 魂 痛 击 ： 冷 却 时 间 减 少 %d 。
 	舍 身 一 击 ： 增 加 %d%% 全 体 抗 性 穿 透 ，持 续 %d 回 合。
 	歼 灭 挥 斩 ： 增 加 半 径 %d 。
-	锁 魂 之 链 ： 如 果 命 中 ， 额 外 附 加 %d 次 40%% 武 器 伤 害 的 攻 击。
+	锁 魂 之 链 ： 如 果 命 中 ， 额 外 附 加 %d 次 35%% 武 器 伤 害 的 攻 击。
 	焚 尽 强 击 ： 增 加 额 外 伤 害 几 率 至 %d%% 。
 	恐 惧 盛 宴 ： 每 汲 取 一 层 叠 加 的 恐 惧 ， 获 得 %0.1f 点 活 力。
-	地 狱 光 环 ： 范 围 增 加 %d 码。]]):
+	乌 鲁 克 之 胃 ：  角 度 增 加 %d 。]]):
 	format(t.getDuration(self, t),
 		t.getPower(self, t),
 		math.min(math.ceil(t.getPower(self, t)/40 *100),100),
@@ -43,5 +43,5 @@ talentInfoCHN["T_DESTROYER"] = function(self, t)
 		math.ceil(dest/2),
 		25 + 10 * dest,
 		dest * 0.4,
-		math.ceil(dest/4))
+		dest * 10)
 end

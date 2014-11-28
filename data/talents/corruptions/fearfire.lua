@@ -29,11 +29,12 @@ talentInfoCHN["T_INFERNAL_BREATH_DOOM"] = function(self, t)
 	format(radius, self:combatTalentStatDamage(t, "str", 30, 350), self:combatTalentStatDamage(t, "str", 30, 70))
 end
 
-t_talent_name["T_FEARSCAPE_AURA"] = "地狱光环"
+t_talent_name["T_FEARSCAPE_AURA"] = "乌鲁克之胃"
 talentInfoCHN["T_FEARSCAPE_AURA"] = function(self, t)
 	local damage = t.getDamage(self, t)
 	local radius = self:getTalentRadius(t)
-	return ([[你 的 身 体 成 为 恶 魔 空 间 与 现 实 的 纽 带 ，在 %d 码 范 围 内 散 发 出 火 焰 光 环，每 回 合 造 成 %0.2f 点 火 焰 伤 害。
-	
+	return ([[你 的 身 体 成 为 恶 魔 空 间 与 现 实 的 纽 带 ，将 %d 码 的 锥 形 范 围 内 的 敌 人 抓 过 来 ，同 时 每 回 合 造 成 %0.2f 点 火 焰 伤 害。
 伤 害 受 法 术 强 度 加 成。]]):format(radius, damage)
 end
+
+

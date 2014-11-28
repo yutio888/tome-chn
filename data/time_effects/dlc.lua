@@ -59,7 +59,7 @@ timeEffectCHN:newEffect{
 	chName = "无尽恐惧",
 	desc = function(self, eff) return ("目 标 对 打 败 你 失 去 信 心 ， 伤 害 减 少 %d%%， 速 度 减 慢 %d%% 。"):format(eff.power*eff.stacks, eff.slow_power*eff.stacks*100) end,
 	type = "精神",
-	subtype = "恐惧",
+	subtype = "堕落",
 }
 
 timeEffectCHN:newEffect{
@@ -67,9 +67,8 @@ timeEffectCHN:newEffect{
 	enName = "Abandoned hope",
 	chName = "绝望",
 	desc = function(self, eff) return ("目 标 精 神 破 碎 ， 不 能 行 动 。") end,
-	type = "精神",
+	type = "其他",
 	subtype = "恐惧",
-	status = "detrimental",
 }
 
 timeEffectCHN:newEffect{
@@ -94,11 +93,25 @@ timeEffectCHN:newEffect{
 	id = "FIERY_GRASP",
 	enName = "Fiery Grasp",
 	chName = "炙炎之牢",
-	desc = function(self, eff) return ("目 标 着 火 了 ， 每 回 合 受 到 %0.2f 点 火 焰 伤 害。"):format(eff.power) end,
+	desc = function(self, eff)
+		if eff.silence == 1 then
+			return ("目 标 着 火 了 ， 每 回 合 受 到 %0.2f 点 火 焰 伤 害 并 被 沉 默 。"):format(eff.power, text) 
+		else
+			return ("目 标 着 火 了 ， 每 回 合 受 到 %0.2f 点 火 焰 伤 害。"):format(eff.power, text) 
+		end
+	end,
 	type = "物理",
 	subtype = "火焰/定身",
+	status = "detrimental",
 }
-
+timeEffectCHN:newEffect{
+	id = "FIRE_SHIELD",
+	enName = "Fiery Aegis",
+	chName = "火焰守护",
+	desc = function(self, eff) return ("目 标 被 一 层 魔 法 护 盾 包 围 ， 吸 收 %d/%d 伤 害 。 护 盾 破 碎 时 在 半 径 %d 范 围 内 造 成 %d 伤 害 。"):format(self.damage_shield_absorb, eff.power, eff.power, eff.radius) end,
+	type = "魔法",
+	subtype = "奥术/护盾",
+}
 timeEffectCHN:newEffect{
 	id = "SURGE_OF_POWER",
 	enName = "Surge of Power",
@@ -219,8 +232,9 @@ timeEffectCHN:newEffect{
 	id = "DARK_REIGN",
 	enName = "Dark Reign",
 	chName = "黑暗支配",
-	desc = function(self, eff) local p = 1 for i = 1, eff.stacks do p = p * 0.92 end p = 100 * (1 - p) 
-		return ("全体伤害吸收增加%d%%"):format(p) end,
+	long_desc = function(self, eff) local p = 1 for i = 1, eff.stacks do p = p * 0.92 end p = 100 * (1 - p)
+		return ("全 体 伤 害 吸 收 增 加 %d%%.\n直 到 %d 生 命 不 会 死 亡。"):format(p, -((eff.die_at or 0) * eff.stacks)) end,
+
 	type = "魔法",
 	subtype = "黑暗",
 }

@@ -1,15 +1,18 @@
 ﻿t_talent_name["T_DEMON_SEED"] = "恶魔之种"
 talentInfoCHN["T_DEMON_SEED"] = function(self, t)
 		local shield, weapon = t.getDam(self, t)
-		return ([[盾 击 目 标 造 成 %d%% 盾 牌 伤 害 ，并 眩 晕 %d 回 合 。如 果 攻 击 命 中 ，你 将 用 武 器 攻 击 目 标 ，造 成 %d%% 枯 萎 武 器 伤 害 。
+		return ([[对 目 标 造 成 %d%% 枯 萎 武 器 伤 害 。如 果 攻 击 命 中 ，你 将 用 盾 牌 攻 击 目 标 ，造 成 %d%% 盾 牌 伤 害 并 眩 晕 %d 回 合。
 		 如 果 武 器 命 中 并 且 没 有 杀 死 目 标 ，一 个 恶 魔 之 种 将 试 图 进 入 目 标 的 体 内 。
 		 种 子 需 要 足 够 强 大 的 宿 主 来 成 长 。存 活 几 率 ：
-			 普 通 生 物 		5%%	精 英 生 物 		20%%
-			 稀 有 与 史 诗 生 物 	50%%	Boss 			100%%
+			 普 通 生 物 		5%%
+			 精 英 生 物 		20%%
+			 稀 有 与 史 诗 生 物 	50%%	
+			 Boss 			100%%
 		 种 子 只 能 寄 生 在 有 经 验 的 生 物 里 ，不 能 寄 生 在 召 唤 物 中 。
 		 当 宿 主 死 亡 时 ，种 子 将 吸 收 宿 主 的 活 力 ，成 长 为 一 个 特 定 的 恶 魔 种 子 ，能 用 于 召 唤 恶 魔 。
-		 如 果 已 有 更 高 级 的 恶 魔 种 子 ，你 将 不 能 制 造 同 类 型 的 低 级 恶 魔 种 子 。]])
-		:format(shield * 100, t.getDazeDuration(self, t), weapon * 100)
+		 如 果 已 有 更 高 级 的 恶 魔 种 子 ，你 将 不 能 制 造 同 类 型 的 低 级 恶 魔 种 子 。
+		 高 技 能 等 级 将 带 来 更 强 大 的 种 子。]])
+		:format(weapon * 100, shield * 100, t.getDazeDuration(self, t))
 	end
 
 t_talent_name["T_BIND_DEMON"] = "恶魔结合"

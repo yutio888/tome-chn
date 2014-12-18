@@ -6,7 +6,7 @@ logCHN:newLog{
 	end,
 }
 logCHN:newLog{
-	log = "#Target# power has recovered",
+	log = "#Target# power has recovered.",
 	fct = function(a)
 		a = npcCHN:getName(a)
 		return ("%s 的强度恢复了！"):format(a)

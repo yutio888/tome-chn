@@ -298,3 +298,51 @@ logCHN:newLog{
 		return ("%s变形为多瑟顿！"):format(a)
 	end,
 }
+
+logCHN:newLog{
+	log = "#RED#You fail to extract a demon seed [%s] (level %d, %s) because you already have one of this kind with a same or higher level.",
+	fct = function(a,b,c)
+		a=npcCHN:getName(a)
+		a=a:gsub("wretch titan","腐烂泰坦")
+		c=c:gsub("mainhand","主手"):gsub("offhand","副手"):gsub("finger","手指"):gsub("body","躯干")
+		return("#RED#你未能提取恶魔种子[%s](level %d, %s)。因为你已经有同级或更高级的种子了"):format(a,b,c)
+	end,
+}
+
+logCHN:newLog{
+	log = "#CRIMSON#You extract a %s and add it to your inventory.",
+	fct = function(a)
+		return("#CRIMSON#你提取了%s并将其收入物品栏。"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#CRIMSON#You extract a %s and bind it to your %s.",
+	fct = function(a,b)
+		return("#CRIMSON#你提取了%s并将其附着于%s。"):format(a,b)
+	end,
+}
+
+logCHN:newLog{
+	log = "You attach %s to your %s.",
+	fct = function(a,b)
+		return("你将%s附着于%s"):format(a,b)
+	end,
+}
+
+logCHN:newLog{
+	log = "You detach %s from your %s.",
+	fct = function(a,b)
+		return("你解除了%s在%s上的附着"):format(a,b)
+	end,
+}
+
+logCHN:newLog{
+	log = "#PURPLE#As %s falls down you see %s reach to it, devour its essence and raise it back as a demonic husk.",
+	fct = function(a,b)
+		a = npcCHN:getName(a)
+		b = npcCHN:getName(b)
+		return("#PURPLE#当%s倒下时，你发现%s靠近了它，吞噬其灵魂，将其制成傀儡。"):format(a,b)
+	end,
+}
+

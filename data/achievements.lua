@@ -8,7 +8,6 @@ function achievementCHN:getName(name)
 		if achievementCHN[achname] then chnname = achievementCHN[achname] end
 		name = name:gsub(achname,chnname):gsub("Nightmare","噩梦难度"):gsub("Insane","疯狂难度"):gsub("Madness","绝望难度")
 						 :gsub("Adventure","冒险模式"):gsub("Roguelike","永久死亡模式"):gsub("Exploration","探索模式")
-						 :gsub("Exploration","探索模式")
 						 :gsub("mode",""):gsub("difficulty","")
 	elseif achievementCHN[name] then name = achievementCHN[name]
 	end
@@ -171,3 +170,12 @@ achievementCHN["Lucky Girl"] = "幸运女孩"
 achievementCHN["Pyromancer"] = "烈焰术士"
 achievementCHN["Cryomancer"] = "冰霜术士"
 achievementCHN["Lichform"] = "巫妖化"
+
+--DLC
+achievementCHN["A Fist Full of Demons"] = "恶魔杀戮者"
+achievementCHN["Glory to the Fearscape"] = "恐惧长廊之荣耀"
+achievementCHN["Well Seeded"] = "种子培育专家"
+achievementCHN["Demonic Party!"] = "恶魔狂欢！"
+achievementCHN["Hell has no fury like a demon scorned!"] = "地狱逃脱"
+achievementCHN["Once bitten, twice shy"] = "再一次的胜利"
+achievementCHN["The Old Ones"] = "古老神话"

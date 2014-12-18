@@ -1,7 +1,7 @@
-t_talent_name["T_DEMON_SEED_FIRE_BOLTS"] = "反击火球"
+t_talent_name["T_DEMON_SEED_FIRE_BOLTS"] = "近战火球"
 talentInfoCHN["T_DEMON_SEED_FIRE_BOLTS"] = function(self, t)
 		local damage = t.getDamage(self, t)
-		return ([[当 你 被 近 战 攻 击 命 中 时 ， 有 %d%% 几 率 释 放 至 多 %d 个 火 球 ， 造 成 %0.2f 点 火 焰 伤 害。
+		return ([[当 你 近 战 攻 击 命 中 时 ， 有 %d%% 几 率 释 放 至 多 %d 个 火 球 ， 造 成 %0.2f 点 火 焰 伤 害。
 		伤 害 受 法 术 强 度 加 成]]):
 		format(self:getTalentLevel(t) * 5 + 20, 1+math.ceil(self:getTalentLevel(t) / 2), damage)
 	end

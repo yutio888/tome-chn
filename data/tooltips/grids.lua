@@ -257,7 +257,16 @@ gridCHN["slimey pool"] = "史莱姆之沼"
 gridCHN["spellblaze scar"] = "奥术之痕"
 gridCHN["weird pedestal"] = "怪异的基座"
 gridCHN["whistling vortex"] = "尖啸漩涡"
+gridCHN["portal to the next level"] = "通向下一层的传送门"
+gridCHN["portal to the previous level"] = "通向上一层的传送门"
+gridCHN["portal to next level"] = "通向下一层的传送门"
+gridCHN["portal to previous level"] = "通向上一层的传送门"
 
+gridCHN["portal to somewhere on Eyal"] = "通向埃亚尔大陆的传送门"
+gridCHN["portal to Eyal"] = "通向埃亚尔大陆的传送门"
+
+gridCHN["portal to the main island"] = "通向主岛的传送门"
+gridCHN["portal to the arrival platform"] = "通向到达平台的传送门"
 --地图描述
 
 gridCHN["A farportal is a way to travel incredible distances in the blink of an eye. They usually require an external item to use."] = " 传 送 门 是 可 以 在 眨 眼 间 将 你 传 送 出 很 远 距 离 的 工 具。 它 们 通 常 需 要 一 件 关 键 道 具 来 激 活。 "

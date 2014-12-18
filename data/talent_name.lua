@@ -1459,7 +1459,8 @@ t_talent_name["T_UNBREAKABLE_WILL"] = "坚定意志"
 t_talent_name["T_SPELL_FEEDBACK"] = "法术反馈"
 t_talent_name["T_MENTAL_TYRANNY"] = "灵魂之怒"
 
-
+--somewhere
+t_talent_name["T_FROST_GRAB"] = "冰霜飞爪"
 
 --Stone Waren
 --[[t_talent_name["T_DWARVEN_HALF_EARTHEN_MISSILES"] = "岩石飞弹"

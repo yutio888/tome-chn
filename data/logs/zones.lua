@@ -681,3 +681,16 @@ logCHN:newLog{
 	end,
 }
 
+logCHN:newLog{
+	log = "#OLIVE_DRAB#You feel the ground shaking from the west.",
+	fct =function()
+		return "#OLIVE_DRAB#你感觉到西边的大地在震动。"
+	end,
+}
+
+logCHN:newLog{
+	log = "#OLIVE_DRAB#The huge sandworm burrower burrows into the ground and disappears.",
+	fct =function()
+		return "#OLIVE_DRAB#巨型沙虫挖掘者挖入地下，消失了"
+	end,
+}

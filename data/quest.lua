@@ -405,8 +405,10 @@ name = " 食 人 魔 巢 穴 ",
 description = function(desc)
 	desc = string.gsub(desc,"Explore the caves below the ruins of Kor'Pul and the Trollmire in search of treasure and glory!"," 到 卡 · 普 尔 和 食 人 魔 沼 泽 的 地 下 城 去 发 现 宝 藏 和 荣 耀！ ")
 	desc = string.gsub(desc,"You have explored the Trollmire and vanquished Prox the Troll."," 你 已 经 探 索 了 食 人 魔 巢 穴 并 击 败 了 食 人 魔 普 洛 克 斯。 ")
+	desc = string.gsub(desc,"You have explored the Trollmire and vanquished Shax the Troll."," 你 已 经 探 索 了 食 人 魔 巢 穴 并 击 败 了 食 人 魔 夏 克 斯。 ")
 	desc = string.gsub(desc,"You must explore the Trollmire and find out what lurks there and what treasures are to be gained!"," 你 必 须 进 入 食 人 魔 沼 泽 去 调 查 那 里 潜 伏 着 什 么 怪 物 并 找 到 那 里 的 宝 藏！ ")
-	desc = string.gsub(desc,"You have explored the ruins of Kor'Pul and vanquished the Shade."," 你 探 索 了 卡 · 普 尔 废 墟 并 击 败 了 席 德。 ")
+	desc = string.gsub(desc,"You have explored the ruins of Kor'Pul and vanquished the Shade."," 你 探 索 了 卡 · 普 尔 废 墟 并 击 败 了 暗 影 骷 髅。 ")
+	desc = string.gsub(desc,"You have explored the ruins of Kor'Pul and vanquished the Possessed."," 你 探 索 了 卡 · 普 尔 废 墟 并 击 败 了 强 盗 头 目。 ")
 	desc = string.gsub(desc,"You must explore the ruins of Kor'Pul and find out what lurks there and what treasures are to be gained!"," 你 必 须 进 入 卡 · 普 尔 去 调 查 那 里 潜 伏 着 什 么 怪 物 并 找 到 那 里 的 宝 藏！ ")
 	return desc
 end}
@@ -496,8 +498,10 @@ description = function(desc)
 	desc = string.gsub(desc,"The Thaloren forest is disrupted. Corruption is spreading. Norgos the guardian bear is said to have gone mad."," 自 然 精 灵 森 林 陷 入 了 混 乱， 到 处 肆 虐 着 堕 落。 听 说 诺 尔 格 斯， 守 护 巨 熊， 陷 入 了 疯 狂。 ")
 	desc = string.gsub(desc,"On the western border of the forest a gloomy aura has been set up. Things inside are... twisted."," 在 森 林 的 西 部 边 境 被 设 置 了 一 个 黑 暗 光 环， 里 面 的 东 西 已 陷 入 了 扭 曲。 ")
 	desc = string.gsub(desc,"You have explored Norgos' Lair and put it to rest."," 你 已 经 探 索 了 诺 尔 格 斯 的 巢 穴 并 埋 葬 了 他 们。 ")
+	desc = string.gsub(desc,"You have explored Norgos' Lair and stopped the shivgoroth invasion."," 你 已 经 探 索 了 诺 尔 格 斯 的 巢 穴 并 阻止了寒 冰 元 素 的 侵 略。 ")
 	desc = string.gsub(desc,"You must explore Norgos' Lair."," 你 必 须 调 查 诺 尔 格 斯 的 巢 穴。 ")
-	desc = string.gsub(desc,"You have explored the Heart of the Gloom and slain the Withering Thing."," 你 已 经 探 索 了 黑 暗 中 心 并 杀 死 了 腐 化 之 源。 ")
+	desc = string.gsub(desc,"You have explored the Heart of the Gloom and slain the Withering Thing."," 你 已 经 探 索 了 黑 暗 中 心 并 杀 死 了 凋 零。 ")
+	desc = string.gsub(desc,"You have explored the Heart of the Gloom and slain the Dreaming One."," 你 已 经 探 索 了 黑 暗 中 心 并 杀 死 了 梦 境 之 眼。 ")
 	desc = string.gsub(desc,"You must explore the Heart of the Gloom."," 你 必 须 调 查 一 下 黑 暗 之 心。 ")
 	return desc
 end}
@@ -597,6 +601,33 @@ description = function(desc)
 	return desc
 end}
 
+questCHN["Ashes in the Wind"] = {
+name = "风中灰烬",
+description = function(desc)
+	desc = string.gsub(desc,"You do not remember much of your life before you were on this burning continent, floating in the void between worlds.  You have been helping demons, happily participating in their experiments to shatter some sort of shield preventing them from taking their righteous revenge on Eyal.","你 已 经 不 太 记 得 来 到 这 片 漂 浮 在 虚 空 中 的 燃 烧 大 陆 之 前 的 记 忆 了 。 你 曾 经 帮 助 过 恶 魔 ， 欢 欣 着 参 与 他 们 的 实 验 ， 以 打 破 某 种 阻 止 恶 魔 降 临 大 举 复 仇 的 无 形 屏 障 。")
+	desc = string.gsub(desc,"You are being taken by your handler to the torture%-pits to help them figure out how to cause the most pain to those on Eyal, when you hear a roaring above you; you look up and see a burning meteor, flying closer, and the demons' spells failing to divert its course!  It lands near you, knocking you off your feet with its shockwave and killing your handler instantly.","你 被 你 的 ' 主 人 ' 带 到 这 里 以 帮 助 研 究 如 何 对 埃 亚 尔 大 陆  造 成 更 严 重 的 伤 害 ， 突 然 一 阵 轰 鸣 从 天 上 传 来 ，你 抬 头 ， 看 见 一 颗 燃 烧 着 的 陨 石 正 在 坠 落 。 恶 魔 试 图 用 法 术 将 其 粉 碎 ， 但 没 有 成 功 ！ 它 落 在 你 身 边 ， 砸 死 了 你 的 ' 主 人 ' ， 同 时 你 也 被 砸 晕 在 地 。")
+	desc = string.gsub(desc,"As you recover, and your platform of searing earth splits from the main continent, your old memories flood your mind and you come to your senses %- the demons are out to destroy your home!  You must escape... but not without destroying the crystal they've used to keep track of you.","当 你 醒 来 后 ， 你 发 现 你 身 处 一 个 和 主 大 陆 分 离 的 平 台 ， 而 你 旧 时 的 记 忆 渐 渐 涌 来 。 你 立 刻 惊 醒 —— 恶 魔 们 要 毁 灭 你 的 故 乡 ！ 你 必 须 逃 离 。。。同 时 别 忘 了 摧 毁 他 们 用 以 追 踪 你 的 水 晶 体。")
+	desc = string.gsub(desc,"You have destroyed the controlling crystal. The demons can no track you down anymore.","你 摧 毁 了 控 制 水 晶 ， 恶 魔 们 不 能 再 追 踪 你 了。")
+	desc = string.gsub(desc,"You have destroyed the Planar Controller. Flee now!","你摧 毁 了 空 间 控 制 者 。 趁 现 在 逃 跑 吧！")
+	desc = string.gsub(desc,"You have to destroy the Planar Controller to escape.","想 要 逃 跑 ， 你 必 须 摧 毁 空 间 控 制 者。")
+	desc = string.gsub(desc,"You have to destroy the controlling crystal before leaving or the demons will be able to track you down.","你 必 须 在 逃 跑 前 摧 毁 控 制 水 晶")
+	return desc
+end
+}
+
+questCHN["I've a feeling we're not on Eyal anymore"] = {
+name = "我感觉我已不在埃亚尔大陆",
+description = function(desc)
+	desc = string.gsub(desc,"Somehow you did not recall out as usual but instead ended up on a sadly familiar area.","不知怎的，你并没有像往常一样回城，而是到了一片令人沮丧的熟悉的地方。")
+	desc = string.gsub(desc,"You are back in the Fearscape. Back and with a welcome committee.","你又回到了恶魔空间，同时面临着一群热情的迎接者们。")
+	desc = string.gsub(desc,"You must find a way to escape, again.","你必须要逃离，再一次。")
+	desc = string.gsub(desc,"You have found your way out of the primary ambush.","你找到摆脱面前伏击的方法。")
+	desc = string.gsub(desc,"Find a way back to Eyal.","寻找回到埃亚尔大陆的路。")
+	desc = string.gsub(desc,"You have escaped the Anteroom of Agony.","你成功地再一次逃离恶魔。")
+		
+	return desc
+end
+}
 questCHN["Escort"] = {
 name = function(n)
 	n = n:gsub("Escort: "," 护 送： "):gsub("lost warrior"," 迷 路 的 战 士 "):gsub("injured seer"," 受 伤 的 先 知 "):gsub("repented thief"," 忏 悔 的 盗 贼 "):gsub("lone alchemist"," 迷 途 的 炼 金 术 士 "):gsub("lost sun paladin"," 迷 路 的 太 阳 骑 士 "):gsub("lost anorithil"," 迷 路 的 星 月 术 士 "):gsub("worried loremaster"," 忧 郁 的 博 学 者 "):gsub("temporal explorer","时 空 探 索 者")

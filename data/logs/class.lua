@@ -87,7 +87,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#Target# evades #Source#.",
 	fct = function()
-		return ("#Target# 闪避了 #Source# 。")
+		return "#Target# 闪避了 #Source# 。"
 	end,
 }
 
@@ -95,18 +95,10 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#Source# misses #Target#.",
 	fct = function()
-		return ("#Source# 未命中 #Target#。")
+		return "#Source# 未命中 #Target#。"
 	end,
 }
 
-logCHN:newLog{
-	log = "%s misses %s.",
-	fct = function(a, b)
-		a = npcCHN:getName(a)
-		b = npcCHN:getName(b)
-		return ("%s 未命中 %s。"):format(a, b)
-	end,
-}
 
 logCHN:newLog{
 	log = "%s ripostes!",

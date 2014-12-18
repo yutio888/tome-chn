@@ -325,10 +325,10 @@ function _M:drawDialog(kind, actor_to_compare)
 
 		h = h + self.font_h
 		if player:attr("forbid_arcane") then
-			s:drawColorStringBlended(self.font, "#ORCHID#Zigur follower", w, h, 255, 255, 255, true) h = h + self.font_h
+			s:drawColorStringBlended(self.font, "#ORCHID#伊格追随者", w, h, 255, 255, 255, true) h = h + self.font_h
 		end
 		if player:attr("blood_life") then
-			s:drawColorStringBlended(self.font, "#DARK_RED#Blood of Life", w, h, 255, 255, 255, true) h = h + self.font_h
+			s:drawColorStringBlended(self.font, "#DARK_RED#生命之血", w, h, 255, 255, 255, true) h = h + self.font_h
 		end
 
 		h = h + self.font_h

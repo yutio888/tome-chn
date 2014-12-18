@@ -5,8 +5,12 @@ npcCHN = {}
 
 function npcCHN:getName(name)
 	if not name then return nil end
-	if name:find("'s Inner Demon") then name = npcCHN:getName(name:gsub("'s Inner Demon","")).."的心魔"
-	elseif name:find("servant") then name = name:gsub("golem","傀儡"):gsub("servant of","")
+	if name:find("'s Inner Demon") then name = npcCHN:getName(name:gsub("'s Inner Demon","")).."的心魔"	
+	elseif name:find("demonic husk") then name = npcCHN:getName(name:gsub(" %(demonic husk%)","")).."(恶魔傀儡)"
+	elseif name:find("servant") then 
+		local tname = name:gsub("golem %(servant of ",""):gsub("%)","")
+		local chnname = npcCHN:getName(tname)
+		name = name:gsub("golem %(servant of","傀儡%("):gsub(tname,chnname):gsub("%)","的仆人)")
 	elseif name:find(" :") then
 		local f,e=name:find(" :")
 		local tname=name:sub(1,f-1)
@@ -59,7 +63,9 @@ end
 function npcCHN:getDesc(name)
 	if not name then return nil end
 	if npcDescCHN[name] then return npcDescCHN[name]
-	elseif npcDescCHN[string.lower(name)] then return npcDescCHN[string.lower(name)]
+	elseif name:find("demonic husk") then 
+		name = name:gsub(" %(demonic husk%)","")
+		return npcCHN:getDesc(name)
 	elseif name:find(" :") then
 		local f,e=name:find(" :")
 		local tname=name:sub(1,f-1)
@@ -1573,6 +1579,9 @@ npcDescCHN["Kor's Fury"] = "暗影骷髅使用强大的能量使它存留于世�
 npcNameCHN["sandworm burrower"] = "沙虫挖掘者"
 npcDescCHN["sandworm burrower"] = "这只沙虫似乎毫不在意你的出现，只顾埋头挖掘。也许跟着它才能找到出路。"
 
+npcNameCHN["huge sandworm burrower"] = "巨型沙虫挖掘者"
+npcDescCHN["huge sandworm burrower"] = "这只沙虫似乎毫不在意你的出现，只顾埋头挖掘。也许跟着它才能找到出路。"
+
 npcNameCHN["Sandworm Queen"] = "沙虫女皇"
 npcDescCHN["Sandworm Queen"] = "在你面前站着的是沙虫女皇。她带着厚重的甲壳和肥胖的身体向你冲来，同时她还在召唤子孙！"
 
@@ -2027,4 +2036,15 @@ npcDescCHN["investigator"] = "这个恶魔专心于从#{italic}#志愿者#{norma
 npcNameCHN["Planar Controller"] = "空间控制者"
 npcDescCHN["Planar Controller"] = "一个巨大的恶魔朝你走来，显然他控制着附近所有的传送门。"
 
+npcNameCHN["quasit squad leader"] = "夸塞魔队长"
+npcDescCHN["quasit squad leader"] = "一只装备了重甲的小恶魔，它向你发起冲锋。"
 
+npcNameCHN["Rogroth, Eater of Souls"] = "罗格洛斯，灵魂吞噬者"
+npcDescCHN["Rogroth, Eater of Souls"] = "火焰和枯萎的力量在蜘蛛一样的黑色金属皮肤上闪现。它没有明显的头部，只有一个大大的嘴巴。"
+npcNameCHN["adventurers party"] = "冒险家分队"
+npcNameCHN["ziguranth patrol"] = "伊格巡逻队"
+npcNameCHN["Allied Kingdoms human patrol"] = "联合王国人类巡逻队"
+npcNameCHN["Allied Kingdoms halfling patrol"] = "联合王国半身人巡逻队"
+npcNameCHN["Sun Paladins patrol"] = "太阳骑士巡逻队"
+npcNameCHN["Anorithil patrol"] = "星月术士巡逻队"
+npcNameCHN["Orcs patrol"] = "兽人巡逻队"

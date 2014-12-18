@@ -5075,7 +5075,7 @@ function _M:getTalentFullDescription(t, addlevel, config, fake_mastery)
 		if t.sustain_stamina then d:add({"color",0x6f,0xff,0x83}, "持续体力消耗： ", {"color",0xff,0xcc,0x80}, ""..(util.getval(t.sustain_stamina, self, t)), true) end
 		if t.sustain_equilibrium then d:add({"color",0x6f,0xff,0x83}, "持续失衡值消耗： ", {"color",0x00,0xff,0x74}, ""..(util.getval(t.sustain_equilibrium, self, t)), true) end
 		if t.sustain_vim then d:add({"color",0x6f,0xff,0x83}, "持续活力值消耗： ", {"color",0x88,0x88,0x88}, ""..(util.getval(t.sustain_vim, self, t)), true) end
-		if t.drain_vim then d:add({"color",0x6f,0xff,0x83}, "每回合仇恨值消耗: ", {"color",0x88,0x88,0x88}, "-"..(util.getval(t.drain_vim, self, t)), true) end
+		if t.drain_vim then d:add({"color",0x6f,0xff,0x83}, "每回合活力值消耗: ", {"color",0x88,0x88,0x88}, "-"..(util.getval(t.drain_vim, self, t)), true) end
 		if t.sustain_positive then d:add({"color",0x6f,0xff,0x83}, "持续正能量消耗： ", {"color",255, 215, 0}, ""..(util.getval(t.sustain_positive, self, t)), true) end
 		if t.sustain_negative then d:add({"color",0x6f,0xff,0x83}, "持续负能量消耗： ", {"color", 127, 127, 127}, ""..(util.getval(t.sustain_negative, self, t)), true) end
 		if t.sustain_hate then d:add({"color",0x6f,0xff,0x83}, "持续仇恨值消耗：  ", {"color", 127, 127, 127}, ""..(util.getval(t.sustain_hate, self, t)), true) end

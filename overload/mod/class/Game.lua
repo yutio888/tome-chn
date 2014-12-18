@@ -1284,6 +1284,7 @@ function _M:logMessage(source, srcSeen, target, tgtSeen, style, ...)
 		     :gsub("fire","火焰"):gsub("lightning","闪电"):gsub("arcane","奥术"):gsub("cold","寒冷")
 		     :gsub("blight","枯萎"):gsub("darkness","暗影"):gsub("physical","物理"):gsub("temporal","时空")
 		     :gsub("light","光系"):gsub("acid","酸性"):gsub("mental","精神"):gsub("nature","自然")
+		     :gsub("turned into osmosis","渗透吸收")
 	return style
 end
 

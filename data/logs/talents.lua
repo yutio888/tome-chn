@@ -2071,13 +2071,6 @@ logCHN:newLog{
 }
 --technique/unarmed-discipline
 logCHN:newLog{
-	log = "#Source# misses #Target#.",
-	fct = function()
-		return "#Source 未命中 #Target#。"
-	end,
-}
-
-logCHN:newLog{
 	log = "#Source# slams #Target# into the ground!",
 	fct = function()
 		return"#Source将#Target#掀翻在地！"

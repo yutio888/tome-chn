@@ -707,3 +707,12 @@ logCHN:newLog{
 	end,
 }
 
+
+logCHN:newLog{
+	log = "%s shrugs off some effects!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return("%s摆脱了某些负面效果！"):format(a)
+	end,
+}
+

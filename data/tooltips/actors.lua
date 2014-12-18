@@ -19,7 +19,7 @@ actorCHN["Horror"] = "恐魔"
 actorCHN["Vermin"] = "害虫"
 actorCHN["Spiderkin"] = "蜘蛛"
 actorCHN["Thought-form"] = "精神体"
-
+actorCHN["Hostile"] = "敌对"
 --角色亚类别
 actorCHN["Human"] = "人类"
 actorCHN["Ant"] = "蚂蚁"

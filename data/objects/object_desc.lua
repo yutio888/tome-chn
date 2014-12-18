@@ -21,7 +21,7 @@ objectMType["charm"] = "护符"
 objectMType["organic"] = "器官"
 objectMType["lore"] = "文献"
 objectMType["corpse"] = "尸体"
-
+objectMType["seed"] = "种子"
 objectSType = {}
 objectSType["battleaxe"] = "战斧"
 objectSType["greatmaul"] = "巨槌"
@@ -88,7 +88,7 @@ objectSType["magic teaching"] = "魔法教学"
 objectSType["heart"] = "心脏"
 objectSType["animal"] = "动物"
 objectSType["blood"] = "血液"
-
+objectSType["demon"] = "恶魔"
 --------------------------------------------------------
 --鼠标信息
 --------------------------------------------------------
@@ -329,7 +329,7 @@ objDesc["Damage shields have +1 duration and +15% power"] = "伤害护盾增加�
 objDesc["% chance to summon an orc spirit"] = "% 几率召唤一个兽人灵魂"
 objDesc["Storm Duration: "] = "风暴持续时间："
 objDesc["Your Obliterating Smash can destroy walls."] = "你的歼灭挥斩能摧毁墙壁"
-objDesc["All nearby enemies take 20 fire damage each turn and healing you for 10% of the damage dealt."] = "附近的敌人每回合受到20火焰伤害。\n你受到10%%伤害值的治疗"
+objDesc["All nearby enemies take 20 fire damage each turn and healing you for 10% of the damage dealt."] = "附近的敌人每回合受到20火焰伤害。\n你受到10%伤害值的治疗"
 objDesc["Plaguefire detonates when its victim dies, spreading to other enemies up to two times."] = "疫火感染的生物死亡时，疫火将传播到附近的敌人。\n至多传播2次。"
 objDesc["Status resistances shift over time to match the statuses you are being hit by."] = "依据你中的负面状态改变你的状态免疫"
 objDesc["Can be unequipped, can't be rerolled."] = "能解除装备，不能重置"
@@ -344,6 +344,7 @@ objDesc["Grants physical power equal to your Shadow Power."] = "每点“阴影�
 
 objDesc["Increases all damage by 1% for each point of your Shadow Power."] = "每点“阴影强度”增加1%%全体伤害加成"
 objDesc["Increases all resists by 0.4% for each point of your Shadow Power."] = "每点“阴影强度”增加0.4%%全体抗性"
+
 --替换特殊攻击效果/绿字效果
 
 special_t = {}
@@ -512,6 +513,7 @@ function getObjectDescCHN(desc)
 			        end
 
 			end
+			desc[i] = desc[i]:gsub("20% chance to trigger a Blood Grasp cast of level","20%%几率触发鲜血支配，等级"):gsub("25% chance to trigger a Silence cast of level ","25%%几率触发沉默，等级"):gsub("Reduces duration of detrimental effects by 40%","减少40%%负面状态持续时间")
 			desc[i] = special_t[desc[i]] or desc[i]
 			desc[i] = itemDamagedesc(desc[i])
 			desc[i] =desc[i]:gsub("fire","火焰"):gsub("lightning","闪电"):gsub("arcane","奥术"):gsub("cold","寒冷")
@@ -527,6 +529,10 @@ function getObjectDescCHN(desc)
 					:gsub("water","水")
 					:gsub("Current Resistance:","当前抗性："):gsub("Blood Charges:","鲜血吸收:")
 					:gsub("item",""):gsub("life","生命")
+			desc[i]=desc[i]:gsub("status","状态"):gsub("alive","存活"):gsub("dead(does not provide benefits)","死亡（不提供属性）")
+			desc[i] = desc[i]:gsub("Attach on","附着于"):gsub("worn on",""):gsub("slot","")
+					:gsub("mainhand","主手"):gsub("offhand","副手"):gsub("finger","手指"):gsub("body","躯干")
+			if desc[i]:find("When attach to") then desc[i] = "当附着时：" end
 		end
         end
 	return desc

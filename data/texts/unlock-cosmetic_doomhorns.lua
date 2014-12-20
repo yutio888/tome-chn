@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
+-- Copyright (C) 2009 - 2014 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -17,15 +17,8 @@
 -- Nicolas Casalini "DarkGod"
 -- darkgod@te4.org
 
-long_name = "CHN Addons for ToME"
-short_name = "chn123"
-for_module = "tome"
-version = {1,2,5}
-tags = {'Chinese','translation'}
-weight = 5
-author = { "Grammier&Marblezls&Yutio888", "Grammier@3DMGAME","Marblezls@3DMGAME","Yutio888@mail.qq.com"}
-homepage = "http://tome.te4.org/"
-description = [[The chinese version of tome4 V1.2.5]]
-overload = true
-superload = true
-data = true
+return "New Cosmetic Race Option: #LIGHT_GREEN#Doomhorns",
+[[You have killed a creature by infusing your shield with demon horns, and you loved it!
+
+You can now create new characters with a pair of demonic horns.
+]]

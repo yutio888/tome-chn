@@ -1,5 +1,5 @@
 ﻿-- TE4 - T-Engine 4
--- Copyright (C) 2009 - 2014 Nicolas Casalini
+-- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -27,12 +27,8 @@ module(..., package.seeall, class.inherit(Base))
 
 --- Requests a simple waiter dialog
 function _M:simpleWaiter(title, text, width, count, max)
-	if title == "Loading level" then
-		title,text = "载入当层数据","载入中，请稍等" 
-	elseif title == "Loading Zone" then
-		title,text = "载入地城中","载入中，请稍等"
-	elseif title:find("Saving") then
-		title,text = "存档中","存档中，请稍等"
+	if simpleWaiterDlg and simpleWaiterDlg[title] then
+		title,text = simpleWaiterDlg[title](text)
 	end
 	width = width or 400
 	local w, h = self.font:size(text)
@@ -220,20 +216,8 @@ end
 function _M:webPopup(url)
 	local d = new(url, game.w * 0.9, game.h * 0.9)
 	local w = require("engine.ui.WebView").new{width=d.iw, height=d.ih, url=url, allow_downloads={addons=true, modules=true}}
-	if w.unusable then return nil end
-	local b = require("engine.ui.ButtonImage").new{no_decoration=true, alpha_unfocus=0.5, file="copy-icon.png", fct=function()
-		if w.cur_url then
-			local url = w.cur_url:gsub("%?_te4&", "?"):gsub("%?_te4", ""):gsub("&_te4", "")
-			core.key.setClipboard(url)
-			print("[WEBVIEW] url copy", url)
-			self:simplePopup("Copy URL", "URL copied to your clipboard.")
-		end
-	end}
 	w.on_title = function(title) d:updateTitle(title) end
-	d:loadUI{
-		{left=0, top=-b.h / 2, ui=b},
-		{left=0, top=0, ui=w},
-	}
+	d:loadUI{{left=0, top=0, ui=w}}
 	d:setupUI()
 	d.key:addBind("EXIT", function() game:unregisterDialog(d) end)
 	game:registerDialog(d)
@@ -711,7 +695,7 @@ function _M:toScreen(x, y, nb_keyframes)
 	core.display.glTranslate(tx, ty, 0)
 	if zoom < 1 then core.display.glScale(zoom, zoom, zoom) end
 
-	-- Draw the frame and shadow
+		-- Draw the frame and shadow
 	if self.frame.shadow then self:drawFrame(x + self.frame.shadow.x, y + self.frame.shadow.y, 0, 0, 0, self.frame.shadow.a) end
 	self:drawFrame(x, y, self.frame.darkness, self.frame.darkness, self.frame.darkness, self.frame.a)
 

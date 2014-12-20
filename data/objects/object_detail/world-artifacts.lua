@@ -1664,7 +1664,13 @@ objects:addObjects({
 })
 
 --zones‘objects
-
+objects:addObjects({
+	unique = true,
+	enName = "Yeek-fur Robe",
+	chName = "夺心魔皮袍",
+	unIdedName = "光滑的毛皮袍子",
+	chDesc = "美丽、柔软、洁白，这显然是为半身人贵族设计的衣物，褶边上还缀着几颗明亮的蓝宝石。尽管它是如此迷人，当你披上它时却忍不住有些恶心。",
+})
 --abashed-expanse
 objects:addObjects({
 	unique = true,

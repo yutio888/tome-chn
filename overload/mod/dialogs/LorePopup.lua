@@ -35,6 +35,8 @@ function _M:init(l, w, force_height)
 	Dialog.init(self, "新手札：#0080FF#"..loreListCHN(l.name), 1, 1)
 
 	local text = util.getval(l.lore).."\n"
+	if loreCHN and loreList and loreList[l.name] and loreCHN[loreList[l.name]] then text = loreCHN[loreList[l.name]] end
+	if text:find("Athrall") then text = "‘为了主人的荣耀’ ——阿夏尔" end
 	text = cutChrCHN(text,40)
 	self.font = core.display.newFont("/data-chn123/font/lorefont.ttf", 16)
 	local list = text:splitLines(w - 10, self.font)

@@ -716,3 +716,57 @@ logCHN:newLog{
 	end,
 }
 
+logCHN:newLog{
+	log = "#LIGHT_BLUE#A dream seed escapes %s's sleeping mind.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return("#LIGHT_BLUE#一个梦境之种从%s的沉眠中释放"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#YELLOW#%s has temporarily forgotten %s!",
+	fct = function(a,b)
+		a = npcCHN:getName(a)
+		return("#YELLOW#%s暂时忘记了%s!"):format(a,b)
+	end,
+}
+
+--dlc
+logCHN:newLog{
+	log = "#CRIMSON#The power of the Fearscape touches %s and fades away, leaving no traces.",
+	fct = function(a)
+		return("#CRIMSON#恶魔空间的力量触及了%s，然后消褪了，没留下一点痕迹。"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#CRIMSON#The power of the Fearscape touches %s and fades away, leaving a nasty looking %s nearby.",
+	fct = function(a,b)
+		b = npcCHN:getName(b)
+		return("#CRIMSON#恶魔空间的力量触及了%s，然后消褪了，留下%s站在你面前"):format(a,b)
+	end,
+}
+
+logCHN:newLog{
+	log = "#CRIMSON#The power of the Fearscape touches %s and fades away, leaving a nasty effect upon you.",
+	fct = function(a)
+		return("#CRIMSON#恶魔空间的力量触及了%s，然后消褪了，留下一个负面效果。"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#CRIMSON#The power of the Fearscape touches %s and fades away, leaving a strange effect upon you.",
+	fct = function(a)
+		return("#CRIMSON#恶魔空间的力量触及了%s，然后消褪了，留下一个奇怪的效果。"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#CRIMSON#The power of the Fearscape touches %s and fades away, leaving a strange item being.",
+	fct = function(a)
+		return("#CRIMSON#恶魔空间的力量触及了%s，然后消褪了，留下一个道具。"):format(a)
+	end,
+}
+
+

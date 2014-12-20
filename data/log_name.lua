@@ -1,4 +1,5 @@
 ﻿function logCHN:getName(name)
+	if name ~= npcCHN:getName(name) then return npcCHN:getName(name) end
 	name = trapCHN:getName(name) 
 	name = npcCHN:getName(name) 
 	if name:find(" from ") then

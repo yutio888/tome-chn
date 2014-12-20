@@ -27,6 +27,21 @@ birthCHN["Demonologist"] = {
 	},
 
 }
+
+birthCHN["Doomelf"] = {
+	chname = "魔化精灵",
+	locked_desc = "The demons of Mal'Rok would never bless you!\t\nThree could tell them of the horrors elves wrought.\t\nOne rages and torments in deep oceans blue,\t\none fights for the third with the cultists she taught.\t\nSilence these beings, maintain your deception,\t\nand then you may witness a new elf's conception...",
+	desc = {
+		"魔 化 精 灵 并 不 是 一 个 真 正 的 种 族 ， 他 们 曾 是 永 恒 精 灵 ， 而 被 恶 魔 抓 去， 变 为 末 日 的 使 者。",
+		"他 们 对 折 磨 敌 人 感 到 享 受。",
+		"他 们 具 有#GOLD# 加 速 #WHITE# 技 能，能 每 隔 一 段 时  间 让 自 己 脱 离 相  位 空 间。",
+		"#GOLD#属 性 修 正 ：",
+		"#LIGHT_BLUE# * -2 力 量, +1 敏 捷, +1 体 质",
+		"#LIGHT_BLUE# * +3 魔 法, +2 意 志, +0 灵 巧",
+		"#GOLD#每 等 级 生 命 加 值：#LIGHT_BLUE# +9",
+		"#GOLD#经 验 惩 罚 ： #LIGHT_BLUE# 25%",
+	}
+}
 birthCHN["Stone Warden"] = {
 	chname = "岩石守卫",
 	desc = {

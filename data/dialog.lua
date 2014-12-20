@@ -55,6 +55,12 @@ end
 
 --- Requests a simple, press any key, dialog
 function _M:listPopup(title, text, list, w, h, fct)
+	if title== "Blighted Path" then 
+		title = "枯萎之路" 
+		text = "选择一项用途："
+		list[1].name=list[1].name:gsub("Attack for","攻击造成"):gsub("blight damage","枯萎伤害")
+		list[2].name=list[2].name:gsub("Restore","恢复"):gsub("vim","活力")
+	end
 	local d = new(title, 1, 1)
 	local desc = require("engine.ui.Textzone").new{width=w, auto_height=true, text=text, scrollbar=true}
 	local l = require("engine.ui.List").new{width=w, height=h-16 - desc.h, list=list, fct=function() d.key:triggerVirtual("ACCEPT") end}
@@ -63,8 +69,8 @@ function _M:listPopup(title, text, list, w, h, fct)
 		{left = 3, top = 3 + desc.h + 3, ui=require("engine.ui.Separator").new{dir="vertical", size=w - 12}},
 		{left = 3, bottom = 3, ui=l},
 	}
-	d.key:addBind("EXIT", function() game:unregisterDialog(d) if fct then fct() end end)
-	d.key:addBind("ACCEPT", function() game:unregisterDialog(d) if list[l.sel].fct then list[l.sel].fct(list[l.sel]) return end if fct then fct(list[l.sel]) end end)
+	d.key:addBind("EXIT", function() if fct then fct() end game:unregisterDialog(d) end)
+	d.key:addBind("ACCEPT", function() if list[l.sel].fct then list[l.sel].fct(list[l.sel]) return end if fct then fct(list[l.sel]) end game:unregisterDialog(d) end)
 	d:setFocus(l)
 	d:setupUI(true, true)
 	game:registerDialog(d)
@@ -119,6 +125,12 @@ function _M:yesnoPopup(title, text, fct, yes_text, no_text, no_leave, escape)
 	if yesnoPopDlg and yesnoPopDlg[title] then
 		title,text = yesnoPopDlg[title](text)
 	end
+	if title:find("Demon Statue") then
+		title = "恶魔雕像"
+		text = "你#{strong}#确定#{normal}#要触摸它么？#" 
+		yes_text = "否"
+		no_text = "是"
+		end
 	if text=="Are you sure you want to target yourself?" then text = "你确定要以自己为目标释放技能？" end
 	local w, h = self.font:size(text)
 	local d = new(title, 1, 1)
@@ -214,10 +226,22 @@ function _M:yesnocancelLongPopup(title, text, w, fct, yes_text, no_text, cancel_
 end
 
 function _M:webPopup(url)
-	local d = new(url, game.w * 0.9, game.h * 0.9)
+	local d = new(url, game.w * 0.9, game.h * 0.9)	
 	local w = require("engine.ui.WebView").new{width=d.iw, height=d.ih, url=url, allow_downloads={addons=true, modules=true}}
+	if w.unusable then return nil end
+	local b = require("engine.ui.ButtonImage").new{no_decoration=true, alpha_unfocus=0.5, file="copy-icon.png", fct=function()
+		if w.cur_url then
+			local url = w.cur_url:gsub("%?_te4&", "?"):gsub("%?_te4", ""):gsub("&_te4", "")
+			core.key.setClipboard(url)
+			print("[WEBVIEW] url copy", url)
+			self:simplePopup("Copy URL", "URL copied to your clipboard.")
+		end
+	end}
 	w.on_title = function(title) d:updateTitle(title) end
-	d:loadUI{{left=0, top=0, ui=w}}
+	d:loadUI{
+		{left=0, top=-b.h / 2, ui=b},
+		{left=0, top=0, ui=w},
+	}
 	d:setupUI()
 	d.key:addBind("EXIT", function() game:unregisterDialog(d) end)
 	game:registerDialog(d)

@@ -513,7 +513,7 @@ function getObjectDescCHN(desc)
 			        end
 
 			end
-			desc[i] = desc[i]:gsub("20% chance to trigger a Blood Grasp cast of level","20%%几率触发鲜血支配，等级"):gsub("25% chance to trigger a Silence cast of level ","25%%几率触发沉默，等级"):gsub("Reduces duration of detrimental effects by 40%","减少40%%负面状态持续时间")
+			desc[i] = desc[i]:gsub("chance to trigger a Blood Grasp cast of level","几率触发鲜血支配，等级"):gsub("chance to trigger a Silence cast of level ","几率触发沉默，等级"):gsub("Reduces duration of detrimental effects by 40%%","减少40%%负面状态持续时间")
 			desc[i] = special_t[desc[i]] or desc[i]
 			desc[i] = itemDamagedesc(desc[i])
 			desc[i] =desc[i]:gsub("fire","火焰"):gsub("lightning","闪电"):gsub("arcane","奥术"):gsub("cold","寒冷")

@@ -49,6 +49,7 @@ require "data-chn123.death_note"
 require "data-chn123.log_name"
 require "data-chn123.talents.talents"
 require "data-chn123.birth.birth"
+require "data-chn123.texts.texts"
 package.loaded["engine.ui.Dialog"] = require "data-chn123.dialog"
 --------------------------------END
 

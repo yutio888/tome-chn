@@ -1,7 +1,4 @@
 simpleWaiterDlg = {}
-simpleWaiterDlg["Saving world"] = function()
-	return "保存世界","保存中，请稍等"
-end
 simpleWaiterDlg["Saving entity"] = function()
 	return "保存物品","保存中，请稍等"
 end

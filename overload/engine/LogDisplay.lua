@@ -125,6 +125,9 @@ function _M:call(str, ...)
 	else
 		str = str:format(...)
 	end
+	if str:find("#CRIMSON#The ") and str:find("glows ominously.") then
+		str = "#CRIMSON#恶魔雕像闪耀着光芒。"
+	end
 	print("[LOG]", str)
 	local tstr = str:toString()
 	if self.out_f then self.out_f:write(tstr:removeColorCodes()) self.out_f:write("\n") end

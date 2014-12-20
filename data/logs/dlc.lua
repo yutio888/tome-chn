@@ -336,7 +336,12 @@ logCHN:newLog{
 		return("你解除了%s在%s上的附着"):format(a,b)
 	end,
 }
-
+logCHN:newLog{
+	log = "You cannot use a tinker without the corresponding item.",
+	fct = function()
+		return "你不能在没有装备的情况下进行附着。"
+	end,
+}
 logCHN:newLog{
 	log = "#PURPLE#As %s falls down you see %s reach to it, devour its essence and raise it back as a demonic husk.",
 	fct = function(a,b)

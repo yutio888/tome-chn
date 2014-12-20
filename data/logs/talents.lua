@@ -1400,6 +1400,42 @@ logCHN:newLog{
 		return "#LIGHT_BLUE#你进入了梦境空间！"
 	end,
 }
+logCHN:newLog{
+	log = "#LIGHT_BLUE#%s has spawned a dream projection to protect its mind!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return("#LIGHT_BLUE#%s产生了一个梦境守卫来保护自己！"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#LIGHT_BLUE#You are brought back from the Dreamscape!",
+	fct = function()
+		return "#LIGHT_BLUE#你脱离了梦境空间！"
+	end,
+}
+logCHN:newLog{
+	log = "#LIGHT_RED#%s writhes in agony as a fragment of its mind is destroyed!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return("#LIGHT_RED#%s作为精神碎片被摧毁了。"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#LIGHT_RED#%s's mind shatters into %d tiny fragments!",
+	fct = function(a,b)
+		a = npcCHN:getName(a)
+		return("#LIGHT_RED#%s的精神破碎为%d块碎片！"):format(a,b)
+	end,
+}
+logCHN:newLog{
+	log = "#LIGHT_RED#%s suffered a %s of self in the Dreamscape!",
+	fct = function(a,b)
+		a = npcCHN:getName(a)
+		b = b:gsub("potentially fatal loss","致命损伤"):gsub("devastating loss","毁灭性的损伤"):gsub("tremendous loss","严重损伤"):gsub("terrible loss","大量伤害"):gsub("loss","伤害")
+		return("#LIGHT_RED#%s在梦境空间中受到了%s！"):format(a,b)
+	end,
+}
 
 --psionic/solipsism
 logCHN:newLog{

@@ -745,14 +745,23 @@ function _M:generateRaces()
 					if locked == true then
 						--DLC 汉化
 						local desc = sd.locked_desc
-						if birthCHN[sd.name] then desc = birthCHN[sd.name].locked_desc	end
+						local tname=sd.name
+						if birthCHN[tname] then 
+							desc = birthCHN[tname].locked_desc
+							tname = birthCHN[tname].chname end
 						nodes[#nodes+1] = { name = tstring{{"font", "italic"}, {"color", "GREY"}, "-- 需解锁 --", {"font", "normal"}}, id=sd.name, pid=d.name, locked=true, desc=desc..locktext }
 					elseif locked == false then
 						local desc = sd.desc
+						local tname = sd.name
 						--DLC 汉化
-						if birthCHN[sd.name] then desc = birthCHN[sd.name].desc	end
-						if type(desc) == "table" then desc = table.concat(sd.desc, "\n") end
-						nodes[#nodes+1] = { name = sd.display_name, basename = sd.display_name, id=sd.name, pid=d.name, desc=desc }
+						if birthCHN[tname] then 
+							desc = birthCHN[tname].desc
+							tname = birthCHN[tname].chname
+						else
+							tname=sd.display_name
+						end
+						if type(desc) == "table" then desc = table.concat(desc, "\n") end
+						nodes[#nodes+1] = { name = tname, basename = tname, id=sd.name, pid=d.name, desc=desc }
 						if self.sel_race and self.sel_race.id == sd.name then newsel = nodes[#nodes] end
 					end
 				end

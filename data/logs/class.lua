@@ -254,18 +254,16 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
-	log = "#CRIMSON#%s leeches life from its victim!",
-	fct = function(a)
-		a = npcCHN:getName(a)
-		return ("#CRIMSON#%s 从目标身上吸取生命！"):format(a)
+	log = "#CRIMSON##Source# leeches life from #Target#!",
+	fct = function()
+		return ("#LIGHT_RED# #Source# 从#Target#身上吸取生命！")
 	end,
 }
 
 logCHN:newLog{
-	log = "#CRIMSON#%s leeches energies from its victim!",
-	fct = function(a)
-		a = npcCHN:getName(a)
-		return ("#CRIMSON#%s 从目标身上吸取能量！"):format(a)
+	log = "#CRIMSON##Source# leeches energies from #Target#!",
+	fct = function()
+		return ("#LIGHT_RED# #Source# 从#Target#身上吸取能量！")
 	end,
 }
 

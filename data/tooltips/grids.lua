@@ -267,6 +267,8 @@ gridCHN["portal to Eyal"] = "通向埃亚尔大陆的传送门"
 
 gridCHN["portal to the main island"] = "通向主岛的传送门"
 gridCHN["portal to the arrival platform"] = "通向到达平台的传送门"
+
+gridCHN["Long tunnel to the island of Rel"] = "通向夺心魔之岛的通道"
 --地图描述
 
 gridCHN["A farportal is a way to travel incredible distances in the blink of an eye. They usually require an external item to use."] = " 传 送 门 是 可 以 在 眨 眼 间 将 你 传 送 出 很 远 距 离 的 工 具。 它 们 通 常 需 要 一 件 关 键 道 具 来 激 活。 "
@@ -310,6 +312,28 @@ gridCHN["Yeek Wayist main village"] = " 夺 心 魔 的 聚 居 点 "
 gridCHN["Ziguranth main training ground"] = " 伊 格 兰 斯 的 主 要 训 练 基 地 "
 gridCHN["Heart of the dwarven Empire"] = " 矮 人 王 国 的 心 脏 "  
 
+--statue
+gridCHN["demon statue a quasit"] = "恶魔雕像：夸塞魔"
+gridCHN["demon statue a wretchling"] = "恶魔雕像：酸液树魔"
+gridCHN["demon statue a fire imp"] = "恶魔雕像：火魔婴"
+gridCHN["demon statue a water imp"] = "恶魔雕像：小水怪"
+gridCHN["demon statue a dolleg"] = "恶魔雕像：多雷格"
+gridCHN["demon statue a a dúathedlen"] = "恶魔雕像：多瑟顿"
+gridCHN["demon statue a forge giant"] = "恶魔雕像：锻造巨人"
+gridCHN["demon statue a thaurhereg"] = "恶魔雕像：修尔希瑞格"
+gridCHN["demon statue a daelach"] = "恶魔雕像：达莱奇"
+gridCHN["demon statue a uruivellas"] = "恶魔雕像：乌尔维拉斯"
+gridCHN["demon statue a wretch titan"] = "恶魔雕像：腐化泰坦"
+gridCHN["demon statue a ruin banshee"] = "恶魔雕像：毁灭女妖"
+gridCHN["demon statue Rogroth, Eater of Souls"] = "恶魔雕像：罗格洛斯灵魂吞噬者"
+gridCHN["demon statue Draebor, the Imp"] = "恶魔雕像：小恶魔德瑞宝"
+gridCHN["demon statue the Corrupted Daelach"] = "恶魔雕像：腐化达莱奇"
+gridCHN["demon statue Khulmanar, General of Urh'Rok"] = "恶魔雕像：库马纳·乌鲁洛克之近卫将军"
+gridCHN["demon statue Kryl-Feijan"] = "恶魔雕像：卡洛·斐济"
+gridCHN["demon statue Lithfengel"] = "恶魔雕像：里斯丰格"
+gridCHN["demon statue Shasshhiy'Kaish"] = "恶魔雕像：莎西·凯希"
+gridCHN["demon statue Walrog"] = "恶魔雕像：乌尔罗格"
+gridCHN["demon statue Harkor'Zun"] = "恶魔雕像：哈克祖"
 
 function getTooltipGridCHN(desc)
 	if not desc then return end

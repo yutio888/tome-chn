@@ -75,7 +75,10 @@ end
 
 function _M:select(item)
 	if item then
-		self.c_desc:switchItem(item, ("#GOLD#分类：#AQUAMARINE# %s\n#GOLD#资料来源：#0080FF# %s\n#GOLD#内容：#ANTIQUE_WHITE#\n %s"):format(loreCat[item.cat] or item.cat, loreListCHN(item.name), item.desc))
+		local desc=item.desc
+		if loreCHN[item.name] then desc = loreCHN[item.name] end
+		if desc:find("Athrall") then desc = "‘为了主人的荣耀’ ——阿夏尔" end
+		self.c_desc:switchItem(item, ("#GOLD#分类：#AQUAMARINE# %s\n#GOLD#资料来源：#0080FF# %s\n#GOLD#内容：#ANTIQUE_WHITE#\n %s"):format(item.cat, item.name, desc))
 		if item.image then
 			if type(item.image) == "string" then
 				self.image = Image.new{file="lore/"..item.image, auto_width=true, auto_height=true}

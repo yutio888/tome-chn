@@ -11,6 +11,8 @@ function npcCHN:getName(name)
 		local tname = name:gsub("golem %(servant of ",""):gsub("%)","")
 		local chnname = npcCHN:getName(tname)
 		name = name:gsub("golem %(servant of","傀儡%("):gsub(tname,chnname):gsub("%)","的仆人)")
+	elseif name:find("\'s dream projection") then
+		name = npcCHN:getName(name:gsub("\'s dream projection","")).."的梦境守卫"
 	elseif name:find(" :") then
 		local f,e=name:find(" :")
 		local tname=name:sub(1,f-1)
@@ -70,6 +72,8 @@ function npcCHN:getDesc(name)
 		local f,e=name:find(" :")
 		local tname=name:sub(1,f-1)
 		return npcCHN:getDesc(tname)
+	elseif name:find("\'s dream projection") then
+		return npcCHN:getDesc(name:gsub("\'s dream projection",""))
 	elseif name:find("gloomy ") or name:find("Gloomy ") then
 		if npcNameCHN[name:gsub("gloomy ","")] then return npcDescCHN[name:gsub("gloomy ","")]
 		elseif npcNameCHN[name:gsub("Gloomy ","")] then return npcDescCHN[name:gsub("Gloomy ","")]
@@ -2041,6 +2045,10 @@ npcDescCHN["quasit squad leader"] = "一只装备了重甲的小恶魔，它向�
 
 npcNameCHN["Rogroth, Eater of Souls"] = "罗格洛斯，灵魂吞噬者"
 npcDescCHN["Rogroth, Eater of Souls"] = "火焰和枯萎的力量在蜘蛛一样的黑色金属皮肤上闪现。它没有明显的头部，只有一个大大的嘴巴。"
+
+npcNameCHN["wretch titan"] = "腐化泰坦"
+npcDescCHN["wretch titan"] = "许多冒险家都遭遇过酸液树魔。相当可怕，酸液树魔们，成群出现，灼烧腐蚀。但这些冒险家们不知道，酸液树魔只是它的未成熟的孩子。"
+--地图巡逻队
 npcNameCHN["adventurers party"] = "冒险家分队"
 npcNameCHN["ziguranth patrol"] = "伊格巡逻队"
 npcNameCHN["Allied Kingdoms human patrol"] = "联合王国人类巡逻队"

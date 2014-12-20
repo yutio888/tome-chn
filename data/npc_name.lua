@@ -65,6 +65,7 @@ end
 function npcCHN:getDesc(name)
 	if not name then return nil end
 	if npcDescCHN[name] then return npcDescCHN[name]
+	elseif npcDescCHN[string.lower(name)] then return npcDescCHN[string.lower(name)]
 	elseif name:find("demonic husk") then 
 		name = name:gsub(" %(demonic husk%)","")
 		return npcCHN:getDesc(name)

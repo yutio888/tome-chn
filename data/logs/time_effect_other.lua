@@ -1,4 +1,4 @@
-
+﻿
 logCHN:newLog{
 	log = "#Target# whirls around and a radiant shield surrounds them!",
 	fct = function(a)
@@ -102,8 +102,9 @@ logCHN:newLog{
 }
 logCHN:newLog{
 	log = "#LIGHT_RED##Target# is out of sight of its master; direct control will break!",
-	fct = function(...)
-		return ("%s 离开了它主人的视线，对它的控制将中断！"):format(...)
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 离开了它主人的视线，对它的控制将中断！"):format(a)
 	end,
 }
 

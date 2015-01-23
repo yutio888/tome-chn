@@ -1,4 +1,4 @@
-timeEffectCHN:newEffect{
+﻿timeEffectCHN:newEffect{
 	id = "DEMON_BLADE",
 	enName = "Demon blade",
 	chName = "恶魔之刃",

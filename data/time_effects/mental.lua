@@ -1,4 +1,4 @@
-timeEffectCHN:newEffect{
+﻿timeEffectCHN:newEffect{
 	id = "SILENCED",
 	enName = "Silenced",
 	chName = "沉默",

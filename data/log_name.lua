@@ -1,7 +1,8 @@
 ﻿function logCHN:getName(name)
-	if name ~= npcCHN:getName(name) then return npcCHN:getName(name) end
+	local name1=npcCHN:getName(name)
+	if name1~=nil and name1~=name then return name end
 	name = trapCHN:getName(name) 
-	name = npcCHN:getName(name) 
+	name = npcCHN:getName(name)
 	if name:find(" from ") then
 		local f,e=name:find(" from ")
 		local teffect=name:sub(1,f-1)
@@ -10,14 +11,14 @@
 		tname = trapCHN:getName(tname)
 		teffect = timeEffectCHN:getName(teffect)
 		name = tname  .."的" .. teffect .."效果"
-	end
-	if name:find("'s ") then
+	else if name:find("'s ") then
 		local f,e=name:find("'s ")
 		local tname=name:sub(1,f-1)
 		local ename=name:sub(e+1,string.len(name))
 		tname = npcCHN:getName(tname)
 		ename = trapCHN:getName(ename)
 		name = tname.."的"..ename
+		end
 	end
 	name = name:gsub("unknown","未知对象"):gsub("something","某物"):gsub("area","区域"):gsub("effect","效果")
 		   :gsub("Temporal Restoration Field","时间储能")

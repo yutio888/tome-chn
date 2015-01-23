@@ -642,7 +642,7 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
-	log = "#Target# is plagued by inner demons!",
+	log = "#F53CBE##Target# is plagued by inner demons!",
 	fct = function(a)
 		a = npcCHN:getName(a)
 		return ("%s受心魔困扰。"):format(a)

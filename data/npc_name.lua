@@ -8,9 +8,9 @@ function npcCHN:getName(name)
 	if name:find("'s Inner Demon") then name = npcCHN:getName(name:gsub("'s Inner Demon","")).."的心魔"	
 	elseif name:find("demonic husk") then name = npcCHN:getName(name:gsub(" %(demonic husk%)","")).."(恶魔傀儡)"
 	elseif name:find("servant") then 
-		local tname = name:gsub("golem %(servant of ",""):gsub("%)","")
+		local tname = name:gsub("golem %(servant of ",""):gsub("Golem %(servant of ",""):gsub("%)","")
 		local chnname = npcCHN:getName(tname)
-		name = name:gsub("golem %(servant of","傀儡%("):gsub(tname,chnname):gsub("%)","的仆人)")
+		name = name:gsub("golem %(servant of","傀儡%("):gsub("Golem %(servant of","傀儡%("):gsub("%)","的仆人)"):gsub(tname,chnname)
 	elseif name:find("\'s dream projection") then
 		name = npcCHN:getName(name:gsub("\'s dream projection","")).."的梦境守卫"
 	elseif name:find(" :") then

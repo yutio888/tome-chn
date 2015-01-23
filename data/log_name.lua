@@ -1,6 +1,4 @@
 ﻿function logCHN:getName(name)
-	local name1=npcCHN:getName(name)
-	if name1~=nil and name1~=name then return name end
 	name = trapCHN:getName(name) 
 	name = npcCHN:getName(name)
 	if name:find(" from ") then

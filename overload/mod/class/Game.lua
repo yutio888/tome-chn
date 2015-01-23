@@ -1,4 +1,4 @@
--- ToME - Tales of Maj'Eyal
+﻿-- ToME - Tales of Maj'Eyal
 -- Copyright (C) 2009 - 2014 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
@@ -1276,7 +1276,7 @@ function _M:logMessage(source, srcSeen, target, tgtSeen, style, ...)
 		else tgtname = logCHN:getName(tgtname) end
 	end
 	if logTableCHN[style] then style = logTableCHN[style].fct() end
-		style = style:gsub("#source#", srcname):gsub("#Source#", srcname):gsub("#target#", tgtname):gsub("#Target#", tgtname)
+	style = style:gsub("#source#", srcname):gsub("#Source#", srcname):gsub("#target#", tgtname):gsub("#Target#", tgtname)
 	style = style:gsub("blocked","格挡"):gsub("knocks back","击退了"):gsub("summons","召唤了"):gsub("something","某物"):gsub("projectile","抛射物")
 		     :gsub("to psi shield","超能护盾吸收"):gsub(" to armor","护甲吸收"):gsub("smeared","时空转化"):gsub("antimagic","反魔盾吸收")
 		     :gsub("dissipated","驱散"):gsub("reduction","减免"):gsub("gestured","手势防御"):gsub("parried","回避")

@@ -108,7 +108,7 @@ timeEffectCHN:newEffect{
 	id = "FIRE_SHIELD",
 	enName = "Fiery Aegis",
 	chName = "火焰守护",
-	desc = function(self, eff) return ("目 标 被 一 层 魔 法 护 盾 包 围 ， 吸 收 %d/%d 伤 害 。 护 盾 破 碎 时 在 半 径 %d 范 围 内 造 成 %d 伤 害 。"):format(self.damage_shield_absorb, eff.power, eff.power, eff.radius) end,
+	desc = function(self, eff) return ("目 标 被 一 层 魔 法 护 盾 包 围 ， 吸 收 %d/%d 伤 害 。 护 盾 破 碎 时 在 半 径 %d 范 围 内 造 成 %d 伤 害 。"):format(self.fiery_aegis_damage_shield_absorb, eff.power, eff.radius, eff.power) end,
 	type = "魔法",
 	subtype = "奥术/护盾",
 }

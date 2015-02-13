@@ -72,6 +72,15 @@ timeEffectCHN:newEffect{
 }
 
 timeEffectCHN:newEffect{
+	id = "SUFFERING_IMMUNE",
+	enName = "Suffered",
+	chName = "被折磨",
+	desc = function(self, eff) return ("目 标 最 近 被 折 磨 过  ， 暂 时 不 能 继 续 折 磨。") end,
+	type = "其他",
+	subtype = "堕落",
+}
+
+timeEffectCHN:newEffect{
 	id = "PURIFIED_BY_FIRE",
 	enName = "Cleansing flames",
 	chName = "净化之焰",

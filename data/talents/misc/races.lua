@@ -31,6 +31,6 @@ talentInfoCHN["T_CORRUPTION_OF_THE_DOOMED"] = function(self, t)
 t_talent_name["T_PITILESS"] = "无情"
 talentInfoCHN["T_PITILESS"] = function(self, t)
 		return ([[你 对 目 标 的 精 神 进 行 冲 击 。
-		 如 果 对 方 法 术 豁 免 失 败 ，他 所 有 正 在 冷 却 中 的 技 能 冷 却 时 间 延 长 %d 回 合 ，所 有 负 面 魔 法 、物 理 、精 神 效 果 延 长 %d 回 合 ，所 有 正 面 魔 法 、物 理 、精 神 效 果 缩 短 %d 回 合 。]]):
+		 他 所 有 正 在 冷 却 中 的 技 能 冷 却 时 间 延 长 %d 回 合 ，所 有 负 面 魔 法 、物 理 、精 神 效 果 延 长 %d 回 合 ，所 有 正 面 魔 法 、物 理 、精 神 效 果 缩 短 %d 回 合 。]]):
 		format(t.getEffectGood(self, t), t.getEffectBad(self, t), t.getEffectGood(self, t))
 	end

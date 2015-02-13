@@ -26,5 +26,5 @@ end
 t_talent_name["T_ETERNAL_SUFFERING"] = "无尽苦痛"
 talentInfoCHN["T_ETERNAL_SUFFERING"] = function(self, t)
 	return ([[你 的 攻 击 充 溢 着 恶 毒 的 力 量 ， 能 够 延 长 敌 人 的 苦 痛 。当 近 战 命 中 时，有 %d%% 几 率 延 长 对 方 所 有 的 负 面 状 态 持 续 时 间并 降  低 所 有 正 面状 态 的 持 续 时 间 ， 增 减 幅 度 为 %d 回 合。
-	每 影 响 一 个 效 果 消 耗 一 点 活 力 。 如 果 活 力 不 足 ， 此 技 能 不 会 生 效 。]]):format(math.min(100, t.getChance(self,t)), t.getExtend(self,t))
+	该 效 果 对 同 一 目 标 每 6 回 合 才 能 生 效  一 次 。]]):format(math.min(100, t.getChance(self,t)), t.getExtend(self,t))
 end

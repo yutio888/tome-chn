@@ -1,7 +1,7 @@
-﻿i_ingredient = {}
+i_ingredient = {}
 
 i_ingredient["length of troll intestine"] = {
-	type = "内脏",
+    type = "内脏",
 	chName = "较长的巨魔肠子",
 	chDesc = "一截较长的巨魔肠子。幸运的是，这只巨魔碰巧没吃任何东西。",
 }
@@ -32,14 +32,14 @@ i_ingredient["naga tongue"] = {
 
 i_ingredient["vial of greater demon bile"] = {
 	type = "内脏",
-	chName = "恶魔领主的胆汁",
-	chDesc = "一瓶恶魔领主的胆汁。尽管有着良好的阻隔，它仍刺激着你的鼻窦。",
+	chName = "大恶魔的胆汁",
+	chDesc = "一瓶大恶魔的胆汁。尽管有着良好的阻隔，它仍刺激着你的鼻窦。",
 }
 
 i_ingredient["pouch of bone giant dust"] = {
 	type = "内脏",
-	chName = "一袋巨人的骨灰",
-	chDesc = "当操纵骨巨人的魔法力量消散后，尘归尘，土归土。也许是你的幻觉，但是它似乎随时会流动起来。",
+	chName = "一袋骨巨人的骨灰",
+	chDesc = "当操纵骨巨人的魔法力量消散后，尘归尘，土归土。也许是你的幻觉，但是它似乎偶尔会自行移动起来。",
 }
 
 i_ingredient["ice ant stinger"] = {
@@ -51,7 +51,7 @@ i_ingredient["ice ant stinger"] = {
 i_ingredient["minotaur nose"] = {
 	type = "内脏",
 	chName = "米诺陶的鼻子",
-	chDesc = "一只米诺陶斯的鼻子的前半部分，上面有圆环装饰。",
+	chDesc = "一只米诺陶的鼻子的前半部分，上面有圆环装饰。",
 }
 
 i_ingredient["vial of elder vampire blood"] = {
@@ -69,18 +69,18 @@ i_ingredient["multi-hued wyrm scale"] = {
 i_ingredient["giant spider spinneret"] = {
 	type = "内脏",
 	chName = "巨蛛的丝腺",
-	chDesc = "从巨蛛身上扯下的一大块丑陋的器官，少量的丝线从某个洞中伸出。",
+	chDesc = "从巨型蜘蛛身上扯下的一大块丑陋的器官，少量的丝线从某个洞中伸出。",
 }
 
 i_ingredient["honey tree root"] = {
 	type = "内脏",
-	chName = "蜂巢树的根",
-	chDesc = "蜂巢树的一根树根。它偶尔会蠕动下，似乎不承认它已经死了，而且还是个“植物”。",
+	chName = "蜜蜂树的根",
+	chDesc = "蜜蜂树的一根树根。它偶尔会蠕动下，似乎不承认它已经死了，而且还是个“植物”。",
 }
 
 i_ingredient["bloated horror heart"] = {
 	type = "内脏",
-	chName = "浮肿的恐怖心脏",
+	chName = "浮肿的恐魔心脏",
 	chDesc = "病变且散发着热气的心脏，在你看它的这段时间里，它似乎开始腐烂。",
 }
 
@@ -104,13 +104,13 @@ i_ingredient["bear paw"] = {
 
 i_ingredient["ice wyrm tooth"] = {
 	type = "内脏",
-	chName = "冰龙的牙齿",
+	chName = "冰霜巨龙的牙齿",
 	chDesc = "这颗牙齿饱受岁月的侵蚀，但是仍然能胜任它的工作。",
 }
 
 i_ingredient["red crystal shard"] = {
 	type = "内脏",
-	chName = "红色水晶鞘翅",
+	chName = "红色水晶碎片",
 	chDesc = "尽管热度已去，小巧的火焰仍然在在这颗透明的水晶里飞舞着。",
 }
 
@@ -123,7 +123,7 @@ i_ingredient["vial of fire wyrm saliva"] = {
 i_ingredient["chunk of ghoul flesh"] = {
 	type = "内脏",
 	chName = "腐烂的食尸鬼肉块",
-	chDesc = "这块肉腐烂且冒着热气，它时不时会抽搐2下。",
+	chDesc = "这块肉腐烂且冒着热气，它时不时会抽搐两下。",
 }
 
 i_ingredient["mummified bone"] = {
@@ -141,7 +141,7 @@ i_ingredient["sandworm tooth"] = {
 i_ingredient["black mamba head"] = {
 	type = "内脏",
 	chName = "黑曼巴头",
-	chDesc = "不像其他的黑曼巴，这颗头一动不动。",
+	chDesc = "不像这条蛇的其他部分，这颗头一动不动。",
 }
 
 i_ingredient["snow giant kidney"] = {
@@ -152,7 +152,7 @@ i_ingredient["snow giant kidney"] = {
 
 i_ingredient["storm wyrm claw"] = {
 	type = "内脏",
-	chName = "风暴之龙的爪子",
+	chName = "风暴巨龙的爪子",
 	chDesc = "这只爪子泛着蓝色光泽并且锋利的吓人，它使你汗毛竖立。",
 }
 
@@ -183,24 +183,24 @@ i_ingredient["warg claw"] = {
 i_ingredient["pouch of faeros ash"] = {
 	type = "内脏",
 	chName = "法罗的灰烬",
-	chDesc = "普通的灰烬。",
+	chDesc = "不起眼的灰烬。",
 }
 
 i_ingredient["wretchling eyeball"] = {
 	type = "内脏",
-	chName = "可怜虫之眼",
+	chName = "酸液树魔之眼",
 	chDesc = "小而充血的眼球，它死亡时的眼神仍使你毛骨悚然。",
 }
 
 i_ingredient["faerlhing fang"] = {
 	type = "内脏",
-	chName = "法尔林毒牙",
+	chName = "费尔荷毒牙",
 	chDesc = "它仍残留着一些毒液，并散发着阵阵魔法能量。",
 }
 
 i_ingredient["vampire lord fang"] = {
 	type = "内脏",
-	chName = "吸血鬼领主的毒牙",
+	chName = "吸血鬼族长的毒牙",
 	chDesc = "亮白色的牙齿，周身却萦绕着黑色的魔法。",
 }
 
@@ -212,6 +212,6 @@ i_ingredient["hummerhorn wing"] = {
 
 i_ingredient["pouch of luminous horror dust"] = {
 	type = "内脏",
-	chName = "一袋闪光的恐怖粉尘",
-	chDesc = "不同于通常意义的灰尘，这些灰尘毫无重量并发出阵阵光芒。",
+	chName = "一袋金色恐魔的粉尘",
+	chDesc = "不同于通常意义上的灰尘，这些灰尘毫无重量并发出阵阵光芒。",
 }

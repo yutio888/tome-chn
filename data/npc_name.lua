@@ -1611,6 +1611,9 @@ npcDescCHN["Weirdling Beast"] = "一只类人生物，在四肢的位置它长�
 npcNameCHN["Fortress Shadow"] = "堡垒之影"
 npcDescCHN["Fortress Shadow"] = "堡垒制造的阴影，就像你之前看到的恐怖生物一样，不过显然它们有着本质的区别。"
 
+npcNameCHN["Training Dummy"] = "训练用傀儡"
+npcDescCHN["Training Dummy"] = ""
+
 --shertul-fortress-caldizar
 npcNameCHN["Caldizar"] = "凯尔帝勒"
 npcDescCHN["Caldizar"] = "四肢是触须，头部由某种突起代替的奇怪生物。一种强烈的能量在他周围流动，这股能量不同于你之前认识的任何一种。他只能是夏·图尔人。一名活生生的夏·图尔人！"

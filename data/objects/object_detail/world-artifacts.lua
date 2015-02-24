@@ -2811,3 +2811,28 @@ objects:addObjects({
 })
 
 
+objects:addObjects({
+	unique = true,
+	enName = "Bikini",
+	chName = "比基尼",
+	unIdedName = "小小的一块布",
+	chDesc = [[性感，粉色，有趣。
+    #{bold}#如果你在全程不脱下它的情况下通关你将可以得到一个成就和吹牛的权利！#{normal}#]],
+})
+
+objects:addObjects({
+	unique = true,
+	enName = "Mankini",
+	chName = "男性比基尼",
+	unIdedName = "小小的一块布",
+	chDesc = [[性感，绿色，有趣。
+    #{bold}#如果你在全程不脱下它的情况下通关你将可以得到一个成就和吹牛的权利！#{normal}#]],
+})
+
+objects:addObjects({
+	unique = true,
+	enName = "Demonic Orb of Many Ways",
+	chName = "恶魔多元水晶球",
+	unIdedName = "涡流水晶球",
+	chDesc = "这个球体可以折射出远处的景象并快速的切换着，有些景象甚至不属于这个世界。如果你在传送点附近使用它，它可能会激活传送。",
+})

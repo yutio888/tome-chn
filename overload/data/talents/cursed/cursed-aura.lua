@@ -1,4 +1,4 @@
--- ToME - Tales of Maj'Eyal
+﻿-- ToME - Tales of Maj'Eyal
 -- Copyright (C) 2009 - 2014 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
@@ -496,6 +496,6 @@ newTalent{
 		local attackSpeed = t.getAttackSpeed(self, t)*100
 
 		return ([[将 部 分 活 性 诅 咒 能 量 灌 输 到 你 背 包 里 的 1 把 武 器 上， 使 其 悬 浮 在 空 中。 这 个 类 似 于 诅 咒 护 卫 的 武 器 会 自 动 攻 击 附 近 的 敌 人， 持 续 %d 回 合。 
-		 当 诅 咒 结 束 时， 武 器 会 化 为 灰 烬。 攻 击 速 度： %d%% ]]):format(duration, attackSpeed)
+		  攻 击 速 度： %d%% ]]):format(duration, attackSpeed)
 	end,
 }

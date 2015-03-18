@@ -1,5 +1,4 @@
-﻿-- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2014 Nicolas Casalini
+﻿-- Copyright (C) 2009 - 2014 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -74,7 +73,7 @@ uberTalent{
 	-- called by getMax function in Antimagic shield talent definition mod.data.talents.gifts.antimagic.lua
 	shieldmult = function(self) return self:combatStatScale("cun", 0.1, 0.5) end,
 	info = function(self, t)
-		return ([[由 于 你 精 通 欺 诈 和 伪 装， 你 的 反 魔 护 盾 可 以 多 吸 收 %d 伤 害。 
+		return ([[由 于 你 精 通 欺 诈 和 伪 装， 你 的 反 魔 护 盾 可 以 多 吸 收 %d%% 伤 害。 
 		 受 灵 巧 影 响， 效 果 按 比 例 加 成。  ]])
 		:format(t.shieldmult(self)*100)
 	end,
@@ -323,3 +322,4 @@ uberTalent{
 		format()
 	end,
 }
+

@@ -4,7 +4,7 @@ questCHN = {}
 questCHN["Hidden treasure"] = {
 name = " 隐 藏 的 财 宝 ",
 description = function(desc)
-	desc = string.gsub(desc,"You have found all the clues leading to the hidden treasure. There should be a way on the third level of the Trollmire."," 你 已 经 找 到 了 所 有 有 关 秘 密 财 宝 的 线 索， 在 食 人 魔 沼 泽 第 三 层 应 该 能 找 到 一 条 通 往 那 里 的 路。 ")
+    desc = string.gsub(desc,"You have found all the clues leading to the hidden treasure. There should be a way on the third level of the Trollmire."," 你 已 经 找 到 了 所 有 有 关 秘 密 财 宝 的 线 索， 在 食 人 魔 沼 泽 第 三 层 应 该 能 找 到 一 条 通 往 那 里 的 路。 ")
 	desc = string.gsub(desc,[[It looks extremely dangerous, however %- beware.]],[[ 注 意： 看 样 子 那 里 非 常 危 险。 ]])
 	desc = string.gsub(desc,"You have slain Bill. His treasure is yours for the taking."," 你 已 经 干 掉 了 比 尔， 他 的 财 宝 现 在 归 你 了。 ")
 	return desc
@@ -719,33 +719,33 @@ function changeElixir(desc)
 	desc = string.gsub(desc,"naga tongue"," 娜 迦 舌 头 ")
 	
 	desc = string.gsub(desc,"Don't drink it, even if it tells you to."," 不 要 去 喝 它， 即 使 它 诱 惑 着 你 … … ")
-	desc = string.gsub(desc,"vial of greater demon bile"," 恶 魔 领 主 的 胆 汁 ")
+	desc = string.gsub(desc,"vial of greater demon bile"," 大 恶 魔 的 胆 汁 ")
 	
-	desc = string.gsub(desc,"Never, ever to be confused with garlic powder. Trust me."," 绝 对 绝 对 不 要 被 大 蒜 粉 所 迷 惑， 相 信 我 … … ")
-	desc = string.gsub(desc,"pouch of bone giant dust"," 一 袋 巨 人 的 骨 灰 ")
+	desc = string.gsub(desc,"Never, ever to be confused with garlic powder. Trust me."," 绝 对 绝 对 不 要 和 大 蒜 粉 搞 混 ， 相 信 我 … … ")
+	desc = string.gsub(desc,"pouch of bone giant dust"," 一 袋 骨 巨 人 的 骨 灰 ")
 	
 	desc = string.gsub(desc,"If you've the means to eliminate the little venom problem, these make miraculous instant drink%-chilling straws."," 如 果 你 有 方 法 消 除 小 小 的 毒 液 问 题， 这 些 螫 针 可 以 成 为 不 可 思 议 的 冷 冻 吸 管。 ")
 	desc = string.gsub(desc,"ice ant stinger"," 冰 蚁 的 螫 针 ")
 	
 	desc = string.gsub(desc,"You'll need to find one with a ring, preferably an expensive one."," 你 要 寻 找 1 个 带 有 圆 环 的， 最 好 是 比 较 贵 的 那 个。 ")
-	desc = string.gsub(desc,"minotaur nose"," 米 诺 陶 斯 的 鼻 子 ")
+	desc = string.gsub(desc,"minotaur nose"," 米 诺 陶 的 鼻 子 ")
 	
 	desc = string.gsub(desc,"Once you've gotten it, cross some moving water on your way back."," 取 得 它 之 后， 你 最 好 在 回 去 的 路 上 用 活 水 写 些 十 字。 ")
 	desc = string.gsub(desc,"vial of elder vampire blood"," 一 瓶 高 级 吸 血 鬼 的 血 液 ")
 	
-	desc = string.gsub(desc,"If you think collecting one of these is hard, try liquefying one."," 如 果 你 认 为 收 集 1 片 龙 鳞 很 困 难， 那 么 去 尝 试 溶 解 它 吧。 ")
+	desc = string.gsub(desc,"If you think collecting one of these is hard, try liquefying one."," 如 果 你 认 为 收 集 一 片 龙 鳞 很 困 难， 那 么 去 尝 试 溶 解 它 吧。 ")
 	desc = string.gsub(desc,"multi%-hued wyrm scale"," 多 彩 的 龙 鳞 ")
 	
-	desc = string.gsub(desc,"The spiders in your barn won't do. You'll know a giant spider when you see one, though they're rare in Maj'Eyal."," 你 家 仓 库 里 的 蜘 蛛 是 不 行 的。 当 你 看 到 一 只 时， 你 就 会 明 白 什 么 是 巨 型 蜘 蛛， 尽 管 在 Maj'Eyal 里 这 种 蜘 蛛 很 稀 少。 ")
+	desc = string.gsub(desc,"The spiders in your barn won't do. You'll know a giant spider when you see one, though they're rare in Maj'Eyal."," 你 家 仓 库 里 的 蜘 蛛 是 不 行 的。 当 你 看 到 一 只 时， 你 就 会 明 白 什 么 是 巨 型 蜘 蛛， 尽 管 在 马 基 埃 亚 尔 这 种 蜘 蛛 很 稀 少。 ")
 	desc = string.gsub(desc,"giant spider spinneret"," 巨 蛛 的 丝 腺 ")
 	
 	desc = string.gsub(desc,"Keep a firm grip on it. These things will dig themselves right back into the ground if you drop them."," 牢 牢 的 抓 住 它， 如 果 你 不 小 心 把 它 掉 在 地 上， 它 会 立 刻 挖 地 逃 走。 ")
-	desc = string.gsub(desc,"honey tree root"," 蜂 巢 树 的 根 ")
+	desc = string.gsub(desc,"honey tree root"," 蜜 蜂 树 的 根 ")
 	
 	desc = string.gsub(desc,"Don't worry if it dissolves. Just don't get any on you."," 不 要 担 心 它 的 腐 烂， 只 要 不 碰 到 你 身 上 就 没 事。 ")
-	desc = string.gsub(desc,"bloated horror heart"," 浮 肿 的 恐 怖 心 脏 ")
+	desc = string.gsub(desc,"bloated horror heart"," 浮 肿 的 恐 魔 心 脏 ")
 	
-	desc = string.gsub(desc,"I know, I know. Where does the eel stop and the tail start%? It doesn't much matter. The last ten inches or so should do nicely."," 我 知 道， 我 知 道。 电 鳗 的 尾 巴 在 哪？ 没 有 确 切 的 答 案。 最 后 10 英 寸 或 许 是 最 合 适 的。 ")
+	desc = string.gsub(desc,"I know, I know. Where does the eel stop and the tail start%? It doesn't much matter. The last ten inches or so should do nicely."," 我 知 道， 我 知 道。 你 想 问 电 鳗 的 尾 巴 是 哪 一 段？ 没 有 确 切 的 答 案。 最 后 10 英 寸 或 许 是 最 合 适 的。 ")
 	desc = string.gsub(desc,"electric eel tail"," 电 鳗 尾 巴 ")
 	
 	desc = string.gsub(desc,"However annoying this will be for you to gather, I promise that the reek it produces in my lab will prove even more annoying."," 不 管 你 怎 样 讨 厌 它， 都 需 要 你 去 采 集， 我 向 你 保 证 我 在 实 验 室 用 它 做 出 的 东 西 会 更 加 令 人 讨 厌。 ")
@@ -755,10 +755,10 @@ function changeElixir(desc)
 	desc = string.gsub(desc,"bear paw"," 熊 爪 ")
 	
 	desc = string.gsub(desc,"Ice Wyrms lose teeth fairly often, so you might get lucky and not have to do battle with one. But dress warm just in case."," 冰 龙 每 隔 一 段 时 间 会 换 齿， 所 以 你 幸 运 的 话， 可 以 捡 到 几 颗 而 不 需 要 和 它 战 斗。 保 险 起 见 穿 的 暖 和 点 … … ")
-	desc = string.gsub(desc,"ice wyrm tooth"," 冰 龙 的 牙 齿 ")
+	desc = string.gsub(desc,"ice wyrm tooth"," 冰 霜 巨 龙 的 牙 齿 ")
 	
-	desc = string.gsub(desc,"I hear these can be found in a cave near Elvala. I also hear that they can cause you to spontaneously combust, so no need to explain if you come back hideously scarred."," 我 听 说 这 些 小 家 伙 可 以 在 埃 尔 瓦 拉 附 近 的 洞 穴 里 找 到。 我 还 听 说 它 们 会 使 你 自 燃， 所 以 当 你 高 度 烧 伤 回 来 的 话， 不 用 解 释。 ")
-	desc = string.gsub(desc,"red crystal shard"," 红 色 水 晶 鞘 翅 ")
+	desc = string.gsub(desc,"I hear these can be found in a cave near Elvala. I also hear that they can cause you to spontaneously combust, so no need to explain if you come back hideously scarred."," 我 听 说 这 些 小 家 伙 可 以 在 埃 尔 瓦 拉 附 近 的 洞 穴 里 找 到。 我 还 听 说 它 们 会 使 你 自 燃， 所 以 当 你 高 度 烧 伤 回 来 的 话， 不 要 向 我 诉 苦。 ")
+	desc = string.gsub(desc,"red crystal shard"," 红 色 水 晶 碎 片 ")
 	
 	desc = string.gsub(desc,"Keep this stuff well away from your campfire unless you want me to have to find a new, more alive adventurer."," 把 这 个 瓶 子 离 你 的 篝 火 远 一 些， 我 可 不 想 明 天 重 新 找 一 个 活 的 冒 险 家。 ")
 	desc = string.gsub(desc,"vial of fire wyrm saliva"," 一 瓶 火 龙 涎 ")
@@ -766,10 +766,10 @@ function changeElixir(desc)
 	desc = string.gsub(desc,"Unfortunately for you, the chunks that regularly fall off ghouls won't do. I need one freshly carved off."," 告 诉 你 一 个 不 幸 的 消 息， 平 时 从 食 尸 鬼 身 上 掉 下 来 的 肉 是 不 行 的。 我 需 要 新 鲜 的， 刚 切 下 来 的 肉。 ")
 	desc = string.gsub(desc,"chunk of ghoul flesh"," 腐 烂 的 食 尸 鬼 肉 块 ")
 	
-	desc = string.gsub(desc,"That is, a bone from a corpse that's undergone mummification. Actually, any bit of the body would do, but the bones are the only parts you're certain to find when you kick a mummy apart. I recommend finding one that doesn't apply curses."," 那 就 是， 经 过 木 乃 伊 化 的 尸 体 身 上 的 骨 头。 实 际 上， 身 体 的 任 何 部 位 都 可 以， 只 有 骨 头 你 必 须 去 从 木 乃 伊 身 上 寻 找。 我 推 荐 你 去 找 一 根 无 法 诅 咒 的 骨 头。 ")
+	desc = string.gsub(desc,"That is, a bone from a corpse that's undergone mummification. Actually, any bit of the body would do, but the bones are the only parts you're certain to find when you kick a mummy apart. I recommend finding one that doesn't apply curses."," 那 就 是， 经 过 木 乃 伊 化 的 尸 体 身 上 的 骨 头。 实 际 上， 身 体 的 任 何 部 位 都 可 以， 只 是 从 它 们 身 上 只 能 找 到 骨 头 了 。 我 推 荐 你 去 找 一 根 没 有 被 诅 咒 的 骨 头。 ")
 	desc = string.gsub(desc,"mummified bone"," 木 乃 伊 骨 头 ")
 	
-	desc = string.gsub(desc,"Yes, sandworms have teeth. They're just very small and well back from where you're ever likely to see them and live."," 是 的， 沙 虫 也 有 牙 齿。 它 们 只 是 很 小 并 且 生 活 在 你 几 乎 看 不 到 的 地 方。 ")
+	desc = string.gsub(desc,"Yes, sandworms have teeth. They're just very small and well back from where you're ever likely to see them and live."," 是 的， 沙 虫 也 有 牙 齿。 它 们 只 是 很 小 ， 藏 得 很 好 ，如 果 你 把 头 伸 进 去 找 它 你 就 没 法 活 着 回 来 了 。")
 	desc = string.gsub(desc,"sandworm tooth"," 沙 虫 之 牙 ")
 	
 	desc = string.gsub(desc,"If you get bitten, I can save your life if you still manage to bring back the head... and if it happens within about a minute from my door. Good luck."," 如 果 你 被 它 咬 到 了， 只 要 你 坚 持 到 把 它 带 回 来 我 就 可 以 拯 救 你 … … 但 是 如 果 你 不 能 及 时 带 回 来， 那 么， 祝 你 好 运。 ")
@@ -781,7 +781,7 @@ function changeElixir(desc)
 	desc = string.gsub(desc,"I recommend severing one of dewclaws. They're smaller and easier to remove, but they've never been blunted by use, so be careful you don't poke yourself. Oh yes, and don't get eaten."," 我 建 议 你 割 断 其 中 一 只 爪 子， 它 们 更 小 而 且 容 易 被 割 下。 但 是 它 们 从 来 不 会 因 使 用 而 钝 化， 所 以 当 心 点 别 划 伤 你 自 己。 哦， 对 了， 还 有 别 被 吃 掉。 ")
 	desc = string.gsub(desc,"storm wyrm claw"," 风 暴 之 龙 的 爪 子 ")
 	
-	desc = string.gsub(desc,"Try to get any knots out before returning. Wear gloves."," 在 回 来 之 前 把 其 他 所 有 的 蠕 虫 都 清 理 掉。 戴 上 手 套。 ")
+	desc = string.gsub(desc,"Try to get any knots out before returning. Wear gloves."," 在 回 来 之 前 把 打 结 在 上 面 的 其 他 蠕 虫 统 统 清 理 掉。 戴 上 手 套。 ")
 	desc = string.gsub(desc,"green worm"," 翡 翠 蠕 虫 ")
 	
 	desc = string.gsub(desc,"If you ingest any of this, never mind coming back here. Please."," 如 果 你 不 小 心 喝 掉 一 点， 请 不 要 介 意 回 到 我 这。 ")
@@ -793,22 +793,22 @@ function changeElixir(desc)
 	desc = string.gsub(desc,"My usual ingredient gatherers draw the line at hunting wargs. Feel free to mock them on your way back."," 我 对 原 料 的 需 求 使 我 想 到 了 猎 杀 座 狼。 在 你 回 来 的 时 候 请 弄 一 只 爪 子 回 来。 ")
 	desc = string.gsub(desc,"warg claw"," 座 狼 爪 ")
 	
-	desc = string.gsub(desc,"They're creatures of pure flame, and likely of extraplanar origin, but the ash of objects consumed by their fire has remarkable properties."," 虽 然 它 们 是 由 纯 粹 的 火 焰 组 成 的 生 物， 并 且 类 似 于 时 空 外 的 物 种， 但 是 由 它 们 的 火 焰 燃 烧 成 的 灰 烬 有 着 非 凡 的 功 效。 ")
-	desc = string.gsub(desc,"pouch of faeros ash"," 圣 甲 虫 的 灰 烬 ")
+	desc = string.gsub(desc,"They're creatures of pure flame, and likely of extraplanar origin, but the ash of objects consumed by their fire has remarkable properties."," 它 们 是 由 纯 粹 的 火 焰 组 成 的 生 物， 似 乎 来 自 另 一 个 世 界。 然 而 ， 由 它 们 的 火 焰 燃 烧 成 的 灰 烬 有 着 非 凡 的 功 效。 ")
+	desc = string.gsub(desc,"pouch of faeros ash"," 法 罗 的 灰 烬 ")
 	
-	desc = string.gsub(desc,"Evil little things, wretchlings. Feel free to kill as many as you can, though I just need the one intact eyeball."," 邪 恶 的 小 恶 魔， 可 怜 的 小 生 物， 你 可 以 尽 情 的 杀 戮 它 们， 尽 管 我 只 需 要 1 只 完 整 的 眼 球。 ")
-	desc = string.gsub(desc,"wretchling eyeball"," 可 怜 虫 之 眼 ")
+	desc = string.gsub(desc,"Evil little things, wretchlings. Feel free to kill as many as you can, though I just need the one intact eyeball."," 邪 恶 的 小 恶 魔， 酸 液 树 魔。 你 可 以 尽 情 的 杀 戮 它 们， 尽 管 我 只 需 要 一 只 完 整 的 眼 球。 ")
+	desc = string.gsub(desc,"wretchling eyeball"," 酸 液 树 魔 之 眼 ")
 	
 	desc = string.gsub(desc,"I've lost a number of adventurers to this one, but I'm sure you'll be fine."," 我 已 经 在 这 个 工 作 中 失 去 了 许 多 冒 险 者， 但 我 确 信 你 会 安 全 归 来。 ")
-	desc = string.gsub(desc,"faerlhing fang"," 法 尔 林 毒 牙 ")
+	desc = string.gsub(desc,"faerlhing fang"," 费 尔 荷 毒 牙 ")
 	
 	desc = string.gsub(desc,"You should definitely consider not pricking yourself with it."," 你 必 须 确 保 自 己 不 会 被 它 划 伤。 ")
-	desc = string.gsub(desc,"vampire lord fang"," 吸 血 鬼 领 主 的 毒 牙 ")
+	desc = string.gsub(desc,"vampire lord fang"," 吸 血 鬼 族 长 的 毒 牙 ")
 	
 	desc = string.gsub(desc,"If you've not encountered hummerhorns before, they're like wasps, only gigantic and lethal."," 如 果 你 以 前 没 看 过 杀 人 蜂， 你 可 以 想 象 下 … … 它 们 像 大 黄 蜂 一 样， 只 不 过 变 的 巨 大 而 致 命。 ")
 	desc = string.gsub(desc,"hummerhorn wing"," 半 透 明 的 昆 虫 翅 膀 ")
 	
-	desc = string.gsub(desc,"Not to be confused with radiant horrors. If you encounter the latter, then I suppose there are always more adventurers."," 不 要 被 四 散 的 恐 惧 所 吓 倒， 如 果 你 被 吓 倒， 我 会 考 虑 更 多 的 冒 险 者 来 接 替 你 的 使 命。 ")
-	desc = string.gsub(desc,"pouch of luminous horror dust"," 一 袋 闪 光 的 恐 怖 粉 尘 ")
+	desc = string.gsub(desc,"Not to be confused with radiant horrors. If you encounter the latter, then I suppose there are always more adventurers."," 不 要 被 恐 魔 发 出 的 强 光 所 吓 倒， 如 果 你 被 吓 倒， 我 会 考 虑 更 多 的 冒 险 者 来 接 替 你 的 使 命。 ")
+	desc = string.gsub(desc,"pouch of luminous horror dust"," 一 袋 金 色 恐 魔 的 粉 尘 ")
 	return desc
 end

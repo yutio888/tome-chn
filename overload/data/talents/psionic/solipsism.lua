@@ -200,9 +200,8 @@ newTalent{
 	end,
 	info = function(self, t)
 		local save_percentage = t.getSavePercentage(self, t)
-		return ([[每 当 你 受 到 伤 害 时， 你 会 使 用 %d%% 精 神 豁 免 来 鉴 定。 鉴 定 时 精 神 豁 免 可 能 暴 击， 最 少 减 少 50%% 的 伤 害 。 
+		return ([[每 当 你 受 到 伤 害 时， 你 会 使 用 %d%% 精 神 豁 免 来 鉴 定。 鉴 定 时 精 神 豁 免 可 能 暴 击， 至 少 减 少 50%% 的 伤 害 。 
 		 学 习 此 技 能 时，（ 高 于 基 础 值 10 的） 每 点 意 志 会 额 外 增 加 0.5 点 超 能 力 值 上 限， 而（ 高 于 基 础 值 10 的） 每 点 体 质 会 减 少 0.25 点 生 命 上 限（ 若 低 于 基 础 值 10 则 增 加 生 命 上 限）。 
 		 学 习 此 技 能 也 会 增 加 你 10％ 唯 我 临 界 点（ 当 前 %d%%）。]]):format(save_percentage * 100, math.min(self.solipsism_threshold or 0,self.clarity_threshold or 1) * 100)		
 	end,
 }
-

@@ -504,6 +504,9 @@ function getObjectDescCHN(desc)
 					
 				elseif desc[i]:find("Cannot be unequipped or rerolled until level") then 
 					desc[i] = desc[i]:gsub("Cannot be unequipped or rerolled until level","不能解除装备也不能重置，直到等级")
+				elseif desc[i]:find("Storm Duration") then 
+					desc[i] = desc[i]:gsub("Storm Duration","冰风暴持续时间")
+					desc[i] = desc[i]:gsub("None","无")
 				else--if desc[i]:find("Special effect on block:") then
 					desc[i] = desc[i]:gsub("Special effect on block:","格挡特效：")
 							:gsub("Chance that a blast of icy cold water will spray at the target.","有30%几率朝目标喷射冰冷的水流")
@@ -528,7 +531,7 @@ function getObjectDescCHN(desc)
 					:gsub("Undead","亡灵"):gsub("Golem","傀儡"):gsub("Race","种族技能")
 					:gsub("water","水")
 					:gsub("Current Resistance:","当前抗性："):gsub("Blood Charges:","鲜血吸收:")
-					:gsub("item",""):gsub("life","生命")
+					:gsub("item",""):gsub("life","生命"):gsub("silence","沉默")
 			desc[i]=desc[i]:gsub("status","状态"):gsub("alive","存活"):gsub("dead(does not provide benefits)","死亡（不提供属性）")
 			desc[i] = desc[i]:gsub("Attach on","附着于"):gsub("worn on",""):gsub("slot","")
 					:gsub("mainhand","主手"):gsub("offhand","副手"):gsub("finger","手指"):gsub("body","躯干")

@@ -1,5 +1,5 @@
 -- TE4 - T-Engine 4
--- Copyright (C) 2009 - 2014 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -61,6 +61,12 @@ function _M:init(t)
 	self.tmp = self.tmp or {}
 end
 
+--- Returns the effect definition
+function _M:getEffectFromId(id)
+	if type(id) == "table" then return id end
+	return _M.tempeffect_def[id]
+end
+
 --- Counts down timed effects, call from your actors "act" method
 -- @param filter if not nil a function that gets passed the effect and its parameters, must return true to handle the effect
 function _M:timedEffects(filter)
@@ -74,7 +80,7 @@ function _M:timedEffects(filter)
 			else
 				if def.on_timeout then
 					if p.src then p.src.__project_source = p end -- intermediate projector source
-					if def.on_timeout(self, p) then
+					if def.on_timeout(self, p, def) then
 						todel[#todel+1] = eff
 					end
 					if p.src then p.src.__project_source = nil end
@@ -101,18 +107,19 @@ function _M:setEffect(eff_id, dur, p, silent)
 	if dur <= 0 then return self:removeEffect(eff_id) end
 	dur = math.floor(dur)
 
-	for k, e in pairs(_M.tempeffect_def[eff_id].parameters) do
+	local ed = _M.tempeffect_def[eff_id]
+	for k, e in pairs(ed.parameters) do
 		if not p[k] then p[k] = e end
 	end
 	p.dur = dur
 	p.effect_id = eff_id
-	self:check("on_set_temporary_effect", eff_id, _M.tempeffect_def[eff_id], p)
+	if self:check("on_set_temporary_effect", eff_id, ed, p) then return end
 	if p.dur <= 0 then return self:removeEffect(eff_id) end
 
 	-- If we already have it, we check if it knows how to "merge", or else we remove it and re-add it
 	if self:hasEffect(eff_id) then
-		if _M.tempeffect_def[eff_id].on_merge then
-			self.tmp[eff_id] = _M.tempeffect_def[eff_id].on_merge(self, self.tmp[eff_id], p)
+		if ed.on_merge then
+			self.tmp[eff_id] = ed.on_merge(self, self.tmp[eff_id], p, ed)
 			self.changed = true
 			return
 		else
@@ -121,8 +128,8 @@ function _M:setEffect(eff_id, dur, p, silent)
 	end
 
 	self.tmp[eff_id] = p
-	if _M.tempeffect_def[eff_id].on_gain then
-		local ret, fly = _M.tempeffect_def[eff_id].on_gain(self, p)
+	if ed.on_gain then
+		local ret, fly = ed.on_gain(self, p)
 		if not silent and not had then
 			if ret then
 				--game.logSeen(self, ret:gsub("#Target#", self.name:capitalize()):gsub("#target#", self.name))
@@ -134,9 +141,23 @@ function _M:setEffect(eff_id, dur, p, silent)
 			end
 		end
 	end
-	if _M.tempeffect_def[eff_id].activate then _M.tempeffect_def[eff_id].activate(self, p) end
+	if ed.activate then ed.activate(self, p, ed) end
+
+	if ed.lists then
+		local lists = ed.lists
+		if 'table' ~= type(lists) then lists = {lists} end
+		for _, list in ipairs(lists) do
+			if 'table' == type(list) then
+				list = table.getTable(self, unpack(list))
+			else
+				list = table.getTable(self, list)
+			end
+			table.insert(list, eff_id)
+		end
+	end
+
 	self.changed = true
-	self:check("on_temporary_effect_added", eff_id, _M.tempeffect_def[eff_id], p)
+	self:check("on_temporary_effect_added", eff_id, ed, p)
 end
 
 --- Check timed effect
@@ -171,8 +192,27 @@ function _M:removeEffect(eff, silent, force)
 			self:removeTemporaryValue(p.__tmpvals[i][1], p.__tmpvals[i][2])
 		end
 	end
-	if _M.tempeffect_def[eff].deactivate then _M.tempeffect_def[eff].deactivate(self, p) end
-	self:check("on_temporary_effect_removed", eff, _M.tempeffect_def[eff], p)
+	if p.__tmpparticles then
+		for i = 1, #p.__tmpparticles do
+			self:removeParticles(p.__tmpparticles[i])
+		end
+	end
+	local ed = _M.tempeffect_def[eff]
+	if ed.deactivate then ed.deactivate(self, p, ed) end
+	if ed.lists then
+		local lists = ed.lists
+		if 'table' ~= type(lists) then lists = {lists} end
+		for _, list in ipairs(lists) do
+			if 'table' == type(list) then
+				list = table.getTable(self, unpack(list))
+			else
+				list = table.getTable(self, list)
+			end
+			table.removeFromList(list, eff_id)
+		end
+	end
+
+	self:check("on_temporary_effect_removed", eff, ed, p)
 end
 
 --- Copy an effect ensuring temporary values are managed properly
@@ -184,7 +224,15 @@ function _M:copyEffect(eff_id)
 	param.__tmpvals = nil
 
 	return param
-end 
+end
+
+--- Reduces time remaining
+function _M:alterEffectDuration(eff_id, v)
+	local e = self.tmp[eff_id]
+	if not e then return end
+	e.dur = e.dur - 1
+	if e.dur <= 0 then self:removeEffect(eff_id) return true end
+end
 
 --- Removes the effect
 function _M:removeAllEffects()
@@ -202,6 +250,14 @@ end
 function _M:effectTemporaryValue(eff, k, v)
 	if not eff.__tmpvals then eff.__tmpvals = {} end
 	eff.__tmpvals[#eff.__tmpvals+1] = {k, self:addTemporaryValue(k, v)}
+end
+
+--- Helper function to add particles and not have to remove them manualy
+function _M:effectParticles(eff, ...)
+	if not eff.__tmpparticles then eff.__tmpparticles = {} end
+	for _, p in ipairs{...} do
+		eff.__tmpparticles[#eff.__tmpparticles+1] = p
+	end
 end
 
 --- Trigger an effect method

@@ -1,5 +1,6 @@
-﻿t_talent_name["T_DEMON_SOUL_EATER"] = "灵魂吞噬者"
-talentInfoCHN["T_DEMON_SOUL_EATER"] = function(self, t)
+﻿local Talents = require "engine.interface.ActorTalents"
+Talents.talents_def.T_DEMON_SOUL_EATER.name = "灵魂吞噬者"
+Talents.talents_def.T_DEMON_SOUL_EATER.info = function(self, t)
 		return ([[任何附近的友方非召唤生物将与你的意志链接。
 		每次与你意志链接的生物死亡时，将会以恶魔外壳的形式复活。
 		恶魔外壳具有如下性质：

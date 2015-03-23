@@ -1,5 +1,6 @@
-﻿t_talent_name["T_DWARVEN_HALF_EARTHEN_MISSILES"] = "岩石飞弹"
-talentInfoCHN["T_DWARVEN_HALF_EARTHEN_MISSILES"] = function(self, t)
+﻿local Talents = require "engine.interface.ActorTalents"
+Talents.talents_def.T_DWARVEN_HALF_EARTHEN_MISSILES.name = "岩石飞弹"
+Talents.talents_def.T_DWARVEN_HALF_EARTHEN_MISSILES.info = function(self, t)
 		local count = 2
 		if self:getTalentLevel(t) >= 5 then
 			count = count + 1
@@ -11,8 +12,8 @@ talentInfoCHN["T_DWARVEN_HALF_EARTHEN_MISSILES"] = function(self, t)
 	end
 
 
-t_talent_name["T_ELEMENTAL_SPLIT"] = "元素分裂"
-talentInfoCHN["T_ELEMENTAL_SPLIT"] = function(self, t)
+Talents.talents_def.T_ELEMENTAL_SPLIT.name = "元素分裂"
+Talents.talents_def.T_ELEMENTAL_SPLIT.info = function(self, t)
 		return ([[深 入 你 的 矮 人 血 统 ， 召 唤 岩 石 和 水 晶 分 身 为 你 作 战 ， 持 续 %d 回 合 。
 		水 晶 分 身 会 使 用 飞 弹 攻 击 敌 人。
 		岩 石 分 身 会 嘲 讽 敌 人 来 保 护 你。
@@ -20,8 +21,8 @@ talentInfoCHN["T_ELEMENTAL_SPLIT"] = function(self, t)
 		]]):format(t.getDuration(self, t))
 	end
 
-t_talent_name["T_POWER_CORE"] = "能量核心"
-talentInfoCHN["T_POWER_CORE"] = function(self, t)
+Talents.talents_def.T_POWER_CORE.name = "能量核心"
+Talents.talents_def.T_POWER_CORE.info = function(self, t)
 		return ([[你 的 分 身 学 会 新 的 技 能。
 		水 晶 分 身 : 尖 刺 之 雨 —— 被 动 技 能 ， 令 周 围 敌 人 流 血 。
 		岩 石 分 身 : 岩 石 链 接 —— 一 层 保 护 护 盾 ， 将 周 围 友 方 受 到 的 所 有 伤 害 转 移 至 岩 石 分 身。
@@ -30,16 +31,16 @@ talentInfoCHN["T_POWER_CORE"] = function(self, t)
 	end
 
 
-t_talent_name["T_DWARVEN_UNITY"] = "矮人的团结"
-talentInfoCHN["T_DWARVEN_UNITY"] = function(self, t)
+Talents.talents_def.T_DWARVEN_UNITY.name = "矮人的团结"
+Talents.talents_def.T_DWARVEN_UNITY.info = function(self, t)
 		return ([[你 呼 唤 你 的 分 身 的 帮 助。
 		岩 石 分 身 将 和 你 交 换 位 置， 同 时 原 位 置 半 径 %d 内 的 敌 人 将 会 转 为 以 岩 石 分 身 为 目 标。
 		水 晶 分 身 将 立 即 发 射 等 级 %d 的 岩 石 飞 弹 ， 目 标 是 岩 石 分 身（ 如 死 亡 ， 则 改 为 你 自 己 ） 半 径 %d 周 围 的 敌 人。]]):
 		format(self:getTalentRadius(t), self:getTalentLevelRaw(t), self:getTalentRadius(t))
 	end
 
-t_talent_name["T_MERGEBACK"] = "重吸收"
-talentInfoCHN["T_MERGEBACK"] = function(self, t)
+Talents.talents_def.T_MERGEBACK.name = "重吸收"
+Talents.talents_def.T_MERGEBACK.info = function(self, t)
 		local nb = t.getRemoveCount(self, t)
 		local dam = t.getDamage(self, t)
 		local heal = t.getHeal(self, t)
@@ -48,14 +49,14 @@ talentInfoCHN["T_MERGEBACK"] = function(self, t)
 		format(nb, heal,dam)
 	end
 
-t_talent_name["T_STONE_LINK"] = "岩石链接"
-talentInfoCHN["T_STONE_LINK"] = function(self, t)
+Talents.talents_def.T_STONE_LINK.name = "岩石链接"
+Talents.talents_def.T_STONE_LINK.info = function(self, t)
 		local radius = self:getTalentRadius(t)
 		return ([[制 造 一 层 半 径 %d 的 护 盾 ， 将 友 方 受 到 的 伤 害 转 移 过 来 ， 持 续 5 回 合。]]):format(radius)
 	end
 
-t_talent_name["T_RAIN_OF_SPIKES"] = "岩刺之雨"
-talentInfoCHN["T_RAIN_OF_SPIKES"] = function(self, t)
+Talents.talents_def.T_RAIN_OF_SPIKES.name = "岩刺之雨"
+Talents.talents_def.T_RAIN_OF_SPIKES.info = function(self, t)
 		local radius = self:getTalentRadius(t)
 		local dam = t.getDamage(self, t)
 		return ([[ 在 身 边 发 射 尖 刺 ， 半 径 %d 内 的 敌 人 在 6 回 合 内 流 血 %0.2f 点。

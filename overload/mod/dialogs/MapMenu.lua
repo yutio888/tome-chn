@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2014 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -99,14 +99,15 @@ function _M:use(item)
 		d.changed = true
 	elseif act == "debug-inventory" then
 		local d
+		local actor = item.actor
 		d = item.actor:showEquipInven(item.actor.name..": Inventory", nil, function(o, inven, item, button, event)
 			if not o then return end
-			local ud = require("mod.dialogs.UseItemDialog").new(event == "button", item.actor, o, item, inven, function(_, _, _, stop)
+			local ud = require("mod.dialogs.UseItemDialog").new(event == "button", actor, o, item, inven, function(_, _, _, stop)
 				d:generate()
 				d:generateList()
-				if stop then self:unregisterDialog(d) end
+				if stop then game:unregisterDialog(d) end
 			end)
-			self:registerDialog(ud)
+			game:registerDialog(ud)
 		end)
 	end
 end
@@ -130,6 +131,7 @@ function _M:generateList()
 	local t = game.level.map(self.tmx, self.tmy, Map.TRAP)
 	local o = game.level.map(self.tmx, self.tmy, Map.OBJECT)
 	local a = game.level.map(self.tmx, self.tmy, Map.ACTOR)
+	local p = game.level.map(self.tmx, self.tmy, Map.PROJECTILE)
 
 	-- Generic actions
 	if g and g.change_level and self.on_player then list[#list+1] = {name="切换地图", action="change_level", color=colors.simple(colors.VIOLET)} end

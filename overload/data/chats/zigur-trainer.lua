@@ -1,5 +1,5 @@
--- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
+﻿-- ToME - Tales of Maj'Eyal
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -48,6 +48,7 @@ local remove_magic = function(npc, player)
 		end
 	end
 	player:attr("forbid_arcane", 1)
+	player:attr("zigur_follower", 1)
 	player.changed = true
 end
 

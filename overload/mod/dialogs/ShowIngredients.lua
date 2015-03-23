@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2014 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -35,6 +35,7 @@ function _M:init(party)
 
 	self:generateList()
 
+	local vsep = Separator.new{dir="horizontal", size=self.ih - 10}
 	self.c_list = ListColumns.new{width=math.floor(self.iw / 2 - 10), height=self.ih - 10, scrollbar=true, sortable=true, columns={
 		{name="材料", width=50, display_prop="name", sort="name"},
 		{name="分类", width=30, display_prop="cat", sort="cat"},
@@ -44,7 +45,7 @@ function _M:init(party)
 	self:loadUI{
 		{left=0, top=0, ui=self.c_list},
 		{right=0, top=0, ui=self.c_desc},
-		{hcenter=0, top=5, ui=Separator.new{dir="horizontal", size=self.ih - 10}},
+		{hcenter=0, top=5, ui=vsep},
 	}
 	self:setFocus(self.c_list)
 	self:setupUI()

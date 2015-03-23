@@ -1,5 +1,5 @@
--- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2014 Nicolas Casalini
+﻿-- ToME - Tales of Maj'Eyal
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -123,7 +123,7 @@ local function set_element(element, new_flavor, player)
 
 	local prev_name = o:getName{no_count=true, force_id=true, no_add_name=true}
 	
-	local dam = o.combat.dam
+	local dam = o.staff_power or o.combat.dam
 	local inven = player:getInven("MAINHAND")
 	local o = player:takeoffObject(inven, 1)
 
@@ -176,9 +176,9 @@ newChat{ id="welcome",
 				game:registerDialog(ds)
 			end,
 		},
-		{"[术士]", cond = function() return not is_sentient() and not o.no_command end, jump="element_mage"},
-		{"[众星]", cond = function() return not is_sentient() and not o.no_command end, jump="element_star"},
-		{"[邪恶]", cond = function() return not is_sentient() and not o.no_command end, jump="element_vile"},
+		{"[术士]", cond = function() return not is_sentient() and not o.no_command and (not o.only_element or o.only_element == "element_mage") end, jump="element_mage"},
+		{"[众星]", cond = function() return not is_sentient() and not o.no_command and (not o.only_element or o.only_element == "element_star") end, jump="element_star"},
+		{"[邪恶]", cond = function() return not is_sentient() and not o.no_command and (not o.only_element or o.only_element == "element_vile") end, jump="element_vile"},
 		{"没事了。"},
 	}
 }

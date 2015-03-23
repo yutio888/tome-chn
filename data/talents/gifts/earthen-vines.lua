@@ -1,5 +1,6 @@
-﻿t_talent_name["T_STONE_VINES"] = "岩石藤蔓"
-talentInfoCHN["T_STONE_VINES"] = function(self, t)
+﻿local Talents = require "engine.interface.ActorTalents"
+Talents.talents_def.T_STONE_VINES.name = "岩石藤蔓"
+Talents.talents_def.T_STONE_VINES.info = function(self, t)
 		local rad = self:getTalentRadius(t)
 		local turns, dam, arcanedam = t.getValues(self, t)
 		local xs = arcanedam and (" 和%0.1f奥术伤害"):format(arcanedam) or ""
@@ -12,23 +13,23 @@ talentInfoCHN["T_STONE_VINES"] = function(self, t)
 		format(rad, dam, xs, turns, rad+4)
 	end
 
-t_talent_name["T_ELDRITCH_VINES"] = "奥术藤蔓"
-talentInfoCHN["T_ELDRITCH_VINES"] = function(self, t)
+Talents.talents_def.T_ELDRITCH_VINES.name = "奥术藤蔓"
+Talents.talents_def.T_ELDRITCH_VINES.info = function(self, t)
 		return ([[每 次 藤 蔓 造 成 伤 害 时 ， 你 回 复 %0.1f 点 失 衡 值 与 %0.1f 点 法 力 值。
 		同 时 藤 蔓 会 附 加 %0.1f 奥 术 伤 害 。]])
 		:format(t.getEquilibrium(self, t), t.getMana(self, t), t.getDamage(self, t))
 	end
 
 
-t_talent_name["T_ROCKWALK"] = "岩石漫步"
-talentInfoCHN["T_ROCKWALK"] = function(self, t)
+Talents.talents_def.T_ROCKWALK.name = "岩石漫步"
+Talents.talents_def.T_ROCKWALK.info = function(self, t)
 		return ([[吸 收 一 条 岩 石 藤 蔓 ，并 将 自 己 拉 到 被 困 住 的 怪 物 附 近 （ 最 大 半 径 %d）。
 		吸 收 岩 石 藤 蔓 会 治 疗 你 %0.2f 点 生 命 值。
 		使 用 这 个 技 能 不 会 打 破 岩 石 身 躯。]])
 		:format(self:getTalentRange(t) ,100 + self:combatTalentStatDamage(t, "wil", 40, 630))
 	end
-t_talent_name["T_ROCKSWALLOW"] = "岩石吞噬"
-talentInfoCHN["T_ROCKSWALLOW"] = function(self, t)
+Talents.talents_def.T_ROCKSWALLOW.name = "岩石吞噬"
+Talents.talents_def.T_ROCKSWALLOW.info = function(self, t)
 		return ([[将 半 径 %d 内 的 目 标 连 同 岩 石 藤 蔓 一 起 拉 过 来 ， 造 成 %0.1f 物 理 伤 害 。
 		伤 害 受 法 术 强 度 加 成 。]])
 		:format(self:getTalentRange(t), 80 + self:combatTalentStatDamage(t, "wil", 40, 330))

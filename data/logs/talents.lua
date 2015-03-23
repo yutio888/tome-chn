@@ -19,6 +19,16 @@ logCHN:newLog{
 		return "必须装备一面盾牌！"
 	end,
 }
+--celestial/eclipse
+logCHN:newLog{
+	log = "%s's darkness can no longer hold back the light!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s的暗影无法再抵御光明！"):format(a)
+	end,
+}
+
+
 --celestial/hymns
 logCHN:newLog{
 	log = "#DARK_GREY#A shroud of shadow dances around %s!",
@@ -1724,7 +1734,7 @@ logCHN:newLog{
 
 --spell/conveyance
 logCHN:newLog{
-	log = "Selects a target to teleport...",
+	log = "Select a target to teleport...",
 	fct = function()
 		return "选择目标传送..."
 	end,

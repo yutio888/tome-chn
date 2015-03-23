@@ -450,7 +450,7 @@ timeEffectCHN:newEffect{
 	id = "UNSTOPPABLE",
 	enName = "Unstoppable",
 	chName = "势不可挡",
-	type = "精神",
+	type = "其他",
 	subtype = "狂热",
 }
 
@@ -658,7 +658,7 @@ timeEffectCHN:newEffect{
 	id = "DRACONIC_WILL",
 	enName = "Draconic Will",
 	chName = "龙族意志",
-	type = "精神",
+	type = "其他",
 	subtype = "自然",
 }
 

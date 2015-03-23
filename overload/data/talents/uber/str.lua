@@ -1,5 +1,5 @@
 ﻿-- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2014 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -42,11 +42,13 @@ uberTalent{
 	tactical = { ATTACK = 4 },
 	on_pre_use = function(self, t) return self.size_category and self.size_category >= 4 end,
 	cooldown = 10,
+	is_melee = true,
+	range = 1,
+	target = function(self, t) return {type="hit", range=self:getTalentRange(t)} end,
 	action = function(self, t)
-		local tg = {type="hit", range=self:getTalentRange(t)}
+		local tg = self:getTalentTarget(t)
 		local x, y, target = self:getTarget(tg)
-		if not x or not y or not target then return nil end
-		if core.fov.distance(self.x, self.y, x, y) > 1 then return nil end
+		if not target or not self:canProject(tg, x, y) then return nil end
 
 		local hit = self:attackTarget(target, nil, 3.5 + 0.8 * (self.size_category - 4), true)
 
@@ -84,11 +86,13 @@ uberTalent{
 	requires_target = true,
 	tactical = { ATTACK = 4 },
 	cooldown = 10,
+	is_melee = true,
+	range = 1,
+	target = function(self, t) return {type="hit", range=self:getTalentRange(t)} end,
 	action = function(self, t)
-		local tg = {type="hit", range=self:getTalentRange(t)}
+		local tg = self:getTalentTarget(t)
 		local x, y, target = self:getTarget(tg)
-		if not x or not y or not target then return nil end
-		if core.fov.distance(self.x, self.y, x, y) > 1 then return nil end
+		if not target or not self:canProject(tg, x, y) then return nil end
 
 		local destroyed = false
 		target:knockback(self.x, self.y, 4, nil, function(g, x, y)
@@ -125,7 +129,7 @@ uberTalent{
 	cooldown = 25,
 	requires_target = true,
 	range = 5,
-	tactical = { ATTACK = 50, CLOSEIN = 30 },
+	tactical = { ATTACKAREA = 50, CLOSEIN = 30 },  -- someone loves this talent :P
 	require = { special={desc="曾造成50000点以上的光系或者火系伤害", fct=function(self) return
 		self.damage_log and (
 			(self.damage_log[DamageType.FIRE] and self.damage_log[DamageType.FIRE] >= 50000) or
@@ -170,6 +174,9 @@ uberTalent{
 	end} },
 	-- _M:levelup function in mod.class.Actor.lua updates the talent levels with character level
 	bonusLevel = function(self, t) return math.ceil(self.level/10) end,
+	callbackOnLevelup = function(self, t, new_level)
+		return t.updateTalent(self, t)
+	end,
 	updateTalent = function(self, t)
 		local p = self.talents_learn_vals[t.id] or {}
 		if p.__tmpvals then
@@ -188,7 +195,7 @@ uberTalent{
 	passives = function(self, t, p)
 		-- talents_inc_cap field referenced by _M:getMaxTPoints in mod.dialogs.LevelupDialog.lua
 		self.talents_inc_cap = self.talents_inc_cap or {}
-		t.updateTalent(self, t)
+		t.callbackOnLevelup(self, t)
 	end,
 	on_learn = function(self, t)
 		require("engine.ui.Dialog"):simplePopup("Legacy of the Naloren", "Slasul will be happy to know your faith in his cause. You should return to speak to him.")

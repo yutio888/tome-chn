@@ -140,6 +140,7 @@ newBirthDescriptor{
 	game_state = {
 		grab_online_event_forbid = true,
 		always_learn_birth_talents = true,
+		force_town_respec = false,
 	},
 }
 newBirthDescriptor{
@@ -223,7 +224,6 @@ newBirthDescriptor{
 		" 稀 有 怪 出 现 频 率 大 幅 增 加， 同 时 出 现 随 机 Boss。 ",
 		" 固 定 boss 拥 有 随 机 技 能",
 		" 所 有 敌 人 血 量 增 加 20%",
-		" 玩 家 等 级 被 设 定 为 普 通 而 不 是 精 英。 ",
 		" 玩 家 如 果 同 时 选 择 永 久 死 亡 或 冒 险 模 式 可 以 达 成 疯 狂 模 式 成 就。 ",
 	},
 	descriptor_choices =
@@ -232,8 +232,8 @@ newBirthDescriptor{
 		class = { ["Tutorial Adventurer"] = "forbid", },
 	},
 	copy = {
+		instakill_immune = 1,
 		__game_difficulty = 4,
-		rank = 2,
 	},
 	game_state = {
 		default_random_rare_chance = 3,
@@ -255,7 +255,6 @@ newBirthDescriptor{
 		" 稀 有 怪 出 现 频 率 大 幅 增 加， 同 时 出 现 随 机 Boss。 ",
 		" 固 定 boss 拥 有 随 机 技 能",
 		" 玩 家 处 于 被 捕 猎 的 状 态， 一 定 半 径 内 所 有 生 物 都 能 感 知 到 你 的 位 置。 ",
-		" 玩 家 等 级 被 设 定 为 普 通 而 不 是 精 英。 ",
 		" 玩 家 如 果 同 时 选 择 永 久 死 亡 模 式 或 冒 险 模 式 可 以 达 成 绝 望 模 式 成 就。 ",
 	},
 	descriptor_choices =
@@ -267,8 +266,8 @@ newBirthDescriptor{
 		[ActorTalents.T_HUNTED_PLAYER] = 1,
 	},
 	copy = {
+		instakill_immune = 1,
 		__game_difficulty = 5,
-		rank = 2,
 	},
 	game_state = {
 		default_random_rare_chance = 3,
@@ -293,7 +292,11 @@ newBirthDescriptor{
 		" 请 记 住 死 亡 作 为 游 戏 的 一 部 分 是 为 了 让 你 成 为 一 个 更 好 的 玩 家。 ",
 		" 此 模 式 你 可 以 完 成 探 索 模 式 成 就。 ",
 	},
+	game_state = {
+		force_town_respec = false,
+	},
 	copy = {
+		infinite_respec = 1,
 		infinite_lifes = 1,
 	},
 }
@@ -338,6 +341,7 @@ load("/data/birth/races/elf.lua")
 load("/data/birth/races/halfling.lua")
 load("/data/birth/races/dwarf.lua")
 load("/data/birth/races/yeek.lua")
+load("/data/birth/races/giant.lua")
 load("/data/birth/races/undead.lua")
 load("/data/birth/races/construct.lua")
 

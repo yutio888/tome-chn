@@ -1,5 +1,5 @@
--- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2014 Nicolas Casalini
+﻿-- ToME - Tales of Maj'Eyal
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -242,10 +242,160 @@ local randart_name_rules = {
 	},
 }
 
---- Generate randarts for this state
+--- Unided name possibilities for randarts
+local unided_names = {"glowing","scintillating","rune-covered","unblemished","jewel-encrusted","humming","gleaming","immaculate","flawless","crackling","glistening","plated","twisted","silvered","faceted","faded","sigiled","shadowy","laminated"}
+
+--- defined power themes, affects equipment generation
+_M.power_themes = {
+	'physical', 'mental', 'spell', 'defense', 'misc', 'fire',
+	'lightning', 'acid', 'mind', 'arcane', 'blight', 'nature',
+	'temporal', 'light', 'dark', 'antimagic'
+}
+
+--- defined power sources, used for equipment generation, defined in class descriptors
+_M.power_sources = table.map(function(k, v) return k, true end, table.keys_to_values({'technique','technique_ranged','nature','arcane','psionic','antimagic'}))
+
+--- map attributes to power restrictions for an entity
+--	returns an updated list of forbidden power types including attributes
+--	used for checking for compatible equipment and npc randboss classes
+function _M:attrPowers(e, not_ps)
+	not_ps = table.clone(not_ps or e.not_power_source or e.forbid_power_source) or {}
+	if e.attr then
+		if e:attr("has_arcane_knowledge") then not_ps.antimagic = true end
+		if e:attr("undead") then not_ps.antimagic = true end
+		if e:attr("forbid_arcane") then not_ps.arcane = true end
+--		if e:attr("forbid_nature") then not_ps.nature = true end
+	end
+	return not_ps
+end
+
+--- Checks power_source compatibility between two entities
+--	returns true if e2 is compatible with e1, false otherwise
+--	by default, only checks .power_source vs. .forbid_power_source between entities
+--	@param require_power if true, will also check that e2.power_source (if present) has a match in e1.power_source
+--	use updatePowers to resolve conflicts.
+function _M:checkPowers(e1, e2, require_power)
+	if not e1 or not e2 then return true end
+	local ok = true
+--print("Comparing power sources",e1.name, e2.name)
+	-- check for excluded power sources first
+	local not_ps = self:attrPowers(e2)
+	for ps, _ in pairs(e1.power_source or {}) do
+		if not_ps[ps] then return false end
+	end
+	not_ps = self:attrPowers(e1)
+	for ps, _ in pairs(e2.power_source or {}) do
+		if not_ps[ps] then return false end
+	end
+	-- check for required power_sources
+	if require_power and e1.power_source and e2.power_source then
+		ok = false
+		for yes_ps, _ in pairs(e1.power_source)	do
+			if (e2.power_source and e2.power_source[yes_ps]) then return true end
+		end
+		return false
+	end
+	return true
+end
+
+--- Adjusts power source parameters and themes to remove conflicts
+-- @param forbid_ps = {arcane = true, technique = true, ...} forbidden power sources <none>
+-- @param allow_ps = {arcane = true, technique = true, ...} allowed power sources <all allowed>
+-- @param randthemes = number of themes to pick randomly from the global pool <0>
+-- @param force_themes = themes to always include {"attack", "antimagic", ...} applied last (optional)
+-- 	themes included can add to forbid_ps and allow_ps
+-- precedence is: forbid_ps > allow_ps > force_themes
+-- returns new forbid_ps, allow_ps, themes (made consistent)
+function _M:updatePowers(forbid_ps, allow_ps, randthemes, force_themes)
+	local spec_powers = allow_ps and next(allow_ps)
+	local yes_ps = spec_powers and table.clone(allow_ps) or table.clone(self.power_sources)
+	local not_ps = forbid_ps and table.clone(forbid_ps) or {}
+	local allthemes, themes = table.clone(self.power_themes), {}
+	local force_themes = force_themes and table.clone(force_themes) or {}
+
+	for fps, _ in pairs(not_ps) do --enforce forbidden power restrictions
+		yes_ps[fps] = nil
+		if fps == "arcane" then
+			table.removeFromList(allthemes, 'spell', 'arcane', 'blight', 'temporal')
+			yes_ps.arcane = nil
+		elseif fps == "antimagic" then
+			table.removeFromList(allthemes, 'antimagic')
+			yes_ps.antimagic = nil
+		elseif fps == "nature" then
+			table.removeFromList(allthemes, 'nature')
+		elseif fps == "psionic" then
+			table.removeFromList(allthemes, 'mental', 'mind')
+		end
+	end
+	if spec_powers then --apply specified power sources
+		if yes_ps.antimagic then
+			not_ps.arcane = true
+			table.removeFromList(allthemes, 'spell', 'arcane', 'blight', 'temporal')
+		end
+		if yes_ps.arcane then
+			not_ps.antimagic = true
+			table.removeFromList(allthemes, 'antimagic')
+		end
+		if yes_ps.nature then
+			if not table.keys_to_values(allthemes).nature then table.insert(allthemes, 'nature') end
+		end
+	end
+	-- build themes list if needed beginning with those requested
+	local theme_count = (randthemes or 0) + #force_themes
+	for n = 1, theme_count do
+		local v = nil
+		if #force_themes > 0 then -- always add forced_themes if possible
+			v = rng.tableRemove(force_themes)
+			table.removeFromList(allthemes, v)
+		end
+		if not v then v = rng.tableRemove(allthemes) end -- pick from remaining themes
+		themes[#themes+1] = v
+			-- enforce theme-theme exclusions
+		if v == 'antimagic' then
+			table.removeFromList(allthemes, 'spell', 'arcane', 'blight', 'temporal')
+			yes_ps.antimagic, yes_ps.arcane = true, nil
+			not_ps.arcane = true
+		elseif v == 'spell' or v == 'arcane' or v == 'blight' or v == 'temporal' then
+			table.removeFromList(allthemes, 'antimagic')
+			yes_ps.antimagic, yes_ps.arcane = nil, true
+			not_ps.antimagic = true
+		elseif v == 'nature' then
+			table.removeFromList(allthemes, 'blight')
+			yes_ps.nature = true 
+		elseif v == 'mind' or v == 'mental' then
+			yes_ps.psionic = true
+		elseif v == 'physical' then
+			yes_ps.technique, yes_ps.technique_ranged = true, true
+		end
+	end
+	return not_ps, yes_ps, themes
+end
+
+--- Generate randarts for this state with optional parameters:
+-- @param data.base = base object to add powers to (base.randart_able must be defined) <random object>
+-- @param data.base_filter = filter passed to makeEntity when making base object
+-- @param data.lev = character level to generate for (affects point budget, #themes and #powers) <12-50>
+-- @param data.power_points_factor = lev based power points multiplier <1>
+-- @param data.nb_points_add = #extra budget points to spend on random powers <0>
+-- @param data.powers_special = function(p) that must return true on each random power to add (from base.randart_able)
+-- @param data.nb_themes = #power themes (power groups) for random powers to use <scales to 5 with lev>
+-- @param data.force_themes = additional power theme(s) to use for random powers = {"attack", "arcane", ...}
+-- @param data.egos = total #egos to include (forced + random) <3>
+-- @param data.greater_egos_bias = #egos that should be greater egos <2/3 * data.egos>
+-- @param data.force_egos = list of egos ("egoname1", "egoname2", ...) to add first (overrides restrictions)
+-- @param data.ego_special = function(e) on ego table that must return true for allowed egos
+-- @param data.forbid_power_source = disallowed power type(s) for egos
+-- 	eg:{arcane = true, psionic = true, technique = true, nature = true, antimagic = true}
+--		note some objects always have a power source by default (i.e. wands are always arcane powered)
+-- @param data.power_source = allowed power type(s) <all allowed> if specified, only egos matching at least one of the power types will be added.  themes (random or forced) can add allowed power_sources
+-- @param data.namescheme = parameters to be passed to the NameGenerator <local randart_name_rules table>
+-- @param data.add_pool if true, adds the randart to the world artifact pool <nil>
+-- @param data.post = function(o) to be applied to the randart after all egos and powers have been added and resolved
 function _M:generateRandart(data)
-	-- Setup level
+	-- Setup basic parameters and override global variables to match data
+	data = data or {}
 	local lev = data.lev or rng.range(12, 50)
+	data.forbid_power_source = data.forbid_power_source or {}
 	local oldlev = game.level.level
 	local oldclev = resolvers.current_level
 	game.level.level = lev
@@ -255,71 +405,92 @@ function _M:generateRandart(data)
 	local base = data.base or game.zone:makeEntity(game.level, "object", data.base_filter or {ignore_material_restriction=true, no_tome_drops=true, ego_filter={keep_egos=true, ego_chance=-1000}, special=function(e)
 		return (not e.unique and e.randart_able) and (not e.material_level or e.material_level >= 2) and true or false
 	end}, nil, true)
-	if not base then game.level.level = oldlev resolvers.current_level = oldclev return end
+	if not base or not base.randart_able then game.level.level = oldlev resolvers.current_level = oldclev return end
 	local o = base:cloneFull()
 
-	local powers_list = engine.Object:loadList(o.randart_able, nil, nil, function(e) if e.rarity then e.rarity = math.ceil(e.rarity / 5) end end)
+	local display = o.display
+
+--o.baseobj = base:cloneFull() -- debugging code
+--o.gendata = table.clone(data, true) -- debugging code
+
+	-- Load possible random powers
+	local powers_list = engine.Object:loadList(o.randart_able, nil, nil,
+		function(e)
+			if data.powers_special and not data.powers_special(e) then e.rarity = nil end
+			if e.rarity then
+				e.rarity = math.ceil(e.rarity / 5)
+			end
+		end)
+	--print(" * loaded powers list:")
 	o.randart_able = nil
 	
+	-----------------------------------------------------------
+	-- Pick Themes
+	-----------------------------------------------------------
 	local nb_themes = data.nb_themes
 	if not nb_themes then -- Gradually increase number of themes at higher levels so there are enough powers to spend points on
 		nb_themes = math.max(2,5*lev/(lev+50)) -- Maximum 5 themes possible
 		nb_themes= math.floor(nb_themes) + (rng.percent((nb_themes-math.floor(nb_themes))*100) and 1 or 0)
 	end
-	local allthemes = {
-		'physical', 'mental', 'spell', 'defense', 'misc', 'fire',
-		'lightning', 'acid', 'mind', 'arcane', 'blight', 'nature',
-		'temporal', 'light', 'dark', 'antimagic'
-	}
-	local themes = {}
-	if data.force_themes then
-		for i, v in ipairs(data.force_themes) do
-			table.removeFromList(allthemes, v)
-			themes[v] = true
-			if v == 'antimagic' then table.removeFromList(allthemes, 'spell', 'arcane', 'blight', 'temporal') end
-			if v == 'spell' or v == 'arcane' or v == 'blight' or v == 'temporal' then table.removeFromList(allthemes, 'antimagic') end
-		end
+	-- update power sources and themes lists based on base object properties
+	local psource
+	if o.power_source then 
+		psource = table.clone(o.power_source)
+		if data.power_source then table.merge(psource, data.power_source) end
+		-- forbid power sources that conflict with existing power source
+		data.forbid_power_source, psource = self:updatePowers(data.forbid_power_source, psource)
+		if data.power_source then data.power_source = psource end
 	end
-	for i = #themes + 1, (nb_themes or 2) do
-		if #allthemes == 0 then break end
-		local v = rng.tableRemove(allthemes)
-		themes[v] = true
-		if v == 'antimagic' then table.removeFromList(allthemes, 'spell', 'arcane', 'blight', 'temporal') end
-		if v == 'spell' or v == 'arcane' or v == 'blight' or v == 'temporal' then table.removeFromList(allthemes, 'antimagic') end
-	end
-	local themes_fct = function(e)
-		for theme, _ in pairs(e.theme) do if themes[theme] then return true end end
-		return false
-	end
+	-- resolve any power/theme conflicts with input data
+	local themes
+	data.forbid_power_source, psource, themes = self:updatePowers(data.forbid_power_source, data.power_source, nb_themes, data.force_themes)
+	if data.power_source then data.power_source = psource end
+	
+	themes = table.map(function(k, v) return k, true end, table.keys_to_values(themes))
 
 	-----------------------------------------------------------
 	-- Determine power
 	-----------------------------------------------------------
-	-- 	Note double diminishing returns when coupled with scaling factor in merger (below)
+	-- Note double diminishing returns when coupled with scaling factor in merger (below)
 	-- Maintains randomness throughout level range ~50% variability in points
-	local points = math.ceil(0.1*lev^0.75*(8 + rng.range(1, 7)) * (data.power_points_factor or 1))+(data.nb_points_add or 0)
+	local points = math.max(0, math.ceil(0.1*lev^0.75*(8 + rng.range(1, 7)) * (data.power_points_factor or 1))+(data.nb_points_add or 0))
 	local nb_powers = 1 + rng.dice(math.max(1, math.ceil(0.281*lev^0.6)), 2) + (data.nb_powers_add or 0)
+	local nb_egos = data.egos or 3
+	local gr_egos = data.greater_egos_bias or math.floor(nb_egos*2/3) -- 2/3 greater egos by default
 	local powers = {}
-	print("Randart generation:", "level = ", lev, "points = ",points, "nb_powers = ",nb_powers)
+	print("Begin randart generation:", "level = ", lev, "egos =", nb_egos,"gr egos =", gr_egos, "rand themes = ", nb_themes, "points = ", points, "nb_powers = ",nb_powers)
+	if data.force_themes and #data.force_themes > 0 then print(" * forcing themes:",table.concat(data.force_themes,",")) end
+	print(" * using themes", table.concat(table.keys(themes), ','))
+	local force_egos = table.clone(data.force_egos)
+	if force_egos then print(" * forcing egos:", table.concat(force_egos, ',')) end
+	if data.forbid_power_source and next(data.forbid_power_source) then print(" * forbid power sources:", table.concat(table.keys(data.forbid_power_source), ',')) end
+	if data.power_source and next(data.power_source) then print(" * allowed power sources:", table.concat(table.keys(data.power_source), ',')) end
 	o.cost = o.cost + points * 7
+	local use_themes = next(themes) and true or false
 	-- Select some powers
+	local themes_fct = function(e)
+		if use_themes then
+			for theme, _ in pairs(e.theme) do if themes[theme] then return true end end
+			return false
+		end
+		return true
+	end
 	local power_themes = {}
-	local lst = game.zone:computeRarities("powers", powers_list, game.level, themes_fct) --Note: probabilities diminish as level exceeds 50 (limited to ~1000 by updated game.zone:computeRarities function)
-	
+	local lst = game.zone:computeRarities("powers", powers_list, game.level, themes_fct) --Note: probabilities diminish as level exceeds 50 (limited to ~1000 by mod.class.zone:adjustComputeRaritiesLevel(level, type, lev))
+
 	for i = 1, nb_powers do
 		local p = game.zone:pickEntity(lst)
 		if p then
 			for t, _ in pairs(p.theme) do if themes[t] and randart_name_rules[t] then power_themes[t] = (power_themes[t] or 0) + 1 end end
-			powers[p.name] = p:clone()
-			powers[#powers+1] = powers[p.name]
+			powers[#powers+1] = p:clone()
 		end
 	end
---	print("Selected powers:") table.print(powers)
+--	print("Selected powers:") for i, p in ipairs(powers) do print(" * ",p.name, table.concat(table.keys(p.theme or {}), ",")) end
 	power_themes = table.listify(power_themes)
 	table.sort(power_themes, function(a, b) return a[2] < b[2] end)
 
 	-----------------------------------------------------------
-	-- Make up a name
+	-- Make up a name based on themes
 	-----------------------------------------------------------
 	local themename = power_themes[#power_themes]
 	themename = themename and themename[1] or nil
@@ -328,110 +499,134 @@ function _M:generateRandart(data)
 	local name
 	local namescheme = data.namescheme or ((ngt ~= ngd) and rng.range(1, 4) or rng.range(1, 3))
 	if namescheme == 1 then
-		name = " '"..ngt:generate().."'"
+		name = o.name.." '"..ngt:generate().."'"
 	elseif namescheme == 2 then
-		name = ngd:generate().." 的 "..ngt:generate()
+		name = ngt:generate().." the "..o.name
 	elseif namescheme == 3 then
 		name = ngt:generate()
 	elseif namescheme == 4 then
-		name = ngd:generate().." 之 "..ngt:generate()
+		name = ngd:generate().." the "..ngt:generate()
 	end
 	o.define_as = name:upper():gsub("[^A-Z]", "_")
-
-	o.unided_name = rng.table{"glowing","scintillating","rune-covered","unblemished","jewel-encrusted","humming","gleaming","immaculate","flawless","crackling","glistening","plated","twisted","silvered","faceted","faded","sigiled","shadowy","laminated"}.." "..(o.unided_name or o.name)
-	
+	o.unided_name = rng.table(unided_names).." "..(o.unided_name or o.name)
 	o.unique = name
+	o.name = name
 	o.randart = true
 	o.no_unique_lore = true
 	o.rarity = rng.range(200, 290)
 
-	print("Creating randart "..name.."("..o.unided_name..") with "..(themename or "nil").." with level "..lev)
-	print(" * using themes", table.concat(table.keys(themes), ','))
+	print("Creating randart "..name.."("..o.unided_name..") with "..(themename or "no themename"))
 
 	-----------------------------------------------------------
-	-- Add ego properties
+	-- Add ego properties (modified by power_source restrictions)
 	-----------------------------------------------------------
-	
-	local nb_egos = data.egos or 3
-	local gr_egos = data.greater_egos_bias or math.floor(nb_egos*2/3) -- 2/3 greater egos by default
 	if o.egos and nb_egos > 0 then
 		local picked_egos = {}
 		local legos = {}
 		local been_greater = 0
-		table.insert(legos, game.level:getEntitiesList("object/"..o.egos..":prefix"))
-		table.insert(legos, game.level:getEntitiesList("object/"..o.egos..":suffix"))
-		table.insert(legos, game.level:getEntitiesList("object/"..o.egos..":"))
+		game.zone:getEntities(game.level, "object") -- make sure ego definitions are loaded
+		-- merge all egos into one list to correctly calculate rarities
+		table.append(legos, game.level:getEntitiesList("object/"..o.egos..":prefix") or {})
+		table.append(legos, game.level:getEntitiesList("object/"..o.egos..":suffix") or {})
+		table.append(legos, game.level:getEntitiesList("object/"..o.egos..":") or {})
+--		print(" * loaded ", #legos, "ego definitions from ", o.egos)
 		for i = 1, nb_egos or 3 do
-			local egos = rng.table(legos)
 			local list = {}
-			local filter = nil
-			if rng.percent(100*lev/(lev+50)) and been_greater < gr_egos then been_greater = been_greater + 1 filter = function(e) return e.greater_ego end end --RE Phase out (but don't eliminate) lesser egos with level
-			for z = 1, #egos do list[#list+1] = egos[z].e end
+			local gr_ego, ignore_filter = false, false
+			if rng.percent(100*lev/(lev+50)) and been_greater < gr_egos then -- Phase out (but don't eliminate) lesser egos with level
+				gr_ego = true
+			end
+			if force_egos then -- use forced egos list first
+				local found = false
+				repeat
+					local fego = rng.tableRemove(force_egos)
+					if not fego then break end
+					for z, e in ipairs(legos) do
+						if e.e.name:find(fego, nil, true) then
+--							print(" * found forced ego", e.e.name)
+							list[1] = e.e
+							found = true
+							gr_ego, ignore_filter = false, true -- make sure forced ego is not filtered out later
+							break
+						end
+					end
+				until found or #force_egos <= 0
+				if #force_egos == 0 then force_egos = nil end
+			end
+			if #list == 0 then -- no forced egos, copy the whole list
+				for z = 1, #legos do
+					list[#list+1] = legos[z].e
+				end
+			end
+			
+			local ef = self:egoFilter(game.zone, game.level, "object", "randartego", o, {special=data.ego_special, forbid_power_source=data.forbid_power_source, power_source=data.power_source}, picked_egos, {})
 
-			local ef = self:egoFilter(game.zone, game.level, "object", "randartego", o, {special=filter, forbid_power_source=data.forbid_power_source, power_source=data.power_source}, picked_egos, {})
-			filter = ef.special
+			local filter = function(e) -- check ego definition properties
+				if ignore_filter then return true end
+				if not ef.special or ef.special(e) then
+					if gr_ego and not e.greater_ego then return false end
+					return game.state:checkPowers(ef, e, true) -- check power_source compatibility
+				end
+			end
 
 			local pick_egos = game.zone:computeRarities("object", list, game.level, filter, nil, nil)
 			local ego = game.zone:pickEntity(pick_egos)
 			if ego then
 				table.insert(picked_egos, ego)
---				print(" ** selected ego", ego.name)
-				ego = ego:clone()
-				if ego.instant_resolve then ego:resolve(nil, nil, o) end -- Don't allow resolvers.generic here (conflict)
-				ego.instant_resolve = nil
-				ego.uid = nil
-
-				ego.name = nil
-				ego.unided_name = nil
-
-				-- OMFG this is ugly, there is a very rare combinaison that can result in a crash there, so we .. well, ignore it :/
+				print(" ** selected ego", ego.name, (ego.greater_ego and "(greater)" or "(normal)"), ego.power_source and table.concat(table.keys(ego.power_source), ","))
+				if ego.greater_ego then been_greater = been_greater + 1 end
+				-- OMFG this is ugly, there is a very rare combination that can result in a crash there, so we .. well, ignore it :/
 				-- Sorry.
-				local ok, err = pcall(table.mergeAddAppendArray, o, ego, true)
+				-- Fixed against overflow
+				local ok, err = pcall(game.zone.applyEgo, game.zone, o, ego, "object", true)
 				if not ok then
-					print("table.mergeAddAppendArray failed at creating a randart, retrying")
+					data.fails = (data.fails or 0) + 1
+					print("randart creation error", err)
+					print("game.zone.applyEgo failed at creating a randart, retrying", data.fails)
 					game.level.level = oldlev
 					resolvers.current_level = oldclev
-					return self:generateRandart(data)
+					if data.fails < 4 then return self:generateRandart(data) else return end
 				end
+			else -- no ego found: increase budget for random powers to compensate
+				local xpoints = gr_ego and 8 or 5
+				print((" ** no ego found (+%d points)"):format(xpoints))
+				points = points + xpoints
 			end
 		end
-		o.egos = nil o.egos_chance = nil o.force_ego = nil
+--		o.egos = nil o.egos_chance = nil o.force_ego = nil
 	end
 	-- Re-resolve with the (possibly) new resolvers
 	o:resolve()
-	o:resolve(nil, true)
 
 	-----------------------------------------------------------
-	-- Imbue powers in the randart
+	-- Imbue random powers into the randart according to themes
 	-----------------------------------------------------------
-	local function merger(dst, src, scale) --scale: factor to adjust power limits for levels higher than 50
-		scale = scale or 1
-		for k, e in pairs(src) do
-			if type(e) == "table" then
-				if e.__resolver and e.__resolver == "randartmax" then
-					dst[k] = (dst[k] or 0) + e.v
-					if e.max < 0 then
-						if dst[k] < e.max * scale then --Adjust maximum values for higher levels
-							dst[k] = math.floor(e.max * scale)
-						end
-					else
-						if dst[k] > e.max * scale then --Adjust maximum values for higher levels
-							dst[k] = math.floor(e.max * scale)
-						end
-					end
-				else
-					if not dst[k] then dst[k] = {} end
-					merger(dst[k], e, scale)
-				end
-			elseif type(e) == "number" then
-				dst[k] = (dst[k] or 0) + e
-			else
-				error("Type "..type(e).. " for randart property unsupported!")
+	local function merger(d, e, k, dst, src, rules, state) --scale: factor to adjust power limits for levels higher than 50
+		if (not state.path or #state.path == 0) and not state.copy then
+			if k == "copy" then -- copy into root
+				state.copy = true
+				table.applyRules(dst, e, rules, state)
 			end
+		end
+		local scale = state.scaleup or 1
+		if type(e) == "table" and e.__resolver and e.__resolver == "randartmax" and d then
+			d.v = d.v + e.v
+			d.max = e.max
+			if e.max < 0 then
+				if d.v < e.max * scale then --Adjust maximum values for higher levels
+					d.v = math.floor(e.max * scale)
+				end
+			else
+				if d.v > e.max * scale then --Adjust maximum values for higher levels
+					d.v = math.floor(e.max * scale)
+				end
+			end
+			return true
 		end
 	end
 
-	-- Distribute points
+	-- Distribute points: half to any powers and half to a shortened list of powers to focus their effects
+	local selected_powers = {}
 	local hpoints = math.ceil(points / 2)
 	local i = 0
 	local fails = 0
@@ -439,30 +634,19 @@ function _M:generateRandart(data)
 		i = util.boundWrap(i + 1, 1, #powers)
 		local p = powers[i]
 		if p and p.points <= hpoints*2 then -- Intentionally allow the budget to be exceeded slightly to guarantee powers at low levels
-			local scaleup = math.max(1,(lev/(p.level_range[2] or 50))^0.5) --Adjust scaleup factor for each power based on lev and level_range max
---			print(" * adding power: "..p.name.."("..p.points.." points)")
-			if p.wielder then
-				o.wielder = o.wielder or {}
-				merger(o.wielder, p.wielder, scaleup)
-			end
-			if p.combat then
-				o.combat = o.combat or {}
-				merger(o.combat, p.combat, scaleup)
-			end
-			if p.special_combat then
-				o.special_combat = o.special_combat or {}
-				merger(o.special_combat, p.special_combat, scaleup)
-			end
-			if p.copy then merger(o, p.copy, scaleup) end 
+			local state = {scaleup = math.max(1,(lev/(p.level_range[2] or 50))^0.5)} --Adjust scaleup factor for each power based on lev and level_range max
+		print(" * adding power: "..p.name.."("..p.points.." points)")
+			selected_powers[p.name] = selected_powers[p.name] or {}
+			table.ruleMergeAppendAdd(selected_powers[p.name], p, {merger}, state)
 			hpoints = hpoints - p.points 
 			p.points = p.points * 1.5 --increased cost (=diminishing returns) on extra applications of the same power
 		else
 			fails = fails + 1
 		end
 	end
-	o:resolve() o:resolve(nil, true)
+--	o:resolve() o:resolve(nil, true)
 
-	-- Bias toward some powers
+	-- Bias towards a shortened list of powers
 	local bias_powers = {}
 	local nb_bias = math.max(1,rng.range(math.ceil(#powers/2), 20*lev /(lev+50))) --Limit bias powers to 20 (50/5 * 2) powers
 	for i = 1, nb_bias do bias_powers[#bias_powers+1] = rng.table(powers) end
@@ -474,21 +658,10 @@ function _M:generateRandart(data)
 
 		local p = bias_powers[i] and bias_powers[i]
 		if p and p.points <= hpoints * 2 then
-			local scaleup = math.max(1,(lev/(p.level_range[2] or 50))^0.5) -- Adjust scaleup factor for each power based on lev and level_range max
-			if p.wielder then
-				o.wielder = o.wielder or {}
-				merger(o.wielder, p.wielder, scaleup)
-			end
-			if p.combat then
-				o.combat = o.combat or {}
-				merger(o.combat, p.combat, scaleup)
-			end
-			if p.special_combat then
-				o.special_combat = o.special_combat or {}
-				merger(o.special_combat, p.special_combat, scaleup)
-			end
-			if p.copy then merger(o, p.copy, scaleup) end
+			local state = {scaleup = math.max(1,(lev/(p.level_range[2] or 50))^0.5)} --Adjust scaleup factor for each power based on lev and level_range max
 --			print(" * adding bias power: "..p.name.."("..p.points.." points)")
+			selected_powers[p.name] = selected_powers[p.name] or {}
+			table.ruleMergeAppendAdd(selected_powers[p.name], p, {merger}, state)
 			hpoints = hpoints - p.points
 			p.points = p.points * 1.5 --increased cost (=diminishing returns) on extra applications of the same power
 		else
@@ -496,56 +669,101 @@ function _M:generateRandart(data)
 		end
 	end
 
-	-- Power source if none
+	for _, ego in pairs(selected_powers) do
+		ego.instant_resolve = true  -- resolve to be able to add
+		ego = engine.Entity.new(ego) -- get a real uid
+		game.zone:applyEgo(o, ego, "object", true)
+	end
+
+	o:resolve()
+	o:resolve(nil, true)
+
+	-- Always assign at least one power source based on themes and restrictions
 	if not o.power_source then
-		local ps = {}
+		local not_ps = data.forbid_power_source or {}
+		local ps = data.power_source or {}
 		if themes.physical or themes.defense then ps.technique = true end
 		if themes.mental then ps[rng.percent(50) and 'nature' or 'psionic'] = true end
-		if themes.spell or themes.arcane or themes.blight or themes.temporal then ps.arcane = true end
+		if themes.spell or themes.arcane or themes.blight or themes.temporal then
+			ps.arcane = true not_ps.antimagic = true
+		end
 		if themes.nature then ps.nature = true end
-		if themes.antimagic then ps.antimagic = true end
-		if not next(ps) then ps[rng.table{'technique','nature','arcane','psionic','antimagic'}] = true end
+		if themes.antimagic then
+			ps.antimagic = true not_ps.arcane = true
+		end
+		if not next(ps) then ps[rng.tableIndex(data.power_source or self.power_sources)] = true end
+		ps = table.minus_keys(ps, not_ps)
+		if not next(ps) then ps = {unknown = true} end
+		print(" * using implied power source(s) ", table.concat(table.keys(ps), ','))
 		o.power_source = ps
 	end
 
-	-- Setup the name
-	o.name = name
+	-- Assign weapon damage
+	if o.combat and not (o.subtype == "staff" or o.subtype == "mindstar") then
+		local theme_map = {
+			physical = engine.DamageType.PHYSICAL,
+			--mental = engine.DamageType.MIND,
+			fire = engine.DamageType.FIRE,
+			lightning = engine.DamageType.LIGHTNING,
+			acid = engine.DamageType.ACID,
+			mind = engine.DamageType.MIND,
+			arcane = engine.DamageType.ARCANE,
+			blight = engine.DamageType.BLIGHT,
+			nature = engine.DamageType.NATURE,
+			temporal = engine.DamageType.TEMPORAL,
+			light = engine.DamageType.LIGHT,
+			dark = engine.DamageType.DARK,
+		}
 
-	local theme_map = {
-		physical = engine.DamageType.PHYSICAL,
-		--mental = engine.DamageType.MIND,
-		fire = engine.DamageType.FIRE,
-		lightning = engine.DamageType.LIGHTNING,
-		acid = engine.DamageType.ACID,
-		mind = engine.DamageType.MIND,
-		arcane = engine.DamageType.ARCANE,
-		blight = engine.DamageType.BLIGHT,
-		nature = engine.DamageType.NATURE,
-		temporal = engine.DamageType.TEMPORAL,
-		light = engine.DamageType.LIGHT,
-		dark = engine.DamageType.DARK,
-	}
-
-	local pickDamtype = function(themes_list)
-		if not rng.percent(18) then return engine.DamageType.PHYSICAL end
-			for k, v in pairs(themes_list) do
-				if theme_map[k] then return theme_map[k] end
-			end
-		return engine.DamageType.PHYSICAL
+		local pickDamtype = function(themes_list)
+			if not rng.percent(18) then return engine.DamageType.PHYSICAL end
+				for k, v in pairs(themes_list) do
+					if theme_map[k] then return theme_map[k] end
+				end
+			return engine.DamageType.PHYSICAL
+		end
+		o.combat.damtype = pickDamtype(themes)
 	end
 
-	if o and o.combat and not (o.subtype and o.subtype == "staff") and not (o.subtype and o.subtype == "mindstar") then o.combat.damtype = pickDamtype(themes) end
+	o.display = display
 
 	if data.post then
 		data.post(o)
 	end
 
 	if data.add_pool then self:addWorldArtifact(o) end
-
+	-- restore global variables
 	game.level.level = oldlev
 	resolvers.current_level = oldclev
 	return o
 end
+
+--- Adds randart properties (egos and random powers) to an existing object
+-- @param o is the object to be updated (o.egos and o.randart_able should be defined as needed)
+-- @param data is the table of randart parameters passed to generateRandart
+-- usable powers and set properties are not overwritten if present
+function _M:addRandartProperties(o, data)
+	print(" ** adding randart properties to ", o.name, o.uid)
+	data.base = o
+	-- properties to not overwrite
+	local protect_props = {name = true, uid=true, rarity = true, unided_name = true, define_as = true, unique = o.unique, randart = o.unique, no_unique_lore = true, require=true, egos = true, randart_able = true}
+	if o.use_power or o.use_talent or o.use_simple then -- allow only one use power
+		table.merge(protect_props, {use_power = true, use_talent = true, use_simple = true,
+			use_no_energy=true, use_no_blind = o.use_no_blind, use_no_silence = o.use_no_silence, use_no_wear = o.use_no_wear,
+			talent_cooldown = true, power = true, max_power=true, power_regen = true, charm_on_use = o.charm_on_use})
+	end
+	if o.set_list then -- preserve set properties Note: mindstar set flags ARE copied
+		table.merge(protect_props, {set_list = true, on_set_complete = true, on_set_broken = true})
+	end
+	print(" ** addRandartProperties: property merge restrictions: ", table.concat(table.keys(protect_props), ','))
+	local art = game.state:generateRandart(data)
+	if art then
+		table.merge(o, art, true, protect_props, nil)
+	else
+		print(" ** FAILED to generate randart properties to add to ", o.name, o.uid)
+	end
+end
+
 local wda_cache = {}
 
 --- Runs the worldmap directory AI
@@ -1135,7 +1353,6 @@ function _M:entityFilterAlter(zone, level, type, filter)
 		end
 
 		-- If we request a specific type/subtype, we don't want categories that could make that not happen
---		if filter.type or filter.subtype or filter.name then t.money = 0 end
 		if filter.type or filter.subtype or filter.name then t.money = 0 t.lore = 0	end
 
 		local u = t.uniques or 0
@@ -1190,7 +1407,6 @@ function _M:entityFilterAlter(zone, level, type, filter)
 			filter.special = function(e) return e.type == "money" or e.type == "gem" end
 
 		elseif r < l then
---			print("[TOME ENTITY FILTER] selected Lore", r, m)
 			print("[TOME ENTITY FILTER] selected Lore", r, l)
 			filter.special = function(e) return e.lore and true or false end
 
@@ -1256,18 +1472,6 @@ function _M:entityFilterPost(zone, level, type, e, filter)
 			if _G.type(filter.random_boss) == "boolean" then filter.random_boss = {}
 			else filter.random_boss = table.clone(filter.random_boss, true) end
 			filter.random_boss.level = filter.random_boss.level or zone:level_adjust_level(level, zone, type)
-			filter.random_boss.class_filter = filter.random_boss.class_filter or function(c)
-				if e.power_source then
-					for ps, _ in pairs(e.power_source) do if c.power_source and c.power_source[ps] then return true end end
-					return false
-				end
-				if e.not_power_source then
-					for ps, _ in pairs(e.not_power_source) do if c.power_source and c.power_source[ps] then return false end end
-					return true
-				end
-				return true
-			end
-
 			e = self:createRandomBoss(e, filter.random_boss)
 		elseif filter.random_elite and not e.unique then
 			if _G.type(filter.random_elite) == "boolean" then filter.random_elite = {}
@@ -1283,17 +1487,8 @@ function _M:entityFilterPost(zone, level, type, e, filter)
 				no_loot_randart = true,
 				resources_boost = 1.5,
 				talent_cds_factor = (lev <= 10) and 3 or ((lev <= 20) and 2 or nil),
-				class_filter = filter.class_filter or function(c)
-					if e.power_source then
-						for ps, _ in pairs(e.power_source) do if c.power_source and c.power_source[ps] then return true end end
-						return false
-					end
-					if e.not_power_source then
-						for ps, _ in pairs(e.not_power_source) do if c.power_source and c.power_source[ps] then return false end end
-						return true
-					end
-					return true
-				end,
+				class_filter = filter.class_filter,
+				no_class_restrictions = filter.no_class_restrictions,
 				level = lev,
 				nb_rares = filter.random_elite.nb_rares or 1,
 				check_talents_level = true,
@@ -1303,23 +1498,6 @@ function _M:entityFilterPost(zone, level, type, e, filter)
 						b.inc_damage = b.inc_damage or {}
 						b.inc_damage.all = (b.inc_damage.all or 0) - 40 * (20 - data.level + 1) / 20
 					end
-
-					-- Drop
-					for i = 1, data.nb_rares do
-						local o = game.zone:makeEntity(game.level,"object", {random_object=true}, nil, true)
-						if o then
-							b:addObject(b.INVEN_INVEN, o)
-							game.zone:addEntity(game.level, o, "object")
-						end
-					end
-					if data.user_post then data.user_post(b, data) end
-				end,
-				post = function(b, data)
-					if data.level <= 20 then
-						b.inc_damage = b.inc_damage or {}
-						b.inc_damage.all = (b.inc_damage.all or 0) - 40 * (20 - data.level + 1) / 20
-					end
-
 					-- Drop
 					for i = 1, data.nb_rares do -- generate rares as weak (1 ego) randarts
 						local fil = {lev=lev, egos=1, greater_egos_bias = 0, forbid_power_source=b.not_power_source,
@@ -1330,8 +1508,12 @@ function _M:entityFilterPost(zone, level, type, e, filter)
 						}
 						local o = game.state:generateRandart(fil,nil, true)
 						if o then
---							print("[entityFilterPost]: Generated random object for", tostring(b.name)) --RE
+--							print("[entityFilterPost]: Generated random object for", tostring(b.name))
 							o.unique, o.randart, o.rare = nil, nil, true
+							if o.__original then
+								local e = o.__original
+								e.unique, e.randart, e.rare = nil, nil, true
+							end
 							b:addObject(b.INVEN_INVEN, o)
 							game.zone:addEntity(game.level, o, "object")
 						else
@@ -1699,13 +1881,27 @@ function _M:createRandomZone(zbase)
 	return zone, boss
 end
 
+--- Add character classes to an actor updating stats, talents, and equipment
+--	@param b = actor(boss) to update
+--	@param data = optional parameters:
+--	@param data.force_classes = specific classes to add {Corruptor = true, Bulwark = true, ...} ignores restrictions
+--	@param data.nb_classes = random classes to add (in addition to any forced classes) <2>
+-- 	@param data.class_filter = function(cdata) that must return true for any class picked.
+--		(cdata = subclass definition in engine.Birther.birth_descriptor_def.subclass)
+--	@param data.no_class_restrictions set true to skip class compatibility checks <nil>
+--	@param data.add_trees = {["talent tree name 1"]=true, ["talent tree name 2"]=true, ..} additional talent trees to learn
+--	@param data.check_talents_level set true to enforce talent level restrictions <nil>
+--	@param data.auto_sustain set true to activate sustained talents at birth <nil>
+--	@param data.forbid_equip set true for no equipment <nil>
+--	@param data.loot_quality = drop table to use <"boss">
+--	@param data.drop_equipment set true to force dropping of equipment <nil>
+--	@param instant set true to force instant learning of talents and generating golem <nil>
 function _M:applyRandomClass(b, data, instant)
 	if not data.level then data.level = b.level end
 
 	------------------------------------------------------------
 	-- Apply talents from classes
 	------------------------------------------------------------
-
 	-- Apply a class
 	local Birther = require "engine.Birther"
 	b.learn_tids = {}
@@ -1718,7 +1914,18 @@ function _M:applyRandomClass(b, data, instant)
 		if not mclass then return end
 
 		print("Adding to random boss class", class.name, mclass.name)
-		if config.settings.cheat then b.desc = (b.desc or "").."\nClass: "..class.name end
+		-- add class to list and build inherent power sources
+		b.descriptor = b.descriptor or {}
+		b.descriptor.classes = b.descriptor.classes or {}
+		table.append(b.descriptor.classes, {class.name})
+		
+		-- build inherent power sources and forbidden power sources
+		-- b.forbid_power_source --> b.not_power_source used for classes
+		b.power_source = table.merge(b.power_source or {}, class.power_source or {})
+		b.not_power_source = table.merge(b.not_power_source or {}, class.not_power_source or {})
+		-- update power source parameters with the new class
+		b.not_power_source, b.power_source = self:updatePowers(self:attrPowers(b, b.not_power_source), b.power_source)
+print("   power types: not_power_source =", table.concat(table.keys(b.not_power_source),","), "power_source =", table.concat(table.keys(b.power_source),","))
 
 		-- Add stats
 		if b.auto_stats then
@@ -1743,6 +1950,7 @@ function _M:applyRandomClass(b, data, instant)
 				for i, d in ipairs(resolver[1]) do
 					d.name = nil
 					d.ego_chance = nil
+					d.forbid_power_source=b.not_power_source
 					d.tome_drops = data.loot_quality or "boss"
 					d.force_drop = (data.drop_equipment == nil) and true or data.drop_equipment
 				end
@@ -1785,7 +1993,6 @@ function _M:applyRandomClass(b, data, instant)
 						ok = false
 					end
 				end
-
 				if ok then list[t.id] = true end
 			end
 		end
@@ -1810,44 +2017,69 @@ function _M:applyRandomClass(b, data, instant)
 				end
 			end
 		end
+		return true
 	end
 
-	-- Select two classes
+	-- Select classes
 	local classes = Birther.birth_descriptor_def.subclass
 	local list = {}
 	local force_classes = data.force_classes and table.clone(data.force_classes)
-	for name, cdata in pairs(classes) do
+	for name, cdata in ipairs(classes) do
 		if force_classes and force_classes[cdata.name] then apply_class(table.clone(cdata, true)) force_classes[cdata.name] = nil
 		elseif not cdata.not_on_random_boss and (not cdata.random_rarity or rng.chance(cdata.random_rarity)) and (not data.class_filter or data.class_filter(cdata))then list[#list+1] = cdata
 		end
 	end
-	for i = 1, data.nb_classes or 2 do
+	local to_apply = data.nb_classes or 2
+	while to_apply > 0 do
 		local c = rng.tableRemove(list)
-		if not c then break end
-		apply_class(table.clone(c, true))
+		if not c then break end --repeat attempts until list is exhausted
+		if data.no_class_restrictions or self:checkPowers(b, c) then  -- recheck power restricts here to account for any previously picked classes
+			if apply_class(table.clone(c, true)) then to_apply = to_apply - 1 end
+		else
+			print("  class", c.name, " rejected due to power source")
+		end
 	end
 end
 
+--- Creates a random Boss (or elite) actor
+--	@param base = base actor to add classes/talents to
+--	calls _M:applyRandomClass(b, data, instant) to add classes, talents, and equipment based on class descriptors
+--		handles data.nb_classes, data.force_classes, data.class_filter, ...
+--	optional parameters:
+--	@param data.level = minimum level range for actor generation <1>
+--	@param data.rank = rank <3.5-4>
+--	@param data.life_rating = function(b.life_rating) <1.7 * base.life_rating + 4-9>
+--	@param data.resources_boost = multiplier for maximum resource pool sizes <3>
+--	@param data.talent_cds_factor = multiplier for all talent cooldowns <1>
+--	@param data.ai = ai_type <"tactical" if rank>3 or base.ai>
+--	@param data.ai_tactic = tactical weights table for the tactical ai <nil - generated based on talents>
+--	@param data.no_loot_randart set true to not drop a randart <nil>
+--	@param data.on_die set true to run base.rng_boss_on_die and base.rng_boss_on_die_custom on death <nil>
+--	@param data.name_scheme <randart_name_rules.default>
+--	@param data.post = function(b, data) to run last to finish generation
 function _M:createRandomBoss(base, data)
 	local b = base:clone()
 	data = data or {level=1}
+	data.nb_classes = data.nb_classes or 2
 
 	------------------------------------------------------------
 	-- Basic stuff, name, rank, ...
 	------------------------------------------------------------
 	local ngd, name
---	if base.random_name_def then
---		ngd = NameGenerator2.new("/data/languages/names/"..base.random_name_def:gsub("#sex#", base.female and "female" or "male")..".txt")
---		name = ngd:generate(nil, base.random_name_min_syllables, base.random_name_max_syllables)
---	else
+	if base.random_name_def then
+		ngd = NameGenerator2.new("/data/languages/names/"..base.random_name_def:gsub("#sex#", base.female and "female" or "male")..".txt")
+		name = ngd:generate(nil, base.random_name_min_syllables, base.random_name_max_syllables)
+	else
 		ngd = NameGenerator.new(randart_name_rules.default)
 		name = ngd:generate()
---	end
---	if data.name_scheme then
---		b.name = data.name_scheme:gsub("#rng#", name):gsub("#base#", b.name)
---	else
-		b.name = b.name.." : "..name
---	end
+	end
+	if data.name_scheme then
+		b.name = data.name_scheme:gsub("#rng#", name):gsub("#base#", b.name)
+	else
+		b.name = name.." the "..b.name
+	end
+	print("Creating random boss ", b.name, data.level, "level", data.nb_classes, "classes")
+	if data.force_classes then print("  * forcing classes:",table.concat(table.keys(data.force_classes),",")) end
 	b.unique = b.name
 	b.randboss = true
 	local boss_id = "RND_BOSS_"..b.name:upper():gsub("[^A-Z]", "_")
@@ -1872,10 +2104,10 @@ function _M:createRandomBoss(base, data)
 	-- Force resolving some stuff
 	if type(b.max_life) == "table" and b.max_life.__resolver then b.max_life = resolvers.calc[b.max_life.__resolver](b.max_life, b, b, b, "max_life", {}) end
 
-	-- All bosses have alll body parts .. yes snake bosses can use archery and so on ..
+	-- All bosses have all body parts .. yes snake bosses can use archery and so on ..
 	-- This is to prevent them from having unusable talents
 	b.inven = {}
-	b.body = { INVEN = 1000, QS_MAINHAND = 1, QS_OFFHAND = 1, MAINHAND = 1, OFFHAND = 1, FINGER = 2, NECK = 1, LITE = 1, BODY = 1, HEAD = 1, CLOAK = 1, HANDS = 1, BELT = 1, FEET = 1, TOOL = 1, QUIVER = 1 }
+	b.body = { INVEN = 1000, QS_MAINHAND = 1, QS_OFFHAND = 1, MAINHAND = 1, OFFHAND = 1, FINGER = 2, NECK = 1, LITE = 1, BODY = 1, HEAD = 1, CLOAK = 1, HANDS = 1, BELT = 1, FEET = 1, TOOL = 1, QUIVER = 1, QS_QUIVER = 1 }
 	b:initBody()
 
 	b:resolve()
@@ -1886,12 +2118,6 @@ function _M:createRandomBoss(base, data)
 	-- Leveling stats
 	b.autolevel = "random_boss"
 	b.auto_stats = {}
-
-	-- Always smart
-	if data.ai then b.ai = data.ai
-	else b.ai = (b.rank > 3) and "tactical" or b.ai
-	end
-	b.ai_state = { talent_in=1, ai_move=data.ai_move or "move_astar" }
 
 	-- Remove default equipment, if any
 	local todel = {}
@@ -1944,13 +2170,25 @@ function _M:createRandomBoss(base, data)
 			end
 		end
 
-		-- Cheat a bit with ressources
+		-- Cheat a bit with resources
 		self.max_mana = self.max_mana * (self._rndboss_resources_boost or 3) self.mana_regen = self.mana_regen + 1
 		self.max_vim = self.max_vim * (self._rndboss_resources_boost or 3) self.vim_regen = self.vim_regen + 1
+		self.soul_regen = self.soul_regen + 0.5
 		self.max_stamina = self.max_stamina * (self._rndboss_resources_boost or 3) self.stamina_regen = self.stamina_regen + 1
 		self.max_psi = self.max_psi * (self._rndboss_resources_boost or 3) self.psi_regen = self.psi_regen + 2
 		self.equilibrium_regen = self.equilibrium_regen - 2
 		self:resetToFull()
+	end
+
+	-- Update AI
+	if data.ai then b.ai = data.ai
+	else b.ai = (b.rank > 3) and "tactical" or b.ai
+	end
+	b.ai_state = { talent_in=1, ai_move=data.ai_move or "move_astar" }
+	if data.ai_tactic then
+		b.ai_tactic = data.ai_tactic
+	else
+		b[#b+1] = resolvers.talented_ai_tactic() --calculate ai_tactic table based on talents
 	end
 
 	-- Anything else
@@ -2066,6 +2304,7 @@ function _M:startEvents()
 
 		-- Randomize the order they are checked as
 		table.shuffle(evts)
+		print("[STARTEVENTS] Zone events list:")
 		table.print(evts)
 		table.shuffle(mevts)
 		table.print(mevts)
@@ -2133,7 +2372,7 @@ function _M:startEvents()
 	end
 
 	return function()
-		print("Assigned events list")
+		print("[STARTEVENTS] Assigned events list:")
 		table.print(game.zone.assigned_events)
 
 		for i, e in ipairs(game.zone.assigned_events[game.level.level] or {}) do

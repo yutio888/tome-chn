@@ -44,6 +44,7 @@ for i = 1, 3 do
 	local g = game.level.map(i, j, engine.Map.TERRAIN):cloneFull()
 	g.name = "weird pedestal"
 	g.display='&' g.color_r=255 g.color_g=255 g.color_b=255 g.notice = true
+	g.always_remember = true g.special_minimap = colors.OLIVE_DRAB
 	g:removeAllMOs()
 	if engine.Map.tiles.nicer_tiles then
 		g.add_displays = g.add_displays or {}
@@ -92,6 +93,7 @@ for i = 1, 3 do
 								local ov = g.add_displays[#g.add_displays]
 								ov.image = "terrain/pedestal_orb_0"..rng.range(1, 5)..".png"
 							end
+							g.name = "weird pedestal (glowing)"
 							game.level.map:updateMap(self.pedestal_x, self.pedestal_y)
 							game.level.pedestal_events = (game.level.pedestal_events or 0) + 1
 							game.logSeen(self, "%s's soul is absorbed by the pedestal. A glowing orb appears.", self.name:capitalize())
@@ -134,6 +136,7 @@ for i = 1, 3 do
 		return false
 	end
 	game.zone:addEntity(game.level, g, "terrain", i, j)
+	print("[EVENT] weird-pedestal placed at ", i, j)
 end
 
 return true

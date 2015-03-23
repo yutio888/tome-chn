@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2014 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -32,7 +32,8 @@ module(..., package.seeall, class.inherit(Dialog))
 function _M:init()
 	Dialog.init(self, "游戏设置", game.w * 0.8, game.h * 0.8)
 
-	self.c_desc = Textzone.new{width=math.floor(self.iw / 2 - 10), height=self.ih, text=""}
+	self.vsep = Separator.new{dir="horizontal", size=self.ih - 10}
+	self.c_desc = Textzone.new{width=math.floor((self.iw - self.vsep.w)/2), height=self.ih, text=""}
 
 	local tabs = {
 		{title="UI", kind="ui"},
@@ -52,7 +53,7 @@ function _M:init()
 		{left=0, top=0, ui=self.c_tabs},
 		{left=0, top=self.c_tabs.h, ui=self.c_list},
 		{right=0, top=self.c_tabs.h, ui=self.c_desc},
-		{hcenter=0, top=5+self.c_tabs.h, ui=Separator.new{dir="horizontal", size=self.ih - 10}},
+		{hcenter=0, top=5+self.c_tabs.h, ui=self.vsep},
 	}
 	self:setFocus(self.c_list)
 	self:setupUI()
@@ -68,11 +69,15 @@ function _M:select(item)
 	end
 end
 
+function _M:isTome()
+	return game.__mod_info.short_name == "tome"
+end
+
 function _M:switchTo(kind)
 	self['generateList'..kind:capitalize()](self)
 	self:triggerHook{"GameOptions:generateList", list=self.list, kind=kind}
 
-	self.c_list = TreeList.new{width=math.floor(self.iw / 2 - 10), height=self.ih - 10, scrollbar=true, columns={
+	self.c_list = TreeList.new{width=math.floor((self.iw - self.vsep.w)/2), height=self.ih - 10, scrollbar=true, columns={
 		{width=60, display_prop="name"},
 		{width=40, display_prop="status"},
 	}, tree=self.list, fct=function(item) end, select=function(item, sel) self:select(item) end}
@@ -103,7 +108,7 @@ function _M:generateListUi()
 		game:registerDialog(GetQuantity.new("设置动画速度(越低越快)", "从 0 到 60", config.settings.tome.smooth_move, 60, function(qty)
 			game:saveSettings("tome.smooth_move", ("tome.smooth_move = %d\n"):format(qty))
 			config.settings.tome.smooth_move = qty
-			engine.Map.smooth_scroll = qty
+			if self:isTome() then engine.Map.smooth_scroll = qty end
 			self.c_list:drawItem(item)
 		end))
 	end,}
@@ -154,8 +159,18 @@ function _M:generateListUi()
 		end)
 	end,}
 
-	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"选择字体样式。默认为Fantasy。Basic 为简化的小字体。\n重启游戏后生效。\n汉化者注：Basic仅适用于英文版。"}
-	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#字体样式#WHITE##{normal}#", status=function(item)
+	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"为每一个格子画线，令位置显示更清晰可见。#WHITE#"}
+	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#显示地图表格线#WHITE##{normal}#", status=function(item)
+		return tostring(config.settings.tome.show_grid_lines and "开启" or "关闭")
+	end, fct=function(item)
+		config.settings.tome.show_grid_lines = not config.settings.tome.show_grid_lines
+		game:saveSettings("tome.show_grid_lines", ("tome.show_grid_lines = %s\n"):format(tostring(config.settings.tome.show_grid_lines)))
+		self.c_list:drawItem(item)
+		if self:isTome() then game:createMapGridLines() end
+	end,}
+
+	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"Select the fonts look. Fantasy is the default one. Basic is simplified and smaller.\nYou must restart the game for the change to take effect."}
+	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#Font Style#WHITE##{normal}#", status=function(item)
 		return tostring(config.settings.tome.fonts.type):capitalize()
 	end, fct=function(item)
 		Dialog:listPopup("字体样式", "选择字体", {{name="Fantasy", type="fantasy"}, {name="Basic", type="basic"}}, 300, 200, function(sel)
@@ -186,8 +201,10 @@ function _M:generateListUi()
 			qty = util.bound(qty, 0, 20)
 			game:saveSettings("tome.log_fade", ("tome.log_fade = %d\n"):format(qty))
 			config.settings.tome.log_fade = qty
-			game.uiset.logdisplay:enableFading(config.settings.tome.log_fade)
-			profile.chat:enableFading(config.settings.tome.log_fade)
+			if self:isTome() then
+				game.uiset.logdisplay:enableFading(config.settings.tome.log_fade)
+				profile.chat:enableFading(config.settings.tome.log_fade)
+			end
 			self.c_list:drawItem(item)
 		end, 0))
 	end,}
@@ -204,44 +221,45 @@ function _M:generateListUi()
 		end, 1))
 	end,}
 
-	if game.uiset:checkGameOption("icons_temp_effects") then
-		local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"采用图标而非文字来表示状态效果。#WHITE#"}
-		list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#图标状态效果#WHITE##{normal}#", status=function(item)
-			return tostring(config.settings.tome.effects_icons and "开启" or "关闭")
-		end, fct=function(item)
-			config.settings.tome.effects_icons = not config.settings.tome.effects_icons
-			game:saveSettings("tome.effects_icons", ("tome.effects_icons = %s\n"):format(tostring(config.settings.tome.effects_icons)))
-			game.player.changed = true
-			self.c_list:drawItem(item)
-		end,}
-	end
-
-	if game.uiset:checkGameOption("icons_hotkeys") then
-		local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"采用图标快捷栏代替文字快捷栏。#WHITE#"}
-		list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#图标快捷栏#WHITE##{normal}#", status=function(item)
-			return tostring(config.settings.tome.hotkey_icons and "开启" or "关闭")
-		end, fct=function(item)
-			config.settings.tome.hotkey_icons = not config.settings.tome.hotkey_icons
-			game:saveSettings("tome.hotkey_icons", ("tome.hotkey_icons = %s\n"):format(tostring(config.settings.tome.hotkey_icons)))
-			game.player.changed = true
-			game:resizeIconsHotkeysToolbar()
-			self.c_list:drawItem(item)
-		end,}
-	end
-
-	if game.uiset:checkGameOption("hotkeys_rows") then
-		local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"调整快捷栏行数。#WHITE#"}
-		list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#图标快捷栏行数#WHITE##{normal}#", status=function(item)
-			return tostring(config.settings.tome.hotkey_icons_rows)
-		end, fct=function(item)
-			game:registerDialog(GetQuantity.new("快捷栏行数", "从1到4", config.settings.tome.hotkey_icons_rows, 4, function(qty)
-				qty = util.bound(qty, 1, 4)
-				game:saveSettings("tome.hotkey_icons_rows", ("tome.hotkey_icons_rows = %d\n"):format(qty))
-				config.settings.tome.hotkey_icons_rows = qty
-				game:resizeIconsHotkeysToolbar()
+	if self:isTome() then
+		if game.uiset:checkGameOption("icons_temp_effects") then
+			local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"采用图标而非文字来表示状态效果。#WHITE#"}
+			list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#图标状态效果#WHITE##{normal}#", status=function(item)
+				return tostring(config.settings.tome.effects_icons and "开启" or "关闭")
+			end, fct=function(item)
+				config.settings.tome.effects_icons = not config.settings.tome.effects_icons
+				game:saveSettings("tome.effects_icons", ("tome.effects_icons = %s\n"):format(tostring(config.settings.tome.effects_icons)))
+				if self:isTome() then game.player.changed = true end
 				self.c_list:drawItem(item)
-			end, 1))
-		end,}
+			end,}
+		end
+
+		if game.uiset:checkGameOption("icons_hotkeys") then
+			local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"采用图标快捷栏代替文字快捷栏。#WHITE#"}
+			list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#图标快捷栏#WHITE##{normal}#", status=function(item)
+				return tostring(config.settings.tome.hotkey_icons and "开启" or "关闭")
+			end, fct=function(item)
+				config.settings.tome.hotkey_icons = not config.settings.tome.hotkey_icons
+				game:saveSettings("tome.hotkey_icons", ("tome.hotkey_icons = %s\n"):format(tostring(config.settings.tome.hotkey_icons)))
+				if self:isTome() then game.player.changed = true game:resizeIconsHotkeysToolbar() end
+				self.c_list:drawItem(item)
+			end,}
+		end
+
+		if game.uiset:checkGameOption("hotkeys_rows") then
+			local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"调整快捷栏行数。#WHITE#"}
+			list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#图标快捷栏行数#WHITE##{normal}#", status=function(item)
+				return tostring(config.settings.tome.hotkey_icons_rows)
+			end, fct=function(item)
+				game:registerDialog(GetQuantity.new("快捷栏行数", "从1到4", config.settings.tome.hotkey_icons_rows, 4, function(qty)
+					qty = util.bound(qty, 1, 4)
+					game:saveSettings("tome.hotkey_icons_rows", ("tome.hotkey_icons_rows = %d\n"):format(qty))
+					config.settings.tome.hotkey_icons_rows = qty
+					if self:isTome() then game:resizeIconsHotkeysToolbar() end
+					self.c_list:drawItem(item)
+				end, 1))
+			end,}
+		end
 	end
 
 	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"调整快捷栏图标大小。#WHITE#"}
@@ -252,7 +270,7 @@ function _M:generateListUi()
 			qty = util.bound(qty, 32, 64)
 			game:saveSettings("tome.hotkey_icons_size", ("tome.hotkey_icons_size = %d\n"):format(qty))
 			config.settings.tome.hotkey_icons_size = qty
-			game:resizeIconsHotkeysToolbar()
+			if self:isTome() then game:resizeIconsHotkeysToolbar() end
 			self.c_list:drawItem(item)
 		end, 32))
 	end,}
@@ -275,6 +293,7 @@ function _M:generateListUi()
 		self.c_list:drawItem(item)
 	end,}
 
+	if self:isTome() then
 	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString[[切换血条显示模式:
 - 血条+小框架 
 - 血条+大框架
@@ -282,29 +301,31 @@ function _M:generateListUi()
 - 不显示
 译者注：切换后该选项显示的模式没有改变，但游戏中可以发现模式已经改变。再次打开这个选项也能发现已经改变。
 #{italic}#在游戏中按Shift+T可以直接切换#{normal}##WHITE#]]}
-	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#血条显示#WHITE##{normal}#", status=function(item)
-		local vs = "血条+小框架"
-		if game.always_target == "old" then
-			 vs = "血条+大框架"
-		elseif game.always_target == "health" then
-			 vs = "只显示血条"
-		elseif game.always_target == nil then
-			 vs = "不显示"
-		elseif game.always_target == true then
-			 vs = "血条+小框架"
-		end
-		return vs
-	end, fct=function(item)
-		Dialog:listPopup("血条显示", "选择模式", {
-			{name="血条+小框架", mode=true},
-			{name="血条+大框架", mode="old"},
-			{name="只显示血条", mode="health"},
-			{name="不显示", mode=nil},
-		}, 300, 200, function(sel)
-			if not sel then return end
-			game:setTacticalMode(sel.mode)
-		end)
-	end,}
+		list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#血条显示#WHITE##{normal}#", status=function(item)
+			local vs = "血条+小框架"
+			if game.always_target == "old" then
+				 vs = "血条+大框架"
+			elseif game.always_target == "health" then
+				 vs = "只显示血条"
+			elseif game.always_target == nil then
+				 vs = "不显示"
+			elseif game.always_target == true then
+				 vs = "血条+小框架"
+			end
+			return vs
+		end, fct=function(item)
+			Dialog:listPopup("血条显示", "选择模式", {
+				{name="血条+小框架", mode=true},
+				{name="血条+大框架", mode="old"},
+				{name="只显示血条", mode="health"},
+				{name="不显示", mode=nil},
+			}, 300, 200, function(sel)
+				if not sel then return end
+				game:setTacticalMode(sel.mode)
+				self.c_list:drawItem(item)
+			end)
+		end,}
+	end
 
 	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"血条切换：正常或者旗杆#WHITE#"}
 	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#旗杆样式#WHITE##{normal}#", status=function(item)
@@ -331,7 +352,7 @@ function _M:generateListUi()
 		config.settings.tome.fullscreen_stun = not config.settings.tome.fullscreen_stun
 		game:saveSettings("tome.fullscreen_stun", ("tome.fullscreen_stun = %s\n"):format(tostring(config.settings.tome.fullscreen_stun)))
 		self.c_list:drawItem(item)
-		if game.player.updateMainShader then game.player:updateMainShader() end
+		if self:isTome() then if game.player.updateMainShader then game.player:updateMainShader() end end
 	end,}
 
 	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"如果关闭，当混乱时你不会得到全屏效果提示。#WHITE#"}
@@ -341,7 +362,25 @@ function _M:generateListUi()
 		config.settings.tome.fullscreen_confusion = not config.settings.tome.fullscreen_confusion
 		game:saveSettings("tome.fullscreen_confusion", ("tome.fullscreen_confusion = %s\n"):format(tostring(config.settings.tome.fullscreen_confusion)))
 		self.c_list:drawItem(item)
-		if game.player.updateMainShader then game.player:updateMainShader() end
+		if self:isTome() then if game.player.updateMainShader then game.player:updateMainShader() end end
+	end,}
+
+	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"高级武器数据显示#WHITE#"}
+	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#高级武器数据#WHITE##{normal}#", status=function(item)
+		return tostring(config.settings.tome.advanced_weapon_stats and "开启" or "关闭")
+	end, fct=function(item)
+		config.settings.tome.advanced_weapon_stats = not config.settings.tome.advanced_weapon_stats
+		game:saveSettings("tome.advanced_weapon_stats", ("tome.advanced_weapon_stats = %s\n"):format(tostring(config.settings.tome.advanced_weapon_stats)))
+		self.c_list:drawItem(item)
+	end,}
+
+	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"当你用右键画出鼠标手势时，会显示彩色的轨迹提示。#WHITE#"}
+	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#显示鼠标手势轨迹#WHITE##{normal}#", status=function(item)
+		return tostring(config.settings.hide_gestures and "关闭" or "开启")
+	end, fct=function(item)
+		config.settings.hide_gestures = not config.settings.hide_gestures
+		game:saveSettings("hide_gestures", ("hide_gestures = %s\n"):format(tostring(config.settings.hide_gestures)))
+		self.c_list:drawItem(item)
 	end,}
 
 	self.list = list
@@ -418,6 +457,15 @@ function _M:generateListGameplay()
 		self.c_list:drawItem(item)
 	end,}
 
+	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"自动选择目标。使用技能、装备等时不再要求指定目标。\n#LIGHT_RED#注意：这非常危险。#WHITE#\n\n默认目标会遵循以下规则选择：\n - 最后一个鼠标划过的目标。\n - 最后一个攻击的目标\n - 最近的目标"}
+	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#自动选择目标#WHITE##{normal}#", status=function(item)
+		return tostring(config.settings.auto_accept_target and "开启" or "关闭")
+	end, fct=function(item)
+		config.settings.auto_accept_target = not config.settings.auto_accept_target
+		game:saveSettings("auto_accept_target", ("auto_accept_target = %s\n"):format(tostring(config.settings.auto_accept_target)))
+		self.c_list:drawItem(item)
+	end,}
+
 	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"新游戏开始时部分技能点自动分配。#WHITE#"}
 	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#出生自动分配技能点#WHITE##{normal}#", status=function(item)
 		return tostring(config.settings.tome.autoassign_talents_on_birth and "开启" or "关闭")
@@ -473,6 +521,15 @@ function _M:generateListOnline()
 		self.c_list:drawItem(item)
 	end,}
 
+	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"在外部浏览器中开启链接。\n这不影响插件浏览和安装等固定在游戏内的功能。"}
+	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#外部浏览器打开超链接#WHITE##{normal}#", status=function(item)
+		return tostring(config.settings.open_links_external and "开启" or "关闭")
+	end, fct=function(item)
+		config.settings.open_links_external = not config.settings.open_links_external
+		game:saveSettings("open_links_external", ("open_links_external = %s\n"):format(tostring(config.settings.open_links_external)))
+		self.c_list:drawItem(item)
+	end,}
+
 	self.list = list
 end
 
@@ -496,6 +553,15 @@ function _M:generateListMisc()
 	end, fct=function(item)
 		config.settings.tome.save_zone_levels = not config.settings.tome.save_zone_levels
 		game:saveSettings("tome.save_zone_levels", ("tome.save_zone_levels = %s\n"):format(tostring(config.settings.tome.save_zone_levels)))
+		self.c_list:drawItem(item)
+	end,}
+
+	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"不允许可能令人不快的开始图片.#WHITE#"}
+	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#开始图片审查#WHITE##{normal}#", status=function(item)
+		return tostring(config.settings.censor_boot and "开启" or "关闭")
+	end, fct=function(item)
+		config.settings.censor_boot = not config.settings.censor_boot
+		game:saveSettings("censor_boot", ("censor_boot = %s\n"):format(tostring(config.settings.censor_boot)))
 		self.c_list:drawItem(item)
 	end,}
 

@@ -1,5 +1,5 @@
-﻿-- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2014 Nicolas Casalini
+-- ToME - Tales of Maj'Eyal
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -103,7 +103,7 @@ newEntity{ base = "BASE_NPC_SUNWALL_DEFENDER", define_as = "SUN_PALADIN_DEFENDER
 	on_added = function(self)
 		self.energy.value = game.energy_to_act self:useTalent(self.T_WEAPON_OF_LIGHT)
 		self.energy.value = game.energy_to_act self:useTalent(self.T_CHANT_OF_FORTRESS)
-		self:doEmote("上吧"..game.player.name.."! 我们会守住这道防线!", 150)
+		self:doEmote("Go "..game.player.name.."! We will hold the line!", 150)
 	end,
 }
 

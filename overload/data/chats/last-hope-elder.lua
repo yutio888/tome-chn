@@ -1,4 +1,4 @@
--- ToME - Tales of Maj'Eyal
+﻿-- ToME - Tales of Maj'Eyal
 -- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
@@ -33,7 +33,7 @@ newChat{ id="found_staff",
 		{"就是这个。 #LIGHT_GREEN#*告诉他有关被兽人部队伏击的事。*#LAST# 你应该拿着它。我能感受到它的力量，法杖在帝国军队的保护下才是安全的。",
 		 jump="given_staff", cond=function(npc, player) return game.party:findInAllPartyInventoriesBy("define_as", "STAFF_ABSORPTION") and player:isQuestStatus("staff-absorption", engine.Quest.COMPLETED, "survived-ukruk") or false end},
 		{"抱歉我没能把它带来。 #LIGHT_GREEN#*告诉他有关被兽人部队伏击的事。*",
-		 jump="lost_staff", cond=function(npc, player) return player:isQuestStatus("staff-absorption", engine.Quest.COMPLETED, "ambush-finish") end},
+		 jump="lost_staff", cond=function(npc, player) return player:isQuestStatus("staff-absorption", engine.Quest.COMPLETED, "ambush-died") end},
 		{"I had it briefly but have lost it somehow.  It could have been some orcs I encountered ...",
 		 jump="lost_staff", fallback=true, cond=function(npc, player) return player:hasQuest("staff-absorption") end},
 	}

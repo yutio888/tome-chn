@@ -1,0 +1,1 @@
+dofile("data-chn123/objects/artifact.lua")

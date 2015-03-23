@@ -1,5 +1,6 @@
-﻿t_talent_name["T_DEEPROCK_FORM"] = "深岩形态"
-talentInfoCHN["T_DEEPROCK_FORM"] = function(self, t)
+﻿local Talents = require "engine.interface.ActorTalents"
+Talents.talents_def.T_DEEPROCK_FORM.name = "深岩形态"
+Talents.talents_def.T_DEEPROCK_FORM.info = function(self, t)
 		local xs = ""
 		local xsi = ""
 		if self:knowTalent(self.T_VOLCANIC_ROCK) then
@@ -20,24 +21,24 @@ talentInfoCHN["T_DEEPROCK_FORM"] = function(self, t)
 		效 果 受 法 术 强 度 加 成。]])
 		:format(t.getTime(self, t), xsi, t.getDam(self, t),t.getPen(self, t), xs, t.getArmor(self, t), self:getTalentLevel(self.T_MOUNTAINHEWN) >=5 and "\n另 外，你 将 用 物 理 抗 性 取 代 其 他 伤 害 抗 性。" or "")
 	end
-t_talent_name["T_VOLCANIC_ROCK"] = "火山熔岩"
-talentInfoCHN["T_VOLCANIC_ROCK"] = function(self, t)
+Talents.talents_def.T_VOLCANIC_ROCK.name = "火山熔岩"
+Talents.talents_def.T_VOLCANIC_ROCK.info = function(self, t)
 		local tv = self:getTalentFromId(self.T_VOLCANO)
 		return ([[当 你 进 入 深 岩 元 素 形 态 时，增 加 %0.1f%% 奥 术 伤 害 和 %0.1f%% 奥 术 抗 性 穿 透，同 时 获 得 激 发 火 山 的 能 力:
 		%s]]):
 		format(t.getDam(self, t),t.getPen(self, t), self:getTalentFullDescription(tv, self:getTalentLevelRaw(t) * 2):toString())
 	end
 
-t_talent_name["T_BOULDER_ROCK"] = "岩石投掷"
-talentInfoCHN["T_BOULDER_ROCK"] = function(self, t)
+Talents.talents_def.T_BOULDER_ROCK.name = "岩石投掷"
+Talents.talents_def.T_BOULDER_ROCK.info = function(self, t)
 		local tv = self:getTalentFromId(self.T_THROW_BOULDER)
 		return ([[当 你 进 入 深 岩 元 素 形 态 时，增 加 %0.1f%% 自 然 伤 害 和 %0.1f%% 自 然 抗 性 穿 透，同 时 获 得 投 掷 巨 石 的 能 力:
 		%s]]):
 		format(t.getDam(self, t),t.getPen(self, t), self:getTalentFullDescription(tv, self:getTalentLevelRaw(t) * 2):toString())
 	end
 
-t_talent_name["T_MOUNTAINHEWN"] = "山崩地裂"
-talentInfoCHN["T_MOUNTAINHEWN"] = function(self, t)
+Talents.talents_def.T_MOUNTAINHEWN.name = "山崩地裂"
+Talents.talents_def.T_MOUNTAINHEWN.info = function(self, t)
 		return ([[当 你 进 入 深 岩 元 素 形 态 时，你 获 得 %d%% 流 血 、 毒 素 、 疾 病 和 震 慑 免 疫。
 		技 能 等 级 5 或 以 上 时 ， 在 深 岩 元 素 形 态 下 ， 你 将 用 物 理 抗 性 取 代 其 他 伤 害 抗 性。]]):
 		format(t.getImmune(self, t)*100)

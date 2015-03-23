@@ -47,7 +47,10 @@ newAchievement{
 		if not game.party:knownLore("garkul-history-4") then return false end
 		if not game.party:knownLore("garkul-history-5") then return false end
 		return true
-	end
+	end,
+	on_gain = function()
+		game:unlockBackground("garkul", "Garkul")
+	end,
 }
 
 newAchievement{

@@ -1,5 +1,5 @@
 ﻿-- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2014 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -22,6 +22,7 @@ newInscription = function(t)
 	for i = 1, 6 do
 		local tt = table.clone(t)
 		tt.short_name = tt.name:upper():gsub("[ ]", "_").."_"..i
+		tt.name = tt.display_name or tt.name
 		tt.display_name = function(self, t)
 			local data = self:getInscriptionData(t.short_name)
 			if data.item_name then
@@ -70,6 +71,7 @@ end
 -----------------------------------------------------------------------
 newInscription{
 	name = "Infusion: Regeneration",
+	display_name = "纹身：回复",
 	type = {"inscriptions/infusions", 1},
 	points = 1,
 	tactical = { HEAL = 2 },
@@ -91,6 +93,7 @@ newInscription{
 
 newInscription{
 	name = "Infusion: Healing",
+	display_name = "纹身：治疗",
 	type = {"inscriptions/infusions", 1},
 	points = 1,
 	tactical = { HEAL = 2 },
@@ -125,21 +128,15 @@ newInscription{
 
 newInscription{
 	name = "Infusion: Wild",
+	display_name = "纹身：狂暴",
 	type = {"inscriptions/infusions", 1},
 	points = 1,
 	no_energy = true,
 	tactical = {
 		DEFEND = 3,
 		CURE = function(self, t, target)
-			local nb = 0
 			local data = self:getInscriptionData(t.short_name)
-			for eff_id, p in pairs(self.tmp) do
-				local e = self.tempeffect_def[eff_id]
-				if data.what[e.type] and e.status == "detrimental" then
-					nb = nb + 1
-				end
-			end
-			return nb
+			return #self:effectsFilter({types=data.what, status="detrimental"})
 		end
 	},
 	action = function(self, t)
@@ -148,37 +145,12 @@ newInscription{
 		local target = self
 		local effs = {}
 		local force = {}
-		local known = false
+		local removed = 0
 
-		-- Go through all temporary effects
-		for eff_id, p in pairs(target.tmp) do
-			local e = target.tempeffect_def[eff_id]
-			if data.what[e.type] and e.status == "detrimental" and e.subtype["cross tier"] then
-				force[#force+1] = {"effect", eff_id}
-			elseif data.what[e.type] and e.status == "detrimental" then
-				effs[#effs+1] = {"effect", eff_id}
-			end
-		end
+		removed = target:removeEffectsFilter({types=data.what, subtype={["cross tier"] = true}, status="detrimental"})
+		removed = removed + target:removeEffectsFilter({types=data.what, status="detrimental"}, 1)
 
-		-- Cross tier effects are always removed and not part of the random game, otherwise it is a huge nerf to wild infusion
-		for i = 1, #force do
-			local eff = force[i]
-			if eff[1] == "effect" then
-				target:removeEffect(eff[2])
-				known = true
-			end
-		end
-
-		for i = 1, 1 do
-			if #effs == 0 then break end
-			local eff = rng.tableRemove(effs)
-
-			if eff[1] == "effect" then
-				target:removeEffect(eff[2])
-				known = true
-			end
-		end
-		if known then
+		if removed > 0 then
 			game.logSeen(self, "%s is cured!", self.name:capitalize())
 		end
 		self:setEffect(self.EFF_PAIN_SUPPRESSION, data.dur, {power=data.power + data.inc_stat})
@@ -186,8 +158,9 @@ newInscription{
 	end,
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		local what = table.concat(table.keys(data.what), ", ")
-		return ([[激 活 纹 身 解 除 你 %s 效 果 并 减 少 所 有 伤 害 %d%% 持 续 %d 回 合。 ]]):format(change_infusion_eff(what), data.power+data.inc_stat, data.dur)
+		local what = table.concatNice(table.keys(data.what), ", ", " or ")
+		return ([[激 活 纹 身 解 除 你 %s 效 果 并 减 少 所 有 伤 害 %d%% 持 续 %d 回 合。 
+同 时 除 去 对 应 类 型 的 CT 效 果 。		]]):format(change_infusion_eff(what), data.power+data.inc_stat, data.dur)
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
@@ -199,21 +172,15 @@ newInscription{
 -- fixedart wild variant
 newInscription{
 	name = "Infusion: Primal", image = "talents/infusion__wild.png",
+	display_name = "纹身：原初",
 	type = {"inscriptions/infusions", 1},
 	points = 1,
 	no_energy = true,
 	tactical = {
 		DEFEND = 3,
 		CURE = function(self, t, target)
-			local nb = 0
 			local data = self:getInscriptionData(t.short_name)
-			for eff_id, p in pairs(self.tmp) do
-				local e = self.tempeffect_def[eff_id]
-				if data.what[e.type] and e.status == "detrimental" then
-					nb = nb + 1
-				end
-			end
-			return nb
+			return #self:effectsFilter({types=data.what, status="detrimental"})
 		end
 	},
 	action = function(self, t)
@@ -222,37 +189,11 @@ newInscription{
 		local target = self
 		local effs = {}
 		local force = {}
-		local known = false
+		local removed = 0
 
-		-- Go through all temporary effects
-		for eff_id, p in pairs(target.tmp) do
-			local e = target.tempeffect_def[eff_id]
-			if data.what[e.type] and e.status == "detrimental" and e.subtype["cross tier"] then
-				force[#force+1] = {"effect", eff_id}
-			elseif data.what[e.type] and e.status == "detrimental" then
-				effs[#effs+1] = {"effect", eff_id}
-			end
-		end
-
-		-- Cross tier effects are always removed and not part of the random game, otherwise it is a huge nerf to wild infusion
-		for i = 1, #force do
-			local eff = force[i]
-			if eff[1] == "effect" then
-				target:removeEffect(eff[2])
-				known = true
-			end
-		end
-
-		for i = 1, 1 do
-			if #effs == 0 then break end
-			local eff = rng.tableRemove(effs)
-
-			if eff[1] == "effect" then
-				target:removeEffect(eff[2])
-				known = true
-			end
-		end
-		if known then
+		removed = target:removeEffectsFilter({types=data.what, subtype={["cross tier"] = true}, status="detrimental"})
+		removed = removed + target:removeEffectsFilter({types=data.what, status="detrimental"}, 1)
+		if removed > 0 then
 			game.logSeen(self, "%s is cured!", self.name:capitalize())
 		end
 		self:setEffect(self.EFF_PRIMAL_ATTUNEMENT, data.dur, {power=data.power + data.inc_stat})
@@ -260,8 +201,9 @@ newInscription{
 	end,
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		local what = table.concat(table.keys(data.what), ", ")
-		return ([[ 激 活 这 个 纹 身 ， 解 除 %s 效 果 并 将 你 受 到 的 %d%% 全 体 伤 害 转 化 为 治 疗 ， 持 续 %d 回 合 。]]):format(change_infusion_eff(what), data.power+data.inc_stat, data.dur)
+		local what = table.concatNice(table.keys(data.what), ", ", " or ")
+		return ([[ 激 活 这 个 纹 身 ， 解 除 %s 效 果 并 将 你 受 到 的 %d%% 全 体 伤 害 转 化 为 治 疗 ， 持 续 %d 回 合 。
+同 时 除 去 对 应 类 型 的 CT 效 果 。]]):format(change_infusion_eff(what), data.power+data.inc_stat, data.dur)
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
@@ -270,9 +212,9 @@ newInscription{
 	end,
 }
 
-
 newInscription{
 	name = "Infusion: Movement",
+	display_name = "纹身：移动",
 	type = {"inscriptions/infusions", 1},
 	points = 1,
 	no_energy = true,
@@ -300,6 +242,7 @@ newInscription{
 
 newInscription{
 	name = "Infusion: Sun",
+	display_name = "纹身：阳光",
 	type = {"inscriptions/infusions", 1},
 	points = 1,
 	tactical = { ATTACKAREA = 1, DISABLE = { blind = 2 } },
@@ -311,29 +254,35 @@ newInscription{
 	target = function(self, t)
 		return {type="ball", range=self:getTalentRange(t), selffire=false, radius=self:getTalentRadius(t), talent=t}
 	end,
+	requires_target = true,
 	action = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
 		local tg = self:getTalentTarget(t)
-		self:project(tg, self.x, self.y, engine.DamageType.BLINDCUSTOMMIND, {power=data.power + data.inc_stat, turns=data.turns})
-		self:project(tg, self.x, self.y, engine.DamageType.BREAK_STEALTH, {power=(data.power + data.inc_stat)/2, turns=data.turns})
+		local apply = self:rescaleCombatStats((data.power + data.inc_stat))
+		
+		self:project(tg, self.x, self.y, engine.DamageType.BLINDCUSTOMMIND, {power=apply, turns=data.turns})
+		self:project(tg, self.x, self.y, engine.DamageType.BREAK_STEALTH, {power=apply/2, turns=data.turns})
 		tg.selffire = true
-		self:project(tg, self.x, self.y, engine.DamageType.LITE, data.power >= 19 and 100 or 1)
+		self:project(tg, self.x, self.y, engine.DamageType.LITE, apply >= 19 and 100 or 1)
 		return true
 	end,
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
+		local apply = self:rescaleCombatStats((data.power + data.inc_stat))
 		return ([[激 活 这 个 纹 身 照 亮 %d 区 域 和 潜 行 单 位， 可 能 使 潜 行 目 标 显 形（ 降 低 %d 潜 行 强 度）。 %s
 		 同 时 区 域 内 目 标 也 有 几 率 被 致 盲（ %d 等 级）， 持 续 %d 回 合。 ]]):
-		format(data.range, (data.power + data.inc_stat)/2, data.power >= 19 and "\n 这 光 线 是 如 此 强 烈， 以 至 于 能 驱 散 魔 法 造 成 的 黑 暗 " or "", data.power + data.inc_stat, data.turns)
+		format(data.range, apply/2, apply >= 19 and "\n 这 光 线 是 如 此 强 烈， 以 至 于 能 驱 散 魔 法 造 成 的 黑 暗 " or "", apply, data.turns)
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[范 围 %d; 强 度 %d; 持 续 %d%s]]):format(data.range, data.power + data.inc_stat, data.turns, data.power >= 19 and "; 驱 散 黑 暗 " or "")
+		local apply = self:rescaleCombatStats((data.power + data.inc_stat))
+		return ([[范 围 %d; 强 度 %d; 持 续 %d%s]]):format(data.range, apply, data.turns, data.power >= 19 and "; 驱 散 黑 暗 " or "")
 	end,
 }
 
 newInscription{
 	name = "Infusion: Heroism",
+	display_name = "纹身：英勇",
 	type = {"inscriptions/infusions", 1},
 	points = 1,
 	no_energy = true,
@@ -358,6 +307,7 @@ newInscription{
 
 newInscription{
 	name = "Infusion: Insidious Poison",
+	display_name = "纹身：下毒",
 	type = {"inscriptions/infusions", 1},
 	points = 1,
 	tactical = { ATTACK = { NATURE = 1 }, DISABLE=1, CURE = function(self, t, target)
@@ -398,6 +348,7 @@ newInscription{
 -- Opportunity cost for this is HUGE, it should not hit friendly, also buffed duration
 newInscription{
 	name = "Infusion: Wild Growth",
+	display_name = "纹身：野性生长",
 	type = {"inscriptions/infusions", 1},
 	points = 1,
 	tactical = { ATTACKAREA = { PHYSICAL = 1, NATURE = 1 }, DISABLE = 3 },
@@ -437,6 +388,7 @@ newInscription{
 -----------------------------------------------------------------------
 newInscription{
 	name = "Rune: Phase Door",
+	display_name = "符文：相位门",
 	type = {"inscriptions/runes", 1},
 	points = 1,
 	is_spell = true,
@@ -448,9 +400,9 @@ newInscription{
 		self:teleportRandom(self.x, self.y, data.range + data.inc_stat)
 		game.level.map:particleEmitter(self.x, self.y, 1, "teleport")
 		self:setEffect(self.EFF_OUT_OF_PHASE, data.dur or 3, {
-			defense=(data.power or data.range) + data.inc_stat * 3,
-			resists=(data.power or data.range) + data.inc_stat * 3,
-			effect_reduction=(data.power or data.range) + data.inc_stat * 3,
+			defense=(data.power or data.range) + data.inc_stat * 3 + (self:attr("defense_on_teleport") or 0),
+			resists=(data.power or data.range) + data.inc_stat * 3 + (self:attr("resist_all_on_teleport") or 0),
+			effect_reduction=(data.power or data.range) + data.inc_stat * 3 + (self:attr("effect_reduction_on_teleport") or 0),
 		})
 		return true
 	end,
@@ -470,6 +422,7 @@ newInscription{
 
 newInscription{
 	name = "Rune: Controlled Phase Door",
+	display_name = "符文：可控相位门",
 	type = {"inscriptions/runes", 1},
 	points = 1,
 	is_spell = true,
@@ -509,6 +462,7 @@ newInscription{
 
 newInscription{
 	name = "Rune: Teleportation",
+	display_name = "符文：传送",
 	type = {"inscriptions/runes", 1},
 	points = 1,
 	is_spell = true,
@@ -533,6 +487,7 @@ newInscription{
 
 newInscription{
 	name = "Rune: Shielding",
+	display_name = "符文：护盾",
 	type = {"inscriptions/runes", 1},
 	points = 1,
 	is_spell = true,
@@ -559,6 +514,7 @@ newInscription{
 
 newInscription{
 	name = "Rune: Reflection Shield",
+	display_name = "符文：反射盾",
 	type = {"inscriptions/runes", 1},
 	points = 1,
 	is_spell = true,
@@ -570,22 +526,30 @@ newInscription{
 	end,
 	action = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		self:setEffect(self.EFF_DAMAGE_SHIELD, 5, {power=100+5*self:getMag(), reflect=100})
+		local power = 100+5*self:getMag()
+		if data.power and data.inc_stat then power = data.power + data.inc_stat end
+		self:setEffect(self.EFF_DAMAGE_SHIELD, data.dur or 5, {power=power, reflect=100})
 		return true
 	end,
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
+		local power = 100+5*self:getMag()
+		if data.power and data.inc_stat then power = data.power + data.inc_stat end
 		return ([[激 活 这 个 符 文 产 生 一 个 防 御 护 盾， 吸 收 并 反 弹 最 多 %d 伤 害 值， 持 续 %d 回 合。 效 果 与 魔 法 成 比 例 增 长。 ]])
-		:format(100+5*self:getMag(), 5)
+		:format(power, 5)
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[吸 收 并 反 弹 %d 持 续 %d 回 合 ]]):format(100+5*self:getMag(), 5)
+		local power = 100+5*self:getMag()
+		if data.power and data.inc_stat then power = data.power + data.inc_stat end
+
+		return ([[吸 收 并 反 弹 %d 持 续 %d 回 合 ]]):format(power, 5)
 	end,
 }
 
 newInscription{
 	name = "Rune: Invisibility",
+	display_name = "符文：隐身",
 	type = {"inscriptions/runes", 1},
 	points = 1,
 	is_spell = true,
@@ -609,6 +573,7 @@ newInscription{
 
 newInscription{
 	name = "Rune: Speed",
+	display_name = "符文：速度",
 	type = {"inscriptions/runes", 1},
 	points = 1,
 	is_spell = true,
@@ -632,6 +597,7 @@ newInscription{
 
 newInscription{
 	name = "Rune: Vision",
+	display_name = "符文：洞察",
 	type = {"inscriptions/runes", 1},
 	points = 1,
 	is_spell = true,
@@ -678,6 +644,7 @@ end
 
 newInscription{
 	name = "Rune: Heat Beam",
+	display_name = "符文：热能射线",
 	type = {"inscriptions/runes", 1},
 	points = 1,
 	is_attack_rune = true,
@@ -727,6 +694,7 @@ newInscription{
 
 newInscription{
 	name = "Rune: Biting Gale",
+	display_name = "符文：冰风",
 	type = {"inscriptions/runes", 1},
 	points = 1,
 	is_attack_rune = true,
@@ -791,6 +759,7 @@ newInscription{
 
 newInscription{
 	name = "Rune: Acid Wave",
+	display_name = "符文：酸性冲击波",
 	type = {"inscriptions/runes", 1},
 	points = 1,
 	is_attack_rune = true,
@@ -866,6 +835,7 @@ newInscription{
 
 newInscription{
 	name = "Rune: Lightning",
+	display_name = "符文：闪电",
 	type = {"inscriptions/runes", 1},
 	points = 1,
 	is_attack_rune = true,
@@ -910,6 +880,7 @@ newInscription{
 
 newInscription{
 	name = "Rune: Manasurge",
+	display_name = "符文：魔力",
 	type = {"inscriptions/runes", 1},
 	points = 1,
 	is_spell = true,
@@ -950,6 +921,7 @@ newInscription{
 
 newInscription{
 	name = "Rune: Frozen Spear",
+	display_name = "符文：冰矛",
 	type = {"inscriptions/runes", 1},
 	points = 1,
 	is_attack_rune = true,
@@ -998,6 +970,7 @@ newInscription{
 -- This is mostly a copy of Time Skip :P
 newInscription{
 	name = "Rune of the Rift",
+	display_name = "符文：时空裂缝",
 	type = {"inscriptions/runes", 1},
 	points = 1,
 	is_spell = true,
@@ -1005,7 +978,7 @@ newInscription{
 	direct_hit = true,
 	reflectable = true,
 	requires_target = true,
-	range = 4,
+	range = 6,
 	target = function(self, t)
 		return {type="hit", range=self:getTalentRange(t), talent=t}
 	end,
@@ -1021,7 +994,7 @@ newInscription{
 
 		if target:attr("timetravel_immune") then
 			game.logSeen(target, "%s is immune!", target.name:capitalize())
-			return
+			return true
 		end
 
 		local hit = self:checkHit(self:combatSpellpower(), target:combatSpellResist() + (target:attr("continuum_destabilization") or 0))
@@ -1030,16 +1003,16 @@ newInscription{
 		self:project(tg, x, y, DamageType.TEMPORAL, self:spellCrit(t.getDamage(self, t)))
 		game.level.map:particleEmitter(x, y, 1, "temporal_thrust")
 		game:playSoundNear(self, "talents/arcane")
-		self:incParadox(-60)
+		self:incParadox(-25)
 		if target.dead or target.player then return true end
 		target:setEffect(target.EFF_CONTINUUM_DESTABILIZATION, 100, {power=self:combatSpellpower(0.3)})
 		
-		-- Replace the target with a temporal instability for a few turns
-		local oe = game.level.map(target.x, target.y, engine.Map.TERRAIN)
-		if not oe or oe:attr("temporary") then return true end
+	-- Placeholder for the actor
+		local oe = game.level.map(x, y, Map.TERRAIN+1)
+		if (oe and oe:attr("temporary")) or game.level.map:checkEntity(x, y, Map.TERRAIN, "block_move") then game.logPlayer(self, "Something has prevented the timetravel.") return true end
 		local e = mod.class.Object.new{
-			old_feat = oe, type = oe.type, subtype = oe.subtype,
-			name = "temporal instability", image = oe.image, add_mos = {{image="object/temporal_instability.png"}},
+			old_feat = oe, type = "temporal", subtype = "instability",
+			name = "temporal instability",
 			display = '&', color=colors.LIGHT_BLUE,
 			temporary = t.getDuration(self, t),
 			canAct = false,
@@ -1049,24 +1022,37 @@ newInscription{
 				self.temporary = self.temporary - 1
 				-- return the rifted actor
 				if self.temporary <= 0 then
-					game.level.map(self.target.x, self.target.y, engine.Map.TERRAIN, self.old_feat)
-					game.level:removeEntity(self, true)
+					-- remove ourselves
+					if self.old_feat then game.level.map(self.target.x, self.target.y, engine.Map.TERRAIN+1, self.old_feat)
+					else game.level.map:remove(self.target.x, self.target.y, engine.Map.TERRAIN+1) end
 					game.nicer_tiles:updateAround(game.level, self.target.x, self.target.y)
+					game.level:removeEntity(self)
+					game.level.map:removeParticleEmitter(self.particles)
+					
+					-- return the actor and reset their values
 					local mx, my = util.findFreeGrid(self.target.x, self.target.y, 20, true, {[engine.Map.ACTOR]=true})
 					local old_levelup = self.target.forceLevelup
+					local old_check = self.target.check
 					self.target.forceLevelup = function() end
+					self.target.check = function() end
 					game.zone:addEntity(game.level, self.target, "actor", mx, my)
 					self.target.forceLevelup = old_levelup
+					self.target.check = old_check
 				end
 			end,
 			summoner_gain_exp = true, summoner = self,
 		}
 		
+		-- Remove the target
 		game.logSeen(target, "%s has moved forward in time!", target.name:capitalize())
 		game.level:removeEntity(target, true)
+		
+		-- add the time skip object to the map
+		local particle = Particles.new("wormhole", 1, {image="shockbolt/terrain/temporal_instability_yellow", speed=1})
+		particle.zdepth = 6
+		e.particles = game.level.map:addParticleEmitter(particle, x, y)
 		game.level:addEntity(e)
-		game.level.map(x, y, Map.TERRAIN, e)
-		game.nicer_tiles:updateAround(game.level, x, y)
+		game.level.map(x, y, Map.TERRAIN+1, e)
 		game.level.map:updateMap(x, y)
 		return true
 	end,
@@ -1087,6 +1073,7 @@ newInscription{
 -----------------------------------------------------------------------
 newInscription{
 	name = "Taint: Devourer",
+	display_name = "堕落印记：吞噬",
 	type = {"inscriptions/taints", 1},
 	points = 1,
 	is_spell = true,
@@ -1158,6 +1145,7 @@ newInscription{
 
 newInscription{
 	name = "Taint: Telepathy",
+	display_name = "堕落印记：感应",
 	type = {"inscriptions/taints", 1},
 	points = 1,
 	is_spell = true,

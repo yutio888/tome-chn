@@ -1,4 +1,4 @@
--- ToME - Tales of Maj'Eyal
+﻿-- ToME - Tales of Maj'Eyal
 -- Copyright (C) 2009 - 2014 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
@@ -59,7 +59,13 @@ newChat{ id="die",
 我。。。本来为你有别的安排，但是我不能违背你的意愿，要知道你还有使命没有完成。
 你确定吗？]],
 	answers = {
-		{"请让我死吧。", action=function(npc, player) game:getPlayer(true):die(game.player, {special_death_msg=("asked the Eidolon to let %s die in peace"):format(game.player.female and "her" or "him")}) end},
+		{"请让我死吧。", action=function(npc, player) 
+			local src = game.player
+			game:getPlayer(true):die(game.player, {special_death_msg=("asked the Eidolon to let %s die in peace"):format(game.player.female and "her" or "him")})
+			while game.party:findSuitablePlayer() do
+				game.player:die(src, {special_death_msg="brought down by Eidolon"})
+			end
+		end},		
 		{"不，也许还是值得活下去的。"},
 	}
 }

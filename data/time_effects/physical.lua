@@ -1,4 +1,4 @@
-timeEffectCHN:newEffect{
+﻿timeEffectCHN:newEffect{
 	id = "ITEM_ANTIMAGIC_SCOURED",
 	enName = "Scoured",
 	chName = "冲刷",
@@ -913,34 +913,10 @@ timeEffectCHN:newEffect{
 	subtype = "冷却",
 }
 
-
---[[岩石守卫状态效果
 timeEffectCHN:newEffect{
-	id = "STONE_VINE",
-	enName = "Stone Vine",
-	chName = "岩石藤蔓",
+	id = "ANTI_GRAVITY",
+	enName = "Anti-Gravity",
+	cnName = "反重力",
 	type = "物理",
-	subtype = "大地/定身",
+	subtype = "空间",
 }
-timeEffectCHN:newEffect{
-	id = "ELDRITCH_STONE",
-	enName = "Eldritch Stone Shield",
-	chName = "岩石护盾",
-	type = "魔法",
-	subtype = "大地/护盾",
-}
-timeEffectCHN:newEffect{
-	id = "STONE_LINK_SOURCE",
-	enName = "Stone Link",
-	chName = "岩石链接",
-	type = "魔法",
-	subtype = "大地/护盾",
-}
-timeEffectCHN:newEffect{
-	id = "DEEPROCK_FORM",
-	enName = "Deeprock Form",
-	chName = "深岩形态",
-	type = "魔法",
-	subtype = "大地/元素",
-}]]
-

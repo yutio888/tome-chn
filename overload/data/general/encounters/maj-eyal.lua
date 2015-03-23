@@ -224,7 +224,7 @@ newEntity{
 
 		local g = mod.class.WorldNPC.new{
 			name="Agrimley the Hermit",
-			type="humanoid", subtype="human", faction="neutral",
+			type="humanoid", subtype="halfling", faction="neutral",
 			display='@', color=colors.BLUE,
 			can_talk = "alchemist-hermit",
 			cant_be_moved = false,

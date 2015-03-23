@@ -1,4 +1,4 @@
-timeEffectCHN:newEffect{
+﻿timeEffectCHN:newEffect{
 	id = "ITEM_NUMBING_DARKNESS",
 	enName = "Numbing Darkness",
 	chName = "黑暗麻痹",
@@ -431,7 +431,7 @@ timeEffectCHN:newEffect{
 timeEffectCHN:newEffect{
 	id = "REDUX",
 	enName = "Redux",
-	chName = "双重施法",
+	chName = "时空回响",
 	type = "魔法",
 	subtype = "时空",
 }
@@ -445,11 +445,27 @@ timeEffectCHN:newEffect{
 }
 
 timeEffectCHN:newEffect{
+	id = "CELERITY",
+	enName = "Celerity",
+	chName = "迅捷",
+	type = "魔法",
+	subtype = "速度/时空",
+}
+
+timeEffectCHN:newEffect{
+	id = "TIME_DILATION",
+	enName = "Time Dilation",
+	chName = "时间膨胀",
+	type = "魔法",
+	subtype = "速度/时空",
+}
+
+timeEffectCHN:newEffect{
 	id = "HASTE",
 	enName = "Haste",
 	chName = "镜像加速",
 	type = "魔法",
-	subtype = "时空",
+	subtype = "速度/时空",
 }
 
 timeEffectCHN:newEffect{
@@ -457,7 +473,7 @@ timeEffectCHN:newEffect{
 	enName = "Cease to Exist",
 	chName = "存在抹杀",
 	type = "魔法",
-	subtype = "时空",
+	subtype = "时空/伤害",
 }
 
 timeEffectCHN:newEffect{

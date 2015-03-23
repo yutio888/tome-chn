@@ -1,4 +1,4 @@
-logCHN:newLog{
+﻿logCHN:newLog{
 	log = "An entity appears through the portal!",
 	fct = function()
 		return "有东西穿过了传送门！"
@@ -238,10 +238,10 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
-	log = "#YELLOW#%s has been saved by a blast of positive energy!#LAST#",
+	log = "#YELLOW#%s has been healed by a blast of positive energy!#LAST#",
 	fct = function(a)
 		a = npcCHN:getName(a)
-		return ("#YELLOW#%s 被一股正能量所救！#LAST#"):format(a)
+		return ("#YELLOW#%s 被一股正能量治疗！#LAST#"):format(a)
 	end,
 }
 
@@ -921,16 +921,16 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
-	log = "#LIGHT_RED#You feel the edges of space begin to ripple and bend!",
+	log = "#LIGHT_RED#You feel the edges of spacetime begin to ripple and bend!",
 	fct = function()
-		return "#LIGHT_RED#你感到空间的边际开始弯曲振荡。"
+		return "#LIGHT_RED#你感到时空的边际开始弯曲振荡。"
 	end,
 }
 
 logCHN:newLog{
-	log = "#LIGHT_BLUE#Space feels more stable.",
+	log = "#LIGHT_BLUE#Spacetime feels more stable.",
 	fct = function()
-		return "#LIGHT_BLUE#空间变得更加稳定。"
+		return "#LIGHT_BLUE#时空变得更加稳定。"
 	end,
 }
 
@@ -1297,3 +1297,10 @@ logCHN:newLog{
 	end,
 }
 
+logCHN:newLog{
+	log = "%s is sleeping and unable to do this.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s正处于睡眠中，不能这样做。"):format(a)
+	end,
+}

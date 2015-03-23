@@ -21,6 +21,7 @@
 --dofile("/mod/map_config.lua")
 
 --------------------------------载入汉化文件
+
 require "data-chn123.stat_name"
 require "data-chn123.talent_name"
 require "data-chn123.talent_type_name"
@@ -47,10 +48,10 @@ require "data-chn123.emote"
 require "data-chn123.death_note"
 
 require "data-chn123.log_name"
-require "data-chn123.talents.talents"
 require "data-chn123.birth.birth"
 require "data-chn123.texts.texts"
 package.loaded["engine.ui.Dialog"] = require "data-chn123.dialog"
+require "data-chn123.damage_type"
 --------------------------------END
 
 -- Entities that are ASCII are outline

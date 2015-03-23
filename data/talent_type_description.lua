@@ -16,20 +16,27 @@ t_talent_type_description = {}
 	t_talent_type_description["The moment of the Eclipse is the moment of Truth, when Sun and Moon are in tandem and the energies of the world hang in the balance. Intense focus allows the greatest Anorithils to harness these energies to unleash devastating forces..."] = " 日 蚀 之 时 即 是 展 现 真 理 之 时， 当 太 阳 与 月 亮 连 成 一 线 的 时 刻 就 是 世 界 处 于 平 衡 的 时 刻。 强 大 的 星 月 术 士 可 以 聚 焦 这 些 能 量 并 释 放 出 其 巨 大 的 威 力。 "
 
 	--chronomancer
-	t_talent_type_description["Manipulate the age of creatures you encounter."] = " 操 纵 你 所 遇 到 的 生 物 的 年 龄。 "
-	t_talent_type_description["Allows you to glimpse the future, or become more aware of the present."] = " 你 拥 有 预 知 未 来 的 能 力， 使 你 对 下 一 步 行 动 更 加 得 心 应 手。 "
-	t_talent_type_description["Manipulate raw energy by addition or subtraction."] = " 利 用 对 能 量 的 微 调 使 你 能 随 心 所 欲 地 操 控 能 量。 "
-	t_talent_type_description["Call upon the force of gravity to crush, push, and pull your foes."] = " 召 唤 大 地 重 力 摧 毁、 推 开 或 吸 引 你 的 目 标。 "
-	t_talent_type_description["Change and shape matter itself."] = " 改 变 物 质 的 性 状。 "
-	t_talent_type_description["Create loopholes in the laws of spacetime."] = " 能 够 搅 乱 时 空 秩 序 的 技 能 系。 "
-	t_talent_type_description["Control how fast objects and creatures move through spacetime."] = " 控 制 物 体 和 生 物 移 动 速 度 的 法 术。 "
-	t_talent_type_description["A blend of chronomancy and physical combat."] = " 格 斗 系 和 时 空 系 的 混 合 战 术。 "
-	t_talent_type_description["Examine and alter the timelines that make up the spacetime continuum."] = " 能 使 你 改 变 时 间 线 连 续 性 的 技 能。 "
-	t_talent_type_description["Travel through time yourself, or send your foes into the future."] = " 穿 越 时 间 或 者 直 接 将 你 的 目 标 传 送 进 未 来 的 某 一 个 时 空…… "
-	t_talent_type_description["Mastery of folding points in space."] = " 使 你 精 通 折 叠 时 空 点 的 技 能。 "
-	t_talent_type_description["Weave the threads of spacetime and correct the damage you've caused through your meddling."] = " 编 织 时 空 并 对 你 能 造 成 的 伤 害 量 进 行 额 外 修 正。 "
-	t_talent_type_description["A blend of chronomancy and ranged combat."] = " 时 空 技 能 与 远 程 战 斗 技 能 的 组 合。 "
-	t_talent_type_description["Miscellaneous Chronomancy effects."] = " 多 种 时 空 系 效 果。 "
+	
+t_talent_type_description["A blend of chronomancy and dual-weapon combat."] = "将 时 空 之 力 与 双 持 战 斗 结 合。" 
+t_talent_type_description["A blend of chronomancy and ranged combat."] = "将 时 空 之 力 和 远 程 战 斗 结 合。"
+t_talent_type_description["A blend of chronomancy and physical combat."] = "将 时 空 之 力 和 物 理 战 斗 结 合。"
+t_talent_type_description["Warden combat training and techniques."] = "训 练 时 空 守 卫 的 专 有 特 技。"
+t_talent_type_description["A blend of ranged and dual-weapon combat."] = "将 远 程 战 斗 和 双 持 战 斗 结 合。"
+t_talent_type_description["Call temporal hounds to aid you in combat."] = "召 唤 时 空 猎 狗 来 帮 助 作 战。"
+t_talent_type_description["Fluctuate spacetime."] = "波 动 的 时 空。"
+t_talent_type_description["Call upon the force of gravity to crush, push, and pull your foes."] = "召 唤 重 力 来 粉 粹 、 推 拉 你 的 敌 人 。" 
+t_talent_type_description["Change and shape matter itself."] = "改 变 物 质 的 形 态 和 性 质。"
+t_talent_type_description["Mastery of folding points in space."] = "折 叠 时 空。"
+t_talent_type_description["Control how fast objects and creatures move through spacetime."] = "控 制 物 体 和 生 物 在 时 空 中 前 进 的 速 度。"
+t_talent_type_description["Stabilize spacetime."] = "让 时 空 更 加 稳 定。"
+t_talent_type_description["Examine and alter the timelines that make up the spacetime continuum."] = "检 查 并 改 变 组 成 时 空 的 时 间 线。" 
+t_talent_type_description["Directly manipulate the flow of time"] = "直 接 改 变 时 间 的 流 动" 
+t_talent_type_description["Manipulate chronomantic spells."] = "强 化 时 空 法 术" 
+t_talent_type_description["Allows you to glimpse the future, or become more aware of the present."] = "窥 视 未 来， 或 者 洞 察 现 在。" 
+t_talent_type_description["Manipulate raw energy by addition or subtraction."] = "改 变 原 始 能 量 流 动。" 
+t_talent_type_description["Weave the threads of fate."] = "编 织 你 的 命 运" 
+t_talent_type_description["Weave the threads of spacetime."] = "编 织 时 空 线" 
+t_talent_type_description["Spacetime anomalies that can randomly occur when paradox is to high."] = "时 空 紊 乱 后 出 现 的 异 常。"
 	t_talent_type_description["Spacetime anomalies that can randomly occur when paradox is to high."] = " 时 空 变 异 会 在 紊 乱 值 较 高 时 随 机 发 生。 "
 	--corruptions
 	t_talent_type_description["Manipulate life force to feed your own dark powers."] = " 操 纵 生 命 之 力 来 提 高 你 自 身 的 黑 暗 力 量。 "
@@ -228,14 +235,14 @@ t_talent_type_description = {}
 	t_talent_type_description["Liches innate abilities."] = " 巫 妖 的 天 赋。 "  
 
 -- stone warden
---[[t_talent_type_description["Dwarves have learned to imbue their shields with the power of stone itself."] = "矮 人 学 会 将 岩 石 力 量 赋 予 给 盾 牌。"
+--t_talent_type_description["Dwarves have learned to imbue their shields with the power of stone itself."] = "矮 人 学 会 将 岩 石 力 量 赋 予 给 盾 牌。"
 t_talent_type_description["Control the stone itself and bring it alive in the form of dreadful vines."] = " 掌 握 岩 石 并 赋 予 其 生 命 ， 形 成 恐 怖 的 藤 蔓。"
 t_talent_type_description["Learn to harness the innate power of your race."] = " 学 会 强 化 自 身 的 种 族 能 力。"
 t_talent_type_description["Infuse arcane forces into your shield."] = "利 用 奥 术 能 量 强 化 盾 牌。"
 t_talent_type_description["Summon stony spikes imbued with various powers."] = "召 唤 各 种 力 量 的 岩 石 尖 刺。"
-t_talent_type_description["Harness the power of the world to turn into a Deeprock Form."] = "利 用 世 界 的 力 量 ， 进 入 深 岩 形 态。"]]
+t_talent_type_description["Harness the power of the world to turn into a Deeprock Form."] = "利 用 世 界 的 力 量 ， 进 入 深 岩 形 态。"
 
---[[DLC
+--DLC
 t_talent_type_description["Demon seeds powers can not be learnt, they must be used from demon seeds attached to your equipment."] = "恶 魔 种 子 的 力 量 不 是 人 能 学 会 的 ， 必 须 通 过 装 备 来 展 现。"
 t_talent_type_description["Bind and use demons to do your bidding."] = "驱 使 恶 魔 为 你 作 战 。"
 t_talent_type_description["Imbue your melee attacks with lethal demonic powers."] = "利 用 致 命 的 恶 魔 之 力 强 化 近 战 攻 击 。"
@@ -252,5 +259,4 @@ t_talent_type_description["Call upon the flames of the Fearscape, incinerating a
 t_talent_type_description["Fire is your lifeblood; it revitalizes you as it burns your foes."] = "火 是 你 的 生 命 之 源，它 给 予 你 力 量 ， 同 时 灼 烧 敌 人 。"
 t_talent_type_description["Infuse your body with the power of Demons."] = "使 用 恶 魔 之 力 强 化 自 身 。"
 t_talent_type_description["Make your blows terrify your foes and manipulate their fear."] = "你 的 攻 击 令 敌 人 闻 风 丧 胆 。"
-dofile("data-chn123/talents/corruptions/black-magic.lua")
-]]
+

@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2014 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -261,8 +261,8 @@ newBirthDescriptor{
 		max_life = 100,
 --		talent_cd_reduction={[ActorTalents.T_FLAME]=-3, [ActorTalents.T_LIGHTNING]=-3, [ActorTalents.T_EARTHEN_MISSILES]=-3, },
 		resolvers.equipbirth{ id=true,
-			{type="weapon", subtype="greatsword", name="iron greatsword", autoreq=true, ego_chance=-1000, ego_chance=-1000},
-			{type="armor", subtype="light", name="rough leather armour", autoreq=true, ego_chance=-1000, ego_chance=-1000},
+			{type="weapon", subtype="巨剑", name="铁质巨剑", autoreq=true, ego_chance=-1000, ego_chance=-1000},
+			{type="armor", subtype="皮甲", name="粗制皮甲", autoreq=true, ego_chance=-1000, ego_chance=-1000}
 		},
 		resolvers.inscription("RUNE:_MANASURGE", {cooldown=25, dur=10, mana=620}),
 	},

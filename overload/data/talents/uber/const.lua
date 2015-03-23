@@ -1,5 +1,5 @@
 ﻿-- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2014 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -47,9 +47,9 @@ uberTalent{
 			DamageType.BLOODSPRING, {dam={dam=100 + self:getCon() * 3, healfactor=0.5}, x=self.x, y=self.y, st=DamageType.DRAINLIFE, power=50 + self:getCon() * 2},
 			1,
 			5, nil,
-			engine.Entity.new{alpha=100, display='', color_br=200, color_bg=60, color_bb=20},
-			function(e)
-				e.radius = e.radius + 0.5
+			MapEffect.new{color_br=255, color_bg=20, color_bb=20, effect_shader="shader_images/darkness_effect.png"},
+			function(e, update_shape_only)
+				if not update_shape_only then e.radius = e.radius + 0.5 end
 				return true
 			end,
 			false

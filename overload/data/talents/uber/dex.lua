@@ -1,5 +1,5 @@
 ﻿-- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2014 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -86,10 +86,11 @@ uberTalent{
 	cooldown = 12,
 	radius = 4,
 	range = 1,
-	tactical = { ATTACK = { PHYSICAL=2 }, DISABLE = { disarm = 2 } },
+	tactical = { ATTACKAREA = {  weapon = 2  }, DISABLE = { disarm = 2 } },
 	target = function(self, t)
 		return {type="ball", range=self:getTalentRange(t), selffire=false, radius=self:getTalentRadius(t)}
 	end,
+	is_melee = true,
 	action = function(self, t)
 		local tg = self:getTalentTarget(t)
 		self:project(tg, self.x, self.y, function(px, py, tg, self)
@@ -146,7 +147,8 @@ uberTalent{
 	cooldown = 20,
 	radius = 1,
 	range = 10,
-	tactical = { CLOSEIN = 2, ATTACK = { PHYSICAL = 2 }, DISABLE = { daze = 1 } },
+	is_melee = true,
+	tactical = { CLOSEIN = 2, ATTACKAREA = { weapon = 2 }, DISABLE = { daze = 1 } },
 	target = function(self, t)
 		return {type="ball", range=self:getTalentRange(t), selffire=false, radius=self:getTalentRadius(t)}
 	end,

@@ -1,5 +1,6 @@
-﻿t_talent_name["T_DEMON_SEED"] = "恶魔之种"
-talentInfoCHN["T_DEMON_SEED"] = function(self, t)
+﻿local Talents = require "engine.interface.ActorTalents"
+Talents.talents_def.T_DEMON_SEED.name = "恶魔之种"
+Talents.talents_def.T_DEMON_SEED.info = function(self, t)
 		local shield, weapon = t.getDam(self, t)
 		return ([[对 目 标 造 成 %d%% 枯 萎 武 器 伤 害 。如 果 攻 击 命 中 ，你 将 用 盾 牌 攻 击 目 标 ，造 成 %d%% 盾 牌 伤 害 并 眩 晕 %d 回 合。
 		 如 果 武 器 命 中 并 且 没 有 杀 死 目 标 ，一 个 恶 魔 之 种 将 试 图 进 入 目 标 的 体 内 。
@@ -15,8 +16,8 @@ talentInfoCHN["T_DEMON_SEED"] = function(self, t)
 		:format(weapon * 100, shield * 100, t.getDazeDuration(self, t))
 	end
 
-t_talent_name["T_BIND_DEMON"] = "恶魔结合"
-talentInfoCHN["T_BIND_DEMON"] = function(self, t)
+Talents.talents_def.T_BIND_DEMON.name = "恶魔结合"
+Talents.talents_def.T_BIND_DEMON.info = function(self, t)
 		return ([[你 能 通 过 恶 魔 种 子 来 临 时 召 唤 恶 魔 %d 回 合 。
 		 召 唤 出 来 的 恶 魔 能 回 复 生 命 ，并 且 保 持 上 一 次 召 唤 结 束 时 的 生 命 值 。
 		 如 果 恶 魔 死 亡 ，将 不 能 再 使 用 同 一 个 种 子 进 行 召 唤 。
@@ -30,8 +31,8 @@ talentInfoCHN["T_BIND_DEMON"] = function(self, t)
 		format(t.getDur(self, t))
 	end
 
-t_talent_name["T_TWISTED_PORTAL"] = "扭曲传送"
-talentInfoCHN["T_TWISTED_PORTAL"] = function(self, t)
+Talents.talents_def.T_TWISTED_PORTAL.name = "扭曲传送"
+Talents.talents_def.T_TWISTED_PORTAL.info = function(self, t)
 		local radius = t.getRadius(self, t)
 		local range = t.getRange(self, t)
 		return ([[传 送 自 己 %d 码 ，误 差 %d 。
@@ -41,8 +42,8 @@ talentInfoCHN["T_TWISTED_PORTAL"] = function(self, t)
 		 传 送 半 径 受 法 术 强 度 加 成 。]]):format(range, radius, t.getDur(self, t))
 	end
 
-t_talent_name["T_SUFFUSE_LIFE"] = "生命能量"
-talentInfoCHN["T_SUFFUSE_LIFE"] = function(self, t)
+Talents.talents_def.T_SUFFUSE_LIFE.name = "生命能量"
+Talents.talents_def.T_SUFFUSE_LIFE.info = function(self, t)
 		local healpct, rezchance, leech = t.getVals(self, t)
 		return ([[你 吸 取 敌 方 生 物 的 生 命 来 治 疗 恶 魔 种 子 和 你 。
 		 每 次 你 杀 死 生 物 时 ，一 个 随 机 的 生 命 不 足 100%% 的 恶 魔 种 子 将 受 到 %d%% 生 命 值 的 治 疗 。

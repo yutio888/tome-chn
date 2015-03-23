@@ -1728,7 +1728,7 @@ objects:addObjects({
 objects:addObjects({
 	unique = true,
 	enName = "Rune of the Rift",
-	chName = "龟裂符文",
+	chName = "符文：时空裂缝",
 	unIdedName = "",
 	chDesc = "",
 })

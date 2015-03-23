@@ -1,5 +1,5 @@
 ﻿-- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2014 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -890,11 +890,14 @@ newEffect{
 newEffect{
 	name = "HEROISM", image = "talents/infusion__heroism.png",
 	desc = "Heroism",
-	long_desc = function(self, eff) return ("提 升 你 %d 三 个 最 高 属 性。"):format(eff.power) end,
+	long_desc = function(self, eff) 
+		local xs = eff.die_at > 0 and (" 并 使 你 直 到 生 命 降 至 %+d 才 会 死 去。"):format(-eff.die_at) or ""
+		return ("提 升 你 %d 三 个 最 高 属 性。"):format(eff.power) 
+	end,
 	type = "physical",
 	subtype = { nature=true },
 	status = "beneficial",
-	parameters = { power=1 },
+	parameters = { power=1, die_at = 0 },
 	activate = function(self, eff)
 		local l = { {Stats.STAT_STR, self:getStat("str")}, {Stats.STAT_DEX, self:getStat("dex")}, {Stats.STAT_CON, self:getStat("con")}, {Stats.STAT_MAG, self:getStat("mag")}, {Stats.STAT_WIL, self:getStat("wil")}, {Stats.STAT_CUN, self:getStat("cun")}, }
 		table.sort(l, function(a,b) return a[2] > b[2] end)
@@ -1030,6 +1033,8 @@ newEffect{
 	activate = function(self, eff)
 		eff.pass = self:addTemporaryValue("can_pass", {pass_wall=1})
 		eff.dig = self:addTemporaryValue("move_project", {[DamageType.DIG]=1})
+		self:effectTemporaryValue(eff, "combat_apr", eff.power)
+		self:effectTemporaryValue(eff, "resists_pen", {[DamageType.PHYSICAL]=eff.power / 2 })
 	end,
 	deactivate = function(self, eff)
 		self:removeTemporaryValue("can_pass", eff.pass)
@@ -1091,6 +1096,7 @@ newEffect{
 		local d = game.turn - eff.start_turn
 		return util.bound(360 - d / eff.possible_end_turns * 360, 0, 360)
 	end,
+	lists = 'break_with_step_up',
 	activate = function(self, eff)
 		eff.start_turn = game.turn
 		eff.possible_end_turns = 10 * (eff.dur+1)
@@ -1119,6 +1125,7 @@ newEffect{
 		local d = game.turn - eff.start_turn
 		return util.bound(360 - d / eff.possible_end_turns * 360, 0, 360)
 	end,
+	lists = 'break_with_step_up',
 	activate = function(self, eff)
 		eff.start_turn = game.turn
 		eff.possible_end_turns = 10 * (eff.dur+1)
@@ -1497,6 +1504,7 @@ newEffect{
 	parameters = { power=0.1 },
 	on_gain = function(self, err) return "#Target# speeds up.", "+Reflexive Dodging" end,
 	on_lose = function(self, err) return "#Target# slows down.", "-Reflexive Dodging" end,
+	lists = 'break_with_step_up',
 	activate = function(self, eff)
 		eff.tmpid = self:addTemporaryValue("global_speed_add", eff.power)
 	end,
@@ -2649,6 +2657,7 @@ newEffect {
 	},
 	status = "beneficial",
 	on_lose = function(self, eff) return "#Target# loses speed.", "-Directed Speed" end,
+	lists = 'break_with_step_up',
 	callbackOnMove = function(self, eff, moved, force, ox, oy)
 		local angle_start = normalize_direction(math.atan2(self.y - eff.start_y, self.x - eff.start_x))
 		local angle_last = normalize_direction(math.atan2(self.y - eff.last_y, self.x - eff.last_x))
@@ -2820,5 +2829,25 @@ newEffect {
 	long_desc = function(self, eff)
 		return ([[目 标 的 反 应 速 度 变 快 了，增 加 %d%% 整 体 速 度。]])
 		:format(eff.global_speed_add * 100)
+	end,
+}
+
+newEffect{
+	name = "ANTI_GRAVITY", image = "talents/gravity_locus.png",
+	desc = "Anti-Gravity",
+	long_desc = function(self, eff) return ("目 标 被 反 重 力 力 量 击 中 ， 减 半 击 退 免 疫。"):format() end,
+	type = "physical",
+	subtype = { spacetime=true },
+	status = "detrimental",
+	on_gain = function(self, err) return nil, "+Anti-Gravity" end,
+	on_lose = function(self, err) return nil, "-Anti-Gravity" end,
+	on_merge = function(self, old_eff, new_eff)
+		old_eff.dur = new_eff.dur
+		return old_eff
+	end,
+	activate = function(self, eff)
+		if self:attr("knockback_immune") then
+			self:effectTemporaryValue(eff, "knockback_immune", -self:attr("knockback_immune") / 2)
+		end
 	end,
 }

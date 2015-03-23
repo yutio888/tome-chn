@@ -36,6 +36,7 @@ egosCHN[" of erosion"] = "侵蚀之"
 egosCHN[" of wind"] = "风之"
 -- Greater
 egosCHN[" of gravity"] = "重力之"
+egosCHN[" of warping"] = "扭曲之"
 -- Antimagic
 egosCHN["manaburning "] = "法力燃烧的"
 egosCHN["slimey "] = "史莱姆的"

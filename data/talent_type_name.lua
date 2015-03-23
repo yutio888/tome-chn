@@ -17,20 +17,32 @@ t_talent_type_name = {}
 	t_talent_type_name["twilight"] = "黄昏系"
 	t_talent_type_name["radiance"] = "光辉系"
 	--chronomancer
-	t_talent_type_name["Age Manipulation"] = "时光操纵系"
-	t_talent_type_name["anomalies"] = "异常系"
-	t_talent_type_name["chronomancy"] = "时空系"
-	t_talent_type_name["energy"] = "能量系"
+	t_talent_type_name["Blade Threading"] = "螺旋灵刃系"
+	t_talent_type_name["Bow Threading"] = "螺旋灵弓系"
+	t_talent_type_name["Temporal Combat"] = "时空格斗系"
+	t_talent_type_name["Temporal Guardian"] = "时空守卫系"
+	t_talent_type_name["Threaded Combat"] = "螺旋战斗系"
+	t_talent_type_name["Temporal Hounds"] = "时空猎狗系"
+	t_talent_type_name["flux"] = "波动系"
 	t_talent_type_name["gravity"] = "重力系"
 	t_talent_type_name["matter"] = "物质系"
-	t_talent_type_name["paradox"] = "无序系"
 	t_talent_type_name["Spacetime Folding"] = "时空折叠系"
-	t_talent_type_name["Spacetime Weaving"] = "时空编织系"
 	t_talent_type_name["Speed Control"] = "速度控制系"
-	t_talent_type_name["Temporal Archery"] = "时空射击系"
-	t_talent_type_name["Temporal Combat"] = "时空格斗系"
+	t_talent_type_name["stasis"] = "静态时空系"
 	t_talent_type_name["Timeline Threading"] = "时空螺旋系"
-	t_talent_type_name["Time Travel"] = "时空漫游系"
+	t_talent_type_name["timetravel"] = "时空旅行系"
+	t_talent_type_name["Spellbinding"] = "时空增效系"
+	t_talent_type_name["Chronomancy"] = "时空系"
+	t_talent_type_name["energy"] = "能量系"
+	t_talent_type_name["Fate Weaving"] = "命运编织系"
+	t_talent_type_name["Spacetime Weaving"] = "时空编织系"
+	t_talent_type_name["anomalies"] = "异常系"
+	
+	t_talent_type_name["Age Manipulation"] = "时光操纵系"
+	t_talent_type_name["anomalies"] = "异常系"
+	t_talent_type_name["paradox"] = "无序系"
+	t_talent_type_name["Temporal Archery"] = "时空射击系"
+
 	
 	--corruptions
 	t_talent_type_name["blight"] = "枯萎系"
@@ -117,7 +129,8 @@ t_talent_type_name = {}
 	t_talent_type_name["yeek"] = "夺心魔"
 	t_talent_type_name["skeleton"] = "骷髅人"
 	t_talent_type_name["ghoul"] = "食尸鬼"
-
+	t_talent_type_name["doomelf"] = "魔化精灵"
+	t_talent_type_name["ogre"] = "食人魔"
 	--psionic
 	t_talent_type_name["absorption"] = "吸收系"
 	t_talent_type_name["augmented mobility"] = "强化移动系"
@@ -220,14 +233,14 @@ t_talent_type_name = {}
 	t_talent_type_name["Buckler Training"] = "盾牌训练系"
 	t_talent_type_name["Skirmisher - Slings"] = "散兵-投石索系"
 	t_talent_type_name["Tireless Combatant"] = "不倦战斗系"
---[[stone warden
+--stone warden
 	t_talent_type_name["dwarven nature"] = "矮人之自然力量"	
 	t_talent_type_name["earthen power"] = "大地力量"
 	t_talent_type_name["earthen vines"] = "岩石藤蔓"
 	t_talent_type_name["eldritch shield"] = "魔力盾牌"
 	t_talent_type_name["eldritch stone"] = "魔法岩石"
-	t_talent_type_name["deeprock"] = "深岩形态"]]
---[[DLC
+	t_talent_type_name["deeprock"] = "深岩形态"
+--DLC
 	t_talent_type_name["demon-seeds"] = "恶魔之种"
 	t_talent_type_name["demonic pact"] = "恶魔契约"
 	t_talent_type_name["infernal combat"] = "地狱格斗"
@@ -242,7 +255,9 @@ t_talent_type_name = {}
 	t_talent_type_name["Fearfire"] = "恐惧之炎"
 	t_talent_type_name["Heart of Fire"] = "狱火之核"
 	t_talent_type_name["demonic strength"] = "恶魔之力"
-	t_talent_type_name["Oppression"] = "压制"]]
+	t_talent_type_name["Oppression"] = "压制"
+	
+	
 	
 --技能大分类名称	
 t_talent_cat = {}

@@ -21,7 +21,6 @@ require "engine.class"
 local UI = require "engine.ui.Base"
 local UISet = require "mod.class.uiset.UISet"
 local DebugConsole = require "engine.DebugConsole"
-local PlayerDisplay = require "mod.class.PlayerDisplay"
 local HotkeysDisplay = require "engine.HotkeysDisplay"
 local HotkeysIconsDisplay = require "engine.HotkeysIconsDisplay"
 local ActorsSeenDisplay = require "engine.ActorsSeenDisplay"
@@ -269,7 +268,7 @@ function _M:resetPlaces()
 	local w, h = core.display.size()
 
 	local th = 52
-	if config.settings.tome.hotkey_icons then th = (4 + config.settings.tome.hotkey_icons_size) * config.settings.tome.hotkey_icons_rows end
+	if config.settings.tome.hotkey_icons then th = (8 + config.settings.tome.hotkey_icons_size) * config.settings.tome.hotkey_icons_rows end
 	local hup = h - th
 
 	self.places = {
@@ -410,30 +409,34 @@ end
 
 function _M:resizeIconsHotkeysToolbar()
 	local h = 52
-	if config.settings.tome.hotkey_icons then h = (4 + config.settings.tome.hotkey_icons_size) * config.settings.tome.hotkey_icons_rows end
+	if config.settings.tome.hotkey_icons then h = (8 + config.settings.tome.hotkey_icons_size) * config.settings.tome.hotkey_icons_rows end
 
 	local oldstop = self.map_h_stop_up or (game.h - h)
 	self.map_h_stop = game.h
 	self.map_h_stop_up = game.h - h
 	self.map_h_stop_tooltip = self.map_h_stop_up
 
-	self.hotkeys_display_icons = HotkeysIconsDisplay.new(nil, self.places.hotkeys.x, self.places.hotkeys.y, self.places.hotkeys.w, self.places.hotkeys.h, nil, self.init_font_mono, self.init_size_mono, config.settings.tome.hotkey_icons_size, config.settings.tome.hotkey_icons_size)
-	self.hotkeys_display_icons:enableShadow(0.6)
+	if not self.hotkeys_display_icons then
+		self.hotkeys_display_icons = HotkeysIconsDisplay.new(nil, self.places.hotkeys.x, self.places.hotkeys.y, self.places.hotkeys.w, self.places.hotkeys.h, nil, self.init_font_mono, self.init_size_mono, config.settings.tome.hotkey_icons_size, config.settings.tome.hotkey_icons_size)
+		self.hotkeys_display_icons:enableShadow(0.6)
+	else
+		self.hotkeys_display_icons:resize(self.places.hotkeys.x, self.places.hotkeys.y, self.places.hotkeys.w, self.places.hotkeys.h, config.settings.tome.hotkey_icons_size, config.settings.tome.hotkey_icons_size)
+	end
 
 	if self.no_ui then
 		self.map_h_stop = game.h
-		game:resizeMapViewport(game.w, self.map_h_stop)
+		game:resizeMapViewport(game.w, self.map_h_stop, 0, 0)
 		self.logdisplay.display_y = self.logdisplay.display_y + self.map_h_stop_up - oldstop
 		profile.chat.display_y = profile.chat.display_y + self.map_h_stop_up - oldstop
-		game:setupMouse()
+		game:setupMouse(true)
 		return
 	end
 
 	if game.inited then
-		game:resizeMapViewport(game.w, self.map_h_stop)
+		game:resizeMapViewport(game.w, self.map_h_stop, 0, 0)
 		self.logdisplay.display_y = self.logdisplay.display_y + self.map_h_stop_up - oldstop
 		profile.chat.display_y = profile.chat.display_y + self.map_h_stop_up - oldstop
-		game:setupMouse()
+		game:setupMouse(true)
 	end
 
 	self.hotkeys_display = config.settings.tome.hotkey_icons and self.hotkeys_display_icons or self.hotkeys_display_text
@@ -929,7 +932,7 @@ function _M:displayResources(scale, bx, by, a)
 		if player:knowTalent(player.T_PARADOX_POOL) and not player._hide_resource_paradox then
 			sshat[1]:toScreenFull(x-6, y+8, sshat[6], sshat[7], sshat[2], sshat[3], 1, 1, 1, a)
 			bshat[1]:toScreenFull(x, y, bshat[6], bshat[7], bshat[2], bshat[3], 1, 1, 1, a)
-			local _, chance = player:paradoxFailChance()
+			local chance = player:paradoxFailChance()
 			local s = chance
 			if s > 15 then s = 15 end
 			s = s / 15
@@ -939,17 +942,20 @@ function _M:displayResources(scale, bx, by, a)
 				paradox_sha:setUniform("speed", 10000 - s * 7000)
 				paradox_sha.shad:use(true)
 			end
-			local p = 1 - chance / 100
+			local p = util.bound(600-player:getModifiedParadox(), 0, 300) / 300
+			--local p = 1 - chance / 100
 			shat[1]:toScreenPrecise(x+49, y+10, shat[6] * p, shat[7], 0, p * 1/shat[4], 0, 1/shat[5], paradox_c[1], paradox_c[2], paradox_c[3], a)
 			if paradox_sha.shad then paradox_sha.shad:use(false) end
 
-			if not self.res.paradox or self.res.paradox.vc ~= player.paradox or self.res.paradox.vr ~= chance then
+			local vm = player:getModifiedParadox()
+			if not self.res.paradox or self.res.paradox.vm ~= vm or self.res.paradox.vc ~= player.paradox or self.res.paradox.vr ~= chance then
 				self.res.paradox = {
 					hidable = "Paradox",
-					vc = player.paradox, vr = chance,
-					cur = {core.display.drawStringBlendedNewSurface(font_sha, ("%d"):format(player.paradox), 255, 255, 255):glTexture()},
+					vc = player.paradox, vr = chance, vm = vm,
+					cur = {core.display.drawStringBlendedNewSurface(font_sha, ("%d (%d)"):format(vm, player.paradox), 255, 255, 255):glTexture()},
 					regen={core.display.drawStringBlendedNewSurface(sfont_sha, ("%d%%"):format(chance), 255, 255, 255):glTexture()},
-				}
+	
+			}
 			end
 			local dt = self.res.paradox.cur
 			dt[1]:toScreenFull(2+x+64, 2+y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 0, 0, 0, 0.7 * a)
@@ -1571,7 +1577,7 @@ end
 
 function _M:displayParty(scale, bx, by)
 	if game.player.changed and next(self.party) then
-		for a, d in pairs(self.party) do if not game.party:hasMember(a) then game.mouse:unregisterZone(d[2]) print("==UNREG part ", d[1].name, d[2]) end end
+		for a, d in pairs(self.party) do if not game.party:hasMember(a) then game.mouse:unregisterZone(d[2]) end end
 		self.party = {}
 	end
 
@@ -1622,7 +1628,10 @@ function _M:displayParty(scale, bx, by)
 					core.display.drawQuad(x+1, y+1 + (1-p)*hs, 38, p*38, life_c[1]*255, life_c[2]*255, life_c[3]*255, 178)
 					if life_sha.shad then life_sha.shad:use(false) end
 
+					local scale, bx, by = self.places.party.scale, self.places.party.x, self.places.party.y
+					core.display.glScissor(true, bx+x*scale, by+y*scale, 40*scale, 40*scale)
 					a:toScreen(nil, x+4, y+4, 32, 32)
+					core.display.glScissor(false)
 					local p = (game.player == a) and portrait or portrait_unsel
 					if a.unused_stats > 0 or a.unused_talents > 0 or a.unused_generics > 0 or a.unused_talents_types > 0 and def.control == "full" then
 						p = (game.player == a) and portrait_lev or portrait_unsel_lev
@@ -1678,7 +1687,9 @@ function _M:displayPlayer(scale, bx, by)
 
 	pf_shadow[1]:toScreenFull(0, 0, pf_shadow[6], pf_shadow[7], pf_shadow[2], pf_shadow[3])
 	pf_bg[1]:toScreenFull(pf_bg_x, pf_bg_y, pf_bg[6], pf_bg[7], pf_bg[2], pf_bg[3])
+	core.display.glScissor(true, bx+15*scale, by+15*scale, 54*scale, 54*scale)
 	player:toScreen(nil, 22, 22, 40, 40)
+	core.display.glScissor(false)
 
 	if (not config.settings.tome.actor_based_movement_mode and self or player).bump_attack_disabled then
 		pf_defend[1]:toScreenFull(22 + pf_attackdefend_x, 67 + pf_attackdefend_y, pf_defend[6], pf_defend[7], pf_defend[2], pf_defend[3])
@@ -2114,6 +2125,7 @@ function _M:display(nb_keyframes)
 	-- Now the map, if any
 	game:displayMap(nb_keyframes)
 
+	if game.creating_player then return end
 	if self.no_ui then return end
 
 	Map.viewport_padding_4 = 0

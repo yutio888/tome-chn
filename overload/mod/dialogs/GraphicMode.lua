@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2014 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -56,10 +56,21 @@ function _M:init()
 
 	self.key:addBinds{
 		EXIT = function()
-			if self.changed then game:setupDisplayMode(true) end
+			if self.changed then
+				if self:isTome() then
+					game:setupDisplayMode(true)
+				else
+					local gfx = config.settings.tome.gfx
+					game:saveSettings("tome.gfx", ('tome.gfx = {tiles=%q, size=%q, tiles_custom_dir=%q, tiles_custom_moddable=%s, tiles_custom_adv=%s}\n'):format(gfx.tiles, gfx.size, gfx.tiles_custom_dir or "", gfx.tiles_custom_moddable and "true" or "false", gfx.tiles_custom_adv and "true" or "false"))
+				end
+			end
 			game:unregisterDialog(self)
 		end,
 	}
+end
+
+function _M:isTome()
+	return game.__mod_info.short_name == "tome"
 end
 
 function _M:doCustomTiles()

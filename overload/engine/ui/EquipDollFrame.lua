@@ -1,5 +1,5 @@
 -- TE4 - T-Engine 4
--- Copyright (C) 2009 - 2014 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -106,6 +106,7 @@ end
 
 function _M:drawItemShortName(o, x, y)
 	if not o then return end
+	if self.no_name then return end
 
 	local t = nil
 	if self.last_o == o then
@@ -138,18 +139,23 @@ function _M:drawItemShortName(o, x, y)
 	self.last_o = o
 end
 
+function _M:forceUpdate()
+	self.last_o = nil
+	self.last_t = nil
+end
+
 function _M:display(x, y, nb_keyframes, ox, oy)
 	if self.focused then
-		self.bg_sel.t:toScreenFull(x, y, self.w, self.h, self.bg_sel.tw, self.bg_sel.th)
+		self.bg_sel.t:toScreenPrecise(x, y, self.w, self.h, 0, self.bg_sel.w/self.bg_sel.tw, 0, self.bg_sel.h/self.bg_sel.th)
 	else
-		self.bg.t:toScreenFull(x, y, self.w, self.h, self.bg.tw, self.bg.th)
+		self.bg.t:toScreenPrecise(x, y, self.w, self.h, 0, self.bg.w/self.bg.tw, 0, self.bg.h/self.bg.th)
 	end
 
 	local o = self:getItem()
 	if o and o.toScreen then
 		o:toScreen(nil, x + self.f_ix, y + self.f_iy, self.f_iw, self.f_ih)
 	elseif self.bg_empty then
-		self.bg_empty.t:toScreenFull(x + self.f_ix, y + self.f_iy, self.f_iw, self.f_ih, self.bg_empty.tw, self.bg_empty.th)
+		self.bg_empty.t:toScreenPrecise(x + self.f_ix, y + self.f_iy, self.f_iw, self.f_ih, 0, self.bg_empty.w/self.bg_empty.tw, 0, self.bg_empty.h/self.bg_empty.th)
 	end
 
 	self:drawItemShortName(o, x, y)

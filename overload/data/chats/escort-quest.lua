@@ -1,5 +1,5 @@
--- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2014 Nicolas Casalini
+﻿-- ToME - Tales of Maj'Eyal
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -166,11 +166,11 @@ local reward_types = {
 		},
 		talents = {
 			[Talents.T_PRECOGNITION] = 1,
-			[Talents.T_SPIN_FATE] = 1,
-		},
+			[Talents.T_FORESIGHT] = 1,
+		},										
 		stats = {
 			[Stats.STAT_MAG] = 2,
-			[Stats.STAT_CUN] = 1,
+			[Stats.STAT_WIL] = 1,
 		},
 		antimagic = {
 			types = {

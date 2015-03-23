@@ -1,5 +1,6 @@
-﻿t_talent_name["T_STONESHIELD"] = "岩石坚盾"
-talentInfoCHN["T_STONESHIELD"] = function(self, t)
+﻿local Talents = require "engine.interface.ActorTalents"
+Talents.talents_def.T_STONESHIELD.name = "岩石坚盾"
+Talents.talents_def.T_STONESHIELD.info = function(self, t)
 		local m, mm, e, em = t.getValues(self, t)
 		local damage = t.getDamage(self, t)
 		local inc = t.getPercentInc(self, t)
@@ -9,24 +10,24 @@ talentInfoCHN["T_STONESHIELD"] = function(self, t)
 	end
 
 
-t_talent_name["T_STONE_FORTRESS"] = "岩石壁垒"
-talentInfoCHN["T_STONE_FORTRESS"] = function(self, t)
+Talents.talents_def.T_STONE_FORTRESS.name = "岩石壁垒"
+Talents.talents_def.T_STONE_FORTRESS.info = function(self, t)
 		return ([[当 你 使 用 钢 筋 铁 骨 时 ， 你 的 皮 肤 会 变 得 非 常 坚 硬 ， 甚 至 能 吸 收 非 物 理 攻 击。
 		所 有 非 物 理 伤 害 减 免 %d%% 护 甲 值 （ 无 视 护 甲 硬 度 ）。]]):
 		format(t.getPercent(self, t))
 	end
 
 
-t_talent_name["T_SHARDS"] = "岩石碎片"
-talentInfoCHN["T_SHARDS"] = function(self, t)
+Talents.talents_def.T_SHARDS.name = "岩石碎片"
+Talents.talents_def.T_SHARDS.info = function(self, t)
 		return ([[尖 锐 的 岩 石 碎 片 从 盾 牌 生 长 出 来。
 		每 次 你 承 受 近 战 攻 击 时 ， 你 能 利 用 这 些 碎 片 反 击 攻 击 者 ， 造  成 %d%% 自 然 伤 害 。
 		每 回 合 只 能 反 击 一 次 。]]):
 		format(self:combatTalentWeaponDamage(t, 0.4, 1) * 100)
 	end
 
-t_talent_name["T_ELDRITCH_STONE"] = "岩石护盾"
-talentInfoCHN["T_ELDRITCH_STONE"] = function(self, t)
+Talents.talents_def.T_ELDRITCH_STONE.name = "岩石护盾"
+Talents.talents_def.T_ELDRITCH_STONE.info = function(self, t)
 		local power = t.getPower(self, t)
 		local radius = self:getTalentRadius(t)
 		return ([[制 造 一 层 持 续 7 回 合 的 岩 石 护 盾 ， 吸 收 至 多 %d 点 伤 害。

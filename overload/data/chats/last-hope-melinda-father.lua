@@ -1,5 +1,5 @@
--- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
+﻿-- ToME - Tales of Maj'Eyal
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -66,6 +66,7 @@ newChat{ id="reward",
 				game.logPlayer(player, "梅琳达的父亲交给了你: %s", ro:getName{do_color=true})
 				game.zone:addEntity(game.level, ro, "object")
 				player:addObject(player:getInven("INVEN"), ro)
+				game._chronoworlds = nil
 			end
 			player:grantQuest("love-melinda")
 			ql = player:hasQuest("love-melinda")

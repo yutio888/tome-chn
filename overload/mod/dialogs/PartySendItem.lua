@@ -1,5 +1,5 @@
 ﻿-- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2014 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -50,13 +50,12 @@ function _M:on_register()
 end
 
 function _M:use(item)
-	if not item then return end
+	if not item or not item.actor:canAddToInven(item.actor.INVEN_INVEN) then return end
 	game:unregisterDialog(self)
-
 	self.source:removeObject(self.inven, self.item, true)
 	self.source:sortInven(self.inven)
 	self.o.__transmo = nil
-	item.actor:addObject(item.actor.INVEN_INVEN, self.o)
+	item.actor:addObject(item.actor.INVEN_INVEN, self.o, true) -- force full stack transfer
 	item.actor:sortInven(item.actor.INVEN_INVEN)
 	game.log("你将 %s 交给 %s.", self.o:getName{do_color=true}, item.actor.name)
 	self.on_end()
@@ -66,8 +65,8 @@ function _M:generateList()
 	local list = {}
 
 	for i, act in ipairs(game.party.m_list) do
-		if not act.no_inventory_access and act ~= game.player then
-			list[#list+1] = {name=act.name, actor=act}
+		if not act.no_inventory_access and act ~= game.player and act:getInven(act.INVEN_INVEN) then
+			list[#list+1] = {name=act.name..(act:canAddToInven(act.INVEN_INVEN) and "" or " #YELLOW#[NO ROOM]#LAST#"), actor=act}
 		end
 	end
 

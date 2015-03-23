@@ -1,4 +1,4 @@
--- ToME - Tales of Maj'Eyal
+﻿-- ToME - Tales of Maj'Eyal
 -- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
@@ -133,7 +133,10 @@ newChat{ id="charred-scar-success",
 	text = [[法师会？我从来没听说过他们。传说部落有了一个新的领袖，看样子现在应该有两个。
 感谢你所做的事，你必须进一步搜寻更多的消息，你知道你该去做什么。]],
 	answers = {
-		{"我会替你的人报仇！", action=function(npc, player) player:setQuestStatus("charred-scar", engine.Quest.DONE) end}
+		{"我会替你的人报仇！", action=function(npc, player)
+			player:setQuestStatus("charred-scar", engine.Quest.DONE)
+			game:unlockBackground("aeryn", "High Sun Paladin Aeryn")
+		end}
 	},
 }
 

@@ -390,9 +390,11 @@ on_grant = function(self, who)
 	g.color_r = colors.VIOLET.r
 	g.color_g = colors.VIOLET.g
 	g.color_b = colors.VIOLET.b
+	g.special_minimap = colors.VIOLET
 	g.add_displays = g.add_displays or {}
 	g.add_displays[#g.add_displays+1] = mod.class.Grid.new{image="terrain/maze_teleport.png"}
 	g.notice = true
+	g.always_remember = true
 	g.escort_portal = true
 	g:altered()
 	g.on_move = function(self, x, y, who)

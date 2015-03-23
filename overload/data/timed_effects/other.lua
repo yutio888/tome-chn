@@ -1,5 +1,5 @@
 ﻿-- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2014 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -396,81 +396,24 @@ newEffect{
 newEffect{
 	name = "DAMAGE_SMEARING", image = "talents/damage_smearing.png",
 	desc = "Damage Smearing",
-	long_desc = function(self, eff) return ("当 前 所 受 伤 害 转 化 为 未 来 的 时 间 伤 害。"):format(eff.power) end,
-	type = "other",
-	subtype = { time=true },
-	status = "beneficial",
-	parameters = { power=10 },
-	on_gain = function(self, err) return "The fabric of time alters around #target#.", "+Damage Smearing" end,
-	on_lose = function(self, err) return "The fabric of time around #target# stabilizes.", "-Damage Smearing" end,
-	activate = function(self, eff)
-		eff.particle = self:addParticles(Particles.new("time_shield", 1))
-	end,
-	deactivate = function(self, eff)
-		self:removeParticles(eff.particle)
-	end,
-}
-
-newEffect{
-	name = "SMEARED",
-	desc = "Smeared",
-	long_desc = function(self, eff) return ("受 到 的 伤 害 转 化 为 每 回 合 %0.2f 时 空 伤 害。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("过 去 受 到 的 伤 害 被 转 化 为 每 回 合 %0.2f 时 空 伤 害 。"):format(eff.dam) end,
 	type = "other",
 	subtype = { time=true },
 	status = "detrimental",
-	parameters = { power=10 },
+	parameters = { dam=10 },
 	on_gain = function(self, err) return "#Target# is taking damage received in the past!", "+Smeared" end,
 	on_lose = function(self, err) return "#Target# stops taking damage received in the past.", "-Smeared" end,
 	on_merge = function(self, old_eff, new_eff)
 		-- Merge the flames!
-		local olddam = old_eff.power * old_eff.dur
-		local newdam = new_eff.power * new_eff.dur
-		local dur = math.ceil((old_eff.dur + new_eff.dur) / 2)
-		old_eff.dur = dur
-		old_eff.power = (olddam + newdam) / dur
-		return old_eff
+		local olddam = old_eff.dam * old_eff.dur
+		local newdam = new_eff.dam * new_eff.dur
+		new_eff.dam = (olddam + newdam) / new_eff.dur
+		return new_eff
 	end,
 	on_timeout = function(self, eff)
-		DamageType:get(DamageType.TEMPORAL).projector(eff.src, self.x, self.y, DamageType.TEMPORAL, eff.power)
-	end,
-}
+		local dead, val = self:takeHit(eff.dam, self, {special_death_msg="was smeared across all space and time"})
 
-newEffect{
-	name = "PRECOGNITION", image = "talents/precognition.png",
-	desc = "Precognition",
-	long_desc = function(self, eff) return "你 进 入 未 来， 当 效 果 结 束 时, 你 会 回 到 原 来 的 状 态。" end,
-	type = "other",
-	subtype = { time=true },
-	status = "beneficial",
-	parameters = { power=10 },
-	cancel_on_level_change = function(self, eff)
-		game.logPlayer(game.player, "#LIGHT_BLUE#Precognition fizzles and dissipates.")
-		game._chronoworlds = nil
-	end,
-	activate = function(self, eff)
-		game:onTickEnd(function()
-			game:chronoClone("precognition")
-		end)
-	end,
-	deactivate = function(self, eff)
-		game:onTickEnd(function()
-			-- Update the shader of the original player
-			self:updateMainShader()
-			if game._chronoworlds == nil then
-				game.logSeen(self, "#LIGHT_RED#The spell fizzles.")
-				return
-			end
-			game.logPlayer(game.player, "#LIGHT_BLUE#You unfold the spacetime continuum to a previous state!")
-			game:chronoRestore("precognition", true)
-			game.player.tmp[self.EFF_PRECOGNITION] = nil
-			if game._chronoworlds then game._chronoworlds = nil end
-			if game.player:knowTalent(game.player.T_FORESIGHT) then
-				local t = game.player:getTalentFromId(game.player.T_FORESIGHT)
-				t.do_precog_foresight(game.player, t)
-			end
-			game.player.energy.value = game.energy_to_act
-			game.paused = true
-		end)
+		game:delayedLogDamage(eff, self, val, ("%s%d %s#LAST#"):format(DamageType:get(DamageType.TEMPORAL).text_color or "#aaaaaa#", math.ceil(val), DamageType:get(DamageType.TEMPORAL).name), false)
 	end,
 }
 
@@ -481,15 +424,24 @@ newEffect{
 	type = "other",
 	subtype = { time=true },
 	status = "beneficial",
-	parameters = { power=10 },
+	parameters = { power=10, defense=0, crits=0 },
+	remove_on_clone = true,
 	activate = function(self, eff)
 		eff.thread = 1
 		eff.max_dur = eff.dur
 		game:onTickEnd(function()
 			game:chronoClone("see_threads_base")
 		end)
+		
+		self:effectTemporaryValue(eff, "ignore_direct_crits", eff.crits)
+		self:effectTemporaryValue(eff, "combat_def", eff.defense)
 	end,
 	deactivate = function(self, eff)
+		-- clone protection
+		if self ~= game.player then
+			return
+		end
+		
 		game:onTickEnd(function()
 
 			if game._chronoworlds == nil then
@@ -646,22 +598,6 @@ newEffect{
 		if not eff.src:hasLOS(self.x, self.y) then return end
 		if eff.dur >= 1 then return end
 		DamageType:get(DamageType.TEMPORAL).projector(eff.src, self.x, self.y, DamageType.TEMPORAL, eff.power)
-	end,
-}
-
-newEffect{
-	name = "SPACETIME_STABILITY",
-	desc = "Spacetime Stability",
-	long_desc = function(self, eff) return "目 标 的 时 空 法 术 不 会 失 败。" end,
-	type = "other",
-	subtype = { time=true },
-	status = "beneficial",
-	parameters = { power=0.1 },
-	on_gain = function(self, err) return "Spacetime has stabilized around #Target#.", "+Spactime Stability" end,
-	on_lose = function(self, err) return "The fabric of spacetime around #Target# has returned to normal.", "-Spacetime Stability" end,
-	activate = function(self, eff)
-	end,
-	deactivate = function(self, eff)
 	end,
 }
 
@@ -1452,30 +1388,6 @@ newEffect{
 }
 
 newEffect{
-	name = "RELOADING", image = "talents/reload.png",
-	desc = "Reloading",
-	long_desc = function(self, eff) return ("装 填 弹 药。") end,
-	decrease = 0,
-	type = "other",
-	subtype = { miscellaneous=true },
-	status = "beneficial",
-	parameters = {},
-	activate = function(self, eff) game.logSeen(self, "#LIGHT_BLUE#%s 开始装填弹药。", npcCHN:getName(self.name:capitalize())) end,
-	deactivate = function(self, eff)
-	end,
-	on_timeout = function(self, eff)
-		for i = 1, eff.shots_per_turn do
-			eff.ammo.combat.shots_left = eff.ammo.combat.shots_left + 1
-			if eff.ammo.combat.shots_left >= eff.ammo.combat.capacity then
-				game.logPlayer(self, "你的弹药装填完毕。")
-				self:breakReloading()
-				break
-			end
-		end
-	end,
-}
-
-newEffect{
 	name = "PROB_TRAVEL_UNSTABLE", image = "talents/probability_travel.png",
 	desc = "Unstable Probabilites",
 	long_desc = function(self, eff) return "目 标 最 近 通 过 使 用 时 空 旅 行 穿 越 了 墙 壁。" end,
@@ -1658,23 +1570,6 @@ newEffect{
 	end,
 }
 
-newEffect{
-	name = "POSSESSION", image = "talents/possess.png",
-	desc = "Psionic Consume",
-	long_desc = function(self, eff) return "生 物 的 自 主 意 识 被 摧 毁， 现 在 其 拥 有 者 控 制 着 它 的 躯 壳。 不 过 强 烈 的 超 能 量 灼 烧 其 肉 体， 很 快 它 便 会 消 失。" end,
-	type = "other",
-	subtype = { psionic=true, possess=true },
-	status = "detrimental",
-	no_stop_resting = true,
-	parameters = { },
-	activate = function(self, eff)
-	end,
-	deactivate = function(self, eff)
-		self.summoner = nil
-		self:die(self)
-	end,
-}
-
 -- Borrowed Time and the Borrowed Time stun effect
 newEffect{
 	name = "HIGHBORN_S_BLOOM", image = "talents/highborn_s_bloom.png",
@@ -1757,19 +1652,23 @@ newEffect{
 		if not self.on_die then return end
 		-- Dreamscape doesn't cooldown in the dreamscape
 		self.talents_cd[self.T_DREAMSCAPE] = self.talents_cd[self.T_DREAMSCAPE] + 1
-		-- Spawn every three turns, or every two for lucid dreamers
+		
+		-- Spawn a copy every other turn
 		local spawn_time = 2
 		if eff.dur%spawn_time == 0 then
-			local x, y = util.findFreeGrid(eff.target.x, eff.target.y, 1, true, {[Map.ACTOR]=true})
+		
+			-- Fine space
+			local x, y = util.findFreeGrid(eff.target.x, eff.target.y, 5, true, {[Map.ACTOR]=true})
 			if not x then
 				game.logPlayer(self, "Not enough space to summon!")
 				return
 			end
+			
 			-- Create a clone for later spawning
 			local m = require("mod.class.NPC").new(eff.target:cloneFull{
 				shader = "shadow_simulacrum",
 				shader_args = { color = {0.0, 1, 1}, base = 0.6 },
-				no_drops = true,
+				no_drops = true, keep_inven_on_death = false,
 				faction = eff.target.faction,
 				summoner = eff.target, summoner_gain_exp=true,
 				ai_target = {actor=nil},
@@ -1777,22 +1676,14 @@ newEffect{
 				ai_state = eff.target.ai_state or { ai_move="move_complex", talent_in=1 },
 				name = eff.target.name.."'s dream projection",
 			})
+			
+			-- Change some values; most of this is typical clone protection stuff
 			m.ai_state.ally_compassion = 10
 			m:removeAllMOs()
 			m.make_escort = nil
 			m.on_added_to_level = nil
 			m._rst_full = true
-
-			m.energy.value = 0
-			m.player = nil
-			m.max_life = m.max_life
-			m.life = util.bound(m.life, 0, m.max_life)
-			if not eff.target:attr("lucid_dreamer") then
-				m.inc_damage.all = (m.inc_damage.all or 0) - 50
-			end
 			m.forceLevelup = function() end
-			m.die = nil
-			m.on_die = nil
 			m.on_acquire_target = nil
 			m.seen_by = nil
 			m.can_talk = nil
@@ -1801,8 +1692,30 @@ newEffect{
 			m.exp_worth = 0
 			m.no_inventory_access = true
 			m.clone_on_hit = nil
+			m.player = nil
+			m.energy.value = 0
+			m.max_life = m.max_life
+			m.life = util.bound(m.life, 0, m.max_life)
 			m.remove_from_party_on_death = true
-			m.is_psychic_projection = true
+			if not eff.target:attr("lucid_dreamer") then
+				m.inc_damage.all = (m.inc_damage.all or 0) - 50
+			end
+			
+			-- special stuff
+ 			m.is_psychic_projection = true
+			m.lucid_dreamer = 1
+			
+			-- Remove some talents
+			local tids = {}
+			for tid, _ in pairs(m.talents) do
+				local t = m:getTalentFromId(tid)
+				if (t.no_npc_use and not t.allow_temporal_clones) or t.remove_on_clone then tids[#tids+1] = t end
+			end
+			for i, t in ipairs(tids) do
+				if t.mode == "sustained" and m:isTalentActive(t.id) then m:forceUseTalent(t.id, {ignore_energy=true, silent=true}) end
+				m:unlearnTalentFull(t.id)
+			end
+			
 			-- remove imprisonment
 			m.invulnerable = m.invulnerable - 1
 			m.time_prison = m.time_prison - 1
@@ -1836,12 +1749,13 @@ newEffect{
 					m:resetCanSeeCache()
 				end
 			end
-
-			-- Try to insure the AI isn't attacking the invulnerable actor
-			if self.ai_target and self.ai_target.actor and self.ai_target.actor:attr("invulnerable") then
-				self:setTarget(nil)
-			end
 		end
+		
+		-- Try to insure the AI isn't attacking the invulnerable actor
+		if self.ai_target and self.ai_target.actor and self.ai_target.actor:attr("invulnerable") then
+			self:setTarget(nil)
+		end
+		
 		-- End the effect early if we've killed enough projections
 		if eff.projections_killed/10 >= eff.target.life/eff.target.max_life then
 			game:onTickEnd(function()
@@ -1858,11 +1772,6 @@ newEffect{
 		eff.tid = eff.target:addTemporaryValue("no_timeflow", 1)
 		eff.imid = eff.target:addTemporaryValue("status_effect_immune", 1)
 		eff.target.energy.value = 0
-		if core.shader.active(4) then
-			eff.particle = eff.target:addParticles(Particles.new("shader_shield", 1, {img="shield2", size_factor=1.25}, {type="shield", shieldIntensity=0.25, time_factor=6000, aadjust=5, color={0, 1, 1}}))
-		else
-			eff.particle = eff.target:addParticles(Particles.new("generic_shield", 1, {r=0, g=1, b=1, a=1}))
-		end
 
 		-- Make the invader deadly
 		eff.pid = self:addTemporaryValue("inc_damage", {all=eff.power})
@@ -1871,15 +1780,17 @@ newEffect{
 	deactivate = function(self, eff)
 		-- Clone protection
 		if not self.on_die then return end
+		
 		-- Remove the target's invulnerability
 		eff.target:removeTemporaryValue("invulnerable", eff.iid)
 		eff.target:removeTemporaryValue("time_prison", eff.sid)
 		eff.target:removeTemporaryValue("no_timeflow", eff.tid)
 		eff.target:removeTemporaryValue("status_effect_immune", eff.imid)
-		eff.target:removeParticles(eff.particle)
+
 		-- Remove the invaders damage bonus
 		self:removeTemporaryValue("inc_damage", eff.pid)
 		self:removeTemporaryValue("lucid_dreamer", eff.did)
+		
 		-- Return from the dreamscape
 		game:onTickEnd(function()
 			-- Collect objects
@@ -2284,7 +2195,14 @@ newEffect{
 		self:effectTemporaryValue(eff, "status_effect_immune", 1)
 		self.energy.value = 0
 	end,
-	deactivate = function(self, eff)
+	deactivate = function(self, eff) --wake up vaulted npcs in LOS
+	  self:computeFOV(5, nil, 
+		function(x, y, dx, dy, sqdist)
+			local act = game.level.map(x, y, Map.ACTOR)
+			if act then
+				act:removeEffect(act.EFF_VAULTED, true, true)
+			end
+		end, true, false, false)
 	end,
 }
 
@@ -2488,10 +2406,416 @@ newEffect{
 	parameters = { power=10},
 	on_gain = function(self, err) return "#Target# retunes the fabric of spaceime.", "+Spacetime Tuning" end,
 	on_timeout = function(self, eff)
-		if not self.resting then
-			self:removeEffect(self.EFF_SPACETIME_TUNING)
-		else
-			self:incParadox(eff.power)
+		local dox = self:getParadox() - self.preferred_paradox
+		local fix = math.min( math.abs(dox), eff.power )
+		self:incParadox(fix)
+	end,
+	activate = function(self, eff)
+		if core.shader.active(4) then
+			eff.particle1 = self:addParticles(Particles.new("shader_shield", 1, {toback=true ,size_factor=1.5, y=-0.3, img="healparadox", life=25}, {type="healing", time_factor=3000, beamsCount=15, noup=2.0, beamColor1={0xb6/255, 0xde/255, 0xf3/255, 1}, beamColor2={0x5c/255, 0xb2/255, 0xc2/255, 1}}))
+			eff.particle2 = self:addParticles(Particles.new("shader_shield", 1, {toback=false,size_factor=1.5, y=-0.3, img="healparadox", life=25}, {type="healing", time_factor=3000, beamsCount=15, noup=1.0, beamColor1={0xb6/255, 0xde/255, 0xf3/255, 1}, beamColor2={0x5c/255, 0xb2/255, 0xc2/255, 1}}))
 		end
+	end,
+	deactivate = function(self, eff)
+		self:removeParticles(eff.particle1)
+		self:removeParticles(eff.particle2)
+	end,
+}
+
+newEffect{
+	name = "TIME_STOP", image = "talents/time_stop.png",
+	desc = "Time Stop",
+	long_desc = function(self, eff)
+		return ("目 标 停 止 了 时 间 ， 期 间 造 成 的 伤 害 减 少 %d%%。"):format(eff.power)
+	end,
+	charges = function(self, eff)
+		local charges = math.floor(self.energy.value/1000) - 1
+		if charges <= 0 then
+			self:removeEffect(self.EFF_TIME_STOP)
+		end
+		return charges
+	end,
+	type = "other",
+	subtype = {time=true},
+	status = "detrimental",
+	parameters = {power=50},
+	remove_on_clone = true,
+	activate = function(self, eff)
+		self:effectTemporaryValue(eff, "generic_damage_penalty", eff.power)
+		self:effectTemporaryValue(eff, "timestopping", 1)
+		self.no_leave_control = true
+		core.display.pauseAnims(true)
+		
+		-- clone protection
+		if self.player then
+			self:updateMainShader()
+		end
+	end,
+	deactivate = function(self, eff)
+		self.no_leave_control = false
+		core.display.pauseAnims(false)
+		
+		-- clone protection
+		if self == game.player then
+			self:updateMainShader()
+		end
+	end,
+}
+
+newEffect{
+	name = "TEMPORAL_REPRIEVE", image = "talents/temporal_reprieve.png",
+	desc = "Temporal Reprieve",
+	long_desc = function(self, eff) return ("目 标 被 传 送 至 安 全 位 置。"):format() end,
+	type = "other",
+	subtype = { time=true },
+	status = "beneficial",
+	parameters = { power=1 },
+	on_timeout = function(self, eff)
+		-- Clone protection
+		if not self.on_die then return end
+	end,
+	activate = function(self, eff)
+	end,
+	deactivate = function(self, eff)
+		-- Clone protection
+		if not self.on_die then return end
+		-- Return from the reprieve
+		game:onTickEnd(function()
+			-- Collect objects
+			local objs = {}
+			for i = 0, game.level.map.w - 1 do for j = 0, game.level.map.h - 1 do
+				for z = game.level.map:getObjectTotal(i, j), 1, -1 do
+					objs[#objs+1] = game.level.map:getObject(i, j, z)
+					game.level.map:removeObject(i, j, z)
+				end
+			end end
+
+			local oldzone = game.zone
+			local oldlevel = game.level
+			local zone = game.level.source_zone
+			local level = game.level.source_level
+
+			if not self.dead then
+				oldlevel:removeEntity(self)
+				level:addEntity(self)
+			end
+
+			game.zone = zone
+			game.level = level
+			game.zone_name_s = nil
+
+			local x1, y1 = util.findFreeGrid(eff.x, eff.y, 20, true, {[Map.ACTOR]=true})
+			if x1 then
+				if not self.dead then
+					self:move(x1, y1, true)
+					self.on_die, self.temporal_reprieve_on_die = self.temporal_reprieve_on_die, nil
+					game.level.map:particleEmitter(x1, y1, 1, "generic_teleport", {rm=0, rM=0, gm=180, gM=255, bm=180, bM=255, am=35, aM=90})
+				else
+					self.x, self.y = x1, y1
+				end
+			end
+
+			-- Add objects back
+			for i, o in ipairs(objs) do
+				game.level.map:addObject(self.x, self.y, o)
+			end
+
+			-- Remove all npcs in the reprieve
+			for uid, e in pairs(oldlevel.entities) do
+				if e ~= self and e.die then e:die() end
+			end
+
+			-- Reload MOs
+			game.level.map:redisplay()
+			game.level.map:recreate()
+			game.uiset:setupMinimap(game.level)
+			game.nicer_tiles:postProcessLevelTilesOnLoad(game.level)
+
+			game.logPlayer(game.player, "#STEEL_BLUE#You are brought back from your repreive!")
+
+		end)
+	end,
+}
+
+newEffect{
+	name = "TEMPORAL_FUGUE", image = "talents/temporal_fugue.png",
+	desc = "Temporal Fugue",
+	long_desc = function(self, eff) return "目 标 将 伤 害 和 复 制 体 共 享。" end,
+	type = "other",
+	subtype = { time=true },
+	status = "beneficial",
+	parameters = { power=10 },
+	decrease = 0,
+	callbackOnTakeDamage = function(self, eff, src, x, y, type, dam, state)
+		if src ~= self and src:hasEffect(src.EFF_TEMPORAL_FUGUE) then
+			-- Find our clones
+			for i = 1, #eff.targets do
+				local target = eff.targets[i]
+				if target == self then dam = 0 end
+			end
+		end
+		return {dam=dam}
+	end,
+	callbackOnHit = function(self, eff, cb, src)
+		if cb.value <= 0 then return cb.value end
+		
+		local clones = {}
+		-- Find our clones
+		for i = 1, #eff.targets do
+			local target = eff.targets[i]
+			if not target.dead and game.level:hasEntity(target) then
+				clones[#clones+1] = target
+			end
+		end
+		
+		-- Split the damage
+		if #clones > 0 and not self.turn_procs.temporal_fugue_damage then
+			self.turn_procs.temporal_fugue_damage = true
+			cb.value = cb.value/#clones
+			game:delayedLogMessage(self, nil, "fugue_damage", "#STEEL_BLUE##Source# shares damage with %s fugue clones!", string.his_her(self))
+			for i = 1, #clones do
+				local target = clones[i]
+				if target ~= self then
+					target.turn_procs.temporal_fugue_damage = true
+					target:takeHit(cb.value, src)
+					game:delayedLogDamage(src or self, self, 0, ("#STEEL_BLUE#(%d shared)#LAST#"):format(cb.value), nil)
+					target.turn_procs.temporal_fugue_damage = nil
+				end
+			end
+			
+			self.turn_procs.temporal_fugue_damage = nil
+		end
+		
+		-- If we're the last clone remove the effect
+		if #clones <= 0 then
+			self:removeEffect(self.EFF_TEMPORAL_FUGUE)
+		end
+		
+		return cb.value
+	end,
+	on_timeout = function(self, eff)
+		-- Temporal Fugue does not cooldown while active
+		if self.talents_cd[self.T_TEMPORAL_FUGUE] then
+			self.talents_cd[self.T_TEMPORAL_FUGUE] = self.talents_cd[self.T_TEMPORAL_FUGUE] + 1
+		end
+	
+		local alive = false
+		for i = 1, #eff.targets do
+			local target = eff.targets[i]
+			if target ~=self and not target.dead then
+				alive = true
+				break
+			end
+		end
+		if not alive then
+			self:removeEffect(self.EFF_TEMPORAL_FUGUE)
+		end
+	end,
+	activate = function(self, eff)
+		self:effectTemporaryValue(eff, "generic_damage_penalty", 66)
+	end,
+}
+
+newEffect{
+	name = "DRACONIC_WILL", image = "talents/draconic_will.png",
+	desc = "Draconic Will",
+	long_desc = function(self, eff) return "目 标 免 疫 负 面效 果." end,
+	type = "other",
+	subtype = { nature=true },
+	status = "beneficial",
+	on_gain = function(self, err) return "#Target#'s skin hardens.", "+Draconic Will" end,
+	on_lose = function(self, err) return "#Target#'s skin is back to normal.", "-Draconic Will" end,
+	parameters = { },
+	activate = function(self, eff)
+		self:effectTemporaryValue(eff, "negative_status_effect_immune", 1)
+	end,
+}
+
+newEffect{
+	name = "REALITY_SMEARING", image = "talents/reality_smearing.png",
+	desc = "Reality Smearing",
+	long_desc = function(self, eff) return ("过 去 受 到 的 伤 害 被 转 化 为 每 回 合 %0.2 点 紊 乱。"):format(eff.paradox) end,
+	type = "other",
+	subtype = { time=true },
+	status = "detrimental",
+	parameters = { paradox=10 },
+	on_gain = function(self, err) return "#Target# converts damage into paradox.", "+Smearing" end,
+	on_lose = function(self, err) return "#Target# stops converting damage to paradox..", "-Smearing" end,
+	on_merge = function(self, old_eff, new_eff)
+		-- Merge the flames!
+		local oldparadox = old_eff.paradox * old_eff.dur
+		local newparadox = new_eff.paradox * new_eff.dur
+		old_eff.paradox = (oldparadox + newparadox) / new_eff.dur
+		old_eff.dur = new_eff.dur
+		return old_eff
+	end,
+	on_timeout = function(self, eff)
+		self:incParadox(eff.paradox)
+	end,
+	activate = function(self, eff)
+		if core.shader.allow("adv") then
+			eff.particle1, eff.particle2 = self:addParticles3D("volumetric", {kind="transparent_cylinder", scrollingSpeed=0.0002, density=15, radius=1.6, growSpeed=0.004, img="continuum_01_5"})
+		else
+			eff.particle1 = self:addParticles(Particles.new("time_shield", 1))
+		end
+	end,
+	deactivate = function(self, eff)
+		self:removeParticles(eff.particle1)
+		self:removeParticles(eff.particle2)
+	end,
+}
+
+newEffect{
+	name = "AEONS_STASIS",
+	desc = "Aeons Stasis",
+	long_desc = function(self, eff) return "目标处于静态时空中。" end,
+	type = "other", decrease = 0, no_remove = true,
+	subtype = { temporal=true },
+	status = "beneficial",
+	on_lose = function(self, err) return "#Target#'s is back to the normal timeflow.", "-Aeons Stasis" end,
+	parameters = { },
+	activate = function(self, eff)
+		self:effectTemporaryValue(eff, "status_effect_immune", 1)
+		self:effectTemporaryValue(eff, "invulnerable", 1)
+		self:effectTemporaryValue(eff, "cant_be_moved", 1)
+		self.never_act = true
+		eff.old_faction = self.faction
+		self.faction = "neutral"
+	end,
+	deactivate = function(self, eff)
+		self.faction = eff.old_faction
+		self.never_act = nil
+		self:disappear(self)
+		local e = game.zone:makeEntity(game.level, "actor", {type="giant", subtype="ogre", special_rarity="special_rarity"}, nil, true)
+		local x, y = util.findFreeGrid(self.x, self.y, 10, true, {[Map.ACTOR]=true})
+		if e and x then
+			game.zone:addEntity(game.level, e, "actor", x, y)
+			local g = game.zone.grid_list[self.to_vat]
+			if g then game.zone:addEntity(game.level, g, "terrain", x, y) end
+
+			game.level.map:particleEmitter(x, y, 1, "goosplosion")
+			game.level.map:particleEmitter(x, y, 1, "goosplosion")
+			game.level.map:particleEmitter(x, y, 1, "goosplosion")
+			game.level.map:particleEmitter(x, y, 1, "goosplosion")
+			game.level.map:particleEmitter(x, y, 1, "goosplosion")
+		end
+	end,
+	on_timeout = function(self, eff)
+		if eff.timeout then
+			eff.timeout = eff.timeout - 1
+			if eff.timeout <= 0 then
+				self:removeEffect(self.EFF_AEONS_STASIS, nil, true)
+			end
+		end
+	end,
+}
+
+newEffect{
+	name = "UNSTOPPABLE", image = "talents/unstoppable.png",
+	desc = "Unstoppable",
+	long_desc = function(self, eff) return ("目 标 无 可 阻 挡 ！ 拒 绝 死 亡 ， 效 果 结 束 时 回  复 %d 生 命。"):format(eff.kills * eff.hp_per_kill * self.max_life / 100) end,
+	type = "other",
+	subtype = { frenzy=true },
+	status = "beneficial",
+	parameters = { hp_per_kill=2 },
+	activate = function(self, eff)
+		eff.kills = 0
+		eff.tmpid = self:addTemporaryValue("unstoppable", 1)
+		eff.healid = self:addTemporaryValue("no_life_regen", 1)
+	end,
+	deactivate = function(self, eff)
+		self:removeTemporaryValue("unstoppable", eff.tmpid)
+		self:removeTemporaryValue("no_life_regen", eff.healid)
+		self:heal(eff.kills * eff.hp_per_kill * self.max_life / 100, eff)
+	end,
+}
+
+newEffect{
+	name = "2H_PENALTY", image = "talents/unstoppable.png",
+	desc = "Hit Penalty",
+	long_desc = function(self, eff) return ("目 标 单 手 使 用 双 手 武 器 ， 物 理 、 法 术 、 精 神 强 度 下 降 %d%% ( 受 体 型 影 响 )；同 时 副 手附  加伤 害 减 少 50%%。"):format(20 - math.min(self.size_category - 4, 4) * 5) end,
+	type = "other", decrease = 0, no_remove = true,
+	subtype = { combat=true, penalty=true },
+	status = "detrimental",
+	no_stop_enter_worlmap = true, no_stop_resting = true,
+	parameters = {},
+	activate = function(self, eff)
+		self:effectTemporaryValue(eff, "hit_penalty_2h", 1)
+	end,
+}
+
+newEffect{
+	name = "TWIST_FATE", image = "talents/twist_fate.png",
+	desc = "Twist Fate",
+	long_desc = function(self, eff) 
+		local t = self:getTalentFromId(eff.talent)
+		return 
+		([[当 前 异 常： %s
+		
+		%s]]):format(t.name or "none", t.info(self, t) or "none")
+	end,
+	type = "other",
+	subtype = { time=true },
+	status = "detrimental",
+	parameters = { paradox=0, twisted=false },
+	on_gain = function(self, err) return nil, "+Twist Fate" end,
+	on_lose = function(self, err) return nil, "-Twist Fate" end,
+	activate = function(self, eff)
+		if core.shader.allow("adv") then
+			eff.particle1, eff.particle2 = self:addParticles3D("volumetric", {kind="fast_sphere", appear=10, radius=1.6, twist=30, density=30, growSpeed=0.004, scrollingSpeed=-0.004, img="continuum_01_3"})
+		end
+	end,
+	deactivate = function(self, eff)
+		self:removeParticles(eff.particle1)
+		self:removeParticles(eff.particle2)
+		if not game.zone.wilderness and not self.dead then
+			if not eff.twisted then
+				self:forceUseTalent(eff.talent, {force_target=self})
+				game:playSoundNear(self, "talents/dispel")
+				self:incParadox(-eff.paradox)
+			end
+		end
+	end,
+}
+
+-- Dummy effect for particles
+newEffect{
+	name = "WARDEN_S_TARGET", image = "talents/warden_s_focus.png",
+	desc = "Warden's Focus Target",
+	long_desc = function(self, eff) return ("%s 被 选 为 目 标."):format(eff.src.name) end,
+	type = "other",
+	subtype = { tactic=true },
+	status = "detrimental",
+	parameters = {},
+	remove_on_clone = true, decrease = 0,
+	on_gain = function(self, err) return nil, "+Warden's Focus" end,
+	on_lose = function(self, err) return nil, "-Warden's Focus" end,
+	on_timeout = function(self, eff)
+		local p = eff.src:hasEffect(eff.src.EFF_WARDEN_S_FOCUS)
+		if not p or p.target ~= self or eff.src.dead or not game.level:hasEntity(eff.src) or core.fov.distance(self.x, self.y, eff.src.x, eff.src.y) > 10 then
+			self:removeEffect(self.EFF_WARDEN_S_TARGET)
+		end
+	end,
+	activate = function(self, eff)
+		if core.shader.active(4) then
+			eff.particle1 = self:addParticles(Particles.new("shader_shield", 1, {toback=true,  size_factor=1.5, y=-0.3, img="healcelestial"}, {type="healing", time_factor=4000, noup=2.0, beamColor1={229/255, 0/255, 0/255, 1}, beamColor2={299/255, 0/255, 0/255, 1}, circleColor={0,0,0,0}, beamsCount=5}))
+			eff.particle2 = self:addParticles(Particles.new("shader_shield", 1, {toback=false, size_factor=1.5, y=-0.3, img="healcelestial"}, {type="healing", time_factor=4000, noup=1.0, beamColor1={229/255, 0/255, 0/255, 1}, beamColor2={229/255, 0/255, 0/255, 1}, circleColor={0.8,0,0,0.8}, beamsCount=5}))
+		end
+	end,
+	deactivate = function(self, eff)
+		self:removeParticles(eff.particle1)
+		self:removeParticles(eff.particle2)
+	end,
+}
+
+newEffect{
+	name = "DEATH_DREAM", image = "talents/sleep.png",
+	desc = "Death in a Dream",
+	type = "other", subtype={mind=true},
+	status = "detrimental",
+	long_desc = function(self, eff) return ("目 标 吸 入 有 毒 的 催 眠 气 体 ， 每 回 合 损 失 %d 生 命 。"):format(eff.power) end,
+	on_timeout = function(self, eff)
+		local dead, val = self:takeHit(eff.power, self, {special_death_msg="killed in a dream"})
+		game:delayedLogDamage(eff, self, val, ("%s%d %s#LAST#"):format(DamageType:get(DamageType.MIND).text_color or "#aaaaaa#", math.ceil(val), "睡梦"), false)
 	end,
 }

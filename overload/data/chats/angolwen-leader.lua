@@ -1,4 +1,4 @@
--- ToME - Tales of Maj'Eyal
+﻿-- ToME - Tales of Maj'Eyal
 -- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
@@ -35,14 +35,21 @@ newChat{ id="save-derth",
 坦白的说，我们送你去的地方，很可能就是一个死亡陷阱，而且我们没有办法再把你从他的巢穴里传送出去，因为他的老巢在岱卡拉山脉的最高峰。]],
 	answers = {
 		{"我要做些准备工作，我马上就回来。", action=function(npc, player) player:setQuestStatus("lightning-overload", engine.Quest.COMPLETED, "tempest-located") end},
-		{"我准备好了，传送我过去吧。我不会再让德斯人民遭受灾难了。", action=function(npc, player) player:setQuestStatus("lightning-overload", engine.Quest.COMPLETED, "tempest-located") player:hasQuest("lightning-overload"):teleport_urkis() end},
+		{"我准备好了，传送我过去吧。我不会再让德斯人民遭受灾难了。", action=function(npc, player)
+			player:setQuestStatus("lightning-overload", engine.Quest.COMPLETED, "tempest-located")
+			player:hasQuest("lightning-overload"):teleport_urkis()
+			game:unlockBackground("linaniil", "Archmage Linaniil")
+		end},
 	}
 }
 
 newChat{ id="teleport-urkis",
 	text = [[祝你好运，愿安格利文的祝福与你同在。]],
 	answers = {
-		{"谢谢。", action=function(npc, player) player:hasQuest("lightning-overload"):teleport_urkis() end},
+		{"谢谢。", action=function(npc, player)
+			 player:hasQuest("lightning-overload"):teleport_urkis() 
+			 game:unlockBackground("linaniil", "Archmage Linaniil")
+			 end},
 	}
 }
 

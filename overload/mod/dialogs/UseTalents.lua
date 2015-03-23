@@ -1,5 +1,5 @@
 -- TE4 - T-Engine 4
--- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ local Separator = require "engine.ui.Separator"
 module(..., package.seeall, class.inherit(Dialog))
 -- Could use better icons when available
 local confirmMark = require("engine.Entity").new({image="ui/chat-icon.png"})
-local autoMark = require("engine.Entity").new({image = "/ui/hotkeys/mainmenu.png"})
+local autoMark = require("engine.Entity").new({image = "ui/hotkeys/mainmenu.png"})
 
 -- generate talent status separately to enable quicker refresh of Dialog
 local function TalentStatus(who,t) 
@@ -56,7 +56,8 @@ function _M:init(actor)
 	actor.hotkey = actor.hotkey or {}
 	Dialog.init(self, "技能设定： "..actor.name, game.w * 0.8, game.h * 0.8)
 
-	self.c_tut = Textzone.new{width=math.floor(self.iw / 2 - 10), height=1, auto_height=true, no_color_bleed=true, text=[[
+	local vsep = Separator.new{dir="horizontal", size=self.ih - 10}
+	self.c_tut = Textzone.new{width=math.floor(self.iw / 2 - vsep.w / 2), height=1, auto_height=true, no_color_bleed=true, text=[[
 你可以将一个非被动技能绑定至相应的快捷键，通过右键点击技能来进行设置。
 仔细检查一下游戏菜单中关于快捷键绑定的设置（默认情况下的快捷键是0～9以
 及Ctrl、Shift与数字组合键）。
@@ -79,14 +80,14 @@ function _M:init(actor)
 			else return "" end
 		end},
 	}
-	self.c_list = TreeList.new{width=math.floor(self.iw / 2 - 10), height=self.ih - 10, all_clicks=true, scrollbar=true, columns=cols, tree=self.list, fct=function(item, sel, button) self:use(item, button) end, select=function(item, sel) self:select(item) end, on_drag=function(item, sel) self:onDrag(item) end}
+	self.c_list = TreeList.new{width=math.floor(self.iw / 2 - vsep.w / 2), height=self.ih - 10, all_clicks=true, scrollbar=true, columns=cols, tree=self.list, fct=function(item, sel, button) self:use(item, button) end, select=function(item, sel) self:select(item) end, on_drag=function(item, sel) self:onDrag(item) end}
 	self.c_list.cur_col = 2
 
 	self:loadUI{
 		{left=0, top=0, ui=self.c_list},
 		{right=0, top=self.c_tut.h + 20, ui=self.c_desc},
 		{right=0, top=0, ui=self.c_tut},
-		{hcenter=0, top=5, ui=Separator.new{dir="horizontal", size=self.ih - 10}},
+		{hcenter=0, top=5, ui=vsep},
 	}
 	self:setFocus(self.c_list)
 	self:setupUI()

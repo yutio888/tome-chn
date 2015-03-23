@@ -64,3 +64,13 @@ newAchievement{
 	desc = [[成就你的野心并获得永恒的生命，你终于成为了巫妖！]],
 	show = "name",
 }
+newAchievement{
+	name = "Best album ever!", id = "THE_CURE",
+	desc = [[Removed 89 beneficial effects from enemies via Disintegration.]],
+	show = "full", 	mode = "player",
+	can_gain = function(self, who)
+		self.nb = (self.nb or 0) + 1
+		if self.nb >= 89 then return true end
+	end,
+	track = function(self) return tstring{tostring(self.nb or 0)," / 89"} end,
+}

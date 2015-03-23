@@ -1,4 +1,5 @@
-﻿-- Copyright (C) 2009 - 2014 Nicolas Casalini
+﻿-- ToME - Tales of Maj'Eyal
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -73,7 +74,7 @@ uberTalent{
 	-- called by getMax function in Antimagic shield talent definition mod.data.talents.gifts.antimagic.lua
 	shieldmult = function(self) return self:combatStatScale("cun", 0.1, 0.5) end,
 	info = function(self, t)
-		return ([[由 于 你 精 通 欺 诈 和 伪 装， 你 的 反 魔 护 盾 可 以 多 吸 收 %d%% 伤 害。 
+		return ([[由 于 你 精 通 欺 诈 和 伪 装， 你 的 反 魔 护 盾 可 以 多 吸 收 %d 伤 害。 
 		 受 灵 巧 影 响， 效 果 按 比 例 加 成。  ]])
 		:format(t.shieldmult(self)*100)
 	end,
@@ -222,30 +223,32 @@ uberTalent{
 
 		for tid, _ in pairs(self.talents_cd) do
 			local t = self:getTalentFromId(tid)
-			if 
-				(kind == "physical" and
-					(
-						t.type[1]:find("^technique/") or
-						t.type[1]:find("^cunning/")
+			if not t.fixed_cooldown then
+				if
+					(kind == "physical" and
+						(
+							t.type[1]:find("^technique/") or
+							t.type[1]:find("^cunning/")
+						)
+					) or
+					(kind == "spell" and
+						(
+							t.type[1]:find("^spell/") or
+							t.type[1]:find("^corruption/") or
+							t.type[1]:find("^celestial/") or
+							t.type[1]:find("^chronomancy/")
+						)
+					) or
+					(kind == "mind" and
+						(
+							t.type[1]:find("^wild%-gift/") or
+							t.type[1]:find("^cursed/") or
+							t.type[1]:find("^psionic/")
+						)
 					)
-				) or
-				(kind == "spell" and
-					(
-						t.type[1]:find("^spell/") or
-						t.type[1]:find("^corruption/") or
-						t.type[1]:find("^celestial/") or
-						t.type[1]:find("^chronomancy/")
-					)
-				) or
-				(kind == "mind" and
-					(
-						t.type[1]:find("^wild%-gift/") or
-						t.type[1]:find("^cursed/") or
-						t.type[1]:find("^psionic/")
-					)
-				)
-				then
-				tids[#tids+1] = tid
+					then
+					tids[#tids+1] = tid
+				end
 			end
 		end
 		if #tids == 0 then return end
@@ -318,8 +321,7 @@ uberTalent{
 	info = function(self, t)
 		return ([[你 结 交 了 狐 朋 狗 友， 学 到 了 一 些 下 三 滥 的 技 巧。 
 		 增 加 灵 巧 / 潜 行 系 0.2 系 数 值（ 需 习 得 该 技 能 树， 未 解 锁 则 会 解 锁 此 技 能）， 同 时 增 加 灵 巧 / 街 头 格 斗 系 0.1 系 数 值（ 未 习 得 则 以 0.9 的 技 能 系 数 解 锁 此 技 能 树）。
-		 此 外， 你 处 于 隐 形 时 的 伤 害 惩 罚 永 久 减 半。  ]]):
+		 此 外， 你 攻 击 隐 形 单 位 时 的 伤 害 惩 罚 永 久 减 半。  ]]):
 		format()
 	end,
 }
-

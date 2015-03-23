@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2014 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -22,6 +22,7 @@ local ActorAI = require "engine.interface.ActorAI"
 local Faction = require "engine.Faction"
 local Emote = require("engine.Emote")
 local Map = require("engine.Map")
+local Chat = require("engine.Chat")
 require "mod.class.Actor"
 
 module(..., package.seeall, class.inherit(mod.class.Actor, engine.interface.ActorAI))
@@ -53,8 +54,6 @@ function _M:bumpInto(target, x, y)
 		elseif target.cant_be_moved and self.cant_be_moved and target.x and target.y and self.x and self.y then
 			-- Displace
 			local tx, ty, sx, sy = target.x, target.y, self.x, self.y
-			target.x = nil target.y = nil
-			self.x = nil self.y = nil
 			target:move(sx, sy, true)
 			self:move(tx, ty, true)
 		end
@@ -93,10 +92,14 @@ function _M:defineDisplayCallback()
 		end
 
 		local e
+		local dy = 0
+		if h > w then dy = (h - w) / 2 end
 		for i = 1, #ps do
 			e = ps[i]
 			e:checkDisplay()
-			if e.ps:isAlive() then e.ps:toScreen(x + w / 2, y + h / 2, true, w / (game.level and game.level.map.tile_w or w))
+			if e.ps:isAlive() then
+				if game.level and game.level.map then e:shift(game.level.map, self._mo) end
+				e.ps:toScreen(x + w / 2, y + dy + h / 2, true, w / (game.level and game.level.map.tile_w or w))
 			else self:removeParticles(e)
 			end
 		end

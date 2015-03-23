@@ -179,7 +179,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#CRIMSON#As you wear both Garkul's heirlooms you can feel the mighty warrior's spirit flowing through you.",
 	fct = function()
-		return "#CRIMSON#当你穿上整套加库尔的传家宝，你感受到战士的精神流淌在你的身上。"
+		return "#CRIMSON#当你穿上整套加库尔的遗物时，你感受到战士的精神流淌在你的身上。"
 	end,
 }
 
@@ -678,6 +678,12 @@ logCHN:newLog{
 		return ("黑色的触须从血肉中伸出，将%s拉了过来！"):format(a)
 	end,
 }
+logCHN:newLog{
+	log = "#CRIMSON#Rogue Plight transfers an effect to its source!",
+	fct = function()
+		return "#CRIMSON#刺客契约将一项效果转移给其来源!"
+	end,
+}
 
 logCHN:newLog{
 	log = "A wave of icy water bursts out from #Source#'s shield towards #Target#!",
@@ -731,7 +737,13 @@ logCHN:newLog{
 		return("#YELLOW#%s暂时忘记了%s!"):format(a,b)
 	end,
 }
-
+logCHN:newLog{
+	log = "%s has temporarily forgotten %s!",
+	fct = function(a,b)
+		a = npcCHN:getName(a)
+		return("%s暂时忘记了%s!"):format(a,b)
+	end,
+}
 --dlc
 logCHN:newLog{
 	log = "#CRIMSON#The power of the Fearscape touches %s and fades away, leaving no traces.",
@@ -762,6 +774,7 @@ logCHN:newLog{
 	end,
 }
 
+
 logCHN:newLog{
 	log = "#CRIMSON#The power of the Fearscape touches %s and fades away, leaving a strange item being.",
 	fct = function(a)
@@ -769,4 +782,119 @@ logCHN:newLog{
 	end,
 }
 
+logCHN:newLog{
+	log = "%s's magic has been #ORCHID#purged#LAST#!",
+	fct = function(a)
+		return("%s的魔法被#ORCHID#净化#LAST#了!"):format(npcCHN:getName(a))
+	end,
+}
 
+logCHN:newLog{
+	log = "%s's %s has been #ORCHID#burned#LAST#!",
+	fct = function(a,b)
+		return("%s的%s被#ORCHID#燃烧#LAST#了!"):format(npcCHN:getName(a),b)
+	end,
+}
+
+logCHN:newLog{
+	log = "%s releases a blast of freezing vapors from %s %s!",
+	fct = function(a,b,c)
+		a = npcCHN:getName(a)
+		b = b:gsub("his","他的"):gsub("her","她的")
+		return("%s用%s %s释放了寒冰霜雾!"):format(a,b,c)
+	end,
+}
+
+logCHN:newLog{
+	log = "%s's %s shakes the ground with its impact!",
+	fct = function(a,b)
+		a = npcCHN:getName(a)
+		return("%s的%s震动了大地！"):format(a,b)
+	end,
+}
+
+logCHN:newLog{
+	log = "#DARK_GREEN#You feel like Nature's Wrath incarnate!",
+	fct = function()
+		return "#DARK_GREEN#你感受到了自然的怒火！"
+	end,
+}
+
+logCHN:newLog{
+	log = "%s uses the %s to cleanse %s mind!",
+	fct = function(a,b,c)
+		a = npcCHN:getName(a)
+		return ("%s使用%s净化了自己的精神！"):format(a,b)
+	end,
+}
+logCHN:newLog{
+	log = "%s aims %s %s!",
+	fct = function(a,b,c)
+		a = npcCHN:getName(a)
+		b = b:gsub("his","他的"):gsub("her","她的")
+		return("%s举起了%s %s!"):format(a,b,c)
+	end,
+}
+logCHN:newLog{
+	log = "%s brandishes %s, calling forth the might of the oceans!",
+	fct = function(a,b)
+		a = npcCHN:getName(a)
+		return("%s挥舞着%s，召唤了海洋的力量%s!"):format(a,b)
+	end,
+}
+logCHN:newLog{
+	log = "#GOLD#As the helm of Kroltar approaches the your scale armour, they begin to fume and emit fire.",
+	fct = function()
+		return("#GOLD#当库洛塔的头盔和鳞甲接触时，他们开始冒烟喷火了")
+	end,
+}
+logCHN:newLog{
+	log = "#GOLD#The fumes and fire fade away.",
+	fct = function()
+		return("#GOLD#烟和火消失了")
+	end,
+}
+logCHN:newLog{
+	log = "#PURPLE#You feel the spirit of the wyrm stirring inside you!",
+	fct = function()
+		return("#PURPLE#你感受到了体内充满了龙之精神!")
+	end,
+}
+logCHN:newLog{
+	log = "#SLATE#The link between the mindstars is broken.",
+	fct = function()
+		return("#SLATE#灵晶间的联系消失了。")
+	end,
+}
+logCHN:newLog{
+	log = "#Source# strikes #Target# with %s %s, sending out an arc of lightning!",
+	fct = function(a,b)
+		a = a:gsub("his","他的"):gsub("her","她的")
+		return("#Source#用%s%s攻击了 #Target#，触发一阵电弧！"):format(a,b)
+	end,
+}
+logCHN:newLog{
+	log = "%s FIRST unleashes antimagic forces from %s %s!",
+	fct = function(a,b,c)
+		a = npcCHN:getName(a)
+		b = b:gsub("his","他的"):gsub("her","她的")
+		return("%s 用%s %s释放了反魔能量！"):format(a,b,c)
+	end,
+}
+logCHN:newLog{
+	log = "%s's %s flashes!",
+	fct = function(a,b)
+		a = npcCHN:getName(a)
+		return("%s的%s 闪光了!"):format(a,b)
+	end,
+}
+
+logCHN:newLog{
+	log = "#GOLD#The sands slowly begin falling towards %s",
+	fct = function(a)
+		a = a:gsub("stability","稳定"):gsub("entropy","熵")
+		return("#GOLD#沙子缓慢地流向 %s"):format(a)
+	end,
+}
+
+	

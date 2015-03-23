@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -224,5 +224,5 @@ defineAction{
 	default = { "sym:_p:true:false:false:false" },
 	type = "TOGGLE_AUTOTALENT",
 	group = "action",
-	name = "Toggle automatic talent usage",
+	name = "切换自动技能使用",
 }

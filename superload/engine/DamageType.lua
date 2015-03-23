@@ -9,10 +9,10 @@ function _M:newDamageType(t)
 	t.name = getDamageTypeCHN(t.name)
 	t.projector = t.projector or self.defaultProjector
 
-	--self.dam_def[t.type] = t
-	--self[t.type] = t.type
-	table.insert(self.dam_def, t)
-	self[t.type] = #self.dam_def
+	self.dam_def[t.type] = t
+	self[t.type] = t.type
+	--table.insert(self.dam_def, t)
+	--self[t.type] = #self.dam_def
 end
 
 return _M

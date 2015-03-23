@@ -1,5 +1,5 @@
 ﻿-- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2014 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -115,7 +115,7 @@ function _M:cleanActor(actor)
 		if eff[1] == "effect" then
 			actor:removeEffect(eff[2])
 		else
-			actor:forceUseTalent(eff[2], {ignore_energy=true, no_equilibrium_fail=true, no_paradox_fail=true})
+			actor:forceUseTalent(eff[2], {ignore_energy=true, no_equilibrium_fail=true, no_paradox_fail=true, save_cleanup=true})
 		end
 	end
 end
@@ -138,9 +138,13 @@ function _M:resurrectBasic(actor)
 
 	local x, y = util.findFreeGrid(last.x, last.y, 20, true, {[Map.ACTOR]=true})
 	if not x then x, y = last.x, last.y end
-
+	
+	-- invulnerable while moving so we don't get killed twice
+	local old_invuln = actor.invulnerable
+	actor.invulnerable = 1
 	actor.x, actor.y = nil, nil
 	actor:move(x, y, true)
+	actor.invulnerable = old_invuln
 
 	game.level:addEntity(actor)
 	game:unregisterDialog(self)
@@ -166,10 +170,13 @@ function _M:eidolonPlane()
 			game.log("#LIGHT_RED#你还剩 %s 。", (self.actor:attr("easy_mode_lifes") and self.actor:attr("easy_mode_lifes").." 条生命") or "0条生命")
 		end
 
+		local is_exploration = game.permadeath == game.PERMADEATH_INFINITE
 		self:cleanActor(self.actor)
 		self:resurrectBasic(self.actor)
 		for uid, e in pairs(game.level.entities) do
-			self:restoreResources(e)
+			if not is_exploration or game.party:hasMember(e) then
+				self:restoreResources(e)
+			end
 		end
 
 		local oldzone = game.zone
@@ -264,6 +271,13 @@ function _M:use(item)
 		self.actor:updateModdableTile()
 		self.actor:check("on_resurrect", "lichform")
 		game:saveGame()
+	elseif act == "threads" then
+		game:chronoRestore("see_threads_base", true)
+		game:onTickEnd(function()
+			game._chronoworlds = nil
+			game.player:removeEffect(game.player.EFF_SEE_THREADS)end
+		)
+		game:saveGame()
 	elseif act == "easy_mode" then
 		self:eidolonPlane()
 	elseif act == "skeleton" then
@@ -309,6 +323,11 @@ function _M:generateList()
 
 	if config.settings.cheat then list[#list+1] = {name="Resurrect by cheating", action="cheat"} end
 	if not self.actor.no_resurrect and allow_res then
+		if self.actor:hasEffect(self.actor.EFF_SEE_THREADS) and game._chronoworlds then
+			self:use{action="threads"}
+			self.dont_show =true
+			return
+		end
 		if self.actor:isTalentActive(self.actor.T_LICHFORM) then
 			self:use{action="lichform"}
 			self.dont_show = true

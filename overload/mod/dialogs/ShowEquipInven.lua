@@ -1,5 +1,5 @@
 -- TE4 - T-Engine 4
--- Copyright (C) 2009 - 2014 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -40,6 +40,7 @@ function _M:init(title, equip_actor, filter, action, on_select, inven_actor)
 
 	self.c_main_set = Tab.new{title="主武器", default=not equip_actor.off_weapon_slots, fct=function() end, on_change=function(s) if s then self:switchSets("main") end end}
 	self.c_off_set = Tab.new{title="副武器", default=equip_actor.off_weapon_slots, fct=function() end, on_change=function(s) if s then self:switchSets("off") end end}
+	local vsep = Separator.new{dir="horizontal", size=self.ih - 10}
 
 	-- Add tooltips
 	self.on_select = function(item)
@@ -70,21 +71,20 @@ function _M:init(title, equip_actor, filter, action, on_select, inven_actor)
 					self.equip_actor:doWearTinker(wear_inven, wear_item, wear_o, base_inven, base_item, base_o, true)
 				end
 			else
-				if ui:getItem() then
-					local bi = self.equip_actor:getInven(ui.inven)
-					local ws = self.equip_actor:getInven(wear_o:wornInven())
-					local os = self.equip_actor:getObjectOffslot(wear_o)
-					if bi and ((ws and ws.id == bi.id) or (os and self.equip_actor:getInven(os).id == bi.id)) then
-						self.equip_actor:doTakeoff(ui.inven, ui.item, ui:getItem(), true, self.inven_actor)
-					end
+				local inven = ui.inven and self.equip_actor:getInven(ui.inven)
+				if inven and self.equip_actor:canWearObject(wear_o, inven.name) then
+					-- Force inventory and item
+					self.equip_actor:doWear(wear_inven, wear_item, wear_o, self.inven_actor, ui.inven, ui.item)
+					ui:forceUpdate()
+				else
+					self.equip_actor:doWear(wear_inven, wear_item, wear_o, self.inven_actor)
 				end
-				self.equip_actor:doWear(wear_inven, wear_item, wear_o, self.inven_actor)
 			end
 			self.c_inven:generateList()
 		end
 	}
 
-	self.c_inven = Inventory.new{actor=inven_actor, inven=inven_actor:getInven("INVEN"), width=self.iw - 20 - self.c_doll.w, height=self.ih - 10, filter=filter,
+	self.c_inven = Inventory.new{actor=inven_actor, inven=inven_actor:getInven("INVEN"), width=self.iw - vsep.w - self.c_doll.w, height=self.ih - 10, filter=filter,
 		default_last_tabs = "all",
 		fct=function(item, sel, button, event) self:use(item, button, event) end,
 		select=function(item, sel) self:select(item) end,
@@ -101,7 +101,7 @@ function _M:init(title, equip_actor, filter, action, on_select, inven_actor)
 		{left=self.c_main_set, top=0, ui=self.c_off_set},
 		{left=0, top=self.c_main_set, ui=self.c_doll},
 		{right=0, top=0, ui=self.c_inven},
-		{left=self.c_doll.w, top=5, ui=Separator.new{dir="horizontal", size=self.ih - 10}},
+		{left=self.c_doll.w, top=5, ui=vsep},
 	}
 
 	self:triggerHook{"EquipInvenDialog:makeUI", uis=uis}
@@ -239,7 +239,7 @@ function _M:use(item, button, event)
 end
 
 function _M:unload()
-	for inven_id = 1, #self.inven_actor.inven_def do if self.inven_actor.inven[inven_id] then for item, o in ipairs(self.inven_actor.inven[inven_id]) do o.__new_pickup = nil end end end
+	for inven_id = 1, #self.inven_actor.inven_def do if self.inven_actor.inven[inven_id] then for item, o in ipairs(self.inven_actor.inven[inven_id]) do o:forAllStack(function(so) so.__new_pickup = nil end) end end end
 end
 
 function _M:updateTitle(title)

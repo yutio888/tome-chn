@@ -29,3 +29,4 @@ description = [[The chinese version of tome4 V1.2.5]]
 overload = true
 superload = true
 data = true
+hooks= true

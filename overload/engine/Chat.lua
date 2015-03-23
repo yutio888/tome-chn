@@ -1,5 +1,5 @@
 -- TE4 - T-Engine 4
--- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -30,8 +30,11 @@ function _M:init(name, npc, player, data)
 	self.player = player
 	self.name = name
 	data = setmetatable(data or {}, {__index=_G})
+	self.data = data
+	if not data.player then data.player = player end
+	if not data.npc then data.npc = npc end
 
-	local f, err = loadfile("/data/chats/"..name..".lua")
+	local f, err = loadfile(self:getChatFile(name))
 	if not f and err then error(err) end
 	setfenv(f, setmetatable({
 		newChat = function(c) self:addChat(c) end,
@@ -39,6 +42,14 @@ function _M:init(name, npc, player, data)
 	self.default_id = f()
 
 	self:triggerHook{"Chat:load", data=data}
+end
+
+function _M:getChatFile(file)
+	local _, _, addon, rfile = file:find("^([^+]+)%+(.+)$")
+	if addon and rfile then
+		return "/data-"..addon.."/chats/"..rfile..".lua"
+	end
+	return "/data/chats/"..file..".lua"
 end
 
 --- Switch the NPC talking
@@ -81,7 +92,12 @@ end
 
 --- Gets the chat with the given id
 function _M:get(id)
-	return self.chats[id]
+	local c = self.chats[id]
+	if c and c.template then
+		local tpl = slt2.loadstring(c.template)
+		c.text = slt2.render(tpl, {data=self.data, player=self.player, npc=self.npc})
+	end
+	return c
 end
 
 --- Replace some keywords in the given text

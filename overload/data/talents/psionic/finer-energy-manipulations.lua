@@ -83,90 +83,42 @@ newTalent{
 }
 
 newTalent{
-	name = "Reshape Weapon/Armour", image = "talents/reshape_weapon.png",
+	name = "武器护甲改造", image = "talents/reshape_weapon.png",
+	short_name ="RESHAPE_WEAPON/ARMOUR",
 	type = {"psionic/finer-energy-manipulations", 2},
 	require = psi_cun_req2,
-	cooldown = 1,
-	psi = 0,
+	mode = "passive",
 	points = 5,
 	no_npc_use = true,
 	no_unlearn_last = true,
-	boost = function(self, t)
-		return math.floor(self:combatTalentMindDamage(t, 5, 20))
+	damBoost = function(self, t) return math.floor(self:combatTalentMindDamage(t, 5, 20)) end,
+	armorBoost = function(self, t) return math.floor(self:combatTalentMindDamage(t, 5, 20)) end,
+	fatigueBoost = function(self, t) return math.floor(self:combatTalentMindDamage(t, 2, 10)) end,
+	getDamBoost = function(self, t, weapon)
+		if weapon and weapon.talented ~= "mindstar" and weapon.talented ~= "unarmed" then
+			return t.damBoost(self, t)
+		end
+		return 0
 	end,
-	arm_boost = function(self, t)
-		return math.floor(self:combatTalentMindDamage(t, 5, 20))
+	getArmorBoost = function(self, t)
+		local nb = 0
+		if self:getInven("BODY") and self:getInven("BODY")[1] then nb = nb + 1 end
+		if self:getInven("OFFHAND") and self:getInven("OFFHAND")[1] and self:getInven("OFFHAND")[1].subtype == "shield" then nb = nb + 1 end
+		return nb * t.armorBoost(self, t)
 	end,
-	fat_red = function(self, t)
-		return math.floor(self:combatTalentMindDamage(t, 2, 10))
-	end,
-	action = function(self, t)
-		local ret = self:talentDialog(self:showInventory("Reshape which weapon or armor?", self:getInven("INVEN"),
-			function(o)
-				return not o.quest and (o.type == "weapon" and o.subtype ~= "mindstar") or (o.type == "armor" and (o.slot == "BODY" or o.slot == "OFFHAND" )) and not o.fully_reshaped --Exclude fully reshaped?
-			end
-			, function(o, item)
-			if o.combat then
-				local atk_boost = t.boost(self, t)
-				local dam_boost = atk_boost
-				if (o.old_atk or 0) < atk_boost or (o.old_dam or 0) < dam_boost then
-					if not o.been_reshaped then
-						o.orig_atk = (o.combat.atk or 0)
-						o.orig_dam = (o.combat.dam or 0)
-					elseif o.been_reshaped == true then --Update items affected by older versions of this talent
-						o.name = o.name:gsub("reshaped ", "", 1)
-						o.orig_atk = o.combat.atk - (o.old_atk or 0)
-						o.orig_dam = o.combat.dam - (o.old_dam or 0)
-					end
-					o.combat.atk = o.orig_atk + atk_boost
-					o.combat.dam = o.orig_dam + dam_boost
-					o.old_atk = atk_boost
-					o.old_dam = dam_boost
-					game.logPlayer(self, "You reshape your %s.", o:getName{do_colour=true, no_count=true})
-					o.special = true
-					o.been_reshaped = "reshaped("..tostring(atk_boost)..","..tostring(dam_boost)..") "
-					self:talentDialogReturn(true)
-				else
-					game.logPlayer(self, "You cannot reshape your %s any further.", o:getName{do_colour=true, no_count=true})
-				end
-			else
-				local armour = t.arm_boost(self, t)
-				local fat = t.fat_red(self, t)
-				if (o.old_fat or 0) < fat or o.wielder.combat_armor < (o.orig_arm or 0) + armour then
-					o.wielder = o.wielder or {}
-					if not o.been_reshaped then
-						o.orig_arm = (o.wielder.combat_armor or 0)
-						o.orig_fat = (o.wielder.fatigue or 0)
-					end
-					o.wielder.combat_armor = o.orig_arm
-					o.wielder.fatigue = o.orig_fat
-					o.wielder.combat_armor = (o.wielder.combat_armor or 0) + armour
-					o.wielder.fatigue = (o.wielder.fatigue or 0) - fat
-					if o.wielder.fatigue < 0 and not (o.orig_fat < 0) then
-						o.wielder.fatigue = 0
-					elseif o.wielder.fatigue < 0 and o.orig_fat < 0 then
-						o.wielder.fatigue = o.orig_fat
-					end
-					o.old_fat = fat
-					game.logPlayer(self, "You reshape your %s.", o:getName{do_colour=true, no_count=true})
-					o.special = true
-					if o.orig_name then o.name = o.orig_name end --Fix name for items affected by older versions of this talent
-					o.been_reshaped = "reshaped["..tostring(armour)..","..tostring(o.wielder.fatigue-o.orig_fat).."%] "
-					self:talentDialogReturn(true)
-				else
-					game.logPlayer(self, "You cannot reshape your %s any further.", o:getName{do_colour=true, no_count=true})
-				end
-			end
-		end))
-		if not ret then return nil end
-		return true
+	getFatigueBoost = function(self, t)
+		local nb = 0
+		if self:getInven("BODY") and self:getInven("BODY")[1] then nb = nb + 1 end
+		if self:getInven("OFFHAND") and self:getInven("OFFHAND")[1] and self:getInven("OFFHAND")[1].subtype == "shield" then nb = nb + 1 end
+		return nb * t.fatigueBoost(self, t)
 	end,
 	info = function(self, t)
-		local weapon_boost = t.boost(self, t)
-		local arm = t.arm_boost(self, t)
-		local fat = t.fat_red(self, t)
-		return ([[操 纵 力 量 从 分 子 层 面 重 组 、平 衡 、磨 砺 一 件 武 器 、盔 甲 或 者 盾 牌 （灵 晶 不 能 被 调 整 因 为 他 们 已 经 是 完 美 的 自 然 形 态 ）
-		永 久 提 高 武 器 %d 命 中 和 伤 害 或 者 盔 甲 %d 护 甲 ，同 时 减 少 %d 疲 劳 。
+		local weapon_boost = t.damBoost(self, t)
+		local arm = t.armorBoost(self, t)
+		local fat = t.fatigueBoost(self, t)
+		return ([[操 纵 力 量 从 分 子 层 面 重 组 、平 衡 、磨 砺 一 件 武 器 、盔 甲 或 者 盾 牌 （灵 晶 不 能 被 调 整 ，因 为 他 们 已 经 是 完 美 的 自 然 形 态 ）
+		永 久 提 高 武 器 %d 命 中 和 伤 害 。
+		你 每 件 身 上 的 护 甲 和 盾 牌 增 加 你 %d 护 甲 ，同 时 减 少 %d 疲 劳 。
 		该 技 能 效 果 受 精 神 强 度 影 响，且 不 能 对  同 一 件 物 品 重 复 使 用。]]):
 		format(weapon_boost, arm, fat)
 	end,

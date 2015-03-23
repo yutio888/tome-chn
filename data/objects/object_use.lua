@@ -76,7 +76,7 @@ objUse["release a will o' the wisp"] = "释放一只鬼火"
 objUse["release the absorbed darkness"] = "释放吸收的黑暗"
 objUse["flip the hourglass"] = "翻转沙漏"
 objUse["force some of your foe's infusions, runes or talents on cooldown"] = "使敌人的部分纹身、 符文或技能进入冷却"
-objUse["call an antimagic pillar, but silence yourself"] = "召唤一根反魔图腾同时沉默自己"
+objUse["call an antimagic pillar for 15 turns, but silence yourself for 5 turns"] = "召唤一根反魔图腾15回合同时沉默自己5回合"
 objUse["release a burst of void energy"] = "释放一团虚空爆炸"
 objUse["fires a bolt of kinetic force, doing 150% weapon damage"] = "释放一颗灵能球，造成 150％武器伤害"
 objUse["invoke dawn"] = "曙光降临"
@@ -86,7 +86,7 @@ objUse["drink the vile blood"] = "喝下肮脏的汁水"
 objUse["invoke your inner bearness"] = "激发你内在的熊性"
 objUse["create living shards of crystal"] = "召唤元素水晶"
 objUse["teleports you randomly (rad %d)"] = "随机传送（半径范围 %d）"
-objUse["reveal the surrounding area"] = "展露周围的地形"
+objUse["reveal the surrounding area (range 20)"] = "展露周围20码的地形"
 objUse["deal temporal damage to summons, and if they survive, remove them from time"] = "造成时空伤害并将目标移出时间"
 objUse["summon a shining orb"] = "召唤一个发光球体"
 objUse["boost movement speed by 300% for 4 turns (does not use a turn)"] = "4回合内增加移动速度300%(使用不消耗时间)"
@@ -102,6 +102,10 @@ objUse["fire a bolt of plaguefire, dealing damage over time based on your magic 
 
 objUse["re-generate the item with random stats. Can only be done three levels after the last reroll. Cannot be unequipped unless a reroll is available, or you are level 50"] = "重置戒指属性。每3级能重置一次。\n除非有重置机会或者人物50级，否则不能解除装备。"
 objUse["deal darkness damage equal to your spellpower to a target, and, if it kills the target, restores 15% of max hp and all resources (except paradox and equilibrium)"] = "造成等于法术强度的暗影伤害。\n如果杀死目标，则恢复15%%全资源（失衡值和紊乱值除外）。"
+
+objUse["release a radius %d blast of frozen vapors that deal %0.2f cold damage (based on Magic) each turn for %d turns"] = "在半径%d范围内释放寒冰气息，每回合造成%0.2f点寒冷伤害（基于魔法），持续%d回合。"
+objUse["attempt to destroy all magic effects and sustains on creatures in a radius %d cone (unnatural creaters are additionally dealt %0.2f arcane damage and stunned)"]="试 图 摧 毁 %d 码 锥 形 范 围 内 所 有 魔 法 效 果 ， 并 对 非 自 然 生 物 造 成 %0.2f 奥 术 伤 害 并 震 慑。"
+
 --护符技能
 --wands powers
 objUse["reveal the area around you dispelling darkness and detecting the presence of nearby creatures (rad %d)"] = "照明并侦查你附近的生物（半径范围 %d）"

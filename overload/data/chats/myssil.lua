@@ -1,4 +1,4 @@
--- ToME - Tales of Maj'Eyal
+﻿-- ToME - Tales of Maj'Eyal
 -- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
@@ -49,6 +49,7 @@ newChat{ id="save-derth",
 	answers = {
 		{"你可以信任我，守卫。", action=function(npc, player)
 			player:hasQuest("lightning-overload"):create_entrance()
+			game:unlockBackground("myssil", "Protector Myssil")
 		end},
 	}
 }

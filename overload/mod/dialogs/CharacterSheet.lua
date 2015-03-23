@@ -23,6 +23,7 @@ local Dialog = require "engine.ui.Dialog"
 local DamageType = require "engine.DamageType"
 local Talents = require "engine.interface.ActorTalents"
 local Tab = require "engine.ui.Tab"
+local Button = require "engine.ui.Button"
 local SurfaceZone = require "engine.ui.SurfaceZone"
 local Separator = require "engine.ui.Separator"
 local Stats = require "engine.interface.ActorStats"
@@ -42,10 +43,24 @@ function _M:init(actor)
 	self.font = core.display.newFont("/data-chn123/font/main.ttf", 12)
 	self.font_h = self.font:lineSkip()
 
+	self.talent_sorting = config.settings.tome.charsheet_talent_sorting or 1
 	self.c_general = Tab.new{title="综合", default=true, fct=function() end, on_change=function(s) if s then self:switchTo("general") end end}
 	self.c_attack = Tab.new{title="攻击", default=false, fct=function() end, on_change=function(s) if s then self:switchTo("attack") end end}
 	self.c_defence = Tab.new{title="防御", default=false, fct=function() end, on_change=function(s) if s then self:switchTo("defence") end end}
 	self.c_talents = Tab.new{title="技能", default=false, fct=function() end, on_change=function(s) if s then self:switchTo("talents") end end}
+	self.b_talents_sorting = Button.new{text="分类: "..({"技能树", "名称", "类型"})[self.talent_sorting], hide=true, width=100, fct=function()
+		self.talent_sorting = self.talent_sorting + 1
+		if self.talent_sorting > 3 then self.talent_sorting = 1 end
+
+		--Save to config
+		config.settings.tome.charsheet_talent_sorting = self.talent_sorting
+		game:saveSettings("tome.charsheet_talent_sorting", ("tome.charsheet_talent_sorting = %d\n"):format(self.talent_sorting))
+
+		self.b_talents_sorting.text = "分类: "..({"技能树", "名称", "类型"})[self.talent_sorting]
+		self.b_talents_sorting:generate()
+		self:switchTo("talents") -- Force a redraw
+	end}
+
 
 	local tw, th = self.font_bold:size(self.title)
 
@@ -103,6 +118,7 @@ function _M:init(actor)
 		{left=15+self.c_general.w+self.c_attack.w, top=self.c_tut.h, ui=self.c_defence},
 		{left=15+self.c_general.w+self.c_attack.w+self.c_defence.w, top=self.c_tut.h, ui=self.c_talents},
 		{left=0, top=self.c_tut.h + self.c_general.h, ui=self.vs},
+		{right=0, bottom=0, ui=self.b_talents_sorting},
 
 		{left=0, top=self.c_tut.h + self.c_general.h + 5 + self.vs.h, ui=self.c_desc},
 	}
@@ -119,11 +135,14 @@ function _M:innerDisplay(x, y, nb_keyframes)
 end
 
 function _M:switchTo(kind)
+	self.b_talents_sorting.hide = true
 	self:drawDialog(kind, _M.cs_player_dup)
 	if kind == "general" then self.c_attack.selected = false self.c_defence.selected = false self.c_talents.selected = false
 	elseif kind == "attack" then self.c_general.selected = false self.c_defence.selected = false self.c_talents.selected = false
 	elseif kind == "defence" then self.c_attack.selected = false self.c_general.selected = false self.c_talents.selected = false
-	elseif kind == "talents" then self.c_attack.selected = false self.c_general.selected = false self.c_defence.selected = false
+	elseif kind == "talents" then
+		self.b_talents_sorting.hide = false
+		self.c_attack.selected = false self.c_general.selected = false self.c_defence.selected = false
 	end
 	self:updateKeys()
 end
@@ -171,7 +190,7 @@ function _M:mouseLink(link, text, _, _, _, w, h, x, y)
 		{ x=x, y=y, w=w, h=h, fct=function(button)
 			game.tooltip_x, game.tooltip_y = 1, 1; game:tooltipDisplayAtMap(game.w, game.h, text)
 			if button == "left" then
-				util.browserOpenUrl(link)
+				util.browserOpenUrl(link, {is_external=true})
 			end
 		end},
 	}, true)
@@ -193,6 +212,7 @@ function _M:drawDialog(kind, actor_to_compare)
 	local w = 0
 
 	local text = ""
+	local dur_text = ""
 
 	if player.__te4_uuid and profile.auth and profile.auth.drupid then
 		local path = "http://te4.org/characters/"..profile.auth.drupid.."/tome/"..player.__te4_uuid
@@ -325,6 +345,7 @@ function _M:drawDialog(kind, actor_to_compare)
 
 		h = h + self.font_h
 		if player:attr("forbid_arcane") then
+			local follow = (player.faction == "zigur" or player:attr("zigur_follower")) and "伊格追随者" or "反魔志愿者"
 			s:drawColorStringBlended(self.font, "#ORCHID#伊格追随者", w, h, 255, 255, 255, true) h = h + self.font_h
 		end
 		if player:attr("blood_life") then
@@ -339,6 +360,9 @@ function _M:drawDialog(kind, actor_to_compare)
 		h = h + self.font_h
 
 		text = compare_fields(player, actor_to_compare, "max_life", "%d", "%+.0f")
+		if player.die_at ~=  0 or (actor_to_compare and actor_to_compare.die_at ~=0) then 
+			text = text .. " #a08080#[" .. compare_fields(player, actor_to_compare, "die_at", "生命底线：%+d","%+.0f", 1, true) .. "]"
+		end
 		if player.life < 0 then self:mouseTooltip(self.TOOLTIP_LIFE, s:drawColorStringBlended(self.font, ("#c00000#生命值：#00ff00#???/%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
 		else self:mouseTooltip(self.TOOLTIP_LIFE, s:drawColorStringBlended(self.font, ("#c00000#生命值：#00ff00#%d/%s"):format(player.life, text), w, h, 255, 255, 255, true)) h = h + self.font_h
 		end
@@ -393,21 +417,22 @@ function _M:drawDialog(kind, actor_to_compare)
 		color = color >= 1 and "#LIGHT_GREEN#" or "#LIGHT_RED#"
 		text = compare_fields(player, actor_to_compare, "global_speed", color.."%.1f%%", "%+.1f%%",100)
 		self:mouseTooltip(self.TOOLTIP_SPEED_GLOBAL,   s:drawColorStringBlended(self.font, ("整体速度：#00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
-		color = 1/player:combatMovementSpeed()
+		color = 1/player:getSpeed("movement")
 		color = color >= 1 and "#LIGHT_GREEN#" or "#LIGHT_RED#"
-		text = compare_fields(player, actor_to_compare, function(actor) return (1/actor:combatMovementSpeed()) end, color.."%.1f%%", "%+.1f%%", 100)
+		text = compare_fields(player, actor_to_compare, function(actor) return (1/actor:getSpeed("movement")) end, color.."%.1f%%", "%+.1f%%", 100)
 		self:mouseTooltip(self.TOOLTIP_SPEED_MOVEMENT, s:drawColorStringBlended(self.font, ("移动速度：#00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
-		color = 1/player:combatSpellSpeed()
+		color = 1/player:getSpeed("spell")
 		color = color >= 1 and "#LIGHT_GREEN#" or "#LIGHT_RED#"
-		text = compare_fields(player, actor_to_compare, function(actor, ...) return 1/actor:combatSpellSpeed() end, color.."%.1f%%", "%+.1f%%", 100)
+		text = compare_fields(player, actor_to_compare, function(actor, ...) return 1/actor:getSpeed("spell") end, color.."%.1f%%", "%+.1f%%", 100)
 		self:mouseTooltip(self.TOOLTIP_SPEED_SPELL,    s:drawColorStringBlended(self.font, ("施法速度：#00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
-		color = 1/player:combatSpeed()
+
+		color = 1/player:getSpeed("weapon")
 		color = color >= 1 and "#LIGHT_GREEN#" or "#LIGHT_RED#"
-		text = compare_fields(player, actor_to_compare, function(actor, ...) return 1/actor:combatSpeed() end, color.."%.1f%%", "%+.1f%%", 100)
+		text = compare_fields(player, actor_to_compare, function(actor, ...) return 1/actor:getSpeed("weapon") end, color.."%.1f%%", "%+.1f%%", 100)
 		self:mouseTooltip(self.TOOLTIP_SPEED_ATTACK,   s:drawColorStringBlended(self.font, ("战斗速度：#00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
-		color = 1/player:combatMindSpeed()
+		color = 1/player:getSpeed("mind")
 		color = color >= 1 and "#LIGHT_GREEN#" or "#LIGHT_RED#"
-		text = compare_fields(player, actor_to_compare, function(actor, ...) return 1/actor:combatMindSpeed() end, color.."%.1f%%", "%+.1f%%", 100)
+		text = compare_fields(player, actor_to_compare, function(actor, ...) return 1/actor:getSpeed("mind") end, color.."%.1f%%", "%+.1f%%", 100)
 		self:mouseTooltip(self.TOOLTIP_SPEED_MENTAL,   s:drawColorStringBlended(self.font, ("精神速度： #00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
 		h = h + self.font_h
 		if player.died_times then
@@ -538,7 +563,6 @@ function _M:drawDialog(kind, actor_to_compare)
 		print_stat(self.actor.STAT_MAG, ("%-12s"):format(Stats.stats_def[self.actor.STAT_MAG].name:capitalize()), self.TOOLTIP_MAG)
 		print_stat(self.actor.STAT_WIL, ("%-12s"):format(Stats.stats_def[self.actor.STAT_WIL].name:capitalize()), self.TOOLTIP_WIL)
 		print_stat(self.actor.STAT_CUN, ("%-12s"):format(Stats.stats_def[self.actor.STAT_CUN].name:capitalize()), self.TOOLTIP_CUN)
-
 		h = h + self.font_h
 
 		local nb_inscriptions = 0
@@ -993,23 +1017,171 @@ function _M:drawDialog(kind, actor_to_compare)
 		h = 0
 		w = 0
 
-		local list = {}
-		for j, t in pairs(player.talents_def) do
-			if player:knowTalent(t.id) and (not t.hide or t.hide ~= "always") then
-				local lvl = player:getTalentLevelRaw(t)
-				list[#list+1] = {
-					name = ("%s (%d)"):format(t.name, lvl),
-					desc = player:getTalentFullDescription(t):toString(),
-				}
+
+		local function sort_talents()
+
+			local talents = {}
+
+			local get_group
+			if self.talent_sorting == 1 then
+				-- Get the group/display name for a given talent type
+				get_group = function(t, tt)
+					if tt.type:match("inscriptions/.*") then
+						return "纹身"
+					elseif tt.type:match("uber/.*") then
+						return "觉醒"
+					elseif tt.type:match(".*/objects") then
+						return "物品技能"
+					end
+
+					local cat = tt.type:gsub("/.*", "")
+					return (t_talent_cat[cat] or cat) .."/"..(tt.name or ""):bookCapitalize()
+				end
+			elseif self.talent_sorting == 2 then
+				-- Alphabetically, so no groups at all.
+				get_group = function(t, tt)
+					return "技能"
+				end
+			else
+				-- Sort by usage type/speed
+				get_group = function(t, tt)
+					if t.mode == "activated" then
+						local no_energy = util.getval(t.no_energy, player, t)
+						return no_energy and "瞬间" or "主动"
+					else
+						return t.mode:gsub("sustained","维持"):gsub("passive","被动")
+					end
+				end
+			end
+
+			-- Process the talents
+			for j, t in pairs(player.talents_def) do
+				if player:knowTalent(t.id) and (not t.hide or t.hide ~= "always") then
+					local lvl = player:getTalentLevelRaw(t)
+					local tt = player:getTalentTypeFrom(t.type[1])
+
+					local data = {type_name = tt,
+						talent = t,
+						name = ("%s (%d)"):format(t.name, lvl),
+						desc = player:getTalentFullDescription(t):toString(),
+					}
+
+					if self.talent_sorting == 2 then
+						if not talents["All"] then
+							talents["All"] = {type_name = "All", talent_type=nil, talents={} }
+						end
+						table.insert(talents["All"]["talents"], data)
+					else
+						local group_name = get_group(t, tt)
+
+						if not talents[group_name] then
+							talents[group_name] = {type_name = group_name, talent_type=tt, talents={}}
+						end
+						table.insert(talents[group_name]["talents"], data)
+					end
+				end
+			end
+
+			local sort_tt
+
+			-- Decide what sorting method do use
+			if self.talent_sorting == 1 then
+				-- Sorting of talent groups, Racial/infusions first, then alphabetical order
+				local sort_rank = {"race/.*", "Inscriptions", "Prodigies", "Item Talents"} -- Relies on the groups
+				sort_tt = function(a, b)
+					a, b = a["type_name"], b["type_name"]
+					for i, v in ipairs(sort_rank) do
+						local rank_a, rank_b
+						rank_a = a:match(v)
+						if not rank_a then
+							rank_b = b:match(v)
+							if rank_b then return false end
+						else
+							return true
+						end
+					end
+					return a < b
+				end
+			elseif self.talent_sorting == 2 then
+				-- Only care about alphabetically sorting
+				sort_tt = function(a, b)
+					return a.name < b.name end
+			else
+				-- instant > activated > sustained > passive > alphabetically
+				local sort_rank = {"Instant", "Activated", "Sustained", "Passive" }
+				sort_tt = function(a, b)
+					a, b = a["type_name"], b["type_name"]
+					for i, v in ipairs(sort_rank) do
+						local rank_a, rank_b
+						rank_a = a:match(v)
+						if not rank_a then
+							rank_b = b:match(v)
+							if rank_b then return false end
+						else
+							return true
+						end
+					end
+					return a < b
+				end
+			end
+			-- Sort the talent type stuff
+			local sorted = {}
+			if self.talent_sorting == 2 then
+				if not talents["All"] or not talents["All"]["talents"] then talents["All"] = {type_name = "All", talent_type=nil, talents={} } end
+				table.sort(talents["All"]["talents"], sort_tt)
+				return talents
+			end
+			for k, v in pairs(talents) do
+				sorted[#sorted+1] = v
+			end
+
+			if self.talent_sorting == 2 then
+				table.sort(sorted[1], sort_tt)
+				return sorted
+			else
+				table.sort(sorted, sort_tt)
+			end
+
+			return sorted
+
+		end
+
+		local sorted = sort_talents()
+
+		-- The color used to display it
+		local function get_talent_color(t)
+			if t.mode == "activated" then
+				local no_energy = util.getval(t.no_energy, player, t)
+				if no_energy == true then
+					return "#00c91b##{italic}#"--return "#E56F48#"
+				else
+					return "#00c91b#"
+				end
+			elseif t.mode == "passive" then
+				return "#LIGHT_STEEL_BLUE#"--return "#486FE5#"
+			else --Sustains
+				return "#C49600#"--return "#E5D848#"
 			end
 		end
 
-		table.sort(list, function(a,b) return a.name < b.name end)
+		-- Now display it!
+		for ts, tt in pairs(sorted) do
+			-- Display talent type
+			local tt_name = tt["type_name"]
+			local talent_type_name = tt["talent_type"] and tt["talent_type"].description or tt_name or ""
+			local talents = tt["talents"]
+			if tt_name then
+				self:mouseTooltip(talent_type_name, s:drawColorStringBlended(self.font, ("#{bold}##KHAKI#%s#{normal}#"):format(tt_name), w, h, 255, 255, 255, true)) h = h + self.font_h
+			end
 
-		for i, t in ipairs(list) do
-			self:mouseTooltip(t.desc, s:drawColorStringBlended(self.font, ("#LIGHT_GREEN#%s"):format(t.name), w, h, 255, 255, 255, true)) h = h + self.font_h
+			-- Display the talents in the talent type
+			for _, t in ipairs(talents) do
+				self:mouseTooltip(t.desc, s:drawColorStringBlended(self.font, (get_talent_color(t.talent).."%s".."#{normal}#"):format(t.name), w, h, 255, 255, 255, true)) h = h + self.font_h
 
-			if h + self.font_h >= self.c_desc.h then h = 0 w = w + self.c_desc.w / 6 end
+				if h + self.font_h >= self.c_desc.h then h = 0 w = w + self.c_desc.w / 6 end
+			end
+		-- Add extra space to seperate categories
+		h = h + self.font_h
 		end
 	end
 

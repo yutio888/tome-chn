@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2014 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -276,7 +276,7 @@ function _M:openVault(vault_id)
 	print("Vault id", vault_id, "opens:", v.x, v.y, v.w, v.h)
 	for i = v.x, v.x + v.w - 1 do for j = v.y, v.y + v.h - 1 do
 		if  game.level.map.attrs(i, j, "vault_id") == vault_id then
-			 game.level.map.attrs(i, j, "vault_id", false)
+			-- game.level.map.attrs(i, j, "vault_id", false)
 			 local act = game.level.map(i, j, Map.ACTOR)
 			 if act and not act.player then
 			 	act:removeEffect(act.EFF_VAULTED, true, true)
@@ -297,7 +297,7 @@ function _M:move(x, y, force)
 
 	if not force and ox == self.x and oy == self.y and self.doPlayerSlide then
 		self.doPlayerSlide = nil
-		tx, ty = self:tryPlayerSlide(x, y, false)
+		local tx, ty = self:tryPlayerSlide(x, y, false)
 		if tx then moved = self:move(tx, ty, false) end
 	end
 	self.doPlayerSlide = nil
@@ -336,8 +336,8 @@ function _M:move(x, y, force)
 	return moved
 end
 
-function _M:act()
-	if not mod.class.Actor.act(self) then return end
+function _M:actBase()
+	mod.class.Actor.actBase(self)
 
 	-- Run out of time ?
 	if self.summon_time then
@@ -348,6 +348,10 @@ function _M:act()
 			return true
 		end
 	end
+end
+
+function _M:act()
+	if not mod.class.Actor.act(self) then return end
 
 	-- Funky shader things !
 	self:updateMainShader()
@@ -436,6 +440,7 @@ function _M:updateMainShader()
 		-- Blur shader
 		if config.settings.tome.fullscreen_confusion and pf.blur and pf.blur.shad then
 			if self:attr("confused") and self.confused >= 1 then pf.blur.shad:uniBlur(2) effects[pf.blur.shad] = true
+			elseif self:attr("sleep") and not self:attr("lucid_dreamer") and self.sleep >= 1 then pf.blur.shad:uniBlur(2) effects[pf.blur.shad] = true
 			end
 		end
 
@@ -456,6 +461,12 @@ function _M:updateMainShader()
 			if self:attr("stunned") and self.stunned >= 1 then pf.wobbling.shad:uniWobbling(1) effects[pf.wobbling.shad] = true
 			elseif self:attr("dazed") and self.dazed >= 1 then pf.wobbling.shad:uniWobbling(0.7) effects[pf.wobbling.shad] = true
 			end
+		end
+
+		-- Timestop shader
+		if self:attr("timestopping") and pf.timestop and pf.timestop.shad then
+			effects[pf.timestop.shad] = true
+			pf.timestop.shad:paramNumber("tick_start", core.game.getTime())
 		end
 
 		game.posteffects_use = table.keys(effects)
@@ -688,12 +699,14 @@ function _M:onTakeHit(value, src, death_note)
 end
 
 function _M:on_set_temporary_effect(eff_id, e, p)
-	mod.class.Actor.on_set_temporary_effect(self, eff_id, e, p)
+	local ret = mod.class.Actor.on_set_temporary_effect(self, eff_id, e, p)
 
 	if e.status == "detrimental" and not e.no_stop_resting and p.dur > 0 then
 		self:runStop("detrimental status effect")
 		self:restStop("detrimental status effect")
 	end
+
+	return ret
 end
 
 function _M:heal(value, src)
@@ -702,7 +715,7 @@ function _M:heal(value, src)
 		value = value * 1.3
 	end
 
-	mod.class.Actor.heal(self, value, src)
+	return mod.class.Actor.heal(self, value, src)
 end
 
 function _M:die(src, death_note)
@@ -717,8 +730,10 @@ function _M:suffocate(value, src, death_msg)
 	local dead, affected = mod.class.Actor.suffocate(self, value, src, death_msg)
 	if affected and value > 0 and self.runStop then
 		-- only stop autoexplore when air is less than 75% of max.
-		if self.air < 0.75 * self.max_air then self:runStop("suffocating") end
-		self:restStop("suffocating")
+		if self.air < 0.75 * self.max_air and self.air < 100 then
+			self:runStop("suffocating")
+			self:restStop("suffocating")
+		end
 	end
 	return dead, affected
 end
@@ -789,7 +804,7 @@ function _M:setTarget(target)
 	return game:targetSetForPlayer(target)
 end
 
-local function spotHostiles(self)
+local function spotHostiles(self, actors_only)
 	local seen = {}
 	if not self.x then return seen end
 
@@ -797,9 +812,36 @@ local function spotHostiles(self)
 	core.fov.calc_circle(self.x, self.y, game.level.map.w, game.level.map.h, self.sight or 10, function(_, x, y) return game.level.map:opaque(x, y) end, function(_, x, y)
 		local actor = game.level.map(x, y, game.level.map.ACTOR)
 		if actor and self:reactionToward(actor) < 0 and self:canSee(actor) and game.level.map.seens(x, y) then
-			seen[#seen + 1] = {x=x,y=y,actor=actor}
+			seen[#seen + 1] = {x=x,y=y,actor=actor, entity=actor, name=actor.name}
 		end
 	end, nil)
+
+	if not actors_only then
+		-- Check for projectiles in line of sight
+		core.fov.calc_circle(self.x, self.y, game.level.map.w, game.level.map.h, self.sight or 10, function(_, x, y) return game.level.map:opaque(x, y) end, function(_, x, y)
+			local proj = game.level.map(x, y, game.level.map.PROJECTILE)
+			if not proj or not game.level.map.seens(x, y) then return end
+
+			-- trust ourselves but not our friends
+			if proj.src and self == proj.src then return end
+			local sx, sy = proj.start_x, proj.start_y
+			local tx, ty
+
+			-- Bresenham is too so check if we're anywhere near the mathematical line of flight
+			if type(proj.project) == "table" then
+				tx, ty = proj.project.def.x, proj.project.def.y
+			elseif proj.homing then
+				tx, ty = proj.homing.target.x, proj.homing.target.y
+			end
+			if tx and ty then
+				local dist_to_line = math.abs((self.x - sx) * (ty - sy) - (self.y - sy) * (tx - sx)) / core.fov.distance(sx, sy, tx, ty)
+				local our_way = ((self.x - x) * (tx - x) + (self.y - y) * (ty - y)) > 0
+				if our_way and dist_to_line < 1.0 then
+					seen[#seen+1] = {x=x, y=y, projectile=proj, entity=proj, name=(proj.getName and proj:getName()) or proj.name}
+				end
+			end
+		end, nil)
+	end
 	return seen
 end
 
@@ -812,28 +854,32 @@ function _M:automaticTalents()
 	local uses = {}
 	for tid, c in pairs(self.talents_auto) do
 		local t = self.talents_def[tid]
-		local spotted = spotHostiles(self)
-		if (t.mode ~= "sustained" or not self.sustain_talents[tid]) and not self.talents_cd[tid] and self:preUseTalent(t, true, true) and (not t.auto_use_check or t.auto_use_check(self, t)) then
+		local spotted = spotHostiles(self, true)
+		local cd = self:getTalentCooldown(t) or 0
+		local turns_used = util.getval(t.no_energy, self, t)  == true and 0 or 1
+		if cd <= turns_used and t.mode ~= "sustained" then
+			game.logPlayer(self, "Automatic use of talent %s #DARK_RED#skipped#LAST#: cooldown too low (%d).", t.name, cd)
+		elseif (t.mode ~= "sustained" or not self.sustain_talents[tid]) and not self.talents_cd[tid] and self:preUseTalent(t, true, true) and (not t.auto_use_check or t.auto_use_check(self, t)) then
 			if (c == 1) or (c == 2 and #spotted <= 0) or (c == 3 and #spotted > 0) then
 				if c ~= 2 then
-					uses[#uses+1] = {name=t.name, no_energy=util.getval(t.no_energy, self, t) == true and 0 or 1, cd=self:getTalentCooldown(t) or 0, fct=function() self:useTalent(tid) end}
+					uses[#uses+1] = {name=t.name, turns_used=turns_used, cd=cd, fct=function() self:useTalent(tid) end}
 				else
 					if not self:attr("blind") then
-						uses[#uses+1] = {name=t.name, no_energy=util.getval(t.no_energy, self, t) == true and 0 or 1, cd=self:getTalentCooldown(t) or 0, fct=function() self:useTalent(tid,nil,nil,nil,self) end}
+						uses[#uses+1] = {name=t.name, turns_used=turns_used, cd=cd, fct=function() self:useTalent(tid,nil,nil,nil,self) end}
 					end
 				end
 			end
 			if c == 4 and #spotted > 0 then
 				for fid, foe in pairs(spotted) do
 					if foe.x >= self.x-1 and foe.x <= self.x+1 and foe.y >= self.y-1 and foe.y <= self.y+1 then
-						uses[#uses+1] = {name=t.name, no_energy=util.getval(t.no_energy, self, t) == true and 0 or 1, cd=self:getTalentCooldown(t) or 0, fct=function() self:useTalent(tid) end}
+						uses[#uses+1] = {name=t.name, turns_used=turns_used, cd=cd, fct=function() self:useTalent(tid) end}
 					end
 				end
 			end
 		end
 	end
 	table.sort(uses, function(a, b)
-		local an, nb = util.getval(a.no_energy, self, a), util.getval(b.no_energy, self, b)
+		local an, nb = a.turns_used, b.turns_used
 		if an < nb then return true
 		elseif an > nb then return false
 		else
@@ -845,7 +891,7 @@ function _M:automaticTalents()
 	table.print(uses)
 	for _, use in ipairs(uses) do
 		use.fct()
-		if util.getval(use.no_energy, self, use) == 1 then break end
+		if use.turns_used > 0 then break end
 	end
 	self:attr("_forbid_sounds", -1)
 end
@@ -860,13 +906,8 @@ function _M:onRestStart()
 		self:attr("mana_regen", self:attr("mana_regen_on_rest"))
 		self.resting.mana_regen = self:attr("mana_regen_on_rest")
 	end
-	if self.preferred_paradox and (self:getParadox() ~= self:getMinParadox() or self.preferred_paradox > self:getParadox())then
-		local power = 0
-		if math.abs(self:getParadox() - self.preferred_paradox) > 1 then
-			local duration = self:callTalent(self.T_SPACETIME_TUNING, "getDuration")
-			power = (self.preferred_paradox - self:getParadox())/duration
-			self:setEffect(self.EFF_SPACETIME_TUNING, duration, {power=power})
-		end
+	if self:knowTalent(self.T_SPACETIME_TUNING) then
+		self:callTalent(self.T_SPACETIME_TUNING, "doTuning")
 	end
 	self:fireTalentCheck("callbackOnRest", "start")
 end
@@ -935,10 +976,19 @@ function _M:restCheck()
 		if self:getVim() < self:getMaxVim() and self.vim_regen > 0 then return true end
 		if self:getEquilibrium() > self:getMinEquilibrium() and self.equilibrium_regen < 0 then return true end
 		if self.life < self.max_life and self.life_regen> 0 then return true end
+		if self.air < self.max_air and self.air_regen > 0 and not self.is_suffocating then return true end
 		for act, def in pairs(game.party.members) do if game.level:hasEntity(act) and not act.dead then
 			if act.life < act.max_life and act.life_regen > 0 and not act:attr("no_life_regen") then return true end
 		end end
 		if ammo and ammo.combat.shots_left < ammo.combat.capacity then return true end
+
+		-- Check for detrimental effects
+		for id, _ in pairs(self.tmp) do
+			local def = self.tempeffect_def[id]
+			if def.type ~= "other" and def.status == "detrimental" and (def.decrease or 1) > 0 then
+				return true
+			end
+		end
 
 		if self:fireTalentCheck("callbackOnRest", "check") then return true end
 	else
@@ -952,17 +1002,45 @@ function _M:restCheck()
 
 	if self.resting.wait_cooldowns then
 		for tid, cd in pairs(self.talents_cd) do
-			if self:isTalentActive(self.T_CONDUIT) and (tid == self.T_KINETIC_AURA or tid == self.T_CHARGED_AURA or tid == self.T_THERMAL_AURA) then
+--			if self:isTalentActive(self.T_CONDUIT) and (tid == self.T_KINETIC_AURA or tid == self.T_CHARGED_AURA or tid == self.T_THERMAL_AURA) then
 				-- nothing
-			elseif self.talents_auto[tid] then
+--			else
+			if self.talents_auto[tid] then
 				-- nothing
 			else
 				if cd > 0 then return true end
 			end
 		end
+		for tid, sus in pairs(self.talents) do
+			local p = self:isTalentActive(tid)
+			if p and p.rest_count and p.rest_count > 0 then return true end
+		end
+		for inven_id, inven in pairs(self.inven) do
+			for _, o in ipairs(inven) do
+				local cd = o:getObjectCooldown(self)
+				if cd and cd > 0 then return true end
+			end
+		end
 	end
 
 	self.resting.wait_cooldowns = nil
+
+	-- Enter full recharge rest if we waited for cooldowns already
+	if self.resting.cnt == 0 then
+		self.resting.wait_powers = true
+	end
+
+	if self.resting.wait_powers then
+		for inven_id, inven in pairs(self.inven) do
+			for _, o in ipairs(inven) do
+				if o.power and o.power_regen and o.power_regen > 0 and o.power < o.max_power then
+					return true
+				end
+			end
+		end
+	end
+
+	self.resting.wait_powers = nil
 
 	-- Enter recall waiting rest if we are at max already
 	if self.resting.cnt == 0 and self:hasEffect(self.EFF_RECALL) then
@@ -987,6 +1065,7 @@ end
 -- 'ignore_memory' is only used when checking for paths around traps.  This ensures we don't remember items "obj_seen" that we aren't supposed to
 function _M:runCheck(ignore_memory)
 	if game:hasDialogUp(1) then return false, "dialog is displayed" end
+	local is_main_player = self == game:getPlayer(true)
 
 	local spotted = spotHostiles(self)
 	if #spotted > 0 then
@@ -1011,7 +1090,8 @@ function _M:runCheck(ignore_memory)
 	local noticed = false
 	self:runScan(function(x, y, what)
 		-- Objects are always interesting, only on curent spot
-		if what == "self" and not game.level.map.attrs(x, y, "obj_seen") then
+		local obj_seen = game.level.map.attrs(x, y, "obj_seen")
+		if what == "self" and obj_seen ~= self and obj_self ~= true then
 			local obj = game.level.map:getObject(x, y, 1)
 			if obj then
 				if not ignore_memory then game.level.map.attrs(x, y, "obj_seen", true) end
@@ -1172,7 +1252,7 @@ function _M:playerDrop()
 	local inven = self:getInven(self.INVEN_INVEN)
 	local titleupdator = self:getEncumberTitleUpdator("Drop object")
 	local d d = self:showInventory(titleupdator(), inven, nil, function(o, item)
-		self:doDrop(inven, item)
+		self:doDrop(inven, item, function() d:updateList() end)
 		d:updateTitle(titleupdator())
 		return true
 	end)
@@ -1244,7 +1324,7 @@ function _M:playerUseItem(object, item, inven)
 			self:breakStealth()
 			self:breakLightningSpeed()
 			self:breakReloading()
-			--	self:breakPsionicChannel()
+			self:breakSpacetimeTuning()
 			self.changed = true
 		end)
 		local ok, ret = coroutine.resume(co)
@@ -1263,86 +1343,10 @@ function _M:playerUseItem(object, item, inven)
 	)
 end
 
-function _M:quickSwitchWeapons()
-	if self.no_inventory_access then return end
-	local mh1, mh2 = self.inven[self.INVEN_MAINHAND], self.inven[self.INVEN_QS_MAINHAND]
-	local oh1, oh2 = self.inven[self.INVEN_OFFHAND], self.inven[self.INVEN_QS_OFFHAND]
-	local pf1, pf2 = self.inven[self.INVEN_PSIONIC_FOCUS], self.inven[self.INVEN_QS_PSIONIC_FOCUS]
-	local qv1, qv2 = self.inven[self.INVEN_QUIVER], self.inven[self.INVEN_QS_QUIVER]
-
-	if not mh1 or not mh2 or not oh1 or not oh2 then return end
-
-	-- Do not reset power of switched items
-	self.no_power_reset_on_wear = true
-
-	-- Check for free weapon swaps
-	local free_swap = false
-	if self:knowTalent(self.T_CELERITY) or self:attr("quick_weapon_swap") then free_swap = true end
-
-	local mhset1, mhset2 = {}, {}
-	local ohset1, ohset2 = {}, {}
-	local pfset1, pfset2 = {}, {}
-	local qvset1, qvset2 = {}, {}
-	-- Remove them all
-	for i = #mh1, 1, -1 do mhset1[#mhset1+1] = self:removeObject(mh1, i, true) end
-	for i = #mh2, 1, -1 do mhset2[#mhset2+1] = self:removeObject(mh2, i, true) end
-	for i = #oh1, 1, -1 do ohset1[#ohset1+1] = self:removeObject(oh1, i, true) end
-	for i = #oh2, 1, -1 do ohset2[#ohset2+1] = self:removeObject(oh2, i, true) end
-	if pf1 and pf2 then
-		for i = #pf1, 1, -1 do pfset1[#pfset1+1] = self:removeObject(pf1, i, true) end
-		for i = #pf2, 1, -1 do pfset2[#pfset2+1] = self:removeObject(pf2, i, true) end
-	end
-	if qv1 and qv2 then
-		for i = #qv1, 1, -1 do qvset1[#qvset1+1] = self:removeObject(qv1, i, true) end
-		for i = #qv2, 1, -1 do qvset2[#qvset2+1] = self:removeObject(qv2, i, true) end
-	end
-	-- Put them all back
-	for i = 1, #mhset1 do self:addObject(mh2, mhset1[i]) end
-	for i = 1, #mhset2 do self:addObject(mh1, mhset2[i]) end
-	for i = 1, #ohset1 do self:addObject(oh2, ohset1[i]) end
-	for i = 1, #ohset2 do self:addObject(oh1, ohset2[i]) end
-	if pf1 and pf2 then
-		for i = 1, #pfset1 do self:addObject(pf2, pfset1[i]) end
-		for i = 1, #pfset2 do self:addObject(pf1, pfset2[i]) end
-	end
-	if qv1 and qv2 then
-		for i = 1, #qvset1 do self:addObject(qv2, qvset1[i]) end
-		for i = 1, #qvset2 do self:addObject(qv1, qvset2[i]) end
-	end
-	if free_swap == false then self:useEnergy() end
-	local names = ""
-	if pf1 and pf2 then
-		if not pf1[1] then
-			if mh1[1] and oh1[1] then names = mh1[1]:getName{do_color=true}.." and "..oh1[1]:getName{do_color=true}
-			elseif mh1[1] and not oh1[1] then names = mh1[1]:getName{do_color=true}
-			elseif not mh1[1] and oh1[1] then names = oh1[1]:getName{do_color=true}
-			end
-		else
-			if mh1[1] and oh1[1] then names = mh1[1]:getName{do_color=true}.." and "..oh1[1]:getName{do_color=true}.." and "..pf1[1]:getName{do_color=true}
-			elseif mh1[1] and not oh1[1] then names = mh1[1]:getName{do_color=true}.." and "..pf1[1]:getName{do_color=true}
-			elseif not mh1[1] and oh1[1] then names = oh1[1]:getName{do_color=true}.." and "..pf1[1]:getName{do_color=true}
-			end
-		end
-	else
-		if mh1[1] and oh1[1] then names = mh1[1]:getName{do_color=true}.." and "..oh1[1]:getName{do_color=true}
-		elseif mh1[1] and not oh1[1] then names = mh1[1]:getName{do_color=true}
-		elseif not mh1[1] and oh1[1] then names = oh1[1]:getName{do_color=true}
-		end
-	end
-
-	self.no_power_reset_on_wear = nil
-
-	self:playerCheckSustains()
-
-	game.logPlayer(self, "You switch your weapons to: %s.", names)
-	self.off_weapon_slots = not self.off_weapon_slots
-	self.changed = true
-end
-
 --- Call when an object is worn
 -- This doesnt call the base interface onWear, it copies the code because we need some tricky stuff
-function _M:onWear(o, bypass_set, slot)
-	mod.class.Actor.onWear(self, o, bypass_set, slot)
+function _M:onWear(o, slot, bypass_set)
+	mod.class.Actor.onWear(self, o, slot, bypass_set)
 
 	if not self.no_power_reset_on_wear then
 		o:forAllStack(function(so)
@@ -1409,24 +1413,6 @@ function _M:onAddObject(o)
 	end
 end
 
-
--- Go through all sustained talents and turn them off if pre_use fails
-function _M:playerCheckSustains()
-	for tid, _ in pairs(self.talents) do
-		local t = self:getTalentFromId(tid)
-		if t and t.mode == "sustained" and self:isTalentActive(t.id) then
-			-- handles unarmed
-			if t.is_unarmed and (self:hasMassiveArmor() or not self:isUnarmed()) then
-				self:forceUseTalent(tid, {ignore_energy=true})
-			end
-			-- handles pre_use checks
-			if t.on_pre_use and not t.on_pre_use(self, t, silent, fake) then
-				self:forceUseTalent(tid, {ignore_energy=true})
-			end
-		end
-	end
-end
-
 function _M:playerLevelup(on_finish, on_birth)
 	local LevelupDialog = require "mod.dialogs.LevelupDialog"
 	local ds = LevelupDialog.new(self, on_finish, on_birth)
@@ -1437,7 +1423,7 @@ end
 function _M:useOrbPortal(portal)
 	if portal.special then portal:special(self) return end
 
-	local spotted = spotHostiles(self)
+	local spotted = spotHostiles(self, true)
 	if #spotted > 0 then
 		local dir = game.level.map:compassDirection(spotted[1].x - self.x, spotted[1].y - self.y)
 		self:logCombat(spotted[1].actor, "You can not use the Orb with foes watching (#Target# to the %s%s)",dir, game.level.map:isOnScreen(spotted[1].x, spotted[1].y) and "" or " - offscreen")
@@ -1563,3 +1549,5 @@ function _M:attackOrMoveDir(dir)
 	self:moveDir(dir)
 	game_or_player.bump_attack_disabled = tmp
 end
+
+return _M

@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2014 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -42,7 +42,7 @@ _M.logCombat = Combat.logCombat
 
 function _M:getRequirementDesc(who)
 	local base_getRequirementDesc = engine.Object.getRequirementDesc
-	if self.subtype == "shield" and who:knowTalent(who.T_SKIRMISHER_BUCKLER_EXPERTISE) then
+	if self.subtype == "shield" and type(self.require) == "table" and who:knowTalent(who.T_SKIRMISHER_BUCKLER_EXPERTISE) then
 		local oldreq = rawget(self, "require")
 		self.require = table.clone(oldreq, true)
 		if self.require.stat and self.require.stat.str then
@@ -54,6 +54,18 @@ function _M:getRequirementDesc(who)
 				break
 			end
 		end end
+
+		local desc = base_getRequirementDesc(self, who)
+
+		self.require = oldreq
+
+		return desc
+	elseif (self.type =="weapon" or self.type=="ammo") and type(self.require) == "table" and who:knowTalent(who.T_STRENGTH_OF_PURPOSE) then
+		local oldreq = rawget(self, "require")
+		self.require = table.clone(oldreq, true)
+		if self.require.stat and self.require.stat.str then
+			self.require.stat.mag, self.require.stat.str = self.require.stat.str, nil
+		end
 
 		local desc = base_getRequirementDesc(self, who)
 
@@ -102,6 +114,88 @@ function _M:canUseObject()
 	return engine.interface.ObjectActivable.canUseObject(self)
 end
 
+function _M:useObject(who, ...)
+	-- Make sure the object is registered with the game, if need be
+	if not game:hasEntity(self) then game:addEntity(self) end
+
+	local reduce = 100 - util.bound(who:attr("use_object_cooldown_reduce") or 0, 0, 100)
+	local usepower = function(power) return math.ceil(power * reduce / 100) end
+
+	if self.use_power then
+		if (self.talent_cooldown and not who:isTalentCoolingDown(self.talent_cooldown)) or (not self.talent_cooldown and self.power >= usepower(self.use_power.power)) then
+		
+			local ret = self.use_power.use(self, who, ...) or {}
+			local no_power = not ret.used or ret.no_power
+			if not no_power then 
+				if self.talent_cooldown then
+					who.talents_cd[self.talent_cooldown] = usepower(self.use_power.power)
+					local t = who:getTalentFromId(self.talent_cooldown)
+					if t.cooldownStart then t.cooldownStart(who, t, self) end
+				else
+					self.power = self.power - usepower(self.use_power.power)
+				end
+			end
+			return ret
+		else
+			if self.talent_cooldown or (self.power_regen and self.power_regen ~= 0) then
+				game.logPlayer(who, "%s is still recharging.", self:getName{no_count=true})
+			else
+				game.logPlayer(who, "%s can not be used anymore.", self:getName{no_count=true})
+			end
+			return {}
+		end
+	elseif self.use_simple then
+		return self.use_simple.use(self, who, ...) or {}
+	elseif self.use_talent then
+		if (self.talent_cooldown and not who:isTalentCoolingDown(self.talent_cooldown)) or (not self.talent_cooldown and (not self.use_talent.power or self.power >= usepower(self.use_talent.power))) then
+		
+			local id = self.use_talent.id
+			local ab = self:getTalentFromId(id)
+			local old_level = who.talents[id]; who.talents[id] = self.use_talent.level
+			local ret = ab.action(who, ab)
+			who.talents[id] = old_level
+
+			if ret then 
+				if self.talent_cooldown then
+					who.talents_cd[self.talent_cooldown] = usepower(self.use_talent.power)
+					local t = who:getTalentFromId(self.talent_cooldown)
+					if t.cooldownStart then t.cooldownStart(who, t, self) end
+				else
+					self.power = self.power - usepower(self.use_talent.power)
+				end
+			end
+
+			return {used=ret}
+		else
+			if self.talent_cooldown or (self.power_regen and self.power_regen ~= 0) then
+				game.logPlayer(who, "%s is still recharging.", self:getName{no_count=true})
+			else
+				game.logPlayer(who, "%s can not be used anymore.", self:getName{no_count=true})
+			end
+			return {}
+		end
+	end
+end
+
+function _M:getObjectCooldown(who)
+	if not self.power then return end
+	if self.talent_cooldown then
+		return (who and who:isTalentCoolingDown(self.talent_cooldown)) or 0
+	end
+	local reduce = 100 - util.bound(who:attr("use_object_cooldown_reduce") or 0, 0, 100)
+	local usepower = function(power) return math.ceil(power * reduce / 100) end
+	local need = (self.use_power and usepower(self.use_power.power)) or (self.use_talent and usepower(self.use_talent.power)) or 0
+	if self.power < need then
+		if self.power_regen and self.power_regen > 0 then
+			return math.ceil((need - self.power)/self.power_regen)
+		else
+			return nil
+		end
+	else
+		return 0
+	end
+end
+
 --- Use the object (quaff, read, ...)
 function _M:use(who, typ, inven, item)
 	inven = who:getInven(inven)
@@ -120,6 +214,11 @@ function _M:use(who, typ, inven, item)
 	end
 	if who:hasEffect(self.EFF_UNSTOPPABLE) then
 		game.logPlayer(who, "You can not use items during a battle frenzy!")
+		return
+	end
+	
+	if who:attr("sleep") and not who:attr("lucid_dreamer") then
+		game.logPlayer(who, "你不能在睡眠中使用物品！")
 		return
 	end
 
@@ -159,6 +258,13 @@ end
 
 --- Describes an attribute, to expand object name
 function _M:descAttribute(attr)
+	local power = function(c)
+		if config.settings.tome.advanced_weapon_stats then
+			return math.floor(game.player:combatDamagePower(self.combat)*100).."% 伤害"
+		else
+			return c.dam.."-"..(c.dam*(c.damrange or 1.1)).." 伤害"
+		end
+	end
 	if attr == "MASTERY" then
 		local tms = {}
 		for ttn, i in pairs(self.wielder.talents_types_mastery) do
@@ -182,20 +288,20 @@ function _M:descAttribute(attr)
 		return ("%s%0.2f/回合"):format(i > 0 and "+" or "-", math.abs(i))
 	elseif attr == "COMBAT" then
 		local c = self.combat
-		return c.dam.."-"..(c.dam*(c.damrange or 1.1)).." 伤害, "..(c.apr or 0).." 穿透"
+		return power(c) ..(c.apr or 0).." 穿透"
 	elseif attr == "COMBAT_AMMO" then
 		local c = self.combat
 		return c.shots_left.."/"..math.floor(c.capacity)..", "..c.dam.."-"..(c.dam*(c.damrange or 1.1)).." 伤害, "..(c.apr or 0).." 穿透"
 	elseif attr == "COMBAT_DAMTYPE" then
 		local c = self.combat
-		return c.dam.."-"..(c.dam*(c.damrange or 1.1)).." 伤害, "..("%d"):format((c.apr or 0)).." 穿透, "..DamageType:get(c.damtype).name.." 伤害"
+		return power(c)..("%d"):format((c.apr or 0)).." 穿透, "..DamageType:get(c.damtype).name.." 伤害"
 	elseif attr == "COMBAT_ELEMENT" then
 		local c = self.combat
-		return c.dam.."-"..(c.dam*(c.damrange or 1.1)).." 强度, "..("%d"):format((c.apr or 0)).." 穿透, "..DamageType:get(c.element or DamageType.PHYSICAL).name.." 元素伤害"
+		return power(c)..("%d"):format((c.apr or 0)).." 穿透, "..DamageType:get(c.element or DamageType.PHYSICAL).name.." 元素伤害"
 	elseif attr == "SHIELD" then
 		local c = self.special_combat
 		if c and (game.player:knowTalentType("technique/shield-offense") or game.player:knowTalentType("technique/shield-defense") or game.player:attr("show_shield_combat")) then
-			return c.dam.." 伤害, "..c.block.." 格挡"
+			return power(c)..c.block.." 格挡"
 		else
 			return c.block.." 格挡"
 		end
@@ -299,7 +405,7 @@ function _M:getName(t)
 	if not t.no_add_name and (self.been_reshaped or self.been_imbued) then
 		name = (type(self.been_reshaped) == "string" and self.been_reshaped or "") .. name .. (type(self.been_imbued) == "string" and self.been_imbued or "")
 	end
-	
+
 	if not self:isIdentified() and not t.force_id and self:getUnidentifiedName() then name = self:getUnidentifiedName() end
 	
 	local objCHN = objects:getObjects(self.name,self.desc,self.subtype,self.short_name,self:isIdentified(),self.rare,self.unique)	
@@ -407,6 +513,11 @@ function _M:getTextualDesc(compare_with, use_actor)
 
 	if self.set_list then
 		desc:add({"color","GREEN"}, "It is part of a set of items.", {"color","LAST"}, true)
+		if self.set_desc then
+			for set_id, text in pairs(self.set_desc) do
+				desc:add({"color","GREEN"}, text, {"color","LAST"}, true)
+			end
+		end
 		if self.set_complete then desc:add({"color","LIGHT_GREEN"}, "The set is complete.", {"color","LAST"}, true) end
 	end
 
@@ -423,8 +534,11 @@ function _M:getTextualDesc(compare_with, use_actor)
 		local add = false
 		ret:add(text)
 		local outformatres
-		if type(outformat) == "function" then outformatres = outformat()
-		else outformatres = outformat:format(((item1[field] or 0) + (add_table[field] or 0)) * mod) end
+		local resvalue = ((item1[field] or 0) + (add_table[field] or 0)) * mod
+		local item1value = resvalue
+		if type(outformat) == "function" then
+			outformatres = outformat(resvalue, nil)
+		else outformatres = outformat:format(resvalue) end
 		if isinversed then
 			ret:add(((item1[field] or 0) + (add_table[field] or 0)) > 0 and {"color","RED"} or {"color","LIGHT_GREEN"}, outformatres, {"color", "LAST"})
 		else
@@ -444,8 +558,10 @@ function _M:getTextualDesc(compare_with, use_actor)
 				add = true
 				if items[i][infield][field] ~= (item1[field] or 0) then
 					local outformatres
-					if type(outformat) == "function" then outformatres = outformat()
-					else outformatres = outformat:format(((item1[field] or 0) - items[i][infield][field]) * mod) end
+					local resvalue = (items[i][infield][field] + (add_table[field] or 0)) * mod
+					if type(outformat) == "function" then
+						outformatres = outformat(item1value, resvalue)
+					else outformatres = outformat:format(item1value - resvalue) end
 					if isdiffinversed then
 						ret:add(items[i][infield][field] < (item1[field] or 0) and {"color","RED"} or {"color","LIGHT_GREEN"}, outformatres, {"color", "LAST"})
 					else
@@ -463,6 +579,22 @@ function _M:getTextualDesc(compare_with, use_actor)
 			desc:merge(ret)
 			desc:add(true)
 		end
+	end
+
+	-- included - if we should include the value in the present total.
+	-- total_call - function to call on the actor to get the current total
+	local compare_scaled = function(item1, items, infield, change_field, results, outformat, text, included, mod, isinversed, isdiffinversed, add_table)
+		local out = function(base_change, base_change2)
+			local unworn_base = (item1.wielded and table.get(item1, infield, change_field)) or table.get(items, 1, infield, change_field)  -- ugly
+			unworn_base = unworn_base or 0
+			local scale_change = use_actor:getAttrChange(change_field, -unworn_base, base_change - unworn_base, unpack(results))
+			if base_change2 then
+				scale_change = scale_change - use_actor:getAttrChange(change_field, -unworn_base, base_change2 - unworn_base, unpack(results))
+				base_change = base_change - base_change2
+			end
+			return outformat:format(base_change, scale_change)
+		end
+		return compare_fields(item1, items, infield, change_field, out, text, mod, isinversed, isdiffinversed, add_table)
 	end
 
 	local compare_table_fields = function(item1, items, infield, field, outformat, text, kfunct, mod, isinversed, filter)
@@ -536,34 +668,68 @@ function _M:getTextualDesc(compare_with, use_actor)
 	local desc_combat = function(combat, compare_with, field, add_table, is_fake_add)
 		add_table = add_table or {}
 		add_table.dammod = add_table.dammod or {}
-		combat = combat[field] or {}
+		combat = table.clone(combat[field] or {})
 		compare_with = compare_with or {}
 		local dm = {}
-		for stat, i in pairs(combat.dammod or {}) do
-			dm[#dm+1] = ("%d%% %s"):format((i + (add_table.dammod[stat] or 0)) * 100, Stats.stats_def[stat].short_name:capitalize())
+		combat.dammod = table.mergeAdd(table.clone(combat.dammod or {}), add_table.dammod)
+		local dammod = use_actor:getDammod(combat)
+		for stat, i in pairs(dammod) do
+			local name = Stats.stats_def[stat].short_name:capitalize()
+			if use_actor:knowTalent(use_actor.T_STRENGTH_OF_PURPOSE) then
+				if name == "Str" then name = "Mag" end
+			end
+			if self.subtype == "dagger" and use_actor:knowTalent(use_actor.T_LETHALITY) then
+				if name == "Str" then name = "Cun" end
+			end
+			dm[#dm+1] = ("%d%% %s"):format(i * 100, name)
 		end
 		if #dm > 0 or combat.dam then
-			local power_diff = ""
 			local diff_count = 0
 			local any_diff = false
-			for i, v in ipairs(compare_with) do
-				if v[field] then
-					local base_power_diff = ((combat.dam or 0) + (add_table.dam or 0)) - ((v[field].dam or 0) + (add_table.dam or 0))
-					local multi_diff = (((combat.damrange or 1.1) + (add_table.damrange or 0)) * ((combat.dam or 0) + (add_table.dam or 0))) - (((v[field].damrange or (1.1 - (add_table.damrange or 0))) + (add_table.damrange or 0)) * ((v[field].dam or 0) + (add_table.dam or 0)))
-					power_diff = power_diff..("%s%s%+.1f#LAST# - %s%+.1f#LAST#"):format(diff_count > 0 and " / " or "", base_power_diff > 0 and "#00ff00#" or "#ff0000#", base_power_diff, multi_diff > 0 and "#00ff00#" or "#ff0000#", multi_diff)
-					diff_count = diff_count + 1
-					if base_power_diff ~= 0 or multi_diff ~= 0 then
-						any_diff = true
+			if config.settings.tome.advanced_weapon_stats then
+				local base_power = use_actor:combatDamagePower(combat, add_table.dam)
+				local base_range = use_actor:combatDamageRange(combat, add_table.damrange)
+				local power_diff, range_diff = {}, {}
+				for _, v in ipairs(compare_with) do
+					if v[field] then
+						local base_power_diff = base_power - use_actor:combatDamagePower(v[field], add_table.dam)
+						local base_range_diff = base_range - use_actor:combatDamageRange(v[field], add_table.damrange)
+						power_diff[#power_diff + 1] = ("%s%+d%%#LAST#"):format(base_power_diff > 0 and "#00ff00#" or "#ff0000#", base_power_diff * 100)
+						range_diff[#range_diff + 1] = ("%s%+.1fx#LAST#"):format(base_range_diff > 0 and "#00ff00#" or "#ff0000#", base_range_diff)
+						diff_count = diff_count + 1
+						if base_power_diff ~= 0 or base_range_diff ~= 0 then
+							any_diff = true
+						end
 					end
 				end
-			end
-			if any_diff == false then
-				power_diff = ""
+				if any_diff then
+					local s = ("伤害: %3d%% (%s)　范围: %.1fx (%s)"):format(base_power * 100, table.concat(power_diff, " / "), base_range, table.concat(range_diff, " / "))
+					desc:merge(s:toTString())
+				else
+					desc:add(("伤害: %3d%%　范围: %.1fx"):format(base_power * 100, base_range))
+				end
 			else
-				power_diff = ("(%s)"):format(power_diff)
+				local power_diff = {}
+				for i, v in ipairs(compare_with) do
+					if v[field] then
+						local base_power_diff = ((combat.dam or 0) + (add_table.dam or 0)) - ((v[field].dam or 0) + (add_table.dam or 0))
+						local dfl_range = (1.1 - (add_table.damrange or 0))
+						local multi_diff = (((combat.damrange or dfl_range) + (add_table.damrange or 0)) * ((combat.dam or 0) + (add_table.dam or 0))) - (((v[field].damrange or dfl_range) + (add_table.damrange or 0)) * ((v[field].dam or 0) + (add_table.dam or 0)))
+						power_diff [#power_diff + 1] = ("%s%+.1f#LAST# - %s%+.1f#LAST#"):format(base_power_diff > 0 and "#00ff00#" or "#ff0000#", base_power_diff, multi_diff > 0 and "#00ff00#" or "#ff0000#", multi_diff)
+						diff_count = diff_count + 1
+						if base_power_diff ~= 0 or multi_diff ~= 0 then
+							any_diff = true
+						end
+					end
+				end
+				if any_diff == false then
+					power_diff = ""
+				else
+					power_diff = ("(%s)"):format(table.concat(power_diff, " / "))
+				end
+				desc:add(("Base power: %.1f - %.1f"):format((combat.dam or 0) + (add_table.dam or 0), ((combat.damrange or (1.1 - (add_table.damrange or 0))) + (add_table.damrange or 0)) * ((combat.dam or 0) + (add_table.dam or 0))))
+				desc:merge(power_diff:toTString())
 			end
-			desc:add(("Base power: %.1f - %.1f"):format((combat.dam or 0) + (add_table.dam or 0), ((combat.damrange or (1.1 - (add_table.damrange or 0))) + (add_table.damrange or 0)) * ((combat.dam or 0) + (add_table.dam or 0))))
-			desc:merge(power_diff:toTString())
 			desc:add(true)
 			desc:add(("Uses stat%s: %s"):format(#dm > 1 and "s" or "",table.concat(dm, ', ')), true)
 			local col = (combat.damtype and DamageType:get(combat.damtype) and DamageType:get(combat.damtype).text_color or "#WHITE#"):toTString()
@@ -588,7 +754,12 @@ function _M:getTextualDesc(compare_with, use_actor)
 		compare_fields(combat, compare_with, field, "atk", "%+d", "Accuracy: ", 1, false, false, add_table)
 		compare_fields(combat, compare_with, field, "apr", "%+d", "Armour Penetration: ", 1, false, false, add_table)
 		compare_fields(combat, compare_with, field, "physcrit", "%+.1f%%", "Physical crit. chance: ", 1, false, false, add_table)
-		compare_fields(combat, compare_with, field, "physspeed", function() return ("%.0f%%"):format(100/((is_fake_add and 1 or 0) + (combat.physspeed or 1))) end, "Attack speed: ", 100, false, true, add_table)
+		local physspeed_compare = function(orig, compare_with)
+			orig = 100 / orig
+			if compare_with then return ("%+.0f%%"):format(orig - 100 / compare_with)
+			else return ("%2.0f%%"):format(orig) end
+		end
+		compare_fields(combat, compare_with, field, "physspeed", physspeed_compare, "Attack speed: ", 1, false, true, add_table)
 
 		compare_fields(combat, compare_with, field, "block", "%+d", "Block value: ", 1, false, false, add_table)
 
@@ -729,16 +900,15 @@ function _M:getTextualDesc(compare_with, use_actor)
 
 			-- No special
 			if not special then return {} end
-
 			-- Single special
 			if special.desc then
-				return {[special.desc] = {10, special.desc}}
+				return {[special.desc] = {10, util.getval(special.desc, self, use_actor, special)}}
 			end
 
 			-- Multiple specials
 			local list = {}
 			for _, special in pairs(special) do
-				list[special.desc] = {10, special.desc}
+				list[special.desc] = {10, util.getval(special.desc, self, use_actor, special)}
 			end
 			return list
 		end
@@ -852,19 +1022,19 @@ function _M:getTextualDesc(compare_with, use_actor)
 	local desc_wielder = function(w, compare_with, field)
 		w = w or {}
 		w = w[field] or {}
-		compare_fields(w, compare_with, field, "combat_atk", "%+d", "Accuracy: ")
+		compare_scaled(w, compare_with, field, "combat_atk", {"combatAttack"}, "%+d #LAST#(%+d 有效值)", "Accuracy: ")
 		compare_fields(w, compare_with, field, "combat_apr", "%+d", "Armour penetration: ")
 		compare_fields(w, compare_with, field, "combat_physcrit", "%+.1f%%", "Physical crit. chance: ")
-		compare_fields(w, compare_with, field, "combat_dam", "%+d", "Physical power: ")
+		compare_scaled(w, compare_with, field, "combat_dam", {"combatPhysicalpower"}, "%+d #LAST#(%+d 有效值)", "Physical power: ")
 
 		compare_fields(w, compare_with, field, "combat_armor", "%+d", "Armour: ")
 		compare_fields(w, compare_with, field, "combat_armor_hardiness", "%+d%%", "Armour Hardiness: ")
-		compare_fields(w, compare_with, field, "combat_def", "%+d", "Defense: ")
-		compare_fields(w, compare_with, field, "combat_def_ranged", "%+d", "Ranged Defense: ")
+		compare_scaled(w, compare_with, field, "combat_def", {"combatDefense", true}, "%+d #LAST#(%+d 有效值)", "Defense: ")
+		compare_scaled(w, compare_with, field, "combat_def_ranged", {"combatDefenseRanged", true}, "%+d #LAST#(%+d 有效值)", "Ranged Defense: ")
 
 		compare_fields(w, compare_with, field, "fatigue", "%+d%%", "Fatigue: ", 1, true, true)
 
-		compare_fields(w, compare_with, field, "ammo_reload_speed", "%+d", "Ammo reloads per turns: ")
+		compare_fields(w, compare_with, field, "ammo_reload_speed", "%+d", "Ammo reloads per turn: ")
 
 
 		local dt_string = tstring{}
@@ -900,7 +1070,7 @@ function _M:getTextualDesc(compare_with, use_actor)
 			end
 		end
 
-		onhit = tstring{}
+		local onhit = tstring{}
 		local found = false
 		local onhit_combat = { on_melee_hit = {} }
 		for i, v in pairs(w.on_melee_hit or {}) do
@@ -1071,7 +1241,7 @@ function _M:getTextualDesc(compare_with, use_actor)
 			desc:add(("Talent master%s: "):format(any_mastery > 1 and "ies" or "y"))
 			for ttn, ttid in pairs(masteries) do
 				local tt = Talents.talents_types_def[ttn]
-				if tt then				
+				if tt then
 					local cat = tt.type:gsub("/.*", "")
 					local name = cat:capitalize().." / "..tt.name:capitalize()
 					local diff = (ttid[2] or 0) - (ttid[1] or 0)
@@ -1193,9 +1363,9 @@ function _M:getTextualDesc(compare_with, use_actor)
 		compare_fields(w, compare_with, field, "inc_stealth", "%+d", "Stealth bonus: ")
 		compare_fields(w, compare_with, field, "max_encumber", "%+d", "Maximum encumbrance: ")
 
-		compare_fields(w, compare_with, field, "combat_physresist", "%+d", "Physical save: ")
-		compare_fields(w, compare_with, field, "combat_spellresist", "%+d", "Spell save: ")
-		compare_fields(w, compare_with, field, "combat_mentalresist", "%+d", "Mental save: ")
+		compare_scaled(w, compare_with, field, "combat_physresist", {"combatPhysicalResist", true}, "%+d #LAST#(%+d 有效值)", "Physical save: ")
+		compare_scaled(w, compare_with, field, "combat_spellresist", {"combatSpellResist", true}, "%+d #LAST#(%+d 有效值)", "Spell save: ")
+		compare_scaled(w, compare_with, field, "combat_mentalresist", {"combatMentalResist", true}, "%+d #LAST#(%+d 有效值)", "Mental save: ")
 
 		compare_fields(w, compare_with, field, "blind_immune", "%+d%%", "Blindness immunity: ", 100)
 		compare_fields(w, compare_with, field, "poison_immune", "%+d%%", "Poison immunity: ", 100)
@@ -1256,11 +1426,11 @@ function _M:getTextualDesc(compare_with, use_actor)
 		compare_fields(w, compare_with, field, "max_negative", "%+.2f", "Maximum neg.energy: ")
 		compare_fields(w, compare_with, field, "max_air", "%+.2f", "Maximum air capacity: ")
 
-		compare_fields(w, compare_with, field, "combat_spellpower", "%+d", "Spellpower: ")
+		compare_scaled(w, compare_with, field, "combat_spellpower", {"combatSpellpower"}, "%+d #LAST#(%+d 有效值)", "Spellpower: ")
 		compare_fields(w, compare_with, field, "combat_spellcrit", "%+d%%", "Spell crit. chance: ")
 		compare_fields(w, compare_with, field, "spell_cooldown_reduction", "%d%%", "Lowers spell cool-downs by: ", 100)
 
-		compare_fields(w, compare_with, field, "combat_mindpower", "%+d", "Mindpower: ")
+		compare_scaled(w, compare_with, field, "combat_mindpower", {"combatMindpower"}, "%+d #LAST#(%+d 有效值)", "Mindpower: ")
 		compare_fields(w, compare_with, field, "combat_mindcrit", "%+d%%", "Mental crit. chance: ")
 
 		compare_fields(w, compare_with, field, "lite", "%+d", "Light radius: ")
@@ -1312,7 +1482,7 @@ function _M:getTextualDesc(compare_with, use_actor)
 
 		compare_fields(w, compare_with, field, "slow_projectiles", "%+d%%", "Slows Projectiles: ")
 
-		compare_fields(w, compare_with, field, "paradox_reduce_fails", "%+d", "Reduces paradox failures(equivalent to willpower): ")
+		compare_fields(w, compare_with, field, "paradox_reduce_anomalies", "%+d", "Reduces paradox failures(equivalent to willpower): ")
 
 		compare_fields(w, compare_with, field, "damage_backfire", "%+d%%", "Damage Backlash: ", nil, true)
 
@@ -1374,7 +1544,7 @@ function _M:getTextualDesc(compare_with, use_actor)
 
 		if (w and w.combat or can_combat_unarmed) and (use_actor:knowTalent(use_actor.T_EMPTY_HAND) or use_actor:attr("show_gloves_combat")) then
 			desc:add({"color","YELLOW"}, "When used to modify unarmed attacks:", {"color", "LAST"}, true)
-			compare_tab = { dam=1, atk=1, apr=0, physcrit=0, physspeed =0.6, dammod={str=1}, damrange=1.1 }
+			compare_tab = { dam=1, atk=1, apr=0, physcrit=0, physspeed =(use_actor:knowTalent(use_actor.T_EMPTY_HAND) and 0.6 or 1), dammod={str=1}, damrange=1.1 }
 			desc_combat(w, compare_unarmed, "combat", compare_tab, true)
 		end
 	end
@@ -1490,6 +1660,13 @@ function _M:getTextualDesc(compare_with, use_actor)
 		end
 	end
 
+	local latent = table.get(self.color_attributes, 'damage_type')
+	if latent then
+		latent = DamageType:get(latent) or {}
+		desc:add({"color","YELLOW",}, "Latent Damage Type: ", {"color","LAST",},
+			latent.text_color or "#WHITE#", latent.name:capitalize(), {"color", "LAST",}, true)
+	end
+
 	if self.inscription_data and self.inscription_talent then
 		use_actor.__inscription_data_fake = self.inscription_data
 		local t = self:getTalentFromId("T_"..self.inscription_talent.."_1")
@@ -1564,9 +1741,10 @@ function _M:getTextualDesc(compare_with, use_actor)
 		desc:add(talents[tid][3] and {"color","GREEN"} or {"color","WHITE"}, ("技能（精神）命中后释放： %s (%d%% 几率 等级 %d)."):format(self:getTalentFromId(tid).name, talents[tid][1], talents[tid][2]), {"color","LAST"}, true)
 	end
 
-	if self.use_no_energy then
+	if self.use_no_energy and self.use_no_energy ~= "fake" then
 		desc:add("Activating this item is instant.", true)
 	end
+
 
 	if self.curse then
 		local t = use_actor:getTalentFromId(use_actor.T_DEFILING_TOUCH)
@@ -1583,17 +1761,22 @@ function _M:getTextualDesc(compare_with, use_actor)
 	return desc
 end
 
+-- get the textual description of the object's usable power
 function _M:getUseDesc(use_actor)
 	use_actor = use_actor or game.player
 	local ret = tstring{}
 	local reduce = 100 - util.bound(use_actor:attr("use_object_cooldown_reduce") or 0, 0, 100)
 	local usepower = function(power) return math.ceil(power * reduce / 100) end
 	if self.use_power and not self.use_power.hidden then
+		local desc = util.getval(objUse[self.use_power.name] or self.use_power.name, self, use_actor)
 		if self.show_charges then
-			ret = tstring{{"color","YELLOW"}, ("可以用来施放【 %s 】，剩余 %d 次，总共可用 %d 次。"):format(util.getval(objUse[self.use_power.name] or self.use_power.name, self), math.floor(self.power / usepower(self.use_power.power)), math.floor(self.max_power / usepower(self.use_power.power))), {"color","LAST"}}
+			ret = tstring{{"color","YELLOW"}, ("可以用来施放【 %s 】，剩余 %d 次，总共可用 %d 次。"):format(desc, math.floor(self.power / usepower(self.use_power.power)), math.floor(self.max_power / usepower(self.use_power.power))), {"color","LAST"}}
 		elseif self.talent_cooldown then
-			--ret = tstring{{"color","YELLOW"}, ("可以用来施放【 %s 】，使其他所有护符进入 %d 回合冷却。"):format(util.getval(objUse[self.use_power.name] or self.use_power.name, self):format(self:getCharmPower(game.player)), usepower(self.use_power.power)), {"color","LAST"}}
-			local use_name_type = type(self.use_power.name)
+			local t_name = self.talent_cooldown == "T_GLOBAL_CD" and "所有护符" or "技能 "..use_actor:getTalentDisplayName(use_actor:getTalentFromId(self.talent_cooldown))
+			local use_name = desc:format(self:getCharmPower(use_actor))
+			ret = tstring{{"color","YELLOW"}, ("可以用来施放【%s】, 使%s进入%d回合冷却。"):format(use_name, t_name, usepower(self.use_power.power)), {"color","LAST"}}
+
+--[[			local use_name_type = type(self.use_power.name)
 			local use_name = util.getval(objUse[self.use_power.name] or self.use_power.name, self):format(self:getCharmPower())
 			if use_name_type == "function" then
 				 use_name = use_name:gsub("fire a bolt of a random element","发射一束随机元素")
@@ -1603,12 +1786,12 @@ function _M:getUseDesc(use_actor)
 						    :gsub("and armour hardiness by","护甲值和护甲硬度")
 			end
 			use_name = use_name:gsub("create a temporary shield that absorbs ","制造一层临时护盾，至多能吸收"):gsub("damage","伤害")
-			ret = tstring{{"color","YELLOW"}, ("可以用来施放【 %s 】，使其他所有护符进入 %d 回合冷却。"):format(use_name, self.use_power.power), {"color","LAST"}}
+			ret = tstring{{"color","YELLOW"}, ("可以用来施放【 %s 】，使其他所有护符进入 %d 回合冷却。"):format(use_name, self.use_power.power), {"color","LAST"}}]]
 		else
-			ret = tstring{{"color","YELLOW"}, ("可以用来施放【 %s 】，消耗 %d 能量，剩余能量%d/%d。"):format(util.getval(objUse[self.use_power.name] or self.use_power.name, self), usepower(self.use_power.power), self.power, self.max_power), {"color","LAST"}}
+			ret = tstring{{"color","YELLOW"}, ("可以用来施放【 %s 】，消耗 %d 能量，剩余能量%d/%d。"):format(desc, usepower(self.use_power.power), self.power, self.max_power), {"color","LAST"}}
 		end
 	elseif self.use_simple then
-		ret = tstring{{"color","YELLOW"}, ("可以用来【%s】"):format(objUse[self.use_simple.name] or self.use_simple.name), {"color","LAST"}}
+		ret = tstring{{"color","YELLOW"}, ("可以用来【%s】"):format(util.getval(objUse[self.use_simple.name] or self.use_simple.name, self, use_actor)), {"color","LAST"}}
 	elseif self.use_talent then
 		local t = use_actor:getTalentFromId(self.use_talent.id)
 		if t then
@@ -1811,9 +1994,9 @@ function _M:getPriceFlags()
 		if w.lite then price = price + w.lite * 10 end
 		if w.size_category then price = price + w.size_category * 25 end
 		if w.esp_all then price = price + w.esp_all * 25 end
+		if w.esp then price = price + table.count(w.esp) * 7 end
 		if w.esp_range then price = price + w.esp_range * 15 end
 		if w.can_breath then for t, v in pairs(w.can_breath) do price = price + v * 30 end end
-		if w.esp_all then price = price + w.esp_all * 25 end
 		if w.damage_shield_penetrate then price = price + w.damage_shield_penetrate * 1 end
 		if w.spellsurge_on_crit then price = price + w.spellsurge_on_crit * 5 end
 		if w.quick_weapon_swap then price = price + w.quick_weapon_swap * 50 end
@@ -1885,8 +2068,9 @@ function _M:on_prepickup(who, idx)
 		return true
 	end
 	if who.player and self.force_lore_artifact then
-		local oCHN = objects:getObjects(self.name,self.unique,self.desc,self.subtype,self.short_name)
-		game.party:additionalLore(self.unique, objects:getObjectsChnName(self:getName()), "artifacts", oCHN.desc)
+--		local oCHN = objects:getObjects(self.name,self.unique,self.desc,self.subtype,self.short_name)
+--		game.party:additionalLore(self.unique, objects:getObjectsChnName(self:getName()), "artifacts", oCHN.desc)
+			game.party:additionalLore(self.unique, self:getName{no_add_name=true, do_color=false, no_count=true}, "artifacts", self.desc)
 		game.party:learnLore(self.unique)
 	end
 end
@@ -1905,8 +2089,9 @@ function _M:on_identify()
 			game.party:learnLore(self.on_id_lore, false, false, true)
 		end
 		if self.unique and self.desc and not self.no_unique_lore then
-			local oCHN = objects:getObjects(self.name,self.unique,self.desc,self.subtype,self.short_name)
-			game.party:additionalLore(self.unique, objects:getObjectsChnName(self:getName{no_add_name=true, do_color=false, no_count=true}), "artifacts", oCHN.desc)
+--			local oCHN = objects:getObjects(self.name,self.unique,self.desc,self.subtype,self.short_name)
+--			game.party:additionalLore(self.unique, objects:getObjectsChnName(self:getName{no_add_name=true, do_color=false, no_count=true}), "artifacts", oCHN.desc)
+			game.party:additionalLore(self.unique, self:getName{no_add_name=true, do_color=false, no_count=true}, "artifacts", self.desc)
 			game.party:learnLore(self.unique, false, false, true)
 		end
 	end)

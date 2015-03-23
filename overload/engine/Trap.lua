@@ -1,5 +1,5 @@
 -- TE4 - T-Engine 4
--- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -139,7 +139,7 @@ function _M:trigger(x, y, who)
 	if self.triggered then known, del = self:triggered(x, y, who) end
 	if self.summoner then self.summoner.__project_source = nil end
 	if known then
-		self:setKnown(who, true)
+		self:setKnown(who, true, x, y)
 		game.level.map:updateMap(x, y)
 	end
 	if del then

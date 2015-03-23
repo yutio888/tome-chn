@@ -1,5 +1,5 @@
 ﻿-- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2014 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -23,6 +23,7 @@ uberTalent{
 	no_energy = true,
 	requires_target = true,
 	range = 10,
+	fixed_cooldown = true,
 	tactical = { BUFF = 2 },
 	action = function(self, t)
 		self:setEffect(self.EFF_DRACONIC_WILL, 5, {})

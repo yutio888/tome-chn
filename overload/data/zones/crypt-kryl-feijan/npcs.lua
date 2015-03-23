@@ -21,6 +21,8 @@ load("/data/general/npcs/elven-caster.lua", rarity(0))
 load("/data/general/npcs/elven-warrior.lua", rarity(0))
 load("/data/general/npcs/minor-demon.lua", rarity(5))
 load("/data/general/npcs/major-demon.lua", function(e) e.rarity = nil end)
+load("/data/general/npcs/ogre.lua", function(e) e.faction = "rhalore" if e.rarity then e.rarity = e.rarity + 4 end end)
+
 local Talents = require("engine.interface.ActorTalents")
 
 newEntity{ base="BASE_NPC_MAJOR_DEMON", define_as = "KRYL_FEIJAN",

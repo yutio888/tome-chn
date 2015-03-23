@@ -1,4 +1,4 @@
-timeEffectCHN:newEffect{
+﻿timeEffectCHN:newEffect{
 	id = "FLASH_SHIELD",
 	enName = "Protected by the sun",
 	chName = "阳光保护",
@@ -560,4 +560,77 @@ timeEffectCHN:newEffect{
 	chName = "时空调谐",
 	type = "其他",
 	subtype = "时间",
+}
+
+timeEffectCHN:newEffect{
+	id = "TIME_STOP",
+	enName = "Time Stop",
+	chName = "时间停止",
+	type = "其他",
+	subtype = "时间",
+}
+
+timeEffectCHN:newEffect{
+	id = "TEMPORAL_REPRIEVE",
+	enName = "Temporal Reprieve",
+	chName = "时间避难所",
+	type = "其他",
+	subtype = "时间",
+}
+
+timeEffectCHN:newEffect{
+	id = "TEMPORAL_FUGUE",
+	enName = "Temporal Fugue",
+	chName = "时间复制体",
+	type = "其他",
+	subtype = "时间",
+}
+
+timeEffectCHN:newEffect{
+	id = "REALITY_SMEARING",
+	enName = "Reality Smearing",
+	chName = "弥散现实",
+	type = "其他",
+	subtype = "时间",
+}
+
+timeEffectCHN:newEffect{
+	id = "AEONS_STASIS",
+	enName = "Aeons Statis",
+	chName = "静态时空",
+	type = "其他",
+	subtype = "时间",
+}
+
+
+timeEffectCHN:newEffect{
+	id = "2H_PENALTY",
+	enName = "Hit Penalty",
+	chName = "双手惩罚",
+	type = "其他",
+	subtype = "战斗/惩罚",
+}
+
+timeEffectCHN:newEffect{
+	id = "TWIST_FATE",
+	enName = "Twist Fate",
+	chName = "扭曲命运",
+	type = "其他",
+	subtype = "时间",
+}
+
+timeEffectCHN:newEffect{
+	id = "WARDEN_S_TARGET",
+	enName = "Warden's Focus Target",
+	chName = "选定的目标",
+	type = "其他",
+	subtype = "策略",
+}
+
+timeEffectCHN:newEffect{
+	id = "DEATH_DREAM",
+	enName = "Death in a Dream",
+	chName = "梦中死亡",
+	type = "其他",
+	subtype = "精神",
 }

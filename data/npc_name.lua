@@ -931,7 +931,8 @@ npcDescCHN["losselhing"] = "这只寒冷的蜘蛛似乎使周围的空气都凝�
 
 npcNameCHN["weaver young"] = "编织者幼体"
 npcDescCHN["weaver young"] = "一只小小的蜘蛛，它在不断的出入相位现实。"
-
+npcNameCHN["weaver hatchling"] = "编织者幼体"
+npcDescCHN["weaver hatchling"] = "一只小小的蜘蛛，它在不断的出入相位现实。"
 npcNameCHN["weaver patriarch"] = "雄性编织者"
 npcDescCHN["weaver patriarch"] = "一只胸部有着白色花纹的巨大蓝蜘蛛。它不断的移动和闪烁，好像它只有部分连接在时间线上。"
 

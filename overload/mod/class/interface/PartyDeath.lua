@@ -79,9 +79,10 @@ function _M:onPartyDeath(src, death_note)
 			end
 		end
 
-		local msg
+		local msg, short_msg
 		if not death_note.special_death_msg then
 			msg = "玩家%s 等级 %d %s %s %s 而死，杀死他（她）的是 %s%s%s ，死在第 %s 层， %s。"
+			short_msg = "%s(%d %s %s)  %s 而死，被 %s%s 杀死于 %s %s."
 			local srcname = src.name
 			local killermsg = (src.killer_message and " "..src.killer_message or ""):gsub("#sex#", game.player.female and "她" or "他")
 			if src.name == game.player.name then
@@ -104,19 +105,33 @@ function _M:onPartyDeath(src, death_note)
 				killermsg,
 				game.level.level, zoneName[game.zone.name] or game.zone.name
 			)
+			short_msg = short_msg:format(
+				game.player.name, game.player.level, s_stat_name[game.player.descriptor.subrace] or game.player.descriptor.subrace, s_stat_name[game.player.descriptor.subclass] or game.player.descriptor.subclass,
+				death_note_chn[death_mean] or "猛击",
+				npcCHN:getName(srcname),
+				killermsg,
+				game.level.level, zoneName[game.zone.name] or game.zone.name
+			)
 		else
 			msg = "玩家%s 等级 %d %s %s %s ，死在第 %s 层， %s。"
+			short_msg = "%s(%d %s %s) %s 死于 %s %s."
 			msg = msg:format(
 				game.player.name, game.player.level, s_stat_name[game.player.descriptor.subrace] or game.player.descriptor.subrace, s_stat_name[game.player.descriptor.subclass] or game.player.descriptor.subclass,
 				death_note.special_death_msg,
 				game.level.level, zoneName[game.zone.name] or game.zone.name
+			)
+			short_msg = short_msg:format(
+				game.player.name, game.player.level, s_stat_name[game.player.descriptor.subrace] or game.player.descriptor.subrace, s_stat_name[game.player.descriptor.subclass] or game.player.descriptor.subclass,
+				death_note.special_death_msg,
+				game.level.level, zoneName[game.zone.name] or game.zone.name
+
 			)
 		end
 
 		game:playSound("actions/death")
 		game.delayed_death_message = "#{bold}#"..msg.."#{normal}#"
 		if (not game.player.easy_mode_lifes or game.player.easy_mode_lifes <= 0) and not game.player.infinite_lifes then
-			profile.chat.uc_ext:sendKillerLink(msg, src)
+			profile.chat.uc_ext:sendKillerLink(msg, short_msg, src)
 		end
 	end
 end

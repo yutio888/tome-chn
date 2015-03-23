@@ -1,4 +1,6 @@
 local Talents = require "engine.interface.ActorTalents"
+local damDesc = Talents.main_env.damDesc
+local DamageType = require "engine.DamageType"
 Talents.talents_def.T_ARROW_STITCHING.name = "重叠灵矢"
 Talents.talents_def.T_ARROW_STITCHING.info = function(self, t)
 		local damage = t.getDamage(self, t) * 100
@@ -19,7 +21,7 @@ Talents.talents_def.T_SINGULARITY_ARROW.info = function(self, t)
 		 从 第 二 个 单 位 起 ，每 增 加 一 个 被 牵 引 的 单 位 ，会 使 伤 害 增 加  %0.2f (最 多 增 加  %0.2f  额 外 伤 害 ).
 		 目 标 离 牵 引 中 心 的 距 离 越 远 受 到 的 伤 害 就 越 低  (每 格 减 少 20%% ).
 		 受 法 术 强 度 影 响 ，额 外 伤 害 有 加 成 。]])
-		:format(damage, radius,  aoe, aoe/8, aoe/2)
+		:format(damage, radius, damDesc(self, DamageType.PHYSICAL, aoe), damDesc(self, DamageType.PHYSICAL, aoe/8), damDesc(self, DamageType.PHYSICAL, aoe/2))
 	end
 
 

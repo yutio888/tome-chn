@@ -1,4 +1,6 @@
 local Talents = require "engine.interface.ActorTalents"
+local damDesc = Talents.main_env.damDesc
+local DamageType = require "engine.DamageType"
 Talents.talents_def.T_SPACETIME_STABILITY.name = "时空稳定"
 Talents.talents_def.T_SPACETIME_STABILITY.info = function(self, t)
 		local tune = t.getTuning(self, t)
@@ -26,7 +28,7 @@ Talents.talents_def.T_STOP.info = function(self, t)
 		local duration = t.getDuration(self, t)
 		return ([[造 成  %0.2f  时 空 伤 害 ，并 试 图 震 慑 半 径  %d  码 的 球 星 范 围 内 所 有 目 标  %d  回 合 。
 		 受 法 术 强 度 影 响 ，伤 害 按 比 例 加 成 。]]):
-		format(damage, radius, duration)
+		format(damDesc(self, DamageType.TEMPORAL, damage), radius, duration)
 	end
 
 Talents.talents_def.T_STATIC_HISTORY.name = "静态历史"

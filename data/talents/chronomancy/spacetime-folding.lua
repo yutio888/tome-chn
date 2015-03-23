@@ -1,4 +1,6 @@
 local Talents = require "engine.interface.ActorTalents"
+local damDesc = Talents.main_env.damDesc
+local DamageType = require "engine.DamageType"
 Talents.talents_def.T_WARP_MINE_TOWARD.name = "时空地雷：接近"
 Talents.talents_def.T_WARP_MINE_TOWARD.info = function(self, t)
 		local damage = self:callTalent(self.T_WARP_MINES, "getDamage")/2
@@ -8,7 +10,7 @@ Talents.talents_def.T_WARP_MINE_TOWARD.info = function(self, t)
 		return ([[ 在 半 径 1 的 范 围 里 埋 设 地 雷 ， 将 敌 人 传 送 至 你 身 边 并 造 成 %0.2f 物 理 和 %0.2f 时 空 伤 害 。
 		地 雷 是 隐 藏 的 陷 阱（ %d 侦 查 强 度 %d 解 除 强 度 基 于 魔 法 ），持 续 %d 回 合 。
 		伤 害 受 法 术 强 度 加 成。]]):
-		format( damage, damage, detect, disarm, duration)
+		format(damDesc(self, DamageType.PHYSICAL, damage), damDesc(self, DamageType.TEMPORAL, damage), detect, disarm, duration)
 	end
 
 Talents.talents_def.T_WARP_MINE_AWAY.name = "时空地雷：远离"
@@ -20,7 +22,7 @@ Talents.talents_def.T_WARP_MINE_AWAY.info = function(self, t)
 		return ([[在 半 径 1 的 范 围 里 埋 设 地 雷 ， 将 敌 人 传 送 远 离 你 身 边 并 造 成 %0.2f 物 理 和 %0.2f 时 空 伤 害 。
 		地 雷 是 隐 藏 的 陷 阱（ %d 侦 查 强 度 %d 解 除 强 度 基 于 魔 法 ），持 续 %d 回 合 。
 		伤 害 受 法 术 强 度 加 成。]]):
-		format(damage, damage, detect, disarm, duration) 
+		format(damDesc(self, DamageType.PHYSICAL, damage), damDesc(self, DamageType.TEMPORAL, damage), detect, disarm, duration) 
 	end
 
 
@@ -38,7 +40,7 @@ Talents.talents_def.T_WARP_MINES.info = function(self, t)
 		地 雷 伤 害 受 法 术 强 度 加 成。
 
 		当 前 半 径 ： %d]]):
-		format(damage , damage, detect, disarm, duration, range) --I5
+		format(damDesc(self, DamageType.PHYSICAL, damage), damDesc(self, DamageType.TEMPORAL, damage), detect, disarm, duration, range) --I5
 	end
 
 Talents.talents_def.T_SPATIAL_TETHER.name = "时空束缚"
@@ -50,7 +52,7 @@ Talents.talents_def.T_SPATIAL_TETHER.info = function(self, t)
 		return ([[将 目 标 束 缚 于 某 处 %d 回 合 。
 		每 回 合 ， 目 标 每 离 开 该 处 1 格 ， 便 有 %d%% 几 率 传 送 回 去 ， 并 在 传 送 点 周 围 造 成 %0.2f 物 理 %0.2f 时 空 伤 害 的 %d 半 径 的 爆 炸。
 		伤 害 受 法 术 强 度 加 成。]])
-		:format(duration, chance,  damage,  damage, radius)
+		:format(duration, chance, damDesc(self, DamageType.PHYSICAL, damage), damDesc(self, DamageType.TEMPORAL, damage), radius)
 	end
 
 
@@ -70,6 +72,5 @@ Talents.talents_def.T_DIMENSIONAL_ANCHOR.info = function(self, t)
 		local duration = t.getDuration(self, t)
 		return ([[制 造 一 个 半 径 3 的 禁 传 区 ， 持 续 %d 轮 ， 并 眩 晕 其 中 所 有 目 标 2 回 合 。
 		试 图 传 送 的 敌 人 将  受 到 %0.2f 物 理 %0.2f 时 空 伤 害。
-		伤 害 受 法 术 强 度 加 成 。]])
-		:format(duration, damage, damage)
+		伤 害 受 法 术 强 度 加 成 。]]):format(duration, damDesc(self, DamageType.PHYSICAL, damage), damDesc(self, DamageType.TEMPORAL, damage))
 	end

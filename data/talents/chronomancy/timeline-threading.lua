@@ -1,4 +1,6 @@
 local Talents = require "engine.interface.ActorTalents"
+local damDesc = Talents.main_env.damDesc
+local DamageType = require "engine.DamageType"
 Talents.talents_def.T_RETHREAD.name = "重组"
 Talents.talents_def.T_RETHREAD.info = function(self, t)
 		local damage = t.getDamage(self, t)
@@ -6,7 +8,7 @@ Talents.talents_def.T_RETHREAD.info = function(self, t)
 		return ([[重组时间线，对一个目标造成%0.2f时空伤害。然后再对半径10内的另一个目标造成等量伤害。
 		重组能击中至多%d个目标，不会重复击中同一个目标，也不会击中施法者。
 		伤害受法术强度加成。]]):
-		format(damage, targets)
+		format(damDesc(self, DamageType.TEMPORAL, damage), targets)
 	end
 
 

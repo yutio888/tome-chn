@@ -1,4 +1,6 @@
 local Talents = require "engine.interface.ActorTalents"
+local damDesc = Talents.main_env.damDesc
+local DamageType = require "engine.DamageType"
 Talents.talents_def.T_WARP_BLADE.name = "扭曲灵刃"
 Talents.talents_def.T_WARP_BLADE.info = function(self, t)
 		local damage = t.getDamage(self, t) * 100
@@ -26,7 +28,7 @@ Talents.talents_def.T_BLADE_SHEAR.info = function(self, t)
 		return ([[攻 击 至 多 三 个 相 邻 目 标 ，造 成  %d%%  武 器 伤 害 。任 何 一 次 攻 击 命 中 将 会 制 造 一 次 时 空 切 变 ，造 成  %0.2f  武 器 伤 害 ，攻 击 半 径 为  %d  的 锥 形 内 的 目 标 。		 
 		随 后 的 每 次 命 中 都 将 增 加 切 变 的 伤 害  25%%。   被 切 变 将 血 量 减 少 到 最 大 值  20%%  以 下 的 目 标 将 会 立 刻 死 亡 。
 		受 法 术 强 度 影 响 ，切 变 的 伤 害 有 额 外 加 成 。]])
-		:format(damage, shear, radius)
+		:format(damage, damDesc(self, DamageType.TEMPORAL, shear), radius)
 	end
 
 Talents.talents_def.T_BLADE_WARD.name = "灵刃守卫"

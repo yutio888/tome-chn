@@ -108,6 +108,8 @@ trapCHN["glyph of fatigue"] = "疲劳圣印"
 trapCHN["gravitic trap"] = "黑洞陷阱"
 trapCHN["flash bang trap"] = "闪光陷阱"
 trapCHN["aether beam"] = "以太射线"
+trapCHN["warp mine: away"] = "时空陷阱：远离"
+trapCHN["warp mine: towards"] = "时空陷阱：接近"
 function getTooltipTrapCHN(desc)
 	if not desc then return end
 

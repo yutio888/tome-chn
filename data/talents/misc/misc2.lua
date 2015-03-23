@@ -13,17 +13,19 @@ Talents.talents_def.T_HUNTED_PLAYER.info= function(self, t) return ([[你 被 �
 		format(1 + self.level / 7, 10 + self.level / 5)
 	end
 Talents.talents_def.T_TELEPORT_ANGOLWEN.name= "传送：安格利文"
-Talents.talents_def.T_TELEPORT_ANGOLWEN.info= [[允 许 你 传 送 至 秘 密 的 小 镇： 安 格 利 文。 
+Talents.talents_def.T_TELEPORT_ANGOLWEN.info= function(self, t)
+return [[允 许 你 传 送 至 秘 密 的 小 镇： 安 格 利 文。 
 		 你 已 经 在 那 里 学 习 了 很 多 魔 法 知 识 并 且 学 会 传 送 至 这 个 小 镇。 
 		 其 他 人 是 不 允 许 学 习 这 种 法 术 的 所 以 你 施 法 时 不 能 被 任 何 生 物 看 到。 
 		 法 术 将 消 耗 一 段 时 间 生 效， 你 施 放 法 术 及 法 术 生 效 以 前 你 必 须 保 持 在 其 他 生 物 视 线 以 外。]]
-
+end
 Talents.talents_def.T_TELEPORT_POINT_ZERO.name= "传送：零点圣域"
-Talents.talents_def.T_TELEPORT_POINT_ZERO.info= [[允 许 你 传 送 至 时 空 守 卫 的 大 本 营： 零 点 圣 域。 
+Talents.talents_def.T_TELEPORT_POINT_ZERO.info= function(self, t)
+return[[允 许 你 传 送 至 时 空 守 卫 的 大 本 营： 零 点 圣 域。 
 		 你 已 经 在 那 里 学 习 了 很 多 时 空 魔 法 并 且 学 会 传 送 至 此 地。 
 		 其 他 人 是 不 允 许 学 习 这 种 法 术 的 所 以 你 施 法 时 不 能 被 任 何 生 物 看 到。 
 		 法 术 将 消 耗 一 段 时 间 生 效， 在 你 施 放 法 术 及 法 术 生 效 前 你 必 须 保 持 在 其 他 生 物 视 线 以 外。]]
-
+end
 Talents.talents_def.T_RELENTLESS_PURSUIT.name= "无尽追踪"
 Talents.talents_def.T_RELENTLESS_PURSUIT.info= function(self, t)
 		local physical_reduction = math.floor(self:combatPhysicalResist(true)/5)

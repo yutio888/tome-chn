@@ -919,7 +919,12 @@ logCHN:newLog{
 		return "#LIGHT_BLUE#时间变得更加稳定。"
 	end,
 }
-
+logCHN:newLog{
+	log = "#LIGHT_RED#You feel the edges of space begin to ripple and bend!",
+	fct = function()
+		return "#LIGHT_RED#你感到空间的边际开始弯曲振荡。"
+	end,
+}
 logCHN:newLog{
 	log = "#LIGHT_RED#You feel the edges of spacetime begin to ripple and bend!",
 	fct = function()
@@ -931,6 +936,12 @@ logCHN:newLog{
 	log = "#LIGHT_BLUE#Spacetime feels more stable.",
 	fct = function()
 		return "#LIGHT_BLUE#时空变得更加稳定。"
+	end,
+}
+logCHN:newLog{
+	log = "#LIGHT_BLUE#Space feels more stable.",
+	fct = function()
+		return "#LIGHT_BLUE#空间变得更加稳定。"
 	end,
 }
 

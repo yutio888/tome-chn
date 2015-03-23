@@ -1,4 +1,6 @@
 local Talents = require "engine.interface.ActorTalents"
+local damDesc = Talents.main_env.damDesc
+local DamageType = require "engine.DamageType"
 Talents.talents_def.T_DUST_TO_DUST.name = "土归土"
 Talents.talents_def.T_DUST_TO_DUST.info = function(self, t)
 		local damage = t.getDamage(self, t)
@@ -6,7 +8,7 @@ Talents.talents_def.T_DUST_TO_DUST.info = function(self, t)
 		return ([[发 射 一 道 射 线 ，令 物 质 归 于 尘 土 ，造 成 %0.2f 时 空 与 %0.2f 物 理 伤 害 。
 		 也 可 以 以 自 己 为 目 标 ，制 造 一 个 围 绕 自 己 %d 码 的 领 域 ，在 3 回 合 内 造 成 伤 害 。
 		 伤 害 受 法 术 强 度 加 成 。]]):
-		format(damage/2, damage/2, radius)
+		format(damDesc(self, DamageType.TEMPORAL, damage / 2), damDesc(self, DamageType.PHYSICAL, damage / 2), radius)
 	end
 
 Talents.talents_def.T_MATTER_WEAVING.name = "物质编织"
@@ -27,7 +29,7 @@ Talents.talents_def.T_MATERIALIZE_BARRIER.info = function(self, t)
 		local radius = self:getTalentRadius(t)
 		return ([[制 造 一 层 坚 实 的 物 质 墙 ，长 度 为 %d，持 续 %d 回 合。
 		当 墙 壁 被 挖 掘 时 ， 会 产 生 半 径 %d 的 爆 炸，范 围 内 敌 人 会 进 入 流 血 状 态，6 回 合 内 受 到 %0.2f 物 理 伤 害 。]])
-		:format(length, duration, radius, damage)
+		:format(length, duration, radius, damDesc(self, DamageType.PHYSICAL, damage))
 	end
 
 Talents.talents_def.T_DISINTEGRATION.name = "裂解"

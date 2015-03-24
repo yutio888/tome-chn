@@ -77,3 +77,24 @@ newLore{
 
 这件事激发了我继续研究和修行自身力量的欲望，但不得不承认我对练习法杖搏击已是兴趣索然。我的剑术却是日益精进。呼，也许有天我能找个附魔师来为我的老剑附一下魔，说到底剑不就是一柄磨尖了的金属杖吗？]],
 }
+
+newLore{
+	id = "angolwen-fountain",
+	category = "angolwen",
+	name = "Angolwen Fountain",
+	always_pop = true,
+	lore = [[#{italic}#(You see here a large, elaborate fountain.  A statue of Linaniil stands in the center, her arms outstretched to welcome all; around the outside of the fountain stand statues of a dwarf manipulating earthen runes, a human with a simple healer's crosier, an elf with a tall, elaborate staff, and a halfling with a scepter in one hand and a fireball hovering over the other.  The runes and the fireball are not connected to anything, and float in a fixed position in the air.  You see a carving repeating along the border of the fountain, in small print.)#{normal}#
+
+ALL ARE WELCOME WHO LEARN FROM THE MISTAKES OF THE PAST
+
+LET THE ARCANE ONCE MORE BE A BOON AND NOT A BANE TO MAJ'EYAL
+
+ALL ARE WELCOME WHO EASE THE SUFFERING OF THE PRESENT
+
+MAY WE HAVE THE WISDOM TO ONE DAY REUNITE THE WORLD IN SAFETY AND ENLIGHTENMENT
+
+ALL ARE WELCOME WHO PREVENT THE THREATS OF THE FUTURE
+
+GATHER HERE IN PEACE TO DISCOVER AND PERFECT THE KNOWLEDGE OF HOW, AND WHEN, TO WEAVE THE WORLD'S FABRIC]],
+}
+

@@ -110,6 +110,7 @@ trapCHN["flash bang trap"] = "闪光陷阱"
 trapCHN["aether beam"] = "以太射线"
 trapCHN["warp mine: away"] = "时空陷阱：远离"
 trapCHN["warp mine: toward"] = "时空陷阱：接近"
+trapCHN["temporal bolt"] = "时空之箭"
 function getTooltipTrapCHN(desc)
 	if not desc then return end
 

@@ -864,3 +864,165 @@ timeEffectCHN:newEffect{
 	type = "魔法",
 	subtype = "水/冰冻",
 }
+
+timeEffectCHN:newEffect{
+	id = "DET_TETHER",
+	enName = "Spatial Tether",
+	chName = "时空锁链",
+	type = "魔法",
+	subtype = "传送/时空",
+}
+timeEffectCHN:newEffect{
+	id = "BEN_TETHER",
+	enName = "Spatial Tether",
+	chName = "时空锁链",
+	type = "魔法",
+	subtype = "传送/时空",
+}
+timeEffectCHN:newEffect{
+	id = "FOLD_FATE",
+	enName = "Fold Fate",
+	chName = "命运折叠",
+	type = "魔法",
+	subtype = "时空",
+}
+timeEffectCHN:newEffect{
+	id = "FATEWEAVER",
+	enName = "Fateweaver",
+	chName = "命运编织者",
+	type = "魔法",
+	subtype = "时空",
+}
+timeEffectCHN:newEffect{
+	id = "WARDEN_S_FOCUS",
+	enName = "Warden's Focus",
+	chName = "专注守卫",
+	type = "魔法",
+	subtype = "时空",
+}
+timeEffectCHN:newEffect{
+	id = "ARROW_ECHOES",
+	enName = "Arrow Echoes",
+	chName = "灵矢回声",
+	type = "魔法",
+	subtype = "时空",
+}
+timeEffectCHN:newEffect{
+	id = "STATIC_HISTORY",
+	enName = "Static History",
+	chName = "静态历史",
+	type = "魔法",
+	subtype = "时空",
+}
+timeEffectCHN:newEffect{
+	id = "WRIT_LARGE",
+	enName = "Writ Large",
+	chName = "纹身亲和",
+	type = "魔法",
+	subtype = "符文",
+}
+timeEffectCHN:newEffect{
+	id = "OGRE_FURY",
+	enName = "Ogre Fury",
+	chName = "食人魔的怒火",
+	type = "魔法",
+	subtype = "符文",
+}
+timeEffectCHN:newEffect{
+	id = "OGRIC_WRATH",
+	enName = "Ogre Wrath",
+	chName = "食人魔之怒",
+	type = "魔法",
+	subtype = "符文",
+}
+timeEffectCHN:newEffect{
+	id = "ATTENUATE_BEN",
+	enName = "Attenuate",
+	chName = "湮灭洪流",
+	type = "魔法",
+	subtype = "时空",
+}
+timeEffectCHN:newEffect{
+	id = "ATTENUATE_DET",
+	enName = "Attenuate",
+	chName = "湮灭洪流",
+	type = "魔法",
+	subtype = "时空",
+}
+timeEffectCHN:newEffect{
+	id = "REGRESSION",
+	enName = "Regerssion",
+	chName = "退化",
+	type = "魔法",
+	subtype = "时空",
+}
+timeEffectCHN:newEffect{
+	id = "PROBABILITY_TRAVEL",
+	enName = "Probability Travel",
+	chName = "相位移动",
+	type = "魔法",
+	subtype = "时空",
+}
+timeEffectCHN:newEffect{
+	id = "BLINK",
+	enName = "Blink",
+	chName = "闪烁",
+	type = "魔法",
+	subtype = "时空",
+}
+timeEffectCHN:newEffect{
+	id = "DIMENSIONAL_ANCHOR",
+	enName = "Dimensional Anchor",
+	chName = "禁止传送",
+	type = "魔法",
+	subtype = "时空",
+}
+timeEffectCHN:newEffect{
+	id = "BREACH",
+	enName = "Breach",
+	chName = "破灭",
+	type = "魔法",
+	subtype = "时空",
+}
+timeEffectCHN:newEffect{
+	id = "BRAIDED",
+	enName = "Braided",
+	chName = "生命线编织",
+	type = "魔法",
+	subtype = "时空",
+}
+timeEffectCHN:newEffect{
+	id = "PRECOGNITION",
+	enName = "Precognition",
+	chName = "预知未来",
+	type = "魔法",
+	subtype = "时空",
+}
+timeEffectCHN:newEffect{
+	id = "WEBS_OF_FATE",
+	enName = "Webs of Fate",
+	chName = "命运之网",
+	type = "魔法",
+	subtype = "时空",
+}
+timeEffectCHN:newEffect{
+	id = "SEAL_FATE",
+	enName = "Seal Fate",
+	chName = "命运封印",
+	type = "魔法",
+	subtype = "时空",
+}
+timeEffectCHN:newEffect{
+	id = "UNRAVEL",
+	enName = "Unravel",
+	chName = "解体",
+	type = "魔法",
+	subtype = "时空",
+}
+timeEffectCHN:newEffect{
+	id = "ENTROPY",
+	enName = "Entropy",
+	chName = "熵",
+	type = "魔法",
+	subtype = "时空",
+}

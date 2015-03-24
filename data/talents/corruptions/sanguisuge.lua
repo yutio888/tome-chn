@@ -11,9 +11,9 @@ Talents.talents_def.T_DRAIN.info= function(self, t)
 	end
 Talents.talents_def.T_BLOODCASTING.name= "血祭施法"
 Talents.talents_def.T_BLOODCASTING.info= function(self, t)
-		return ([=[Sacrifices 50%% of your current life to restore %d vim.
+		return ([[Sacrifices 50%% of your current life to restore %d vim.
 		This only works if there is at least one foe in sight.
-		The effect will increase with your Magic stat.]=]):
+		The effect will increase with your Magic stat.]]):
 		format(30 + self:combatTalentSpellDamage(t, 5, 150))
 	end
 Talents.talents_def.T_ABSORB_LIFE.name= "生命吞噬"

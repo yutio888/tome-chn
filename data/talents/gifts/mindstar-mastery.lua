@@ -1,7 +1,13 @@
 local Talents = require "engine.interface.ActorTalents"
 local damDesc = Talents.main_env.damDesc
 local DamageType = require "engine.DamageType"
+local function get_mindstar_power_mult(self, div)
+	local main, off = self:hasPsiblades(true, true)
+	if not main or not off then return 1 end
 
+	local mult = 1 + (main.combat.dam + off.combat.dam) * 0.8 / (div or 40)
+	return mult
+end
 Talents.talents_def.T_PSIBLADES.name= "心灵利刃"
 Talents.talents_def.T_PSIBLADES.info= function(self, t)
 		local damage = t.getDamage(self, t)

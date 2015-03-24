@@ -1,6 +1,58 @@
 local Talents = require "engine.interface.ActorTalents"
 local damDesc = Talents.main_env.damDesc
 local DamageType = require "engine.DamageType"
+local function aura_strength(self, t)
+	return self:combatTalentMindDamage(t, 10, 40)
+end
+
+local function aura_spike_strength(self, t)
+	return aura_strength(self, t) * 10
+end
+
+local function aura_mastery(self, t)
+	return 0.5 --9 + self:getTalentLevel(t) * 2
+end
+
+local function aura_range(self, t)
+	-- Spiked ability
+	if self:isTalentActive(t.id) then
+		if type(t.getSpikedRange) == "function" then return t.getSpikedRange(self, t) end
+		return t.getSpikedRange
+	-- Normal ability
+	else
+		if type(t.getNormalRange) == "function" then return t.getNormalRange(self, t) end
+		return t.getNormalRange
+	end
+end
+
+local function aura_radius(self, t)
+	-- Spiked ability
+	if self:isTalentActive(t.id) then
+		if type(t.getSpikedRadius) == "function" then return t.getSpikedRadius(self, t) end
+		return t.getSpikedRadius
+	-- Normal ability
+	else
+		if type(t.getNormalRadius) == "function" then return t.getNormalRadius(self, t) end
+		return t.getNormalRadius
+	end
+end
+
+local function aura_target(self, t)
+	-- Spiked ability
+	if self:isTalentActive(t.id) then
+		if type(t.getSpikedTarget) == "function" then return t.getSpikedTarget(self, t) end
+		return t.getSpikedTarget
+	-- Normal ability
+	else
+		if type(t.getNormalTarget) == "function" then return t.getNormalTarget(self, t) end
+		return t.getNormalTarget
+	end
+end
+
+local function aura_should_proc(self, t)
+	local psiweapon = self:getInven("PSIONIC_FOCUS") and self:getInven("PSIONIC_FOCUS")[1]
+	return (psiweapon and ( not psiweapon.combat or psiweapon.subtype == "mindstar" )) or not psiweapon
+end
 
 Talents.talents_def.T_KINETIC_AURA.name= "动能光环"
 Talents.talents_def.T_KINETIC_AURA.info= function(self, t)

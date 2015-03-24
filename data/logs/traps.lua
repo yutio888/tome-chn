@@ -5,6 +5,13 @@ logCHN:newLog{
 		a = npcCHN:getName(a)
 		return ("%s 触发了警报！"):format(a)
 	end,}
+	logCHN:newLog{
+	log = "@Target@ moves onto the wormhole.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 踩中了虫洞。！"):format(a)
+	end,}
+
 logCHN:newLog{
 	log = "An alarm rings!",
 	fct = function()

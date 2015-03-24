@@ -5446,7 +5446,9 @@ function _M:getTalentFullDescription(t, addlevel, config, fake_mastery)
 				local speed = self:getTalentSpeed(t)
 				local speed_type = self:getTalentSpeedType(t)
 				if type(speed_type) == "string" then
-					speed_type = speed_type:gsub("mind","精神"):gsub("spell","法术"):gsub("weapon","武器"):gsub("archery","弓箭"):gsub("combat","战斗"):gsub("standard","标准"):gsub("movement","移动")
+					speed_type = speed_type:gsub("mind","精神"):gsub("spell","法术"):gsub("weapon","武器"):gsub("archery","弓箭")
+																 :gsub("combat","战斗"):gsub("standard","标准"):gsub("movement","移动")
+																 :gsub("double","双倍"):gsub("Archery","弓箭")
 				else
 					speed_type = '特殊'
 				end
@@ -5479,8 +5481,11 @@ function _M:getTalentFullDescription(t, addlevel, config, fake_mastery)
 	self:triggerHook{"Actor:getTalentFullDescription", str=d, t=t, addlevel=addlevel, config=config, fake_mastery=fake_mastery}
 
 	d:add({"color",0x6f,0xff,0x83}, "描述：", {"color",0xFF,0xFF,0xFF})
-
-	local info = t.info(self, t):toTString():tokenize(" ()[]")
+	
+	local info
+	if type(t.info) =="function" then	info = t.info(self, t):toTString():tokenize(" ()[]")
+	elseif type(t.info) == "string" then info=t.info
+	end
 	
 	if talentInfoCHN and talentInfoCHN[t.id]
 		then info = talentInfoCHN[t.id](self,t):toTString():tokenize(" ()[]")

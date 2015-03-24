@@ -349,6 +349,88 @@ objDesc["Lights terrain (power 100)"] = "照亮地形（强度100）"
 objDesc["Lights terrain (power 10)"] = "照亮地形（强度10）"
 objDesc["Slows by 17%"] = "减速17%%"
 
+objDesc["This harmonious mindstar will complement other natural mindstars."] = "这个和谐的灵晶能与其他自然灵晶组合成套装。"
+objDesc["This purifying mindstar will cleanse other mindstars."] = "这个灵晶能净化其他灵晶"
+objDesc["This mindstar will resonate with other psionic mindstars."] = "这个灵晶能和其他超能力灵晶共鸣"
+objDesc["This honing mindstar will focus other psionic mindstars."] = "这个灵晶能和其他超能力灵晶共鸣"
+objDesc["This parasitic mindstar will draw strength from other psionic mindstars"] = "这个灵晶能从其他超能力灵晶吸取力量"
+objDesc["This natural mindstar calls for a summoner."] = "这个自然灵晶需要一个召唤者"
+objDesc["The natural wyrm seeks an element."] = "龙战士寻求一种元素"
+objDesc["This natural fire should be returned to the wyrm."] = "自然之火应该回归龙战士"
+objDesc["This natural frost should be returned to the wyrm."] = "自然之冰应该回归龙战士"
+objDesc["This natural sand should be returned to the wyrm."] = "自然之沙应该回归龙战士"
+objDesc["This natural lightning should be returned to the wyrm."] = "自然之雷应该回归龙战士"
+objDesc["This natural venom should be returned to the wyrm."] = "自然之毒素应该回归龙战士"
+objDesc["This psionic mindstar dreams of an epiphany."] = "这个超能灵晶有一个光辉的梦想"
+objDesc["This psionic mindstar has an epiphany about dreams."] = "这个超能灵晶有一个光辉的梦想"
+objDesc["This mindstar absorbs psionic energy that needs to be projected."] = "这个灵晶吸收被放射出的超能力"
+objDesc["This mindstar projects psionic energy if enough is absorbed."] = "这个灵晶能放射出超能力"
+objDesc["This psionic mindstar hates not to be wrathful."] = "这个灵晶需要足够的愤怒"
+objDesc["This psionic mindstar is wrathful to the hated."] = "这个灵晶需要足够的仇恨"
+special_t = {}
+	special_t["10% chance to stun, blind, pin, or confuse the target"] = "10% 几率震慑、致盲、定身或混乱目标"
+	special_t["cripple the target"] = "致残目标"
+	special_t["wounds the target reducing their healing"] = "重创目标并降低治疗效果"
+		special_t["wounds the target"] = "重创目标"
+	special_t["splashes the target with acid"] = "用硫酸溅目标一脸"
+	special_t["25% chance for lightning to arc to a second target"] = "25% 几率闪电连锁至下一个目标"
+	special_t["35% chance for lightning to arc to a second target"] = "35% 几率闪电连锁至下一个目标"
+	special_t["random elemental effect"] = "随机元素效果"
+	special_t["20% chance to curse the target"] = "20% 几率诅咒目标"
+	special_t["25% chance to crush the target"] = "25% 几率碾碎目标"
+	special_t["25% chance to remove a magical effect"] = "25% 几率移除魔法效果"
+	special_t["burns latent spell energy"] = "燃烧潜在的法术能量"
+	special_t["disrupts spell-casting"] = "打断施法"
+	special_t["leeches stamina from the target"] = "从目标身上吸收耐力"
+	special_t["25% chance to put talents on cooldown"] = "25% 几率使技能进入冷却"
+	special_t["20% chance to torment the target"] = "20% 几率折磨目标"
+	special_t["10% chance to create an air burst"] = "10% 几率制造一次音爆"
+	special_t["10% chance to knock the target back"] = "10% 几率击退目标"
+	special_t["10% chance to crush the target"] = "10% 几率碾碎目标"
+	special_t["Damage nearby creatures"] = "伤害附近敌人"
+	special_t["9% chance to stun or confuse the target"] = "9% 几率震慑或混乱目标"
+	special_t["10% chance to send the wielder into a killing frenzy"] = "10% 几率使持有者进入疯狂杀戮状态"
+	special_t["10% chance to shimmer to a different hue and gain powers"] = "10% 几率变换不同颜色并且增加强度"
+	special_t["40% chance to dominate the target"] = "40% 几率支配目标"
+	special_t["dominate the target"] = "支配目标"
+	special_t["sets off a powerful explosion"] = "产生一次猛烈的爆炸"
+	special_t["grows in power"] = "增加强度"
+	special_t["grows dramatically in power"] = "大幅增加强度"
+	special_t["torments the target with many mental effects"] = "对目标附加多种精神状态"
+	special_t["hit up to two adjacent enemies"] = "攻击目标相邻的2个单位"
+	special_t["20% to slow target"] = "20％几率减速目标"
+	special_t["bursts into an icy cloud"] = "爆炸成一片冰雾"
+	special_t["20% chance to shatter magical shields"] = "20％几率打破魔法护盾"
+	special_t["50% chance to shatter magical shields"] = "50％几率打破魔法护盾"
+	special_t["silences the target"] = "沉默目标"
+	special_t["inflicts pinning spydric poison upon the target"] = "释放出定身目标的毒液"
+	special_t["15% chance to animate a bleeding foe's blood"] = "15％几率使处于流血状态的敌人大出血"
+	special_t["deal magical damage"] = "造成魔法伤害"
+        special_t["decapitate a weakened target"] = "将虚弱的敌人斩首"
+        special_t["pin the target to the nearest wall"] ="将目标钉在最近的墙上"
+	special_t["deals physical damage equal to 3% of the target's missing health"] = "造成等于目标已损失生命值3%的物理伤害"
+	special_t["steals up to 50 mana from the target"] = "从目标处吸取至多50点法力"
+	special_t["release a burst of light and dark damage (scales with Magic)"] = "爆发光明和黑暗伤害\n（随魔法增加）"
+	special_t["25% chance to strike the target again."] = "25%几率再次攻击"
+	special_t["Attempt to devour a low HP enemy, striking again and possibly killing instantly."] = "试图吞噬低生命的敌人，再次攻击，可能秒杀目标。"
+	special_t["inflicts bonus temporal damage and slows target"] = "造成额外时空伤害并让目标减速"
+	special_t["25% chance to damage nearby creatures"] = "25%几率伤害附近生物"
+	special_t["deal bonus arcane and darkness damage"] = "造成额外奥术和暗影伤害"
+	special_t["Causes lightning to strike and destroy any projectiles in a radius of 10, dealing damage and dazing enemies in a radius of 5 around them."] =
+	"触发闪电,击落半径10内所有抛射物\n抛射物半径5以内的敌人受到伤害并被眩晕。"
+	special_t["Breaks enemy weapon."] = "破坏对方武器"
+	special_t["releases a burst of light, dealing damage equal to your spellpower in a 3 radius cone."]="释放光明，在半径3的锥形范围内\n造成等于法术强度的伤害"
+	special_t["deal manaburn damage equal to your mindpower in a radius 3 cone"] = "在半径3的锥形范围内\n造成相当于精神强度的法力燃烧伤害"
+	special_t["Create a Winter Storm that gradually expands, dealing cold damage to your enemies each turn and reducing their turn energy by 20%.  Melee attacks will relocate the storm on top of your target and increase its duration."]="制造不断扩张的冰风暴，每回合对敌人造成\n寒冷伤害同时减少对方20%回合能量。\n近战攻击将强化风暴并延长时间。"
+	special_t["reduces mental save penalty"]="减少精神豁免的减益效果"
+	special_t["grows dramatically in power"]="显著增加强度"
+	special_t["swallows the victim's soul, gaining a new power"]="吞噬受害者的灵魂，得到新的能力"                
+	special_t["Enter a Rampage (Shared 30 turn cooldown)."]= "进入暴走状态（共享30回合冷却）" 
+	special_t["Random elemental explosion"] = "随机元素爆炸"
+	special_t["releases a burst of dark fire, dealing damage equal to your magic stat"] = "释放黑暗之火\n造成等于魔法属性的伤害"
+	special_t["Increases all damage dealt, and reduces all damage taken, by 1%, stacking up to 10 times. Resets after 10 turns without attacking."] = "增加全体伤害并减少受到的伤害各1%%\n效果持续10回合，最多叠加至10层\n"
+
+
 
 --装备鼠标提示汉化替换
 function getObjectDescCHN(desc)
@@ -450,7 +532,7 @@ function getObjectDescCHN(desc)
 					desc[i] = desc[i]:gsub("None","无")
 				else--if desc[i]:find("Special effect on block:") then
 					desc[i] = desc[i]:gsub("Special effect on block:","格挡特效：")
-							:gsub("Chance that a blast of icy cold water will spray at the target.","有30%几率朝目标喷射冰冷的水流")
+							:gsub("Chance that a blast of icy cold water will spray at the target.","有30%%几率朝目标喷射冰冷的水流")
 							:gsub("30%% chance of petrifying the attacker","30%%几率石化攻击者")
 							:gsub("30%% chance of pulling in the attacker","30%%几率勒住攻击者")
 							:gsub("Unleash the fury of the cosmos, dealing light and darkness damage to your attackers","释放宇宙的愤怒\n造成光系与暗影伤害")
@@ -458,6 +540,7 @@ function getObjectDescCHN(desc)
 
 			end
 			desc[i] = desc[i]:gsub("chance to trigger a Blood Grasp cast of level","几率触发鲜血支配，等级"):gsub("chance to trigger a Silence cast of level ","几率触发沉默，等级"):gsub("Reduces duration of detrimental effects by 40%%","减少40%%负面状态持续时间")
+			desc[i] = special_t[desc[i]] or desc[i]
 			desc[i] = itemDamagedesc(desc[i])
 			desc[i] =desc[i]:gsub("fire","火焰"):gsub("lightning","闪电"):gsub("arcane","奥术"):gsub("cold","寒冷")
 					:gsub("blight","枯萎"):gsub("darkness","暗影"):gsub("physical","物理"):gsub("temporal","时空")

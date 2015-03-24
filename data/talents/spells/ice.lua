@@ -1,7 +1,15 @@
 local Talents = require "engine.interface.ActorTalents"
 local damDesc = Talents.main_env.damDesc
 local DamageType = require "engine.DamageType"
-
+local function necroEssenceDead(self, checkonly)
+	local eff = self:hasEffect(self.EFF_ESSENCE_OF_THE_DEAD)
+	if not eff then return false end
+	if checkonly then return true end
+	return function()
+		eff.nb = eff.nb - 1
+		if eff.nb <= 0 then self:removeEffect(self.EFF_ESSENCE_OF_THE_DEAD, true) end
+	end
+end
 
 Talents.talents_def.T_ICE_SHARDS.name= "寒冰箭"
 Talents.talents_def.T_ICE_SHARDS.info= function(self, t)

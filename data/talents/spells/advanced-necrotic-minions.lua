@@ -1,7 +1,15 @@
 local Talents = require "engine.interface.ActorTalents"
 local damDesc = Talents.main_env.damDesc
 local DamageType = require "engine.DamageType"
-
+local function necroEssenceDead(self, checkonly)
+	local eff = self:hasEffect(self.EFF_ESSENCE_OF_THE_DEAD)
+	if not eff then return false end
+	if checkonly then return true end
+	return function()
+		eff.nb = eff.nb - 1
+		if eff.nb <= 0 then self:removeEffect(self.EFF_ESSENCE_OF_THE_DEAD, true) end
+	end
+end
 Talents.talents_def.T_UNDEAD_EXPLOSION.name= "亡灵爆炸"
 Talents.talents_def.T_UNDEAD_EXPLOSION.info= function(self, t)
 		return ([[亡 灵 随 从 只 是 工 具。 你 可 以 残 忍 地 引 爆 它 们。 

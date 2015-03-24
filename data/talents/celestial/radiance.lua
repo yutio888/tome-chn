@@ -1,7 +1,13 @@
 local Talents = require "engine.interface.ActorTalents"
 local damDesc = Talents.main_env.damDesc
 local DamageType = require "engine.DamageType"
-
+function radianceRadius(self)
+	if self:hasEffect(self.EFF_RADIANCE_DIM) then
+		return 1
+	else
+		return self:getTalentRadius(self:getTalentFromId(self.T_RADIANCE))
+	end
+end
 Talents.talents_def.T_RADIANCE.name= "光辉"
 Talents.talents_def.T_RADIANCE.info= function(self, t)
 		return ([[你 的 体 内 充 满 了 阳 光 ， 你 的 身 体  会 发 光 ，半 径 %d。

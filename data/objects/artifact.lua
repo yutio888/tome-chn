@@ -1,6 +1,6 @@
 ﻿local class = require "engine.class"
 class:bindHook("Entity:loadList", function (self,data)
-	if data.file:find("artifacts")then
+	if data.file:find("artifact") or data.file:find("zones") then
    for _, item in ipairs(data.res) do
    		if item.name == "Rungof's Fang" then
 				item.name = "郎格夫之牙"
@@ -12,7 +12,7 @@ class:bindHook("Entity:loadList", function (self,data)
 				item.unided_name  = "闪耀的长剑"
 				item.desc  =  "这把剑带给这片区域无尽的寒冷，剑锋周围的空气似乎都要凝固了。据说是第一次厄流纪大战期间，孔克雷夫大师为他们的战争之王所打造。"
 				item.special_desc = function(self)
-					if not self.winterStorm then 
+					if not self.winterStorm then
 						return ("风暴持续时间:  无") 
 					else
 						return ("风暴持续时间: " .. (self.winterStorm.duration or "无"))
@@ -150,7 +150,7 @@ class:bindHook("Entity:loadList", function (self,data)
 				item.name = "战争之王格纳哥的饮血剑"
 				item.unided_name  = "血迹斑斑的巨剑"
 				item.desc  =  "一把血迹斑斑的巨剑，它洞穿了许多敌人。"
-				item.combat.special_on_hit.desc="10% 几 率 令 持 有 者 进 入 嗜 血 状 态。"
+				item.combat.special_on_hit.desc="10%% 几 率 令 持 有 者 进 入 嗜 血 状 态。"
 			end
 			 if item.name == "Crown of the Elements" then
 				item.name = "元素王冠"
@@ -339,7 +339,10 @@ class:bindHook("Entity:loadList", function (self,data)
 				item.name = "忏悔"
 				item.unided_name  = "通红的法杖"
 				item.desc  =  "永恒精灵密送到安格利文，用以对抗魔法大爆炸所引起灾难的强大法杖。"
-
+				item.use_power.name = function(self, who) 
+					return ("治愈至多 %d 项疾病和毒素。 ( 基于魔法 )")
+					:format(self.use_power.cures(self, who)) 
+					end
 			end
 			 if item.name == "Lost Staff of Archmage Tarelion" then
 				item.name = "大法师泰尔兰丢失的法杖"
@@ -379,7 +382,9 @@ class:bindHook("Entity:loadList", function (self,data)
 				item.name = "战争回响"
 				item.unided_name  = "深黑色的项链"
 				item.desc  =  "当你戴上这个古老的项链，似乎耳边仍回荡着第一次大战的战鼓声。"
-
+				item.use_power.name = function(self, who)
+					return ("释放毁灭哀嚎，摧毁地形，造 成 %0.2f 物理伤害 (基于 魔法) 伤害半径 %d"):format(engine.interface.ActorTalents.damDesc(who, engine.DamageType.PHYSICAL, self.use_power.damage(who)), self.use_power.radius)
+				end
 			end
 			 if item.name == "Feathersteel Amulet" then
 				item.name = "失重项链"
@@ -666,7 +671,9 @@ class:bindHook("Entity:loadList", function (self,data)
 				item.name = "戈瓦的燃烧斗志"
 				item.unided_name  = "炽热的魔杖"
 				item.desc  =  "戈瓦，一个生活在魔法狩猎时的火焰术士，她被一群猎魔人逼入了绝境。她战斗至最后一刻，据说在她流尽最后一滴血之前她用这把魔杖干掉了至少十人。"
-
+				item.use_power.name = function(self, who)
+					return ("发 射 长 度 %d 的 锥 形 火 焰 ， 造 成 %0.2f 火 焰 伤 害 （ 基 于 魔 法）。"):format(self.use_power.radius, engine.interface.ActorTalents.damDesc(who, engine.DamageType.FIRE, self.use_power.damage(self, who)))
+				end
 			end
 			 if item.name == "Crude Iron Battle Axe of Kroll" then
 				item.name = "克罗尔的生铁战斧"
@@ -816,13 +823,13 @@ class:bindHook("Entity:loadList", function (self,data)
 				item.name = "至尊法杖"
 				item.unided_name  = "银色符文法杖"
 				item.desc  =  "一根又细又长的法杖，由远古龙骨制成，它通体铭刻着银色的符文。它会发出微弱的嗡嗡声，似乎有一股强大的力量被锁在了里面，整体来看，它似乎是不完整的。"
-
+				item.set_desc.channelers = "只 有 理 解 奥 术 才 能 完 全 使 用 它 的 力 量。"
 			end
 			 if item.name == "Hat of Arcane Understanding" then
 				item.name = "奥术理解之帽"
 				item.unided_name  = "银色符文帽子"
 				item.desc  =  "一只传统巫师的尖帽子，由紫色的精灵丝绸制成，上面还有亮银色的装饰物。你意识到它来自远古时代，一个拥有众多伟大法师的时代。通过触摸你可以感受到远古的知识和能量，但仍有一部分被密封着，等待有缘人来释放它。"
-
+				item.set_desc.channelers = "只 有 奥 术 至 尊 才 能 完 全 发 挥 它 的力 量  。"
 			end
 			 if item.name == "Quiver of the Sun" then
 				item.name = "日冕箭壶"
@@ -1002,7 +1009,9 @@ class:bindHook("Entity:loadList", function (self,data)
 				item.name = "镜影碎片"
 				item.unided_name  = "镶有锁链的镜片"
 				item.desc  =  "据说是由一位强大的魔法师在他的家园被猎魔行动的暴民摧毁后制造。虽然他逃脱了追捕，但是他的财产都被破坏和烧毁殆尽。当他回去时，发现家里已成废墟，墙上的斑驳和地上的碎片说明了这里曾遭到怎样的劫难。最终，他捡起了其中一块镜子残片，将其做成了这副项链。"
-
+				item.use_power.name = function(self, who) 
+					return ("制造反射护盾（50%%反射率， %d 吸收量， 基于 魔法) 持续5 回合。"):format(self.use_power.shield(self, who)) 
+					end
 			end
 			 if item.name == "Summertide" then
 				item.name = "夏夜"
@@ -1216,7 +1225,7 @@ class:bindHook("Entity:loadList", function (self,data)
 				item.name = "欲望之核"
 				item.unided_name  = "常见的弹药袋"
 				item.desc  =  "你情不自禁的想使用这袋弹药。"
-				item.combat.special_on_hit.desc="50% 几 率 回 复 一 颗 子 弹。"
+				item.combat.special_on_hit.desc="50%% 几 率 回 复 一 颗 子 弹。"
 			end
 			 if item.name == "Wind Worn Shot" then
 				item.name = "风化弹"
@@ -1340,7 +1349,7 @@ class:bindHook("Entity:loadList", function (self,data)
 				item.name = "永恒光辉"
 				item.unided_name  = "闪耀着金色光芒的盾牌"
 				item.desc  =  "当冲锋队队长艾米奥·帕纳森为他的遇难船员们寻求庇护所的时候，他的盾牌反射着落日的光辉。他们在光辉照耀的地方休息宿营，之后太阳之墙在那里成立。在随后那些暗无天日的日子里，这面盾牌被人们当做美好未来希望的象征。"
-
+				item.	set_desc.dawn = "在黎明下闪耀光芒。"
 			end
 			 if item.name == "Scorched Boots" then
 				item.name = "烧焦的长靴"
@@ -1371,7 +1380,10 @@ class:bindHook("Entity:loadList", function (self,data)
 				item.name = "黎明之刃"
 				item.unided_name  = "闪光的长剑"
 				item.desc  =  "传说是在太阳堡垒成立之初打造，这把长剑闪耀着黎明破晓之光，可以破除一切黑暗。"
-
+				item.use_power.name = function(self, who) 
+					return ("激 发 黎 明 的 光 芒，在 半 径 %d 内 造 成 %0.2f 光 系 伤 害（基于魔法），并 照 明 %d 码 。")
+					:format(self.use_power.radius, engine.interface.ActorTalents.damDesc(who, engine.DamageType.LIGHT, self.use_power.damage(who)), self.use_power.radius*2) end
+				item.set_desc.dawn = "如果太阳永不落山，黎明的光辉将永恒。"
 			end
 			 if item.name == "Zemekkys' Broken Hourglass" then
 				item.name = "伊莫克斯的破沙漏"
@@ -1389,7 +1401,9 @@ class:bindHook("Entity:loadList", function (self,data)
 				item.name = "灵能钉刺"
 				item.unided_name  = "短刃匕首"
 				item.desc  =  "看似只是简单雕刻过的石柄，然而其前端显现着一道摇晃的刀锋。当你试图去抓住刀锋的时候，你感受到这是一股如热气般无形的力量。尽管外观粗糙，但它在意志足够坚强并且懂得使用它的人手里却可以削铁如泥。"
-
+				item.use_power.name = function(self, who) 
+					return ("发 射 灵 能 之 力 ，在 距 离 %d 范 围 内 造 成 150%% 武 器 伤 害 。")
+					:format(self.use_power.range) end
 			end
 			 if item.name == "Yeek-fur Robe" then
 				item.name = "夺心魔皮袍"
@@ -1703,13 +1717,13 @@ class:bindHook("Entity:loadList", function (self,data)
 				item.name = "黑暗之网"
 				item.unided_name  = "一堆卷须"
 				item.desc  =  "盾牌由许多黑色的触须交织而成。当你触摸它时，你可以感受它非常明显的反应，它缠绕住你的手臂并将其包裹在一团黑色而温暖的物质中。"
-				item.on_block.desc = "30% 几率勒住攻击者"
+				item.on_block.desc = "30%% 几率勒住攻击者"
 			end
 			 if item.name == "Neira's Memory" then
 				item.name = "尼耶拉的记忆"
 				item.unided_name  = "发出异常声音的腰带"
 				item.desc  =  "许多年前这根腰带是年轻时的莱娜尼尔穿戴的，在魔法大爆炸的火焰之中它的力量保护了她，但却保护不了她的姐妹尼耶拉。"
-
+				item.use_power.name = function(self, who) return ("制造一层魔法护盾，( 强度 %d, 基于魔法) ，持 续 10 回 合。"):format(self.use_power.shield(self, who)) end
 			end
 			 if item.name == "Quiver of Domination" then
 				item.name = "统御箭袋"
@@ -2303,7 +2317,11 @@ class:bindHook("Entity:loadList", function (self,data)
 	item.unided_name = "一瓶黑色的液体"
 	item.desc = "一瓶粘稠的反射着金属光泽的液体。它有着难以置信的重量。"
 	end
-	
+	if item.name == "Decayed Visage" then
+		item.name = "堕落视觉"
+		item.unided_name = "木乃伊皮面罩"
+		item.desc = [[一小片人皮面具，是派尔纪一位死灵法师的遗物。他试图变成巫妖，但是没有成功。他的身体逐渐腐烂，但由于未成功的法术而不能死去，就这样过了数年。现在，他的灵魂仍藏身于这小块皮肤中，渴求着永恒的生命。]]
+		end
 	if 	item.name == "Dream Malleus" then
 		item.name = "梦境之槌"
 		item.unided_name = "发光木锤"
@@ -2319,12 +2337,13 @@ class:bindHook("Entity:loadList", function (self,data)
 		item.unided_name = "刺痛项圈"
 		item.desc = [[这项圈摸起来让人觉得刺痛,但似乎增强了你的思考.]]
 		item.special_desc = function(self) 
-			return "每次当你的雷电伤害超过了目标10%最大生命时，将附加锁脑状态。" end
+			return "每次当你 的 雷 电 伤 害 超 过 了 目 标 10%% 最 大 生 命 时 ， 将 附 加 锁 脑 状 态。" end
 	end
 	if 	item.name == "Stormfront" then
 		item.name = "风暴前线"
 		item.unided_name = "潮湿的钢铁战斧"
 		item.desc = [[剑身泛着淡淡的蓝色,反射出了满天的乌云.]]
+		item.combat.special_on_crit.desc = "造成湿润或震撼效果。"
 	end
 	if 	item.name == "Eye of Summer" then
 		item.name = "夏日之眼"
@@ -2381,7 +2400,7 @@ class:bindHook("Entity:loadList", function (self,data)
 		item.unided_name = "螺旋形金属腰带"
 		item.desc = [[一个坚固的铁链缠着细金属丝网。火花在上面跳舞.]]
 		item.special_desc = function(self)
-		 return [[每 次 接 受 雷 电 伤 害 或 造 成 暴 击 雷 电 伤 害 时 获 得两 点 充 能 ， 每 点 充 能 提 供 5% 雷 电 伤 害 加 成 和 1 点 全属 性 。 每 回 合 损 失一 点 加 成。]] 
+		 return [[每 次 接 受 雷 电 伤 害 或 造 成 暴 击 雷 电 伤 害 时 获 得两 点 充 能 ， 每 点 充 能 提 供 5%% 雷 电 伤 害 加 成 和 1 点 全属 性 。 每 回 合 损 失一 点 加 成。]] 
 		end
 	end
 end

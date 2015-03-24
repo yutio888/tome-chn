@@ -164,14 +164,14 @@ function objects:getObjects(name,desc,subtype,short_name,is_ided,rare,unique)
 	return o
 end
 
---dofile("data-chn123/objects/object_detail/world-artifacts.lua")
+dofile("data-chn123/objects/object_detail/world-artifacts.lua")
 dofile("data-chn123/objects/object_detail/2haxes.lua")
 dofile("data-chn123/objects/object_detail/2hmaces.lua")
 dofile("data-chn123/objects/object_detail/2hswords.lua")
 dofile("data-chn123/objects/object_detail/2htridents.lua")
 dofile("data-chn123/objects/object_detail/axes.lua")
 dofile("data-chn123/objects/object_detail/bows.lua")
---dofile("data-chn123/objects/object_detail/brotherhood-artifacts.lua")
+dofile("data-chn123/objects/object_detail/brotherhood-artifacts.lua")
 dofile("data-chn123/objects/object_detail/cloak.lua")
 dofile("data-chn123/objects/object_detail/cloth-armors.lua")
 dofile("data-chn123/objects/object_detail/digger.lua")

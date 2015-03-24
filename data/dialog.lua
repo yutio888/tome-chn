@@ -368,6 +368,7 @@ function _M:generate()
 		self.mouse:registerZone(0, 0, gamew, gameh, function(button, x, y, xrel, yrel, bx, by, event) self:mouseEvent(button, x, y, xrel, yrel, bx - self.display_x, by - self.display_y, event) end)
 	else
 		self.mouse:registerZone(0, 0, gamew, gameh, function(button, x, y, xrel, yrel, bx, by, event) if button == "left" and event == "button" then  self.key:triggerVirtual("EXIT") end end)
+		self.mouse:registerZone(self.display_x + self.frame.ox1, self.display_y + self.frame.ox2, self.frame.w, self.frame.h, function(...) self:no_focus() end)
 		self.mouse:registerZone(self.display_x, self.display_y, self.w, self.h, function(...) self:mouseEvent(...) end)
 	end
 	self.key.receiveKey = function(_, ...) self:keyEvent(...) end
@@ -386,14 +387,8 @@ function _M:updateTitle(title)
 	local title = title
 	if type(title)=="function" then title = title() end
 	self.font_bold:setStyle("bold")
-	local tw, th = self.font_bold:size(title)
-	local s = core.display.newSurface(tw, th)
-	s:erase(0, 0, 0, 0)
-	s:drawColorStringBlended(self.font_bold, title, 0, 0, self.color.r, self.color.g, self.color.b, true)
+	self.title_tex = self:drawFontLine(self.font_bold, title)
 	self.font_bold:setStyle("normal")
-	self.title_tex = {s:glTexture()}
-	self.title_tex.w = tw
-	self.title_tex.h = th
 end
 
 function _M:loadUI(t)
@@ -418,6 +413,8 @@ end
 function _M:setupUI(resizex, resizey, on_resize, addmw, addmh)
 	local mw, mh = nil, nil
 
+	local padding = 3 -- to not glue stuff to each other
+
 --	resizex, resizey = true, true
 	if resizex or resizey then
 		mw, mh = 0, 0
@@ -425,27 +422,30 @@ function _M:setupUI(resizex, resizey, on_resize, addmw, addmh)
 
 		for i, ui in ipairs(self.uis) do
 			if not ui.absolute then
+				if ui.top and type(ui.top) == "table" then ui.top = self.ui_by_ui[ui.top].top + self.ui_by_ui[ui.top].ui.h + padding end
+				if ui.bottom and type(ui.bottom) == "table" then ui.bottom = self.ui_by_ui[ui.bottom].bottom + self.ui_by_ui[ui.bottom].ui.h + padding end
+				if ui.left and type(ui.left) == "table" then ui.left = self.ui_by_ui[ui.left].left + self.ui_by_ui[ui.left].ui.w + padding end
+				if ui.right and type(ui.right) == "table" then ui.right = self.ui_by_ui[ui.right].right + self.ui_by_ui[ui.right].ui.w + padding end
+				
 				if ui.top then mh = math.max(mh, ui.top + ui.ui.h + (ui.padding_h or 0))
 				elseif ui.bottom then addh = math.max(addh, ui.bottom + ui.ui.h + (ui.padding_h or 0))
 				end
-			end
 
 --		print("ui", ui.left, ui.right, ui.ui.w)
-			if not ui.absolute then
 				if ui.left then mw = math.max(mw, ui.left + ui.ui.w + (ui.padding_w or 0))
 				elseif ui.right then addw = math.max(addw, ui.right + ui.ui.w + (ui.padding_w or 0))
 				end
 			end
 		end
 --		print("===", mw, addw)
-		mw = mw + addw + 5 * 2 + (addmw or 0)
+		mw = mw + addw + 5 * 2 + (addmw or 0) + padding
 
 --		print("===", mw, addw)
 		local tw, th = 0, 0
 		if self.title then tw, th = self.font_bold:size(self.title) end
 		mw = math.max(tw + 6, mw)
 
-		mh = mh + addh + 5 + 22 + 3 + (addmh or 0) + th
+		mh = mh + addh + 5 + 22 + 3 + (addmh or 0) + th + padding
 
 		if on_resize then on_resize(resizex and mw or self.w, resizey and mh or self.h) end
 		self:resize(resizex and mw or self.w, resizey and mh or self.h)
@@ -460,33 +460,72 @@ function _M:setupUI(resizex, resizey, on_resize, addmw, addmh)
 		if not ui.absolute then
 			ux, uy = self.ix, self.iy
 
+			-- At first, calculate ALL dependencies
+			if ui.top and type(ui.top) == "table" then ui.top = self.ui_by_ui[ui.top].y - self.iy + ui.top.h + padding end
+			if ui.bottom and type(ui.bottom) == "table" then
+				local top = self.ui_by_ui[ui.bottom].y - self.iy  -- top of ui.bottom
+				ui.bottom = self.ih - top + padding
+			end
+			if ui.vcenter and type(ui.vcenter) == "table" then
+				local vcenter = self.ui_by_ui[ui.vcenter].y + ui.vcenter.h
+				ui.vcenter = math.floor(vcenter - self.ih / 2)
+			end
+
+			if ui.left and type(ui.left) == "table" then ui.left = self.ui_by_ui[ui.left].x - self.ix + ui.left.w + padding end
+			if ui.right and type(ui.right)== "table" then
+				local left = self.ui_by_ui[ui.right].x - self.ix -- left of ui.right
+				ui.right = self.iw - left + padding
+			end
+			if ui.hcenter and type(ui.hcenter) == "table" then
+				local hcenter = self.ui_by_ui[ui.hcenter].x - self.ix + ui.hcenter.w / 2
+				ui.hcenter = math.floor(hcenter - self.iw / 2)
+			end
+			if ui.hcenter_left and type(ui.hcenter_left) == "table" then  -- I still have no idea what that does
+				ui.hcenter_left = self.ui_by_ui[ui.hcenter_left].x + ui.hcenter_left.w
+			end
+
+			local regenerate = false
+			if ui.calc_width then
+				if ui.left and ui.right then
+					ui.ui.w = self.iw - (ui.right + ui.left)
+				elseif ui.left and ui.hcenter then
+					ui.ui.w = self.iw + 2 * (ui.hcenter - ui.left)
+				elseif ui.hcenter and ui.right then
+					ui.ui.w = self.iw + 2 * (-ui.hcenter - ui.right)
+				end
+				regenerate = true
+			end
+			if ui.calc_height then
+				if ui.top and ui.bottom then
+					ui.ui.h = self.ih - (ui.bottom + ui.top)
+				elseif ui.top and ui.vcenter then
+					ui.ui.h = self.ih + 2 * (ui.vcenter - ui.top)
+				elseif ui.vcenter and ui.bottom then
+					ui.ui.h = self.ih + 2 * (-ui.vcenter - ui.bottom)
+				end
+				regenerate = true
+			end
+			if regenerate then
+				ui.ui:generate()
+			end
+
+
 			if ui.top then
-				if type(ui.top) == "table" then ui.top = self.ui_by_ui[ui.top].y end
 				uy = uy + ui.top
 			elseif ui.bottom then
-				if type(ui.bottom) == "table" then ui.bottom = self.ui_by_ui[ui.bottom].y end
 				uy = uy + self.ih - ui.bottom - ui.ui.h
 			elseif ui.vcenter then
-				if type(ui.vcenter) == "table" then ui.vcenter = self.ui_by_ui[ui.vcenter].y + ui.vcenter.h end
 				uy = uy + math.floor(self.ih / 2) + ui.vcenter - ui.ui.h / 2
 			end
 
-			if ui.left then
-				if type(ui.left) == "table" then ui.left = self.ui_by_ui[ui.left].x + ui.left.w end
+			if ui.left then 
 				ux = ux + ui.left
 			elseif ui.right then
-				if type(ui.right) == "table" then ui.right = self.ui_by_ui[ui.right].x end
 				ux = ux + self.iw - ui.right - ui.ui.w
 			elseif ui.hcenter then
-				if type(ui.hcenter) == "table" then ui.hcenter = self.ui_by_ui[ui.hcenter].x + ui.hcenter.w end
 				ux = ux + math.floor(self.iw / 2) + ui.hcenter - ui.ui.w / 2
 			elseif ui.hcenter_left then
-				if type(ui.hcenter_left) == "table" then 
-					ui.hcenter_left = self.ui_by_ui[ui.hcenter_left].x + ui.hcenter_left.w
-					ux = ux + ui.hcenter_left - self.ix
-				else
-					ux = ux + math.floor(self.iw / 2) + ui.hcenter_left
-				end
+				ux = ux + math.floor(self.iw / 2) + ui.hcenter_left
 			end
 		else
 			ux, uy = 0, 0
@@ -729,12 +768,12 @@ function _M:toScreen(x, y, nb_keyframes)
 			if shader then
 				shader:use(true)
 				shader:uniOutlineSize(self.shadow_power, self.shadow_power)
-				shader:uniTextSize(self.title_tex[2], self.title_tex[3])
+				shader:uniTextSize(self.title_tex.tw, self.title_tex.th)
 			else
-				self.title_tex[1]:toScreenFull(x + (self.w - self.title_tex.w) / 2 + 3 + self.frame.title_x, y + 3 + self.frame.title_y, self.title_tex.w, self.title_tex.h, self.title_tex[2], self.title_tex[3], 0, 0, 0, 0.5)
+				self:textureToScreen(self.title_tex, x + (self.w - self.title_tex.w) / 2 + 3 + self.frame.title_x, y + 3 + self.frame.title_y, 0, 0, 0, 0.5)
 			end
 		end
-		self.title_tex[1]:toScreenFull(x + (self.w - self.title_tex.w) / 2 + self.frame.title_x, y + self.frame.title_y, self.title_tex.w, self.title_tex.h, self.title_tex[2], self.title_tex[3])
+		self:textureToScreen(self.title_tex, x + (self.w - self.title_tex.w) / 2 + self.frame.title_x, y + self.frame.title_y)
 		if self.title_shadow and shader then shader:use(false) end
 	end
 

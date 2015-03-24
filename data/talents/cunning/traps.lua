@@ -1,6 +1,11 @@
 local Talents = require "engine.interface.ActorTalents"
 local damDesc = Talents.main_env.damDesc
 local DamageType = require "engine.DamageType"
+local trap_range = function(self, t)
+	if not self:knowTalent(self.T_TRAP_LAUNCHER) then return 1 end
+	return math.floor(self:combatTalentScale(self:getTalentLevel(self.T_TRAP_LAUNCHER), 2, 7, "log")) -- 2@1, 7@5
+end
+local trapPower = function(self,t) return math.max(1,self:combatScale(self:getTalentLevel(self.T_TRAP_MASTERY) * self:getCun(15, true), 0, 0, 75, 75)) end -- Used to determine detection and disarm power, about 75 at level 50
 
 Talents.talents_def.T_TRAP_MASTERY.name= "陷阱大师"
 Talents.talents_def.T_TRAP_MASTERY.info= function(self, t)

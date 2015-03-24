@@ -896,5 +896,19 @@ logCHN:newLog{
 		return("#GOLD#沙子缓慢地流向 %s"):format(a)
 	end,
 }
-
+logCHN:newLog{
+	log = "%s evokes a mental assault from %s %s!",
+	fct = function(a,b,c)
+		a = a:gsub("his","他的"):gsub("her","她的")
+		return("%s用%s %s激发精神攻击!"):format(a,b,c)
+	end,
+}
+logCHN:newLog{
+	log = "%s uses %s, curing %s afflictions!",
+	fct = function(a,b,c)
+		a = npcCHN:getName(a)
+		c = npcCHN:getName(c)
+		return("%s用%s 治疗了%s的痛苦!"):format(a,b,c)
+	end,
+}
 	

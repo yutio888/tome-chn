@@ -1,7 +1,19 @@
 ﻿local Talents = require "engine.interface.ActorTalents"
 local damDesc = Talents.main_env.damDesc
 local DamageType = require "engine.DamageType"
-
+local function DistortionCount(self)
+	local distortion_count = 0
+	
+	for tid, lev in pairs(self.talents) do
+		local t = game.player:getTalentFromId(tid)
+		if t.type[1]:find("^psionic/") and t.type[1]:find("^psionic/distortion") then
+			distortion_count = distortion_count + lev
+		end
+	end
+	distortion_count = mod.class.interface.Combat:combatScale(distortion_count, 0, 0, 20, 20, 0.75)
+	print("Distortion Count", distortion_count)
+	return distortion_count
+end
 Talents.talents_def.T_DISTORTION_BOLT.name= "扭曲之球"
 Talents.talents_def.T_DISTORTION_BOLT.info= function(self, t)
 		local damage = t.getDamage(self, t)

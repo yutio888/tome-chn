@@ -1,7 +1,68 @@
 local Talents = require "engine.interface.ActorTalents"
 local damDesc = Talents.main_env.damDesc
 local DamageType = require "engine.DamageType"
+local sling_equipped = function(self, silent)
+	if not self:hasArcheryWeapon("sling") then
+		if not silent then
+			game.logPlayer(self, "You must wield a sling!")
+		end
+		return false
+	end
+	return true
+end
 
+-- calc_all is so the info can show all the effects.
+local sniper_bonuses = function(self, calc_all)
+	local bonuses = {}
+	local t = self:getTalentFromId("T_SKIRMISHER_SLING_SNIPER")
+	local level = self:getTalentLevel(t)
+
+	if level > 0 or calc_all then
+		bonuses.crit_chance = self:combatTalentScale(t, 3, 10)
+		bonuses.crit_power = self:combatTalentScale(t, 0.1, 0.2, 0.75)
+	end
+	if level >= 5 or calc_all then
+		bonuses.resists_pen = {[DamageType.PHYSICAL] = self:combatStatLimit("cun", 100, 15, 50)} -- Limit < 100%
+	end
+	return bonuses
+end
+
+-- Add the phys pen to self right before the shot hits.
+local pen_on = function(self, talent, tx, ty, tg, target)
+	if target and tg and tg.archery and tg.archery.resists_pen then
+		self.temp_skirmisher_sling_sniper = self:addTemporaryValue("resists_pen", tg.archery.resists_pen)
+	end
+end
+
+-- The action for each of the shots.
+local fire_shot = function(self, t)
+	local tg = {type = "hit"}
+
+	local targets = self:archeryAcquireTargets(tg, table.clone(t.archery_target_parameters))
+	if not targets then return end
+	local bonuses = sniper_bonuses(self)
+	local params = {mult = t.damage_multiplier(self, t)}
+	if bonuses.crit_chance then params.crit_chance = bonuses.crit_chance end
+	if bonuses.crit_power then params.crit_power = bonuses.crit_power end
+	if bonuses.resists_pen then params.resists_pen = bonuses.resists_pen end
+	self:archeryShoot(targets, t, {type = "hit", speed = 200}, params) -- Projectile speed because using "hit" with slow projectiles is infuriating
+	return true
+end
+
+-- Remove the phys pen from self right after the shot is finished.
+local pen_off = function(self, talent, target, x, y)
+	if self.temp_skirmisher_sling_sniper then
+		self:removeTemporaryValue("resists_pen", self.temp_skirmisher_sling_sniper)
+	end
+end
+
+local shot_cooldown = function(self, t)
+	if self:getTalentLevel(self.T_SKIRMISHER_SLING_SNIPER) >= 3 then
+		return 6
+	else
+		return 8
+	end
+end
 Talents.talents_def.T_SKIRMISHER_KNEECAPPER.name= "膝盖杀手"
 Talents.talents_def.T_SKIRMISHER_KNEECAPPER.info= function(self, t)
 		return ([[射 击 敌 人 的 膝 盖 （ 或 者 任 何 活 动 肢 体 上 的 重 要 部 位）， 造 成 %d%% 武 器 伤 害， 并 将 敌 人 击 倒 （ 定 身 %d 回 合） 并 在 之 后 降 低 其 移 动 速 度 %d%% %d 回合 。

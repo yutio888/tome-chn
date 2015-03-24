@@ -1,7 +1,18 @@
 local Talents = require "engine.interface.ActorTalents"
 local damDesc = Talents.main_env.damDesc
 local DamageType = require "engine.DamageType"
+local function combatTalentDamage(self, t, min, max)
+	return self:combatTalentSpellDamage(t, min, max, self.level + self:getWil())
+end
 
+local function getWillFailureEffectiveness(self, minChance, maxChance, attackStrength)
+	return attackStrength * self:getWil() * 0.05 * (minChance + (maxChance - minChance) / 2)
+end
+
+-- mindpower bonus for gloom talents
+local function gloomTalentsMindpower(self)
+	return self:combatScale(self:getTalentLevel(self.T_GLOOM) + self:getTalentLevel(self.T_WEAKNESS) + self:getTalentLevel(self.T_DISMAY) + self:getTalentLevel(self.T_SANCTUARY), 1, 1, 20, 20, 0.75)
+end
 Talents.talents_def.T_GLOOM.name= "黑暗光环"
 Talents.talents_def.T_GLOOM.info= function(self, t)
 		local chance = t.getChance(self, t)

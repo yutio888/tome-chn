@@ -274,6 +274,14 @@ logCHN:newLog{
 
 --chronomancy/spacetime-weaving
 logCHN:newLog{
+	log = "#CRIMSON#%s has been yanked back to the tether!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("#CRIMSON#%s 被时空锁链拉了回去！"):format(a)
+	end,
+}
+
+logCHN:newLog{
 	log = "%s moves onto the wormhole.",
 	fct = function(a)
 		a = npcCHN:getName(a)

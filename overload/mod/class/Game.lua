@@ -1336,9 +1336,10 @@ function _M:logMessage(source, srcSeen, target, tgtSeen, style, ...)
 			srcname = engine.Entity.check(source, "getName") or source.name or "unknown"
 		end
 		if srcname ~= "something" then Dstring = source.__is_actor and source.getDisplayString and source:getDisplayString() end
+	if source.name and source.name=="spatial tether" then srcname ="时空锁链" end
 	srcname = logCHN:getName(srcname)
-	if source.name and source.name:find("maelstrom") then srcname="灵能漩涡" end
-
+	if source.name and source.name:find("maelstrom") then srcname ="灵能漩涡" end
+	
 		local tgtname = "something"
 			if target then
 			if target.player then

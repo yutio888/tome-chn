@@ -1006,3 +1006,129 @@ logCHN:newLog{
 		return ("%s被时空锁链固定！"):format(a)
 	end,
 }
+logCHN:newLog{
+	log = "#Target# is anchored.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s被禁止传送。"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target# is no longer anchored.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s不再被禁止传送。"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target#'s lifeline has been braided.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s的生命线被编织了。"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target#'s lifeline is no longer braided.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s的生命线不再被编织。"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target# is no longer anchored.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s不再被禁止传送。"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target# is no longer anchored.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s不再被禁止传送。"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target# has started to unravel.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s开始解体。"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target# is caught in an entropic field!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s被熵领域覆盖！"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target# is free from the entropy.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s从熵领域解脱。"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target# has regressed.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s退化了。"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target# has returned to its natural state.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s返回了自然状态。"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target# is being being removed from the timeline!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s被从时间线中除去！"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target# survived the attenuation.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s从时间线中存活了。"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target# is being being grounded in the timeline!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s被时间线围绕！"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target# is no longer being grounded.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s不再被时间线围绕。"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target# enters an ogric frenzy.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s进入狂热状态。"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "Spacetime has stabilized around #Target#.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s周围的时间线变得稳定"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "The fabric of spacetime around #Target# has returned to normal.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s周围的时间线恢复了正常。"):format(a)
+	end,
+}

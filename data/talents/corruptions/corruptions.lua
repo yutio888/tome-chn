@@ -13,4 +13,3 @@ dofile("data-chn123/talents/corruptions/oppression.lua")
 dofile("data-chn123/talents/corruptions/spellblaze.lua")
 dofile("data-chn123/talents/corruptions/torture.lua")
 dofile("data-chn123/talents/corruptions/wrath.lua")
-

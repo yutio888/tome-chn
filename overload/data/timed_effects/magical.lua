@@ -3042,8 +3042,8 @@ newEffect{
 		for i = 1, #eff.targets do
 			local target = eff.targets[i]
 			if target ~= self and not target.dead then
-				game:delayedLogMessage(eff.src, target, "braided", "#CRIMSON##Source# damages #Target# through the Braid!")
-				game:delayedLogDamage(eff.src, target, braid_damage, ("#PINK#%d braided #LAST#"):format(braid_damage), false)
+				game:delayedLogMessage(eff.src, target, "braided", "#CRIMSON##Source# 通过编织在一起的生命线伤害了#Target#")
+				game:delayedLogDamage(eff.src, target, braid_damage, ("#PINK#%d 生命线#LAST#"):format(braid_damage), false)
 				target:takeHit(braid_damage, eff.src)
 			end
 		end
@@ -3124,7 +3124,7 @@ newEffect{
 				DamageType.defaultProjector(self, a.x, a.y, type, displace, state)
 				state.no_reflect = nil
 				dam = dam - displace
-				game:delayedLogDamage(src, self, 0, ("%s(%d webs of fate)#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", displace), false)
+				game:delayedLogDamage(src, self, 0, ("%s(%d 命运之网)#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", displace), false)
 			end
 		end
 		
@@ -3516,7 +3516,7 @@ newEffect{
 			-- Reduce damage
 			local reduction = dam * eff.power/100
 			dam = dam -  reduction
-			game:delayedLogDamage(src, self, 0, ("%s(%d focus)#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", reduction), false)
+			game:delayedLogDamage(src, self, 0, ("%s(%d 集中)#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", reduction), false)
 		end
 		return {dam=dam}
 	end,

@@ -158,7 +158,7 @@ newInscription{
 	end,
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		local what = table.concatNice(table.keys(data.what), ", ", " or ")
+		local what = table.concatNice(table.keys(data.what), ", ", " 或者 ")
 		return ([[激 活 纹 身 解 除 你 %s 效 果 并 减 少 所 有 伤 害 %d%% 持 续 %d 回 合。 
 同 时 除 去 对 应 类 型 的 CT 效 果 。		]]):format(change_infusion_eff(what), data.power+data.inc_stat, data.dur)
 	end,
@@ -201,7 +201,7 @@ newInscription{
 	end,
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		local what = table.concatNice(table.keys(data.what), ", ", " or ")
+		local what = table.concatNice(table.keys(data.what), ", ", " 或者 ")
 		return ([[ 激 活 这 个 纹 身 ， 解 除 %s 效 果 并 将 你 受 到 的 %d%% 全 体 伤 害 转 化 为 治 疗 ， 持 续 %d 回 合 。
 同 时 除 去 对 应 类 型 的 CT 效 果 。]]):format(change_infusion_eff(what), data.power+data.inc_stat, data.dur)
 	end,

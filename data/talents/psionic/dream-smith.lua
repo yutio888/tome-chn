@@ -1,7 +1,38 @@
 ﻿local Talents = require "engine.interface.ActorTalents"
 local damDesc = Talents.main_env.damDesc
 local DamageType = require "engine.DamageType"
+local function useDreamHammer(self)
+	local combat = {
+		talented = "dream",
+		sound = {"actions/melee", pitch=0.6, vol=1.2}, sound_miss = {"actions/melee", pitch=0.6, vol=1.2},
 
+		wil_attack = true,
+		damrange = 1.5,
+		physspeed = 1,
+		dam = 16,
+		apr = 0,
+		atk = 0,
+		physcrit = 0,
+		dammod = {wil=1.2},
+		melee_project = {},
+	}
+	if self:knowTalent(self.T_DREAM_HAMMER) then
+		local t = self:getTalentFromId(self.T_DREAM_HAMMER)
+		combat.dam = 16 + t.getBaseDamage(self, t)
+		combat.apr = 0 + t.getBaseApr(self, t)
+		combat.physcrit = 0 + t.getBaseCrit(self, t)
+		combat.atk = 0 + t.getBaseAtk(self, t)
+	end
+	if self:knowTalent(self.T_HAMMER_TOSS) then
+		local t = self:getTalentFromId(self.T_HAMMER_TOSS)
+		combat.atk = t.getAttackTotal(self, t)
+	end
+	if self:knowTalent(self.T_FORGE_ECHOES) then
+		local t = self:getTalentFromId(self.T_FORGE_ECHOES)
+		combat.melee_project = { [engine.DamageType.DREAMFORGE] = t.getProject(self, t) }
+	end
+	return combat
+end
 Talents.talents_def.T_DREAM_HAMMER.name= "梦之巨锤"
 Talents.talents_def.T_DREAM_HAMMER.info= function(self, t)
 		local damage = t.getDamage(self, t)

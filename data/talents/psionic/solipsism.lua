@@ -3,8 +3,7 @@ local damDesc = Talents.main_env.damDesc
 local DamageType = require "engine.DamageType"
 
 Talents.talents_def.T_SOLIPSISM.name= "唯我论"
-Talents.talents_def.T_SOLIPSISM.info= "Solipsism"
-	info= function(self, t)
+Talents.talents_def.T_SOLIPSISM.info= function(self, t)
 		local conversion_ratio = t.getConversionRatio(self, t)
 		local psi_damage_resist, psi_damage_resist_base, psi_damage_resist_talent = t.getPsiDamageResist(self, t)
 		local threshold = math.min((self.solipsism_threshold or 0),self:callTalent(self.T_CLARITY, "getClarityThreshold") or 1)

@@ -7,7 +7,7 @@ Talents.talents_def.T_SWALLOW.info= function(self, t)
 		return ([[对 目 标 造 成 %d%% 自 然 武 器 伤 害。 
 		 如 果 此 攻 击 将 目 标 生 命 值 降 低 到 %d%% 以 下 或 杀 死 它 时 你 可 以 吞 噬 它 并 杀 死 它， 依 目 标 等 级 恢 复 你 的 生 命 和 自 然 失 衡 值。 
 		 吞 噬 几 率 取 决 于 技 能 等 级 和 对 方 体 型 大 小。 
-		 同 时 ， 每 点 技 能 等 级 增 加 物 理 和 精 神 暴 击 率%d%%。
+		 这 个 技 能 还 能 被 动 提 升 物 理 和 精 神 暴 击 率 %d%% 。
 		 每 点 土 龙 系 的 天 赋 可 以 使 你 增 加 物 理 抵 抗 0.5%%。]]):
 		format(100 * self:combatTalentWeaponDamage(t, 1.6, 2.5), t.maxSwallow(self, t, self), t.getPassiveCrit(self, t))
 	end

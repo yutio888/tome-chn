@@ -8,7 +8,7 @@ Talents.talents_def.T_LIGHTNING_SPEED.info= function(self, t)
 		 同 时 提 供 30%% 物 理 伤 害 抵 抗 和 100%% 闪 电 抵 抗。 
 		 除 了 移 动 外， 任 何 动 作 都 会 打 断 此 效 果。 
 		 注 意： 由 于 你 的 移 动 速 度 非 常 快， 游 戏 回 合 时 间 会 显 得 非 常 慢。 
-		 每 点 技 能 等 级 会 增 加 你 %d%% 移 动 速 度。 
+		 这 个 技 能 还 能 被 动 提 升 %d%% 移 动 速 度。 
 		 每 点 雷 龙 系 的 天 赋 可 以 使 你 增 加 闪 电 抵 抗 1%%。]])
 		 :format(t.getSpeed(self, t), t.getDuration(self, t), t.getPassiveSpeed(self, t)*100)
 	end

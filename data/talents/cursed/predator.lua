@@ -1,10 +1,9 @@
-local Talents = require "engine.interface.ActorTalents"
+﻿local Talents = require "engine.interface.ActorTalents"
 local damDesc = Talents.main_env.damDesc
 local DamageType = require "engine.DamageType"
 
 Talents.talents_def.T_MARK_PREY.name= "猎杀标记"
-Talents.talents_def.T_MARK_PREY.info= "Mark Prey"
-	info= function(self, t)
+Talents.talents_def.T_MARK_PREY.info= function(self, t)
 		local maxKillExperience = t.getMaxKillExperience(self, t)
 		local subtypeDamageChange = t.getSubtypeDamageChange(self, t)
 		local typeDamageChange = t.getTypeDamageChange(self, t)

@@ -178,7 +178,7 @@ class:bindHook("Entity:loadList", function (self,data)
 				item.name = "废除之枝"
 				item.unided_name  = "黑暗的枝条"
 				item.desc  =  "你可以感受到枝条周围的魔力流失，甚至它自己也似乎受到了影响。"
-					name = function(self, who) 
+				item.use_power.name = function(self, who) 
 					return ("将 半 径 %d 内 的 一 个 目 标 的 至 多 3 个 纹 身、 符 文 或 技 能 打 入 3-5 回 合 的 冷 却。")
 					:format(self.use_power.range)
 				end
@@ -929,7 +929,8 @@ class:bindHook("Entity:loadList", function (self,data)
 				item.desc  =  "这根钢质的鞭子缠绕着许多电弧。你可以感受这根鞭子上散发出的力量强大且不可控制。"
 				item.use_power.name = function(self, who)
 					local dam = who:damDesc(engine.DamageType.LIGHTNING, self.use_power.damage(self, who))
-					return ("攻 击 距 离 %d 内 的 敌 人 ， 造 成 100% 闪 电 武 器 伤 害 ， 然  后 在 半 径 %d 内 释 放 电 弧  ， 造 成 %0.2f 到 %0.2f 闪 电 伤 害 （ 基 于 魔 法 和 敏 捷 ） "):format(self.use_power.range, self.use_power.radius, dam/3, dam)
+					return ("攻击距离 %d 内的敌人，造成 100%% 闪电武器 伤害 并在半径 %d 内释放电弧， 造成 %0.2f 到 %0.2f 点闪电 伤害 ( 基于 魔法 和 敏捷)")
+					:format(self.use_power.range, self.use_power.radius, dam/3, dam)
 				end
 			end
 			 if item.name == "Focus Whip" then

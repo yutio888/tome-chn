@@ -1,4 +1,6 @@
 local Talents = require "engine.interface.ActorTalents"
+local damDesc = Talents.main_env.damDesc
+local DamageType = require "engine.DamageType"
 Talents.talents_def.T_TEMPORAL_BOLT.name = "时空之箭"
 Talents.talents_def.T_TEMPORAL_BOLT.info = function(self, t)
 		local damage = t.getDamage(self, t)

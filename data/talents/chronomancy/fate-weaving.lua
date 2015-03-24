@@ -2,8 +2,8 @@ local Talents = require "engine.interface.ActorTalents"
 Talents.talents_def.T_SPIN_FATE.name = "命运之丝"
 Talents.talents_def.T_SPIN_FATE.info = function(self, t)
 		local save = t.getSaveBonus(self, t)
-		return ([[每 当 你 要 受 到 其 他 人 造 成 的 伤 害 时 ， 你 编 织 一 层 命 运 之 丝，使 你 的 闪 避 和 豁 免 增 加 %d，持 续 三 回 合。
-		这 个 效 果 每 回 合 只 能 触 发 一 次 ， 丝 能 叠 加 三 层 ( 加 成 最 多 为 %d).]]):
+		return ([[每 当 你 要 受 到 其 他 人 造 成 的 伤 害 时 ， 你 编 织 一 层 命 运 之 丝，使 你 的 闪 避 和 豁 免 增 加 %d ，持 续 三 回 合。
+		这 个 效 果 每 回 合 只 能 触 发 一 次 ， 丝 能 叠 加 三 层 ( 加 成 最 多 为 %d ).]]):
 		format(save, save * 3)
 	end
 

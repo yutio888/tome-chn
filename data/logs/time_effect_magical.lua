@@ -964,4 +964,45 @@ logCHN:newLog{
 		return ("%s被光明灼烧！"):format(a)
 	end,
 }
-
+logCHN:newLog{
+	log = "#Target# spins fate.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s编织命运！"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target# stops spining fate.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s停止编织命运！"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target# weaves fate.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s编织命运！"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target# stops weaving fate.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s停止编织命运！"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target# is nearing the end.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s接近末日！"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target# has been tethered!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s被时空锁链固定！"):format(a)
+	end,
+}

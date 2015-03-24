@@ -273,6 +273,13 @@ logCHN:newLog{
 }
 
 --chronomancy/spacetime-weaving
+logCHN:newLog{
+	log = "%s moves onto the wormhole.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s踏入虫洞"):format(a)
+	end,
+}
 
 logCHN:newLog{
 	log = "You do not have line of sight.",
@@ -1105,6 +1112,8 @@ logCHN:newLog{
 		return ("%s 召唤了一头三头蛇！"):format(a)
 	end,
 }
+
+
 
 logCHN:newLog{
 	log = "%s summons a Rimebark!",

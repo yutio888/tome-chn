@@ -101,7 +101,10 @@ function _M:generateList()
 	table.sort(list, function(a,b)
 		if a.unique and not b.unique then return true
 		elseif not a.unique and b.unique then return false end
-		return a.name < b.name
+--		if type(a.name) == "function" and type(b.name) =="function" then return a.name()<b.name()
+--		elseif type(a.name) == "function" then return true
+--		elseif type(b.name) =="function" then return false end
+		return a.name<b.name
 	end)
 
 	local chars = {}

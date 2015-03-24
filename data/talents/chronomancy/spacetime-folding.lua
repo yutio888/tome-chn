@@ -33,7 +33,7 @@ Talents.talents_def.T_WARP_MINES.info = function(self, t)
 		local detect = t.trapPower(self,t)*0.8
 		local disarm = t.trapPower(self,t)
 		local duration = t.getDuration(self, t)
-		return ([[学 会 在 半 径 1 的 范 围 内 埋 设 时 空 地 雷。
+		return ([[学 会 在 半 径 1 的 范 围 内 埋 设 时 空 地 雷，造 成 %0.2f 物 理 和 %0.2f 时 空 伤 害。
 		时 空 地 雷 能 将 敌 人 传 送 ， 到 你 身 边 或 者 传 到 远 处 。
 		地 雷 是 隐 藏 的 陷 阱（ %d 侦 查 强 度 %d 解 除 强 度 基 于 魔 法 ），持 续 %d 回 合 ，有 10 回 合 冷 却 时 间 。
 		在 该 技 能 上 投 入 点 数 能 增 加 时 空 折 叠 系 技 能 的 半 径。

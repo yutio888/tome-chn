@@ -499,13 +499,13 @@ function _M:generateRandart(data)
 	local name
 	local namescheme = data.namescheme or ((ngt ~= ngd) and rng.range(1, 4) or rng.range(1, 3))
 	if namescheme == 1 then
-		name = o.name.." '"..ngt:generate().."'"
+		name = " '"..ngt:generate().."'"
 	elseif namescheme == 2 then
-		name = ngt:generate().." the "..o.name
+		name = ngd:generate().." 的 "..ngt:generate()
 	elseif namescheme == 3 then
 		name = ngt:generate()
 	elseif namescheme == 4 then
-		name = ngd:generate().." the "..ngt:generate()
+		name = ngd:generate().." 之 "..ngt:generate()
 	end
 	o.define_as = name:upper():gsub("[^A-Z]", "_")
 	o.unided_name = rng.table(unided_names).." "..(o.unided_name or o.name)
@@ -2066,18 +2066,19 @@ function _M:createRandomBoss(base, data)
 	-- Basic stuff, name, rank, ...
 	------------------------------------------------------------
 	local ngd, name
-	if base.random_name_def then
-		ngd = NameGenerator2.new("/data/languages/names/"..base.random_name_def:gsub("#sex#", base.female and "female" or "male")..".txt")
-		name = ngd:generate(nil, base.random_name_min_syllables, base.random_name_max_syllables)
-	else
+--	if base.random_name_def then
+--		ngd = NameGenerator2.new("/data/languages/names/"..base.random_name_def:gsub("#sex#", base.female and "female" or "male")..".txt")
+--		name = ngd:generate(nil, base.random_name_min_syllables, base.random_name_max_syllables)
+--	else
 		ngd = NameGenerator.new(randart_name_rules.default)
 		name = ngd:generate()
-	end
-	if data.name_scheme then
-		b.name = data.name_scheme:gsub("#rng#", name):gsub("#base#", b.name)
-	else
-		b.name = name.." the "..b.name
-	end
+--	end
+--	if data.name_scheme then
+--		b.name = data.name_scheme:gsub("#rng#", name):gsub("#base#", b.name)
+--	else
+		b.name = b.name.." : "..name
+--	end
+
 	print("Creating random boss ", b.name, data.level, "level", data.nb_classes, "classes")
 	if data.force_classes then print("  * forcing classes:",table.concat(table.keys(data.force_classes),",")) end
 	b.unique = b.name

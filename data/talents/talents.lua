@@ -1,6 +1,7 @@
 local Talents = require "engine.interface.ActorTalents"
 
 dofile("/data-chn123/talents/celestial/chants.lua")
+dofile("/data-chn123/talents/celestial/circles.lua")
 dofile("/data-chn123/talents/celestial/sunlight.lua")
 dofile("/data-chn123/talents/celestial/sun.lua")
 dofile("/data-chn123/talents/celestial/combat.lua")

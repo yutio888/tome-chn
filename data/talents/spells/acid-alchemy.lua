@@ -27,7 +27,7 @@ Talents.talents_def.T_CAUSTIC_MIRE.info= function(self, t)
 		local duration = t.getDuration(self, t)
 		local radius = self:getTalentRadius(t)
 		return ([[ 一 小 块 酸 液 覆 盖 了 目 标 地 面 ，散 落 在 半 径 %d 的 范 围 内 ， 每 回 合 造 成 %0.1f 点 酸 性 伤 害 ， 持续 %d 回 合 。
-		 受 影 响 的 生 物 同 时 会 减 速 %d%%。
+		 受 影 响 的 生 物 同 时 会 减 速 %d%% 。
 		 受 法 术 强 度 影 响 ，伤 害 有 额 外 加 成。]]):
 		format(radius, damDesc(self, DamageType.ACID, damage), duration, slow)
 	end

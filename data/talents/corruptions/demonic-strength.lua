@@ -1,4 +1,4 @@
-﻿local Talents = require "engine.interface.ActorTalents"
+local Talents = require "engine.interface.ActorTalents"
 Talents.talents_def.T_DISMEMBER.name = "肢解"
 Talents.talents_def.T_DISMEMBER.info = function(self, t)
 	return ([[当 近 战 攻 击 暴 击 时， 致 残 你 的 目 标，降 低 %d%% 移 动 速 度 和 %d 命 中 ，持 续 %d 回合 。

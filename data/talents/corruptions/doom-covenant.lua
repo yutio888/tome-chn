@@ -1,4 +1,4 @@
-﻿local Talents = require "engine.interface.ActorTalents"
+local Talents = require "engine.interface.ActorTalents"
 Talents.talents_def.T_DARK_REIGN.name = "黑暗支配"
 Talents.talents_def.T_DARK_REIGN.info = function(self, t)
 		return ([[你 与 阴 影 的 联 系 更 加 紧 密 了 。

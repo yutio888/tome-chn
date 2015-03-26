@@ -6,7 +6,7 @@ Talents.talents_def.T_FIRE_INFUSION.name= "火焰充能"
 Talents.talents_def.T_FIRE_INFUSION.info= function(self, t)
 		local daminc = t.getIncrease(self, t)
 		return ([[给 炼 金 炸 弹 附 加 火 焰 能 量, 使 敌 人 进 入 灼 烧 状 态
-		此 外， 你 造 成 的 所 有 火 焰 伤 害 增 加 %d%%。]]):
+		此 外， 你 造 成 的 所 有 火 焰 伤 害 增 加 %d%% 。]]):
 		format(daminc)
 	end
 Talents.talents_def.T_SMOKE_BOMB.name= "烟雾弹"

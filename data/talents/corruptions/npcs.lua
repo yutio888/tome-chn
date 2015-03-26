@@ -1,4 +1,4 @@
-﻿local Talents = require "engine.interface.ActorTalents"
+local Talents = require "engine.interface.ActorTalents"
 Talents.talents_def.T_DEMON_SOUL_EATER.name = "灵魂吞噬者"
 Talents.talents_def.T_DEMON_SOUL_EATER.info = function(self, t)
 		return ([[任何附近的友方非召唤生物将与你的意志链接。

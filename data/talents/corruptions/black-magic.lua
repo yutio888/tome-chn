@@ -1,4 +1,4 @@
-﻿local Talents = require "engine.interface.ActorTalents"
+local Talents = require "engine.interface.ActorTalents"
 Talents.talents_def.T_BLEAK_OUTCOME.name = "悲惨结局"
 Talents.talents_def.T_BLEAK_OUTCOME.info = function(self, t)
 		return ([[你 的 一 举 一 动 都 是 敌 人 悲 惨 结 局 的 预 兆。

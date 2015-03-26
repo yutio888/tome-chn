@@ -42,7 +42,7 @@ Talents.talents_def.T_ADRENALINE_SURGE.info= function(self, t)
 		local attack_power = t.getAttackPower(self, t)
 		local duration = t.getDuration(self, t)
 		return ([[你 激 活 肾 上 腺 素 来 增 加 %d 物 理 强 度 持 续 %d 回 合。 
-		此 技 能 激 活 时， 你 可 以 不 知 疲 倦 地 战 斗， 若 体 力 为 0， 可 继 续 使 用 消 耗 类 技 能， 代 价 为 消 耗 生 命。 
+		此 技 能 激 活 时， 你 可 以 不 知 疲 倦 地 战 斗， 若 体 力 为 0 ， 可 继 续 使 用 消 耗 类 技 能， 代 价 为 消 耗 生 命。 
 		受 体 质 影 响， 物 理 强 度 有 额 外 加 成。 
 		使 用 本 技 能 不 会 消 耗 额 外 回 合。]]):
 		format(attack_power, duration)

@@ -1,4 +1,4 @@
-﻿local Talents = require "engine.interface.ActorTalents"
+local Talents = require "engine.interface.ActorTalents"
 Talents.talents_def.T_OBLITERATING_SMASH.name = "歼灭挥斩"
 Talents.talents_def.T_OBLITERATING_SMASH.info = function(self, t)
 	return ([[用 无 与 伦 比 的 力 量 挥 动 武 器 ， 打 击 正 面 半 圆 %d 码 范 围 内 所 有 敌 对 生 物 ， 对 所 有 目 标 造 成 %d%% 武 器 伤 害。

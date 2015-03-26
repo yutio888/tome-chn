@@ -23,7 +23,7 @@ Talents.talents_def.T_DEATH_DANCE_ASSAULT.info= function(self, t)
 	end
 Talents.talents_def.T_EXECUTION.name= "致命斩杀"
 Talents.talents_def.T_EXECUTION.info= function(self, t)
-		return ([[试 图 斩 杀 目 标 。 目 标 每 损 失 1％ 生 命 ， 你 造 成 额 外 %0.2f％ 武 器 伤 害。（剩 余 30％ 生 命 时 造 成 %0.2f％ 武 器 伤 害 ）
+		return ([[试 图 斩 杀 目 标 。 目 标 每 损 失 1 ％ 生 命 ， 你 造 成 额 外 %0.2f％ 武 器 伤 害。（剩 余 30 ％ 生 命 时 造 成 %0.2f％ 武 器 伤 害 ）
 		该 攻 击 必 定 暴 击 。]]):
 		format(t.getPower(self, t), 100 + t.getPower(self, t) * 70)
 	end

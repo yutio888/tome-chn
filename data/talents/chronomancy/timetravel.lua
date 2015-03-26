@@ -5,7 +5,7 @@ Talents.talents_def.T_TEMPORAL_BOLT.name = "时空之箭"
 Talents.talents_def.T_TEMPORAL_BOLT.info = function(self, t)
 		local damage = t.getDamage(self, t)
 		return ([[ 将 一 道 时 空 之 箭 射 入 时 间 线 中 。
-		时 空 之 箭 会 返 回 你 的 位 置 ，对 路 径 上 目 标 造 成 %0.2f 时 空 伤害 。每 飞 行 1 格 ， 伤 害 增 加 5%%。
+		时 空 之 箭 会 返 回 你 的 位 置 ，对 路 径 上 目 标 造 成 %0.2f 时 空 伤害 。每 飞 行 1 格 ， 伤 害 增 加 5%% 。
 		每 命 中 一 个 目 标 会 减 少 你 随 机 一 个 冷 却 中 的时 空 技 能 一 回 合 CD。
 		技 能 等 级 5 时 ， 减 少 2 回 合cd。]]):
 		format(damDesc(self, DamageType.TEMPORAL, damage))

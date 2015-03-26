@@ -1,4 +1,4 @@
-﻿local Talents = require "engine.interface.ActorTalents"
+local Talents = require "engine.interface.ActorTalents"
 Talents.talents_def.T_DEEPROCK_FORM.name = "深岩形态"
 Talents.talents_def.T_DEEPROCK_FORM.info = function(self, t)
 		local xs = ""

@@ -1,4 +1,4 @@
-﻿local Talents = require "engine.interface.ActorTalents"
+local Talents = require "engine.interface.ActorTalents"
 Talents.talents_def.T_INCINERATING_BLOWS.name = "焚尽强击"
 Talents.talents_def.T_INCINERATING_BLOWS.info = function(self, t)
 	return ([[恶 魔 空 间 的 力 量 注 入 你 的 武 器 ： 你 的 近 战 攻 击 在 3 回 合 内 造 成 %0.2f 点 火 焰 伤 害。

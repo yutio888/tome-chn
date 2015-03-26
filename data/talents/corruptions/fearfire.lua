@@ -1,4 +1,4 @@
-﻿local Talents = require "engine.interface.ActorTalents"
+local Talents = require "engine.interface.ActorTalents"
 Talents.talents_def.T_FEARSCAPE_SHIFT.name = "炼狱之门"
 Talents.talents_def.T_FEARSCAPE_SHIFT.info = function(self, t)
 	local damage = t.getDamage(self, t)

@@ -1,4 +1,4 @@
-﻿local Talents = require "engine.interface.ActorTalents"
+local Talents = require "engine.interface.ActorTalents"
 Talents.talents_def.T_ELDRITCH_BLOW.name = "奥术盾击"
 Talents.talents_def.T_ELDRITCH_INFUSION.name = "奥术充能"
 Talents.talents_def.T_ELDRITCH_FURY.name = "奥术连击"

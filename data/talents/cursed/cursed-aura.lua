@@ -1,4 +1,4 @@
-﻿local Talents = require "engine.interface.ActorTalents"
+local Talents = require "engine.interface.ActorTalents"
 local damDesc = Talents.main_env.damDesc
 local DamageType = require "engine.DamageType"
 
@@ -24,7 +24,7 @@ Talents.talents_def.T_DARK_GIFTS.info= function(self, t)
 		local level = math.min(4, self:getTalentLevelRaw(t))
 		local xs = t.curseBonusLevel(self,t)
 		return ([[你 的 诅 咒 带 来 黑 暗 的 礼 物。 解 锁 所 有 诅 咒 第 %d 层 效 果， 并 允 许 你 在 诅 咒 达 到 该 等 级 时 获 得 此 效 果。 
-		 在 等 级 5 时， 因 诅 咒 带 来 的 幸 运 惩 罚 降 到 1。
+		 在 等 级 5 时， 因 诅 咒 带 来 的 幸 运 惩 罚 降 到 1 。
 		 等 级 5 以 上 时 增 加 诅 咒 效 果 （ 当 前 增 加 %0.1f ）]]):
 		format(level, xs)
 	end

@@ -1,4 +1,4 @@
-﻿local Talents = require "engine.interface.ActorTalents"
+local Talents = require "engine.interface.ActorTalents"
 local damDesc = Talents.main_env.damDesc
 local DamageType = require "engine.DamageType"
 
@@ -31,8 +31,8 @@ Talents.talents_def.T_DREAMSCAPE.info= function(self, t)
 		local power = t.getPower(self, t)
 		return([[进 入 某 个 睡 眠 状 态 目 标 的 梦 境 中， 持 续 %d 回 合。 
 		 当 你 位 于 梦 境 空 间 中 时， 你 将 会 遇 到 目 标 无 敌 的 睡 眠 形 态， 每 4 回 合 它 会 制 造 出 1 个 梦 境 守 卫 来 保 护 它 的 心 灵。 
-		 除 非 目 标 激 活 了 清 晰 梦 境， 否 则 梦 境 守 卫 造 成 的 普 通 伤 害 只 有 50％。 
-		 当 梦 境 空 间 的 效 果 结 束 时， 你 每 摧 毁 一 个 梦 境 守 卫， 目 标 生 命 值 会 减 少 10％， 并 且 受 到 持 续 1 回 合 的 锁 脑 效 果（ 可 叠 加）。 
+		 除 非 目 标 激 活 了 清 晰 梦 境， 否 则 梦 境 守 卫 造 成 的 普 通 伤 害 只 有 50 ％。 
+		 当 梦 境 空 间 的 效 果 结 束 时， 你 每 摧 毁 一 个 梦 境 守 卫， 目 标 生 命 值 会 减 少 10 ％， 并 且 受 到 持 续 1 回 合 的 锁 脑 效 果（ 可 叠 加）。 
 		 在 梦 境 空 间 中 时， 你 的 伤 害 会 提 高 %d%% 。 
 		 受 精 神 强 度 影 响， 伤 害 增 益 有 额 外 加 成。]]):format(duration, power)
 	end

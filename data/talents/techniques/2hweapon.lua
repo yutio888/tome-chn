@@ -49,7 +49,7 @@ Talents.talents_def.T_SUNDER_ARMS.info= function(self, t)
 Talents.talents_def.T_BLOOD_FRENZY.name= "血之狂暴"
 Talents.talents_def.T_BLOOD_FRENZY.info= function(self, t)
 		return ([[进 入 血 之 狂 暴 状 态， 快 速 消 耗 体 力（ -4 体 力 / 回 合）。 每 次 你 在 血 之 狂 暴 状 态 下 杀 死 一 个 敌 人， 你 可 以 获 得 %d 物 理 强 度 增 益。 
-		每 回 合 增 益 减 2。]]):
+		每 回 合 增 益 减 2 。]]):
 		format(t.bonuspower(self,t))
 	end
 

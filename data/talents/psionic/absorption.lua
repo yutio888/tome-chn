@@ -150,7 +150,7 @@ Talents.talents_def.T_CHARGED_SHIELD.info= function(self, t)
 Talents.talents_def.T_FORCEFIELD.name= "超能力场"
 Talents.talents_def.T_FORCEFIELD.info= function(self, t)
 		return ([[用 力 场 环 绕 自 己 ，减 少 受 到 的 所 有 伤 害 %d%%
-		维 持 这 样 的 护 盾 代 价 非 常 昂 贵 ，开 启 时 每 回 合 叠 加 消 耗 5%%你 的 最 大 超 能 值 ，第 二 回 合 将 消 耗 10%%，依 次 递 增 。]]):
+		维 持 这 样 的 护 盾 代 价 非 常 昂 贵 ，开 启 时 每 回 合 叠 加 消 耗 5%% 你 的 最 大 超 能 值 ，第 二 回 合 将 消 耗 10%% ，依 次 递 增 。]]):
 		format(t.getResist(self,t))
 	end
 

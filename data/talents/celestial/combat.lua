@@ -18,7 +18,7 @@ Talents.talents_def.T_WAVE_OF_POWER.info= function(self, t)
 		local range = self:getTalentRange(t)
 		return ([[你 用 圣 光 释 放 一 次 近 程 打 击， 造 成 %d%% 武 器 伤 害。 
 		如 果 目 标 在 近 战 范 围 以 外 ， 有 一 定 几 率 进 行 二 次 打 击 ，造 成 %d%% 武 器 伤 害。
-		二 次 打 击 几 率 随 距 离 增 加 ， 距 离 2 时 为 %0.1f%% ， 距 离 最 大（%d）时 几 率  为%0.1f%%。
+		二 次 打 击 几 率 随 距 离 增 加 ， 距 离 2 时 为 %0.1f%% ， 距 离 最 大（%d）时 几 率  为%0.1f%% 。
 		受 力 量 影 响， 攻 击 距 离 有 额 外 加 成。]]):
 		format(t.getDamage(self, t)*100, t.getDamage(self, t, true)*100, t.SecondStrikeChance(self, t, 2), range,t.SecondStrikeChance(self, t, range))
 	end

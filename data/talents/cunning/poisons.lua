@@ -5,11 +5,11 @@ local DamageType = require "engine.DamageType"
 Talents.talents_def.T_VILE_POISONS.name= "涂毒"
 Talents.talents_def.T_VILE_POISONS.info= function(self, t)
 		return ([[你 学 会 如 何 在 近 战 武 器, 长 弓 和 投 石 索 的 弹 药  上 涂 毒。 每 等 级 你 将 会 学 到 新 的 毒 剂。 
-		 等 级 1： 致 命 毒 剂 
-		 等 级 2： 麻 木 毒 剂 
-		 等 级 3： 阴 险 毒 剂 
-		 等 级 4： 致 残 毒 剂 
-		 等 级 5： 石 化 毒 剂 
+		 等 级 1 ： 致 命 毒 剂 
+		 等 级 2 ： 麻 木 毒 剂 
+		 等 级 3 ： 阴 险 毒 剂 
+		 等 级 4 ： 致 残 毒 剂 
+		 等 级 5 ： 石 化 毒 剂 
 		 同 时 你 还 可 以 向 世 界 上 特 定 的 人 学 习 新 毒 剂。 
 		 同 时 提 高 你 %d%% 的 毒 素 效 果。（ 此 效 果 对 每 个 毒 剂 都 有 改 变） 
 		 在 你 的 武 器 上 涂 毒 不 会 打 破 潜 行 状 态。 

@@ -23,7 +23,7 @@ Talents.talents_def.T_EXPLOSION_EXPERT.name= "爆破专家"
 Talents.talents_def.T_EXPLOSION_EXPERT.info= function(self, t)
 		local min, max = t.minmax(self, t)
 		return ([[炼 金 炸 弹 的 爆 炸 半 径 现 在 增 加 %d 码。
-		 增 加 %d%%（ 地 形 开 阔 ） ～ %d%%（ 地 形 狭 窄 ） 爆 炸 伤 害。 ]]):
+		 增 加 %d%% （ 地 形 开 阔 ） ～ %d%% （ 地 形 狭 窄 ） 爆 炸 伤 害。 ]]):
 		format(t.getRadius(self, t), min*100, max*100) 
 	end
 Talents.talents_def.T_SHOCKWAVE_BOMB.name= "烈性炸弹"

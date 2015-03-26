@@ -1,4 +1,4 @@
-﻿local Talents = require "engine.interface.ActorTalents"
+local Talents = require "engine.interface.ActorTalents"
 Talents.talents_def.T_DWARVEN_HALF_EARTHEN_MISSILES.name = "岩石飞弹"
 Talents.talents_def.T_DWARVEN_HALF_EARTHEN_MISSILES.info = function(self, t)
 		local count = 2

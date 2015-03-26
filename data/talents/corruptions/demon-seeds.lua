@@ -96,7 +96,7 @@ Talents.talents_def.T_DEMON_SEED_DOOM_TENDRILS.info = function(self, t)
 Talents.talents_def.T_DEMON_SEED_DOOMED_NATURE.name = "自然末日"
 Talents.talents_def.T_DEMON_SEED_DOOMED_NATURE.info = function(self, t)
 		return ([[你 诅 咒 目 标 5 回 合 ，割 裂 其 与 自 然 的 联 系 。
-		 每 次 被 诅 咒 的 目 标 试 图 使 用 自 然 力 量 时 ，有 %d%%几 率 失 败 并 制 造 一 个 火 球 ，对 半 径 1 内 的 生 物 造 成 %0.2f 火 焰 伤 害 。
+		 每 次 被 诅 咒 的 目 标 试 图 使 用 自 然 力 量 时 ，有 %d%% 几 率 失 败 并 制 造 一 个 火 球 ，对 半 径 1 内 的 生 物 造 成 %0.2f 火 焰 伤 害 。
 		 伤 害 受 你 的 意 志 加 成 。]]):
 		format(t.getChance(self, t),  t.getDamage(self, t))
 	end
@@ -118,7 +118,7 @@ Talents.talents_def.T_DEMON_SEED_ACID_CONE.info = function(self, t)
 
 Talents.talents_def.T_DEMON_SEED_ARMOURED_LEVIATHAN.name = "重装上阵"
 Talents.talents_def.T_DEMON_SEED_ARMOURED_LEVIATHAN.info = function(self, t)
-		return ([[你 利 用 盾 牌 来 强 化 自 身 ，力 量 和 魔 法 增 加 10%%格 挡 值 ,持 续 %d 回 合 。]]):
+		return ([[你 利 用 盾 牌 来 强 化 自 身 ，力 量 和 魔 法 增 加 10%% 格 挡 值 ,持 续 %d 回 合 。]]):
 		format(t.getDuration(self, t))
 	end
 

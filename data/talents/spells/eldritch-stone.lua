@@ -1,4 +1,4 @@
-﻿local Talents = require "engine.interface.ActorTalents"
+local Talents = require "engine.interface.ActorTalents"
 Talents.talents_def.T_STONE_SPIKES.name = "岩石尖刺"
 Talents.talents_def.T_POISONED_SPIKES.name = "剧毒尖刺"
 Talents.talents_def.T_ELDRITCH_SPIKES.name = "奥术尖刺"

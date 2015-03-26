@@ -1,4 +1,4 @@
-﻿local Talents = require "engine.interface.ActorTalents"
+local Talents = require "engine.interface.ActorTalents"
 local damDesc = Talents.main_env.damDesc
 local DamageType = require "engine.DamageType"
 
@@ -10,7 +10,7 @@ Talents.talents_def.T_SLEEP.info= function(self, t)
 		local insomnia = t.getInsomniaPower(self, t)
 		return([[使 %d 码 半 径 范 围 内 的 目 标 陷 入 %d 回 合 的 睡 眠 状 态 中， 使 它 们 无 法 行 动。 它 们 每 承 受 %d 点 伤 害， 睡 眠 的 持 续 时 间 减 少 一 回 合。 
 		 当 睡 眠 结 束 时， 目 标 会 饱 受 失 眠 的 痛 苦， 持 续 回 合 等 于 已 睡 眠 的 回 合 数（ 但 最 多 10 回 合）， 失 眠 状 态 的 每 一 个 剩 余 回 合 数 会 让 目 标 获 得 %d%% 睡 眠 免 疫。 
-		 在 等 级 5 时， 睡 眠 会 具 有 传 染 性， 每 回 合 有 25％ 几 率 传 播 向 附 近 的 目 标。 
+		 在 等 级 5 时， 睡 眠 会 具 有 传 染 性， 每 回 合 有 25 ％ 几 率 传 播 向 附 近 的 目 标。 
 		 受 精 神 强 度 影 响， 伤 害 临 界 点 按 比 例 加 成。]]):format(radius, duration, power, insomnia)
 	end
 Talents.talents_def.T_LUCID_DREAMER.name= "清晰梦境"

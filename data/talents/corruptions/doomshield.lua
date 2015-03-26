@@ -1,4 +1,4 @@
-﻿local Talents = require "engine.interface.ActorTalents"
+local Talents = require "engine.interface.ActorTalents"
 Talents.talents_def.T_OSMOSIS_SHIELD.name = "渗透护盾"
 Talents.talents_def.T_OSMOSIS_SHIELD.info = function(self, t)
 		return ([[你 的 盾 牌 充 满 了 恶 魔 能 量 ，带 来 一 层 魔 法 护 盾 ，每 回 合 受 到 第 一 次 伤 害 时 给 予 你 持 续 3 回 合 的 治 疗 （基 于 格 挡 值 ），治 疗 效 果 可 以 叠 加 。

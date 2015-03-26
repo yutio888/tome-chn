@@ -190,9 +190,9 @@ Talents.talents_def.T_YEEK_ID.info= function(self, t)
 	end
 Talents.talents_def.T_OGRE_WRATH.name= "食人魔之怒"
 Talents.talents_def.T_OGRE_WRATH.info= function(self, t)
-		return ([[你 进 入 愤 怒 状 态 %d 回 合 ，获 得 20%%震 慑 和 定 身 免 疫 ，全 体 伤 害 增 加 10%%。
+		return ([[你 进 入 愤 怒 状 态 %d 回 合 ，获 得 20%% 震 慑 和 定 身 免 疫 ，全 体 伤 害 增 加 10%% 。
 		 同 时 ，每 当 你 攻 击 未 命 中 或 伤 害 被 护 盾 等 效 果 削 减 时 ，你 获 得 一 层 食 人 魔 之 怒 效 果 ，持 续 7 回 合 ，效 果 可 叠 加 至 最 多 5 层 。
-		 每 层 提 供 20%%暴 击 伤 害 和 5%%暴 击 率 。
+		 每 层 提 供 20%% 暴 击 伤 害 和 5%% 暴 击 率 。
 		 每 次 暴 击 时 减 少 一 层 食 人 魔 之 怒 效 果 。
 		 持 续 时 间 受 力 量 加 成 。]]):format(t.getduration(self))
 	end
@@ -202,12 +202,12 @@ Talents.talents_def.T_GRISLY_CONSTITUTION.info= function(self, t)
 		return ([[食 人 魔 的 身 体 对 法 术 和 符 文 亲 和 力 很 强 。
 		 增 加 %d 法 术 豁 免 ，增 加 纹 身 和 符 文 的 属 性 加 成 效 果 %d%% 。
 		 技 能 等 级 5 时 ，你 的 身 体 变 得 如 此 强 壮 ，能 在 主 手 持 有 双 手 武 器 的 同 时 ，副 手 持 有 其 他 副 手 武 器 。
-		 这 样 做 的 话 ，你 的 物 理 法 术 精 神 强 度 会 下 降 20%%，体 型 超 过 'Big'时 ，每 增 加 一 体 型 ，惩 罚 减 少 5%%。同 时 你 的 副 手 武 器 附 加 伤 害 减 少 50%%。]]):
+		 这 样 做 的 话 ，你 的 物 理 法 术 精 神 强 度 会 下 降 20%% ，体 型 超 过 'Big'时 ，每 增 加 一 体 型 ，惩 罚 减 少 5%% 。同 时 你 的 副 手 武 器 附 加 伤 害 减 少 50%% 。]]):
 		format(t.getSave(self, t), t.getMult(self, t) * 100)
 	end
 Talents.talents_def.T_SCAR_SCRIPTED_FLESH.name = "血肉伤痕"
 Talents.talents_def.T_SCAR_SCRIPTED_FLESH.info= function(self, t)
-		return ([[每 次 暴 击 时 有 %d%%几 率 减 少 随 机 一 个 纹 身 或 符 文 1 回 合 冷 却 时 间 ，或 减 少 符 文 紊 乱 或 纹 身 紊 乱 1 回 合 持 续 时 间 。
+		return ([[每 次 暴 击 时 有 %d%% 几 率 减 少 随 机 一 个 纹 身 或 符 文 1 回 合 冷 却 时 间 ，或 减 少 符 文 紊 乱 或 纹 身 紊 乱 1 回 合 持 续 时 间 。
 		 该 效 果 每 回 合 最 多 触 发 一 次 。]]):
 		format(t.getChance(self, t))
 	end

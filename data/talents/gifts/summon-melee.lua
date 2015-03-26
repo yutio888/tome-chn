@@ -1,4 +1,4 @@
-﻿local Talents = require "engine.interface.ActorTalents"
+local Talents = require "engine.interface.ActorTalents"
 local damDesc = Talents.main_env.damDesc
 local DamageType = require "engine.DamageType"
 
@@ -19,7 +19,7 @@ Talents.talents_def.T_JELLY.info= function(self, t)
 		return ([[召 唤 1 只 果 冻 怪 来 攻 击 敌 人， 持 续 %d 回 合。 
 		 果 冻 怪 不 会 移 动。 
 		 它 拥 有 %d 点 体 质 和 %d 点 力 量。 
-		 每 当 果 冻 怪 受 到 伤 害 时， 你 降 低 等 同 于 它 受 到 伤 害 值 的 10％ 失 衡 值。 
+		 每 当 果 冻 怪 受 到 伤 害 时， 你 降 低 等 同 于 它 受 到 伤 害 值 的 10 ％ 失 衡 值。 
 		 你 的 召 唤 物 继 承 你 部 分 属 性： 增 加 百 分 比 伤 害、 震 慑 / 定 身 / 混 乱 / 致 盲 抵 抗 和 护 甲 穿 透。 
 		 受 精 神 强 度 影 响， 果 冻 怪 的 体 质 有 额 外 加 成。]])
 		:format(t.summonTime(self, t), incStats.con, incStats.str)

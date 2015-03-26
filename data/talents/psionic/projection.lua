@@ -98,7 +98,7 @@ Talents.talents_def.T_CHARGED_AURA.info= function(self, t)
 		 如 果 你 的 灵 能 武 器 槽 佩 戴 的 是 宝 石 或 灵 晶 ，会 对 所 有 接 近 的 目 标 造 成 %0.1f 的 闪 电 伤 害 。
 		 电 能 光 环 造 成 的 伤 害 会 吸 收 能 量 ，每 造 成 %0.1f 点 伤 害 吸 收 一 点 能 量 。
 		 如 果 你 的 灵 能 武 器 槽 佩 戴 的 是 武 器 ，每 次 攻 击 附 加 %0.1f 的 闪 电 伤 害 。
-		 当 关 闭 该 技 能 时 ，如 果 你 拥 有 最 少 %d 点 能 量 ，巨 大 的 电 能 会 释 放 为 在 最 多 %d 个 邻 近 目 标 间 跳 跃 的 闪 电 ，对 每 个 目 标 造 成 %0.1f 的 闪 电 伤 害 ，且 50%%的 概 率 令 他 们 眩 晕 。
+		 当 关 闭 该 技 能 时 ，如 果 你 拥 有 最 少 %d 点 能 量 ，巨 大 的 电 能 会 释 放 为 在 最 多 %d 个 邻 近 目 标 间 跳 跃 的 闪 电 ，对 每 个 目 标 造 成 %0.1f 的 闪 电 伤 害 ，且 50%% 的 概 率 令 他 们 眩 晕 。
 		#{bold#激 活 光 环 是 不 消 耗 时 间 的 ，但 是 关 闭 它 则 需 要 消 耗 时 间 。#{normal#
 		 如 果 要 关 闭 光 环 且 不 发 射 射 线 ，关 闭 它 并 选 择 你 自 己 为 目 标 。伤 害 随 着 精 神 强 度 而 增 长 。]]):
 		format(damDesc(self, DamageType.LIGHTNING, dam), mast, damDesc(self, DamageType.LIGHTNING, dam), spikecost, nb, damDesc(self, DamageType.LIGHTNING, spikedam))

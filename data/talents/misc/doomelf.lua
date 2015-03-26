@@ -1,4 +1,4 @@
-﻿local Talents = require "engine.interface.ActorTalents"
+local Talents = require "engine.interface.ActorTalents"
 Talents.talents_def.T_HASTE_OF_THE_DOOMED.name = "加速"
 Talents.talents_def.T_HASTE_OF_THE_DOOMED.info = function(self, t)
 		local v = t.getPower(self, t)
@@ -19,11 +19,11 @@ Talents.talents_def.T_RESILIENCE_OF_THE_DOOMED.info =  function(self, t)
 Talents.talents_def.T_CORRUPTION_OF_THE_DOOMED.name = "腐化"
 Talents.talents_def.T_CORRUPTION_OF_THE_DOOMED.info = function(self, t)
 		return ([[你 原 本 的 隐 身 技 能 被 腐 化 扭 曲 了 。
-		 当 你 受 到 一 次 伤 害 超 过 10%%总 生 命 值 时 ，有 %d%% 几 率 转 变 成 多 瑟 顿 形 态 5 回 合 。
+		 当 你 受 到 一 次 伤 害 超 过 10%% 总 生 命 值 时 ，有 %d%% 几 率 转 变 成 多 瑟 顿 形 态 5 回 合 。
 		 在 多 瑟 顿 形 态 下 ：
 		-  你 获 得 永 久 潜 行 (强 度 %d )
 		-  你 的 暗 影 伤 害 增 加 %d%%
-		-  每 当 你 造 成 超 过 %d 点 的 非 物 理 非 精 神 伤 害 时 ，在 半 径 1 的 范 围 内 产 生 一 次 暗 影 爆 炸 ，造 成 额 外 50%%伤 害 （每 回 合 至 多 1 次 ）。
+		-  每 当 你 造 成 超 过 %d 点 的 非 物 理 非 精 神 伤 害 时 ，在 半 径 1 的 范 围 内 产 生 一 次 暗 影 爆 炸 ，造 成 额 外 50%% 伤 害 （每 回 合 至 多 1 次 ）。
 		-  变 形 时 重 置 种 族 技 能 “加 速 ”与 种 族 技 能 “无 情 ”
 		]]):
 		format(t.getChance(self, t), t.getStealth(self, t), t.getDarkness(self, t), t.getThreshold(self, t))

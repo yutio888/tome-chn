@@ -35,8 +35,8 @@ Talents.talents_def.T_HAYMAKER.info= function(self, t)
 		local maxDamage = damage * 2
 		local stamina = t.getStamina(self, t, 0)/self.max_stamina*100
 		local staminamax = t.getStamina(self, t, 5)/self.max_stamina*100
-		return ([[一 次 强 烈 的 终 结 追 击， 对 目 标 造 成 %d%% 伤 害， 每 1 点 连 击 点 额 外 造 成 20%% 的 伤 害 ，至多%d%%。 
-		如 果 目 标 生 命 低 于 20%%， 则 会 被 立 刻 杀 死。 
+		return ([[一 次 强 烈 的 终 结 追 击， 对 目 标 造 成 %d%% 伤 害， 每 1 点 连 击 点 额 外 造 成 20%% 的 伤 害 ，至多%d%% 。 
+		如 果 目 标 生 命 低 于 20%% ， 则 会 被 立 刻 杀 死。 
 		用 此 技 能 杀 死 目 标 会 立 刻 回 复 你 %d%% 到 %d%% 最 大 体 力 值（ 由 你 的 连 击 点 数 决 定）。 
 		使 用 此 技 能 会 消 耗 当 前 所 有 连 击 点。]])
 		:format(damage, maxDamage, stamina, staminamax)

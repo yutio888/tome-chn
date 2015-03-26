@@ -24,7 +24,7 @@ Talents.talents_def.T_SUN_VENGEANCE.info= function(self, t)
 		local chance = t.getProcChance(self, t)
 		return ([[让 阳 光 的 怒 火 充 满 自 身 ， 增 加 %d%% 物 理 和 法 术暴 击 率。
 		 每 次 物 理 或 法 术 暴 击  时 ，有 %d%% 几 率 获 得 阳 光 之 怒 效 果 ， 持 续 两 回 合 。
-		 当 效 果 激 活 时 ， 你 的 阳 光 烈 焰 变 为 瞬 发 ， 同 时 伤 害 增 加25%%。 
+		 当 效 果 激 活 时 ， 你 的 阳 光 烈 焰 变 为 瞬 发 ， 同 时 伤 害 增 加25%% 。 
 		 如 果 阳 光 烈 焰 处 于 冷 却 中， 则 减 少 1 回 合 冷 却 时间 。 
 		 该 效 果 一 回 合 至 多 触 发一 次 。 ]]):
 		format(crit, chance)

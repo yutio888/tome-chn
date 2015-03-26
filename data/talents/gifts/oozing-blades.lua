@@ -11,9 +11,9 @@ Talents.talents_def.T_OOZEBEAM.info= function(self, t)
 	end
 Talents.talents_def.T_NATURAL_ACID.name= "自然酸化"
 Talents.talents_def.T_NATURAL_ACID.info= function(self, t)
-		return ([[ 你 的 自 然 抗 性 增 加 %d%%。
-		 当 你 造 成 酸 性 伤 害 时 ， 你 的 自 然 伤 害 增 加 %0.1f%%， 持 续 %d 回 合。
-		 伤 害 加 成 能 够 积 累 到 最 多 4 倍 （ 1 回 合 至 多 触 发 1 次 ） ， 最 大 值 %0.1f%%。
+		return ([[ 你 的 自 然 抗 性 增 加 %d%% 。
+		 当 你 造 成 酸 性 伤 害 时 ， 你 的 自 然 伤 害 增 加 %0.1f%% ， 持 续 %d 回 合。
+		 伤 害 加 成 能 够 积 累 到 最 多 4 倍 （ 1 回 合 至 多 触 发 1 次 ） ， 最 大 值 %0.1f%% 。
 		 受 精 神 强 度 影 响 ， 抗 性 和 伤 害 加 成 有 额 外 加 成 。]]):
 		format(t.getResist(self, t), t.getNatureDamage(self, t, 1), t.getDuration(self, t), t.getNatureDamage(self, t, 5))
 	end

@@ -25,7 +25,7 @@ Talents.talents_def.T_SUPERCHARGE_GOLEM.info= function(self, t)
 Talents.talents_def.T_RUNIC_GOLEM.name= "符文傀儡"
 Talents.talents_def.T_RUNIC_GOLEM.info= function(self, t)
 		return ([[增 加 傀 儡 %0.2f 生 命、 法 力 和 耐 力 回 复。 
-		 在 等 级 1、 3、 5 时， 傀 儡 会 增 加 1 个 新 的 符 文 孔。 
+		 在 等 级 1 、 3 、 5 时， 傀 儡 会 增 加 1 个 新 的 符 文 孔。 
 		 即 使 没 有 此 天 赋， 傀 儡 默 认 也 有 3 个 符 文 孔。]]):
 		format(self:getTalentLevelRaw(t))
 	end

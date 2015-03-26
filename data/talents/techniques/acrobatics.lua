@@ -20,8 +20,8 @@ Talents.talents_def.T_SKIRMISHER_TRAINED_REACTIONS.info= function(self, t)
 		local reduce = t.getReduction(self, t)
 		local cost = t.stamina_per_use(self, t) * (1 + self:combatFatigue() * 0.01)
 		return ([[当 这 个 技 能 被 激 活 的 时 候， 你 能 够 预 见 到 致 命 的 伤 害。
-		每 当 你 遭 受 一 次 大 于 %d%%生 命 值 的 攻 击 时， 你 闪 身 躲 避 这 个 攻 击 并 摆 出 防 御 姿 势。
-		这 个 技 能 降 低 本 次 伤 害 和 接 下 来 本 回 合 的 所 有 伤 害 %d%%。
+		每 当 你 遭 受 一 次 大 于 %d%% 生 命 值 的 攻 击 时， 你 闪 身 躲 避 这 个 攻 击 并 摆 出 防 御 姿 势。
+		这 个 技 能 降 低 本 次 伤 害 和 接 下 来 本 回 合 的 所 有 伤 害 %d%% 。
 		你 需 要 %0.1f 体 力 和 相 邻 的 无 人 空 地 来 触 发 技 能 效 果 （ 尽 管 你 不 会 因 为 躲 避 而 移 动） 。]])
 		:format(trigger, reduce, cost)
 	end
@@ -29,7 +29,7 @@ Talents.talents_def.T_SKIRMISHER_SUPERB_AGILITY.name= "身轻如燕"
 Talents.talents_def.T_SKIRMISHER_SUPERB_AGILITY.info= function(self, t)
 		return ([[你 使 用 杂 耍 系 技 能 更 加 得 心 应 手， 降 低 撑 杆 跳、 翻 滚 和 求 生 本 能 的 冷 却 时 间 %d 回 合， 降 低 技 能 的 体 力 消 耗 %0.1f 。
 		在 等 级 3 时， 每 当 求 生 本 能 触 发， 你 获 得 10%%  的 全 局 速 度 1 回 合。
-		在 等 级 5 时， 速 度 加 成 变 为 20%%， 持 续 2 回 合。]])
+		在 等 级 5 时， 速 度 加 成 变 为 20%% ， 持 续 2 回 合。]])
 		:format(t.cooldown_bonus(self, t), t.stamina_bonus(self, t))
 	end
 

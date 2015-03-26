@@ -44,7 +44,7 @@ Talents.talents_def.T_IMPLODE.name= "碎骨压制"
 Talents.talents_def.T_IMPLODE.info= function(self, t)
 		local dur = t.getDuration(self, t)
 		local dam = t.getDamage(self, t)
-		return ([[用 粉 碎 骨 头 的  力 量 紧 紧 锁 住 目 标 ， 定 身 并 减 速 目 标 50%%， 持 续  %d 回 合 ， 每 回 合 造 成 %0.1f 物 理 伤 害。
+		return ([[用 粉 碎 骨 头 的  力 量 紧 紧 锁 住 目 标 ， 定 身 并 减 速 目 标 50%% ， 持 续  %d 回 合 ， 每 回 合 造 成 %0.1f 物 理 伤 害。
 		受 精 神 强 度 影 响， 持 续 时 间 和 伤 害 有 额 外 加 成。]]):format(dur, damDesc(self, DamageType.PHYSICAL, dam))
 	end
 

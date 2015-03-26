@@ -1,4 +1,4 @@
-﻿local Talents = require "engine.interface.ActorTalents"
+local Talents = require "engine.interface.ActorTalents"
 Talents.talents_def.T_DRAINING_ASSAULT.name = "汲魂痛击"
 Talents.talents_def.T_DRAINING_ASSAULT.info = function(self, t)
 	return ([[对 目 标 攻 击 两 次 ， 每 次 造 成 %d%% 武 器 伤 害 , 吸 取 %d%% 的 伤 害 回 复 生 命 ， 同 时 每 次 击 中 均 回 复 %d 活 力 。]]):format(100 * t.getHit(self, t), t.lifeSteal(self, t), t.vimSteal(self, t))

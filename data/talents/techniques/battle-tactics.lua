@@ -29,7 +29,7 @@ Talents.talents_def.T_TRUE_GRIT.info= function(self, t)
 		return ([[采 取 一 个 防 守 姿 态 并 抵 抗 敌 人 的 猛 攻.
 		当 你 受 伤 后 ， 你 获 得 相 当 于 %d%% 损 失 生 命 值 百 分 比 的 全 体 伤 害 抗 性。
 		例 如：当你 损 失 70%% 生 命 时 获 得 %d%% 抗 性。
-		同 时，你 的 全 体 伤 害 抗 性 上 限 相 比 于 100%% 差 距 将 减 少 %0.1f%%。
+		同 时，你 的 全 体 伤 害 抗 性 上 限 相 比 于 100%% 差 距 将 减 少 %0.1f%% 。
 		每 回 合 体 力 值 %d 。
 		效 果 在 每 回 合 开 始 时 刷 新。]]):
 		format(resistC, resistC*0.7, t.getCapApproach(self, t)*100, drain)

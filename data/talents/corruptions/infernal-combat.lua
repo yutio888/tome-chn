@@ -1,4 +1,4 @@
-﻿local Talents = require "engine.interface.ActorTalents"
+local Talents = require "engine.interface.ActorTalents"
 Talents.talents_def.T_FLAME_LEASH.name = "火焰束缚"
 Talents.talents_def.T_FLAME_LEASH.info = function(self, t)
 		return ([[火 焰 触 须 从 你 的 手 中 伸 出 ，在 锥 形 范 围 内 伸 展 。

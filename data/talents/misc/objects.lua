@@ -55,11 +55,11 @@ Talents.talents_def.T_BLOOM_HEAL.info= function(self, t)
 	end
 Talents.talents_def.T_DESTROY_MAGIC.name= "禁魔"
 Talents.talents_def.T_DESTROY_MAGIC.info= function(self, t)
-		return ([[ 目 标 有 %d%% 概 率（ 最 大 叠 加 至 %d%%） 施 法 失 败 率。 等 级 2 时 魔 法 效 果 可 能 会 被 打 断 。 等 级 3 时 持 续 性 法 术 可 能 会 被 打 断 。 等 级 5 时 魔 法 生 物 和 不 死 族 可 能 会 被 震 慑。 ]]):format(t.getpower(self, t),t.maxpower(self,t))
+		return ([[ 目 标 有 %d%% 概 率（ 最 大 叠 加 至 %d%% ） 施 法 失 败 率。 等 级 2 时 魔 法 效 果 可 能 会 被 打 断 。 等 级 3 时 持 续 性 法 术 可 能 会 被 打 断 。 等 级 5 时 魔 法 生 物 和 不 死 族 可 能 会 被 震 慑。 ]]):format(t.getpower(self, t),t.maxpower(self,t))
 	end
 Talents.talents_def.T_BATTLE_TRANCE.name= "战意勃发"
 Talents.talents_def.T_BATTLE_TRANCE.info= function(self, t)
-		return ([[ 你 进 入 了 战 斗 狂 热 状 态， 获 得 15％ 全 体 伤 害 抗 性， 减 少 15 点 精 神 强 度 并 获 得 20 点 精 神 豁 免。 技 能 激 活 5 回 合 后 ， 每 回 合 你 都 有 一 定 几 率 疲 劳 ， 终 止 技 能 并 进 入 混 乱 状 态。 ]])
+		return ([[ 你 进 入 了 战 斗 狂 热 状 态， 获 得 15 ％ 全 体 伤 害 抗 性， 减 少 15 点 精 神 强 度 并 获 得 20 点 精 神 豁 免。 技 能 激 活 5 回 合 后 ， 每 回 合 你 都 有 一 定 几 率 疲 劳 ， 终 止 技 能 并 进 入 混 乱 状 态。 ]])
 	end
 Talents.talents_def.T_SOUL_PURGE.name= "解放灵魂"
 Talents.talents_def.T_SOUL_PURGE.info= function(self, t)

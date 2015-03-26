@@ -16,7 +16,7 @@ Talents.talents_def.T_ICE_SHARDS.info= function(self, t)
 		local damage = t.getDamage(self, t)
 		return ([[向 指 定 地 点 的 目 标 射 出 寒 冰 箭。 每 根 寒 冰 箭 %s 并 造 成 %0.2f 冰 系 伤 害， 对 目 标 附 近 单 位 同 样 造 成 伤 害。 
 		 此 法 术 不 会 伤 害 施 法 者。 
-		 如 果 目 标 处 于 湿 润 状 态 ， 伤 害 增 加 30%%， 同 时 冰 冻  率 上 升 至 50%% 。
+		 如 果 目 标 处 于 湿 润 状 态 ， 伤 害 增 加 30%% ， 同 时 冰 冻  率 上 升 至 50%% 。
 		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成。]]):
 		format(necroEssenceDead(self, true) and " 影 响 路 径 上 所 有 敌 人 " or "缓 慢 移 动", damDesc(self, DamageType.COLD, damage))
 	end

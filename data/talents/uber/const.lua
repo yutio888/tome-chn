@@ -1,4 +1,4 @@
-﻿
+
 
 
 
@@ -20,12 +20,12 @@
 uberTalent{
 	name = "Draconic Body"
 	info= function(self, t)
-		return ([[你 的 身 体 如 龙 般 坚 固， 当 生 命 值 下 降 到 30％ 以 下 时， 恢 复 40％ 的 最 大 生 命 值。  ]])
+		return ([[你 的 身 体 如 龙 般 坚 固， 当 生 命 值 下 降 到 30 ％ 以 下 时， 恢 复 40 ％ 的 最 大 生 命 值。  ]])
 		:format()
 	end
 name = "Bloodspring"
 	info= function(self, t)
-		return ([[当 敌 人 的 单 次 攻 击 造 成 超 过 你 15%% 总 生 命 值 伤 害 时， 产 生 持 续 4 回 合 的 血 之 狂 潮， 造 成 %0.2f 枯 萎 伤 害 并 治 疗 你 相 当 于 50％ 伤 害 值 的 生 命， 同 时 击 退 敌 人。 
+		return ([[当 敌 人 的 单 次 攻 击 造 成 超 过 你 15%% 总 生 命 值 伤 害 时， 产 生 持 续 4 回 合 的 血 之 狂 潮， 造 成 %0.2f 枯 萎 伤 害 并 治 疗 你 相 当 于 50 ％ 伤 害 值 的 生 命， 同 时 击 退 敌 人。 
 		 受 体 质 影 响， 伤 害 有 额 外 加 成。  ]])
 		:format(100 + self:getCon() * 3)
 	end
@@ -41,7 +41,7 @@ name = "Never Stop Running"
 	end
 name = "Armour of Shadows"
 	info= function(self, t)
-		return ([[你 懂 得 如 何 融 入 阴 影， 当 你 站 在 黑 暗 地 形 上 时 将 增 加 %d 点 护 甲 和 50％ 护 甲 韧 性。 同 时， 你 造 成 的 暗 影 伤 害 会 使 你 当 前 所 在 区 域 和 目 标 区 域 陷 入 黑 暗。  
+		return ([[你 懂 得 如 何 融 入 阴 影， 当 你 站 在 黑 暗 地 形 上 时 将 增 加 %d 点 护 甲 和 50 ％ 护 甲 韧 性。 同 时， 你 造 成 的 暗 影 伤 害 会 使 你 当 前 所 在 区 域 和 目 标 区 域 陷 入 黑 暗。  
 		 受 体 质 影 响, 护 甲 加 值 有 额 外 加 成。]])
 		:format(t.ArmourBonus(self,t))
 	end

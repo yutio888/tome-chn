@@ -1,4 +1,4 @@
-﻿local Talents = require "engine.interface.ActorTalents"
+local Talents = require "engine.interface.ActorTalents"
 Talents.talents_def.T_STONESHIELD.name = "岩石坚盾"
 Talents.talents_def.T_STONESHIELD.info = function(self, t)
 		local m, mm, e, em = t.getValues(self, t)

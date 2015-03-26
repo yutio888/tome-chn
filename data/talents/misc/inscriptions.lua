@@ -1,4 +1,4 @@
-﻿
+
 
 
 
@@ -137,7 +137,7 @@ name = "Rune: Phase Door"
 		local data = self:getInscriptionData(t.short_name)
 		local power = (data.power or data.range) + data.inc_stat * 3
 		return ([[激 活 这 个 符 文 会 使 你 在 %d 码 范 围 内 随 机 传 送。 
-		 之 后 ， 你 会 出 入 现 实 空 间 % d 回 合 ， 所 有 新 的 负 面 状 态 持 续 时 间 减 少 %d%% ， 闪 避 增 加 %d ， 全 体 伤 害 抗 性 增 加 %d%%。 ]]):
+		 之 后 ， 你 会 出 入 现 实 空 间 % d 回 合 ， 所 有 新 的 负 面 状 态 持 续 时 间 减 少 %d%% ， 闪 避 增 加 %d ， 全 体 伤 害 抗 性 增 加 %d%% 。 ]]):
 		format(data.range + data.inc_stat, data.dur or 3, power, power, power)
 	end
 name)
@@ -181,7 +181,7 @@ name = "Rune: Invisibility"
 	info= function(self, t)
 		local data = self:getInscriptionData(t.short_name)
 		return ([[激 活 这 个 符 文 使 你 变 得 隐 形（ %d 隐 形 等 级） 持 续 %d 回 合。 
-		 由 于 你 的 隐 形 使 你 从 现 实 相 位 中 脱 离， 你 的 所 有 伤 害 降 低 40%%。 
+		 由 于 你 的 隐 形 使 你 从 现 实 相 位 中 脱 离， 你 的 所 有 伤 害 降 低 40%% 。 
 		]]):format(data.power + data.inc_stat, data.dur)
 	end
 name)

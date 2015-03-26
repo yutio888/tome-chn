@@ -1,4 +1,4 @@
-﻿local Talents = require "engine.interface.ActorTalents"
+local Talents = require "engine.interface.ActorTalents"
 local damDesc = Talents.main_env.damDesc
 local DamageType = require "engine.DamageType"
 
@@ -6,9 +6,9 @@ Talents.talents_def.T_FORGE_SHIELD.name= "熔炉屏障"
 Talents.talents_def.T_FORGE_SHIELD.info= function(self, t)
 		local power = t.getPower(self, t)
 		local dur = t.getDuration(self, t)
-		return ([[当 你 将 要 承 受 一 次 超 过 15％ 最 大 生 命 值 的 攻 击 时， 你 会 锻 造 一 个 熔 炉 屏 障 来 保 护 自 己， 减 少 %0.2f 点 所 有 该 类 型 攻 击 伤 害 于 下 %d 回 合。 
-		 熔 炉 屏 障 能 够 同 时 格 挡 多 种 类 型 的 伤 害， 但 是 每 一 种 已 拥 有 的 格 挡 类 型 会 使 伤 害 临 界 点 上 升 15％。
-		 如 果 你 完 全 格 挡 了 某 一 攻 击 者 的 伤 害， 则 此 攻 击 者 受 到 持 续 1 回 合 的 反 击 DEBUFF（ 200％ 普 通 近 身 或 远 程 伤 害）。 
+		return ([[当 你 将 要 承 受 一 次 超 过 15 ％ 最 大 生 命 值 的 攻 击 时， 你 会 锻 造 一 个 熔 炉 屏 障 来 保 护 自 己， 减 少 %0.2f 点 所 有 该 类 型 攻 击 伤 害 于 下 %d 回 合。 
+		 熔 炉 屏 障 能 够 同 时 格 挡 多 种 类 型 的 伤 害， 但 是 每 一 种 已 拥 有 的 格 挡 类 型 会 使 伤 害 临 界 点 上 升 15 ％。
+		 如 果 你 完 全 格 挡 了 某 一 攻 击 者 的 伤 害， 则 此 攻 击 者 受 到 持 续 1 回 合 的 反 击 DEBUFF（ 200 ％ 普 通 近 身 或 远 程 伤 害）。 
 		 在 等 级 5 时， 格 挡 效 果 将 持 续 2 回 合。 
 		 受 精 神 强 度 影 响， 格 挡 值 按 比 例 加 成。]]):format(power, dur)
 	end
@@ -19,7 +19,7 @@ Talents.talents_def.T_FORGE_BELLOWS.info= function(self, t)
 		local duration = t.getDuration(self, t)
 		local forge_damage = t.getForgeDamage(self, t)/2
 		return ([[将 梦 之 熔 炉 的 风 箱 打 开， 朝 向 你 的 四 周， 对 锥 形 范 围 内 敌 人 造 成 %0.2f 精 神 伤 害， %0.2f 燃 烧 伤 害 并 造 成 击 退 效 果。 锥 型 范 围 的 半 径 为 %d 码 。
-		 空 旷 的 地 面 有 50％ 几 率 转 化 为 持 续 %d 回 合 的 熔 炉 外 壁。 熔 炉 外 壁 阻 挡 移 动， 并 对 周 围 敌 人 造 成 %0.2f 的 精 神 伤 害 和 %0.2f 的 火 焰 伤 害。 
+		 空 旷 的 地 面 有 50 ％ 几 率 转 化 为 持 续 %d 回 合 的 熔 炉 外 壁。 熔 炉 外 壁 阻 挡 移 动， 并 对 周 围 敌 人 造 成 %0.2f 的 精 神 伤 害 和 %0.2f 的 火 焰 伤 害。 
 		 受 精 神 强 度 影 响， 伤 害 和 击 退 几 率 按 比 例 加 成。]]):
 		format(damDesc(self, DamageType.MIND, blast_damage), damDesc(self, DamageType.FIRE, blast_damage), radius, duration, damDesc(self, DamageType.MIND, forge_damage), damDesc(self, DamageType.FIRE, forge_damage))
 	end

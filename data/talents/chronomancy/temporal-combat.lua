@@ -68,7 +68,7 @@ Talents.talents_def.T_WEAPON_MANIFOLD.info =  function(self, t)
 		return ([[你 现 在 有 %d%% 几 率 将 命 运 、重 力 或 扭 曲 之 力 折 叠 进 你 的 武 器 。
 		 命 运 ：半 径 %d 内 造 成 %0.2f 时 空 伤 害 ，并 降 低 %d%% 物 理 和 时 空 抗 性 。
 		 扭 曲 ：半 径 %d 内 造 成 %0.2f 物 理 %0.2f 时 空 伤 害 ，并 可 能 震 慑 、致 盲 、混 乱 或 者 定 身 %d 回 合 。
-		 重 力 ：半 径 %d 内 造 成 %0.2f 物 理 伤 害 ，并 减 速 （%d%% ）%d 回 合 。
+		 重 力 ：半 径 %d 内 造 成 %0.2f 物 理 伤 害 ，并 减 速 （ %d%% ） %d 回 合 。
 		 每 项 效 果 有 8 回 合 冷 却 时 间 。
 		 当 处 于 冷 却 中 的 效 果 被 触 发 时 ，将 减 少 另 外 两 个 效 果 的 冷 却 1 回 合 。]])
 			:format(chance, damDesc(self, DamageType.TEMPORAL, damage), radius, resists, duration, damDesc(self, DamageType.PHYSICAL, damage/2), damDesc(self, DamageType.TEMPORAL, damage/2), radius,

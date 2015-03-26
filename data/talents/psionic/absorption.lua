@@ -123,7 +123,7 @@ Talents.talents_def.T_KINETIC_SHIELD.info= function(self, t)
 		local absorb = 100*getEfficiency(self,t)
 		return ([[用 护 盾 环 绕 自 己 ，吸 收  %d%%  物 理 、酸 性 、自 然 、时 空 伤 害 ，每 次 最 多 吸 收 %d 伤 害 。
 		每 次 你 的 护 盾 吸 收 伤 害 时，将 部 分 伤 害 转 化 为 能 量 ，获 得 两 点 超 能 力 值 ，每 吸 收 %0.1f 点 伤 害 额 外 增 加 一 点 超 能 力 值 ，每 回 合 最 多 增 加 %0.1f 点 超 能 力 值 。
-		等 级 3 时 ，  当 你 关 掉 护 盾 ，前 3 回 合 内 吸 收 的 全 部 伤 害 值 的 两 倍 将 被 释 放 成 为 一 个 完 整 的 超 能 力 护 盾 （吸 收 完 整 伤 害 ）
+		等 级 3 时 ， 当 你 关 掉 护 盾 ，前 3 回 合 内 吸 收 的 全 部 伤 害 值 的 两 倍 将 被 释 放 成 为 一 个 完 整 的 超 能 力 护 盾 （吸 收 完 整 伤 害 ）
 		护 盾 的 吸 收 值 和 获 得 超 能 力 值 的 效 率 随 精 神 强 度 增 强 。]]):
 		format(absorb, s_str, shieldMastery(self, t), maxPsiAbsorb(self,t))
 	end
@@ -133,7 +133,7 @@ Talents.talents_def.T_THERMAL_SHIELD.info= function(self, t)
 		local absorb = 100*getEfficiency(self,t)
 		return ([[用 护 盾 环 绕 自 己 ，吸 收  %d%%  火 焰 、寒 冷 、光 系 、奥 术 伤 害 ，每 次 最 多 吸 收 %d 伤 害 。
 		每 次 你 的 护 盾 吸 收 伤 害 时，将 部 分 伤 害 转 化 为 能 量 ，获 得 两 点 超 能 力 值 ，每 吸 收 %0.1f 点 伤 害 额 外 增 加 一 点 超 能 力 值 ，每 回 合 最 多 增 加 %0.1f 点 超 能 力 值 。
-		等 级 3 时 ，  当 你 关 掉 护 盾 ，前 3 回 合 内 吸 收 的 全 部 伤 害 值 的 两 倍 将 被 释 放 成 为 一 个 完 整 的 超 能 力 护 盾 （吸 收 完 整 伤 害 ）
+		等 级 3 时 ， 当 你 关 掉 护 盾 ，前 3 回 合 内 吸 收 的 全 部 伤 害 值 的 两 倍 将 被 释 放 成 为 一 个 完 整 的 超 能 力 护 盾 （吸 收 完 整 伤 害 ）
 		护 盾 的 吸 收 值 和 获 得 超 能 力 值 的 效 率 随 精 神 强 度 增 强 。]]):
 		format(absorb, s_str, shieldMastery(self, t), maxPsiAbsorb(self,t))
 	end
@@ -143,7 +143,7 @@ Talents.talents_def.T_CHARGED_SHIELD.info= function(self, t)
 		local absorb = 100*getEfficiency(self,t)
 		return ([[用 护 盾 环 绕 自 己 ，吸 收  %d%%  闪 电 、枯 萎 、暗 影 、精 神 伤 害  , 每 次 最 多 吸 收 %d 伤 害 。
 每 次 你 的 护 盾 吸 收 伤 害 ，将 其 部 分 转 化 为 能 量 ，获 得 两 点 能 量 ，每 吸 收 %0.1f 点 伤 害 额 外 增 加 一 点 能 量 ，每 回 合 最 多 增 加 %0.1f 点 能 量 。
-等 级 3 时 ，  当 你 关 掉 护 盾 ，前 3 回 合 内 吸 收 的 全 部 伤 害 两 倍 将 被 释 放 成 为 一 个 完 整 的 超 能 力 护 盾 （吸 收 完 整 伤 害 ）
+等 级 3 时 ， 当 你 关 掉 护 盾 ，前 3 回 合 内 吸 收 的 全 部 伤 害 两 倍 将 被 释 放 成 为 一 个 完 整 的 超 能 力 护 盾 （吸 收 完 整 伤 害 ）
 护 盾 的 吸 收 值 和 获 得 能 量 的 效 率 随 精 神 强 度 增 强 .]]):
 		format(absorb, s_str, shieldMastery(self, t), maxPsiAbsorb(self,t))
 	end

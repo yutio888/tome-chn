@@ -17,7 +17,7 @@ Talents.talents_def.T_REFIT_GOLEM.info= function(self, t)
 	end
 Talents.talents_def.T_GOLEM_POWER.name= "强化傀儡"
 Talents.talents_def.T_GOLEM_POWER.info= function(self, t)
-		if not self.alchemy_golem then return "提 高 傀 儡 的 武 器 熟 练 度， 增 加 它 的 命 中、  物 理 强 度 和 伤 害。" end
+		if not self.alchemy_golem then return "提 高 傀 儡 的 武 器 熟 练 度， 增 加 它 的 命 中、 物 理 强 度 和 伤 害。" end
 		local rawlev = self:getTalentLevelRaw(t)
 		local olda, oldd = self.alchemy_golem.talents[Talents.T_WEAPON_COMBAT], self.alchemy_golem.talents[Talents.T_WEAPONS_MASTERY]
 		self.alchemy_golem.talents[Talents.T_WEAPON_COMBAT], self.alchemy_golem.talents[Talents.T_WEAPONS_MASTERY] = 1 + rawlev, rawlev

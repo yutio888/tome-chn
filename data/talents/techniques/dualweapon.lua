@@ -12,7 +12,7 @@ Talents.talents_def.T_DUAL_WEAPON_DEFENSE.info= function(self, t)
 		 你 现 在 有 %d%% 的 概 率 偏 移 至 多 %d 点 伤 害 （ 你 副 手 伤 害 的 %d%% ） ， 每 回 合 至 多 触 发 %0.1f 次 （ 基 于 你 的 灵 巧）。 ]]):
 		format(t.getDeflectChance(self,t),t.getDamageChange(self, t, true), t.getDeflectPercent(self,t), t.getDeflects(self, t, true))
 		return ([[你 已 经 学 会 用 你 的 武 器 招 架 攻 击。 当 你 双 持 时， 增 加 %d 点 近 身 闪 避。 
-		受 敏 捷 影 响， 闪 避 增 益 按 比 例 加 成。%s]]):format(t.getDefense(self, t),xs)
+		受 敏 捷 影 响， 闪 避 增 益 按 比 例 加 成。 %s]]):format(t.getDefense(self, t),xs)
 	end
 Talents.talents_def.T_PRECISION.name= "弱点打击"
 Talents.talents_def.T_PRECISION.info= function(self, t)

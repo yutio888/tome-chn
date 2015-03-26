@@ -29,7 +29,7 @@ Talents.talents_def.T_BODY_OF_ICE.name= "冰霜之躯"
 Talents.talents_def.T_BODY_OF_ICE.info= function(self, t)
 		local resist = t.getResistance(self, t)
 		local crit = t.critResist(self, t)
-		return ([[ 将 你 的 身 体 转 化 为 纯 净 的 寒 冰 体  ， 你 受 到 的 寒 冰 伤 害 的 %d%% 会 治 疗 你 ， 同 时 你  的 物 理 抗 性 增 加 %d%% 。
+		return ([[ 将 你 的 身 体 转 化 为 纯 净 的 寒 冰 体 ， 你 受 到 的 寒 冰 伤 害 的 %d%% 会 治 疗 你 ， 同 时 你 的 物 理 抗 性 增 加 %d%% 。
 		对 你 的 直 接 暴 击 会 减 少 %d%% 暴 击 系 数 ， 但 不 会 少 于 普 通 伤 害 。 
  		受 法 术 强 度 影 响 ， 效 果 有 额 外 加 成 。]]):
 		format(t.getAffinity(self, t), resist, resist * 0.6, crit)

@@ -24,7 +24,7 @@ Talents.talents_def.T_ASSEMBLE.info= function(self, t)
 		 在 等 级 3 时 它 可 以 制 造 1 个 重 型 骨 巨 人。 
 		 在 等 级 5 时 它 可 以 制 造 1 个 不 朽 骨 巨 人。 
 		 在 等 级 6 时 它 可 以 有 20%% 几 率 制 造 1 个 符 文 骨 巨 人。 
-		 在 同 一 时 间 只 能 激 活 %s。]]):
+		 在 同 一 时 间 只 能 激 活 %s 。]]):
 		format(necroEssenceDead(self, true) and "2 个 骨 巨 人" or "1 个 骨 巨 人")
 	end
 Talents.talents_def.T_SACRIFICE.name= "献祭骨盾"

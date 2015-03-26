@@ -16,7 +16,7 @@ Talents.talents_def.T_MATTER_WEAVING.info = function(self, t)
 		local armor = t.getArmor(self, t)
 		local immune = t.getImmunity(self, t) * 100
 		return ([[你 的 血 肉 被 改 变， 对 伤 害 的 抗 性 提 高 。
-		增 加 %d 护 甲，%d%% 震 慑 与 割 伤 免 疫。
+		增 加 %d 护 甲， %d%% 震 慑 与 割 伤 免 疫。
 		护 甲 加 成 受 魔 法 加 成 。]]):
 		format(armor, immune)
 	end
@@ -27,8 +27,8 @@ Talents.talents_def.T_MATERIALIZE_BARRIER.info = function(self, t)
 		local duration = t.getDuration(self, t)
 		local damage = t.getDamage(self, t)
 		local radius = self:getTalentRadius(t)
-		return ([[制 造 一 层 坚 实 的 物 质 墙 ，长 度 为 %d，持 续 %d 回 合。
-		当 墙 壁 被 挖 掘 时 ， 会 产 生 半 径 %d 的 爆 炸，范 围 内 敌 人 会 进 入 流 血 状 态，6 回 合 内 受 到 %0.2f 物 理 伤 害 。]])
+		return ([[制 造 一 层 坚 实 的 物 质 墙 ，长 度 为 %d ，持 续 %d 回 合。
+		当 墙 壁 被 挖 掘 时 ， 会 产 生 半 径 %d 的 爆 炸，范 围 内 敌 人 会 进 入 流 血 状 态， 6 回 合 内 受 到 %0.2f 物 理 伤 害 。]])
 		:format(length, duration, radius, damDesc(self, DamageType.PHYSICAL, damage))
 	end
 

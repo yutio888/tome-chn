@@ -13,8 +13,8 @@ Talents.talents_def.T_ELDRITCH_BLOW.info = function(self, t)
 	end
 Talents.talents_def.T_ELDRITCH_INFUSION.info = function(self, t)
 		local dam = t.getDamage(self, t)
-		return ([[用 奥 术 能 量 给 盾 牌 冲 能，每 次 近 战 攻 击 附 加 %0.1f 奥 术 伤 害， 同 时 每 次 受 到 近 战 攻 击 时 反 击%0.1f 点 奥 术 伤 害。
-		伤 害 受 法 术 强 度 加  成。]]):
+		return ([[用 奥 术 能 量 给 盾 牌 冲 能，每 次 近 战 攻 击 附 加 %0.1f 奥 术 伤 害， 同 时 每 次 受 到 近 战 攻 击 时 反 击 %0.1f 点 奥 术 伤 害。
+		伤 害 受 法 术 强 度 加 成。]]):
 		format(dam, dam * 0.7)
 	end
 Talents.talents_def.T_ELDRITCH_FURY.info = function(self, t)

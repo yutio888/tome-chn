@@ -41,7 +41,7 @@ Talents.talents_def.T_SHADOW_SIMULACRUM.info= function(self, t)
 		elseif allowed < 6 then
 			size = "huge"
 		end
-		return ([[用 阴 影 复 制 目 标（ 最 大 体 积 %s）， 幻 象 会 立 刻 攻 击 目 标。 
+		return ([[用 阴 影 复 制 目 标（ 最 大 体 积 %s ）， 幻 象 会 立 刻 攻 击 目 标。 
 		 幻 象 持 续 %d 回 合。 
 		 幻 象 拥 有 %d%% 目 标 生 命, %d%% 全 部 伤 害 抵 抗，+50%% 暗 影 伤 害 抗 性，-50%% 光 系 伤 害 抗 性。
 		 受 灵 巧 影 响， 它 的 持 续 时 间、 生 命 值 和 抗 性 按 比 例 加 成。

@@ -15,10 +15,10 @@ Talents.talents_def.T_ARMOUR_TRAINING.info= function(self, t)
 		local criticalreduction = t.getCriticalChanceReduction(self, t)
 		local classrestriction = ""
 		if self.descriptor and self.descriptor.subclass == "Brawler" then
-			classrestriction = "(注 意  当 格 斗 家 穿 戴 板 甲 时 ， 他 们 的 大 部 分 技 能 无 法 使 用 。 )"
+			classrestriction = "(注 意 当 格 斗 家 穿 戴 板 甲 时 ， 他 们 的 大 部 分 技 能 无 法 使 用 。 )"
 		end
 		if self:knowTalent(self.T_STEALTH) then
-			classrestriction = "(注 意 当 你 穿 戴 锁  甲 时 会 干 扰 潜 行。)"
+			classrestriction = "(注 意 当 你 穿 戴 锁 甲 时 会 干 扰 潜 行。)"
 		end
 		return ([[ 你 使 用 防 具 来 偏 转 攻 击 和 保 护 重 要 部 位 的 能 力 加 强 了。 
 		根 据 现 有 防 具， 提 高 %d 护 甲 值 和 %d%% 护 甲 韧 性， 并 减 少 %d%% 被 暴 击 几 率。 

@@ -54,7 +54,7 @@ Talents.talents_def.T_HALLUCINOGENIC_MOSS.info= function(self, t)
 		local radius = self:getTalentRadius(t)
 		return ([[ 在 你 的 脚 下， 半 径 %d 的 范 围 内 生 长 出 苔 藓。 
 		 每 回 合 苔 藓 对 半 径 内 的 敌 人 会 造 成 %0.2f 点 自 然 伤 害。 
-		 这 种 苔 藓 上 沾 满 了 奇 怪 的 液 体， 有 %d%% 概 率 让 对 方 混 乱 （%d%% 强 度） 2 个 回 合。  
+		 这 种 苔 藓 上 沾 满 了 奇 怪 的 液 体， 有 %d%% 概 率 让 对 方 混 乱 （ %d%% 强 度） 2 个 回 合。  
 		 苔 藓 持 续 %d 个 回 合。 
 		 苔 藓 系 技 能 无 需 使 用 时 间， 但 会 让 同 系 其 他 技 能 进 入 3 回 合 的 冷 却。 
 		 受 精 神 强 度 影 响， 伤 害 有 额 外 加 成。 ]]):

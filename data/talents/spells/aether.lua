@@ -22,7 +22,7 @@ Talents.talents_def.T_AETHER_BREACH.info= function(self, t)
 Talents.talents_def.T_AETHER_AVATAR.name= "以太之体"
 Talents.talents_def.T_AETHER_AVATAR.info= function(self, t)
 		return ([[你 的 身 体 与 以 太 能 量 相 融， 持 续 %d 回 合。 
-		 当 此 技 能 激 活 时， 你 只 能 使 用 奥 术 系 或 以 太 系 技 能， 同 时， 2 系 技 能 的 冷 却 时 间 减 为 三 分 之 一  ， 你 的 奥 术 伤 害 增 加 25 ％， 并 且 你 可 以 随 时 开 启 干 扰 护 盾， 你 的 法 力 最 大 值 增 加 33 ％。]]):
+		 当 此 技 能 激 活 时， 你 只 能 使 用 奥 术 系 或 以 太 系 技 能， 同 时， 2 系 技 能 的 冷 却 时 间 减 为 三 分 之 一 ， 你 的 奥 术 伤 害 增 加 25 ％， 并 且 你 可 以 随 时 开 启 干 扰 护 盾， 你 的 法 力 最 大 值 增 加 33 ％。]]):
 		format(t.getNb(self, t))
 	end
 Talents.talents_def.T_PURE_AETHER.name= "以太掌握"

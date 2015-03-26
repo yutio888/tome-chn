@@ -5,7 +5,7 @@ local DamageType = require "engine.DamageType"
 Talents.talents_def.T_PUSH_KICK.name= "强力踢"
 Talents.talents_def.T_PUSH_KICK.info= function(self, t)
 		local damage = t.getDamage(self, t) *100
-		return ([[每 有 一 个  连 击 点，  对 目 标 造 成 %d%% 武 器 伤 害，并 解 除 目 标 一 项 物 理 持 续 技 能。 
+		return ([[每 有 一 个 连 击 点， 对 目 标 造 成 %d%% 武 器 伤 害，并 解 除 目 标 一 项 物 理 持 续 技 能。 
 		等 级 3 时，魔 法 持 续 技 能 也 会 受 影 响。
 		等 级 5 时，精 神 持 续 技 能 也 会 受 影 响。 
 		使 用 该 技 能 将 除 去 全 部 连 击 点。]])

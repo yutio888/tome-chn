@@ -26,7 +26,7 @@ Talents.talents_def.T_DETONATE.info= function(self, t)
 	end
 Talents.talents_def.T_RESILIENCE.name= "体质强化"
 Talents.talents_def.T_RESILIENCE.info= function(self, t)
-		return ([[提 升 你 所 有 召 唤 物 %d点体质，并 在 计 算 召 唤 物 剩 余 时 间 时 增 加 %0.1f 点 技 能 等 级。]]):format(t.incCon(self, t), self:getTalentLevel(t))
+		return ([[提 升 你 所 有 召 唤 物 %d 点体质，并 在 计 算 召 唤 物 剩 余 时 间 时 增 加 %0.1f 点 技 能 等 级。]]):format(t.incCon(self, t), self:getTalentLevel(t))
 	end
 Talents.talents_def.T_PHASE_SUMMON.name= "次元召唤"
 Talents.talents_def.T_PHASE_SUMMON.info= function(self, t)

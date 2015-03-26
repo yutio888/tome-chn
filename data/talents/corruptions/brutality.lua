@@ -16,12 +16,12 @@ end
 Talents.talents_def.T_RECKLESS_STRIKE.name = "舍身一击"
 Talents.talents_def.T_RECKLESS_STRIKE.info = function(self, t)
 	return ([[攻 击 目 标 ，造 成 %d%% 武 器 伤 害。本 次 攻 击 必 中，且 无 视 目 标 护 甲 和 抗 性 。
-	但 是，你 自 己 会 受 到 输 出 伤 害 的%d%% 或 者 当 前 生 命 值 30%% 的 伤 害 ， 取 数 值 较 低 者。]]):format(100 * t.getMainhit(self, t), t.getBacklash(self,t))
+	但 是，你 自 己 会 受 到 输 出 伤 害 的 %d%% 或 者 当 前 生 命 值 30%% 的 伤 害 ， 取 数 值 较 低 者。]]):format(100 * t.getMainhit(self, t), t.getBacklash(self,t))
 end
 
 Talents.talents_def.T_SHARE_THE_PAIN.name = "以眼还眼"
 Talents.talents_def.T_SHARE_THE_PAIN.info = function(self, t)
 	return ([[你 沉 迷 于 战 争 的 狂 热 。 当 一 个 近 身 的 敌 对 生 物 伤 害 你 时，有 %d%% 几 率 自 动 反 击，造 成 %d%% 武 器 伤 害。
-	此 效 果  每 回 合 对 同 一 目 标 触 发 一 次。]]):format(math.min(100, t.getChance(self,t)), t.getHit(self,t)*100)
+	此 效 果 每 回 合 对 同 一 目 标 触 发 一 次。]]):format(math.min(100, t.getChance(self,t)), t.getHit(self,t)*100)
 end
 

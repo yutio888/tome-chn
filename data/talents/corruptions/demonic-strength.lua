@@ -22,8 +22,8 @@ end
 
 Talents.talents_def.T_ABYSSAL_SHIELD.name = "深渊护盾"
 Talents.talents_def.T_ABYSSAL_SHIELD.info = function(self, t)
-	return ([[深 渊 气 息 围 绕 着 你 ， 增 加 %d 点 护 甲 ， 增 加 %0.2f 点 火 焰 、%0.2f 点 枯 萎 近 战 反 击 伤 害。
-	同 时 你 的 活 力 会 增 强 你 的 防 御 ， 减 少 相 当 于 当 前 活 力 %d%% 的 伤 害 （ 目 前 为 %d 点），但 不 会 减 少 超 过 原 伤 害 的 一 半 。 此 效 果会 消  耗 等 同 于 5%% 减 少 伤 害 值 的 活 力。
+	return ([[深 渊 气 息 围 绕 着 你 ， 增 加 %d 点 护 甲 ， 增 加 %0.2f 点 火 焰 、 %0.2f 点 枯 萎 近 战 反 击 伤 害。
+	同 时 你 的 活 力 会 增 强 你 的 防 御 ， 减 少 相 当 于 当 前 活 力 %d%% 的 伤 害 （ 目 前 为 %d 点），但 不 会 减 少 超 过 原 伤 害 的 一 半 。 此 效 果会 消 耗 等 同 于 5%% 减 少 伤 害 值 的 活 力。
 	伤 害 值 受 法 术 强 度 加 成 。]]):
 		format(	t.statBonus(self, t),t.getDamage(self,t),t.getDamage(self,t),t.defBonus(self, t),(t.defBonus(self, t)/100)*self:getVim())
 end

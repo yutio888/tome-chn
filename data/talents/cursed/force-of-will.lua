@@ -36,7 +36,7 @@ Talents.talents_def.T_UNSEEN_FORCE.info= function(self, t)
 		local secondHitChance = t.getSecondHitChance(self, t)
 		local hits = 1 + math.floor(secondHitChance/100)
 		local chance = secondHitChance - math.floor(secondHitChance/100)*100
-		return ([[你 的 愤 怒 变 成 一 股 无 形 之 力， 猛 烈 鞭 笞 你 附 近 的 随 机 敌 人。在 %d 回 合 内， 你 将 攻 击 %d（ %d%% 概 率 攻 击%d） 个 半 径 5  以 内 的 敌 人， 造 成 %d 点 伤 害 并 击 退 %d 码。 额 外 攻 击 的 数 目 随 技 能 等 级 增 长。 
+		return ([[你 的 愤 怒 变 成 一 股 无 形 之 力， 猛 烈 鞭 笞 你 附 近 的 随 机 敌 人。在 %d 回 合 内， 你 将 攻 击 %d （ %d%% 概 率 攻 击 %d ） 个 半 径 5  以 内 的 敌 人， 造 成 %d 点 伤 害 并 击 退 %d 码。 额 外 攻 击 的 数 目 随 技 能 等 级 增 长。 
 		 你 灌 注 力 量 的 能 力 使 你 增 加 %d%% 所 有 暴 击 伤 害。（ 当 前： %d%% ） 
 		 受 精 神 强 度 影 响， 伤 害 有 额 外 加 成。]]):format(duration, hits, chance, hits+1, damDesc(self, DamageType.PHYSICAL, damage), knockback, t.critpower(self, t), self.combat_critical_power or 0)
 	end

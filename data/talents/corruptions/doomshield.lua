@@ -25,6 +25,6 @@ Talents.talents_def.T_DEMONIC_MADNESS.info = function(self, t)
 
 Talents.talents_def.T_BLIGHTED_SHIELD.name = "枯萎能量"
 Talents.talents_def.T_BLIGHTED_SHIELD.info = function(self, t)
-		return ([[你 的 盾 牌 充 满 强 大 的 枯 萎 能 量 。每 次 你 格 挡 并 附 加 反 击 状 态 时 ，目 标 将 被 虚 弱 诅 咒 感 染 ，5 回 合 内 降 低 %d%% 伤 害。
+		return ([[你 的 盾 牌 充 满 强 大 的 枯 萎 能 量 。每 次 你 格 挡 并 附 加 反 击 状 态 时 ，目 标 将 被 虚 弱 诅 咒 感 染 ， 5 回 合 内 降 低 %d%% 伤 害。
 		 效 果 受 法 术 强 度 加 成 。]]):format(t.imppower(self,t))
 	end

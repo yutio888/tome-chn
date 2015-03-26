@@ -12,7 +12,7 @@ Talents.talents_def.T_CONSUME_SOUL.info= function(self, t)
 Talents.talents_def.T_ANIMUS_HOARDER.name= "灵魂储存"
 Talents.talents_def.T_ANIMUS_HOARDER.info= function(self, t)
 		local max, chance = t.getMax(self, t), t.getChance(self, t)
-		return ([[ 你 对 灵 魂 的 渴 望 与 日 俱 增 。 当 你 杀 死 一 个 生 物 时 ， 你 利 用 强 大 的 力 量 抹 去 它 的 仇 恨， 有 %d%% 概 率 获 得 额 外 一 个 灵 魂 ， 同 时 你 能 获 得  的 最 大 灵 魂 数 增 加  %d。]]):
+		return ([[ 你 对 灵 魂 的 渴 望 与 日 俱 增 。 当 你 杀 死 一 个 生 物 时 ， 你 利 用 强 大 的 力 量 抹 去 它 的 仇 恨， 有 %d%% 概 率 获 得 额 外 一 个 灵 魂 ， 同 时 你 能 获 得 的 最 大 灵 魂 数 增 加  %d 。]]):
 		format(chance, max)
 	end
 Talents.talents_def.T_ANIMUS_PURGE.name= "仇恨净化"
@@ -31,7 +31,7 @@ Talents.talents_def.T_ANIMUS_PURGE.info= function(self, t)
 Talents.talents_def.T_ESSENCE_OF_THE_DEAD.name= "亡者精华"
 Talents.talents_def.T_ESSENCE_OF_THE_DEAD.info= function(self, t)
 		local nb = t.getnb(self, t)
-		return ([[  粉 碎 两 个 灵 魂， 接 下 来  的 %d 个 法 术 获  得 额 外 效 果 ： 
+		return ([[  粉 碎 两 个 灵 魂， 接 下 来 的 %d 个 法 术 获 得 额 外 效 果 ： 
                   受 影 响 的 法 术 有：
 		  亡 灵 分 流： 获 得 治 疗 量 一 半 的 护 盾 
                   亡 灵 召 唤： 额 外 召 唤 两 个 不 死 族

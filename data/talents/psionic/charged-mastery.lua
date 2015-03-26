@@ -19,7 +19,7 @@ Talents.talents_def.T_TRANSCENDENT_ELECTROKINESIS.info=function(self, t)
 Talents.talents_def.T_THOUGHT_SENSE.name= "心电感应"
 Talents.talents_def.T_THOUGHT_SENSE.info= function(self, t)
 		return ([[感 知 半 径 %d 范 围 内 生 物 的 精 神 活 动 ， 效 果 持 续 %d 回 合。
-		这 个 技 能 暴 露 他 们 的 位 置， 并 增 加 你 的 防 御 %d。
+		这 个 技 能 暴 露 他 们 的 位 置， 并 增 加 你 的 防 御 %d 。
 		受 精 神 强 度 影 响， 持 续 时 间、 闪 避、 和 半 径 有 额 外 加 成。]]):format(t.radius(self, t), t.getDuration(self, t), t.getDefense(self, t))
 	end
 Talents.talents_def.T_STATIC_NET.name= "静电网络"

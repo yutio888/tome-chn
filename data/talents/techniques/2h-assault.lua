@@ -12,7 +12,7 @@ Talents.talents_def.T_FEARLESS_CLEAVE.name= "无畏跳斩"
 Talents.talents_def.T_FEARLESS_CLEAVE.info= function(self, t)
 		local damage = t.getDamage(self, t) * 100
 		local movedamage = t.getDamage(self, t) * 0.5 * 100
-		return ([[向 前 跳 一步 ， 对 前 方 弧 形 范 围 内 至  多 3 名 目 标 造 成 %d%% 武 器 伤 害。
+		return ([[向 前 跳 一步 ， 对 前 方 弧 形 范 围 内 至 多 3 名 目 标 造 成 %d%% 武 器 伤 害。
 		如 果 你 不 能 移 动，伤 害 变 为 %d%%]])
 		:format(damage, movedamage)
 	end

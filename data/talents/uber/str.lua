@@ -27,7 +27,7 @@ name = "You Shall Be My Weapon!", short_name="TITAN_S_SMASH", image = "talents/t
 	info= function(self, t)
 		return ([[对 敌 人 进 行 一 次 猛 击， 造 成 350 ％ 的 武 器 伤 害 并 击 退 目 标 6 码。 
 		所 有 击 退 路 径 上 的 敌 人 会 被 撞 至 一 旁 并 被 震 慑 3 回 合。
-		体 型 超 过  “Big” 时， 每 增 加 一 级 ， 额 外 增 加 80%% 武 器 伤 害。 ]])
+		体 型 超 过 “Big” 时， 每 增 加 一 级 ， 额 外 增 加 80%% 武 器 伤 害。 ]])
 		:format()
 	end
 name = "Massive Blow"
@@ -60,7 +60,7 @@ name = "Legacy of the Naloren"
 	info= function(self, t)
 		local level = t.bonusLevel(self,t)
 		return ([[你 站 在 萨 拉 苏 尔 一 方 并 帮 助 他 解 决 了 厄 库 尔 维 斯 克。 你 现 在 可 以 轻 松 的 在 水 下 呼 吸。 
-	         同 时， 你 能 轻 易 学 会 如 何 使 用 三 叉 戟 和 其 他 异 形 武 器（ 获 得 %d 级 异 形 武 器 掌 握）， 并 且 可 以 像 娜 迦 一 样 喷 吐 毒 素（ 等 级 %d） 。 技 能 等 级 随 人 物 等 级 增 长。   
+	         同 时， 你 能 轻 易 学 会 如 何 使 用 三 叉 戟 和 其 他 异 形 武 器（ 获 得 %d 级 异 形 武 器 掌 握）， 并 且 可 以 像 娜 迦 一 样 喷 吐 毒 素（ 等 级 %d ） 。 技 能 等 级 随 人 物 等 级 增 长。   
 		 此 外， 若 萨 拉 苏 尔 仍 然 存 活， 他 还 会 送 你 一 份 大 礼 …]])
 		:format(level, level)
 	end

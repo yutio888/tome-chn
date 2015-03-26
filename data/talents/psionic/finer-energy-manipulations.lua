@@ -6,7 +6,7 @@ Talents.talents_def.T_REALIGN.name= "重组"
 Talents.talents_def.T_REALIGN.info= function(self, t)
 		local heal = t.getHeal(self, t)
 		local cure = t.numCure(self, t)
-		return ([[用 你 的 精 神 力 量  重 组 并 调 整 你 的 身 体 ， 移 除 最 多 %d 负 面 物 理 状 态  并 治 愈 %d 生 命。
+		return ([[用 你 的 精 神 力 量 重 组 并 调 整 你 的 身 体 ， 移 除 最 多 %d 负 面 物 理 状 态 并 治 愈 %d 生 命。
 		受 精 神 强 度 影 响，治 疗 量 有 额 外 加 成。]]):
 		format(cure, heal)
 	end
@@ -18,7 +18,7 @@ Talents.talents_def.T_REALIGN.info= function(self, t)
 --		return ([[操 纵 力 量 从 分 子 层 面 重 组 、平 衡 、磨 砺 一 件 武 器 、盔 甲 或 者 盾 牌 （灵 晶 不 能 被 调 整 ，因 为 他 们 已 经 是 完 美 的 自 然 形 态 ）
 --		永 久 提 高 武 器 %d 命 中 和 伤 害 。
 --		你 每 件 身 上 的 护 甲 和 盾 牌 增 加 你 %d 护 甲 ，同 时 减 少 %d 疲 劳 。
---		该 技 能 效 果 受 精 神 强 度 影 响，且 不 能 对  同 一 件 物 品 重 复 使 用。]]):
+--		该 技 能 效 果 受 精 神 强 度 影 响，且 不 能 对 同 一 件 物 品 重 复 使 用。]]):
 --		format(weapon_boost, arm, fat)
 --	end
 Talents.talents_def.T_MATTER_IS_ENERGY.name= "宝石能量"

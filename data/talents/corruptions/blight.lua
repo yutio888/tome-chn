@@ -25,7 +25,7 @@ Talents.talents_def.T_POISON_STORM.name= "剧毒风暴"
 Talents.talents_def.T_POISON_STORM.info= function(self, t)
 		return ([[一 股 强 烈 的 剧 毒 风 暴 围 绕 着 施 法 者， 半 径 %d 持 续 %d 回 合。风 暴 内 的 生 物 将 进 入 中 毒 状 态 ，受 到 共 计 %0.2f 的 自 然 伤 害。 
 		 毒 性 是 可 以 叠 加 的， 它 们 在 剧 毒 风 暴 里 待 的 时 间 越 长， 它 们 受 到 的 毒 素 伤 害 越 高。 
-		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成， 并 且  可 暴 击。]]):
+		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成， 并 且 可 暴 击。]]):
 		format(self:getTalentRadius(t), t.getDuration(self, t), damDesc(self, DamageType.NATURE, self:combatTalentSpellDamage(t, 12, 130)))
 	end
 

@@ -112,7 +112,7 @@ Talents.talents_def.T_DEMON_SEED_ACID_CONE.name = "锥形酸液"
 Talents.talents_def.T_DEMON_SEED_ACID_CONE.info = function(self, t)
 		local damage = t.getDamage(self, t)
 		return ([[每 次 近 战 暴 击 时 ， 将 释 放 一 股 锥 形 酸 液 ，造 成 %d 伤 害 并 融 化 墙 壁。
-		伤 害 受 法 术  强 度 加 成。]]):
+		伤 害 受 法 术 强 度 加 成。]]):
 		format(damage)
 	end
 
@@ -131,6 +131,6 @@ Talents.talents_def.T_DEMON_SEED_FLASH_BLOCK.info = function(self, t)
 Talents.talents_def.T_DEMON_SEED_BLACKICE.name = "黑冰"
 Talents.talents_def.T_DEMON_SEED_BLACKICE.info = function(self, t)
 		return ([[每 次 你 用 非 火 焰 伤 害 杀 死 生 物 时 ， 你 获 得 一 次 黑 冰 充 能 ， 持 续 20 回 合 ， 最 多 累 计 %d 次。
-		任 何 时 候 ， 你 能 消 耗 一 次 充 能 ， 降 低  一 个 生 物 %d%% 火 焰 抗 性 7 回 合。]]):
+		任 何 时 候 ， 你 能 消 耗 一 次 充 能 ， 降 低 一 个 生 物 %d%% 火 焰 抗 性 7 回 合。]]):
 		format(t.getStack(self, t), t.getRes(self, t))
 	end

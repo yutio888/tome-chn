@@ -25,6 +25,6 @@ end
 Talents.talents_def.T_OMINOUS_SHADOW.name = "不祥黑影"
 Talents.talents_def.T_OMINOUS_SHADOW.info = function(self, t)
 		return ([[当 被 悲 惨 结 局 诅 咒 的 生 物 死 亡 时，你 获 得 一 个 不 祥 黑 影（至 多 %d 个），保 存 12 回 合。
-		每 个 不 祥 黑 影  能 让 你 隐 身 2 回 合 ，隐 形 强 度 %d。]]):
+		每 个 不 祥 黑 影 能 让 你 隐 身 2 回 合 ，隐 形 强 度 %d 。]]):
 		format(t.getStack(self, t), t.getInvisibilityPower(self, t))
 end

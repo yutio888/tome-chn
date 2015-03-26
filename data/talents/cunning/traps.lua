@@ -71,7 +71,7 @@ Talents.talents_def.T_NIGHTSHADE_TRAP.info= function(self, t)
 Talents.talents_def.T_FLASH_BANG_TRAP.name= "闪光陷阱"
 Talents.talents_def.T_FLASH_BANG_TRAP.info= function(self, t)
 		return ([[放 置 一 个 闪 光 陷 阱。 产 生 一 个 2 码 范 围 的 爆 炸， 致 盲 或 眩 晕 目 标 %d 回 合。
-		 范 围 内 所 有 人 将 受  到 %0.2f 点 物 理 伤 害 。
+		 范 围 内 所 有 人 将 受 到 %0.2f 点 物 理 伤 害 。
 		 持 续 时 间 受 陷 阱 大 师 等 级 加 成。 
 		 高 级 诱 饵 可 触 发 这 个 陷 阱。]]):
 		format(t.getDuration(self, t), damDesc(self, engine.DamageType.PHYSICAL, t.getDamage(self, t)))

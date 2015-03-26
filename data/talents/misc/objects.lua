@@ -23,7 +23,7 @@ Talents.talents_def.T_WARD.info= function(self, t)
 			xs = xs .. (xs ~= "" and ", " or "") .. engine.DamageType.dam_def[w].name:capitalize() .. "(" .. tostring(nb) .. ")"
 		end
 		return ([[激 活 指 定 伤 害 类 型 的 抵 抗 状 态， 能 够 完 全 抵 抗 对 应 属 性 的 伤 害。 抵 抗 次 数 由 魔 杖 决 定。
-		你 能 激 活 的 伤 害 类 型 有 ：%s]]):format(xs)
+		你 能 激 活 的 伤 害 类 型 有 ： %s]]):format(xs)
 	end
 Talents.talents_def.T_YIILKGUR_BEAM_DOWN.name= "回到地面"
 Talents.talents_def.T_YIILKGUR_BEAM_DOWN.info= function(self, t)
@@ -76,7 +76,7 @@ Talents.talents_def.T_SHIV_LORD.info= function(self, t)
 		local power = t.getPower(self, t)
 		local dur = t.getDuration(self, t)
 		return ([[你 吸 收 周 围 的 寒 冰 围 绕 你， 将 自 己 转 变 为 纯 粹 的 冰 元 素 — — 西 弗 格 罗 斯， 持 续 %d 回 合。 
-		 转 化 成 元 素 后， 你 不 需 要 呼 吸 并 获 得 等 级 %d 的 冰 雪 风 暴， 获 得 %d%% 切 割 和 震 慑 抵 抗 ，%d%% 寒 冰 抗 性 ,所 有 冰 冷 伤 害 可 对 你 产 生 治 疗， 治 疗 量 基 于 伤 害 值 的 %d%% 。 
+		 转 化 成 元 素 后， 你 不 需 要 呼 吸 并 获 得 等 级 %d 的 冰 雪 风 暴， 获 得 %d%% 切 割 和 震 慑 抵 抗 ， %d%% 寒 冰 抗 性 ,所 有 冰 冷 伤 害 可 对 你 产 生 治 疗， 治 疗 量 基 于 伤 害 值 的 %d%% 。 
 		 受 法 术 强 度 影 响， 效 果 有 额 外 加 成。]]):
 		format(dur, self:getTalentLevelRaw(t), power * 100, power * 100 / 2, 50 + power * 100)
 	end

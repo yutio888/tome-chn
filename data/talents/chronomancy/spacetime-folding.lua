@@ -71,6 +71,6 @@ Talents.talents_def.T_DIMENSIONAL_ANCHOR.info = function(self, t)
 		local damage = t.getDamage(self, t)/2
 		local duration = t.getDuration(self, t)
 		return ([[制 造 一 个 半 径 3 的 禁 传 区 ， 持 续 %d 轮 ， 并 眩 晕 其 中 所 有 目 标 2 回 合 。
-		试 图 传 送 的 敌 人 将  受 到 %0.2f 物 理 %0.2f 时 空 伤 害。
+		试 图 传 送 的 敌 人 将 受 到 %0.2f 物 理 %0.2f 时 空 伤 害。
 		伤 害 受 法 术 强 度 加 成 。]]):format(duration, damDesc(self, DamageType.PHYSICAL, damage), damDesc(self, DamageType.TEMPORAL, damage))
 	end

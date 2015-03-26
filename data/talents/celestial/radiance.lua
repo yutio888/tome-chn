@@ -10,9 +10,9 @@ function radianceRadius(self)
 end
 Talents.talents_def.T_RADIANCE.name= "光辉"
 Talents.talents_def.T_RADIANCE.info= function(self, t)
-		return ([[你 的 体 内 充 满 了 阳 光 ， 你 的 身 体  会 发 光 ，半 径 %d。
+		return ([[你 的 体 内 充 满 了 阳 光 ， 你 的 身 体 会 发 光 ，半 径 %d 。
 		 你 的 眼 睛 适 应 了 光 明 ， 获 得 %d%% 目 盲 免 疫 。
-		 光 照 超 过 你 的 灯 具 时 取 代 之  ， 不 与 灯 具 叠 加 光 照 。
+		 光 照 超 过 你 的 灯 具 时 取 代 之 ， 不 与 灯 具 叠 加 光 照 。
 		]]):
 		format(radianceRadius(self), t.getResist(self, t))
 	end
@@ -32,7 +32,7 @@ Talents.talents_def.T_SEARING_SIGHT.info= function(self, t)
 	end
 Talents.talents_def.T_JUDGEMENT.name= "裁决"
 Talents.talents_def.T_JUDGEMENT.info= function(self, t)
-		return ([[向 光 辉 覆 盖 的 敌 人 发 射 光 明 球 ， 每 个 球 会 缓 慢 移 动 ， 直 到 命 中 ， 同 时 对 路 径 上 的 障 碍 物 造  成%d 点 光 系 伤 害。
+		return ([[向 光 辉 覆 盖 的 敌 人 发 射 光 明 球 ， 每 个 球 会 缓 慢 移 动 ， 直 到 命 中 ， 同 时 对 路 径 上 的 障 碍 物 造 成 %d 点 光 系 伤 害。
 		 当 击 中 目 标 时 ， 球 体 会 爆 炸 ， 造 成 %d 点 光 系 伤 害 ， 同 时 50%% 的 伤 害 会 治 疗 你 。
 		 使 用 这 项 技 能 会 让 光 辉 照 明 范 围 减 少 至 1 ， 持 续 5 回 合 。]]):
 		format(t.getMoveDamage(self, t), t.getExplosionDamage(self, t))

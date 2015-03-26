@@ -31,7 +31,7 @@ Talents.talents_def.T_AXE_KICK.name= "斧踢"
 Talents.talents_def.T_AXE_KICK.info= function(self, t)
 		local damage = t.getDamage(self, t) * 100
 		return ([[ 施 展 一 次 毁 灭 性 的 的 踢 技 ，造 成 %d%% 伤 害 。
-		 如 果 攻 击 命 中 ， 对 方 的 大 脑 受  到 伤 害 ，不 能 使 用 技 能 ， 持 续 %d 回 合 ， 同 时 你 获 得 2 连 击 点。 ]])
+		 如 果 攻 击 命 中 ， 对 方 的 大 脑 受 到 伤 害 ，不 能 使 用 技 能 ， 持 续 %d 回 合 ， 同 时 你 获 得 2 连 击 点。 ]])
 		:format(damage, t.getDuration(self, t))
 	end
 Talents.talents_def.T_FLURRY_OF_FISTS.name= "流星拳"

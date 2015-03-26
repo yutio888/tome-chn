@@ -224,8 +224,8 @@ name = "Rune: Biting Gale"
 		local data = self:getInscriptionData(t.short_name)
 		local apply = self:rescaleCombatStats((data.apply + data.inc_stat))
 		return ([[激 活 这 个 符 文 ， 形 成 一 股 锥 形 寒 风 ， 造 成 %0.2f 寒 冷 伤 害。
-			寒 风 会 减 半 敌 人 的  震 慑 抗 性  ， 并 试 图 冻 结 他 们 3 回合 ，强 度 %d。
-			寒 冷 同 时 净 化 了 你 的 精 神， 解 除 一  项 随 机 负 面 精 神 效 果。 ]]):
+			寒 风 会 减 半 敌 人 的 震 慑 抗 性 ， 并 试 图 冻 结 他 们 3 回合 ，强 度 %d 。
+			寒 冷 同 时 净 化 了 你 的 精 神， 解 除 一 项 随 机 负 面 精 神 效 果。 ]]):
 			format(damDesc(self, DamageType.COLD, data.power + data.inc_stat), apply)
 	end
 name)
@@ -239,7 +239,7 @@ name = "Rune: Acid Wave"
 		  local apply = self:rescaleCombatStats((data.apply + data.inc_stat))
 		  
 		  return ([[发 射 锥 形 酸 性 冲 击 波 造 成 %d 码 %0.2f 酸 性 伤 害。
-		 酸 性 冲 击 波 会 腐 蚀 目 标， 缴 械 %d 回 合 ，强 度 %d。
+		 酸 性 冲 击 波 会 腐 蚀 目 标， 缴 械 %d 回 合 ，强 度 %d 。
 		 酸 性 能 量 同 时 会 除 去 你 的 一 项 负 面 魔 法 效 果。]]):
 			 format(self:getTalentRadius(t), damDesc(self, DamageType.ACID, data.power + data.inc_stat), data.dur or 3, apply)
 	   end
@@ -254,7 +254,7 @@ name = "Rune: Lightning"
 		local data = self:getInscriptionData(t.short_name)
 		local dam = damDesc(self, DamageType.LIGHTNING, data.power + data.inc_stat)
 		return ([[激 活 这 个 符 文 发 射 一 束 闪 电 打 击 目 标， 造 成 %0.2f 至 %0.2f 闪 电 伤 害。 
-		 同 时 会 让 你 进 入 闪 电 形 态 %d 回 合： 受 到 伤 害 时 你 会 瞬 移 到 附 近 的 一  格 并 防 止 此 伤 害 ， 一 回 合 只 能 触 发 一 次。 ]]):
+		 同 时 会 让 你 进 入 闪 电 形 态 %d 回 合： 受 到 伤 害 时 你 会 瞬 移 到 附 近 的 一 格 并 防 止 此 伤 害 ， 一 回 合 只 能 触 发 一 次。 ]]):
 		format(dam / 3, dam, 2)
 	end
 name)

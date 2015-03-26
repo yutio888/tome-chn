@@ -16,7 +16,7 @@ Talents.talents_def.T_RIPOSTE.info= function(self, t)
 		local inc = t.getDurInc(self, t)
 		return ([[通 过 以 下 方 法 提 高 你 的 反 击 能 力：
 		当 出 现 不 完 全 格 挡 时 也 可 以 进 行 反 击。
-		增 加 攻 击 者 反 击DEBUFF的 持 续 时 间 %d。
+		增 加 攻 击 者 反 击DEBUFF的 持 续 时 间 %d 。
 		你 对 可 反 击 目 标 的 反 击 次 数 增 加 %d 次。
 		增 加 %d%% 反 击 暴 击 率。
 		受 敏 捷 影 响， 此 暴 击 率 按 比 例 加 成。]]):format(inc, inc, t.getCritInc(self, t))

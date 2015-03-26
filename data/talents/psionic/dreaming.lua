@@ -23,7 +23,7 @@ Talents.talents_def.T_LUCID_DREAMER.info= function(self, t)
 Talents.talents_def.T_DREAM_WALK.name= "梦境穿梭"
 Talents.talents_def.T_DREAM_WALK.info= function(self, t)
 		local radius = self:getTalentRadius(t)
-		return ([[你 穿 越 梦 境， 出 现 在 某 个 目 标 地 点 附 近 （%d 码 传 送 误 差）。
+		return ([[你 穿 越 梦 境， 出 现 在 某 个 目 标 地 点 附 近 （ %d 码 传 送 误 差）。
 		 如 果 目 标 为 处 于 睡 眠 状 态 的 生 物， 你 将 会 出 现 在 离 目 标 最 近 的 地 方。]]):format(radius)
 	end
 Talents.talents_def.T_DREAM_PRISON.name= "梦境牢笼"

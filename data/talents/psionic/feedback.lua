@@ -8,7 +8,7 @@ Talents.talents_def.T_BIOFEEDBACK.info= function(self, t)
 		local decaySpeed = t.getDecaySpeed(self, t)
 		local newDecay = decaySpeed*0.1
 		local netHeal = newDecay*heal
-		return ([[ 你 的 反 馈 值 衰 减 的 %0.1f%% 会 治 疗 你 ， 同 时 衰 减 速 率 下 降 %d%% （ 每 回 合 最 多 %0.1f%% ） 。 总 而 言 之， 每 回 合 你 将 受 到  治 疗 量 等 于 你 的 反 馈 池 %0.2f%% 的 治 疗。 
+		return ([[ 你 的 反 馈 值 衰 减 的 %0.1f%% 会 治 疗 你 ， 同 时 衰 减 速 率 下 降 %d%% （ 每 回 合 最 多 %0.1f%% ） 。 总 而 言 之， 每 回 合 你 将 受 到 治 疗 量 等 于 你 的 反 馈 池 %0.2f%% 的 治 疗。 
 		受 精 神 强 度 影 响， 治 疗 效 果 按 比 例 加 成。]]):format(heal, decaySpeed*100, newDecay*100, netHeal*100)
 	end
 Talents.talents_def.T_RESONANCE_FIELD.name= "共鸣领域"

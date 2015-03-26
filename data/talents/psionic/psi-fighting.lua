@@ -15,7 +15,7 @@ Talents.talents_def.T_AUGMENTATION.info= function(self, t)
 		local inc = t.getMult(self, t)
 		local str_power = inc*self:getWil()
 		local dex_power = inc*self:getCun()
-		return ([[当 开 启 时 ， 你  为 了 你 的 血 肉 之 躯 精 准 地 灌 布 精 神 之 力 。 分 别 增 加 意 志 和 灵 巧 的 %d%% 至 力 量 和 敏 捷。
+		return ([[当 开 启 时 ， 你 为 了 你 的 血 肉 之 躯 精 准 地 灌 布 精 神 之 力 。 分 别 增 加 意 志 和 灵 巧 的 %d%% 至 力 量 和 敏 捷。
 		力 量 增 加 %d 点
 		敏 捷 增 加 %d 点]]):
 		format(inc*100, str_power, dex_power)

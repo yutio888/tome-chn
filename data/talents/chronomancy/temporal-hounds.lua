@@ -10,7 +10,7 @@ Talents.talents_def.T_TEMPORAL_HOUNDS.info = function(self, t)
 		 每 隔 %d 回 合 召 唤 另 一 条 时 空 猎 犬 ，直 至 最 多 3 条 。
 		 当 一 条 猎 犬 死 去 时 ，你 将 在 %d 回 合 内 召 唤 一 条 新 的 猎 犬 。
 		 你 猎 犬 继 承 你 的 伤 害 加 成 ，有 %d%% 物 理 和 %d%% 时 空 抗 性 ，对 负 面 传 送 效 果 免 疫 。
-		 猎 犬 将 拥 有 %d  力 量 ，%d 敏 捷 ，%d 体 质 ，%d 魔 法 和 %d 灵 巧 ，基 于 你 的 魔 法 。]])
+		 猎 犬 将 拥 有 %d  力 量 ， %d 敏 捷 ， %d 体 质 ， %d 魔 法 和 %d 灵 巧 ，基 于 你 的 魔 法 。]])
 		:format(cooldown, cooldown, resists/2, math.min(100, resists*2), incStats.str + 1, incStats.dex + 1, incStats.con + 1, incStats.mag + 1, incStats.wil +1, incStats.cun + 1)
 	end
 

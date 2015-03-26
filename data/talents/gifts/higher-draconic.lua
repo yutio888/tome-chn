@@ -23,7 +23,7 @@ Talents.talents_def.T_VENOMOUS_BREATH.info= function(self, t)
 Talents.talents_def.T_WYRMIC_GUILE.name= "龙之狡诈"
 Talents.talents_def.T_WYRMIC_GUILE.info= function(self, t)
 		return ([[你 继 承 了 龙 族 的 狡 诈。 
-		 你 的 灵 巧 增 加 %d 点， 同 时 你 的 吐 息 技 能 冷 却 减 少 %d。 
+		 你 的 灵 巧 增 加 %d 点， 同 时 你 的 吐 息 技 能 冷 却 减 少 %d 。 
 		 你 获 得 %d%% 击 退 抵 抗 和 %d%% 致 盲、 震 慑 抵 抗。]]):format(2*self:getTalentLevelRaw(t), t.CDreduce(self, t), 100*t.resistKnockback(self, t), 100*t.resistBlindStun(self, t))
 	end
 Talents.talents_def.T_CHROMATIC_FURY.name= "天龙之怒"

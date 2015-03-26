@@ -52,7 +52,7 @@ Talents.talents_def.T_SHADOW_WARRIORS.info= function(self, t)
 		local dominateLevel = t.getDominateLevel(self, t)
 		local fadeCooldown = math.max(3, 8 - self:getTalentLevelRaw(t))
 		return ([[将 仇 恨 注 入 你 的 阴 影， 强 化 他 们 的 攻 击。 他 们 获 得 %d%% 额 外 命 中 和 %d%% 额 外 伤 害 加 成。 
-		 他 们 疯 狂 的 攻 击 可 以 令 他 们 控 制 对 手， 提 高 控 制 目 标 的 所 有 伤 害 4 回 合（ 等 级 %d， %d%% 几 率 1 码 范 围）。 
+		 他 们 疯 狂 的 攻 击 可 以 令 他 们 控 制 对 手， 提 高 控 制 目 标 的 所 有 伤 害 4 回 合（ 等 级 %d ， %d%% 几 率 1 码 范 围）。 
 		 它 们 同 时 拥 有 消 隐 的 能 力， 免 疫 所 有 伤 害 直 到 下 一 回 合 开 始（ %d 回 合 冷 却 时 间）。]]):format(combatAtk, incDamage, dominateLevel, dominateChance, fadeCooldown)
 	end
 Talents.talents_def.T_SHADOW_MAGES.name= "阴影法师"

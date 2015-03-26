@@ -4,7 +4,7 @@ local DamageType = require "engine.DamageType"
 
 Talents.talents_def.T_VILE_POISONS.name= "涂毒"
 Talents.talents_def.T_VILE_POISONS.info= function(self, t)
-		return ([[你 学 会 如 何 在 近 战 武 器, 长 弓 和 投 石 索 的 弹 药  上 涂 毒。 每 等 级 你 将 会 学 到 新 的 毒 剂。 
+		return ([[你 学 会 如 何 在 近 战 武 器, 长 弓 和 投 石 索 的 弹 药 上 涂 毒。 每 等 级 你 将 会 学 到 新 的 毒 剂。 
 		 等 级 1 ： 致 命 毒 剂 
 		 等 级 2 ： 麻 木 毒 剂 
 		 等 级 3 ： 阴 险 毒 剂 

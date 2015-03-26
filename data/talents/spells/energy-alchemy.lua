@@ -13,7 +13,7 @@ Talents.talents_def.T_LIGHTNING_INFUSION.info= function(self, t)
 Talents.talents_def.T_DYNAMIC_RECHARGE.name= "动态充能"
 Talents.talents_def.T_DYNAMIC_RECHARGE.info= function(self, t)
 		return ([[ 当 闪 电 充 能 开 启 时 ， 你 的 炸 弹 会 给 傀 儡 充 能 。
-		 你 的 傀 儡  的 所 有 冷 却 中 技 能 有 %d%% 概 率 减 少 %d 回 合 冷 却 时 间。]]):
+		 你 的 傀 儡 的 所 有 冷 却 中 技 能 有 %d%% 概 率 减 少 %d 回 合 冷 却 时 间。]]):
 		format(t.getChance(self, t), t.getNb(self, t))
 	end
 Talents.talents_def.T_THUNDERCLAP.name= "闪电霹雳"

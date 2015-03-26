@@ -10,7 +10,7 @@ Talents.talents_def.T_PRISMATIC_SLASH.info= function(self, t)
 		return ([[向 你 的 敌 人 释 放 原 始 的 混 乱 元 素 攻 击。 
 		 你 有 几 率 使 用 致 盲 之 沙、 缴 械 酸 雾、 冰 结 之 息、 震 慑 闪 电 或 燃 烧 之 焰 攻 击 敌 人， 造 成 %d%% 点 对 应 伤 害 类 型 的 武 器 伤 害。 
 		 此 外， 无 论 你 的 元 素 攻 击 是 否 命 中 敌 人 你 都 会 对 %d 码 半 径 范 围 内 的 敌 人 造 成 %0.2f 伤 害。 
-		 每 提 升 1 级 五 灵 挥 击 会 增 加 你 的 物 理、 法 术 和 精 神 豁 免 %d%% 。]]):format(100 * self:combatTalentWeaponDamage(t, 1.2, 2.0), radius,burstdamage , 100*speed)
+		 每 提 升 1 级 五 灵 挥 击 会 增 加 你 的 物 理、 法 术 和 精 神 速 度 %d%% 。]]):format(100 * self:combatTalentWeaponDamage(t, 1.2, 2.0), radius,burstdamage , 100*speed)
 	end
 Talents.talents_def.T_VENOMOUS_BREATH.name= "剧毒吐息"
 Talents.talents_def.T_VENOMOUS_BREATH.info= function(self, t)

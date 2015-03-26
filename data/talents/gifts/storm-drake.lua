@@ -16,7 +16,7 @@ Talents.talents_def.T_STATIC_FIELD.name= "静电力场"
 Talents.talents_def.T_STATIC_FIELD.info= function(self, t)
 		local percent = t.getPercent(self, t)
 		local litdam = t.getDamage(self, t)
-		return ([[制 造 一 个 1 码 范 围 的 静 电 力 场。 任 何 范 围 内 的 目 标 至 多 会 丢 失 %0.1f%% 当 前 生 命 值（精 英 或 稀 有 %0.1f%% 史 诗 或 Boss %0.1f%% 精 英 Boss %0.1f%% ）该 伤 害 不 能 抵 抗 ， 但 可 以 被 物 理 豁 免 减 少 。 
+		return ([[制 造 一 个 %d 码 范 围 的 静 电 力 场。 任 何 范 围 内 的 目 标 至 多 会 丢 失 %0.1f%% 当 前 生 命 值（精 英 或 稀 有 %0.1f%% 史 诗 或 Boss %0.1f%% 精 英 Boss %0.1f%% ）该 伤 害 不 能 抵 抗 ， 但 可 以 被 物 理 豁 免 减 少 。 
 		 之 后 ， 会 造 成 额 外 %0.2f 闪 电 伤 害 ， 无 视 怪 物 阶 级。
 		  受 精 神 强 度 影 响， 生 命 丢 失 量 和 闪 电 伤 害 有 额 外 加 成。闪 电 伤 害 可 以 暴 击。 
 		 每 点 雷 龙 系 的 天 赋 可 以 使 你 增 加 闪 电 抵 抗 1%% 。]]):format(self:getTalentRadius(t), percent, percent/1.5, percent/2, percent/2.5, damDesc(self, DamageType.LIGHTNING, litdam))

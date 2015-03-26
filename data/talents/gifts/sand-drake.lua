@@ -24,6 +24,7 @@ Talents.talents_def.T_BURROW.name= "土遁"
 Talents.talents_def.T_BURROW.info= function(self, t)
 		return ([[允 许 你 钻 进 墙 里， 持 续 %d 回 合。
 		 你 强 大 的 挖 掘 能 力 让 你 能 挖 掘 敌 人 的 防 御 弱 点； 处 于 该 状 态 下 时 你 获 得 %d 护 甲 穿 透 和 %d%% 物 理 抗 性 穿 透 。
+         在 技 能 等 级 5 时 ， 这 个 技 能 变 成 瞬 发 。 冷 却 时 间 随 技 能 等 级 升 高 而 降 低 。
 		 每 点 土 龙 系 的 天 赋 可 以 使 你 增 加 物 理 抵 抗 0.5%% 。]]):format(t.getDuration(self, t), t.getPenetration(self, t), t.getPenetration(self, t) / 2)
 	end
 Talents.talents_def.T_SAND_BREATH.name= "沙瀑吐息"

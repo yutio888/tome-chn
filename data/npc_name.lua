@@ -5,7 +5,8 @@ npcCHN = {}
 
 function npcCHN:getName(name)
 	if not name then return nil end
-	if name:find("'s Inner Demon") then name = npcCHN:getName(name:gsub("'s Inner Demon","")).."的心魔"	
+	if name:find("'s temporal clone") then name =npcCHN:getName(name:gsub("'s temporal clone","")).."的时空复制体"	
+	elseif name:find("'s Inner Demon") then name = npcCHN:getName(name:gsub("'s Inner Demon","")).."的心魔"	
 	elseif name:find("demonic husk") then name = npcCHN:getName(name:gsub(" %(demonic husk%)","")).."(恶魔傀儡)"
 	elseif name:find("servant") then 
 		local tname = name:gsub("golem %(servant of ",""):gsub("Golem %(servant of ",""):gsub("%)","")

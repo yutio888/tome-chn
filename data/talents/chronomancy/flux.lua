@@ -2,7 +2,7 @@ local Talents = require "engine.interface.ActorTalents"
 Talents.talents_def.T_INDUCE_ANOMALY.name = "引导异常"
 Talents.talents_def.T_INDUCE_ANOMALY.info = function(self, t)
 		local reduction = t.getReduction(self, t)
-		return ([[引 发 一 次 异 常 ， 减 少 你 的 紊 乱 值 %d。  这 个 技 能 不 会 引 发 重 大 异 常。
+		return ([[引 发 一 次 异 常 ， 减 少 你 的 紊 乱 值 %d 。  这 个 技 能 不 会 引 发 重 大 异 常。
 		引 导 异 常 不 会 被 扭 曲 命 运 延 后 ， 也 不 会 触 发 被 延 后 的 异 变 。 
 		然 而 ， 当 学 会 扭 曲 命 运 后 ， 你 可 以 选 中 引 导 异 变 作 为 目 标。
 		受 法 术 强 度 影 响 ， 紊 乱 值 减 少 效  果 有 额 外 加 成。]]):format(reduction)

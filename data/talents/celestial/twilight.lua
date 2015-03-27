@@ -14,18 +14,18 @@ Talents.talents_def.T_JUMPGATE_TELEPORT.name= "跃迁之门：传送"
 Talents.talents_def.T_JUMPGATE_TELEPORT.info= function(self, t)
 		return ([[在 %d 码 范 围 以 内 你 可 以 立 即 传 送 至 你 的 跃 迁 之 门。]]):format(t.getRange(self, t))
  	end
-name = "Jumpgate"
-	info= function(self, t)
+Talents.talents_def.T_JUMPGATE.name = "跃迁之门"
+Talents.talents_def.T_JUMPGATE.info= function(self, t)
 		local jumpgate_teleport = self:getTalentFromId(self.T_JUMPGATE_TELEPORT)
 		local range = jumpgate_teleport.getRange(self, jumpgate_teleport)
 		return ([[在 你 的 位 置 制 造 1 个 阴 影 跃 迁 之 门， 当 你 激 活 这 个 技 能 时 你 可 以 使 用 跃 迁 之 门： 传 送 技 能 将 你 传 送 至 此（ 跃 迁 之 门 必 须 在 你 %d 码 范 围 以 内）。 
 		 注 意： 当 此 技 能 激 活 且 楼 梯 位 于 跃 迁 之 门 下 方 时， 楼 梯 将 不 可 使 用。 你 必 须 取 消 此 技 能 方 可 使 用 楼 梯 离 开 该 区 域。 
 		 在 等 级 4 时， 你 可 以 制 造 2 个 跃 迁 之 门。]]):format(range)
  	end
-name = "Mind Blast"
-	info= function(self, t)
+Talents.talents_def.T_MIND_BLAST.name = "心灵震爆"
+Talents.talents_def.T_MIND_BLAST.info= function(self, t)
 		local duration = t.getConfuseDuration(self, t)
-		return ([[在 3 码 半 径 范 围 内 释 放 一 股 精 神 冲 击， 摧 毁 目 标 的 意 志， 使 他 们 混 乱 (%d%% to act randomly) %d 回 合。 
+		return ([[在 3 码 半 径 范 围 内 释 放 一 股 精 神 冲 击， 摧 毁 目 标 的 意 志， 使 他 们 混 乱 (%d%% 几率随机行动) %d 回 合。 
 		 受 灵 巧 影 响， 持 续 时 间 有 额 外 加 成。]]):
 		format(t.getConfuseEfficency(self,t),duration)
 	end

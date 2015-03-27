@@ -2054,6 +2054,37 @@ npcDescCHN["Rogroth, Eater of Souls"] = "火焰和枯萎的力量在蜘蛛一样
 
 npcNameCHN["wretch titan"] = "腐化泰坦"
 npcDescCHN["wretch titan"] = "许多冒险家都遭遇过酸液树魔。相当可怕，酸液树魔们，成群出现，灼烧腐蚀。但这些冒险家们不知道，酸液树魔只是它的未成熟的孩子。"
+
+npcNameCHN["ogre guard"] = "食人魔守卫"
+npcDescCHN["ogre guard"] = "一个手里拿着重锤的食人魔，随时准备将你一锤击碎。"
+
+npcNameCHN["ogre warmaster"] = "食人魔战争领主"
+npcDescCHN["ogre warmaster"] = "一个精于战斗技巧的食人魔，她已经等不及在你身上试试自己的新技能了。"
+
+npcNameCHN["ogre mauler"] = "食人魔重击者"
+npcDescCHN["ogre mauler"] = "冲击！碾碎！摧毁一切！"
+
+npcNameCHN["ogre pounder"] = "食人魔摔跤手"
+npcDescCHN["ogre pounder"] = "这个食人魔快速地接近你，张开他死亡的拥抱。"
+
+npcNameCHN["ogre rune-spinner"] = "食人魔符文师"
+npcDescCHN["ogre rune-spinner"] = "一个高大的食人魔守卫，她的身上印刻着充满魔力的符文。"
+
+npcNameCHN["degenerated ogric mass"] = "腐化的食人魔碎肉"
+npcDescCHN["degenerated ogric mass"] = "这团变形的腐肉看上去曾经是某个食人魔身体器官的一部分，不过——好像出了点什么问题"
+
+npcNameCHN["ogric abomination"] = "憎恶食人魔"
+npcDescCHN["ogric abomination"] = "这个食人魔似乎试图把傀儡的身躯嫁接在自己的身体上。各种意义上有趣的结果。"
+
+npcNameCHN["ogre sentry"] = "食人魔哨兵"
+npcDescCHN["ogre sentry"] = "这个挥舞着巨剑的食人魔用带着鄙视和仇恨的眼神凝视着你。"
+
+npcNameCHN["Healer Astelrid"] = "孔克雷夫医师亚斯特莉"
+npcDescCHN["Healer Astelrid"] = "一个巨大的食人魔，身上穿着的破烂长袍上是一枚亮闪闪的官员徽章。她用手抓住一把治疗用的法杖，被石膏浇铸并裹挟着手术刀，用作一个巨大的狼牙棒。"
+
+npcNameCHN["old vats"] = "古老的培养槽"
+npcDescCHN["old vats"] = ""
+
 --地图巡逻队
 npcNameCHN["adventurers party"] = "冒险家分队"
 npcNameCHN["ziguranth patrol"] = "伊格巡逻队"

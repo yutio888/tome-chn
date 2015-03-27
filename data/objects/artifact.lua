@@ -714,7 +714,7 @@ class:bindHook("Entity:loadList", function (self,data)
 			 if item.name == "Girdle of the Calm Waters" then
 				item.name = "静水腰带"
 				item.unided_name  = "金色腰带"
-				item.desc  =  "传说这条腰带曾被教会的牧师们佩戴。"
+				item.desc  =  "传说这条腰带曾被孔克雷夫的医师们佩戴。"
 
 			end
 			 if item.name == "Behemoth Hide" then
@@ -2365,7 +2365,9 @@ class:bindHook("Entity:loadList", function (self,data)
 	if 	item.name == "Icy Kill" then
 		item.name = "冰冷杀戮"
 		item.unided_name = "锋利的冰柱"
-		item.desc = [[巨大的力量集中在这沉重的权杖里.只是掉落在地就可以摧毁附近的墙壁.]]
+		item.desc = [[任何占卜师都知道，凶器乃是缉查凶手最重要的线索；他们往往顺着这条线索顺藤摸瓜，从人群中找出凶手的真身。
+        然而，一个冷酷的杀手找到了一个办法：他用寒冰铸成了一把利刃，将其刺入受害者的胸口，让其随着受害者心脏的体温渐渐融化，消失于无形。
+        最终，这名杀手仍然没有逍遥于法外。一名受害者幸运地夺下了利刃，反身刺入了杀手的心脏里。杀手冷酷的内心没有温度，而这把与其相融的利刃从此再也不会融化。]]
 		item.combat.special_on_crit.desc="冻结目标"
 		item.combat.special_on_kill.desc="令 一 个 冻 结 生 物 爆 炸 ( 伤 害 受 意 志 加 成)"
 		end
@@ -2402,6 +2404,14 @@ class:bindHook("Entity:loadList", function (self,data)
 		item.special_desc = function(self)
 		 return [[每 次 接 受 雷 电 伤 害 或 造 成 暴 击 雷 电 伤 害 时 获 得两 点 充 能 ， 每 点 充 能 提 供 5%% 雷 电 伤 害 加 成 和 1 点 全属 性 。 每 回 合 损 失一 点 加 成。]] 
 		end
+	end
+    if item.name == "Astelrid's Clubstaff" then
+		item.name = "医师亚斯特莉的“狼牙棒”"
+		item.unided_name = "一把巨锤"
+		item.desc = [[如同它的前任主人一样，这曾经是无私治愈的工具，然而愤怒和恐惧将其扭曲成一把嗜血的武器。在插着锋利的手术设备的石膏涂层下，依稀可以感觉到流淌而出的治疗魔法的力量]]
+		item.special_desc = function(self)
+		 return [[增 加 纹 身 和 符 文 的 属 性 加 成 效 果 15%%]]         
+        end
 	end
 end
 end

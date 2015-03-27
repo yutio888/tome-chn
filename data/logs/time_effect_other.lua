@@ -396,4 +396,12 @@ logCHN:newLog{
 		return ("%s返回了现实时间！"):format(a)
 	end,
 }
+logCHN:newLog{
+	log = "#Target#'s is back to the normal timeflow.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("在%s中沉睡了无数年的生物被唤醒了！"):format(a)
+	end,
+}
+
 

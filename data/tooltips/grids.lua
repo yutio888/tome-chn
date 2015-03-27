@@ -334,6 +334,13 @@ gridCHN["demon statue Lithfengel"] = "恶魔雕像：里斯丰格"
 gridCHN["demon statue Shasshhiy'Kaish"] = "恶魔雕像：莎西·凯希"
 gridCHN["demon statue Walrog"] = "恶魔雕像：乌尔罗格"
 gridCHN["demon statue Harkor'Zun"] = "恶魔雕像：哈克祖"
+--conclave vault
+gridCHN["old vats"] = "古老的培养槽"
+gridCHN["broken vat"] = "被打破的培养槽"
+gridCHN["infusion rack"] = "输液架"
+gridCHN["operating table"] = "手术台"
+gridCHN["bone pile"] = "一堆白骨"
+gridCHN["body remains"] = "一箱器官"
 
 function getTooltipGridCHN(desc)
 	if not desc then return end

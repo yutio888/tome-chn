@@ -16,7 +16,7 @@ Talents.talents_def.T_SKIRMISHER_BASH_AND_SMASH.info= function(self, t)
 		local shieldMult = t.getShieldMult(self, t) * 100
 		local tiles = t.getDist(self, t)
 		local slingMult = t.getSlingMult(self, t) * 100
-		return ([[用 盾 牌 重 击 近 战 范 围 内 的 一 名 敌 人 （ 当 技 能 等 级 在 5 级 或 更 高 时 重 击 2 次 ），  造 成 %d%% 伤 害 并 击 退 %d 格。 紧 接 着 用 投 石 索 发 动 一 次 致 命 的 攻 击， 造 成 %d%% 伤 害。 
+		return ([[用 盾 牌 重 击 近 战 范 围 内 的 一 名 敌 人 （ 当 技 能 等 级 在 5 级 或 更 高 时 重 击 2 次 ）， 造 成 %d%% 伤 害 并 击 退 %d 格。 紧 接 着 用 投 石 索 发 动 一 次 致 命 的 攻 击， 造 成 %d%% 伤 害。 
 		盾 牌 攻 击 使 用 敏 捷 取 代 力 量 来 计 算 盾 牌 伤 害 加 成。]])
 		:format(shieldMult, tiles, slingMult)
 	end

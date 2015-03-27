@@ -9,7 +9,7 @@ Talents.talents_def.T_ATTACK.info= function(self, t)
 
 Talents.talents_def.T_HUNTED_PLAYER.name= "被捕猎"
 Talents.talents_def.T_HUNTED_PLAYER.info= function(self, t) return ([[你 被 捕 猎 了 ！
-		每 回 合 有 %d%% 几 率 半 径 %d 的 怪 能 在 30 回 合 内 察 觉 你 的 位  置。]]):
+		每 回 合 有 %d%% 几 率 半 径 %d 的 怪 能 在 30 回 合 内 察 觉 你 的 位 置。]]):
 		format(1 + self.level / 7, 10 + self.level / 5)
 	end
 Talents.talents_def.T_TELEPORT_ANGOLWEN.name= "传送：安格利文"

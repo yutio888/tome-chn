@@ -1,4 +1,4 @@
-﻿local Talents = require "engine.interface.ActorTalents"
+local Talents = require "engine.interface.ActorTalents"
 Talents.talents_def.T_DEMON_SEED.name = "恶魔之种"
 Talents.talents_def.T_DEMON_SEED.info = function(self, t)
 		local shield, weapon = t.getDam(self, t)

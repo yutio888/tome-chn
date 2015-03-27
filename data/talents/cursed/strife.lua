@@ -18,7 +18,7 @@ Talents.talents_def.T_PRETERNATURAL_SENSES.info= function(self, t)
 		return ([[你 的 第 7 感 能 让 你 能 在 狩 猎 中 发 现 下 个 牺 牲 品。 
 		 你 能 感 觉 到 %0.1f 码 半 径 范 围 内 的 敌 人。 
 		 在 10 码 半 径 范 围 内 你 总 能 看 见 被 追 踪 的 目 标。
-		 同 时 增 加 你 的 侦 测 潜 行 等 级 %d， 侦 测 隐 形 等 级%d。
+		 同 时 增 加 你 的 侦 测 潜 行 等 级 %d ， 侦 测 隐 形 等 级 %d 。
 		 受 意 志 影 响， 侦 测 强 度 有 额 外 加 成。 ]]):
 		format(range, sense, sense)
 	end

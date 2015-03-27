@@ -19,7 +19,7 @@ Talents.talents_def.T_TRANSCENDENT_ELECTROKINESIS.info=function(self, t)
 Talents.talents_def.T_THOUGHT_SENSE.name= "心电感应"
 Talents.talents_def.T_THOUGHT_SENSE.info= function(self, t)
 		return ([[感 知 半 径 %d 范 围 内 生 物 的 精 神 活 动 ， 效 果 持 续 %d 回 合。
-		这 个 技 能 暴 露 他 们 的 位 置， 并 增 加 你 的 防 御 %d。
+		这 个 技 能 暴 露 他 们 的 位 置， 并 增 加 你 的 防 御 %d 。
 		受 精 神 强 度 影 响， 持 续 时 间、 闪 避、 和 半 径 有 额 外 加 成。]]):format(t.radius(self, t), t.getDuration(self, t), t.getDefense(self, t))
 	end
 Talents.talents_def.T_STATIC_NET.name= "静电网络"
@@ -27,7 +27,7 @@ Talents.talents_def.T_STATIC_NET.info= function(self, t)
 		local damage = t.getDamage(self, t)
 		local duration = t.getDuration(self, t)
 		return ([[在 半 径 %d 范 围 中 散 布 一 个 持 续 %d 回 合 的 静 电 捕 网。
-		站 在 网 中 的 敌 人 受 到 %0.1f 的 闪 电 伤 害 并 被 减 速 %d%%。
+		站 在 网 中 的 敌 人 受 到 %0.1f 的 闪 电 伤 害 并 被 减 速 %d%% 。
 		当 你 在 网 中 穿 梭， 你 的 武 器 上 会 逐 渐 累 加 静 电 充 能， 让 你 的 下 一 次 攻 击 造 成 额 外 %0.1f 的 闪 电 伤 害。
 		受 精 神 强 度 影 响， 技 能 效 果 有 额 外 加 成。]]):
 		format(self:getTalentRadius(t), duration, damDesc(self, DamageType.LIGHTNING, damage), t.getSlow(self, t), damDesc(self, DamageType.LIGHTNING, t.getWeaponDamage(self, t)))

@@ -2,7 +2,8 @@ local Talents = require "engine.interface.ActorTalents"
 local damDesc = Talents.main_env.damDesc
 local DamageType = require "engine.DamageType"
 
-Talents.talents_def.T_MASTER_SUMMONER.name= "召唤精通"
+
+Talents.talents_def.T_MASTER_SUMMONER.name= "召唤精通"
 Talents.talents_def.T_MASTER_SUMMONER.info= function(self, t)
 		local cooldownred = t.getCooldownReduction(self, t)
 		return ([[降 低 所 有 召 唤 系 技 能 %d%% 冷 却 时 间。]]):

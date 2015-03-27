@@ -17,7 +17,7 @@ Talents.talents_def.T_CHANT_OF_FORTRESS.name = "防御赞歌"
 Talents.talents_def.T_CHANT_OF_FORTRESS.info = function(self, t)
 		local range = -t.getDamageChange(self, t)
 		local damageonmeleehit = t.getDamageOnMeleeHit(self, t)
-		return ([[赞 美 太 阳 之 荣 耀, 距 离 3 及 以 上 的 敌 人 对 你 的 伤 害 减 少 %d%%。
+		return ([[赞 美 太 阳 之 荣 耀, 距 离 3 及 以 上 的 敌 人 对 你 的 伤 害 减 少 %d%% 。
 		 此 外 它 提 供 你 光 之 护 盾， 对 任 何 攻 击 你 的 目 标 造 成 %0.1f 光 系 伤 害。 
 		 同 时 只 能 激 活 1 个 圣 歌。 
 		 伤 害 减 少 量 受 技 能 等 级 加 成 ， 光 系 伤 害 受 法 强 加 成。]]):

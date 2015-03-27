@@ -6,7 +6,7 @@ Talents.talents_def.T_SLASH.name= "削砍"
 Talents.talents_def.T_SLASH.info= function(self, t)
 		local healFactorChange = t.getHealFactorChange(self, t)
 		local woundDuration = t.getWoundDuration(self, t)
-		return ([[野 蛮 的 削 砍 你 的 目 标 造 成 %d%%（ 0 仇 恨） 至 %d%%（ 100+ 仇 恨） 伤 害。 
+		return ([[野 蛮 的 削 砍 你 的 目 标 造 成 %d%% （ 0 仇 恨） 至 %d%% （ 100+ 仇 恨） 伤 害。 
 		 等 级 3 时 攻 击 附 带 诅 咒， 降 低 目 标 治 疗 效 果 %d%% 持 续 %d 回 合， 效 果 可 叠 加。 
 		 受 力 量 影 响， 伤 害 按 比 例 加 成。]]):format(t.getDamageMultiplier(self, t, 0) * 100, t.getDamageMultiplier(self, t, 100) * 100, -healFactorChange * 100, woundDuration)
 	end
@@ -35,7 +35,7 @@ Talents.talents_def.T_CLEAVE.name= "分裂攻击"
 Talents.talents_def.T_CLEAVE.info= function(self, t)
 		local chance = t.getChance(self, t, 0)
 		local chance2h = t.getChance(self, t, 1)
-		return ([[ 激 活 时 ， 你 的 每 一 个 武 器 有 %d%% （ 双 持） 或 %d%% （ 单 持） 概 率 攻 击 第 二 个 目 标， 造 成 %d%%（ 0 仇 恨 值） 到 %d%% （ 100+ 仇 恨 值） 伤 害（ 双 手 武 器 伤 害 额 外 增 加 25%% ）。 
+		return ([[ 激 活 时 ， 你 的 每 一 个 武 器 有 %d%% （ 双 持） 或 %d%% （ 单 持） 概 率 攻 击 第 二 个 目 标， 造 成 %d%% （ 0 仇 恨 值） 到 %d%% （ 100+ 仇 恨 值） 伤 害（ 双 手 武 器 伤 害 额 外 增 加 25%% ）。 
 		 不 顾 一 切 的 杀 戮 会 带 给 你 厄 运 (-3 幸 运 )。 
 		 分 裂 攻 击、 杀 意 涌 动 和 无 所 畏 惧 不 能 同 时 开 启， 并 且 激 活 其 中 一 个 也 会 使 另 外 两 个 进 入 冷 却。
 		 受 力 量 影 响 ， 攻 击 概 率 和 伤 害 有 额 外 加 成 。]]):

@@ -8,8 +8,8 @@ Talents.talents_def.T_FOLD_FATE.info = function(self, t)
 		local radius = self:getTalentRadius(t)
 		local resists = t.getResists(self, t)
 		local duration = t.getDuration(self, t)
-		return ([[当 你 用 武 器 折 叠 命 中 时 ，有 %d%%几 率 在 半 径 %d 内 造 成 额 外 %0.2f 时 空 伤 害 。
-		 受 影 响 的 生 物 可 能 减 少 %d%%物 理 和 时 空 抗 性 %d 回 合 。
+		return ([[当 你 用 武 器 折 叠 命 中 时 ，有 %d%% 几 率 在 半 径 %d 内 造 成 额 外 %0.2f 时 空 伤 害 。
+		 受 影 响 的 生 物 可 能 减 少 %d%% 物 理 和 时 空 抗 性 %d 回 合 。
 		 这 个 效 果 有 冷 却 时 间 。当 处 于 冷 却 状 态 被 触 发 时 ，会 减 少 重 力 折 叠 和 扭 曲 折 叠 1 回 合 冷 却 时 间 。]])
 		:format(chance, damDesc(self, DamageType.TEMPORAL, damage), radius, resists, duration)
 	end
@@ -20,7 +20,7 @@ Talents.talents_def.T_FOLD_WARP.info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local radius = self:getTalentRadius(t)
 		local duration = t.getDuration(self, t)
-		return ([[当 你 用 武 器 折 叠 命 中 时 ，有 %d%%几 率 在 半 径 %d 内 造 成 额 外 %0.2f 物 理 和 %0.2f 时 空 伤 害 。
+		return ([[当 你 用 武 器 折 叠 命 中 时 ，有 %d%% 几 率 在 半 径 %d 内 造 成 额 外 %0.2f 物 理 和 %0.2f 时 空 伤 害 。
 		 受 影 响 的 生 物 可 能 被 震 慑 、 致 盲 、 定 身 或 混 乱 %d 回 合 。
 		 这 个 效 果 有 冷 却 时 间 。当 处 于 冷 却 状 态 被 触 发 时 ，会 减 少 重 力 折 叠 和 命 运 折 叠 1 回 合 冷 却 时 间 。]])
 		:format(chance, damDesc(self, DamageType.TEMPORAL, damage/2), damDesc(self, DamageType.PHYSICAL, damage/2), radius, duration)
@@ -33,7 +33,7 @@ Talents.talents_def.T_FOLD_GRAVITY.info = function(self, t)
 		local radius = self:getTalentRadius(t)
 		local slow = t.getSlow(self, t)
 		local duration = t.getDuration(self, t)
-		return ([[当 你 用 武 器 折 叠 命 中 时 ，有 %d%%几 率 在 半 径 %d 内 造 成 额 外 %0.2f 物 理( 重 力) 伤 害 。
+		return ([[当 你 用 武 器 折 叠 命 中 时 ，有 %d%% 几 率 在 半 径 %d 内 造 成 额 外 %0.2f 物 理( 重 力) 伤 害 。
 		 受 影 响 的 生 物 可 能 被 减 速 %d%% ，持 续 %d 回 合 。
 		 这 个 效 果 有 冷 却 时 间 。当 处 于 冷 却 状 态 被 触 发 时 ，会 减 少 扭 曲 折 叠 和 命 运 折 叠 1 回 合 冷 却 时 间 。]])
 		:format(chance, damDesc(self, DamageType.PHYSICAL, damage), radius, slow, duration)
@@ -65,10 +65,10 @@ Talents.talents_def.T_WEAPON_MANIFOLD.info =  function(self, t)
 		local slow = t.getSlow(self, t)
 		local duration = t.getDuration(self, t)
 		local resists = t.getResists(self, t)
-		return ([[你 现 在 有 %d%%几 率 将 命 运 、重 力 或 扭 曲 之 力 折 叠 进 你 的 武 器 。
-		 命 运 ：半 径 %d 内 造 成 %0.2f 时 空 伤 害 ，并 降 低 %d%%物 理 和 时 空 抗 性 。
+		return ([[你 现 在 有 %d%% 几 率 将 命 运 、重 力 或 扭 曲 之 力 折 叠 进 你 的 武 器 。
+		 命 运 ：半 径 %d 内 造 成 %0.2f 时 空 伤 害 ，并 降 低 %d%% 物 理 和 时 空 抗 性 。
 		 扭 曲 ：半 径 %d 内 造 成 %0.2f 物 理 %0.2f 时 空 伤 害 ，并 可 能 震 慑 、致 盲 、混 乱 或 者 定 身 %d 回 合 。
-		 重 力 ：半 径 %d 内 造 成 %0.2f 物 理 伤 害 ，并 减 速 （%d%%）%d 回 合 。
+		 重 力 ：半 径 %d 内 造 成 %0.2f 物 理 伤 害 ，并 减 速 （ %d%% ） %d 回 合 。
 		 每 项 效 果 有 8 回 合 冷 却 时 间 。
 		 当 处 于 冷 却 中 的 效 果 被 触 发 时 ，将 减 少 另 外 两 个 效 果 的 冷 却 1 回 合 。]])
 			:format(chance, damDesc(self, DamageType.TEMPORAL, damage), radius, resists, duration, damDesc(self, DamageType.PHYSICAL, damage/2), damDesc(self, DamageType.TEMPORAL, damage/2), radius,

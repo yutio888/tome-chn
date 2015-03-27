@@ -1,4 +1,4 @@
-﻿local Talents = require "engine.interface.ActorTalents"
+local Talents = require "engine.interface.ActorTalents"
 local damDesc = Talents.main_env.damDesc
 local DamageType = require "engine.DamageType"
 
@@ -30,9 +30,9 @@ Talents.talents_def.T_EYAL_S_WRATH.name= "埃亚尔之怒"
 Talents.talents_def.T_EYAL_S_WRATH.info= function(self, t)
 		local drain = t.getDrain(self, t)
 		return ([[  你 在 自 己 周 围 半 径 %d 的 范 围 内 制 造 自 然 力 量 风 暴 ， 持 续 %d 回 合 。
-		 风 暴 会 跟 随 你 移 动 ， 每 回 合 对 每 个 敌 人 造 成 %0.1f 点 自 然 伤 害 ， 并 抽 取 %d 点 法 力 ， %d 点 活 力 ，%d 点 正 负 能 量 。
-		 同 时 你 的 失 衡 值 会 回 复 你 抽 取 能 量 的 10%%。
-		 受 精 神 强 度 影 响 ， 伤 害 和 吸 取 量 有 额 外 加 成  。]]):
+		 风 暴 会 跟 随 你 移 动 ， 每 回 合 对 每 个 敌 人 造 成 %0.1f 点 自 然 伤 害 ， 并 抽 取 %d 点 法 力 ， %d 点 活 力 ， %d 点 正 负 能 量 。
+		 同 时 你 的 失 衡 值 会 回 复 你 抽 取 能 量 的 10%% 。
+		 受 精 神 强 度 影 响 ， 伤 害 和 吸 取 量 有 额 外 加 成 。]]):
 		format(self:getTalentRadius(t), t.getDuration(self, t), damDesc(self, DamageType.NATURE, t.getDamage(self, t)), drain, drain/2, drain/4, drain/4)
 	end
 

@@ -8,7 +8,7 @@ Talents.talents_def.T_UNNATURAL_BODY.info= function(self, t)
 		local maxUnnaturalBodyHeal = t.getMaxUnnaturalBodyHeal(self, t)
 		local regenRate = t.getRegenRate(self, t)
 
-		return ([[你 的 力 量 来 源 于 心 底 的 憎 恨， 这 使 得 大 部 分 治 疗 效 果 减 至 原 来 的 50%%（ 0 仇 恨） ～ 100%%（ 100+ 仇 恨）。 
+		return ([[你 的 力 量 来 源 于 心 底 的 憎 恨， 这 使 得 大 部 分 治 疗 效 果 减 至 原 来 的 50%% （ 0 仇 恨） ～ 100%% （ 100+ 仇 恨）。 
 		 另 外， 每 次 击 杀 敌 人 你 将 存 储 生 命 能 量 来 治 疗 自 己， 回 复 %d 点 生 命（ 受 敌 人 最 大 生 命 值 限 制， 任 何 时 候 不 能 超 过 %d 点 ）。 这 个 方 式 带 来 的 每 回 合 回 复 量 不 能 超 过 %0.1f 点 生 命， 也 不 受 仇 恨 等 级 或 治 疗 加 成 等 因 素 影 响。 
 		 受 意 志 影 响， 通 过 杀 死 敌 人 获 得 的 治 疗 量 有 额 外 加 成。]]):format(healPerKill, maxUnnaturalBodyHeal, regenRate)
 	end

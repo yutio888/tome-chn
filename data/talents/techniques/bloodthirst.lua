@@ -23,7 +23,7 @@ Talents.talents_def.T_BLOODBATH.info= function(self, t)
 Talents.talents_def.T_BLOODY_BUTCHER.name= "血之屠夫"
 Talents.talents_def.T_BLOODY_BUTCHER.info= function(self, t)
 		return ([[你 沉 醉 于 撕 裂 伤 口 的 兴 奋 中，增 加 %d 物 理 强 度。
-		同 时 ， 每 次 你 让 敌 人流 血 时 ， 它 的 物 理 抗 性 下 降 %d%%（但 不 会 小 于0）
+		同 时 ， 每 次 你 让 敌 人流 血 时 ， 它 的 物 理 抗 性 下 降 %d%% （但 不 会 小 于 0 ）
 		物 理 强 度 加 成 受 力 量 影 响。]]):
 		format(t.getDam(self, t), t.getResist(self, t))
 	end

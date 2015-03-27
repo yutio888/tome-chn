@@ -7,7 +7,7 @@ Talents.talents_def.T_GLACIAL_VAPOUR.info= function(self, t)
 		local damage = t.getDamage(self, t)
 		local duration = t.getDuration(self, t)
 		return ([[在 3 码 半 径 范 围 内 升 起 一 片 寒 冷 的 冰 雾， 每 回 合 造 成 %0.2f 冰 冷 伤 害， 持 续 %d 回 合。 
-		 处 于 湿 润 状 态 的 生 物 承 受 额 外 30%%伤 害， 并 有 15%% 几 率 被 冻 结。
+		 处 于 湿 润 状 态 的 生 物 承 受 额 外 30%% 伤 害， 并 有 15%% 几 率 被 冻 结。
 		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成。]]):
 		format(damDesc(self, DamageType.COLD, damage), duration)
 	end
@@ -44,7 +44,7 @@ Talents.talents_def.T_ICE_STORM.info= function(self, t)
 		local duration = t.getDuration(self, t)
 		return ([[召 唤 一 股 激 烈 的 暴 风 雪 围 绕 着 施 法 者， 在 3 码 范 围 内 每 回 合 对 目 标 造 成 %0.2f 冰 冷 伤 害， 持 续 %d 回 合。 
 		 它 有 25%% 概 率 冰 冻 受 影 响 目 标。 
-		 如 果 目 标 处 于 湿 润 状 态 ， 伤 害 增 加 30%%， 同 时 冻 结 率 上 升 至 50%%。
+		 如 果 目 标 处 于 湿 润 状 态 ， 伤 害 增 加 30%% ， 同 时 冻 结 率 上 升 至 50%% 。
 		 受 法 术 强 度 影 响， 伤 害 和 持 续 时 间 有 额 外 加 成。]]):format(damDesc(self, DamageType.COLD, damage), duration)
 	end
 

@@ -12,7 +12,7 @@ Talents.talents_def.T_SKIRMISHER_PACE_YOURSELF.name= "调整步伐"
 Talents.talents_def.T_SKIRMISHER_PACE_YOURSELF.info= function(self, t)
 		local slow = t.getSlow(self, t) * 100
 		local reduction = t.getReduction(self, t)
-		return ([[控 制 你 的 行 动 来 节 省 体 力。 当 这 个 技 能 激 活 时， 你 的 全 局 速 度 降 低 %0.1f%%， 你 的 疲 劳 值 降 低 %d%% （ 最 多 降 至 0%%）。]])
+		return ([[控 制 你 的 行 动 来 节 省 体 力。 当 这 个 技 能 激 活 时， 你 的 全 局 速 度 降 低 %0.1f%% ， 你 的 疲 劳 值 降 低 %d%% （ 最 多 降 至 0%% ）。]])
 		:format(slow, reduction)
 	end
 Talents.talents_def.T_SKIRMISHER_DAUNTLESS_CHALLENGER.name= "不屈底力"

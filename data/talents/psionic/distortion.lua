@@ -1,4 +1,4 @@
-﻿local Talents = require "engine.interface.ActorTalents"
+local Talents = require "engine.interface.ActorTalents"
 local damDesc = Talents.main_env.damDesc
 local DamageType = require "engine.DamageType"
 local function DistortionCount(self)
@@ -20,7 +20,7 @@ Talents.talents_def.T_DISTORTION_BOLT.info= function(self, t)
 		local radius = self:getTalentRadius(t)
 		local distort = DistortionCount(self)
 		return ([[射 出 一 枚 无 视 抵 抗 的 扭 曲 之 球 并 造 成 %0.2f 物 理 伤 害。 此 技 能 会 扭 曲 目 标，减 少 对 方 物 理 抗 性 %d%% ，并 使 其 在 2 回 合 内 受 到 扭 曲 效 果 时 会 产 生 额 外 的 负 面 影 响。
-		 如 果 目 标 身 上 已 存 在 扭 曲 效 果， 则 会 在 %d 码 范 围 内 产 生 150％ 基 础 伤 害 的 爆 炸。 
+		 如 果 目 标 身 上 已 存 在 扭 曲 效 果， 则 会 在 %d 码 范 围 内 产 生 150 ％ 基 础 伤 害 的 爆 炸。 
 		 在 该 技 能 投 入 点 数 会 增 加 你 所 有 扭 曲 效 果 的 降 抗 效 果。
 		 在 等 级 5 时， 你 学 会 控 制 你 的 扭 曲 效 果， 防 止 扭 曲 效 果 攻 击 到 你 或 友 军。 
 		 受 精 神 强 度 影 响， 伤 害 按 比 例 加 成。]]):format(damDesc(self, DamageType.PHYSICAL, damage), distort, radius)
@@ -44,7 +44,7 @@ Talents.talents_def.T_RAVAGE.info= function(self, t)
 		local distort = DistortionCount(self)
 		return ([[疯 狂 扭 曲 目 标， 造 成 每 轮 %0.2f 物 理 伤 害， 持 续 %d 回 合。 
 		 此 技 能 会 扭 曲 目 标，减 少 对 方 物 理 抗 性 %d%% ，并 使 其 在 2 回 合 内 受 到 扭 曲 效 果 时 会 产 生 额 外 的 负 面 影 响。
-		 如 果 目 标 身 上 已 存 在 扭 曲 效 果， 则 伤 害 提 升 50％， 并 且 目 标 每 回 合 会 丢 失 一 种 物 理 增 益 效 果 或 持 续 技 能 效 果。 
+		 如 果 目 标 身 上 已 存 在 扭 曲 效 果， 则 伤 害 提 升 50 ％， 并 且 目 标 每 回 合 会 丢 失 一 种 物 理 增 益 效 果 或 持 续 技 能 效 果。 
 		 在 该 技 能 投 入 点 数 会 增 加 你 所 有 扭 曲 效 果 的 降 抗 效 果。
 		 受 精 神 强 度 影 响， 伤 害 按 比 例 加 成。]]):format(damDesc(self, DamageType.PHYSICAL, damage), duration, distort)
 	end

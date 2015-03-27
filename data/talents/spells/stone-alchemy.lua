@@ -22,7 +22,7 @@ Talents.talents_def.T_EXTRACT_GEMS.info= function(self, t)
 	end
 Talents.talents_def.T_IMBUE_ITEM.name= "装备附魔"
 Talents.talents_def.T_IMBUE_ITEM.info= function(self, t)
-		return ([[在 %s 上 附 魔 宝 石（ 最 大 材 质 等 级 %d）， 使 其 获 得 额 外 增 益。
+		return ([[在 %s 上 附 魔 宝 石（ 最 大 材 质 等 级 %d ）， 使 其 获 得 额 外 增 益。
 		 你 只 能 给 每 个 装 备 附 魔 1 次， 并 且 此 效 果 是 永 久 的。]]):format(self:knowTalent(self.T_CRAFTY_HANDS) and "胸 甲、 腰 带 或 头 盔" or "胸 甲", self:getTalentLevelRaw(t))
 	end
 Talents.talents_def.T_GEM_PORTAL.name= "宝石传送"

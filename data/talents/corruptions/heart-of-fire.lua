@@ -1,4 +1,4 @@
-﻿local Talents = require "engine.interface.ActorTalents"
+local Talents = require "engine.interface.ActorTalents"
 Talents.talents_def.T_BURNING_SACRIFICE.name = "燃烧献祭"
 Talents.talents_def.T_BURNING_SACRIFICE.info = function(self, t)
 	local mult = t.getMult(self, t) * 100
@@ -11,14 +11,14 @@ end
 Talents.talents_def.T_DEVOURING_FLAMES.name = "火焰守护"	--Diplay name: Fiery Aegis
 Talents.talents_def.T_DEVOURING_FLAMES.info = function(self, t)
 	return ([[吸 取 燃 烧 中 的 烈 焰 ， 将 自 己 包 裹 其 中。
-	除 去 半 径 5 内 的 敌 方 生 物 身 上 的 燃 烧 效 果 ， 同 时 制 造 一 层 持 续 %d 轮 的 %d 强 度 的 护 盾 ， 每 吸 收 一 层 燃 烧  效 果 护盾  强 度 增 加 15%%。
+	除 去 半 径 5 内 的 敌 方 生 物 身 上 的 燃 烧 效 果 ， 同 时 制 造 一 层 持 续 %d 轮 的 %d 强 度 的 护 盾 ， 每 吸 收 一 层 燃 烧 效 果 护盾 强 度 增 加 15%% 。
 	当 护 盾 效 果 结 束 时 ， 将 在 半 径 %d 范 围 内 释 放 一 次 火 焰 爆 炸 ， 灼 烧 周 围 生 物 3 回 合 ， 造 成 等 于 护 盾 初 始 值 的 伤 害 。]]):format(t.getDur(self, t), t.getBaseShield(self, t), t.getRange(self, t))
 end
 
 Talents.talents_def.T_INFERNO_NEXUS.name = "吞噬之焰"		--Display name:Devouring flame
 Talents.talents_def.T_INFERNO_NEXUS.info =  function(self, t)
 	return ([[恶 魔 之 炎 抚 育 你 成 长 。 每 次 你 近 战 攻 击 命 中 时 ， 你 对 目 标 施 加 诅 咒 ， 只 要 其 处 于 燃 烧 状 态 ， 你 每 回 合 获 得 %0.2f 生 命 与 %0.2f 活 力 。 
-	同 时，在 你 周 围 10 码 范 围 内  ，所 有 被 诅 咒 火 焰 燃 烧 的 敌 方 生 物 会 将 诅 咒 传 播 至 半 径 1 内 的 燃 烧 生 物 上 ，并 造 成 %d 火 焰 伤 害 同时 给 予 你 等 量 治 疗。]]):format(t.getHeal(self, t), t.getVim(self, t),  t.getDam(self, t))
+	同 时，在 你 周 围 10 码 范 围 内 ，所 有 被 诅 咒 火 焰 燃 烧 的 敌 方 生 物 会 将 诅 咒 传 播 至 半 径 1 内 的 燃 烧 生 物 上 ，并 造 成 %d 火 焰 伤 害 同时 给 予 你 等 量 治 疗。]]):format(t.getHeal(self, t), t.getVim(self, t),  t.getDam(self, t))
 end
 		
 

@@ -15,7 +15,7 @@ Talents.talents_def.T_QUICK_AS_THOUGHT.info= function(self, t)
 		local percentinc = 100 * inc
 		local boost = t.getBoost(self, t)
 		return ([[用 灵 能 围 绕 你 的 躯 体 ，通 过 思 想 直 接 高 效 控 制 身 体 ，而 不 是 通 过 神 经 和 肌 肉 。
-		增 加 %d 命 中  、%0.1f%% 暴 击 率 和 %d%% 攻 击 速 度， 持 续  %d  回 合。 
+		增 加 %d 命 中 、 %0.1f%% 暴 击 率 和 %d%% 攻 击 速 度， 持 续  %d  回 合。 
 		受 精 神 强 度 影 响， 持 续 时 间 有 额 外 加 成。]]):
 		format(boost, 0.5*boost, percentinc, t.getDuration(self, t))
 	end
@@ -30,7 +30,7 @@ Talents.talents_def.T_MINDHOOK.info= function(self, t)
 Talents.talents_def.T_TELEKINETIC_LEAP.name= "灵能跳跃"
 Talents.talents_def.T_TELEKINETIC_LEAP.info= function(self, t)
 		local range = self:getTalentRange(t)
-		return ([[使 用 灵 能  ，精  准 地 跳 向 %d 码 外 的 地 点。]]):
+		return ([[使 用 灵 能 ，精 准 地 跳 向 %d 码 外 的 地 点。]]):
 		format(range)
 	end
 

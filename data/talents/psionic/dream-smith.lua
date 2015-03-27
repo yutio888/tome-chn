@@ -1,4 +1,4 @@
-﻿local Talents = require "engine.interface.ActorTalents"
+local Talents = require "engine.interface.ActorTalents"
 local damDesc = Talents.main_env.damDesc
 local DamageType = require "engine.DamageType"
 local function useDreamHammer(self)
@@ -47,7 +47,7 @@ Talents.talents_def.T_DREAM_HAMMER.info= function(self, t)
 
 		 当 前 梦 之 巨 锤 属 性： 
 		 攻 击 力 : %0.2f - %0.2f
-		 加 成 属 性 : 120％ 意 志 
+		 加 成 属 性 : 120 ％ 意 志 
 		 伤 害 类 型 : 物 理 
 		 此 武 器 的 命 中 率 基 于 意 志 计 算。 
 		 命 中 加 成 : +%d

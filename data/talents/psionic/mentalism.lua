@@ -1,11 +1,11 @@
-﻿local Talents = require "engine.interface.ActorTalents"
+local Talents = require "engine.interface.ActorTalents"
 local damDesc = Talents.main_env.damDesc
 local DamageType = require "engine.DamageType"
 
 Talents.talents_def.T_PSYCHOMETRY.name= "共鸣之心"
 Talents.talents_def.T_PSYCHOMETRY.info= function(self, t)
 		local max = t.getPsychometryCap(self, t)
-		return ([[与 你 装 备 着 的 超 能 力、 自 然 和 反 魔 超 能 力 值 所 制 造 的 物 品  产 生 共 鸣， 增 加 你 %0.2f 点 或 %d%% 物 品 材 质 等 级 数 值（ 取 较 小 值） 的 物 理 和 精 神 强 度。 
+		return ([[与 你 装 备 着 的 超 能 力、 自 然 和 反 魔 超 能 力 值 所 制 造 的 物 品 产 生 共 鸣， 增 加 你 %0.2f 点 或 %d%% 物 品 材 质 等 级 数 值（ 取 较 小 值） 的 物 理 和 精 神 强 度。 
 		 此 效 果 可 以 叠 加， 并 且 适 用 于 所 有 符 合 条 件 的 已 穿 戴 装 备。]]):format(max, 100*t.getMaterialMult(self,t))
 	end
 Talents.talents_def.T_MENTAL_SHIELDING.name= "精神屏障"

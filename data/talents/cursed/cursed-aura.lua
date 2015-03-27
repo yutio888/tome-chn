@@ -1,4 +1,4 @@
-﻿local Talents = require "engine.interface.ActorTalents"
+local Talents = require "engine.interface.ActorTalents"
 local damDesc = Talents.main_env.damDesc
 local DamageType = require "engine.DamageType"
 
@@ -24,7 +24,7 @@ Talents.talents_def.T_DARK_GIFTS.info= function(self, t)
 		local level = math.min(4, self:getTalentLevelRaw(t))
 		local xs = t.curseBonusLevel(self,t)
 		return ([[你 的 诅 咒 带 来 黑 暗 的 礼 物。 解 锁 所 有 诅 咒 第 %d 层 效 果， 并 允 许 你 在 诅 咒 达 到 该 等 级 时 获 得 此 效 果。 
-		 在 等 级 5 时， 因 诅 咒 带 来 的 幸 运 惩 罚 降 到 1。
+		 在 等 级 5 时， 因 诅 咒 带 来 的 幸 运 惩 罚 降 到 1 。
 		 等 级 5 以 上 时 增 加 诅 咒 效 果 （ 当 前 增 加 %0.1f ）]]):
 		format(level, xs)
 	end
@@ -46,7 +46,7 @@ Talents.talents_def.T_CURSED_SENTRY.info= function(self, t)
 
 		return ([[将 部 分 活 性 诅 咒 能 量 灌 输 到 你 背 包 里 的 1 把 武 器 上， 使 其 悬 浮 在 空 中。 这 个 类 似 于 诅 咒 护 卫 的 武 器 会 自 动 攻 击 附 近 的 敌 人， 持 续 %d 回 合。 
 		  攻 击 速 度： %d%% 。
-		  当 你 第 一 次 选 择 武 器 后 ， 只 要 武 器 仍 旧 在 背 包 里 ， 就 会 被 记 住 。 使 用  “ 选 择 诅 咒 护 卫 ” 技 能 来 切 换 武 器 。
+		  当 你 第 一 次 选 择 武 器 后 ， 只 要 武 器 仍 旧 在 背 包 里 ， 就 会 被 记 住 。 使 用 “ 选 择 诅 咒 护 卫 ” 技 能 来 切 换 武 器 。
 		  技 能 等 级 3 时 ， 你 能 将 具 有 高 级 词 缀 的 武 器 化 为 守 卫 。
 		  技 能 等 级 5 时 ， 你 能 将 神 器 化 为 守 卫。
 		  ]]):format(duration, attackSpeed)

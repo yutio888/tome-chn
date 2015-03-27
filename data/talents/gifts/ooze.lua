@@ -1,4 +1,4 @@
-﻿local Talents = require "engine.interface.ActorTalents"
+local Talents = require "engine.interface.ActorTalents"
 local damDesc = Talents.main_env.damDesc
 local DamageType = require "engine.DamageType"
 
@@ -7,7 +7,7 @@ Talents.talents_def.T_MITOSIS.info= function(self, t)
 		local xs = self:knowTalent(self.T_REABSORB) and ([[同 时， 当 这 个 技 能 开 启 时 ， 每 回 合 回 复 %0.1f 点 失 衡 值 。
 		]]):format(self:callTalent(self.T_REABSORB, "equiRegen")) or ""
 		return ([[你 的 身 体 构 造 变 的 像 软 泥 怪 一 样。 
-		 当 你 受 到 攻 击 时， 你 有 几 率 分 裂 出 一 个 浮 肿 软 泥 怪， 其 生 命 值 为 你 所 承 受 的 伤 害 值 的 两 倍（ 最 大 %d）。 
+		 当 你 受 到 攻 击 时， 你 有 几 率 分 裂 出 一 个 浮 肿 软 泥 怪， 其 生 命 值 为 你 所 承 受 的 伤 害 值 的 两 倍（ 最 大 %d ）。 
 		 分 裂 几 率 为 你 损 失 生 命 百 分 比 的 %0.2f 倍。
 		 你 所 承 受 的 所 有 伤 害 会 在 你 和 浮 肿 软 泥 怪 间 均 摊。 
 		 你 同 时 最 多 只 能 拥 有 %d 只 浮 肿 软 泥 怪（ 基 于 你 的 灵 巧 值 和 技 能 等 级 ）。

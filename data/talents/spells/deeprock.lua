@@ -1,4 +1,4 @@
-﻿local Talents = require "engine.interface.ActorTalents"
+local Talents = require "engine.interface.ActorTalents"
 Talents.talents_def.T_DEEPROCK_FORM.name = "深岩形态"
 Talents.talents_def.T_DEEPROCK_FORM.info = function(self, t)
 		local xs = ""
@@ -16,8 +16,8 @@ Talents.talents_def.T_DEEPROCK_FORM.info = function(self, t)
 			format(self:callTalent(self.T_MOUNTAINHEWN, "getImmune")*100)
 		end
 		return ([[你 呼 唤 世 界 深 层 的 核 心 之 力 ， 用 来 改 造 自 己 的 身 体。
-		%d 回 合 内 ， 你 将 变 成 深 岩 元 素 形 态 ， 增 加 2 点 体 型 %s。
-		同 时 ， 你 将 增 加 %0.1f%% 物 理 伤 害 和 %0.1f%% 物 理 抗 性 穿 透 %s， 并 获 得 %d 点 护 甲。%s
+		%d 回 合 内 ， 你 将 变 成 深 岩 元 素 形 态 ， 增 加 2 点 体 型 %s 。
+		同 时 ， 你 将 增 加 %0.1f%% 物 理 伤 害 和 %0.1f%% 物 理 抗 性 穿 透 %s ， 并 获 得 %d 点 护 甲。 %s
 		效 果 受 法 术 强 度 加 成。]])
 		:format(t.getTime(self, t), xsi, t.getDam(self, t),t.getPen(self, t), xs, t.getArmor(self, t), self:getTalentLevel(self.T_MOUNTAINHEWN) >=5 and "\n另 外，你 将 用 物 理 抗 性 取 代 其 他 伤 害 抗 性。" or "")
 	end

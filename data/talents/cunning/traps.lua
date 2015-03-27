@@ -12,11 +12,11 @@ Talents.talents_def.T_TRAP_MASTERY.info= function(self, t)
 		local detect_power = t.getPower(self, t)
 		local disarm_power = t.getPower(self, t)*1.25
 		return ([[学 会 如 何 使 用 陷 阱。 你 将 会 学 到 新 的 陷 阱 如 下： 
-		 等 级 1： 爆 炸 陷 阱 
-		 等 级 2： 兽 夹 陷 阱 
-		 等 级 3： 弹 射 陷 阱 
-		 等 级 4： 缴 械 陷 阱 
-		 等 级 5： 颠 茄 陷 阱 
+		 等 级 1 ： 爆 炸 陷 阱 
+		 等 级 2 ： 兽 夹 陷 阱 
+		 等 级 3 ： 弹 射 陷 阱 
+		 等 级 4 ： 缴 械 陷 阱 
+		 等 级 5 ： 颠 茄 陷 阱 
 		 同 时 你 还 可 以 向 世 界 上 特 定 的 人 学 习 新 陷 阱。 
 		 同 时 提 高 你 %d%% 的 陷 阱 效 果。（ 此 效 果 对 每 个 陷 阱 都 有 效） 并 让 陷 阱 更 难 被 发 现、 被 解 除 （ %d 点 侦 测 强 度， %d 点 解 除 强 度 ， 基 于 灵 巧）。
 		 当 陷 阱 消 失 时， 如 果 效 果 未 触 发， 回 复 80%% 体 力 消 耗。]]):
@@ -71,7 +71,7 @@ Talents.talents_def.T_NIGHTSHADE_TRAP.info= function(self, t)
 Talents.talents_def.T_FLASH_BANG_TRAP.name= "闪光陷阱"
 Talents.talents_def.T_FLASH_BANG_TRAP.info= function(self, t)
 		return ([[放 置 一 个 闪 光 陷 阱。 产 生 一 个 2 码 范 围 的 爆 炸， 致 盲 或 眩 晕 目 标 %d 回 合。
-		 范 围 内 所 有 人 将 受  到 %0.2f 点 物 理 伤 害 。
+		 范 围 内 所 有 人 将 受 到 %0.2f 点 物 理 伤 害 。
 		 持 续 时 间 受 陷 阱 大 师 等 级 加 成。 
 		 高 级 诱 饵 可 触 发 这 个 陷 阱。]]):
 		format(t.getDuration(self, t), damDesc(self, engine.DamageType.PHYSICAL, t.getDamage(self, t)))

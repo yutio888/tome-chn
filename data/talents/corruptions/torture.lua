@@ -1,4 +1,4 @@
-﻿local Talents = require "engine.interface.ActorTalents"
+local Talents = require "engine.interface.ActorTalents"
 Talents.talents_def.T_INCINERATING_BLOWS.name = "焚尽强击"
 Talents.talents_def.T_INCINERATING_BLOWS.info = function(self, t)
 	return ([[恶 魔 空 间 的 力 量 注 入 你 的 武 器 ： 你 的 近 战 攻 击 在 3 回 合 内 造 成 %0.2f 点 火 焰 伤 害。
@@ -26,6 +26,6 @@ end
 	
 Talents.talents_def.T_ETERNAL_SUFFERING.name = "无尽苦痛"
 Talents.talents_def.T_ETERNAL_SUFFERING.info = function(self, t)
-	return ([[你 的 攻 击 充 溢 着 恶 毒 的 力 量 ， 能 够 延 长 敌 人 的 苦 痛 。当 近 战 命 中 时，有 %d%% 几 率 延 长 对 方 所 有 的 负 面 状 态 持 续 时 间并 降  低 所 有 正 面状 态 的 持 续 时 间 ， 增 减 幅 度 为 %d 回 合。
-	该 效 果 对 同 一 目 标 每 6 回 合 才 能 生 效  一 次 。]]):format(math.min(100, t.getChance(self,t)), t.getExtend(self,t))
+	return ([[你 的 攻 击 充 溢 着 恶 毒 的 力 量 ， 能 够 延 长 敌 人 的 苦 痛 。当 近 战 命 中 时，有 %d%% 几 率 延 长 对 方 所 有 的 负 面 状 态 持 续 时 间并 降 低 所 有 正 面状 态 的 持 续 时 间 ， 增 减 幅 度 为 %d 回 合。
+	该 效 果 对 同 一 目 标 每 6 回 合 才 能 生 效 一 次 。]]):format(math.min(100, t.getChance(self,t)), t.getExtend(self,t))
 end

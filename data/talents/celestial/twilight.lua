@@ -1,4 +1,4 @@
-﻿local Talents = require "engine.interface.ActorTalents"
+local Talents = require "engine.interface.ActorTalents"
 local damDesc = Talents.main_env.damDesc
 local DamageType = require "engine.DamageType"
 
@@ -6,7 +6,7 @@ Talents.talents_def.T_TWILIGHT.name= "黄昏"
 Talents.talents_def.T_TWILIGHT.info= function(self, t)
 		return ([[你 处 于 黑 暗 和 光 明 之 间， 能 够 将 15 点 正 能 量 转 化 为 %d 负 能 量。 
 		 此 外， 这 也 会 影 响 正 负 能 量 的 固 有 值， 数 值 为 它 们 最 大 值 的 %d%% 。 
-		 每 回 合 正 负 能 量 值 会 缓 慢 的 上 升 / 下 降， 而 不 是 归 0。 
+		 每 回 合 正 负 能 量 值 会 缓 慢 的 上 升 / 下 降， 而 不 是 归 0 。 
 		 受 灵 巧 影 响， 效 果 有 额 外 加 成。]]):
 		format(t.getNegativeGain(self, t), t.getRestValue(self, t))
 	end
@@ -41,7 +41,7 @@ Talents.talents_def.T_SHADOW_SIMULACRUM.info= function(self, t)
 		elseif allowed < 6 then
 			size = "huge"
 		end
-		return ([[用 阴 影 复 制 目 标（ 最 大 体 积 %s）， 幻 象 会 立 刻 攻 击 目 标。 
+		return ([[用 阴 影 复 制 目 标（ 最 大 体 积 %s ）， 幻 象 会 立 刻 攻 击 目 标。 
 		 幻 象 持 续 %d 回 合。 
 		 幻 象 拥 有 %d%% 目 标 生 命, %d%% 全 部 伤 害 抵 抗，+50%% 暗 影 伤 害 抗 性，-50%% 光 系 伤 害 抗 性。
 		 受 灵 巧 影 响， 它 的 持 续 时 间、 生 命 值 和 抗 性 按 比 例 加 成。

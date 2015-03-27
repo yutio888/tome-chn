@@ -202,6 +202,11 @@ loreList["Rashim Journal (1)"] = "Rashim的日记(1)"
 loreList["Rashim Journal (2)"] = "Rashim的日记(2)"
 loreList["Rashim Journal (3)"] = "Rashim的日记(3)"
 loreList["The Spellblaze Chronicles(1): A Fateful Meeting"] = "魔法大爆炸纪事(1)：命运相遇的瞬间"
+loreList["order for director Hompalan"] = "致半身人法师红帕兰的绝密命令"
+loreList["healer Astelrid log 1"] = "孔克雷夫医师亚斯特莉的日志 第一部分"
+loreList["healer Astelrid log 2"] = "孔克雷夫医师亚斯特莉的日志 第二部分"
+loreList["healer Astelrid log 3"] = "孔克雷夫医师亚斯特莉的日志 第三部分"
+loreList["healer Astelrid log 4"] = "孔克雷夫医师亚斯特莉的日志 第四部分"
 function loreListCHN(name)
 	if not name then return end
 	if loreList[name] then name = loreList[name]

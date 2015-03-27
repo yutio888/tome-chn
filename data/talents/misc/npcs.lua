@@ -101,7 +101,7 @@ Talents.talents_def.T_ICE_BOLT.info= function(self, t)
 Talents.talents_def.T_BLIGHT_BOLT.name= "枯萎箭"
 Talents.talents_def.T_BLIGHT_BOLT.info= function(self, t)
 		return ([[释 放 枯 萎 箭 ， 对 目 标 造 成 %0.2f 点 枯 萎 伤 害。
-		该 法 术 的 暴 击 率 增 加 %0.2f%%。
+		该 法 术 的 暴 击 率 增 加 %0.2f%% 。
 		受 法 术 强 度 影 响 ， 伤 害 有 额 外 加 成。]]):
 		format(damDesc(self, DamageType.BLIGHT, self:combatTalentSpellDamage(t, 1, 180)), t.getCritChance(self, t))
 	end
@@ -119,7 +119,7 @@ Talents.talents_def.T_VOID_BLAST.info= function(self, t)
 Talents.talents_def.T_RESTORATION.name= "自然治愈"
 Talents.talents_def.T_RESTORATION.info= function(self, t)
 		local curecount = t.getCureCount(self, t)
-		return ([[召 唤 自 然 的 力 量 治 愈 你 的 身 体， 移 除 %d 个 毒 素 和 疫 病 不 良 效 果（ 等 级 3）。]]):
+		return ([[召 唤 自 然 的 力 量 治 愈 你 的 身 体， 移 除 %d 个 毒 素 和 疫 病 不 良 效 果（ 等 级 3 ）。]]):
 		format(curecount)
 	end
 Talents.talents_def.T_REGENERATION.name= "再生"

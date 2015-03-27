@@ -1,13 +1,13 @@
-﻿local Talents = require "engine.interface.ActorTalents"
+local Talents = require "engine.interface.ActorTalents"
 local damDesc = Talents.main_env.damDesc
 local DamageType = require "engine.DamageType"
 
 Talents.talents_def.T_AETHER_BEAM.name= "以太螺旋"
 Talents.talents_def.T_AETHER_BEAM.info= function(self, t)
 		local dam = t.getDamage(self, t)
-		return ([[你 凝 聚 以 太 能 量， 释 放 出 一 个 以 太 螺 旋， 对 周 围 目 标 造 成 %0.2f 奥 术 伤 害 并 且 有 25％ 几 率 沉 默 目 标。 
-		 以 太 螺 旋 每 回 合 也 会 对 中 心 点 造 成 10％ 的 伤 害（ 但 是 不 会 沉 默 目 标）。 
-		 螺 旋 会 以 难 以 置 信 的 速 度 旋 转。（ 1600％ 基 础 速 度） 
+		return ([[你 凝 聚 以 太 能 量， 释 放 出 一 个 以 太 螺 旋， 对 周 围 目 标 造 成 %0.2f 奥 术 伤 害 并 且 有 25 ％ 几 率 沉 默 目 标。 
+		 以 太 螺 旋 每 回 合 也 会 对 中 心 点 造 成 10 ％ 的 伤 害（ 但 是 不 会 沉 默 目 标）。 
+		 螺 旋 会 以 难 以 置 信 的 速 度 旋 转。（ 1600 ％ 基 础 速 度） 
 		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成。]]):
 		format(damDesc(self, DamageType.ARCANE, dam))
 	end
@@ -22,7 +22,7 @@ Talents.talents_def.T_AETHER_BREACH.info= function(self, t)
 Talents.talents_def.T_AETHER_AVATAR.name= "以太之体"
 Talents.talents_def.T_AETHER_AVATAR.info= function(self, t)
 		return ([[你 的 身 体 与 以 太 能 量 相 融， 持 续 %d 回 合。 
-		 当 此 技 能 激 活 时， 你 只 能 使 用 奥 术 系 或 以 太 系 技 能， 同 时， 2 系 技 能 的 冷 却 时 间 减 为 三 分 之 一  ， 你 的 奥 术 伤 害 增 加 25％， 并 且 你 可 以 随 时 开 启 干 扰 护 盾， 你 的 法 力 最 大 值 增 加 33％。]]):
+		 当 此 技 能 激 活 时， 你 只 能 使 用 奥 术 系 或 以 太 系 技 能， 同 时， 2 系 技 能 的 冷 却 时 间 减 为 三 分 之 一 ， 你 的 奥 术 伤 害 增 加 25 ％， 并 且 你 可 以 随 时 开 启 干 扰 护 盾， 你 的 法 力 最 大 值 增 加 33 ％。]]):
 		format(t.getNb(self, t))
 	end
 Talents.talents_def.T_PURE_AETHER.name= "以太掌握"

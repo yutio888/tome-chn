@@ -33,7 +33,7 @@ Talents.talents_def.T_DARKEST_LIGHT.info= function(self, t)
 		local damage = t.getDamage(self, t)
 		local radius = t.getRadius(self, t)
 		return ([[这 个 强 大 的 技 能 提 供 你 %d 额 外 隐 形 等 级， 但 是 每 回 合 会 转 化 %d 负 能 量 至 正 能 量。 一 旦 你 的 正 能 量 超 过 负 能 量， 或 你 中 断 此 技 能， 此 效 果 会 终 止 并 产 生 光 系 爆 炸， 将 你 所 有 的 正 能 量 转 化 为 伤 害 并 对 所 有 敌 人 附 加 %0.2f 伤 害（ %d 码 有 效 范 围）。 
-		 由 于 你 变 得 不 可 见， 你 脱 离 了 相 位 现 实， 你 的 所 有 伤 害 减 少 50%%。 
+		 由 于 你 变 得 不 可 见， 你 脱 离 了 相 位 现 实， 你 的 所 有 伤 害 减 少 50%% 。 
 		 当 此 技 能 激 活 时， 你 不 能 激 活 黄 昏 技 能 并 且 你 必 须 取 下 光 源， 否 则 你 仍 然 会 被 发 现。 
 		 受 灵 巧 影 响， 隐 形 等 级 有 额 外 加 成； 受 法 术 强 度 影 响， 爆 炸 伤 害 有 额 外 加 成。]]):
 		format(invisibilitypower, convert, damDesc(self, DamageType.LIGHT, damage), radius)

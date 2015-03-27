@@ -24,8 +24,8 @@ Talents.talents_def.T_RIGHTEOUS_STRENGTH.info= function(self, t)
 Talents.talents_def.T_FLASH_OF_THE_BLADE.name= "闪光之刃"
 Talents.talents_def.T_FLASH_OF_THE_BLADE.info= function(self, t)
 		return ([[ 旋 转 一 周 ， 同 时 将 光 明 之 力 充 满 武 器 。
-		 半 径 1 以 内 的 敌 人 将 受 到 %d%% 武 器 伤 害 ， 同 时 半 径 2 以内 的 敌  人将 受 到 %d%% 光 系 武 器 伤害 。
-		 技 能 等 级 4 或 以 上 时 ， 在 旋 转 时 你 会 制 造  一层  护盾 ， 吸 收 1 回 合 内 的 所 有 攻 击 。]]):
+		 半 径 1 以 内 的 敌 人 将 受 到 %d%% 武 器 伤 害 ， 同 时 半 径 2 以内 的 敌 人将 受 到 %d%% 光 系 武 器 伤害 。
+		 技 能 等 级 4 或 以 上 时 ， 在 旋 转 时 你 会 制 造 一层 护盾 ， 吸 收 1 回 合 内 的 所 有 攻 击 。]]):
 		format(t.get1Damage(self, t) * 100, t.get2Damage(self, t) * 100)
 	end
 

@@ -23,7 +23,7 @@ Talents.talents_def.T_WARD.info= function(self, t)
 			xs = xs .. (xs ~= "" and ", " or "") .. engine.DamageType.dam_def[w].name:capitalize() .. "(" .. tostring(nb) .. ")"
 		end
 		return ([[激 活 指 定 伤 害 类 型 的 抵 抗 状 态， 能 够 完 全 抵 抗 对 应 属 性 的 伤 害。 抵 抗 次 数 由 魔 杖 决 定。
-		你 能 激 活 的 伤 害 类 型 有 ：%s]]):format(xs)
+		你 能 激 活 的 伤 害 类 型 有 ： %s]]):format(xs)
 	end
 Talents.talents_def.T_YIILKGUR_BEAM_DOWN.name= "回到地面"
 Talents.talents_def.T_YIILKGUR_BEAM_DOWN.info= function(self, t)
@@ -55,11 +55,11 @@ Talents.talents_def.T_BLOOM_HEAL.info= function(self, t)
 	end
 Talents.talents_def.T_DESTROY_MAGIC.name= "禁魔"
 Talents.talents_def.T_DESTROY_MAGIC.info= function(self, t)
-		return ([[ 目 标 有 %d%% 概 率（ 最 大 叠 加 至 %d%%） 施 法 失 败 率。 等 级 2 时 魔 法 效 果 可 能 会 被 打 断 。 等 级 3 时 持 续 性 法 术 可 能 会 被 打 断 。 等 级 5 时 魔 法 生 物 和 不 死 族 可 能 会 被 震 慑。 ]]):format(t.getpower(self, t),t.maxpower(self,t))
+		return ([[ 目 标 有 %d%% 概 率（ 最 大 叠 加 至 %d%% ） 施 法 失 败 率。 等 级 2 时 魔 法 效 果 可 能 会 被 打 断 。 等 级 3 时 持 续 性 法 术 可 能 会 被 打 断 。 等 级 5 时 魔 法 生 物 和 不 死 族 可 能 会 被 震 慑。 ]]):format(t.getpower(self, t),t.maxpower(self,t))
 	end
 Talents.talents_def.T_BATTLE_TRANCE.name= "战意勃发"
 Talents.talents_def.T_BATTLE_TRANCE.info= function(self, t)
-		return ([[ 你 进 入 了 战 斗 狂 热 状 态， 获 得 15％ 全 体 伤 害 抗 性， 减 少 15 点 精 神 强 度 并 获 得 20 点 精 神 豁 免。 技 能 激 活 5 回 合 后 ， 每 回 合 你 都 有 一 定 几 率 疲 劳 ， 终 止 技 能 并 进 入 混 乱 状 态。 ]])
+		return ([[ 你 进 入 了 战 斗 狂 热 状 态， 获 得 15 ％ 全 体 伤 害 抗 性， 减 少 15 点 精 神 强 度 并 获 得 20 点 精 神 豁 免。 技 能 激 活 5 回 合 后 ， 每 回 合 你 都 有 一 定 几 率 疲 劳 ， 终 止 技 能 并 进 入 混 乱 状 态。 ]])
 	end
 Talents.talents_def.T_SOUL_PURGE.name= "解放灵魂"
 Talents.talents_def.T_SOUL_PURGE.info= function(self, t)
@@ -76,7 +76,7 @@ Talents.talents_def.T_SHIV_LORD.info= function(self, t)
 		local power = t.getPower(self, t)
 		local dur = t.getDuration(self, t)
 		return ([[你 吸 收 周 围 的 寒 冰 围 绕 你， 将 自 己 转 变 为 纯 粹 的 冰 元 素 — — 西 弗 格 罗 斯， 持 续 %d 回 合。 
-		 转 化 成 元 素 后， 你 不 需 要 呼 吸 并 获 得 等 级 %d 的 冰 雪 风 暴， 获 得 %d%% 切 割 和 震 慑 抵 抗 ，%d%% 寒 冰 抗 性 ,所 有 冰 冷 伤 害 可 对 你 产 生 治 疗， 治 疗 量 基 于 伤 害 值 的 %d%% 。 
+		 转 化 成 元 素 后， 你 不 需 要 呼 吸 并 获 得 等 级 %d 的 冰 雪 风 暴， 获 得 %d%% 切 割 和 震 慑 抵 抗 ， %d%% 寒 冰 抗 性 ,所 有 冰 冷 伤 害 可 对 你 产 生 治 疗， 治 疗 量 基 于 伤 害 值 的 %d%% 。 
 		 受 法 术 强 度 影 响， 效 果 有 额 外 加 成。]]):
 		format(dur, self:getTalentLevelRaw(t), power * 100, power * 100 / 2, 50 + power * 100)
 	end

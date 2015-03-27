@@ -41,7 +41,7 @@ Talents.talents_def.T_CRUSADE.info= function(self, t)
 		local cooldown = t.getCooldownReduction(self, t)
 		local cleanse = t.getDebuff(self, t)
 		return ([[你 用 武 器 攻 击 造 成 %d%% 光 系 伤 害 ， 再 用 盾 牌 攻 击 造 成 %d%% 光 系 伤 害。
-			如 果 第 一 次 攻 击 命 中 ， 随 机 %d 个 技 能 cd 时 间 减 1。
+			如 果 第 一 次 攻 击 命 中 ， 随 机 %d 个 技 能 cd 时 间 减 1 。
 			如 果 第 二 次 攻 击 命 中， 除 去 你 身 上 至 多 %d 个 debuff。]]):
 		format(weapon, shield, cooldown, cleanse)
 	end

@@ -2,10 +2,10 @@ local Talents = require "engine.interface.ActorTalents"
 Talents.talents_def.T_INDUCE_ANOMALY.name = "引导异常"
 Talents.talents_def.T_INDUCE_ANOMALY.info = function(self, t)
 		local reduction = t.getReduction(self, t)
-		return ([[引 发 一 次 异 常 ， 减 少 你 的 紊 乱 值 %d 。  这 个 技 能 不 会 引 发 重 大 异 常。
+		return ([[引 发 一 次 异 常 ， 减 少 你 的 紊 乱 值 %d 。 这 个 技 能 不 会 引 发 重 大 异 常。
 		引 导 异 常 不 会 被 扭 曲 命 运 延 后 ， 也 不 会 触 发 被 延 后 的 异 变 。 
 		然 而 ， 当 学 会 扭 曲 命 运 后 ， 你 可 以 选 中 引 导 异 变 作 为 目 标。
-		受 法 术 强 度 影 响 ， 紊 乱 值 减 少 效  果 有 额 外 加 成。]]):format(reduction)
+		受 法 术 强 度 影 响 ， 紊 乱 值 减 少 效 果 有 额 外 加 成。]]):format(reduction)
 	end
 
 Talents.talents_def.T_REALITY_SMEARING.name = "弥散现实"
@@ -23,7 +23,7 @@ Talents.talents_def.T_ATTENUATE.info = function(self, t)
 		local duration = t.getDuration(self, t)
 		local radius = self:getTalentRadius(t)
 		return ([[对 范 围 内 所 有 单 位 造 成 %0.2f 时 空 伤 害 ， 这 些 伤 害 会 被 分 散 到  %d 回 合 中 。 技 能 半 径 为 %d 格。
-		 带 有 弥 散 现 实 效 果 的 单 位  不 会 受 到 伤 害 ， 并 在 四 回 合 中 回 复 %d 生 命 值。
+		 带 有 弥 散 现 实 效 果 的 单 位 不 会 受 到 伤 害 ， 并 在 四 回 合 中 回 复 %d 生 命 值。
 		 如 果 目 标 的 生 命 值 被 减 低 到  20%% 以下，湮 灭 洪 流 将 会 立 刻 杀 死 目 标。
 		 受 到 法 术 强 度 影 响 ， 伤 害 有 额 外 加 成。]]):format(damage, duration, radius, damage *0.4)
 	end

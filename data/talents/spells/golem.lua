@@ -71,7 +71,7 @@ Talents.talents_def.T_GOLEM_ARMOUR.info= function(self, t)
 		local critreduce = t.getCriticalChanceReduction(self, t)
 		local dir = self:getTalentLevelRaw(t) >= 3 and "In" or "De"
 		return ([[傀 儡 学 会 重 新 组 装 重 甲 和 板 甲， 以 便 更 加 适 用 于 傀 儡。 
-		 当 装 备 重 甲 或 板 甲 时， %s 增 加 护 甲 强 度 %d 点 , 护 甲 韧 性 %d%%， 并 且 减 少 %d%% 暴 击 伤 害。]]):
+		 当 装 备 重 甲 或 板 甲 时， %s 增 加 护 甲 强 度 %d 点 , 护 甲 韧 性 %d%% ， 并 且 减 少 %d%% 暴 击 伤 害。]]):
 		format(dir, armor, hardiness, critreduce)
 	end
 Talents.talents_def.T_DROLEM_POISON_BREATH.name= "毒性吐息"

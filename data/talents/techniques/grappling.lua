@@ -37,7 +37,7 @@ Talents.talents_def.T_TAKE_DOWN.name= "关节技：抱摔"
 Talents.talents_def.T_TAKE_DOWN.info= function(self, t)
 		local takedown = t.getDamage(self, t)*100
 		local slam = t.getSlam(self, t)
-		return ([[冲 向 目 标 ， 试 图 将 他 掀 翻 在 地 ， 造 成 %d%% 伤 害 然 后 抓 取 之 。 如 果 已 经 抓 取 ， 则 将 他 掀 翻 ， 制 造 冲 击 波 ， 在 半 径 5 的 范  围 内 造 成 %d 物 理 伤 害 并 解 除 抓 取。
+		return ([[冲 向 目 标 ， 试 图 将 他 掀 翻 在 地 ， 造 成 %d%% 伤 害 然 后 抓 取 之 。 如 果 已 经 抓 取 ， 则 将 他 掀 翻 ， 制 造 冲 击 波 ， 在 半 径 5 的 范 围 内 造 成 %d 物 理 伤 害 并 解 除 抓 取。
 		 抓 取 效 果 和 持 续 时 间 基 于 抓 取 技 能 。 伤 害 受 物 理 强 度 加 成。]])
 		:format(damDesc(self, DamageType.PHYSICAL, (takedown)), damDesc(self, DamageType.PHYSICAL, (slam)))
 	end

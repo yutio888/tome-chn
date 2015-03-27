@@ -10,7 +10,7 @@ Talents.talents_def.T_TIME_DILATION.name = "时间膨胀"
 Talents.talents_def.T_TIME_DILATION.info = function(self, t)
 		local speed = t.getSpeed(self, t) * 100
 		local duration = t.getDuration(self, t)
-		return ([[当 你 使 用 非 瞬 发 时 空 系 法 术 ， 你 获 得 %d%% 战 斗 、 施 法 和 精 神 速 度 ， 持 续  %d 回 合 。  这 个 效 果 可 以 叠 加 三 次 ， 每 回 合 只 能 触 发 一 次 。 
+		return ([[当 你 使 用 非 瞬 发 时 空 系 法 术 ， 你 获 得 %d%% 战 斗 、 施 法 和 精 神 速 度 ， 持 续  %d 回 合 。 这 个 效 果 可 以 叠 加 三 次 ， 每 回 合 只 能 触 发 一 次 。 
 		]]):format(speed, duration)
 	end
 

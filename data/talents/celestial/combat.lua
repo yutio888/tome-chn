@@ -18,7 +18,7 @@ Talents.talents_def.T_WAVE_OF_POWER.info= function(self, t)
 		local range = self:getTalentRange(t)
 		return ([[你 用 圣 光 释 放 一 次 近 程 打 击， 造 成 %d%% 武 器 伤 害。 
 		如 果 目 标 在 近 战 范 围 以 外 ， 有 一 定 几 率 进 行 二 次 打 击 ，造 成 %d%% 武 器 伤 害。
-		二 次 打 击 几 率 随 距 离 增 加 ， 距 离 2 时 为 %0.1f%% ， 距 离 最 大（%d）时 几 率  为%0.1f%%。
+		二 次 打 击 几 率 随 距 离 增 加 ， 距 离 2 时 为 %0.1f%% ， 距 离 最 大（ %d ）时 几 率 为 %0.1f%% 。
 		受 力 量 影 响， 攻 击 距 离 有 额 外 加 成。]]):
 		format(t.getDamage(self, t)*100, t.getDamage(self, t, true)*100, t.SecondStrikeChance(self, t, 2), range,t.SecondStrikeChance(self, t, range))
 	end
@@ -27,7 +27,7 @@ Talents.talents_def.T_WEAPON_OF_WRATH.info= function(self, t)
 		local martyr = t.getMartyrDamage(self, t)
 		local damagepct = t.getLifeDamage(self, t)
 		local damage = t.getDamage(self, t)
-		return ([[你 使 用 武 器 攻 击 时 ， 造 成 相 当 于 %d%% 你 已 损 失 的 生 命 值  的 火 焰 伤 害 , 至 多 %d 点,当 前 %d 点 
+		return ([[你 使 用 武 器 攻 击 时 ， 造 成 相 当 于 %d%% 你 已 损 失 的 生 命 值 的 火 焰 伤 害 , 至 多 %d 点,当 前 %d 点 
 		然 后 令 目 标 进 入 殉 难 状 态，受 到 %d%% 自 己 造 成 的 伤 害 ，持 续 4 回 合。]]):
 		format(damagepct*100, t.getMaxDamage(self, t, 10, 400), damage, martyr)
 	end

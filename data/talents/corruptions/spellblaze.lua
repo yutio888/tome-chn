@@ -1,4 +1,4 @@
-﻿local Talents = require "engine.interface.ActorTalents"
+local Talents = require "engine.interface.ActorTalents"
 Talents.talents_def.T_RAIN_OF_FIRE.name = "陨星火雨"
 Talents.talents_def.T_RAIN_OF_FIRE.info = function(self, t)
 		return ([[你 释 放 魔 法 大 爆 炸 的 力 量 ，持 续 消 耗 活 力 。

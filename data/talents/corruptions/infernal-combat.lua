@@ -1,4 +1,4 @@
-﻿local Talents = require "engine.interface.ActorTalents"
+local Talents = require "engine.interface.ActorTalents"
 Talents.talents_def.T_FLAME_LEASH.name = "火焰束缚"
 Talents.talents_def.T_FLAME_LEASH.info = function(self, t)
 		return ([[火 焰 触 须 从 你 的 手 中 伸 出 ，在 锥 形 范 围 内 伸 展 。
@@ -20,7 +20,7 @@ Talents.talents_def.T_DEMON_BLADE.info = function(self, t)
 Talents.talents_def.T_LINK_OF_PAIN.name = "苦痛链接"
 Talents.talents_def.T_LINK_OF_PAIN.info = function(self, t)
 		return ([[使 用 恶 魔 之 力 ，你 在 源 生 物 与 牺 牲 生 物 间 构 造 痛 苦 链 接 ，持 续 %d 回 合 。
-		 每 次 源 生 物 受 到 伤 害 时 ，%d%% 伤 害 由 牺 牲 生 物 承 受 。
+		 每 次 源 生 物 受 到 伤 害 时 ， %d%% 伤 害 由 牺 牲 生 物 承 受 。
 		 当 牺 牲 生 物 因 此 效 果 死 亡 时 ，你 将 获 得 能 量 ，减 少 所 有 技 能 冷 却 时 间 1 回 合 。]]):
 		format(t.getDur(self, t), t.getPower(self, t))
 	end

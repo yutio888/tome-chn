@@ -933,7 +933,7 @@ function _M:restCheck()
 	local spotted = spotHostiles(self)
 	if #spotted > 0 then
 		for _, node in ipairs(spotted) do
-			node.actor:addParticles(engine.Particles.new("notice_enemy", 1))
+			node.entity:addParticles(engine.Particles.new("notice_enemy", 1))
 		end
 		local dir = game.level.map:compassDirection(spotted[1].x - self.x, spotted[1].y - self.y)
 		if dir == "northwest" then dir = "西北方向"

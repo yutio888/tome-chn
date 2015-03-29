@@ -177,6 +177,7 @@ dofile("/data-chn123/talents/techniques/archery.lua")
 dofile("/data-chn123/talents/techniques/excellence.lua")
 dofile("/data-chn123/talents/techniques/magical-combat.lua")
 dofile("/data-chn123/talents/techniques/mobility.lua")
+dofile("/data-chn123/talents/techniques/pugilism.lua")
 dofile("/data-chn123/talents/techniques/thuggery.lua")
 
 dofile("/data-chn123/talents/techniques/skirmisher-slings.lua")

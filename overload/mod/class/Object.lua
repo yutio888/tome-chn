@@ -1786,9 +1786,9 @@ function _M:getUseDesc(use_actor)
 												 :gsub("unleash an elemental blastwave, dealing","释放元素冲击波，造成"):gsub("damage in a radius","伤害，半径"):gsub("around the user","")
 												 :gsub("conjure elemental energy in a radius","发射锥形元素能量，半径"):gsub("cone, dealing","造成")
 												 :gsub("harden the skin for 7 turns increasing armour by","硬化皮肤7回合，并增加")
-						    				 :gsub("and armour hardiness by","护甲值和护甲硬度")
+						    				     :gsub("and armour hardiness by","护甲值和护甲硬度")
 												 :gsub("inflict","造成"):gsub("mind damage","精神伤害"):gsub("gaining psi and hate equal to 1/10 of the damage done","获 得 十 分 之 一 伤 害 值 的 超 能 力 值 和 仇 恨 值")
-												 :gsub("dam","伤害"):gsub("damage","伤害"):gsub("dealing","造成"):gsub("for","")
+                                                 :gsub("dam","伤害"):gsub("damage","伤害"):gsub("dealing","造成"):gsub("for","")
 												 use_name = use_name:gsub("create a temporary shield that absorbs ","制造一层临时护盾，至多能吸收")
 			ret = tstring{{"color","YELLOW"}, ("可以用来施放【%s】, 使%s进入%d回合冷却。"):format(use_name, t_name, usepower(self.use_power.power)), {"color","LAST"}}
 
@@ -1798,7 +1798,8 @@ function _M:getUseDesc(use_actor)
 				 use_name = use_name:gsub("fire a bolt of a random element","发射一束随机元素")
 						    :gsub("fire a beam of lightning","释放一束闪电")
 						    :gsub("fire a blast of psionic energies in a range ","释放一束长度"):gsub("beam","射线"):gsub("dam","伤害")
-
+						    :gsub("harden the skin for 7 turns increasing armour by","硬化皮肤7回合，并增加")
+						    :gsub("and armour hardiness by","护甲值和护甲硬度")
 			end
 			use_name = use_name:gsub("create a temporary shield that absorbs ","制造一层临时护盾，至多能吸收"):gsub("damage","伤害")
 			ret = tstring{{"color","YELLOW"}, ("可以用来施放【 %s 】，使其他所有护符进入 %d 回合冷却。"):format(use_name, self.use_power.power), {"color","LAST"}}]]

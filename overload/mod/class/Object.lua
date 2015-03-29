@@ -1787,6 +1787,7 @@ function _M:getUseDesc(use_actor)
 												 :gsub("conjure elemental energy in a radius","发射锥形元素能量，半径"):gsub("cone, dealing","造成")
 												 :gsub("inflict","造成"):gsub("mind damage (range 10), gaining psi and hate equal to 1/10 of the damage done","精神伤害，距离10，并获得 十分之一 伤害值 的 超能力值 和 仇恨值")
 												 :gsub("dam","伤害"):gsub("damage","伤害"):gsub("dealing","造成")
+												 :gsub("harden the skin for","硬化皮肤"):gsub("turns","回合"):gsub("increasing armour by","并增加护甲值"):gsub("and armour hardiness by","和护甲强度")
 												 use_name = use_name:gsub("create a temporary shield that absorbs ","制造一层临时护盾，至多能吸收")
 			ret = tstring{{"color","YELLOW"}, ("可以用来施放【%s】, 使%s进入%d回合冷却。"):format(use_name, t_name, usepower(self.use_power.power)), {"color","LAST"}}
 

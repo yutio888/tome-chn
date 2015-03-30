@@ -1181,7 +1181,7 @@ function _M:runStopped()
 	local spotted = spotHostiles(self)
 	if #spotted > 0 then
 		for _, node in ipairs(spotted) do
-			node.actor:addParticles(engine.Particles.new("notice_enemy", 1))
+			node.entity:addParticles(engine.Particles.new("notice_enemy", 1))
 		end
 	end
 

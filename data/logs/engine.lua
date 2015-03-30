@@ -39,7 +39,8 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "%s picks up (%s.): %s%s.",
 	fct = function(a,b,c,d)
-		return ("%s 拾取了（ %s ）：%s"):format( a, b, c,d)
+		local name = objects:getObjectsChnName(d)
+		return ("%s 拾取了（ %s ）：%s%s"):format( a, b, c,name)
 	end,
 }
 

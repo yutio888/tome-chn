@@ -1335,6 +1335,7 @@ function _M:handleEffect(player, eff_id, e, p, x, y, hs, bx, by, is_first, scale
 		else
 			desc = ("#{bold}##GOLD#%s\n(%s: %s)#WHITE##{normal}#\n"):format(name, (effCHN[e.name] and effCHN[e.name].type) or e.type, eff_subtype)..long_desc(player, p)
 		end
+		
 		if allow_remove then desc = desc.."\n---\n右键点击终止这个效果。" end
 
 		local txt = nil

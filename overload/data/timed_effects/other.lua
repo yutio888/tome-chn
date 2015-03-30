@@ -2634,7 +2634,7 @@ newEffect{
 newEffect{
 	name = "REALITY_SMEARING", image = "talents/reality_smearing.png",
 	desc = "Reality Smearing",
-	long_desc = function(self, eff) return ("过 去 受 到 的 伤 害 被 转 化 为 每 回 合 %0.2 点 紊 乱。"):format(eff.paradox) end,
+	long_desc = function(self, eff) return ("过 去 受 到 的 伤 害 被 转 化 为 每 回 合 %0.2f 点 紊 乱。"):format(eff.paradox) end,
 	type = "other",
 	subtype = { time=true },
 	status = "detrimental",

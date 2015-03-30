@@ -1995,7 +1995,7 @@ newDamageType{
 		useImplicitCrit(src, state)
 		local target = game.level.map(x, y, Map.ACTOR)
 		if target then
-			game:delayedLogDamage(src, target, 0, ("%s<%d%%%% gloom chance>#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", dam), false)
+			game:delayedLogDamage(src, target, 0, ("%s<%d%%%% 几率黑暗光环>#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", dam), false)
 			if rng.percent(dam) then
 			local check = math.max(src:combatAttack(), src:combatSpellpower(), src:combatMindpower())
 			if not src:checkHit(check, target:combatMentalResist()) then return end
@@ -2043,7 +2043,7 @@ newDamageType{
 		useImplicitCrit(src, state)
 		local target = game.level.map(x, y, Map.ACTOR)
 		if target then
-			game:delayedLogDamage(src, target, 0, ("%s<%d%%%% dark numbing chance>#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", dam), false)
+			game:delayedLogDamage(src, target, 0, ("%s<%d%%%% 几率黑暗减伤>#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", dam), false)
 			if rng.percent(dam) then
 				local check = math.max(src:combatAttack(), src:combatSpellpower(), src:combatMindpower())
 				local reduction = 15
@@ -2110,7 +2110,7 @@ newDamageType{
 		useImplicitCrit(src, state)
 		local target = game.level.map(x, y, Map.ACTOR)
 		if target then
-			game:delayedLogDamage(src, target, 0, ("%s<%d%%%% corrode armour chance>#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", dam), false)
+			game:delayedLogDamage(src, target, 0, ("%s<%d%%%% 几率腐蚀护甲>#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", dam), false)
 			if rng.percent(dam) then
 			local check = math.max(src:combatAttack(), src:combatSpellpower(), src:combatMindpower())
 			--local param = { atk=dam/3, armor=dam/3, defense=dam/3, src=src, apply_power = check, no_ct_effect=true }
@@ -2142,7 +2142,7 @@ newDamageType{
 		useImplicitCrit(src, state)
 		local target = game.level.map(x, y, Map.ACTOR)
 		if target then
-			game:delayedLogDamage(src, target, 0, ("%s<%d%%%% blind chance>#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", dam), false)
+			game:delayedLogDamage(src, target, 0, ("%s<%d%%%% 几率致盲>#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", dam), false)
 			if rng.percent(dam) then
 			if target:canBe("blind") then
 				local check = math.max(src:combatAttack(), src:combatSpellpower(), src:combatMindpower())
@@ -2177,7 +2177,7 @@ newDamageType{
 		useImplicitCrit(src, state)
 		local target = game.level.map(x, y, Map.ACTOR)
 		if target then
-			game:delayedLogDamage(src, target, 0, ("%s<%d%%%% daze chance>#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", dam), false)
+			game:delayedLogDamage(src, target, 0, ("%s<%d%%%% 几率眩晕 >#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", dam), false)
 			if rng.percent(dam) then
 			if target:canBe("stun") then
 				local check = math.max(src:combatAttack(), src:combatSpellpower(), src:combatMindpower())
@@ -2209,7 +2209,7 @@ newDamageType{
 		useImplicitCrit(src, state)
 		local target = game.level.map(x, y, Map.ACTOR)
 		if target then
-			game:delayedLogDamage(src, target, 0, ("%s<%d%%%% disease chance>#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", dam), false)
+			game:delayedLogDamage(src, target, 0, ("%s<%d%%%% 几率疾病 >#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", dam), false)
 			if rng.percent(dam) and target:canBe("disease") then
 			local check = math.max(src:combatSpellpower(), src:combatMindpower(), src:combatAttack())
 			local disease_power = math.min(30, dam / 2)
@@ -2297,7 +2297,7 @@ newDamageType{
 		useImplicitCrit(src, state)
 		local target = game.level.map(x, y, Map.ACTOR)
 		if target then
-			game:delayedLogDamage(src, target, 0, ("%s<%d%%%% scour chance>#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", dam), false)
+			game:delayedLogDamage(src, target, 0, ("%s<%d%%%% 几率降低强度 >#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", dam), false)
 			if rng.percent(dam) then
 			target:setEffect(target.EFF_ITEM_ANTIMAGIC_SCOURED, 3, {pct = 0.2, no_ct_effect=true})
 		end

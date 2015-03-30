@@ -6,7 +6,7 @@ end
 
 function itemDamagedesc(data)
 	if data:find("random insanity") then return data:gsub("chance to cause","几率"):gsub("random insanity","随机疯狂")
-	elseif data:find("random gloom") then return data:gsub("chance to cause","几率"):gsub("random gloom","随机疯狂")
+	elseif data:find("random gloom") then return data:gsub("chance to cause","几率"):gsub("random gloom","黑暗光环")
 	elseif data:find("damage reduction") then return data:gsub("chance to inflict","几率"):gsub("damage reduction","减少对方伤害")
 	elseif data:find("10%% of a turn") then return data:gsub("chance to gain","几率获得"):gsub("10%% of a turn","10%%回合")
 	elseif data:find("corrode armour") then return  data:gsub("chance to","几率"):gsub("corrode armour","腐蚀护甲")

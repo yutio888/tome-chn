@@ -945,7 +945,7 @@ function _M:restCheck()
 		elseif dir == "south" then dir = "南面"
 		elseif dir == "north" then dir = "北面"
 		end
-		return false, ("发现敌人位于 %s (%s%s)"):format(dir or "???", npcCHN:getName(spotted[1].actor.name), game.level.map:isOnScreen(spotted[1].x, spotted[1].y) and "" or " - 位于屏幕外")
+		return false, ("发现敌人位于 %s (%s%s)"):format(dir or "???", npcCHN:getName(spotted[1].name), game.level.map:isOnScreen(spotted[1].x, spotted[1].y) and "" or " - 位于屏幕外")
 	end
 
 	-- Resting improves regen

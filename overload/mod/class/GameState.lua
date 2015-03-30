@@ -147,15 +147,15 @@ function _M:zoneCheckBackupGuardian()
 		if game.difficulty == game.DIFFICULTY_NIGHTMARE then
 			game.zone.base_level_range = table.clone(game.zone.level_range, true)
 			game.zone.specific_base_level.object = -10 -game.zone.base_level
-			game.zone.base_level = game.zone.base_level * 1.5 + 3
+			game.zone.base_level = game.zone.base_level * 1.5 + 2
 		elseif game.difficulty == game.DIFFICULTY_INSANE then
 			game.zone.base_level_range = table.clone(game.zone.level_range, true)
 			game.zone.specific_base_level.object = -10 -game.zone.base_level
-			game.zone.base_level = game.zone.base_level * 2.2 + 5
+			game.zone.base_level = game.zone.base_level * 1.5 + 3
 		elseif game.difficulty == game.DIFFICULTY_MADNESS then
 			game.zone.base_level_range = table.clone(game.zone.level_range, true)
 			game.zone.specific_base_level.object = -10 -game.zone.base_level
-			game.zone.base_level = game.zone.base_level * 2.5 + 10
+			game.zone.base_level = game.zone.base_level * 2.5 + 6
 		end
 		if data.action then data.action(false) end
 	end

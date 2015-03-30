@@ -404,4 +404,19 @@ logCHN:newLog{
 	end,
 }
 
+logCHN:newLog{
+	log = "#Target# converts damage into paradox.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 将伤害转化为紊乱值。"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# stops converting damage to paradox..",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 停止将伤害转化为紊乱值。"):format(a)
+	end,
+}
 

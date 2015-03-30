@@ -4,12 +4,10 @@ local DamageType = require "engine.DamageType"
 Talents.talents_def.T_SPACETIME_STABILITY.name = "时空稳定"
 Talents.talents_def.T_SPACETIME_STABILITY.info = function(self, t)
 		local tune = t.getTuning(self, t)
-		local duration = t.getTuningAdjustment(self, t)
 		return ([[当 时 空 调 谐 处 于 非 激 活 状 态 时 ，你 的 紊 乱 值 每 回 合 自 动 向 设 定 值 调 整  %0.2f  点 。
-		 使 用 时 空 调 谐 使 紊 乱 值 恢 复 为 设 定 值 的 时 间 减 少  %d  回 合 。]]):
-		format(tune, duration)
-	end
-
+		处 于 激 活 状 态 时 ， 该 效 果 加 倍 。]]):
+		format(tune)
+end
 Talents.talents_def.T_CHRONO_TIME_SHIELD.name = "时间盾"
 Talents.talents_def.T_CHRONO_TIME_SHIELD.info= function(self, t)
 		local maxabsorb = t.getMaxAbsorb(self, t)

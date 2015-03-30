@@ -351,18 +351,18 @@ function _M:loaded()
 				if self.difficulty == self.DIFFICULTY_NIGHTMARE then
 					zone.base_level_range = table.clone(zone.level_range, true)
 					zone.specific_base_level.object = -10 -zone.level_range[1]
-					zone.level_range[1] = zone.level_range[1] * 1.5 + 3
-					zone.level_range[2] = zone.level_range[2] * 1.5 + 3
+					zone.level_range[1] = zone.level_range[1] * 1.5 + 2
+					zone.level_range[2] = zone.level_range[2] * 1.5 + 2
 				elseif self.difficulty == self.DIFFICULTY_INSANE then
 					zone.base_level_range = table.clone(zone.level_range, true)
 					zone.specific_base_level.object = -10 -zone.level_range[1]
-					zone.level_range[1] = zone.level_range[1] * 1.5 + 5
-					zone.level_range[2] = zone.level_range[2] * 1.5 + 5
+					zone.level_range[1] = zone.level_range[1] * 1.5 + 3
+					zone.level_range[2] = zone.level_range[2] * 1.5 + 3
 				elseif self.difficulty == self.DIFFICULTY_MADNESS then
 					zone.base_level_range = table.clone(zone.level_range, true)
 					zone.specific_base_level.object = -10 -zone.level_range[1]
-					zone.level_range[1] = zone.level_range[1] * 2.5 + 10
-					zone.level_range[2] = zone.level_range[2] * 2.5 + 10
+					zone.level_range[1] = zone.level_range[1] * 2.5 + 6
+					zone.level_range[2] = zone.level_range[2] * 2.5 + 6
 				end
 			end
 		end,
@@ -1432,7 +1432,7 @@ end
 function _M:delayedLogDamage(src, target, dam, desc, crit)
 	if not target or not src then return end
 	local psrc = src.__project_source or src -- assign message to indirect damage source if available
-	local visible, srcSeen, tgtSeen = self:logVisible(src, target)
+	local visible, srcSeen, tgtSeen = self:logVisible(psrc, target)
 	if visible then -- only log damage the player is aware of
 		local t = table.getTable(self.delayed_log_damage, src, psrc, target)
 		table.update(t, {total=0, healing=0, descs={}})
@@ -1688,7 +1688,10 @@ function _M:setupCommands()
 			print("===============")
 		end end,
 		[{"_g","ctrl"}] = function() if config.settings.cheat then
-			error("lolzor plopadz kajzdhkhvkervkert 1")
+			for i = 1, 10000 do
+				game.log("PLOP")
+				profile.chat:addMessage("talk", "tome", "test", "test", "test", {"test", colors.GOLD})
+			end
 do return end
 			local o = game.zone:makeEntity(game.level, "object", {random_object=true}, nil, true)
 			if o then

@@ -20,12 +20,12 @@
 long_name = "CHN Addons for ToME"
 short_name = "chn123"
 for_module = "tome"
-version = {1,3,0}
+version = {1,3,1}
 tags = {'Chinese','translation'}
 weight = 5
 author = { "Grammier&Marblezls&Yutio888", "Grammier@3DMGAME","Marblezls@3DMGAME","Yutio888@mail.qq.com"}
 homepage = "http://tome.te4.org/"
-description = [[The chinese version of tome4 V1.2.5]]
+description = [[The chinese version of tome4]]
 overload = true
 superload = true
 data = true

@@ -19,7 +19,9 @@ Talents.talents_def.T_REDUX.name = "回响"
 Talents.talents_def.T_REDUX.info = function(self, t)
 		local duration = t.getDuration(self, t)
 		local cooldown = t.getMaxCooldown(self, t)
-		return ([[接 下 来 %d 回 合 中 ，冷 却 时 间 不 大 于 %d 的 技 能 ， 只 需 要 一 回 合 冷 却。]]):
+		return ([[接 下 来 %d 回 合 中 ，冷 却 时 间 不 大 于 %d 的 技 能 ， 只 需 要 一 回 合 冷 却。
+对 一 个 技 能 生 效 后 ， 该 效 果 将 结 束。
+		]]):
 		format(duration, cooldown)
 	end
 

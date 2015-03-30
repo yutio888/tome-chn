@@ -907,7 +907,7 @@ function _M:onRestStart()
 		self.resting.mana_regen = self:attr("mana_regen_on_rest")
 	end
 	if self:knowTalent(self.T_SPACETIME_TUNING) then
-		self:callTalent(self.T_SPACETIME_TUNING, "doTuning")
+		self:callTalent(self.T_SPACETIME_TUNING, "startTuning")
 	end
 	self:fireTalentCheck("callbackOnRest", "start")
 end

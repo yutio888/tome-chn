@@ -8,10 +8,9 @@ Talents.talents_def.T_DIMENSIONAL_STEP.info = function(self, t)
 
 Talents.talents_def.T_DIMENSIONAL_SHIFT.name = "时空流转"
 Talents.talents_def.T_DIMENSIONAL_SHIFT.info = function(self, t)
-		local count = t.getCount(self, t)
 		local reduction = t.getReduction(self, t)
-		return ([[每 当 你 进 行 传 送 ，你 的 最 多 %d 个 负 面 效 果 的 持 续 时 间 被 减 少 %d 回 合 。]]):
-		format(count, reduction)
+		return ([[每 当 你 进 行 传 送 ，你 的 1 个 负 面 效 果 的 持 续 时 间 被 减 少 %d 回 合 。]]):
+		format(reduction)
 	end
 
 Talents.talents_def.T_WORMHOLE.name = "虫洞穿梭"

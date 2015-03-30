@@ -28,11 +28,13 @@ Talents.talents_def.T_VIGILANCE.info = function(self, t)
 		format(sense, sense, power)
 	end
 
+
 Talents.talents_def.T_WARDEN_S_FOCUS.name = "专注守卫"
 Talents.talents_def.T_WARDEN_S_FOCUS.info = function(self, t)
 		local damage = t.getDamage(self, t) * 100
 		local power = t.getPower(self, t)
-		return ([[使 用 你 的 远 程 或 者 近 战 武 器 对 目 标 造 成  %d%%  武 器 伤 害 。   在 接 下 来 的 十 回 合 中 ，你 的 随 机 目 标 技 能 ，比 如 闪 烁 灵 刃 和 守 卫 召 唤 将 会 集 中 命 中 目 标 。
-		 对 这 个 目 标 的 攻 击 获 得  %d%%  额 外 的 暴 击 几 率 和 暴 击 加 成 ，同 时 其 他 分 级 低 于 目 标 的 单 位 对 你 造 成 的 伤 害 减 少  %d%%  。]])
-		:format(damage, power, power, power)
+		local duration = t.getDuration(self, t)
+		return ([[使 用 你 的 远 程 或 者 近 战 武 器 对 目 标 造 成  %d%%  武 器 伤 害 。   在 接 下 来 的 %d 回 合 中 ，你 的 随 机 目 标 技 能 ，比 如 闪 烁 灵 刃 和 守 卫 召 唤 将 会 集 中 命 中 目 标 。
+		 对 这 个 目 标 的 攻 击 获 得  %d%%  额 外 的 暴 击 几 率 和 暴 击 加 成 ，同 时 其 他 分 级 低 于 目 标 的 单 位 对 你 造 成 的 伤 害 减 少  %d%% ]])
+		:format(damage, duration, power, power, power)
 	end

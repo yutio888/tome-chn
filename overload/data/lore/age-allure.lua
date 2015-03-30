@@ -157,6 +157,7 @@ newLore{
 
 #{italic}#(在信上记录着几个坐标，外加信封里一把巨大的，魔法所铸的钥匙。你觉得通过这些信息，你可以大致找到那座被封印的孔克雷夫实验室。)#{normal}#
 ]],
+	always_pop = true,
 	on_learn = function(who)
 		if not game.state.can_conclave_vault then return end
 		game:onLevelLoad("wilderness-1", function(zone, level)

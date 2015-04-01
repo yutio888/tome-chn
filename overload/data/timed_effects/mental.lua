@@ -3196,7 +3196,7 @@ newEffect{
 	image="talents/unseen_force.png",
 	long_desc = function(self, eff)
 		local hits = (eff.extrahit > 0 and "从 "..eff.hits.." 到 "..(eff.hits + 1)) or ""..eff.hits
-		return ("一 股 无 形 的 力 量 撞 击 着 这 个 生 物 周 围 5 码 内 的 %s 个 目 标An unseen force strikes %s targets in a range of 5 around this creature "..
+		return ("一 股 无 形 的 力 量 撞 击 着 这 个 生 物 周 围 5 码 内 的 %s 个 目 标 "..
 		"每 回 合 造 成 %d 伤 害 并 击 退 %d 码 。"):format(hits, eff.damage, eff.knockback) end,
 	type = "mental",
 	subtype = {psionic=true},

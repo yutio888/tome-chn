@@ -778,3 +778,10 @@ timeEffectCHN:newEffect{
 	type = "精神",
 	subtype = "超能/护盾",
 }
+timeEffectCHN:newEffect{
+	id = "UNSEEN_FORCE",
+	enName = "Unseen Force",
+	chName = "无形之力",
+	type = "精神",
+	subtype = "超能",
+}

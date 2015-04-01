@@ -1441,12 +1441,7 @@ class:bindHook("Entity:loadList", function (self,data)
 				item.desc  =  "一只黑色的斗篷，它在编织的过程中加入了幻觉特效。"
 
 			end
-			 if item.name == "Resonating Diamond" then
-				item.name = "共鸣宝石"
-				item.unided_name  = ""
-				item.desc  =  ""
 
-			end
 			 if item.name == "Rune of the Rift" then
 				item.name = "符文：时空裂缝"
 				item.unided_name  = ""
@@ -1533,7 +1528,7 @@ class:bindHook("Entity:loadList", function (self,data)
 				item.desc  =  "在亚伯契的弧线失踪前，它已经服务于守卫们数载，代代相传。根据历史记载，它是用魔法大爆炸后第一棵长出的白蜡树制成，拥有时空和恢复的力量。"
 
 			end
-			 if item.name == "Sealed Scroll of Last Hope" then
+--[[			 if item.name == "Sealed Scroll of Last Hope" then
 				item.name = "最后希望的密封卷轴"
 				item.unided_name  = ""
 				item.desc  =  ""
@@ -1550,7 +1545,7 @@ class:bindHook("Entity:loadList", function (self,data)
 				item.unided_name  = "祭祀短剑"
 				item.desc  =  "一柄祭祀短剑，上面刻有血色的符文。它散发着能量波动。"
 
-			end
+			end]]
 			 if item.name == "Fake Skullcleaver" then
 				item.name = "仿制碎颅战斧"
 				item.unided_name  = "仿制的血红战斧"
@@ -1593,24 +1588,7 @@ class:bindHook("Entity:loadList", function (self,data)
 				item.desc  =  "这套长袍闪烁着金属般的光辉。"
 
 			end
-			 if item.name == "Resonating Diamond" then
-				item.name = "共鸣宝石"
-				item.unided_name  = ""
-				item.desc  =  ""
 
-			end
-			 if item.name == "Blood-Runed Athame" then
-				item.name = "血符祭剑"
-				item.unided_name  = "祭祀短剑"
-				item.desc  =  "一柄祭祀短剑，上面刻有血色的符文。它散发着能量波动。"
-
-			end
-			 if item.name == "Orb of Many Ways" then
-				item.name = "多元水晶球"
-				item.unided_name  = "涡流水晶球"
-				item.desc  =  "这个球体可以折射出远处的景象并快速的切换着，有些景象甚至不属于这个世界。如果你在传送点附近使用它，它可能会激活传送。"
-
-			end
 			 if item.name == "Telos's Staff (Bottom Half)" then
 				item.name = "泰勒斯的法杖（下半部）"
 				item.unided_name  = "折断的法杖"
@@ -1693,12 +1671,6 @@ class:bindHook("Entity:loadList", function (self,data)
 				item.name = "精神豁免之戒指（+6）"
 				item.unided_name  = "光滑的戒指"
 				item.desc  =  "一只镶有红宝石的戒指。"
-
-			end
-			 if item.name == "Blood-Runed Athame" then
-				item.name = "血符祭剑"
-				item.unided_name  = "祭祀短剑"
-				item.desc  =  "一柄祭祀短剑，上面刻有血色的符文。它散发着能量波动。"
 
 			end
 			 if item.name == "Tome of Wildfire" then
@@ -2179,26 +2151,22 @@ class:bindHook("Entity:loadList", function (self,data)
     #{bold}#如果你在全程不脱下它的情况下通关你将可以得到一个成就和吹牛的权利！#{normal}#]]
 
 			end
-			 if item.name == "Demonic Orb of Many Ways" then
-				item.name = "恶魔多元水晶球"
-				item.unided_name  = "涡流水晶球"
-				item.desc  =  "这个球体可以折射出远处的景象并快速的切换着，有些景象甚至不属于这个世界。如果你在传送点附近使用它，它可能会激活传送。"
-			end
+
 	if item.name == "Staff of Absorption" then
 	item.name = "吸能法杖"
 	item.unided_name  = "黑暗符文法杖"
 	item.desc  =  "杖身铭刻着符文，这根法杖似乎是很久以前制造的，虽然它毫无侵蚀的痕迹。它周围的光线会变的暗淡，当你触摸它时可以感受到惊人的魔力。"
 	end
-	if item.name == "Orb of Many Ways" then
+--[[	if item.name == "Orb of Many Ways" then
 	item.name = "多元水晶球"
 	item.unided_name  = "涡流水晶球"
 	item.desc  =  "这个球体可以折射出远处的景象并快速的切换着，有些景象甚至不属于这个世界。如果你在传送点附近使用它，它可能会激活传送。"
-	end
-	if item.name == "Orb of Many Ways Demon" then
+	end]]
+--[[	if item.name == "Orb of Many Ways Demon" then
 	item.name = "多元水晶球"
 	item.unided_name  = "涡流水晶球"
 	item.desc  =  "这个球体可以折射出远处的景象并快速的切换着，有些景象甚至不属于这个世界。如果你在传送点附近使用它，它可能会激活传送。"
-	end
+	end]]
 	if item.name == "Orb of Undeath (Orb of Command)" then
 	item.name = "指令水晶球（亡灵） "
 	item.unided_name  = "指令水晶球"

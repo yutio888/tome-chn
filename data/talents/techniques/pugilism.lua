@@ -13,8 +13,8 @@ Talents.talents_def.T_STRIKING_STANCE.info= function(self, t)
 Talents.talents_def.T_DOUBLE_STRIKE.name= "双重打击"
 Talents.talents_def.T_DOUBLE_STRIKE.info= function(self, t)
 		local damage = t.getDamage(self, t) * 100
-		return ([[Deliver two quick punches that deal %d%% damage each, and switch your stance to Striking Stance.  If you already have Striking Stance active and Double Strike isn't on cooldown, this talent will automatically replace your normal attacks (and trigger the cooldown).
-		If either jab connects, you earn one combo point.  At talent level 4 or greater, if both jabs connect, you'll earn two combo points.]])
+		return ([[对 目 标 进 行 2 次 快 速 打 击， 每 次 打 击 造 成 %d%% 伤 害 并 使 你 的 姿 态 切 换 为 攻 击 姿 态， 如 果 你 已 经 在 攻 击 姿 态 且 此 技 能 已 就 绪， 那 么 此 技 能 会 自 动 取 代 你 的 普 通 攻 击 ( 并 触 发 冷 却 )。 
+		任 何 一 次 打 击 都 会 使 你 获 得 1 点 连 击 点。 在 等 级 4 或 更 高 等 级 时 若 2 次 打 击 都 命 中 你 可 以 获 得 2 点 连 击 点。]])
 		:format(damage)
 	end
 Talents.talents_def.T_SPINNING_BACKHAND.name= "旋风打击"

@@ -83,18 +83,18 @@ newLore{
 	category = "angolwen",
 	name = "Angolwen Fountain",
 	always_pop = true,
-	lore = [[#{italic}#(You see here a large, elaborate fountain.  A statue of Linaniil stands in the center, her arms outstretched to welcome all; around the outside of the fountain stand statues of a dwarf manipulating earthen runes, a human with a simple healer's crosier, an elf with a tall, elaborate staff, and a halfling with a scepter in one hand and a fireball hovering over the other.  The runes and the fireball are not connected to anything, and float in a fixed position in the air.  You see a carving repeating along the border of the fountain, in small print.)#{normal}#
+	lore = [[#{italic}#(你在这里看到一个大而精美的喷泉。莱娜尼尔的雕像矗立在中央，她张开双臂欢迎所有的来客。围绕喷泉外站立着一位操纵大地符文的矮人；一位紧握治疗之杖的人类；一位身佩精致法杖的精灵；一位手拿单手法杖的半身人，火球在他的另一只手上飞舞。令人感到惊奇的是，雕刻而成的火球与符文没有和任何东西连结在一起，而是漂浮于空中。在喷泉的的边缘，你看到上面雕刻着一行小字。)#{normal}#
 
-ALL ARE WELCOME WHO LEARN FROM THE MISTAKES OF THE PAST
+欢迎一切深刻反省过去的错误之人
 
-LET THE ARCANE ONCE MORE BE A BOON AND NOT A BANE TO MAJ'EYAL
+愿你们的魔法，成为世界的福音而非祸害
 
-ALL ARE WELCOME WHO EASE THE SUFFERING OF THE PRESENT
+欢迎一切竭力缓解现今的苦难之人
 
-MAY WE HAVE THE WISDOM TO ONE DAY REUNITE THE WORLD IN SAFETY AND ENLIGHTENMENT
+愿你们的智慧，赐予世界的和平以及启迪
 
-ALL ARE WELCOME WHO PREVENT THE THREATS OF THE FUTURE
+欢迎一切矢志排除未来的威胁之人
 
-GATHER HERE IN PEACE TO DISCOVER AND PERFECT THE KNOWLEDGE OF HOW, AND WHEN, TO WEAVE THE WORLD'S FABRIC]],
+愿你们的团聚，共铸世界的探索愈加完美]],
 }
 

@@ -207,6 +207,7 @@ loreList["healer Astelrid log 1"] = "孔克雷夫医师亚斯特莉的日志 第
 loreList["healer Astelrid log 2"] = "孔克雷夫医师亚斯特莉的日志 第二部分"
 loreList["healer Astelrid log 3"] = "孔克雷夫医师亚斯特莉的日志 第三部分"
 loreList["healer Astelrid log 4"] = "孔克雷夫医师亚斯特莉的日志 第四部分"
+loreList["Angolwen Fountain"] = "安格列文的喷泉"
 function loreListCHN(name)
 	if not name then return end
 	if loreList[name] then name = loreList[name]

@@ -182,7 +182,7 @@ function getTooltipActorCHN(desc)
 				elseif string.find(desc[i],"Sorcerers %(.+%)") then
 					desc[i] = string.gsub(desc[i],"Sorcerers","恶魔法师")
 				elseif string.find(desc[i],"Fearscape %(.+%)") then
-					desc[i] = string.gsub(desc[i],"Fearscape","恐惧之地")
+					desc[i] = string.gsub(desc[i],"Fearscape","恶魔空间")
 				elseif string.find(desc[i],"Sher'Tul %(.+%)") then
 					desc[i] = string.gsub(desc[i],"Sher'Tul","夏·图尔")
 				elseif string.find(desc[i],"Keepers of Reality %(.+%)") then
@@ -193,9 +193,9 @@ function getTooltipActorCHN(desc)
 				elseif string.find(desc[i],"Action radius:") then desc[i] = string.gsub(desc[i],"Action radius:","活动范围：　")
 				end
 
-				if string.find(desc[i],"hostile, .%d") then desc[i] = string.gsub(desc[i],"hostile, ","敌对，")
-				elseif string.find(desc[i],"friendly, .%d") then desc[i] = string.gsub(desc[i],"friendly, ","友善，")
-				elseif string.find(desc[i],"neutral, .%d") then desc[i] = string.gsub(desc[i],"neutral, ","中立，")
+				if string.find(desc[i],"hostile, %d") then desc[i] = string.gsub(desc[i],"hostile, ","敌对，")
+				elseif string.find(desc[i],"friendly, %d") then desc[i] = string.gsub(desc[i],"friendly, ","友善，")
+				elseif string.find(desc[i],"neutral, %d") then desc[i] = string.gsub(desc[i],"neutral, ","中立，")
 				end
 			end
 		end

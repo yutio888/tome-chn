@@ -32,12 +32,14 @@ trapCHN["Knives and daggers"] = "小刀与匕首"
 trapCHN["Death from Afar"] = "远处的死亡气息"
 trapCHN["Herbalist"] = "草药馆"
 trapCHN["Jewelry"] = "珠宝店"
+trapCHN["Survival Supplies"] = "野外生存用品"
 trapCHN["Home of Stire the Alchemist"] = "炼金师斯泰尔的家"
 
 --elvala
 trapCHN["Tailor"] = "裁缝店"
-trapCHN["Staff carver"] = "法杖与刀具店"
+trapCHN["Staff carver"] = "法杖雕刻者"
 trapCHN["Runemaster"] = "大师符文店"
+trapCHN["Shady Library"] = "不显眼的图书馆"
 trapCHN["Home of Marus the Alchemist"] = "炼金师马鲁斯的家"
 
 --gate of morning
@@ -59,16 +61,18 @@ trapCHN["Mace smith"] = "制锤铁匠铺"
 --shatur
 trapCHN["Nature's Punch"] = "自然天成"
 trapCHN["Silent Hunter"] = "沉默猎手"
+trapCHN["Night's Star"] = "暗夜繁星"
 
 --Zigur
 trapCHN["Horman's Plates"] = "霍尔曼铠甲店"
-trapCHN["Infused Leather"] = "附魔皮甲"
+trapCHN["Infused Leather"] = "自然浸染的皮甲"
 trapCHN["Slash & Dash"] = "冲锋与砍杀"
 trapCHN["Slice & Dice"] = "切成碎块"
 trapCHN["Nature's Reach"] = "自然的延伸"
 trapCHN["A Million Cuts"] = "千刀万剐"
 trapCHN["Trainer"] = "训练师"
 trapCHN["Nature's Emporium"] = "自然大百货"
+trapCHN["Purification Tools"] = "净化的工具"
 
 --陷阱
 trapCHN["trap"] = "陷阱"
@@ -116,12 +120,7 @@ function getTooltipTrapCHN(desc)
 
 	for i = 1,#desc do
 		if type(desc[i]) == "string" then 
-				if desc[i]:find("'s ") then
-	                              	local f,e=desc[i]:find("'s ")
-					local tname=desc[i]:sub(1,f-1)
-					local ename=desc[i]:sub(e+1,string.len(desc[i]))
-					desc[i] = npcCHN:getName(tname) .. "的" .. trapCHN:getName(ename) 
-				end
+            desc[i] = trapCHN:getName(desc[i])
 		end
 	end
 
@@ -136,6 +135,6 @@ function trapCHN:getName(name)
 		local tname=name:sub(1,f-1)
 		local ename=name:sub(e+1,string.len(name))
 		return npcCHN:getName(tname) .. "的" .. trapCHN:getName(ename) 
-	else return name 
+	else return name:gsub("turns", "回合"):gsub("Allied Kingdoms","联合王国"):gsub("Shalore","永恒精灵"):gsub("Thalore","自然精灵"):gsub("Keepers of Reality","现实守卫"):gsub("Angolwen","安格利文"):gsub("Sunwall","太阳堡垒"):gsub("Zigur","伊格"):gsub("hostile, ","敌对，"):gsub("friendly, ","友善，"):gsub("Faction", "阵营"):gsub("neutral, ","中立，")
 	end
 end

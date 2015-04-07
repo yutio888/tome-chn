@@ -1852,6 +1852,9 @@ function _M:tooltip(x, y, seen_by)
 		else	ts:add(self.desc, true)
 		end
 	end
+	if config.settings.cheat and self.descriptor and self.descriptor.classes then
+		ts:add("Classes:", table.concat(self.descriptor.classes or {}, ","), true)
+	end
 	if self.faction and Faction.factions[self.faction] then ts:add("Faction: ") ts:merge(factcolor:toTString()) ts:add(("%s (%s, %d)"):format(Faction.factions[self.faction].name, factstate, factlevel), {"color", "WHITE"}, true) end
 	if game.player ~= self then ts:add("Personal reaction: ") ts:merge(pfactcolor:toTString()) ts:add(("%s, %d"):format(pfactstate, pfactlevel), {"color", "WHITE"} ) end
 
@@ -4443,17 +4446,17 @@ local previous_incParadox = _M.incParadox
 function _M:incParadox(paradox)
 	-- Anomaly checks
 	if self:getModifiedParadox() < 300 and self:getModifiedParadox() + paradox >= 300 then
-		game.logPlayer(self, "#LIGHT_RED#You feel the edges of space begin to ripple and bend!")
+		game.logPlayer(self, "#LIGHT_RED#You feel the edges of spacetime begin to ripple and bend!")
 	end
 	if self:getModifiedParadox() > 300 and self:getModifiedParadox() + paradox <= 300 then
-		game.logPlayer(self, "#LIGHT_BLUE#Space feels more stable.")
+		game.logPlayer(self, "#LIGHT_BLUE#Spacetime feels more stable.")
 	end
-	-- Backfire checks
-	if self:getModifiedParadox() < 400 and self:getModifiedParadox() + paradox >= 400 then
-		game.logPlayer(self, "#LIGHT_RED#Space and time both fight against your control!")
+	-- Greater anomalies
+	if self:getModifiedParadox() < 600 and self:getModifiedParadox() + paradox >= 600 then
+		game.logPlayer(self, "#LIGHT_RED#Spacetime fights against your control!")
 	end
-	if self:getParadox() > 400 and self:getParadox() + paradox <= 400 then
-		game.logPlayer(self, "#LIGHT_BLUE#Space and time have calmed...  somewhat.")
+	if self:getModifiedParadox() > 600 and self:getModifiedParadox() + paradox <= 600 then
+		game.logPlayer(self, "#LIGHT_BLUE#Spacetime has calmed...  somewhat.")
 	end
 
 	-- Cosmic Cycle
@@ -4600,11 +4603,11 @@ function _M:preUseTalent(ab, silent, fake)
 	if ab.is_unarmed and not (ab.mode == "sustained" and self:isTalentActive(ab.id)) then
 		-- first check for heavy and massive armor
 		if self:hasMassiveArmor() then
-			if not silent then game.logSeen(self, "You are too heavily armoured to use this talent.") end
+			if not silent then game.logSeen(self, "%s is too heavily armoured to use this talent.", self.name:capitalize()) end
 			return false
 		-- next make sure we're unarmed
 		elseif not self:isUnarmed() then
-			if not silent then game.logSeen(self, "You can't use this talent while holding a weapon or shield.") end
+			if not silent then game.logSeen(self, "%s can't use this talent while holding a weapon or shield.", self.name:capitalize()) end
 			return false
 		end
 	end
@@ -5461,6 +5464,7 @@ function _M:getTalentFullDescription(t, addlevel, config, fake_mastery)
 		if t.is_spell then is_a[#is_a+1] = "法术" end
 		if t.is_mind then is_a[#is_a+1] = "精神力量" end
 		if t.is_nature then is_a[#is_a+1] = "自然之赐" end
+		if t.is_antimagic then is_a[#is_a+1] = "反魔法力量" end
 		if t.is_summon then is_a[#is_a+1] = "召唤力量" end
 		if #is_a > 0 then
 			d:add({"color",0x6f,0xff,0x83}, "这是：", {"color",0xFF,0xFF,0xFF}, table.concatNice(is_a, ", ", " 和 "), true)
@@ -5561,7 +5565,7 @@ function _M:startTalentCooldown(t, v)
 		if t.id ~= self.T_REDUX and self:hasEffect(self.EFF_REDUX) then
 			local eff = self:hasEffect(self.EFF_REDUX)
 			if self:getTalentCooldown(t) <= eff.max_cd and t.mode == "activated" and not t.fixed_cooldown then
-				self.talents_cd[t.id] = 1
+				self.talents_cd[t.id] = 0
 				self:removeEffect(self.EFF_REDUX)
 			end
 		end

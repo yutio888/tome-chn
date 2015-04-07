@@ -121,9 +121,14 @@ end
 
 simpleLongDlg["Impossible"] = function(str)
 	str = str:gsub("You cannot learn this talent%(s%): ","你不可以学习此技能： ")
-	str = str:gsub("You cannot unlearn this talent because of talent%(s%): ","你不可以学习此技能因为技能： ")
+	str = str:gsub("You cannot unlearn this talent because of talent%(s%): ","你不可以遗忘此技能因为技能： ")
 	str = str:gsub("You can not unlearn this talent because of talent%(s%): ","你不可以遗忘此技能因为技能： ")
 	str = str:gsub("You cannot unlearn this category because of: ","你不可以遗忘此技能树因为： ")
+	str = str:gsub("not enough stat","属性点不足")
+	str = str:gsub("not enough levels","等级不足")
+    str = str:gsub("missing dependency","需求技能未满足")
+    str = str:gsub("unknown talent type","未知的技能类型")
+    str = str:gsub("not enough talents of this type known","技能树中已学习技能不足")
 	return "不可能", str
 end
 

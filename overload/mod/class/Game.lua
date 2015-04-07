@@ -1331,7 +1331,7 @@ function _M:logMessage(source, srcSeen, target, tgtSeen, style, ...)
 	local srcname = "something"
 	local Dstring
 		if source.player then
-			srcname = source.name
+			srcname = "#fbd578#"..source.name.."#LAST#"
 		elseif srcSeen then
 			srcname = engine.Entity.check(source, "getName") or source.name or "unknown"
 		end
@@ -1340,15 +1340,20 @@ function _M:logMessage(source, srcSeen, target, tgtSeen, style, ...)
 	srcname = logCHN:getName(srcname)
 	if source.name and source.name:find("maelstrom") then srcname ="灵能漩涡" end
 	
+	style = style:gsub("#source#", srcname)
+	style = style:gsub("#Source#", (Dstring or "")..srcname:capitalize())
+	if target then
 		local tgtname = "something"
-			if target then
 			if target.player then
-				tgtname = target.name
+				tgtname = "#fbd578#"..target.name.."#LAST#"
 			elseif tgtSeen then
-				tgtname = engine.Entity.check(target, "getName") or target.name or "something"
+				tgtname = engine.Entity.check(target, "getName") or target.name or "unknown"
 			end
 		if target and target.name=="Iceblock" then tgtname = "冰块"
 		else tgtname = logCHN:getName(tgtname) end
+		
+		style = style:gsub("#target#", tgtname)
+		style = style:gsub("#Target#", tgtname:capitalize())
 	end
 	if logTableCHN[style] then style = logTableCHN[style].fct() end
 	style = style:gsub("#source#", srcname):gsub("#Source#", srcname):gsub("#target#", tgtname):gsub("#Target#", tgtname)
@@ -1972,6 +1977,7 @@ do return end
 			else
 				self.log("Displaying talents.")
 			end
+			if self.uiset.resizeIconsHotkeysToolbar then self.uiset:resizeIconsHotkeysToolbar() end
 		end,
 
 		SCREENSHOT = function() self:saveScreenshot() end,

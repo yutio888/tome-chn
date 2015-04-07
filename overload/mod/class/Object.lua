@@ -288,20 +288,20 @@ function _M:descAttribute(attr)
 		return ("%s%0.2f/回合"):format(i > 0 and "+" or "-", math.abs(i))
 	elseif attr == "COMBAT" then
 		local c = self.combat
-		return power(c) ..(c.apr or 0).." 穿透"
+		return power(c) ..", "..(c.apr or 0).." 穿透"
 	elseif attr == "COMBAT_AMMO" then
 		local c = self.combat
-		return c.shots_left.."/"..math.floor(c.capacity)..", "..c.dam.."-"..(c.dam*(c.damrange or 1.1)).." 伤害, "..(c.apr or 0).." 穿透"
+		return c.shots_left.."/"..math.floor(c.capacity)..", "..power(c).." 伤害, "..(c.apr or 0).." 穿透"
 	elseif attr == "COMBAT_DAMTYPE" then
 		local c = self.combat
-		return power(c)..("%d"):format((c.apr or 0)).." 穿透, "..DamageType:get(c.damtype).name.." 伤害"
+		return power(c)..", "..("%d"):format((c.apr or 0)).." 穿透, "..DamageType:get(c.damtype).name.." 伤害"
 	elseif attr == "COMBAT_ELEMENT" then
 		local c = self.combat
-		return power(c)..("%d"):format((c.apr or 0)).." 穿透, "..DamageType:get(c.element or DamageType.PHYSICAL).name.." 元素伤害"
+		return power(c)..", "..("%d"):format((c.apr or 0)).." 穿透, "..DamageType:get(c.element or DamageType.PHYSICAL).name.." 元素伤害"
 	elseif attr == "SHIELD" then
 		local c = self.special_combat
 		if c and (game.player:knowTalentType("technique/shield-offense") or game.player:knowTalentType("technique/shield-defense") or game.player:attr("show_shield_combat")) then
-			return power(c)..c.block.." 格挡"
+			return power(c)..", "..c.block.." 格挡"
 		else
 			return c.block.." 格挡"
 		end
@@ -428,13 +428,13 @@ function _M:getName(t)
 
 	if not t.do_color then
 		if qty == 1 or t.no_count then return name
-		else return qty..name
+		else return qty.." "..name
 		end
 	else
 		local _, c = self:getDisplayColor()
 		local ds = t.no_image and "" or self:getDisplayString()
 		if qty == 1 or t.no_count then return c..ds..name.."#LAST#"
-		else return c..qty..ds..name.."#LAST#"
+		else return c..qty.." "..ds..name.."#LAST#"
 		end
 	end
 end
@@ -1482,7 +1482,7 @@ function _M:getTextualDesc(compare_with, use_actor)
 
 		compare_fields(w, compare_with, field, "slow_projectiles", "%+d%%", "Slows Projectiles: ")
 
-		compare_fields(w, compare_with, field, "paradox_reduce_anomalies", "%+d", "Reduces paradox failures(equivalent to willpower): ")
+		compare_fields(w, compare_with, field, "paradox_reduce_anomalies", "%+d", "Reduces paradox anomalies(equivalent to willpower): ")
 
 		compare_fields(w, compare_with, field, "damage_backfire", "%+d%%", "Damage Backlash: ", nil, true)
 

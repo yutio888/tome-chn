@@ -1200,7 +1200,7 @@ class:bindHook("Entity:loadList", function (self,data)
 				item.desc  =  "这个锯齿状的影像看上去像是时空中的黑洞，但它又是固态的，尽管重量非常的轻。"
 				item.use_power.name = function(self, who)
 					local dam = self.use_power.damage(self, who)/2
-					return ("在 %d 码 范 围 内 释放 虚空 能 量 ，至 多 距 离 %d。造 成 %0.2f时空和 %0.2f 暗 影 伤 害。(基 于 魔 法)"):format(self.use_power.radius, self.use_power.range, who:damDesc(engine.DamageType.TEMPORAL, dam), who:damDesc(engine.DamageType.DARKNESS, dam))
+					return ("在 %d 码 范 围 内 释 放 虚 空 能 量 ，至 多 距 离 %d。造 成 %0.2f 时 空 和 %0.2f 暗 影 伤 害。(基 于 魔 法)"):format(self.use_power.radius, self.use_power.range, who:damDesc(engine.DamageType.TEMPORAL, dam), who:damDesc(engine.DamageType.DARKNESS, dam))
 				end
 			end
 			 if item.name == "Thalore-Wood Cuirass" then

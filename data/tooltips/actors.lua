@@ -193,9 +193,9 @@ function getTooltipActorCHN(desc)
 				elseif string.find(desc[i],"Action radius:") then desc[i] = string.gsub(desc[i],"Action radius:","活动范围：　")
 				end
 
-				if string.find(desc[i],"hostile, %d") then desc[i] = string.gsub(desc[i],"hostile, ","敌对，")
-				elseif string.find(desc[i],"friendly, %d") then desc[i] = string.gsub(desc[i],"friendly, ","友善，")
-				elseif string.find(desc[i],"neutral, %d") then desc[i] = string.gsub(desc[i],"neutral, ","中立，")
+				if string.find(desc[i],"hostile, .?%d") then desc[i] = string.gsub(desc[i],"hostile, ","敌对，")
+				elseif string.find(desc[i],"friendly, .?%d") then desc[i] = string.gsub(desc[i],"friendly, ","友善，")
+				elseif string.find(desc[i],"neutral, .?%d") then desc[i] = string.gsub(desc[i],"neutral, ","中立，")
 				end
 			end
 		end

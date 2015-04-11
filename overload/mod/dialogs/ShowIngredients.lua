@@ -36,7 +36,7 @@ function _M:init(party)
 	self:generateList()
 
 	local vsep = Separator.new{dir="horizontal", size=self.ih - 10}
-	self.c_list = ListColumns.new{width=math.floor(self.iw / 2 - 10), height=self.ih - 10, scrollbar=true, sortable=true, columns={
+	self.c_list = ListColumns.new{width=math.floor(self.iw / 2 - vsep.w / 2), height=self.ih - 10, scrollbar=true, sortable=true, columns={
 		{name="材料", width=50, display_prop="name", sort="name"},
 		{name="分类", width=30, display_prop="cat", sort="cat"},
 		{name="数量", width=20, display_prop="nb", sort="nb"},

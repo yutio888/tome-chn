@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2014 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -646,7 +646,6 @@ function _M:drawDialog(kind, actor_to_compare)
 				if mean and dam then
 					s:drawColorStringBlended(self.font, WeaponTxt, w, h, 255, 255, 255, true) h = h + self.font_h
 					text = compare_fields(player, actor_to_compare, function(actor, ...) return math.floor(actor:combatAttack(...)) end, "%3d", "%+.0f", 1, false, false, mean, dam)
-					dur_text = ("%d"):format(math.floor(player:combatAttack(o.combat)/5))
 					self:mouseTooltip(self.TOOLTIP_COMBAT_ATTACK, s:drawColorStringBlended(self.font, ("命中：    #00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
 					text = compare_fields(player, actor_to_compare, function(actor, ...) return actor:combatDamage(...) end, "%3d", "%+.0f", 1, false, false, dam)
 					self:mouseTooltip(self.TOOLTIP_COMBAT_DAMAGE, s:drawColorStringBlended(self.font, ("伤害：    #00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
@@ -669,7 +668,6 @@ function _M:drawDialog(kind, actor_to_compare)
 			local mean, dam = player:getObjectCombat(nil, "barehand"), player:getObjectCombat(nil, "barehand")
 			if mean and dam then
 				text = compare_fields(player, actor_to_compare, function(actor, ...) return math.floor(actor:combatAttack(...)) end, "%3d", "%+.0f", 1, false, false, mean)
-				dur_text = ("%d"):format(math.floor(player:combatAttack(player.combat)/5))
 				self:mouseTooltip(self.TOOLTIP_COMBAT_ATTACK, s:drawColorStringBlended(self.font, ("命中：      #00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
 				text = compare_fields(player, actor_to_compare, function(actor, ...) return actor:combatDamage(...) end, "%3d", "%+.0f", 1, false, false, dam)
 				self:mouseTooltip(self.TOOLTIP_COMBAT_DAMAGE, s:drawColorStringBlended(self.font, ("伤害：      #00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
@@ -700,7 +698,6 @@ function _M:drawDialog(kind, actor_to_compare)
 				if mean and dam then
 					s:drawColorStringBlended(self.font, "#LIGHT_BLUE#副手："..(player:attr("disarmed") and " (disabled)" or ""), w, h, 255, 255, 255, true) h = h + self.font_h
 					text = compare_fields(player, actor_to_compare, function(actor, ...) return math.floor(actor:combatAttack(...)) end, "%3d", "%+.0f", 1, false, false, mean)
-					dur_text = ("%d"):format(math.floor(player:combatAttack(o.combat)/5))
 					self:mouseTooltip(self.TOOLTIP_COMBAT_ATTACK, s:drawColorStringBlended(self.font, ("命中：      #00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
 					text = compare_fields(player, actor_to_compare, function(actor, ...) return actor:combatDamage(...) end, "%3d", "%+.0f", offmult, false, false, dam)
 					self:mouseTooltip(self.TOOLTIP_COMBAT_DAMAGE, s:drawColorStringBlended(self.font, ("伤害：      #00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
@@ -725,7 +722,6 @@ function _M:drawDialog(kind, actor_to_compare)
 
 		s:drawColorStringBlended(self.font, "#LIGHT_BLUE#魔法：", w, h, 255, 255, 255, true) h = h + self.font_h
 		text = compare_fields(player, actor_to_compare, function(actor, ...) return actor:combatSpellpower() end, "%3d", "%+.0f")
-		dur_text = ("%d"):format(math.floor(player:combatSpellpower()/5))
 		self:mouseTooltip(self.TOOLTIP_SPELL_POWER, s:drawColorStringBlended(self.font, ("法术强度：  #00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
 		text = compare_fields(player, actor_to_compare, function(actor, ...) return actor:combatSpellCrit() end, "%d%%", "%+.0f%%")
 		self:mouseTooltip(self.TOOLTIP_SPELL_CRIT, s:drawColorStringBlended(self.font,  ("暴击率：    #00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
@@ -886,13 +882,10 @@ function _M:drawDialog(kind, actor_to_compare)
 		h = h + self.font_h
 		s:drawColorStringBlended(self.font, "#LIGHT_BLUE#豁免：", w, h, 255, 255, 255, true) h = h + self.font_h
 		text = compare_fields(player, actor_to_compare, function(actor, ...) return math.floor(actor:combatPhysicalResist(true)) end, "%3d", "%+.0f")
-		dur_text = ("%d"):format(math.floor(player:combatPhysicalResist(true)/5))
 		self:mouseTooltip(self.TOOLTIP_PHYS_SAVE,   s:drawColorStringBlended(self.font, ("物理豁免：#00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
 		text = compare_fields(player, actor_to_compare, function(actor, ...) return math.floor(actor:combatSpellResist(true)) end, "%3d", "%+.0f")
-		dur_text = ("%d"):format(math.floor(player:combatSpellResist(true)/5))
 		self:mouseTooltip(self.TOOLTIP_SPELL_SAVE,  s:drawColorStringBlended(self.font, ("法术豁免：#00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
 		text = compare_fields(player, actor_to_compare, function(actor, ...) return math.floor(actor:combatMentalResist(true)) end, "%3d", "%+.0f")
-		dur_text = ("%d"):format(math.floor(player:combatMentalResist(true)/5))
 		self:mouseTooltip(self.TOOLTIP_MENTAL_SAVE, s:drawColorStringBlended(self.font, ("精神豁免：#00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
 
 		h = 0
@@ -1551,3 +1544,4 @@ function _M:dump()
 
 	Dialog:simplePopup("Character dump complete", "File: "..fs.getRealPath(file))
 end
+

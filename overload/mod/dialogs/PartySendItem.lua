@@ -56,8 +56,8 @@ function _M:use(item)
 	self.source:sortInven(self.inven)
 	self.o.__transmo = nil
 	item.actor:addObject(item.actor.INVEN_INVEN, self.o, true) -- force full stack transfer
-	item.actor:sortInven(item.actor.INVEN_INVEN)
 	game.log("你将 %s 交给 %s.", self.o:getName{do_color=true}, item.actor.name)
+	item.actor:sortInven(item.actor.INVEN_INVEN)
 	self.on_end()
 end
 

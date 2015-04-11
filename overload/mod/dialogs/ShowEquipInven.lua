@@ -40,6 +40,7 @@ function _M:init(title, equip_actor, filter, action, on_select, inven_actor)
 
 	self.c_main_set = Tab.new{title="主武器", default=not equip_actor.off_weapon_slots, fct=function() end, on_change=function(s) if s then self:switchSets("main") end end}
 	self.c_off_set = Tab.new{title="副武器", default=equip_actor.off_weapon_slots, fct=function() end, on_change=function(s) if s then self:switchSets("off") end end}
+
 	local vsep = Separator.new{dir="horizontal", size=self.ih - 10}
 
 	-- Add tooltips

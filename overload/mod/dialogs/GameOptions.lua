@@ -101,6 +101,7 @@ function _M:generateListUi()
 	end, fct=function(item)
 		game:registerDialog(GraphicMode.new())
 	end,}
+
 	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"令生物和抛射物移动更加平滑。设置为0时移动看起来是瞬间完成的。\n数值越高，画面显示的移动速度越慢。\n注意：这并不会改变该游戏的回合制机制。\n在你的角色图像仍在移动的时候，你仍旧可以移动它。"}
 	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#平滑移动#WHITE##{normal}#", status=function(item)
 		return tostring(config.settings.tome.smooth_move)

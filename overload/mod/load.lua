@@ -1,5 +1,5 @@
 ﻿-- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2014 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -60,52 +60,17 @@ Entity.ascii_outline = {x=2, y=2, r=0, g=0, b=0, a=0.8}
 
 -- This file loads the game module, and loads data
 local UIBase = require "engine.ui.Base"
-local Map = require "engine.Map"
 local Level = require "engine.Level"
 local FontPackage = require "engine.FontPackage"
 
 -- Init settings
-config.settings.tome = config.settings.tome or {}
-profile.mod.allow_build = profile.mod.allow_build or {}
---if type(config.settings.tome.autosave) == "nil" then
-config.settings.tome.autosave = true
---end
-if not config.settings.tome.smooth_move then config.settings.tome.smooth_move = 3 end
-if type(config.settings.tome.twitch_move) == "nil" then config.settings.tome.twitch_move = true end
-if not config.settings.tome.gfx then
-	local w, h = core.display.size()
-	if w >= 1000 then config.settings.tome.gfx = {size="64x64", tiles="shockbolt"}
-	else config.settings.tome.gfx = {size="48x48", tiles="shockbolt"}
-	end
+dofile("/mod/settings.lua")
+if config.settings.tome.gfx and config.settings.tome.gfx.tiles == "ascii" then
+	dofile("/mod/class/AsciiMap.lua")
 end
-if config.settings.tome.gfx.tiles == "mushroom" then config.settings.tome.gfx.tiles="shockbolt" end
-if type(config.settings.tome.weather_effects) == "nil" then config.settings.tome.weather_effects = true end
-if type(config.settings.tome.smooth_fov) == "nil" then config.settings.tome.smooth_fov = true end
-if type(config.settings.tome.daynight) == "nil" then config.settings.tome.daynight = true end
-if type(config.settings.tome.hotkey_icons) == "nil" then config.settings.tome.hotkey_icons = true end
-if type(config.settings.tome.effects_icons) == "nil" then config.settings.tome.effects_icons = true end
-if type(config.settings.tome.autoassign_talents_on_birth) == "nil" then config.settings.tome.autoassign_talents_on_birth = true end
-if type(config.settings.tome.chat_log) == "nil" then config.settings.tome.chat_log = true end
-if type(config.settings.tome.actor_based_movement_mode) == "nil" then config.settings.tome.actor_based_movement_mode = true end
-if type(config.settings.tome.rest_before_explore) == "nil" then config.settings.tome.rest_before_explore = true end
-if type(config.settings.tome.lore_popup) == "nil" then config.settings.tome.lore_popup = true end
-if type(config.settings.tome.auto_hotkey_object) == "nil" then config.settings.tome.auto_hotkey_object = true end
-if type(config.settings.tome.immediate_melee_keys) == "nil" then config.settings.tome.immediate_melee_keys = true end
-if type(config.settings.tome.immediate_melee_keys_auto) == "nil" then config.settings.tome.immediate_melee_keys_auto = true end
-if type(config.settings.tome.allow_online_events) == "nil" then config.settings.tome.allow_online_events = true end
-if type(config.settings.tome.small_frame_side) == "nil" then config.settings.tome.small_frame_side = true end
-if type(config.settings.tome.fullscreen_stun) == "nil" then config.settings.tome.fullscreen_stun = true end
-if type(config.settings.tome.fullscreen_confusion) == "nil" then config.settings.tome.fullscreen_confusion = true end
---if not config.settings.tome.fonts then 
-	config.settings.tome.fonts = {type="fantasy", size="normal"} 
---end
-if not config.settings.tome.ui_theme2 then config.settings.tome.ui_theme2 = "metal" end
-if not config.settings.tome.uiset_mode then config.settings.tome.uiset_mode = "Minimalist" end
-if not config.settings.tome.log_lines then config.settings.tome.log_lines = 5 end
-if not config.settings.tome.log_fade then config.settings.tome.log_fade = 3 end
-if not config.settings.tome.scroll_dist then config.settings.tome.scroll_dist = 20 end
-if not config.settings.tome.hotkey_icons_rows then config.settings.tome.hotkey_icons_rows = 1 end
-if not config.settings.tome.hotkey_icons_size then config.settings.tome.hotkey_icons_size = 48 end
+local Map = require "engine.Map"
+
+-- Apply some settings
 Map.smooth_scroll = config.settings.tome.smooth_move
 Map.faction_danger2 = "tactical_danger.png"
 Map.faction_danger1 = "tactical_enemy_strong.png"
@@ -212,27 +177,27 @@ ActorInventory:defineInventory("HANDS", "On hands", true, "Various gloves can be
 ActorInventory:defineInventory("FEET", "On feet", true, "Sandals or boots can be worn on your feet.", nil, {equipdoll_back="ui/equipdoll/boots_inv.png"})
 ActorInventory:defineInventory("TOOL", "Tool", true, "This is your readied tool, always available immediately.", nil, {equipdoll_back="ui/equipdoll/tool_inv.png"})
 ActorInventory:defineInventory("QUIVER", "Quiver", true, "Your readied ammo.", nil, {equipdoll_back="ui/equipdoll/ammo_inv.png"})
-ActorInventory:defineInventory("GEM", "Socketed Gems", true, "Socketed gems.", nil, {equipdoll_back="ui/equipdoll/gem_inv.png"})
+ActorInventory:defineInventory("GEM", "Socketed Gems", true, "Gems worn in/on the body, providing their worn bonuses.", nil, {equipdoll_back="ui/equipdoll/gem_inv.png", stack_limit = 1})
 ActorInventory:defineInventory("QS_MAINHAND", "Second weapon set: In main hand", false, "Weapon Set 2: Most weapons are wielded in the main hand. Press 'x' to switch weapon sets.", true)
 ActorInventory:defineInventory("QS_OFFHAND", "Second weapon set: In off hand", false, "Weapon Set 2: You can use shields or a second weapon in your off-hand, if you have the talents for it. Press 'x' to switch weapon sets.", true)
 ActorInventory:defineInventory("QS_PSIONIC_FOCUS", "Second weapon set: psionic focus", false, "Weapon Set 2: Object held in your telekinetic grasp. It can be a weapon or some other item to provide a benefit to your psionic powers. Press 'x' to switch weapon sets.", true)
 ActorInventory:defineInventory("QS_QUIVER", "Second weapon set: Quiver", false, "Weapon Set 2: Your readied ammo.", true)
 ActorInventory.equipdolls = {
 	default = { w=48, h=48, itemframe="ui/equipdoll/itemframe48.png", itemframe_sel="ui/equipdoll/itemframe-sel48.png", ix=3, iy=3, iw=42, ih=42, doll_x=116, doll_y=168+64, list={
-		PSIONIC_FOCUS = {{weight=1, x=48, y=48}},
-		MAINHAND = {{weight=2, x=48, y=120}},
-		OFFHAND = {{weight=3, x=48, y=192}},
-		BODY = {{weight=4, x=48, y=264}},
-		QUIVER = {{weight=5, x=48, y=336}},
-		FINGER = {{weight=6, x=48, y=408}, {weight=7, x=120, y=408, text="bottom"}},
-		LITE = {{weight=8, x=192, y=408}},
-		TOOL = {{weight=9, x=264, y=408, text="bottom"}},
+		PSIONIC_FOCUS = {{weight=1, x=48, y=48, subshift="left"}},
+		MAINHAND = {{weight=2, x=48, y=120, subshift="left"}},
+		OFFHAND = {{weight=3, x=48, y=192, subshift="left"}},
+		BODY = {{weight=4, x=48, y=264, subshift="left"}},
+		QUIVER = {{weight=5, x=48, y=336, subshift="left"}},
+		FINGER = {{weight=6, x=48, y=408, subshift="bottom"}, {weight=7, x=120, y=408, text="bottom", subshift="bottom"}},
+		LITE = {{weight=8, x=192, y=408, subshift="bottom"}},
+		TOOL = {{weight=9, x=264, y=408, subshift="bottom", text="bottom"}},
 		FEET = {{weight=10, x=264, y=336}},
 		BELT = {{weight=11, x=264, y=264}},
 		HANDS = {{weight=12, x=264, y=192}},
 		CLOAK = {{weight=13, x=264, y=120}},
-		NECK = {{weight=14, x=192, y=48, text="topright"}},
-		HEAD = {{weight=15, x=120, y=48, text="topleft"}},
+		NECK = {{weight=14, x=192, y=48, subshift="bottom", text="topright"}},
+		HEAD = {{weight=15, x=120, y=48, subshift="bottom", text="topleft"}},
 	}},
 	alchemist_golem = { w=48, h=48, itemframe="ui/equipdoll/itemframe48.png", itemframe_sel="ui/equipdoll/itemframe-sel48.png", ix=3, iy=3, iw=42, ih=42, doll_x=116, doll_y=168+64, list={
 		MAINHAND = {{weight=1, x=48, y=120}},
@@ -320,7 +285,11 @@ os.exit()
 --]]
 
 -- Load tilesets, to speed up image loads
---Tiles:loadTileset("/data/gfx/ts-shockbolt-all.lua")
+Tiles:loadTileset("/data/gfx/ts-gfx-npc.lua")
+Tiles:loadTileset("/data/gfx/ts-gfx-object.lua")
+Tiles:loadTileset("/data/gfx/ts-gfx-trap.lua")
+Tiles:loadTileset("/data/gfx/ts-gfx-terrain.lua")
+Tiles:loadTileset("/data/gfx/ts-gfx-talents-effects.lua")
 
 -- Factions
 dofile("/data/factions.lua")

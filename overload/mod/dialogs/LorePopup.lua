@@ -62,9 +62,10 @@ function _M:init(l, w, force_height)
 		self.frame.overlays = ovs
 	end
 
-	local h = math.min(force_height and (force_height * game.h) or 999999999, self.font_h * #list)
+	local required_h = self.font:height() + self.font_h * (#list - 1)
+	local h = math.min(force_height and (force_height * game.h) or 999999999, required_h)
 	local c_text = require("engine.ui.Textzone").new{
-		width=w+10, height=h, scrollbar=(h < self.font_h * #list) and true or false, text=text, color=self.color,font=self.font
+		width=w+10, height=h, scrollbar=(h < required_h) and true or false, text=text, color=self.color,font=self.font
 	}
 	c_text:setTextShadow(false)
 

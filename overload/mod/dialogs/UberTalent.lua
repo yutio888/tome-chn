@@ -27,6 +27,7 @@ local TextzoneList = require "engine.ui.TextzoneList"
 local TalentGrid = require "mod.dialogs.elements.TalentGrid"
 local Separator = require "engine.ui.Separator"
 local DamageType = require "engine.DamageType"
+local FontPackage = require "engine.FontPackage"
 
 module(..., package.seeall, class.inherit(Dialog, mod.class.interface.TooltipsData))
 

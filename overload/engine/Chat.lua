@@ -19,6 +19,7 @@
 
 require "engine.class"
 require "engine.dialogs.Chat"
+local slt2 = require "slt2"
 
 --- Handle chats between the player and NPCs
 module(..., package.seeall, class.make)
@@ -64,7 +65,7 @@ function _M:addChat(c)
 	self:triggerHook{"Chat:add", c=c}
 
 	assert(c.id, "no chat id")
-	assert(c.text, "no chat text")
+	assert(c.text or c.template, "no chat text or template")
 	assert(c.answers, "no chat answers")
 	self.chats[c.id] = c
 	print("[CHAT] loaded", c.id, c)

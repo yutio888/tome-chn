@@ -18,38 +18,38 @@
 -- darkgod@te4.org
 
 newChat{ id="welcome",
-	template = [[#LIGHT_GREEN#*Entering the room, you see two massive ogres standing guard, blinking as though awakened from a long sleep. They see you, and immediately snap to attention. The one on the right speaks:*#WHITE#
-YOU!  Name, rank, and identification.  NOW.
+	template = [[#LIGHT_GREEN#*当你进入这个房间时，你发现两个身形魁梧的食人魔站在你的面前，仿佛刚刚从无尽的长眠中醒来。他们在看到你的瞬间迅速立正，右边的一个向你大喊到:*#WHITE#
+你是谁！立刻报上你的姓名、军衔、部队番号！
 ]],
 	answers = {
-		{"My what?"},
-		{"[attack]"},
+		{"我的什么？"},
+		{"[攻击]"},
 	}
 }
 
 newChat{ id="nargol-scum",
-	template = [[#LIGHT_GREEN#*Entering the room, you see two massive ogres standing guard, blinking as though awakened from a long sleep. They see you, and immediately draw their weapons.]],
+	template = [[#LIGHT_GREEN#*当你进入这个房间时，你发现两个身形魁梧的食人魔站在你的面前，仿佛刚刚从无尽的长眠中醒来。他们在看到你的瞬间立刻举起武器向你冲来。]],
 	answers = {
-		{"[attack]", action=function(npc, player) npc:doEmote("#CRIMSON#NARGOL SCUM!  WE'RE UNDER ATTACK!", 120) end},
+		{"[攻击]", action=function(npc, player) npc:doEmote("#CRIMSON#纳格尔帝国的半身人杂种攻进来了！我们正遭受攻击！", 120) end},
 	}
 }
 
 newChat{ id="conclave",
-	template = [[#LIGHT_GREEN#*Entering the room, you see two massive ogres standing guard, blinking as though awakened from a long sleep. They see you, and immediately snap to attention. The one on the right speaks:*#WHITE#
-Ah!  Reinforcements!  I don't know how long it's been, but I'll get Astelrid up here to--  wait a minute, where are the rest of them?  #LIGHT_GREEN#*He frowns.*#WHITE# What's your identification number?
+	template = [[#LIGHT_GREEN#*当你进入这个房间时，你发现两个身形魁梧的食人魔站在你的面前，仿佛刚刚从无尽的长眠中醒来。他们在看到你的瞬间迅速立正，右边的一个向你大喊到:*#WHITE#
+太好了！我们的援军终于到了！我不知道已经过了多久，不过我想亚斯特莉可以告诉你们——等等，其他人呢？  #LIGHT_GREEN#*他的眉头紧锁。*#WHITE# 你的部队番号是什么！
 ]],
 	answers = {
-		{"Wait! The war's over! It's been thousands of years, the Conclave doesn't exist anymore!", jump="angry-conclave"},
-		{"[attack]"},
+		{"等等！战争已经结束了！已经过去了几千年了，孔克雷夫也早已灭亡了！", jump="angry-conclave"},
+		{"[攻击]"},
 	}
 }
 
 newChat{ id="angry-conclave",
-	text = [[#LIGHT_GREEN#*They look at each other and scowl, drawing their weapons.  The one on the left growls:*#WHITE#
-LIES!  The Conclave could not have lost!  I don't know who you are, but we can't afford witnesses!
+	text = [[#LIGHT_GREEN#*他们怒目而视，举起武器。左边的一个大喊道：*#WHITE#
+一派胡言！孔克雷夫是不可能灭亡的！我不知道你到底是谁，但是你别想骗得了我们！
 ]],
 	answers = {
-		{"[attack]"},
+		{"[攻击]"},
 	}
 }
 

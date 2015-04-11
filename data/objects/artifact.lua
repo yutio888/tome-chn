@@ -632,7 +632,7 @@ class:bindHook("Entity:loadList", function (self,data)
 
 			end
 			 if item.name == "Vestments of the Conclave" then
-				item.name = "主教的礼服"
+				item.name = "孔克雷夫法袍"
 				item.unided_name  = "破烂的长袍"
 				item.desc  =  "这件古老的礼服从厄流纪保存了下来。上古的魔法力量占据着它。它由人类专门为人类制造；只有他们才能驾驭这件长袍的真正力量。"
 

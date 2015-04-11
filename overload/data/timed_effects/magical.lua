@@ -3385,7 +3385,7 @@ newEffect{
 newEffect{
 	name = "OGRE_FURY", image = "effects/ogre_fury.png",
 	desc = "Ogre Fury",
-	long_desc = function(self, eff) return ("增 加 %d%% 暴 击 率 与 %d%% 暴 击 强 度 。叠 加： %d ."):format(eff.stacks * 10, eff.stacks * 5, eff.stacks * 20, eff.stacks) end,
+	long_desc = function(self, eff) return ("增 加 %d%% 暴 击 率 与 %d%% 暴 击 强 度 。叠 加： %d ."):format(eff.stacks * 5, eff.stacks * 20, eff.stacks) end,
 	type = "magical",
 	subtype = { runic=true },
 	status = "beneficial",

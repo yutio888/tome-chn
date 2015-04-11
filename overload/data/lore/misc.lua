@@ -369,10 +369,11 @@ newLore{
 第4章 - 永恒精灵
 第5章 - 自然精灵
 第6章 - 纳鲁精灵（已灭绝）
-第7章 - 兽人（已灭绝）
-第8章 - 夏·图尔人（已灭绝）
-第9章 - 巨魔
-第10章 - 龙族
+第7章 - 食人魔
+第8章 - 兽人（已灭绝）
+第9章 - 夏·图尔人（已灭绝）
+第10章 - 怪物种族
+第11章 - 龙族
 ]]}
 
 newLore{
@@ -381,9 +382,9 @@ newLore{
 	name = "Loremaster Greynot's Analysis of the Races - Chapter 1 - Humans",
 	lore = [[我从人类的研究开始，基本上来说是马基·埃亚尔人口最多的种族。迄今为止，最强的、屈指可数的几个国家是科纳克斯王国、肖塔王国、马卓普王国以及高等人类王国——血统。最大的人类聚居地是在最后希望的城堡周围，另外还有许多聚居地存在于马基·埃亚尔的每个角落。
 
-科纳克斯人基本身高在5英英尺9左右，有着黑色的头发、棕色的眼睛以及红润的肌肤。大多数科纳克斯人选择商人、农民或者其他体力劳动职业。不幸的是，大部分强盗组织也更倾向于控制科纳克斯人。科纳克斯人的家族很庞大，并且自黄昏纪以来他们的人口增长极快，特别是在西部农业地区和南部的最后希望地区，这种现象尤为明显。
+科纳克斯人基本身高在5英尺9英寸左右，有着黑色的头发、棕色的眼睛以及红润的肌肤。大多数科纳克斯人选择商人、农民或者其他体力劳动职业。不幸的是，大部分强盗组织也更倾向于控制科纳克斯人。科纳克斯人的家族很庞大，并且自黄昏纪以来他们的人口增长极快，特别是在西部农业地区和南部的最后希望地区，这种现象尤为明显。
 
-肖塔人基本身高在5英英尺11左右，黑皮肤黑头发黑眼睛。他们起源于马基·埃亚尔的东南地区，自从大爆炸将他们大部分土地沉入海洋后，他们的数量急剧减少。他们以自然亲和著称，并且经常作为牧师、纹身师或猎龙者行走于世。
+肖塔人基本身高在5英尺11英寸左右，黑皮肤黑头发黑眼睛。他们起源于马基·埃亚尔的东南地区，自从大爆炸将他们大部分土地沉入海洋后，他们的数量急剧减少。他们以自然亲和著称，并且经常作为牧师、纹身师或猎龙者行走于世。
 
 马卓普人在黄昏纪和魔法大爆炸后基本已经灭绝。他们以对魔法亲和著称，而这类人通常是猎魔者的首要目标。不管怎样，他们的血统特征——火红的头发以及生有雀斑的皮肤，仍能在某些偏远的地方找到。有部分传言说他们仍住在某些遥远的地方的城堡或高塔里。
 
@@ -424,7 +425,7 @@ newLore{
 	name = "Loremaster Greynot's Analysis of the Races - Chapter 4 - Shaloren",
 	lore = [[虽然乍一看，精灵们都差不多，但是他们还是有着不同的历史、文化、观念和许多微妙的生理特征，所以我将会分开写他们。所有的精灵都有着非常明显的标志——尖尖的耳朵和高颧骨，至于其他特征就太普遍了。必须说的是，他们称自己为整体的“Elore”，意即“兄弟”，然而这些兄弟姐妹间的关系通常是比较紧张的。
 
-	永恒精灵（或不朽精灵——“不朽恩赐”）通常身高6英英尺2左右，有着阳光般灿烂的头发和蓝紫色的眼睛。他们身材苗条，体重较轻，有着魔法运用上的巨大优势。他们以迅捷的移动速度和轻快的步伐而闻名。但是最值得注意的是他们的魔法亲和力，这一点其他任何种族中都是无法相提并论的，同时他们还拥有强大的意志。
+	永恒精灵（或不朽精灵——“不朽恩赐”）通常身高6英尺2英寸左右，有着阳光般灿烂的头发和蓝紫色的眼睛。他们身材苗条，体重较轻，有着魔法运用上的巨大优势。他们以迅捷的移动速度和轻快的步伐而闻名。但是最值得注意的是他们的魔法亲和力，这一点其他任何种族中都是无法相提并论的，同时他们还拥有强大的意志。
 
 很久以前，永恒精灵们便学会了魔法的运用，而这点也一直延续至今。虽然其他种族认为魔法充满了巨大的威胁，永恒精灵们却热爱着它，并且广泛运用于整个社会。不过，在他们与其他种族交流时，他们仍小心地隐藏魔法。永恒精灵是导致魔法大爆炸的源头之一，虽然他们可能已经忘记了它，但是炽热的记忆却深埋于许多人心中。在黄昏纪的魔法大爆炸中，他们紧闭大门并用一层薄雾笼罩着整个城市，偶尔悄悄的溜出来。许多世纪后他们才为世人所接受，但是大家对他们仍心存猜忌。
 
@@ -436,7 +437,7 @@ newLore{
 	id = "races-5",
 	category = "races",
 	name = "Loremaster Greynot's Analysis of the Races - Chapter 5 - Thaloren",
-	lore = [[自然精灵（或木精灵——“自然之怒”）通常身高6英英尺4左右，有着棕黑色的头发和淡褐色或绿色的眼睛。他们有着发达的肌肉和强悍的物理战力，并且以他们渴望杀戮的心态闻名——激烈的战斗就是他们欢乐的歌谣。因为厌恶同族兄弟对魔法的使用，他们与永恒精灵互相敌视。
+	lore = [[自然精灵（或木精灵——“自然之怒”）通常身高6英尺4英寸左右，有着棕黑色的头发和淡褐色或绿色的眼睛。他们有着发达的肌肉和强悍的物理战力，并且以他们渴望杀戮的心态闻名——激烈的战斗就是他们欢乐的歌谣。因为厌恶同族兄弟对魔法的使用，他们与永恒精灵互相敌视。
 
 他们的首都在夏特尔，隐藏在北部丛林的深处，并且他们不允许任何外来者接近森林周围。弓箭手和战士们认真的巡逻边境，他们将会从树上给任何靠近的人带来死亡。他们的领袖是王后奈希拉·坦泰兰，据说他们生活在巨大的树腹中，但是他们的社会很少为人所知。
 
@@ -450,7 +451,7 @@ newLore{
 	name = "Loremaster Greynot's Analysis of the Races - Chapter 6 - Naloren (extinct)",
 	lore = [[纳鲁精灵(或纳精灵——“精神之源”)是一支绝迹的种族，他们的大陆因大灾变的影响而沉入大海。不过，作为精灵族的分支种族，他们还是有可学习的地方，虽然历史记载很少。许多人说纳鲁精灵是虚构出来的，但是有人可以推测出某些史实。
 
-纳鲁精灵大约在5英英尺10左右，有着亚麻色的长发和绿色的眼睛。他们非常瘦弱，但却以敏捷的身手和灵巧的行动而闻名。他们的王国座落在马基·埃亚尔的东部地区，并且他们所有的城镇都建在海边或者河边。他们擅长捕鱼、采集海绵、航海和音乐。他们同样以超长的水下屏息能力而闻名，并且那些掌握了魔法的人甚至可以做到水下呼吸。
+纳鲁精灵大约在5英尺10英寸左右，有着亚麻色的长发和绿色的眼睛。他们非常瘦弱，但却以敏捷的身手和灵巧的行动而闻名。他们的王国座落在马基·埃亚尔的东部地区，并且他们所有的城镇都建在海边或者河边。他们擅长捕鱼、采集海绵、航海和音乐。他们同样以超长的水下屏息能力而闻名，并且那些掌握了魔法的人甚至可以做到水下呼吸。
 
 他们很少与外界交易，并且很重视他们的土地。他们尤其小心守护的是他们领土中心一个叫夏·图尔的遗迹。永恒精灵们非常渴望研究它们，虽然纳鲁们自己很害怕接触它，但是却始终拒绝永恒精灵们进入（典型的占着茅坑不拉屎啊～）。据说兽人们经常侵略他们的边境，但是总能被他们武装整齐、手持三叉戟的精锐战士击退。
 
@@ -460,22 +461,22 @@ newLore{
 	id = "races-ogre",
 	category = "races",
 	name = "Loremaster Greynot's Analysis of the Races - Chapter 7 - Ogres",
-	lore = [[Ogres have never been a thriving race, starting from their abrupt appearance as soldiers and laborers for the Conclave during the Allure Wars (unexplained aside from a highly implausible story from the Conclave's Overseers about a lost mountain tribe).  Left without homes or proper runic training after the war's end, they were forced to found their own tribes and rediscover the fields of rune and infusion creation for themselves, and though their numbers dropped rapidly, they enjoyed a brief period of relative success as nomadic rune-traders, virtually unaffected by the Spellblaze.  The Spellhunt nearly proved to be their undoing, as their monstrous size and rune-covered skin made them popular targets; they were thought to be extinct, and only in recent years has the city of Elvala revealed that some Ogres took refuge there during this time.  Their descendants still live today, fearful of persecution but gradually beginning to explore outside Elvala for the first time in ages.
+	lore = [[食人魔从来不是一个昌盛的种族。在厄流纪的长期征战中，这个种族突然出现在世人的视线里，作为孔克雷夫的工人和士兵。孔克雷夫的长老会宣称他们是在崇山峻岭中找到了隐藏于世间许久的食人魔，然而这个故事难以置信，漏洞百出，使得目前食人魔的产生仍然原因不明。在旷日持久的战争结束后，流离失所的他们无家可归，也没有接受过系统化的符文训练，只能被迫重新建立起自己的部落，重新研究出操作符文和纹身的复杂技术。尽管这一过程伴随着大规模的人口减员，他们作为流浪符文师度过了一段相对和平的日子，基本没有受到魔法大爆炸的影响。接踵而来的魔法狩猎曾经被认为是完全毁灭了这个种族。因为他们怪异的体格和满身符文的皮肤，他们迅速成为猎魔者的首要目标。几乎所有人都认为这个种族已经灭绝，直到近几年我们才发现埃尔瓦拉在很长时间内为一批食人魔提供了庇护。他们的后代仍然生活在今天，尽管仍然畏惧着外人的迫害，他们中的少数仍然尝试着向埃尔瓦拉以外的区域前去探索。
 
-Ogres' most striking feature is their size, by far the largest of any intelligent race; they average at roughly 8'4" tall, and most are nearly half as wide with muscle.  They have a similar range of skin tones to humans, although slightly grayer on the whole; their hair tends to be dark brown or black, and their eyes run the gamut from black to bright blue to purple, presumably a side-effect of runic mis-transcription.  Their angular facial features invite some impolite comparisons to Orcs, with strong jawlines, disproportionately large mouths and teeth, and squarish heads, but otherwise resemble those of humans.  It would be remiss of me to describe Ogres' appearance without mentioning the intricate, glowing pattern of runes covering their skin from head to toe, although the exact patterns and colors vary.  
+食人魔们最引人注目的特征是他们高大的体格，目前是所有智慧种族中体格最为硕大的一个。他们通常身高在8英尺4英寸左右，浑身的肌肉使他们足足有身高的一半那么宽。就像人类一样，他们也有各种类似的不同肤色，但总体而言比较偏灰色。它们的头发趋向于呈黑色或深褐色，眼睛的颜色分布在从黑色到湖蓝色到紫色的广泛色域内，相比是符文转录错误引发的副作用。他们面部的棱角引发了一些与野蛮的兽人族的令人不快的比较，连同强壮的下颌，不成比例地巨大的嘴巴和牙齿，以及方形的头。然而在其他方面，他们十分类似于人类。当然，最为不得不提的是，错综复杂地闪烁着的符文遍布于他们全身，从头到脚，尽管确切的图案和颜色各不相同。
 
-Although they excel at physical tasks for obvious reasons, and the necessity of careful inscription has made their finger dexterity (and penmanship) rather impressive, their limb movements tend to be slow and clumsy due to their size, and they tire quickly if they over-exert themselves during strenuous labor.  Their slow speech, incredible appetites, and lack of interest in arts or most scholarly concerns has led to a misconception that they are dim-witted; however, Ogres forced into studious tasks have performed admirably, and one needs only look at their runic patterns to know the patient study and artistic vision they are capable of, if properly motivated.  This may tie into the humble, duty-bound mindset that seems to be an inherent property of the species - most Ogres show absolutely no interest in leadership or impressing others, only completing tasks in the most reliable manner possible, and such strategies tend to be rather simple.
+他们一眼看上去就很适合体力任务，并且对于管理符文的重要性使他们手指变得十分灵巧，就连写出来的书法也令人印象深刻。然而，由于他们的庞大体型，他们的肢体动作往往显得缓慢而笨拙。并且，他们如果在艰苦的劳动中透支体力就会很快变得无比疲倦。他们语速缓慢，胃口令人难以置信的大，对艺术和科学基本没有兴趣，引发了广泛的误解，让人们往往趋向于认为这是一个低智商的种族。事实上，他们在所有真正感兴趣的领域都能发挥到令人倾佩的地步。只需要看看他们所制的符文图案，就能了解到他们只要需要的情况下就能发挥出多么伟大的艺术造诣和技术水平。这可能是深深植根于它们心中的一种固有的心态——大部分食人魔对领导他人或者给他人留下深刻的印象毫无兴趣，只一心关注于用最可靠的方式完成他们所做的事，而这种方式往往是最简单而毫不花哨的一种。
 
-While Shalore use of magic is (arguably) a choice, Ogres have no such luxury.  Their inscriptions are as crucial to their well-being and structural integrity as any internal organ, and attempts by Ziguranth to "cleanse" captured Ogres of their runes invariably lead to them first collapsing under their own weight, then their organs shutting down one by one; one can assume that their natural infusions are just as vital.  As such, Ogre reproduction is a careful task; a newborn can live for a few months unaltered, but after this the parents must give their child a thorough regimen of runic inscription and herbal infusions.  The parents typically perform this task together, using each others' runes as a reference, and any mistakes made in the transcription will affect the child's health and development (usually adversely, though it is believed that transcription errors are responsible for mitigating Ogres' once-uncontrollable tempers).  As such, the inscribed patterns are as much of an influence on the child's development as the physical and mental traits of his or her parents.	
+或许即使是永恒精灵也有可能放弃魔法的力量，但是食人魔可没有这样的奢侈。他们身上的符文对他们的生命和体内器官的结构完整性至关重要。在魔法狩猎时期被伊格兰斯曾经试着“净化”所捕获的食人魔身上的符文，最终导致他们体重迅速下降，所有器官一个接一个停止工作。可以假定，他们身上的纹身也相当重要。因此，食人魔的生育是一个十分复杂的过程。婴儿们可以保持没有符文的状态几个月，在此之后父母必须在他的身上铭刻一套包含各种符文和纹身的复杂的整体。父母们通常一起执行一个任务，使用彼此的符文作为参考，并且在这个转录的过程中的任何错误都会影响孩子的健康和发育。通常这一影响是不利的，然而因祸得福，似乎也正是转录错误缓解了食人魔们过去火爆的脾气。因此，孩子们身上所铭刻的符文和纹身对它们未来的发展，和父母本身的身心特质同样重要。
 
-Due to the safety and comfort of Elvala, and their mistrust of much of the outside world, most Ogres who leave their home do so for trade purposes; no longer using Shaloren as couriers, some have begun to enter the growing market of runes and infusions, and have proven very successful thanks to their natural talent in this area.  Those few who could be considered "adventurers" tend to pack up their things and leave abruptly, not for glory or riches, but because they see a recurring source of misery in the world and wish to dispose of it themselves as a public service.  It is not uncommon for an Ogre to sigh in frustration after hearing about a hijacked shipment of grain, head out, return a few days later with the blood of a once-persistent bandit clan stuck to his club, and go right back to tending his crops.]]}
+由于埃尔瓦拉的舒适安定的生活和深切感受到的来自外界的不信任，绝大多数离开家园的食人魔仅仅是为了一些商业目的。不再需要永恒精灵作为他们的中介人，一些人已经开始进入纹身和符文这一不断增长的市场，他们在这方面的天赋使他们在这一领域大获成功。而那些少数可以被视为冒险家的人，往往只是收拾好自己的东西突然离开，不为荣耀和财富，只为消除世界上不断出现的苦难与不幸而为他人奉献。经常听到这样的故事，一个食人魔偶尔听到有满载粮食的货船被劫的消息，立即出发。几天之后，他挥舞着那终结了曾经不可一世的强盗性命的狼牙棒荣归故里，然后继续回到乡间照料他的庄稼。]]}
 newLore{
 	id = "races-7",
 	category = "races",
-	name = "Loremaster Greynot's Analysis of the Races - Chapter 7 - Orcs (extinct)",
+	name = "Loremaster Greynot's Analysis of the Races - Chapter 8 - Orcs (extinct)",
 	lore = [[兽人们，很高兴的说，已经在马基·埃亚尔大陆上绝迹了，紧接着的便是图库纳国王揭开的新纪元——卓越纪。但是对它们之前文化风俗的学术研究却是非常有趣的，虽然可能会比较原始。
 
-兽人们大约在6英英尺1左右，有着绿色或黑色的皮肤。他们擅长物理领域多样化的职业，这似乎与他们惊人的繁殖速度有关。大部分兽人拥有雄壮的体型和发达的肌肉，关于兽人军队的这部分记忆仍旧存在于老人们的心中。然而在派尔纪，一群相对瘦弱却更加强大的兽人出现了，他们掌握了毁灭性的法术。
+兽人们大约在6英尺1英寸左右，有着绿色或黑色的皮肤。他们擅长物理领域多样化的职业，这似乎与他们惊人的繁殖速度有关。大部分兽人拥有雄壮的体型和发达的肌肉，关于兽人军队的这部分记忆仍旧存在于老人们的心中。然而在派尔纪，一群相对瘦弱却更加强大的兽人出现了，他们掌握了毁灭性的法术。
 
 与兽人发生第一次接触的是艾德瑞尔半身人，他们只想将兽人当做奴隶，但是在发现兽人们过于凶残后放弃了这一想法。在随后的数个世纪中，战争与争斗始终是为了对抗这些野兽。他们压倒性的数量，一度对所有文明产生过巨大的威胁，即使是在魔法大爆炸的影响之后。最可怕的年代是在派尔纪，当兽人们掌握了魔法，并且在吞噬者加库尔的领导下时，他们几乎扫除了面前的一切障碍。最终，上万的半身人士兵在纳格尔之战中为了毁灭兽族恶魔般的领袖和军团献出了生命。之后各种族的文明开始缓慢恢复，最终图库纳国王和米雯尼雅王后统一了人类和半身人王国，使大家团结一致击退了兽人，并将它们一网打尽。
 
@@ -486,20 +487,20 @@ newLore{
 newLore{
 	id = "races-8",
 	category = "races",
-	name = "Loremaster Greynot's Analysis of the Races - Chapter 8 - Sher'Tul (extinct)",
+	name = "Loremaster Greynot's Analysis of the Races - Chapter 9 - Sher'Tul (extinct)",
 	lore = [[啊，传奇的夏·图尔！学者们是多么爱研究他们啊。事实上，相关的文献很多，但有事实根据的很少，所以有关该种族的信息也较少。最权威的研究是基于知名探险家和考古学家达沃德·欧卡顿的发现，但是他在写作过程中已经失踪好几个月了。在此，我将总结下他关键性的几个发现。
 
 夏·图尔生活在距今一万年前，被称为混沌纪的时代。这个种族的名字来源于精灵族，他们以敬畏之情述说着古代种族，即便如此，他们也对其知之甚少。在马基·埃亚尔大陆上，夏·图尔如梦似幻的废墟结构被找出并探索，有的废墟甚至位海洋中沉没的大陆上，暗示着夏·图尔人曾经一度统治过整个世界。
 	传送门的首次发现是在厄流纪，被半身人发现，在大量的实验后他们发现可以将物品和生物传送到很远的地方。这些奇迹背后的奥术原理仍远远超出我们能够理解的范围。那些试图刨根挖底的人，现在湮灭在了历史中——那些永恒精灵法师将所有已知的传送门搬到了一个靠近他们首都的地方，并且他们的魔导师们过于自信的开启了魔法大爆炸，他们瞬间化为了灰烬并且整个大陆分崩离析。那些在大陆上剩下的传送门，至今无人敢碰。
 
-关于他们的长相几乎没有人说得清，因为毫无历史文献或者是记录来描述他们的样子。然而他们肯定与其他种族有着类似的特征，因为他们的废墟中存在着楼梯、大门和不适合人类居住的房间痕迹。欧卡顿通过研究他们的工具和遗迹，得出了这样的结论：他们大约高5英英尺4左右，有着不同寻常的触手状四肢。
+关于他们的长相几乎没有人说得清，因为毫无历史文献或者是记录来描述他们的样子。然而他们肯定与其他种族有着类似的特征，因为他们的废墟中存在着楼梯、大门和不适合人类居住的房间痕迹。欧卡顿通过研究他们的工具和遗迹，得出了这样的结论：他们大约高5英尺4英寸左右，有着不同寻常的触手状四肢。
 
 他们绝迹的原因始终是个未解之谜，尽管有着各种猜想。在考古界最流行的说法是他们强大的魔法毁灭了自己，内战使他们消弭在历史中。其他理论——阿奇曼·加里伯德，恶魔研究者则一直相信夏·图尔人在魔法上的杰出造诣引来了异次元的恶魔，最终导致了整个种族的毁灭。有的人则更相信他们不是真的绝迹了，而是隐匿了起来，或者离开了这个世界。我恐怕真相永远无人知晓，但是对夏·图尔文明的深入研究仍有着非常重要的价值和意义。]]}
 
 newLore{
 	id = "races-9",
 	category = "races",
-	name = "Loremaster Greynot's Analysis of the Races - Chapter 9 - Monstrous Races",
+	name = "Loremaster Greynot's Analysis of the Races - Chapter 10 - Monstrous Races",
 	lore = [[没有任何文字可以诠释那些影响我们世界的野蛮种族。他们没有任何文化遗留，也没有任何先进的智慧或文化，但是他们仍能激起大家研究原始种族的兴趣。
 
 巨魔主要分为两大类——科兹拉克和马提普，或者说岩石和森林巨魔，因为这更加通俗地为人所知。岩石巨魔生存与东北部的山脉地区，有些为了寻找食物和散播暴力甚至走到了更远的地方。他们通常超过8英英尺高，有着强壮的肌肉和厚厚的煤黑色或花岗岩状的外观。森林巨魔生活在浓密的森林和沼泽中，在德斯镇东部的巨魔沼泽尤为臭名卓著。他们比岩石巨魔同胞有着更为敏捷的速度，并且以移动迅速和能够使用精工武器闻名，尽管他们没有那么发达的肌肉和强壮的身躯。所有的巨魔有着快速的新陈代谢能力，再严重的伤口，恢复只要几个小时。据测量，他们在出生时只有8寸长，但是在2年内他们就可以成长完全，并且很少有寿命超过10年的。他们一开始被认为仅比野兽好一点，然而在派尔纪时，他们被兽人当做战士般训练，甚至学习了一些基础语言和战术，使得他们更加危险。虽然兽人已经走了，但他们的仆人仍然存在，并且巨魔们的广泛分布和令人惊讶的生育率使得他们至今仍活跃在马基·埃亚尔的舞台上。
@@ -513,7 +514,7 @@ newLore{
 newLore{
 	id = "races-10",
 	category = "races",
-	name = "Loremaster Greynot's Analysis of the Races - Chapter 10 - Dragons",
+	name = "Loremaster Greynot's Analysis of the Races - Chapter 11 - Dragons",
 	lore = [[一般人也许会嘲笑我把龙作为单独列出的智慧种族，但是经验丰富的龙战士们知道其实不然。龙族是另人难以置信的长寿生命，某些已知的龙族已经存活了数千年之久。尽管在他们早期的生命中，他们兽性的一面比较多，但是随着他们生活几个世纪以后，他们会获得前所未有的超强理解力。那些远古巨龙有时被认为是马基·埃亚尔最狡猾和富有智慧的生物，他们拥有心灵沟通和优秀的精神能力，并且龙战士们始终对龙族有着最崇高的敬意。
 
 龙族有着不同的大小和形状，一般常见于5英尺长的幼仔到20英尺长的成年龙族，某些最强大的龙族体长能达到40英尺。他们通常是带翅膀的、有着蜥蜴般的咽喉和锋利爪子的前后肢。他们通常有着鲜艳色彩的鳞片，通常代表与埃亚尔某种元素的亲和。这种亲和力在任何其他种族都未曾出现过，有些学者认为，由于龙族在世界起源时形成较早，因此能表现出强大的元素亲和力。然而这个理论只有那些狂热的研究了龙族太久的龙战士信徒们才会相信。
@@ -660,19 +661,19 @@ newLore{
 	id = "kestin-highfin-adventuring-notes",
 	category = "highfin",
 	name = "On Adventuring",
-	lore = [[ I must say, as time grows, I feel so do I grow more and more inclined to distance myself from the calling of an 'adventurer', like so many you can find roaming the countryside. I feel like the myth of a wandering hero has blinded too many with promise of easy fame and riches, with no eye for the other kind of fortune.
+	lore = [[我必须说，随着漫长的冒险岁月，我似乎与那些在你们眼中的“冒险家”，也就是那群在乡间小路上的流浪者们渐行渐远。我想，或许是那些流浪英雄的神话使得那些金钱和荣誉的诱惑蒙蔽了你的双眼，让你们忽视了真正的财富就在我们的身边。
 
-Hear me out on this.
+诸君啊，敬请听我一言。
 
-Nowadays most don't really recognize how fascinating the world we live in truly is. It is vast, more than you can imagine. I can safely promise, any wild thought you can muster up, dear reader, will not come close to the truth. Such is the breadth of wonders, I would probably dismiss most of what I have seen as myth, be I not there myself. And even then sometimes, I had to wonder whether I could trust my eyes.
+现在，许多年轻人根本无法理解，我们身处的这个世界究竟是多么神奇而又美好，远远超出了任何人的想象。我向你们中任何一人保证，亲爱的读者啊，无论是在你脑海中多么狂野的梦想，在那无比瑰丽的真实世界面前都是那么渺小，这就是真正奇迹的恢弘气势。即使我将一切我未能亲身经历的故事全部当作神话，天哪，我所亲历的一切仍然是那么震撼人心，让我甚至无法相信我的亲眼所见。
 
-Perhaps I'm being too vague, or maybe these promises leave much to be desired. After all, adventuring is not all fun and exotics, it is before all danger and a constant threat of death, or worse. So then if you wish me to be more concrete, think of derelict, crumbling crypts, cults and demons, hungry forests full of monsters and forces beyond time and place. True, there is overwhelming awe, thrill even, but the reason that so little detail reaches you, is because so little live to tell.
+或许，我的描述有些过于模糊，或许，这些保证有些难以置信。毕竟，冒险并不总是充满了探索未知的喜悦——那是前所未有的危险，无时无刻不伴随着死亡的威胁，甚至更糟。所以，如果你想要让我用语言描述的话——请想象一下，废弃的远古地穴里巨岩崩碎跌落；疯狂的邪教徒将恶魔从异次元唤来；随着远处猛兽的咆哮，外表平和的森林展露了它嗜血的本性；还有，与之伴随的，超越时空约束的强大力量。这就是真实的冒险，任何人都会为其壮丽景象所倾倒，为其沉醉——尽管，我们所能了解的实在只是冒险旅途的吉光片羽，毕竟只有极少一部分的人能生还下来，告诉我们他们真实的经历。
 
-What does reach us then, are not people, but objects. Artifacts of great power, legacy of the past. Surely, any drunkard might like to tell tales after a pint or two, but a magical sword is a proof of its own and it keeps quiet of what it has seen. So, a great hero is usually easy to recognize, being practically a walking history book. Clad in half the age of important events which he probably has no idea about.
+如果要说我们能够亲眼所见的是什么，那就往往是那些过去和现在伟大冒险家的遗物：那是身怀着强大力量的神器，诉说着真正的史诗。当然，在灌下一两杯之后任何一个醉鬼都能够信口开河，胡诌一通；然而，一把灌注着强大魔力的利刃从来不会说谎，它们是冒险史诗的诚实记录者，然而始终保持缄默，从不多言。所以说，一个伟大的英雄往往在装备上就引人注目。他们如同活动着的历史，身上的每一件物品都诉说着宏大的史诗，其中至少有一半连他的主人都没有丝毫了解。
 
-It is important to remember, that every artifact has a meaning, beings of great power and importance behind them. Stories, that now slowly wane into nothing. This is why it is not artifacts that make an adventurer. It is his great deeds, the will to dare where nobody did before. It is not important if you get known in the process or not, after all, if you were truly great, maybe you will leave behind a legacy of your own.
+要记住重要的是，每一件神器都有其自己的意义，如同曾经手持他们的那些值得在史册留名的伟大英雄。尽管他们的故事已经被人们渐渐淡忘，他们的遗物仍然在世间永存。这就是为什么说，真正的英雄并不是因为他的财富扬名立万。真正的冒险家永远无畏于挑战前人所不敢为之事，无论他们的功绩是否为人所记载。无论如何，你伟大的冒险经历将开创属于你自己的史诗。
 
--#{italic}#Kestin Highfin#{normal}#]]
+——#{italic}#科斯汀·赫菲因#{normal}#]]
 }
 
 

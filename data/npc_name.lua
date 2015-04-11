@@ -2082,6 +2082,9 @@ npcDescCHN["ogre sentry"] = "这个挥舞着巨剑的食人魔用带着鄙视和
 npcNameCHN["Healer Astelrid"] = "孔克雷夫医师亚斯特莉"
 npcDescCHN["Healer Astelrid"] = "一个巨大的食人魔，身上穿着的破烂长袍上是一枚亮闪闪的官员徽章。她用手抓住一把治疗用的法杖，被石膏浇铸并裹挟着手术刀，用作一个巨大的狼牙棒。"
 
+npcNameCHN["Director Hompalan"] = "研究主管 红帕兰"
+npcDescCHN["Director Hompalan"] = "这个研究设施的主人，曾经如此高傲的研究主管红帕兰，现在已经只剩下摇摇欲坠的枯骨。尽管这具遗骸只剩下空洞无神的眼窝，你也能从中察觉到他凝视着你的神情。"
+
 npcNameCHN["old vats"] = "古老的培养槽"
 npcDescCHN["old vats"] = ""
 

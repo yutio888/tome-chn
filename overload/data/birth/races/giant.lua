@@ -49,6 +49,7 @@ newBirthDescriptor
 {
 	type = "subrace",
 	name = "Ogre",
+	display_name = " 食 人 魔 ",
 	locked = function() return profile.mod.allow_build.race_ogre end,
 	locked_desc = [[Forged in the hatred of ages long passed,
 made for a war that they've come to outlast.
@@ -57,7 +58,7 @@ its tunnels ruined so it wouldn't be found.
 Past burglars have failed, but their data's immortal;
 to start, look where halflings once tinkered with portals...]],
 	desc = {
-		"Ogres 是 变 种 人 类 ， 在 厄 流 纪 被 孔 克 雷 夫 作 为 工 人 和 战 士 而 制 造。",
+		"食 人 魔 是 变 种 人 类 ， 在 厄 流 纪 被 孔 克 雷 夫 作 为 工 人 和 战 士 而 制 造。",
 		"符 文 给 他 们 超 过 自 然 界 限 的 强 大 力 量 ， 但 他 们 对 符 文 魔 法 的 依 赖 使 之 成 为 猎 魔 行 动 绝 佳 的 目 标 ， 而 不 得 不 依 附 于 永 恒 精 灵。",
 		"他 们 简 单 的 喜 好 与 直 接 的 方 式 令 他 们 获 得 了 哑 巴 和 野 兽 的 蔑 称，尽 管 他 们 在 法 术 和 符 文 上 有 惊 人 的 亲 和 力。",
 		"他 们 拥 有 #GOLD#怒火中烧 #WHITE# 技 能， 能 提 供 暴 击 几 率 和 伤 害 ， 并 提 供 震 慑 定 身 免 疫 。",

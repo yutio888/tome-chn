@@ -839,7 +839,7 @@ logCHN:newLog{
 	log = "%s brandishes %s, calling forth the might of the oceans!",
 	fct = function(a,b)
 		a = npcCHN:getName(a)
-		return("%s挥舞着%s，召唤了海洋的力量%s!"):format(a,b)
+		return("%s挥舞着%s，召唤了海洋的力量!"):format(a,b)
 	end,
 }
 logCHN:newLog{

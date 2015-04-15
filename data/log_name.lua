@@ -1,7 +1,6 @@
 ﻿function logCHN:getName(name)
-
-	name = trapCHN:getName(name) 
 	name = npcCHN:getName(name)
+	name = trapCHN:getName(name) 
 	if name:find(" from ") then
 		local f,e=name:find(" from ")
 		local teffect=name:sub(1,f-1)

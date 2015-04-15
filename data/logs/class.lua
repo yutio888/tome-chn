@@ -616,8 +616,16 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "You switch your weapons to: %s.",
 	fct = function(a)
-		local name = objects:getObjectsChnName(a)
+		local name = objects:getObjectsChnName(a):gsub("and", "和")
 		return ("你切换了你的装备至： %s 。"):format(name)
+	end,
+}
+
+logCHN:newLog{
+	log = "You teleport %s into your hands.",
+	fct = function(a)
+		local name = objects:getObjectsChnName(a):gsub("and", "和")
+		return ("你将 %s 传送到了手中。"):format(name)
 	end,
 }
 

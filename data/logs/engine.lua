@@ -308,26 +308,32 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#LIGHT_GREEN#Personal New Achievement: %s!",
 	fct = function(a)
-		local key = a:gsub(" %(.+%)","")
-		if achievementCHN[key] then
-			a = a:gsub(key,achievementCHN[key])
-			a = a:gsub("Exploration mode","探索模式")
-			a = a:gsub("Insane difficulty","困难难度")
-		end
-		return ("#LIGHT_GREEN#新的个人成就：%s！"):format(a)
+		local key = achievementCHN:getName(a)
+		return ("#LIGHT_GREEN#新的个人成就：%s！"):format(key)
 	end,
 }
 
 logCHN:newLog{
 	log = "#LIGHT_GREEN#New Achievement: %s!",
 	fct = function(a)
-		local key = a:gsub(" %(.+%)","")
-		if achievementCHN[key] then
-			a = a:gsub(key,achievementCHN[key])
-			a = a:gsub("Exploration mode","探索模式")
-			a = a:gsub("Insane difficulty","困难难度")
-		end
-		return ("#LIGHT_GREEN#新成就：%s！"):format(a)
+		local key = achievementCHN:getName(a)
+		return ("#LIGHT_GREEN#新成就：%s！"):format(key)
+	end,
+}
+
+logCHN:newLog{
+	log = "#GOLD#Personal New Achievement: %s!",
+	fct = function(a)
+		local key = achievementCHN:getName(a)
+		return ("#GOLD#新的个人成就：%s！"):format(key)
+	end,
+}
+
+logCHN:newLog{
+	log = "#GOLD#New Achievement: %s!",
+	fct = function(a)
+		local key = achievementCHN:getName(a)
+		return ("#GOLD#新成就：%s！"):format(key)
 	end,
 }
 

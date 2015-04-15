@@ -11,7 +11,7 @@ Talents.talents_def.T_FOLD_FATE.info = function(self, t)
 		return ([[当 你 用 武 器 折 叠 命 中 时 ，有 %d%% 几 率 在 半 径 %d 内 造 成 额 外 %0.2f 时 空 伤 害 。
 		 受 影 响 的 生 物 可 能 减 少 %d%% 物 理 和 时 空 抗 性 %d 回 合 。
 		 这 个 效 果 有 冷 却 时 间 。当 处 于 冷 却 状 态 被 触 发 时 ，会 减 少 重 力 折 叠 和 扭 曲 折 叠 1 回 合 冷 却 时 间 。]])
-		:format(chance, damDesc(self, DamageType.TEMPORAL, damage), radius, resists, duration)
+		:format(chance, radius, damDesc(self, DamageType.TEMPORAL, damage), resists, duration)
 	end
 
 Talents.talents_def.T_FOLD_WARP.name = "扭曲折叠"
@@ -23,7 +23,7 @@ Talents.talents_def.T_FOLD_WARP.info = function(self, t)
 		return ([[当 你 用 武 器 折 叠 命 中 时 ，有 %d%% 几 率 在 半 径 %d 内 造 成 额 外 %0.2f 物 理 和 %0.2f 时 空 伤 害 。
 		 受 影 响 的 生 物 可 能 被 震 慑 、 致 盲 、 定 身 或 混 乱 %d 回 合 。
 		 这 个 效 果 有 冷 却 时 间 。当 处 于 冷 却 状 态 被 触 发 时 ，会 减 少 重 力 折 叠 和 命 运 折 叠 1 回 合 冷 却 时 间 。]])
-		:format(chance, damDesc(self, DamageType.TEMPORAL, damage/2), damDesc(self, DamageType.PHYSICAL, damage/2), radius, duration)
+		:format(chance, radius, damDesc(self, DamageType.TEMPORAL, damage/2), damDesc(self, DamageType.PHYSICAL, damage/2), duration)
 	end
 
 Talents.talents_def.T_FOLD_GRAVITY.name = "重力折叠"
@@ -36,7 +36,7 @@ Talents.talents_def.T_FOLD_GRAVITY.info = function(self, t)
 		return ([[当 你 用 武 器 折 叠 命 中 时 ，有 %d%% 几 率 在 半 径 %d 内 造 成 额 外 %0.2f 物 理( 重 力) 伤 害 。
 		 受 影 响 的 生 物 可 能 被 减 速 %d%% ，持 续 %d 回 合 。
 		 这 个 效 果 有 冷 却 时 间 。当 处 于 冷 却 状 态 被 触 发 时 ，会 减 少 扭 曲 折 叠 和 命 运 折 叠 1 回 合 冷 却 时 间 。]])
-		:format(chance, damDesc(self, DamageType.PHYSICAL, damage), radius, slow, duration)
+		:format(chance, radius, damDesc(self, DamageType.PHYSICAL, damage), slow, duration)
 	end
 
 Talents.talents_def.T_WEAPON_FOLDING.name = "武器折叠"
@@ -71,8 +71,8 @@ Talents.talents_def.T_WEAPON_MANIFOLD.info =  function(self, t)
 		 重 力 ：半 径 %d 内 造 成 %0.2f 物 理 伤 害 ，并 减 速 （ %d%% ） %d 回 合 。
 		 每 项 效 果 有 8 回 合 冷 却 时 间 。
 		 当 处 于 冷 却 中 的 效 果 被 触 发 时 ，将 减 少 另 外 两 个 效 果 的 冷 却 1 回 合 。]])
-			:format(chance, damDesc(self, DamageType.TEMPORAL, damage), radius, resists, duration, damDesc(self, DamageType.PHYSICAL, damage/2), damDesc(self, DamageType.TEMPORAL, damage/2), radius,
-		duration, damDesc(self, DamageType.PHYSICAL, damage), radius, slow, duration)
+			:format(chance, radius, damDesc(self, DamageType.TEMPORAL, damage), resists, radius, damDesc(self, DamageType.PHYSICAL, damage/2), damDesc(self, DamageType.TEMPORAL, damage/2), duration, radius,
+		 damDesc(self, DamageType.PHYSICAL, damage), slow, duration)
 	end
 
 Talents.talents_def.T_BREACH.name = "破灭"

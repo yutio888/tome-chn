@@ -165,11 +165,13 @@ end
 
 simpleLongDlg["Ambush"] = function(str)
 	if str:find("the staff is gone") then
-		str = [[几个小时以后，你醒了过来，惊讶地发现自己还活着，不过法杖已经不见了！#VIOLET#立刻返回最后的希望报告这件事！]]
+		str = [[几个小时以后，你醒了过来，惊讶地发现自己还活着，不过
+        法杖已经不见了！#VIOLET#立刻返回最后的希望报告这件事！]]
 	else str = [[令人惊讶，你竟然活了下来！#VIOLET#立刻返回最后的希望报告这件事！]] end
 	return "伏击",str
 end
 
-simpleLongDlg["Lush Forest"] = function()
-	return "茂密森林",[[突然你想起来，很久以前某人曾对你提起过一个坐落于冰冷北方的奇怪森林。]]
+simpleLongDlg["Lush forest"] = function()
+	return "茂密森林",[[突然你想起来，很久以前某人曾对你提起过一个坐落于冰冷
+    北方的奇怪森林。]]
 end

@@ -157,7 +157,7 @@ WorldAchievements:loadDefinition("/data/achievements/")
 PartyLore:loadDefinition("/data/lore/lore.lua")
 
 -- Useful keybinds
-KeyBind:load("move,hotkeys,inventory,actions,interface,tome,debug")
+KeyBind:load("chn_move,chn_hotkeys,chn_inventory,chn_actions,chn_interface,tome,chn_debug")
 
 -- Additional entities resolvers
 dofile("/mod/resolvers.lua")

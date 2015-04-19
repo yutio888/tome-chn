@@ -2088,6 +2088,8 @@ npcDescCHN["Director Hompalan"] = "这个研究设施的主人，曾经如此高
 npcNameCHN["old vats"] = "古老的培养槽"
 npcDescCHN["old vats"] = ""
 
+npcNameCHN["Lady Nashva the Streambender"] = "激流纳纱瓦女士"
+npcDescCHN["Lady Nashva the Streambender"] = "水流缓慢的围绕着这位娜迦的尾巴旋转。她黑色的尾巴蜷缩起来，使她看起来较为矮小，但是她沉着而自信的脸庞使你感受到她无所畏惧。当水流在她周围蒸腾时，星空都仿佛失去了光芒，你感到她的眼神看穿了你的内心。"
 --地图巡逻队
 npcNameCHN["adventurers party"] = "冒险家分队"
 npcNameCHN["ziguranth patrol"] = "伊格巡逻队"

@@ -161,6 +161,8 @@ function getTooltipActorCHN(desc)
 					desc[i] = string.gsub(desc[i],"Dreadfell","恐惧王座")
 				elseif string.find(desc[i],"Temple of Creation %(.+%)") then
 					desc[i] = string.gsub(desc[i],"Temple of Creation","造物者神庙")
+				elseif string.find(desc[i],"Vargh Republic %(.+%)") then
+					desc[i] = string.gsub(desc[i],"Vargh Republic","瓦尔弗娜迦共和国")
 				elseif string.find(desc[i],"Water lair %(.+%)") then
 					desc[i] = string.gsub(desc[i],"Water lair","水下墓穴")
 				elseif string.find(desc[i],"Assassin lair %(.+%)") then

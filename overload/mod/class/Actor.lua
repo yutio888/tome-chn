@@ -5452,7 +5452,7 @@ function _M:getTalentFullDescription(t, addlevel, config, fake_mastery)
 				if type(speed_type) == "string" then
 					speed_type = speed_type:gsub("mind","精神"):gsub("spell","法术"):gsub("weapon","武器"):gsub("archery","弓箭")
 																 :gsub("combat","战斗"):gsub("standard","标准"):gsub("movement","移动")
-																 :gsub("double","双倍"):gsub("Archery","弓箭")
+																 :gsub("double","双倍"):gsub("Archery","弓箭"):gsub("summon","召唤"):gsub("shield","盾牌")
 				else
 					speed_type = '特殊'
 				end

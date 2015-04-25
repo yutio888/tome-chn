@@ -24,8 +24,9 @@ Talents.talents_def.T_FROZEN_GROUND.name= "冻结大地"
 Talents.talents_def.T_FROZEN_GROUND.info= function(self, t)
 		local damage = t.getDamage(self, t)
 		local radius = self:getTalentRadius(t)
-		return ([[制 造 一 股 冷 空 气 围 绕 着 你， 在 %d 码 半 径 范 围 内 对 目 标 造 成 %0.2f 冰 冷 伤 害 并 冻 结 它 们 4 回 合。 
-		 被 冻 结 单 位 可 以 动 作 但 无 法 移 动。 
+		return ([[制 造 一 股 冷 空 气 围 绕 着 你， 在 %d 码 半 径 范 围 内 对 目 标 造 成 %0.2f 冰 冷 伤 害 并 冻 结 它 们 的 双 脚 4 回 合。 
+		 被 冻 结 双 脚 的 单 位 可 以 动 作 但 无 法 移 动。 
+		 该 技 能 每 击 中 一 个 处 于 湿 润 状 态 的 目 标 ， 将 会 减 少 寒 冰 破 碎 的 技 能 冷 却 时 间 2 回 合 。
 		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成。]]):format(radius, damDesc(self, DamageType.COLD, damage))
 	end
 Talents.talents_def.T_SHATTER.name= "寒冰破碎"

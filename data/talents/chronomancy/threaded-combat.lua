@@ -15,8 +15,8 @@ Talents.talents_def.T_THREAD_WALK.info = function(self, t)
 Talents.talents_def.T_BLENDED_THREADS.name = "混合螺旋"
 Talents.talents_def.T_BLENDED_THREADS.info =  function(self, t)
 		local count = t.getCount(self, t)
-		return ([[每 次 你 的 箭 命 中 时 ， 减 少 一 个 螺 旋 灵 弓 系 技 能 一 回 合 的 冷 却。
-		每 次 你 的 近 战 武 器 命 中 时 ， 减 少 一 个 螺 旋 灵 刃 系 技 能 一 回 合 的 冷 却。
+		return ([[每 次 你 的 箭 命 中 时 ， 减 少 一 个 螺 旋 灵 刃 系 技 能 一 回 合 的 冷 却。
+		每 次 你 的 近 战 武 器 命 中 时 ， 减 少 一 个 螺 旋 灵 弓 系 技 能 一 回 合 的 冷 却。
 		这 个 效 果 一 回 合 最 多 触 发 %d 次。]])
 		:format(count)
 	end

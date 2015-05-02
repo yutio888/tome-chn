@@ -270,6 +270,7 @@ gridCHN["portal to the main island"] = "通向主岛的传送门"
 gridCHN["portal to the arrival platform"] = "通向到达平台的传送门"
 
 gridCHN["Long tunnel to the island of Rel"] = "通向夺心魔之岛的通道"
+gridCHN["Door to an old Conclave vault"] = "通向古老的孔克雷夫地下实验室的大门"
 --地图描述
 
 gridCHN["A farportal is a way to travel incredible distances in the blink of an eye. They usually require an external item to use."] = " 传 送 门 是 可 以 在 眨 眼 间 将 你 传 送 出 很 远 距 离 的 工 具。 它 们 通 常 需 要 一 件 关 键 道 具 来 激 活。 "

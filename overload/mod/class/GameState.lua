@@ -2073,12 +2073,11 @@ function _M:createRandomBoss(base, data)
 		ngd = NameGenerator.new(randart_name_rules.default)
 		name = ngd:generate()
 --	end
---	if data.name_scheme then
---		b.name = data.name_scheme:gsub("#rng#", name):gsub("#base#", b.name)
---	else
+	if data.name_scheme then
+		b.name = b.name .. " : " .. (randomboss_name_scheme[data.name_scheme] or data.name_scheme):gsub("#rng#", name):gsub("#base#", b.name)
+	else
 		b.name = b.name.." : "..name
---	end
-
+	end
 	print("Creating random boss ", b.name, data.level, "level", data.nb_classes, "classes")
 	if data.force_classes then print("  * forcing classes:",table.concat(table.keys(data.force_classes),",")) end
 	b.unique = b.name

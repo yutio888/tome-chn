@@ -46,6 +46,7 @@ require "data-chn123.elixir_ingredients"
 require "data-chn123.dialogs.dialogs"
 require "data-chn123.emote"
 require "data-chn123.death_note"
+require "data-chn123.randomboss_name_scheme"
 
 require "data-chn123.log_name"
 require "data-chn123.birth.birth"

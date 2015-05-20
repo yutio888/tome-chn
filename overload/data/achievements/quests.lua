@@ -1,5 +1,5 @@
 ﻿-- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -156,6 +156,7 @@ newAchievement{
 	show = "full", huge=true,
 	desc = [[Won the game without ever taking off his mankini.]],
 }
+
 -------------- Other quests
 newAchievement{
 	name = "Rescuer of the lost", id = "LOST_MERCHANT_RESCUE",

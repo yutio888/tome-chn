@@ -1,0 +1,12 @@
+randomboss_name_scheme = randomboss_name_scheme or {}
+randomboss_name_scheme["#rng# the Invoker"] = "扰乱者#rng#"
+randomboss_name_scheme["#rng# the Bringer of Doom"] = "末日行者#rng#"
+randomboss_name_scheme["#rng# the Witherer"] = "枯萎使者#rng#"
+randomboss_name_scheme["#rng# the Invader"] = "入侵者#rng#"
+randomboss_name_scheme["#rng# the Tidebender"] = "踏浪者#rng#"
+randomboss_name_scheme["#rng# the Guardian"] = "守护者#rng#"
+randomboss_name_scheme["#rng# the Fearsome"] = "恐怖的#rng#"
+randomboss_name_scheme["#rng# the Neverdead"] = "不死的#rng#"
+randomboss_name_scheme["#rng# the Silent Death"] = "静谧杀手#rng#"
+randomboss_name_scheme["#rng# the Crusher"] = "破坏者#rng#"
+randomboss_name_scheme["#rng# the Tidebender"] = "踏浪者#rng#"

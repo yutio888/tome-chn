@@ -56,8 +56,8 @@ function npcCHN:getName(name)
 		elseif npcNameCHN[name:gsub("Dozing ","")] then
 			name = "打瞌睡的" .. npcNameCHN[name:gsub("Dozing ","")]
 		end
-	elseif name:find("影之") and npcNameCHN[name:gsub("影之 ","")] then 
-		name = "影之"..npcNameCHN[name:gsub("影之 ","")]
+	elseif name:find("shade of ") and npcNameCHN[name:gsub("shade of ","")] then 
+		name = npcNameCHN[name:gsub("shade of ","")] .. "之影"
 	end
 
 	return name
@@ -105,8 +105,8 @@ function npcCHN:getDesc(name, desc)
 		if npcNameCHN[name:gsub("dozing ","")] then return npcDescCHN[name:gsub("dozing ","")]
 		elseif npcNameCHN[name:gsub("Dozing ","")] then return npcDescCHN[name:gsub("Dozing ","")]
 		end
-	elseif name:find("影之 ") then
-		if npcDescCHN[name:gsub("影之 ","")] then return npcDescCHN[name:gsub("影之 ","")] end
+	elseif name:find("shade of ") then
+		return "通过一些可怕的秘法，这只生物的影子被剥离出了它原本的身体并获得了亡灵之躯。"
 	else return nil
 	end
 end
@@ -1348,7 +1348,10 @@ npcNameCHN["Kryl-Feijan"] = "卡洛·斐济"
 npcDescCHN["Kryl-Feijan"] = "这只巨大的恶魔被黑暗所包围。它的“母亲”的碎肉仍悬挂在它的利爪上。"
 
 npcNameCHN["Melinda"] = "米琳达"
---npcDescCHN["Melinda"] = "一位赤裸并且全身刻有扭曲符文的女人。她的四肢被镣铐绑在了祭台上。尽管她的皮肤上满是鲜血，你仍然能发现她的美丽。"
+npcDescCHN["Melinda"] = {}
+npcDescCHN["Melinda"]["A female Human with twisted sigils scored into her naked flesh. Her wrists and ankles are sore and hurt by ropes and chains. You can discern great beauty beyond the stains of blood covering her skin."] = "一位赤裸并且全身刻有扭曲符文的女人。她的四肢被镣铐绑在了祭台上。尽管她的皮肤上满是鲜血，你仍然能发现她的美丽。"
+npcDescCHN["Melinda"]["Enjoying a lovely day at the beach."] = "在海滩上享受生活。"
+npcDescCHN["Melinda"]["You saved her from the depth of a cultists' lair and fell in love with her. She has moved into the Fortress to see you more often."] = "你将她从邪教徒手中拯救出来，同时你爱上了她。她搬到堡垒里了，这样能常常看到你。"
 
 npcNameCHN["Acolyte of the Sect of Kryl-Feijan"] = "卡洛·斐济的邪教徒"
 npcDescCHN["Acolyte of the Sect of Kryl-Feijan"] = "穿着黑色长袍的精灵，他们的眼中满是疯狂。"

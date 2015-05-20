@@ -1847,8 +1847,8 @@ function _M:tooltip(x, y, seen_by)
 
 	--if self.desc then ts:add(self.desc, true) end
 	if self.desc then
-		if npcCHN:getDesc(self.name) then
-			ts:add(cutChrCHN(npcCHN:getDesc(self.name),19), true)
+		if npcCHN:getDesc(self.name, self.desc) then
+			ts:add(cutChrCHN(npcCHN:getDesc(self.name, self.desc),19), true)
 		else	ts:add(self.desc, true)
 		end
 	end

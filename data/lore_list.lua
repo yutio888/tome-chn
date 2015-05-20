@@ -46,6 +46,7 @@ loreCat["boss"] = "BOSS"
 loreCat["lake of nur"] = "纳尔湖"
 loreCat["magic"] = "魔法"
 loreCat["dreamscape"] = "梦境空间"
+loreCat["keepsake"] = "往昔信物"
 --lore list
 loreList["tract of destruction"] = "毁灭之源"
 loreList["tract of anarchy"] = "无序之治"
@@ -210,6 +211,23 @@ loreList["healer Astelrid log 3"] = "孔克雷夫医师亚斯特莉的日志 第
 loreList["healer Astelrid log 4"] = "孔克雷夫医师亚斯特莉的日志 第四部分"
 loreList["Angolwen Fountain"] = "安格列文的喷泉"
 loreList["On Adventuring"] = "关于冒险"
+--keepsake-meadow
+loreList["A Tranquil Meadow"] = "宁静的草原"
+loreList["A Haunting Dream"] = "噩梦"
+loreList["Bander's Notes"] = "班德的笔记"
+loreList["The Acorn"] = "铁质橡果"
+loreList["The Merchant Caravan"] = "商队营地"
+loreList["The Dream's End"] = "噩梦初醒"
+loreList["The Stone Marker"] = "岩石标记"
+loreList["The Sealed Cave"] = "被封印的洞穴"
+loreList["The Battle of the Cave"] = "洞穴之战"
+loreList["Kyless' Journal: First Entry"] = "克里斯的日记：第一页"
+loreList["Kyless' Journal: Second Entry"] = "克里斯的日记：第二页"
+loreList["Kyless' Journal: Third Entry"] = "克里斯的日记：第三页"
+loreList["Kyless' Journal: Fourth Entry"] = "克里斯的日记：第四页"
+loreList["The Vault"] = "藏宝室"
+loreList["Kyless"] = "克里斯"
+loreList["Keepsake"] = "往昔信物"
 function loreListCHN(name)
 	if not name then return end
 	if loreList[name] then name = loreList[name]

@@ -1421,13 +1421,13 @@ class:bindHook("Entity:loadList", function (self,data)
 				item.name = "永夜绷带"
 				item.unided_name  = "染黑的滑腻木乃伊绷带"
 				item.desc  =  "这根由亡灵能量编织成的绷带，给任何它们接触到的东西带来死亡。任何穿上它们的人会发现他处于生死的边缘。"
-
+                item.set_desc.eternalnight = "能与其匹敌的只有永夜无上的荣耀。"
 			end
 			 if item.name == "Crown of Eternal Night" then
 				item.name = "永夜王冠"
 				item.unided_name  = "染黑的王冠"
 				item.desc  =  "这顶王冠看起来毫无用处，尽管如此你仍能感受到它是由亡灵能量编织而成的。可能会有些用处吧。"
-
+                item.set_desc.eternalnight = "你需要找到一样东西来给予它力量。"
 			end
 			 if item.name == "Rod of Spydric Poison" then
 				item.name = "蜘蛛毒枝"

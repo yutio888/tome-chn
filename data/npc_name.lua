@@ -63,19 +63,24 @@ function npcCHN:getName(name)
 	return name
 end
 
-function npcCHN:getDesc(name)
+function npcCHN:getDesc(name, desc)
 	if not name then return nil end
-	if npcDescCHN[name] then return npcDescCHN[name]
-	elseif npcDescCHN[string.lower(name)] then return npcDescCHN[string.lower(name)]
+	if npcDescCHN[name] then 
+        if type(npcDescCHN[name]) == 'table' then
+            return npcDescCHN[name][desc] or desc
+        else 
+            return npcDescCHN[name]
+        end
+	elseif npcDescCHN[string.lower(name)] then return npcCHN:getDesc(string.lower(name), desc)
 	elseif name:find("demonic husk") then 
 		name = name:gsub(" %(demonic husk%)","")
-		return npcCHN:getDesc(name)
+		return npcCHN:getDesc(name, desc)
 	elseif name:find(" :") then
 		local f,e=name:find(" :")
 		local tname=name:sub(1,f-1)
-		return npcCHN:getDesc(tname)
+		return npcCHN:getDesc(tname, desc)
 	elseif name:find("\'s dream projection") then
-		return npcCHN:getDesc(name:gsub("\'s dream projection",""))
+		return npcCHN:getDesc(name:gsub("\'s dream projection",""), desc)
 	elseif name:find("gloomy ") or name:find("Gloomy ") then
 		if npcNameCHN[name:gsub("gloomy ","")] then return npcDescCHN[name:gsub("gloomy ","")]
 		elseif npcNameCHN[name:gsub("Gloomy ","")] then return npcDescCHN[name:gsub("Gloomy ","")]
@@ -1819,7 +1824,7 @@ npcNameCHN["skeleton mage"] = "骷髅法师"
 npcDescCHN["skeleton mage"] = ""
 
 npcNameCHN["half-dead forest troll"] = "半死的森林巨魔"
-npcDescCHN["half-dead forest troll"] = "绿皮丑陋的生物，这只笨重的人形生物在盯着你并握紧了Green-skinned and ugly, this massive humanoid glares at you, clenching wart-covered green fists.He looks hurt."
+npcDescCHN["half-dead forest troll"] = "绿皮丑陋的生物，这只笨重的人形生物在盯着你并握紧了满是肉瘤的绿色拳头。他看起来受伤了。"
 
 npcNameCHN["Lone Wolf"] = "寂寞的狼"
 npcDescCHN["Lone Wolf"] = "这是一只狡诈的狼，只有普通狼的3倍大。它看起来很饥渴，而你——很美味！"
@@ -2090,6 +2095,33 @@ npcDescCHN["old vats"] = ""
 
 npcNameCHN["Lady Nashva the Streambender"] = "激流纳纱瓦女士"
 npcDescCHN["Lady Nashva the Streambender"] = "水流缓慢的围绕着这位娜迦的尾巴旋转。她黑色的尾巴蜷缩起来，使她看起来较为矮小，但是她沉着而自信的脸庞使你感受到她无所畏惧。当水流在她周围蒸腾时，星空都仿佛失去了光芒，你感到她的眼神看穿了你的内心。"
+
+--keepsake-meadow
+npcNameCHN["caravan merchant"] = "商队商人"
+npcDescCHN["caravan merchant"] = "一个商队里的商人"
+npcNameCHN["caravan guard"] = "商队守卫"
+npcDescCHN["caravan guard"] = "一个商队里的守卫"
+npcNameCHN["caravan porter"] = "商队搬运工"
+npcDescCHN["caravan porter"] = "一个商队里的搬运工"
+npcNameCHN["war dog"] = "猎犬"
+npcDescCHN["war dog"] = "这是一条老练的猎犬，被培育和训练用于战斗。"
+npcNameCHN["corrupted war dog"] = "被诅咒的猎犬"
+npcDescCHN["corrupted war dog"] = "这是一条老练的猎犬，被培育和训练用于战斗。不过，他运动起来的方式似乎有些不太正常。"
+npcNameCHN["shadow claw"] = "阴影之爪"
+npcDescCHN["shadow claw"] = {}
+npcDescCHN["shadow claw"]["A shadow, almost humanoid in shape. Long claws extend in front of it as is swims through the air."] = "一个影子，看起来几乎是人类的形状。长长的触手在它面前延伸，如同在空气中游动。"
+npcDescCHN["shadow claw"]["A shadow, almost humanoid in shape. At times its form seems to be a force of will rather than something real."] = "一个影子，看起来几乎是人类的形状。有时它的形态看上去不像是某种真实存在的物体，而是某种意志的力量。"
+npcNameCHN["shadow stalker"] = "阴影潜行者"
+npcDescCHN["shadow stalker"] = "一个影子，看起来几乎是人类的形状。它狡猾地闪现，出其不意地发动攻击。"
+npcNameCHN["Companion Warrior"] = "同伴战士"
+npcDescCHN["Companion Warrior"] = "这个精灵战士是贝里斯的同伴。他身穿皮甲，手拿长剑。"
+npcNameCHN["Companion Archer"] = "同伴弓手"
+npcDescCHN["Companion Archer"] = "这个精灵弓手是贝里斯的同伴。他身穿皮甲，手拿长弓。"
+npcNameCHN["Kyless"] = "克里斯"
+npcDescCHN["Kyless"] = "这是克里斯，你的老朋友。他比你的记忆中更加蓬头垢面，也更加危险。"
+npcNameCHN["Berethh"] = "贝里斯"
+npcDescCHN["Berethh"] = "这是贝里斯，你的老朋友，久经沙场的皮甲和长弓显示着他的实力。他平静的表情透露出大义凛然的气势。"
+
 --地图巡逻队
 npcNameCHN["adventurers party"] = "冒险家分队"
 npcNameCHN["ziguranth patrol"] = "伊格巡逻队"

@@ -192,7 +192,7 @@ description = function(desc)
 end}
 
 questCHN["Keepsake"] = {
-name = " 纪 念 品 ",
+name = " 往 昔 信 物 ",
 description = function(desc)
 	desc = string.gsub(desc,"You have begun to look for a way to overcome the curse that afflicts you."," 你 开 始 寻 求 方 法 以 驱 除 一 直 困 扰 着 你 的 诅 咒。 ")
 	desc = string.gsub(desc,"You have found a small iron acorn which you keep as a reminder of your past"," 你 找 到 了 一 个 小 小 的 铁 质 橡 果， 似 乎 可 以 让 你 回 想 起 以 前 的 往 事。 ")

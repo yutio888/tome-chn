@@ -81,49 +81,51 @@ newLore{
 	name = "The Spellblaze Chronicles(2): A Night to Remember",
 	lore = [[#{italic}#来自 艾伦尼恩·加威尔 ——时任埃尔瓦拉最高议会的领袖——的回忆 #{normal}#
 
-#{bold}#Chapter Two: A Night to Remember#{normal}#
+#{bold}#第二章：难忘之夜#{normal}#
 
-It was three nights later I awoke in darkness from a troubled dream to find my window open, the silk drapes billowing in the breeze.  As my eyes adjusted to the light I saw Linaniil stood at the foot of my bed, a thin azure dress clinging to her skin in the chill night air.  Around her was a cashmere belt inset with opals and woven with pale runes, and gold jewellery adorned her neck and wrists.  A long staff rested lightly in her hands, rubies glistening in its decorated top.  Her red hair stirred in the wind as she gazed at me.
+    三天后的午夜，我在一场噩梦中惊醒。眼前窗户大开，晦暗的光线中丝织的帘幕在晚风中舞动。随着我的眼睛渐渐适应了夜晚微弱的亮光，视线中隐约看到清朗的晚风中，莱娜尼尔身穿轻柔的紧身蔚蓝长裙的身影。她的腰间环绕着镶嵌着蛋白石和苍色符文的羊绒腰带，颈上腕间环绕着闪耀的金制首饰，一根顶端镶着一颗闪耀的红宝石的长杖静静地躺在她的手中。清风吹拂，她澄澈的眸子中映出我的影子，红色的长发迎风飘荡。
  
-“What are you doing here?” I enquired.  I did not bother asking how she managed to sneak into my bedchamber, past many guards.  I knew that no less than a council member would be able to divine her presence when she put her mind to illusion.
+    “你在做什么呢？”，我轻轻问道。我并没有打算询问她到底是如何绕过那些卫兵悄悄潜入我的卧房的，议会的成员或许也没有能力在她集中精力潜行的时候感知他的存在。
  
-She looked at me slowly for a moment, before turning her eyes to the rest of the room, analysing my personal space in detail.  “There be a band of orcs marauding in the north,” she said in a distracted tone.  She picked an ornamental dagger from a shelf and looked it over as she spoke.  “They look like to cause trouble for some outlying elven settlements.”
+    她明媚的目光轻柔地凝视着我，接着在屋子的四周扫过，仔细分析着房间里的每一个部分。“有一队兽人劫掠正从北方赶来”，她稍有些心烦意乱地说道，手中漫不经心把玩着我在书架上放着的一把装饰用的匕首，“他们看起来似乎准备对一些边远的精灵营地发动进攻。”
  
-“I will summon a raiding party at once,” I said, rising quickly from my bed, unheeding of modesty.
+    “我立刻就召集突击队迎敌。”，我不顾礼仪地从床上坐起。
  
-“Oh, how boring!” she complained, putting the dagger down and spinning to face me.  “What of the promise ye made to hunt orc together?”
+    “唔，那样多无聊啊”，嘟哝着的她将匕首轻轻放下，回身面向着我，“你还记得我们曾经约定一起去狩猎兽人吗？”
  
-“What, just the two of us?”
+    “……什么？就只有我们两个人去吗？”
  
-“Aye,” she said, looking my unclad form up and down with a slow gaze, seeming to take delight in the sight.  “Or are ye not man enough?”
+    “唉呀”，她缓缓望向我裸露在外的肌肉，眼中好奇的神情如同小孩子一样欢欣，“你是个男人吗？”
  
-“A strange question to ask of an elf, my lady.  But I can take this band of orcs myself, I am sure.  If you wish to tag along then I cannot promise to keep you safe.”
+    “对于精灵族来说这还真是个怪问题，我的女士。不过，我可以在此保证，只需要我一个人也可以亲手干掉那些兽人。如果你真的想要一同前行的话，我可能没法确保您的安全。”
  
-She laughed then, and the sound was like ringing crystal.  “Very well then!  Get ye your steel stick and we shall see who holds their own best.”  I agreed with a smile, and went to my armoury and shoved on metal greaves and a chain hauberk, my breastplate and steel gauntlets.  Linaniil tutted in surly impatience.  “Must ye wear that tin suit?”
+    她的笑声如同水晶泠泠碰撞般清脆。“那真是太好了！来，拿上你的金属棍子，让我们来比一比谁才是这个领域的专家。”我微笑着点头，打开房间里的武器库，从中拿出了金属护胫，锁子甲，胸甲和钢臂铠。莱娜尼尔有些焦急的埋怨道，“你非得穿上这堆废铜烂铁不可吗？”
  
-“It is my battle gear,” said I, pulling on my visored helm and wrapping a thick cloak round my shoulders.
+    “这是我的战斗服”，我戴上头盔，披上斗篷。
  
-“Ye look like a golem,” she muttered, visibly annoyed.  “Come then, I grow bored.”  She leapt out the window, taking to the air with grace, flying away into the night.
+    “唔，看起来简直就像一只炼金傀儡，”她小声咕哝着，“快来吧，我有点无聊了。”紧接着，她轻巧地越过窗台，优雅地随风而去，在夜空中划出一道弧线。
  
-I took then my greatsword from its hanging.  It was a simple looking blade, adorned only with a heavy moonstone on its pommel.  But its looks belied its power, for it was forged by the dwarves in their early years, before vanity overcame their works and their weapons became more for show than for battle.  It had an edge that clove through steel and bone with ease, without ever dulling the blade.  Mooncutter it is called, though it is lost to me now.  I gave it a swing through the air before leaping out the window myself, conjuring a cushion of air beneath me and following swiftly after Linaniil.
+    我拿起了我的爱剑。乍一眼看上去，这似乎只是一把普通的剑刃，唯一的装饰是剑柄上一颗硕大的月亮石。这把剑由矮人于多年之前所铸，其貌不扬却强韧无比。之后，他们的虚荣和浮华替代了匠人的坚毅，让装备成为了用于炫耀的道具而不是用于战斗的兵器。这把剑的剑锋可以轻易穿透钢铁和骨头，如同划破薄纸一般势如破竹。它的名字叫做斩月剑，尽管现在已经随着岁月的流逝而不知所踪。我轻轻将其掷向空中，在空中形成一道气流的屏障，紧接着向外跃去跳到其之上，跟随着莱娜尼尔在夜空中飞行。
  
-With rapid pace we flew through the scattered clouds in silence for twenty minutes before Linaniil began to descend.  I could see nestled between some low hills were the flames of campfires, and as we came closer the sound of orcish chanting became clear.  “How shall we approach them?” I called out, wondering what tactics the sorceress would want to employ.
+    在错杂的云间，我们沉默不语，直到二十分钟紧张的步伐后莱娜尼尔的身躯开始下降。群山间点缀着营地的篝火，随着高度的下降，兽人的战歌之声渐渐传来。“我们应该怎么发起进攻？”，寒风中我喊了出来，想看看这位女魔法师准备采取什么样的策略。
  
-“Directly,” she said, and with that she made a sudden burst of speed, coming right above the orcish camp and descending in their midst.  With a curse I sped after her, landing by her side and drawing Mooncutter as the orcs rose in fury and alarm, grabbing up their weapons.  As a ring of dark swords and spears and halberds gathered round us Linaniil turned to me with a wild smile.  “Time to dance.”
- 
-She shot forth a ray of purple arcane energy from her right hand, whilst her left held up her staff, its tip blazing like a torch.  Flames leapt up in tandem from my own blade as I rose it high, and swept it before me in a wide arc, cutting down the nearest brute and sending a shocking wave of fire into the troops behind it.  I pressed forward, forcing back the orcs before me with a roaring hot wind.  Their weapons dropped from their hands as they reached up to cover their faces, and with a grin of satisfaction I rushed to hew their heads off.  But as I swung my blade I was knocked to the ground from behind by a blast of fire, and turning about I saw Linaniil standing in a pillar of flame, her arms outstretched as it expanded around her.  “Too hot for ye, Aranion?” she called out as the orcs nearby were fried to a crisp, their flesh withering into black dust.
- 
-I grunted, and turned my blade into ice, and with deft sword strokes sent streams of freezing cold into the orcs around her, so that they shattered like glass before the fire ever hit them.  Linaniil cursed my name as she dropped the flames from about her.  “Don’t ruin my fun!” she exclaimed, before teleporting to the other side of the camp and beginning to blast the orcs there.
+    “正面上”，随着一声咒语的轻响，她的身躯如箭般风驰电掣，径直向兽人营地冲去，踏足在营地的正中央。我紧随着她念动咒语跟上他的速度并在她的身旁降落，望着身旁愤怒的兽人发出警报，拿起武器，手中的斩月剑反射着月亮的光华。随着月下兽人们的刀斧剑戟黑色的影子将我们团团围绕，莱娜尼尔转过头来，嘴角露出一丝微笑。
 
-I laughed and turned on the beasts nearest me, and brought tumults to the earth with each swing, so that they lost their footing and fell to the ground before my sword found their throats.  Then I conjured a mighty spark of lightning, spearing it through their densest ranks, and I rushed along its glowing length hewing down the monsters before they could react.  I laughed again with the fey heat of battle, and I discarded my helm and tore off my platemail, taking joy from moving about the field with ease and slaughtering my inferior foes.  Mooncutter danced through their flesh, and their dark blood gushed and fountained with joyful rhythm.
-
-On the far side of the camp explosions and screams marked Linaniil’s passage, and I saw burning limbs flying into the air and streaks of fire tearing through the night.  The sorceress was wreathed in flames, her eyes shining, and the dancing blaze about her made her look like a nymph of fire incarnate.  No more beautiful and awe-inspiring a sight had I ever beheld.
-
-Seeing their numbers quickly dwindling the orcs began to flee, but I phased to block their retreat and called forth a wave of water, forcing them back against Linaniil’s flames.  There against the wall of fire I dashed them, and great numbers of them fell like leaves scattered in the wind.  Blood spilled thick and plentiful, and with but a few more thrusts of Mooncutter and blasts from Linaniil’s hands the battle was over.  Not a single orc still moved, and well over four hundred lay dead on the ground.
+    “舞会开始了”
  
-Linaniil and I stood facing each other, panting with sudden exhaustion as the adrenaline of the fight left us.  “I lost count,” I said between breaths, “of who slew more…”  She grinned coyly at me, sweat trickling down her face.  Minor cuts and burns left her robe in tatters, with one shoulder strap hanging loose.  Her glistening chest heaved up and down with each breath, and her deep eyes looked at me with naked intensity.
+    一道紫色的奥术能量从她的右手指尖射出，而她左手高举法杖，杖端如同火炬般被炽焰所缠绕。随着剑尖高举，一团团火焰从我的剑刃上腾跃而起，在我面前呈弧形喷发出来，迅速击倒了最前排的兽人，爆裂的冲击波向他身后的部队席卷而去。我紧逼而前，炽热之风在四周环绕咆哮。兽人军队在灼热的刺激下只能丢下慌忙武器试图抵挡呛人的烟雾，直到我怀着满意的微笑冲上前去，一剑终结他们的性命。突然，一团火焰冲击将我击倒。转身望去，只见莱娜尼尔站在熊熊烈火之中，双臂向前伸展，烈焰应之而动。“对你来说是不是有些太热了呢，艾伦尼恩先生？”。在她的谈笑之间，周围的兽人纷纷被烈焰吞噬，转瞬便灰飞烟灭。
+
+    我应声道，旋即向刃尖注入寒冰的魔法，在剑刃灵巧的舞动中冰霜与寒风向着她周围的兽人席卷而来。随着一声声碎裂的轻响，遭遇冰火两重天的兽人冻结的肢体如同玻璃般裂成碎片。莱娜尼尔嘟起嘴，手中的火焰渐渐熄灭。“喂，别抢了我的乐子。”，她大喊道。旋即，随着传送魔法的波动，她的身形出现在兽人营地的另一侧，烈火与爆炸的硝烟也随之燃起。
+
+    我大笑着转身，剑尖轻击地面，地震的烈波横贯开来，周围的兽人纷纷不支倒下，任凭利刃穿透他们的脖颈。紧接着，狂暴的闪电在剑锋聚集，如同投枪一般射出，发光的尾迹一路噼啪怒吼着撕裂兽人们密集的军列，在他们还没来得及反应之前取走他们的性命。斗志昂扬的我热血沸腾，脱下头盔和板甲，在敌人已经溃不成军的队列中尽情厮杀，享受击败敌人的快乐。斩月剑在血肉横飞的战场回旋舞动，战斗的声响如同精灵最欢快的舞曲一般。
+
+    远处营地爆炸的烟雾和兽人的惨叫声点缀着莱娜尼尔的足迹，晴朗的夜空下烈火燃烧直冲云霄，如同焰火般绽放于空中。炽焰点缀着她的裙摆，她晶莹的眸子又比那烈火更加炽热，轻盈的舞步绽放着辉耀的光华，如同火灵的仙女下凡一般。此情此景，真是我一生所见最为美好最为震撼的那一刻。
+
+    剩余的兽人试图召集起仅存的残兵败将准备撤退，然而我看穿了他们的胆怯，随着魔力的流动，一排惊涛骇浪席卷而来，将他们步步紧逼，只能退回莱娜尼尔由烈焰交织的包围圈。火墙的团团围绕之下，我的身躯如箭一般射入包围圈的中心，残余的兽人如同风卷残云一般成批倒下。轻踏于血泊之间，斩月剑与莱娜尼尔手中的烈火迅速终结了最后几个敌人。兽人部队被完全歼灭，地上只剩下超过四百具尸体。
  
-She strode forward then, and grabbing me roughly by my hauberk she pulled my lips to hers.  The kiss was hot and fierce, and as she bit my lower lip the course of blood in battle came back to me afresh.  I kissed her again and grabbed her body, pulling her tight to me, our lips locked.  She tore lustfully at my remaining armour, flinging it to the ground, and I slid off her silken clothes, till we were left bare beneath the stars.  Then against a rocky outcrop we pressed against each other, still gasping and sweating from the fight.  There with blazing passion flesh met flesh and our hot moans rose into the cold night sky.]],
+    面对面地，我和莱娜尼尔的身躯矗立在硝烟弥漫的战场上，在肾上腺素的作用下，两个人急促的呼吸在空气中凝成雾气。“抱歉”，我气喘吁吁地说道，“我有些忘了，到底是谁杀的更多了…”。她害羞地微笑着，汗水从泛红的面颊滴落。战场的烈火和利刃撕开了她美丽的长袍，展现着长袍下雪白的皮肤。肩上的细带不知何时已经悄然滑落，营地篝火昏黄的光线照耀着她的身躯。混乱的呼吸声中，她的胸脯轻轻摇动，深邃的眼神饱含着柔情。
+ 
+    她大步向前与我相拥，双唇热切地贴合在一起，嘴畔传来的柔软的炽热触感与战斗时烈火般的激情交织在一起，轻轻厮磨贴合我的下唇。浅浅地一开后，我再次与她深深相吻，舌尖游移舔舐，双手轻柔地在她的腰际环抱。她不顾一切地将我的脱了一半的护甲解开扔在地上，而我轻轻拉动了她长裙的腰系，摇曳的火光中，两人纯洁的胴体被繁星的光辉所点缀。寒冷的夜空之下，我们长久地缠绵在一起，皮肤微微渗出汗水，心脏的跳动比战斗之时更为强烈，妩媚的娇声如风吹动的烛火般摇曳。]],
 	on_learn = function(who)
 		world:gainAchievement("SPELLBLAZE_LORE")
 	end,

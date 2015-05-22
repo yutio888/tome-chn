@@ -1472,7 +1472,7 @@ npcNameCHN["Gorbat, Supreme Wyrmic of the Pride"] = "普莱德龙战士领主加
 npcDescCHN["Gorbat, Supreme Wyrmic of the Pride"] = "一只皮肤上布有鳞片的兽人，他的背后有着锋利的爪子和一对翅膀。"
 
 --grushnak-pride
-npcNameCHN["Grushnak, Battlemaster of the Pride"] = "普兰德战争领主格鲁希纳克"
+npcNameCHN["Grushnak, Battlemaster of the Pride"] = "普莱德战争领主格鲁希纳克"
 npcDescCHN["Grushnak, Battlemaster of the Pride"] = "一只浑身都是伤疤的年老兽人，他看起来异常的凶残和危险。"
 
 --halfling-ruins

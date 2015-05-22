@@ -76,6 +76,7 @@ actorCHN["Halfling"] = "半身人"
 actorCHN["Yeek"] = "夺心魔"
 actorCHN["Thought-form"] = "精神体"
 actorCHN["shade"] = "影子"
+actorCHN["ogre"] = "食人魔"
 			
 --角色分级
 actorCHN["Rank: "] = "分级："

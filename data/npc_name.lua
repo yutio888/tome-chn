@@ -7,6 +7,9 @@ function npcCHN:getName(name)
 	if not name then return nil end
 	if name:find("'s temporal clone") then name =npcCHN:getName(name:gsub("'s temporal clone","")).."的时空复制体"	
 	elseif name:find("'s Inner Demon") then name = npcCHN:getName(name:gsub("'s Inner Demon","")).."的心魔"	
+	elseif name:find("Crystaline Half") then name = npcCHN:getName(name:gsub("Crystaline Half","")).."的水晶分身"
+	elseif name:find("Stone Half") then name = npcCHN:getName(name:gsub("Stone Half","")).."的岩石分身"
+	elseif name:find("enthralled ") then name = "被奴役的"..npcCHN:getName(name:gsub("enthralled ",""))
 	elseif name:find("demonic husk") then name = npcCHN:getName(name:gsub(" %(demonic husk%)","")).."(恶魔傀儡)"
 	elseif name:find("servant") then 
 		local tname = name:gsub("golem %(servant of ",""):gsub("Golem %(servant of ",""):gsub("%)","")
@@ -72,7 +75,11 @@ function npcCHN:getDesc(name, desc)
             return npcDescCHN[name]
         end
 	elseif npcDescCHN[string.lower(name)] then return npcCHN:getDesc(string.lower(name), desc)
-	elseif name:find("demonic husk") then 
+	elseif name:find("Crystaline Half (") then
+        return [[从你的完整身体中抽出的水晶分身。]]
+	elseif name:find("Stone Half (") then
+        return [[从你的完整身体中抽出的岩石分身。]]
+	elseif name:find("demonic husk") then
 		name = name:gsub(" %(demonic husk%)","")
 		return npcCHN:getDesc(name, desc)
 	elseif name:find(" :") then
@@ -180,7 +187,9 @@ npcNameCHN["water imp"] = "小水怪"
 npcDescCHN["water imp"] = "水中的小恶魔，向你缓慢投射法术。"
 
 npcNameCHN["Walrog"] = "乌尔罗格"
-npcDescCHN["Walrog"] = "乌尔罗格，水中的主宰。"
+npcDescCHN["Walrog"] = {}
+npcDescCHN["Walrog"]["Walrog, the lord of Water, is fearsome to behold. The water writhes around him as if trying to escape, making his form indistinct. He does not seem surprised to see you."] = "乌尔罗格，水之主，是水中的恐怖恶魔。水如同想要逃离一般在他的周围沸腾，使他的影子若隐若现。他面对你的表情似乎并不惊讶。"
+npcDescCHN["Walrog"]["Walrog, the lord of Water, is #AQUAMARINE#fearsome#LAST# to behold. The water writhes around him as if trying to escape, making his form indistinct. He does not seem surprised to see you."] = "乌尔罗格，水之主，是水中的#AQUAMARINE#恐怖#LAST#恶魔。水如同想要逃离一般在他的周围沸腾，使他的影子若隐若现。他面对你的表情似乎并不惊讶。"
 
 --动物——熊(bear)
 npcNameCHN["brown bear"] = "棕熊"
@@ -662,6 +671,22 @@ npcDescCHN["naga tide huntress"] = "尽管那根指向你的锋利箭矢是令�
 
 npcNameCHN["naga psyren"] = "娜迦海妖"
 npcDescCHN["naga psyren"] = "你从未见过如此妖娆和恐怖的结合。上半身是一个美丽而出尘，性感而又迷人的女人。下半身是厚实而光滑的蛇尾。尾巴在她身后缓慢的来回摆动着，摆动的幅度醒目而又具有迷惑性。当你抬头看她时，你看到她性感的嘴角漾起神秘的微笑。"
+
+--食人魔(ogre)
+npcNameCHN["ogre guard"] = "食人魔守卫"
+npcDescCHN["ogre guard"] = "一个手里拿着重锤的食人魔，随时准备将你一锤击碎。"
+
+npcNameCHN["ogre warmaster"] = "食人魔战争领主"
+npcDescCHN["ogre warmaster"] = "一个精于战斗技巧的食人魔，她已经等不及在你身上试试自己的新技能了。"
+
+npcNameCHN["ogre mauler"] = "食人魔重击者"
+npcDescCHN["ogre mauler"] = "冲击！碾碎！摧毁一切！"
+
+npcNameCHN["ogre pounder"] = "食人魔摔跤手"
+npcDescCHN["ogre pounder"] = "这个食人魔快速地接近你，张开他死亡的拥抱。"
+
+npcNameCHN["ogre rune-spinner"] = "食人魔符文师"
+npcDescCHN["ogre rune-spinner"] = "一个高大的食人魔守卫，她的身上印刻着充满魔力的符文。"
 
 --软泥怪(ooze)
 npcNameCHN["green ooze"] = "绿泥怪"
@@ -1343,6 +1368,22 @@ npcNameCHN["Fyrk, Faeros High Guard"] = "炎魔守卫弗莱克"
 npcDescCHN["Fyrk, Faeros High Guard"] = [[炎魔是高智慧的火焰元素，在火山以外的其他地方很少看到。它们很可能不属于这个世界。
 这只看起来更加凶残，它用蔑视的眼神看着你。火焰在它的身上流转。]]
 
+--conclave-vault
+npcNameCHN["degenerated ogric mass"] = "腐化的食人魔碎肉"
+npcDescCHN["degenerated ogric mass"] = "这团变形的腐肉看上去曾经是某个食人魔身体器官的一部分，不过——好像出了点什么问题"
+
+npcNameCHN["ogric abomination"] = "憎恶食人魔"
+npcDescCHN["ogric abomination"] = "这个食人魔似乎试图把傀儡的身躯嫁接在自己的身体上。各种意义上有趣的结果。"
+
+npcNameCHN["ogre sentry"] = "食人魔哨兵"
+npcDescCHN["ogre sentry"] = "这个挥舞着巨剑的食人魔用带着鄙视和仇恨的眼神凝视着你。"
+
+npcNameCHN["Healer Astelrid"] = "孔克雷夫医师亚斯特莉"
+npcDescCHN["Healer Astelrid"] = "一个巨大的食人魔，身上穿着的破烂长袍上是一枚亮闪闪的官员徽章。她用手抓住一把治疗用的法杖，被石膏浇铸并裹挟着手术刀，用作一个巨大的狼牙棒。"
+
+npcNameCHN["old vats"] = "古老的培养槽"
+npcDescCHN["old vats"] = ""
+
 --crypt-kryl-feijan
 npcNameCHN["Kryl-Feijan"] = "卡洛·斐济"
 npcDescCHN["Kryl-Feijan"] = "这只巨大的恶魔被黑暗所包围。它的“母亲”的碎肉仍悬挂在它的利爪上。"
@@ -1441,12 +1482,16 @@ npcDescCHN["Subject Z"] = "这个似乎是文献中提到的代号“Z”。它�
 npcNameCHN["Yeek Wayist"] = "夺心魔超能力者"
 npcDescCHN["Yeek Wayist"] = "这只生物像半身人一样高。他浑身被有白色的毛发并有一颗不相称的大头。最不可思议的是，他的武器就那样悬浮在他面前。"
 
+npcNameCHN["Director Hompalan"] = "研究主管 红帕兰"
+npcDescCHN["Director Hompalan"] = "这个研究设施的主人，曾经如此高傲的研究主管红帕兰，现在已经只剩下摇摇欲坠的枯骨。尽管这具遗骸只剩下空洞无神的眼窝，你也能从中察觉到他凝视着你的神情。"
+
 --heart-gloom
 npcNameCHN["The Withering Thing"] = "凋零"
 npcDescCHN["The Withering Thing"] = "这只畸形的巨兽之前或许是头狼，不过现在……它很可怕。"
 
 npcNameCHN["The Dreaming One"] = "梦境之眼"
 npcDescCHN["The Dreaming One"] = "这个奇怪的发光球体似乎是活的，而且正在熟睡。不过，尽管它还没有移动，你已经感受到它梦境的力量在冲击自己的精神。"
+
 --high-peak
 npcNameCHN["Elandar"] = "埃兰达"
 npcDescCHN["Elandar"] = "叛逃安格利文的法师，恶魔法师建立于远东并缓慢成长。现在他们的末日来临了。"
@@ -1459,6 +1504,46 @@ npcDescCHN["Fallen Sun Paladin Aeryn"] = "一位身披板甲的美女。她的�
 
 npcNameCHN["High Sun Paladin Aeryn"] = "太阳骑士艾琳"
 npcDescCHN["High Sun Paladin Aeryn"] = "一位身披板甲的美女。她的周身闪耀着光辉。"
+
+--illusory-castle
+
+--infinite-dungeon
+
+--keepsake-meadow
+npcNameCHN["caravan merchant"] = "商队商人"
+npcDescCHN["caravan merchant"] = "一个商队里的商人"
+
+npcNameCHN["caravan guard"] = "商队守卫"
+npcDescCHN["caravan guard"] = "一个商队里的守卫"
+
+npcNameCHN["caravan porter"] = "商队搬运工"
+npcDescCHN["caravan porter"] = "一个商队里的搬运工"
+
+npcNameCHN["war dog"] = "猎犬"
+npcDescCHN["war dog"] = "这是一条老练的猎犬，被培育和训练用于战斗。"
+
+npcNameCHN["corrupted war dog"] = "被诅咒的猎犬"
+npcDescCHN["corrupted war dog"] = "这是一条老练的猎犬，被培育和训练用于战斗。不过，他运动起来的方式似乎有些不太正常。"
+
+npcNameCHN["shadow claw"] = "阴影之爪"
+npcDescCHN["shadow claw"] = {}
+npcDescCHN["shadow claw"]["A shadow, almost humanoid in shape. Long claws extend in front of it as is swims through the air."] = "一个影子，看起来几乎是人类的形状。长长的触手在它面前延伸，如同在空气中游动。"
+npcDescCHN["shadow claw"]["A shadow, almost humanoid in shape. At times its form seems to be a force of will rather than something real."] = "一个影子，看起来几乎是人类的形状。有时它的形态看上去不像是某种真实存在的物体，而是某种意志的力量。"
+
+npcNameCHN["shadow stalker"] = "阴影潜行者"
+npcDescCHN["shadow stalker"] = "一个影子，看起来几乎是人类的形状。它狡猾地闪现，出其不意地发动攻击。"
+
+npcNameCHN["Companion Warrior"] = "同伴战士"
+npcDescCHN["Companion Warrior"] = "这个精灵战士是贝里斯的同伴。他身穿皮甲，手拿长剑。"
+
+npcNameCHN["Companion Archer"] = "同伴弓手"
+npcDescCHN["Companion Archer"] = "这个精灵弓手是贝里斯的同伴。他身穿皮甲，手拿长弓。"
+
+npcNameCHN["Kyless"] = "克里斯"
+npcDescCHN["Kyless"] = "这是克里斯，你的老朋友。他比你的记忆中更加蓬头垢面，也更加危险。"
+
+npcNameCHN["Berethh"] = "贝里斯"
+npcDescCHN["Berethh"] = "这是贝里斯，你的老朋友，久经沙场的皮甲和长弓显示着他的实力。他平静的表情透露出大义凛然的气势。"
 
 --last-hope-graveyard
 npcNameCHN["Celia"] = "赛利亚"
@@ -1481,6 +1566,10 @@ npcDescCHN["Nimisil"] = "覆盖着可怕的发光物和瘤状物，这只蜘蛛�
 --murgol-lair
 npcNameCHN["Murgol, the Yaech Lord"] = "夺魂魔领主穆格尔"
 npcDescCHN["Murgol, the Yaech Lord"] = "你可以在这只夺魂魔身上感受到庞大的超能力。"
+
+npcNameCHN["Lady Nashva the Streambender"] = "激流盘旋者纳纱瓦女士"
+npcDescCHN["Lady Nashva the Streambender"] = "水流缓慢的围绕着这位娜迦的尾巴旋转。她黑色的尾巴蜷缩起来，使她看起来较为矮小，但是她沉着而自信的脸庞使你感受到她无所畏惧。当水流在她周围蒸腾时，星空都仿佛失去了光芒，你感到她的眼神看穿了你的内心。"
+
 
 --norgos-lair
 npcNameCHN["Norgos, the Guardian"] = "守护者诺尔格斯"
@@ -1715,7 +1804,7 @@ npcDescCHN["human farmer"] = "穿着普通的人类农民。"
 npcNameCHN["halfling gardener"] = "半身人园丁"
 npcDescCHN["halfling gardener"] = "一名正在寻找植物的半身人。"
 
-npcNameCHN["Shady cornac man"] = "普通人类沙帝"
+npcNameCHN["Shady cornac man"] = "鬼鬼祟祟的普通人类"
 npcDescCHN["Shady cornac man"] = ""
 
 --town-elvala
@@ -1840,7 +1929,7 @@ npcNameCHN["skeleton mage"] = "骷髅法师"
 npcDescCHN["skeleton mage"] = ""
 
 npcNameCHN["half-dead forest troll"] = "半死的森林巨魔"
-npcDescCHN["half-dead forest troll"] = "绿皮丑陋的生物，这只笨重的人形生物在盯着你并握紧了Green-skinned and ugly, this massive humanoid glares at you, clenching wart-covered green fists.He looks hurt."
+npcDescCHN["half-dead forest troll"] = "绿皮丑陋的生物，这只笨重的人形生物在盯着你并握紧了满是肉瘤的拳头。他看起来受伤了。"
 
 npcNameCHN["Lone Wolf"] = "寂寞的狼"
 npcDescCHN["Lone Wolf"] = "这是一只狡诈的狼，只有普通狼的3倍大。它看起来很饥渴，而你——很美味！"
@@ -1946,18 +2035,6 @@ npcDescCHN["overpowered greater multi-hued wyrm"] = ""
 npcNameCHN["Vor, Grand Geomancer of the Pride"] = "普莱德地卜师将军沃尔"
 npcDescCHN["Vor, Grand Geomancer of the Pride"] = "一名身穿彩色长袍的年老兽人。冰霜在他周围盘旋，他在走过的路上留下一条雷火之径。"
 
-npcNameCHN["walking corpse"] = "行尸"
-npcDescCHN["walking corpse"] = "这具尸体是刚复活的，看起来它正在学习怎么走路。"
-
-npcNameCHN["terror"] = "暗夜恐魔"
-npcDescCHN["terror"] = "这只形态模糊的恐魔，将敌人连同周围的空气一起切成两半。"
-
-npcNameCHN["tormentor"] = "折磨者"
-npcDescCHN["tormentor"] = "恐惧的场景折磨着你的脑海。"
-
-npcNameCHN["dark tendril"] = "黑暗触须"
-npcDescCHN["dark tendril"] = ""
-
 --traps
 npcNameCHN["Intruder alarm"] = "入侵警报"
 npcNameCHN["Summoning alarm"] = "召唤警报"
@@ -2017,6 +2094,18 @@ npcDescCHN["void shard"] = "它看起来就像是无尽虚空中的一个缝隙�
 npcNameCHN["Vilespawn"] = "业障"
 npcDescCHN["Vilespawn"] = "这团史莱姆样的恶魔，诞生于卡帕萨斯之中，它张开了大嘴，试图吞噬你。"
 
+npcNameCHN["walking corpse"] = "行尸"
+npcDescCHN["walking corpse"] = "这具尸体是刚复活的，看起来它正在学习怎么走路。"
+
+npcNameCHN["terror"] = "暗夜恐魔"
+npcDescCHN["terror"] = "这只形态模糊的恐魔，将敌人连同周围的空气一起切成两半。"
+
+npcNameCHN["tormentor"] = "折磨者"
+npcDescCHN["tormentor"] = "恐惧的场景折磨着你的脑海。"
+
+npcNameCHN["dark tendril"] = "黑暗触须"
+npcDescCHN["dark tendril"] = ""
+
 ----thought-form
 npcNameCHN["thought-forged bowman"] = "精神体弓箭手"
 npcDescCHN["thought-forged bowman"] = "一位身穿皮甲的精神体弓箭手。他时刻准备着战斗。"
@@ -2034,19 +2123,33 @@ npcDescCHN["Cultist"] = "一名精灵异教徒，他似乎无视了你。"
 npcNameCHN["Shasshhiy'Kaish"] = "莎西·凯希"
 npcDescCHN["Shasshhiy'Kaish"] = "不看她那盘旋在头上的火焰王冠、三条小尾巴以及那锋利的爪子，这只恶魔仍然充满了奇异的魅惑。当你看着她时，你感觉痛苦像利刃一样，深入骨髓，她是痛苦的使者。"
 
---events
 --kitty
 npcNameCHN["Pumpkin, the little kitty"] = "小南瓜，可爱的小猫咪"
 npcDescCHN["Pumpkin, the little kitty"] = "一只橙色的小猫咪，胸前有一颗白色的星星。只要有机会就会舔你的脸颊。"
 
 
 --DLC
+--tome-ashes-urhrok
+
+--major-demon
+npcNameCHN["wretch titan"] = "腐化泰坦"
+npcDescCHN["wretch titan"] = "许多冒险家都遭遇过酸液树魔。相当可怕，酸液树魔们，成群出现，灼烧腐蚀。但这些冒险家们不知道，酸液树魔只是它的未成熟的孩子。"
+
+--zones
+
+--anteroom-agony
+npcNameCHN["quasit squad leader"] = "夸塞魔队长"
+npcDescCHN["quasit squad leader"] = "一只装备了重甲的小恶魔，它向你发起冲锋。"
+
+npcNameCHN["Rogroth, Eater of Souls"] = "罗格洛斯，灵魂吞噬者"
+npcDescCHN["Rogroth, Eater of Souls"] = "火焰和枯萎的力量在蜘蛛一样的黑色金属皮肤上闪现。它没有明显的头部，只有一个大大的嘴巴。"
+
+--searing-halls
 npcNameCHN["demonic clerk"] = "恶魔职员"
 npcDescCHN["demonic clerk"] = "一个小恶魔，他对你的自由感到非常惊惶。"
 
 npcNameCHN["mutilator"] = "恶魔切割者"
 npcDescCHN["mutilator"] = "一个长着三只手的恶魔，准备切割你。不是娱乐，而是实验！"
-
 
 npcNameCHN["investigator"] = "恶魔调查者"
 npcDescCHN["investigator"] = "这个恶魔专心于从#{italic}#志愿者#{normal}#手里#{italic}#获取#{normal}#资料。"
@@ -2054,76 +2157,7 @@ npcDescCHN["investigator"] = "这个恶魔专心于从#{italic}#志愿者#{norma
 npcNameCHN["Planar Controller"] = "空间控制者"
 npcDescCHN["Planar Controller"] = "一个巨大的恶魔朝你走来，显然他控制着附近所有的传送门。"
 
-npcNameCHN["quasit squad leader"] = "夸塞魔队长"
-npcDescCHN["quasit squad leader"] = "一只装备了重甲的小恶魔，它向你发起冲锋。"
 
-npcNameCHN["Rogroth, Eater of Souls"] = "罗格洛斯，灵魂吞噬者"
-npcDescCHN["Rogroth, Eater of Souls"] = "火焰和枯萎的力量在蜘蛛一样的黑色金属皮肤上闪现。它没有明显的头部，只有一个大大的嘴巴。"
-
-npcNameCHN["wretch titan"] = "腐化泰坦"
-npcDescCHN["wretch titan"] = "许多冒险家都遭遇过酸液树魔。相当可怕，酸液树魔们，成群出现，灼烧腐蚀。但这些冒险家们不知道，酸液树魔只是它的未成熟的孩子。"
-
-npcNameCHN["ogre guard"] = "食人魔守卫"
-npcDescCHN["ogre guard"] = "一个手里拿着重锤的食人魔，随时准备将你一锤击碎。"
-
-npcNameCHN["ogre warmaster"] = "食人魔战争领主"
-npcDescCHN["ogre warmaster"] = "一个精于战斗技巧的食人魔，她已经等不及在你身上试试自己的新技能了。"
-
-npcNameCHN["ogre mauler"] = "食人魔重击者"
-npcDescCHN["ogre mauler"] = "冲击！碾碎！摧毁一切！"
-
-npcNameCHN["ogre pounder"] = "食人魔摔跤手"
-npcDescCHN["ogre pounder"] = "这个食人魔快速地接近你，张开他死亡的拥抱。"
-
-npcNameCHN["ogre rune-spinner"] = "食人魔符文师"
-npcDescCHN["ogre rune-spinner"] = "一个高大的食人魔守卫，她的身上印刻着充满魔力的符文。"
-
-npcNameCHN["degenerated ogric mass"] = "腐化的食人魔碎肉"
-npcDescCHN["degenerated ogric mass"] = "这团变形的腐肉看上去曾经是某个食人魔身体器官的一部分，不过——好像出了点什么问题"
-
-npcNameCHN["ogric abomination"] = "憎恶食人魔"
-npcDescCHN["ogric abomination"] = "这个食人魔似乎试图把傀儡的身躯嫁接在自己的身体上。各种意义上有趣的结果。"
-
-npcNameCHN["ogre sentry"] = "食人魔哨兵"
-npcDescCHN["ogre sentry"] = "这个挥舞着巨剑的食人魔用带着鄙视和仇恨的眼神凝视着你。"
-
-npcNameCHN["Healer Astelrid"] = "孔克雷夫医师亚斯特莉"
-npcDescCHN["Healer Astelrid"] = "一个巨大的食人魔，身上穿着的破烂长袍上是一枚亮闪闪的官员徽章。她用手抓住一把治疗用的法杖，被石膏浇铸并裹挟着手术刀，用作一个巨大的狼牙棒。"
-
-npcNameCHN["Director Hompalan"] = "研究主管 红帕兰"
-npcDescCHN["Director Hompalan"] = "这个研究设施的主人，曾经如此高傲的研究主管红帕兰，现在已经只剩下摇摇欲坠的枯骨。尽管这具遗骸只剩下空洞无神的眼窝，你也能从中察觉到他凝视着你的神情。"
-
-npcNameCHN["old vats"] = "古老的培养槽"
-npcDescCHN["old vats"] = ""
-
-npcNameCHN["Lady Nashva the Streambender"] = "激流纳纱瓦女士"
-npcDescCHN["Lady Nashva the Streambender"] = "水流缓慢的围绕着这位娜迦的尾巴旋转。她黑色的尾巴蜷缩起来，使她看起来较为矮小，但是她沉着而自信的脸庞使你感受到她无所畏惧。当水流在她周围蒸腾时，星空都仿佛失去了光芒，你感到她的眼神看穿了你的内心。"
-
---keepsake-meadow
-npcNameCHN["caravan merchant"] = "商队商人"
-npcDescCHN["caravan merchant"] = "一个商队里的商人"
-npcNameCHN["caravan guard"] = "商队守卫"
-npcDescCHN["caravan guard"] = "一个商队里的守卫"
-npcNameCHN["caravan porter"] = "商队搬运工"
-npcDescCHN["caravan porter"] = "一个商队里的搬运工"
-npcNameCHN["war dog"] = "猎犬"
-npcDescCHN["war dog"] = "这是一条老练的猎犬，被培育和训练用于战斗。"
-npcNameCHN["corrupted war dog"] = "被诅咒的猎犬"
-npcDescCHN["corrupted war dog"] = "这是一条老练的猎犬，被培育和训练用于战斗。不过，他运动起来的方式似乎有些不太正常。"
-npcNameCHN["shadow claw"] = "阴影之爪"
-npcDescCHN["shadow claw"] = {}
-npcDescCHN["shadow claw"]["A shadow, almost humanoid in shape. Long claws extend in front of it as is swims through the air."] = "一个影子，看起来几乎是人类的形状。长长的触手在它面前延伸，如同在空气中游动。"
-npcDescCHN["shadow claw"]["A shadow, almost humanoid in shape. At times its form seems to be a force of will rather than something real."] = "一个影子，看起来几乎是人类的形状。有时它的形态看上去不像是某种真实存在的物体，而是某种意志的力量。"
-npcNameCHN["shadow stalker"] = "阴影潜行者"
-npcDescCHN["shadow stalker"] = "一个影子，看起来几乎是人类的形状。它狡猾地闪现，出其不意地发动攻击。"
-npcNameCHN["Companion Warrior"] = "同伴战士"
-npcDescCHN["Companion Warrior"] = "这个精灵战士是贝里斯的同伴。他身穿皮甲，手拿长剑。"
-npcNameCHN["Companion Archer"] = "同伴弓手"
-npcDescCHN["Companion Archer"] = "这个精灵弓手是贝里斯的同伴。他身穿皮甲，手拿长弓。"
-npcNameCHN["Kyless"] = "克里斯"
-npcDescCHN["Kyless"] = "这是克里斯，你的老朋友。他比你的记忆中更加蓬头垢面，也更加危险。"
-npcNameCHN["Berethh"] = "贝里斯"
-npcDescCHN["Berethh"] = "这是贝里斯，你的老朋友，久经沙场的皮甲和长弓显示着他的实力。他平静的表情透露出大义凛然的气势。"
 
 --地图巡逻队
 npcNameCHN["adventurers party"] = "冒险家分队"

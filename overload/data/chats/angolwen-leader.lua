@@ -19,7 +19,7 @@
 
 newChat{ id="welcome",
 	text = [[#LIGHT_GREEN#*一位身材高大的女人站在你的面前，她白皙的皮肤透过她的白色长袍放射出一股惊人的力量。*#WHITE#
-我是卡·普尔的莱娜尼尔。欢迎来到我们的城市。@playerdescriptor.subclass@有什么需要帮忙的么？]],
+我是卡库罗尔的莱娜尼尔。欢迎来到我们的城市。@playerdescriptor.subclass@有什么需要帮忙的么？]],
 	answers = {
 		{"我寻求一切能帮助我的力量，不是为我自己而是为了东北地区的德斯小镇。", jump="save-derth", cond=function(npc, player) local q = player:hasQuest("lightning-overload") return q and q:isCompleted("saved-derth") and not q:isCompleted("tempest-located") and not q:isStatus(q.DONE) end},
 		{"我准备好了，送我去厄奇斯！", jump="teleport-urkis", cond=function(npc, player) local q = player:hasQuest("lightning-overload") return q and not q:isEnded("tempest-located") and q:isCompleted("tempest-located") end},

@@ -23,6 +23,7 @@ Talents.talents_def.T_CORROSIVE_SEEDS.info= function(self, t)
 		local nb = t.getNb(self, t)
 		return ([[ 你 集 中 精 神 于 某 块 半 径 2 的 区 域， 制 造 出 %d 个 腐 蚀 之 种。 
 		 第 一 个 种 子 会 产 生 于 中 心 处 ， 其 他 的 会 随 机 出 现。
+         每 个 种 子 持 续 %d 回 合，
 		 当 一 个 生 物 走 过 腐 蚀 之 种 时， 会 在 半 径 1 的 区 域 内 引 发 一 场 爆 炸， 击 退 对 方 并 造 成 %0.1f 点 酸 性 伤 害。 
 		 受 精 神 强 度 影 响， 伤 害 有 额 外 加 成]]):
 		format(nb, t.getDuration(self, t), damDesc(self, DamageType.ACID, dam))

@@ -94,6 +94,7 @@ loreList["a letter to Filio from the Master"] = "主人写给菲里奥的信"
 --elvala
 loreList["The Spellblaze Chronicles(1): A Fateful Meeting"] = "魔法大爆炸纪事(1)：命运相遇的瞬间"
 loreList["The Spellblaze Chronicles(2): A Night to Remember"] = "魔法大爆炸纪事(2)：难忘之夜"
+loreList["The Spellblaze Chronicles(3): The Farportal"] = "魔法大爆炸纪事(3)：远古传送门"
 
 --fearscape
 loreList["a fearsome sight"] =  "一副恐怖的景象"

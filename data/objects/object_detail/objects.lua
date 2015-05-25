@@ -48,6 +48,9 @@ function objects:getObjects(name,desc,subtype,short_name,is_ided,rare,unique)
 	if type == "seed" or subtype == "demon" then
 		o.chName = o.name:gsub("demon seed","恶魔种子"):gsub("level","等级"):gsub("finger","手指"):gsub("body","躯干"):gsub("mainhand","主手"):gsub("offhand","副手"):gsub("fire imp","火魔婴"):gsub("wretchling","酸液树魔"):gsub("quasit","夸塞魔"):gsub("water imp","小水怪"):gsub("dolleg","多累格"):gsub("dúathedlen","多瑟顿"):gsub("uruivellas","乌尔维拉斯"):gsub("thaurhereg","修尔希瑞格"):gsub("daelach","达莱奇"):gsub("wretch titan","腐烂泰坦"):gsub("forge%-giant","锻造巨人"):gsub("champion of Urh'Rok","乌鲁洛克精锐")
 		o.desc = [[恶魔之种]]
+	elseif subtype == "money" then
+        o.chName = o.name:gsub("huge pile of gold pieces", "一大袋金币"):gsub("gold pieces", "一堆金币")
+        o.desc = [[发光的不总是金子，是金子不总会发光。]]
 	elseif objectU[o.enName] then
 		if o.is_ided then
 			o.chName = objectU[o.enName].chName

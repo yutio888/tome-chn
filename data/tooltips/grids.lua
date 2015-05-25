@@ -1,4 +1,5 @@
 gridCHN = {}
+gridsuffixCHN = {}
 
 gridCHN["Never visited yet"] = "尚未探索区域"
 gridCHN["Lit"] = "被照亮区域"
@@ -9,13 +10,19 @@ gridCHN["Diggable"] = "可挖掘"
 gridCHN["Cannot teleport to this place"] = "无法传送到这里"
 gridCHN["In sight"] = "视线内"
 
+
+--data\general\grids\*
+--autumn_forest
+gridCHN["autumn grass"] = "秋日的草地"
+gridCHN["autumn tree"] = "秋日的树"
+gridCHN["tall thick tree"] = "高大粗壮的树"
+--basic
 gridCHN["exit to the worldmap"] = "离开前往世界地图"
 gridCHN["previous level"] = "前往上一层"
 gridCHN["next level"] = "前往下一层"
-gridCHN["way to the previous level"] = "通往上一层"
-gridCHN["way to the next level"] = "通往下一层"
+gridCHN["way to the previous level"] = "通往上一层的路"
+gridCHN["way to the next level"] = "通往下一层的路"
 gridCHN["floor"] = "地板"
-gridCHN["wall"] = "墙壁"
 gridCHN["door"] = "门"
 gridCHN["open door"] = "敞开的门"
 gridCHN["sealed door"] = "被封印的门"
@@ -23,119 +30,220 @@ gridCHN["glass wall"] = "玻璃墙"
 gridCHN["glass door"] = "玻璃门"
 gridCHN["open glass door"] = "敞开的玻璃门"
 gridCHN["huge lever"] = "巨大的控制杆"
-gridCHN["burnt tree"] = "烧焦的树"
-gridCHN["burnt ground"] = "烧焦的土地"
-gridCHN["corrupted altar"] = "毁坏的祭坛"
-gridCHN["cave floor"] = "山洞平地"
-gridCHN["cave walls"] = "山洞壁"
+--bone
+gridCHN["sand"] = "沙子"
+gridCHN["bone walls"] = "骨墙"
 gridCHN["ladder to the next level"] = "通往下一层的台阶"
 gridCHN["ladder to the previous level"] = "通往上一层的台阶"
 gridCHN["ladder to worldmap"] = "通往世界地图的台阶"
+--burntland
+gridCHN["burnt tree"] = "烧焦的树"
+gridCHN["burnt ground"] = "烧焦的土地"
+gridCHN["corrupted altar"] = "毁坏的祭坛"
+--cave
+gridCHN["cave floor"] = "山洞平地"
+gridCHN["cave walls"] = "山洞壁"
+--elven_forest
 gridCHN["grass"] = "草地"
-gridCHN["snowy grass"] = "雪后的草地"
 gridCHN["tree"] = "树"
-gridCHN["tall thick tree"] = "高大粗壮的树"
+--forest
 gridCHN["flower"] = "花"
 gridCHN["huge loose rock"] = "巨大的松动石头"
+gridCHN["old road"]="古老的路"
+--fortress
+--ice
+gridCHN["icy floor"] = "冰面"
+gridCHN["frozen water"] = "被冻结的水"
+--icecave
+gridCHN["ice cave floor"] = "冰封洞穴平地"
+gridCHN["ice cave walls"] = "冰封洞穴墙壁"
+gridCHN["breakable ice wall"] = "可以打破的冰墙"
+gridCHN["broken ice wall"] = "被打破的冰墙"
+--jungle
 gridCHN["muddy floor"] = "泥地"
+--jungle_hut
 gridCHN["bamboo hut floor"] = "竹制地板"
 gridCHN["bamboo wall"] = "竹制墙壁"
+--lava
 gridCHN["lava floor"] = "熔岩平地"
 gridCHN["lava wall"] = "熔岩墙壁"
 gridCHN["molten lava"] = "融化的岩浆"
+--mountain
 gridCHN["rocky ground"] = "石地"
 gridCHN["rocky mountain"] = "石山"
-gridCHN["mountain chain"] = "山脉"
 gridCHN["hard rocky mountain"] = "硬石山"
-gridCHN["sand"] = "沙子"
-gridCHN["daikara"] = "岱卡拉"
+gridCHN["snowy tree"] = "雪后的树"
+--sand
 gridCHN["sandwall"] = "沙墙"
+--slime
 gridCHN["slime floor"] = "烂泥地"
 gridCHN["slime wall"] = "烂泥墙"
 gridCHN["slime door"] = "烂泥覆盖的门"
 gridCHN["open slime door"] = "敞开的烂泥覆盖的门"
-gridCHN["old road"]="古老的路"
+--snowy_forest
+gridCHN["snowy grass"] = "雪后的草地"
+gridCHN["winter tree"] = "冬日的树"
+--underground
 gridCHN["underground thick vegetation"] = "地下厚植被"
 gridCHN["crystals"] = "水晶"
+--void
 gridCHN["void"] = "虚空"
 gridCHN["crack in spacetime"] = "时空裂隙"
 gridCHN["floating rocks"] = "浮石"
+--water
 gridCHN["underwater"] = "水下"
 gridCHN["coral wall"] = "珊瑚墙"
 gridCHN["underwater air bubble"] = "水下气泡"
 gridCHN["deep water"] = "深水"
 gridCHN["poisoned deep water"] = "有毒的深水"
+
+--data\zones\
+
+--abashed-expanse
 gridCHN["unstable wormhole"] = "不稳定的虫洞"
+gridCHN["stable wormhole"] = "稳定的虫洞"
+--ancient-elven-ruins
 gridCHN["teleporting circle to the surface"] = "通往地面的传送阵"
-gridCHN["teleportation circle to the surface"] = "通往地面的传送阵"
+--ardhungol
+--arena
+gridCHN["wall"] = "墙壁"
 gridCHN["closed gate"] = "关闭的大门"
 gridCHN["open gate"] = "敞开的大门"
+--blighted-ruins
 gridCHN["unholy circle"] = "邪恶法阵"
 gridCHN["broken unholy circle"] = "被破坏的邪恶法阵"
+--charred-scar
 gridCHN["Farportal: the Far East"] = "远古传送门：至远东大陆"
+--conclave-vault
+gridCHN["body remains"] = "一箱器官"
+gridCHN["bone pile"] = "一堆白骨"
+gridCHN["infusion rack"] = "输液架"
+gridCHN["operating table"] = "手术台"
+gridCHN["broken vat"] = "被打破的培养槽"
+gridCHN["old vats"] = "古老的培养槽"
+--crypt-kryl-feijan
 gridCHN["demonic symbol"] = "恶魔符文"
+--daikara
 gridCHN["Temporal Rift"] = "时空裂隙"
-gridCHN["The Iron Council (Dwarven empire main city)"] = "钢铁议会（矮人王国的主城）"
+--deep-bellow
+gridCHN["The Iron Council (Dwarven empire main city)"] = "钢铁议会（矮人帝国的主城）"
+--demon-plane
 gridCHN["Demonic Portal"] = "恶魔传送门"
+--dreadfell
 gridCHN["sign post with a note"] = "告示牌"
+--dreams
 gridCHN["Dream Portal"] = "梦境传送门"
 gridCHN["mouse hole"] = "老鼠洞"
 gridCHN["Dreamstone"] = "梦境之石"
 gridCHN["weird floor"] = "怪异地板"
 gridCHN["altar of dreams"] = "梦境祭坛"
+--eruan
 gridCHN["Farportal: Charred Scar"] = "远古传送门：灼烧之痕"
+--gladium
+--golem-graveyard
 gridCHN["the remains of Atamathon"] = "阿塔玛森的遗骸"
-gridCHN["entrance to a slimy pit"] = "泥泞矿坑入口"
+--grushnak-pride
+gridCHN["entrance to a slimy pit"] = "一个泥泞的坑"
+--high-peak
 gridCHN["Farportal: Iron Throne"] = "远古传送门：钢铁王座"
 gridCHN["Farportal: the Void"] = "远古传送门：虚空"
-gridCHN["Invocation Portal: Undeath"] = "符文传送：不死亡灵"
-gridCHN["Invocation Portal: Elements"] = "符文传送：元素"
-gridCHN["Invocation Portal: Dragons"] = "符文传送：龙"
-gridCHN["Invocation Portal: Destruction"] = "符文传送：毁灭"
+gridCHN["Invocation Portal: Undeath"] = "符文传送门：亡灵"
+gridCHN["Invocation Portal: Elements"] = "符文传送门：元素"
+gridCHN["Invocation Portal: Dragons"] = "符文传送门：龙"
+gridCHN["Invocation Portal: Destruction"] = "符文传送门：毁灭"
 gridCHN["Portal: The Sanctum"] = "圣所传送门"
+--infinite-dungeon
 gridCHN["The Hunter and the Hunted"] = "猎人与猎物"
+--keepsake-meadow
+gridCHN["troll stew"] = "巨魔的肉汤"
+gridCHN["cave marker"] = "洞穴标记"
+--lake-nur
 gridCHN["way to the old forest"] = "通往远古森林的路"
 gridCHN["entrance to the Sher'Tul ruins"] = "夏·图尔废墟入口"
-gridCHN["way to the old forest"] = "通往远古森林的路"
-gridCHN["Entrance to a dark crypt"] = "通向阴影地窖之路"
-gridCHN["cobblestone road"] = "鹅卵石路"
+--last-hope-graveyard
 gridCHN["grave"] = "坟墓"
 gridCHN["coffin"] = "棺材"
 gridCHN["open coffin"] = "被打开的棺材"
 gridCHN["open mausoleum"] = "被打开的陵墓"
 gridCHN["ritualistic symbol"] = "仪式标志"
+--maze
+gridCHN["huge crack in the floor"] = "地上的大洞"
+--old-forest
 gridCHN["way to the lake of Nur"] = "通往纳尔湖的路"
+--paradox-plane
+--reknor
 gridCHN["Iron Throne Edict"] = "钢铁王座布告"
-gridCHN["Slave Control Orb"] = "奴隶控制水晶球"
+--reknor-escape
+--ring-of-blood
 gridCHN["lava pit"] = "熔岩矿坑"
+gridCHN["Slave Control Orb"] = "奴隶控制水晶球"
+--ruined-dungeon
 gridCHN["inscription"] = "铭文"
 gridCHN["way into the infinite dungeon"] = "通往无尽地下城的路"
+gridCHN["orb"] = "水晶球"
+--shadow-crypt
+--shertul-fortress
 gridCHN["stair back to the lake of Nur"] = "返回纳尔湖的台阶"
+gridCHN["teleportation circle to the surface"] = "通往地面的传送阵"
+gridCHN["teleportation circle for Melinda"] = "为米琳达准备的传送阵"
 gridCHN["Sher'Tul Control Orb"] = "夏·图尔控制水晶球"
-gridCHN["Exploratory Farportal"] = "远古传送门"
+gridCHN["Exploratory Farportal"] = "异度传送门"
 gridCHN["Library of Lost Mysteries"] = "失落秘密图书库"
 gridCHN["mural painting"] = "壁画"
-gridCHN["orb pedestal (dragon)"] = "水晶基座：龙"
-gridCHN["orb pedestal (undeath)"] = "水晶基座：亡灵"
-gridCHN["orb pedestal (elements)"] = "水晶基座：元素"
-gridCHN["orb pedestal (destruction)"] = "水晶基座：毁灭"
+gridCHN["Training Control Orb"] = "训练室控制水晶球"
+gridCHN["Training Monitor Orb"] = "训练室监测水晶球"
+gridCHN["Exploratory Farportal exit"] = "异度传送门出口"
+gridCHN["Teleportation portal to the Sher'Tul Fortress"] = "通向夏·图尔堡垒的传送阵"
+--shertul-fortress-caldizar
+--slazish-fen
+gridCHN["bog water"] = "沼泽泥水塘"
+gridCHN["coral portal"] = "珊瑚传送门"
+--slime-tunnels
+gridCHN["orb pedestal (dragon)"] = "水晶球基座：龙"
+gridCHN["orb pedestal (undeath)"] = "水晶球基座：亡灵"
+gridCHN["orb pedestal (elements)"] = "水晶球基座：元素"
+gridCHN["orb pedestal (destruction)"] = "水晶球基座：毁灭"
+gridCHN["Entrance to the High Peak"] = "巅峰入口"
 gridCHN["exit to Grushnak Pride"] = "离开前往格鲁希纳克部落"
+--sludgenest
+--south-beach
+gridCHN["lovely umbrella"] = "可爱的阳伞"
+gridCHN["picnic basket"] = "野餐篮子"
+--stellar-system-shandral
+--tannen-tower
 gridCHN["Portal to Last Hope"] = "通往最后的希望的传送门"
+--temporal-rift
+--town-angolwen
 gridCHN["cultivated fields"] = "耕地"
+gridCHN["cobblestone road"] = "鹅卵石路"
 gridCHN["magical rock"] = "魔法石头"
-gridCHN["fountain"] = "泉水"
+gridCHN["fountain"] = "喷泉"
+--town-derth
+--town-gates-of-morning
+gridCHN["Farportal: Last Hope"] = "远古传送门：至最后的希望"
 gridCHN["Sunwall mountain"] = "太阳堡垒群山"
 gridCHN["Way into the Slazish fens"] = "通往斯拉伊什沼泽的路"
+--town-irkkk
 gridCHN["cooking pit"] = "烹饪凹地"
+--town-iron-council
+gridCHN["Escape route from Reknor"] = "瑞库纳逃生之路"
+gridCHN["The Deep Bellow"] = "无尽深渊"
 gridCHN["The Dwarven Empire Incarnate"] = "矮人帝国的化身"
 gridCHN["Mystic of the Empire"] = "帝国的奥秘"
 gridCHN["Warrior of the Empire"] = "帝国的战士"
 gridCHN["Defender of the Empire"] = "帝国的保卫者"
+--town-last-hope
 gridCHN["Farportal: Gates of Morning"] = "远古传送门：晨曦之门"
+--town-point-zero
+gridCHN["Temporal Rift to Maj'Eyal"] = "通向马基·埃亚尔的时空裂隙"
+gridCHN["polar cap"] = "极地冰冠"
+--town-shatur
+--town-zigur
 gridCHN["Zigur Postsign"] = "伊格的岗哨"
 gridCHN["giant rock"] = "巨大的岩石"
-gridCHN["dirt road"] = "肮脏的路"
-gridCHN["troll stew"] = "巨魔的肉汤"
+--trollmire
+gridCHN["dirt road"] = "土路"
+--tutorial-combat-stats
 gridCHN["Lobby Portal"] = "前厅传送门"
 gridCHN["Sign"] = "标记"
 gridCHN["Rune of Enlightenment: Summer Vacation"] = "启蒙符文：暑假"
@@ -147,34 +255,56 @@ gridCHN["Rune of Enlightenment: Fear"] = "启蒙符文：恐惧"
 gridCHN["Rune of Enlightenment: Bleed"] = "启蒙符文：流血"
 gridCHN["Rune of Enlightenment: Confusion"] = "启蒙符文：混乱"
 gridCHN["glowing door"] = "发光的门"
+--unhallowed-morass
+--valley-moon
 gridCHN["moonstone"] = "月亮石"
-gridCHN["Fearscape Portal"] = "恐惧长廊传送门"
+gridCHN["Fearscape Portal"] = "恶魔空间传送门"
+--valley-moon-caverns
 gridCHN["exit to the lost valley"] = "离开前往失落山谷"
+--void
+--wilderness
 gridCHN["plains"] = "平原"
-gridCHN["forest"] = "森林"
 gridCHN["low hills"] = "丘陵"
+gridCHN["forest"] = "森林"
+gridCHN["pine forest"] = "松林"
 gridCHN["Old forest"] = "远古森林"
 gridCHN["Charred Scar"] = "灼烧之痕"
-gridCHN["polar cap"] = "极地冰冠"
+gridCHN["burnt forest"] = "被烧毁的森林"
 gridCHN["frozen sea"] = "冰冻之海"
 gridCHN["cold forest"] = "冰冷森林"
+gridCHN["cold thaloren forest"] = "自然精灵的冰冷森林"
+gridCHN["thaloren forest"] = "自然精灵的森林"
 gridCHN["sea of Eyal"] = "埃亚尔之海"
 gridCHN["river"] = "河流"
 gridCHN["lake of Nur"] = "纳尔湖"
 gridCHN["sea of Sash"] = "萨希之海"
 gridCHN["lake"] = "湖"
-gridCHN["Westreach lake"] = "维斯特瑞池"
+gridCHN["Westreach lake"] = "维斯特瑞湖"
 gridCHN["Irondeep lake"] = "艾恩迪普湖"
 gridCHN["Spellmurk lake"] = "斯拜尔莫克湖"
+gridCHN["mountain chain"] = "山脉"
+gridCHN["volcanic mountains"] = "火山"
+gridCHN["daikara"] = "岱卡拉"
 gridCHN["jungle"] = "丛林"
 gridCHN["desert"] = "沙漠"
 gridCHN["oasis"] = "绿洲"
+-- Towns
+gridCHN["Derth (Town)"] = "德斯镇（城镇）"
+gridCHN["Last Hope (Town)"] = "最后的希望（城镇）"
+gridCHN["Angolwen, the hidden city of magic"] = "安格利文，隐藏的魔法城（城镇）"
+gridCHN["Hidden teleportation portal to Angolwen, the hidden city of magic"] = "隐藏的安格利文魔法城传送点"
+gridCHN["Shatur (Town)"] = "夏特尔（城镇）"
+gridCHN["Elvala (Town)"] = "埃尔瓦拉（城镇）"
+gridCHN["Gates of Morning (Town)"] = "晨曦之门（城镇）"
+gridCHN["Irkkk (Town)"] = "伊尔克（城镇）"
+gridCHN["Zigur (Town)"] = "伊格（城镇）"
+gridCHN["Iron Council (Town)"] = "钢铁议会（城镇）"
+-- Maj'Eyal Zones
 gridCHN["A gate into the Maze"] = "进入迷宫的门"
 gridCHN["Passageway into the Trollmire"] = "通往巨魔沼泽的路"
 gridCHN["A path into the Old Forest"] = "通往远古森林的路"
 gridCHN["Passageway into Norgos' Lair"] = "通往诺尔格斯巢穴的路"
 gridCHN["Passageway into the Daikara"] = "通往岱卡拉的路"
-gridCHN["Daikara"] = "岱卡拉"
 gridCHN["The entry to the old tower of Dreadfell"] = "恐惧王座入口"
 gridCHN["Ruins of Kor'Pul"] = "卡·普尔废墟"
 gridCHN["Very old halfling ruins"] = "古老的半身人废墟"
@@ -189,88 +319,130 @@ gridCHN["Unremarkable cave"] = "不显眼的山洞"
 gridCHN["A gate into the old kingdom of Reknor"] = "古代王国瑞库纳的大门"
 gridCHN["Entrance into Telmur, tower of Telos"] = "泰勒斯之塔泰尔玛的入口"
 gridCHN["Way into the lair of Murgol"] = "穆格尔巢穴的入口"
-gridCHN["Long road to the Tempest Peak"] = "通向高塔巅峰的长道"
+gridCHN["Long road to the Tempest Peak"] = "通向风暴之颠的长道"
 gridCHN["A gate into Last Hope's graveyard"] = "通向最后的希望墓地的门"
 gridCHN["Entrance to Rak'shor Pride bastion"] = "拉克·肖部落基地入口"
 gridCHN["Entrance to Gorbat Pride bastion"] = "加伯特部落基地入口"
 gridCHN["Entrance to Grushnak Pride bastion"] = "格鲁希纳克部落基地入口"
 gridCHN["Entrance to Vor Pride bastion"] = "沃尔部落基地入口"
 gridCHN["Backdoor to the Vor Armoury"] = "沃尔军工厂后门"
-gridCHN["Entrance into the sandpit of Briagh"] = "布莱亚弗沙坑入口"
+gridCHN["Entrance into the sandpit of Briagh"] = "布莱亚沙坑入口"
 gridCHN["Cavern leading to the valley of the moon"] = "通向月之山谷的洞穴"
 gridCHN["A way into the caverns of Ardhungol"] = "通向阿尔德胡格洞穴的路"
 gridCHN["The arid wastes of Erúan"] = "艾露安·腐化之地"
+
+--quest
+--high-peak
+gridCHN["Ruins of the Gates of Morning"] = "晨曦之门的废墟"
+--keepsake
+gridCHN["secret path to the cave"] = "通向山洞的秘密通道"
+--lumberjack-curesed
+gridCHN["Small lumberjack village"] = "伐木工人的小村庄"
+--spydric-infestation
+gridCHN["Portal back to the Gates of Morning"] = "返回晨曦之门的传送门"
+--trollmire-treasure
+gridCHN["way to the hidden trollmire treasure"] = "巨魔宝藏的隐藏入口"
+
+--events
+--antimagic-bush
+gridCHN["antimagic bush"] = "反魔灌木"
+gridsuffixCHN[" (antimagic aura)"] = "（反魔光环）"
+--bligthed-soil
+gridCHN["blighted soil"] = "荒芜之地"
+gridsuffixCHN[" (blighted aura)"] = "（荒芜光环）"
+--cultists
+gridCHN["monolith"] = "符文巨石"
+gridCHN["corrupted monolith"] = "被污染的符文巨石"
+gridCHN["disrupted monolith"] = "被干扰的符文巨石"
+--damp-cave
+gridCHN["damp cave"] = "潮湿洞穴"
+--drake-cave
+gridCHN["intimidating cave"] = "恐怖地穴"
+--fearscape-portal
+gridCHN["fearscape invasion portal"] = "恶魔空间入侵传送门"
+--fell-aura
+gridsuffixCHN[" (fell aura)"] = "（毁灭光环）"
+--font-life
+gridCHN["font of life"] = "生命之泉"
+gridsuffixCHN[" (life aura)"] = "（生命光环）"
+--glimmerstone
+gridCHN["glimmerstone"] = "闪光石"
+--glowing-chest
+gridCHN["glowing chest"] = "闪光的宝箱"
+gridCHN["coral invasion portal"] = "珊瑚传送门入口"
+--naga-portal
+gridCHN["naga invasion coral portal"] = "娜迦入侵珊瑚传送门"
+gridCHN["broken naga invasion coral portal"] = "被破坏的娜迦入侵珊瑚传送门"
+--necrotic-air
+gridsuffixCHN[" (necrotic air)"] = "（死灵瘴气）"
+--noxious-caldera
+gridCHN["Way into a volcanic caldera"] = "通往火山口的路"
+--old-battle-field
+gridCHN["grave (opened)"] = "被打开的墓碑"
+--protective-aura
+gridCHN[" (protective aura)"] = "（防御光环）"
+--rat-lich
+gridCHN["forsaken crypt"] = "废弃地下室"
+--slimey-pool
+gridCHN["slimey pool"] = "史莱姆之沼"
+gridsuffixCHN[" (slimey)"] = "（泥泞）"
+--sludgenest
+gridCHN["Way into a strange lush forest"] = "通向一片奇怪的葱郁森林的道路"
+--spellblaze-scar
+gridCHN["spellblaze scar"] = "奥术之痕"
+gridsuffixCHN[" (spellblaze aura)"] = "（奥术之痕）"
+--tombstone
+--weird-pedestals
+gridCHN["weird pedestal"] = "奇怪的基座"
+gridCHN["weird pedestal (glowing)"] = "奇怪的发光基座"
+--whistling-vortex
+gridsuffixCHN[" (whistling vortex)"] = "（尖啸漩涡）"
+
+
+--maps\towns\last-hope.lua
 gridCHN["Statue of King Tolak the Fair"] = "公正大帝托拉克的雕像"
 gridCHN["Statue of King Toknor the Brave"] = "英勇大帝托克诺尔的雕像"
 gridCHN["Statue of Queen Mirvenia the Inspirer"] = "智慧皇后米雯尼雅的雕像"
-gridCHN["portal back"] = "返回传送门"
-gridCHN["Moss covered statue"] = "长满苔藓的雕像"
-gridCHN["Derth (Town)"] = "德斯镇（城镇）"
-gridCHN["Last Hope (Town)"] = "最后的希望（城镇）"
-gridCHN["Angolwen, the hidden city of magic"] = "安格利文，隐藏的魔法城（城镇）"
-gridCHN["Hidden teleportation portal to Angolwen, the hidden city of magic"] = "隐藏的安格利文魔法城传送点"
-gridCHN["Shatur (Town)"] = "夏特尔（城镇）"
-gridCHN["Elvala (Town)"] = "埃尔瓦拉（城镇）"
-gridCHN["Gates of Morning (Town)"] = "晨曦之门（城镇）"
-gridCHN["Irkkk (Town)"] = "伊尔克（城镇）"
-gridCHN["Zigur (Town)"] = "伊格（城镇）"
-gridCHN["Iron Council (Town)"] = "钢铁议会（城镇）"
-gridCHN["Iron Throne"] = "钢铁王座"
-gridCHN["Entrance to the orc breeding pit"] = "兽人育种棚入口"
-gridCHN["Entrance to an underwater cave"] = "水下洞穴入口"
-gridCHN["way to the hidden trollmire treasure"] = "巨魔宝藏的隐藏入口"
-gridCHN["Temporal Rift to Maj'Eyal"] = "通向马基·埃亚尔的时空裂隙"
+gridCHN["Declaration of the Unification of the Allied Kingdoms"] = "联合王国统一公告"
+--data\lore\age-allure.lua
+gridCHN["Door to an old Conclave vault"] = "通向古老的孔克雷夫地下实验室的大门"
+--data\chats\arena-unlock.lua
 gridCHN["exit to Derth"] = "通向德斯镇的出口"
-gridCHN["Entrance to the High Peak"] = "巅峰入口"
-gridCHN["Small lumberjack village"] = "伐木工人的小村庄"
-gridCHN["Teleportation portal to the Sher'Tul Fortress"] = "通向夏·图尔堡垒的传送阵"
-gridCHN["Exploratory Farportal exit"] = "异度传送门出口"
-gridCHN["Golem Graveyard"] = "傀儡墓地"
-gridCHN["Mark of the Spellblaze"] = "魔法大爆炸之痕"
-gridCHN["Portal to the Bearscape"] = "通向巨熊空间的传送门"
+--data\general\encounters\fareast.lua
+gridCHN["Entrance to an underwater cave"] = "水下洞穴入口"
+gridCHN["Entrance to a dark crypt"] = "通向阴影地窖之路"
+-- removed
+-- gridCHN["Entrance to the orc breeding pit"] = "兽人育种棚入口" 
+--data\general\encounters\maj-eyal.lua
 gridCHN["Entrance to some ancient elven ruins"] = "远古精灵遗迹入口"
 gridCHN["Entrance to a ruined dungeon"] = "废弃地城入口"
-gridCHN["The Deep Bellow"] = "无尽深渊"
-gridCHN["Escape route from Reknor"] = "瑞库纳逃生之路"
-gridCHN["Hidden compound"] = "隐藏之所"
+gridCHN["Golem Graveyard"] = "傀儡墓地"
+gridCHN["Mark of the Spellblaze"] = "魔法大爆炸之痕"
+gridCHN["Hidden compound"] = "隐藏的竞技场"
+gridCHN["tranquil meadow"] = "宁静的草原"
+--data\maps\towns\shatur.lua
+gridCHN["Moss covered statue"] = "长满苔藓的雕像"
+--data\maps\zones\valley-moon.lua
+gridCHN["Passage to the caverns"] = "通向山洞的通道"
+gridCHN["A dark hole in the mountain"] = "山岭间的黑暗洞穴"
+--data\maps\zones\halfling-ruins-last.lua
+gridCHN["Long tunnel to the island of Rel"] = "通向夺心魔之岛的通道"
 
---events
-gridCHN["antimagic bush"] = "反魔灌木"
-gridCHN["blighted soil"] = "荒芜之地"
-gridCHN["monolith"] = "符文巨石"
-gridCHN["damp cave"] = "潮湿洞穴"
-gridCHN["intimidating cave"] = "恐怖地穴"
-gridCHN["portal"] = "传送门"
-gridCHN["fearscape invasion portal"] = "死亡空间传送门入口"
-gridCHN["fell aura"] = "毁灭光环"
-gridCHN["font of life"] = "生命之泉"
-gridCHN["glimmerstone"] = "闪光石"
-gridCHN["icy floor"] = "冰面"
-gridCHN["ice"] = "寒冰"
-gridCHN["coral invasion portal"] = "珊瑚传送门入口"
-gridCHN["naga invasion coral portal"] = "娜迦珊瑚传送门入口"
-gridCHN["broken naga invasion coral portal"] = "破碎的娜迦珊瑚传送门入口"
-gridCHN["necrotic air"] = "死灵瘴气"
-gridCHN["Way into a volcanic caldera"] = "通往火山口的路"
-gridCHN["protective aura"] = "防御光环"
-gridCHN["forsaken crypt"] = "废弃地下室"
-gridCHN["slimey pool"] = "史莱姆之沼"
-gridCHN["spellblaze scar"] = "奥术之痕"
-gridCHN["weird pedestal"] = "怪异的基座"
-gridCHN["whistling vortex"] = "尖啸漩涡"
+--unused?
+gridCHN["Portal to the Bearscape"] = "通向巨熊空间的传送门"
+gridCHN["Iron Throne"] = "钢铁王座"
+gridCHN["portal to somewhere on Eyal"] = "通向埃亚尔大陆某处的传送门"
+gridCHN["portal to Eyal"] = "通向埃亚尔大陆的传送门"
+gridCHN["portal to the main island"] = "通向主岛的传送门"
+gridCHN["portal to the arrival platform"] = "通向到达平台的传送门"
 gridCHN["portal to the next level"] = "通向下一层的传送门"
 gridCHN["portal to the previous level"] = "通向上一层的传送门"
 gridCHN["portal to next level"] = "通向下一层的传送门"
 gridCHN["portal to previous level"] = "通向上一层的传送门"
+gridCHN["portal back"] = "返回传送门"
+gridCHN["portal"] = "传送门"
+gridCHN["ice"] = "寒冰"
 
-gridCHN["portal to somewhere on Eyal"] = "通向埃亚尔大陆的传送门"
-gridCHN["portal to Eyal"] = "通向埃亚尔大陆的传送门"
-
-gridCHN["portal to the main island"] = "通向主岛的传送门"
-gridCHN["portal to the arrival platform"] = "通向到达平台的传送门"
-
-gridCHN["Long tunnel to the island of Rel"] = "通向夺心魔之岛的通道"
-gridCHN["Door to an old Conclave vault"] = "通向古老的孔克雷夫地下实验室的大门"
 --地图描述
 
 gridCHN["A farportal is a way to travel incredible distances in the blink of an eye. They usually require an external item to use."] = " 传 送 门 是 可 以 在 眨 眼 间 将 你 传 送 出 很 远 距 离 的 工 具。 它 们 通 常 需 要 一 件 关 键 道 具 来 激 活。 "
@@ -336,23 +508,25 @@ gridCHN["demon statue Lithfengel"] = "恶魔雕像：里斯丰格"
 gridCHN["demon statue Shasshhiy'Kaish"] = "恶魔雕像：莎西·凯希"
 gridCHN["demon statue Walrog"] = "恶魔雕像：乌尔罗格"
 gridCHN["demon statue Harkor'Zun"] = "恶魔雕像：哈克祖"
---conclave vault
-gridCHN["old vats"] = "古老的培养槽"
-gridCHN["broken vat"] = "被打破的培养槽"
-gridCHN["infusion rack"] = "输液架"
-gridCHN["operating table"] = "手术台"
-gridCHN["bone pile"] = "一堆白骨"
-gridCHN["body remains"] = "一箱器官"
 
+function getLineTooltipGridCHN(line)
+    if line:find(" %(") then
+        local f,e = line:find(" %(")
+        local a = line:sub(1, f - 1)
+        local b = line:sub(f, string.len(line))
+        if gridsuffixCHN[b] then return getLineTooltipGridCHN(a) .. ' ' .. gridsuffixCHN[b] end
+    end
+    line = gridCHN[line] or line
+    if string.find(line,"range:") then line = line:gsub("range","距离") end
+    return line
+end
 function getTooltipGridCHN(desc)
 	if not desc then return end
 
 	for i = 1,#desc do
 		if type(desc[i]) == "string" then 
-			desc[i] = gridCHN[desc[i]] or desc[i] 
-			if string.find(desc[i],"range:") then desc[i] = desc[i]:gsub("range","距离") end
+			desc[i] = getLineTooltipGridCHN(desc[i])
 		end
-
 	end
 
 	return desc

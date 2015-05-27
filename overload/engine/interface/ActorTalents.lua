@@ -1013,11 +1013,17 @@ function _M:registerTalentTranslation(t)
 	assert(t.id, "no talent id")
 	assert(t.name, "no talent name")
 	assert(t.info, "no talent info")
-	assert(self.talents_def[t.id], "talent id undefineded")
-	print("[registerTalentTranslation] " .. t.id)
+	assert(self.talents_def[t.id], "talent id " .. t.id .. " undefineded")
+	print("[registerTalentTranslation] " .. t.id .. ", name = " .. t.name)
 	self.talents_def[t.id].name = t.name
 	self.talents_def[t.id].info = t.info
 	if t.require_special_desc then
 		self.talents_def[t.id].require.special.desc = t.require_special_desc
+	end
+	if t.short_info then
+		self.talents_def[t.id].short_info = t.short_info
+	end
+	if t.extra_data then
+		self.talents_def[t.id].extra_data = table.clone(t.extra_data)
 	end
 end

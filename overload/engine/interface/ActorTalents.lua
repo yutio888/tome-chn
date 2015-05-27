@@ -1014,7 +1014,6 @@ function _M:registerTalentTranslation(t)
 	assert(t.name, "no talent name")
 	assert(t.info, "no talent info")
 	assert(self.talents_def[t.id], "talent id " .. t.id .. " undefineded")
-	print("[registerTalentTranslation] " .. t.id .. ", name = " .. t.name)
 	self.talents_def[t.id].name = t.name
 	self.talents_def[t.id].info = t.info
 	if t.require_special_desc then

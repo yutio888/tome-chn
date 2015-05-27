@@ -1,8 +1,8 @@
 local _M = loadPrevious(...)
 
 registerTalentTranslation{
-    id = "T_SKULLCRACKER",
-    name = "铁头功",
+	id = "T_SKULLCRACKER",
+	name = "铁头功",
 	info = function(self, t)
 		local dam = damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t))
 		local duration = t.getDuration(self, t)
@@ -15,16 +15,8 @@ registerTalentTranslation{
 }
 
 registerTalentTranslation{
-    id = "T_RIOT-BORN",
-    name = "黑暗出身",
-	info = function(self, t)
-		return ([[你 与 生 俱 来 的 暴 力 倾 向 使 你 在 战 斗 时 增 加 %d%% 震 慑 和 混 乱 抵 抗。]]):
-		format(t.getImmune(self, t)*100)
-	end,
-}
-registerTalentTranslation{
-    id = "T_VICIOUS_STRIKES",
-    name = "恶毒打击",
+	id = "T_VICIOUS_STRIKES",
+	name = "恶毒打击",
 	info = function(self, t)
 		return ([[你 知 道 如 何 击 中 目 标 弱 点， 使 你 获 得 +%d%% 暴 击 伤 害 加 成 和 %d 护 甲 穿 透。]]):
 		format(t.critpower(self, t), t.getAPR(self, t))
@@ -32,8 +24,8 @@ registerTalentTranslation{
 }
 
 registerTalentTranslation{
-    id = "T_TOTAL_THUGGERY",
-    name = "不择手段",
+	id = "T_TOTAL_THUGGERY",
+	name = "不择手段",
 	info = function(self, t)
 		return ([[你 疯 狂 地 杀 戮， 试 图 尽 快 击 倒 你 的 敌 人。 
 		战 斗 中， 每 次 攻 击 增 加 +%d%% 暴 击 率 和 +%d%% 物 理 抵 抗 穿 透， 但 是 每 次 攻 击 消 耗 %0.1f 体 力。]]):

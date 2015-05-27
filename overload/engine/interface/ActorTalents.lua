@@ -36,6 +36,7 @@ function _M:loadDefinition(file, env)
 		MapEffect = require("engine.MapEffect"),
 		newTalent = function(t) self:newTalent(t) end,
 		newTalentType = function(t) self:newTalentType(t) end,
+		registerTalentTranslation = function(t) self:registerTalentTranslation(t) end,
 		load = function(f) self:loadDefinition(f, getfenv(2)) end
 	}, {__index=_G}))
 	if not f and err then error(err) end
@@ -90,12 +91,6 @@ function _M:newTalent(t)
 	t.info = function(self, t) return info(self, t):gsub("\n\t+", "\n") end
 
 	t.id = "T_"..t.short_name
-	
---[[	-------------技能名汉化
-	local tid = string.gsub(t.id,"_%d","")
-	if t_talent_name[tid] then t.name = t_talent_name[tid] end
-	-------------END]]
-	
 	self.talents_def[t.id] = t
 	assert(not self[t.id], "talent already exists with id T_"..t.short_name)
 	self[t.id] = t.id
@@ -1011,4 +1006,18 @@ function _M:talentDialog(d)
 	table.removeFromList(dialog_returns_list, d)
 
 	return unpack(ret or {})
+end
+
+--- Register talent translation descriptor from superload 
+function _M:registerTalentTranslation(t)
+	assert(t.id, "no talent id")
+	assert(t.name, "no talent name")
+	assert(t.info, "no talent info")
+	assert(self.talents_def[t.id], "talent id undefineded")
+	print("[registerTalentTranslation] " .. t.id)
+	self.talents_def[t.id].name = t.name
+	self.talents_def[t.id].info = t.info
+	if t.require_special_desc then
+		self.talents_def[t.id].require.special.desc = t.require_special_desc
+	end
 end

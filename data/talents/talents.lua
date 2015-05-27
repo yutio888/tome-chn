@@ -8,7 +8,7 @@ dofile("/data-chn123/talents/celestial/combat.lua")
 dofile("/data-chn123/talents/celestial/light.lua")
 dofile("/data-chn123/talents/celestial/glyphs.lua")
 dofile("/data-chn123/talents/celestial/guardian.lua")
-dofile("/data-chn123/talents/celestial/radiance.lua")
+-- dofile("/data-chn123/talents/celestial/radiance.lua")
 dofile("/data-chn123/talents/celestial/crusader.lua")
 dofile("/data-chn123/talents/celestial/twilight.lua")
 dofile("/data-chn123/talents/celestial/hymns.lua")
@@ -203,65 +203,3 @@ dofile("/data-chn123/talents/undeads/skeleton.lua")
 		dofile("data-chn123/talents/gifts/gifts.lua")
 		dofile("data-chn123/talents/spells/spells.lua")
 	end
-	
-	
-
---uber/const
-Talents.talents_def.T_DRACONIC_BODY.name = "龙族之躯"
-Talents.talents_def.T_BLOODSPRING.name = "血如泉涌"
-Talents.talents_def.T_ETERNAL_GUARD.name = "永恒防御"
-Talents.talents_def.T_NEVER_STOP_RUNNING.name = "永不止步"
-Talents.talents_def.T_ARMOUR_OF_SHADOWS.name = "影之护甲"
-Talents.talents_def.T_SPINE_OF_THE_WORLD.name = "世界之脊"
-Talents.talents_def.T_FUNGAL_BLOOD.name = "真菌之血"
-Talents.talents_def.T_CORRUPTED_SHELL.name = "堕落之壳"
-
---uber/cun
-Talents.talents_def.T_FAST_AS_LIGHTNING.name = "疾如闪电"
-Talents.talents_def.T_TRICKY_DEFENSES.name = "欺诈护盾"
-Talents.talents_def.T_ENDLESS_WOES.name = "无尽灾厄"
-Talents.talents_def.T_SECRETS_OF_TELOS.name = "泰勒斯之秘"
-Talents.talents_def.T_ELEMENTAL_SURGE.name = "元素狂潮"
-Talents.talents_def.T_EYE_OF_THE_TIGER.name = "猛虎之眼"
-Talents.talents_def.T_WORLDLY_KNOWLEDGE.name = "渊博学识"
-Talents.talents_def.T_TRICKS_OF_THE_TRADE.name = "欺诈圣手"
-
---uber/dex
-Talents.talents_def.T_THROUGH_THE_CROWD.name = "穿梭人群"
-Talents.talents_def.T_SWIFT_HANDS.name = "疾影手"
-Talents.talents_def.T_WINDBLADE.name = "剑刃风暴"
-Talents.talents_def.T_WINDTOUCHED_SPEED.name = "和风守护"
-Talents.talents_def.T_GIANT_LEAP.name = "战争践踏"
-Talents.talents_def.T_CRAFTY_HANDS.name = "心灵手巧"
-Talents.talents_def.T_ROLL_WITH_IT.name = "随波逐流"
-Talents.talents_def.T_VITAL_SHOT.name = "要害射击"
-
---uber/mag
-Talents.talents_def.T_SPECTRAL_SHIELD.name = "无光之盾"
-Talents.talents_def.T_AETHER_PERMEATION.name = "以太渗透"
-Talents.talents_def.T_MYSTICAL_CUNNING.name = "魔之秘术"
-Talents.talents_def.T_ARCANE_MIGHT.name = "奥术之握"
-Talents.talents_def.T_TEMPORAL_FORM.name = "时空形态"
-Talents.talents_def.T_BLIGHTED_SUMMONING.name = "枯萎召唤"
-Talents.talents_def.T_REVISIONIST_HISTORY.name = "修正历史"
-Talents.talents_def.T_CAUTERIZE.name = "浴火重生"
-
---uber/str
-Talents.talents_def.T_FLEXIBLE_COMBAT.name = "自由格斗"
-Talents.talents_def.T_TITAN_S_SMASH.name = "化作星星吧！！"
-Talents.talents_def.T_MASSIVE_BLOW.name = "巨人之锤"
-Talents.talents_def.T_STEAMROLLER.name = "无尽冲锋"
-Talents.talents_def.T_IRRESISTIBLE_SUN.name = "无御之日"
-Talents.talents_def.T_NO_FATIGUE.name = "我能举起世界！"
-Talents.talents_def.T_LEGACY_OF_THE_NALOREN.name = "纳鲁之传承"
-Talents.talents_def.T_SUPERPOWER.name = "超级力量"
-
---uber/wil
-Talents.talents_def.T_DRACONIC_WILL.name = "龙族意志"
-Talents.talents_def.T_METEORIC_CRASH.name = "落星"
-Talents.talents_def.T_GARKUL_S_REVENGE.name = "加库尔的复仇"
-Talents.talents_def.T_HIDDEN_RESOURCES.name = "潜能爆发"
-Talents.talents_def.T_LUCKY_DAY.name = "幸运日"
-Talents.talents_def.T_UNBREAKABLE_WILL.name = "坚定意志"
-Talents.talents_def.T_SPELL_FEEDBACK.name = "法术反馈"
-Talents.talents_def.T_MENTAL_TYRANNY.name = "灵魂之怒"

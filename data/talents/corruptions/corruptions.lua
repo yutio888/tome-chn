@@ -1,5 +1,5 @@
 dofile("data-chn123/talents/corruptions/black-magic.lua")
-dofile("data-chn123/talents/corruptions/brutality.lua")
+--dofile("data-chn123/talents/corruptions/brutality.lua")
 dofile("data-chn123/talents/corruptions/demonic-strength.lua")
 dofile("data-chn123/talents/corruptions/demon-pact.lua")
 dofile("data-chn123/talents/corruptions/demon-seeds.lua")

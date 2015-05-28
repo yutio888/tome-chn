@@ -114,3 +114,5 @@ registerTalentTranslation{
 
 
 
+
+return _M

@@ -102,3 +102,5 @@ registerTalentTranslation{
 		:format(damage, duration)
 	end,
 }
+
+return _M

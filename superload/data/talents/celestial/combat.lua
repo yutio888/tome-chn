@@ -49,3 +49,5 @@ registerTalentTranslation{
 		format(t.getLife(self, t))
 	end,
 }
+
+return _M

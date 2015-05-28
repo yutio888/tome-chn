@@ -37,3 +37,5 @@ registerTalentTranslation{
 		 如 果 你 对 目 标 造 成 伤 害， 则 目 标 会 脱 离 诅 咒。]]):format(t.getDuration(self, t))
 	end,
 }
+
+return _M

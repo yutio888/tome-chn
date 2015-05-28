@@ -38,3 +38,5 @@ registerTalentTranslation{
 		format(t.getMult(self,t))
 	end,
 }
+
+return _M

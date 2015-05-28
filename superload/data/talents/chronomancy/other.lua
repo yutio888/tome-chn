@@ -22,3 +22,5 @@ registerTalentTranslation{
 		当 前 异 常 几 率:  %d%%]]):format(tune, preference, sp_modifier, spellpower, will_modifier, sustain_modifier, after_will, anomaly)
 	end,
 }
+
+return _M

@@ -47,3 +47,5 @@ registerTalentTranslation{
 		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成。]]):format(damDesc(self, DamageType.LIGHT, damage), radius)
 	end,
 }
+
+return _M

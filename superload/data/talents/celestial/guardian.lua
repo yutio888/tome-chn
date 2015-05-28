@@ -56,3 +56,5 @@ registerTalentTranslation{
 		format(weapon, shield, cooldown, cleanse)
 	end,
 }
+
+return _M

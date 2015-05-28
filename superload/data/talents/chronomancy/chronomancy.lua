@@ -52,3 +52,5 @@ registerTalentTranslation{
 		:format(duration)
 	end,
 }
+
+return _M

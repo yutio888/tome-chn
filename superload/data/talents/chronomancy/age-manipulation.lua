@@ -45,3 +45,5 @@ registerTalentTranslation{
 		format(heal, count)
 	end,
 }
+
+return _M

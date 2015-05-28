@@ -91,3 +91,5 @@ registerTalentTranslation{
 		format()
 	end,
 }
+
+return _M

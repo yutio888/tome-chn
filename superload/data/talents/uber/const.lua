@@ -85,3 +85,5 @@ registerTalentTranslation{
 		:format(self:getCon() / 3, self:getCon() / 3)
 	end,
 }
+
+return _M

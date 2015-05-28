@@ -48,3 +48,5 @@ registerTalentTranslation{
 		format(radius, damDesc(self, DamageType.DARKNESS, damage))
 	end,
 }
+
+return _M

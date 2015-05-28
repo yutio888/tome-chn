@@ -58,3 +58,5 @@ registerTalentTranslation{
 		 当 你 学 会 该 技 能 后 ，猎 犬 们 获 得 %d%% 时 空 伤 害 吸 收 。]]):format(damDesc(self, DamageType.TEMPORAL, damage), radius, stat_damage, duration, affinity)
 	end,
 }
+
+return _M

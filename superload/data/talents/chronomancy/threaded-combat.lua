@@ -53,3 +53,5 @@ registerTalentTranslation{
 		:format(damage_penalty)
 	end,
 }
+
+return _M

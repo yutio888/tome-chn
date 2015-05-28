@@ -51,3 +51,5 @@ registerTalentTranslation{
 		format(60+inc, inc, math.ceil(inc/5))
 	end,
 }
+
+return _M

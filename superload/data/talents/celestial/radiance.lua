@@ -44,3 +44,5 @@ registerTalentTranslation{
 		format(t.getMoveDamage(self, t), t.getExplosionDamage(self, t))
 	end,
 }
+
+return _M

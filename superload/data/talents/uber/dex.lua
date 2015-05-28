@@ -88,3 +88,5 @@ registerTalentTranslation{
 		 受 命 中 影 响， 震 慑 和 残 废 几 率 有 额 外 加 成。 ]]):format()
 	end,
 }
+
+return _M

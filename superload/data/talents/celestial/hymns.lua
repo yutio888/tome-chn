@@ -58,3 +58,5 @@ registerTalentTranslation{
 		format(targetcount, damDesc(self, DamageType.DARKNESS, damage), drain)
 	end,
 }
+
+return _M

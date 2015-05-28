@@ -82,3 +82,5 @@ registerTalentTranslation{
 		return ([[立 即 传 送 你 至 先 前 创 造 的 第 2 个 跃 迁 之 门， 距 离 不 超 过 %d 码。]]):format(t.getRange(self, t))
 	end,
 }
+
+return _M

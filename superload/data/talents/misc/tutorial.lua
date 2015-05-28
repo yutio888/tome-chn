@@ -43,3 +43,5 @@ registerTalentTranslation{
 		return ([[使 用 你 的 精 神 力 量 使 目 标 混 乱 5 回 合。]])
 	end,
 }
+
+return _M

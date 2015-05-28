@@ -48,3 +48,5 @@ registerTalentTranslation{
 		format(radius, damDesc(self, DamageType.TEMPORAL, damage), percent)
 	end,
 }
+
+return _M

@@ -52,3 +52,5 @@ registerTalentTranslation{
 		format(chance, digs)
 	end,
 }
+
+return _M

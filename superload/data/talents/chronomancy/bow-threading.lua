@@ -51,3 +51,5 @@ registerTalentTranslation{
 		:format(tune)
 	end,
 }
+
+return _M

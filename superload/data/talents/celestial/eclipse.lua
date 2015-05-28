@@ -51,3 +51,5 @@ registerTalentTranslation{
 		format(invisibilitypower, convert, damDesc(self, DamageType.LIGHT, damage), radius)
 	end,
 }
+
+return _M

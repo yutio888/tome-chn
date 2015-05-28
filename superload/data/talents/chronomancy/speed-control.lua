@@ -40,3 +40,5 @@ registerTalentTranslation{
 		return ([[获 得 %d 个 回 合 。 在 这 段 时 间 内， 你 造 成 的 伤 害 减 少 %d%% 。]]):format(duration, reduction)
 	end,
 }
+
+return _M

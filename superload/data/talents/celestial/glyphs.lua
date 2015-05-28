@@ -48,3 +48,5 @@ registerTalentTranslation{
 		format(100 * slow, t.trapPower(self, t), t.trapPower(self, t), duration)
 	end,
 }
+
+return _M

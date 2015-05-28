@@ -41,3 +41,5 @@ registerTalentTranslation{
 		format(t.get1Damage(self, t) * 100, t.get2Damage(self, t) * 100)
 	end,
 }
+
+return _M

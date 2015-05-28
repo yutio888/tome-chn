@@ -48,3 +48,5 @@ registerTalentTranslation{
 
 
 
+
+return _M

@@ -61,3 +61,5 @@ registerTalentTranslation{
 		format(duration, t_name, t_info)
 	end,
 }
+
+return _M

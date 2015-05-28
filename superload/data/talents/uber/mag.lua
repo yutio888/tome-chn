@@ -120,3 +120,5 @@ registerTalentTranslation{
 		 警 告： 此 技 能 有 冷 却 时 间， 慎 用。  ]])
 	end,
 }
+
+return _M

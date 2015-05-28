@@ -49,3 +49,5 @@ registerTalentTranslation{
 		return ([[每 次 你 造 成 精 神 伤 害 时， 有 %d%% 概 率 你 的 敌 人 必 须 用 精 神 抵 抗 抵 消 你 的 精 神 强 度， 否 则 会 崩 溃。 精 神 崩 溃 会 使 它 们 在 短 时 间 内 被 混 乱、 减 速 或 震 慑 3 回 合， 并 且 降 低 它 们 %d%% 对 精 神 伤 害 的 抵 抗。]]):format(chance, -mindResistChange)
 	end,
 }
+
+return _M

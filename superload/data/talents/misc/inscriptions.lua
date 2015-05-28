@@ -438,3 +438,5 @@ registerInscriptionTranslation{
 	end,
 }
 
+
+return _M

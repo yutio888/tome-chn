@@ -15,3 +15,5 @@ function _M:saySimple(time, txt, ...)
     local t = bignews_translation[txt] or txt
 	return chn123_old_saySimple(self, time, t, ...)
 end
+
+return _M

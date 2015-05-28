@@ -88,3 +88,5 @@ registerTalentTranslation{
 		伤 害 受 法 术 强 度 加 成 。]]):format(duration, damDesc(self, DamageType.PHYSICAL, damage), damDesc(self, DamageType.TEMPORAL, damage))
 	end,
 }
+
+return _M

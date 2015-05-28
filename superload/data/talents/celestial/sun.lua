@@ -49,3 +49,5 @@ registerTalentTranslation{
 		format(t.getHaste(self, t)*100, t.getCD(self, t)*100, t.getCap(self, t))
    end,
 }
+
+return _M

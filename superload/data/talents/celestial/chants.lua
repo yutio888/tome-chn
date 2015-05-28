@@ -58,3 +58,5 @@ registerTalentTranslation{
 		format(damageinc, damDesc(self, DamageType.LIGHT, damage), lite)
 	end,
 }
+
+return _M

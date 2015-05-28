@@ -46,3 +46,5 @@ registerTalentTranslation{
 		format(radius, chance, duration)
 	end,
 }
+
+return _M

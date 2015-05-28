@@ -1521,22 +1521,22 @@ end
 
 function _M:on_quest_grant(quest)
 	game.logPlayer(game.player, "#LIGHT_GREEN#Accepted quest '%s'! #WHITE#(Press 'j' to see the quest log)", quest.name)
-	game.bignews:saySimple(60, "#LIGHT_GREEN#接受任务 '%s'!", self:get_quest_cname(quest.name))
+	game.bignews:saySimple(60, "#LIGHT_GREEN#Accepted quest '%s'!", quest.name)
 end
 
 function _M:on_quest_status(quest, status, sub)
 	if sub then
 		game.logPlayer(game.player, "#LIGHT_GREEN#Quest '%s' status updated! #WHITE#(Press 'j' to see the quest log)", quest.name)
-		game.bignews:saySimple(60, "#LIGHT_GREEN#任务 '%s' 更新了！", self:get_quest_cname(quest.name))
+		game.bignews:saySimple(60, "#LIGHT_GREEN#Quest '%s' updated!", quest.name)
 	elseif status == engine.Quest.COMPLETED then
 		game.logPlayer(game.player, "#LIGHT_GREEN#Quest '%s' completed! #WHITE#(Press 'j' to see the quest log)", quest.name)
-		game.bignews:saySimple(60, "#LIGHT_GREEN#任务 '%s' 终结了！", self:get_quest_cname(quest.name))
+		game.bignews:saySimple(60, "#LIGHT_GREEN#Quest '%s' completed!", quest.name)
 	elseif status == engine.Quest.DONE then
 		game.logPlayer(game.player, "#LIGHT_GREEN#Quest '%s' is done! #WHITE#(Press 'j' to see the quest log)", quest.name)
-		game.bignews:saySimple(60, "#LIGHT_GREEN#任务 '%s' 完成了！", self:get_quest_cname(quest.name))
+		game.bignews:saySimple(60, "#LIGHT_GREEN#Quest '%s' done!", quest.name)
 	elseif status == engine.Quest.FAILED then
 		game.logPlayer(game.player, "#LIGHT_RED#Quest '%s' is failed! #WHITE#(Press 'j' to see the quest log)", quest.name)
-		game.bignews:saySimple(60, "#LIGHT_RED#任务 '%s' 失败了！", self:get_quest_cname(quest.name))
+		game.bignews:saySimple(60, "#LIGHT_RED#Quest '%s' failed!", quest.name)
 	end
 end
 

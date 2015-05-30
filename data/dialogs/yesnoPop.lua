@@ -151,3 +151,11 @@ end
 yesnoPopDlg["Heart of the Sandworm Queen"] = function()
 	return "沙虫女王之心","这似乎与沙虫女王之心有反应，你感觉你能腐化它。"
 end
+
+yesnoPopDlg["Encounter"] = function(str)
+	if str == "You find a hidden trap door, and hear cries for help from within..." then
+		return "遭遇", "你发现了一个隐藏地下室的入口，你听到从里面传来了呼救声...","进入通道", "悄悄离开"
+	elseif str == "You find an entrance to an old crypt. An aura of terrible evil emanates from this place. You feel threatened just standing there.\nYou hear the muffled cries of a woman coming from inside." then
+		return "遭遇", "你发现了一个古老地窖的入口，里面笼罩着恐怖的恶魔气息，仅仅站在门口你就已经感受到了它的威胁。\n你听到里面传来了模糊的女人的哭声。", "进入地窖", "悄悄离开"
+	end
+end

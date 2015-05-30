@@ -51,8 +51,10 @@ require "data-chn123.randomboss_name_scheme"
 require "data-chn123.log_name"
 require "data-chn123.birth.birth"
 require "data-chn123.texts.texts"
-package.loaded["engine.ui.Dialog"] = require "data-chn123.dialog"
 require "data-chn123.damage_type"
+
+package.loaded["engine.ui.Dialog"] = require "data-chn123.dialog"
+engine.ui.Dialog = require "data-chn123.dialog"
 --------------------------------END
 
 -- Entities that are ASCII are outline

@@ -1,5 +1,5 @@
 ﻿-- TE4 - T-Engine 4
--- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -25,6 +25,8 @@ local Particles = require "engine.Particles"
 --- A generic UI button
 module(..., package.seeall, class.inherit(Base))
 
+print("[debug.getinfo(new)]")
+print( debug.getinfo(new) )
 --- Requests a simple waiter dialog
 function _M:simpleWaiter(title, text, width, count, max)
 	if simpleWaiterDlg and simpleWaiterDlg[title] then
@@ -122,15 +124,28 @@ end
 
 --- Requests a simple yes-no dialog
 function _M:yesnoPopup(title, text, fct, yes_text, no_text, no_leave, escape)
+	local my_yes_text, my_no_text = nil, nil
 	if yesnoPopDlg and yesnoPopDlg[title] then
-		title,text = yesnoPopDlg[title](text)
+		title,text,my_yes_text,my_no_text = yesnoPopDlg[title](text)
 	end
-	if title:find("Demon Statue") then
-		title = "恶魔雕像"
+	yes_text = my_yes_text or yes_text
+	no_text = my_no_text or no_text
+	if title:find("Demon Statue of ") then
+		local _, f = string.find(title, "Demon Statue of ")
+		local ts = title:sub(f + 1, string.len(title))
+		if ts:sub(1, 2) == "a " then
+			title = "一个" .. npcCHN:getName(ts:sub(3, string.len(ts) ) ) .. "的恶魔雕像"
+		elseif ts:sub(1, 3) == "an " then
+			title = "一个" .. npcCHN:getName(ts:sub(4, string.len(ts) ) ) .. "的恶魔雕像"
+		elseif ts:sub(1, 4) == "the " then
+			title = npcCHN:getName(ts:sub(5, string.len(ts) ) ) .. "的恶魔雕像"
+		else
+			title = npcCHN:getName(ts) .. "的恶魔雕像"
+		end
 		text = "你#{strong}#确定#{normal}#要触摸它么？#" 
 		yes_text = "否"
 		no_text = "是"
-		end
+	end
 	if text=="Are you sure you want to target yourself?" then text = "你确定要以自己为目标释放技能？" end
 	local w, h = self.font:size(text)
 	local d = new(title, 1, 1)
@@ -226,7 +241,7 @@ function _M:yesnocancelLongPopup(title, text, w, fct, yes_text, no_text, cancel_
 end
 
 function _M:webPopup(url)
-	local d = new(url, game.w * 0.9, game.h * 0.9)	
+	local d = new(url, game.w * 0.9, game.h * 0.9)
 	local w = require("engine.ui.WebView").new{width=d.iw, height=d.ih, url=url, allow_downloads={addons=true, modules=true}}
 	if w.unusable then return nil end
 	local b = require("engine.ui.ButtonImage").new{no_decoration=true, alpha_unfocus=0.5, file="copy-icon.png", fct=function()
@@ -758,7 +773,7 @@ function _M:toScreen(x, y, nb_keyframes)
 	core.display.glTranslate(tx, ty, 0)
 	if zoom < 1 then core.display.glScale(zoom, zoom, zoom) end
 
-		-- Draw the frame and shadow
+	-- Draw the frame and shadow
 	if self.frame.shadow then self:drawFrame(x + self.frame.shadow.x, y + self.frame.shadow.y, 0, 0, 0, self.frame.shadow.a) end
 	self:drawFrame(x, y, self.frame.darkness, self.frame.darkness, self.frame.darkness, self.frame.a)
 

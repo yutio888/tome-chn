@@ -1511,14 +1511,6 @@ function _M:on_targeted(act)
 end
 
 ------ Quest Events
-function _M:get_quest_cname(name)
-	if questCHN[name] then
-		return questCHN[name].name
-	else
-		return name
-	end
-end
-
 function _M:on_quest_grant(quest)
 	game.logPlayer(game.player, "#LIGHT_GREEN#Accepted quest '%s'! #WHITE#(Press 'j' to see the quest log)", quest.name)
 	game.bignews:saySimple(60, "#LIGHT_GREEN#Accepted quest '%s'!", quest.name)

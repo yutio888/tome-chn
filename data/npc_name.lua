@@ -2011,7 +2011,7 @@ npcNameCHN["Krogar"] = "克罗格"
 npcDescCHN["Krogar"] = "一名穿着锁甲的兽人，他手持法杖并且看起来凶残异常。"
 
 --valley-moon
-npcNameCHN["Corrupted Daelach"] = "被诅咒者达莱彻"
+npcNameCHN["Corrupted Daelach"] = "堕落达莱奇"
 npcDescCHN["Corrupted Daelach"] = "阴影和火焰。这团火焰怪物向你冲来，它的巨大暗影翅膀逐渐张开。"
 
 npcNameCHN["Limmir the Jeweler"] = "珠宝匠利米尔"
@@ -2124,6 +2124,7 @@ npcNameCHN["Shasshhiy'Kaish"] = "莎西·凯希"
 npcDescCHN["Shasshhiy'Kaish"] = "不看她那盘旋在头上的火焰王冠、三条小尾巴以及那锋利的爪子，这只恶魔仍然充满了奇异的魅惑。当你看着她时，你感觉痛苦像利刃一样，深入骨髓，她是痛苦的使者。"
 
 --kitty
+npcNameCHN["Lost Kitty"] = "迷路的猫咪"
 npcNameCHN["Pumpkin, the little kitty"] = "小南瓜，可爱的小猫咪"
 npcDescCHN["Pumpkin, the little kitty"] = "一只橙色的小猫咪，胸前有一颗白色的星星。只要有机会就会舔你的脸颊。"
 

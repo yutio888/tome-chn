@@ -40,6 +40,8 @@ function _M:getTooltipAtMap(tmx, tmy, mx, my)
 			to_add = getTooltipActorCHN(to_add)
 		elseif t == "grid" then
 			to_add = getTooltipGridCHN(to_add)
+		elseif t == "projectile" then
+			to_add = getTooltipProjectileCHN(to_add)
 		end
 		if to_add then 
 			if type(to_add) == "string" then to_add = to_add:toTString() end
@@ -56,7 +58,7 @@ function _M:getTooltipAtMap(tmx, tmy, mx, my)
 		check(Map.TRAP,"trap")
 		if seen then check(Map.ACTOR,"actor") end
 		check(Map.OBJECT)
-		if seen then check(Map.PROJECTILE) end
+		if seen then check(Map.PROJECTILE,"projectile") end
 		check(Map.TERRAIN,"grid")
 	end
 	

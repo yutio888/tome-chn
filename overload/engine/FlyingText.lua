@@ -22,8 +22,8 @@ require "engine.class"
 module(..., package.seeall, class.make)
 
 function _M:init(fontname, fontsize, bigfontname, bigfontsize)
-	self.font = core.display.newFont("/data-chn123/font/main.ttf", fontsize or 12)
-	self.bigfont = core.display.newFont("/data-chn123/font/main.ttf", bigfontsize or 14)
+	self.font = core.display.newFont(chn123_tome_font(), fontsize or 12)
+	self.bigfont = core.display.newFont(chn123_tome_font(), bigfontsize or 14)
 	self.font_h = self.font:lineSkip()
 	self.flyers = {}
 end

@@ -130,9 +130,9 @@ ammo_shot = {core.display.loadImage("/data/gfx/ui/resources/ammo_shot.png"):glTe
 _M['ammo_shadow_alchemist-gem'] = {core.display.loadImage("/data/gfx/ui/resources/ammo_shadow_alchemist-gem.png"):glTexture()}
 _M['ammo_alchemist-gem'] = {core.display.loadImage("/data/gfx/ui/resources/ammo_alchemist-gem.png"):glTexture()}
 
-font_sha = core.display.newFont("/data-chn123/font/main.ttf", 14, true)
+font_sha = core.display.newFont(chn123_tome_font(), 14, true)
 font_sha:setStyle("bold")
-sfont_sha = core.display.newFont("/data-chn123/font/main.ttf", 12, true)
+sfont_sha = core.display.newFont(chn123_tome_font(), 12, true)
 sfont_sha:setStyle("bold")
 
 icon_green = { core.display.loadImage("/data/gfx/ui/talent_frame_ok.png"):glTexture() }
@@ -347,13 +347,13 @@ function _M:activate()
 	if config.settings.tome.fonts.type == "fantasy" then
 		size = ({normal=16, small=14, big=18})[config.settings.tome.fonts.size]
 		size_mono = ({normal=14, small=10, big=16})[config.settings.tome.fonts.size]
-		font = "/data-chn123/font/main.ttf"
-		font_mono = "/data-chn123/font/main.ttf"
+		font = chn123_tome_font()
+		font_mono = chn123_tome_font()
 	else
 		size = ({normal=12, small=10, big=14})[config.settings.tome.fonts.size]
 		size_mono = ({normal=12, small=10, big=14})[config.settings.tome.fonts.size]
-		font = "/data-chn123/font/main.ttf"
-		font_mono = "/data-chn123/font/main.ttf"
+		font = chn123_tome_font()
+		font_mono = chn123_tome_font()
 	end
 	local f = core.display.newFont(font, size)
 	font_h = f:lineSkip()

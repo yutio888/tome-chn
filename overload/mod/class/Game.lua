@@ -109,7 +109,7 @@ function _M:runReal()
 	self.flyers:enableShadow(0.6)
 	game:setFlyingText(self.flyers)
 
-	self.bignews = BigNews.new("/data-chn123/font/main.ttf", 30)
+	self.bignews = BigNews.new(chn123_tome_font(), 30)
 
 	self.nicer_tiles = NicerTiles.new()
 
@@ -150,14 +150,14 @@ function _M:runReal()
 	end)
 
 	-- Create the map scroll text overlay
-	local lfont = core.display.newFont("/data-chn123/font/main.ttf", 30)
+	local lfont = core.display.newFont(chn123_tome_font(), 30)
 	lfont:setStyle("bold")
 	local s = core.display.drawStringBlendedNewSurface(lfont, "<Scroll mode, press keys to scroll, caps lock to exit>", unpack(colors.simple(colors.GOLD)))
 	lfont:setStyle("normal")
 	self.caps_scroll = {s:glTexture()}
 	self.caps_scroll.w, self.caps_scroll.h = s:getSize()
 
-	self.zone_font = core.display.newFont("/data-chn123/font/main.ttf", 12)
+	self.zone_font = core.display.newFont(chn123_tome_font(), 12)
 
 	self.inited = true
 

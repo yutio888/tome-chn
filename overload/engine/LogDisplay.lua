@@ -35,7 +35,7 @@ function _M:init(x, y, w, h, max, fontname, fontsize, color, bgcolor)
 		self.bgcolor = {0,0,0}
 		self.bg_image = bgcolor
 	end
-	self.font = core.display.newFont(fontname or "/data-chn123/font/main.ttf", fontsize or 12)
+	self.font = core.display.newFont(fontname or chn123_tome_font(), fontsize or 12)
 	self.font_h = self.font:lineSkip()
 	self.log = {}
 	getmetatable(self).__call = _M.call

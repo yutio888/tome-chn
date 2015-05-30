@@ -30,7 +30,10 @@ local FontPackage = require "engine.FontPackage"
 module(..., package.seeall, class.inherit(Dialog))
 
 function _M:init()
-	Dialog.init(self, "游戏设置", game.w * 0.8, game.h * 0.8)
+	-- we can be called from the boot menu, so make sure to load initial settings in this case
+	dofile("/mod/settings.lua")
+
+	Dialog.init(self, "Game Options", game.w * 0.8, game.h * 0.8)
 
 	self.vsep = Separator.new{dir="horizontal", size=self.ih - 10}
 	self.c_desc = Textzone.new{width=math.floor((self.iw - self.vsep.w)/2), height=self.ih, text=""}
@@ -170,8 +173,8 @@ function _M:generateListUi()
 		if self:isTome() then game:createMapGridLines() end
 	end,}
 
-	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"Select the fonts look. Fantasy is the default one. Basic is simplified and smaller.\nYou must restart the game for the change to take effect."}
-	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#Font Style#WHITE##{normal}#", status=function(item)
+	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"选择字体样式。默认为Fantasy。Basic 为简化的小字体。\n重启游戏后生效。\n汉化者注：Basic仅适用于英文版。"}
+	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#字体类型#WHITE##{normal}#", status=function(item)
 		return tostring(config.settings.tome.fonts.type):capitalize()
 	end, fct=function(item)
 		Dialog:listPopup("字体样式", "选择字体", {{name="Fantasy", type="fantasy"}, {name="Basic", type="basic"}}, 300, 200, function(sel)
@@ -180,6 +183,15 @@ function _M:generateListUi()
 			config.settings.tome.fonts.type = sel.type
 			self.c_list:drawItem(item)
 		end)
+	end,}
+
+	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"选择空格是否显示。\n隐藏后英文间不会显示空格，但显示后中文间可能会有多余的空格。\n你必须重启游戏才能看到效果。#WHITE#"}
+	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#空格显示#WHITE##{normal}#", status=function(item)
+		return tostring(config.settings.tome.show_spaces and "显示" or "隐藏")
+	end, fct=function(item)
+		config.settings.tome.show_spaces = not config.settings.tome.show_spaces
+		game:saveSettings("tome.show_spaces", ("tome.show_spaces = %s\n"):format(tostring(config.settings.tome.show_spaces)))
+		self.c_list:drawItem(item)
 	end,}
 
 	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"选择字体大小。\n你必须重启游戏才能看到效果。"}
@@ -277,7 +289,7 @@ function _M:generateListUi()
 	end,}
 
 	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"关闭后相同手札只会弹出一次。\n开启后，手札只会在你第一次看见时弹出。#WHITE#"}
-	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#手札弹出#WHITE##{normal}#", status=function(item)
+	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#手札始终弹出#WHITE##{normal}#", status=function(item)
 		return tostring(config.settings.tome.lore_popup and "开启" or "关闭")
 	end, fct=function(item)
 		config.settings.tome.lore_popup = not config.settings.tome.lore_popup

@@ -23,7 +23,7 @@ local Focusable = require "engine.ui.Focusable"
 
 module(..., package.seeall, class.inherit(Base, Focusable))
 
-_M.font = core.display.newFont("/data-chn123/font/main.ttf", 10)
+_M.font = core.display.newFont(chn123_tome_font(), 10)
 _M.font_h = _M.font:lineSkip()
 
 function _M:init(t)
@@ -44,7 +44,7 @@ function _M:init(t)
 	self.filter = t.filter
 	self.name_pos = t.name_pos
 	self.subobject = t.subobject
-	self.font = core.display.newFont("/data-chn123/font/main.ttf", 10)
+	self.font = core.display.newFont(chn123_tome_font(), 10)
 
 	Base.init(self, t)
 end

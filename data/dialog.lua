@@ -21,13 +21,9 @@ require "engine.class"
 local KeyBind = require "engine.KeyBind"
 local Base = require "engine.ui.Base"
 local Particles = require "engine.Particles"
-
 --- A generic UI button
 module(..., package.seeall, class.inherit(Base))
 
-print("[debug.getinfo(new)]")
-print( debug.getinfo(new) )
---- Requests a simple waiter dialog
 function _M:simpleWaiter(title, text, width, count, max)
 	if simpleWaiterDlg and simpleWaiterDlg[title] then
 		title,text = simpleWaiterDlg[title](text)

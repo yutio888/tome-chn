@@ -55,6 +55,9 @@ require "data-chn123.damage_type"
 
 package.loaded["engine.ui.Dialog"] = require "data-chn123.dialog"
 engine.ui.Dialog = require "data-chn123.dialog"
+function chn123_tome_font()
+	return config.settings.tome.show_spaces and "/data-chn123/font/main_spaced.ttf" or "/data-chn123/font/main.ttf"
+end
 --------------------------------END
 
 -- Entities that are ASCII are outline
@@ -87,9 +90,9 @@ UIBase:setTextShadow(0.6)
 -- Dialogs fonts
 --if config.settings.tome.fonts.type == "fantasy" then
 	local size = ({normal=16, small=12, big=18})[config.settings.tome.fonts.size]
-	UIBase.font = core.display.newFont("/data-chn123/font/main.ttf", size)
-	UIBase.font_bold = core.display.newFont("/data-chn123/font/main.ttf", size)
-	UIBase.font_mono = core.display.newFont("/data-chn123/font/main.ttf", size)
+	UIBase.font = core.display.newFont(chn123_tome_font(), size)
+	UIBase.font_bold = core.display.newFont(chn123_tome_font(), size)
+	UIBase.font_mono = core.display.newFont(chn123_tome_font(), size)
 	UIBase.font_bold:setStyle("bold")
 	UIBase.font_h = UIBase.font:lineSkip()
 	UIBase.font_bold_h = UIBase.font_bold:lineSkip()

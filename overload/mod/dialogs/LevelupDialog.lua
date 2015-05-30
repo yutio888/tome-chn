@@ -653,7 +653,7 @@ function _M:createDisplay()
 	if self.actor.unused_talents_types > 0 and self.b_inscriptions then self.b_inscriptions.glow = 0.6 end
 
 	self.c_ctree = TalentTrees.new{
-		font = core.display.newFont("/data-chn123/font/main.ttf", 14),
+		font = core.display.newFont(chn123_tome_font(), 14),
 		tiles=game.uiset.hotkeys_display_icons,
 		tree=self.ctree,
 		width=320, height=self.ih-50,
@@ -674,7 +674,7 @@ function _M:createDisplay()
 	}
 
 	self.c_gtree = TalentTrees.new{
-		font = core.display.newFont("/data-chn123/font/main.ttf", 14),
+		font = core.display.newFont(chn123_tome_font(), 14),
 		tiles=game.uiset.hotkeys_display_icons,
 		tree=self.gtree,
 		width=320, height=(self.no_tooltip and self.ih - 50) or self.ih-50 - math.max((not self.b_prodigies and 0 or self.b_prodigies.h + 5), (not self.b_inscriptions and 0 or self.b_inscriptions.h + 5)),
@@ -694,7 +694,7 @@ function _M:createDisplay()
 	}
 
 	self.c_stat = TalentTrees.new{
-		font = core.display.newFont("/data-chn123/font/main.ttf", 14),
+		font = core.display.newFont(chn123_tome_font(), 14),
 		tiles=game.uiset.hotkeys_display_icons,
 		tree=self.tree_stats, no_cross = true,
 		width=50, height=self.ih,

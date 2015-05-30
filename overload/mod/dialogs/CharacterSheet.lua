@@ -40,7 +40,7 @@ function _M:init(actor)
 	self.actor = actor
 	Dialog.init(self, "角色面板   "..self.actor.name, math.max(game.w * 0.7, 950), 500)
 
-	self.font = core.display.newFont("/data-chn123/font/main.ttf", 12)
+	self.font = core.display.newFont(chn123_tome_font(), 12)
 	self.font_h = self.font:lineSkip()
 
 	self.talent_sorting = config.settings.tome.charsheet_talent_sorting or 1

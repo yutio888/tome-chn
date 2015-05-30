@@ -1,5 +1,9 @@
 local _M = loadPrevious(...)
 
+local function aura_mastery(self, t)
+	return 0.5 --9 + self:getTalentLevel(t) * 2
+end
+
 registerTalentTranslation{
 	id = "T_KINETIC_AURA",
 	name = "动能光环",

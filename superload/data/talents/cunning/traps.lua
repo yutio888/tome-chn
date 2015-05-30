@@ -1,5 +1,10 @@
 local _M = loadPrevious(...)
 
+local trap_range = function(self, t)
+	if not self:knowTalent(self.T_TRAP_LAUNCHER) then return 1 end
+	return math.floor(self:combatTalentScale(self:getTalentLevel(self.T_TRAP_LAUNCHER), 2, 7, "log")) -- 2@1, 7@5
+end
+
 registerTalentTranslation{
 	id = "T_TRAP_MASTERY",
 	name = "陷阱大师",

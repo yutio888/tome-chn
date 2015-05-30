@@ -1,5 +1,21 @@
 local _M = loadPrevious(...)
 
+-- calc_all is so the info can show all the effects.
+local sniper_bonuses = function(self, calc_all)
+	local bonuses = {}
+	local t = self:getTalentFromId("T_SKIRMISHER_SLING_SNIPER")
+	local level = self:getTalentLevel(t)
+
+	if level > 0 or calc_all then
+		bonuses.crit_chance = self:combatTalentScale(t, 3, 10)
+		bonuses.crit_power = self:combatTalentScale(t, 0.1, 0.2, 0.75)
+	end
+	if level >= 5 or calc_all then
+		bonuses.resists_pen = {[DamageType.PHYSICAL] = self:combatStatLimit("cun", 100, 15, 50)} -- Limit < 100%
+	end
+	return bonuses
+end
+
 registerTalentTranslation{
 	id = "T_SKIRMISHER_KNEECAPPER",
 	name = "膝盖杀手",

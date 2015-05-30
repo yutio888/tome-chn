@@ -1,5 +1,9 @@
 local _M = loadPrevious(...)
 
+local function gloomTalentsMindpower(self)
+	return self:combatScale(self:getTalentLevel(self.T_GLOOM) + self:getTalentLevel(self.T_WEAKNESS) + self:getTalentLevel(self.T_DISMAY) + self:getTalentLevel(self.T_SANCTUARY), 1, 1, 20, 20, 0.75)
+end
+
 registerTalentTranslation{
 	id = "T_GLOOM",
 	name = "黑暗光环",

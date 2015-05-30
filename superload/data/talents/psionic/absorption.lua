@@ -1,5 +1,22 @@
 local _M = loadPrevious(...)
 
+local function getShieldStrength(self, t)
+	--return math.max(0, self:combatMindpower())
+	return self:combatTalentMindDamage(t, 20, 100)
+end
+
+local function getEfficiency(self, t)
+	return self:combatTalentLimit(t, 100, 20, 55)/100 -- Limit to <100%
+end
+
+local function maxPsiAbsorb(self, t) -- Max psi/turn to prevent runaway psi gains (solipsist randbosses)
+	return 2 + self:combatTalentScale(t, 0.3, 1)
+end
+
+local function shieldMastery(self, t)
+	return 100-self:combatTalentMindDamage(t, 40, 50)
+end
+
 registerTalentTranslation{
 	id = "T_KINETIC_SHIELD",
 	name = "动能护盾",

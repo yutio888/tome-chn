@@ -9,6 +9,7 @@ projectileCHN["huge boulder"] = "巨石"
 projectileCHN["Judgement"] = "裁决"
 projectileCHN["Polarity Bolt"] = "极性之箭"
 projectileCHN["Temporal Bolt"] = "时空之箭"
+projectileCHN["firestorm"] = "火焰风暴"
 
 function projectileCHN:getName(s)
 	return projectileCHN[s] or s

@@ -81,7 +81,7 @@ actorCHN["ogre"] = "食人魔"
 --角色分级
 actorCHN["Rank: "] = "分级："
 actorCHN["elite"] = "精英"
-actorCHN["critter"] = "生物"
+actorCHN["critter"] = "小怪"
 actorCHN["normal"] = "普通"
 actorCHN["rare"] = "稀有"
 actorCHN["unique"] = "史诗"

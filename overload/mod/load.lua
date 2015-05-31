@@ -88,6 +88,7 @@ Level.remove_old_entity_on_duplicate = true
 UIBase.ui = config.settings.tome.ui_theme2
 UIBase:setTextShadow(0.6)
 
+FontPackage:loadDefinition("data-chn123/font/packages/default.lua")
 -- Dialogs fonts
 --if config.settings.tome.fonts.type == "fantasy" then
 	local size = ({normal=16, small=12, big=18})[config.settings.tome.fonts.size]

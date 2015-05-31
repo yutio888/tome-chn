@@ -32,11 +32,11 @@ function _M:init(text, dur, color)
 	self.dur = dur or 60
 	self.color = color or colors.BLACK
 
-	Base.init(self, {font = {"data-chn123/font/main.ttf", 16}})
+	Base.init(self, {font = {chn123_tome_font(), 16}})
 end
 
 function _M:loaded()
-	Base.init(self, {font = {"data-chn123/font/main.ttf", 16}})
+	Base.init(self, {font = {chn123_tome_font(), 16}})
 end
 
 --- Serialization

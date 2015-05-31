@@ -66,7 +66,8 @@ function _M:generateList()
 	local i = 0
 	for id, _ in pairs(self.actor.lore_known) do
 		local l = self.actor:getLore(id)
-		list[#list+1] = { name=loreListCHN(l.name), desc=cutChrCHN(util.getval(l.lore),25), cat=loreCat[l.category] or l.category, order=l.order, image=l.image }
+		list[#list+1] = { name=l.name, desc=util.getval(l.lore), cat=loreCat[l.category] or l.category, order=l.order, image=l.image }
+		if l.chn_translated then list[#list].desc = cutChrCHN(list[#list].desc, 25) end
 		i = i + 1
 	end
 	-- Add known artifacts

@@ -35,7 +35,7 @@ function _M:init(actor, levelup_end_prodigies)
 	self.actor = actor
 	self.levelup_end_prodigies = levelup_end_prodigies
 
-	self.font = core.display.newFont("data-chn123/font/main.ttf", 12)
+	self.font = core.display.newFont(chn123_tome_font(), 12)
 	self.font_h = self.font:lineSkip()
 
 	self.actor_dup = actor:clone()

@@ -734,7 +734,6 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "Lore found: #0080FF#%s",
 	fct = function(a)
-		if loreList[a] then a = loreList[a] end
 		return ("发现手札：#0080FF# %s"):format(a)
 	end,
 }

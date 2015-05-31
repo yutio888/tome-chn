@@ -68,7 +68,7 @@ function _M:init(actor, on_finish, on_birth)
 	self.talent_types_learned = {}
 	self.stats_increased = {}
 
-	self.font = core.display.newFont("data-chn123/font/main.ttf", 12)
+	self.font = core.display.newFont(chn123_tome_font(), 12)
 	self.font_h = self.font:lineSkip()
 
 	self.actor.__hidden_talent_types = self.actor.__hidden_talent_types or {}

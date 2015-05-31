@@ -2,7 +2,7 @@
 
 function cutChrCHN(txt,w)
 	local w = w or 35
-	local chr = utf8:new(delSpaceTxt(txt))
+	local chr = utf8:new(txt)
 	local x = ""
 	local y = ""
 	local z = ""

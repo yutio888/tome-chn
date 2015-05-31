@@ -91,7 +91,13 @@ logCHN:newLog{
 	end,
 }
 
-
+logCHN:newLog{
+	log = "You receive: %s",
+	fct = function(a)
+		local name = objects:getObjectsChnName(a)
+		return ("你收到： %s 。"):format(name)
+	end,
+}
 
 logCHN:newLog{
 	log = "You receive: %s.",

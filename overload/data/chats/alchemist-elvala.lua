@@ -223,7 +223,7 @@ newChat{ id="welcome",
 
 else -- Here's the dialog that pops up if the player *has* worked with this alchemist before (either done quests or is in the middle of one):
 
-local other_alch, other_elixir, player_loses, alch_picked, e_picked = q:competition(player, other_alchemist_nums)
+local other_alch, other_elixir, player_loses, alch_picked, e_picked = require "data-chn123.quests.brotherhood-of-alchemists".competition(q, player, other_alchemist_nums)
 
 newChat{ id="welcome",
 	text = [[#LIGHT_GREEN#*那个衣衫褴褛的精灵开了门。*#WHITE#

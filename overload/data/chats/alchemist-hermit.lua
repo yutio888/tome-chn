@@ -227,26 +227,26 @@ newChat{ id="welcome",
 
 else -- Here's the dialog that pops up if the player *has* worked with this alchemist before (either done quests or is in the middle of one):
 
-local other_alch, other_elixir, player_loses, alch_picked, e_picked = q:competition(player, other_alchemist_nums)
+local other_alch, other_elixir, player_loses, alch_picked, e_picked = require "data-chn123.quests.brotherhood-of-alchemists".competition(q, player, other_alchemist_nums)
 
 newChat{ id="welcome",
 	text = [[#LIGHT_GREEN#*那个半身人，身上还冒着烟，开了门。*#WHITE#
 我呆在这坑爹的地方是有原因的，你TM…………哦，是你啊。]],
 	answers = {
 		-- If not the final elixir:
-		{"我回来了，我找到了"..e[1].cap_name.."的材料。", jump="complete",
+		{"我回来了，我找到了"..e[1].name.."的材料。", jump="complete",
 			cond = function(npc, player) return turn_in(npc, player, 1) end,
 			action = function(npc, player)
 				q:on_turnin(player, alch_picked, e_picked, false)
 			end,
 		},
-		{"我回来了，我找到了"..e[2].cap_name.."的材料。", jump="complete",
+		{"我回来了，我找到了"..e[2].name.."的材料。", jump="complete",
 			cond = function(npc, player) return turn_in(npc, player, 2) end,
 			action = function(npc, player)
 				q:on_turnin(player, alch_picked, e_picked, false)
 			end,
 		},
-		{"我回来了，我找到了"..e[3].cap_name.."的材料。", jump="complete",
+		{"我回来了，我找到了"..e[3].name.."的材料。", jump="complete",
 			cond = function(npc, player) return turn_in(npc, player, 3) end,
 			action = function(npc, player)
 				q:on_turnin(player, alch_picked, e_picked, false)
@@ -254,24 +254,24 @@ newChat{ id="welcome",
 		},
 
 		-- If the final elixir:
-		{"我回来了，我找到了"..e[1].cap_name.."的材料。", jump="totally-complete",
+		{"我回来了，我找到了"..e[1].name.."的材料。", jump="totally-complete",
 			cond = function(npc, player) return turn_in_final(npc, player, 1) end,
 		},
-		{"我回来了，我找到了"..e[2].cap_name.."的材料。", jump="totally-complete",
+		{"我回来了，我找到了"..e[2].name.."的材料。", jump="totally-complete",
 			cond = function(npc, player) return turn_in_final(npc, player, 2) end,
 		},
-		{"我回来了，我找到了"..e[3].cap_name.."的材料。", jump="totally-complete",
+		{"我回来了，我找到了"..e[3].name.."的材料。", jump="totally-complete",
 			cond = function(npc, player) return turn_in_final(npc, player, 3) end,
 		},
 
 		-- If the elixir got made while you were out:
-		{"我回来了，我找到了"..e[1].cap_name.."的材料。", jump="poached",
+		{"我回来了，我找到了"..e[1].name.."的材料。", jump="poached",
 			cond = function(npc, player) return turn_in_poached(npc, player, 1) end,
 		},
-		{"我回来了，我找到了"..e[2].cap_name.."的材料。", jump="poached",
+		{"我回来了，我找到了"..e[2].name.."的材料。", jump="poached",
 			cond = function(npc, player) return turn_in_poached(npc, player, 2) end,
 		},
-		{"我回来了，我找到了"..e[3].cap_name.."的材料。", jump="poached",
+		{"我回来了，我找到了"..e[3].name.."的材料。", jump="poached",
 			cond = function(npc, player) return turn_in_poached(npc, player, 3) end,
 		},
 

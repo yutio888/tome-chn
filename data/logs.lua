@@ -4,9 +4,9 @@ logTableCHN = {}
 
 function logCHN:newLog(l)
 	if not l then return end
-	--if logTableCHN[l.log] then print(l.log .."÷ÿ∏¥¡À£°") end
+	--if logTableCHN[l.log] then print(l.log .."ÈáçÂ§ç‰∫ÜÔºÅ") end
 	--logCount = logCount + 1
-	--print ("LOG◊‹ ˝£∫"..logCount)
+	--print ("LOGÊÄªÊï∞Ôºö"..logCount)
 	logTableCHN[l.log] = l
 end
 
@@ -16,6 +16,7 @@ dofile("data-chn123/logs/chat.lua")
 dofile("data-chn123/logs/class.lua")
 dofile("data-chn123/logs/damage_type.lua")
 dofile("data-chn123/logs/general.lua")
+dofile("data-chn123/logs/objects.lua")
 dofile("data-chn123/logs/quests.lua")
 dofile("data-chn123/logs/talents.lua")
 dofile("data-chn123/logs/time_effect_magical.lua")

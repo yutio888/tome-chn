@@ -911,4 +911,17 @@ logCHN:newLog{
 		return("%s用%s 治疗了%s的痛苦!"):format(a,b,c)
 	end,
 }
-	
+
+logCHN:newLog{
+	log = "#AQUAMARINE#As #Source# falls #Target# seems to weaken!",
+	fct = function()
+		return "#AQUAMARINE#当 #Source# 倒下时， #Target# 似乎被削弱了！"
+	end,
+}
+
+logCHN:newLog{
+	log = "#AQUAMARINE#As #Source# falls you notice that #Target# seems to shudder in pain!",
+	fct = function()
+		return "#AQUAMARINE#当 #Source# 倒下时， 你注意到 #Target# 似乎在痛苦中挣扎！"
+	end,
+}

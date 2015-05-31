@@ -6,9 +6,9 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local targets = t.getTargetCount(self, t)
-		return ([[重组时间线，对一个目标造成 %0.2f时空伤害。然后再对半径 10 内的另一个目标造成等量伤害。
-		重组能击中至多 %d 个目标，不会重复击中同一个目标，也不会击中施法者。
-		伤害受法术强度加成。]]):
+		return ([[重 组 时 间 线 ， 对 一 个 目 标 造 成  %0.2f 时 空 伤 害 。 然 后 再 对 半 径 10 内 的 另 一 个 目 标 造 成 等 量 伤 害 。
+		重 组  能 击 中 至 多 %d 个 目 标 ， 不 会 重 复 击 中 同 一 个 目 标 ， 也 不 会 击 中 施 法 者 。
+		伤 害 受 法 术 强 度 加 成 。]]):
 		format(damDesc(self, DamageType.TEMPORAL, damage), targets)
 	end,
 }

@@ -1,9 +1,10 @@
 ﻿function logCHN:getName(name)
+	print("[logCHN:getName]" .. name)
 	name = npcCHN:getName(name)
 	if name:find(" from ") then
 		local f,e=name:find(" from ")
 		local teffect=name:sub(1,f-1)
-		local tname = name:gsub(" from ",""):gsub(teffect,"")
+		local tname = name:sub(e + 1,string.len(name))
 		tname = npcCHN:getName(tname)
 		tname = trapCHN:getName(tname)
 		teffect = timeEffectCHN:getName(teffect)

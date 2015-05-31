@@ -694,3 +694,9 @@ logCHN:newLog{
 		return "#OLIVE_DRAB#巨型沙虫挖掘者挖入地下，消失了"
 	end,
 }
+logCHN:newLog{
+	log = "#Source# emits dark energies at your feet.",
+	fct = function()
+		return "#Source# 在你的脚下释放了黑暗的能量。"
+	end,
+}

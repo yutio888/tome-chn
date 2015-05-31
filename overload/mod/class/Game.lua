@@ -1327,6 +1327,7 @@ end
 -- #source#|#Source# -> <displayString>..self.name|self.name:capitalize()
 -- #target#|#Target# -> target.name|target.name:capitalize()
 function _M:logMessage(source, srcSeen, target, tgtSeen, style, ...)
+	if logTableCHN[style] then style = logTableCHN[style].fct(...) end
 	style = style:format(...)
 	local srcname = "something"
 	local Dstring

@@ -17,8 +17,8 @@
 -- Nicolas Casalini "DarkGod"
 -- darkgod@te4.org
 
-return "New Cosmetic Race Option: #LIGHT_GREEN#Red Skin",
-[[You have used a lot of demon seeds to increase your power, proving your devotion to the corrupting forces.
+return "新 的 种 族 皮 肤 : #LIGHT_GREEN# 红 色 皮 肤",
+[[你 已 经 用 了 许 多 恶 魔 种 子 来 增 强 你 的 能 力 ， 献 身 于 堕 落 的 力 量 。
 
-You can now create new characters with a demonic red skin.
+你 可 以 创 造 具 有 恶 魔 般 红 色 皮 肤 的 角 色 。
 ]]

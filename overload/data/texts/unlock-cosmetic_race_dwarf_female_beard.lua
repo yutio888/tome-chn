@@ -17,11 +17,11 @@
 -- Nicolas Casalini "DarkGod"
 -- darkgod@te4.org
 
-return "New Cosmetic Race Option: #LIGHT_GREEN#Facial Pilosity for Female Dwarves",
-[[You have saved the Iron Council from untold horrors from the deep.
+return "新 的 种 族 皮 肤 : #LIGHT_GREEN# 女 性 矮 人 的 胡 子",
+[[你 击 败 了 地 底 的 恐 魔 ， 拯 救 了 钢 铁 王 座 。
 
-You may now create female dwarf characters sporting proudly facial pilosity as is the norm in the upper classes of dwarven society.
-This has no effect on gameplay at all but it is fun!
+你 现 在 可 以 创 造 那 些 骄 傲 地 炫 耀 着 自 己 浓 密 胡 须 的 女 性 矮 人 ， 这 是 属 于 矮 人 上 层 社 会 的 荣 耀 ！
+这 种 胡 子 没 有 任 何 加 成， 仅 仅 是 为 了 好 玩 !
 
-#LIGHT_GREEN#This is only available to donators. Thanks for your support!
+#LIGHT_GREEN# 注 意 这 项 奖 励 只 有 捐 赠 者 们 可 用。 谢 谢 你 们 的 支 持！ 
 ]]

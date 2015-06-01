@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -49,7 +49,7 @@ newChat{ id="welcome",
 
 newChat{ id="master",
 	text = [[*#LIGHT_GREEN#那个生物瞪着你。#WHITE#*
-你拿着魔杖，你就是我的主人。]],
+你拿着控制魔杖，你就是我的主人。]],
 	answers = {
 		{"哦……好吧。", jump="welcome"},
 	}
@@ -107,7 +107,7 @@ newChat{ id="energy",
 它还装备了其他设施：探险传送门，紧急防护场，远程存储……
 然而，堡垒已经严重损坏，而且已经休眠了太久了。它的能量几近枯竭。
 拿着这个转化之盒。它与堡垒有永久链接，所有放进去的装备都可以使用它分解，转化为堡垒的能量。
-不过它还有这样一个副作用：转化金属物品会产生金币，而金币对于要塞是没有用的，所以钱会返还给你。]],
+不过它还有这样一个副作用：转化物品会产生一种叫做金子的金属，它们对于要塞是没有用的，所以会变成金币返还给你。]],
 	answers = {
 		{"我知道了，谢谢。", jump="welcome", action=function() q:spawn_transmo_chest() end, cond=function(npc, player) return not player:attr("has_transmo") end},
 		{"我已经在我的旅途中找到了一个，它有发挥效用么？", jump="alreadychest", action=function() q:setStatus(q.COMPLETED, "transmo-chest") end, cond=function(npc, player) return player:attr("has_transmo") end},

@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -75,7 +75,7 @@ newChat{ id="quest2",
 	}
 }
 newChat{ id="quest3",
-	text = [[那些奥术看守，我想我就不提他们了，抱歉，我的朋友……
+	text = [[他们是世界上仅存的法……唉呀，我好像说了什么不该说的话……抱歉，我的朋友……
 无论如何，我必须得搜集些物品。这些都没问题了，不过我还需要找到一件充满奥术能量的神器。我想你不会恰巧有一件吧……当然如果你有的话，请告诉我 ！]],
 	answers = {
 		{"好的，我记住了！", action=function(npc, player) player:grantQuest("mage-apprentice") end},
@@ -100,8 +100,8 @@ newChat{ id="unique",
 }
 
 newChat{ id="thanks",
-	text = [[哦……对，我可以重新返回安格利文，呃……我想我现在可以告诉你了，你帮了我这么多我应该告诉你。
-在魔法狩猎的那些黑暗年代里，几千年前，莱娜尼尔，卡·普尔的大法师，担心魔法会在她们那一代人身上灭绝，人们需要的这些魔法会从这个世界上消失。
+	text = [[哦……对，我可以重新返回安格利…，呃……我想我现在可以告诉你了，你帮了我这么多我应该告诉你。
+在魔法狩猎的那些黑暗年代里，几千年前，莱娜尼尔，卡尔·库尔的大法师，担心魔法会在她们那一代人身上灭绝，人们需要的这些魔法会从这个世界上消失。
 于是她秘密安置了一个隐秘的地方继续传承魔法。
 她执行了她的计划，她手下的人在西部的群山之中建立了一个叫做安格利文的小镇。#LIGHT_GREEN#*他在你的地图上做了一个记号，然后为你开启了一个传送门。*#WHITE#
 只有少部分人会被那里的人接受，我会想办法让你进去的。]],

@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -96,7 +96,7 @@ newChat{ id="welcome",
 			npc.store:interact(player)
 		end, cond=function(npc, player) return npc.store and true or false end},
 		{"我在找一些特殊的珠宝。", jump="jewelry"},
-		{"在这里你可以给项链充能？", jump="artifact_jewelry", cond=function(npc, player) return npc.can_craft and player:hasQuest("master-jeweler") and player:isQuestStatus("master-jeweler", engine.Quest.COMPLETED, "limmir-survived") end},
+		{"据说你可以给项链附魔？", jump="artifact_jewelry", cond=function(npc, player) return npc.can_craft and player:hasQuest("master-jeweler") and player:isQuestStatus("master-jeweler", engine.Quest.COMPLETED, "limmir-survived") end},
 		{"我找到了这本手册，看上去好像很重要。", jump="quest", cond=function(npc, player) return npc.can_quest and player:hasQuest("master-jeweler") and player:hasQuest("master-jeweler"):has_tome(player) end},
 		{"抱歉，我必须得走了。"},
 	}
@@ -123,8 +123,8 @@ newChat{ id="artifact_jewelry",
 }
 
 newChat{ id="quest",
-	text = [[#LIGHT_GREEN#*他快速浏览了那本手册，露出了惊讶的表情。*
-#WHITE# 这真是神奇的发现！太神奇了！有了这些知识我就能制造更强大的项链了。不过这需要一个特殊的地方来完成制作过程。
+	text = [[#LIGHT_GREEN#*他快速浏览了那本手册，露出了惊讶的表情。*#WHITE# 这真是神奇的发现！太神奇了！
+有了这些知识我就能制造更强大的项链了。不过这需要一个特殊的地方来完成制作过程。
 传言在南部山脉之中有个地方充满能量。有个古老的传说，当冬月与太阳距离太接近的时候它的一部分从空中掉落了下来并融入了大地，使那个地方充满能量。
 在坠落的地方形成了一个湖泊，湖水吸收了万年月光的力量，应该有足够的神力来制作这件艺术品。
 去找到那个湖泊，然后使用这个卷轴将我召唤过去，从现在开始我要潜心研修你的这本手册，等待你召唤我的那一刻。]],

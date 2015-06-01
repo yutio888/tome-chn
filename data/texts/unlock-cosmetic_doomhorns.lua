@@ -17,8 +17,8 @@
 -- Nicolas Casalini "DarkGod"
 -- darkgod@te4.org
 
-return "New Cosmetic Race Option: #LIGHT_GREEN#Doomhorns",
-[[You have killed a creature by infusing your shield with demon horns, and you loved it!
+return "新 的 种 族 皮 肤 : #LIGHT_GREEN# 恶 魔 之 角",
+[[ 你 用 盾 上 的 恶 魔 之 角 杀 死 了 敌 人 。 太 酷 了 ！
 
-You can now create new characters with a pair of demonic horns.
+你 现 在 可 以 创 建 头 上 长 着 恶 魔 之 角 的 角 色 。
 ]]

@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -18,7 +18,6 @@
 -- darkgod@te4.org
 
 newChat{ id="welcome",
-
 	text = [[#LIGHT_GREEN#*闪烁的光线照亮在草地上。经过调查,你发现一个孤单的太阳骑士躺在地上。她的伤口很小,但她苍白的神色显示出她身中剧毒。她无力的对你呼唤。* #白色#
 救命,请帮我。
 ]],

@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -41,8 +41,8 @@ local function evil(npc, player)
 end
 
 newChat{ id="welcome",
-	text = [[#LIGHT_GREEN#*在你面前站着一个穿着黑衣服的凶恶男人。*
-#WHITE#啊，一个入侵者……我该怎么处置你呢？你为什么杀我的人？]],
+	text = [[#LIGHT_GREEN#*在你面前站着一个穿着黑衣服的凶恶男人。*#WHITE#
+啊，一个入侵者……我该怎么处置你呢？你为什么杀我的人？]],
 	answers = {
 		{"我听到了哭喊声……然后你的人挡了我的道。这里发生了什么事？", jump="what"},
 		{"我以为这里可能有财宝。", jump="greed"},

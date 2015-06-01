@@ -8,19 +8,19 @@
 --
 -- This program is distributed in the hope that it will be useful,
 -- but WITHOUT ANY WARRANTY; without even the implied warranty of
--- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 -- GNU General Public License for more details.
 --
 -- You should have received a copy of the GNU General Public License
--- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-- along with this program. If not, see <http://www.gnu.org/licenses/>.
 --
 -- Nicolas Casalini "DarkGod"
 -- darkgod@te4.org
 
-return "新职业: #LIGHT_GREEN#堕落系 (恶魔使者)",
-[[在 入 侵 埃 亚 尔 大 陆 的 过 程 中 ，恶 魔 绑 架 了 这 颗 星  球 的 居 民 ， 将 他 们  洗 脑 后 训 练 为 双 面 间 谍。
+return "新职业: #LIGHT_GREEN# 堕落系(恶魔使者)",
+[[在 入 侵 埃 亚 尔 大 陆 的 过 程 中 ，恶 魔 绑 架 了 这 颗 星 球 的 居 民 ， 将 他 们 洗 脑 后 训 练 为 双 面 间 谍。
 
-他 们 接 受 使 用 恶 魔 之 力 的 训 练 ， 并 通 过 黑 暗 仪  式 来 传 播 不 安  与 恐 慌 。
+他 们 接 受 使 用 恶 魔 之 力 的 训 练 ， 并 通 过 黑 暗 仪 式 来 传 播 不 安 与 恐 慌 。
 
 也 有 一 些 人 成 功 逃 脱 了 恶 魔 的 控 制 ， 选 择 追 随 自 己 的 渴 望 与 意 志 。
 
@@ -29,7 +29,7 @@ return "新职业: #LIGHT_GREEN#堕落系 (恶魔使者)",
 堕 落 系 是 施 法 职 业,能 使 用 魔 法 攻 击 敌 人。
 职 业 特 点 ：#Yellow#
 - 向 敌 人 注 射 恶 魔 之 种
-- 将 恶 魔 种 子 附 着 在 装 备 上 ，以强化 装 备 效 果
+- 将 恶 魔 种 子 附 着 在 装 备 上 ，以 强 化 装 备 效 果
 - 召 唤 并 控 制 恶 魔
 - 将 堕 落 魔 法 与 盾 牌 战 技 结 合 ， 保 护 自 己 并 毁 灭 敌 人。
 

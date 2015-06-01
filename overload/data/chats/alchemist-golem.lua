@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -50,7 +50,7 @@ end
 local change_name = function(npc, player)
 	local d = require("engine.dialogs.GetText").new("更换傀儡的名字。", "名字", 2, 25, function(name)
 		if name then
-			npc.name = name.." ("..player.name..")"
+			npc.name = name.." ("..player.name.." 的仆人)"
 			npc.changed = true
 		end
 	end)

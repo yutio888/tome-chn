@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 -- darkgod@te4.org
 
 newChat{ id="welcome",
-	text = [[终于见到你了， @playername@。我是最后的希望国王托洛克派来给你送信的。
+	text = [[终于见到你了， @playername@。我是最后的希望国王托拉克派来给你送信的。
 我追随你的足迹找到你，令人印象深刻！很荣幸你是站在我们这一边的。
 不聊了，信我已送到，我必须得走了。
 #LIGHT_GREEN#他递给你一个密封的卷轴，然后消失在阴影中。#LAST#]],

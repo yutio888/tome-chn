@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -40,7 +40,7 @@ newChat{ id="kindness",
 }
 
 newChat{ id="what",
-	text = [[维网是启迪、和平和守护，我是一个夺心魔。我穿过通道来到这个和我们的世界有类似纪元的地方探险。]],
+	text = [[维网是启迪、和平和守护，我是一个夺心魔。我穿过通道来到这个和我们的世界隔绝了几千年的世界来探险。]],
 	answers = {
 		{"你能告诉我更多有关维网的事么？", jump="way", action=function(npc, player)
 			game.party:reward("Select the party member to receive the mental shield:", function(player)

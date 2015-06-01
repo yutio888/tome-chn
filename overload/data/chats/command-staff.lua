@@ -48,7 +48,7 @@ local function intro(o)
 		fawning = [[智慧的长者，请指示我让我更好的为您服务。]],
 		penitent = [[赎罪吧，法师们，你们带来了罄竹难书的危害。]],
 		telos = [[要知道，你可以给我找个更好的环境。现在嘛，我还是留在我原来的旧水晶里吧，这根法杖有一股狐臭的味道。]],
-		telos_full = [[Tremble before the might of Telos!]],
+		telos_full = [[在泰勒斯的强大力量下颤抖吧！]],
 	}
 	if o.no_command then
 		return [[在这根法杖上没有合适的位置镶嵌此物品。这样做会带来破坏。]]
@@ -67,8 +67,8 @@ local function how_speak(o)
 		aggressive = [[哈！拜某次实验事故和那个被永久囚禁的傻X灵魂所赐，我的身体，像所有其他被法术轰击过的物体一样，有意或无意，灰飞烟灭了。幸运的是，我还有这根可以容纳灵魂的法杖容器，所以我没有完全湮灭。好了，不多说了，让我们去打爆敌人吧！]],
 		fawning = [[我的旧主人——虽然他的法术很强大，但却比不上你和你的荣耀——他认为，把我囚禁在这根法杖里可以为他更好的服务。唉，虽然他已经不复存在了，但我并不感到绝望，因为我找到了一个强大的新主人。]],
 		penitent = [[我是在魔法大爆炸期间被撕裂灵魂的一部分。我可以灌输给你所需的知识，只要你肯留下我。]],
-		telos = [[如果不能说话，那这样的永生还有何意义？没有任何法师会站在已知的论点上去制造永恒的不死生物。而且，顺便说一句，你的能量操纵水平只配给我提鞋，给我仔细的听着，如果你不想因为遗漏我说的话而死的不明不白。]],
-		telos_full = [[What's the good of immortality if you can't even speak? No archmage worth his salt is going to concoct some immoral life-after-death scheme without including some sort of capacity for making his opinions known. And, by the way, your energy manipulation techniques are on the same level as those of my average pair of shoes. Best study up if you don't want to die forgotten and incompetent.]],
+		telos = [[如果不能说话，那这样的永生还有何意义？凡是想要达到永生不死的大法师，没有一个留下一种方法让自己的伟大知识永久流传。而且，顺便说一句，你的能量操纵水平只配给我提鞋，给我仔细的听着，如果你不想因为遗漏我说的话而死的不明不白。]],
+		telos_full = [[如果不能说话，那这样的永生还有何意义？凡是想要达到永生不死的大法师，没有一个留下一种方法让自己的伟大知识永久流传。而且，顺便说一句，你的能量操纵水平只配给我提鞋，给我仔细的听着，如果你不想因为遗漏我说的话而死的不明不白。]],
 	}
 	return sentient_responses[o.combat.sentient] or sentient_responses["default"]
 end
@@ -77,11 +77,11 @@ local function which_aspect(o)
 	if not o.combat.sentient then return [[错误!]] end
 	local sentient_responses = {
 		default = [[当然。哪一种？]],
-		aggressive = [[我强烈推荐术士类火元素。你不会找到比这更好的能让一块肉变成蒸汽的方法了。]],
-		fawning = [[我思故我在——虽然“存在”在这里对于我而言并不是那么准确。]],
-		penitent = [[明智的选择。超越你们理解的力量，只有那些仔细维护自然秩序的人才会容忍。]],
+		aggressive = [[我强烈推荐术士类火焰元素。你不会找到比这更好的能让一块肉变成蒸汽的方法了。]],
+		fawning = [[我毕生为你效劳——虽然“毕生”在这里对于我而言并不是那么准确。]],
+		penitent = [[明智地进行选择。只有那些仔细维护自然秩序的人才会被那些超越你们理解的力量所容忍。]],
 		telos = [[在我的时代，我们并不需要用棍子挥来挥去来施法。我们只需要抓取一种元素，就可以任意的使用它——像上帝一样。]],
-		telos_full = [[Back in my day, we didn't need to go changing our staves around willy-nilly. We picked an element and stuck with it, by the gods.]],
+		telos_full = [[在我的时代，我们并不需要用棍子挥来挥去来施法。我们只需要抓取一种元素，就可以任意的使用它——像上帝一样。]],
 	}
 	return sentient_responses[o.combat.sentient] or sentient_responses["default"]
 end

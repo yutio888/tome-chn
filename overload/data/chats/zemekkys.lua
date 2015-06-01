@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -18,11 +18,11 @@
 -- darkgod@te4.org
 
 local function remove_materials(npc, player)
-	local gem_o, gem_item, gem_inven_id = player:findInAllInventoriesBy("define_as","RESONATING_DIAMOND")
+	local gem_o, gem_item, gem_inven_id = player:findInAllInventories("Resonating Diamond")
 	player:removeObject(gem_inven_id, gem_item, false)
 	gem_o:removed()
 
-	local athame_o, athame_item, athame_inven_id = player:findInAllInventoriesBy("define_as","ATHAME")
+	local athame_o, athame_item, athame_inven_id = player:findInAllInventories("Blood-Runed Athame")
 	player:removeObject(athame_inven_id, athame_item, false)
 	athame_o:removed()
 

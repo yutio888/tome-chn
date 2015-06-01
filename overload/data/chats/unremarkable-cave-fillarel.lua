@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ newChat{ id="welcome",
 }
 
 newChat{ id="what",
-	text = [[我是阿诺里塞尔，一位星月术士，我和一群太阳骑士一起和所有恶魔战斗。我们来自东部的晨曦之门。
+	text = [[我是一位星月术士，操纵太阳和月亮的神力的法师。我和一群太阳骑士一起对抗邪恶。我们来自东部的晨曦之门。
 我的伙伴们都被兽人杀死了，我也差点丧命，再次感谢你的帮助。]],
 	answers = {
 		{"我的荣幸，不过我有个请求？我不是这个大陆的人，我使用了钢铁王座地下深处兽人保护的远古传送门，然后就到了这里。", action=function(npc, player) game:setAllowedBuild("divine") game:setAllowedBuild("divine_anorithil", true) end, jump="sunwall"},

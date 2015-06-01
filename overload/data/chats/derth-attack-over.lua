@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -26,14 +26,16 @@ newChat{ id="welcome",
 }
 
 newChat{ id="quest",
-	text = [[不知道从哪儿来的！从天上！我真不知道。我当时正在农田里照看我的庄稼，然后我听到了哭喊声。当我走进村子，我看到了天上的乌云。那些……那些……东西正喷出一道道闪电！]],
+	text = [[不知道从哪儿来的！从天上！
+	我真不知道。我当时正在农田里照看我的庄稼，然后我听到了哭喊声。当我走进村子，我看到了天上的乌云。那些……那些……东西正喷出一道道闪电！]],
 	answers = {
 		{"好像它们现在不会再来了。我会找到人来帮我弄清楚这些邪恶乌云的来龙去脉的。", jump="quest2"},
 	}
 }
 
 newChat{ id="quest2",
-	text = [[多谢！你今天救了很多人！我听到有一个传说，说在群山中隐居着一群足智多谋的贤士。也许他们能帮上忙？要是他们真的存在的话……
+	text = [[多谢！你今天救了很多人！
+我听到有一个传说，说在群山中隐居着一群足智多谋的贤士。也许他们能帮上忙？要是他们真的存在的话……
 还有一群被称为什么伊格的号称与魔法战斗的人，那些人怎么不在这儿？！]],
 	answers = {
 		{"你是指伊格兰斯吧？我就是。", cond=function(npc, player) return player:isQuestStatus("antimagic", engine.Quest.DONE) end, jump="zigur"},

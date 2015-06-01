@@ -1,5 +1,5 @@
 ﻿-- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2014 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
 
 newChat{ id="welcome",
 	text = [[#LIGHT_GREEN#*在你面前的虚无之中站着一个人形的东西。它似乎在盯着你看。 *
-#WHITE#在你死亡的瞬间我把你带到这里，我是灵魂幻象。
+在你死亡的瞬间我把你带到这里，我是灵魂幻象。
 我一直在注视着你，观察你的价值还有你的未来。
 你可以在这里休息一会，当你准备好时，我可以送你回到你原来所在的物质世界。
 不过不要滥用我给你的帮助，我可不是你的仆人，也许有一天我也会让你死去。

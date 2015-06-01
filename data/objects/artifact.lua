@@ -1876,6 +1876,7 @@ registerArtifactTranslation{
 	name = "最后希望的密封卷轴",
 	unided_name = "",
 	desc = "",
+	["use_simple.name"] = "打开密封卷轴阅读消息。"
 }
 
 registerArtifactTranslation{
@@ -2610,13 +2611,6 @@ registerArtifactTranslation{
 registerArtifactTranslation{
 	originName = "Orb of Many Ways",
 	name = "多元水晶球",
-	unided_name = "涡流水晶球",
-	desc = "这个球体可以折射出远处的景象并快速的切换着，有些景象甚至不属于这个世界。如果你在传送点附近使用它，它可能会激活传送。",
-}
-
-registerArtifactTranslation{
-	originName = "Orb of Many Ways Demon",
-	name = "恶魔多元水晶球",
 	unided_name = "涡流水晶球",
 	desc = "这个球体可以折射出远处的景象并快速的切换着，有些景象甚至不属于这个世界。如果你在传送点附近使用它，它可能会激活传送。",
 }

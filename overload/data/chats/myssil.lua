@@ -1,5 +1,5 @@
 ﻿-- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@ local p = game.party:findMember{main=true}
 if not p:attr("forbid_arcane") or p:attr("forbid_arcane") < 2 then
 newChat{ id="welcome",
 	text = [[#LIGHT_GREEN#*一个半身人女人站在你面前，穿着黑色板甲*#WHITE#
-先试试，然后接着聊。]],
+先到导师那里参加对抗奥术魔法的测试，然后再说话。]],
 	answers = {
 		{"但是……"},
 	}
@@ -33,21 +33,21 @@ end
 
 newChat{ id="welcome",
 	text = [[#LIGHT_GREEN#*一个半身人女人站在你面前，穿着黑色的钢板甲*#WHITE#
-我是守卫米歇尔，欢迎来到伊格。]],
+我是守护者米歇尔，欢迎来到伊格。]],
 	answers = {
 		{"我需要一切可以获得的帮助，不是为我自己，是为了东北部的德斯小镇。", jump="save-derth", cond=function(npc, player) local q = player:hasQuest("lightning-overload") return q and q:isCompleted("saved-derth") and not q:isCompleted("tempest-entrance") and not q:isStatus(q.DONE) end},
 		{"守护者，我已经按您的意思将风暴术士杀死了……", jump="tempest-dead", cond=function(npc, player) local q = player:hasQuest("lightning-overload") return q and q:isCompleted("tempest-entrance") and not q:isCompleted("antimagic-reward") and q:isStatus(q.DONE) end},
-		{"再见，守卫。"},
+		{"再见，守护者。"},
 	}
 }
 
 newChat{ id="save-derth",
 	text = [[是的，我们已经感觉到了那里的堕落气息，我已经派人去驱散那里的乌云，但是真正的威胁并不在那儿。
-据我们所知，一个风暴术士，可以操控风暴的元素法师，和这些破坏有关。安格利文的那些蠢蛋可不会那么做。完全堕落了！
+据我们所知，一个风暴术士，可以操控风暴的元素法师，和这些破坏有关。安格利文的那些懦夫居然袖手旁观。真是堕落！
 所以你必须采取行动， @playername@。我会告诉你那个法师所在的位置，在岱卡拉山脉的最高峰。
 除掉他。]],
 	answers = {
-		{"你可以信任我，守卫。", action=function(npc, player)
+		{"你可以信任我，守护者。", action=function(npc, player)
 			player:hasQuest("lightning-overload"):create_entrance()
 			game:unlockBackground("myssil", "Protector Myssil")
 		end},

@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -28,7 +28,8 @@ newChat{ id="welcome",
 }
 
 newChat{ id="leave",
-	text = [[啊～我亲爱的！好吧，现在我自由了，我会开启一个到晨曦之门的传送门。我想我这辈子再也不想见到蜘蛛了。]],
+	text = [[啊～我亲爱的！
+	好吧，现在我自由了，我会开启一个到晨曦之门的传送门。我想我这辈子再也不想见到蜘蛛了。]],
 	answers = {
 		{"请带路！", action=function(npc, player) player:hasQuest("spydric-infestation"):portal_back(player) end},
 	}

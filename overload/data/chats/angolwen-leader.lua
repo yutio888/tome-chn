@@ -1,5 +1,5 @@
 ﻿-- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -47,9 +47,9 @@ newChat{ id="teleport-urkis",
 	text = [[祝你好运，愿安格利文的祝福与你同在。]],
 	answers = {
 		{"谢谢。", action=function(npc, player)
-			 player:hasQuest("lightning-overload"):teleport_urkis() 
-			 game:unlockBackground("linaniil", "Archmage Linaniil")
-			 end},
+			player:hasQuest("lightning-overload"):teleport_urkis()
+			game:unlockBackground("linaniil", "Archmage Linaniil")
+		end},
 	}
 }
 

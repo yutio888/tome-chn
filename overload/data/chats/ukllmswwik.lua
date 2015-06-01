@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -42,7 +42,7 @@ newChat{ id="quest",
 他们现在被称为娜迦，他们生活在马基·埃亚尔和远东大陆之间的海洋深处。
 他们中的一个，萨拉苏尔，违抗了他的使命，妄图控制整个水上和水下世界，他发现了一个有可能残留有夏·图尔遗迹的古代神庙，叫做造物者神庙。
 他相信可以利用它来#{italic}#进化#{normal}#娜迦。
-但是他陷入了疯狂，把一切水下智慧生物都视为对他的威胁，包括他自己。
+但是他陷入了疯狂，把一切水下智慧生物都视为对他的威胁，包括我自己。
 我不能离开这个圣所，但是也许你能帮我结果了他？
 毕竟，算是对他疯狂的一种宽恕吧。]],
 	answers = {

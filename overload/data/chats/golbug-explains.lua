@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -22,13 +22,13 @@ newChat{ id="welcome",
 #LAST#@playerdescriptor.race@！你不应该来这里！你的死期到了！
 兽人部落不会为任何人让步！他们有他们的荣耀，你什么也做不了！]],
 	answers = {
-		{"整个兽人部落服从与一个首领？我明白了……“荣耀”，的确！", jump="mock"},
+		{"整个兽人部落屈服于一个吸血鬼领主？我明白了……还真是“荣耀”啊！", jump="mock"},
 		{"#LIGHT_GREEN#[攻击]"},
 	}
 }
 
 newChat{ id="mock",
-	text = [[部落选择了他的盟友，不会再有首领了！攻击！]],
+	text = [[部落选择了自己的盟友，我们从不屈服于人！攻击！]],
 	answers = {
 		{"#LIGHT_GREEN#[攻击]"},
 	}

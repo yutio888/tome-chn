@@ -32,13 +32,14 @@ newChat{ id="welcome",
 			npc.store:interact(player)
 		end},
 		{"不如说说那个特殊物品？", cond=function(npc, player) return game.state:isAdvanced() end, jump="unique1"},
-		{"闪光陷阱？听上去很不做.", cond=function(npc, player) return p:knowTalent(p.T_TRAP_MASTERY) and not p:knowTalent(p.T_FLASH_BANG_TRAP) end, jump="trap"},
+		{"闪光陷阱？听上去很不错.", cond=function(npc, player) return p:knowTalent(p.T_TRAP_MASTERY) and not p:knowTalent(p.T_FLASH_BANG_TRAP) end, jump="trap"},
 		{"抱歉，我得走了！"},
 	}
 }
 
 newChat{ id="trap",
-	text = [[你要知道，我问遍了每个地方都没发现有相同的东西。不过，既然你救了我的命，给我3000金币我就把它转让给你。这可是很划算的！]],
+	text = [[你要知道，我问遍了每个地方都没发现有相同的东西。
+	不过，既然你救了我的命，给我3000金币我就把它转让给你。这可是很划算的！]],
 	answers = {
 		{"虽然很贵，不过我要了.", cond=function(npc, player) return player.money >= 3000 end, jump="traplearn"},
 		{"..."},

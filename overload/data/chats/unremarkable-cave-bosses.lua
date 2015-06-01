@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -48,7 +48,7 @@ game.player:grantQuest("strange-new-world")
 newChat{ id="welcome",
 	text = [[#LIGHT_GREEN#*一个穿着金色长袍的美丽精灵女子站在你面前，看着穿锁甲的兽人。*#WHITE#
 菲拉瑞尔：“投降吧，兽人！你不会赢的，我拥有太阳和月亮的神力。”
-克罗格： "哈！只剩下一个小时了，而你看上去已经很疲惫了，我的女士。"
+克罗格： "哈！才过了一个小时了，而你看上去已经很疲惫了，我的女士。"
 #LIGHT_GREEN#*当你进入房间时他们注意到了你*#WHITE#
 菲拉瑞尔： "你！ @playerdescriptor.race@!帮我干掉这只怪物，要不然给我滚开！"
 克罗格： "哦？找人帮忙了？呸，@playerdescriptor.race@，给我干掉这个臭婊子，我会报答你的！"]],

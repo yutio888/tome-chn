@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 -- darkgod@te4.org
 
 newChat{ id="welcome",
-	text = [[@playername@ 欢迎来到我的商店。]],
+	text = [[@playername@，欢迎来到我的商店。]],
 	answers = {
 		{"让我看看你的商品吧。", action=function(npc, player)
 			npc.store:loadup(game.level, game.zone)

@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -67,14 +67,14 @@ newChat{ id="yeek-unsure",
 			player:setQuestStatus("high-peak", engine.Quest.COMPLETED, "yeek")
 			player:hasQuest("high-peak"):win("yeek-sacrifice")
 		end},
-		{"#LIGHT_GREEN#[在最后关头你用意志抵抗了维网几秒钟，向亚伦传递了信息。]#WHITE# 亚伦女士，快杀了我！#{bold}#现在！#{normal}#",
+		{"#LIGHT_GREEN#[在最后关头你用意志抵抗了维网几秒钟，向艾伦传递了信息。]#WHITE# 艾伦女士，快杀了我！#{bold}#现在！#{normal}#",
 			cond=function(npc, player) return not void_portal_open(nil, player) and aeryn_alive(npc, player) and player:getWil() >= 55 end, jump="yeek-stab"
 		},
 	}
 }
 
 newChat{ id="yeek-stab",
-	text = [[#LIGHT_GREEN#*通过你的精神力量，亚伦明白了维网的计划。*#WHITE#
+	text = [[#LIGHT_GREEN#*通过你的精神力量，艾伦明白了维网的计划。*#WHITE#
 你是一位伟大的盟友和罕见的伙伴。我发誓，整个世界都会铭记你的牺牲。
 #LIGHT_GREEN#*一边说，她一边用剑刺入你的身体，终结了维网的计划。*#WHITE#
 ]],

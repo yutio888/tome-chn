@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -85,8 +85,7 @@ newChat{ id="welcome",
 
 newChat{ id="cause",
 	text = [[我希望你能配合。
-现在，让我们开始履行同盟仪式。将你的生命与我同享！
-这样你活下去的同时，我也不会因衰老而亡！
+现在，让我们开始履行同盟仪式。将你的生命与我同享！这样只要你活着，我就永远不死！
 作为回报，我会赐予你这柄强大的三叉戟。
 ]],
 	answers = {

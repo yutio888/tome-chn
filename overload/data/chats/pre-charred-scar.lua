@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
 
 newChat{ id="welcome",
 	text = [[*#LIGHT_GREEN#突然你的头顶上出现了一个声音。#WHITE#*
-@playername@，我是太阳堡垒的高阶太阳骑士艾伦。我借助阿诺里塞尔的神力和你取得联系。
+@playername@，我是太阳堡垒的高阶太阳骑士艾伦。我借助星月术士的能力和你取得联系。
 我有个非常紧急的消息要告诉你：我们已经知道你一直在寻找的法杖去向。]],
 	answers = {
 		{"在哪里？！", jump="where"},

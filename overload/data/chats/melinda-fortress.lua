@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2014 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -36,7 +36,7 @@ ql.wants_to = ql.wants_to or "derth"
 local dest = {
 	derth = [[我想在德斯镇开店？]],
 	magic = [[我想去安格利文学魔法?]],
-	antimagic = [[我想去一个训练?]],
+	antimagic = [[我想去伊格兰斯训练?]],
 }
 
 newChat{ id="settle",
@@ -45,7 +45,7 @@ newChat{ id="settle",
 不过，呆久了还是觉得有些无聊。
 你还记得么,我曾经说过“]]..dest[ql.wants_to]..[[”，或许能想个办法，白天出去，晚上再回来？]],
 	answers = {
-		{"当然可以，我相信我们能做到。Shadow,能为她制造一个传送门么？", jump="portal", switch_npc=butler},
+		{"当然可以，我相信我们能做到。堡垒幻影，能为她制造一个传送门么？", jump="portal", switch_npc=butler},
 	}
 }
 

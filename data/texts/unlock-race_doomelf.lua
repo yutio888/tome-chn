@@ -18,14 +18,14 @@
 -- darkgod@te4.org
 
 return "New Race: #LIGHT_GREEN#Doomelf",
-[[Doomelves are not a real race, they are Shaloren that have been taken by demons and transformed into harbingers of doom.
-They skills in inflicting and resisting pain has been honed by their rigorous training on the Fearscape.
+[[魔 化 精 灵 并 不 是 一 个 真 正 的 种 族 ， 他 们 曾 是 永 恒 精 灵 ， 而 被 恶 魔 抓 去， 变 为 末 日 的 使 者。
+恶 魔 空 间 的 烈 火 和 严 格 训 练 磨 砺 了 他 们 抵 御 痛 苦 、 施 展 痛 苦 的 强 大 能 力 。
 
-You have killed the only three explorers from Mal'Rok that could have told the demons the truth and thus have earned the right to make #LIGHT_GREEN#Doomelf#WHITE# characters.
+你 已 经 终 结 了 从 恶 魔 家 乡 玛 · 洛 克 来 的 仅 有 的 那 三 位 探 险 者 。 现 在 ， 恶 魔 们 将 无 法 了 解 到 有 关 埃 亚 尔 大 陆 的 真 相 ， #LIGHT_GREEN#魔 化 精 灵#WHITE# 应 运 而 生 。
 
-Race features:#YELLOW#
-- Instant cast phase door
-- Can turn into a dúathedlen
-- Can increase detrimental effects and reduce beneficial ones on their foes
+种 族 特 点 :#YELLOW#
+- 使 用 加 速 技 能 ， 瞬 间 穿 梭 空 间
+- 转 化 成 多 瑟 顿 形 态
+- 可 以 延 长 敌 人 的 负 面 效 果 ， 缩 短 敌 人 的 正 面 效 果
 #WHITE#
 ]]

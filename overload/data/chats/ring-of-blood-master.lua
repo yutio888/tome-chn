@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ newChat{ id="welcome",
 
 newChat{ id="what",
 	text = [[这里是鲜血之环！听着，你现在有两个选择。
-既然你看上去不像是奴隶的食物，我会给你一个机会来玩一个游戏。
+既然你看上去不像那些奴隶一样的炮灰，我会给你一个机会来玩一个游戏。
 要是你不想参加这个奴隶游戏，恐怕你得从我面前消失了。]],
 	answers = {
 		{"奴隶？你没搞错吧！[攻击]", action=attack("You think so? Die.")},
@@ -41,7 +41,7 @@ newChat{ id="what",
 
 newChat{ id="game",
 	text = [[你看，很简单。我会精神控制一些野生怪物或者奴隶，你则用对面的指令水晶球来控制一个奴隶。
-然后我们对战10轮，如果你的奴隶还活着，那你就赢得了这个血之召唤者游戏。]],
+然后我们对战10轮，如果你的奴隶还活着，那你会赢得了一个戒指，鲜血呼唤。]],
 	answers = {
 		{"要是我输了呢？", jump="lose"},
 		{"鲜血和死亡，但自己却不用冒生命危险，太有趣了！", jump="price"},

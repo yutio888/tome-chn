@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -19,7 +19,8 @@
 
 newChat{ id="welcome",
 	text = [[谢谢你 @playername@ ，为了帝国的财富我们都活下来了。我会把这些消息带给他们。
-我可不希望和死神再来一次亲密接触了。再见。]],
+我可不希望和死神再来一次亲密接触了。
+再见。]],
 	answers = {
 		{"帝国万岁！多保重。", action=function(npc, player)
 			npc:disappear()

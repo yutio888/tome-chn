@@ -1,5 +1,4 @@
 ﻿function logCHN:getName(name)
-	print("[logCHN:getName]" .. name)
 	name = npcCHN:getName(name)
 	if name:find(" from ") then
 		local f,e=name:find(" from ")

@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -21,8 +21,8 @@ local function check_materials_gave_orb(npc, player)
 	local q = player:hasQuest("east-portal")
 	if not q or not q:isCompleted("gotoreknor") or not q:isCompleted("gave-orb") then return false end
 
-	local gem_o, gem_item, gem_inven_id = player:findInAllInventories("共鸣宝石")
-	local athame_o, athame_item, athame_inven_id = player:findInAllInventories("血符祭剑")
+	local gem_o, gem_item, gem_inven_id = player:findInAllInventories("Resonating Diamond")
+	local athame_o, athame_item, athame_inven_id = player:findInAllInventories("Blood-Runed Athame")
 	return gem_o and athame_o
 end
 
@@ -30,8 +30,8 @@ local function check_materials_withheld_orb(npc, player)
 	local q = player:hasQuest("east-portal")
 	if not q or not q:isCompleted("gotoreknor") or not q:isCompleted("withheld-orb") then return false end
 
-	local gem_o, gem_item, gem_inven_id = player:findInAllInventories("共鸣宝石")
-	local athame_o, athame_item, athame_inven_id = player:findInAllInventories("血符祭剑")
+	local gem_o, gem_item, gem_inven_id = player:findInAllInventories("Resonating Diamond")
+	local athame_o, athame_item, athame_inven_id = player:findInAllInventories("Blood-Runed Athame")
 	return gem_o and athame_o
 end
 

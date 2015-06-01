@@ -1,2 +1,2 @@
-dofile("data-chn123/objects/artifact.lua")
-dofile("data-chn123/objects/entity.lua")
+require("data-chn123.objects.artifact").bindHooks()
+require("data-chn123.objects.entity").bindHooks()

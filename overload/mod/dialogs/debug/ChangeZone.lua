@@ -26,7 +26,7 @@ module(..., package.seeall, class.inherit(engine.ui.Dialog))
 
 function _M:init()
 	self:generateList()
-	engine.ui.Dialog.init(self, "Debug/Cheat! It's BADDDD!", 1, 1)
+	engine.ui.Dialog.init(self, "调试/作弊! 你一定在想着做坏事吧!", 1, 1)
 
 	local list = List.new{width=400, height=500, scrollbar=true, list=self.list, fct=function(item) self:use(item) end}
 
@@ -56,7 +56,7 @@ function _M:use(item)
 	if not item then return end
 	game:unregisterDialog(self)
 
-	game:registerDialog(GetQuantity.new("Zone: "..item.name, "Level "..item.min.."-"..item.max, 1, item.max, function(qty)
+	game:registerDialog(GetQuantity.new("地图: "..item.name, "楼层 "..item.min.."-"..item.max, 1, item.max, function(qty)
 		game:changeLevel(qty, item.zone)
 	end), 1)
 end
@@ -71,7 +71,7 @@ function _M:generateList()
 				setfenv(f, setmetatable({}, {__index=_G}))
 				local ok, z = pcall(f)
 				if ok then
-					list[#list+1] = {name=z.name..(add_simple and " ["..add_simple.."]" or ""), zone=add..dir, min=1, max=z.max_level}
+					list[#list+1] = {name=(zoneName[z.name] or z.name)..(add_simple and " ["..add_simple.."]" or ""), zone=add..dir, min=1, max=z.max_level}
 				end
 			end
 		end

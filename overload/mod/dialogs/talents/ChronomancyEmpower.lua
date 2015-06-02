@@ -54,11 +54,11 @@ end
 function _M:init(actor)
 	self.actor = actor
 	actor.hotkey = actor.hotkey or {}
-	Dialog.init(self, "Empower", game.w * 0.6, game.h * 0.8)
+	Dialog.init(self, "能量增幅", game.w * 0.6, game.h * 0.8)
 
 	local vsep = Separator.new{dir="horizontal", size=self.ih - 10}
 	self.c_tut = Textzone.new{width=math.floor(self.iw / 2 - vsep.w / 2), height=1, auto_height=true, no_color_bleed=true, text=[[
-You may select a chronomancy spell to Empower, increasing your effective spellpower when casting that spell.
+你 可 以 选 择 一 个 时 空 系 法 术 来 施 展 “ 能 量 增 幅 ” ， 增 加 释 放 这 个 技 能 时 的 法 术 强 度 。
 ]]}
 	self.c_desc = TextzoneList.new{width=math.floor(self.iw / 2 - vsep.w / 2), height=self.ih - self.c_tut.h - 20, scrollbar=true, no_color_bleed=true}
 
@@ -141,7 +141,7 @@ function _M:generateList()
 	for i, node in ipairs(talents) do node.char = self:makeKeyChar(letter) chars[node.char] = node letter = letter + 1 end
 
 	list = {
-		{ char='', name=('#{bold}#Choose a talent#{normal}#'):toTString(), status='', hotkey='', desc="All talents that can be used with Empower.", color=function() return colors.simple(colors.LIGHT_GREEN) end, nodes=talents, shown=true },
+		{ char='', name=('#{bold}#选择一个技能#{normal}#'):toTString(), status='', hotkey='', desc="所有可以被施展能量增幅的技能。", color=function() return colors.simple(colors.LIGHT_GREEN) end, nodes=talents, shown=true },
 		chars = chars,
 	}
 	self.list = list

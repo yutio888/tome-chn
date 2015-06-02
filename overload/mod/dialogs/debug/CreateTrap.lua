@@ -26,7 +26,7 @@ module(..., package.seeall, class.inherit(Dialog))
 
 function _M:init()
 	self:generateList()
-	Dialog.init(self, "Create Trap", 1, 1)
+	Dialog.init(self, "创造陷阱", 1, 1)
 
 	local list = List.new{width=400, height=500, list=self.list, fct=function(item) self:use(item) end}
 

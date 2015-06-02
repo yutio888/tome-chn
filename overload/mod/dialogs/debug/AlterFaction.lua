@@ -27,7 +27,7 @@ module(..., package.seeall, class.inherit(Dialog))
 
 function _M:init()
 	self:generateList()
-	Dialog.init(self, "Alter Faction", 1, 1)
+	Dialog.init(self, "切换阵营友好度", 1, 1)
 
 	local list = List.new{width=400, height=500, list=self.list, fct=function(item) self:use(item) end}
 
@@ -57,11 +57,11 @@ function _M:use(item)
 	if not item then return end
 	game:unregisterDialog(self)
 
-	Dialog:listPopup("Alter: "..item.def.name, "Alter to which state:", {{name="friendly"}, {name="neutral"}, {name="hostile"}}, 300, 150, function(sel)
+	Dialog:listPopup("切换: "..item.def.name, "切换到什么友好度？", {{name="友好"}, {name="中立"}, {name="敌对"}}, 300, 150, function(sel)
 		if not sel then return end
-		if sel.name == "friendly" then Faction:setFactionReaction(game.player.faction, item.def.short_name, 100, true)
-		elseif sel.name == "neutral" then Faction:setFactionReaction(game.player.faction, item.def.short_name, 0, true)
-		elseif sel.name == "hostile" then Faction:setFactionReaction(game.player.faction, item.def.short_name, -100, true)
+		if sel.name == "友好" then Faction:setFactionReaction(game.player.faction, item.def.short_name, 100, true)
+		elseif sel.name == "中立" then Faction:setFactionReaction(game.player.faction, item.def.short_name, 0, true)
+		elseif sel.name == "敌对" then Faction:setFactionReaction(game.player.faction, item.def.short_name, -100, true)
 		end
 	end)
 end

@@ -26,7 +26,7 @@ module(..., package.seeall, class.inherit(engine.ui.Dialog))
 
 function _M:init()
 	self:generateList()
-	engine.ui.Dialog.init(self, "Debug/Cheat! It's BADDDD!", 1, 1)
+	engine.ui.Dialog.init(self, "调试/作弊! 你一定在想着做坏事吧!", 1, 1)
 
 	local list = List.new{width=400, height=500, list=self.list, fct=function(item) self:use(item) end}
 
@@ -104,7 +104,7 @@ function _M:use(item)
 			end
 		end
 	elseif act == "change_level" then
-		game:registerDialog(GetQuantity.new("Zone: "..game.zone.name, "Level 1-"..game.zone.max_level, game.level.level, game.zone.max_level, function(qty)
+		game:registerDialog(GetQuantity.new("地图: "..game.zone.name, "楼层 1-"..game.zone.max_level, game.level.level, game.zone.max_level, function(qty)
 			game:changeLevel(qty)
 		end), 1)
 	elseif act == "shertul-energy" then
@@ -152,21 +152,21 @@ end
 function _M:generateList()
 	local list = {}
 
-	list[#list+1] = {name="Change Zone", dialog="ChangeZone"}
-	list[#list+1] = {name="Change Level", action="change_level"}
-	list[#list+1] = {name="Reveal all map", action="magic_map"}
-	list[#list+1] = {name="Godmode", action="godmode"}
-	list[#list+1] = {name="Create all artifacts", action="all_arts"}
-	list[#list+1] = {name="Grant/Alter Quests", dialog="GrantQuest"}
-	list[#list+1] = {name="Summon Creature", dialog="SummonCreature"}
-	list[#list+1] = {name="Create Item", dialog="CreateItem"}
-	list[#list+1] = {name="Alter Faction", dialog="AlterFaction"}
-	list[#list+1] = {name="Give Sher'tul fortress energy", action="shertul-energy"}
-	list[#list+1] = {name="Create Trap", dialog="CreateTrap"}
-	list[#list+1] = {name="Remove all creatures", action="remove-all"}
-	list[#list+1] = {name="Semi-Godmode", action="semigodmode"}
-	list[#list+1] = {name="Give all ingredients", action="all-ingredients"}
-	list[#list+1] = {name="Weakdamage", action="weakdamage"}
+	list[#list+1] = {name="切换地图", dialog="ChangeZone"}
+	list[#list+1] = {name="切换楼层", action="change_level"}
+	list[#list+1] = {name="地图全开", action="magic_map"}
+	list[#list+1] = {name="无敌模式", action="godmode"}
+	list[#list+1] = {name="制造所有神器", action="all_arts"}
+	list[#list+1] = {name="接任务/重接任务", dialog="GrantQuest"}
+	list[#list+1] = {name="召唤生物", dialog="SummonCreature"}
+	list[#list+1] = {name="制造物品", dialog="CreateItem"}
+	list[#list+1] = {name="调整阵营友好度", dialog="AlterFaction"}
+	list[#list+1] = {name="获得夏·图尔堡垒能量", action="shertul-energy"}
+	list[#list+1] = {name="制造陷阱", dialog="CreateTrap"}
+	list[#list+1] = {name="清除所有生物", action="remove-all"}
+	list[#list+1] = {name="半无敌模式", action="semigodmode"}
+	list[#list+1] = {name="获得所有材料", action="all-ingredients"}
+	list[#list+1] = {name="减少造成的伤害", action="weakdamage"}
 	self:triggerHook{"DebugMain:generate", menu=list}
 
 	local chars = {}

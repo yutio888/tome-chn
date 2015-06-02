@@ -40,11 +40,11 @@ end
 function _M:init(actor)
 	self.actor = actor
 	actor.hotkey = actor.hotkey or {}
-	Dialog.init(self, "Contingency", game.w * 0.6, game.h * 0.8)
+	Dialog.init(self, "意外术", game.w * 0.6, game.h * 0.8)
 
 	local vsep = Separator.new{dir="horizontal", size=self.ih - 10}
 	self.c_tut = Textzone.new{width=math.floor(self.iw / 2 - vsep.w / 2), height=1, auto_height=true, no_color_bleed=true, text=[[
-You may select a spell for Contingency to automatically use when your life falls below a percentage.  Only active spells that do not require a target may be chosen.
+你 可 以 选 择 一 个 技 能 释 放 意 外 术 。 当 你 受 到 伤 害 并 使 生 命 值 降 低 到 一 定 百 分 比 以 下 时 ，这 个 技 能 会 被 自 动 释 放 。
 ]]}
 	self.c_desc = TextzoneList.new{width=math.floor(self.iw / 2 - vsep.w / 2), height=self.ih - self.c_tut.h - 20, scrollbar=true, no_color_bleed=true}
 
@@ -127,7 +127,7 @@ function _M:generateList()
 	for i, node in ipairs(talents) do node.char = self:makeKeyChar(letter) chars[node.char] = node letter = letter + 1 end
 
 	list = {
-		{ char='', name=('#{bold}#Choose a talent#{normal}#'):toTString(), status='', hotkey='', desc="All talents that can be used with Contingency.", color=function() return colors.simple(colors.LIGHT_GREEN) end, nodes=talents, shown=true },
+		{ char='', name=('#{bold}#选择一个技能#{normal}#'):toTString(), status='', hotkey='', desc="所有可以被施展意外术的技能。", color=function() return colors.simple(colors.LIGHT_GREEN) end, nodes=talents, shown=true },
 		chars = chars,
 	}
 	self.list = list

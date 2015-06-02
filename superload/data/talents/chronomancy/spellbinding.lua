@@ -45,7 +45,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local power = t.getPower(self, t) * 100
 		local talent = self:isTalentActive(t.id) and self:getTalentFromId(self:isTalentActive(t.id).talent).name or "None"
-		return ([[强 化 指 定 的 时 空 系 法 术 ，减 少 指 定 法 术 的 施 放 速 度  %d%% 。
+		return ([[强 化 指 定 的 时 空 系 法 术 ，减 少 施 放 指 定 法 术 需 要 的 时 间 %d%% 。
 		 每 个 技 能 只 能 附 加 一 种 时 空 增 效 系 效 。
 		 
 		 当 前 强 化 法 术 ： %s  ]]):

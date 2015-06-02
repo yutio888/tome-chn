@@ -129,7 +129,9 @@ function _M:yesnoPopup(title, text, fct, yes_text, no_text, no_leave, escape)
 	if title:find("Demon Statue of ") then
 		local _, f = string.find(title, "Demon Statue of ")
 		local ts = title:sub(f + 1, string.len(title))
-		if ts:sub(1, 2) == "a " then
+		if ts == "a forge giant" then
+			title = "一个锻造巨人的恶魔雕像"
+		elseif ts:sub(1, 2) == "a " then
 			title = "一个" .. npcCHN:getName(ts:sub(3, string.len(ts) ) ) .. "的恶魔雕像"
 		elseif ts:sub(1, 3) == "an " then
 			title = "一个" .. npcCHN:getName(ts:sub(4, string.len(ts) ) ) .. "的恶魔雕像"

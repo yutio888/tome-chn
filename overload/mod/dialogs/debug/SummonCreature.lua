@@ -26,7 +26,7 @@ module(..., package.seeall, class.inherit(engine.ui.Dialog))
 
 function _M:init()
 	self:generateList()
-	engine.ui.Dialog.init(self, "Summon Creature", 1, 1)
+	engine.ui.Dialog.init(self, "召唤生物", 1, 1)
 
 	local list = List.new{width=400, height=500, list=self.list, fct=function(item) self:use(item) end}
 
@@ -66,7 +66,7 @@ function _M:generateList()
 	local list = {}
 
 	for i, e in ipairs(game.zone.npc_list) do
-		list[#list+1] = {name=e.name, unique=e.unique, e=e}
+		list[#list+1] = {name=npcCHN:getName(e.name), unique=e.unique, e=e}
 	end
 	table.sort(list, function(a,b)
 		if a.unique and not b.unique then return true

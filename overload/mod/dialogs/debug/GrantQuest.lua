@@ -26,7 +26,7 @@ module(..., package.seeall, class.inherit(engine.ui.Dialog))
 
 function _M:init()
 	self:generateList()
-	engine.ui.Dialog.init(self, "Debug/Cheat! It's BADDDD!", 1, 1)
+	engine.ui.Dialog.init(self, "调试/作弊! 你一定在想着做坏事吧!", 1, 1)
 
 	local list = List.new{width=400, height=500, list=self.list, fct=function(item) self:use(item) end}
 

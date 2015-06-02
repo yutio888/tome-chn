@@ -27,7 +27,7 @@ function _M:init(actor, def)
 	self.actor = actor
 	self.def = def
 	self:generateList()
-	engine.ui.Dialog.init(self, "Set behavior: "..actor.name, 1, 1)
+	engine.ui.Dialog.init(self, "设置行为: "..npcCHN:getName(actor.name), 1, 1)
 
 	local list = List.new{width=400, nb_items=#self.list, list=self.list, fct=function(item) self:use(item) end}
 
@@ -54,11 +54,11 @@ end
 
 function _M:generateList()
 	local list = {
-		{name="Default", set="default"},
-		{name="Melee", set="melee"},
-		{name="Ranged", set="ranged"},
-		{name="Tank", set="tank"},
-		{name="Standby", set="standby"},
+		{name="默认", set="default"},
+		{name="近程攻击", set="melee"},
+		{name="远程攻击", set="ranged"},
+		{name="坦克", set="tank"},
+		{name="乖乖站好", set="standby"},
 	}
 
 	local chars = {}

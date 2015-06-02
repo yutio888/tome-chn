@@ -54,11 +54,11 @@ end
 function _M:init(actor)
 	self.actor = actor
 	actor.hotkey = actor.hotkey or {}
-	Dialog.init(self, "Matrix", game.w * 0.6, game.h * 0.8)
+	Dialog.init(self, "矩阵加速", game.w * 0.6, game.h * 0.8)
 
 	local vsep = Separator.new{dir="horizontal", size=self.ih - 10}
 	self.c_tut = Textzone.new{width=math.floor(self.iw / 2 - vsep.w / 2), height=1, auto_height=true, no_color_bleed=true, text=[[
-You may select a chronomancy spell to Matrix, reducing the cooldown of that spell.
+你 可 以 选 择 一 个 时 空 系 法 术 来 施 展 “ 矩 阵 加 速 ” ， 减 少 这 个 技 能 的 冷 却 时 间 。
 ]]}
 	self.c_desc = TextzoneList.new{width=math.floor(self.iw / 2 - vsep.w / 2), height=self.ih - self.c_tut.h - 20, scrollbar=true, no_color_bleed=true}
 
@@ -119,7 +119,7 @@ function _M:generateList()
 
 	-- Generate lists of all talents by category
 	for j, t in pairs(self.actor.talents_def) do
-		if self.actor:knowTalent(t.id) and t.type[1]:find("^chronomancy/") and not t.type[1]:find("^chronomancy/spellbinding") and not t.hide and t.cooldown and t.mode ~= "passive" and not t.fixed_cooldownand and not spellbound(self.actor, t.id) then
+		if self.actor:knowTalent(t.id) and t.type[1]:find("^chronomancy/") and not t.type[1]:find("^chronomancy/spellbinding") and not t.hide and t.cooldown and t.mode ~= "passive" and not t.fixed_cooldown and not spellbound(self.actor, t.id) then
 			local nodes = talents
 			local status = tstring{{"color", "LIGHT_GREEN"}, "Talents"}
 			
@@ -141,7 +141,7 @@ function _M:generateList()
 	for i, node in ipairs(talents) do node.char = self:makeKeyChar(letter) chars[node.char] = node letter = letter + 1 end
 
 	list = {
-		{ char='', name=('#{bold}#Choose a talent#{normal}#'):toTString(), status='', hotkey='', desc="All talents that can be used with Matrix.", color=function() return colors.simple(colors.LIGHT_GREEN) end, nodes=talents, shown=true },
+		{ char='', name=('#{bold}#选择一个技能#{normal}#'):toTString(), status='', hotkey='', desc="所有可以被施展矩阵加速的技能。", color=function() return colors.simple(colors.LIGHT_GREEN) end, nodes=talents, shown=true },
 		chars = chars,
 	}
 	self.list = list

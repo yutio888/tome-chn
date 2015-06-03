@@ -23,6 +23,7 @@ local ListColumns = require "engine.ui.ListColumns"
 local TextzoneList = require "engine.ui.TextzoneList"
 local Separator = require "engine.ui.Separator"
 local Image = require "engine.ui.Image"
+local loreC = require "data-chn123.lore"
 
 module(..., package.seeall, class.inherit(Dialog))
 
@@ -78,7 +79,7 @@ end
 function _M:select(item)
 	if item then
 		local desc=item.desc
-		if loreCHN[item.name] then desc = loreCHN[item.name] end
+		if loreC.loreCHN[item.name] then desc = loreC.loreCHN[item.name] end
 		if desc:find("Athrall") then desc = "‘为了主人的荣耀’ ——阿夏尔" end
 		self.c_desc:switchItem(item, ("#GOLD#分类：#AQUAMARINE# %s\n#GOLD#资料来源：#0080FF# %s\n#GOLD#内容：#ANTIQUE_WHITE#\n %s"):format(item.cat, item.name, desc))
 		if item.image then

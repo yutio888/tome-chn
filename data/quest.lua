@@ -278,8 +278,8 @@ questCHN["Lost Knowledge"] = {
 name = " 遗 失 的 知 识 ",
 description = function(desc)
 	desc = string.gsub(desc,"You found an ancient tome about gems."," 你 发 现 一 本 关 于 珠 宝 的 旧 书。 ")
-	desc = string.gsub(desc,"You should bring it to the jeweler in the Gates of Morning."," 你 应 该 把 这 本 书 带 给 晨 光 之 门 的 珠 宝 匠 看 看。 ")
-	desc = string.gsub(desc,"Limmir told you to look for the Valley of the Moon in the southern mountains.","Limmir 告 诉 你 去 到 南 部 的 山 脉 中 寻 找 新 月 峡 谷 ")
+	desc = string.gsub(desc,"You should bring it to the jeweler in the Gates of Morning."," 你 应 该 把 这 本 书 带 给 晨 曦 之 门 的 珠 宝 匠 看 看。 ")
+	desc = string.gsub(desc,"Limmir told you to look for the Valley of the Moon in the southern mountains.","利 米 尔 告 诉 你 去 到 南 部 的 山 脉 中 寻 找 新 月 峡 谷 ")
 	return desc
 end}
 

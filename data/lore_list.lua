@@ -306,16 +306,3 @@ function loreListCHN(name)
 	end
 	return name
 end
-
---DLC lores
-loreCHN = {}
-
-function registerLoreTranslation(t)
-	assert(t.id, "no lore translation id")
-	loreCHN[t.id] = {}
-	loreCHN[t.id].id = t.id
-	loreCHN[t.id].name = t.name
-	loreCHN[t.id].lore = t.lore
-end
-
-dofile("data-chn123/lore/lore.lua")

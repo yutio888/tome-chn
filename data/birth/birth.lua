@@ -15,7 +15,7 @@ birthCHN["Doombringer"] = {
 
 birthCHN["Demonologist"] = {
 	chname = "恶魔使者",
-	locked_desc = "Most simply run, but I understand: a distant planet, ravaged and damned. Burnt creations seek righteous vengeance, Urh'Rok's ashes, now destruction's engines. Harness their power! Capture and tame! I call on you, demons - UNLEASH THE FLAMES!",
+	locked_desc = "人 们 常 畏 惧 ， 但 我 了 解 真 实 ： 遥 远 的 星 球 ， 被 厄 运 所 折 磨 ； 燃 烧 的 造 物 们 ， 如 今 渴 望 复 仇 ； 乌 鲁 克 之 烬 ， 驱 动 战 争 机 器 。 捕 获 并 征 服 ！ 驾 驭 他 们 的 力 量 ！ 在 此 召 唤 — — 恶 魔 们 ， 释 放 你 们 的 烈 焰 ！",
 	desc = {
 		"	不 同 于 众 人 所 相 信 的 ， 恶 魔 使 者 并 非 恶 魔 的 走 卒 。 他 们 只 是 小 心 谨 慎 地 与 恶 魔 签 订 契 约 。",
 		"	他 们 利 用 恶 魔 之 力 达 成 所 愿，无 论 善 恶，亦 有 少 数 人 以 此 反 击 恶 魔 。",
@@ -30,7 +30,7 @@ birthCHN["Demonologist"] = {
 
 birthCHN["Doomelf"] = {
 	chname = "魔化精灵",
-	locked_desc = "The demons of Mal'Rok would never bless you!\t\nThree could tell them of the horrors elves wrought.\t\nOne rages and torments in deep oceans blue,\t\none fights for the third with the cultists she taught.\t\nSilence these beings, maintain your deception,\t\nand then you may witness a new elf's conception...",
+	locked_desc = "Mal'Rok 的 恶 魔 绝 不 会 对 你 施 以 祝 福 ！ \t\n 三 者 可 以 诉 说 精 灵 所 带 来 的 恐 怖 \t\n 之 一 在 无 尽 的 深 海 中 永 远 咆 哮 \t\n 之 一 召 集 邪 徒 为 复 活 另 一 者 而 战 \t\n 静 默 他 们 的 声 音 ， 隐 藏 你 的 踪 影 \t\n 新 的 精 灵 终 将 诞 生 … ",
 	desc = {
 		"魔 化 精 灵 并 不 是 一 个 真 正 的 种 族 ， 他 们 曾 是 永 恒 精 灵 ， 而 被 恶 魔 抓 去， 变 为 末 日 的 使 者。",
 		"他 们 对 折 磨 敌 人 感 到 享 受。",

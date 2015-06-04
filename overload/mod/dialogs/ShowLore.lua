@@ -24,6 +24,7 @@ local TextzoneList = require "engine.ui.TextzoneList"
 local Separator = require "engine.ui.Separator"
 local Image = require "engine.ui.Image"
 local loreC = require "data-chn123.lore"
+local r = require "data-chn123.rewrite_descriptor"
 
 module(..., package.seeall, class.inherit(Dialog))
 
@@ -67,7 +68,9 @@ function _M:generateList()
 	local i = 0
 	for id, _ in pairs(self.actor.lore_known) do
 		local l = self.actor:getLore(id)
+		r.rewrite()
 		list[#list+1] = { name=l.name, desc=util.getval(l.lore), cat=loreCat[l.category] or l.category, order=l.order, image=l.image }
+		r.recover()
 		if l.chn_translated then list[#list].desc = cutChrCHN(list[#list].desc, 25) end
 		i = i + 1
 	end

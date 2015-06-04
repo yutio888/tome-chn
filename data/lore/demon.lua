@@ -5,11 +5,49 @@
 -------------------------------------------------------------------------
 
 registerLoreTranslation{
+	id = "ashes-urhrok-demon-history-mistranslated",
+	name = "有关Mal'Rok历史的模糊印象",
+	lore = [[
+	你看到一堆奇怪的石板，整齐地放在一个架子上。你从架子上拿起第一块石板，试着读懂上面的信息。当你的手指触及石板的瞬间，一些奇怪的语句在你的头脑中涌动。你竭尽全力，努力理解那些奇怪的词语和图画。
+
+在他#{italic}##FIREBRICK# [播种] #{normal}##LAST#我们并陷入#{italic}##FIREBRICK# [沉睡] #{normal}##LAST#后已经经过了许多#{italic}##FIREBRICK# [环形山] #{normal}##LAST#，#{italic}##FIREBRICK# [父亲] #{normal}##LAST#大人终于从他的#{italic}##FIREBRICK# [茧] #{normal}##LAST#里醒来，看到我们正在 #{italic}##FIREBRICK# [互相争斗] #{normal}##LAST#。他惊异于我们#{italic}##FIREBRICK# [枯槁] #{normal}##LAST# 的样子，问我们为什么要#{italic}##FIREBRICK# [互相争斗] #{normal}##LAST#；我们告诉他我们所经历的#{italic}##FIREBRICK# [摇动] #{normal}##LAST#，这个星球已经被#{italic}##FIREBRICK# [毁坏] #{normal}##LAST#。无论我们的 #{italic}##FIREBRICK# [豆荚里的豆子] #{normal}##LAST#如何努力#{italic}##FIREBRICK# [填补裂缝] #{normal}##LAST#以防止#{italic}##FIREBRICK# [珠子] #{normal}##LAST##{italic}##FIREBRICK# [落下] #{normal}##LAST#，那些#{italic}##FIREBRICK# [扫帚] #{normal}##LAST#仍然将我们的#{italic}##FIREBRICK# [尘土兔子] #{normal}##LAST#清理干净。我们没有足够的土地来防止#{italic}##FIREBRICK# [珠子] #{normal}##LAST#被#{italic}##FIREBRICK# [打碎] #{normal}##LAST#。
+
+（石板上有一个巨大的方块；当你把手按在上面的时候，你突然看到了一片荒芜的星球，尘土飓风不时在星球上横扫蹂躏。你可以感受到一个绿色的小生物望着自己被毁坏的庄稼时绝望的心情；一旁红色皮肤的生物愤怒地冲向一大群小型的缟玛瑙色的生物，他们一手拿着长剑，一手操纵火球。当你把手放开时，那些影像消失了。）
+
+#{italic}##FIREBRICK# [父亲] #{normal}##LAST#给了我们他的#{italic}##FIREBRICK# [工具] #{normal}##LAST#，在我们#{italic}##FIREBRICK# [解开束缚？] #{normal}##LAST#后，他让我们#{italic}##FIREBRICK# [有礼貌地摇动] #{normal}##LAST#我们。我们不再#{italic}##FIREBRICK# [互相争斗] #{normal}##LAST#而是#{italic}##FIREBRICK# [创作音乐] #{normal}##LAST#，只#{italic}##FIREBRICK# [打碎] #{normal}##LAST#那些使我们#{italic}##FIREBRICK# [走调] #{normal}##LAST#的#{italic}##FIREBRICK# [珠子] #{normal}##LAST#。我们的#{italic}##FIREBRICK# [珠子] #{normal}##LAST#变得越来越强，学会了使用#{italic}##FIREBRICK# [父亲] #{normal}##LAST#给我们的各种#{italic}##FIREBRICK# [颜色] #{normal}##LAST#的#{italic}##FIREBRICK# [工具] #{normal}##LAST#。#{italic}##FIREBRICK# [父亲] #{normal}##LAST#喜欢#{italic}##FIREBRICK# [听我们的音乐] #{normal}##LAST#，我们也为他能为我们#{italic}##FIREBRICK# [谱曲] #{normal}##LAST#感到高兴；不久我们学会了#{italic}##FIREBRICK# [创造自己的音乐] #{normal}##LAST#，我们不再#{italic}##FIREBRICK# [互相争斗] #{normal}##LAST#，#{italic}##FIREBRICK# [父亲] #{normal}##LAST#也再一次地#{italic}##FIREBRICK# [沉睡] #{normal}##LAST#。
+
+（这上面也有一个巨大的方块。你看到和蔼可亲的伟大父亲降临星球，他的手触及之处，沙漠变成了茂密的森林；你和你红宝石色、绿宝石色和缟玛瑙色的同胞都对它无限崇拜。所有同胞，无论体格大小，无论身体形态，都团聚在一起，感激父亲大人为我们所做的贡献。多年以来，你终于结束了居无定所食不果腹的生活，再也不会有其他人或是尘土风暴摧残你的农田了。他手中握着一些邪恶的法师的尸体，他们是尘土风暴的罪魁祸首；你对他们恨之入骨，但你知道，未来幸福的时代终将到来。你和你的同族开始有组织地相互竞赛起来，有时也会有战斗，但即使你在赛场上战死你也知道你正为这颗星球做出贡献。多年以后，你和你的同族变得更聪明、更强壮，你们过得生活比以前更加幸福，宛如在天堂一般。你把手从石板上移开，满溢胸中的崇拜和赞美之情突然消失了。）
+
+然而，一群#{italic}##FIREBRICK# [鸡蛋怪] #{normal}##LAST#出现了。我们试着#{italic}##FIREBRICK# [打碎他们的珠子] #{normal}##LAST#，但是失败了；他们并不准备#{italic}##FIREBRICK# [打碎] #{normal}##LAST#我们，而是承诺给我们比我们#{italic}##FIREBRICK# [父亲] #{normal}##LAST#给我们的#{italic}##FIREBRICK# [音乐集] #{normal}##LAST#更好的东西，不过有一个条件：我们必须#{italic}##FIREBRICK# [打碎] #{normal}##LAST##{italic}##FIREBRICK# [父亲] #{normal}##LAST#。我们拒绝了，但是我们最终达成了一个#{italic}##FIREBRICK# [糟糕的豆子] #{normal}##LAST#：我们使用他亲手给我们的#{italic}##FIREBRICK# [工具] #{normal}##LAST##{italic}##FIREBRICK# [沉默？栽种？] #{normal}##LAST#了伟大的#{italic}##FIREBRICK# [父亲] #{normal}##LAST#，让他成为了一个#{italic}##FIREBRICK# [懒惰的木匠] #{normal}##LAST#，以向#{italic}##FIREBRICK# [鸡蛋怪] #{normal}##LAST#证明我们的#{italic}##FIREBRICK# [豆荚已经不在了] #{normal}##LAST#。#{italic}##FIREBRICK# [父亲] #{normal}##LAST#不会被这样的过程#{italic}##FIREBRICK# [烦扰或打碎] #{normal}##LAST#，他根本不知道发生了什么。这些#{italic}##FIREBRICK# [鸡蛋怪] #{normal}##LAST#为我们的行为感到高兴，在我们的星球上#{italic}##FIREBRICK# [放置] #{normal}##LAST#了#{italic}##FIREBRICK# [鸡蛋吸盘] #{normal}##LAST#，让我们可以和其他各种#{italic}##FIREBRICK# [花园] #{normal}##LAST#之间交易#{italic}##FIREBRICK# [其他植物的豆荚] #{normal}##LAST#。我们尝到了新的食物，学习了新的#{italic}##FIREBRICK# [工具] #{normal}##LAST#，并领略了各种各样#{italic}##FIREBRICK# [有趣] #{normal}##LAST#的，来到我们#{italic}##FIREBRICK# [花园] #{normal}##LAST#的#{italic}##FIREBRICK# [珠子] #{normal}##LAST#。我们似乎听到了来自#{italic}##FIREBRICK# [父亲] #{normal}##LAST#的一些#{italic}##FIREBRICK# [声音] #{normal}##LAST#，但是他的#{italic}##FIREBRICK# [声音并不大] #{normal}##LAST#，并且他#{italic}##FIREBRICK# [听不到] #{normal}##LAST#外面的#{italic}##FIREBRICK# [声音] #{normal}##LAST#。#{italic}##FIREBRICK# [鸡蛋怪] #{normal}##LAST#成为了我们#{italic}##FIREBRICK# [豆荚里的豆子] #{normal}##LAST#，我们专心#{italic}##FIREBRICK# [聆听] #{normal}##LAST#他的声音，直到他们#{italic}##FIREBRICK# [从豆荚中滑落] #{normal}##LAST#，我们再也无法#{italic}##FIREBRICK# [参加他们的音乐会] #{normal}##LAST#。
+
+（你的手轻放在了下一块石板上。眼前浮现了一个奇怪的生物，正从浮动的城堡中走出来——它有和蛋一样的身体，四肢则是如同海带一般的触手。你和你的所有同族都痛恨这个生物，但在当时你还并不知道一切。他们说他们希望干掉#{italic}##FIREBRICK# [父亲] #{normal}##LAST#，然后可以提供给你们强大的魔法和技术作为回报。你对这个提议深表厌恶，但是他们强大的堡垒和武器对你的恫吓迫使你不得不考虑这问题。你想要叫醒#{italic}##FIREBRICK# [父亲] #{normal}##LAST#大人寻求帮助，但又担心他可能无法击败那些#{italic}##FIREBRICK# [鸡蛋怪] #{normal}##LAST#。最终，你决定把他封印在沉睡之中。他虽然没有受伤，却也无法做出任何行动，直到进一步的介入为之都会保持着无意识的状态。那些#{italic}##FIREBRICK# [鸡蛋怪] #{normal}##LAST#勉强答应遵守了他们的诺言。他们带来了奇怪而强大的神器，在我们的世界建设起一座座传送门，让我们可以踏入走进那些未知的世界。外面的世界比任何人的想象都要壮丽和美好，到处是同样收到了来自他们礼物的人，想要和我们进行友好的贸易。你品尝了新的食物，学习了新的魔法，探索到了在你的漫长历史中不曾领略的壮丽美景。如果不是你的心中始终怀着愧疚之意，那这是你所领略过的最美好的生活。当你把手从石板上移开时，你的慢慢变得清晰的意识认出了那些“鸡蛋怪”就是夏·图尔人。）
+
+然而，一阵#{italic}##FIREBRICK# [噪音] #{normal}##LAST#突然传来。传来的声音#{italic}##FIREBRICK# [越来越大] #{normal}##LAST#。传来的声音#{italic}##FIREBRICK# [越来越大] #{normal}##LAST#。传来的声音#{italic}##FIREBRICK# [越来越大] #{normal}##LAST#。传来的声音#{italic}##FIREBRICK# [越来越大] #{normal}##LAST#。传来的声音#{italic}##FIREBRICK# [越来越大] #{normal}##LAST#。传来的声音#{italic}##FIREBRICK# [越来越大] #{normal}##LAST#。传来的声音#{italic}##FIREBRICK# [越来越大] #{normal}##LAST#。传来的声音#{italic}##FIREBRICK# [越来越大] #{normal}##LAST#。传来的声音#{italic}##FIREBRICK# [越来越大] #{normal}##LAST#。传来的声音#{italic}##FIREBRICK# [越来越大] #{normal}##LAST#。传来的声音#{italic}##FIREBRICK# [越来越大] #{normal}##LAST#。传来的声音#{italic}##FIREBRICK# [越来越大] #{normal}##LAST#。传来的声音#{italic}##FIREBRICK# [越来越大] #{normal}##LAST#。传来的声音#{italic}##FIREBRICK# [越来越大] #{normal}##LAST#。传来的声音#{italic}##FIREBRICK# [越来越大] #{normal}##LAST#。传来的声音#{italic}##FIREBRICK# [越来越大] #{normal}##LAST#。传来的声音#{italic}##FIREBRICK# [越来越大] #{normal}##LAST#。传来的声音#{italic}##FIREBRICK# [越来越大] #{normal}##LAST#。传来的声音#{italic}##FIREBRICK# [越来越大] #{normal}##LAST#。传来的声音#{italic}##FIREBRICK# [越来越大] #{normal}##LAST#。传来的声音#{italic}##FIREBRICK# [越来越大] #{normal}##LAST#。传来的声音#{italic}##FIREBRICK# [越来越大] #{normal}##LAST#。传来的声音#{italic}##FIREBRICK# [越来越大] #{normal}##LAST#。传来的声音#{italic}##FIREBRICK# [越来越大] #{normal}##LAST#。传来的声音#{italic}##FIREBRICK# [越来越大] #{normal}##LAST#。传来的声音#{italic}##FIREBRICK# [越来越大] #{normal}##LAST#。传来的声音#{italic}##FIREBRICK# [越来越大] #{normal}##LAST#。传来的声音#{italic}##FIREBRICK# [越来越大] #{normal}##LAST#。传来的声音#{italic}##FIREBRICK# [越来越大] #{normal}##LAST#。传来的声音#{italic}##FIREBRICK# [越来越大] #{normal}##LAST#。传来的声音#{italic}##FIREBRICK# [越来越大] #{normal}##LAST#。传来的声音#{italic}##FIREBRICK# [越来越大] #{normal}##LAST#。传来的声音#{italic}##FIREBRICK# [越来越大] #{normal}##LAST#。传来的声音#{italic}##FIREBRICK# [越来越大] #{normal}##LAST#。#{italic}##FIREBRICK# [巨响传来] #{normal}##LAST#， 天崩地裂。
+
+（你并不敢触摸另一块石板，然而在你试图把他移开的手指轻触之间，一阵强烈的痛苦瞬间掠过撕裂你的脑海。饥饿、灼烧、痛苦、折磨、狂怒，还有在你心头徘徊的直抒胸臆的苦闷和怒火。你的手指仅仅触及了石板一瞬间，然而你感受到的痛苦和折磨却宛如持续了数千年。在你把手伸向下一块石板之前，耳间仍然回响着之前的恐怖声音。）
+
+那些#{italic}##FIREBRICK# [鸡蛋吸盘] #{normal}##LAST#是一个陷阱，这个#{italic}##FIREBRICK# [不和谐音] #{normal}##LAST#是#{italic}##FIREBRICK# [鸡蛋怪们] #{normal}##LAST#多年以前就策划的阴谋，而他的目的就是为了把我们所有人统统#{italic}##FIREBRICK# [打碎] #{normal}##LAST#。这场灾难对他们自己的#{italic}##FIREBRICK# [花园] #{normal}##LAST#只造成了#{italic}##FIREBRICK# [轻微的损坏] #{normal}##LAST#，但这一#{italic}##FIREBRICK# [错误的音符] #{normal}##LAST#将我们的整个星球的变得彻底#{italic}##FIREBRICK# [嘈杂] #{normal}##LAST#，几乎我们所有人都#{italic}##FIREBRICK# [跌出了豆荚] #{normal}##LAST#。#{italic}##FIREBRICK# [苹果被切裂了] #{normal}##LAST#，我们的#{italic}##FIREBRICK# [壳] #{normal}##LAST#的碎片在无穷的#{italic}##FIREBRICK# [大海] #{normal}##LAST#中漂流。即使我们的#{italic}##FIREBRICK# [能工巧匠] #{normal}##LAST#已经立刻行动起来维持我们#{italic}##FIREBRICK# [花园] #{normal}##LAST#的#{italic}##FIREBRICK# [节奏] #{normal}##LAST#，如果不是#{italic}##FIREBRICK# [父亲] #{normal}##LAST#大人被#{italic}##FIREBRICK# [噪音] #{normal}##LAST#吵醒，我们早已死于非命。
+
+我们很愧疚。我们十分愧疚。我们知道我们的#{italic}##FIREBRICK# [豆荚] #{normal}##LAST#已经完全#{italic}##FIREBRICK# [腐败] #{normal}##LAST#，我们从一开始就不应该#{italic}##FIREBRICK# [种植它] #{normal}##LAST#。父亲原谅了我们#{italic}##FIREBRICK# [毁坏的桶] #{normal}##LAST#，重新#{italic}##FIREBRICK# [为我们的花园施肥] #{normal}##LAST#。它仍然处于燃烧和#{italic}##FIREBRICK# [荒芜] #{normal}##LAST#之中，但是在#{italic}##FIREBRICK# [打开了工具箱] #{normal}##LAST#之后，我们仍然可以在上面#{italic}##FIREBRICK# [种植种子] #{normal}##LAST#。我们不能#{italic}##FIREBRICK# [开花] #{normal}##LAST#，但是我们至少可以#{italic}##FIREBRICK# [敲击一个音符，至少一个音符] #{normal}##LAST#。#{italic}##FIREBRICK# [父亲] #{normal}##LAST#仍然在集中他所有的意志来#{italic}##FIREBRICK# [把我们的花园钉在一起] #{normal}##LAST#，否则只要他稍微放松一分一秒，它就会#{italic}##FIREBRICK# [碎裂凋零] #{normal}##LAST#。我们为#{italic}##FIREBRICK# [父亲] #{normal}##LAST#的无私祝福。我们为#{italic}##FIREBRICK# [父亲] #{normal}##LAST#祝福。我们十分愧疚。
+
+（你颤颤巍巍地将手掌放到下一块石板上，荒芜的虚空在你的面前呈现。你站在被无尽之炎焦灼的峭壁之上，岩浆泛动的波纹烘烤着大地，大地在你的面前破碎殆尽，眼中只能看到点缀着繁星的无尽虚空。烈焰无时无刻不在你的脚下灼烧：那些法师虽然可以产生氧气并将周围的魔力转换成生物能够使用的能量，但是即使再高明的魔法也不能清除那些被炸裂的土地上蔓延燃烧的恐怖魔法火焰，也无法阻拦永恒的火柱将你曾经的家园撕成碎片。你曾经的同袍几乎都在痛苦中死于非命，然而你们的占卜师却发现，那些#{italic}##FIREBRICK# [鸡蛋怪] #{normal}##LAST#的家园只遭受了轻微的损伤。然而事实比那更加可怕：几乎所有你曾经通过传送门访问的地方几乎都瞬间被爆裂性的魔法力量炸成了粉碎。只有你的家园在#{italic}##FIREBRICK# [父亲] #{normal}##LAST#大人的持久不懈的努力和意志之下才侥幸幸存了下来，他集中了他所能利用的一切魔法能量，努力将家园残存的碎片聚合起来，防止他们瞬间炸裂飘散消失在无尽的虚空之中。你感到无尽的自责环绕着你的内心，为了报答#{italic}##FIREBRICK# [父亲] #{normal}##LAST#大人对你们无时无刻不在持续着的无私奉献，你愿意为他赴汤蹈火，献出一切。当你把手从石板上移开的时候，愧疚之情慢慢消失。）
+
+我们问#{italic}##FIREBRICK# [父亲] #{normal}##LAST#，#{italic}##FIREBRICK# [唱什么样的歌] #{normal}##LAST#才能让他再次#{italic}##FIREBRICK# [起舞] #{normal}##LAST#。他告诉我们：#{italic}##FIREBRICK# [争斗] #{normal}##LAST#那些#{italic}##FIREBRICK# [鸡蛋怪] #{normal}##LAST#直到他们最后一个#{italic}##FIREBRICK# [珠子滑落] #{normal}##LAST#。我知道我们的#{italic}##FIREBRICK# [乐队大厅] #{normal}##LAST#，并且我们将#{italic}##FIREBRICK# [粉碎他们的派对] #{normal}##LAST#。为了我们自己，我们将从#{italic}##FIREBRICK# [鸡蛋怪] #{normal}##LAST#或者他们的#{italic}##FIREBRICK# [豆芽] #{normal}##LAST#夺回一个新的#{italic}##FIREBRICK# [花园] #{normal}##LAST#，来弥补他们从我们窃取的东西。为了我们的#{italic}##FIREBRICK# [父亲] #{normal}##LAST#，只有我们重新#{italic}##FIREBRICK# [种植下去] #{normal}##LAST#，他才能再一次得到休息。为了所有人，我们将会为那些被他们的#{italic}##FIREBRICK# [烈火] #{normal}##LAST##{italic}##FIREBRICK# [打碎的珠子] #{normal}##LAST#复仇，#{italic}##FIREBRICK# [沉默] #{normal}##LAST#一切#{italic}##FIREBRICK# [鸡蛋怪] #{normal}##LAST#和他们#{italic}##FIREBRICK# [种植] #{normal}##LAST#的#{italic}##FIREBRICK# [芦苇] #{normal}##LAST#。
+
+（你轻轻碰触了另一块石板。你厌恶你自己，你厌恶埃亚尔，你厌恶夏·图尔人，你厌恶自己身边的一切事物。你想要摧毁一切，让亿万死于非命的灵魂的正义得到伸张。你想要灭绝夏·图尔人——不，不仅如此，你还要灭绝那些一切在他们身边的东西。精灵、半身人、兽人、人类……一切带着他们的邪恶印记的人。他们背负罪恶却苟活下来，而其他使用传送门的无辜者却被烈火灼烧瞬间死于非命。如果埃亚尔上还存在哪怕一个夏·图尔人，这颗星球都应该被枯萎之火焚烧殆尽。埃亚尔上的一切都应该接受正义的复仇。在你把手从石板上离开了许久之后，你的脑海里仍然残存着不明原因的怒火。）
+
+在#{italic}##FIREBRICK# [父亲] #{normal}##LAST#的帮助下，我们的#{italic}##FIREBRICK# [匠人] #{normal}##LAST#制造了#{italic}##FIREBRICK# [强力的工具] #{normal}##LAST#，这些被他祝福的#{italic}##FIREBRICK# [修理扳手] #{normal}##LAST#能让我们#{italic}##FIREBRICK# [摇动地更加剧烈] #{normal}##LAST#。#{italic}##FIREBRICK# [豆子] #{normal}##LAST#们被酸液覆盖，#{italic}##FIREBRICK# [甜菜] #{normal}##LAST#获得了超人的速度，#{italic}##FIREBRICK# [胡椒] #{normal}##LAST#用#{italic}##FIREBRICK# [嘈杂的土地] #{normal}##LAST#和他们的双手融合，射向那些#{italic}##FIREBRICK# [制造噪音] #{normal}##LAST#者。这些#{italic}##FIREBRICK# [花] #{normal}##LAST#有些#{italic}##FIREBRICK# [嘈杂] #{normal}##LAST#，但完全不能和#{italic}##FIREBRICK# [鸡蛋怪的尖锐刺耳声] #{normal}##LAST#相比。如果我们不能#{italic}##FIREBRICK# [成为能工巧匠] #{normal}##LAST#，我们就会在#{italic}##FIREBRICK# [阳光下凋零] #{normal}##LAST#。按下这块石板，#{italic}##FIREBRICK# [获得你的工具箱] #{normal}##LAST#。你将成为#{italic}##FIREBRICK# [能工巧匠] #{normal}##LAST#。
+
+（一瞬间，你的脑海中回闪出一个酸液树魔把你的脑袋按在这块石板上的记忆，你非常了解这块石板是用来干什么的。你绝不想要再次碰到这块石板。）
+	]]
+}
+
+registerLoreTranslation{
 	id = "ashes-urhrok-training-recall1",
 	name = "遗失的记忆（1）",
 	lore = [[#{italic}#你紧紧地抱住自己的头，一踏入下一层，被囚禁的记忆如潮水般涌来……#{normal}#
 
-"很好，下一个。"红宝石色皮肤的指挥道。一小群矮小的、黑绿的东西擦干了曾是矮人的灰烬，你走到队首，站在矮人刚才的位置。在房间的另一边，另一个同族站在同样的平台上。这让你有些激动——你被选中为实验对象！你希望你能对他们的研究有所助益，希望能找到更加有效、更加“痛苦”的方法，同时期望着痛苦的降临。一只绿色的小恶魔——形态似乎有些变异，比你通常见到的骨节更加突出——站在你身边，充满期待地微笑着。另一边，一只较为正常的小恶魔走向你的伙伴。“控制组准备……开始”那只正常的酸液树魔踩在他脸上，紧紧地按住，同时一股酸液从皮肤中涌出。红色的小恶魔看了看他融化的肉体，略记了些什么，然后小声说道“痛苦阻断关闭……”他脸上的笑容突然消失了，他抓着自己的脸，然后发出痛苦地哀嚎，倒在地上，不停翻滚着。红色小恶魔再次低下头看了看，厌倦地叹了口气，继续写着。“好吧，痛苦阻断打开，把他带走。”他停止了翻滚，站了起来，再度微笑，酸液继续吞噬着他的血肉，直到房间里的管子朝他喷洒了药剂。另一只红色小恶魔咕哝了几句，摆摆手，带着他离开了。同时，你看见他身上可怕的伤害渐渐愈合。
+"很好，下一个。"红宝石色皮肤的指挥道。一小群矮小的、黑绿的东西擦干了曾是<?=player.descriptor.subrace?>的灰烬，你走到队首，站在<?=player.descriptor.subrace?>刚才的位置。在房间的另一边，另一个同族站在同样的平台上。这让你有些激动——你被选中为实验对象！你希望你能对他们的研究有所助益，希望能找到更加有效、更加“痛苦”的方法，同时期望着痛苦的降临。一只绿色的小恶魔——形态似乎有些变异，比你通常见到的骨节更加突出——站在你身边，充满期待地微笑着。另一边，一只较为正常的小恶魔走向你的伙伴。“控制组准备……开始”那只正常的酸液树魔踩在他脸上，紧紧地按住，同时一股酸液从皮肤中涌出。红色的小恶魔看了看他融化的肉体，略记了些什么，然后小声说道“痛苦阻断关闭……”他脸上的笑容突然消失了，他抓着自己的脸，然后发出痛苦地哀嚎，倒在地上，不停翻滚着。红色小恶魔再次低下头看了看，厌倦地叹了口气，继续写着。“好吧，痛苦阻断打开，把他带走。”他停止了翻滚，站了起来，再度微笑，酸液继续吞噬着他的血肉，直到房间里的管子朝他喷洒了药剂。另一只红色小恶魔咕哝了几句，摆摆手，带着他离开了。同时，你看见他身上可怕的伤害渐渐愈合。
 
 “实验组……开始”你还没反应过来，那只变异的酸液树魔已经踩在你脸上了。当酸液滴落在你躯干上时，你并没有感到疼痛，只有一种古怪的皮肤消融的感觉。小恶魔再次低头向下看；显然他漏看了你的眼睛，因为你能看到他神色中的失望。“结构伤害……好的，痛苦阻断解除”你认为下一步骤里大家都期望着你不会发出尖叫。
 
@@ -106,6 +144,42 @@ registerLoreTranslation{
 
 #{italic}#最后一个字歪歪扭扭，一条墨水细线向下划去直到页面的底部，那是笔从手上滑落留下的痕迹。下方是一幅关于你的涂鸦，手里拿着武士刀，正在和“忍者王阿塔玛森”对战。看起来，你的霸气侧漏把这个恶魔吓尿了。#{normal}#
 ]]
+}
+
+registerLoreTranslation{
+	id = "ashes-urhrok-mural-painting-1",
+	name = "第一幅壁画",
+	lore = [[#{italic}#“吾主万岁”——您的奴仆#{normal}#]],
+}
+
+registerLoreTranslation{
+	id = "ashes-urhrok-mural-painting-2",
+	name = "第二幅壁画",
+	lore = [[#{italic}#“吾主万岁”——您的奴仆#{normal}#]],
+}
+
+registerLoreTranslation{
+	id = "ashes-urhrok-mural-painting-3",
+	name = "第三幅壁画",
+	lore = [[#{italic}#“吾主万岁”——您的奴仆#{normal}#]],
+}
+
+registerLoreTranslation{
+	id = "ashes-urhrok-mural-painting-4",
+	name = "第四幅壁画",
+	lore = [[#{italic}#“吾主万岁”——您的奴仆#{normal}#]],
+}
+
+registerLoreTranslation{
+	id = "ashes-urhrok-mural-painting-5",
+	name = "第五幅壁画",
+	lore = [[#{italic}#“吾主万岁”——您的奴仆#{normal}#]],
+}
+
+registerLoreTranslation{
+	id = "ashes-urhrok-mural-painting-6",
+	name = "第六幅壁画",
+	lore = [[#{italic}#“吾主万岁”——您的奴仆#{normal}#]],
 }
 
 -------------------------------------------------------------------------

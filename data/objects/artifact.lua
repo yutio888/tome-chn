@@ -1782,7 +1782,8 @@ registerArtifactTranslation{
 	originName = "Shifting Boots",
 	name = "闪现靴",
 	unided_name = "一双可以闪现的靴子",
-	desc = "这双靴子可以使任何人像它以前的主人戴伯一样淘气。",
+	desc = "这双靴子可以使任何人像它以前的主人小恶魔德瑞宝一样淘气。",
+	["use_power.name"] = function(self, who) return ("传送到半径 %d 范围内的随机位置 (基于魔法)"):format(self.use_power.range(self, who)) end,
 }
 
 registerArtifactTranslation{
@@ -2498,14 +2499,14 @@ registerArtifactTranslation{
 	originName = "Wheel of Fate",
 	name = "命运之轮",
 	unided_name = "命运之轮",
-	desc = "这不是我想要的结果！- Howar	Muransk,普通人类恶魔学家。\nThis band of gothic obsidian menaces with an embossed image of a grinning skull. It beckons you to tempt fate and put it on. Do you?",
+	desc = "这不是我想要的结果！- Howar	Muransk,普通人类恶魔学家。\n狞笑着的骷髅图案在这个由黑曜石铸成的哥特式戒指上隐约浮现。骷髅似乎在召唤着你，使你情不自禁想要铤而走险地把它戴在手上，转动命运之轮。你会这么做吗？",
 }
 
 registerArtifactTranslation{
 	originName = "Helm of the Dominated",
 	name = "支配头盔",
 	unided_name = "长角的头盔",
-	desc = "这个头盔是为了提高Doom Elf的能力，而作为实验产品被制造出来。",
+	desc = "这个头盔是为了提高魔化精灵的能力，而作为实验产品被制造出来。",
 }
 
 registerArtifactTranslation{
@@ -2890,7 +2891,7 @@ registerArtifactTranslation{
 	unided_name = "螺旋形金属腰带",
 	desc = [[一个坚固的铁链缠着细金属丝网。火花在上面跳舞.]],
 	special_desc = function(self)
-		return [[每 次 接 受 雷 电 伤 害 或 造 成 暴 击 雷 电 伤 害 时 获 得两 点 充 能 ， 每 点 充 能 提 供 5%% 雷 电 伤 害 加 成 和 1 点 全属 性 。 每 回 合 损 失一 点 加 成。]] 
+		return [[每 次 接 受 雷 电 伤 害 或 造 成 暴 击 雷 电 伤 害 时 获 得 两 点 充 能 ， 每 点 充 能 提 供 5%% 雷 电 伤 害 加 成 和 1 点 全 属 性 。 每 回 合 损 失 一 点 加 成。]] 
 	end,
 }
 

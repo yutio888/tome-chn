@@ -1,3 +1,4 @@
+-- dangerous, use it carefully or it may damage the save file
 module(..., package.seeall, class.make)
 
 local old_descriptor = {}

@@ -23,6 +23,7 @@ local ListColumns = require "engine.ui.ListColumns"
 local TextzoneList = require "engine.ui.TextzoneList"
 local Image = require "engine.ui.Image"
 local Separator = require "engine.ui.Separator"
+local r = require "data-chn123.rewrite_descriptor"
 
 module(..., package.seeall, class.inherit(Dialog))
 
@@ -34,7 +35,9 @@ function _M:init(l, w, force_height)
 
 	Dialog.init(self, "新手札：#0080FF#"..l.name, 1, 1)
 
+	r.rewrite()
 	local text = util.getval(l.lore).."\n"
+	r.recover()
 	if (l.chn_translated) then text = cutChrCHN(text, 40) end
 
 	if text:find("Athrall") then text = "‘为了主人的荣耀’ ——阿夏尔" end

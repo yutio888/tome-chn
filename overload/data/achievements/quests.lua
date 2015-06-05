@@ -48,7 +48,7 @@ newAchievement{
 newAchievement{
 	name = "Burnt to the ground", id="APPRENTICE_STAFF",
 	show = "none",
-	desc = [[把湮灭法杖交给法师学徒并观看烟火。]],
+	desc = [[把吸能法杖交给法师学徒并观看烟火。]],
 }
 newAchievement{
 	name = "Against all odds", id = "KILL_UKRUK",

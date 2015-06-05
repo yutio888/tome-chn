@@ -75,9 +75,9 @@ function npcCHN:getDesc(name, desc)
             return npcDescCHN[name]
         end
 	elseif npcDescCHN[string.lower(name)] then return npcCHN:getDesc(string.lower(name), desc)
-	elseif name:find("Crystaline Half (") then
+	elseif name:find("Crystaline Half %(") then
         return [[从你的完整身体中抽出的水晶分身。]]
-	elseif name:find("Stone Half (") then
+	elseif name:find("Stone Half %(") then
         return [[从你的完整身体中抽出的岩石分身。]]
 	elseif name:find("demonic husk") then
 		name = name:gsub(" %(demonic husk%)","")

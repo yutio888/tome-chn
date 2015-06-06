@@ -119,3 +119,7 @@ yesnoLongPopDlg["Alter of Dreams"] = function()
 将会让你的身体一并死亡。
 确定要进入梦境么？]]
 end
+
+yesnoLongPopDlg["Encounter"] = function ()
+	return "遭遇", "你发现了一个古老地窖的入口，里面笼罩着恐怖的恶魔气息，仅仅站在门口你就已经感受到了它的威胁。\n你听到里面传来了模糊的女人的哭声。", "进入地窖", "悄悄离开"
+end

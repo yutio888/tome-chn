@@ -48,6 +48,8 @@ loreCat["magic"] = "魔法"
 loreCat["dreamscape"] = "梦境空间"
 loreCat["keepsake"] = "往昔信物"
 loreCat["Ashes of Urh'Rok"] = "乌鲁克之灰烬"
+loreCat["valley of the moon"] = "月之山谷"
+loreCat["tannen's tower"] = "泰恩之塔"
 --lore list
 
 --age-allure

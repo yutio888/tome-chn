@@ -180,7 +180,7 @@ simpleLongDlg["Conclave Vault"] = function()
 	return "孔克雷夫地下实验室",[[在 你 到 达 地 图 上 坐 标 所 指 的 位 置 时 ， 你 惊 奇 地 发 现 地 上 有 一 个 巨 大 的 裂 谷 ， 深 邃 的 谷 底 中 闪 烁 着 金 属 的 光 泽 ， 那 是 一 扇 古 老 的 大 门 。 看 起 来 ， 魔 法 大 爆 炸 的 强 大 力 量 所 造 成 的 地 震 正 好 将 地 面 切 裂 ， 让 本 来 在 爆 炸 中 被 毁 的 ， 通 向 孔 克 雷 夫 古 老 遗 迹 的 通 道 重 现 人 间 。 你 小 心 地 从 裂 谷 上 攀 爬 而 下 ， 站 在 门 前 。]]
 end
 
-simpleLongDlg["Tannen's Tower"] = function 
+simpleLongDlg["Tannen's Tower"] = function() 
 	return "泰恩之塔",[[
 	当你爬上楼梯，你看到泰恩正和他的龙傀儡站在一起，手中拿
 	着一张羊皮纸。在他阅读的时候，他的眉头紧皱，汗如雨下，

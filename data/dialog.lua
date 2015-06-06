@@ -166,9 +166,12 @@ end
 
 --- Requests a long yes-no dialog
 function _M:yesnoLongPopup(title, text, w, fct, yes_text, no_text, no_leave, escape)
+	local my_yes_text, my_no_text = nil, nil
 	if yesnoLongPopDlg and yesnoLongPopDlg[title] then
-		title,text = yesnoLongPopDlg[title](text)
+		title,text,my_yes_text,my_no_text = yesnoLongPopDlg[title](text)
 	end
+	yes_text = my_yes_text or yes_text
+	no_text = my_no_text or no_text
 	local list = text:splitLines(w - 10, font)
 	local d = new(title, 1, 1)
 

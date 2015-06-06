@@ -302,10 +302,6 @@ simplePopDlg["Rod of Recall"] = function()
 	return "回归之杖", "你找到了一根回归之杖，你可以用它快速的离开当前区域，回到大地图。"
 end
 
-simplePopDlg["Easy!"] = function()
-	return "小菜一碟！", "这个地下城对你来说过于简单，你闲庭信步，直达最后一层。"
-end
-
 simplePopDlg["Inscriptions"] = function()
 	return "纹身", "你已经解锁了所有的纹身槽。"
 end

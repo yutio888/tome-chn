@@ -144,7 +144,7 @@ function _M:yesnoPopup(title, text, fct, yes_text, no_text, no_leave, escape)
 		yes_text = "否"
 		no_text = "是"
 	end
-	if text=="Are you sure you want to target yourself?" then text = "你确定要以自己为目标释放技能？" end
+	if text=="Are you sure you want to target yourself?" then text = "你确定要以自己为目标释放技能？"  yes_text = "否" no_text = "是" end
 	local w, h = self.font:size(text)
 	local d = new(title, 1, 1)
 

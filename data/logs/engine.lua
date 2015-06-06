@@ -91,15 +91,24 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
-	log = "%s can not wear: %s (%s).",
-	fct = function(a,b,c)
+	log = "%s can not wear: %s.",
+	fct = function(a,b)
 		local name = objects:getObjectsChnName(b)
-		if c == "not enough stat" then c = "属性点不足"
-		elseif c == "not enough levels" then c = "等级不足"
-		elseif c == "missing dependency" then c = "附属条件未达到"
-		elseif c == "cannot use currently due to an other worn object" then c = "由于其他已装备物品， 暂时无法使用"
+		return ("%s 不能装备: %s。"):format(a,name)
+	end,
+}
+
+logCHN:newLog{
+	log = "%s can not wear (%s): %s (%s).",
+	fct = function(a,b,c,d)
+		local ns = b:gsub("in main hand","在主手"):gsub("in off hand","在副手"):gsub("psionic focus","心灵聚焦"):gsub("on fingers","在手指上"):gsub("around neck","在脖子上"):gsub("light source","以光源"):gsub("main armor","作为主护甲"):gsub("cloak","作为披风"):gsub("on head","在头上"):gsub("around waist","在腰间"):gsub("on hands","在手上"):gsub("on feet","在脚上"):gsub("tool","作为工具"):gsub("quiver","作为箭矢"):gsub("socketed gems","作为插入的宝石"):gsub("second weapon set: in main hand","作为第二套主手武器"):gsub("second weapon set: in off hand","作为第二套副手武器"):gsub("second weapon set: psionic focus","作为第二套心灵聚焦"):gsub("second weapon set: quiver","作为第二套箭矢")
+		local name = objects:getObjectsChnName(c)
+		if d == "not enough stat" then d = "属性点不足"
+		elseif d == "not enough levels" then d = "等级不足"
+		elseif d == "missing dependency" then d = "附属条件未达到"
+		elseif d == "cannot use currently due to an other worn object" then c = "由于其他已装备物品， 暂时无法使用"
 		end
-		return ("%s 无法装备： %s （ %s ）"):format(a,name,c)
+		return ("%s 无法%s装备： %s （ %s ）"):format(a,ns,name,c)
 	end,
 }
 
@@ -112,7 +121,7 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
-	log = "%s wears(offslot): %s.",
+	log = "%s wears (offslot): %s.",
 	fct = function(a,b)
 		local name = objects:getObjectsChnName(b)
 		return ("%s 副手装备了： %s"):format(a,name)
@@ -120,10 +129,11 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
-	log = "%s wears(replacing): %s.",
-	fct = function(a,b)
+	log = "%s wears (replacing %s): %s.",
+	fct = function(a,b,c)
 		local name = objects:getObjectsChnName(b)
-		return ("%s 装备（替换）了： %s"):format(a,name)
+		local name2 = objects:getObjectsChnName(c)
+		return ("%s 装备（替换 %s）了： %s"):format(a,name,name2)
 	end,
 }
 

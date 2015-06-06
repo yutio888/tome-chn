@@ -918,9 +918,9 @@ function _M:changeLevelReal(lev, zone, params)
 			if self.zone.tier1 then
 				if lev == 1 and game.state:tier1Killed(game.state.birth.start_tier1_skip or 3) then
 					self.zone.tier1 = nil
-					Dialog:yesnoPopup("Easy!", "这个区域太简单了，你能直接走到最后一层。", function(ret) if ret then
+					Dialog:yesnoPopup("Easy!", "This zone is so easy for you that you can stroll to the last area with ease.", function(ret) if ret then
 						game:changeLevel(self.zone.max_level)
-					end end, "直接深入", "停在入口")
+					end end, "Stroll", "Stay there")
 				end
 			end
 			if type(self.zone.save_per_level) == "nil" then self.zone.save_per_level = config.settings.tome.save_zone_levels and true or false end

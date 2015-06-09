@@ -443,8 +443,12 @@ npcDescCHN["oozing horror"] = "一个巨大的有着绿色斑点的黏糊糊的�
 npcNameCHN["umbral horror"] = "暗影恐魔"
 npcDescCHN["umbral horror"] = "一个闪过黑暗的阴影，迅速遁入了无尽的黑暗。"
 
-npcNameCHN["dreaming horror"] = "梦靥恐魔"
-npcDescCHN["dreaming horror"] = "这是一只混沌状的触手生物，它在这里惬意的休息并不断的变幻着颜色，显然无视了你的存在。它的每次呼吸都会使周围的空间发生轻微的扭曲。在它身上氤氲着的光芒由蓝转红、由绿转黄，交织成一片五彩缤纷的幻景。"
+npcNameCHN["dreaming horror"] = "梦境恐魔"
+npcDescCHN["dreaming horror"] = {}
+npcDescCHN["dreaming horror"][ [[A vaguely tentacled yet constantly changing form rests here apparently oblivious to your existence.
+With each slow breath it takes reality distorts around it.  Blue twirls into red, green twists into yellow, and the air sings softly before bursting into a myriad of pastel shapes and colors.]] ] = "这是一只混沌状的触手生物，它在这里惬意的休息并不断的变幻着颜色，显然无视了你的存在。它的每次呼吸都会使周围的空间发生轻微的扭曲。在它身上氤氲着的光芒由蓝转红、由绿转黄，交织成一片五彩缤纷的和谐幻景。"
+npcDescCHN["dreaming horror"][ [[A vaguely tentacled yet rapidly changing shape floats here.  With each breath you can feel reality twist, shatter, and break. 
+Blue burns into red, green bursts into yellow, and the air crackles and hisses before exploding into a thousand fragments of sharp shapes and colors.]] ] = "这是一只混沌状的触手生物，被吵醒的它快速变幻着颜色。它的每次呼吸都会使周围的空间剧烈地扭曲，撕裂，粉碎。在它身上氤氲着的光芒由蓝转红、由绿转黄，周围的空气鼓动着迸射出无数五彩斑斓的晶莹碎片。"
 
 npcNameCHN["dream seed"] = "梦境之种"
 npcDescCHN["dream seed"] = "这是一个漂浮着的粉红色泡沫，它似乎能够反映出世界的另一面，但是由于这虚幻的空间，它所反映的事物只可能存在于我们的梦境中。"
@@ -1445,6 +1449,10 @@ npcNameCHN["Ukruk the Fierce"] = "凶残的乌克鲁克"
 npcDescCHN["Ukruk the Fierce"] = "这只丑陋的兽人看起来邪恶而丑陋。显然他正在寻找某物，并且他在不断的用盾牌发出信号。"
 
 --dreams
+npcNameCHN["frail mouse"] = "脆弱的老鼠"
+
+npcNameCHN["lost man"] = "迷路的男人"
+
 npcNameCHN["yeek illusion"] = "夺心魔幻象"
 npcDescCHN["yeek illusion"] = "纳尼？！"
 

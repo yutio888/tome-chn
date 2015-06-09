@@ -120,6 +120,7 @@ local urlmatch = lpeg.anywhere(lpeg.C(urlfind))
 -- log("foo %s", s)
 function _M:call(str, ...)
 	--str = str:format(...)
+	str = str or ""
 	if logTableCHN[str] then
 		print("[logerr]"..str)
 		str = logTableCHN[str].fct(...)

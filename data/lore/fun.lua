@@ -1,6 +1,6 @@
 ﻿registerLoreTranslation{
 	id = "troll-poem",
-	name = "巨魔之歌",
+	name = "巨魔诗歌",
 	lore = [[#{bold}#“我爱大棒槌”
 
 #{italic}#大棒槌，大棒槌，大棒槌，

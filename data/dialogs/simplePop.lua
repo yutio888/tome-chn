@@ -1,6 +1,6 @@
 ﻿simplePopDlg = {}
 simplePopDlg["Caves..."] = function()
-	return "洞穴...", "当你走进洞穴时，你发现这里已经被魔法力量扭曲了。"
+	return "洞穴...", "当你走进洞穴时，你发现这里已经被魔法力量扭曲了，使其变得规整而曲折。"
 end
 
 simplePopDlg["Lake of Nur"] = function(str)
@@ -18,7 +18,7 @@ end
 
 simplePopDlg["Back and there again"] = function(str)
 	if str == "As the annoying imp falls a portal appears under its corpse." then
-		str = "当这只讨厌的章鱼被击败后，一个传送门从它的尸体下露了出来。"
+		str = "当这只讨厌的小恶魔被击败后，一个传送门从它的尸体下露了出来。"
 	else
 		str = "一道传送门出现在塔中间！"
 	end
@@ -34,8 +34,10 @@ simplePopDlg["Strange Orb"] = function(str)
 		str = "这只水晶球在你的触摸下反应很糟，你听到了一声尖叫！"
 	elseif str == "The orb glows brightly. There is a loud crack coming from the northern central chamber." then
 		str = "水晶球闪耀着光芒。来自北部中心的地区传出了一声巨大的破裂声。"
-	else
+	elseif str == "The orb glows brightly."
 		str = "水晶球闪耀着光芒。"
+	elseif str == "The orb looks inactive."
+		str = "水晶球看起来对你不起反应"
 	end
 	return "奇特的水晶球", str	
 end
@@ -79,10 +81,6 @@ simplePopDlg["Temporal Rift"] = function(str)
 	return "时空裂隙", str
 end
 
-simplePopDlg["Long tunnel"] = function()
-	return "绵长隧道", "你不能放任这些瑞尔的夺心魔们去面对岛上的危险。"
-end
-
 simplePopDlg["Crypt"] = function(str)
 	if str == "You hear an eerie chanting echoing from a distance." then
 		str = "你听到远方传来的念诵回响声。"
@@ -101,12 +99,17 @@ simplePopDlg["Tannen's Tower"] = function()
 	return "泰恩之塔", "传送门将你送到了这座高塔的一个小房间里。你必须逃离！"
 end
 simplePopDlg["Thanks"] = function(str)
+	str = str:gsub("You saved all of us, ", "你救了我们所有人")
+	str = str:gsub("You saved most of us", "你救了我们大多数人")
+	str = str:gsub("please take this has a reward. (They give you", "请把这个带走作为礼物。(他们给了你")
 	str = str:gsub("The remaining lumberjacks collect some gold to thanks you","幸存的伐木工们搜集了一些金币来感谢你")
 	return "谢谢",str
 end
 
 simplePopDlg["Fortress Shadow"] = function()
-	return "堡垒之影", "能量太低了。至少需要15点能量。"
+	str = str:gsub("The energy is too low. It needs to be at least ", "能量太低了。至少需要")
+	str = str:gsub("%.", "点能量。")
+	return "堡垒之影", ""
 end
 
 simplePopDlg["Lichform"] = function()
@@ -161,8 +164,13 @@ simplePopDlg["Transmogrification Chest"] = function(str)
 	return "转化之盒", str
 end
 
-simplePopDlg["Long tunnel"] = function()
-	return "绵长通道", "当你进入通道时，你感到一股奇异的力量把你往回推。"
+simplePopDlg["Long tunnel"] = function(str)
+	if str == "As you enter the tunnel you feel a strange compulsion to go backward."
+		str = "在你试图进入隧道时，有种奇怪的力量把你推了回去。"
+	elseif str == "You cannot abandon the yeeks of Rel to the dangers that lie within the island."
+		str = "在清除这座岛上夺心魔们仍然面对的危险之前，你不能离开这座岛。"
+	end
+	return "绵长隧道", str
 end
 
 simplePopDlg["Ambush!"] = function()
@@ -321,7 +329,7 @@ simplePopDlg["Weird Pedestal"] = function(str)
 end
 
 simplePopDlg["Forsaken Crypt"] = function()
-	return "遗弃地穴", "你听到尖叫声和骨骼摩擦的回声……前方似乎有死亡在等待着你，还是逃吧！"
+	return "遗弃地穴", "你听到吱吱声和骨骼摩擦的回声……前方似乎有死亡在等待着你，还是逃吧！"
 end
 
 simplePopDlg["Fall..."] = function()
@@ -329,10 +337,8 @@ simplePopDlg["Fall..."] = function()
 end
 
 simplePopDlg["Cultist"] = function(str)
-	str = str:gsub("The cultist's soul seems to be absorbed by the strange stone he was guarding. You feel like something is about to happen...","信徒的灵魂似乎被其守卫的奇异石头所吸收。你感觉似乎要出大事了……")
-		 :gsub("A terrible shout thunders across the level: 'Come my darling, come, I will be ssssooo *nice* to you!'","一个恐怖的声音突然自空中传来：“来吧，亲爱的，来吧，我将会好好的“疼”你的。” ")
-		 :gsub("You should flee from this level!","你必须逃离此地！")
-	return "信徒",str
+	str = str:gsub("The cultist's soul seems to be absorbed by the strange stone he was guarding. You feel like something is about to happen...","邪教徒的灵魂似乎被其守卫的奇异石头所吸收。你感觉似乎要出大事了……")
+	return "邪教徒",str
 end
 
 simplePopDlg["Strange Pedestal"] = function()
@@ -341,4 +347,37 @@ end
 
 simplePopDlg["Sludgenest"] = function()
 	return "淤泥巢穴","似乎从墙壁里出来的史莱姆会随时间变强"
+end
+
+simplePopDlg["Meteor!"] = function()
+	return "陨石！","你正匆匆赶路时，你注意到一块巨大的石头正从天而降，在你的身旁坠落！"
+end
+
+simplePopDlg["Thunderstorm"] = function()
+	return "暴风雨","当你进入这个区域时，你感觉到一股暴风雨在你的头顶盘旋。小心！"
+end
+
+simplePopDlg["Snowstorm"] = function()
+	return "暴风雪","当你进入这个区域时，你感觉到一股暴风雪在你的头顶盘旋。小心！"
+end
+
+simplePopDlg["Legacy of the Naloren"] = function()
+	return "纳鲁精灵的遗产","萨拉苏斯很高兴了解你的忠诚，你最好再回去见见他。"
+end
+
+simplePopDlg["Murgol Lair"] = function()
+	return "穆格尔巢穴", "当你进入巢穴时你听到了打斗的兵器撞击声。似乎已经有人入侵了这里。"
+end
+
+simplePopDlg["Fumes"] = function()
+	return "烟雾", "当心灵蠕虫倒下时，弥漫的烟气似乎不再侵袭你的心灵了。"
+end
+
+simplePopDlg["Rumbling..."] = function()
+	return "隆隆之声", "大地震颤起来，远处好像有一个巨大的东西正搅动着大地。"
+end
+
+simplePopDlg["Screenshot taken"] = function(str)
+	str = str:gsub("File: ", "文件存放位置：")
+	return "截图已保存", str
 end

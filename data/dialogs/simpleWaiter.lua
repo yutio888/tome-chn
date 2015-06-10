@@ -41,7 +41,20 @@ end
 simpleWaiterDlg["Registering..."] = function()
 	return "注册中...","注册中，请稍等"
 end
-simpleWaiterDlg["Yiilkgur's Library of Lost Mysteries"] = function()
-	return "图书馆","接受来自宇宙的遗失的知识..."
+simpleWaiterDlg["Registering character"] = function()
+	return "正在注册角色","正在在 http://te4.org/ 上注册角色。"
 end
-
+simpleWaiterDlg["Retrieving data from the server"] = function()
+	return "正在从服务器取回数据","请稍等…"
+end
+simpleWaiterDlg["Requesting..."] = function()
+	return "正在请求…","正在请求用户数据，请稍等…"
+end
+simpleWaiterDlg["Chronomancy"] = function(str)
+	if str == "Folding the space time structure..."
+		str = "正在折叠时空的结构…"
+	elseif str == "Unfolding the space time structure..."
+		str = "正在展开时空的结构…"
+	end
+	return "时空法术",str
+end

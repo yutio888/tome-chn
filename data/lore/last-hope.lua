@@ -591,7 +591,7 @@ registerLoreTranslation{
 	lore = [[#{bold}#
 天鹅西瑞亚
 #{normal}#56 - 109#{italic}#
-希望你的脚莫要踏足于星海
+你的双足将漫步于星海
 #{normal}#]],
 }
 
@@ -614,7 +614,7 @@ registerLoreTranslation{
 	lore = [[#{bold}#
 神枪手哈宝
 #{normal}#94 - 120#{italic}#
-不安全着陆
+被跳弹击中
 #{normal}#]],
 }
 
@@ -727,7 +727,7 @@ registerLoreTranslation{
 	lore = [[#{bold}#
 愿圣骑士吉迪斯安息
 #{normal}#?? - 118#{italic}#
-来自为止大陆的闪亮新星
+来自未知大陆的闪亮新星
 我们为你的陨落而哭泣
 #{normal}#]],
 }

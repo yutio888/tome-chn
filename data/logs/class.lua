@@ -1322,3 +1322,10 @@ logCHN:newLog{
 		return ("%s正处于睡眠中，不能这样做。"):format(a)
 	end,
 }
+
+logCHN:newLog{
+	log = "#RED#Rising again, the Rat Lich's eyes glow with renewed energy!"
+	fct = function()
+		return "#RED#鼠巫妖再次站起，它的眼睛放射着能量的光辉！"
+	end
+}

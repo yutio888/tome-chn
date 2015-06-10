@@ -407,7 +407,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#AQUAMARINE#All around you there is only water as far as you can see, except to your left, a giant coral structure. This is probably the temple of Creation.",
 	fct = function()
-		return "#AQUAMARINE#在你四周除了水你看到的还是水， 除了在你的左边，你看到一个珊瑚礁，有可能这就是造物者神庙。"
+		return "#AQUAMARINE#在你四周除了水你看到的还是水， 除了在你的左边，你看到一个巨大的珊瑚礁建筑，有可能这就是造物者神庙。"
 	end,
 }
 
@@ -415,7 +415,7 @@ logCHN:newLog{
 	log = "The Eidolon Plane seems to not physicaly exists in the same way the normal world does, you can not seem to drop anything here. %s comes back into your backpack.",
 	fct = function(a)
 		local name = objects:getObjectsChnName(a)
-		return ("幻象位面似乎并不在现实世界中真实存在， 似乎你在这里不能丢弃任何东西， %s 又回到了你的手中。"):format(name)
+		return ("艾德隆位面似乎并不在现实世界中真实存在， 似乎你在这里不能丢弃任何东西， %s 又回到了你的手中。"):format(name)
 	end,
 }
 

@@ -90,7 +90,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#AQUAMARINE#With Grgglck's death its tentacle also falls lifeless on the ground!",
 	fct = function()
-		return "#AQUAMARINE#随着格尔格勒克的死去它的那些爬虫也毫无生机地倒在了地上！"
+		return "#AQUAMARINE#随着格尔格勒克的死去它的那些触手也毫无生机地倒在了地上！"
 	end,
 }
 
@@ -923,5 +923,12 @@ logCHN:newLog{
 	log = "#AQUAMARINE#As #Source# falls you notice that #Target# seems to shudder in pain!",
 	fct = function()
 		return "#AQUAMARINE#当 #Source# 倒下时， 你注意到 #Target# 似乎在痛苦中挣扎！"
+	end,
+}
+
+logCHN:newLog{
+	log = "#LIGHT_BLUE#The sleeper stirs...",
+	fct = function()
+		return "#LIGHT_BLUE#有人打扰了沉睡者的沉眠..."
 	end,
 }

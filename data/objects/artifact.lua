@@ -157,7 +157,7 @@ registerArtifactTranslation{
 
 registerArtifactTranslation{
 	originName = "Kor's Fall",
-	name = "卡尔的陨落",
+	name = "卡·普尔的陨落",
 	unided_name = "黑暗的法杖",
 	desc = "这根法杖由许多生物的骨头制成并散发着能量。你甚至可以在很远的地方感受到它的邪恶气息。",
 }

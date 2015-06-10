@@ -227,9 +227,6 @@ npcDescCHN["heavy bone giant"] = "像铁塔一样的生物，由数不清的骨�
 npcNameCHN["runed bone giant"] = "符文骨巨人"
 npcDescCHN["runed bone giant"] = "像铁塔一样的生物，由数不清的骨头构成，它的骨头上布满符文和充斥着憎恨的魔法印记。"
 
-npcNameCHN["Heavy Sentinel"] = "笨重的森提内尔"
-npcDescCHN["Heavy Sentinel"] = "像铁塔一样的生物，由数不清的骨头构成。它的胸前缠绕着一圈烈焰。"
-
 --犬科动物(canine)
 npcNameCHN["wolf"] = "狼"
 npcDescCHN["wolf"] = "一头瘦弱的、狡猾的皮毛蓬松的饿狼，它正用贪婪的眼神看着你。"
@@ -372,9 +369,6 @@ npcDescCHN["banshee"] = "一个发出凄惨尖叫的女妖。"
 npcNameCHN["ruin banshee"] = "毁灭女妖"
 npcDescCHN["ruin banshee"] = "乌鲁洛克的吐息中诞生，不断嚎叫的复仇之魂。恐惧之地的气息不断从她次元扭曲的身体中渗出，不断灼烧和腐蚀着周围的一切。"
 
-npcNameCHN["Glacial Legion"] = "格拉希尔·雷金"
-npcDescCHN["Glacial Legion"] = "一个巨大的无定形态的漂浮灵魂体，它包裹在一颗冰封的血球中。冰雾从地板上冉冉升起。"
-
 --恶鬼(ghoul)
 npcNameCHN["ghoul"] = "食尸鬼"
 npcDescCHN["ghoul"] = "肉块正在不断的从这个腐朽的身体上掉落。"
@@ -387,9 +381,6 @@ npcDescCHN["ghoulking"] = "这具腐烂的身躯散发着一股恶臭。它的�
 
 npcNameCHN["risen corpse"] = "浮尸"
 npcDescCHN["risen corpse"] = "一具通过黑暗魔法漂浮着的尸体"
-
-npcNameCHN["Rotting Titan"] = "堕落泰坦"
-npcDescCHN["Rotting Titan"] = "这只行动缓慢的巨大石化怪物每走一步都会使大地为之震颤。它的身体看起来似乎在不断的颤动和重塑。厚重的石化指尖成为了它强大的钝器。"
 
 --元素生物 大气(gwelgoroth)
 npcNameCHN["gwelgoroth"] = "格维格罗斯"
@@ -1108,7 +1099,9 @@ npcNameCHN["gigantic bone rat"] = "巨型骨鼠"
 npcDescCHN["gigantic bone rat"] = "这只巨大的怪物看起来像是许多骨头拼起来的老鼠。"
 
 npcNameCHN["Rat Lich"] = "鼠巫妖"
-npcDescCHN["Rat Lich"] = "这只军团的主人站在你面前。它吱吱叫着并指挥一大群怪物接近你。"
+npcDescCHN["Rat Lich"] = {}
+npcDescCHN["Rat Lich"]["The master of the pit is before you. It squeaks with menace as it and a horde of minions approach you."] = "这只军团的主人站在你面前。它吱吱叫着并指挥一大群怪物接近你。"
+npcDescCHN["Rat Lich"]["The master of the pit is before you. It squeaks with menace as it and a horde of minions approach you.\nThe Rat Lich's true power has been unveiled! Swirling with arcane energy, it stalks towards you uttering warsqueaks at its minions!"] = "这只军团的主人站在你面前。它吱吱叫着并指挥一大群怪物接近你。\n鼠巫妖的真正力量展现出来了！它的身躯环绕着奥术能量，昂首阔步地带领着它的仆从包围着你，发出吱吱的战吼！"
 
 --吸血鬼(vampire)
 npcNameCHN["lesser vampire"] = "小吸血鬼"
@@ -1125,9 +1118,6 @@ npcDescCHN["elder vampire"] = "这只吸血鬼一副可怕的披长袍的不死�
 
 npcNameCHN["vampire lord"] = "吸血鬼族长"
 npcDescCHN["vampire lord"] = "当这只可怕的生物靠近时，你感到脊背一阵发凉。"
-
-npcNameCHN["Arch Zephyr"] = "阿克·伊法"
-npcDescCHN["Arch Zephyr"] = "这只远古吸血鬼的长袍无风自动。闪电在他的周身环绕。他手里握着一把长弓，电弧在这把弓上流转。"
 
 --蠕虫(vermin)
 npcNameCHN["white worm mass"] = "白色蠕虫团"
@@ -1627,6 +1617,21 @@ npcDescCHN["Epoch"] = "在你面前的是一只黄蓝双色能量线的混合体
 npcNameCHN["Rak'shor, Grand Necromancer of the Pride"] = "普莱德死灵魔导师拉克·肖"
 npcDescCHN["Rak'shor, Grand Necromancer of the Pride"] = "一只穿着黑色长袍的年老兽人。他命令不死大军攻击你。"
 
+npcNameCHN["Rotting Titan"] = "堕落泰坦"
+npcDescCHN["Rotting Titan"] = "这只行动缓慢的巨大石化怪物每走一步都会使大地为之震颤。它的身体看起来似乎在不断的颤动和重塑。厚重的石化指尖成为了它强大的钝器。"
+
+npcNameCHN["Glacial Legion"] = "格拉希尔·雷金"
+npcDescCHN["Glacial Legion"] = "一个巨大的无定形态的漂浮灵魂体，它包裹在一颗冰封的血球中。冰雾从地板上冉冉升起。"
+
+npcNameCHN["Heavy Sentinel"] = "笨重的森提内尔"
+npcDescCHN["Heavy Sentinel"] = "像铁塔一样的生物，由数不清的骨头构成。它的胸前缠绕着一圈烈焰。"
+
+npcNameCHN["Arch Zephyr"] = "阿克·伊法"
+npcDescCHN["Arch Zephyr"] = "这只远古吸血鬼的长袍无风自动。闪电在他的周身环绕。他手里握着一把长弓，电弧在这把弓上流转。"
+
+npcNameCHN["Void Spectre"] = "虚空亡魂"
+npcDescCHN["Void Spectre"] = "无尽的奥术能量在它永恒的身躯周围环绕。"
+
 --reknor
 npcNameCHN["Golbug the Destroyer"] = "毁灭者高尔布格"
 npcDescCHN["Golbug the Destroyer"] = "一只膘肥身健的巨大兽人。他看起来既危险又狡猾……"
@@ -1681,10 +1686,10 @@ npcDescCHN["Ritch Great Hive Mother"] = "这只巨大的里奇似乎是所有里
 npcNameCHN["The Shade"] = "暗影骷髅"
 npcDescCHN["The Shade"] = "这只骷髅看起来很邪恶。它的眼眶里有红色的燃烧火焰。它手持一把巨剑冲向你，并向你投掷法术。"
 
-npcNameCHN["The Possessed"] = "强盗头目"
-npcDescCHN["The Possessed"] = "这是那伙杀死暗影骷髅的强盗的头目，但显然他只是取代了暗影骷髅的位置罢了。"
+npcNameCHN["The Possessed"] = "幽灵附体的强盗头目"
+npcDescCHN["The Possessed"] = "这是那伙杀死暗影骷髅的强盗的头目，但显然暗影骷髅上的灵魂并没有这么甘心离去，曾经不可一世的强盗头目也只是被其附体的行尸走肉罢了。"
 
-npcNameCHN["Kor's Fury"] = "卡尔之怒"
+npcNameCHN["Kor's Fury"] = "卡·普尔之怒"
 npcDescCHN["Kor's Fury"] = "暗影骷髅使用强大的能量使它存留于世。现在，它成为了疯狂的复仇之魂。"
 
 --sandworm-lair

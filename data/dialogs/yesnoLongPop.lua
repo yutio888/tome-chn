@@ -123,3 +123,9 @@ end
 yesnoLongPopDlg["Encounter"] = function ()
 	return "遭遇", "你发现了一个古老地窖的入口，里面笼罩着恐怖的恶魔气息，仅仅站在门口你就已经感受到了它的威胁。\n你听到里面传来了模糊的女人的哭声。", "进入地窖", "悄悄离开"
 end
+
+yesnoLongPopDlg["Cursed Fate"] = function(str)
+	str = str:gsub(" lying nearby catches your attention. What draws you to it is not the thing itself, but something burning inside you. You feel contempt for it and all worldly things. This feeling is not new but the power of it overwhelms you. You reach out to touch the object, to curse it, to defile it. And you notice it begin to change. The colors of it begin to fade and are replaced with an insatiable hate. For a moment you hesitate. You know you must choose to resist this manifestation of your curse now and forever, or fall further into your madness.", [[引 起 了 你 的 注 意。 吸 引 你 的 并 不 是 物 体 本 身， 而 是 在 你 心 底 熊 熊 燃 烧 的 憎 恨 之 火。 你 对 它 充 满 着 憎 恨， 正 如 你 憎 恨 着 世 间 万 物 一 般。 对 你 而 言， 这 种 感 觉 已 经 相 当 的 熟 悉， 但 是 这 一 次， 这 股 憎 恨 已 经 快 要 支 配 你 了。 你 伸 出 手 拾 起 了 它 , 发 自 内 心 地 诅 咒 它、 污 染 它。 紧 接 着， 你 发 现 它 发 生 了 变 化。 它 的 光 泽 开 始 暗 淡， 继 而 充 斥 着 无 尽 的 憎 恨。 那 一 瞬 间， 你 犹 豫 了。 你 知 道 命 运 的 抉 择 正 放 在 面 前， 要 么 从 今 天 起 抵 抗 身 上 的 诅 咒， 并 与 之 对 抗 终 身； 要 么 继 续 放 纵 自 我， 任 由 诅 咒 带 你 堕 入 这 疯 狂 的 深 渊。]])
+	str = str:gsub("The ", "地 上 的 ")
+	return "被诅咒的命运", str, "将 你 的 憎 恨 释 放 到 物 品 上", "压 制 你 的 憎 恨 之 意"
+end

@@ -46,9 +46,8 @@ end
 
 simpleLongDlg["Back and there again"] = function(str)
 		if str:find("A careful examination") then
-		str = [[仔细检查恶魔的身体会发现一个血符文祭祀匕首和一块
-共鸣宝石，尽管它们都沾上了烟尘和鲜血，但看起来仍完好
-无损。]]
+		str = [[仔细检查恶魔的身体会发现一把血符祭剑和一块共鸣宝石，
+尽管它们都沾上了烟尘和鲜血，但看起来仍完好无损。]]
 	else
 		str = [[当阴影消退，你没有找到任何《关于力场翻转与回复的
 可能性研究》标题的文本。你必须回到泰恩那。]]
@@ -177,7 +176,12 @@ simpleLongDlg["Lush forest"] = function()
 end
 
 simpleLongDlg["Conclave Vault"] = function()
-	return "孔克雷夫地下实验室",[[在 你 到 达 地 图 上 坐 标 所 指 的 位 置 时 ， 你 惊 奇 地 发 现 地 上 有 一 个 巨 大 的 裂 谷 ， 深 邃 的 谷 底 中 闪 烁 着 金 属 的 光 泽 ， 那 是 一 扇 古 老 的 大 门 。 看 起 来 ， 魔 法 大 爆 炸 的 强 大 力 量 所 造 成 的 地 震 正 好 将 地 面 切 裂 ， 让 本 来 在 爆 炸 中 被 毁 的 ， 通 向 孔 克 雷 夫 古 老 遗 迹 的 通 道 重 现 人 间 。 你 小 心 地 从 裂 谷 上 攀 爬 而 下 ， 站 在 门 前 。]]
+	return "孔克雷夫地下实验室",[[在你到达地图上坐标所指的位置时，你惊奇地发现地上有一
+个巨大的裂谷，深邃的谷底中闪烁着金属的光泽，那是一扇
+古老的大门。看起来，魔法大爆炸的强大力量所造成的地震
+正好将地面切裂，让本来在爆炸中被毁的，通向孔克雷夫古
+老遗迹的通道重现人间。你小心地从裂谷上攀爬而下，站在
+门前。]]
 end
 
 simpleLongDlg["Tannen's Tower"] = function() 
@@ -228,4 +232,49 @@ Posionous fumes take their toll on your body!]] then
 呛在有毒的烟雾中让你浑身不适！]]
 	end
 	return "沉眠", msg
+end
+
+simpleLongDlg["Lake of Nur"] = function()
+	return "纳尔湖", [[当你进入下一层时你感受到了一股奇异的屏障试图隔离湖水。
+然而奇异的屏障似乎被破坏了，下一层也已经被水淹没。]]
+end
+
+simpleLongDlg["Screenshot taken"] = function(str)
+	str = str:gsub("Screenshot should appear in your Steam client's #LIGHT_GREEN#Screenshots Library#LAST#.\nAlso available on disk: ", "截图已经保存在你Steam客户端中的#LIGHT_GREEN#截图展柜#LAST#\n文件也存放在硬盘上的：")
+	return "截图已保存", str
+end
+
+simpleLongDlg["Cultist"] = function(str)
+	str = str:gsub("A terrible shout thunders across the level: 'Come my darling, come, I will be ssssooo *nice* to you!'","一个恐怖的声音突然自空中传来：“来吧，亲爱的，来吧，我将会好好的“疼”你的。” ")
+		:gsub("You should flee from this level!","你必须逃离此地！")
+	return "邪教徒", str
+end
+
+simpleLongDlg["Onslaught"] = function()
+	return "围攻", [[你从不死族的围攻中幸存了下来，你注意到周围墙上有一条
+你不曾注意的向上爬的道路]]
+end
+
+simpleLongDlg["Cursed Fate"] = function(str)
+	str = str:gsub(" lies defiled at your feet. An aura of hatred surrounds you and you now feel truly cursed. You have gained the Cursed Aura talent tree and 1 point in Defiling Touch, but at the cost of 2 Willpower.", " 。一 个 诅 咒 光 环 笼 罩 了 你， 你 感 到 自 己 被 诅 咒 了。 你 获 得 了 诅 咒 光 环 技 能 树 和 等 级 1 的 诅 咒 之 触， 但 是 需 永 久 消 耗 2 点 意 志。")
+	str = str:gsub("The ", "你 的 脚 下 躺 着 受 诅 咒 的 ")
+	return "被诅咒的命运", str
+end
+
+simpleLongDlg["Mouse Gestures"] = function()
+	return "鼠标手势",[[
+你开始试着绘制鼠标手势了！
+鼠标手势可以让你用鼠标动作来完成释放技能或是键盘操作。
+你只需要#{bold}#右击并拖动#{normal}#就可以绘制鼠标手势。
+默认情况下，鼠标手势没有绑定到任何操作。如果你需要使用
+鼠标手势，你可以在浏览“按键绑定”并添加，它可以为你的
+冒险旅程提供帮助。
+
+手势动作以颜色编码，以让你更好地显示你目前做出的动作：
+#15ed2f##{italic}#绿色#{normal}##LAST#: 向上拖动
+#1576ed##{italic}#蓝色#{normal}##LAST#: 向下拖动
+#ed1515##{italic}#红色#{normal}##LAST#: 向左拖动
+#d6ed15##{italic}#黄色#{normal}##LAST#: 向右拖动
+
+如果你不希望看到手势动作，请在游戏设置的UI栏设置关闭它。]]
 end

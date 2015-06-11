@@ -51,7 +51,7 @@ end
 
 function _M:generate()
 	-- Draw UI
-	self.text = emote_chn[self.text] or self.text
+	self.text = emote_chn_get(self.text)
 	local chn_w = utf8:new(self.text)
 	local w = chn_w:len()*15
 	local _, h = self.font:size(self.text)

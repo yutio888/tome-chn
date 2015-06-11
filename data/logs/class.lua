@@ -1324,8 +1324,8 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
-	log = "#RED#Rising again, the Rat Lich's eyes glow with renewed energy!"
+	log = "#RED#Rising again, the Rat Lich's eyes glow with renewed energy!",
 	fct = function()
 		return "#RED#鼠巫妖再次站起，它的眼睛放射着能量的光辉！"
-	end
+	end,
 }

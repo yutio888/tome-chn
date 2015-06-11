@@ -51,9 +51,9 @@ simpleWaiterDlg["Requesting..."] = function()
 	return "正在请求…","正在请求用户数据，请稍等…"
 end
 simpleWaiterDlg["Chronomancy"] = function(str)
-	if str == "Folding the space time structure..."
+	if str == "Folding the space time structure..." then
 		str = "正在折叠时空的结构…"
-	elseif str == "Unfolding the space time structure..."
+	elseif str == "Unfolding the space time structure..." then
 		str = "正在展开时空的结构…"
 	end
 	return "时空法术",str

@@ -1,5 +1,5 @@
-¹ØÓÚ#Target#\#Source#µÄºº»¯£º
-×´Ì¬Ğ§¹ûµÄlogÏÔÊ¾ÊÇActorTemporaryEffextÖĞµÄsetEffect()º¯Êı²ÉÓÃÖ±½Ó½«#Target#Ìæ»»ÎªÈËÎïÃû³ÆµÄ·½·¨
-Í¨¹ımod\class\Game.luaÀïµÄlogseen()º¯Êı½ø¶øµ÷ÓÃlogDisplay.luaÖĞµÄcall()Ö÷º¯ÊıÀ´ÏÔÊ¾µÄ£¬Òò´Ë¿ÉÒÔ»»µô#Target#£¬Ò²¿ÉÒÔ²»»»¡£
+å…³äº#Target#\#Source#çš„æ±‰åŒ–ï¼š
+çŠ¶æ€æ•ˆæœçš„logæ˜¾ç¤ºæ˜¯ActorTemporaryEffextä¸­çš„setEffect()å‡½æ•°é‡‡ç”¨ç›´æ¥å°†#Target#æ›¿æ¢ä¸ºäººç‰©åç§°çš„æ–¹æ³•
+é€šè¿‡mod\class\Game.luaé‡Œçš„logseen()å‡½æ•°è¿›è€Œè°ƒç”¨logDisplay.luaä¸­çš„call()ä¸»å‡½æ•°æ¥æ˜¾ç¤ºçš„ï¼Œå› æ­¤å¯ä»¥æ¢æ‰#Target#ï¼Œä¹Ÿå¯ä»¥ä¸æ¢ã€‚
 
-ÆäËûlogÏÔÊ¾´ó²¿·ÖÊÇÍ¨¹ıµ÷ÓÃGame.luaÀïµÄlogMessage()º¯ÊıÉú³ÉÒ»¸östringÔÙÀûÓÃlogDisplay()À´ÏÔÊ¾£¬Òò´Ëºº»¯Ê±Çë±£Áô#Target##Source#¡£
+å…¶ä»–logæ˜¾ç¤ºå¤§éƒ¨åˆ†æ˜¯é€šè¿‡è°ƒç”¨Game.luaé‡Œçš„logMessage()å‡½æ•°ç”Ÿæˆä¸€ä¸ªstringå†åˆ©ç”¨logDisplay()æ¥æ˜¾ç¤ºï¼Œå› æ­¤æ±‰åŒ–æ—¶è¯·ä¿ç•™#Target##Source#ã€‚

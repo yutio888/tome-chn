@@ -34,9 +34,9 @@ simplePopDlg["Strange Orb"] = function(str)
 		str = "这只水晶球在你的触摸下反应很糟，你听到了一声尖叫！"
 	elseif str == "The orb glows brightly. There is a loud crack coming from the northern central chamber." then
 		str = "水晶球闪耀着光芒。来自北部中心的地区传出了一声巨大的破裂声。"
-	elseif str == "The orb glows brightly."
+	elseif str == "The orb glows brightly." then
 		str = "水晶球闪耀着光芒。"
-	elseif str == "The orb looks inactive."
+	elseif str == "The orb looks inactive." then
 		str = "水晶球看起来对你不起反应"
 	end
 	return "奇特的水晶球", str	
@@ -165,9 +165,9 @@ simplePopDlg["Transmogrification Chest"] = function(str)
 end
 
 simplePopDlg["Long tunnel"] = function(str)
-	if str == "As you enter the tunnel you feel a strange compulsion to go backward."
+	if str == "As you enter the tunnel you feel a strange compulsion to go backward." then
 		str = "在你试图进入隧道时，有种奇怪的力量把你推了回去。"
-	elseif str == "You cannot abandon the yeeks of Rel to the dangers that lie within the island."
+	elseif str == "You cannot abandon the yeeks of Rel to the dangers that lie within the island." then
 		str = "在清除这座岛上夺心魔们仍然面对的危险之前，你不能离开这座岛。"
 	end
 	return "绵长隧道", str

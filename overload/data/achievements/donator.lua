@@ -19,26 +19,26 @@
 
 newAchievement{
 	name = "Bronze Donator", id = "BRONZE_DONATOR",
-	desc = [[ÎªÂí»ù°£ÑÇ¶ûµÄ´«Ëµ¾èÔù²»³¬¹ı 5 Å·Ôª¡£]],
+	desc = [[ä¸ºé©¬åŸºåŸƒäºšå°”çš„ä¼ è¯´æèµ ä¸è¶…è¿‡ 5 æ¬§å…ƒã€‚]],
 	no_difficulty_duplicate = true, no_chat_broadcast = true,
 }
 newAchievement{
 	name = "Silver Donator", id = "SILVER_DONATOR",
-	desc = [[ÎªÂí»ù°£ÑÇ¶ûµÄ´«Ëµ¾èÔùÖÁÉÙ 6 Å·Ôª¡£]],
+	desc = [[ä¸ºé©¬åŸºåŸƒäºšå°”çš„ä¼ è¯´æèµ è‡³å°‘ 6 æ¬§å…ƒã€‚]],
 	no_difficulty_duplicate = true, no_chat_broadcast = true,
 }
 newAchievement{
 	name = "Gold Donator", id = "GOLD_DONATOR",
-	desc = [[ÎªÂí»ù°£ÑÇ¶ûµÄ´«Ëµ¾èÔùÖÁÉÙ 16 Å·Ôª¡£]],
+	desc = [[ä¸ºé©¬åŸºåŸƒäºšå°”çš„ä¼ è¯´æèµ è‡³å°‘ 16 æ¬§å…ƒã€‚]],
 	no_difficulty_duplicate = true, no_chat_broadcast = true,
 }
 newAchievement{
 	name = "Stralite Donator", id = "STRALITE_DONATOR",
-	desc = [[ÎªÂí»ù°£ÑÇ¶ûµÄ´«Ëµ¾èÔùÖÁÉÙ 31 Å·Ôª¡£]],
+	desc = [[ä¸ºé©¬åŸºåŸƒäºšå°”çš„ä¼ è¯´æèµ è‡³å°‘ 31 æ¬§å…ƒã€‚]],
 	no_difficulty_duplicate = true, no_chat_broadcast = true,
 }
 newAchievement{
 	name = "Voratun Donator", id = "VORATUN_DONATOR",
-	desc = [[ÎªÂí»ù°£ÑÇ¶ûµÄ´«Ëµ¾èÔùÖÁÉÙ 60 Å·Ôª¡£]],
+	desc = [[ä¸ºé©¬åŸºåŸƒäºšå°”çš„ä¼ è¯´æèµ è‡³å°‘ 60 æ¬§å…ƒã€‚]],
 	no_difficulty_duplicate = true, no_chat_broadcast = true,
 }

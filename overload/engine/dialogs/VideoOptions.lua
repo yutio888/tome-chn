@@ -1,5 +1,5 @@
 -- TE4 - T-Engine 4
--- Copyright (C) 2009 - 2014 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -172,15 +172,15 @@ function _M:generateList()
 		end), 50)
 	end,}
 
-	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"禁止加载可能令人不快的的图像。#WHITE#"}
-	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#Censor boot#WHITE##{normal}#", status=function(item)
-		return tostring(config.settings.censor_boot and "开启" or "关闭")
+	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"开启/关闭图块使用。\n在某些显卡/显卡驱动的很差且很慢的机器上，开启这个选项可能带来负面效果。"}
+	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#图块使用#WHITE##{normal}#", status=function(item)
+		return tostring(config.settings.disable_tilesets and "关闭" or "开启")
 	end, fct=function(item)
-		config.settings.censor_boot = not config.settings.censor_boot
-		game:saveSettings("censor_boot", ("censor_boot = %s\n"):format(tostring(config.settings.censor_boot)))
+		config.settings.disable_tilesets = not config.settings.disable_tilesets
+		game:saveSettings("disable_tilesets", ("disable_tilesets = %s\n"):format(tostring(config.settings.disable_tilesets)))
 		self.c_list:drawItem(item)
 	end,}
-	
+
 	-- *Requested* Window Position
 	--  SDL tends to lie about where windows are positioned in fullscreen mode,
 	-- so always store the position requests, not the actual positions. 

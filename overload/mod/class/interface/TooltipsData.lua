@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2014 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -183,7 +183,7 @@ TOOLTIP_ENCUMBERED = [[#GOLD#负重#LAST#
 ]]
 
 TOOLTIP_INSCRIPTIONS = [[#GOLD#纹身#LAST#
-Eyal的人们发明了一种利用提取的植物精
+埃亚尔的人们发明了一种利用提取的植物精
 华将一些符咒纹刻到皮肤上的技术。
 那些纹身可以产生一些特殊的能力，通常
 人们会纹刻一种回复纹身，当然还有一些

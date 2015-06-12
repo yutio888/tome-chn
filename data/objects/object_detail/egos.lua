@@ -383,6 +383,11 @@ egosCHN[" of the titan"] = "泰坦的"
 egosCHN["troll-hide "] = "巨魔的"
 egosCHN["nimble "] = "灵敏的"
 egosCHN["marauder's "] = "掠夺者的"
+egosCHN["tempestuous "] = "暴风雨的"
+egosCHN["volcanic "] = "火山的"
+egosCHN["miasmic "] = "瘴气的"
+egosCHN["aetheric "] = "以太的"
+egosCHN[" of the void"] = "虚空之"
 egosCHN[" of Toknor"] = "图库纳之"
 egosCHN[" of the wind"] = "轻风之"
 egosCHN["multi-hued "] = "多彩的"
@@ -825,7 +830,7 @@ egosCHN["defiled "] = "肮脏的"
 egosCHN["shadowy "] = "阴影的"
 -- ego "warded " defined.
 egosCHN["void "] = "虚空的"
-egosCHN["volcanic "] = "火山的"
+-- ego "volcanic " defined.
 egosCHN["striking "] = "打击的"
 
 --weapon.lua

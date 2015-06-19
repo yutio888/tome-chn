@@ -25,7 +25,7 @@ newBirthDescriptor{
 	name = "Giant",
 	display_name = "巨人",
 	locked = function() return profile.mod.allow_build.race_giant end,
-	locked_desc = "Powerful beings that tower over all, but the bigger they are, the harder they fall...",
+	locked_desc = "庞然的巨物傲视着渺小的生灵。然而须知，高处不胜寒，站得越高，跌得越深……",
 	desc = {
 		[[#{italic}#"巨 人"#{normal}# 是 对 那 些 身 高 超 过 八 英 尺 的 人 型 生 物 的 统 称 。他 们 的 起 源 、 文 化 和 关 系 与 其 他 种 族 迥 异 。他 们 被 其 他 矮 小 的 种 族 视 为 威 胁 而 躲 避， 作 为 避 难 的 流 浪 者 而 生 存 。]],
 	},

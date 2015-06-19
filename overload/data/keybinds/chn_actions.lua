@@ -1,5 +1,5 @@
 -- TE4 - T-Engine 4
--- Copyright (C) 2009, 2010, 2011, 2012 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ defineAction{
 }
 
 defineAction{
-	default = { "sym:=g:false:true:false:false" },
+	default = { "sym:=p:false:false:false:false", "sym:=g:false:true:false:false" },
 	type = "LEVELUP",
 	group = "actions",
 	name = "打开升级面板",
@@ -94,7 +94,7 @@ defineAction{
 }
 
 defineAction{
-	default = { "sym:=c", "sym:=c:false:true:false:false" },
+	default = { "sym:=c:false:false:false:false", "sym:=c:false:true:false:false" },
 	type = "SHOW_CHARACTER_SHEET",
 	group = "actions",
 	name = "显示角色面板",

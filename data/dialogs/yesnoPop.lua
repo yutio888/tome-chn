@@ -32,7 +32,7 @@ yesnoPopDlg["Atamathon"] = function(str)
 end
 
 yesnoPopDlg["Danger..."] = function()
-	return "危险...","这条路通往食人魔巢穴，一路上到处都是血迹，你确定要进去么？"
+	return "危险...","这条路通往巨魔的巢穴，一路上到处都是血迹，你确定要进去么？"
 end
 
 yesnoPopDlg["Recharge?"] = function(str)

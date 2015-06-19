@@ -25,8 +25,19 @@ tags = {'Chinese','translation'}
 weight = 5
 author = { "Grammier&Marblezls&Yutio888", "Grammier@3DMGAME","Marblezls@3DMGAME","Yutio888@mail.qq.com"}
 homepage = "http://tome.te4.org/"
-description = [[The chinese version of tome4]]
+description = [[The chinese translation addon of tome4.
+For limited technical support or bug report, please visit http://tieba.baidu.com/p/2908849201 .
+Author & main maintainers: Grammier, Marblezls, Yutio888
+Original publication notes from 3DMGAME:
+负责人：Marblezls、Grammier
+翻译： Marblezls,Grammier,马达哦,林大彤,风中脚步,大菠萝
+技术： Grammier,zhouwei_e,weichiche
+美工：Grammier
+校对+润色： Marblezls,枫鼠儿,killingcloud,念奴娇下月怀古
+测试： Tome4讨论群的诸位网友
+特别感谢： 乐♂神,feihuxia,wenxiao,nosoul,kinodar
+]]
 overload = true
 superload = true
 data = true
-hooks= true
+hooks = true

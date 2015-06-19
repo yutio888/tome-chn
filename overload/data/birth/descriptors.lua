@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2014 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -195,8 +195,8 @@ newBirthDescriptor{
 	{
 		"#GOLD##{bold}#噩梦模式#WHITE##{normal}#",
 		" 高 难 度 游 戏 设 定 ",
-		" 所 有 地 区 等 级 提 高 50% + 3",
-		" 所 有 生 物 技 能 等 级 提 高 50%",
+		" 所 有 地 区 等 级 提 高 50% + 2",
+		" 所 有 生 物 技 能 等 级 提 高 30%",
 	        " 玩 家 如 果 同 时 选 择 永 久 死 亡 模 式 或 冒 险 模 式 可 以 达 成 噩 梦 模 式 成 就。 ",
 	},
 	descriptor_choices =
@@ -219,7 +219,7 @@ newBirthDescriptor{
 	{
 		"#GOLD##{bold}#疯狂模式#WHITE##{normal}#",
 		" 和 噩 梦 规 则 相 似 ，但 随 机 boss 出 现 更 加 频 繁 ！",
-		" 所 有 区 域 难 度 增 加 相 当 于 人 物 等 级 的 50%+ 3级。 ",
+		" 所 有 区 域 难 度 增 加 相 当 于 人 物 等 级 的 50% + 3级。 ",
 		" 所 有 生 物 天 赋 等 级 增 加 50%。 ",
 		" 稀 有 怪 出 现 频 率 大 幅 增 加， 同 时 出 现 随 机 Boss。 ",
 		" 固 定 boss 拥 有 随 机 技 能",
@@ -250,7 +250,7 @@ newBirthDescriptor{
 	{
 		"#GOLD##{bold}# 绝望模式#WHITE##{normal}#",
 		" 绝 对 不 公 平 的 游 戏 设 定。 选 这 个 模 式 的 都 是 疯 子！ ",
-		" 所 有 区 域 难 度 增 加 相 当 于 人 物 等 级 的 150%+6 级。 ",
+		" 所 有 区 域 难 度 增 加 相 当 于 人 物 等 级 的 150% + 6 级。 ",
 		" 所 有 生 物 天 赋 等 级 增 加 170%。 ",
 		" 稀 有 怪 出 现 频 率 大 幅 增 加， 同 时 出 现 随 机 Boss。 ",
 		" 固 定 boss 拥 有 随 机 技 能",
@@ -291,6 +291,7 @@ newBirthDescriptor{
 		" 这 不 是 本 游 戏 推 荐 的 游 戏 方 式， 不 过 也 能 让 你 有 一 个 更 难 忘 的 经 历。 ",
 		" 请 记 住 死 亡 作 为 游 戏 的 一 部 分 是 为 了 让 你 成 为 一 个 更 好 的 玩 家。 ",
 		" 此 模 式 你 可 以 完 成 探 索 模 式 成 就。 ",
+		" 此 模 式 下 你 可 以 无 限 洗 点 。",
 	},
 	game_state = {
 		force_town_respec = false,
@@ -326,7 +327,7 @@ newBirthDescriptor{
 		"#GOLD##{bold}#永久死亡模式#WHITE#",
 		" 经 典 的 Roguelike 模 式。 ",
 		" 你 只 有 一 次 生 命 机 会。 #{normal}#",
-		" 除 非 你 在 游 戏 内 找 到 仅 有 的 一 次 原 地 复 活 的 能 力。 ",
+		" 除 非 你 在 游 戏 内 找 到 某 些 原 地 复 活 的 能 力。 ",
 	},
 }
 

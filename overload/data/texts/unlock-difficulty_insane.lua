@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009, 2010, 2011 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -24,11 +24,12 @@ return "New game difficulty mode: #LIGHT_GREEN#Insane",
  你 错 了 ! 如 果 噩 梦 模 式 不 能 打 倒 你， 那 么 疯 狂 模 式 一 定 会 !
 
  疯 狂 模 式 的 特 点 :#YELLOW#
-- 所 有 地 区 的 怪 物 等 级 为 基 础 的 50% + 5
+- 所 有 地 区 的 怪 物 等 级 为 基 础 的 50% + 3
 - 所 有 怪 物 的 技 能 等 级 增 加 50%
-- Boss 拥 有 随 机 技 能 。 
-- 玩 家 的 分 级 为 普 通 而 不 是 精 英 
-- 如 果 玩 家 在 此 模 式 下 同 时 开 启 冒 险 模 式 或  Roguelike 模 式， 那 么 可 获 得 独 有 的 疯 狂 模 式 成 就 .
+- 稀 有 怪 产 生 频 率 大 幅 增 加 ， 同 时 出 现 随 机 Boss
+- Boss 将 可 以 随 机 获 得 新 技 能
+- 怪 物 血 量 增 加 20%
+- 如 果 玩 家 在 此 模 式 下 同 时 开 启 冒 险 模 式 或  Roguelike 模 式， 那 么 可 获 得 独 有 的 疯 狂 模 式 成 就 。
 
 #WHITE# 祝 你 玩 的 愉 快， 死 的 开 心 !
 ]]

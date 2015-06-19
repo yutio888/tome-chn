@@ -1,5 +1,5 @@
 -- TE4 - T-Engine 4
--- Copyright (C) 2009, 2010, 2011, 2012 Nicolas Casalini
+-- Copyright (C) 2009 - 2015 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -133,5 +133,5 @@ defineAction{
 	default = { "sym:_z:false:false:false:false" },
 	type = "RUN_AUTO",
 	group = "movement",
-	name = "自动探测",
+	name = "自动探索",
 }

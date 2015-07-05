@@ -836,28 +836,28 @@ timeEffectCHN:newEffect{
 timeEffectCHN:newEffect{
 	id = "HUNTER_SPEED",
 	enName = "Hunter",
-	cnName = "猎手",
+	chName = "猎手",
 	type = "物理",
 	subtype = "自然/速度",
 }
 timeEffectCHN:newEffect{
 	id = "NATURE_REPLENISHMENT",
 	enName = "Natural Replenishment",
-	cnName = "自然充能",
+	chName = "自然充能",
 	type = "物理",
 	subtype = "自然",
 }
 timeEffectCHN:newEffect{
 	id = "BERSERKER_RAGE",
 	enName = "Berserker Rage",
-	cnName = "狂战之怒",
+	chName = "狂战之怒",
 	type = "物理",
 	subtype = "策略",
 }
 timeEffectCHN:newEffect{
 	id = "RELENTLESS_FURY",
 	enName = "Relentless Fury",
-	cnName = "无尽怒火",
+	chName = "无尽怒火",
 	type = "物理",
 	subtype = "策略",
 }
@@ -865,35 +865,35 @@ timeEffectCHN:newEffect{
 timeEffectCHN:newEffect{
 	id = "SKIRMISHER_DIRECTED_SPEED",
 	enName = "Directed Speed",
-	cnName = "定向加速",
+	chName = "定向加速",
 	type = "物理",
 	subtype = "加速",
 }
 timeEffectCHN:newEffect{
 	id = "SKIRMISHER_STUN_INCREASE",
 	enName = "Stun Lengthen",
-	cnName = "震慑延长",
+	chName = "震慑延长",
 	type = "物理",
 	subtype = "震慑",
 }
 timeEffectCHN:newEffect{
 	id = "SKIRMISHER_ETERNAL_WARRIOR",
 	enName = "Eternel Warrior",
-	cnName = "不灭战士",
+	chName = "不灭战士",
 	type = "物理",
 	subtype = "士气",
 }
 timeEffectCHN:newEffect{
 	id = "SKIRMISHER_TACTICAL_POSITION",
 	enName = "Tactical Position",
-	cnName = "策略走位",
+	chName = "策略走位",
 	type = "物理",
 	subtype = "策略",
 }
 timeEffectCHN:newEffect{
 	id = "SKIRMISHER_DEFENSIVE_ROLL",
 	enName = "Defensive Roll",
-	cnName = "防御滚动",
+	chName = "防御滚动",
 	type = "物理",
 	subtype = "策略",
 }
@@ -901,14 +901,14 @@ timeEffectCHN:newEffect{
 timeEffectCHN:newEffect{
 	id = "SKIRMISHER_TRAINED_REACTIONS_COOLDOWN",
 	enName = "Trained Reactions Cooldown",
-	cnName = "训练反应冷却",
+	chName = "训练反应冷却",
 	type = "其他",
 	subtype = "冷却",
 }
 timeEffectCHN:newEffect{
 	id = "SKIRMISHER_SUPERB_AGILITY",
 	enName = "Superb Agility",
-	cnName = "异常灵活",
+	chName = "异常灵活",
 	type = "其他",
 	subtype = "冷却",
 }
@@ -916,7 +916,7 @@ timeEffectCHN:newEffect{
 timeEffectCHN:newEffect{
 	id = "ANTI_GRAVITY",
 	enName = "Anti-Gravity",
-	cnName = "反重力",
+	chName = "反重力",
 	type = "物理",
 	subtype = "空间",
 }

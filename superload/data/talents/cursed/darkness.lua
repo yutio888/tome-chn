@@ -1,5 +1,21 @@
 local _M = loadPrevious(...)
 
+local function getDamageIncrease(self)
+	local total = 0
+		
+	local t = self:getTalentFromId(self.T_CREEPING_DARKNESS)
+	if t then total = total + self:getTalentLevelRaw(t) end
+	t = self:getTalentFromId(self.T_DARK_VISION)
+	if t then total = total + self:getTalentLevelRaw(t) end
+	t = self:getTalentFromId(self.T_DARK_TORRENT)
+	if t then total = total + self:getTalentLevelRaw(t) end
+	t = self:getTalentFromId(self.T_DARK_TENDRILS)
+	if t then total = total + self:getTalentLevelRaw(t) end
+	
+	return self:combatScale(total, 5, 1, 40, 20) --I5
+--I5	return total * 2
+end
+
 registerTalentTranslation{
 	id = "T_CREEPING_DARKNESS",
 	name = "黑暗之雾",

@@ -26,7 +26,7 @@ registerTalentTranslation{
 		 同 时 你 会 释 放 一 股 反 魔 能 量， 在 %d 半 径 内 造 成 %0.2f 点 法 力 燃 烧 伤 害。 
 		 如 果 有 丝 分 裂 技 能 开 启 ， 每 回 合 你 将 回 复 %0.1f 点 失 衡 值 。
 		 受 精 神 强 度 影 响， 伤 害 、 持 续 时 间 和 失 衡 值 回 复 有 额 外 加 成。 ]]):
-		format(t.getDuration(self, t), damDesc(self, DamageType.ARCANE, t.getDam(self, t)),	3, t.equiRegen(self, t))
+		format(t.getDuration(self, t), 3,damDesc(self, DamageType.ARCANE, t.getDam(self, t)),	 t.equiRegen(self, t))
 	end,
 }
 

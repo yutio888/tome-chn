@@ -2171,8 +2171,9 @@ npcDescCHN["investigator"] = "这个恶魔专心于从#{italic}#志愿者#{norma
 npcNameCHN["Planar Controller"] = "空间控制者"
 npcDescCHN["Planar Controller"] = "一个巨大的恶魔朝你走来，显然他控制着附近所有的传送门。"
 
-
-
+--temporal-hound
+npcNameCHN["temporal hound"] = "时空猎犬"
+npcDescCHN["temporal hound"] = "一条受训的猎犬，同时呈现出小狗崽和老掉牙两种状态。"
 --地图巡逻队
 npcNameCHN["adventurers party"] = "冒险家分队"
 npcNameCHN["ziguranth patrol"] = "伊格巡逻队"

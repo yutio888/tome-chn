@@ -235,7 +235,8 @@ setDefaultProjector(function(src, x, y, type, dam, state)
 			if dark.summoner == src and dark.damageIncrease > 0 and not dark.projecting then
 				local source = src.__project_source or src
 				inc = inc + dark.damageIncrease
-				game:delayedLogMessage(source, target, "dark_strike"..(source.uid or ""), "#Source# strikes #Target# in the darkness (%+d%%%%%%%% damage).", dark.damageIncrease) -- resolve %% 3 levels deep
+--				game:delayedLogMessage(source, target, "dark_strike"..(source.uid or ""), "#Source# strikes #Target# in the darkness (%+d%%%%%%%% damage).", dark.damageIncrease) -- resolve %% 3 levels deep
+				game:delayedLogMessage(source, target, "dark_strike"..(source.uid or ""), "#Source# 在黑暗中打击了 #Target# (%+d%%%%%%%% 伤害).", dark.damageIncrease) -- resolve %% 3 levels deep
 			end
 		end
 		

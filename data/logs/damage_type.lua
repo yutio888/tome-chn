@@ -5,14 +5,14 @@ logCHN:newLog{
 		return ("%s 摆脱了暴击伤害！"):format(a)
 	end,
 }
-
+--[[
 logCHN:newLog{
 	log = "#Source# strikes #Target# in the darkness (%+d%%%%%%%% damage).",
 	fct = function(a)
 		return ("#Source# 在黑暗中打击了 #Target#  (%+d%%%%%%%% 伤害)!"):format(a)
 	end,
 }
-
+]]
 logCHN:newLog{
 	log = "#CRIMSON##Source# damages %s through Martyrdom!",
 	fct = function(a)

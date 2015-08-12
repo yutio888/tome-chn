@@ -31,11 +31,11 @@ registerTalentTranslation{
 		local maxAttackCount = t.getMaxAttackCount(self, t)
 		local size
 		if level >= 5 then
-			size = "Big"
+			size = "大型"
 		elseif level >= 3 then
-			size = "Medium-sized"
+			size = "中型"
 		else
-			size = "Small"
+			size = "小型"
 		end
 		return ([[冲 过 你 的 目 标， 途 经 的 所 有 目 标 受 到 %d%% （ 0 仇 恨） 至 %d%% （ 100+ 仇 恨） 伤 害。 %s 体 型 的 目 标 会 被 你 弹 开。 你 最 多 可 以 攻 击 %d 次， 并 且 你 对 路 径 上 的 敌 人 可 造 成 不 止 1 次 攻 击。]]):format(t.getDamageMultiplier(self, t, 0) * 100, t.getDamageMultiplier(self, t, 100) * 100, size, maxAttackCount)
 	end,

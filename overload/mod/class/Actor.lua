@@ -5443,7 +5443,7 @@ function _M:getTalentFullDescription(t, addlevel, config, fake_mastery)
 			local no_energy = util.getval(t.no_energy, self, t)
 			local display_speed = util.getval(t.display_speed, self, t)
 			if display_speed then
-				uspeed = display_speed
+				uspeed = display_speed:gsub("Double","双倍"):gsub("Archery","弓箭"):gsub("of a turn","回合")
 			elseif no_energy and type(no_energy) == "boolean" and no_energy == true then
 				uspeed = "瞬间 (#LIGHT_GREEN#0%#LAST# 回合)"
 			else
@@ -5452,7 +5452,7 @@ function _M:getTalentFullDescription(t, addlevel, config, fake_mastery)
 				if type(speed_type) == "string" then
 					speed_type = speed_type:gsub("mind","精神"):gsub("spell","法术"):gsub("weapon","武器"):gsub("archery","弓箭")
 																 :gsub("combat","战斗"):gsub("standard","标准"):gsub("movement","移动")
-																 :gsub("double","双倍"):gsub("Archery","弓箭"):gsub("summon","召唤"):gsub("shield","盾牌")
+																 :gsub("Double","双倍"):gsub("Archery","弓箭"):gsub("summon","召唤"):gsub("shield","盾牌")
 				else
 					speed_type = '特殊'
 				end

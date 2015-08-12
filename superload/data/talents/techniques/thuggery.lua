@@ -22,7 +22,14 @@ registerTalentTranslation{
 		format(t.critpower(self, t), t.getAPR(self, t))
 	end,
 }
-
+registerTalentTranslation{
+	id = "T_RIOT-BORN",
+	name = "黑暗出生",
+	info = function(self, t)
+		return ([[你 与 生 俱 来 的 暴 力 意 识 令 你 在 战 斗 中 获 得 %d%% 震 慑 和 混 乱 免 疫 。]]):
+		format(t.getImmune(self, t)*100)
+	end,
+}
 registerTalentTranslation{
 	id = "T_TOTAL_THUGGERY",
 	name = "不择手段",

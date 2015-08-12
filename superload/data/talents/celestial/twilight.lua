@@ -49,13 +49,13 @@ registerTalentTranslation{
 	info = function(self, t)
 		local duration = t.getDuration(self, t)
 		local allowed = 2 + math.ceil(self:getTalentLevelRaw(t) / 2 )
-		local size = "gargantuan"
+		local size = "庞大"
 		if allowed < 4 then
-			size = "medium"
+			size = "中型"
 		elseif allowed < 5 then
-			size = "big"
+			size = "大型"
 		elseif allowed < 6 then
-			size = "huge"
+			size = "巨大"
 		end
 		return ([[用 阴 影 复 制 目 标（ 最 大 体 积 %s ）， 幻 象 会 立 刻 攻 击 目 标。 
 		 幻 象 持 续 %d 回 合。 

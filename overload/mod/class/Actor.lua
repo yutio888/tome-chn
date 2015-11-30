@@ -314,7 +314,7 @@ function _M:getSpeed(speed_type)
 			self:getInven(self.INVEN_MAINHAND)
 		then
 			local o = self:getInven(self.INVEN_MAINHAND)[1]
-			if o then
+			if o and self:getObjectCombat(o, "mainhand") then
 				speed = self:combatSpeed(self:getObjectCombat(o, "mainhand"))
 			end
 		end
@@ -323,7 +323,7 @@ function _M:getSpeed(speed_type)
 			self:getInven(self.INVEN_OFFHAND)
 		then
 			local o = self:getInven(self.INVEN_OFFHAND)[1]
-			if o then
+			if o and self:getObjectCombat(o, "mainhand") then
 				speed = math.max(speed or 0, self:combatSpeed(self:getObjectCombat(o, "offhand")))
 			end
 		end
@@ -4357,8 +4357,8 @@ function _M:paradoxDoAnomaly(chance, paradox, def)
 	-- See if we create an anomaly
 	if not game.zone.no_anomalies and not self:attr("no_paradox_fail") then
 		-- This is so players can't chain cancel out of targeting to trigger anomalies on purpose, we clear it out in postUse
-		if not chance == 100 and self.turn_procs.anomalies_checked then return false end  
-		if not chance == 100 then self.turn_procs.anomalies_checked = true end
+		if chance ~= 100 and self.turn_procs.anomalies_checked then return false end  
+		if chance ~= 100 then self.turn_procs.anomalies_checked = true end
 
 		if rng.percent(chance) then
 			local anomaly_triggered = true
@@ -6286,7 +6286,9 @@ function _M:addedToLevel(level, x, y)
 					if not x then break end
 
 					-- Find an actor with that filter
-					local m = game.zone:makeEntity(game.level, "actor", filter, nil, true)
+					local m
+					if filter.define_as then m = game.zone:makeEntityByName(game.level, "actor", filter.define_as, true)
+					else m = game.zone:makeEntity(game.level, "actor", filter, nil, true) end
 					if m and m:canMove(x, y) then
 						if filter.no_subescort then m.make_escort = nil end
 						if self._empty_drops_escort then m:emptyDrops() end

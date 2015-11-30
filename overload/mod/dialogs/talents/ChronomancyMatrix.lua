@@ -119,7 +119,7 @@ function _M:generateList()
 
 	-- Generate lists of all talents by category
 	for j, t in pairs(self.actor.talents_def) do
-		if self.actor:knowTalent(t.id) and t.type[1]:find("^chronomancy/") and not t.type[1]:find("^chronomancy/spellbinding") and not t.hide and t.cooldown and t.mode ~= "passive" and not t.fixed_cooldown and not spellbound(self.actor, t.id) then
+		if self.actor:knowTalent(t.id) and t.type[1]:find("^chronomancy/") and not t.type[1]:find("^chronomancy/spellbinding") and not t.hide and t.cooldown and not t.fixed_cooldown and t.mode ~= "passive" and not spellbound(self.actor, t.id) then
 			local nodes = talents
 			local status = tstring{{"color", "LIGHT_GREEN"}, "Talents"}
 			

@@ -17,6 +17,23 @@
 -- Nicolas Casalini "DarkGod"
 -- darkgod@te4.org
 
+if game.zone.from_farportal then
+
+newChat{ id="welcome",
+	text = [[#LIGHT_GREEN#*在你面前的虚无之中站着一个人形的东西。它似乎在盯着你看。*#WHITE#
+我是艾德隆，你在这里不受欢迎!
+不论你怎样来到这里, #{bold}#不要再来!
+快滚!
+#{normal}#
+.]],
+	answers = {
+		{"...", action=function() game.level.data.eidolon_exit(false) end},
+	}
+}
+
+
+else
+
 newChat{ id="welcome",
 	text = [[#LIGHT_GREEN#*在你面前的虚无之中站着一个人形的东西。它似乎在盯着你看。 *
 在你死亡的瞬间我把你带到这里，我是灵魂幻象。
@@ -46,6 +63,8 @@ newChat{ id="welcome",
 	}
 }
 
+
+
 newChat{ id="jump_error",
 	text = [[似乎时间线和空间已经被打乱。。。
 我会将你安全送回。]],
@@ -70,4 +89,6 @@ newChat{ id="die",
 	}
 }
 
+
+end
 return "welcome"

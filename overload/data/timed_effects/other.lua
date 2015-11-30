@@ -1218,7 +1218,9 @@ newEffect{
 	on_timeout = function(self, eff) -- Chance for nightmare fades over time
 		if eff.nightmareChance then eff.nightmareChance = math.max(0, eff.nightmareChance-1) end
 	end,
-	-- called by _M:onTakeHit function in in mod.class.Actor.lua
+	callbackOnHit = function(self, eff, cb)
+		game:onTickEnd(function() eff.doNightmare(self, eff) end)
+	end,
 	doNightmare = function(self, eff)
 		if math.min(eff.unlockLevel, eff.level) >= 4 then
 			-- build chance for a nightmare
@@ -2690,9 +2692,13 @@ newEffect{
 		local x, y = util.findFreeGrid(self.x, self.y, 10, true, {[Map.ACTOR]=true})
 		if e and x then
 			game.zone:addEntity(game.level, e, "actor", x, y)
-			local g = game.zone.grid_list[self.to_vat]
-			if g then game.zone:addEntity(game.level, g, "terrain", x, y) end
 
+			local og = game.level.map(x, y, Map.TERRAIN)
+			if not og or (not og.special and not og.change_level) then
+				local g = game.zone.grid_list[self.to_vat]
+				if g then game.zone:addEntity(game.level, g, "terrain", x, y) end
+			end
+			
 			game.level.map:particleEmitter(x, y, 1, "goosplosion")
 			game.level.map:particleEmitter(x, y, 1, "goosplosion")
 			game.level.map:particleEmitter(x, y, 1, "goosplosion")
@@ -2770,7 +2776,11 @@ newEffect{
 		self:removeParticles(eff.particle2)
 		if not game.zone.wilderness and not self.dead then
 			if not eff.twisted then
-				self:forceUseTalent(eff.talent, {force_target=self})
+				self:forceUseTalent(eff.talent, {force_target=self, ignore_energy=true})
+				-- manually use energy
+				local anom = self:getTalentFromId(eff.talent)
+				self:useEnergy(self:getTalentSpeed(anom) * game.energy_to_act)
+				
 				game:playSoundNear(self, "talents/dispel")
 				self:incParadox(-eff.paradox)
 			end

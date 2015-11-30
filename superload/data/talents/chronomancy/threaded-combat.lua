@@ -46,12 +46,12 @@ registerTalentTranslation{
 	id = "T_WARDEN_S_CALL",
 	name = "守卫呼唤",
 	info = function(self, t)
-		local damage_penalty = t.getDamagePenalty(self, t)
-		return ([[当 你 用 弓 箭 或 近 战 武 器 攻 击 时 ， 一 个 时 空 守 卫 可 能 从 另 一 个 时 空 线 穿 越 过 来 帮 助 你 ， 射 击 或 者 攻 击 目 标。
+		return ([[当 你 用 弓 箭 或 近 战 武 器 攻 击 时 ，有 %d%% 几 率 让 一 个 时 空 守 卫 从 另 一 个 时 空 线 穿 越 过 来 帮 助 你 ， 攻 击 或 者 射 击 目 标。
 		守 卫 处 于 相 位 空 间 外 ， 伤 害 减 少 %d%% ， 守 卫 的 弓 箭 能 穿 过 友 方 生 物。
 		这 个 效 果 每 回 合 只 能 触 发 一 次 ， 守 卫 在 攻 击 后 会 消 失 。]])
-		:format(damage_penalty)
+		:format(t.getChance(self, t), t.getDamagePenalty(self, t))
 	end,
+
 }
 
 return _M

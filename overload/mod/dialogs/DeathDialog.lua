@@ -170,53 +170,20 @@ function _M:eidolonPlane()
 			game.log("#LIGHT_RED#你还剩 %s 。", (self.actor:attr("easy_mode_lifes") and self.actor:attr("easy_mode_lifes").." 条生命") or "0条生命")
 		end
 
+
 		local is_exploration = game.permadeath == game.PERMADEATH_INFINITE
 		self:cleanActor(self.actor)
 		self:resurrectBasic(self.actor)
+		for e, _ in pairs(game.party.members) do
+			self:cleanActor(e)
+		end
 		for uid, e in pairs(game.level.entities) do
 			if not is_exploration or game.party:hasMember(e) then
 				self:restoreResources(e)
 			end
 		end
 
-		local oldzone = game.zone
-		local oldlevel = game.level
-		local zone = mod.class.Zone.new("eidolon-plane")
-		local level = zone:getLevel(game, 1, 0)
-
-		level.data.eidolon_exit_x = self.actor.x
-		level.data.eidolon_exit_y = self.actor.y
-
-		local acts = {}
-		for act, _ in pairs(game.party.members) do
-			if not act.dead then
-				acts[#acts+1] = act
-				if oldlevel:hasEntity(act) then oldlevel:removeEntity(act) end
-			end
-		end
-
-		level.source_zone = oldzone
-		level.source_level = oldlevel
-		game.zone = zone
-		game.level = level
-		game.zone_name_s = nil
-
-		for _, act in ipairs(acts) do
-			local x, y = util.findFreeGrid(23, 25, 20, true, {[Map.ACTOR]=true})
-			if x then
-				level:addEntity(act)
-				act:move(x, y, true)
-				act.changed = true
-				game.level.map:particleEmitter(x, y, 1, "teleport")
-			end
-		end
-
-		for uid, act in pairs(game.level.entities) do
-			if act.setEffect then
-				if game.level.data.zero_gravity then act:setEffect(act.EFF_ZERO_GRAVITY, 1, {})
-				else act:removeEffect(act.EFF_ZERO_GRAVITY, nil, true) end
-			end
-		end
+		game.party:goToEidolon(self.actor)
 
 		game.log("#LIGHT_RED#在死亡的边缘，你被拉入了另一个位面。")
 		game.player:updateMainShader()

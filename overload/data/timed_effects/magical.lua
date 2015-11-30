@@ -3369,7 +3369,7 @@ newEffect{
 	activate = function(self, eff)
 		self:effectTemporaryValue(eff, "stun_immune", 0.2)
 		self:effectTemporaryValue(eff, "pin_immune", 0.2)
-		self:effectTemporaryValue(eff, "inc_damage", {all=0.1})
+		self:effectTemporaryValue(eff, "inc_damage", {all=10})
 
 		self.moddable_tile_ornament, eff.old_mod = {female="runes_red_glow_01", male="runes_red_glow_01"}, self.moddable_tile_ornament
 		self.moddable_tile_ornament_shader, eff.old_mod_shader = "runes_glow", self.moddable_tile_ornament_shader

@@ -9,6 +9,7 @@ local chn123_old_getLore = _M.getLore
 function _M:getLore(lore, silent)
 	r.rewrite()
 	l = chn123_old_getLore(self, lore, silent)
+	if l == nil then return nil end
 	l.chn_translated = false
 	if loreC.loreCHN[l.id] then
 		l.name = loreC.loreCHN[l.id].name

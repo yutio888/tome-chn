@@ -105,7 +105,7 @@ function _M:generateList()
 
 	-- Generate lists of all talents by category
 	for j, t in pairs(self.actor.talents_def) do
-		if self.actor:knowTalent(t.id) and t.mode == "activated" and t.is_spell and not t.requires_target and not t.hide then
+		if self.actor:knowTalent(t.id) and t.mode == "activated" and t.is_spell and not t.requires_target and not t.hide and not t.fixed_cooldown then
 			local nodes = talents
 			local status = tstring{{"color", "LIGHT_GREEN"}, "Talents"}
 			

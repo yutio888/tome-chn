@@ -262,6 +262,7 @@ objDesc["Turns elapse between self-loadings: "] = "自动装填的间隔时间�
 objDesc["Ammo reloads per turn: "] = "弹药每回合装填："
 objDesc["Damage Shield penetration (this weapon only): "] = "护盾穿透（仅限此武器）："
 objDesc["Lifesteal (this weapon only): "] = "生命偷取（仅限此武器）: " 
+objDesc["Multiple attacks: "] = "多次攻击："
 objDesc["Burst (radius 1) on hit: "] = "击中时溅射伤害（1格半径）："
 objDesc["Burst (radius 2) on hit: "] = "击中时溅射伤害（2格半径）："
 objDesc["Burst (radius 2) on crit: "] = "暴击时溅射伤害（2格半径）："

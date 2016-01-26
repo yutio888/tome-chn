@@ -65,8 +65,10 @@ registerTalentTranslation{
 		local level = t.getLevel(self, t)
 		local healLevel = t.getHealLevel(self, t)
 		local blindsideLevel = t.getBlindsideLevel(self, t)
+		local avoid_master_damage = t.getAvoidMasterDamage(self, t)
 		return ([[当 此 技 能 激 活 时， 你 可 以 召 唤 %d 个 等 级 %d 的 阴 影 帮 助 你 战 斗。 每 个 阴 影 需 消 耗 6 点 仇 恨 值 召 唤。 
-		 阴 影 是 脆 弱 的 战 士， 它 们 能 够： 使 用 奥 术 重 组 治 疗 自 己（ 等 级 %d ）， 使 用 灵 异 打 击 突 袭 目 标（ 等 级 %d ）， 使 用 相 位 之 门 进 行 传 送。]]):format(maxShadows, level, healLevel, blindsideLevel)
+		 阴 影 是 脆 弱 的 战 士， 它 们 能 够： 使 用 奥 术 重 组 治 疗 自 己（ 等 级 %d ）， 使 用 灵 异 打 击 突 袭 目 标（ 等 级 %d ）， 使 用 相 位 之 门 进 行 传 送。
+		 阴 影 无 视 %d%% 主 人 造 成 的 伤 害。]]):format(maxShadows, level, healLevel, blindsideLevel, avoid_master_damage)
 	end,
 }
 
@@ -108,6 +110,7 @@ registerTalentTranslation{
 		local defenseDuration = t.getDefenseDuration(self, t)
 		local blindsideChance = t.getBlindsideChance(self, t)
 		return ([[将 你 的 阴 影 聚 集 至 单 一 目 标。 如 果 目 标 为 友 善 则 保 护 目 标 %d 回 合。 如 目 标 为 敌 对 则 有 %d%% 几 率 使 用 灵 异 打 击 攻 击 目 标。 
+		 如 果 你 的 阴 影 数 目 少 于 最 大 值 ， 将 在 聚 集 前 召 唤 出 来。
 		 该 技 能 不 消 耗 任 何 能 量。]]):format(defenseDuration, blindsideChance)
 	end,
 }

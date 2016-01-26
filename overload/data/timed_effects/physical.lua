@@ -1,5 +1,5 @@
 ﻿-- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2015 Nicolas Casalini
+-- Copyright (C) 2009 - 2016 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -677,6 +677,8 @@ newEffect{
 	subtype = { nature=true },
 	status = "beneficial",
 	parameters = { ac=10, hard=10 },
+	on_gain = function(self, err) return "#Target#'s skin looks a bit thorny.", "+Thorny Skin" end,
+	on_lose = function(self, err) return "#Target# is less thorny now.", "-Thorny Skin" end,
 	activate = function(self, eff)
 		eff.aid = self:addTemporaryValue("combat_armor", eff.ac)
 		eff.hid = self:addTemporaryValue("combat_armor_hardiness", eff.hard)
@@ -767,8 +769,8 @@ newEffect{
 
 newEffect{
 	name = "ETERNAL_WRATH", image = "talents/thaloren_wrath.png",
-	desc = "Wrath of the Eternals",
-	long_desc = function(self, eff) return ("目 标 唤 醒 内 在 的 力 量， 提 升 %d%% 所 有 伤 害， 并 减 少 %d%% 所 受 伤 害。"):format(eff.power, eff.power) end,
+	desc = "Wrath of the Woods",
+	long_desc = function(self, eff) return ("The target calls upon its inner resources, improving all damage by %d%% and reducing all damage taken by %d%%."):format(eff.power, eff.power) end,
 	type = "physical",
 	subtype = { nature=true },
 	status = "beneficial",
@@ -916,6 +918,8 @@ newEffect{
 	subtype = { sunder=true },
 	status = "detrimental",
 	parameters = { power=10 },
+	on_gain = function(self, err) return "#Target#'s armour is damaged!", "+Sunder Armor" end,
+	on_lose = function(self, err) return "#Target#'s armour is more intact.", "-Sunder Armor" end,
 	activate = function(self, eff)
 		self:effectTemporaryValue(eff, "combat_armor", -eff.power)
 		self:effectTemporaryValue(eff, "combat_physresist", -eff.power)
@@ -932,6 +936,8 @@ newEffect{
 	subtype = { sunder=true },
 	status = "detrimental",
 	parameters = { power=10 },
+	on_gain = function(self, err) return "#Target#'s fighting ability is impaired!", "+Sunder Arms" end,
+	on_lose = function(self, err) return "#Target#'s ability to fight has recovered.", "-Sunder Arms" end,
 	activate = function(self, eff)
 		eff.tmpid = self:addTemporaryValue("combat_atk", -eff.power)
 	end,
@@ -1121,6 +1127,19 @@ newEffect{
 	parameters = {power=1000},
 	on_gain = function(self, err) return "#Target# prepares for the next kill!", "+Hunter" end,
 	on_lose = function(self, err) return "#Target# slows down.", "-Hunter" end,
+	
+	on_timeout = function(self, eff)--make sure that NPC's that catch their target (or can't get away) can fight
+		if eff.aiid then
+			local turns = (game.turn - eff.start_turn)*game.energy_per_tick/game.energy_to_act
+			if turns >= 1 then
+				local target = self.ai_target and self.ai_target.actor
+				if (target and core.fov.distance(self.x, self.y, target.x, target.y) <= 1) or not rng.chance(turns) then
+					self:removeTemporaryValue("ai_state", eff.aiid); eff.aiid = nil
+					print("---HUNTER_SPEED", self.name, "ai free to act after", turns, "turns")
+				end
+			end
+		end
+	end,
 	get_fractional_percent = function(self, eff)
 		local d = game.turn - eff.start_turn
 		return util.bound(360 - d / eff.possible_end_turns * 360, 0, 360)
@@ -1128,7 +1147,7 @@ newEffect{
 	lists = 'break_with_step_up',
 	activate = function(self, eff)
 		eff.start_turn = game.turn
-		eff.possible_end_turns = 10 * (eff.dur+1)
+		eff.possible_end_turns = (eff.dur+1)*game.energy_to_act/game.energy_per_tick
 		eff.tmpid = self:addTemporaryValue("wild_speed", 1)
 		eff.moveid = self:addTemporaryValue("movement_speed", eff.power/100)
 		if self.ai_state then eff.aiid = self:addTemporaryValue("ai_state", {no_talents=1}) end -- Make AI not use talents while using it
@@ -1154,6 +1173,7 @@ newEffect{
 		local d = game.turn - eff.start_turn
 		return util.bound(360 - d / eff.possible_end_turns * 360, 0, 360)
 	end,
+	lists = 'break_with_step_up',
 	activate = function(self, eff)
 		eff.start_turn = game.turn
 		eff.possible_end_turns = 10 * (eff.dur+1)
@@ -1283,14 +1303,14 @@ newEffect{
 	callbackOnHit = function(self, eff, cb, src)
 		if not src then return cb.value end
 		local share = cb.value * eff.sharePct
-		
+
 		-- deal the redirected damage as physical because I don't know how to preserve the damage type in a callback
 		if not self.__grapling_feedback_damage then
 			self.__grapling_feedback_damage = true
 			DamageType:get(DamageType.PHYSICAL).projector(self or eff.src, eff.trgt.x, eff.trgt.y, DamageType.PHYSICAL, share)
 			self.__grapling_feedback_damage = nil
 		end
-		
+
 		return cb.value - share
 	end,
 }
@@ -2049,8 +2069,9 @@ newEffect{
 		if not self:knowTalent(self.T_ETERNAL_GUARD) then eff.dur = 0 end
 		local amt = util.bound(dam - eff.power, 0, dam)
 		local blocked = dam - amt
-		local shield = self:hasShield()
-		if shield and shield.on_block and shield.on_block.fct then shield.on_block.fct(shield, self, src, type, dam, eff) end
+		local shield1, combat1, shield2, combat2 = self:hasShield()
+		if shield1 and shield1.on_block and shield1.on_block.fct then shield1.on_block.fct(shield1, self, src, type, dam, eff) end
+		if shield2 and shield2.on_block and shield2.on_block.fct then shield2.on_block.fct(shield2, self, src, type, dam, eff) end
 		if eff.properties.br then
 			self:heal(blocked, src)
 			game:delayedLogMessage(self, src, "block_heal", "#CRIMSON##Source# heals from blocking with %s shield!", string.his_her(self))
@@ -2159,7 +2180,6 @@ newEffect{
 		return {dam = dam}
 	end,
 }
-
 
 newEffect{
 	name = "DEFENSIVE_GRAPPLING", image = "talents/defensive_throw.png",
@@ -2848,6 +2868,77 @@ newEffect{
 	activate = function(self, eff)
 		if self:attr("knockback_immune") then
 			self:effectTemporaryValue(eff, "knockback_immune", -self:attr("knockback_immune") / 2)
+		end
+	end,
+}
+
+newEffect{
+	name = "PARASITIC_LEECHES", image = "talents/blood_suckers.png",
+	desc = "Parasitic Leeches",
+	display_desc = function(self, eff) return "寄生虫: "..eff.nb.." 堆" end,
+	long_desc = function(self, eff)
+		local source = eff.src or self
+		return ("目 标 被 %d 堆 寄 生 虫 寄 生 ， 每 回 合 受 到 %0.2f 物 理 和 %0.2f 酸 性 伤 害。 每 隔 %d 回 合 ， 一 堆 寄 生 虫 将 脱 落 并 繁 殖 。"):format(eff.nb,
+		source:damDesc("PHYSICAL", eff.dam*eff.nb/2), source:damDesc("ACID", eff.dam*eff.nb/2), eff.gestation)
+	end,
+	type = "physical",
+	subtype = { parasite=true },
+	status = "detrimental",
+	decrease = 0,
+	on_merge = function(self, old_eff, new_eff) -- More leeches = faster feeding and more damage.
+		old_eff.nb = old_eff.nb + 1
+		old_eff.gestation = old_eff.gestation - 1
+		return old_eff
+	end,
+	activate = function(self, eff)
+	end,
+	charges = function(self, eff) return eff.nb end,
+	parameters = {dam=10, nb=1, gestation=5, turns=0 },
+	on_gain = function(self, err) return "#Target# is #GREEN#INFESTED#LAST# with parasitic leeches!", "+Parasitic Leeches" end,
+	on_timeout = function(self, eff)
+		eff.turns = eff.turns + 1
+		-- Creepy, so the player tries to get rid of it as soon as possible...
+		local source = eff.src or self
+		source:project({}, self.x, self.y, DamageType.PHYSICAL, eff.dam*eff.nb/2)
+		source:project({}, self.x, self.y, DamageType.ACID, eff.dam*eff.nb/2)
+		if eff.turns >= eff.gestation then
+			-- Find space
+			local x, y = util.findFreeGrid(self.x, self.y, 3, true, {[Map.ACTOR]=true})
+			if not x then
+				--game.logPlayer(self, "Not enough space to invoke!")
+				return
+			end
+			local m = game.zone:makeEntityByName(game.level, "actor", "HORROR_PARASITIC_LEECHES")
+			if m then
+				m.exp_worth = 0
+				m.can_multiply = 1
+				game.zone:addEntity(game.level, m, "actor", x, y)
+				m:learnTalent(m.T_MULTIPLY, 1)
+
+				game.logSeen(self, "Some leeches drop off %s!", self.name:capitalize())
+			end
+			eff.turns = 0
+			eff.nb = eff.nb - 1
+			eff.gestation = 6 - eff.nb
+			if eff.nb <= 0 then self:removeEffect(self.EFF_PARASITIC_LEECHES, false, true) end
+		end
+	end,
+	deactivate = function(self, eff)
+		if eff.nb >= 0 then -- prematurely removed, drop all leeches without multiply.
+			for n=1, eff.nb do
+				-- Find space
+				local x, y = util.findFreeGrid(self.x, self.y, 3, true, {[Map.ACTOR]=true})
+				if not x then
+					--game.logPlayer(self, "Not enough space to invoke!")
+					return
+				end
+				local m = game.zone:makeEntityByName(game.level, "actor", "HORROR_PARASITIC_LEECHES")
+				if m then
+					m.exp_worth = 0
+					game.zone:addEntity(game.level, m, "actor", x, y)
+				end
+			end
+			game.logSeen(self, "Some leeches drop off %s!", self.name:capitalize())
 		end
 	end,
 }

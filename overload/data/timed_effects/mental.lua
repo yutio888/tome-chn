@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2015 Nicolas Casalini
+-- Copyright (C) 2009 - 2016 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -556,7 +556,7 @@ newEffect{
 newEffect{
 	name = "HARASSED", image = "talents/harass_prey.png",
 	desc = "Harassed",
-	long_desc = function(self, eff) return ("目 标 被 追 踪 至 疲 倦， 伤 害 减 低 %d%% 。"):format( -eff.damageChange * 100) end,
+	long_desc = function(self, eff) return ("目 标 被 追 踪 至 疲 倦， 伤 害 减 低 %d%% 。"):format( -eff.damageChange ) end,
 	type = "mental",
 	subtype = { fear=true },
 	status = "detrimental",
@@ -607,7 +607,7 @@ newEffect{
 	subtype = { psychic_drain=true },
 	status = "beneficial",
 	parameters = { },
-	activate = function(self, eff)
+	activate = function(self, eff, ed)
 		eff.src = self
 
 		-- hate
@@ -641,6 +641,8 @@ newEffect{
 		end
 
 		eff.target:setEffect(eff.target.EFF_FED_UPON, eff.dur, { src = eff.src, target = eff.target, constitutionLoss = -eff.constitutionGain, lifeRegenLoss = -eff.lifeRegenGain, damageLoss = -eff.damageGain, resistLoss = -eff.resistGain })
+
+		ed.updateFeed(self, eff)
 	end,
 	deactivate = function(self, eff)
 		-- hate
@@ -1787,7 +1789,7 @@ newEffect{
 
 		-- check negative life first incase the creature has healing
 		if self.life <= (self.die_at or 0) then
-			local sx, sy = game.level.map:getTileToScreen(self.x, self.y)
+			local sx, sy = game.level.map:getTileToScreen(self.x, self.y, true)
 			game.flyers:add(sx, sy, 30, (rng.range(0,2)-1) * 0.5, rng.float(-2.5, -1.5), "Falls dead!", {255,0,255})
 			game.logSeen(self, "%s dies when its frenzy ends!", self.name:capitalize())
 			self:die(self)
@@ -3177,7 +3179,7 @@ newEffect{
 		self.damage_shield_absorb = eff.power
 		self.damage_shield_absorb_max = eff.power
 		if core.shader.active(4) then
-			eff.particle = self:addParticles(Particles.new("shader_shield", 1, {size_factor=1.4, img="shield3"}, {type="runicshield", ellipsoidalFactor=1, time_factor=-10000, llpow=1, aadjust=7, bubbleColor=colors.hex1alpha"9fe836a0", auraColor=colors.hex1alpha"36bce8da"}))
+			eff.particle = self:addParticles(Particles.new("shader_shield", 1, {a=eff.shield_transparency or 1, size_factor=1.4, img="shield3"}, {type="runicshield", ellipsoidalFactor=1, time_factor=-10000, llpow=1, aadjust=7, bubbleColor=colors.hex1alpha"9fe836a0", auraColor=colors.hex1alpha"36bce8da"}))
 		else
 			eff.particle = self:addParticles(Particles.new("damage_shield", 1))
 		end

@@ -216,6 +216,7 @@ newBirthDescriptor{
 		"#LIGHT_BLUE# * +0 魔 法， +1 意 志， +4 灵 巧",
 		"#GOLD# 每 等 级 生 命 加 值： #LIGHT_BLUE# +0",
 	},
+	not_on_random_boss = true,
 	power_source = {technique=true},
 	stats = {dex = 4, cun = 4, wil = 1},
 	talents_types = {

@@ -1,5 +1,5 @@
 ﻿-- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2014 Nicolas Casalini
+-- Copyright (C) 2009 - 2016 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -28,6 +28,7 @@ local LogDisplay = require "engine.LogDisplay"
 local LogFlasher = require "engine.LogFlasher"
 local FlyingText = require "engine.FlyingText"
 local Shader = require "engine.Shader"
+local ActorResource = require "engine.interface.ActorResource"
 local Tooltip = require "mod.class.Tooltip"
 local TooltipsData = require "mod.class.interface.TooltipsData"
 local Dialog = require "engine.ui.Dialog"
@@ -36,7 +37,16 @@ local FontPackage = require "engine.FontPackage"
 
 module(..., package.seeall, class.inherit(UISet, TooltipsData))
 
-local move_handle = {core.display.loadImage("/data/gfx/ui/move_handle.png"):glTexture()}
+local function imageLoader(file)
+	local sfile = "/data/gfx/"..UI.ui.."-ui/minimalist/"..file
+	if fs.exists(sfile) then
+		return core.display.loadImage(sfile)
+	else
+		return core.display.loadImage( "/data/gfx/ui/"..file)
+	end
+end
+
+local move_handle = {imageLoader("move_handle.png"):glTexture()}
 
 local frames_colors = {
 	ok = {0.3, 0.6, 0.3},
@@ -51,134 +61,157 @@ air_sha = Shader.new("resources", {require_shader=4, delay_load=true, color=air_
 life_c = {0xc0/255, 0, 0}
 life_sha = Shader.new("resources", {require_shader=4, delay_load=true, color=life_c, speed=1000, distort={1.5,1.5}})
 shield_c = {0.5, 0.5, 0.5}
-shield_sha = Shader.new("resources", {require_shader=4, delay_load=true, color=shield_c, speed=5000, a=0.8, distort={0.5,0.5}})
-stam_c = {0xff/255, 0xcc/255, 0x80/255}
-stam_sha = Shader.new("resources", {require_shader=4, delay_load=true, color=stam_c, speed=700, distort={1,1.4}})
-mana_c = {106/255, 146/255, 222/255}
-mana_sha = Shader.new("resources", {require_shader=4, delay_load=true, color=mana_c, speed=1000, distort={0.4,0.4}})
-soul_c = {128/255, 128/255, 128/255}
-soul_sha = Shader.new("resources", {require_shader=4, delay_load=true, color=soul_c, speed=1200, distort={0.4,-0.4}})
-equi_c = {0x00/255, 0xff/255, 0x74/255}
-equi_c2 = {0x80/255, 0x9f/255, 0x44/255}
-equi_sha = Shader.new("resources2", {require_shader=4, delay_load=true, color1=equi_c, color2=equi_c2, amp=0.8, speed=20000, distort={0.3,0.25}})
-paradox_c = {0x2f/255, 0xa0/255, 0xb4/255}
-paradox_c2 = {0x8f/255, 0x80/255, 0x44/255}
-paradox_sha = Shader.new("resources2", {require_shader=4, delay_load=true, color1=paradox_c, color2=paradox_c2, amp=0.8, speed=20000, distort={0.1,0.25}})
-pos_c = {colors.GOLD.r/255, colors.GOLD.g/255, colors.GOLD.b/255}
-pos_sha = Shader.new("resources", {require_shader=4, delay_load=true, color=pos_c, speed=1000, distort={1.6,0.2}})
-neg_c = {colors.DARK_GREY.r/255, colors.DARK_GREY.g/255, colors.DARK_GREY.b/255}
-neg_sha = Shader.new("resources", {require_shader=4, delay_load=true, color=neg_c, speed=1000, distort={1.6,-0.2}})
-vim_c = {0x90/255, 0x40/255, 0x10/255}
-vim_sha = Shader.new("resources", {require_shader=4, delay_load=true, color=vim_c, speed=1000, distort={0.4,0.4}})
-hate_c = {0xF5/255, 0x3C/255, 0xBE/255}
-hate_sha = Shader.new("resources", {require_shader=4, delay_load=true, color=hate_c, speed=1000, distort={0.4,0.4}})
-psi_c = {colors.BLUE.r/255, colors.BLUE.g/255, colors.BLUE.b/255}
-psi_sha = Shader.new("resources", {require_shader=4, delay_load=true, color=psi_c, speed=2000, distort={0.4,0.4}})
+shield_sha = Shader.new("resources", {require_shader=4, delay_load=true, color=shield_c, speed=5000, a=0.5, distort={0.5,0.5}})
+psi_sha = Shader.new("resources", {require_shader=4, delay_load=true, color={colors.BLUE.r/255, colors.BLUE.g/255, colors.BLUE.b/255}, speed=2000, distort={0.4,0.4}})
 feedback_c = {colors.YELLOW.r/255, colors.YELLOW.g/255, colors.YELLOW.b/255}
 feedback_sha = Shader.new("resources", {require_shader=4, delay_load=true, color=feedback_c, speed=2000, distort={0.4,0.4}})
 fortress_c = {0x39/255, 0xd5/255, 0x35/255}
 fortress_sha = Shader.new("resources", {require_shader=4, delay_load=true, color=fortress_c, speed=2000, distort={0.4,0.4}})
-save_c = pos_c
-save_sha = pos_sha
+save_c = {colors.GOLD.r/255, colors.GOLD.g/255, colors.GOLD.b/255}
+save_sha = Shader.new("resources", {require_shader=4, delay_load=true, color=save_c, speed=1000, distort={1.6,0.2}})
 
-sshat = {core.display.loadImage("/data/gfx/ui/resources/shadow.png"):glTexture()}
-bshat = {core.display.loadImage("/data/gfx/ui/resources/back.png"):glTexture()}
-shat = {core.display.loadImage("/data/gfx/ui/resources/fill.png"):glTexture()}
-fshat = {core.display.loadImage("/data/gfx/ui/resources/front.png"):glTexture()}
-fshat_life = {core.display.loadImage("/data/gfx/ui/resources/front_life.png"):glTexture()}
-fshat_life_dark = {core.display.loadImage("/data/gfx/ui/resources/front_life_dark.png"):glTexture()}
-fshat_shield = {core.display.loadImage("/data/gfx/ui/resources/front_life_armored.png"):glTexture()}
-fshat_shield_dark = {core.display.loadImage("/data/gfx/ui/resources/front_life_armored_dark.png"):glTexture()}
-fshat_stamina = {core.display.loadImage("/data/gfx/ui/resources/front_stamina.png"):glTexture()}
-fshat_stamina_dark = {core.display.loadImage("/data/gfx/ui/resources/front_stamina_dark.png"):glTexture()}
-fshat_mana = {core.display.loadImage("/data/gfx/ui/resources/front_mana.png"):glTexture()}
-fshat_mana_dark = {core.display.loadImage("/data/gfx/ui/resources/front_mana_dark.png"):glTexture()}
-fshat_soul = {core.display.loadImage("/data/gfx/ui/resources/front_souls.png"):glTexture()}
-fshat_soul_dark = {core.display.loadImage("/data/gfx/ui/resources/front_souls_dark.png"):glTexture()}
-fshat_equi = {core.display.loadImage("/data/gfx/ui/resources/front_nature.png"):glTexture()}
-fshat_equi_dark = {core.display.loadImage("/data/gfx/ui/resources/front_nature_dark.png"):glTexture()}
-fshat_paradox = {core.display.loadImage("/data/gfx/ui/resources/front_paradox.png"):glTexture()}
-fshat_paradox_dark = {core.display.loadImage("/data/gfx/ui/resources/front_paradox_dark.png"):glTexture()}
-fshat_hate = {core.display.loadImage("/data/gfx/ui/resources/front_hate.png"):glTexture()}
-fshat_hate_dark = {core.display.loadImage("/data/gfx/ui/resources/front_hate_dark.png"):glTexture()}
-fshat_positive = {core.display.loadImage("/data/gfx/ui/resources/front_positive.png"):glTexture()}
-fshat_positive_dark = {core.display.loadImage("/data/gfx/ui/resources/front_positive_dark.png"):glTexture()}
-fshat_negative = {core.display.loadImage("/data/gfx/ui/resources/front_negative.png"):glTexture()}
-fshat_negative_dark = {core.display.loadImage("/data/gfx/ui/resources/front_negative_dark.png"):glTexture()}
-fshat_vim = {core.display.loadImage("/data/gfx/ui/resources/front_vim.png"):glTexture()}
-fshat_vim_dark = {core.display.loadImage("/data/gfx/ui/resources/front_vim_dark.png"):glTexture()}
-fshat_psi = {core.display.loadImage("/data/gfx/ui/resources/front_psi.png"):glTexture()}
-fshat_psi_dark = {core.display.loadImage("/data/gfx/ui/resources/front_psi_dark.png"):glTexture()}
-fshat_feedback = {core.display.loadImage("/data/gfx/ui/resources/front_psi.png"):glTexture()}
-fshat_feedback_dark = {core.display.loadImage("/data/gfx/ui/resources/front_psi_dark.png"):glTexture()}
-fshat_air = {core.display.loadImage("/data/gfx/ui/resources/front_air.png"):glTexture()}
-fshat_air_dark = {core.display.loadImage("/data/gfx/ui/resources/front_air_dark.png"):glTexture()}
-fshat_fortress = {core.display.loadImage("/data/gfx/ui/resources/front_fortress.png"):glTexture()}
-fshat_fortress_dark = {core.display.loadImage("/data/gfx/ui/resources/front_fortress_dark.png"):glTexture()}
+sshat = {imageLoader("resources/shadow.png"):glTexture()}
+bshat = {imageLoader("resources/back.png"):glTexture()}
+shat = {imageLoader("resources/fill.png"):glTexture()}
+fshat = {imageLoader("resources/front.png"):glTexture()}
+fshat_life = {imageLoader("resources/front_life.png"):glTexture()}
+fshat_life_dark = {imageLoader("resources/front_life_dark.png"):glTexture()}
+fshat_shield = {imageLoader("resources/front_life_armored.png"):glTexture()}
+fshat_shield_dark = {imageLoader("resources/front_life_armored_dark.png"):glTexture()}
+fshat_feedback = {imageLoader("resources/front_psi.png"):glTexture()}
+fshat_feedback_dark = {imageLoader("resources/front_psi_dark.png"):glTexture()}
+fshat_air = {imageLoader("resources/front_air.png"):glTexture()}
+fshat_air_dark = {imageLoader("resources/front_air_dark.png"):glTexture()}
+fshat_fortress = {imageLoader("resources/front_fortress.png"):glTexture()}
+fshat_fortress_dark = {imageLoader("resources/front_fortress_dark.png"):glTexture()}
 
-fshat_hourglass = {core.display.loadImage("/data/gfx/ui/resources/hourglass_front.png"):glTexture()}
-sshat_hourglass = {core.display.loadImage("/data/gfx/ui/resources/hourglass_shadow.png"):glTexture()}
-shat_hourglass_top = {core.display.loadImage("/data/gfx/ui/resources/hourglass_top.png"):glTexture()}
-shat_hourglass_bottom = {core.display.loadImage("/data/gfx/ui/resources/hourglass_bottom.png"):glTexture()}
+fshat_hourglass = {imageLoader("resources/hourglass_front.png"):glTexture()}
+sshat_hourglass = {imageLoader("resources/hourglass_shadow.png"):glTexture()}
+shat_hourglass_top = {imageLoader("resources/hourglass_top.png"):glTexture()}
+shat_hourglass_bottom = {imageLoader("resources/hourglass_bottom.png"):glTexture()}
 
-ammo_shadow_default = {core.display.loadImage("/data/gfx/ui/resources/ammo_shadow_default.png"):glTexture()}
-ammo_default = {core.display.loadImage("/data/gfx/ui/resources/ammo_default.png"):glTexture()}
-ammo_shadow_arrow = {core.display.loadImage("/data/gfx/ui/resources/ammo_shadow_arrow.png"):glTexture()}
-ammo_arrow = {core.display.loadImage("/data/gfx/ui/resources/ammo_arrow.png"):glTexture()}
-ammo_shadow_shot = {core.display.loadImage("/data/gfx/ui/resources/ammo_shadow_shot.png"):glTexture()}
-ammo_shot = {core.display.loadImage("/data/gfx/ui/resources/ammo_shot.png"):glTexture()}
-_M['ammo_shadow_alchemist-gem'] = {core.display.loadImage("/data/gfx/ui/resources/ammo_shadow_alchemist-gem.png"):glTexture()}
-_M['ammo_alchemist-gem'] = {core.display.loadImage("/data/gfx/ui/resources/ammo_alchemist-gem.png"):glTexture()}
+ammo_shadow_default = {imageLoader("resources/ammo_shadow_default.png"):glTexture()}
+ammo_default = {imageLoader("resources/ammo_default.png"):glTexture()}
+ammo_shadow_arrow = {imageLoader("resources/ammo_shadow_arrow.png"):glTexture()}
+ammo_arrow = {imageLoader("resources/ammo_arrow.png"):glTexture()}
+ammo_shadow_shot = {imageLoader("resources/ammo_shadow_shot.png"):glTexture()}
+ammo_shot = {imageLoader("resources/ammo_shot.png"):glTexture()}
+_M['ammo_shadow_alchemist-gem'] = {imageLoader("resources/ammo_shadow_alchemist-gem.png"):glTexture()}
+_M['ammo_alchemist-gem'] = {imageLoader("resources/ammo_alchemist-gem.png"):glTexture()}
 
 font_sha = core.display.newFont(chn123_tome_font(), 14, true)
 font_sha:setStyle("bold")
 sfont_sha = core.display.newFont(chn123_tome_font(), 12, true)
 sfont_sha:setStyle("bold")
 
-icon_green = { core.display.loadImage("/data/gfx/ui/talent_frame_ok.png"):glTexture() }
-icon_yellow = { core.display.loadImage("/data/gfx/ui/talent_frame_sustain.png"):glTexture() }
-icon_red = { core.display.loadImage("/data/gfx/ui/talent_frame_cooldown.png"):glTexture() }
+icon_green = { imageLoader("talent_frame_ok.png"):glTexture() }
+icon_yellow = { imageLoader("talent_frame_sustain.png"):glTexture() }
+icon_red = { imageLoader("talent_frame_cooldown.png"):glTexture() }
 
-local portrait = {core.display.loadImage("/data/gfx/ui/party-portrait.png"):glTexture()}
-local portrait_unsel = {core.display.loadImage("/data/gfx/ui/party-portrait-unselect.png"):glTexture()}
-local portrait_lev = {core.display.loadImage("/data/gfx/ui/party-portrait-lev.png"):glTexture()}
-local portrait_unsel_lev = {core.display.loadImage("/data/gfx/ui/party-portrait-unselect-lev.png"):glTexture()}
+local portrait = {imageLoader("party-portrait.png"):glTexture()}
+local portrait_unsel = {imageLoader("party-portrait-unselect.png"):glTexture()}
+local portrait_lev = {imageLoader("party-portrait-lev.png"):glTexture()}
+local portrait_unsel_lev = {imageLoader("party-portrait-unselect-lev.png"):glTexture()}
 
 local pf_bg_x, pf_bg_y = 0, 0
-local pf_bg = {core.display.loadImage("/data/gfx/ui/playerframe/back.png"):glTexture()}
-local pf_shadow = {core.display.loadImage("/data/gfx/ui/playerframe/shadow.png"):glTexture()}
-local pf_defend = {core.display.loadImage("/data/gfx/ui/playerframe/defend.png"):glTexture()}
+local pf_player_x, pf_player_y = 0, 0
+local pf_bg = {imageLoader("playerframe/back.png"):glTexture()}
+local pf_shadow = {imageLoader("playerframe/shadow.png"):glTexture()}
+local pf_defend = {imageLoader("playerframe/defend.png"):glTexture()}
 local pf_attackdefend_x, pf_attackdefend_y = 0, 0
-local pf_attack = {core.display.loadImage("/data/gfx/ui/playerframe/attack.png"):glTexture()}
-local pf_levelup = {core.display.loadImage("/data/gfx/ui/playerframe/levelup.png"):glTexture()}
-local pf_encumber = {core.display.loadImage("/data/gfx/ui/playerframe/encumber.png"):glTexture()}
-local pf_exp = {core.display.loadImage("/data/gfx/ui/playerframe/exp.png"):glTexture()}
-local pf_exp_levelup = {core.display.loadImage("/data/gfx/ui/playerframe/exp_levelup.png"):glTexture()}
+local pf_attack = {imageLoader("playerframe/attack.png"):glTexture()}
+local pf_levelup_x, pf_levelup_y = 0, 0
+local pf_levelup = {imageLoader("playerframe/levelup.png"):glTexture()}
+local pf_encumber_x, pf_encumber_y = 0, 0
+local pf_encumber = {imageLoader("playerframe/encumber.png"):glTexture()}
+local pf_exp_x, pf_exp_y = 0, 0
+local pf_exp = {imageLoader("playerframe/exp.png"):glTexture()}
+local pf_exp_levelup = {imageLoader("playerframe/exp_levelup.png"):glTexture()}
+local pf_money_x, pf_money_y = 0, 0
+local pf_exp_cur_x, pf_exp_cur_y = 0, 0
+local pf_name_x, pf_name_y = 0, 0
+local pf_level_x, pf_level_y = 0, 0
 
 local mm_bg_x, mm_bg_y = 0, 0
-local mm_bg = {core.display.loadImage("/data/gfx/ui/minimap/back.png"):glTexture()}
-local mm_comp = {core.display.loadImage("/data/gfx/ui/minimap/compass.png"):glTexture()}
-local mm_shadow = {core.display.loadImage("/data/gfx/ui/minimap/shadow.png"):glTexture()}
-local mm_transp = {core.display.loadImage("/data/gfx/ui/minimap/transp.png"):glTexture()}
+local mm_bg = {imageLoader("minimap/back.png"):glTexture()}
+local mm_comp = {imageLoader("minimap/compass.png"):glTexture()}
+local mm_shadow = {imageLoader("minimap/shadow.png"):glTexture()}
+local mm_transp = {imageLoader("minimap/transp.png"):glTexture()}
 
-local tb_bg = {core.display.loadImage("/data/gfx/ui/hotkeys/icons_bg.png"):glTexture()}
-local tb_talents = {core.display.loadImage("/data/gfx/ui/hotkeys/talents.png"):glTexture()}
-local tb_inven = {core.display.loadImage("/data/gfx/ui/hotkeys/inventory.png"):glTexture()}
-local tb_lore = {core.display.loadImage("/data/gfx/ui/hotkeys/lore.png"):glTexture()}
-local tb_quest = {core.display.loadImage("/data/gfx/ui/hotkeys/quest.png"):glTexture()}
-local tb_mainmenu = {core.display.loadImage("/data/gfx/ui/hotkeys/mainmenu.png"):glTexture()}
-local tb_padlock_open = {core.display.loadImage("/data/gfx/ui/padlock_open.png"):glTexture()}
-local tb_padlock_closed = {core.display.loadImage("/data/gfx/ui/padlock_closed.png"):glTexture()}
+local tb_bg = {imageLoader("hotkeys/icons_bg.png"):glTexture()}
+local tb_talents = {imageLoader("hotkeys/talents.png"):glTexture()}
+local tb_inven = {imageLoader("hotkeys/inventory.png"):glTexture()}
+local tb_lore = {imageLoader("hotkeys/lore.png"):glTexture()}
+local tb_quest = {imageLoader("hotkeys/quest.png"):glTexture()}
+local tb_mainmenu = {imageLoader("hotkeys/mainmenu.png"):glTexture()}
+local tb_padlock_open = {imageLoader("padlock_open.png"):glTexture()}
+local tb_padlock_closed = {imageLoader("padlock_closed.png"):glTexture()}
 
-local hk1 = {core.display.loadImage("/data/gfx/ui/hotkeys/hotkey_1.png"):glTexture()}
-local hk2 = {core.display.loadImage("/data/gfx/ui/hotkeys/hotkey_2.png"):glTexture()}
-local hk3 = {core.display.loadImage("/data/gfx/ui/hotkeys/hotkey_3.png"):glTexture()}
-local hk4 = {core.display.loadImage("/data/gfx/ui/hotkeys/hotkey_4.png"):glTexture()}
-local hk5 = {core.display.loadImage("/data/gfx/ui/hotkeys/hotkey_5.png"):glTexture()}
-local hk6 = {core.display.loadImage("/data/gfx/ui/hotkeys/hotkey_6.png"):glTexture()}
-local hk7 = {core.display.loadImage("/data/gfx/ui/hotkeys/hotkey_7.png"):glTexture()}
-local hk8 = {core.display.loadImage("/data/gfx/ui/hotkeys/hotkey_8.png"):glTexture()}
-local hk9 = {core.display.loadImage("/data/gfx/ui/hotkeys/hotkey_9.png"):glTexture()}
+local hk1 = {imageLoader("hotkeys/hotkey_1.png"):glTexture()}
+local hk2 = {imageLoader("hotkeys/hotkey_2.png"):glTexture()}
+local hk3 = {imageLoader("hotkeys/hotkey_3.png"):glTexture()}
+local hk4 = {imageLoader("hotkeys/hotkey_4.png"):glTexture()}
+local hk5 = {imageLoader("hotkeys/hotkey_5.png"):glTexture()}
+local hk6 = {imageLoader("hotkeys/hotkey_6.png"):glTexture()}
+local hk7 = {imageLoader("hotkeys/hotkey_7.png"):glTexture()}
+local hk8 = {imageLoader("hotkeys/hotkey_8.png"):glTexture()}
+local hk9 = {imageLoader("hotkeys/hotkey_9.png"):glTexture()}
+
+_M:bindHook("UISet:Minimalist:Load", function(self, data)
+	if UI.ui ~= "dark" then return end
+	data.alterlocal("pf_bg_y", -5)
+	data.alterlocal("pf_attackdefend_x", 8)
+	data.alterlocal("pf_attackdefend_y", -8)
+	data.alterlocal("pf_player_x", 5)
+	data.alterlocal("pf_player_y", -4)
+	data.alterlocal("pf_levelup_x", -5)
+	data.alterlocal("pf_levelup_y", -9)
+	data.alterlocal("pf_exp_x", 10)
+	data.alterlocal("pf_exp_y", -1)
+	data.alterlocal("pf_level_x", 9)
+	data.alterlocal("pf_level_y", -2)
+	data.alterlocal("pf_name_x", 10)
+	data.alterlocal("pf_name_y", -2)
+	data.alterlocal("pf_money_x", 7)
+	data.alterlocal("pf_money_y", -2)
+	data.alterlocal("pf_exp_cur_x", 7)
+	data.alterlocal("pf_exp_cur_y", -1)
+	data.alterlocal("mm_bg_x", -5)
+	data.alterlocal("mm_bg_y", -3)
+end)
+
+-- Note: could use a bit more room for some of the resource texts
+
+-- Additional (optional) resource parameters for the Minimalist UI (defined in ActorResource:resources_def[resource_name].Minimalist):
+--	images = {front = <highlighted graphic file path> , front_dark = <unhighlighted graphic file path>}
+-- 		(base directories: "/data/gfx/"..UI.ui.."-ui/minimalist/" or "/data/gfx/ui/")
+--	highlight = function(player, vc, vn, vm, vr) return true to display the highlighted resource graphic
+--		vc, vn, vm, vr = resource current, min, max, regen values
+--	shader_params = { shader parameters used to define the shader for the resource bar (merged into default parameters below)
+--		display_resource_bar = function(player, shader, x, y, color, a) --function to draw the resource bar within the resource graphic
+--			shader = a Shader object to be drawn at x, y with color = vector {r, g, b}/255 and alpha a (0-1)
+--			called with the uiset fenv
+--			Note: will be called with player = false before the ui is initialized
+--	}
+-- see Minimalist:initialize_resources, Minimalist:displayResources
+
+-- Default shader parameters used to draw the resource bars
+-- Overridden by resource_def.Minimalist.shader_params
+_M.shader_params = {default = {name = "resources", require_shader=4, delay_load=true, speed=1000, distort={1.5,1.5}},
+	air={name = "resources", require_shader=4, delay_load=true, color=air_c, speed=100, amp=0.8, distort={2,2.5}},
+	life={name = "resources", require_shader=4, delay_load=true, color=life_c, speed=1000, distort={1.5,1.5}},
+	stamina={name = "resources", require_shader=4, delay_load=true, color={0xff/255, 0xcc/255, 0x80/255}, speed=700, distort={1,1.4}},
+	mana={name = "resources", require_shader=4, delay_load=true, color={106/255, 146/255, 222/255}, speed=1000, distort={0.4,0.4}},
+	soul={name = "resources", require_shader=4, delay_load=true, color={128/255, 128/255, 128/255}, speed=1200, distort={0.4,-0.4}},
+	equilibrium={name = "resources2", require_shader=4, delay_load=true, color1={0x00/255, 0xff/255, 0x74/255}, color2={0x80/255, 0x9f/255, 0x44/255}, amp=0.8, speed=20000, distort={0.3,0.25}},
+	paradox={name = "resources2", require_shader=4, delay_load=true, color1={0x2f/255, 0xa0/255, 0xb4/255}, color2={0x8f/255, 0x80/255, 0x44/255}, amp=0.8, speed=20000, distort={0.1,0.25}},
+	positive={name = "resources", require_shader=4, delay_load=true, color={colors.GOLD.r/255, colors.GOLD.g/255, colors.GOLD.b/255}, speed=1000, distort={1.6,0.2}},
+	negative={name = "resources", require_shader=4, delay_load=true, color={colors.DARK_GREY.r/255, colors.DARK_GREY.g/255, colors.DARK_GREY.b/255}, speed=1000, distort={1.6,-0.2}},
+	vim={name = "resources", require_shader=4, delay_load=true, color={210/255, 180/255, 140/255}, speed=1000, distort={0.4,0.4}},
+	hate={name = "resources", require_shader=4, delay_load=true, color={0xF5/255, 0x3C/255, 0xBE/255}, speed=1000, distort={0.4,0.4}},
+	psi={name = "resources", require_shader=4, delay_load=true, color={colors.BLUE.r/255, colors.BLUE.g/255, colors.BLUE.b/255}, speed=2000, distort={0.4,0.4}},
+	feedback={require_shader=4, delay_load=true, speed=2000, distort={0.4,0.4}},
+}
 
 _M:triggerHook{"UISet:Minimalist:Load", alterlocal=function(k, v)
 	local i = 1
@@ -189,6 +222,75 @@ _M:triggerHook{"UISet:Minimalist:Load", alterlocal=function(k, v)
 		i = i + 1
 	end
 end }
+
+-- load and set up resource graphics
+function _M:initialize_resources()
+	local res_gfx = {}
+	for res, res_def in ipairs(ActorResource.resources_def) do
+		local rname = res_def.short_name
+
+		res_gfx[rname] = table.clone(res_def.minimalist_gfx) or {color = {}, shader = {}} -- use the graphics defined with the resource, if possible
+		local res_color = res_def.color or "#WHITE#"
+
+		-- set up color
+		if type(res_color) == "string" then
+			local r, g, b
+			res_color = res_color:gsub("#", ""):upper()
+			if colors[res_color] then -- lookup
+				r, g, b = colors.unpack(colors[res_color])
+				r, g, b = r/255, g/255, b/255
+			else -- parse
+				r, g, b = colors.hex1unpack(res_color)
+			end
+			res_gfx[rname].color = {r, g, b}
+		else
+			res_gfx[rname].color = res_color
+		end
+
+		local shad_params = table.clone(_M.shader_params[rname] or _M.shader_params.default)
+		local extra_shader_params = table.get(res_def, "Minimalist", "shader_params")
+		-- note: Shader init calls all arg functions
+		if extra_shader_params then -- update fenv for custom functions
+			for p, val in pairs(extra_shader_params) do
+				if type(val) == "function" then
+					 setfenv(val, getfenv(_M.init))
+				end
+			end
+			table.merge(shad_params, extra_shader_params)
+		end
+		-- get color from resource_definition.Minimalist.shader_params, then _M.shader_params (defined here), then resource_definition.color
+		shad_params.color = table.get(res_def, "Minimalist", "shader_color") or shad_params.color or res_gfx[rname].color
+		res_gfx[rname].shader = Shader.new(shad_params.name, shad_params)
+		-- optional custom highlight select function
+		res_gfx[rname].highlight = table.get(res_def, "Minimalist", "highlight")	
+		-- load graphic images
+		local res_imgs = table.merge({front = "resources/front_"..rname..".png", front_dark = "resources/front_"..rname.."_dark.png"}, table.get(res_def, "Minimalist", "images") or {})
+		local sbase, bbase = "/data/gfx/"..UI.ui.."-ui/minimalist/", "/data/gfx/ui/"
+		for typ, file in pairs(res_imgs) do
+			local sfile = sbase..file
+			local bfile = bbase..file
+			if fs.exists(sfile) then -- load the specific image
+				print("[Minimalist] resource ui:", rname, "gfx file", sfile, "found")
+				res_gfx[rname][typ] = {core.display.loadImage(sfile):glTexture()}
+			elseif fs.exists(bfile) then -- load the specific image
+				print("[Minimalist] resource base:", rname, "gfx file", bfile, "found")
+				res_gfx[rname][typ] = {core.display.loadImage(bfile):glTexture()}
+			else -- load a default image (Psi graphics)
+				print("[Minimalist] Warning: resource", rname, "gfx file", file, "**NOT FOUND** in directories", sbase, "or", bbase, "(using default image)")
+				if typ == "front" then
+					res_gfx[rname][typ] = {imageLoader("resources/front_psi.png"):glTexture()}
+				else
+					res_gfx[rname][typ] = {imageLoader("resources/front_psi_dark.png"):glTexture()}
+				end
+			end
+		end
+		-- generate default tooltip if needed
+		res_gfx[rname].tooltip = _M["TOOLTIP_"..rname:upper()] or ([[#GOLD#%s#LAST#
+%s]]):format(res_def.name, res_def.description or "no description")
+
+	end
+	self.res_gfx = res_gfx
+end
 
 function _M:init()
 	UISet.init(self)
@@ -235,6 +337,7 @@ function _M:init()
 	self.tbbuttons = {inven=0.6, talents=0.6, mainmenu=0.6, lore=0.6, quest=0.6}
 
 	self.buffs_base = UI:makeFrame("ui/icon-frame/frame", 40, 40)
+	self:initialize_resources()
 end
 
 function _M:isLocked()
@@ -588,18 +691,17 @@ function _M:showResourceTooltip(x, y, w, h, id, desc, is_first)
 					if event == "button" and button == "right" then
 						local player = game.player
 						local list = {}
-						if player:knowTalent(player.T_STAMINA_POOL) then list[#list+1] = {name="Stamina", id="stamina"} end
-						if player:knowTalent(player.T_MANA_POOL) then list[#list+1] = {name="Mana", id="mana"} end
-						if player:knowTalent(player.T_SOUL_POOL) then list[#list+1] = {name="Necrotic", id="soul"} end
-						if player:knowTalent(player.T_EQUILIBRIUM_POOL) then list[#list+1] = {name="Equilibrium", id="equilibrium"} end
-						if player:knowTalent(player.T_POSITIVE_POOL) then list[#list+1] = {name="Positive", id="positive"} end
-						if player:knowTalent(player.T_NEGATIVE_POOL) then list[#list+1] = {name="Negative", id="negative"} end
-						if player:knowTalent(player.T_PARADOX_POOL) then list[#list+1] = {name="Paradox", id="paradox"} end
-						if player:knowTalent(player.T_VIM_POOL) then list[#list+1] = {name="Vim", id="vim"} end
-						if player:knowTalent(player.T_HATE_POOL) then list[#list+1] = {name="Hate", id="hate"} end
-						if player:knowTalent(player.T_PSI_POOL) then list[#list+1] = {name="Psi", id="psi"} end
+						local rname
+						for res, res_def in ipairs(ActorResource.resources_def) do
+							rname = res_def.short_name
+							if not res_def.hidden_resource and player:knowTalent(res_def.talent) then
+								list[#list+1] = {name=res_def.name, id=rname}
+							end
+						end
 						if player:knowTalent(player.T_FEEDBACK_POOL) then list[#list+1] = {name="Feedback", id="feedback"} end
-						Dialog:listPopup("Display/Hide resources", "Toggle:", list, 300, 300, function(sel)
+						if player.is_fortress and player:hasQuest("shertul-fortress") then list[#list+1] = {name="Fortress Energy", id="fortress"} end
+						
+						Dialog:listPopup("Display/Hide resources", "Toggle:", list, 300, util.bound((8+#list)*(self.init_font_h+1), 14*(self.init_font_h+1), game.h*.75), function(sel)
 							if not sel or not sel.id then return end
 							game.player["_hide_resource_"..sel.id] = not game.player["_hide_resource_"..sel.id]
 						end)
@@ -639,7 +741,7 @@ function _M:displayResources(scale, bx, by, a)
 			sshat[1]:toScreenFull(x-6, y+8, sshat[6], sshat[7], sshat[2], sshat[3], 1, 1, 1, a)
 			bshat[1]:toScreenFull(x, y, bshat[6], bshat[7], bshat[2], bshat[3], 1, 1, 1, a)
 			if air_sha.shad then air_sha:setUniform("a", a) air_sha.shad:use(true) end
-			local p = player:getAir() / player.max_air
+			local p = math.min(1, math.max(0, player:getAir() / player.max_air))
 			shat[1]:toScreenPrecise(x+49, y+10, shat[6] * p, shat[7], 0, p * 1/shat[4], 0, 1/shat[5], air_c[1], air_c[2], air_c[3], a)
 			if air_sha.shad then air_sha.shad:use(false) end
 
@@ -675,24 +777,35 @@ function _M:displayResources(scale, bx, by, a)
 
 		local life_regen = player.life_regen * util.bound((player.healing_factor or 1), 0, 2.5)
 		if not self.res.life or self.res.life.vc ~= player.life or self.res.life.vm ~= player.max_life or self.res.life.vr ~= life_regen then
+			local status_text = ("%s/%d"):format(player.life > 0 and math.round(player.life) or "???", math.round(player.max_life))
+			local reg_text = string.limit_decimals(life_regen,3, "+")
 			self.res.life = {
 				vc = player.life, vm = player.max_life, vr = life_regen,
-				--cur = {core.display.drawStringBlendedNewSurface(font_sha, (player.life < 0) and "???" or ("%d/%d"):format(player.life, player.max_life), 255, 255, 255):glTexture()},
-				cur = {core.display.drawStringBlendedNewSurface(font_sha, ("%d/%d"):format(player.life, player.max_life), 255, 255, 255):glTexture()},
-				regen={core.display.drawStringBlendedNewSurface(sfont_sha, ("%+0.2f"):format(life_regen), 255, 255, 255):glTexture()},
+				cur = {core.display.drawStringBlendedNewSurface(#status_text*1.1 + #reg_text <=14 and font_sha or sfont_sha, status_text, 255, 255, 255):glTexture()}, -- adjust font for space
+				regen={core.display.drawStringBlendedNewSurface(sfont_sha, reg_text, 255, 255, 255):glTexture()},
 			}
 		end
+
+		local shield, max_shield = 0, 0
+		if player:attr("time_shield") then shield = shield + player.time_shield_absorb max_shield = max_shield + player.time_shield_absorb_max end
+		if player:attr("damage_shield") then shield = shield + player.damage_shield_absorb max_shield = max_shield + player.damage_shield_absorb_max end
+		if player:attr("displacement_shield") then shield = shield + player.displacement_shield max_shield = max_shield + player.displacement_shield_max end
+		
+		local front = fshat_life_dark
+		if max_shield > 0 then
+			front = fshat_shield_dark
+			if shield >= max_shield * 0.8 then front = fshat_shield end
+		elseif player.life >= player.max_life then front = fshat_life end
+		front[1]:toScreenFull(x, y, front[6], front[7], front[2], front[3], 1, 1, 1, a)
+	
+		-- draw text on top of graphic for legibility
 		local dt = self.res.life.cur
 		dt[1]:toScreenFull(2+x+64, 2+y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 0, 0, 0, 0.7 * a)
 		dt[1]:toScreenFull(x+64, y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 1, 1, 1, a)
 		dt = self.res.life.regen
 		dt[1]:toScreenFull(2+x+144, 2+y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 0, 0, 0, 0.7 * a)
 		dt[1]:toScreenFull(x+144, y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 1, 1, 1, a)
-
-		local shield, max_shield = 0, 0
-		if player:attr("time_shield") then shield = shield + player.time_shield_absorb max_shield = max_shield + player.time_shield_absorb_max end
-		if player:attr("damage_shield") then shield = shield + player.damage_shield_absorb max_shield = max_shield + player.damage_shield_absorb_max end
-		if player:attr("displacement_shield") then shield = shield + player.displacement_shield max_shield = max_shield + player.displacement_shield_max end
+		
 		if max_shield > 0 then
 			if shield_sha.shad then shield_sha:setUniform("a", a * 0.5) shield_sha.shad:use(true) end
 			local p = math.min(1, math.max(0, shield / max_shield))
@@ -706,9 +819,8 @@ function _M:displayResources(scale, bx, by, a)
 				}
 			end
 			local dt = self.res.shield.cur
-			dt[1]:toScreenFull(2+x+170-dt[6], 2+y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 0, 0, 0, 0.7 * a)
-			dt[1]:toScreenFull(x+170-dt[6], y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 1, 1, 1, a)
-
+			dt[1]:toScreenFull(2+x+45+(shat[6]-dt[6])/2, 2+y+front[7]-dt[7], dt[6], dt[7], dt[2], dt[3], 0, 0, 0, 0.7 * a) -- shadow
+			dt[1]:toScreenFull(x+45+(shat[6]-dt[6])/2, y+front[7]-dt[7], dt[6], dt[7], dt[2], dt[3], 1, 1, 1, a)
 			self:showResourceTooltip(bx+x*scale, by+y*scale, fshat[6], fshat[7], "res:shield", self.TOOLTIP_DAMAGE_SHIELD.."\n---\n"..self.TOOLTIP_LIFE, true)
 			if game.mouse:getZone("res:life") then game.mouse:unregisterZone("res:life") end
 		else
@@ -716,360 +828,83 @@ function _M:displayResources(scale, bx, by, a)
 			if game.mouse:getZone("res:shield") then game.mouse:unregisterZone("res:shield") end
 		end
 
-		local front = fshat_life_dark
-		if max_shield > 0 then
-			front = fshat_shield_dark
-			if shield >= max_shield * 0.8 then front = fshat_shield end
-		elseif player.life >= player.max_life then front = fshat_life end
-		front[1]:toScreenFull(x, y, front[6], front[7], front[2], front[3], 1, 1, 1, a)
 		x, y = self:resourceOrientStep(orient, bx, by, scale, x, y, fshat[6], fshat[7])
 
 		if not self.locked then
 			move_handle[1]:toScreenFull(fshat[6] / 2 - move_handle[6], 0, move_handle[6], move_handle[7], move_handle[2], move_handle[3])
 		end
 
-		-----------------------------------------------------------------------------------
-		-- Stamina
-		if player:knowTalent(player.T_STAMINA_POOL) and not player._hide_resource_stamina then
-			sshat[1]:toScreenFull(x-6, y+8, sshat[6], sshat[7], sshat[2], sshat[3], 1, 1, 1, a)
-			bshat[1]:toScreenFull(x, y, bshat[6], bshat[7], bshat[2], bshat[3], 1, 1, 1, a)
-			if stam_sha.shad then stam_sha:setUniform("a", a) stam_sha.shad:use(true) end
-			local p = player:getStamina() / player.max_stamina
-			shat[1]:toScreenPrecise(x+49, y+10, shat[6] * p, shat[7], 0, p * 1/shat[4], 0, 1/shat[5], stam_c[1], stam_c[2], stam_c[3], a)
-			if stam_sha.shad then stam_sha.shad:use(false) end
+		-- Note: unnatural_body_heal not shown (difference from classic ui)
 
-			if not self.res.stamina or self.res.stamina.vc ~= player.stamina or self.res.stamina.vm ~= player.max_stamina or self.res.stamina.vr ~= player.stamina_regen then
-				self.res.stamina = {
-					hidable = "Stamina",
-					vc = player.stamina, vm = player.max_stamina, vr = player.stamina_regen,
-					cur = {core.display.drawStringBlendedNewSurface(font_sha, ("%d/%d"):format(player.stamina, player.max_stamina), 255, 255, 255):glTexture()},
-					regen={core.display.drawStringBlendedNewSurface(sfont_sha, ("%+0.2f"):format(player.stamina_regen), 255, 255, 255):glTexture()},
-				}
+		-- display standard resources
+		local vc, vn, vm, vr
+		for res, res_def in ipairs(ActorResource.resources_def) do
+			local rname = res_def.short_name
+			local rgfx = self.res_gfx[rname]
+			local rshad_args = rgfx.shader and rgfx.shader.args
+			
+			if not res_def.hidden_resource then
+				if player:knowTalent(res_def.talent) and not player["_hide_resource_"..res_def.short_name] then
+					sshat[1]:toScreenFull(x-6, y+8, sshat[6], sshat[7], sshat[2], sshat[3], 1, 1, 1, a) --shadow
+					bshat[1]:toScreenFull(x, y, bshat[6], bshat[7], bshat[2], bshat[3], 1, 1, 1, a) --background
+					vc, vn, vm, vr = player[res_def.getFunction](player), player[res_def.getMinFunction](player), player[res_def.getMaxFunction](player), player[res_def.regen_prop]
+
+					-- draw the resource bar
+					if rshad_args.display_resource_bar then -- use a resource-specific method
+						rshad_args.display_resource_bar(player, rgfx.shader, x, y, rgfx.color, a)
+					else -- use the default method, as fraction of maximum
+						if rgfx.shader and rgfx.shader.shad then rgfx.shader:setUniform("a", a) rgfx.shader.shad:use(true) end
+						local p -- proportion of resource bar to display
+						if vn and vm then
+							p = math.min(1, math.max(0, vc/vm))
+						else p = 1
+						end
+						shat[1]:toScreenPrecise(x+49, y+10, shat[6] * p, shat[7], 0, p * 1/shat[4], 0, 1/shat[5], rgfx.color[1], rgfx.color[2], rgfx.color[3], a)
+						if rgfx.shader and rgfx.shader.shad then rgfx.shader.shad:use(false) end
+					end
+
+					-- draw the resource graphic using the highlighted/dim resource display based on values
+					local front = self.res_gfx[rname].front_dark
+					if self.res_gfx[rname].highlight then
+						if util.getval(self.res_gfx[rname].highlight, player, vc, vn, vm, vr) then
+							front = self.res_gfx[rname].front
+						end
+					elseif vm and vc >= vm then
+						front = self.res_gfx[rname].front
+					end
+					front[1]:toScreenFull(x, y, front[6], front[7], front[2], front[3], 1, 1, 1, a)
+
+					-- update display values (draw text on top of graphics for legibility)
+					if not self.res[rname] or self.res[rname].vc ~= vc or self.res[rname].vn ~= vn or self.res[rname].vm ~= vm or self.res[rname].vr ~= vr then
+
+						local status_text = util.getval(res_def.status_text, player) or ("%d/%d"):format(vc, vm)
+						status_text = (status_text):format() -- fully resolve format codes (%%)
+						self.res[rname] = {
+							hidable = rname:capitalize(),
+							vc = vc, vn = vn, vm = vm, vr = vr,
+							-- use smaller font if needed for room
+							cur = {core.display.drawStringBlendedNewSurface(#status_text <=15 and font_sha or sfont_sha, status_text, 255, 255, 255):glTexture()},
+							-- only draw regen if it's non-zero and there is room
+							regen = vr and vr ~= 0 and #status_text < 10 and {core.display.drawStringBlendedNewSurface(sfont_sha, string.limit_decimals(vr, 3, "+"), 255, 255, 255):glTexture()},
+						}
+					end
+					local dt = self.res[rname].cur
+					dt[1]:toScreenFull(2+x+64, 2+y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 0, 0, 0, 0.7 * a)
+					dt[1]:toScreenFull(x+64, y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 1, 1, 1, a)
+					dt = self.res[rname].regen
+					if dt then
+						dt[1]:toScreenFull(2+x+144, 2+y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 0, 0, 0, 0.7 * a)
+						dt[1]:toScreenFull(x+144, y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 1, 1, 1, a)
+					end
+					self:showResourceTooltip(bx+x*scale, by+y*scale, fshat[6], fshat[7], "res:"..rname, self.res_gfx[rname].tooltip)
+					x, y = self:resourceOrientStep(orient, bx, by, scale, x, y, fshat[6], fshat[7])
+				elseif game.mouse:getZone("res:"..rname) then game.mouse:unregisterZone("res:"..rname) end
 			end
-			local dt = self.res.stamina.cur
-			dt[1]:toScreenFull(2+x+64, 2+y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 0, 0, 0, 0.7 * a)
-			dt[1]:toScreenFull(x+64, y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 1, 1, 1, a)
-			dt = self.res.stamina.regen
-			dt[1]:toScreenFull(2+x+144, 2+y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 0, 0, 0, 0.7 * a)
-			dt[1]:toScreenFull(x+144, y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 1, 1, 1, a)
-
-			local front = fshat_stamina_dark
-			if player.stamina >= player.max_stamina then front = fshat_stamina end
-			front[1]:toScreenFull(x, y, front[6], front[7], front[2], front[3], 1, 1, 1, a)
-
-			self:showResourceTooltip(bx+x*scale, by+y*scale, fshat[6], fshat[7], "res:stamina", self.TOOLTIP_STAMINA)
-			x, y = self:resourceOrientStep(orient, bx, by, scale, x, y, fshat[6], fshat[7])
-		elseif game.mouse:getZone("res:stamina") then game.mouse:unregisterZone("res:stamina") end
-
-		-----------------------------------------------------------------------------------
-		-- Mana
-		if player:knowTalent(player.T_MANA_POOL) and not player._hide_resource_mana then
-			sshat[1]:toScreenFull(x-6, y+8, sshat[6], sshat[7], sshat[2], sshat[3], 1, 1, 1, a)
-			bshat[1]:toScreenFull(x, y, bshat[6], bshat[7], bshat[2], bshat[3], 1, 1, 1, a)
-			if mana_sha.shad then mana_sha:setUniform("a", a) mana_sha.shad:use(true) end
-			local p = player:getMana() / player.max_mana
-			shat[1]:toScreenPrecise(x+49, y+10, shat[6] * p, shat[7], 0, p * 1/shat[4], 0, 1/shat[5], mana_c[1], mana_c[2], mana_c[3], a)
-			if mana_sha.shad then mana_sha.shad:use(false) end
-
-			if not self.res.mana or self.res.mana.vc ~= player.mana or self.res.mana.vm ~= player.max_mana or self.res.mana.vr ~= player.mana_regen then
-				self.res.mana = {
-					hidable = "Mana",
-					vc = player.mana, vm = player.max_mana, vr = player.mana_regen,
-					cur = {core.display.drawStringBlendedNewSurface(font_sha, ("%d/%d"):format(player.mana, player.max_mana), 255, 255, 255):glTexture()},
-					regen={core.display.drawStringBlendedNewSurface(sfont_sha, ("%+0.2f"):format(player.mana_regen), 255, 255, 255):glTexture()},
-				}
-			end
-			local dt = self.res.mana.cur
-			dt[1]:toScreenFull(2+x+64, 2+y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 0, 0, 0, 0.7 * a)
-			dt[1]:toScreenFull(x+64, y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 1, 1, 1, a)
-			dt = self.res.mana.regen
-			dt[1]:toScreenFull(2+x+144, 2+y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 0, 0, 0, 0.7 * a)
-			dt[1]:toScreenFull(x+144, y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 1, 1, 1, a)
-
-			local front = fshat_mana_dark
-			if player.mana >= player.max_mana then front = fshat_mana end
-			front[1]:toScreenFull(x, y, front[6], front[7], front[2], front[3], 1, 1, 1, a)
-			self:showResourceTooltip(bx+x*scale, by+y*scale, fshat[6], fshat[7], "res:mana", self.TOOLTIP_MANA)
-			x, y = self:resourceOrientStep(orient, bx, by, scale, x, y, fshat[6], fshat[7])
-		elseif game.mouse:getZone("res:mana") then game.mouse:unregisterZone("res:mana") end
-
-		-----------------------------------------------------------------------------------
-		-- Souls
-		if player:knowTalent(player.T_SOUL_POOL) and not player._hide_resource_soul then
-			sshat[1]:toScreenFull(x-6, y+8, sshat[6], sshat[7], sshat[2], sshat[3], 1, 1, 1, a)
-			bshat[1]:toScreenFull(x, y, bshat[6], bshat[7], bshat[2], bshat[3], 1, 1, 1, a)
-			if soul_sha.shad then soul_sha:setUniform("a", a) soul_sha.shad:use(true) end
-			local p = player:getSoul() / player.max_soul
-			shat[1]:toScreenPrecise(x+49, y+10, shat[6] * p, shat[7], 0, p * 1/shat[4], 0, 1/shat[5], soul_c[1], soul_c[2], soul_c[3], a)
-			if soul_sha.shad then soul_sha.shad:use(false) end
-
-			if not self.res.soul or self.res.soul.vc ~= player.soul or self.res.soul.vm ~= player.max_soul then
-				self.res.soul = {
-					hidable = "Souls",
-					vc = player.soul, vm = player.max_soul,
-					cur = {core.display.drawStringBlendedNewSurface(font_sha, ("%d/%d"):format(player.soul, player.max_soul), 255, 255, 255):glTexture()},
-				}
-			end
-			local dt = self.res.soul.cur
-			dt[1]:toScreenFull(2+x+64, 2+y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 0, 0, 0, 0.7 * a)
-			dt[1]:toScreenFull(x+64, y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 1, 1, 1, a)
-
-			local front = fshat_soul_dark
-			if player.soul >= player.max_soul then front = fshat_soul end
-			front[1]:toScreenFull(x, y, front[6], front[7], front[2], front[3], 1, 1, 1, a)
-			self:showResourceTooltip(bx+x*scale, by+y*scale, fshat[6], fshat[7], "res:necrotic", self.TOOLTIP_NECROTIC_AURA)
-			x, y = self:resourceOrientStep(orient, bx, by, scale, x, y, fshat[6], fshat[7])
-		elseif game.mouse:getZone("res:necrotic") then game.mouse:unregisterZone("res:necrotic") end
+		end
 
 		-----------------------------------------------------------------------------------
-		-- Equilibirum
-		if player:knowTalent(player.T_EQUILIBRIUM_POOL) and not player._hide_resource_equilibrium then
-			sshat[1]:toScreenFull(x-6, y+8, sshat[6], sshat[7], sshat[2], sshat[3], 1, 1, 1, a)
-			bshat[1]:toScreenFull(x, y, bshat[6], bshat[7], bshat[2], bshat[3], 1, 1, 1, a)
-			local _, chance = player:equilibriumChance()
-			local s = 100 - chance
-			if s > 15 then s = 15 end
-			s = s / 15
-			if equi_sha.shad then
-				equi_sha:setUniform("pivot", math.sqrt(s))
-				equi_sha:setUniform("a", a)
-				equi_sha:setUniform("speed", 10000 - s * 7000)
-				equi_sha.shad:use(true)
-			end
-
-			local p = chance / 100
-			shat[1]:toScreenPrecise(x+49, y+10, shat[6] * p, shat[7], 0, p * 1/shat[4], 0, 1/shat[5], equi_c[1], equi_c[2], equi_c[3], a)
-			if equi_sha.shad then equi_sha.shad:use(false) end
-
-			if not self.res.equilibrium or self.res.equilibrium.vc ~= player.equilibrium or self.res.equilibrium.vr ~= chance then
-				self.res.equilibrium = {
-					hidable = "Equilibrium",
-					vc = player.equilibrium, vr = chance,
-					cur = {core.display.drawStringBlendedNewSurface(font_sha, ("%d"):format(player.equilibrium), 255, 255, 255):glTexture()},
-					regen={core.display.drawStringBlendedNewSurface(sfont_sha, ("%d%%"):format(100-chance), 255, 255, 255):glTexture()},
-				}
-			end
-			local dt = self.res.equilibrium.cur
-			dt[1]:toScreenFull(2+x+64, 2+y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 0, 0, 0, 0.7 * a)
-			dt[1]:toScreenFull(x+64, y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 1, 1, 1, a)
-			dt = self.res.equilibrium.regen
-			dt[1]:toScreenFull(2+x+144, 2+y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 0, 0, 0, 0.7 * a)
-			dt[1]:toScreenFull(x+144, y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 1, 1, 1, a)
-
-			local front = fshat_equi
-			if chance <= 85 then front = fshat_equi_dark end
-			front[1]:toScreenFull(x, y, front[6], front[7], front[2], front[3], 1, 1, 1, a)
-			self:showResourceTooltip(bx+x*scale, by+y*scale, fshat[6], fshat[7], "res:equi", self.TOOLTIP_EQUILIBRIUM)
-			x, y = self:resourceOrientStep(orient, bx, by, scale, x, y, fshat[6], fshat[7])
-		elseif game.mouse:getZone("res:equi") then game.mouse:unregisterZone("res:equi") end
-
-		-----------------------------------------------------------------------------------
-		-- Positive
-		if player:knowTalent(player.T_POSITIVE_POOL) and not player._hide_resource_positive then
-			sshat[1]:toScreenFull(x-6, y+8, sshat[6], sshat[7], sshat[2], sshat[3], 1, 1, 1, a)
-			bshat[1]:toScreenFull(x, y, bshat[6], bshat[7], bshat[2], bshat[3], 1, 1, 1, a)
-			if pos_sha.shad then pos_sha:setUniform("a", a) pos_sha.shad:use(true) end
-			local p = player:getPositive() / player.max_positive
-			shat[1]:toScreenPrecise(x+49, y+10, shat[6] * p, shat[7], 0, p * 1/shat[4], 0, 1/shat[5], pos_c[1], pos_c[2], pos_c[3], a)
-			if pos_sha.shad then pos_sha.shad:use(false) end
-
-			if not self.res.positive or self.res.positive.vc ~= player.positive or self.res.positive.vm ~= player.max_positive or self.res.positive.vr ~= player.positive_regen then
-				self.res.positive = {
-					hidable = "Positive",
-					vc = player.positive, vm = player.max_positive, vr = player.positive_regen,
-					cur = {core.display.drawStringBlendedNewSurface(font_sha, ("%d/%d"):format(player.positive, player.max_positive), 255, 255, 255):glTexture()},
-					regen={core.display.drawStringBlendedNewSurface(sfont_sha, ("%+0.2f"):format(player.positive_regen), 255, 255, 255):glTexture()},
-				}
-			end
-			local dt = self.res.positive.cur
-			dt[1]:toScreenFull(2+x+64, 2+y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 0, 0, 0, 0.7 * a)
-			dt[1]:toScreenFull(x+64, y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 1, 1, 1, a)
-			dt = self.res.positive.regen
-			dt[1]:toScreenFull(2+x+144, 2+y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 0, 0, 0, 0.7 * a)
-			dt[1]:toScreenFull(x+144, y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 1, 1, 1, a)
-
-			local front = fshat_positive_dark
-			if player.positive >= player.max_positive * 0.7 then front = fshat_positive end
-			front[1]:toScreenFull(x, y, front[6], front[7], front[2], front[3], 1, 1, 1, a)
-			self:showResourceTooltip(bx+x*scale, by+y*scale, fshat[6], fshat[7], "res:positive", self.TOOLTIP_POSITIVE)
-			x, y = self:resourceOrientStep(orient, bx, by, scale, x, y, fshat[6], fshat[7])
-		elseif game.mouse:getZone("res:positive") then game.mouse:unregisterZone("res:positive") end
-
-		-----------------------------------------------------------------------------------
-		-- Negative
-		if player:knowTalent(player.T_NEGATIVE_POOL) and not player._hide_resource_negative then
-			sshat[1]:toScreenFull(x-6, y+8, sshat[6], sshat[7], sshat[2], sshat[3], 1, 1, 1, a)
-			bshat[1]:toScreenFull(x, y, bshat[6], bshat[7], bshat[2], bshat[3], 1, 1, 1, a)
-			if neg_sha.shad then neg_sha:setUniform("a", a) neg_sha.shad:use(true) end
-			local p = player:getNegative() / player.max_negative
-			shat[1]:toScreenPrecise(x+49, y+10, shat[6] * p, shat[7], 0, p * 1/shat[4], 0, 1/shat[5], neg_c[1], neg_c[2], neg_c[3], a)
-			if neg_sha.shad then neg_sha.shad:use(false) end
-
-			if not self.res.negative or self.res.negative.vc ~= player.negative or self.res.negative.vm ~= player.max_negative or self.res.negative.vr ~= player.negative_regen then
-				self.res.negative = {
-					hidable = "Negative",
-					vc = player.negative, vm = player.max_negative, vr = player.negative_regen,
-					cur = {core.display.drawStringBlendedNewSurface(font_sha, ("%d/%d"):format(player.negative, player.max_negative), 255, 255, 255):glTexture()},
-					regen={core.display.drawStringBlendedNewSurface(sfont_sha, ("%+0.2f"):format(player.negative_regen), 255, 255, 255):glTexture()},
-				}
-			end
-			local dt = self.res.negative.cur
-			dt[1]:toScreenFull(2+x+64, 2+y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 0, 0, 0, 0.7 * a)
-			dt[1]:toScreenFull(x+64, y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 1, 1, 1, a)
-			dt = self.res.negative.regen
-			dt[1]:toScreenFull(2+x+144, 2+y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 0, 0, 0, 0.7 * a)
-			dt[1]:toScreenFull(x+144, y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 1, 1, 1, a)
-
-			local front = fshat_negative_dark
-			if player.negative >= player.max_negative * 0.7  then front = fshat_negative end
-			front[1]:toScreenFull(x, y, front[6], front[7], front[2], front[3], 1, 1, 1, a)
-			self:showResourceTooltip(bx+x*scale, by+y*scale, fshat[6], fshat[7], "res:negative", self.TOOLTIP_NEGATIVE)
-			x, y = self:resourceOrientStep(orient, bx, by, scale, x, y, fshat[6], fshat[7])
-		elseif game.mouse:getZone("res:negative") then game.mouse:unregisterZone("res:negative") end
-
-		-----------------------------------------------------------------------------------
-		-- Paradox
-		if player:knowTalent(player.T_PARADOX_POOL) and not player._hide_resource_paradox then
-			sshat[1]:toScreenFull(x-6, y+8, sshat[6], sshat[7], sshat[2], sshat[3], 1, 1, 1, a)
-			bshat[1]:toScreenFull(x, y, bshat[6], bshat[7], bshat[2], bshat[3], 1, 1, 1, a)
-			local chance = player:paradoxFailChance()
-			local s = chance
-			if s > 15 then s = 15 end
-			s = s / 15
-			if paradox_sha.shad then
-				paradox_sha:setUniform("pivot", math.sqrt(s))
-				paradox_sha:setUniform("a", a)
-				paradox_sha:setUniform("speed", 10000 - s * 7000)
-				paradox_sha.shad:use(true)
-			end
-			local p = util.bound(600-player:getModifiedParadox(), 0, 300) / 300
-			--local p = 1 - chance / 100
-			shat[1]:toScreenPrecise(x+49, y+10, shat[6] * p, shat[7], 0, p * 1/shat[4], 0, 1/shat[5], paradox_c[1], paradox_c[2], paradox_c[3], a)
-			if paradox_sha.shad then paradox_sha.shad:use(false) end
-
-			local vm = player:getModifiedParadox()
-			if not self.res.paradox or self.res.paradox.vm ~= vm or self.res.paradox.vc ~= player.paradox or self.res.paradox.vr ~= chance then
-				self.res.paradox = {
-					hidable = "Paradox",
-					vc = player.paradox, vr = chance, vm = vm,
-					cur = {core.display.drawStringBlendedNewSurface(font_sha, ("%d (%d)"):format(vm, player.paradox), 255, 255, 255):glTexture()},
-					regen={core.display.drawStringBlendedNewSurface(sfont_sha, ("%d%%"):format(chance), 255, 255, 255):glTexture()},
-	
-			}
-			end
-			local dt = self.res.paradox.cur
-			dt[1]:toScreenFull(2+x+64, 2+y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 0, 0, 0, 0.7 * a)
-			dt[1]:toScreenFull(x+64, y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 1, 1, 1, a)
-			dt = self.res.paradox.regen
-			dt[1]:toScreenFull(2+x+144, 2+y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 0, 0, 0, 0.7 * a)
-			dt[1]:toScreenFull(x+144, y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 1, 1, 1, a)
-
-			local front = fshat_paradox
-			if chance <= 10 then front = fshat_paradox_dark end
-			front[1]:toScreenFull(x, y, front[6], front[7], front[2], front[3], 1, 1, 1, a)
-			self:showResourceTooltip(bx+x*scale, by+y*scale, fshat[6], fshat[7], "res:paradox", self.TOOLTIP_PARADOX)
-			x, y = self:resourceOrientStep(orient, bx, by, scale, x, y, fshat[6], fshat[7])
-		elseif game.mouse:getZone("res:paradox") then game.mouse:unregisterZone("res:paradox") end
-
-		-----------------------------------------------------------------------------------
-		-- Vim
-		if player:knowTalent(player.T_VIM_POOL) and not player._hide_resource_vim then
-			sshat[1]:toScreenFull(x-6, y+8, sshat[6], sshat[7], sshat[2], sshat[3], 1, 1, 1, a)
-			bshat[1]:toScreenFull(x, y, bshat[6], bshat[7], bshat[2], bshat[3], 1, 1, 1, a)
-			if vim_sha.shad then vim_sha:setUniform("a", a) vim_sha.shad:use(true) end
-			local p = player:getVim() / player.max_vim
-			shat[1]:toScreenPrecise(x+49, y+10, shat[6] * p, shat[7], 0, p * 1/shat[4], 0, 1/shat[5], vim_c[1], vim_c[2], vim_c[3], a)
-			if vim_sha.shad then vim_sha.shad:use(false) end
-
-			if not self.res.vim or self.res.vim.vc ~= player.vim or self.res.vim.vm ~= player.max_vim or self.res.vim.vr ~= player.vim_regen then
-				self.res.vim = {
-					hidable = "Vim",
-					vc = player.vim, vm = player.max_vim, vr = player.vim_regen,
-					cur = {core.display.drawStringBlendedNewSurface(font_sha, ("%d/%d"):format(player.vim, player.max_vim), 255, 255, 255):glTexture()},
-					regen={core.display.drawStringBlendedNewSurface(sfont_sha, ("%+0.2f"):format(player.vim_regen), 255, 255, 255):glTexture()},
-				}
-			end
-			local dt = self.res.vim.cur
-			dt[1]:toScreenFull(2+x+64, 2+y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 0, 0, 0, 0.7 * a)
-			dt[1]:toScreenFull(x+64, y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 1, 1, 1, a)
-			dt = self.res.vim.regen
-			dt[1]:toScreenFull(2+x+144, 2+y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 0, 0, 0, 0.7 * a)
-			dt[1]:toScreenFull(x+144, y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 1, 1, 1, a)
-
-			local front = fshat_vim_dark
-			if player.vim >= player.max_vim then front = fshat_vim end
-			front[1]:toScreenFull(x, y, front[6], front[7], front[2], front[3], 1, 1, 1, a)
-			self:showResourceTooltip(bx+x*scale, by+y*scale, fshat[6], fshat[7], "res:vim", self.TOOLTIP_VIM)
-			x, y = self:resourceOrientStep(orient, bx, by, scale, x, y, fshat[6], fshat[7])
-		elseif game.mouse:getZone("res:vim") then game.mouse:unregisterZone("res:vim") end
-
-		-----------------------------------------------------------------------------------
-		-- Hate
-		if player:knowTalent(player.T_HATE_POOL) and not player._hide_resource_hate then
-			sshat[1]:toScreenFull(x-6, y+8, sshat[6], sshat[7], sshat[2], sshat[3], 1, 1, 1, a)
-			bshat[1]:toScreenFull(x, y, bshat[6], bshat[7], bshat[2], bshat[3], 1, 1, 1, a)
-			if hate_sha.shad then hate_sha:setUniform("a", a) hate_sha.shad:use(true) end
-			local p = player:getHate() / player.max_hate
-			shat[1]:toScreenPrecise(x+49, y+10, shat[6] * p, shat[7], 0, p * 1/shat[4], 0, 1/shat[5], hate_c[1], hate_c[2], hate_c[3], a)
-			if hate_sha.shad then hate_sha.shad:use(false) end
-
-			if not self.res.hate or self.res.hate.vc ~= player.hate or self.res.hate.vm ~= player.max_hate or self.res.hate.vr ~= player.hate_regen then
-				self.res.hate = {
-					hidable = "Hate",
-					vc = player.hate, vm = player.max_hate, vr = player.hate_regen,
-					cur = {core.display.drawStringBlendedNewSurface(font_sha, ("%d/%d"):format(player.hate, player.max_hate), 255, 255, 255):glTexture()},
-					regen={core.display.drawStringBlendedNewSurface(sfont_sha, ("%+0.1f"):format(player.hate_regen), 255, 255, 255):glTexture()},
-				}
-			end
-			local dt = self.res.hate.cur
-			dt[1]:toScreenFull(2+x+64, 2+y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 0, 0, 0, 0.7 * a)
-			dt[1]:toScreenFull(x+64, y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 1, 1, 1, a)
-			dt = self.res.hate.regen
-			dt[1]:toScreenFull(2+x+144, 2+y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 0, 0, 0, 0.7 * a)
-			dt[1]:toScreenFull(x+144, y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 1, 1, 1, a)
-
-			local front = fshat_hate_dark
-			if player.hate >= 100 then front = fshat_hate end
-			front[1]:toScreenFull(x, y, front[6], front[7], front[2], front[3], 1, 1, 1, a)
-			self:showResourceTooltip(bx+x*scale, by+y*scale, fshat[6], fshat[7], "res:hate", self.TOOLTIP_HATE)
-			x, y = self:resourceOrientStep(orient, bx, by, scale, x, y, fshat[6], fshat[7])
-		elseif game.mouse:getZone("res:hate") then game.mouse:unregisterZone("res:hate") end
-
-		-----------------------------------------------------------------------------------
-		-- Psi
-		if player:knowTalent(player.T_PSI_POOL) and not player._hide_resource_psi then
-			sshat[1]:toScreenFull(x-6, y+8, sshat[6], sshat[7], sshat[2], sshat[3], 1, 1, 1, a)
-			bshat[1]:toScreenFull(x, y, bshat[6], bshat[7], bshat[2], bshat[3], 1, 1, 1, a)
-			if psi_sha.shad then psi_sha:setUniform("a", a) psi_sha.shad:use(true) end
-			local p = player:getPsi() / player.max_psi
-			shat[1]:toScreenPrecise(x+49, y+10, shat[6] * p, shat[7], 0, p * 1/shat[4], 0, 1/shat[5], psi_c[1], psi_c[2], psi_c[3], a)
-			if psi_sha.shad then psi_sha.shad:use(false) end
-
-			if not self.res.psi or self.res.psi.vc ~= player.psi or self.res.psi.vm ~= player.max_psi or self.res.psi.vr ~= player.psi_regen then
-				self.res.psi = {
-					hidable = "Psi",
-					vc = player.psi, vm = player.max_psi, vr = player.psi_regen,
-					cur = {core.display.drawStringBlendedNewSurface(font_sha, ("%d/%d"):format(player.psi, player.max_psi), 255, 255, 255):glTexture()},
-					regen={core.display.drawStringBlendedNewSurface(sfont_sha, ("%+0.2f"):format(player.psi_regen), 255, 255, 255):glTexture()},
-				}
-			end
-			local dt = self.res.psi.cur
-			dt[1]:toScreenFull(2+x+64, 2+y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 0, 0, 0, 0.7 * a)
-			dt[1]:toScreenFull(x+64, y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 1, 1, 1, a)
-			dt = self.res.psi.regen
-			dt[1]:toScreenFull(2+x+144, 2+y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 0, 0, 0, 0.7 * a)
-			dt[1]:toScreenFull(x+144, y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 1, 1, 1, a)
-
-			local front = fshat_psi_dark
-			if player.psi >= player.max_psi then front = fshat_psi end
-			front[1]:toScreenFull(x, y, front[6], front[7], front[2], front[3], 1, 1, 1, a)
-			self:showResourceTooltip(bx+x*scale, by+y*scale, fshat[6], fshat[7], "res:psi", self.TOOLTIP_PSI)
-			x, y = self:resourceOrientStep(orient, bx, by, scale, x, y, fshat[6], fshat[7])
-		elseif game.mouse:getZone("res:psi") then game.mouse:unregisterZone("res:psi") end
-
-		-----------------------------------------------------------------------------------
-		-- Feedback
-		if player.psionic_feedback_max and not player._hide_resource_feedback then
+		-- Feedback -- pseudo resource
+		if player.psionic_feedback_max and player:knowTalent(player.T_FEEDBACK_POOL) and not player._hide_resource_feedback then
 			sshat[1]:toScreenFull(x-6, y+8, sshat[6], sshat[7], sshat[2], sshat[3], 1, 1, 1, a)
 			bshat[1]:toScreenFull(x, y, bshat[6], bshat[7], bshat[2], bshat[3], 1, 1, 1, a)
 			if feedback_sha.shad then feedback_sha:setUniform("a", a) feedback_sha.shad:use(true) end
@@ -1077,6 +912,10 @@ function _M:displayResources(scale, bx, by, a)
 			shat[1]:toScreenPrecise(x+49, y+10, shat[6] * p, shat[7], 0, p * 1/shat[4], 0, 1/shat[5], feedback_c[1], feedback_c[2], feedback_c[3], a)
 			if feedback_sha.shad then feedback_sha.shad:use(false) end
 
+			local front = fshat_feedback_dark
+			if player.psionic_feedback >= player.psionic_feedback_max then front = fshat_feedback end
+			front[1]:toScreenFull(x, y, front[6], front[7], front[2], front[3], 1, 1, 1, a)
+			
 			if not self.res.feedback or self.res.feedback.vc ~= player:getFeedback() or self.res.feedback.vm ~= player:getMaxFeedback() or self.res.feedback.vr ~= player:getFeedbackDecay() then
 				self.res.feedback = {
 					hidable = "Feedback",
@@ -1092,15 +931,12 @@ function _M:displayResources(scale, bx, by, a)
 			dt[1]:toScreenFull(2+x+144, 2+y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 0, 0, 0, 0.7 * a)
 			dt[1]:toScreenFull(x+144, y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 1, 1, 1, a)
 
-			local front = fshat_feedback_dark
-			if player.psionic_feedback >= player.psionic_feedback_max then front = fshat_feedback end
-			front[1]:toScreenFull(x, y, front[6], front[7], front[2], front[3], 1, 1, 1, a)
 			self:showResourceTooltip(bx+x*scale, by+y*scale, fshat[6], fshat[7], "res:feedback", self.TOOLTIP_FEEDBACK)
 			x, y = self:resourceOrientStep(orient, bx, by, scale, x, y, fshat[6], fshat[7])
 		elseif game.mouse:getZone("res:feedback") then game.mouse:unregisterZone("res:feedback") end
 
 		-----------------------------------------------------------------------------------
-		-- Fortress Energy
+		-- Fortress Energy -- special
 		if player.is_fortress and not player._hide_resource_fortress then
 			local q = game:getPlayer(true):hasQuest("shertul-fortress")
 			sshat[1]:toScreenFull(x-6, y+8, sshat[6], sshat[7], sshat[2], sshat[3], 1, 1, 1, a)
@@ -1110,6 +946,9 @@ function _M:displayResources(scale, bx, by, a)
 			shat[1]:toScreenPrecise(x+49, y+10, shat[6] * p, shat[7], 0, p * 1/shat[4], 0, 1/shat[5], fortress_c[1], fortress_c[2], fortress_c[3], a)
 			if fortress_sha.shad then fortress_sha.shad:use(false) end
 
+			local front = fshat_fortress
+			front[1]:toScreenFull(x, y, front[6], front[7], front[2], front[3], 1, 1, 1, a)
+			
 			if not self.res.fortress or self.res.fortress.vc ~= q.shertul_energy then
 				self.res.fortress = {
 					hidable = "Fortress",
@@ -1121,13 +960,12 @@ function _M:displayResources(scale, bx, by, a)
 			dt[1]:toScreenFull(2+x+64, 2+y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 0, 0, 0, 0.7 * a)
 			dt[1]:toScreenFull(x+64, y+10 + (shat[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 1, 1, 1, a)
 
-			local front = fshat_fortress
-			front[1]:toScreenFull(x, y, front[6], front[7], front[2], front[3], 1, 1, 1, a)
 			self:showResourceTooltip(bx+x*scale, by+y*scale, fshat[6], fshat[7], "res:fortress", self.TOOLTIP_FORTRESS_ENERGY)
 			x, y = self:resourceOrientStep(orient, bx, by, scale, x, y, fshat[6], fshat[7])
 		elseif game.mouse:getZone("res:fortress") then game.mouse:unregisterZone("res:fortress") end
 
-		-- Any hooks
+		-- Any hooks?
+		-- Use to display other pseudo resources or those with .hidden_resource set under special circumstances
 		local hd = {"UISet:Minimalist:Resources", a=a, player=player, x=x, y=y, bx=bx, by=by, orient=orient, scale=scale}
 		if self:triggerHook(hd) then 
 			x, y = hd.x, hd.y
@@ -1160,10 +998,12 @@ function _M:displayResources(scale, bx, by, a)
 			local dt = self.res.ammo.cur
 			dt[1]:toScreenFull(2+x+44, 2+y+3 + (bg[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 0, 0, 0, 0.7 * a)
 			dt[1]:toScreenFull(x+44, y+3 + (bg[7]-dt[7])/2, dt[6], dt[7], dt[2], dt[3], 1, 1, 1, a)
-
+			self:showResourceTooltip(bx+x*scale, by+y*scale, shad[6], shad[7], "res:ammo", self.TOOLTIP_COMBAT_AMMO)
 			x, y = self:resourceOrientStep(orient, bx, by, scale, x, y, fshat[6], fshat[7])
+		elseif game.mouse:getZone("res:ammo") then game.mouse:unregisterZone("res:ammo")
 		end
 
+-- consider separating these from resources into their own frame
 		-----------------------------------------------------------------------------------
 		-- Hourglass
 		if game.level and game.level.turn_counter then
@@ -1638,7 +1478,7 @@ function _M:displayParty(scale, bx, by)
 						p = (game.player == a) and portrait_lev or portrait_unsel_lev
 					end
 					p[1]:toScreenFull(x, y, p[6], p[7], p[2], p[3])
-					-- Display turns remaining on summon's portrait ?Marson
+					-- Display turns remaining on summon's portrait Marson
 					if a.summon_time and a.name ~= "shadow" then
 						local gtxt = self.party[a].txt_summon_time
 						if not gtxt or self.party[a].cur_summon_time ~= a.summon_time then
@@ -1689,7 +1529,7 @@ function _M:displayPlayer(scale, bx, by)
 	pf_shadow[1]:toScreenFull(0, 0, pf_shadow[6], pf_shadow[7], pf_shadow[2], pf_shadow[3])
 	pf_bg[1]:toScreenFull(pf_bg_x, pf_bg_y, pf_bg[6], pf_bg[7], pf_bg[2], pf_bg[3])
 	core.display.glScissor(true, bx+15*scale, by+15*scale, 54*scale, 54*scale)
-	player:toScreen(nil, 22, 22, 40, 40)
+	player:toScreen(nil, 22 + pf_player_x, 22 + pf_player_y, 40, 40)
 	core.display.glScissor(false)
 
 	if (not config.settings.tome.actor_based_movement_mode and self or player).bump_attack_disabled then
@@ -1700,13 +1540,13 @@ function _M:displayPlayer(scale, bx, by)
 
 	if player.unused_stats > 0 or player.unused_talents > 0 or player.unused_generics > 0 or player.unused_talents_types > 0 then
 		local glow = (1+math.sin(core.game.getTime() / 500)) / 2 * 100 + 120
-		pf_levelup[1]:toScreenFull(269, 78, pf_levelup[6], pf_levelup[7], pf_levelup[2], pf_levelup[3], 1, 1, 1, glow / 255)
-		pf_exp_levelup[1]:toScreenFull(108, 74, pf_exp_levelup[6], pf_exp_levelup[7], pf_exp_levelup[2], pf_exp_levelup[3], 1, 1, 1, glow / 255)
+		pf_levelup[1]:toScreenFull(269 + pf_levelup_x, 78 + pf_levelup_y, pf_levelup[6], pf_levelup[7], pf_levelup[2], pf_levelup[3], 1, 1, 1, glow / 255)
+		pf_exp_levelup[1]:toScreenFull(108 + pf_exp_x, 74 + pf_exp_y, pf_exp_levelup[6], pf_exp_levelup[7], pf_exp_levelup[2], pf_exp_levelup[3], 1, 1, 1, glow / 255)
 	end
 
 	local cur_exp, max_exp = player.exp, player:getExpChart(player.level+1)
 	local p = math.min(1, math.max(0, cur_exp / max_exp))
-	pf_exp[1]:toScreenPrecise(117, 85, pf_exp[6] * p, pf_exp[7], 0, p * 1/pf_exp[4], 0, 1/pf_exp[5])
+	pf_exp[1]:toScreenPrecise(117 + pf_exp_x, 85 + pf_exp_y, pf_exp[6] * p, pf_exp[7], 0, p * 1/pf_exp[4], 0, 1/pf_exp[5])
 
 	if not self.res.exp or self.res.exp.vc ~= p then
 		self.res.exp = {
@@ -1715,8 +1555,8 @@ function _M:displayPlayer(scale, bx, by)
 		}
 	end
 	local dt = self.res.exp.cur
-	dt[1]:toScreenFull(2+87 - dt[6] / 2, 2+89 - dt[7] / 2, dt[6], dt[7], dt[2], dt[3], 0, 0, 0, 0.7)
-	dt[1]:toScreenFull(87 - dt[6] / 2, 89 - dt[7] / 2, dt[6], dt[7], dt[2], dt[3])
+	dt[1]:toScreenFull(pf_exp_cur_x + 2+87 - dt[6] / 2, pf_exp_cur_y + 2+89 - dt[7] / 2, dt[6], dt[7], dt[2], dt[3], 0, 0, 0, 0.7)
+	dt[1]:toScreenFull(pf_exp_cur_x + 87 - dt[6] / 2, pf_exp_cur_y + 89 - dt[7] / 2, dt[6], dt[7], dt[2], dt[3])
 
 	if not self.res.money or self.res.money.vc ~= player.money then
 		self.res.money = {
@@ -1725,8 +1565,8 @@ function _M:displayPlayer(scale, bx, by)
 		}
 	end
 	local dt = self.res.money.cur
-	dt[1]:toScreenFull(2+112 - dt[6] / 2, 2+43, dt[6], dt[7], dt[2], dt[3], 0, 0, 0, 0.7)
-	dt[1]:toScreenFull(112 - dt[6] / 2, 43, dt[6], dt[7], dt[2], dt[3])
+	dt[1]:toScreenFull(pf_money_x + 2+112 - dt[6] / 2, pf_money_y + 2+43, dt[6], dt[7], dt[2], dt[3], 0, 0, 0, 0.7)
+	dt[1]:toScreenFull(pf_money_x + 112 - dt[6] / 2, pf_money_y + 43, dt[6], dt[7], dt[2], dt[3])
 
 	if not self.res.pname or self.res.pname.vc ~= player.name then
 		self.res.pname = {
@@ -1735,8 +1575,8 @@ function _M:displayPlayer(scale, bx, by)
 		}
 	end
 	local dt = self.res.pname.cur
-	dt[1]:toScreenFull(2+166, 2+13, dt[6], dt[7], dt[2], dt[3], 0, 0, 0, 0.7)
-	dt[1]:toScreenFull(166, 13, dt[6], dt[7], dt[2], dt[3])
+	dt[1]:toScreenFull(pf_name_x + 2+166, pf_name_y + 2+13, dt[6], dt[7], dt[2], dt[3], 0, 0, 0, 0.7)
+	dt[1]:toScreenFull(pf_name_x + 166, pf_name_y + 13, dt[6], dt[7], dt[2], dt[3])
 
 	if not self.res.plevel or self.res.plevel.vc ~= player.level then
 		self.res.plevel = {
@@ -1745,8 +1585,8 @@ function _M:displayPlayer(scale, bx, by)
 		}
 	end
 	local dt = self.res.plevel.cur
-	dt[1]:toScreenFull(2+253, 2+46, dt[6], dt[7], dt[2], dt[3], 0, 0, 0, 0.7)
-	dt[1]:toScreenFull(253, 46, dt[6], dt[7], dt[2], dt[3])
+	dt[1]:toScreenFull(pf_level_x + 2+253, pf_level_y + 2+46, dt[6], dt[7], dt[2], dt[3], 0, 0, 0, 0.7)
+	dt[1]:toScreenFull(pf_level_x + 253, pf_level_y + 46, dt[6], dt[7], dt[2], dt[3])
 
 	if player:attr("encumbered") then
 		local glow = (1+math.sin(core.game.getTime() / 500)) / 2 * 100 + 120
@@ -1984,6 +1824,13 @@ function _M:displayHotkeys(scale, bx, by)
 						local d = require("mod.dialogs.UseTalents").new(game.player)
 						d:use({talent=hk[2], name=game.player:getTalentFromId(hk[2]).name}, "right")
 						return true
+					elseif button == "right" and hk and hk[1] == "inventory" then
+						Dialog:yesnoPopup("取消绑定 "..hk[2], "从快捷栏去掉该物品？", function(ret) if ret then
+							for i = 1, 12 * game.player.nb_hotkey_pages do
+								if game.player.hotkey[i] and game.player.hotkey[i][1] == "inventory" and game.player.hotkey[i][2] == hk[2] then game.player.hotkey[i] = nil end
+							end
+						end end)
+						return true
 					end
 				end
 			)
@@ -2203,6 +2050,8 @@ function _M:display(nb_keyframes)
 		if size.bottom then d.drawQuad(0, Map.viewport.height - 10, Map.viewport.width, 10, 0, 200, 0, 50) end
 		d.glTranslate(-Map.display_x, -Map.display_y, -0)
 	end
+
+	UISet.display(self, nb_keyframes)
 end
 
 function _M:setupMouse(mouse)

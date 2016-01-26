@@ -37,6 +37,9 @@ TOOLTIP_LIVES = [[#GOLD#生命数#LAST#
 你的总生命数取决于你的死亡模式设定。
 你可以获得其他的复活机会，但这不视为
 额外的生命数。]]
+TOOLTIP_BLOOD_LIFE = [[#GOLD#生命之血#LAST#
+生命之血在你体内流淌。
+能将你从死亡边缘挽救一次。]]
 
 TOOLTIP_LIFE = [[#GOLD#生命值#LAST#
 这是你的生命力量，你收到伤害时会不断
@@ -308,6 +311,10 @@ TOOLTIP_COMBAT_SPEED = [[#GOLD#攻击速度#LAST#
 TOOLTIP_COMBAT_RANGE = [[#GOLD#攻击范围#LAST#
 你武器能攻击的最远距离。
 ]]
+TOOLTIP_ARCHERY_RANGE_SPEED = [[#GOLD#弓箭范围和速度Archery range and speed#LAST#
+弓箭能射出的最大范围，超过范围攻击会消失。
+所有抛射物有独立的飞行速度，以百分比形式和移动速度比较。
+]]
 TOOLTIP_COMBAT_AMMO = [[#GOLD#弹药剩余#LAST#
 表示你剩余的弹药数量。
 弓和投石索有一个无限量的基础弹药，当
@@ -443,8 +450,24 @@ TOOLTIP_RESIST_ALL = [[#GOLD#伤害抵抗：全体#LAST#
 减免。
 可以与独立类型的伤害减免效果叠加。
 ]]
+TOOLTIP_RESIST_ABSOLUTE = [[#GOLD#伤害抵抗: 绝对#LAST#
+所有类型任何方式对你造成的伤害按此值
+减免。
+该效果在常规伤害抵抗后生效，不受抗性
+穿透影响。
+]]
 TOOLTIP_RESIST = [[#GOLD#伤害抵抗：指定#LAST#
 任何方式受到指定类型的伤害按此值减免。
+]]
+
+TOOLTIP_RESIST_SPEED = [[#GOLD#伤害抵抗: 速度#LAST#
+所有类型任何方式对你造成的伤害按此值
+减免，随着你的总体移动速度减少而增加。
+该效果在常规伤害抵抗后生效，不受抗性
+穿透影响。
+]]
+TOOLTIP_RESIST_DAMAGE_ACTOR = [[#GOLD#伤害抵抗: 生物类型#LAST#
+任何方式受到指定生物类型的伤害按此值减免。
 ]]
 TOOLTIP_AFFINITY_ALL = [[#GOLD#伤害吸收: 全体#LAST#
 任何方式受到的伤害均按此值治疗你。
@@ -456,10 +479,20 @@ TOOLTIP_AFFINITY = [[#GOLD#伤害吸收: 指定#LAST#
 任何方式受到指定类型的伤害按此值治疗你。
 注意：伤害吸收的治疗效果在伤害产生
 后处理，不能防止秒杀。
-]]
+TOOLTIP_STATUS_IMMUNE = [[#GOLD#状态免疫#LAST#
+大部分状态效果可以被特定的免疫来抵消。
+百分比表示你完全免疫特效的几率。]]
 TOOLTIP_SPECIFIC_IMMUNE = [[#GOLD#特
 效免疫几率#LAST#
 表示你完全免疫特效的几率。
+TOOLTIP_STUN_IMMUNE = [[#GOLD#震慑免疫#LAST#
+表示你完全免疫震慑、眩晕或者冰冻的几率。
+]]
+TOOLTIP_INSTAKILL_IMMUNE = [[#GOLD#即死免疫#LAST#
+表示你对立即死亡类效果的抵抗几率。
+]]
+TOOLTIP_NEGATIVE_STATUS_IMMUNE = [[#GOLD#负面状态效果免疫#LAST#
+表示你完全免疫负面特效的几率。
 ]]
 TOOLTIP_ON_HIT_DAMAGE = [[#GOLD#伤害反弹#LAST#
 生物每次近战攻击你时所受到的反弹伤害。

@@ -1,5 +1,5 @@
 -- TE4 - T-Engine 4
--- Copyright (C) 2009 - 2015 Nicolas Casalini
+-- Copyright (C) 2009 - 2016 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -21,6 +21,8 @@ require "engine.class"
 local Base = require "engine.ui.Base"
 local Focusable = require "engine.ui.Focusable"
 
+--- Equipment Doll preview frame
+-- @classmod engine.ui.EquipDollFrame
 module(..., package.seeall, class.inherit(Base, Focusable))
 
 _M.font = core.display.newFont(chn123_tome_font(), 10)
@@ -42,7 +44,9 @@ function _M:init(t)
 	self.drag_enable = t.drag_enable
 	self.fct = t.fct
 	self.filter = t.filter
-	self.name_pos = t.name_pos
+	self.name_pos = t.name_pos --"bottom", "abovetop", "topleft","topright", centered above by default
+	self.name_justify = t.name_justify --Justification, left, right, center by default
+	self.name_y_line_shift_max = t.name_y_line_shift_max or 0.85 -- allow the text to me moved up this many lines for multi-line names that may overlap the frame
 	self.subobject = t.subobject
 	self.font = core.display.newFont(chn123_tome_font(), 10)
 
@@ -104,37 +108,51 @@ function _M:onDrag(inven, item, o)
 	end
 end
 
+-- Display a description of the object at x, y
 function _M:drawItemShortName(o, x, y)
-	if not o then return end
-	if self.no_name then return end
+	if self.no_name or not o then return end
 
-	local t = nil
+	local t, nlines, width = {}
 	if self.last_o == o then
 		t = self.last_t
 	else
 		--汉化
 		local name = o:getName({do_color=true, no_image=true, no_add_name=true})
 		--local name = (o.getShortName or o.getName)(o, {do_color=true, no_image=true, no_add_name=true}):toString()
-		t = self.font:draw(name, self.font:size(name), 255, 255, 255)[1]
+		t, nlines, width = self.font:draw(name, self.font:size(name), 255, 255, 255, false, true)
+		t.nlines, t.width = nlines, width
 	end
-
-	if not self.name_pos then
-		x = x - (t.w - self.w) / 2
-		y = y - t.h
-	elseif self.name_pos == "bottom" then
-		x = x - (t.w - self.w) / 2
+	-- text is center justified by default with extra lines word-wrapped below (possibly overlapping the frame)
+	--multi-line text will be shifted up slightly to keep it centered at the specified y-position up to self.name_y_line_shift_max lines
+	local y_shift = util.bound(t.nlines-1, 0, self.name_y_line_shift_max)*self.font_h
+	if self.name_pos == "bottom" then
+		x = x + self.w/2
 		y = y + self.h
+	elseif self.name_pos == "abovetop" then
+		x = x + self.w/2
+		y = y - 2*self.font_h - y_shift
 	elseif self.name_pos == "topleft" then
-		x = x - t.w + self.w
-		y = y - t.h
+		x = x - t.width + self.w
+		y = y - self.font_h - y_shift
 	elseif self.name_pos == "topright" then
-		x = x
-		y = y - t.h
+		x = x + self.w
+		y = y - self.font_h - y_shift
+	else -- top center by default
+		x = x + self.w/2
+		y = y - self.font_h - y_shift
 	end
-
-	t._tex:toScreenFull(x, y, t.w, t.h, t._tex_w, t._tex_h)
---	if self.text_shadow then t._tex:toScreenFull(x - (t.w - self.w) / 2 + 1, y - t.h + 1, t.w, t.h, t._tex_w, t._tex_h, 0, 0, 0, self.text_shadow) end
-
+	local xpos, ypos
+	for i, tex in ipairs(t) do
+		if self.name_justify == "left" then
+			xpos = x - t.width/2
+		elseif self.name_justify == "right" then
+			xpos = x + t.width/2 - tex.realw
+		else -- default center justification
+			xpos = x - tex.realw/2
+		end
+		ypos = y + (i-1)*self.font_h
+		tex._tex:toScreenFull(xpos, ypos, tex.realw+1, tex.h, tex._tex_w, tex._tex_h)
+	end
 	self.last_t = t
 	self.last_o = o
 end

@@ -131,7 +131,9 @@ local maker_list = function()
 				repeat
 					o = game.zone:makeEntity(game.level, "object", {name=name, ignore_material_restriction=true, no_tome_drops=true, ego_filter={keep_egos=true, ego_chance=-1000}}, nil, true)
 					if o then ok = true end
-					if o and o.power_source and player:attr("forbid_arcane") and o.power_source.arcane then ok = false o = nil end
+					if o and not game.state:checkPowers(player, o, nil, "antimagic_only") then
+						ok = false o = nil 
+					end
 					tries = tries - 1
 				until ok or tries < 0
 				if o then
@@ -143,7 +145,9 @@ local maker_list = function()
 						repeat
 							art = game.state:generateRandart{base=o, lev=70, egos=4, force_themes=force_themes, forbid_power_source=not_ps}
 							if art then ok = true end
-							if art and art.power_source and player:attr("forbid_arcane") and art.power_source.arcane then ok = false end
+							if art and not game.state:checkPowers(player, art, nil, "antimagic_only") then
+								ok = false
+							end
 							nb = nb + 1
 							if nb == 40 then break end
 						until ok

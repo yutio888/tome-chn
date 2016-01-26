@@ -1,5 +1,5 @@
 -- TE4 - T-Engine 4
--- Copyright (C) 2009 - 2015 Nicolas Casalini
+-- Copyright (C) 2009 - 2016 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -33,9 +33,12 @@ function _M:init(title, equip_actor, filter, action, on_select, inven_actor)
 	inven_actor = inven_actor or equip_actor
 	self.equip_actor = equip_actor
 	self.inven_actor = inven_actor
-
 	game.tooltip.add_map_str = nil
 
+	if not inven_actor:getInven("INVEN") then -- set up default inventory if missing
+		print("[ShowEquipInven] initiating inventory INVEN_INVEN for", inven_actor.name, inven_actor.uid)
+		inven_actor.inven[inven_actor.INVEN_INVEN] = {worn=false, id=inven_actor.INVEN_INVEN, name="INVEN", max = 10}
+	end
 	Dialog.init(self, title or "Inventory", math.max(800, game.w * 0.8), math.max(600, game.h * 0.8))
 
 	self.c_main_set = Tab.new{title="主武器", default=not equip_actor.off_weapon_slots, fct=function() end, on_change=function(s) if s then self:switchSets("main") end end}
@@ -84,8 +87,7 @@ function _M:init(title, equip_actor, filter, action, on_select, inven_actor)
 			self.c_inven:generateList()
 		end
 	}
-
-	self.c_inven = Inventory.new{actor=inven_actor, inven=inven_actor:getInven("INVEN"), width=self.iw - vsep.w - self.c_doll.w, height=self.ih - 10, filter=filter,
+	self.c_inven = Inventory.new{actor=inven_actor, inven=inven_actor:getInven("INVEN") or {}, width=self.iw - vsep.w - self.c_doll.w, height=self.ih - 10, filter=filter,
 		default_last_tabs = "all",
 		fct=function(item, sel, button, event) self:use(item, button, event) end,
 		select=function(item, sel) self:select(item) end,
@@ -204,7 +206,12 @@ function _M:firstDisplay()
 end
 
 function _M:on_register()
-	game:onTickEnd(function() self.key:unicodeInput(true) end)
+	if not self.inven_actor:getInven("INVEN") then
+		Dialog:simplePopup("No Inventory", self.inven_actor.name:capitalize().." Has no defined main inventory")
+		game:unregisterDialog(self)
+	else
+		game:onTickEnd(function() self.key:unicodeInput(true) end)
+	end
 end
 
 function _M:defineHotkey(id)

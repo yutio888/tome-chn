@@ -1,5 +1,5 @@
 -- TE4 - T-Engine 4
--- Copyright (C) 2009 - 2015 Nicolas Casalini
+-- Copyright (C) 2009 - 2016 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -24,6 +24,7 @@ local Mouse = require "engine.Mouse"
 local Slider = require "engine.ui.Slider"
 
 --- Module that handles message history in a mouse wheel scrollable zone
+-- @classmod engine.LogDisplay
 module(..., package.seeall, class.inherit(engine.ui.Base))
 
 --- Creates the log zone

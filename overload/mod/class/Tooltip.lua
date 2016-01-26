@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2014 Nicolas Casalini
+-- Copyright (C) 2009 - 2016 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -40,8 +40,6 @@ function _M:getTooltipAtMap(tmx, tmy, mx, my)
 			to_add = getTooltipActorCHN(to_add)
 		elseif t == "grid" then
 			to_add = getTooltipGridCHN(to_add)
-		elseif t == "projectile" then
-			to_add = getTooltipProjectileCHN(to_add)
 		end
 		if to_add then 
 			if type(to_add) == "string" then to_add = to_add:toTString() end
@@ -58,7 +56,26 @@ function _M:getTooltipAtMap(tmx, tmy, mx, my)
 		check(Map.TRAP,"trap")
 		if seen then check(Map.ACTOR,"actor") end
 		check(Map.OBJECT)
-		if seen then check(Map.PROJECTILE,"projectile") end
+
+		if seen then
+			-- search for all projectiles (kludge! consider implementing like Objects)
+				local to_add
+				for uid, e in pairs(game.level.entities) do
+					if e.__is_projectile and e.x == tmx and e.y == tmy then
+						to_add = e:check("tooltip", tmx, tmy)
+						to_add = getTooltipProjectileCHN(to_add)
+						if to_add then 
+							if type(to_add) == "string" then to_add = to_add:toTString() end
+							if to_add.is_tstring then 
+								tt[#tt+1] = to_add 
+							else 
+								table.append(tt, to_add) 
+							end
+						end
+					end
+				end
+		end
+		
 		check(Map.TERRAIN,"grid")
 	end
 	

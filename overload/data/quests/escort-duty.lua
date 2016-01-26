@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2014 Nicolas Casalini
+-- Copyright (C) 2009 - 2016 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -339,10 +339,15 @@ on_grant = function(self, who)
 	local hd = {"Quest:escort:assign", possible_types=possible_types}
 	if self:triggerHook(hd) then possible_types = hd.possible_types end
 
+	game.state.escorts_seen = game.state.escorts_seen or {}
+	local escorts_seen = game.state.escorts_seen
 	while true do
 		self.kind = rng.table(possible_types)
-		if rng.percent(self.kind.chance) then break end
+		if not self.kind.unique or not escorts_seen[self.kind.name] then
+			if rng.percent(self.kind.chance) then break end
+		end
 	end
+	escorts_seen[self.kind.name] = (escorts_seen[self.kind.name] or 0) + 1
 
 	if self.kind.random == "player" then
 		self.kind.actor.name = self.kind.actor.name:format(game.player.name)

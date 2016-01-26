@@ -8,9 +8,13 @@ registerTalentTranslation{
 		local stunChance = t.getStunChance(self, t)
 		local bonusDamage = t.getBonusDamage(self, t)
 		local bonusCritical = t.getBonusCritical(self, t)
-		return ([[ 使 用 痛 苦 手 势 来 代 替 通 常 攻 击， 对 你 的 敌 人 的 精 神 进 行 打 击， 造 成 %0.2f 到 %0.2f 点 精 神 伤 害。 如 果 攻 击 命 中， 有 %d%% 概 率 震 慑 你 的 目 标 3 个 回 合。 
-		 这 项 攻 击 采 用 你 的 精 神 强 度 而 非 物 理 强 度， 同 时 需 检 查 对 方 精 神 豁 免。 这 项 攻 击 不 受 你 的 命 中 或 对 方 闪 避 影 响， 也 不 会 触 发 任 何 当 你 的 武 器 命 中 对 方 时 触 发 的 效 果。 但 是， 你 的 灵 晶 提 供 的 基 础 伤 害 和 暴 击 率 会 被 计 算 入 攻 击 中。 
-		 这 项 技 能 需 要 你 空 手 或 双 持 灵 晶， 同 时 有 25%% 概 率 触 发 可 暴 击 的 锁 脑 效 果。 受 精 神 强 度 影 响， 伤 害 有 额 外 加 成。 受 灵 晶 影 响， 增 加 %d 伤 害 和 %d%% 暴 击 率。 ]]):format(damDesc(self, DamageType.MIND, baseDamage * 0.5), damDesc(self, DamageType.MIND, baseDamage), stunChance, bonusDamage, bonusCritical)
+		return ([[使 用 痛 苦 手 势 来 代 替 通 常 攻 击， 对 你 的 敌 人 的 精 神 进 行 打 击， 造 成 %0.1f 到 %0.1f 点 精 神 伤 害。 如 果 攻 击 命 中， 有 %d%% 概 率 震 慑 你 的 目 标 3 个 回 合。 
+		 这 项 攻 击 采 用 你 的 精 神 强 度 而 非 物 理 强 度， 同 时 需 检 查 对 方 精 神 豁 免。 这 项 攻 击 不 受 你 的 命 中 或 对 方 闪 避 影 响， 也 不 会 触 发 任 何 当 你 的 武 器 命 中 对 方 时 触 发 的 效 果。 但 是， 你 的 灵 晶 提 供 的 基 础 伤 害（ 按 双 倍 计 算） 和 暴 击 率 会 被 计 算 入 攻 击 中。 
+		 这 项 技 能 需 要 你 空 手 或 双 持 灵 晶， 同 时 有 25%% 概 率 触 发 可 暴 击 的 锁 脑 效 果。
+		 如 果 用 双 持 灵 晶 攻 击，能 够 触 发 命 中 效 果。
+		 受 精 神 强 度 影 响， 伤 害 有 额 外 加 成。 
+		 受 灵 晶 影 响， 增 加 %d 伤 害 和 %d%% 暴 击 率。]])
+		:format(damDesc(self, DamageType.MIND, baseDamage * 0.5), damDesc(self, DamageType.MIND, baseDamage), stunChance, bonusDamage, bonusCritical)
 	end,
 }
 

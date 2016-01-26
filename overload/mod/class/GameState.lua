@@ -1,5 +1,5 @@
 ﻿-- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2015 Nicolas Casalini
+-- Copyright (C) 2009 - 2016 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -46,6 +46,7 @@ end
 --- Restock all stores
 function _M:storesRestock()
 	self.stores_restock = self.stores_restock + 1
+	game.log("#AQUAMARINE#大部分商店应该有新的货物了。")
 	print("[STORES] restocking")
 end
 
@@ -272,28 +273,36 @@ end
 --- Checks power_source compatibility between two entities
 --	returns true if e2 is compatible with e1, false otherwise
 --	by default, only checks .power_source vs. .forbid_power_source between entities
+--  @param e1, e2 entities to check
 --	@param require_power if true, will also check that e2.power_source (if present) has a match in e1.power_source
+--  @param [opt = string] theme type of checks to perform, default to all
 --	use updatePowers to resolve conflicts.
-function _M:checkPowers(e1, e2, require_power)
+function _M:checkPowers(e1, e2, require_power, theme)
 	if not e1 or not e2 then return true end
-	local ok = true
---print("Comparing power sources",e1.name, e2.name)
+	-- print("Comparing power sources",e1.name, e2.name)
 	-- check for excluded power sources first
-	local not_ps = self:attrPowers(e2)
-	for ps, _ in pairs(e1.power_source or {}) do
-		if not_ps[ps] then return false end
-	end
-	not_ps = self:attrPowers(e1)
-	for ps, _ in pairs(e2.power_source or {}) do
-		if not_ps[ps] then return false end
-	end
-	-- check for required power_sources
-	if require_power and e1.power_source and e2.power_source then
-		ok = false
-		for yes_ps, _ in pairs(e1.power_source)	do
-			if (e2.power_source and e2.power_source[yes_ps]) then return true end
+	if theme == "antimagic_only" then -- check antimagic restrictions only
+		local not_ps = self:attrPowers(e1)
+		if e2.power_source and (e2.power_source.antimagic and not_ps.antimagic or e2.power_source.arcane and not_ps.arcane) then return false end
+		local not_ps = self:attrPowers(e2)
+		if e1.power_source and (e1.power_source.antimagic and not_ps.antimagic or e1.power_source.arcane and not_ps.arcane) then return false end
+		return true
+	else -- check for all conflicts
+		local not_ps = self:attrPowers(e2)
+		for ps, _ in pairs(e1.power_source or {}) do
+			if not_ps[ps] then return false end
 		end
-		return false
+		not_ps = self:attrPowers(e1)
+		for ps, _ in pairs(e2.power_source or {}) do
+			if not_ps[ps] then return false end
+		end
+		-- check for required power_sources
+		if require_power and e1.power_source and e2.power_source then
+			for yes_ps, _ in pairs(e1.power_source)	do
+				if (e2.power_source and e2.power_source[yes_ps]) then return true end
+			end
+			return false
+		end
 	end
 	return true
 end
@@ -699,7 +708,7 @@ function _M:generateRandart(data)
 	end
 
 	-- Assign weapon damage
-	if o.combat and not (o.subtype == "staff" or o.subtype == "mindstar") then
+	if o.combat and not (o.subtype == "staff" or o.subtype == "mindstar" or o.fixed_randart_damage_type) then
 		local theme_map = {
 			physical = engine.DamageType.PHYSICAL,
 			--mental = engine.DamageType.MIND,
@@ -1288,6 +1297,7 @@ local loot_mod = {
 		basic = 0,
 		money = 0,
 		lore = 0,
+		material_mod = 1,
 	},
 	gvault = { -- Greater vault
 		uniques = 10,
@@ -1299,6 +1309,7 @@ local loot_mod = {
 		basic = 0,
 		money = 0,
 		lore = 0,
+		material_mod = 1,
 	},
 	vault = { -- Default vault
 		uniques = 5,
@@ -1310,6 +1321,7 @@ local loot_mod = {
 		basic = 0,
 		money = 0,
 		lore = 0,
+		material_mod = 1,
 	},
 }
 
@@ -1448,6 +1460,7 @@ function _M:entityFilter(zone, e, filter, type)
 		if not filter.ignore_material_restriction then
 			local min_mlvl = util.getval(zone.min_material_level)
 			local max_mlvl = util.getval(zone.max_material_level)
+			if filter.tome_mod and filter.tome_mod.material_mod then max_mlvl = util.bound((max_mlvl or 3) + filter.tome_mod.material_mod, 1, 5) end
 			if min_mlvl and not e.material_level_min_only then
 				if not e.material_level then return true end
 				if e.material_level < min_mlvl then return false end
@@ -1884,10 +1897,11 @@ end
 --- Add character classes to an actor updating stats, talents, and equipment
 --	@param b = actor(boss) to update
 --	@param data = optional parameters:
---	@param data.force_classes = specific classes to add {Corruptor = true, Bulwark = true, ...} ignores restrictions
+--	@param data.force_classes = specific classes to apply first {Corruptor = true, Bulwark = true, ...} ignores restrictions
+--		forced classes are applied first, ignoring restrictions
 --	@param data.nb_classes = random classes to add (in addition to any forced classes) <2>
--- 	@param data.class_filter = function(cdata) that must return true for any class picked.
---		(cdata = subclass definition in engine.Birther.birth_descriptor_def.subclass)
+-- 	@param data.class_filter = function(cdata, b) that must return true for any class picked.
+--		(cdata, b = subclass definition in engine.Birther.birth_descriptor_def.subclass, boss (before classes are applied))
 --	@param data.no_class_restrictions set true to skip class compatibility checks <nil>
 --	@param data.add_trees = {["talent tree name 1"]=true, ["talent tree name 2"]=true, ..} additional talent trees to learn
 --	@param data.check_talents_level set true to enforce talent level restrictions <nil>
@@ -1944,17 +1958,21 @@ print("   power types: not_power_source =", table.concat(table.keys(b.not_power_
 
 		-- Add starting equipment
 		local apply_resolvers = function(k, resolver)
-			if type(resolver) == "table" and resolver.__resolver and resolver.__resolver == "equip" and not data.forbid_equip then
-				resolver[1].id = nil
-				-- Make sure we equip some nifty stuff instead of player's starting iron stuff
-				for i, d in ipairs(resolver[1]) do
-					d.name = nil
-					d.ego_chance = nil
-					d.forbid_power_source=b.not_power_source
-					d.tome_drops = data.loot_quality or "boss"
-					d.force_drop = (data.drop_equipment == nil) and true or data.drop_equipment
+			if type(resolver) == "table" and resolver.__resolver then
+				if resolver.__resolver == "equip" and not data.forbid_equip then
+					resolver[1].id = nil
+					-- Make sure we equip some nifty stuff instead of player's starting iron stuff
+					for i, d in ipairs(resolver[1]) do
+						d.name = nil
+						d.ego_chance = nil
+						d.forbid_power_source=b.not_power_source
+						d.tome_drops = data.loot_quality or "boss"
+						d.force_drop = (data.drop_equipment == nil) and true or data.drop_equipment
+					end
+					b[#b+1] = resolver
+				elseif resolver.__resolver == "inscription" then -- add support for inscriptions
+					b[#b+1] = resolver
 				end
-				b[#b+1] = resolver
 			elseif k == "innate_alchemy_golem" then 
 				b.innate_alchemy_golem = true
 			elseif k == "birth_create_alchemist_golem" then
@@ -2026,7 +2044,7 @@ print("   power types: not_power_source =", table.concat(table.keys(b.not_power_
 	local force_classes = data.force_classes and table.clone(data.force_classes)
 	for name, cdata in ipairs(classes) do
 		if force_classes and force_classes[cdata.name] then apply_class(table.clone(cdata, true)) force_classes[cdata.name] = nil
-		elseif not cdata.not_on_random_boss and (not cdata.random_rarity or rng.chance(cdata.random_rarity)) and (not data.class_filter or data.class_filter(cdata))then list[#list+1] = cdata
+		elseif not cdata.not_on_random_boss and (not cdata.random_rarity or rng.chance(cdata.random_rarity)) and (not data.class_filter or data.class_filter(cdata, b)) then list[#list+1] = cdata
 		end
 	end
 	local to_apply = data.nb_classes or 2
@@ -2046,6 +2064,7 @@ end
 --	calls _M:applyRandomClass(b, data, instant) to add classes, talents, and equipment based on class descriptors
 --		handles data.nb_classes, data.force_classes, data.class_filter, ...
 --	optional parameters:
+--	@param data.init = function(data, b) to run before generation
 --	@param data.level = minimum level range for actor generation <1>
 --	@param data.rank = rank <3.5-4>
 --	@param data.life_rating = function(b.life_rating) <1.7 * base.life_rating + 4-9>
@@ -2060,21 +2079,22 @@ end
 function _M:createRandomBoss(base, data)
 	local b = base:clone()
 	data = data or {level=1}
+	if data.init then data.init(data, b) end
 	data.nb_classes = data.nb_classes or 2
 
 	------------------------------------------------------------
 	-- Basic stuff, name, rank, ...
 	------------------------------------------------------------
 	local ngd, name
---	if base.random_name_def then
---		ngd = NameGenerator2.new("/data/languages/names/"..base.random_name_def:gsub("#sex#", base.female and "female" or "male")..".txt")
---		name = ngd:generate(nil, base.random_name_min_syllables, base.random_name_max_syllables)
---	else
+	if base.random_name_def then
+		ngd = NameGenerator2.new("/data/languages/names/"..base.random_name_def:gsub("#sex#", base.female and "female" or "male")..".txt")
+		name = ngd:generate(nil, base.random_name_min_syllables, base.random_name_max_syllables)
+	else
 		ngd = NameGenerator.new(randart_name_rules.default)
 		name = ngd:generate()
---	end
+	end
 	if data.name_scheme then
-		b.name = b.name .. " : " .. (randomboss_name_scheme[data.name_scheme] or data.name_scheme):gsub("#rng#", name):gsub("#base#", b.name)
+		b.name = data.name_scheme:gsub("#rng#", name):gsub("#base#", b.name)
 	else
 		b.name = b.name.." : "..name
 	end
@@ -2094,6 +2114,7 @@ function _M:createRandomBoss(base, data)
 		b.life_rating = b.life_rating * 1.7 + rng.range(4, 9)
 	end
 	b.max_life = b.max_life or 150
+	b.max_inscriptions = 5
 
 	if b.can_multiply or b.clone_on_hit then
 		b.clone_base = base:clone()
@@ -2144,7 +2165,7 @@ function _M:createRandomBoss(base, data)
 	self:applyRandomClass(b, data)
 
 	b.rnd_boss_on_added_to_level = b.on_added_to_level
-	b._rndboss_resources_boost = data.resources_boost
+	b._rndboss_resources_boost = data.resources_boost or 3
 	b._rndboss_talent_cds = data.talent_cds_factor
 	b.on_added_to_level = function(self, ...)
 		self:check("birth_create_alchemist_golem")
@@ -2170,13 +2191,22 @@ function _M:createRandomBoss(base, data)
 			end
 		end
 
-		-- Cheat a bit with resources
-		self.max_mana = self.max_mana * (self._rndboss_resources_boost or 3) self.mana_regen = self.mana_regen + 1
-		self.max_vim = self.max_vim * (self._rndboss_resources_boost or 3) self.vim_regen = self.vim_regen + 1
-		self.soul_regen = self.soul_regen + 0.5
-		self.max_stamina = self.max_stamina * (self._rndboss_resources_boost or 3) self.stamina_regen = self.stamina_regen + 1
-		self.max_psi = self.max_psi * (self._rndboss_resources_boost or 3) self.psi_regen = self.psi_regen + 2
-		self.equilibrium_regen = self.equilibrium_regen - 2
+		-- Enhance resource pools (cheat a bit with recovery)
+		for res, res_def in ipairs(self.resources_def) do
+			if res_def.randomboss_enhanced then
+				local capacity
+				if self[res_def.minname] and self[res_def.maxname] then -- expand capacity
+					capacity = (self[res_def.maxname] - self[res_def.minname]) * self._rndboss_resources_boost
+				end
+				if res_def.invert_values then
+					if capacity then self[res_def.minname] = self[res_def.maxname] - capacity end
+					self[res_def.regen_prop] = self[res_def.regen_prop] - (res_def.min and res_def.max and (res_def.max-res_def.min)*.01 or 1) * self._rndboss_resources_boost
+				else
+					if capacity then self[res_def.maxname] = self[res_def.minname] + capacity end
+					self[res_def.regen_prop] = self[res_def.regen_prop] + (res_def.min and res_def.max and (res_def.max-res_def.min)*.01 or 1) * self._rndboss_resources_boost
+				end
+			end
+		end
 		self:resetToFull()
 	end
 
@@ -2238,7 +2268,7 @@ function _M:canEventGridRadius(level, x, y, radius, min)
 	end end
 
 	if #list < min then return false
-	else return list end
+	else list.center_x, list.center_y = x, y return list end
 end
 
 function _M:findEventGrid(level, checker)

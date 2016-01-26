@@ -1231,6 +1231,13 @@ logCHN:newLog{
 		return "目标距离太远"
 	end,
 }
+logCHN:newLog{
+	log = "%s performs a telekinetically enhanced leap!",
+	fct = function(a)
+			a = npcCHN:getName(a)
+		return ("%s施展了灵能跳跃！"):gsub(a)
+	end,
+}
 
 logCHN:newLog{
 	log = "You must either have a spiked kinetic shield or be able to spike one. Cancelling charge.",
@@ -1694,6 +1701,14 @@ logCHN:newLog{
 	end,
 }
 --spell/water
+
+logCHN:newLog{
+	log = "A #LIGHT_BLUE#wave of icy water#LAST# erupts from the ground!",
+	fct = function()
+		return "一股 #LIGHT_BLUE#冰冷的水流#LAST# 从地面上涌现!"
+	end,
+}
+
 logCHN:newLog{
 	log = "You are already a Shivgoroth!",
 	fct = function(a)
@@ -2314,6 +2329,15 @@ logCHN:newLog{
 	fct = function()
 		return "#LIGHT_BLUE##Source# 惩罚了 #Target# 的施法!"
 	end,}
+--misc/npc
+logCHN:newLog{
+	log = "%s hurls lightning at %s!",
+	fct = function(a,b)
+		a = npcCHN:getName(a)
+		b = npcCHN:getName(b)
+		return ("%s向%s释放闪电！"):format(a,b)
+	end,
+}
 
 --misc/race
 logCHN:newLog{

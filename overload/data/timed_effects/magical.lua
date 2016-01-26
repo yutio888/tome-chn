@@ -580,6 +580,50 @@ newEffect{
 	charges = function(self, eff) return math.ceil(self.damage_shield_absorb) end,
 	on_gain = function(self, err) return "A shield forms around #target#.", "+Shield" end,
 	on_lose = function(self, err) return "The shield around #target# crumbles.", "-Shield" end,
+	on_merge = function(self, old_eff, new_eff)
+		local new_eff_adj = {} -- Adjust for shield modifiers
+		if self:attr("shield_factor") then
+			new_eff_adj.power = new_eff.power * (100 + self:attr("shield_factor")) / 100
+		else
+			new_eff_adj.power = new_eff.power
+		end
+		if self:attr("shield_dur") then
+			new_eff_adj.dur = new_eff.dur + self:attr("shield_dur")
+		else
+			new_eff_adj.dur = new_eff.dur
+		end
+		-- If the new shield would be stronger than the existing one, just replace it
+		if old_eff.dur > new_eff_adj.dur then return old_eff end
+		if math.max(self.damage_shield_absorb, self.damage_shield_absorb_max) <= new_eff_adj.power then
+			self:removeEffect(self.EFF_DAMAGE_SHIELD)
+			self:setEffect(self.EFF_DAMAGE_SHIELD, new_eff.dur, new_eff)
+			return self:hasEffect(self.EFF_DAMAGE_SHIELD)
+		end
+		if self.damage_shield_absorb <= new_eff_adj.power then
+			-- Don't update a reflection shield with a normal shield
+			if old_eff.reflect and not new_eff.reflect then
+				return old_eff
+			elseif old_eff.reflect and new_eff.reflect and math.min(old_eff.reflect, new_eff.reflect) > 0 then
+				old_eff.reflect = math.min(old_eff.reflect, new_eff.reflect)
+				if self:attr("damage_shield_reflect") then
+					self:attr("damage_shield_reflect", old_eff.reflect, true)
+				else
+					old_eff.refid = self:addTemporaryValue("damage_shield_reflect", old_eff.reflect)
+				end
+			end
+			-- Otherwise, keep the existing shield for use with Aegis, but update absorb value and maybe duration
+			self.damage_shield_absorb = new_eff_adj.power -- Use adjusted values here since we bypass setEffect()
+			if not old_eff.dur_extended or old_eff.dur_extended <= 20 then
+				old_eff.dur = new_eff_adj.dur
+				if not old_eff.dur_extended then
+					old_eff.dur_extended = 1
+				else
+					old_eff.dur_extended = old_eff.dur_extended + 1
+				end
+			end
+		end
+		return old_eff
+	end,
 	on_aegis = function(self, eff, aegis)
 		self.damage_shield_absorb = self.damage_shield_absorb + eff.power * aegis / 100
 		if core.shader.active(4) then
@@ -1048,21 +1092,30 @@ newEffect{
 newEffect{
 	name = "CORROSIVE_WORM", image = "talents/corrosive_worm.png",
 	desc = "Corrosive Worm",
-	long_desc = function(self, eff) return ("目 标 被 感 染 腐 蚀 蠕 虫 造 成 每 回 合 %0.2f 酸 性 伤 害。"):format(eff.dam) end,
+	long_desc = function(self, eff) return ("目 标 被 腐 蚀 蠕 虫 感 染，减 少 %d%% 酸 性 和 枯 萎 抗 性 ， 效 果 结 束 后 ， 蠕 虫 团 将 爆 炸 ， 在 半 径 4 范 围 内 造 成 %d 酸 性 伤 害 。 在 该 效 果 下 受 到 伤 害 的 %d%% 将 被 加 成 至 爆 炸 伤 害 中 。"):format(eff.power, eff.finaldam, eff.rate*100) end,
 	type = "magical",
 	subtype = { acid=true },
 	status = "detrimental",
-	parameters = { dam=1, explosion=10 },
+	parameters = { power=20, rate=10, finaldam=50, },
 	on_gain = function(self, err) return "#Target# is infected by a corrosive worm.", "+Corrosive Worm" end,
 	on_lose = function(self, err) return "#Target# is free from the corrosive worm.", "-Corrosive Worm" end,
-	on_timeout = function(self, eff)
-		DamageType:get(DamageType.ACID).projector(eff.src or self, self.x, self.y, DamageType.ACID, eff.dam)
-	end,
 	activate = function(self, eff)
 		eff.particle = self:addParticles(Particles.new("circle", 1, {base_rot=0, oversize=0.7, a=255, appear=8, speed=0, img="blight_worms", radius=0}))
+		self:effectTemporaryValue(eff, "resists", {[DamageType.BLIGHT]=-eff.power, [DamageType.ACID]=-eff.power})
 	end,
 	deactivate = function(self, eff)
+		local tg = {type="ball", radius=4, selffire=false, x=self.x, y=self.y}
+		eff.src:project(tg, self.x, self.y, DamageType.ACID, eff.finaldam, {type="acid"})
 		self:removeParticles(eff.particle)
+	end,
+	callbackOnHit = function(self, eff, cb)
+		eff.finaldam = eff.finaldam + (cb.value * eff.rate)
+		return true
+	end,
+	
+	on_die = function(self, eff)
+		local tg = {type="ball", radius=4, selffire=false, x=self.x, y=self.y}
+		eff.src:project(tg, self.x, self.y, DamageType.ACID, eff.finaldam, {type="acid"})
 	end,
 }
 
@@ -3225,7 +3278,7 @@ newEffect{
 	deactivate = function(self, eff)
 		-- check negative life first incase the creature has healing
 		if self.life <= (self.die_at or 0) then
-			local sx, sy = game.level.map:getTileToScreen(self.x, self.y)
+			local sx, sy = game.level.map:getTileToScreen(self.x, self.y, true)
 			game.flyers:add(sx, sy, 30, (rng.range(0,2)-1) * 0.5, rng.float(-2.5, -1.5), "Unravels!", {255,0,255})
 			game.logSeen(self, "%s has unraveled!", self.name:capitalize())
 			self:die(self)
@@ -3610,6 +3663,7 @@ newEffect{
 	status = "beneficial",
 	parameters = { chance = 1 },
 	on_gain = function(self, err) return "#Target# has been tethered!", "+Tether" end,
+	on_lose = function(self, err) return "#Target# is no longer tethered.", "-Tether" end,
 	activate = function(self, eff)
 	end,
 	deactivate = function(self, eff)
@@ -3628,8 +3682,123 @@ newEffect{
 	status = "detrimental",
 	parameters = { chance = 1 },
 	on_gain = function(self, err) return "#Target# has been tethered!", "+Tether" end,
+	on_lose = function(self, err) return "#Target# is no longer tethered.", "-Tether" end,
 	activate = function(self, eff)
 	end,
 	deactivate = function(self, eff)
+	end,
+}
+
+newEffect{
+	name = "BLIGHT_POISON", image = "effects/poisoned.png",
+	desc = "Blight Poison",
+	long_desc = function(self, eff) return ("目 标 中 毒，每 回 合 受 到 %0.2f 枯 萎 伤 害 。"):format(eff.power) end,
+	type = "magical",
+	subtype = { poison=true, blight=true }, no_ct_effect = true,
+	status = "detrimental",
+	parameters = { power=10 },
+	on_gain = function(self, err) return "#Target# is poisoned!", "+Blight Poison" end,
+	on_lose = function(self, err) return "#Target# stops being poisoned.", "-Blight Poison" end,
+	on_merge = function(self, old_eff, new_eff)
+		-- Merge the poison
+		local olddam = old_eff.power * old_eff.dur
+		local newdam = new_eff.power * new_eff.dur
+		local dur = math.ceil((old_eff.dur + new_eff.dur) / 2)
+		old_eff.dur = dur
+		old_eff.power = (olddam + newdam) / dur
+		if new_eff.max_power then old_eff.power = math.min(old_eff.power, new_eff.max_power) end
+		return old_eff
+	end,
+	on_timeout = function(self, eff)
+		if self:attr("purify_poison") then self:heal(eff.power, eff.src)
+		else DamageType:get(DamageType.BLIGHT).projector(eff.src, self.x, self.y, DamageType.BLIGHT, eff.power)
+		end
+	end,
+}
+
+newEffect{
+	name = "INSIDIOUS_BLIGHT", image = "effects/insidious_poison.png",
+	desc = "Insidious Blight",
+	long_desc = function(self, eff) return ("目 标 中 毒， 每 回 合 受 到 %0.2f 枯 萎 伤 害 并 降 低 所 有 治 疗 效 果 %d%%。"):format(eff.power, eff.heal_factor) end,
+	type = "magical",
+	subtype = { poison=true, blight=true }, no_ct_effect = true,
+	status = "detrimental",
+	parameters = {power=10, heal_factor=30},
+	on_gain = function(self, err) return "#Target# is poisoned!", "+Insidious Blight" end,
+	on_lose = function(self, err) return "#Target# is no longer poisoned.", "-Insidious Blight" end,
+	activate = function(self, eff)
+		eff.healid = self:addTemporaryValue("healing_factor", -eff.heal_factor / 100)
+	end,
+	-- There are situations this matters, such as copyEffect
+	on_merge = function(self, old_eff, new_eff)
+		old_eff.dur = math.max(old_eff.dur, new_eff.dur)
+		return old_eff
+	end,
+	on_timeout = function(self, eff)
+		if self:attr("purify_poison") then self:heal(eff.power, eff.src)
+		else DamageType:get(DamageType.BLIGHT).projector(eff.src, self.x, self.y, DamageType.BLIGHT, eff.power)
+		end
+	end,
+	deactivate = function(self, eff)
+		self:removeTemporaryValue("healing_factor", eff.healid)
+	end,
+}
+
+
+newEffect{
+	name = "CRIPPLING_BLIGHT", image = "talents/crippling_poison.png",
+	desc = "Crippling Blight",
+	long_desc = function(self, eff) return ("目 标 中 毒， 每 回 合 受 到 %0.2f 枯 萎 伤 害， 每 次 使 用 技 能 时 有 %d%% 概 率 失 败。"):format(eff.power, eff.fail) end,
+	type = "magical",
+	subtype = { poison=true, blight=true }, no_ct_effect = true,
+	status = "detrimental",
+	parameters = {power=10, fail=5},
+	on_gain = function(self, err) return "#Target# is poisoned!", "+Crippling Blight" end,
+	on_lose = function(self, err) return "#Target# is no longer poisoned.", "-Crippling Blight" end,
+	-- Damage each turn
+	on_timeout = function(self, eff)
+		if self:attr("purify_poison") then self:heal(eff.power, eff.src)
+		else DamageType:get(DamageType.BLIGHT).projector(eff.src, self.x, self.y, DamageType.BLIGHT, eff.power)
+		end
+	end,
+	-- There are situations this matters, such as copyEffect
+	on_merge = function(self, old_eff, new_eff)
+		old_eff.dur = math.max(old_eff.dur, new_eff.dur)
+		return old_eff
+	end,
+	activate = function(self, eff)
+		eff.tmpid = self:addTemporaryValue("talent_fail_chance", eff.fail)
+	end,
+	deactivate = function(self, eff)
+		self:removeTemporaryValue("talent_fail_chance", eff.tmpid)
+	end,
+}
+
+newEffect{
+	name = "NUMBING_BLIGHT", image = "effects/numbing_poison.png",
+	desc = "Numbing Blight",
+	long_desc = function(self, eff) return ("目 标 中 毒， 每 回 合 受 到 %0.2f 枯 萎 伤 害 并 减 少 其 造 成 伤 害 %d%%。"):format(eff.power, eff.reduce) end,
+	type = "magical",
+	subtype = { poison=true, blight=true }, no_ct_effect = true,
+	status = "detrimental",
+	parameters = {power=10, reduce=5},
+	on_gain = function(self, err) return "#Target# is poisoned!", "+Numbing Blight" end,
+	on_lose = function(self, err) return "#Target# is no longer poisoned.", "-Numbing Blight" end,
+	-- Damage each turn
+	on_timeout = function(self, eff)
+		if self:attr("purify_poison") then self:heal(eff.power, eff.src)
+		else DamageType:get(DamageType.BLIGHT).projector(eff.src, self.x, self.y, DamageType.BLIGHT, eff.power)
+		end
+	end,
+	-- There are situations this matters, such as copyEffect
+	on_merge = function(self, old_eff, new_eff)
+		old_eff.dur = math.max(old_eff.dur, new_eff.dur)
+		return old_eff
+	end,
+	activate = function(self, eff)
+		eff.tmpid = self:addTemporaryValue("numbed", eff.reduce)
+	end,
+	deactivate = function(self, eff)
+		self:removeTemporaryValue("numbed", eff.tmpid)
 	end,
 }

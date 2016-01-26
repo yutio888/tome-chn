@@ -1,5 +1,5 @@
 -- TE4 - T-Engine 4
--- Copyright (C) 2009 - 2015 Nicolas Casalini
+-- Copyright (C) 2009 - 2016 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -20,6 +20,7 @@
 require "engine.class"
 
 --- Handles actors stats
+-- @classmod engine.generator.interface.ActorTalents
 module(..., package.seeall, class.make)
 
 _M.talents_def = {}
@@ -28,7 +29,7 @@ _M.talents_types_def = {}
 --- Defines actor talents
 -- Static!
 function _M:loadDefinition(file, env)
-	local f, err = util.loadfilemods(file, setmetatable(env or {
+	env = env or setmetatable({
 		DamageType = require("engine.DamageType"),
 		Particles = require("engine.Particles"),
 		Talents = self,
@@ -37,8 +38,9 @@ function _M:loadDefinition(file, env)
 		newTalent = function(t) self:newTalent(t) end,
 		newTalentType = function(t) self:newTalentType(t) end,
 		registerTalentTranslation = function(t) self:registerTalentTranslation(t) end,
-		load = function(f) self:loadDefinition(f, getfenv(2)) end
-	}, {__index=_G}))
+		load = function(f) self:loadDefinition(f, env) end
+	}, {__index=getfenv(2)})
+	local f, err = util.loadfilemods(file, env)
 	if not f and err then error(err) end
 	f()
 end
@@ -261,7 +263,7 @@ function _M:useTalent(id, who, force_level, ignore_cd, force_target, silent, no_
 			end
 		end)
 		if not no_confirm and self:isTalentConfirmable(ab) then
-			local abname = game:getGenericTextTiles(ab)..ab.name
+			local abname = game:getGenericTextTiles(ab)..tostring(self:getTalentDisplayName(ab))
 			require "engine.ui.Dialog":yesnoPopup("Talent Use Confirmation", ("Use %s?"):format(abname),
 			function(quit)
 				if quit ~= false then
@@ -385,7 +387,9 @@ end
 -- @param t_id the id of the talent to learn
 -- @param force if true do not check canLearnTalent
 -- @param nb the amount to increase the raw talent level by, default 1
--- @return true if the talent was learnt, nil and an error message otherwise
+-- @return[1] nil if failed
+-- @return[1] an error message
+-- @return[2] true if the talent was learned
 function _M:learnTalent(t_id, force, nb)
 --	print("[TALENT]", self.name, self.uid, "learning", t_id, force, nb)
 	local t = _M.talents_def[t_id]
@@ -466,9 +470,11 @@ function _M:learnTalent(t_id, force, nb)
 	return true
 end
 
---- Actor forgets a talent completly
+--- Actor forgets a talent completely
 -- @param t_id the id of the talent to learn
--- @return true if the talent was unlearnt, nil and an error message otherwise
+-- @return[1] nil if failed
+-- @return[1] an error message
+-- @return[2] true if the talent was unlearned
 function _M:unlearnTalentFull(t_id)
 	local lvl = self:getTalentLevelRaw(t_id)
 	if lvl > 0 then self:unlearnTalent(t_id, lvl) end
@@ -476,6 +482,7 @@ end
 
 --- Actor forgets a talent
 -- @param t_id the id of the talent to learn
+-- @param nb
 -- @return true if the talent was unlearnt, nil and an error message otherwise
 function _M:unlearnTalent(t_id, nb)
 	if not self:knowTalent(t_id) then return false, "talent not known" end
@@ -566,6 +573,7 @@ end
 --- Checks the talent if learnable
 -- @param t the talent to check
 -- @param offset the level offset to check, defaults to 1
+-- @param ignore_special ignore requirement of special
 function _M:canLearnTalent(t, offset, ignore_special)
 	-- Check prerequisites
 	if rawget(t, "require") then
@@ -767,8 +775,11 @@ function _M:getTalentTypeFrom(id)
 end
 
 --- Actor learns a talent type
--- @param t_id the id of the talent to learn
--- @return true if the talent was learnt, nil and an error message otherwise
+-- @param tt the id of the talent to learn
+-- @param v value
+-- @return[1] nil if failed
+-- @return[1] an error message
+-- @return[2] true if the talent was learned
 function _M:learnTalentType(tt, v)
 	if v == nil then v = true end
 	if self.talents_types[tt] then return end
@@ -779,8 +790,10 @@ function _M:learnTalentType(tt, v)
 end
 
 --- Actor forgets a talent type
--- @param t_id the id of the talent to learn
--- @return true if the talent was unlearnt, nil and an error message otherwise
+-- @param tt the id of the talent to unlearn
+-- @return[1] nil if failed
+-- @return[1] an error message
+-- @return[2] true if the talent was unlearned
 function _M:unlearnTalentType(tt)
 	self.talents_types[tt] = false
 	self.changed = true
@@ -937,9 +950,10 @@ end
 
 --- Helper function to add temporary particles and not have to remove them manualy
 function _M:talentParticles(p, ...)
+	local Particles = require "engine.Particles"
 	if not p.__tmpparticles then p.__tmpparticles = {} end
 	for _, ps in ipairs{...} do
-		p.__tmpparticles[#p.__tmpparticles+1] = ps
+		p.__tmpparticles[#p.__tmpparticles+1] = self:addParticles(Particles.new(ps.type, 1, ps.args))
 	end
 end
 

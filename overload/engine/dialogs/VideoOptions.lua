@@ -1,5 +1,5 @@
 -- TE4 - T-Engine 4
--- Copyright (C) 2009 - 2015 Nicolas Casalini
+-- Copyright (C) 2009 - 2016 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -23,7 +23,10 @@ local TreeList = require "engine.ui.TreeList"
 local Textzone = require "engine.ui.Textzone"
 local Separator = require "engine.ui.Separator"
 local GetQuantity = require "engine.dialogs.GetQuantity"
+local GetQuantitySlider = require "engine.dialogs.GetQuantitySlider"
 
+--- Video Options
+-- @classmod engine.dialogs.VideoOptions
 module(..., package.seeall, class.inherit(Dialog))
 
 function _M:init()
@@ -66,28 +69,40 @@ function _M:generateList()
 	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#分辨率#WHITE##{normal}#", status=function(item)
 		return config.settings.window.size
 	end, fct=function(item)
-		local menu = require("engine.dialogs.DisplayResolution").new(function() self.c_list:drawItem(item) end)
+		local menu = require("engine.dialogs.DisplayResolution").new(function()	self.c_list:drawItem(item) end)
 		game:registerDialog(menu)
 	end,}
 
+	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"如果你有一个高分辨率的屏幕，你可以调高该数值。重启后生效。#WHITE#"}
+	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#Screen Zoom#WHITE##{normal}#", status=function(item)
+		return tostring(config.settings.screen_zoom * 100)
+	end, fct=function(item)
+		game:registerDialog(GetQuantitySlider.new("Enter Zoom %", "From 50 to 400", math.floor(config.settings.screen_zoom * 100), 50, 400, 5, function(qty)
+			qty = util.bound(qty, 50, 400)
+			game:saveSettings("screen_zoom", ("screen_zoom = %f\n"):format(qty / 100))
+			config.settings.screen_zoom = qty / 100
+			self.c_list:drawItem(item)
+		end))
+	end,}
+	
 	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"帧密度选项。\n降低帧密度可以减轻CPU占用，提高可以提升显示效果。#WHITE#"}
 	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#帧密度设定#WHITE##{normal}#", status=function(item)
 		return tostring(config.settings.display_fps)
 	end, fct=function(item)
-		game:registerDialog(GetQuantity.new("设定密度", "从 5 到 60", config.settings.display_fps, 60, function(qty)
+		game:registerDialog(GetQuantity.new("设定密度", "从 5 到 60", config.settings.display_fps, 5, 60, 1, function(qty)
 			qty = util.bound(qty, 5, 60)
 			game:saveSettings("display_fps", ("display_fps = %d\n"):format(qty))
 			config.settings.display_fps = qty
 			core.game.setFPS(qty)
 			self.c_list:drawItem(item)
-		end), 5)
+		end))
 	end,}
 
 	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"设定粒子效果的密度。\n可以改变游戏内的粒子效果密度。\n如果你在施法时发现游戏速度进行较慢请尝试降低这个设置。#WHITE#"}
 	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#粒子效果密度#WHITE##{normal}#", status=function(item)
 		return tostring(config.settings.particles_density)
 	end, fct=function(item)
-		game:registerDialog(GetQuantity.new("输入密度", "从 0 到 100", config.settings.particles_density, 100, function(qty)
+		game:registerDialog(GetQuantity.new("输入密度", "从 0 到 100", config.settings.particles_density, 0, 100, 1, function(qty)
 			game:saveSettings("particles_density", ("particles_density = %d\n"):format(qty))
 			config.settings.particles_density = qty
 			self.c_list:drawItem(item)
@@ -163,13 +178,13 @@ function _M:generateList()
 	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#画面亮度#WHITE##{normal}#", status=function(item)
 		return tostring(config.settings.gamma_correction)
 	end, fct=function(item)
-		game:registerDialog(GetQuantity.new("亮度设定", "从 50 到 300", config.settings.gamma_correction, 300, function(qty)
+		game:registerDialog(GetQuantity.new("亮度设定", "从 50 到 300", config.settings.gamma_correction, 50, 300, 5, function(qty)
 			qty = util.bound(qty, 50, 300)
 			game:saveSettings("gamma_correction", ("gamma_correction = %d\n"):format(qty))
 			config.settings.gamma_correction = qty
 			game:setGamma(config.settings.gamma_correction / 100)
 			self.c_list:drawItem(item)
-		end), 50)
+		end))
 	end,}
 
 	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"开启/关闭图块使用。\n在某些显卡/显卡驱动的很差且很慢的机器上，开启这个选项可能带来负面效果。"}

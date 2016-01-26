@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2015 Nicolas Casalini
+-- Copyright (C) 2009 - 2016 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -53,6 +53,7 @@ end
 
 function _M:init(actor, on_finish, on_birth)
 	self.on_birth = on_birth
+	actor.is_dialog_talent_leveling = true
 	actor.no_last_learnt_talents_cap = true
 	self.actor = actor
 	self.unused_stats = self.actor.unused_stats
@@ -139,6 +140,7 @@ function _M:on_register()
 end
 
 function _M:unload()
+	self.actor.is_dialog_talent_leveling = nil
 	self.actor.no_last_learnt_talents_cap = nil
 	self.actor:capLastLearntTalents("class")
 	self.actor:capLastLearntTalents("generic")
@@ -204,6 +206,17 @@ function _M:finish()
 		for t_id, _ in pairs(self.talents_learned) do
 			local t = self.actor:getTalentFromId(t_id)
 			if not self.actor:isTalentCoolingDown(t) and not self.actor_dup:knowTalent(t_id) then self.actor:startTalentCooldown(t) end
+		end
+	end
+
+	for t_id, _ in pairs(self.talents_learned) do
+		local t = self.actor:getTalentFromId(t_id)
+		if t.on_levelup_close then
+			local lvl = self.actor:getTalentLevel(t_id)
+			local lvl_raw = self.actor:getTalentLevelRaw(t_id)
+			local old_lvl = self.actor_dup:getTalentLevel(t_id)
+			local old_lvl_raw = self.actor_dup:getTalentLevelRaw(t_id)
+			t.on_levelup_close(self, t, lvl, old_lvl, lvl_raw, old_lvl_raw, true)
 		end
 	end
 	return true

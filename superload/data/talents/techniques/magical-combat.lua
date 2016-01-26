@@ -4,13 +4,40 @@ registerTalentTranslation{
 	id = "T_ARCANE_COMBAT",
 	name = "奥术武器",
 	info = function(self, t)
+		local talent_list = ""
+		local build_string = {}
+		for _, talent in pairs(self.talents_def) do
+			if talent.allow_for_arcane_combat and talent.name then
+				if #build_string > 0 then build_string[#build_string+1] = ", " end
+				build_string[#build_string+1] = talent.name
+			end
+		end
+		if #build_string > 0 then talent_list = table.concat(build_string) end
+		
+		local talent_selected = ""
+		if self:isTalentActive(t.id) then
+			local talent = self:getTalentFromId(self:isTalentActive(t.id).talent)
+			if talent and talent.name then
+				talent_selected = [[
+				
+				当前选择法术: ]] .. talent.name
+			else
+				talent_selected = [[
+				
+				当前选择法术: 随机]]
+			end
+		end
 		return ([[允 许 你 使 用 近 战 武 器 附 魔 法 术。 在 你 每 次 的 近 战 攻 击 中 都 有 %d%% 概 率 附 加 一 次 火 球 术、 闪 电 术 或 岩 石 飞 弹 。 
-		当 双 持 或 持 有 盾 牌 时， 此 效 果 对 每 一 个 武 器 均 可 触 发， 但 触 发 概 率 减 少。 
+		你 可 以 选 择 触 发 某 一 种 法 术 ， 或 者 选 择 随 机 触 发 任 意 一 种 法 术。
+		当 双 持 时，  触 发 概 率 减 半。
+		当 持 有 盾 牌 时 ， 触 发 概 率 减 少 四 分 之 一 。 
 		通 过 这 种 方 式 触 发 的 法 术 不 会 造 成 对 应 技 能 进 入 CD 状 态， 但 是 只 有 在 对 应 技 能 未 冷 却 时 才 可 以 触 发。 
-		受 灵 巧 影 响， 触 发 概 率 有 额 外 加 成。 ]]):
-		format(t.getChance(self, t))
+		受 灵 巧 影 响， 触 发 概 率 有 额 外 加 成。
+		允 许 法 术 ： %s %s]]):
+		format(t.getChance(self, t), talent_list, talent_selected)
 	end,
 }
+
 
 registerTalentTranslation{
 	id = "T_ARCANE_CUNNING",

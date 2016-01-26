@@ -31,8 +31,9 @@ registerTalentTranslation{
 		return ([[你 学 会 如 何 在 敌 人 的 视 线 内 进 入 潜 行 状 态。
 		 成 功 率 取 决 于 %0.2f 倍 潜 行 强 度（ 现 有 %d 点 ）、 所 有 敌 人 的 侦 测 潜 行 强 度、敌 人 数 目 以 及 敌 人 和 你 的 距 离（ 每 有 1 码 距 离 ， 对 方 侦 测 潜 行 强 度 减 少 10 ％ ） ， 同 时 此 技 能 会 刷 新 潜 行 的 冷 却 时 间。 
 		 所 有 正 在 追 赶 你 的 生 物 都 会 丢 失 你 的 踪 迹。
-		 当 你 不 在 敌 人 的 视 野 内 时， 成 功 率 为 100 ％。]]):
-		format(t.stealthMult(self, t), t.getChance(self, t, true))
+		 当 你 不 在 敌 人 的 视 野 内 时， 成 功 率 为 100 ％。
+		 你 估 计 成 功 率 为 %0.1f%%。]]):
+		format(t.stealthMult(self, t), t.getChance(self, t, true), t.getChance(self, t, false, true))
 	end,
 }
 
@@ -43,8 +44,8 @@ registerTalentTranslation{
 		return ([[当 你 在 隐 身 状 态 下 行 动 时（ 如 攻 击， 使 用 物 品 … …），你 有 一 定 概 率 不 会 打 破 潜 行 状 态 。
 		成 功 率 取 决 于 %0.2f 倍 潜 行 强 度（ 现 有  %d 点 ）、 所 有 敌 人 的 侦 测 潜 行 强 度、敌 人 数 目 以 及 敌 人 和 你 的 距 离（ 每 有 1 码 距 离 ， 对 方 侦 测 潜 行 强 度 减 少 10%% ）。
 		当 你 不 在 敌 人 的 视 野 内 时， 基 础 成 功 率 为 100%% 。
-		受 幸 运 值， 成 功 率 有 额 外 加 成 。]]):
-		format(t.stealthMult(self, t), t.getChance(self, t, true))
+		你 估 计 当 前 成 功 率 为 %0.1f%%。]]):
+		format(t.stealthMult(self, t), t.getChance(self, t, true), t.getChance(self, t, false, true))
 	end,
 }
 

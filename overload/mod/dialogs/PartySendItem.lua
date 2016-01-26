@@ -50,7 +50,14 @@ function _M:on_register()
 end
 
 function _M:use(item)
-	if not item or not item.actor:canAddToInven(item.actor.INVEN_INVEN) then return end
+	if not item or not item.actor:canAddToInven(item.actor.INVEN_INVEN) or (item.actor:attr("sleep") and not item.actor:attr("lucid_dreamer")) then
+		game.log("%s 不能在睡眠中接受物品!", item.actor.name:capitalize())
+		return
+	end
+	if self.source:attr("sleep") and not self.source:attr("lucid_dreamer") then
+		game.log("%s 不能在睡眠中传递物品!", self.source.name:capitalize())
+		return 
+	end
 	game:unregisterDialog(self)
 	self.source:removeObject(self.inven, self.item, true)
 	self.source:sortInven(self.inven)
@@ -66,7 +73,9 @@ function _M:generateList()
 
 	for i, act in ipairs(game.party.m_list) do
 		if not act.no_inventory_access and act ~= game.player and act:getInven(act.INVEN_INVEN) then
-			list[#list+1] = {name=act.name..(act:canAddToInven(act.INVEN_INVEN) and "" or " #YELLOW#[NO ROOM]#LAST#"), actor=act}
+			local warn = act:attr("sleep") and not act:attr("lucid_dreamer") and " #YELLOW#[SLEEPING]#LAST#" or ""
+			if not act:canAddToInven(act.INVEN_INVEN) then warn = " #YELLOW#[NO ROOM]#LAST#" end
+			list[#list+1] = {name=act.name..warn, actor=act}
 		end
 	end
 

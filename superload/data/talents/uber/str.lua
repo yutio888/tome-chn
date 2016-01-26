@@ -51,7 +51,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local dam = (50 + self:getStr() * 1.7) / 3
 		return ([[你 获 得 6 回 合 的 星 之 引 力， 将 周 围 5 码 范 围 内 的 所 有 生 物 向 你 拉 扯， 并 对 所 有 敌 人 造 成 %0.2f 火 焰、 %0.2f 光 系 和 %0.2f 物 理 伤 害。 
-		最 靠 近 你 的 敌 人 受 到 额 外 的 200％ 伤 害。 
+		最 靠 近 你 的 敌 人 受 到 额 外 的 150％ 伤 害。 
 		受 力 量 影 响， 伤 害 值 有 额 外 加 成。  ]])
 		:format(damDesc(self, DamageType.FIRE, dam), damDesc(self, DamageType.LIGHT, dam), damDesc(self, DamageType.PHYSICAL, dam))
 	end,

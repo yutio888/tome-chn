@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2015 Nicolas Casalini
+-- Copyright (C) 2009 - 2016 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -38,7 +38,6 @@ local default_eyal_descriptors = function(add)
 		__ALL__ = "disallow",
 		Psionic = "allow",
 		Warrior = "allow",
-		Archer = "allow",
 		Rogue = "allow",
 		Mage = "allow",
 		Celestial = "allow",
@@ -61,12 +60,14 @@ local default_eyal_descriptors = function(add)
 	if add then table.merge(base, add) end
 	return base
 end
+Birther.default_eyal_descriptors = default_eyal_descriptors
 
 -- Player worlds/campaigns
 newBirthDescriptor{
 	type = "world",
 	name = "Maj'Eyal",
 	display_name = " 马 基 埃 亚 尔 : 卓 越 时 代 ",
+	selection_default = config.settings.tome.default_birth and config.settings.tome.default_birth.campaign == "Maj'Eyal",
 	desc =
 	{
 		"    马 基 埃 亚 尔 的 人： 人 类、 半 身 人 、 精 灵 和 矮 人 再 次 繁 荣 起 来， 世 界 已 经 保 持 了 超 过 一 百 年 的 和 平。 ",
@@ -94,6 +95,7 @@ newBirthDescriptor{
 	display_name = " 无 尽 地 下 城 ",
 	locked = function() return profile.mod.allow_build.campaign_infinite_dungeon end,
 	locked_desc = "    无 尽 深 度， 没 有 终 点， 没 有 重 复， 不 断 深 入， 在 古 老 的 废 墟 里， 穿 过 关 闭 的 大 门， 解 开 谜 题， 寻 找 你 的 宿 命。 ",
+	selection_default = config.settings.tome.default_birth and config.settings.tome.default_birth.campaign == "Infinite",
 	desc =
 	{
 		"    选 择 你 最 喜 欢 的 种 族 和 职 业， 进 入 无 尽 地 城 冒 险。 ",
@@ -164,6 +166,7 @@ newBirthDescriptor{
 	display_name = " 竞 技 场： 竞 技 之 王 的 挑 战 ",
 	locked = function() return profile.mod.allow_build.campaign_arena end,
 	locked_desc = "    血 溅 沙 场， 勇 者 生 存， 需 证 明 你 有 进 入 的 资 格。 ",
+	selection_default = config.settings.tome.default_birth and config.settings.tome.default_birth.campaign == "Arena",
 	desc =
 	{
 		"    孤 身 一 人 直 面 竞 技 场 的 挑 战！ ",

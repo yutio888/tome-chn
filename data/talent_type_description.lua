@@ -52,6 +52,7 @@ t_talent_type_description["Spacetime anomalies that can randomly occur when para
 	t_talent_type_description["Bring corruption and decay to all who oppose you."] = " 使 任 何 敌 对 你 的 目 标 腐 败 和 衰 弱。 "
 	t_talent_type_description["Harness the power of the demonic shadowflame."] = " 学 习 驾 驭 恶 魔 暗 影 之 火 的 力 量。 "
 	t_talent_type_description["Manipulate life for your vile needs."] = "为 了 你 的 邪 恶 目 的 而 操 纵 生 命。"
+	t_talent_type_description["Become one with rot and decay."] = "成 为 腐 烂 和 衰 败 的 传 播 者。"
 	--cunning
 	t_talent_type_description["Allows the user to enter stealth."] = " 使 你 的 角 色 进 入 潜 行。 "
 	t_talent_type_description["The knowledge of trap laying and assorted trickeries."] = " 学 习 装 配 陷 阱 的 技 术。 "
@@ -83,8 +84,8 @@ t_talent_type_description["Spacetime anomalies that can randomly occur when para
 	t_talent_type_description["The effects of cursed objects."] = " 提 升 各 种 诅 咒 效 果。 "
 	t_talent_type_description["Life as an outcast has given you time to reflect on your misfortunes."] = " 你 被 长 期 放 逐， 但 你 也 一 直 在 与 你 的 厄 运 抗 争。 "
 	t_talent_type_description["Use the fear that lies at the heart of your curse to attack the minds of your enemies."] = " 使 用 内 心 恐 惧 直 接 打 击 敌 人 的 心 智。 "
-	t_talent_type_description["Harness your shadows to their full potential."] = "强 化 你 的 阴 影 。"
-
+	t_talent_type_description["Harness your shadows to their full potential."] = "最 大 程 度 利 用 你 的 阴 影 。"
+	t_talent_type_description["Gain more direct control over your shadows with physical damage talents."] = "获 得 对 阴 影 更 直 接 的 控 制 力 ， 造 成 物 理 伤 害 。"
 	--gifts
 	t_talent_type_description["Be at one with nature."] = " 与 大 自 然 的 融 为 一 体。 "
 	t_talent_type_description["Nature heals and cleans you."] = " 利 用 大 自 然 的 力 量 治 疗 你 受 到 的 创 伤、 清 洁 你 的 身 体。 "

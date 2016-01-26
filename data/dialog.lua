@@ -1,5 +1,5 @@
 ﻿-- TE4 - T-Engine 4
--- Copyright (C) 2009 - 2015 Nicolas Casalini
+-- Copyright (C) 2009 - 2016 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -21,7 +21,9 @@ require "engine.class"
 local KeyBind = require "engine.KeyBind"
 local Base = require "engine.ui.Base"
 local Particles = require "engine.Particles"
---- A generic UI button
+
+--- A generic UI Dialog
+-- @classmod engine.ui.Dialog
 module(..., package.seeall, class.inherit(Base))
 
 function _M:simpleWaiter(title, text, width, count, max)
@@ -29,11 +31,17 @@ function _M:simpleWaiter(title, text, width, count, max)
 		title,text = simpleWaiterDlg[title](text)
 	end
 	width = width or 400
-	local w, h = self.font:size(text)
+
+	local _, th = self.font:size(title)
 	local d = new(title, 1, 1)
+	local max_h = 9999
+	local textzone = require("engine.ui.Textzone").new{width=width+10, auto_height=true, scrollbar=true, text=text}
+	if textzone.h > max_h then textzone.h = max_h
+	else textzone.scrollbar = nil
+	end
 	local wait = require("engine.ui.Waiter").new{size=width, known_max=max}
 	d:loadUI{
-		{left = 3, top = 3, ui=require("engine.ui.Textzone").new{width=w+10, height=h+5, text=text}},
+		{left = 3, top = 3, ui=textzone},
 		{left = 3, bottom = 3, ui=wait},
 	}
 	d:setupUI(true, true)
@@ -50,6 +58,37 @@ function _M:simpleWaiter(title, text, width, count, max)
 	return d
 end
 
+--- Requests a simple waiter dialog
+function _M:simpleWaiterTip(title, text, tip, width, count, max)
+	if not tip then return self:simpleWaiter(title, text, width, count, max) end
+
+	width = width or 400
+
+	local _, th = self.font:size(title)
+	local d = new(title, 1, 1)
+	local wait = require("engine.ui.Waiter").new{size=width, known_max=max}
+	local textzone = require("engine.ui.Textzone").new{width=wait.w, auto_height=true, scrollbar=false, text=text}
+	local tipzone = require("engine.ui.Textzone").new{width=wait.w, auto_height=true, scrollbar=false, text=tip}
+	local split = require("engine.ui.Separator").new{dir="vertical", size=wait.w - 12}
+	d:loadUI{
+		{left = 3, top = 3, ui=textzone},
+		{left = 3+6, top = 3+textzone.h, ui=split},
+		{left = 3, top = 3+textzone.h+split.h, ui=tipzone},
+		{left = 3, bottom = 3, ui=wait},
+	}
+	d:setupUI(true, true)
+
+	d.done = function(self) game:unregisterDialog(self) end
+	d.timeout = function(self, secs, cb) wait:setTimeout(secs, function() cb() local done = self.done self.done = function()end done(self) end) end
+	d.manual = function(self, ...) wait:manual(...) end
+	d.manualStep = function(self, ...) wait:manualStep(...) end
+
+	game:registerDialog(d)
+
+	core.wait.enable(count, wait:getWaitDisplay(d))
+
+	return d
+end
 
 --- Requests a simple, press any key, dialog
 function _M:listPopup(title, text, list, w, h, fct)
@@ -105,8 +144,12 @@ function _M:simpleLongPopup(title, text, w, fct, no_leave, force_height)
 	local list = text:splitLines(w - 10, self.font)
 	local _, th = self.font:size(title)
 	local d = new(title, 1, 1)
-	local h = math.min(force_height and (force_height * game.h) or 999999999, self.font_h * #list + th )
-	d:loadUI{{left = 3, top = 3, ui=require("engine.ui.Textzone").new{width=w+10, height=h + 10, scrollbar=(h < self.font_h * #list) and true or false, text=text}}}
+	local max_h = force_height and force_height * game.h or 9999
+	local textzone = require("engine.ui.Textzone").new{width=w+10, auto_height=true, scrollbar=true, text=text}
+	if textzone.h > max_h then textzone.h = max_h
+	else textzone.scrollbar = nil
+	end
+	d:loadUI{{left = 3, top = 3, ui=textzone}}
 	if not no_leave then
 		d.key:addBind("EXIT", function() game:unregisterDialog(d) if fct then fct() end end)
 		local close = require("engine.ui.Button").new{text="关闭", fct=function() d.key:triggerVirtual("EXIT") end}
@@ -172,12 +215,16 @@ function _M:yesnoLongPopup(title, text, w, fct, yes_text, no_text, no_leave, esc
 	end
 	yes_text = my_yes_text or yes_text
 	no_text = my_no_text or no_text
-	local list = text:splitLines(w - 10, font)
-	local d = new(title, 1, 1)
+	local d
+	local ok = require("engine.ui.Button").new{text=yes_text or "Yes", fct=function() game:unregisterDialog(d) fct(true) end}
+	local cancel = require("engine.ui.Button").new{text=no_text or "No", fct=function() game:unregisterDialog(d) fct(false) end}
+
+	w = math.max(w + 20, ok.w + cancel.w + 10)
+
+	d = new(title, w + 6, 1)
+
 
 --	d.key:addBind("EXIT", function() game:unregisterDialog(d) fct(false) end)
-	local ok = require("engine.ui.Button").new{text=yes_text or "是", fct=function() game:unregisterDialog(d) fct(true) end}
-	local cancel = require("engine.ui.Button").new{text=no_text or "否", fct=function() game:unregisterDialog(d) fct(false) end}
 	if not no_leave then d.key:addBind("EXIT", function() game:unregisterDialog(d) game:unregisterDialog(d) fct(escape) end) end
 	d:loadUI{
 		{left = 3, top = 3, ui=require("engine.ui.Textzone").new{width=w+20, height=self.font_h * #list, text=text}},
@@ -185,7 +232,7 @@ function _M:yesnoLongPopup(title, text, w, fct, yes_text, no_text, no_leave, esc
 		{right = 3, bottom = 3, ui=cancel},
 	}
 	d:setFocus(ok)
-	d:setupUI(true, true)
+	d:setupUI(false, true)
 
 	game:registerDialog(d)
 	return d
@@ -229,7 +276,7 @@ function _M:yesnocancelLongPopup(title, text, w, fct, yes_text, no_text, cancel_
 	local cancel = require("engine.ui.Button").new{text=cancel_text or "Cancel", fct=function() game:unregisterDialog(d) fct(false, true) end}
 	if not no_leave then d.key:addBind("EXIT", function() game:unregisterDialog(d) game:unregisterDialog(d) fct(false, not escape) end) end
 	d:loadUI{
-		{left = 3, top = 3, ui=require("engine.ui.Textzone").new{width=w+20, height=self.font_h * #list, text=text}},
+		{left = 3, top = 3, ui=require("engine.ui.Textzone").new{width=w+20, auto_height=true, text=text}},
 		{left = 3, bottom = 3, ui=ok},
 		{left = 3 + ok.w, bottom = 3, ui=no},
 		{right = 3, bottom = 3, ui=cancel},
@@ -293,12 +340,23 @@ function _M:init(title, w, h, x, y, alpha, font, showup, skin)
 		shadow = conf.frame_shadow,
 		a = conf.frame_alpha or 1,
 		darkness = conf.frame_darkness or 1,
+		dialog_h_middles = conf.dialog_h_middles,
+		dialog_v_middles = conf.dialog_v_middles,
 		particles = table.clone(conf.particles, true),
 	}
 	self.frame.ox1 = self.frame.ox1 or conf.frame_ox1
 	self.frame.ox2 = self.frame.ox2 or conf.frame_ox2
 	self.frame.oy1 = self.frame.oy1 or conf.frame_oy1
 	self.frame.oy2 = self.frame.oy2 or conf.frame_oy2
+
+	if self.frame.dialog_h_middles then
+		self.frame.b8 = "ui/dialogframe_8_middle.png"
+		self.frame.b8l = "ui/dialogframe_8_left.png"
+		self.frame.b8r = "ui/dialogframe_8_right.png"
+		self.frame.b2 = "ui/dialogframe_2_middle.png"
+		self.frame.b2l = "ui/dialogframe_2_left.png"
+		self.frame.b2r = "ui/dialogframe_2_right.png"
+	end
 
 	self.particles = {}
 
@@ -363,6 +421,13 @@ function _M:generate()
 	self.b2 = self:getUITexture(self.frame.b2)
 	self.b6 = self:getUITexture(self.frame.b6)
 	self.b5 = self:getUITexture(self.frame.b5)
+
+	if self.frame.dialog_h_middles then
+		self.b8l = self:getUITexture(self.frame.b8l)
+		self.b8r = self:getUITexture(self.frame.b8r)
+		self.b2l = self:getUITexture(self.frame.b2l)
+		self.b2r = self:getUITexture(self.frame.b2r)
+	end
 
 	self.overs = {}
 	for i, o in ipairs(self.frame.overlays or {}) do
@@ -443,20 +508,19 @@ function _M:setupUI(resizex, resizey, on_resize, addmw, addmh)
 				if ui.left and type(ui.left) == "table" then ui.left = self.ui_by_ui[ui.left].left + self.ui_by_ui[ui.left].ui.w + padding end
 				if ui.right and type(ui.right) == "table" then ui.right = self.ui_by_ui[ui.right].right + self.ui_by_ui[ui.right].ui.w + padding end
 				
-				if ui.top then mh = math.max(mh, ui.top + ui.ui.h + (ui.padding_h or 0))
-				elseif ui.bottom then addh = math.max(addh, ui.bottom + ui.ui.h + (ui.padding_h or 0))
-				end
+				if not ui.ignore_size then
+					if ui.top then mh = math.max(mh, ui.top + ui.ui.h + (ui.padding_h or 0))
+					elseif ui.bottom then addh = math.max(addh, ui.bottom + ui.ui.h + (ui.padding_h or 0))
+					end
 
---		print("ui", ui.left, ui.right, ui.ui.w)
-				if ui.left then mw = math.max(mw, ui.left + ui.ui.w + (ui.padding_w or 0))
-				elseif ui.right then addw = math.max(addw, ui.right + ui.ui.w + (ui.padding_w or 0))
+					if ui.left then mw = math.max(mw, ui.left + ui.ui.w + (ui.padding_w or 0))
+					elseif ui.right then addw = math.max(addw, ui.right + ui.ui.w + (ui.padding_w or 0))
+					end
 				end
 			end
 		end
---		print("===", mw, addw)
 		mw = mw + addw + 5 * 2 + (addmw or 0) + padding
 
---		print("===", mw, addw)
 		local tw, th = 0, 0
 		if self.title then tw, th = self.font_bold:size(self.title) end
 		mw = math.max(tw + 6, mw)
@@ -676,8 +740,21 @@ function _M:drawFrame(x, y, r, g, b, a)
 	y = y + self.frame.oy1
 
 	-- Sides
-	self.b8.t:toScreenFull(x + self.b7.w, y, self.frame.w - self.b7.w - self.b9.w, self.b8.h, self.b8.tw, self.b8.th, r, g, b, a)
-	self.b2.t:toScreenFull(x + self.b7.w, y + self.frame.h - self.b3.h, self.frame.w - self.b7.w - self.b9.w, self.b2.h, self.b2.tw, self.b2.th, r, g, b, a)
+	if self.frame.dialog_h_middles then
+		local mw = math.floor(self.frame.w / 2)
+		local b8hw = math.floor(self.b8.w / 2)
+		self.b8l.t:toScreenFull(x + self.b7.w, y, mw - self.b7.w - b8hw, self.b8l.h, self.b8l.tw, self.b8l.th, r, g, b, a)
+		self.b8r.t:toScreenFull(x + mw + b8hw, y, mw - self.b9.w - b8hw, self.b8r.h, self.b8r.tw, self.b8r.th, r, g, b, a)
+		self.b8.t:toScreenFull(x + mw - b8hw, y, self.b8.w, self.b8.h, self.b8.tw, self.b8.th, r, g, b, a)
+
+		local b2hw = math.floor(self.b2.w / 2)
+		self.b2l.t:toScreenFull(x + self.b1.w, y + self.frame.h - self.b3.h, mw - self.b1.w - b2hw, self.b2l.h, self.b2l.tw, self.b2l.th, r, g, b, a)
+		self.b2r.t:toScreenFull(x + mw + b2hw, y + self.frame.h - self.b3.h, mw - self.b3.w - b2hw, self.b2r.h, self.b2r.tw, self.b2r.th, r, g, b, a)
+		self.b2.t:toScreenFull(x + mw - b2hw, y + self.frame.h - self.b3.h, self.b2.w, self.b2.h, self.b2.tw, self.b2.th, r, g, b, a)
+	else
+		self.b8.t:toScreenFull(x + self.b7.w, y, self.frame.w - self.b7.w - self.b9.w, self.b8.h, self.b8.tw, self.b8.th, r, g, b, a)
+		self.b2.t:toScreenFull(x + self.b7.w, y + self.frame.h - self.b3.h, self.frame.w - self.b7.w - self.b9.w, self.b2.h, self.b2.tw, self.b2.th, r, g, b, a)
+	end
 	self.b4.t:toScreenFull(x, y + self.b7.h, self.b4.w, self.frame.h - self.b7.h - self.b1.h, self.b4.tw, self.b4.th, r, g, b, a)
 	self.b6.t:toScreenFull(x + self.frame.w - self.b9.w, y + self.b7.h, self.b6.w, self.frame.h - self.b7.h - self.b1.h, self.b6.tw, self.b6.th, r, g, b, a)
 

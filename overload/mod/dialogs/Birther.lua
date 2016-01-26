@@ -1,5 +1,5 @@
 ﻿-- TE4 - T-Engine 4
--- Copyright (C) 2009 - 2015 Nicolas Casalini
+-- Copyright (C) 2009 - 2016 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -38,6 +38,7 @@ local Tiles = require "engine.Tiles"
 local Particles = require "engine.Particles"
 local CharacterVaultSave = require "engine.CharacterVaultSave"
 local Object = require "mod.class.Object"
+local OptionTree = require "mod.dialogs.OptionTree"
 
 module(..., package.seeall, class.inherit(Birther))
 
@@ -68,6 +69,8 @@ function _M:init(title, actor, order, at_end, quickbirth, w, h)
 	self.c_tut = Button.new{text="教程", fct=function() self:tutorial() end}
 	self.c_options = Button.new{text="Customize", fct=function() self:customizeOptions() end}
 	self.c_options.hide = true
+	self.c_extra_options = Button.new{text="额外选项", fct=function() self:extraOptions() end}
+	self.c_extra_options.hide = #game.extra_birth_option_defs == 0
 
 	self.c_name = Textbox.new{title="角色名: ", text=(not config.settings.cheat and game.player_name == "player") and "" or game.player_name, chars=30, max_len=50, fct=function()
 		if config.settings.cheat then self:makeDefault() end
@@ -154,6 +157,8 @@ function _M:init(title, actor, order, at_end, quickbirth, w, h)
 		{left=self.c_premade, bottom=0, ui=self.c_tile},
 		{left=self.c_tile, bottom=0, ui=self.c_options},
 		{right=0, bottom=0, ui=self.c_cancel},
+
+		{left=0, bottom=self.c_ok, ui=self.c_extra_options},
 	}
 	self:setupUI()
 
@@ -301,7 +306,7 @@ function _M:atEnd(v)
 			save:delete()
 			save:close()
 
-			game:saveSettings("tome.default_birth", ("tome.default_birth = {permadeath=%q, sex=%q}\n"):format(self.actor.descriptor.permadeath, self.actor.descriptor.sex))
+			game:saveSettings("tome.default_birth", ("tome.default_birth = {permadeath=%q, difficulty=%q, sex=%q, campaign=%q}\n"):format(self.actor.descriptor.permadeath, self.actor.descriptor.difficulty, self.actor.descriptor.sex, self.actor.descriptor.world))
 
 			self.at_end(false)
 		end)
@@ -580,6 +585,10 @@ function _M:updateDescriptors()
 	self.c_options.hide = #self.cosmetic_unlocks == 0
 end
 
+function _M:isDescriptorSet(key, val)
+	return self.descriptors_by_type[key] == val
+end
+
 function _M:setDescriptor(key, val)
 	if key then
 		self.descriptors_by_type[key] = val
@@ -650,17 +659,18 @@ function _M:generateCampaigns()
 		if self:isDescriptorAllowed(d, {difficulty=true, permadeath=true, race=true, subrace=true, class=true, subclass=true}) then
 			local locked = self:getLock(d)
 			if locked == true then
-				list[#list+1] = { name = tstring{{"font", "italic"}, {"color", "GREY"}, "-- 需解锁 --", {"font", "normal"}}:toString(), id=d.name, locked=true, desc=d.locked_desc..locktext }
+				list[#list+1] = { name = tstring{{"font", "italic"}, {"color", "GREY"}, "-- 需解锁 --", {"font", "normal"}}:toString(), id=d.name, locked=true, desc=util.getval(d.locked_desc, self)..locktext }
 			elseif locked == false then
 				local desc = d.desc
 				if type(desc) == "table" then desc = table.concat(d.desc, "\n") end
 				list[#list+1] = { name = tstring{d.display_name}:toString(), id=d.name, desc=desc }
+				if util.getval(d.selection_default) then self.default_campaign = d.name end
 			end
 		end
 	end
 
 	self.all_campaigns = list
-	self.default_campaign = list[1].id
+	if not self.default_campaign then self.default_campaign = list[1].id end
 end
 
 function _M:generateDifficulties()
@@ -1492,4 +1502,10 @@ function _M:customizeOptions()
 	d:setupUI(true, true)
 	d.key:addBind("EXIT", function() game:unregisterDialog(d) end)
 	game:registerDialog(d)
+end
+
+function _M:extraOptions()
+  local options = OptionTree.new(game.extra_birth_option_defs, 'Birth Options', 600, 550)
+  options:initialize()
+  game:registerDialog(options)
 end

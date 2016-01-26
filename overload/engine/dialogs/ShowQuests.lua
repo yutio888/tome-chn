@@ -1,5 +1,5 @@
 -- TE4 - T-Engine 4
--- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
+-- Copyright (C) 2009 - 2016 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -23,9 +23,11 @@ local ListColumns = require "engine.ui.ListColumns"
 local TextzoneList = require "engine.ui.TextzoneList"
 local Separator = require "engine.ui.Separator"
 
+--- Show Quests
+-- @classmod engine.dialogs.ShowQuests
 module(..., package.seeall, class.inherit(Dialog))
 
-function _M:init(actor)
+function _M:init(actor, select_id)
 	self.actor = actor
 	Dialog.init(self, actor.name.."的任务列表", game.w * 0.8, game.h * 0.8)
 
@@ -51,12 +53,25 @@ function _M:init(actor)
 		EXIT = function() game:unregisterDialog(self) end,
 	}
 
-	self:select(self.list[1])
+	local none_selected = true
+
+	if select_id then
+		for i, q in ipairs(self.list) do
+			if q.quest.id == select_id then
+				none_selected = false
+				self:select(q, true)
+				break
+			end
+		end
+	end
+
+	if none_selected then self:select(self.list[1], true) end
 end
 
-function _M:select(item)
+function _M:select(item, force)
 	if item then
 		self.c_desc:switchItem(item, item.desc)
+		if self.c_list and force then self.c_list.sel = item.list_id end
 	end
 end
 
@@ -71,7 +86,7 @@ function _M:generateList()
 			elseif q:isStatus(q.FAILED) then color = colors.simple(colors.RED)
 			end
 
-			--list[#list+1] = {  name=q.name, quest=q, color = color, status=q.status_text[q.status], status_order=q.status, desc=q:desc(self.actor) }
+			--list[#list+1] = { name=q.name, quest=q, color = color, status=q.status_text[q.status], status_order=q.status, desc=q:desc(self.actor), list_id=#list+1 }
 
 			--local quest_CHN = getQuestCHN(q.name,q:desc(self.actor))
 			local qname = q.name
@@ -83,7 +98,7 @@ function _M:generateList()
 				qname = questCHN["Escort"].name(q.name)
 				qdesc = questCHN["Escort"].description(q:desc(self.actor))
 			end
-			list[#list+1] = {  name=qname, quest=q, color = color, status=getQuestStat(q.status_text[q.status]), status_order=q.status, desc=qdesc }
+			list[#list+1] = {  name=qname, quest=q, color = color, status=getQuestStat(q.status_text[q.status]), status_order=q.status, desc=qdesc, list_id=#list+1  }
 		end
 	end
 	if game.turn then

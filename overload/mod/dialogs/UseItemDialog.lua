@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2015 Nicolas Casalini
+-- Copyright (C) 2009 - 2016 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -84,6 +84,9 @@ function _M:use(item)
 		end
 	elseif act == "wear" then
 		self.actor:doWear(self.inven, self.item, self.object, self.dst_actor)
+		if self.object.wielded and not self.actor.player and game.party:hasMember(self.actor) then -- make sure usable equipment worn by party members begins cooling down
+			mod.class.Player.cooldownWornObject(self.actor, self.object)
+		end
 		self.onuse(self.inven, self.item, self.object, false)
 	elseif act == "takeoff" then
 		self.actor:doTakeoff(self.inven, self.item, self.object, nil, self.dst_actor)

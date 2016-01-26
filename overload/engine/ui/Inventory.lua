@@ -1,5 +1,5 @@
 -- TE4 - T-Engine 4
--- Copyright (C) 2009 - 2015 Nicolas Casalini
+-- Copyright (C) 2009 - 2016 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -26,6 +26,7 @@ local KeyBind = require "engine.KeyBind"
 local UIGroup = require "engine.ui.UIGroup"
 
 --- A generic inventory, with possible tabs
+-- @classmod engine.ui.Inventory
 module(..., package.seeall, class.inherit(Base, Focusable, UIGroup))
 
 function _M:init(t)

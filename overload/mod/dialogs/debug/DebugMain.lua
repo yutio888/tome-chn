@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2015 Nicolas Casalini
+-- Copyright (C) 2009 - 2016 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -144,6 +144,23 @@ function _M:use(item)
 				game.player:sortInven()
 			end
 		end
+	elseif act == "test-dummy" then
+		local m = mod.class.NPC.new{define_as="TRAINING_DUMMY",
+			type = "training", subtype = "dummy",
+			name = "Test Dummy", color=colors.GREY,
+			desc = "Test dummy.", image = "npc/lure.png",
+			level_range = {1, 1}, exp_worth = 0,
+			rank = 3,
+			max_life = 300000, life_rating = 0,
+			life_regen = 300000,
+			never_move = 1,
+			training_dummy = 1,
+		}
+		local x, y = util.findFreeGrid(game.player.x, game.player.y, 20, true, {[engine.Map.ACTOR]=true})
+		if not x then return end
+		m:resolve()
+		m:resolve(nil, true)
+		game.zone:addEntity(game.level, m, "actor", x, y)
 	else
 		self:triggerHook{"DebugMain:use", act=act}
 	end
@@ -167,6 +184,7 @@ function _M:generateList()
 	list[#list+1] = {name="半无敌模式", action="semigodmode"}
 	list[#list+1] = {name="获得所有材料", action="all-ingredients"}
 	list[#list+1] = {name="减少造成的伤害", action="weakdamage"}
+	list[#list+1] = {name="测试傀儡", action="test-dummy"}
 	self:triggerHook{"DebugMain:generate", menu=list}
 
 	local chars = {}

@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2015 Nicolas Casalini
+-- Copyright (C) 2009 - 2016 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -203,6 +203,8 @@ function _M:onEnterLevel(zone, level)
 		level:removeEntity(ent, true)
 		ent.dead = true
 	end
+
+	self:fireTalentCheck("callbackOnChangeLevel", "enter", zone, level)
 end
 
 function _M:onEnterLevelEnd(zone, level)
@@ -221,6 +223,8 @@ function _M:onLeaveLevel(zone, level)
 		q.abandoned = true
 		self:setQuestStatus(eid, q.FAILED)
 	end
+
+	self:fireTalentCheck("callbackOnChangeLevel", "leave", zone, level)
 end
 
 -- Wilderness encounter
@@ -236,8 +240,8 @@ end
 function _M:describeFloor(x, y, force)
 	if self.old_x == x and self.old_y == y and not force then return end
 
-	-- Autopickup money
-	if self:getInven(self.INVEN_INVEN) and not self.no_inventory_access then
+	-- Autopickup things on the floor
+	if self:getInven(self.INVEN_INVEN) and not self.no_inventory_access and not (self:attr("sleep") and not self:attr("lucid_dreamer")) then
 		local i, nb = game.level.map:getObjectTotal(x, y), 0
 		local obj = game.level.map:getObject(x, y, i)
 		while obj do
@@ -294,6 +298,11 @@ function _M:move(x, y, force)
 	end
 
 	local moved = mod.class.Actor.move(self, x, y, force)
+
+	if not moved and self.encumbered then
+		game.logPlayer(self, "#FF0000#你携带的物品过重--你走不动了!")
+		game.logPlayer(self, "#FF0000#扔掉一些东西吧。")
+	end
 
 	if not force and ox == self.x and oy == self.y and self.doPlayerSlide then
 		self.doPlayerSlide = nil
@@ -374,9 +383,15 @@ function _M:act()
 	end
 
 	-- Resting ? Running ? Otherwise pause
-	if not self:restStep() and not self:runStep() and self.player and self:enoughEnergy() then
-		game.paused = true
-		if game.uiset.logdisplay:getNewestLine() ~= "" then game.log("") end
+	if self.player and self:enoughEnergy() then
+		if self:restStep() then
+			while self:enoughEnergy() do self:restStep() end
+		elseif self:runStep() then
+			while self:enoughEnergy() do self:runStep() end
+		else
+			game.paused = true
+			if game.uiset.logdisplay:getNewestLine() ~= "" then game.log("") end
+		end
 	elseif not self.player then
 		self:useEnergy()
 	end
@@ -506,7 +521,8 @@ function _M:playerFOV()
 			if self:attr("detect_actor") and game.level.map(x, y, game.level.map.ACTOR) then ok = true end
 			if self:attr("detect_object") and game.level.map(x, y, game.level.map.OBJECT) then ok = true end
 			if self:attr("detect_trap") and game.level.map(x, y, game.level.map.TRAP) then
-				game.level.map(x, y, game.level.map.TRAP):setKnown(self, true)
+				game.level.map(x, y, game.level.map.TRAP):setKnown(self, true, x, y)
+				game.level.map.remembers(x, y, true)
 				game.level.map:updateMap(x, y)
 				ok = true
 			end
@@ -587,16 +603,11 @@ function _M:playerFOV()
 			end, true, true, true)
 		end
 
-		-- Overseer of Nations bonus
-		local bonus = 0
-		if self:knowTalent(self.T_OVERSEER_OF_NATIONS) then
-			bonus = math.ceil(self:getTalentLevelRaw(self.T_OVERSEER_OF_NATIONS)/2)
-		end
-
 		-- Handle infravision/heightened_senses which allow to see outside of lite radius but with LOS
+		-- Note: Overseer of Nations bonus already factored into attributes
 		if self:attr("infravision") or self:attr("heightened_senses") then
 			local radius = math.max((self.heightened_senses or 0), (self.infravision or 0))
-			radius = math.min(radius + bonus, self.sight)
+			radius = math.min(radius, self.sight)
 			local rad2 = math.max(1, math.floor(radius / 4))
 			self:computeFOV(radius, "block_sight", function(x, y, dx, dy, sqdist) if game.level.map(x, y, game.level.map.ACTOR) then game.level.map.seens(x, y, fovdist[sqdist]) end end, true, true, true)
 			self:computeFOV(rad2, "block_sight", function(x, y, dx, dy, sqdist) game.level.map:applyLite(x, y, fovdist[sqdist]) end, true, true, true)
@@ -610,7 +621,7 @@ function _M:playerFOV()
 		local lradius = self.lite
 		if self.radiance_aura and lradius < self.radiance_aura then lradius = self.radiance_aura end
 		if self.lite <= 0 then game.level.map:applyLite(self.x, self.y)
-		else self:computeFOV(lradius + bonus, "block_sight", function(x, y, dx, dy, sqdist) game.level.map:applyLite(x, y) end, true, true, true) end
+		else self:computeFOV(lradius, "block_sight", function(x, y, dx, dy, sqdist) game.level.map:applyLite(x, y) end, true, true, true) end
 
 		-- For each entity, generate lite
 		local uid, e = next(game.level.entities)
@@ -682,7 +693,7 @@ function _M:onTakeHit(value, src, death_note)
 	self:restStop("taken damage")
 	local ret = mod.class.Actor.onTakeHit(self, value, src, death_note)
 	if self.life < self.max_life * 0.3 then
-		local sx, sy = game.level.map:getTileToScreen(self.x, self.y)
+		local sx, sy = game.level.map:getTileToScreen(self.x, self.y, true)
 		game.flyers:add(sx, sy, 30, (rng.range(0,2)-1) * 0.5, 2, "LOW HEALTH!", {255,0,0}, true)
 	end
 
@@ -753,7 +764,7 @@ function _M:onTalentCooledDown(tid)
 	if not self:knowTalent(tid) then return end
 	local t = self:getTalentFromId(tid)
 
-	local x, y = game.level.map:getTileToScreen(self.x, self.y)
+	local x, y = game.level.map:getTileToScreen(self.x, self.y, true)
 	game.flyers:add(x, y, 30, -0.3, -3.5, ("%s available"):format(t.name:capitalize()), {0,255,00})
 	game.log("#00ff00#%sTalent %s is ready to use.", (t.display_entity and t.display_entity:getDisplayString() or ""), t.name)
 end
@@ -855,10 +866,10 @@ function _M:automaticTalents()
 	for tid, c in pairs(self.talents_auto) do
 		local t = self.talents_def[tid]
 		local spotted = spotHostiles(self, true)
-		local cd = self:getTalentCooldown(t) or 0
-		local turns_used = util.getval(t.no_energy, self, t)  == true and 0 or 1
+		local cd = self:getTalentCooldown(t) or (t.is_object_use and t.cycle_time(self, t)) or 0
+		local turns_used = util.getval(t.no_energy, self, t) == true and 0 or 1
 		if cd <= turns_used and t.mode ~= "sustained" then
-			game.logPlayer(self, "Automatic use of talent %s #DARK_RED#skipped#LAST#: cooldown too low (%d).", t.name, cd)
+			game.logPlayer(self, "Automatic use of talent %s #DARK_RED#skipped#LAST#: cooldown too low (%d).", self:getTalentDisplayName(t), cd)
 		elseif (t.mode ~= "sustained" or not self.sustain_talents[tid]) and not self.talents_cd[tid] and self:preUseTalent(t, true, true) and (not t.auto_use_check or t.auto_use_check(self, t)) then
 			if (c == 1) or (c == 2 and #spotted <= 0) or (c == 3 and #spotted > 0) then
 				if c ~= 2 then
@@ -970,17 +981,24 @@ function _M:restCheck()
 	if not self.resting.rest_turns then
 		if self.air_regen < 0 then return false, "窒息！" end
 		if self.life_regen <= 0 then return false, "生命值下降！" end
-		if self:getMana() < self:getMaxMana() and self.mana_regen > 0 then return true end
-		if self:getStamina() < self:getMaxStamina() and self.stamina_regen > 0 then return true end
-		if self:getPsi() < self:getMaxPsi() and self.psi_regen > 0 then return true end
-		if self:getVim() < self:getMaxVim() and self.vim_regen > 0 then return true end
-		if self:getEquilibrium() > self:getMinEquilibrium() and self.equilibrium_regen < 0 then return true end
+
 		if self.life < self.max_life and self.life_regen> 0 then return true end
 		if self.air < self.max_air and self.air_regen > 0 and not self.is_suffocating then return true end
 		for act, def in pairs(game.party.members) do if game.level:hasEntity(act) and not act.dead then
 			if act.life < act.max_life and act.life_regen > 0 and not act:attr("no_life_regen") then return true end
 		end end
 		if ammo and ammo.combat.shots_left < ammo.combat.capacity then return true end
+
+		-- Check for resources
+		for res, res_def in ipairs(_M.resources_def) do
+			if res_def.wait_on_rest and res_def.regen_prop and self:attr(res_def.regen_prop) then
+				if not res_def.invert_values then
+					if self[res_def.regen_prop] > 0.0001 and self:check(res_def.getFunction) < self:check(res_def.getMaxFunction) then return true end
+				else
+					if self[res_def.regen_prop] < 0.0001 and self:check(res_def.getFunction) > self:check(res_def.getMinFunction) then return true end
+				end
+			end
+		end
 
 		-- Check for detrimental effects
 		for id, _ in pairs(self.tmp) do
@@ -1025,6 +1043,20 @@ function _M:restCheck()
 
 	self.resting.wait_cooldowns = nil
 
+
+	-- Enter recall waiting rest if we are at max already
+	if self.resting.cnt == 0 and self:hasEffect(self.EFF_RECALL) then
+		self.resting.wait_recall = true
+	end
+
+	if self.resting.wait_recall then
+		if self:hasEffect(self.EFF_RECALL) then
+			return true
+		end
+	end
+
+	self.resting.wait_recall = nil
+
 	-- Enter full recharge rest if we waited for cooldowns already
 	if self.resting.cnt == 0 then
 		self.resting.wait_powers = true
@@ -1042,18 +1074,6 @@ function _M:restCheck()
 
 	self.resting.wait_powers = nil
 
-	-- Enter recall waiting rest if we are at max already
-	if self.resting.cnt == 0 and self:hasEffect(self.EFF_RECALL) then
-		self.resting.wait_recall = true
-	end
-
-	if self.resting.wait_recall then
-		if self:hasEffect(self.EFF_RECALL) then
-			return true
-		end
-	end
-
-	self.resting.wait_recall = nil
 	self.resting.rested_fully = true
 
 	return false, "所有能量及生命值均已恢复满"
@@ -1190,6 +1210,21 @@ function _M:runStopped()
 	if obj then game.level.map.attrs(x, y, "obj_seen", true) end
 end
 
+--- Uses an hotkeyed talent
+-- This requires the ActorTalents interface to use talents and a method player:playerUseItem(o, item, inven) to use inventory objects
+function _M:activateHotkey(id)
+	-- Visual feedback to show whcih key was pressed
+	if config.settings.tome.visual_hotkeys and game.uiset.hotkeys_display and game.uiset.hotkeys_display.clics and game.uiset.hotkeys_display.clics[id] and self.hotkey[id] then
+		local zone = game.uiset.hotkeys_display.clics[id]
+		game.uiset:addParticle(
+			game.uiset.hotkeys_display.display_x + zone[1] + zone[3] / 2, game.uiset.hotkeys_display.display_y + zone[2] + zone[4] / 2,
+			"hotkey_feedback", {w=zone[3], h=zone[4]}
+		)
+	end
+
+	return engine.interface.PlayerHotkeys.activateHotkey(self, id)
+end
+
 --- Activates a hotkey with a type "inventory"
 function _M:hotkeyInventory(name)
 	local find = function(name)
@@ -1230,6 +1265,10 @@ function _M:playerPickup()
 	if game.level.map:getObject(self.x, self.y, 2) then
 		local titleupdator = self:getEncumberTitleUpdator("Pickup")
 		local d d = self:showPickupFloor(titleupdator(), nil, function(o, item)
+			if self:attr("sleep") and not self:attr("lucid_dreamer") then
+				game:delayedLogMessage(self, nil, "sleep pickup", "你不能在睡眠中捡物品!")
+				return
+			end
 			local o = self:pickupFloor(item, true)
 			if o and type(o) == "table" then o.__new_pickup = true end
 			self.changed = true
@@ -1237,6 +1276,9 @@ function _M:playerPickup()
 			d:used()
 		end)
 	else
+		if self:attr("sleep") and not self:attr("lucid_dreamer") then
+			return
+		end
 		local o = self:pickupFloor(1, true)
 		if o and type(o) == "table" then
 			self:useEnergy()
@@ -1312,18 +1354,8 @@ function _M:playerUseItem(object, item, inven)
 					end
 					self:sortInven(self:getInven(inven))
 				end
-				self:breakStepUp()
-				self:breakStealth()
-				self:breakLightningSpeed()
-				self:breakSpacetimeTuning()
 				return true
 			end
-
-			self:breakStepUp()
-			self:breakStealth()
-			self:breakLightningSpeed()
-			self:breakReloading()
-			self:breakSpacetimeTuning()
 			self.changed = true
 		end)
 		local ok, ret = coroutine.resume(co)
@@ -1342,11 +1374,8 @@ function _M:playerUseItem(object, item, inven)
 	)
 end
 
---- Call when an object is worn
--- This doesnt call the base interface onWear, it copies the code because we need some tricky stuff
-function _M:onWear(o, slot, bypass_set)
-	mod.class.Actor.onWear(self, o, slot, bypass_set)
-
+--- Put objects with usable powers on cooldown when worn (apply only to party members)
+function _M:cooldownWornObject(o)
 	if not self.no_power_reset_on_wear then
 		o:forAllStack(function(so)
 			if so.power and so:attr("power_regen") then
@@ -1365,7 +1394,13 @@ function _M:onWear(o, slot, bypass_set)
 			end
 		end)
 	end
+end
 
+--- Call when an object is worn
+-- This doesnt call the base interface onWear, it copies the code because we need some tricky stuff
+function _M:onWear(o, slot, bypass_set)
+	mod.class.Actor.onWear(self, o, slot, bypass_set)
+	self:cooldownWornObject(o)
 	if self.hotkey and o:canUseObject() and config.settings.tome.auto_hotkey_object and not o.no_auto_hotkey then
 		local position
 		local name = o:getName{no_count=true, force_id=true, no_add_name=true}
@@ -1381,8 +1416,8 @@ function _M:onWear(o, slot, bypass_set)
 end
 
 --- Call when an object is added
-function _M:onAddObject(o)
-	mod.class.Actor.onAddObject(self, o)
+function _M:onAddObject(o, inven_id, slot)
+	mod.class.Actor.onAddObject(self, o, inven_id, slot)
 	if self.hotkey and o:attr("auto_hotkey") and config.settings.tome.auto_hotkey_object then
 		local position
 		local name = o:getName{no_count=true, force_id=true, no_add_name=true}
@@ -1511,24 +1546,61 @@ function _M:on_targeted(act)
 end
 
 ------ Quest Events
+local quest_popups = {}
+local function tick_end_quests()
+	local QuestPopup = require "mod.dialogs.QuestPopup"
+
+	local list = {}
+	for quest_id, status in pairs(quest_popups) do
+		list[#list+1] = { id=quest_id, status=status }
+	end
+	quest_popups = {}
+	table.sort(list, function(a, b) return a.status > b.status end)
+
+	local lastd = nil
+	for _, q in ipairs(list) do
+		local quest = game.player:hasQuest(q.id)
+		local d = QuestPopup.new(quest, q.status)
+		if lastd then
+			lastd.unload = function(self) game:registerDialog(d) end
+		else
+			game:registerDialog(d)
+		end
+		lastd = d
+	end
+end
+
+function _M:questPopup(quest, status)
+	if game and game.creating_player then return end
+	if not quest_popups[quest.id] or quest_popups[quest.id] < status then
+		quest_popups[quest.id] = status
+		if not game:onTickEndGet("quest_popups") then game:onTickEnd(tick_end_quests, "quest_popups") end
+	end
+end
+
 function _M:on_quest_grant(quest)
 	game.logPlayer(game.player, "#LIGHT_GREEN#Accepted quest '%s'! #WHITE#(Press 'j' to see the quest log)", quest.name)
-	game.bignews:saySimple(60, "#LIGHT_GREEN#Accepted quest '%s'!", quest.name)
+	if not config.settings.tome.quest_popup then game.bignews:saySimple(60, "#LIGHT_GREEN#Accepted quest '%s'!", quest.name)
+	else self:questPopup(quest, -1) end
 end
 
 function _M:on_quest_status(quest, status, sub)
 	if sub then
 		game.logPlayer(game.player, "#LIGHT_GREEN#Quest '%s' status updated! #WHITE#(Press 'j' to see the quest log)", quest.name)
-		game.bignews:saySimple(60, "#LIGHT_GREEN#Quest '%s' updated!", quest.name)
+		if not config.settings.tome.quest_popup then game.bignews:saySimple(60, "#LIGHT_GREEN#Quest '%s' updated!", quest.name)
+		else self:questPopup(quest, engine.Quest.PENDING) end
 	elseif status == engine.Quest.COMPLETED then
 		game.logPlayer(game.player, "#LIGHT_GREEN#Quest '%s' completed! #WHITE#(Press 'j' to see the quest log)", quest.name)
-		game.bignews:saySimple(60, "#LIGHT_GREEN#Quest '%s' completed!", quest.name)
+		if not config.settings.tome.quest_popup then game.bignews:saySimple(60, "#LIGHT_GREEN#Quest '%s' completed!", quest.name)
+		else self:questPopup(quest, status) end
 	elseif status == engine.Quest.DONE then
 		game.logPlayer(game.player, "#LIGHT_GREEN#Quest '%s' is done! #WHITE#(Press 'j' to see the quest log)", quest.name)
-		game.bignews:saySimple(60, "#LIGHT_GREEN#Quest '%s' done!", quest.name)
+		if not config.settings.tome.quest_popup then game.bignews:saySimple(60, "#LIGHT_GREEN#Quest '%s' done!", quest.name)
+		else self:questPopup(quest, status) end
 	elseif status == engine.Quest.FAILED then
 		game.logPlayer(game.player, "#LIGHT_RED#Quest '%s' is failed! #WHITE#(Press 'j' to see the quest log)", quest.name)
-		game.bignews:saySimple(60, "#LIGHT_RED#Quest '%s' failed!", quest.name)
+		if not config.settings.tome.quest_popup then game.bignews:saySimple(60, "#LIGHT_RED#Quest '%s' failed!", quest.name)
+		else self:questPopup(quest, status) end
 	end
 end
 

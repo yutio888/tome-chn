@@ -267,6 +267,21 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
+	log = "#Target#'s skin looks a bit thorny.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s的皮肤变得坚硬"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target# is less thorny now.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s的皮肤不再坚硬"):format(a)
+	end,
+}
+
+logCHN:newLog{
 	log = "#Target# is frozen to the ground!",
 	fct = function(a)
 		a = npcCHN:getName(a)
@@ -374,8 +389,34 @@ logCHN:newLog{
 		return ("%s 对枯萎抵抗力下降。"):format(a)
 	end,
 }
-
-
+logCHN:newLog{
+	log = "#Target#'s armour is damaged!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 的护甲破损了！"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target#'s armour is more intact.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 的护甲恢复了。"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target#'s fighting ability is impaired!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 的战斗能力被削弱了！"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target#'s ability to fight has recovered.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 的战斗能力恢复了。"):format(a)
+	end,
+}
 logCHN:newLog{
 	log = "#Target# is pinned to the ground.",
 	fct = function(a)
@@ -1093,6 +1134,20 @@ logCHN:newLog{
 	fct = function(a)
 		a = npcCHN:getName(a)
 		return ("%s速度上升！"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target# is #GREEN#INFESTED#LAST# with parasitic leeches!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s被寄生虫#GREEN#寄生#LAST#了！ "):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "Some leeches drop off %s!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("寄生虫从%s处脱落！ "):format(a)
 	end,
 }
 

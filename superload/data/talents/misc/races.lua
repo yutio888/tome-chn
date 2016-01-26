@@ -250,6 +250,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		return ([[呼 唤 兽 族 荣 耀 来 和 敌 人 拼 搏。 
 		 治 疗 %d 生 命 值 并 移 除 %d 个 负 面 状 态。 
+		 该 技 能 能 在 冰 冻 状 态 下 使 用 ， 但 如 果 未 能 除 去 冰 冻 状 态 ， 将 无 法 获 得 治 疗 。
 		 受 体 质 影 响， 治 疗 量 有 额 外 加 成。]]):
 		format(t.heal(self, t), t.remcount(self,t))
 	end,

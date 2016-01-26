@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2015 Nicolas Casalini
+-- Copyright (C) 2009 - 2016 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -44,13 +44,6 @@ newBirthDescriptor{
 			["Maj'Eyal"] = "allow",
 			Infinite = "allow",
 			Arena = "allow",
-			Ents = "disallow",
-			Spydre = "disallow",
-			Orcs = "disallow",
-			Trolls = "disallow",
-			Nagas = "disallow",
-			Undeads = "disallow",
-			Faeros = "disallow",
 		},
 		class =
 		{
@@ -147,6 +140,7 @@ newBirthDescriptor{
 	type = "difficulty",
 	name = "Easy",
 	display_name = "简单",
+	selection_default = config.settings.tome.default_birth and config.settings.tome.default_birth.difficulty == "Easy",
 	desc =
 	{
 		"#GOLD##{bold}#简单模式#WHITE##{normal}#",
@@ -171,7 +165,8 @@ newBirthDescriptor{
 	type = "difficulty",
 	name = "Normal",
 	display_name = "普通",
-	selection_default = true,
+	selection_default = (config.settings.tome.default_birth and config.settings.tome.default_birth.difficulty == "Normal") or (not config.settings.tome.default_birth) or (config.settings.tome.default_birth and not config.settings.tome.default_birth.difficulty),
+
 	desc =
 	{
 		"#GOLD##{bold}#普通模式#WHITE##{normal}#",
@@ -191,6 +186,8 @@ newBirthDescriptor{
 	type = "difficulty",
 	name = "Nightmare",
 	display_name = "噩梦",
+	selection_default = config.settings.tome.default_birth and config.settings.tome.default_birth.difficulty == "Nightmare",
+
 	desc =
 	{
 		"#GOLD##{bold}#噩梦模式#WHITE##{normal}#",
@@ -207,6 +204,7 @@ newBirthDescriptor{
 	copy = {
 		instakill_immune = 1,
 		__game_difficulty = 3,
+		money = 100,
 	},
 }
 newBirthDescriptor{
@@ -215,6 +213,7 @@ newBirthDescriptor{
 	display_name = "疯狂",
 	locked = function() return profile.mod.allow_build.difficulty_insane end,
 	locked_desc = " 简 单 模 式， 菜 鸟！ \n 普 通 模 式， 菜 鸟！ \n 噩 梦 模 式， 弱 爆 了！ \n 想 成 为 王 者 领 略 最 强 的 挑 战 吗？ \n 解 锁 疯 狂 模 式！ ",
+	selection_default = config.settings.tome.default_birth and config.settings.tome.default_birth.difficulty == "Insane",
 	desc =
 	{
 		"#GOLD##{bold}#疯狂模式#WHITE##{normal}#",
@@ -234,6 +233,8 @@ newBirthDescriptor{
 	copy = {
 		instakill_immune = 1,
 		__game_difficulty = 4,
+		money = 250,
+		start_level = 2,
 	},
 	game_state = {
 		default_random_rare_chance = 3,
@@ -246,6 +247,7 @@ newBirthDescriptor{
 	display_name = "绝望",
 	locked = function() return profile.mod.allow_build.difficulty_madness end,
 	locked_desc = " 疯 狂 弱 爆 了！ 来 体 验 真 正 让 大 脑 崩 溃 的 感 觉 吧！",
+	selection_default = config.settings.tome.default_birth and config.settings.tome.default_birth.difficulty == "Madness",
 	desc =
 	{
 		"#GOLD##{bold}# 绝望模式#WHITE##{normal}#",
@@ -268,6 +270,8 @@ newBirthDescriptor{
 	copy = {
 		instakill_immune = 1,
 		__game_difficulty = 5,
+		money = 500,
+		start_level = 3,
 	},
 	game_state = {
 		default_random_rare_chance = 3,

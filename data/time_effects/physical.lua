@@ -920,3 +920,11 @@ timeEffectCHN:newEffect{
 	type = "物理",
 	subtype = "空间",
 }
+
+timeEffectCHN:newEffect{
+	id = "PARASITIC_LEECHES",
+	enName = "Parasitic Leeches",
+	chName = "寄生虫",
+	type = "物理",
+	subtype = "寄生",
+}

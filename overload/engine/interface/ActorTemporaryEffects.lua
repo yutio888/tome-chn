@@ -1,5 +1,5 @@
 -- TE4 - T-Engine 4
--- Copyright (C) 2009 - 2015 Nicolas Casalini
+-- Copyright (C) 2009 - 2016 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -20,25 +20,27 @@
 require "engine.class"
 
 --- Handles actors temporary effects (temporary boost of a stat, ...)
+-- @classmod engine.generator.interface.ActorTemporaryEffects
 module(..., package.seeall, class.make)
 
 _M.tempeffect_def = {}
 
 --- Defines actor temporary effects
--- Static!
+-- @static
 function _M:loadDefinition(file, env)
-	local f, err = util.loadfilemods(file, setmetatable(env or {
+	env = env or setmetatable({
 		DamageType = require "engine.DamageType",
 		TemporaryEffects = self,
 		newEffect = function(t) self:newEffect(t) end,
-		load = function(f) self:loadDefinition(f, getfenv(2)) end
-	}, {__index=_G}))
+		load = function(f) self:loadDefinition(f, env) end
+	}, {__index=getfenv(2)})
+	local f, err = util.loadfilemods(file, env)
 	if not f and err then error(err) end
 	f()
 end
 
 --- Defines one effect
--- Static!
+-- @static
 function _M:newEffect(t)
 	assert(t.name, "no effect name")
 	assert(t.desc, "no effect desc")
@@ -56,7 +58,7 @@ function _M:newEffect(t)
 	self["EFF_"..t.name] = "EFF_"..t.name
 end
 
-
+--- init
 function _M:init(t)
 	self.tmp = self.tmp or {}
 end
@@ -136,7 +138,8 @@ function _M:setEffect(eff_id, dur, p, silent)
 				game.logSeen(self, ret,self.name)
 			end
 			if fly and game.flyers and self.x and self.y and game.level.map.seens(self.x, self.y) then
-				local sx, sy = game.level.map:getTileToScreen(self.x, self.y)
+				if fly == true then fly = "+"..ed.desc end
+				local sx, sy = game.level.map:getTileToScreen(self.x, self.y, true)
 				if game.level.map.seens(self.x, self.y) then game.flyers:add(sx, sy, 20, (rng.range(0,2)-1) * 0.5, -3, fly, {255,100,80}) end
 			end
 		end
@@ -162,7 +165,8 @@ end
 
 --- Check timed effect
 -- @param eff_id the effect to check for
--- @return either nil or the parameters table for the effect
+-- @return[1] nil
+-- @return[2] the parameters table for the effect
 function _M:hasEffect(eff_id)
 	return self.tmp[eff_id]
 end
@@ -174,15 +178,17 @@ function _M:removeEffect(eff, silent, force)
 	if _M.tempeffect_def[eff].no_remove and not force then return end
 	self.tmp[eff] = nil
 	self.changed = true
-	if _M.tempeffect_def[eff].on_lose then
-		local ret, fly = _M.tempeffect_def[eff].on_lose(self, p)
+	local ed = _M.tempeffect_def[eff]
+	if ed.on_lose then
+		local ret, fly = ed.on_lose(self, p)
 		if not silent then
 			if ret then
 				--game.logSeen(self, ret:gsub("#Target#", self.name:capitalize()):gsub("#target#", self.name))
 				game.logSeen(self, ret,self.name)
 			end
 			if fly and game.flyers and self.x and self.y then
-				local sx, sy = game.level.map:getTileToScreen(self.x, self.y)
+				if fly == true then fly = "-"..ed.desc end
+				local sx, sy = game.level.map:getTileToScreen(self.x, self.y, true)
 				if game.level.map.seens(self.x, self.y) then game.flyers:add(sx, sy, 20, (rng.range(0,2)-1) * 0.5, -3, fly, {255,100,80}) end
 			end
 		end
@@ -197,7 +203,6 @@ function _M:removeEffect(eff, silent, force)
 			self:removeParticles(p.__tmpparticles[i])
 		end
 	end
-	local ed = _M.tempeffect_def[eff]
 	if ed.deactivate then ed.deactivate(self, p, ed) end
 	if ed.lists then
 		local lists = ed.lists
@@ -217,7 +222,8 @@ end
 
 --- Copy an effect ensuring temporary values are managed properly
 -- @param eff_id the effect to copy
--- @return either nil or the parameters table for the effect
+-- @return[1] nil
+-- @return[2] the parameters table for the effect
 function _M:copyEffect(eff_id)
 	if not self then return nil end
 	local param = table.clone( self:hasEffect(eff_id) )
@@ -230,7 +236,7 @@ end
 function _M:alterEffectDuration(eff_id, v)
 	local e = self.tmp[eff_id]
 	if not e then return end
-	e.dur = e.dur - 1
+	e.dur = e.dur + v
 	if e.dur <= 0 then self:removeEffect(eff_id) return true end
 end
 
@@ -254,9 +260,10 @@ end
 
 --- Helper function to add particles and not have to remove them manualy
 function _M:effectParticles(eff, ...)
+	local Particles = require "engine.Particles"
 	if not eff.__tmpparticles then eff.__tmpparticles = {} end
 	for _, p in ipairs{...} do
-		eff.__tmpparticles[#eff.__tmpparticles+1] = p
+		eff.__tmpparticles[#eff.__tmpparticles+1] = self:addParticles(Particles.new(p.type, 1, p.args))
 	end
 end
 

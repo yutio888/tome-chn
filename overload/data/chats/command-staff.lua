@@ -100,52 +100,16 @@ local function is_sentient()
 	return o.combat.sentient
 end
 
-local function update_table(d_table_old, d_table_new, old_element, new_element, tab, v, is_greater)
-	if is_greater then
-		for i = 1, #d_table_old do
-			o.wielder[tab][d_table_old[i]] = o.wielder[tab][d_table_old[i]] - v
-			if o.wielder[tab][d_table_old[i]] == 0 then o.wielder[tab][d_table_old[i]] = nil end
-		end
-		for i = 1, #d_table_new do
-			o.wielder[tab][d_table_new[i]] = (o.wielder[tab][d_table_new[i]] or 0) + v
-		end
-	else
-		o.wielder[tab][old_element] = o.wielder[tab][old_element] - v
-		o.wielder[tab][new_element] = (o.wielder[tab][new_element] or 0) + v
-		if o.wielder[tab][old_element] == 0 then o.wielder[tab][old_element] = nil end
-	end
-
-end
-
 local function set_element(element, new_flavor, player)
 	state.set_element = true
+	local old_reset = player.no_power_reset_on_wear
 	player.no_power_reset_on_wear = true
-
 	local prev_name = o:getName{no_count=true, force_id=true, no_add_name=true}
-	
-	local dam = o.staff_power or o.combat.dam
-	local inven = player:getInven("MAINHAND")
-	local o = player:takeoffObject(inven, 1)
 
-	local dam_tables = {
-		magestaff = {engine.DamageType.FIRE, engine.DamageType.COLD, engine.DamageType.LIGHTNING, engine.DamageType.ARCANE},
-		starstaff = {engine.DamageType.LIGHT, engine.DamageType.DARKNESS, engine.DamageType.TEMPORAL, engine.DamageType.PHYSICAL},
-		vilestaff = {engine.DamageType.DARKNESS, engine.DamageType.BLIGHT, engine.DamageType.ACID, engine.DamageType.FIRE}, -- yes it overlaps, it's okay
-	}
+	local _, item, inven_id = player:findInAllInventoriesByObject(o)
+	if inven_id then player:onTakeoff(o, inven_id, true) end
 
-	update_table(dam_tables[o.flavor_name], dam_tables[new_flavor], o.combat.element, element, "inc_damage", dam, o.combat.is_greater)
-	if o.combat.of_warding then update_table(dam_tables[o.flavor_name], dam_tables[new_flavor], o.combat.element, element, "wards", 2, o.combat.is_greater) end
-	if o.combat.of_greater_warding then update_table(dam_tables[o.flavor_name], dam_tables[new_flavor], o.combat.element, element, "wards", 3, o.combat.is_greater) end
-	if o.combat.of_breaching then update_table(dam_tables[o.flavor_name], dam_tables[new_flavor], o.combat.element, element, "resists_pen", dam/2, o.combat.is_greater) end
-	if o.combat.of_protection then update_table(dam_tables[o.flavor_name], dam_tables[new_flavor], o.combat.element, element, "resists", dam/2, o.combat.is_greater) end
-
-	--o.combat.damtype = element
-	o.combat.element = element
-	if not o.unique then o.name = o.name:gsub(o.flavor_name, new_flavor) end
-	o.flavor_name = new_flavor
-	o:resolve()
-	o:resolve(nil, true)	
-
+	o:commandStaff(element, new_flavor)
 	local next_name = o:getName{no_count=true, force_id=true, no_add_name=true}
 
 	if player.hotkey then
@@ -155,146 +119,70 @@ local function set_element(element, new_flavor, player)
 		end
 	end
 
-	player:addObject(inven, o)	
-	player.no_power_reset_on_wear = nil
+	if inven_id then player:onWear(o, inven_id, true) end
+	player.no_power_reset_on_wear = old_reset
 	print("(in chat's set_element) state.set_element is ", state.set_element)
 
 	coroutine.resume(co, true)
 
 end
 
-newChat{ id="welcome",
-	text = intro(o),
-	answers = {
-		{"有何吩咐？", cond = function() return is_sentient() and not o.no_command end, jump="how_speak"},
-		{"我想注入一种不同的属性。", cond = function() return is_sentient() and not o.no_command end, jump="which_aspect"},
-		{"我想改变你的基础属性。", cond = function() return is_sentient() and not o.no_command end, 
-			action = function()
-				coroutine.resume(co, true)
-				local SentientWeapon = require "mod.dialogs.SentientWeapon"
-				local ds = SentientWeapon.new({actor=game.player, o=o})
-				game:registerDialog(ds)
-			end,
-		},
-		{"[术士]", cond = function() return not is_sentient() and not o.no_command and (not o.only_element or o.only_element == "element_mage") end, jump="element_mage"},
-		{"[众星]", cond = function() return not is_sentient() and not o.no_command and (not o.only_element or o.only_element == "element_star") end, jump="element_star"},
-		{"[邪恶]", cond = function() return not is_sentient() and not o.no_command and (not o.only_element or o.only_element == "element_vile") end, jump="element_vile"},
-		{"没事了。"},
-	}
-}
+local DamageType = require "engine.DamageType"
+local flavors = o:getStaffFlavorList()
+local flavor_list = table.keys(flavors)
+table.sort(flavor_list)
 
-newChat{ id="element_mage",
-	text = [[注入何种元素？]],
-	answers = {
-		{"[火焰]", 
-			action = function()
-				set_element(DamageType.FIRE, "magestaff", game.player) 
-				game.level.map:particleEmitter(game.player.x, game.player.y, 1, "teleport") 
-			end,
-		},
-		{"[闪电]", 
-			action = function() 
-				set_element(DamageType.LIGHTNING, "magestaff", game.player) 
-				game.level.map:particleEmitter(game.player.x, game.player.y, 1, "teleport") 
-			end,
-		},
-		{"[寒冰]", 
-			action = function() 
-				set_element(DamageType.COLD, "magestaff", game.player) 
-				game.level.map:particleEmitter(game.player.x, game.player.y, 1, "teleport") 
-			end,
-		},
-		{"[奥术]", 
-			action = function() 
-				set_element(DamageType.ARCANE, "magestaff", game.player) 
-				game.level.map:particleEmitter(game.player.x, game.player.y, 1, "teleport") 
-			end,
-		},
-		{"[选择不同的属性]", jump="welcome"},
-		{"没事了。"},
-	}
-}
+local aspect_answers = {}
+local aspect_chat_id = not is_sentient() and "welcome" or "which-aspect"
+for _, flavor in ipairs(flavor_list) do
+	local damtypes = o:getStaffFlavor(flavor)
+	local answers = {}
+	for i, dtype in ipairs(damtypes) do
+		local name = ("[%s]"):format(DamageType:get(dtype).name:capitalize())
+		answers[i] = {name, action = function() set_element(dtype, flavor, game.player) end}
+	end
+	answers[#answers + 1] = {"选择其他领域", jump = aspect_chat_id}
+	answers[#answers + 1] = {"别介意."}
+	newChat{id="element_"..flavor, text = "召唤哪种元素？", answers = answers}
 
-newChat{ id="element_star",
-	text = [[注入何种元素？]],
-	answers = {
-		{"[光系]", 
-			action = function() 
-				set_element(DamageType.LIGHT, "starstaff", game.player) 
-				game.level.map:particleEmitter(game.player.x, game.player.y, 1, "temporal_teleport") 
-			end,
-		},
-		{"[暗影]", 
-			action = function() 
-				set_element(DamageType.DARKNESS, "starstaff", game.player) 
-				game.level.map:particleEmitter(game.player.x, game.player.y, 1, "temporal_teleport") 
-			end,
-		},
-		{"[时空]", 
-			action = function() 
-				set_element(DamageType.TEMPORAL, "starstaff", game.player) 
-				game.level.map:particleEmitter(game.player.x, game.player.y, 1, "temporal_teleport") 
-			end,
-		},
-		{"[物理]", 
-			action = function() 
-				set_element(DamageType.PHYSICAL, "starstaff", game.player) 
-				game.level.map:particleEmitter(game.player.x, game.player.y, 1, "temporal_teleport") 
-			end,
-		},
-		{"[选择不同的属性]", jump="welcome"},
-		{"没事了。"},
-	}
-}
+	local flavor_name = flavor:gsub("staff", ""):capitalize()
+	aspect_answers[#aspect_answers + 1] = {("[%s]"):format(flavor_name), jump = "element_"..flavor}
+end
 
+aspect_answers[#aspect_answers + 1] = {"别介意."}
 
-newChat{ id="element_vile",
-	text = [[注入何种元素？]],
-	answers = {
-		{"[暗影]", 
-			action = function() 
-				set_element(DamageType.DARKNESS, "vilestaff", game.player) 
-				game.level.map:particleEmitter(game.player.x, game.player.y, 1, "demon_teleport") 
-			end,
-		},
-		{"[枯萎]", 
-			action = function() 
-				set_element(DamageType.BLIGHT, "vilestaff", game.player) 
-				game.level.map:particleEmitter(game.player.x, game.player.y, 1, "demon_teleport") 
-			end,
-		},
-		{"[酸性]", 
-			action = function() 
-				set_element(DamageType.ACID, "vilestaff", game.player) 
-				game.level.map:particleEmitter(game.player.x, game.player.y, 1, "demon_teleport") 
-			end,
-		},
-		{"[火焰]", 
-			action = function() 
-				set_element(DamageType.FIRE, "vilestaff", game.player) 
-				game.level.map:particleEmitter(game.player.x, game.player.y, 1, "demon_teleport") 
-			end,
-		},
-		{"[选择不同的属性]", jump="welcome"},
-		{"没事。"},
+if is_sentient() then
+	newChat{ id="welcome",
+		text = intro(o),
+			answers = {
+			{"你怎么会说话？", cond = function() return is_sentient() and not o.no_command end, jump="how_speak"},
+			{"我希望切换到其他领域。", cond = function() return is_sentient() and not o.no_command end, jump="which_aspect"},
+			{"我希望改变你的基础属性。", cond = function() return is_sentient() and not o.no_command end, 
+				action = function()
+					coroutine.resume(co, true)
+					local SentientWeapon = require "mod.dialogs.SentientWeapon"
+					local ds = SentientWeapon.new({actor=game.player, o=o})
+					game:registerDialog(ds)
+				end,
+			},
+			{"Never mind."},
+		}
 	}
-}
+	newChat{ id="which_aspect",
+		text = which_aspect(o),
+		answers = aspect_answers,
+	}
+else
+	newChat{ id="welcome",
+		text = intro(o),
+		answers = aspect_answers,
+	}
+end
 
 newChat{ id="how_speak",
 	text = how_speak(o),
 	answers = {
-		{"我知道了。", jump="welcome"},
-	}
-}
-
-newChat{ id="which_aspect",
-	text = which_aspect(o),
-	answers = {
-		{"[术士]", jump="element_mage"},
-		{"[众星]", jump="element_star"},
-		{"[邪恶]", jump="element_vile"},
-		{"等一下。.", jump="welcome"},
-		{"没事了。"},
+		{"I see.", jump="welcome"},
 	}
 }
 

@@ -1,5 +1,5 @@
 ﻿-- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2015 Nicolas Casalini
+-- Copyright (C) 2009 - 2016 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -85,7 +85,7 @@ local ogretext = ""
 if player.descriptor and player.descriptor.subrace == "Ogre" then
 	ogretext = "\n请不要担心，虽然你是个食人魔，我们可以用我们最新研究出的新型复方纹身来取代你身上的不洁符文，从而永久消除了你对他们的依赖。这个过程可能有些……不快，并且可能会缩短你的寿命，但是在此之后，你终于能够不再沉溺于奥术力量的深渊，达到真正的洁净！\n"
 	if player.descriptor.subclass == "Oozemancer" then
-		ogretext = ogretext.."我们还会加强那些你身上的纹身——这些最新的复方符文比你原来用的那种相比可以至少增加五年以上的寿命。\n"
+		ogretext = ogretext.."我们还会加强那些你身上的纹身——这些最新的复方纹身比你原来用的那种相比可以至少增加五年以上的寿命。\n"
 	end
 end
 

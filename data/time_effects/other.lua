@@ -634,3 +634,92 @@ timeEffectCHN:newEffect{
 	type = "其他",
 	subtype = "精神",
 }
+timeEffectCHN:newEffect{
+	id = "ZONE_AURA_GORBAT",
+	enName = "Natural Aura",
+	chName = "自然光环",
+	type = "其他",
+	subtype = "光环",
+}
+
+timeEffectCHN:newEffect{
+	id = "ZONE_AURA_VOR",
+	enName = "Sorcerous Aura",
+	chName = "魔法光环",
+	type = "其他",
+	subtype = "光环",
+}
+
+
+
+timeEffectCHN:newEffect{
+	id = "ZONE_AURA_GRUSHNAK",
+	enName = "Disciplined Aura",
+	chName = "纪律光环",
+	type = "其他",
+	subtype = "光环",
+}
+
+timeEffectCHN:newEffect{
+	id = "ZONE_AURA_RAKSHOR",
+	enName = "Sinister Aura",
+	chName = "危险光环",	
+	type = "其他",
+	subtype = "光环",
+}
+
+timeEffectCHN:newEffect{
+	id = "ZONE_AURA_UNDERWATER",
+	enName = "Underwater Zone",
+	chName = "水下区域",	
+	type = "其他",
+	subtype = "光环",
+}
+
+timeEffectCHN:newEffect{
+	id = "ZONE_AURA_FEARSCAPE",
+	enName = "Fearscape Zone",
+	chName = "恐惧空间",
+	type = "其他",
+	subtype = "光环",
+}
+
+timeEffectCHN:newEffect{
+	id = "ZONE_AURA_OUT_OF_TIME",
+	enName = "Out of Time Zone",
+	chName = "异常时空",
+	type = "其他",
+	subtype = "光环",
+}
+
+timeEffectCHN:newEffect{
+	id = "ZONE_AURA_SPELLBLAZE",
+	enName = "Spellblaze Aura",
+	chNmae = "魔法大爆炸区域",
+	type = "其他",
+	subtype = "光环",
+}
+
+timeEffectCHN:newEffect{
+	id = "ZONE_AURA_CALDERA",
+	enName = "Heady Scent",
+	chName = "催眠区域",
+	type = "其他",
+	subtype = "光环",
+}
+
+timeEffectCHN:newEffect{
+	id = "ZONE_AURA_THUNDERSTORM",
+	enName = "Thunderstorm",
+	chNmae = "雷暴区域",
+	type = "其他",
+	subtype = "光环",
+}
+
+timeEffectCHN:newEffect{
+	id = "ZONE_AURA_ABASHED",
+	enName = "Abashed Expanse",
+	chName = "不稳区域",
+	type = "其他",
+	subtype = "光环",
+}

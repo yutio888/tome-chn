@@ -1,5 +1,5 @@
 ﻿-- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2015 Nicolas Casalini
+-- Copyright (C) 2009 - 2016 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -640,7 +640,7 @@ newEffect{
 		self:removeTemporaryValue("resists", eff.rstid)
 		self:removeTemporaryValue("inc_damage", eff.dmgid)
 	end,
-}
+	}
 
 newEffect{
 	name = "SHADOW_VEIL", image = "talents/shadow_veil.png",
@@ -770,9 +770,9 @@ newEffect{
 		-- level 4: Reprieve from Death
 	end,
 	deactivate = function(self, eff)
-		if eff.resistsUndeadId then self:removeTemporaryValue("resists_actor_type", eff.resistsUndeadId) end
-		if eff.incDamageUndeadId then self:removeTemporaryValue("inc_damage_actor_type", eff.incDamageUndeadId) end
-		if eff.incStatsId then self:removeTemporaryValue("inc_stats", eff.incStatsId) end
+		if eff.resistsUndeadId then self:removeTemporaryValue("resists_actor_type", eff.resistsUndeadId) eff.resistsUndeadId = nil end
+		if eff.incDamageUndeadId then self:removeTemporaryValue("inc_damage_actor_type", eff.incDamageUndeadId) eff.incDamageUndeadId = nil end
+		if eff.incStatsId then self:removeTemporaryValue("inc_stats", eff.incStatsId) eff.incStatsId = nil end
 	end,
 	on_merge = function(self, old_eff, new_eff) return old_eff end,
 	doCorpselight = function(self, eff, target)
@@ -911,10 +911,10 @@ newEffect{
 		-- level 4: Mania
 	end,
 	deactivate = function(self, eff)
-		if eff.mindResistId then self:removeTemporaryValue("resists", eff.mindResistId) end
-		if eff.confusionImmuneId then self:removeTemporaryValue("confusion_immune", eff.confusionImmuneId) end
-		if eff.getCombatCriticalPowerChangeId then self:removeTemporaryValue("combat_critical_power", eff.getCombatCriticalPowerChangeId) end
-		if eff.incStatsId then self:removeTemporaryValue("inc_stats", eff.incStatsId) end
+		if eff.mindResistId then self:removeTemporaryValue("resists", eff.mindResistId) eff.mindResistId = nil end
+		if eff.confusionImmuneId then self:removeTemporaryValue("confusion_immune", eff.confusionImmuneId) eff.confusionImmuneId = nil end
+		if eff.getCombatCriticalPowerChangeId then self:removeTemporaryValue("combat_critical_power", eff.getCombatCriticalPowerChangeId) eff.getCombatCriticalPowerChangeId = nil end
+		if eff.incStatsId then self:removeTemporaryValue("inc_stats", eff.incStatsId) eff.incStatsId = nil end
 	end,
 	on_timeout = function(self, eff)
 		-- mania
@@ -1014,10 +1014,10 @@ newEffect{
 		-- level 4: Shroud of Death
 	end,
 	deactivate = function(self, eff)
-		if eff.resistsDarknessId then self:removeTemporaryValue("resists", eff.resistsDarknessId) end
-		if eff.resistsCapDarknessId then self:removeTemporaryValue("resists_cap", eff.resistsCapDarknessId) end
-		if eff.seeInvisibleId then self:removeTemporaryValue("see_invisible", eff.seeInvisibleId) end
-		if eff.incStatsId then self:removeTemporaryValue("inc_stats", eff.incStatsId) end
+		if eff.resistsDarknessId then self:removeTemporaryValue("resists", eff.resistsDarknessId) eff.resistsDarknessId = nil end
+		if eff.resistsCapDarknessId then self:removeTemporaryValue("resists_cap", eff.resistsCapDarknessId) eff.resistsCapDarknessId = nil end
+		if eff.seeInvisibleId then self:removeTemporaryValue("see_invisible", eff.seeInvisibleId) eff.seeInvisibleId = nil end
+		if eff.incStatsId then self:removeTemporaryValue("inc_stats", eff.incStatsId) eff.incStatsId = nil end
 
 		if self:hasEffect(self.EFF_SHROUD_OF_WEAKNESS) then self:removeEffect(self.EFF_SHROUD_OF_WEAKNESS) end
 		if self:hasEffect(self.EFF_SHROUD_OF_PASSING) then self:removeEffect(self.EFF_SHROUD_OF_PASSING) end
@@ -1126,7 +1126,7 @@ newEffect{
 	getWilChange = function(level) return -1 + level * 2 end,
 	getBaseSuffocateAirChange = function(level) return Combat:combatTalentLimit(level, 50, 4, 16) end, -- Limit < 50 to take >2 hits to kill most monsters
 	getSuffocateAirChange = function(level) return Combat:combatTalentLimit(level, 10, 0, 7) end, -- Limit < 10
-	getNightmareChance = function(level) return Combat:combatTalentLimit(math.max(0, level-4), 25, 3, 10) end, -- Limit < 25%
+	getNightmareChance = function(level) return Combat:combatTalentLimit(math.max(0, level-3), 25, 3, 10) end, -- Limit < 25%
 	getNightmareRadius = function(level) return 5 + (level - 4) * 2 end,
 	display_desc = function(self, eff)
 		if math.min(eff.unlockLevel, eff.level) >= 4 then
@@ -1171,9 +1171,9 @@ newEffect{
 		-- level 4: Nightmare
 	end,
 	deactivate = function(self, eff)
-		if eff.resistsPhysicalId then self:removeTemporaryValue("resists", eff.resistsPhysicalId); end
-		if eff.resistsCapPhysicalId then self:removeTemporaryValue("resists_cap", eff.resistsCapPhysicalId) end
-		if eff.incStatsId then self:removeTemporaryValue("inc_stats", eff.incStatsId) end
+		if eff.resistsPhysicalId then self:removeTemporaryValue("resists", eff.resistsPhysicalId); eff.resistsPhysicalId =  nil end
+		if eff.resistsCapPhysicalId then self:removeTemporaryValue("resists_cap", eff.resistsCapPhysicalId) eff.resistsCapPhysicalId =  nil end
+		if eff.incStatsId then self:removeTemporaryValue("inc_stats", eff.incStatsId) eff.incStatsId =  nil end
 	end,
 	on_merge = function(self, old_eff, new_eff) return old_eff end,
 	doSuffocate = function(self, eff, target)
@@ -1218,10 +1218,7 @@ newEffect{
 	on_timeout = function(self, eff) -- Chance for nightmare fades over time
 		if eff.nightmareChance then eff.nightmareChance = math.max(0, eff.nightmareChance-1) end
 	end,
-	callbackOnHit = function(self, eff, cb)
-		game:onTickEnd(function() eff.doNightmare(self, eff) end)
-	end,
-	doNightmare = function(self, eff)
+	callbackOnHit = function(self, eff, cb)	game:onTickEnd(function()
 		if math.min(eff.unlockLevel, eff.level) >= 4 then
 			-- build chance for a nightmare
 			local def = self.tempeffect_def[self.EFF_CURSE_OF_NIGHTMARES]
@@ -1291,7 +1288,7 @@ newEffect{
 				game:playSoundNear(self, "talents/cloud")
 			end
 		end
-	end,
+	end) end,
 }
 
 
@@ -1359,11 +1356,11 @@ newEffect{
 		-- level 4: Unfortunate End
 	end,
 	deactivate = function(self, eff)
-		if eff.moneyValueMultiplierId then self:removeTemporaryValue("money_value_multiplier", eff.moneyValueMultiplierId) end
-		if eff.combatDefId then self:removeTemporaryValue("combat_def", eff.combatDefId) end
-		if eff.combatDefRangedId then self:removeTemporaryValue("combat_def_ranged", eff.combatDefRangedId) end
-		if eff.incStatsId then self:removeTemporaryValue("inc_stats", eff.incStatsId) end
-		if eff.trapAvoidanceId then self:removeTemporaryValue("trap_avoidance", eff.trapAvoidanceId) end
+		if eff.moneyValueMultiplierId then self:removeTemporaryValue("money_value_multiplier", eff.moneyValueMultiplierId) eff.moneyValueMultiplierId = nil end
+		if eff.combatDefId then self:removeTemporaryValue("combat_def", eff.combatDefId) eff.combatDefId = nil end
+		if eff.combatDefRangedId then self:removeTemporaryValue("combat_def_ranged", eff.combatDefRangedId) eff.combatDefRangedId = nil end
+		if eff.incStatsId then self:removeTemporaryValue("inc_stats", eff.incStatsId) eff.incStatsId = nil end
+		if eff.trapAvoidanceId then self:removeTemporaryValue("trap_avoidance", eff.trapAvoidanceId) eff.trapAvoidanceId = nil end
 	end,
 	on_merge = function(self, old_eff, new_eff) return old_eff end,
 	
@@ -2827,5 +2824,222 @@ newEffect{
 	on_timeout = function(self, eff)
 		local dead, val = self:takeHit(eff.power, self, {special_death_msg="killed in a dream"})
 		game:delayedLogDamage(eff, self, val, ("%s%d %s#LAST#"):format(DamageType:get(DamageType.MIND).text_color or "#aaaaaa#", math.ceil(val), "睡梦"), false)
+	end,
+}
+
+newEffect{
+	name = "ZONE_AURA_GORBAT",
+	desc = "Natural Aura",
+	no_stop_enter_worlmap = true,
+	long_desc = function(self, eff) return ("地 图 效 果 : +20 精 神 强 度 , +2 生 命 恢 复 , -1 失 衡 值 / 回 合, -20% 抗 性 穿 透。") end,
+	decrease = 0, no_remove = true,
+	type = "other",
+	subtype = { aura=true },
+	status = "detrimental",
+	zone_wide_effect = true,
+	parameters = {},
+	activate = function(self, eff)
+		self:effectTemporaryValue(eff, "combat_mindpower", 20)
+		self:effectTemporaryValue(eff, "life_regen", 2)
+		self:effectTemporaryValue(eff, "equilibrium_regen", -1)
+		self:effectTemporaryValue(eff, "resists_pen", {all=-20})
+	end,
+	deactivate = function(self, eff)
+	end,
+}
+
+newEffect{
+	name = "ZONE_AURA_VOR",
+	desc = "Sorcerous Aura",
+	no_stop_enter_worlmap = true,
+	long_desc = function(self, eff) return ("地 图 效 果 : +20 魔 法 , +2 法 力 回 复 , -20 命 中, -20 潜 行 强 度 。") end,
+	decrease = 0, no_remove = true,
+	type = "other",
+	subtype = { aura=true },
+	status = "detrimental",
+	zone_wide_effect = true,
+	parameters = {},
+	activate = function(self, eff)
+		self:effectTemporaryValue(eff, "inc_stats", {[Stats.STAT_MAG] = 20})
+		self:effectTemporaryValue(eff, "mana_regen", 2)
+		self:effectTemporaryValue(eff, "combat_atk", -20)
+		self:effectTemporaryValue(eff, "inc_stealth", -20)
+	end,
+	deactivate = function(self, eff)
+	end,
+}
+
+newEffect{
+	name = "ZONE_AURA_GRUSHNAK",
+	desc = "Disciplined Aura",
+	no_stop_enter_worlmap = true,
+	long_desc = function(self, eff) return ("地 图 效 果 : +20 闪 避, +20 全 豁 免 , -20 法 术 强 度 。") end,
+	decrease = 0, no_remove = true,
+	type = "other",
+	subtype = { aura=true },
+	status = "detrimental",
+	zone_wide_effect = true,
+	parameters = {},
+	activate = function(self, eff)
+		self:effectTemporaryValue(eff, "combat_def", 20)
+		self:effectTemporaryValue(eff, "combat_physresist", 20)
+		self:effectTemporaryValue(eff, "combat_spellresist", 20)
+		self:effectTemporaryValue(eff, "combat_mentalresist", 20)
+		self:effectTemporaryValue(eff, "combat_spellpower", -20)
+	end,
+	deactivate = function(self, eff)
+	end,
+}
+
+newEffect{
+	name = "ZONE_AURA_RAKSHOR",
+	desc = "Sinister Aura",
+	no_stop_enter_worlmap = true,
+	long_desc = function(self, eff) return ("地 图 效 果 : +10% 暴 击 几 率 , +20% 暴 击 伤 害 , -20% 自 然 枯 萎 抗 性 。") end,
+	decrease = 0, no_remove = true,
+	type = "other",
+	subtype = { aura=true },
+	status = "detrimental",
+	zone_wide_effect = true,
+	parameters = {},
+	activate = function(self, eff)
+		self:effectTemporaryValue(eff, "combat_physcrit", 10)
+		self:effectTemporaryValue(eff, "combat_spellcrit", 10)
+		self:effectTemporaryValue(eff, "combat_mindcrit", 10)
+		self:effectTemporaryValue(eff, "combat_critical_power", 20)
+		self:effectTemporaryValue(eff, "resists", {[DamageType.NATURE]=-20, [DamageType.BLIGHT]=-20})
+	end,
+	deactivate = function(self, eff)
+	end,
+}
+
+newEffect{
+	name = "ZONE_AURA_UNDERWATER",
+	desc = "Underwater Zone",
+	no_stop_enter_worlmap = true,
+	long_desc = function(self, eff) return ("地 图 效 果 :  空 气 值 随 时 间 损 失 ， 空 气 用 光 后 将 损 失 生 命 。 寻 找 气 泡 来 回 复 空 气 值。 水 同 时 令 震 慑 免 疫 和 火 焰 伤 害 下 降 10% ，同 时 增 加 10% 寒 冷 伤 害 。") end,
+	decrease = 0, no_remove = true,
+	type = "other",
+	subtype = { aura=true },
+	status = "detrimental",
+	zone_wide_effect = true,
+	parameters = {},
+	activate = function(self, eff)
+		self:effectTemporaryValue(eff, "stun_immune", -0.1)
+		self:effectTemporaryValue(eff, "inc_damage", {[DamageType.COLD]=10, [DamageType.FIRE]=-10})
+	end,
+	deactivate = function(self, eff)
+	end,
+}
+
+newEffect{
+	name = "ZONE_AURA_FEARSCAPE",
+	desc = "Fearscape Zone",
+	no_stop_enter_worlmap = true,
+	long_desc = function(self, eff) return ("地 图 效 果 :  恐 惧 空 间 的 火 焰 将 增 加 10% 火 焰 和 枯 萎 伤 害 ，同 时 减 少 20% 击 退 抗 性。") end,
+	decrease = 0, no_remove = true,
+	type = "other",
+	subtype = { aura=true },
+	status = "detrimental",
+	zone_wide_effect = true,
+	parameters = {},
+	activate = function(self, eff)
+		self:effectTemporaryValue(eff, "knockback_immune", -0.2)
+		self:effectTemporaryValue(eff, "inc_damage", {[DamageType.BLIGHT]=10, [DamageType.FIRE]=10})
+	end,
+	deactivate = function(self, eff)
+	end,
+}
+
+newEffect{
+	name = "ZONE_AURA_OUT_OF_TIME",
+	desc = "Out of Time Zone",
+	no_stop_enter_worlmap = true,
+	long_desc = function(self, eff) return ("地 图 效 果 : 你 似 乎 处 于 通 常 时 空 之 外 。 +10% 物 理 抗 性 ， -10% 时 空 抗 性  , -20% 传 送 免 疫 .") end,
+	decrease = 0, no_remove = true,
+	type = "other",
+	subtype = { aura=true },
+	status = "detrimental",
+	zone_wide_effect = true,
+	parameters = {},
+	activate = function(self, eff)
+		self:effectTemporaryValue(eff, "teleport_immune", -0.2)
+		self:effectTemporaryValue(eff, "resists", {[DamageType.PHYSICAL]=10, [DamageType.TEMPORAL]=-10})
+	end,
+	deactivate = function(self, eff)
+	end,
+}
+
+newEffect{
+	name = "ZONE_AURA_SPELLBLAZE",
+	desc = "Spellblaze Aura",
+	no_stop_enter_worlmap = true,
+	long_desc = function(self, eff) return ("地 图 效 果 : 魔 法 大 爆 炸 的 火 焰 仍 在 燃 烧 ， -10% 火 焰 、 枯 萎 、 奥 术 抗 性 , +10% 寒 冷 抗 性 。 警 告 ：强 大 的 魔 法 能 量 可 能 干 扰 传 送 法 术 ！ ") end,
+	decrease = 0, no_remove = true,
+	type = "other",
+	subtype = { aura=true },
+	status = "detrimental",
+	zone_wide_effect = true,
+	parameters = {},
+	activate = function(self, eff)
+		self:effectTemporaryValue(eff, "resists", {[DamageType.FIRE]=-10, [DamageType.ARCANE]=-10, [DamageType.BLIGHT]=-10, [DamageType.COLD]=10})
+	end,
+	deactivate = function(self, eff)
+	end,
+}
+
+newEffect{
+	name = "ZONE_AURA_CALDERA",
+	desc = "Heady Scent",
+	no_stop_enter_worlmap = true,
+	long_desc = function(self, eff) return ("地 图 效 果 :  强 烈 的 气 味 充 满 了 空 气 ， 让 你 感 觉 困 倦 。  倒 计 时 结 束 时 ， 你 将 进 入 梦 境 。-10% 精 神 抗 性 ，-20% 睡 眠 免 疫 ， +10% 自 然 伤 害 .") end,
+	decrease = 0, no_remove = true,
+	type = "other",
+	subtype = { aura=true },
+	status = "detrimental",
+	zone_wide_effect = true,
+	parameters = {},
+	activate = function(self, eff)
+		self:effectTemporaryValue(eff, "sleep_immune", -0.2)
+		self:effectTemporaryValue(eff, "inc_damage", {[DamageType.NATURE]=10})
+		self:effectTemporaryValue(eff, "resists", {[DamageType.MIND]=-10})
+	end,
+	deactivate = function(self, eff)
+	end,
+}
+
+newEffect{
+	name = "ZONE_AURA_THUNDERSTORM",
+	desc = "Thunderstorm",
+	no_stop_enter_worlmap = true,
+	long_desc = function(self, eff) return ("地 图 效 果 :  强 大 的 雷 暴 在 你 头 顶 轰 鸣。 +10% 闪 电 伤 害 ， -10% 震 慑 免 疫 。") end,
+	decrease = 0, no_remove = true,
+	type = "other",
+	subtype = { aura=true },
+	status = "detrimental",
+	zone_wide_effect = true,
+	parameters = {},
+	activate = function(self, eff)
+		self:effectTemporaryValue(eff, "stun_immune", -0.1)
+		self:effectTemporaryValue(eff, "inc_damage", {[DamageType.LIGHTNING]=10})
+	end,
+	deactivate = function(self, eff)
+	end,
+}
+
+newEffect{
+	name = "ZONE_AURA_ABASHED",
+	desc = "Abashed Expanse",
+	no_stop_enter_worlmap = true,
+	long_desc = function(self, eff) return ("地 图 效 果 : 你 的 相 位 之 门 法 术 在 这 里 极 其 容 易 施 展 ， 不 论 等 级 如 何 ，都 能 指 定 位 置 。") end,
+	decrease = 0, no_remove = true,
+	type = "other",
+	subtype = { aura=true },
+	status = "detrimental",
+	zone_wide_effect = true,
+	parameters = {},
+	activate = function(self, eff)
+	end,
+	deactivate = function(self, eff)
 	end,
 }

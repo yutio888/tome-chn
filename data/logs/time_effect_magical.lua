@@ -1007,6 +1007,14 @@ logCHN:newLog{
 	end,
 }
 logCHN:newLog{
+	log = "#Target# is no longer tethered.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s不再被时空锁链固定。"):format(a)
+	end,
+}
+
+logCHN:newLog{
 	log = "#Target# is anchored.",
 	fct = function(a)
 		a = npcCHN:getName(a)

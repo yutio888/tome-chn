@@ -1,5 +1,5 @@
 ﻿-- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2015 Nicolas Casalini
+-- Copyright (C) 2009 - 2016 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -121,7 +121,7 @@ function _M:runReal()
 
 	self:setupDisplayMode(false, "postinit")
 	if self.level and self.level.data.day_night then self.state:dayNightCycle() end
-	if self.level and self.player then self.calendar = Calendar.new("/data/calendar_"..(self.player.calendar or "allied")..".lua", "今天是 %s %s 第 %s 年 卓越纪，马基埃亚尔。\n现在时间是 %02d:%02d.", 122, 167, 11) end
+	if self.level and self.player then self:rebuildCalendar() end
 
 	-- Setup inputs
 	self:setupCommands()
@@ -165,6 +165,11 @@ function _M:runReal()
 		self.nicer_tiles:postProcessLevelTilesOnLoad(self.level)
 	end
 end
+
+function _M:rebuildCalendar()
+	self.calendar = Calendar.new("/data/calendar_"..(self.player.calendar or "allied")..".lua", "今天是 %s %s 第 %s 年 卓越纪，马基埃亚尔。\n现在时间是 %02d:%02d.", 122, 167, 11) 
+end
+
 
 --- Resize the hotkeys
 function _M:resizeIconsHotkeysToolbar()
@@ -220,6 +225,7 @@ function _M:newGame()
 		if config.settings.cheat then self.player.__cheated = true end
 
 		self.player:recomputeGlobalSpeed()
+		self:rebuildCalendar()
 
 		-- Force the hotkeys to be sorted.
 		self.player:sortHotkeys()
@@ -236,6 +242,8 @@ function _M:newGame()
 	end
 	local nb_unlocks, max_unlocks = self:countBirthUnlocks()
 	self.creating_player = true
+	self.extra_birth_option_defs = {}
+	self:triggerHook{"ToME:extraBirthOptions", options = self.extra_birth_option_defs}
 	local birth; birth = Birther.new("角色创建 ("..nb_unlocks.."/"..max_unlocks.." 未解锁项)", self.player, {"base", "world", "difficulty", "permadeath", "race", "subrace", "sex", "class", "subclass" }, function(loaded)
 		if not loaded then
 			self.calendar = Calendar.new("/data/calendar_"..(self.player.calendar or "allied")..".lua", "今天是 %s %s 第 %s 年 卓越纪，马基埃亚尔。\n现在时间是 %02d:%02d.", 122, 167, 11)
@@ -243,6 +251,14 @@ function _M:newGame()
 			self.player.make_tile = nil
 			self.player:check("before_starting_zone")
 			self.player:check("class_start_check")
+
+			-- Save current state of extra birth options.
+			self.player.extra_birth_options = {}
+			for _, option in ipairs(self.extra_birth_option_defs) do
+				if option.id then
+					self.player.extra_birth_options[option.id] = config.settings.tome[option.id]
+				end
+			end
 
 			-- Configure & create the worldmap
 			self.player.last_wilderness = self.player.default_wilderness[3] or "wilderness"
@@ -276,13 +292,14 @@ function _M:newGame()
 					self.player:onBirth(birth)
 					-- For quickbirth
 					savefile_pipe:push(self.player.name, "entity", self.party, "engine.CharacterVaultSave")
-					self.creating_player = false
 
 					self.player:grantQuest(self.player.starting_quest)
+					self.creating_player = false
 
 					birth_done()
 					self.player:check("on_birth_done")
 					self:setTacticalMode(self.always_target)
+					self:triggerHook{"ToME:birthDone"}
 
 					if __module_extra_info.birth_done_script then loadstring(__module_extra_info.birth_done_script)() end
 				end, true)
@@ -323,6 +340,7 @@ function _M:newGame()
 			birth_done()
 			self.player:check("on_birth_done")
 			self:setTacticalMode(self.always_target)
+			self:triggerHook{"ToME:birthDone"}
 		end
 	end, quickbirth, 800, 600)
 	self:registerDialog(birth)
@@ -429,7 +447,7 @@ function _M:computeAttachementSpots()
 			setfenv(f, t)
 			local ok, err = pcall(f)
 			if not ok then print("Loading tileset attachements error", err) end
-		end		
+		end
 	end
 	for _, file in ipairs(fs.list(Tiles.prefix)) do if file:find("^attachements%-.+.lua$") then
 		print("Loading tileset attachements from ", Tiles.prefix..file)
@@ -439,7 +457,7 @@ function _M:computeAttachementSpots()
 			setfenv(f, t)
 			local ok, err = pcall(f)
 			if not ok then print("Loading tileset attachements error", err) end
-		end		
+		end
 	end end
 	self:computeAttachementSpotsFromTable(t)
 end
@@ -473,7 +491,7 @@ function _M:computeFacings()
 			setfenv(f, t)
 			local ok, err = pcall(f)
 			if not ok then print("Loading tileset facings error", err) end
-		end		
+		end
 	end
 	for _, file in ipairs(fs.list(Tiles.prefix)) do if file:find("^facings%-.+.lua$") then
 		print("Loading tileset facings from ", Tiles.prefix..file)
@@ -483,7 +501,7 @@ function _M:computeFacings()
 			setfenv(f, t)
 			local ok, err = pcall(f)
 			if not ok then print("Loading tileset facings error", err) end
-		end		
+		end
 	end end
 	self:computeFacingsFromTable(t)
 end
@@ -596,12 +614,12 @@ function _M:createFBOs()
 			gestures = Shader.new("main_fbo/gestures"),
 		}
 		self.posteffects_use = { self.fbo_shader.shad }
-		if not self.fbo_shader.shad then self.fbo = nil self.fbo_shader = nil end 
+		if not self.fbo_shader.shad then self.fbo = nil self.fbo_shader = nil end
 		self.fbo2 = core.display.newFBO(Map.viewport.width, Map.viewport.height)
 
 		if self.gestures and self.posteffects and self.posteffects.gestures and self.posteffects.gestures.shad then self.gestures.shader = self.posteffects.gestures.shad end
 	end
-	
+
 	if self.player then self.player:updateMainShader() end
 
 	self.full_fbo = core.display.newFBO(self.w, self.h)
@@ -792,7 +810,7 @@ function _M:changeLevel(lev, zone, params)
 			for i = #inven, 1, -1 do
 				local o = inven[i]
 				if o.__transmo then
-					p:transmoInven(inven, i, o)
+					p:transmoInven(inven, i, o, p.default_transmo_source)
 				end
 			end
 			if game.zone == oldzone and game.level == oldlevel then
@@ -939,6 +957,7 @@ function _M:changeLevelReal(lev, zone, params)
 
 	-- Post process if needed once the nicer tiles are done
 	if self.level.data and self.level.data.post_nicer_tiles then self.level.data.post_nicer_tiles(self.level) end
+	self.zone:runPostGeneration(self.level)
 
 	-- After ? events ?
 	if afternicer then afternicer() end
@@ -1080,7 +1099,7 @@ function _M:changeLevelReal(lev, zone, params)
 		end
 	end
 	if self.level.data.effects then
-		for uid, act in pairs(self.level.entities) do 
+		for uid, act in pairs(self.level.entities) do
 			if act.setEffect then for _, effid in ipairs(self.level.data.effects) do
 				act:setEffect(effid, 1, {})
 			end end
@@ -1164,6 +1183,10 @@ end
 
 function _M:getCampaign()
 	return self:getPlayer(true).descriptor.world
+end
+
+function _M:isCampaign(name)
+	return self:getPlayer(true).descriptor.world == name
 end
 
 --- Says if this savefile is usable or not
@@ -1290,8 +1313,8 @@ end
 -- displayDelayedLogDamage to display the queued combat messages
 
 -- output a message to the log based on the visibility of an actor to the player
-function _M.logSeen(e, style, ...) 
-	if e and e.player or (not e.dead and e.x and e.y and game.level and game.level.map.seens(e.x, e.y) and game.player:canSee(e)) then game.log(style, ...) end 
+function _M.logSeen(e, style, ...)
+	if e and e.player or (not e.dead and e.x and e.y and game.level and game.level.map.seens(e.x, e.y) and game.player:canSee(e)) then game.log(style, ...) end
 end
 
 -- determine whether an action between 2 actors should produce a message in the log and if the player
@@ -1300,11 +1323,10 @@ end
 -- tgt, tgtSeen: target display?, identify?
 -- output: Visible? and srcSeen (source is identified by the player), tgtSeen(target is identified by the player)
 function _M:logVisible(source, target)
-	-- target should display if it's the player, an actor in a seen tile, or a non-actor without coordinates
-	local tgt = target and (target.player or (target.__is_actor and game.level.map.seens(target.x, target.y)) or (not target.__is_actor and not target.x))
+	-- target should display if it's the player, an actor (or projectile) in a seen tile, or a non-actor without coordinates
+	local tgt = target and (target.player or ((target.__is_actor or target.__is_projectile) and game.level.map.seens(target.x, target.y)) or (not target.__is_actor and not target.x))
 	local tgtSeen = tgt and (target.player or game.player:canSee(target)) or false
 	local src, srcSeen = false, false
---	local srcSeen = src and (not source.x or (game.player:canSee(source) and game.player:canSee(target)))
 	-- Special cases
 	if not source.x then -- special case: unpositioned source uses target parameters (for timed effects on target)
 		if tgtSeen then
@@ -1312,8 +1334,8 @@ function _M:logVisible(source, target)
 		else
 			src, tgt = nil, nil
 		end
-	else -- source should display if it's the player or an actor in a seen tile, or same as target for non-actors
-		src = source.player or (source.__is_actor and game.level.map.seens(source.x, source.y)) or (not source.__is_actor and tgt)
+	else -- source should display if it's the player or an actor (or projectile) in a seen tile, or same as target for non-actors
+		src = source.player or ((source.__is_actor or source.__is_projectile) and game.level.map.seens(source.x, source.y)) or (not source.__is_actor and tgt)
 		srcSeen = src and game.player:canSee(source) or false
 	end	
 	
@@ -1500,6 +1522,7 @@ function _M:displayMap(nb_keyframes)
 
 		-- Display using Framebuffer, so that we can use shaders and all
 		if self.fbo then
+			if self.level.data.display_prepare then self.level.data.display_prepare(self.level, 0, 0, nb_keyframes) end
 			self.fbo:use(true)
 				if self.level.data.background then self.level.data.background(self.level, 0, 0, nb_keyframes) end
 				map:display(0, 0, nb_keyframes, config.settings.tome.smooth_fov, self.fbo)
@@ -1691,14 +1714,14 @@ function _M:setupCommands()
 			g:getMapObjects(game.level.map.tiles, mos, 1)
 			table.print(mos)
 			print("===============")
+			local attrs = game.level.map.attrs[self.player.x + self.player.y * self.level.map.w]
+			table.print(attrs)
+			print("===============")
 		end end,
 		[{"_g","ctrl"}] = function() if config.settings.cheat then
-			for i = 1, 10000 do
-				game.log("PLOP")
-				profile.chat:addMessage("talk", "tome", "test", "test", "test", {"test", colors.GOLD})
-			end
+			self:changeLevel(1, "orcs+primal-forest")
 do return end
-			local o = game.zone:makeEntity(game.level, "object", {random_object=true}, nil, true)
+			local o = game.zone:makeEntity(game.level, "object", {subtype="steamsaw", random_object=true}, nil, true)
 			if o then
 				o:identify(true)
 				game.zone:addEntity(game.level, o, "object", game.player.x, game.player.y-1)
@@ -1793,6 +1816,7 @@ do return end
 					end
 				elseif not self.player:autoExplore() then
 					self.log("这一层没有地方可以探索了。")
+					self:triggerHook{"Player:autoExplore:nowhere"}
 				end
 			end end
 
@@ -1942,6 +1966,17 @@ do return end
 			self:registerDialog(require("mod.dialogs.CharacterSheet").new(self.player))
 		end,
 
+		SHOW_CHARACTER_SHEET_CURSOR = function()
+			local mx, my = self.mouse.last_pos.x, self.mouse.last_pos.y
+			local tmx, tmy = self.level.map:getMouseTile(mx, my)
+			local a = self.level.map(tmx, tmy, Map.ACTOR)
+			self:registerDialog(require("mod.dialogs.CharacterSheet").new((config.settings.cheat or self.player:canSee(a)) and a or self.player))
+		end,
+
+		CENTER_ON_PLAYER = function()
+			self.level.map:centerViewAround(self.player.x, self.player.y)
+		end,
+
 		SHOW_MESSAGE_LOG = function()
 			self:registerDialog(require("mod.dialogs.ShowChatLog").new("Message Log", 0.6, self.uiset.logdisplay, profile.chat))
 		end,
@@ -2088,6 +2123,18 @@ do return end
 				game_or_player.bump_attack_disabled = true
 			end
 		end
+	}
+	-- add key bindings for targeting mode
+	self.targetmode_key:addBinds{
+		SHOW_CHARACTER_SHEET_CURSOR = function()
+			local target = table.get(self, "target", "target", "entity") -- gets the actor under the targeting reticle
+			target = target and (config.settings.cheat or self.player:canSee(target)) and target or self.player
+			self:registerDialog(require("mod.dialogs.CharacterSheet").new(target))
+		end,
+		SHOW_CHARACTER_SHEET = function()
+			self:registerDialog(require("mod.dialogs.CharacterSheet").new(self.player))
+		end,
+		LUA_CONSOLE = self.key.virtuals.LUA_CONSOLE,
 	}
 	engine.interface.PlayerHotkeys:bindAllHotkeys(self.key, not_wild(function(i)
 		self:targetTriggerHotkey(i)
@@ -2424,13 +2471,17 @@ end
 
 --- Create a random lore object and place it
 function _M:placeRandomLoreObjectScale(base, nb, level)
-	local dist = ({
-		[5] = { {1}, {2,3}, {4,5} }, -- 5 => 3
-		korpul = { {1,2}, {3,4} }, -- 5 => 3
-		maze = { {1,2,3,4},{5,6,7} }, -- 5 => 3
-		daikara = { {1}, {2}, {3}, {4,5} },
-		[7] = { {1,2}, {3,4}, {5,6}, {7} }, -- 7 => 4
-	})[nb][level]
+	local dist
+	if type(nb) == "table" then dist = nb[level]
+	else
+		dist = ({
+			[5] = { {1}, {2,3}, {4,5} }, -- 5 => 3
+			korpul = { {1,2}, {3,4} }, -- 5 => 3
+			maze = { {1,2,3,4},{5,6,7} }, -- 5 => 3
+			daikara = { {1}, {2}, {3}, {4,5} },
+			[7] = { {1,2}, {3,4}, {5,6}, {7} }, -- 7 => 4
+		})[nb][level]
+	end
 	if not dist then return end
 	for _, i in ipairs(dist) do self:placeRandomLoreObject(base..i) end
 end

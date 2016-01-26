@@ -58,6 +58,7 @@ t_talent_type_name = {}
 	t_talent_type_name["torment"] = "折磨系"
 	t_talent_type_name["vim"] = "活力系"
 	t_talent_type_name["vile life"] = "邪恶生命系"
+	t_talent_type_name["rot"] = "腐烂系"
 	--cunning
 	t_talent_type_name["ambush"] = "伏击系"
 	t_talent_type_name["dirty fighting"] = "卑劣攻击系"
@@ -81,7 +82,7 @@ t_talent_type_name = {}
 	t_talent_type_name["force of will"] = "意志之力系"
 	t_talent_type_name["gestures"] = "手势系"
 	t_talent_type_name["gloom"] = "黑暗光环系"
-	t_talent_type_name["one with shadows"] = "强化阴影系"
+	t_talent_type_name["one with shadows"] = "同化阴影系"
 	t_talent_type_name["predator"] = "猎杀系"
 	t_talent_type_name["primal magic"] = "源初魔法系"
 	t_talent_type_name["punishments"] = "惩罚系"
@@ -90,7 +91,7 @@ t_talent_type_name = {}
 	t_talent_type_name["slaughter"] = "杀戮系"
 	t_talent_type_name["strife"] = "冲突系"
 	t_talent_type_name["traveler"] = "旅行系"	
-	
+	t_talent_type_name["advanced shadowmancy"] = "阴影进阶系"
 	--gifts
 	t_talent_type_name["antimagic"] = "反魔法系"
 	t_talent_type_name["call of the wild"] = "自然召唤系"

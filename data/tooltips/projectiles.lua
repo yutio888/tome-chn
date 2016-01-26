@@ -26,6 +26,9 @@ function getTooltipProjectileCHN(desc)
 					desc[i] = desc[i]:gsub("Projectile: ","抛射物： ")
 				elseif string.find(desc[i], "Origin: ") then 
 					desc[i] = desc[i]:gsub("Origin: ","发射者： ")
+				elseif string.find(desc[i], "Speed: ") then 
+					desc[i] = desc[i]:gsub("Speed: ","飞行速度： "):gsub("southeast","东南"):gsub("southwest","西南"):gsub("northeast","东北"):gsub("northwest","西北")
+													 :gsub("south","南"):gsub("east","东"):gsub("west","西"):gsub("north","北")		
 				elseif string.find(desc[i], "Affect origin chance: ") then 
 					desc[i] = desc[i]:gsub("Affect origin chance: ","伤害发射者的概率： ")
 				elseif string.find(desc[i], "Affect origin's friends chance: ") then 

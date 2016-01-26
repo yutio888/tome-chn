@@ -9,7 +9,7 @@ registerTalentTranslation{
 		return ([[在 %d 码 范 围 内 随 机 传 送 你 自 己。 
 		 在 等 级 4 时， 你 可 以 传 送 指 定 生 物（ 怪 物 或 被 护 送 者）。 
 		 在 等 级 5 时， 你 可 以 选 择 传 送 位 置（ 半 径 %d ）。 
-		 如 果 目 标 位 置 不 在 你 的 视 线 里， 则 法 术 有 可 能 失 败。 
+		 如 果 目 标 位 置 不 在 你 的 视 线 里， 则 法 术 有 可 能 失 败，变 为 随 机 传 送。 
 		 受 法 术 强 度 影 响， 影 响 范 围 有 额 外 加 成。]]):format(range, radius)
 	end,
 }
@@ -20,10 +20,11 @@ registerTalentTranslation{
 	info = function(self, t)
 		local range = t.getRange(self, t)
 		local radius = t.getRadius(self, t)
-		return ([[在 %d 码 范 围 内 随 机 传 送， 最 小 距 离 15 。 
+		return ([[在 %d 码 范 围 内 随 机 传 送 。 
 		 在 等 级 4 时， 你 可 以 传 送 指 定 生 物（ 怪 物 或 被 护 送 者）。 
 		 在 等 级 5 时， 你 可 以 选 择 传 送 位 置（ 半 径 %d ）。 
-		 受 法 术 强 度 影 响， 影 响 范 围 有 额 外 加 成。]]):format(range, radius)
+		 随 机 传 送 的 最 小 半 径 为 %d。
+		 受 法 术 强 度 影 响， 影 响 范 围 有 额 外 加 成。]]):format(range, radius, t.minRange)
 	end,
 }
 

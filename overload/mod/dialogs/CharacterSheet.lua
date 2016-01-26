@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2015 Nicolas Casalini
+-- Copyright (C) 2009 - 2016 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -29,25 +29,54 @@ local Separator = require "engine.ui.Separator"
 local Stats = require "engine.interface.ActorStats"
 local Textzone = require "engine.ui.Textzone"
 local FontPackage = require "engine.FontPackage"
+local EquipDoll = require "engine.ui.EquipDoll"
+local TextzoneList = require "engine.ui.TextzoneList"
 
 module(..., package.seeall, class.inherit(Dialog, mod.class.interface.TooltipsData))
 
 cs_player_dup = nil
+local tabs_list = {general=true, attack=true, defense=true, talents=true, equipment=true}
 
-function _M:init(actor)
+function _M:init(actor, start_tab)
 	if _M.cs_player_dup and _M.cs_player_dup.name ~= actor.name then _M.cs_player_dup = nil end
 
 	self.actor = actor
-	Dialog.init(self, "角色面板   "..self.actor.name, math.max(game.w * 0.7, 950), 500)
+	start_tab = start_tab and tabs_list[start_tab] and start_tab or "general"
 
 	self.font = core.display.newFont(chn123_tome_font(), 12)
+	self.font_w, self.font_h = self.font:size(' ')
 	self.font_h = self.font:lineSkip()
 
+
+	Dialog.init(self, "角色面板   "..self.actor.name,  util.bound(self.font_w*200, game.w*0.5, game.w*0.95), util.bound(self.font_h*36, game.h*.35, game.h*.85))
+
 	self.talent_sorting = config.settings.tome.charsheet_talent_sorting or 1
-	self.c_general = Tab.new{title="综合", default=true, fct=function() end, on_change=function(s) if s then self:switchTo("general") end end}
-	self.c_attack = Tab.new{title="攻击", default=false, fct=function() end, on_change=function(s) if s then self:switchTo("attack") end end}
-	self.c_defence = Tab.new{title="防御", default=false, fct=function() end, on_change=function(s) if s then self:switchTo("defence") end end}
-	self.c_talents = Tab.new{title="技能", default=false, fct=function() end, on_change=function(s) if s then self:switchTo("talents") end end}
+
+	self.c_general = Tab.new{title="[G]综合", default=start_tab == "general", fct=function() end, on_change=function(s) if s then self:switchTo("general") end end}
+	self.c_attack = Tab.new{title="[A]攻击", default=start_tab == "attack", fct=function() end, on_change=function(s) if s then self:switchTo("attack") end end}
+	self.c_defence = Tab.new{title="[D]防御", default=start_tab == "defense", fct=function() end, on_change=function(s) if s then self:switchTo("defence") end end}
+	self.c_talents = Tab.new{title="[T]技能", default=start_tab == "talents", fct=function() end, on_change=function(s) if s then self:switchTo("talents") end end}
+	-- Select equipment/switch sets
+	self.equip_set = self.actor.off_weapon_slots and "off" or "main"
+	self.c_equipment = Tab.new{title="[E]装备: "..self.equip_set:gsub("main","主手"):gsub("off","副手").." 装备", default=start_tab == "equipment",
+		fct=function()
+		end,
+		on_change=function(s)
+			if not self.actor.quickSwitchWeapons then return end
+			if s then
+				if self.last_tab == "equipment" then
+					local switch_set = self.equip_set == "off" and "main" or "off"
+					if self:updateEquipDollRefs(switch_set) then
+						self.equip_set = switch_set
+						game.logPlayer(self.actor, "#RED#Displaying %s set for %s (equipment NOT switched)", self.equip_set, self.actor.name:capitalize())
+					end
+				end
+				self.c_equipment.title = "[E]装备: "..self.equip_set:gsub("main","主手"):gsub("off","副手").." 装备"
+				self:switchTo("equipment")
+				self.c_equipment:generate() -- Force redraw
+			end
+		end
+	}
 	self.b_talents_sorting = Button.new{text="分类: "..({"技能树", "名称", "类型"})[self.talent_sorting], hide=true, width=100, fct=function()
 		self.talent_sorting = self.talent_sorting + 1
 		if self.talent_sorting > 3 then self.talent_sorting = 1 end
@@ -60,8 +89,11 @@ function _M:init(actor)
 		self.b_talents_sorting:generate()
 		self:switchTo("talents") -- Force a redraw
 	end}
-
-
+	self.b_show_equipment = Button.new{text="[I]物品", fct=function()
+		self:showInventory()
+		return
+	end}
+	
 	local tw, th = self.font_bold:size(self.title)
 
 	self.vs = Separator.new{dir="vertical", size=self.iw}
@@ -110,25 +142,76 @@ function _M:init(actor)
 
 	self.c_desc = SurfaceZone.new{width=self.iw, height=self.ih - self.c_general.h - self.vs.h - self.c_tut.h,alpha=0}
 
+	self.equip_frame = { -- display equipment
+		dialog = self,
+		c_doll = EquipDoll.new{equipdoll = self.actor.equipdoll or "default", actor=self.actor, title=false,
+			subobject=self.actor:attr("can_tinker") and "getTinker" or nil,
+			subobject_restrict_slots=self.actor.tinker_restrict_slots,
+			drag_enable=false, filter=nil,
+			scale = math.min(self.ih/660, self.iw/1700), --scale doll to fit dialog
+			fct=function(item) end,
+			on_select=function(ui, inven, item, o)
+--game.log("c_doll select called with item %s (ui:%s, inven:%s, item:%s)", o and o.name, tostring(ui), inven, item)
+				if o and inven and item and ui and ui.x and ui.y then
+--game.log("#GREY#c_doll select(local):ui = (%s,%s) to (%s,%s)", ui.x, ui.y, ui.x+ui.ui.w, ui.y+ui.ui.h)
+					self.equip_frame.c_obj_desc:switchItem({item=item, object=o, ui=ui, inven=inven}, o:getDesc({do_color=true}, nil, true, self.actor))
+				end
+			end,
+		},
+		vsep = Separator.new{dir="horizontal", size=self.ih - self.c_tut.h - self.c_general.h - 20}
+	}
+	self.equip_frame.c_doll.dialog = self
+	self.equip_frame.c_obj_desc = TextzoneList.new{focus_check=true, scrollbar=true, pingpong = 20, width=self.iw - self.equip_frame.c_doll.w - self.equip_frame.vsep.w - 50, height = self.ih - self.c_tut.h, no_color_bleed=true,
+		dest_area = { h = self.ih - self.c_tut.h - self.vs.h},
+		can_focus = true,
+		on_focus = function(self, v)
+		end,
+		font = self.font,
+		}
+
 	self:loadUI{
 		{left=0, top=0, ui=self.c_tut},
 		{left=self.iw * 0.5, top=0, ui=self.c_playtime},
 		{left=15, top=self.c_tut.h, ui=self.c_general},
+--		{right=130, top=50, ui=self.b_show_equipment}, -- misaligned mouse zone?
+		{right=200, top=self.c_tut.h, ui=self.b_show_equipment},
 		{left=15+self.c_general.w, top=self.c_tut.h, ui=self.c_attack},
 		{left=15+self.c_general.w+self.c_attack.w, top=self.c_tut.h, ui=self.c_defence},
 		{left=15+self.c_general.w+self.c_attack.w+self.c_defence.w, top=self.c_tut.h, ui=self.c_talents},
+		{left=15+self.c_general.w+self.c_attack.w+self.c_defence.w+self.c_talents.w, top=self.c_tut.h, ui=self.c_equipment},
 		{left=0, top=self.c_tut.h + self.c_general.h, ui=self.vs},
 		{right=0, bottom=0, ui=self.b_talents_sorting},
 
 		{left=0, top=self.c_tut.h + self.c_general.h + 5 + self.vs.h, ui=self.c_desc},
 	}
-	self:setFocus(self.c_general)
+--	self:setFocus(self.c_general)
 	self:setupUI()
 
-	self:switchTo("general")
+	self:switchTo(start_tab)
 
 	self:updateKeys()
 end
+
+-- Immunity types to display matching Actor:attr(<immunity>)
+_M.status_immunities = {
+	poison_immune 	= "毒素     ",
+	disease_immune 	= "疾病     ", 
+	cut_immune 	= "流血     ",
+	confusion_immune= "混乱     ",
+	blind_immune 	= "致盲     ",
+	silence_immune 	= "沉默     ",
+	disarm_immune 	= "缴械     ",
+	pin_immune 	= "定身     ",
+	stun_immune 	= "震慑/冻结",
+	sleep_immune	= "睡眠     ",
+	fear_immune 	= "恐惧     ",
+	knockback_immune= "击退     ",
+	stone_immune 	= "石化     ",
+	instakill_immune= "即死     ",
+	teleport_immune = "传送     ",
+	negative_status_effect_immune = "全体     "}
+-- Specific tooltips to use for certain immunity types
+_M.immunity_tooltips = {instakill_immune = "TOOLTIP_INSTAKILL_IMMUNE", negative_status_effect_immune = "TOOLTIP_NEGATIVE_STATUS_IMMUNE", stun_immune="TOOLTIP_STUN_IMMUNE"}
 
 function _M:innerDisplay(x, y, nb_keyframes)
 	self.actor:toScreen(nil, x + self.iw - 128, y + 6, 128, 128)
@@ -136,14 +219,18 @@ end
 
 function _M:switchTo(kind)
 	self.b_talents_sorting.hide = true
+	self.b_show_equipment.hide = not self.actor.player
+	self:hideEquipmentFrame() -- turn off special frames for equipment
 	self:drawDialog(kind, _M.cs_player_dup)
-	if kind == "general" then self.c_attack.selected = false self.c_defence.selected = false self.c_talents.selected = false
-	elseif kind == "attack" then self.c_general.selected = false self.c_defence.selected = false self.c_talents.selected = false
-	elseif kind == "defence" then self.c_attack.selected = false self.c_general.selected = false self.c_talents.selected = false
+	if kind == "general" then self.c_attack.selected = false self.c_defence.selected = false self.c_talents.selected = false self.c_equipment.selected = false
+	elseif kind == "attack" then self.c_general.selected = false self.c_defence.selected = false self.c_talents.selected = false self.c_equipment.selected = false
+	elseif kind == "defence" then self.c_attack.selected = false self.c_general.selected = false self.c_talents.selected = false self.c_equipment.selected = false
 	elseif kind == "talents" then
 		self.b_talents_sorting.hide = false
-		self.c_attack.selected = false self.c_general.selected = false self.c_defence.selected = false
+		self.c_attack.selected = false self.c_general.selected = false self.c_defence.selected = false self.c_equipment.selected = false
+	elseif kind == "equipment" then self.c_attack.selected = false self.c_general.selected = false self.c_talents.selected = false self.c_defence.selected = false
 	end
+	self.last_tab = kind
 	self:updateKeys()
 end
 
@@ -155,22 +242,51 @@ function _M:updateKeys()
 	self.key:addCommands{
 	_TAB = function() self:tabTabs() end,
 	__TEXTINPUT = function(c)
-		if (c == 'd' or c == 'D') and self.actor.player then
+		if (c == 'u' or c == 'U') and self.actor.player then
 			self:dump()
+		elseif (c == 'g' or c == 'G') then
+			self.c_general:select()
+		elseif (c == 'a' or c == 'A') then
+			self.c_attack:select()
+		elseif (c == 'd' or c == 'D') then
+			self.c_defence:select()
+		elseif (c == 't' or c == 'T') then
+			self.c_talents:select()
+		elseif (c == 'e' or c == 'E') then
+			self.c_equipment:select()
+		elseif (c == 'i' or c == 'I') then
+			self:showInventory()
 		end
 	end,
 	}
-
+	if self.c_equipment.selected then
+		local OD = self.equip_frame.c_obj_desc
+		self.key:addCommands{
+		[{"_UP","ctrl"}] = function() OD.key:triggerVirtual("MOVE_UP") end,
+		[{"_DOWN","ctrl"}] = function()	OD.key:triggerVirtual("MOVE_DOWN") end,
+		_HOME = function() if OD.scrollbar then OD.scrollbar.pos = 0 end end,
+		_END = function() if OD.scrollbar then OD.scrollbar.pos = OD.scrollbar.max end end,
+		_PAGEUP = function() if OD.scrollbar then OD.scrollbar.pos = util.minBound(OD.scrollbar.pos - OD.h, 0, OD.scrollbar.max) end end,
+		_PAGEDOWN = function() if OD.scrollbar then OD.scrollbar.pos = util.minBound(OD.scrollbar.pos + OD.h, 0, OD.scrollbar.max) end end,
+	}
+	end
 	self.key:addBinds{
 		EXIT = function() _M.cs_player_dup = game.player:clone() game:unregisterDialog(self) end,
-	}
+		LUA_CONSOLE = function()
+			if config.settings.cheat then
+				local DebugConsole = require "engine.DebugConsole"
+				game:registerDialog(DebugConsole.new())
+			end
+		end,
+		}
 end
 
 function _M:tabTabs()
 	if self.c_general.selected == true then self.c_attack:select()
 	elseif self.c_attack.selected == true then self.c_defence:select()
-	elseif 	self.c_defence.selected == true then self.c_talents:select()
-	elseif self.c_talents.selected == true then self.c_general:select()
+	elseif self.c_defence.selected == true then self.c_talents:select()
+	elseif self.c_talents.selected == true then self.c_equipment:select()
+	elseif self.c_equipment.selected == true then self.c_general:select()
 	end
 end
 
@@ -196,12 +312,114 @@ function _M:mouseLink(link, text, _, _, _, w, h, x, y)
 	}, true)
 end
 
+-- Switch between equipment sets (by reference only) for the equip doll
+-- This makes sure the equipment shown in the equipdoll matches the tab setting
+-- Done this way to make sure the actor's equipment is never actually touched
+function _M:updateEquipDollRefs(showset)
+	local actor, c_doll = self.actor, self.equip_frame.c_doll
+	local mh1, mh2 = actor.inven[actor.INVEN_MAINHAND], actor.inven[actor.INVEN_QS_MAINHAND]
+	local oh1, oh2 = actor.inven[actor.INVEN_OFFHAND], actor.inven[actor.INVEN_QS_OFFHAND]
+	local pf1, pf2 = actor.inven[actor.INVEN_PSIONIC_FOCUS], actor.inven[actor.INVEN_QS_PSIONIC_FOCUS]
+	local qv1, qv2 = actor.inven[actor.INVEN_QUIVER], actor.inven[actor.INVEN_QS_QUIVER]
+	if not mh1 or not mh2 or not oh1 or not oh2 then return end
+	
+	--find ui's corresponding to displayed inventory slots and update refs to the displayed slots
+	local mhui, ohui, qvui, pfui
+	for i, ui in ipairs(c_doll.uis) do
+		if ui.ui and ui.ui.inven then
+			if not ui.ui.inven_name then -- assign inventory names the first time
+				ui.ui.inven_name = ui.ui.inven.name
+			end
+			if ui.ui.inven_name == "MAINHAND" then
+				ui.ui.inven = showset == "main" and mh1 or mh2
+			elseif ui.ui.inven_name == "OFFHAND" then
+				ui.ui.inven = showset == "main" and oh1 or oh2
+			elseif ui.ui.inven_name == "PSIONIC_FOCUS" then
+				ui.ui.inven = showset == "main" and pf1 or pf2
+			elseif ui.ui.inven_name == "QUIVER" then
+				ui.ui.inven = showset == "main" and qv1 or qv2
+			end
+		end
+	end
+	return true
+end
+
+-- show the equipment inspection area
+function _M:showEquipmentFrame()
+	local EF = self.equip_frame
+	local uis = {no_reset=true,
+		{left=EF.c_doll.w, top=self.c_tut.h + self.c_general.h + self.vs.h, ui=EF.vsep},
+		{left=0, top=self.c_tut.h + self.c_general.h + self.vs.h, ui=EF.c_doll},
+		{left=EF.c_doll.w + EF.vsep.w + 10, top=self.c_tut.h + self.c_general.h + self.vs.h, ui=EF.c_obj_desc},
+	}
+	self:loadUI(uis)
+	self:setFocus(EF.c_doll)
+	self:setupUI()
+	-- set up mouse for this tab
+	self.mouse:registerZone(self.display_x + 0, self.display_y + self.title_tex.h + self.c_tut.h + self.c_general.h + self.vs.h + 10, self.w, EF.c_doll.h,
+		function(button, x, y, xrel, yrel, bx, by, event)
+--game.log("#PINK#Csheet: c_doll mouse event (local) function: button: %s, (%s, %s), (%s, %s), [%s, %s], event:%s", button, x, y, xrel, yrel, bx, by, event)
+			if button == "wheelup" and event == "button" then
+				EF.c_obj_desc.key:triggerVirtual("MOVE_UP")
+			elseif button == "wheeldown" and event == "button" then
+				EF.c_obj_desc.key:triggerVirtual("MOVE_DOWN")
+			end
+			for i = 1, #EF.c_doll.uis do
+				local ui = EF.c_doll.uis[i]
+--game.log("#GREY#--ui[%d]: (%s,%s) to (%s,%s)", i, ui.x, ui.x + ui.ui.w, ui.y, ui.y + ui.ui.h)
+				if ui.ui.can_focus and bx >= ui.x and bx <= ui.x + ui.ui.w and by >= ui.y and by <= ui.y + ui.ui.h then
+--game.log("#YELLOW#--Setting focus for ui[%d]: (%s,%s) to (%s,%s)", i, ui.x, ui.x + ui.ui.w, ui.y, ui.y + ui.ui.h)
+					EF.c_doll:setInnerFocus(i)
+					-- Pass the event
+					ui.ui.mouse:delegate(button, x, y, xrel, yrel, bx, by, event)
+					return true
+				end
+			end
+			EF.c_doll:no_focus()
+		end,
+		mode, "equip_doll")
+end
+
+-- hide the equipment inspection area
+function _M:hideEquipmentFrame()
+	self.mouse:unregisterZone("equip_doll") -- disable equip doll mouse functions
+	local EF = self.equip_frame
+	self:toggleDisplay(EF.c_doll, false)
+	self:toggleDisplay(EF.c_obj_desc, false)
+	self:toggleDisplay(EF.vsep, false)
+end
+
+--Failing to update Csheet on equipment drag?
+-- show the inventory screen
+function _M:showInventory()
+	if self.actor.no_inventory_access or not self.actor.player then return end
+	local d
+	local titleupdator = self.actor:getEncumberTitleUpdator("Inventory")
+	d = require("mod.dialogs.ShowEquipInven").new(titleupdator(), self.actor, nil,
+		function(o, inven, item, button, event)
+			if not o then return end
+			local ud = require("mod.dialogs.UseItemDialog").new(event == "button", self.actor, o, item, inven, function(_, _, _, stop)
+				d:generate()
+				d:generateList()
+				d:updateTitle(titleupdator())
+				if stop then game:unregisterDialog(d) game:unregisterDialog(self)
+				end
+				if self.actor.changed then
+					_M.cs_player_dup = d._actor_to_compare --update comparison info
+					self:switchTo(self.last_tab) -- force refresh
+				end
+			end)
+			game:registerDialog(ud)
+		end
+		)
+	game:registerDialog(d)
+	d._actor_to_compare = d._actor_to_compare or game.player:clone() -- save comparison info
+end
+
 function _M:drawDialog(kind, actor_to_compare)
-	--actor_to_compare = actor_to_compare or {}
+--game.log("Drawing dialog for %s(%s vs %s)", self.actor.name, tostring(self.actor), actor_to_compare)
 	self.c_desc.mouse:reset()
 	self.c_desc.key:reset()
-
---	self:setupUI()
 
 	local player = self.actor
 	local s = self.c_desc.s
@@ -341,17 +559,13 @@ function _M:drawDialog(kind, actor_to_compare)
 		s:drawStringBlended(self.font, "性别："..((player.descriptor and player.descriptor.sex) or (player.female and "女性" or "男性")), w, h, 0, 200, 255, true) h = h + self.font_h
 		s:drawStringBlended(self.font, "种族："..((player.descriptor and player.descriptor.subrace) or player.type:capitalize()), w, h, 0, 200, 255, true) h = h + self.font_h
 		s:drawStringBlended(self.font, "职业："..((player.descriptor and player.descriptor.subclass) or player.subtype:capitalize()), w, h, 0, 200, 255, true) h = h + self.font_h
-		s:drawStringBlended(self.font, "体型："..player:TextSizeCategory(), w, h, 0, 200, 255, true) h = h + self.font_h
 
-		h = h + self.font_h
 		if player:attr("forbid_arcane") then
 			local follow = (player.faction == "zigur" or player:attr("zigur_follower")) and "伊格追随者" or "反魔志愿者"
-			s:drawColorStringBlended(self.font, "#ORCHID#伊格追随者", w, h, 255, 255, 255, true) h = h + self.font_h
+			self:mouseTooltip(self.TOOLTIP_ANTIMAGIC_USER, s:drawColorStringBlended(self.font, "#ORCHID#"..follow, w+200, h, 255, 255, 255, true))
 		end
-		if player:attr("blood_life") then
-			s:drawColorStringBlended(self.font, "#DARK_RED#生命之血", w, h, 255, 255, 255, true) h = h + self.font_h
-		end
-
+		h = h + self.font_h
+		s:drawStringBlended(self.font, "体型 : "..(player:TextSizeCategory():capitalize()), w, h, 0, 200, 255, true) h = h + self.font_h
 		h = h + self.font_h
 		self:mouseTooltip(self.TOOLTIP_LEVEL, s:drawColorStringBlended(self.font,  "等级：#00ff00#"..player.level, w, h, 255, 255, 255, true)) h = h + self.font_h
 		self:mouseTooltip(self.TOOLTIP_LEVEL, s:drawColorStringBlended(self.font, ("经验值：#00ff00#%2d%%"):format(100 * cur_exp / max_exp), w, h, 255, 255, 255, true)) h = h + self.font_h
@@ -359,55 +573,66 @@ function _M:drawDialog(kind, actor_to_compare)
 
 		h = h + self.font_h
 
-		text = compare_fields(player, actor_to_compare, "max_life", "%d", "%+.0f")
+		s:drawColorStringBlended(self.font, "#LIGHT_BLUE#资源:", w, h, 255, 255, 255, true) h = h + self.font_h
+		text = compare_fields(player, actor_to_compare, "max_life", "%d", "%+.0f max")
 		if player.die_at ~=  0 or (actor_to_compare and actor_to_compare.die_at ~=0) then 
 			text = text .. " #a08080#[" .. compare_fields(player, actor_to_compare, "die_at", "生命底线：%+d","%+.0f", 1, true) .. "]"
 		end
 		if player.life < 0 then self:mouseTooltip(self.TOOLTIP_LIFE, s:drawColorStringBlended(self.font, ("#c00000#生命值：#00ff00#???/%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
 		else self:mouseTooltip(self.TOOLTIP_LIFE, s:drawColorStringBlended(self.font, ("#c00000#生命值：#00ff00#%d/%s"):format(player.life, text), w, h, 255, 255, 255, true)) h = h + self.font_h
 		end
+		-- general resources
+		local function getCHNresourcename(name)
+			name=name:gsub("Stamina","体力"):gsub("Mana","法力"):gsub("Soul","灵魂"):gsub("Equilibrium","失衡")
+				 :gsub("Vim","活力"):gsub("Positive","正能量"):gsub("Negative","负能量"):gsub("Hate","仇恨")
+				 :gsub("Paradox","紊乱"):gsub("Psi","意念力"):gsub("Feedback","反馈")
+			return name
+		end
+		for res, res_def in ipairs(player.resources_def) do
+			local rname = res_def.short_name
+			local val_text, reg_text
+			if not res_def.hidden_resource and player:knowTalent(res_def.talent) then
+				local status_text = table.get(res_def.CharacterSheet, "status_text") or res_def.status_text
+				if status_text then --use resource specific status text if available
+					val_text = status_text(player, actor_to_compare, compare_fields)
+				else -- generate std. status text
+					text = compare_fields(player, actor_to_compare, function(act) return act[res_def.invert_values and res_def.getMinFunction or res_def.getMaxFunction](act) or 0 end, "%d", "%+.0f "..(res_def.invert_values and "min" or "max"), nil, res_def.invert_values)
+					val_text = ("%d/%s"):format(player[res_def.getFunction](player), text)
+				end
+				local tt = self["TOOLTIP_"..rname:upper()] or ([[#GOLD#%s#LAST#
+%s]]):format(res_def.name, res_def.description or "No Description")
 
-		if player:knowTalent(player.T_STAMINA_POOL) then
-			text = compare_fields(player, actor_to_compare, "max_stamina", "%d", "%+.0f")
-			self:mouseTooltip(self.TOOLTIP_STAMINA, s:drawColorStringBlended(self.font, ("#ffcc80#体力值：#00ff00#%d/%s"):format(player:getStamina(), text), w, h, 255, 255, 255, true)) h = h + self.font_h
+				-- display regen property if present
+				if (player[res_def.regen_prop] and player[res_def.regen_prop] ~= 0) or (actor_to_compare and actor_to_compare[res_def.regen_prop] and actor_to_compare[res_def.regen_prop] ~= 0) then
+					local _, reg_fmt = string.limit_decimals(player[res_def.regen_prop], 3, "+")
+
+					reg_text = compare_fields(player, actor_to_compare, function(act) return act[res_def.regen_prop] or 0 end, reg_fmt, reg_fmt, nil, res_def.invert_values)
+					reg_text = ((player[res_def.regen_prop] or 0)*(res_def.invert_values and -1 or 1) >= 0 and "#LIGHT_GREEN#" or "#LIGHT_RED#")..reg_text.."#LAST#"
+				end
+				self:mouseTooltip(tt, s:drawColorStringBlended(self.font, ("%s%-8.8s: #00ff00#%s "):format(res_def.color or "#WHITE#", getCHNresourcename(res_def.name), val_text), w, h, 255, 255, 255, true))
+				if reg_text then
+					tt = ([[#GOLD#%s 回复/削减#LAST#
+每回合自动获得/减少 %s的量。]]):format(getCHNresourcename(res_def.name), getCHNresourcename(res_def.name))
+					self:mouseTooltip(tt, s:drawColorStringBlended(self.font, " "..reg_text, self.w*.17, h, 255, 255, 255, true))
+				end
+				h = h + self.font_h
+			end
+		
 		end
-		if player:knowTalent(player.T_MANA_POOL) then
-			text = compare_fields(player, actor_to_compare, "max_mana", "%d", "%+.0f")
-			self:mouseTooltip(self.TOOLTIP_MANA, s:drawColorStringBlended(self.font, ("#7fffd4#法力值：#00ff00#%d/%s"):format(player:getMana(), text), w, h, 255, 255, 255, true)) h = h + self.font_h
-		end
-		if player:knowTalent(player.T_POSITIVE_POOL) then
-			text = compare_fields(player, actor_to_compare, "max_positive", "%d", "%+.0f")
-			self:mouseTooltip(self.TOOLTIP_POSITIVE, s:drawColorStringBlended(self.font, ("#7fffd4#正能量：#00ff00#%d/%s"):format(player:getPositive(), text), w, h, 255, 255, 255, true)) h = h + self.font_h
-		end
-		if player:knowTalent(player.T_NEGATIVE_POOL) then
-			text = compare_fields(player, actor_to_compare, "max_negative", "%d", "%+.0f")
-			self:mouseTooltip(self.TOOLTIP_NEGATIVE, s:drawColorStringBlended(self.font, ("#7fffd4#负能量：#00ff00#%d/%s"):format(player:getNegative(), text), w, h, 255, 255, 255, true)) h = h + self.font_h
-		end
-		if player:knowTalent(player.T_VIM_POOL) then
-			text = compare_fields(player, actor_to_compare, "max_vim", "%d", "%+.0f")
-			self:mouseTooltip(self.TOOLTIP_VIM, s:drawColorStringBlended(self.font, ("#904010#活力：#00ff00#%d/%s"):format(player:getVim(), text), w, h, 255, 255, 255, true)) h = h + self.font_h
-		end
-		if player:knowTalent(player.T_HATE_POOL) then
-			self:mouseTooltip(self.TOOLTIP_HATE, s:drawColorStringBlended(self.font, ("#F53CBE#仇恨：#00ff00#%d/%d"):format(player:getHate(), player.max_hate), w, h, 255, 255, 255, true)) h = h + self.font_h
-		end
-		if player:knowTalent(player.T_PARADOX_POOL) then
-			text = compare_fields(player, actor_to_compare, function(actor) local _, chance = actor:paradoxFailChance() return chance end, "%d%%", "%+.1f%%", 1, true)
-			self:mouseTooltip(self.TOOLTIP_PARADOX, s:drawColorStringBlended(self.font, ("#LIGHT_STEEL_BLUE#紊乱值：#00ff00#%d(fail: %s)"):format(player:getParadox(), text), w, h, 255, 255, 255, true)) h = h + self.font_h
-		end
-		if player:knowTalent(player.T_PSI_POOL) then
-			text = compare_fields(player, actor_to_compare, "max_psi", "%d", "%+.0f")
-			self:mouseTooltip(self.TOOLTIP_PSI, s:drawColorStringBlended(self.font, ("#7fffd4#意念力：#00ff00#%d/%s"):format(player:getPsi(), text), w, h, 255, 255, 255, true)) h = h + self.font_h
-		end
+		-- special resources
 		if player:getMaxFeedback() > 0 then
 			text = compare_fields(player, actor_to_compare, "psionic_feedback_max", "%d", "%+.0f")
 			local tt = self.TOOLTIP_FEEDBACK..(" 现在获得的反馈值为受到伤害的%0.1f％"):format(player:callTalent(player.T_FEEDBACK_POOL, "getFeedbackRatio")*100)
 			self:mouseTooltip(tt, s:drawColorStringBlended(self.font, ("#7fffd4#反馈值: #00ff00#%d/%s"):format(player:getFeedback(), text), w, h, 255, 255, 255, true)) h = h + self.font_h
+			local decay_text = compare_fields(player, actor_to_compare, function(act) return act:getFeedbackDecay() end, (player:getFeedbackDecay() > 0 and "#LIGHT_RED#" or "#LIGHT_GREEN#").."%+0.1f", "%+.1f", -1, true)
+			if decay_text then
+				self:mouseTooltip(tt, s:drawColorStringBlended(self.font, " "..decay_text, self.w*.17, h, 255, 255, 255, true)) 
+			end
+			h = h + self.font_h
 		end
-
-		if player:knowTalent(player.T_EQUILIBRIUM_POOL) then
-			text = compare_fields(player, actor_to_compare, function(actor) local _, chance = actor:equilibriumChance() return 100 - chance end, "%d%%", "%+.1f%%", 1, true)
-			self:mouseTooltip(self.TOOLTIP_EQUILIBRIUM, s:drawColorStringBlended(self.font, ("#00ff74#失衡值：#00ff00#%d(fail: %s)"):format(player:getEquilibrium(), text), w, h, 255, 255, 255, true)) h = h + self.font_h
-		end
+		-- could put a hook here for any really strange resources
+		
+-- Note: color codes confusing %xs format 
 
 		h = 0
 		w = self.w * 0.25
@@ -577,13 +802,11 @@ function _M:drawDialog(kind, actor_to_compare)
 		if any_esp then
 			h = h + self.font_h
 			self:mouseTooltip(self.TOOLTIP_ESP,  s:drawColorStringBlended(self.font, ("心灵感应: "), w, h, 255, 255, 255, true)) h = h + self.font_h
---			if not esps_compare["All"] then
 			if not esps_compare["All"] or not esps_compare["All"][2] or esps_compare["All"][2] == 0 then
 				for type, v in pairs(esps_compare) do
 					self:mouseTooltip(self.TOOLTIP_ESP,  s:drawColorStringBlended(self.font, ("%s%s "):format(v[2] and (v[1] and "#GOLD#" or "#00ff00#") or "#ff0000#", type:capitalize()), w, h, 255, 255, 255, true)) h = h + self.font_h
 				end
 			else
---				self:mouseTooltip(self.TOOLTIP_ESP_ALL,  s:drawColorStringBlended(self.font, ("%sAll "):format(esps_compare["All"][1] and "#GOLD#" or "#00ff00#"), w, h, 255, 255, 255, true)) h = h + self.font_h
 				self:mouseTooltip(self.TOOLTIP_ESP_ALL,  s:drawColorStringBlended(self.font, ("%sAll "):format(esps_compare["All"][2] and (esps_compare["All"][1] and "#GOLD#" or "#00ff00#") or "#ff0000#"), w, h, 255, 255, 255, true)) h = h + self.font_h
 			end
 		end
@@ -623,99 +846,129 @@ function _M:drawDialog(kind, actor_to_compare)
 	elseif kind=="attack" then
 		h = 0
 		w = 0
-		
+
+		-- get the combat stats for weapon by inventory and slot
+		local function get_combat_stats(actor, type, inven_id, item)
+			local o = table.get(actor:getInven(inven_id), item)
+			local mean
+			local ammo
+			local atk
+			local dmg
+			local apr
+			local crit
+			local aspeed
+			local range
+			local mspeed
+			local dam, archery
+			ammo = table.get(actor:getInven("QUIVER"), 1)
+			archery = o and o.archery and ammo and ammo.archery_ammo == o.archery and ammo.combat and (type ~= "offhand" or actor:attr("can_offshoot")) and (type ~= "psionic" or actor:attr("psi_focus_combat")) -- ranged combat
+			if type == "psionic" then
+				if not o or o.archery and not archery then return end
+				actor:attr("use_psi_combat", 1)
+			end
+			if not o or (o.archery and not archery) or actor:attr("disarmed") then -- unarmed
+				mean = actor.combat
+				dmg = actor:combatDamage(mean) * (mean.dam_mult or 1)
+				atk = actor:combatAttack(mean)
+				apr = actor:combatAPR(mean)
+				crit = actor:combatCrit(mean)
+				aspeed = 1/actor:combatSpeed(mean)
+				archery = false
+			else -- weapon combat
+				mean = o and (o.special_combat and (o.slot == actor.inven[inven_id].name or actor:knowTalent(actor.T_STONESHIELD)) and o.special_combat) or actor:getObjectCombat(o, type == "psionic" and "mainhand" or type) or actor.combat -- handles stone wardens
+				if archery then -- ranged combat
+					dam = ammo.combat
+					atk = actor:combatAttackRanged(mean, dam)
+					dmg = actor:combatDamage(mean, nil, dam) * (mean.dam_mult or 1)
+					apr = actor:combatAPR(mean) + (dam.apr or 0)
+					range = math.max(mean.range or 6, actor:attr("archery_range_override") or 1)
+					mspeed = 10 + (actor.combat.travel_speed or 0) + (mean.travel_speed or 0) + (dam.travel_speed or 0)
+				else -- melee combat
+					dam = o.combat
+					atk = actor:combatAttack(mean)
+					dmg = actor:combatDamage(mean) * (type == "offhand" and mean.talented ~= "shield" and actor:getOffHandMult(dam) or 1) * (mean.dam_mult or 1)
+					apr = actor:combatAPR(mean)
+				end
+				crit = actor:combatCrit(dam)
+				aspeed = 1/actor:combatSpeed(mean)
+			end
+			if type == "psionic" then actor:attr("use_psi_combat", -1) end
+			return {obj=o, atk=atk, dmg=dmg, apr=apr, crit=crit, aspeed=aspeed, range=range, mspeed=mspeed, archery=archery, mean=mean, ammo=ammo, block=mean.block, talented=mean.talented}
+		end
+		local function getCHNweaptype(weap_type)
+			weap_type=weap_type:gsub("knife","匕首"):gsub("staff","法杖"):gsub("axe","斧头"):gsub("sword","剑"):gsub("bow","弓"):gsub("mace","狼牙棒"):gsub("sling","投石索"):gsub("mindstar","灵晶"):gsub("whip","鞭子"):gsub("trident","三叉戟"):gsub("unarmed","空手")
+			return weap_type
+		end
+		-- display the combat (comparison) stats for a combat slot
+		local function display_combat_stats(text, player, actor_to_compare, inven_id, type, item)
+			local combat = get_combat_stats(player, type, inven_id, item)
+			if not combat then return end
+			local combatc = actor_to_compare and get_combat_stats(actor_to_compare, type, inven_id, item) or {}
+			local color
+			local weap_type = combat.talented or table.get(combat.mean, "talented")
+			local text2 = (combat.obj and combat.obj.slot_forbid == "OFFHAND" and "双手, " or "")..(weap_type and getCHNweaptype(weap_type) or "")
+			s:drawColorStringBlended(self.font, (text or "Weapon")..(weap_type and " ("..text2..")" or "")..":", w, h, 255, 255, 255, true) h = h + self.font_h
+
+			text = compare_fields(player, actor_to_compare,
+				function(actor, ...)
+					return actor == actor_to_compare and combatc.atk or combat.atk
+				end,
+				"%3d", "%+.0f", 1, false, false, mean, dam)
+			self:mouseTooltip(self.TOOLTIP_COMBAT_ATTACK, s:drawColorStringBlended(self.font, ("命中     : #00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
+			text = compare_fields(player, actor_to_compare,
+				function(actor, ...)
+					return actor == actor_to_compare and combatc.dmg or combat.dmg
+				end,
+				"%3d", "%+.0f", 1, false, false, dam)
+			self:mouseTooltip(self.TOOLTIP_COMBAT_DAMAGE, s:drawColorStringBlended(self.font, ("伤害       : #00ff00#%s"):format(text), w, h, 255, 255, 255, true))
+			if combat.block then -- or combatc and combatc.block then
+				text = compare_fields(player, actor_to_compare, function(actor, ...) return actor == actor_to_compare and combatc.block or combat.block end, "%3d", "%+.0f", 1, false, false, dam)
+				self:mouseTooltip(self.TOOLTIP_COMBAT_BLOCK, s:drawColorStringBlended(self.font, ("格挡 : #00ff00#%s"):format(text), self.w*.14, h, 255, 255, 255, true))-- h = h + self.font_h
+			end
+			h = h + self.font_h
+			text = compare_fields(player, actor_to_compare, function(actor, ...) return actor == actor_to_compare and combatc.apr or combat.apr end, "%3d", "%+.0f", 1, false, false, dam)
+			self:mouseTooltip(self.TOOLTIP_COMBAT_APR,    s:drawColorStringBlended(self.font, ("护甲穿透          : #00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
+			text = compare_fields(player, actor_to_compare, function(actor, ...) return actor == actor_to_compare and combatc.crit or combat.crit end, "%3d%%", "%+.0f%%", 1, false, false, dam)
+			self:mouseTooltip(self.TOOLTIP_COMBAT_CRIT,   s:drawColorStringBlended(self.font, ("暴击几率 : #00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
+			color = combat.aspeed
+			color = color >= 1 and "#LIGHT_GREEN#" or "#LIGHT_RED#"
+			text = compare_fields(player, actor_to_compare, function(actor, ...) return actor == actor_to_compare and combatc.aspeed or combat.aspeed end, color.."%.1f%%", "%+.1f%%", 100, false, false, mean)
+			self:mouseTooltip(self.TOOLTIP_COMBAT_SPEED,  s:drawColorStringBlended(self.font, ("攻击速度 : #00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
+			if combat.archery then -- display range and projectile speed
+				text = compare_fields(player, actor_to_compare, function(actor, ...) return actor == actor_to_compare and combatc.range or combat.range end, "范围 %2d", "%+d", 1, false, false, mean)
+				local text2 = compare_fields(player, actor_to_compare, function(actor, ...) return actor == actor_to_compare and combatc.mspeed or combat.mspeed end, "飞行速度 %3d%%", "%+.0f%%", 100, false, false, dam)
+				self:mouseTooltip(self.TOOLTIP_ARCHERY_RANGE_SPEED, s:drawColorStringBlended(self.font, ("弓箭      : #00ff00#%s, %s"):format(text, text2), w, h, 255, 255, 255, true)) h = h + self.font_h
+			end
+		end
+
 		local color
 		local mainhand = player:getInven(player.INVEN_MAINHAND)
+		local double_weapon
 		if mainhand and (#mainhand > 0) and not player:attr("disarmed") then
-			local WeaponTxt = "#LIGHT_BLUE#主手"
-			if player:hasTwoHandedWeapon() then
-				WeaponTxt = WeaponTxt.."(双手武器)"
-			end
-			WeaponTxt = WeaponTxt..":"
-
 			for i, o in ipairs(player:getInven(player.INVEN_MAINHAND)) do
-				local mean, dam = player:getObjectCombat(o, "mainhand"), player:getObjectCombat(o, "mainhand")
-				local range
-				if o.archery and mean then
-					local ammo = player:getInven("QUIVER") and player:getInven("QUIVER")[1]
-					if ammo and ammo.archery_ammo == o.archery then -- make sure ammo matches launcher
-						dam = player:getObjectCombat(ammo, "mainhand")
-						range = mean.range
-					end
-				end
-				if mean and dam then
-					s:drawColorStringBlended(self.font, WeaponTxt, w, h, 255, 255, 255, true) h = h + self.font_h
-					text = compare_fields(player, actor_to_compare, function(actor, ...) return math.floor(actor:combatAttack(...)) end, "%3d", "%+.0f", 1, false, false, mean, dam)
-					self:mouseTooltip(self.TOOLTIP_COMBAT_ATTACK, s:drawColorStringBlended(self.font, ("命中：    #00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
-					text = compare_fields(player, actor_to_compare, function(actor, ...) return actor:combatDamage(...) end, "%3d", "%+.0f", 1, false, false, dam)
-					self:mouseTooltip(self.TOOLTIP_COMBAT_DAMAGE, s:drawColorStringBlended(self.font, ("伤害：    #00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
-					text = compare_fields(player, actor_to_compare, function(actor, ...) return actor:combatAPR(...) end, "%3d", "%+.0f", 1, false, false, dam)
-					self:mouseTooltip(self.TOOLTIP_COMBAT_APR,    s:drawColorStringBlended(self.font, ("护甲穿透：#00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
-					text = compare_fields(player, actor_to_compare, function(actor, ...) return actor:combatCrit(...) end, "%3d%%", "%+.0f%%", 1, false, false, dam)
-					self:mouseTooltip(self.TOOLTIP_COMBAT_CRIT,   s:drawColorStringBlended(self.font, ("暴击率：  #00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
-					color = 1/player:combatSpeed(mean)
-					color = color >= 1 and "#LIGHT_GREEN#" or "#LIGHT_RED#"
-					text = compare_fields(player, actor_to_compare, function(actor, ...) return 1/actor:combatSpeed(...) end, color.."%.1f%%", "%+.1f%%", 100, true, false, mean)
-					self:mouseTooltip(self.TOOLTIP_COMBAT_SPEED,  s:drawColorStringBlended(self.font, ("速度：    #00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
-				end
-				if range then
-					self:mouseTooltip(self.TOOLTIP_COMBAT_RANGE, s:drawColorStringBlended(self.font, ("范围(主手)：#00ff00#%3d"):format(range), w, h, 255, 255, 255, true)) h = h + self.font_h
-				end
+				if not double_weapon and o.double_weapon then double_weapon = i end
+				display_combat_stats("#LIGHT_BLUE#主手", player, actor_to_compare, player.INVEN_MAINHAND, "mainhand", i) h = h + self.font_h
 			end
-		-- Handle bare-handed combat
-		else
-			s:drawColorStringBlended(self.font, "#LIGHT_BLUE#徒手：", w, h, 255, 255, 255, true) h = h + self.font_h
-			local mean, dam = player:getObjectCombat(nil, "barehand"), player:getObjectCombat(nil, "barehand")
-			if mean and dam then
-				text = compare_fields(player, actor_to_compare, function(actor, ...) return math.floor(actor:combatAttack(...)) end, "%3d", "%+.0f", 1, false, false, mean)
-				self:mouseTooltip(self.TOOLTIP_COMBAT_ATTACK, s:drawColorStringBlended(self.font, ("命中：      #00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
-				text = compare_fields(player, actor_to_compare, function(actor, ...) return actor:combatDamage(...) end, "%3d", "%+.0f", 1, false, false, dam)
-				self:mouseTooltip(self.TOOLTIP_COMBAT_DAMAGE, s:drawColorStringBlended(self.font, ("伤害：      #00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
-				text = compare_fields(player, actor_to_compare, function(actor, ...) return actor:combatAPR(...) end, "%3d", "%+.0f", 1, false, false, dam)
-				self:mouseTooltip(self.TOOLTIP_COMBAT_APR,    s:drawColorStringBlended(self.font, ("护甲穿透：  #00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
-				text = compare_fields(player, actor_to_compare, function(actor, ...) return actor:combatCrit(...) end, "%3d%%", "%+.0f%%", 1, false, false, dam)
-				self:mouseTooltip(self.TOOLTIP_COMBAT_CRIT,   s:drawColorStringBlended(self.font, ("暴击率：    #00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
-				color = 1/player:combatSpeed(mean)
-				color = color >= 1 and "#LIGHT_GREEN#" or "#LIGHT_RED#"
-				text = compare_fields(player, actor_to_compare, function(actor, ...) return 1/actor:combatSpeed(...) end, color.."%.1f%%", "%+.1f%%", 100, false, false, mean)
-				self:mouseTooltip(self.TOOLTIP_COMBAT_SPEED,  s:drawColorStringBlended(self.font, ("速度：      #00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
-			end
-			if mean and mean.range then
-				self:mouseTooltip(self.TOOLTIP_COMBAT_RANGE, s:drawColorStringBlended(self.font, ("范围(主手)：#00ff00#%3d"):format(mean.range), w, h, 255, 255, 255, true)) h = h + self.font_h
-			end
+		else -- Handle bare-handed combat
+			display_combat_stats("#LIGHT_BLUE#空手", player, actor_to_compare, player.INVEN_MAINHAND, "barehand", 1) h = h + self.font_h
 		end
-
-		h = h + self.font_h
 		-- All weapons in off hands
-		-- Offhand attacks are with a damage penalty, that can be reduced by talents
+		-- Most offhand attacks are with a damage penalty, that can be reduced by talents
+		local count = 0
 		if player:getInven(player.INVEN_OFFHAND) then
 			for i, o in ipairs(player:getInven(player.INVEN_OFFHAND)) do
-				local offmult = player:getOffHandMult(o.combat)
-				local mean, dam = player:getObjectCombat(o, "offhand"), player:getObjectCombat(o, "offhand")
-				if o.archery and mean then
-					dam = (player:getInven("QUIVER") and player:getInven("QUIVER")[1] and player:getInven("QUIVER")[1].combat)
-				end
-				if mean and dam then
-					s:drawColorStringBlended(self.font, "#LIGHT_BLUE#副手："..(player:attr("disarmed") and " (disabled)" or ""), w, h, 255, 255, 255, true) h = h + self.font_h
-					text = compare_fields(player, actor_to_compare, function(actor, ...) return math.floor(actor:combatAttack(...)) end, "%3d", "%+.0f", 1, false, false, mean)
-					self:mouseTooltip(self.TOOLTIP_COMBAT_ATTACK, s:drawColorStringBlended(self.font, ("命中：      #00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
-					text = compare_fields(player, actor_to_compare, function(actor, ...) return actor:combatDamage(...) end, "%3d", "%+.0f", offmult, false, false, dam)
-					self:mouseTooltip(self.TOOLTIP_COMBAT_DAMAGE, s:drawColorStringBlended(self.font, ("伤害：      #00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
-					text = compare_fields(player, actor_to_compare, function(actor, ...) return actor:combatAPR(...) end, "%3d", "%+.0f", 1, false, false, dam)
-					self:mouseTooltip(self.TOOLTIP_COMBAT_APR,    s:drawColorStringBlended(self.font, ("护甲穿透：  #00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
-					text = compare_fields(player, actor_to_compare, function(actor, ...) return actor:combatCrit(...) end, "%3d%%", "%+.0f%%", 1, false, false, dam)
-					self:mouseTooltip(self.TOOLTIP_COMBAT_CRIT,   s:drawColorStringBlended(self.font, ("暴击率：    #00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
-					color = 1/player:combatSpeed(mean)
-					color = color >= 1 and "#LIGHT_GREEN#" or "#LIGHT_RED#"
-					text = compare_fields(player, actor_to_compare, function(actor, ...) return 1/actor:combatSpeed(...) end, color.."%.1f%%", "%+.1f%%", 100, false, false, mean)
-					self:mouseTooltip(self.TOOLTIP_COMBAT_SPEED,  s:drawColorStringBlended(self.font, ("速度：      #00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
-				end
-				if mean and mean.range then self:mouseTooltip(self.TOOLTIP_COMBAT_RANGE, s:drawColorStringBlended(self.font, ("范围(副手)：#00ff00#%3d"):format(mean.range), w, h, 255, 255, 255, true)) h = h + self.font_h end
+				count = count + 1
+				display_combat_stats("#LIGHT_BLUE#副手"..(player:attr("disarmed") and " (不能使用)" or ""), player, actor_to_compare, player.INVEN_OFFHAND, "offhand", i) h = h + self.font_h
 			end
 		end
-
-		-- player.combat_physcrit
-		-- player.combat_mindcrit
+		-- special case: double weapon in mainhand
+		if double_weapon and count == 0 then
+			display_combat_stats("#LIGHT_BLUE#副手双持"..(player:attr("disarmed") and " (不能使用)" or ""), player, actor_to_compare, player.INVEN_MAINHAND, "offhand", double_weapon) h = h + self.font_h
+		end
+		-- Psionic Focus weapon if present (only 1 slot)
+		if player:getInven(player.INVEN_PSIONIC_FOCUS) and player:attr("psi_focus_combat") then
+			display_combat_stats("#LIGHT_BLUE#灵能聚焦", player, actor_to_compare, player.INVEN_PSIONIC_FOCUS, "psionic", 1) h = h + self.font_h
+		end
 
 		h = 0
 		w = self.w * 0.25
@@ -743,6 +996,12 @@ function _M:drawDialog(kind, actor_to_compare)
 		text = compare_fields(player, actor_to_compare, function(actor, ...) return 1/actor:combatMindSpeed() end, color.."%.1f%%", "%+.1f%%", 100)
 		self:mouseTooltip(self.TOOLTIP_MIND_SPEED, s:drawColorStringBlended(self.font, ("精神速度：#00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
 
+		-- Hook to display additional types of attack power
+		local hd = {"CharacterSheet:Attack:power", player=player, actor_to_compare=actor_to_compare, h=h, w=w, s=s, compare_fields = compare_fields}
+		if self:triggerHook(hd) then 
+			w, h = hd.w, hd.h
+		end
+		
 		h = 0
 		w = self.w * 0.5
 
@@ -750,71 +1009,40 @@ function _M:drawDialog(kind, actor_to_compare)
 		text = compare_fields(player, actor_to_compare, function(actor, ...) return 150 + (actor.combat_critical_power or 0) end, "%3d%%", "%+.0f%%")
 		self:mouseTooltip(self.TOOLTIP_INC_CRIT_POWER  , s:drawColorStringBlended(self.font,   ("暴击加成： #00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
 
-		if player.inc_damage.all then
+		if player.inc_damage.all and player.inc_damage.all ~= 0 or (actor_to_compare and actor_to_compare.inc_damage.all and actor_to_compare.inc_damage.all ~= 0) then
 			text = compare_fields(player, actor_to_compare, function(actor, ...) return actor.inc_damage and actor.inc_damage.all or 0 end, "%3d%%", "%+.0f%%")
 			self:mouseTooltip(self.TOOLTIP_INC_DAMAGE_ALL, s:drawColorStringBlended(self.font, ("伤害加成（全体）：#00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
 		end
 
-		local inc_damages = {}
+		-- Specific Damage type increases
+		local all_damage = player.inc_damage.all and player.inc_damage.all or 0
 		for i, t in pairs(DamageType.dam_def) do
-			if player:combatHasDamageIncrease(DamageType[t.type]) then
-				inc_damages[t] = inc_damages[t] or {}
-				inc_damages[t][1] = player:combatGetDamageIncrease(DamageType[t.type])
-			end
-			if actor_to_compare and actor_to_compare:combatHasDamageIncrease(DamageType[t.type]) then
-				inc_damages[t] = inc_damages[t] or {}
-				inc_damages[t][2] = actor_to_compare:combatGetDamageIncrease(DamageType[t.type])
+			local valn = player.inc_damage[DamageType[t.type]] or 0
+			local valo = actor_to_compare and actor_to_compare.inc_damage[DamageType[t.type]] or valn
+			if valn~=0 or valo~=0 then
+				text = compare_fields(player, actor_to_compare, function(actor, ...) return actor:combatGetDamageIncrease(DamageType[t.type]) end, "%+3d%%", "%+.0f%%")
+				self:mouseTooltip(self.TOOLTIP_INC_DAMAGE, s:drawColorStringBlended(self.font, ("%s%-20s: #00ff00#%s"):format((t.text_color or "#WHITE#"), t.name:capitalize().."#LAST#", text), w, h, 255, 255, 255, true)) h = h + self.font_h
 			end
 		end
 
-		for i, ts in pairs(inc_damages) do
-			if ts[1] then
-				if ts[2] and ts[2] ~= ts[1] then
-					self:mouseTooltip(self.TOOLTIP_INC_DAMAGE, s:drawColorStringBlended(self.font, ("%s%-20s: #00ff00#%+d%%%s(%+.0f%%)"):format((i.text_color or "#WHITE#"), i.name.."#LAST# 伤害", ts[1], ts[2] > ts[1] and "#ff0000#" or "#00ff00#", ts[1] - ts[2] ), w, h, 255, 255, 255, true)) h = h + self.font_h
-				else
-					self:mouseTooltip(self.TOOLTIP_INC_DAMAGE, s:drawColorStringBlended(self.font, ("%s%-20s: #00ff00#%+d%%"):format((i.text_color or "#WHITE#"), i.name.."#LAST# 伤害", ts[1]), w, h, 255, 255, 255, true)) h = h + self.font_h
-				end
-			else
-				if ts[2] then
-					self:mouseTooltip(self.TOOLTIP_INC_DAMAGE, s:drawColorStringBlended(self.font, ("%s%-20s: #00ff00#%+d%%(%+.0f%%)"):format((i.text_color or "#WHITE#"), i.name.."#LAST# 伤害", (player.inc_damage.all or 0),(player.inc_damage.all or 0)-ts[2] ), w, h, 255, 255, 255, true)) h = h + self.font_h
-				end
-			end
-		end
-
-		local inc_damage_actor_types = {}
-		if player.inc_damage_actor_type then
-			for i, t in pairs(player.inc_damage_actor_type) do
-				if player.inc_damage_actor_type[i] and player.inc_damage_actor_type[i] ~= 0 then
-					inc_damage_actor_types[i] = inc_damage_actor_types[i] or {}
-					inc_damage_actor_types[i][1] = player.inc_damage_actor_type[i]
-				end
-			end
-		end
-		if actor_to_compare and actor_to_compare.inc_damage_actor_type then
-			for i, t in pairs(actor_to_compare.inc_damage_actor_type) do
-				if actor_to_compare.inc_damage_actor_type[i] and actor_to_compare.inc_damage_actor_type[i] ~= 0 then
-					inc_damage_actor_types[i] = inc_damage_actor_types[i] or {}
-					inc_damage_actor_types[i][2] = actor_to_compare.inc_damage_actor_type[i]
-				end
-			end
-		end
-		for i, ts in pairs(inc_damage_actor_types) do
-			if ts[1] then
-				if ts[2] and ts[2] ~= ts[1] then
-					self:mouseTooltip(self.TOOLTIP_INC_DAMAGE, s:drawColorStringBlended(self.font, ("#ORANGE#%-20s: #00ff00#%+d%%%s(%+.0f%%)"):format(i:capitalize().."#LAST# damage", ts[1], ts[2] > ts[1] and "#ff0000#" or "#00ff00#", ts[1] - ts[2] ), w, h, 255, 255, 255, true)) h = h + self.font_h
-				else
-					self:mouseTooltip(self.TOOLTIP_INC_DAMAGE, s:drawColorStringBlended(self.font, ("#ORANGE#%-20s: #00ff00#%+d%%"):format(i:capitalize().."#LAST# damage", ts[1]), w, h, 255, 255, 255, true)) h = h + self.font_h
-				end
-			else
-				if ts[2] then
-					self:mouseTooltip(self.TOOLTIP_INC_DAMAGE, s:drawColorStringBlended(self.font, ("#ORANGE#%-20s: #00ff00#%+d%%(%+.0f%%)"):format(i:capitalize().."#LAST# damage", 0,-ts[2] ), w, h, 255, 255, 255, true)) h = h + self.font_h
+		--Damage vs actor types
+		if player.inc_damage_actor_type or actor_to_compare and actor_to_compare.inc_damage_actor_type then
+			local types = {}
+			if player.inc_damage_actor_type then table.merge(types, player.inc_damage_actor_type) end
+			if actor_to_compare and actor_to_compare.inc_damage_actor_type then table.merge(types, actor_to_compare.inc_damage_actor_type) end
+			for t, v in pairs(types) do
+				local valn = player.inc_damage_actor_type and player.inc_damage_actor_type[t] or 0
+				local valo = actor_to_compare and actor_to_compare.inc_damage_actor_type and actor_to_compare.inc_damage_actor_type[t] or 0
+				if valn~=0 or valo~=0 then
+					text = compare_fields(player, actor_to_compare, function(actor, ...) return actor == player and valn or actor == actor_to_compare and valo or 0 end, "%+3d%%", "%+.0f%%")
+					self:mouseTooltip(self.TOOLTIP_INC_DAMAGE_ACTOR, s:drawColorStringBlended(self.font, ("%s%-20s: #00ff00#%s"):format("#ORANGE#", "vs "..t:capitalize().."#LAST#", text), w, h, 255, 255, 255, true)) h = h + self.font_h
 				end
 			end
 		end
 
 		h = 0
 		w = self.w * 0.75
-
+		--Resist penetration
 		s:drawColorStringBlended(self.font, "#LIGHT_BLUE#伤害穿透：", w, h, 255, 255, 255, true) h = h + self.font_h
 
 		if player.resists_pen.all then
@@ -822,32 +1050,15 @@ function _M:drawDialog(kind, actor_to_compare)
 			self:mouseTooltip(self.TOOLTIP_RESISTS_PEN_ALL, s:drawColorStringBlended(self.font, ("伤害穿透（全体）：#00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
 		end
 
-		local resists_pens = {}
 		for i, t in pairs(DamageType.dam_def) do
-			if player.resists_pen[DamageType[t.type]] and player.resists_pen[DamageType[t.type]] ~= 0 then
-				resists_pens[t] = resists_pens[t] or {}
-				resists_pens[t][1] = player.resists_pen[DamageType[t.type]]
-			end
-			if actor_to_compare and actor_to_compare.resists_pen[DamageType[t.type]] and actor_to_compare.resists_pen[DamageType[t.type]] ~= 0 then
-				resists_pens[t] = resists_pens[t] or {}
-				resists_pens[t][2] = actor_to_compare.resists_pen[DamageType[t.type]]
+			local valn = player.resists_pen[DamageType[t.type]] or 0
+			local valo = actor_to_compare and actor_to_compare.resists_pen[DamageType[t.type]] or 0
+			if valn~=0 or valo~=0 then
+				text = compare_fields(player, actor_to_compare, function(actor, ...) return actor:combatGetResistPen(DamageType[t.type]) end, "%3d%%", "%+.0f%%")
+				self:mouseTooltip(self.TOOLTIP_RESISTS_PEN, s:drawColorStringBlended(self.font, ("%s%-20s: #00ff00#%s"):format((t.text_color or "#WHITE#"), t.name:capitalize().."#LAST#", text), w, h, 255, 255, 255, true)) h = h + self.font_h
 			end
 		end
-
-		for i, ts in pairs(resists_pens) do
-			if ts[1] then
-				if ts[2] and ts[2] ~= ts[1] then
-					self:mouseTooltip(self.TOOLTIP_RESISTS_PEN, s:drawColorStringBlended(self.font, ("%s%-20s: #00ff00#%+d%%%s(%+.0f%%)"):format((i.text_color or "#WHITE#"), i.name.."#LAST# 伤害", ts[1] + (player.resists_pen.all or 0), ts[2] > ts[1] and "#ff0000#" or "#00ff00#", ts[1] - ts[2] ), w, h, 255, 255, 255, true)) h = h + self.font_h
-				else
-					self:mouseTooltip(self.TOOLTIP_RESISTS_PEN, s:drawColorStringBlended(self.font, ("%s%-20s: #00ff00#%+d%%"):format((i.text_color or "#WHITE#"), i.name.."#LAST# 伤害", ts[1] + (player.resists_pen.all or 0)), w, h, 255, 255, 255, true)) h = h + self.font_h
-				end
-			else
-				if ts[2] then
-					self:mouseTooltip(self.TOOLTIP_RESISTS_PEN, s:drawColorStringBlended(self.font, ("%s%-20s: #00ff00#%+d%%(%+.0f%%)"):format((i.text_color or "#WHITE#"), i.name.."#LAST# 伤害", (player.resists_pen.all or 0),-ts[2] ), w, h, 255, 255, 255, true)) h = h + self.font_h
-				end
-			end
-		end
-
+		
 	elseif kind=="defence" then
 		h = 0
 		w = 0
@@ -880,7 +1091,7 @@ function _M:drawDialog(kind, actor_to_compare)
 		self:mouseTooltip(self.TOOLTIP_CRIT_SHRUG,s:drawColorStringBlended(self.font,           ("暴击伤害减免    ： #00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
 
 		h = h + self.font_h
-		s:drawColorStringBlended(self.font, "#LIGHT_BLUE#豁免：", w, h, 255, 255, 255, true) h = h + self.font_h
+		self:mouseTooltip(self.TOOLTIP_SAVES, s:drawColorStringBlended(self.font, "#LIGHT_BLUE#豁免:", w, h, 255, 255, 255, true)) h = h + self.font_h
 		text = compare_fields(player, actor_to_compare, function(actor, ...) return math.floor(actor:combatPhysicalResist(true)) end, "%3d", "%+.0f")
 		self:mouseTooltip(self.TOOLTIP_PHYS_SAVE,   s:drawColorStringBlended(self.font, ("物理豁免：#00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
 		text = compare_fields(player, actor_to_compare, function(actor, ...) return math.floor(actor:combatSpellResist(true)) end, "%3d", "%+.0f")
@@ -888,113 +1099,152 @@ function _M:drawDialog(kind, actor_to_compare)
 		text = compare_fields(player, actor_to_compare, function(actor, ...) return math.floor(actor:combatMentalResist(true)) end, "%3d", "%+.0f")
 		self:mouseTooltip(self.TOOLTIP_MENTAL_SAVE, s:drawColorStringBlended(self.font, ("精神豁免：#00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
 
+		-- Hook to display additional types of saves
+		local hd = {"CharacterSheet:Defence:saves", player=player, actor_to_compare=actor_to_compare, h=h, w=w, s=s, compare_fields = compare_fields}
+		if self:triggerHook(hd) then 
+			w, h = hd.w, hd.h
+		end
+		
 		h = 0
 		w = self.w * 0.25
-
-		s:drawColorStringBlended(self.font, "#LIGHT_BLUE#抗性 基础 / 上限：", w, h, 255, 255, 255, true) h = h + self.font_h
-
-		local resists = {}
+		-- Damage Resistance
+		self:mouseTooltip(self.TOOLTIP_RESIST_DAMAGE, s:drawColorStringBlended(self.font, "#LIGHT_BLUE#抗性   : 基础 / 上限:", w, h, 255, 255, 255, true)) h = h + self.font_h
+		if player.resists.all or actor_to_compare and actor_to_compare.resists.all then
+			local res = player.resists.all or 0
+			local reso = actor_to_compare and actor_to_compare.resists.all or res
+			if res ~= 0 or reso ~= 0 then
+				local change = ""
+				local cap = player.resists_cap.all or 100
+				local capo = actor_to_compare and (actor_to_compare.resists_cap.all or 100) or cap
+				res, reso = math.min(res, cap), math.min(reso, capo)
+				if res ~= reso or cap ~= capo then
+					local rdiff, capdiff = res-reso, cap-capo
+					change = ("(%s%+3.0f%%#LAST#/%s%+3.0f%%#LAST#)"):format(rdiff>0 and "#LIGHT_GREEN#" or rdiff<0 and "#RED#" or "#GREY#", rdiff, capdiff>0 and "#LIGHT_GREEN#" or capdiff<0 and "#RED#" or "#GREY#", capdiff)
+				end
+				self:mouseTooltip(self.TOOLTIP_RESIST_ALL, s:drawColorStringBlended(self.font, ("%-14s: #00ff00#%3d%% / %3.0f%% %s"):format("全体", res, cap, change), w, h, 255, 255, 255, true)) h = h + self.font_h
+			end
+		end
+		if player.resists.absolute or actor_to_compare and actor_to_compare.resists.absolute then
+			local res = player.resists.absolute or 0
+			local reso = actor_to_compare and actor_to_compare.resists.absolute or res
+			if res ~= 0 or reso ~= 0 then
+				local change = ""
+				local cap = player.resists_cap.absolute or 70
+				local capo = actor_to_compare and (actor_to_compare.resists_cap.absolute or 70) or cap
+				res, reso = math.min(res, cap), math.min(reso, capo)
+				if res ~= reso or cap ~= capo then
+					local rdiff, capdiff = res-reso, cap-capo
+					change = ("(%s%+3.0f%%#LAST#/%s%+3.0f%%#LAST#)"):format(rdiff>0 and "#LIGHT_GREEN#" or rdiff<0 and "#RED#" or "#GREY#", rdiff, capdiff>0 and "#LIGHT_GREEN#" or capdiff<0 and "#RED#" or "#GREY#", capdiff)
+				end
+				self:mouseTooltip(self.TOOLTIP_RESIST_ABSOLUTE, s:drawColorStringBlended(self.font, ("#SALMON#%-14s: #00ff00#%3d%% / %3.0f%% %s"):format("绝对抗性", res, cap, change), w, h, 255, 255, 255, true)) h = h + self.font_h
+			end
+		end
+		if player:attr("speed_resist") or actor_to_compare and actor_to_compare:attr("speed_resist") then
+			local resfunc = function(actor, ...)
+				if not (actor and actor:attr("speed_resist")) then return end
+				return 100 - (util.bound(actor.global_speed * actor.movement_speed, 1-(actor.speed_resist_cap or 70)/100, 1)) * 100 
+			end
+			local res = resfunc(player)
+			local reso = resfunc(actor_to_compare) or res
+			local change = ""
+			local cap = player.speed_resist_cap or 70
+			local capo = actor_to_compare and (actor_to_compare.speed_resist_cap or 70) or cap
+			if res ~= reso or cap ~= capo then
+				local rdiff, capdiff = res-reso, cap-capo
+				change = ("(%s%+3.0f%%#LAST#/%s%+3.0f%%#LAST#)"):format(rdiff>0 and "#LIGHT_GREEN#" or rdiff<0 and "#RED#" or "#GREY#", rdiff, capdiff>0 and "#LIGHT_GREEN#" or capdiff<0 and "#RED#" or "#GREY#", capdiff)
+			end
+			self:mouseTooltip(self.TOOLTIP_RESIST_SPEED, s:drawColorStringBlended(self.font, ("#SALMON#%-14s: #00ff00#%3d%% / %3.0f%% %s"):format("速度抗性", res, cap, change), w, h, 255, 255, 255, true)) h = h + self.font_h
+		end
+		-- Resists vs specific damage types
 		for i, t in pairs(DamageType.dam_def) do
-			if player.resists[DamageType[t.type]] and player.resists[DamageType[t.type]] ~= 0 then
-				resists[t] = resists[t] or {}
-				resists[t][1] = player:combatGetResist(DamageType[t.type])
-			end
-			if actor_to_compare and actor_to_compare.resists[DamageType[t.type]] and actor_to_compare.resists[DamageType[t.type]] ~= 0 then
-				resists[t] = resists[t] or {}
-				resists[t][2] = actor_to_compare:combatGetResist(DamageType[t.type])
+			local res = player.resists[DamageType[t.type]] or 0
+			local reso = actor_to_compare and actor_to_compare.resists[DamageType[t.type]] or res
+			if res ~= 0 or reso ~= 0 then -- report restance type
+				local res = player:combatGetResist(DamageType[t.type])
+				local reso = actor_to_compare and actor_to_compare:combatGetResist(DamageType[t.type]) or res
+				local cap = (player.resists_cap[DamageType[t.type]] or 0) + (player.resists_cap.all or 0)
+				local capo = actor_to_compare and (actor_to_compare.resists_cap[DamageType[t.type]] or 0) + (actor_to_compare.resists_cap.all or 0) or cap
+				local vals = ("%3.0f%% / %3.0f%%"):format(res, cap)
+				local change = ""
+				if res ~= reso or cap ~= capo then
+					local rdiff = res-reso
+					local capdiff = cap-capo
+					change = ("(%s%+3.0f%%#LAST#/%s%+3.0f%%#LAST#)"):format(rdiff>0 and "#LIGHT_GREEN#" or rdiff<0 and "#RED#" or "#GREY#", rdiff, capdiff>0 and "#LIGHT_GREEN#" or capdiff<0 and "#RED#" or "#GREY#", capdiff)
+				
+				end
+				self:mouseTooltip(self.TOOLTIP_RESIST, s:drawColorStringBlended(self.font, ("%s%-14s#LAST#: #00ff00#%3s %s"):format((t.text_color or "#WHITE#"), t.name:capitalize(), vals, change), w, h, 255, 255, 255, true)) h = h + self.font_h
 			end
 		end
 
-		if player.resists.all then
-			text = compare_fields(player, actor_to_compare, function(actor, ...) return actor.resists.all end, "", "%+.0f%%", 1, false, true)
-			local res_cap = compare_fields(player, actor_to_compare, function(actor, ...) return actor.resists_cap.all or 0 end, "", "%+.0f%%",  1, false, true)
-			local res_text = ("(%s / %s)"):format(text ~= "" and text or "0", res_cap ~= "" and res_cap or "0")
-			if res_text == "(0 / 0)" then
-				res_text = ""
-			end
-			self:mouseTooltip(self.TOOLTIP_RESIST_ALL, s:drawColorStringBlended(self.font, ("%-10s: #00ff00#%3d%% / %d%%%s"):format("全体", player.resists.all, player.resists_cap.all or 0, res_text), w, h, 255, 255, 255, true)) h = h + self.font_h
-		end
-		for i, t in pairs(DamageType.dam_def) do
-			if player.resists[DamageType[t.type]] and player.resists[DamageType[t.type]] ~= 0 then
-				self:mouseTooltip(self.TOOLTIP_RESIST, s:drawColorStringBlended(self.font, ("%s%-10s#LAST#: #00ff00#%3d%% / %d%%"):format((t.text_color or "#WHITE#"), t.name:capitalize(), player:combatGetResist(DamageType[t.type]), (player.resists_cap[DamageType[t.type]] or 0) + (player.resists_cap.all or 0)), w, h, 255, 255, 255, true)) h = h + self.font_h
-			end
-		end
-		if player.resists_actor_type then
-			for i, t in pairs(player.resists_actor_type) do
-				if t and t ~= 0 then
-					self:mouseTooltip(self.TOOLTIP_RESIST, s:drawColorStringBlended(self.font, ("#ORANGE#%-10s#LAST#: #00ff00#%3d%% / %d%%"):format(i:capitalize(), t, player.resists_cap_actor_type or 100), w, h, 255, 255, 255, true)) h = h + self.font_h
+		--Resists vs actor types
+		if player.resists_actor_type or actor_to_compare and actor_to_compare.resists_actor_type then
+			local types = {}
+			if player.resists_actor_type then table.merge(types, player.resists_actor_type) end
+			if actor_to_compare and actor_to_compare.resists_actor_type then table.merge(types, actor_to_compare.resists_actor_type) end
+			for t, v in pairs(types) do
+				local res = table.get(player, "resists_actor_type", t) or 0
+				local reso = table.get(actor_to_compare, "resists_actor_type", t) or res
+				local cap = player.resists_cap_actor_type or 100
+				local capo = actor_to_compare and actor_to_compare.resists_cap_actor_type or cap
+				
+				if res ~= 0 or reso ~= 0 then -- report resistances
+					local vals = ("%3.0f%% /%3.0f%%"):format(res, cap)
+					local change = ""
+					if res ~= reso or cap ~= capo then
+						local rdiff = res-reso
+						local capdiff = cap-capo
+						change = ("(%s%+.0f%%#LAST#/%s%+.0f%%#LAST#)"):format(rdiff>0 and "#LIGHT_GREEN#" or rdiff<0 and "#RED#" or "#GREY#", rdiff, capdiff>0 and "#LIGHT_GREEN#" or capdiff<0 and "#RED#" or "#GREY#", capdiff)
+					end
+					self:mouseTooltip(self.TOOLTIP_RESIST_DAMAGE_ACTOR, s:drawColorStringBlended(self.font, ("#ORANGE#vs %-11s#LAST#: #00ff00#%3s %s"):format(t:capitalize(), vals, change), w, h, 255, 255, 255, true)) h = h + self.font_h
+
 				end
 			end
 		end
-
+		
 		h = h + self.font_h
+		--Damage Affinities
 		s:drawColorStringBlended(self.font, "#LIGHT_BLUE#伤害吸收:", w, h, 255, 255, 255, true) h = h + self.font_h
 
-		if player.damage_affinity.all then
+		if player.damage_affinity.all or (actor_to_compare and actor_to_compare.damage_affinity.all) then
 			text = compare_fields(player, actor_to_compare, function(actor, ...) return actor.damage_affinity and actor.damage_affinity.all or 0 end, "%3d%%", "%+.0f%%")
-			self:mouseTooltip(self.TOOLTIP_AFFINITY_ALL, s:drawColorStringBlended(self.font, ("全体伤害    : #00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
+			if text ~= "  0%" then
+				self:mouseTooltip(self.TOOLTIP_AFFINITY_ALL, s:drawColorStringBlended(self.font, ("All damage    : #00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
+			end
 		end
 
-		local damage_affinitys = {}
 		for i, t in pairs(DamageType.dam_def) do
-			if player.damage_affinity[DamageType[t.type]] and player.damage_affinity[DamageType[t.type]] ~= 0 then
-				damage_affinitys[t] = damage_affinitys[t] or {}
-				damage_affinitys[t][1] = player.damage_affinity[DamageType[t.type]]
-			end
-			if actor_to_compare and actor_to_compare.damage_affinity[DamageType[t.type]] and actor_to_compare.damage_affinity[DamageType[t.type]] ~= 0 then
-				damage_affinitys[t] = damage_affinitys[t] or {}
-				damage_affinitys[t][2] = actor_to_compare.damage_affinity[DamageType[t.type]]
-			end
-		end
-
-		for i, ts in pairs(damage_affinitys) do
-			if ts[1] then
-				if ts[2] and ts[2] ~= ts[1] then
-					self:mouseTooltip(self.TOOLTIP_AFFINITY, s:drawColorStringBlended(self.font, ("%s%-20s: #00ff00#%+d%%%s(%+.0f%%)"):format((i.text_color or "#WHITE#"), i.name:capitalize().."#LAST# 伤害", ts[1] + (player.damage_affinity.all or 0), ts[2] > ts[1] and "#ff0000#" or "#00ff00#", ts[1] - ts[2] ), w, h, 255, 255, 255, true)) h = h + self.font_h
-				else
-					self:mouseTooltip(self.TOOLTIP_AFFINITY, s:drawColorStringBlended(self.font, ("%s%-20s: #00ff00#%+d%%"):format((i.text_color or "#WHITE#"), i.name:capitalize().."#LAST# 伤害", ts[1] + (player.damage_affinity.all or 0)), w, h, 255, 255, 255, true)) h = h + self.font_h
-				end
-			else
-				if ts[2] then
-					self:mouseTooltip(self.TOOLTIP_AFFINITY, s:drawColorStringBlended(self.font, ("%s%-20s: #00ff00#%+d%%(%+.0f%%)"):format((i.text_color or "#WHITE#"), i.name:capitalize().."#LAST# 伤害", (player.damage_affinity.all or 0),-ts[2] ), w, h, 255, 255, 255, true)) h = h + self.font_h
-				end
+			local alln = player.damage_affinity.all or 0
+			local allo = actor_to_compare and actor_to_compare.damage_affinity.all or 0
+			local valn = player.damage_affinity[DamageType[t.type]] or 0
+			local valo = actor_to_compare and actor_to_compare.damage_affinity[DamageType[t.type]] or 0
+			if valn~=0 or valo~=0 then
+				text = compare_fields(player, actor_to_compare, function(actor, ...) return actor == player and valn+alln or actor == actor_to_compare and valo+allo or 0 end, "%3d%%", "%+.0f%%")
+				self:mouseTooltip(self.TOOLTIP_AFFINITY, s:drawColorStringBlended(self.font, ("%s%-20s: #00ff00#%s"):format((t.text_color or "#WHITE#"), t.name:capitalize().."#LAST#", text), w, h, 255, 255, 255, true)) h = h + self.font_h
 			end
 		end
 
+		-- Status Immunities
 		h = 0
 		w = self.w * 0.52
+		self:mouseTooltip(self.TOOLTIP_STATUS_IMMUNE, s:drawColorStringBlended(self.font, "#LIGHT_BLUE#状态效果免疫:", w, h, 255, 255, 255, true)) h = h + self.font_h
 
-		s:drawColorStringBlended(self.font, "#LIGHT_BLUE#特效抗性：", w, h, 255, 255, 255, true) h = h + self.font_h
-
-
-		immune_type = "poison_immune" immune_name =    "毒素     " if player:attr(immune_type) then text = compare_fields(player, actor_to_compare, function(actor, ...) return util.bound((actor:attr(...) or 0) * 100, 0, 100) end, "%3d%%", "%+.0f%%", 1, false, false, immune_type) self:mouseTooltip(self.TOOLTIP_SPECIFIC_IMMUNE, s:drawColorStringBlended(self.font, ("%s: #00ff00#%s"):format(immune_name, text), w, h, 255, 255, 255, true)) h = h + self.font_h end
-		immune_type = "disease_immune" immune_name =   "疾病    " if player:attr(immune_type) then text = compare_fields(player, actor_to_compare, function(actor, ...) return util.bound((actor:attr(...) or 0) * 100, 0, 100) end, "%3d%%", "%+.0f%%", 1, false, false, immune_type) self:mouseTooltip(self.TOOLTIP_SPECIFIC_IMMUNE, s:drawColorStringBlended(self.font, ("%s: #00ff00#%s"):format(immune_name, text), w, h, 255, 255, 255, true)) h = h + self.font_h end
-		immune_type = "cut_immune" immune_name =       "流血      " if player:attr(immune_type) then text = compare_fields(player, actor_to_compare, function(actor, ...) return util.bound((actor:attr(...) or 0) * 100, 0, 100) end, "%3d%%", "%+.0f%%", 1, false, false, immune_type) self:mouseTooltip(self.TOOLTIP_SPECIFIC_IMMUNE, s:drawColorStringBlended(self.font, ("%s: #00ff00#%s"):format(immune_name, text), w, h, 255, 255, 255, true)) h = h + self.font_h end
-		immune_type = "confusion_immune" immune_name = "混乱  " if player:attr(immune_type) then text = compare_fields(player, actor_to_compare, function(actor, ...) return util.bound((actor:attr(...) or 0) * 100, 0, 100) end, "%3d%%", "%+.0f%%", 1, false, false, immune_type) self:mouseTooltip(self.TOOLTIP_SPECIFIC_IMMUNE, s:drawColorStringBlended(self.font, ("%s: #00ff00#%s"):format(immune_name, text), w, h, 255, 255, 255, true)) h = h + self.font_h end
-		immune_type = "blind_immune" immune_name =     "致盲      " if player:attr(immune_type) then text = compare_fields(player, actor_to_compare, function(actor, ...) return util.bound((actor:attr(...) or 0) * 100, 0, 100) end, "%3d%%", "%+.0f%%", 1, false, false, immune_type) self:mouseTooltip(self.TOOLTIP_SPECIFIC_IMMUNE, s:drawColorStringBlended(self.font, ("%s: #00ff00#%s"):format(immune_name, text), w, h, 255, 255, 255, true)) h = h + self.font_h end
-		immune_type = "silence_immune" immune_name =   "沉默    " if player:attr(immune_type) then text = compare_fields(player, actor_to_compare, function(actor, ...) return util.bound((actor:attr(...) or 0) * 100, 0, 100) end, "%3d%%", "%+.0f%%", 1, false, false, immune_type) self:mouseTooltip(self.TOOLTIP_SPECIFIC_IMMUNE, s:drawColorStringBlended(self.font, ("%s: #00ff00#%s"):format(immune_name, text), w, h, 255, 255, 255, true)) h = h + self.font_h end
-		immune_type = "disarm_immune" immune_name =    "缴械     " if player:attr(immune_type) then text = compare_fields(player, actor_to_compare, function(actor, ...) return util.bound((actor:attr(...) or 0) * 100, 0, 100) end, "%3d%%", "%+.0f%%", 1, false, false, immune_type) self:mouseTooltip(self.TOOLTIP_SPECIFIC_IMMUNE, s:drawColorStringBlended(self.font, ("%s: #00ff00#%s"):format(immune_name, text), w, h, 255, 255, 255, true)) h = h + self.font_h end
-		immune_type = "pin_immune" immune_name =       "定身    " if player:attr(immune_type) then text = compare_fields(player, actor_to_compare, function(actor, ...) return util.bound((actor:attr(...) or 0) * 100, 0, 100) end, "%3d%%", "%+.0f%%", 1, false, false, immune_type) self:mouseTooltip(self.TOOLTIP_SPECIFIC_IMMUNE, s:drawColorStringBlended(self.font, ("%s: #00ff00#%s"):format(immune_name, text), w, h, 255, 255, 255, true)) h = h + self.font_h end
-		immune_type = "stun_immune" immune_name =      "震慑/冻结" if player:attr(immune_type) then text = compare_fields(player, actor_to_compare, function(actor, ...) return util.bound((actor:attr(...) or 0) * 100, 0, 100) end, "%3d%%", "%+.0f%%", 1, false, false, immune_type) self:mouseTooltip(self.TOOLTIP_SPECIFIC_IMMUNE, s:drawColorStringBlended(self.font, ("%s: #00ff00#%s"):format(immune_name, text), w, h, 255, 255, 255, true)) h = h + self.font_h end
-		immune_type = "sleep_immune" immune_name =     "睡眠      " if player:attr(immune_type) then text = compare_fields(player, actor_to_compare, function(actor, ...) return util.bound((actor:attr(...) or 0) * 100, 0, 100) end, "%3d%%", "%+.0f%%", 1, false, false, immune_type) self:mouseTooltip(self.TOOLTIP_SPECIFIC_IMMUNE, s:drawColorStringBlended(self.font, ("%s: #00ff00#%s"):format(immune_name, text), w, h, 255, 255, 255, true)) h = h + self.font_h end
-		immune_type = "fear_immune" immune_name =      "恐惧       " if player:attr(immune_type) then text = compare_fields(player, actor_to_compare, function(actor, ...) return util.bound((actor:attr(...) or 0) * 100, 0, 100) end, "%3d%%", "%+.0f%%", 1, false, false, immune_type) self:mouseTooltip(self.TOOLTIP_SPECIFIC_IMMUNE, s:drawColorStringBlended(self.font, ("%s: #00ff00#%s"):format(immune_name, text), w, h, 255, 255, 255, true)) h = h + self.font_h end
-		immune_type = "knockback_immune" immune_name = "击退  " if player:attr(immune_type) then text = compare_fields(player, actor_to_compare, function(actor, ...) return util.bound((actor:attr(...) or 0) * 100, 0, 100) end, "%3d%%", "%+.0f%%", 1, false, false, immune_type) self:mouseTooltip(self.TOOLTIP_SPECIFIC_IMMUNE, s:drawColorStringBlended(self.font, ("%s: #00ff00#%s"):format(immune_name, text), w, h, 255, 255, 255, true)) h = h + self.font_h end
-		immune_type = "stone_immune" immune_name =     "石化    " if player:attr(immune_type) then text = compare_fields(player, actor_to_compare, function(actor, ...) return util.bound((actor:attr(...) or 0) * 100, 0, 100) end, "%3d%%", "%+.0f%%", 1, false, false, immune_type) self:mouseTooltip(self.TOOLTIP_SPECIFIC_IMMUNE, s:drawColorStringBlended(self.font, ("%s: #00ff00#%s"):format(immune_name, text), w, h, 255, 255, 255, true)) h = h + self.font_h end
-		immune_type = "instakill_immune" immune_name = "即死 " if player:attr(immune_type) then text = compare_fields(player, actor_to_compare, function(actor, ...) return util.bound((actor:attr(...) or 0) * 100, 0, 100) end, "%3d%%", "%+.0f%%", 1, false, false, immune_type) self:mouseTooltip(self.TOOLTIP_SPECIFIC_IMMUNE, s:drawColorStringBlended(self.font, ("%s: #00ff00#%s"):format(immune_name, text), w, h, 255, 255, 255, true)) h = h + self.font_h end
-		immune_type = "teleport_immune" immune_name =  "传送   " if player:attr(immune_type) then text = compare_fields(player, actor_to_compare, function(actor, ...) return util.bound((actor:attr(...) or 0) * 100, 0, 100) end, "%3d%%", "%+.0f%%", 1, false, false, immune_type) self:mouseTooltip(self.TOOLTIP_SPECIFIC_IMMUNE, s:drawColorStringBlended(self.font, ("%s: #00ff00#%s"):format(immune_name, text), w, h, 255, 255, 255, true)) h = h + self.font_h end
-
-		immune_type = "negative_status_effect_immune" immune_name =	"全体        " if player:attr(immune_type) then text = compare_fields(player, actor_to_compare, function(actor, ...) return util.bound((actor:attr(...) or 0) * 100, 0, 100) end, "%3d%%", "%+.0f%%", 1, false, false, immune_type) self:mouseTooltip(self.TOOLTIP_SPECIFIC_IMMUNE, s:drawColorStringBlended(self.font, ("%s: #00ff00#%s"):format(immune_name, text), w, h, 255, 255, 255, true)) h = h + self.font_h end
+		for immune_type, immune_name in pairs(self.status_immunities) do
+			text = compare_fields(player, actor_to_compare, function(actor, ...) return util.bound((actor:attr(...) or 0) * 100, 0, 100) end, "%3d%%", "%+.0f%%", 1, false, false, immune_type)
+			if text ~= "  0%" then
+				self:mouseTooltip(self[self.immunity_tooltips[immune_type] or "TOOLTIP_SPECIFIC_IMMUNE"], s:drawColorStringBlended(self.font, ("%s: #00ff00#%s"):format(immune_name, text), w, h, 255, 255, 255, true))
+				h = h + self.font_h
+			end
+		end
 
 		h = 0
 		w = self.w * 0.75
 
-		s:drawColorStringBlended(self.font, "#LIGHT_BLUE#被击中后伤害反弹：", w, h, 255, 255, 255, true) h = h + self.font_h
+		self:mouseTooltip(self.TOOLTIP_ON_HIT_DAMAGE, s:drawColorStringBlended(self.font, "#LIGHT_BLUE#被击中后伤害反弹：", w, h, 255, 255, 255, true)) h = h + self.font_h
 		for i, t in pairs(DamageType.dam_def) do
 			if player.on_melee_hit[DamageType[t.type]] and player.on_melee_hit[DamageType[t.type]] ~= 0 then
 				local dval = player.on_melee_hit[DamageType[t.type]]
 				if t.tdesc then
 					dval = t.tdesc(dval)
-					dval = itemDamagedesc(dval)
 					self:mouseTooltip(self.TOOLTIP_ON_HIT_DAMAGE, s:drawColorStringBlended(self.font, ("%s"):format(dval), w, h, 255, 255, 255, true)) h = h + self.font_h
 				else
 					dval = Talents.damDesc(player, DamageType[t.type] ,type(dval) == "number" and dval or dval.dam)
@@ -1004,8 +1254,10 @@ function _M:drawDialog(kind, actor_to_compare)
 			end
 		end
 
-		--player.combat_mentalresist
+	elseif kind=="equipment" then
+		self:showEquipmentFrame()
 
+	-- allow scrolling for large numbers of talents?
 	elseif kind=="talents" then
 		h = 0
 		w = 0
@@ -1077,7 +1329,7 @@ function _M:drawDialog(kind, actor_to_compare)
 
 			local sort_tt
 
-			-- Decide what sorting method do use
+			-- Decide what sorting method to use
 			if self.talent_sorting == 1 then
 				-- Sorting of talent groups, Racial/infusions first, then alphabetical order
 				local sort_rank = {"race/.*", "Inscriptions", "Prodigies", "Item Talents"} -- Relies on the groups
@@ -1143,7 +1395,9 @@ function _M:drawDialog(kind, actor_to_compare)
 
 		-- The color used to display it
 		local function get_talent_color(t)
-			if t.mode == "activated" then
+			if t.uber then
+				return "#GOLD#"
+			elseif t.mode == "activated" then
 				local no_energy = util.getval(t.no_energy, player, t)
 				if no_energy == true then
 					return "#00c91b##{italic}#"--return "#E56F48#"
@@ -1164,20 +1418,23 @@ function _M:drawDialog(kind, actor_to_compare)
 			local talent_type_name = tt["talent_type"] and tt["talent_type"].description or tt_name or ""
 			local talents = tt["talents"]
 			if tt_name then
+				if h + self.font_h*2 >= self.c_desc.h then h = 0 w = w + self.c_desc.w / 6 end
 				self:mouseTooltip(talent_type_name, s:drawColorStringBlended(self.font, ("#{bold}##KHAKI#%s#{normal}#"):format(tt_name), w, h, 255, 255, 255, true)) h = h + self.font_h
 			end
 
 			-- Display the talents in the talent type
 			for _, t in ipairs(talents) do
+				if h + self.font_h >= self.c_desc.h then h = 0 w = w + self.c_desc.w / 6 end
 				self:mouseTooltip(t.desc, s:drawColorStringBlended(self.font, (get_talent_color(t.talent).."%s".."#{normal}#"):format(t.name), w, h, 255, 255, 255, true)) h = h + self.font_h
 
-				if h + self.font_h >= self.c_desc.h then h = 0 w = w + self.c_desc.w / 6 end
 			end
-		-- Add extra space to seperate categories
-		h = h + self.font_h
+			-- Add extra space to separate categories
+			h = h + self.font_h
 		end
 	end
 
+	--put a hook here to allow adding more info to the display?  (Steampower, etc.)
+	
 	self.c_desc:update()
 	self.changed = false
 end

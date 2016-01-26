@@ -1,5 +1,5 @@
 -- TE4 - T-Engine 4
--- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
+-- Copyright (C) 2009 - 2016 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -26,6 +26,10 @@ local Separator = require "engine.ui.Separator"
 local Image = require "engine.ui.Image"
 local Checkbox = require "engine.ui.Checkbox"
 
+--- Dialog for showing achievements
+--
+-- See also: @{Achievement}
+-- @classmod engine.dialogs.ShowAchievements
 module(..., package.seeall, class.inherit(Dialog))
 
 function _M:init(title, player)

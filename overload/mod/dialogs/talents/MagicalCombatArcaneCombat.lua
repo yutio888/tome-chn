@@ -1,5 +1,5 @@
--- TE4 - T-Engine 4
--- Copyright (C) 2009 - 2015 Nicolas Casalini
+-- ToME - Tales of Maj'Eyal
+-- Copyright (C) 2009 - 2016 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -26,39 +26,22 @@ local TextzoneList = require "engine.ui.TextzoneList"
 local Separator = require "engine.ui.Separator"
 
 module(..., package.seeall, class.inherit(Dialog))
--- Could use better icons when available
---local confirmMark = require("engine.Entity").new({image="ui/chat-icon.png"})
---local autoMark = require("engine.Entity").new({image = "/ui/hotkeys/mainmenu.png"})
 
--- generate talent status separately to enable quicker refresh of Dialog
+-- Generate talent status separately to enable quicker refresh of Dialog
 local function TalentStatus(who,t) 
 	local status = tstring{{"color", "LIGHT_GREEN"}, "Active"} 
 
 	return tostring(status) 
 end
 
--- check if the talent is already bound to another sustain
-local function spellbound(who, t)
-	for tid, active in pairs(who.sustain_talents) do
-		if active then
-			local tt = who:getTalentFromId(tid)
-			if tt.type[1]:find("^chronomancy/spellbinding") then
-				if who:isTalentActive(tid).talent == t then
-					return true
-				end
-			end
-		end
-	end
-end
-
 function _M:init(actor)
 	self.actor = actor
 	actor.hotkey = actor.hotkey or {}
-	Dialog.init(self, "èƒ½é‡å¢å¹…", game.w * 0.6, game.h * 0.8)
+	Dialog.init(self, "Arcane Combat", game.w * 0.6, game.h * 0.8)
 
 	local vsep = Separator.new{dir="horizontal", size=self.ih - 10}
 	self.c_tut = Textzone.new{width=math.floor(self.iw / 2 - vsep.w / 2), height=1, auto_height=true, no_color_bleed=true, text=[[
-ä½  å¯ ä»¥ é€‰ æ‹© ä¸€ ä¸ª æ—¶ ç©º ç³» æ³• æœ¯ æ¥ æ–½ å±• â€œ èƒ½ é‡ å¢ å¹… â€ ï¼Œ å¢ åŠ  é‡Š æ”¾ è¿™ ä¸ª æŠ€ èƒ½ æ—¶ çš„ æ³• æœ¯ å¼º åº¦ ã€‚
+Äã¿ÉÒÔÑ¡ÔñÒ»Ïî·¨ÊõÔÚ½üÕ½¹¥»÷ÖĞ×Ô¶¯´¥·¢£¬»òÕßÑ¡Ôñ"Ëæ»ú·¨Êõ"¡£
 ]]}
 	self.c_desc = TextzoneList.new{width=math.floor(self.iw / 2 - vsep.w / 2), height=self.ih - self.c_tut.h - 20, scrollbar=true, no_color_bleed=true}
 
@@ -75,7 +58,7 @@ function _M:init(actor)
 		{left=0, top=0, ui=self.c_list},
 		{right=0, top=self.c_tut.h + 20, ui=self.c_desc},
 		{right=0, top=0, ui=self.c_tut},
-		{hcenter=0, top=5, ui=Separator.new{dir="horizontal", size=self.ih - 10}},
+		{hcenter=0, top=5, ui=vsep},
 	}
 	self:setFocus(self.c_list)
 	self:setupUI()
@@ -107,10 +90,14 @@ function _M:select(item)
 	end
 end
 
+-- Don't close the dialog until the player clicks an appropriate option
 function _M:use(item)
-	if not item or not item.talent then return end
-	self.actor:talentDialogReturn(item.talent)
-	game:unregisterDialog(self)
+	if item and (item.talent or item.use_random) then
+		self.actor:talentDialogReturn(item.talent, item.use_random)
+		game:unregisterDialog(self)
+	else
+		return
+	end
 end
 
 -- Display the player tile
@@ -121,38 +108,46 @@ function _M:innerDisplay(x, y, nb_keyframes)
 end
 
 function _M:generateList()
-	-- Makes up the list
 	local list = {}
 	local letter = 1
 
 	local talents = {}
 	local chars = {}
 
-	-- Generate lists of all talents by category
-	for j, t in pairs(self.actor.talents_def) do
-		if self.actor:knowTalent(t.id) and t.type[1]:find("^chronomancy/") and not t.type[1]:find("^chronomancy/spellbinding") and not t.hide and t.mode ~= "passive" and not spellbound(self.actor, t.id) then
-			local nodes = talents
+	for _, t in pairs(self.actor.talents_def) do
+		if t.allow_for_arcane_combat and self.actor:knowTalent(t) then
 			local status = tstring{{"color", "LIGHT_GREEN"}, "Talents"}
 			
 			-- Pregenerate icon with the Tiles instance that allows images
 			if t.display_entity then t.display_entity:getMapObjects(game.uiset.hotkeys_display_icons.tiles, {}, 1) end
 
-			nodes[#nodes+1] = {
-				name=((t.display_entity and t.display_entity:getDisplayString() or "")..t.name):toTString(),
-				cname=t.name,
-				status=status,
-				entity=t.display_entity,
-				talent=t.id,
-				desc=self.actor:getTalentFullDescription(t),
-				color=function() return {0xFF, 0xFF, 0xFF} end
+			talents[#talents+1] = {
+				name = ((t.display_entity and t.display_entity:getDisplayString() or "")..t.name):toTString(),
+				cname = t.name,
+				status = status,
+				entity = t.display_entity,
+				talent = t.id,
+				desc = self.actor:getTalentFullDescription(t),
+				color = function() return {0xFF, 0xFF, 0xFF} end
 			}
 		end
 	end
 	table.sort(talents, function(a,b) return a.cname < b.cname end)
-	for i, node in ipairs(talents) do node.char = self:makeKeyChar(letter) chars[node.char] = node letter = letter + 1 end
+	
+	talents[#talents+1] = {
+		name = "Ëæ»ú·¨Êõ",
+		use_random = true,
+		desc = "Each time Arcane Combat is triggered, a random allowed spell will be used."
+	}
+	
+	for _, node in ipairs(talents) do
+		node.char = self:makeKeyChar(letter)
+		chars[node.char] = node
+		letter = letter + 1
+	end
 
 	list = {
-		{ char='', name=('#{bold}#é€‰æ‹©ä¸€ä¸ªæŠ€èƒ½#{normal}#'):toTString(), status='', hotkey='', desc="æ‰€æœ‰å¯ä»¥è¢«æ–½å±•èƒ½é‡å¢å¹…çš„æŠ€èƒ½ã€‚", color=function() return colors.simple(colors.LIGHT_GREEN) end, nodes=talents, shown=true },
+		{ char='', name=('#{bold}#Ñ¡ÔñÒ»Ïî·¨Êõ#{normal}#'):toTString(), status='', hotkey='', desc="All known spells that can be used with Arcane Combat.", color=function() return colors.simple(colors.LIGHT_GREEN) end, nodes=talents, shown=true },
 		chars = chars,
 	}
 	self.list = list

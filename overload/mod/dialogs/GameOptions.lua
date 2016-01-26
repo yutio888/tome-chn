@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2015 Nicolas Casalini
+-- Copyright (C) 2009 - 2016 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -163,6 +163,23 @@ function _M:generateListUi()
 		end)
 	end,}
 
+	if self:isTome() and game.uiset:checkGameOption("log_lines") then	
+		local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"战斗日志显示行数 (经典HUD)."}
+		list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#日志行数#WHITE##{normal}#", status=function(item)
+			return tostring(config.settings.tome.log_lines)
+		end, fct=function(item)
+			game:registerDialog(GetQuantity.new("日志行数", "从 5 到 50", config.settings.tome.log_lines, 50, function(qty)
+				qty = util.bound(qty, 5, 50)
+				game:saveSettings("tome.log_lines", ("tome.log_lines = %d\n"):format(qty))
+				config.settings.tome.log_lines = qty
+				if self:isTome() then
+					game.uiset.logdisplay.resizeToLines()
+				end
+				self.c_list:drawItem(item)
+			end, 0))
+		end,}
+	end
+	
 	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"为每一个格子画线，令位置显示更清晰可见。#WHITE#"}
 	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#显示地图表格线#WHITE##{normal}#", status=function(item)
 		return tostring(config.settings.tome.show_grid_lines and "开启" or "关闭")
@@ -275,6 +292,23 @@ function _M:generateListUi()
 		end
 	end
 
+	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"当你点击快捷栏或者使用快捷键时，将在快捷栏对应技能上有视觉反馈。#WHITE#"}
+	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#可视化快捷键反馈#WHITE##{normal}#", status=function(item)
+		return tostring(config.settings.tome.visual_hotkeys and "开启" or "关闭")
+	end, fct=function(item)
+		config.settings.tome.visual_hotkeys = not config.settings.tome.visual_hotkeys
+		game:saveSettings("tome.visual_hotkeys", ("tome.visual_hotkeys = %s\n"):format(tostring(config.settings.tome.visual_hotkeys)))
+		self.c_list:drawItem(item)
+	end,}
+
+	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"当玩家或者NPC使用技能时，将When the player or an NPC uses a talent shows a quick popup with the talent's icon and name over its head.#WHITE#"}
+	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#T地图显示使用技能#WHITE##{normal}#", status=function(item)
+		return tostring(config.settings.tome.talents_flyers and "开启" or "关闭")
+	end, fct=function(item)
+		config.settings.tome.talents_flyers = not config.settings.tome.talents_flyers
+		game:saveSettings("tome.talents_flyers", ("tome.talents_flyers = %s\n"):format(tostring(config.settings.tome.talents_flyers)))
+		self.c_list:drawItem(item)
+	end,}
 	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"调整快捷栏图标大小。#WHITE#"}
 	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#快捷栏图标大小#WHITE##{normal}#", status=function(item)
 		return tostring(config.settings.tome.hotkey_icons_size)
@@ -396,6 +430,15 @@ function _M:generateListUi()
 		self.c_list:drawItem(item)
 	end,}
 
+	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"如果开启，任何任务信息变化都将以更明显的方式显示在屏幕上。#WHITE#"}
+	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#大号任务提示#WHITE##{normal}#", status=function(item)
+		return tostring(config.settings.tome.quest_popup and "开启" or "关闭")
+	end, fct=function(item)
+		config.settings.tome.quest_popup = not config.settings.tome.quest_popup
+		game:saveSettings("tome.quest_popup", ("tome.quest_popup = %s\n"):format(tostring(config.settings.tome.quest_popup)))
+		self.c_list:drawItem(item)
+	end,}
+
 	self.list = list
 end
 
@@ -494,6 +537,15 @@ function _M:generateListGameplay()
 	end, fct=function(item)
 		config.settings.tome.rest_before_explore = not config.settings.tome.rest_before_explore
 		game:saveSettings("tome.rest_before_explore", ("tome.rest_before_explore = %s\n"):format(tostring(config.settings.tome.rest_before_explore)))
+		self.c_list:drawItem(item)
+	end,}
+
+	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"当切换一件带有附着物的装备时，自动将附着物切换至新装备上。#WHITE#"}
+	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#附着物自动切换#WHITE##{normal}#", status=function(item)
+		return tostring(config.settings.tome.tinker_auto_switch and "开启" or "关闭")
+	end, fct=function(item)
+		config.settings.tome.tinker_auto_switch = not config.settings.tome.tinker_auto_switch
+		game:saveSettings("tome.tinker_auto_switch", ("tome.tinker_auto_switch = %s\n"):format(tostring(config.settings.tome.rest_before_explore)))
 		self.c_list:drawItem(item)
 	end,}
 

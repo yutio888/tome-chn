@@ -69,18 +69,18 @@ registerTalentTranslation{
 	end,
 }
 
-registerTalentTranslation{
-	id = "T_WORM_ROT",
-	name = "腐烂蠕虫",
-	info = function(self, t)
-		local duration = t.getDuration(self, t)
-		local damage = t.getDamage(self, t)
-		local burst = t.getBurstDamage(self, t)
-		return ([[使 目 标 感 染 腐 肉 寄 生 幼 虫 持 续 %d 回 合。 每 回 合 会 移 除 目 标 一 个 物 理 增 益 效 果 并 造 成 %0.2f 酸 系 和 %0.2f 枯 萎 伤 害。 
-		 如 果 5 回 合 后 未 被 清 除 则 幼 虫 会 孵 化 造 成 %0.2f 酸 系 伤 害， 移 除 这 个 效 果 但 是 会 在 目 标 处 成 长 为 一 条 成 熟 的 腐 肉 虫。]]):
-		format(duration, damDesc(self, DamageType.ACID, (damage/2)), damDesc(self, DamageType.BLIGHT, (damage/2)), damDesc(self, DamageType.ACID, (burst)))
-	end,
-}
+--registerTalentTranslation{
+--	id = "T_WORM_ROT",
+--	name = "腐烂蠕虫",
+--	info = function(self, t)
+--		local duration = t.getDuration(self, t)
+--		local damage = t.getDamage(self, t)
+--		local burst = t.getBurstDamage(self, t)
+--		return ([[使 目 标 感 染 腐 肉 寄 生 幼 虫 持 续 %d 回 合。 每 回 合 会 移 除 目 标 一 个 物 理 增 益 效 果 并 造 成 %0.2f 酸 系 和 %0.2f 枯 萎 伤 害。 
+--		 如 果 5 回 合 后 未 被 清 除 则 幼 虫 会 孵 化 造 成 %0.2f 酸 系 伤 害， 移 除 这 个 效 果 但 是 会 在 目 标 处 成 长 为 一 条 成 熟 的 腐 肉 虫。]]):
+--		format(duration, damDesc(self, DamageType.ACID, (damage/2)), damDesc(self, DamageType.BLIGHT, (damage/2)), damDesc(self, DamageType.ACID, (burst)))
+--	end,
+--}
 
 registerTalentTranslation{
 	id = "T_KNIFE_STORM",
@@ -164,5 +164,27 @@ registerTalentTranslation{
 	end,
 }
 
+
+registerTalentTranslation{
+	id = "T_DRENCH",
+	name = "浸湿",
+	info = function(self, t)
+		local radius = self:getTalentRadius(t)
+		return ([[在 你 身 边 %d 范 围 内 制 造 水 流 ， 令 所 有 生 物 湿 润。
+		效 果 受 法 术 强 度 加 成。]]):format(radius)
+	end,
+}
+
+registerTalentTranslation{
+	id = "T_BLOOD_SUCKERS",
+	name = "吸血者",
+	info = function(self, t)
+		local Pdam, Fdam = self:damDesc(DamageType.PHYSICAL, self.level/2), self:damDesc(DamageType.ACID, self.level/2)
+		return ([[抓 住 目 标 ，吸 取 他 们 的 血 液 ， 每 回 合 造 成 %0.2f 物 理 和 %0.2f 酸 性 伤 害 。
+		5 回 合 后 脱 落 并 繁 殖。
+		伤 害 随 等 级 上 升 。
+		]]):format(Pdam, Fdam)
+	end,
+}
 
 return _M

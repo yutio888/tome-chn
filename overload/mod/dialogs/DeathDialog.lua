@@ -1,5 +1,5 @@
 ﻿-- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2015 Nicolas Casalini
+-- Copyright (C) 2009 - 2016 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -113,7 +113,7 @@ function _M:cleanActor(actor)
 		local eff = rng.tableRemove(effs)
 
 		if eff[1] == "effect" then
-			actor:removeEffect(eff[2])
+			actor:removeEffect(eff[2], false, true)
 		else
 			actor:forceUseTalent(eff[2], {ignore_energy=true, no_equilibrium_fail=true, no_paradox_fail=true, save_cleanup=true})
 		end
@@ -196,7 +196,9 @@ function _M:use(item)
 	if not item then return end
 	local act = item.action
 
-	if act == "exit" then
+	if type(act) == "function" then
+		act()
+	elseif act == "exit" then
 		if item.subaction == "none" then
 			util.showMainMenu()
 		elseif item.subaction == "restart" then
@@ -316,6 +318,8 @@ function _M:generateList()
 				self.possible_items.consume = true
 			end
 		end)
+
+		self.actor:fireTalentCheck("callbackOnDeathbox", self, list)
 	end
 
 	list[#list+1] = {name=(not profile.auth and "消息日志" or "消息/聊天日志(允许聊天)"), action="log"}

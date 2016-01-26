@@ -1,5 +1,5 @@
 -- TE4 - T-Engine 4
--- Copyright (C) 2009 - 2015 Nicolas Casalini
+-- Copyright (C) 2009 - 2016 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -22,6 +22,7 @@ local Entity = require "engine.Entity"
 local Map = require "engine.Map"
 
 --- Describes a trap
+-- @classmod engine.Trap
 module(..., package.seeall, class.inherit(Entity))
 
 _M.display_on_seen = true

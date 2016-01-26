@@ -32,6 +32,7 @@ registerTalentTranslation{
 		local shield = t.getShield(self, t)
 		return ([[使 你 的 周 身 围 绕 着 保 护 性 的 奥 术 能 量。 
 		 每 当 你 获 得 一 个 直 接 治 疗 时（ 非 持 续 恢 复 效 果） 你 会 自 动 获 得 一 个 护 盾， 护 盾 强 度 为 治 疗 量 的 %d%% ， 持 续 3 回 合。 
+		 如 果 新 护 盾 的 量 和 持 续 时 间 比 当 前 护 盾 大 或 相 等，将 会 取 代 之。
 		 受 法 术 强 度 影 响， 护 盾 强 度 有 额 外 加 成。]]):
 		format(shield)
 	end,

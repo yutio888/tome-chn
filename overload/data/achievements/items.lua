@@ -19,12 +19,15 @@
 
 newAchievement{
 	name = "Deus Ex Machina",
-	desc = [[获得再装填药剂和生命之血。]],
+	desc = [[获得生命之血与四种特殊符文：原初纹身，野性生长纹身，反射符文，时空裂缝符文。]],
 	mode = "player",
 	can_gain = function(self, who, obj)
 		if obj:getName{force_id=true} == "Blood of Life" then self.blood = true end
-		if obj:getName{force_id=true} == "Ever-Refilling Potion of Healing" then self.life = true end
-		return self.blood and self.life
+		if obj:getName{force_id=true}:toString():prefix("Primal Infusion") then self.primal = true end
+		if obj:getName{force_id=true}:toString():prefix("Infusion of Wild Growth") then self.wild = true end
+		if obj:getName{force_id=true}:toString():prefix("Rune of Reflection") then self.reflection = true end
+		if obj:getName{force_id=true}:toString():prefix("Rune of the Rift") then self.rift = true end
+		return self.blood and self.primal and self.wild and self.reflection and self.rift
 	end
 }
 

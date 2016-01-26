@@ -62,7 +62,7 @@ newBirthDescriptor{
 		starting_quest = "start-undead",
 		undead = 1,
 		forbid_nature = 1,
-		inscription_restrictions = { ["inscriptions/runes"] = true, ["inscriptions/taints"] = true, },
+		inscription_forbids = { ["inscriptions/infusions"] = true },
 		resolvers.inscription("RUNE:_SHIELDING", {cooldown=14, dur=5, power=130}),
 		--resolvers.inscription("RUNE:_PHASE_DOOR", {cooldown=7, range=10, dur=5, power=15}),
 		resolvers.inscription("RUNE:_HEAT_BEAM", {cooldown=18, range=8, power=40}), -- yeek and undead starts are unfun to the point of absurdity

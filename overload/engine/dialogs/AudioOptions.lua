@@ -1,5 +1,5 @@
 -- TE4 - T-Engine 4
--- Copyright (C) 2009, 2010, 2011, 2012, 2013 Nicolas Casalini
+-- Copyright (C) 2009 - 2016 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -22,8 +22,11 @@ local Dialog = require "engine.ui.Dialog"
 local Textzone = require "engine.ui.Textzone"
 local Checkbox = require "engine.ui.Checkbox"
 local Numberbox = require "engine.ui.Numberbox"
+local NumberSlider = require "engine.ui.NumberSlider"
 local Separator = require "engine.ui.Separator"
 
+--- Shows audio options
+-- @classmod engine.dialogs.AudioOptions
 module(..., package.seeall, class.inherit(Dialog))
 
 function _M:init()
@@ -31,8 +34,8 @@ function _M:init()
 
 	self.c_enable = Checkbox.new{title="开启音效", default=config.settings.audio.enable, fct=function() end, on_change=function(s) self:sfxEnable(s) end}
 
-	self.c_music_vol = Numberbox.new{title="背景音乐音量：", number=config.settings.audio.music_volume, max=100, min=0, chars=5, fct=function() end, on_change=function(v) self:sfxVolume("music", v) end}
-	self.c_effects_vol = Numberbox.new{title="音效音量：", number=config.settings.audio.effects_volume, max=100, min=0, chars=5, fct=function() end, on_change=function(v) self:sfxVolume("effects", v) end}
+	self.c_music_vol = NumberSlider.new{title="音乐音量: ", size_title="Effects: ", w=400, max=100, min=0, value=config.settings.audio.music_volume, on_change = function(v) self:sfxVolume("music", v) end}
+	self.c_effects_vol = NumberSlider.new{title="音效音量: ", w=400, max=100, min=0, value=config.settings.audio.effects_volume, on_change = function(v) self:sfxVolume("effects", v) end}
 
 	self:loadUI{
 		{left=0, top=0, ui=self.c_enable},

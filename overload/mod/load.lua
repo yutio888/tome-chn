@@ -1,5 +1,5 @@
 ﻿-- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2015 Nicolas Casalini
+-- Copyright (C) 2009 - 2016 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -85,7 +85,7 @@ Map.faction_danger_check = function(self, e, max) return (not max and e.rank > 3
 Level.remove_old_entity_on_duplicate = true
 
 -- Dialog UI
-UIBase.ui = config.settings.tome.ui_theme2
+UIBase:changeDefault(config.settings.tome.ui_theme3)
 UIBase:setTextShadow(0.6)
 
 FontPackage:loadDefinition("data-chn123/font/packages/default.lua")
@@ -191,23 +191,25 @@ ActorInventory:defineInventory("QS_OFFHAND", "Second weapon set: In off hand", f
 ActorInventory:defineInventory("QS_PSIONIC_FOCUS", "Second weapon set: psionic focus", false, "Weapon Set 2: Object held in your telekinetic grasp. It can be a weapon or some other item to provide a benefit to your psionic powers. Press 'x' to switch weapon sets.", true)
 ActorInventory:defineInventory("QS_QUIVER", "Second weapon set: Quiver", false, "Weapon Set 2: Your readied ammo.", true)
 ActorInventory.equipdolls = {
-	default = { w=48, h=48, itemframe="ui/equipdoll/itemframe48.png", itemframe_sel="ui/equipdoll/itemframe-sel48.png", ix=3, iy=3, iw=42, ih=42, doll_x=116, doll_y=168+64, list={
+	default = { w=48, h=48, itemframe="ui/equipdoll/itemframe48.png", itemframe_sel="ui/equipdoll/itemframe-sel48.png", ix=3, iy=3, iw=42, ih=42, doll_x=116, doll_y=168+64, doll_w=128, doll_h=128,
+	list={
 		PSIONIC_FOCUS = {{weight=1, x=48, y=48, subshift="left"}},
 		MAINHAND = {{weight=2, x=48, y=120, subshift="left"}},
 		OFFHAND = {{weight=3, x=48, y=192, subshift="left"}},
 		BODY = {{weight=4, x=48, y=264, subshift="left"}},
 		QUIVER = {{weight=5, x=48, y=336, subshift="left"}},
-		FINGER = {{weight=6, x=48, y=408, subshift="bottom"}, {weight=7, x=120, y=408, text="bottom", subshift="bottom"}},
-		LITE = {{weight=8, x=192, y=408, subshift="bottom"}},
-		TOOL = {{weight=9, x=264, y=408, subshift="bottom", text="bottom"}},
+		FINGER = {{weight=6, x=48, y=408, subshift="left"}, {weight=7, x=124, y=408, text="bottom", subshift="left"}},
+		LITE = {{weight=8, x=188, y=408, subshift="right"}},
+		TOOL = {{weight=9, x=264, y=408, subshift="right", text="bottom"}},
 		FEET = {{weight=10, x=264, y=336}},
 		BELT = {{weight=11, x=264, y=264}},
 		HANDS = {{weight=12, x=264, y=192}},
 		CLOAK = {{weight=13, x=264, y=120}},
-		NECK = {{weight=14, x=192, y=48, subshift="bottom", text="topright"}},
-		HEAD = {{weight=15, x=120, y=48, subshift="bottom", text="topleft"}},
+		NECK = {{weight=14, x=235, y=48, subshift="right", text="topright"}},
+		HEAD = {{weight=15, x=150, y=35, subshift="left", text="bottom"}},
 	}},
-	alchemist_golem = { w=48, h=48, itemframe="ui/equipdoll/itemframe48.png", itemframe_sel="ui/equipdoll/itemframe-sel48.png", ix=3, iy=3, iw=42, ih=42, doll_x=116, doll_y=168+64, list={
+	alchemist_golem = { w=48, h=48, itemframe="ui/equipdoll/itemframe48.png", itemframe_sel="ui/equipdoll/itemframe-sel48.png", ix=3, iy=3, iw=42, ih=42, doll_x=116, doll_y=168+64, doll_w=128, doll_h=128,
+	list={
 		MAINHAND = {{weight=1, x=48, y=120}},
 		OFFHAND = {{weight=2, x=48, y=192}},
 		BODY = {{weight=3, x=48, y=264}},
@@ -227,18 +229,8 @@ ActorTalents:loadDefinition("/data/talents.lua")
 -- Timed Effects
 ActorTemporaryEffects:loadDefinition("/data/timed_effects.lua")
 
--- Actor resources
-ActorResource:defineResource("Air", "air", nil, "air_regen", "Air capacity in your lungs. Entities that need not breath are not affected.")
-ActorResource:defineResource("Stamina", "stamina", ActorTalents.T_STAMINA_POOL, "stamina_regen", "Stamina represents your physical fatigue. Each physical ability used reduces it.")
-ActorResource:defineResource("Mana", "mana", ActorTalents.T_MANA_POOL, "mana_regen", "Mana represents your reserve of magical energies. Each spell cast consumes mana and each sustained spell reduces your maximum mana.")
-ActorResource:defineResource("Equilibrium", "equilibrium", ActorTalents.T_EQUILIBRIUM_POOL, "equilibrium_regen", "Equilibrium represents your standing in the grand balance of nature. The closer it is to 0 the more balanced you are. Being out of equilibrium will negatively affect your ability to use Wild Gifts.", 0, false)
-ActorResource:defineResource("Vim", "vim", ActorTalents.T_VIM_POOL, "vim_regen", "Vim represents the amount of life energy/souls you have stolen. Each corruption talent requires some.")
-ActorResource:defineResource("Positive", "positive", ActorTalents.T_POSITIVE_POOL, "positive_regen", "Positive energy represents your reserve of positive power. It slowly decreases.")
-ActorResource:defineResource("Negative", "negative", ActorTalents.T_NEGATIVE_POOL, "negative_regen", "Negative energy represents your reserve of negative power. It slowly decreases.")
-ActorResource:defineResource("Hate", "hate", ActorTalents.T_HATE_POOL, "hate_regen", "Hate represents the level of frenzy of a cursed soul.")
-ActorResource:defineResource("Paradox", "paradox", ActorTalents.T_PARADOX_POOL, "paradox_regen", "Paradox represents how much damage you've done to the space-time continuum. A high Paradox score makes Chronomancy less reliable and more dangerous to use but also amplifies the effects.", 0, false)
-ActorResource:defineResource("Psi", "psi", ActorTalents.T_PSI_POOL, "psi_regen", "Psi represents the power available to your mind.")
-ActorResource:defineResource("Soul", "soul", ActorTalents.T_SOUL_POOL, "soul_regen", "Soul fragments you have extracted from your foes.", 0, 10)
+-- Load Actor resources
+dofile("/data/resources.lua")
 
 -- Actor stats
 ActorStats:defineStat("Strength",	"str", 10, 1, 100, [[力量属性影响你的角色的物理能力，提升力量
@@ -320,18 +312,20 @@ require("engine.dialogs.Chat").show_portraits = true
 
 -- Inventory tabs
 InventoryUI.default_tabslist = function(self)
-	local tabslist = {
-		{image="metal-ui/inven_tabs/weapons.png", 	kind="weapons",		desc="武器",		filter=function(o) return not o.__transmo and (o.type == "weapon") end},
-		{image="metal-ui/inven_tabs/armors.png", 	kind="armors",		desc="护甲",		filter=function(o) return not o.__transmo and (o.type == "armor") end},
-		{image="metal-ui/inven_tabs/jewelry.png", 	kind="jewelry",		desc="饰品",		filter=function(o) return not o.__transmo and (o.type == "jewelry") end},
-		{image="metal-ui/inven_tabs/gems.png", 		kind="gems",		desc="宝石"		,		filter=function(o) return not o.__transmo and (o.type == "gem" or o.type == "alchemist-gem") end},
-		{image="metal-ui/inven_tabs/inscriptions.png", 	kind="inscriptions",	desc="纹身、符文",		filter=function(o) return not o.__transmo and (o.type == "scroll") end},
-		{image="metal-ui/inven_tabs/misc.png", 		kind="misc",		desc="杂项",			filter="others"},
-		{image="metal-ui/inven_tabs/quests.png", 	kind="quests",		desc="任务物品",	filter=function(o) return not o.__transmo and (o.plot or o.quest) end},
-	}
-	if self.actor:attr("has_transmo") then tabslist[#tabslist+1] = {image="metal-ui/inven_tabs/chest.png", kind="transmo", desc="转化之盒", filter=function(o) return o.__transmo end} end
+	local tabslist = {}
+	tabslist[#tabslist+1] = {image="inven_tabs/weapons.png", 	kind="weapons",		desc="All kinds of weapons",		filter=function(o) return not o.__transmo and (o.type == "weapon") end}
+	tabslist[#tabslist+1] = {image="inven_tabs/armors.png", 	kind="armors",		desc="All kinds of armours",		filter=function(o) return not o.__transmo and (o.type == "armor") end}
+	tabslist[#tabslist+1] = {image="inven_tabs/jewelry.png", 	kind="jewelry",		desc="Rings and Amulets",		filter=function(o) return not o.__transmo and (o.type == "jewelry") end}
+	tabslist[#tabslist+1] = {image="inven_tabs/gems.png", 		kind="gems",		desc="Gems"		,		filter=function(o) return not o.__transmo and (o.type == "gem" or o.type == "alchemist-gem") end}
+	tabslist[#tabslist+1] = {image="inven_tabs/inscriptions.png", 	kind="inscriptions",	desc="Infusions, Runes, ...",		filter=function(o) return not o.__transmo and (o.type == "scroll") end}
+	if self.actor.can_tinker then tabslist[#tabslist+1] = {image="inven_tabs/tinkers.png", kind="tinker", desc="Tinkers", filter=function(o) return o.is_tinker end} end
+	tabslist[#tabslist+1] = {image="inven_tabs/misc.png", 		kind="misc",		desc="Miscellaneous",			filter="others"}
+	tabslist[#tabslist+1] = {image="inven_tabs/quests.png", 	kind="quests",		desc="Quest and plot related items",	filter=function(o) return not o.__transmo and (o.plot or o.quest) end}
+	if self.actor:attr("has_transmo") then tabslist[#tabslist+1] = {image="inven_tabs/chest.png", kind="transmo", desc="Transmogrification Chest", filter=function(o) return o.__transmo end} end
+
 	self:triggerHook{"Inventory:makeTabs", tabslist=tabslist}
-	tabslist[#tabslist+1] = {image="metal-ui/inven_tabs/all.png", kind="all", desc="全部", filter="all"}
+	tabslist[#tabslist+1] = {image="inven_tabs/all.png", kind="all", desc="All", filter="all"}
+	for _, t in ipairs(tabslist) do if fs.exists("/data/gfx/"..UIBase.ui.."-ui/"..t.image) then t.image = UIBase.ui.."-ui/"..t.image else t.image = "metal-ui/"..t.image end end
 	return tabslist
 end
 

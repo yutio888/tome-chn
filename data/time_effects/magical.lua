@@ -1026,3 +1026,34 @@ timeEffectCHN:newEffect{
 	type = "魔法",
 	subtype = "时空",
 }
+timeEffectCHN:newEffect{
+	id = "BLIGHT_POISON",
+	enName = "Blight Poison",
+	chName = "枯萎毒素",
+	type = "魔法",
+	subtype = "枯萎/毒素",
+}
+
+timeEffectCHN:newEffect{
+	id = "INSIDIOUS_BLIGHT",
+	enName = "Insidious Blight",
+	chName = "阴险枯萎毒药",
+	type = "魔法",
+	subtype = "枯萎/毒素",
+}
+
+timeEffectCHN:newEffect{
+	id = "CRIPPLING_BLIGHT",
+	enName = "Crippling Blight",
+	chName = "致残枯萎毒药",
+	type = "魔法",
+	subtype = "枯萎/毒素",
+}
+
+timeEffectCHN:newEffect{
+	id = "NUMBING_BLIGHT",
+	enName = "Numbing Blight",
+	chName = "痳痹枯萎毒药",
+	type = "枯萎",
+	subtype = "枯萎/毒素",
+}

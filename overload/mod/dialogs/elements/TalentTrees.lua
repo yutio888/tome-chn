@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2015 Nicolas Casalini
+-- Copyright (C) 2009 - 2016 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -21,6 +21,7 @@ require "engine.class"
 local Base = require "engine.ui.Base"
 local Focusable = require "engine.ui.Focusable"
 local Slider = require "engine.ui.Slider"
+local Tiles = require "engine.Tiles"
 
 --- A talent trees display
 module(..., package.seeall, class.inherit(Base, Focusable))
@@ -57,6 +58,9 @@ function _M:init(t)
 	self.talent_frame = self:makeFrame("ui/icon-frame/frame", self.frame_size, self.frame_size)
 	self.plus = _M:getUITexture("ui/plus.png")
 	self.minus = _M:getUITexture("ui/minus.png")
+	self.tiles = Tiles.new(iw, ih, self.fontname or "/data/font/DroidSansMono.ttf", self.fontsize or 10, true, true)
+	self.tiles.use_images = true
+	self.tiles.force_back_color = {r=0, g=0, b=0}
 
 	Base.init(self, t)
 end
@@ -313,7 +317,7 @@ function _M:redrawAllItems()
 		self:drawItem(tree)
 		for j = 1, #tree.nodes do
 			local tal = tree.nodes[j]
-			if not tal.texture then tal.texture = self:getImage(tal.entity.image):glTexture() end
+			if not tal.texture then tal.texture = self.tiles:loadImage(tal.entity.image):glTexture() end
 			self:drawItem(tal)
 		end
 	end

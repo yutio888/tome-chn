@@ -300,6 +300,18 @@ local function generate_rewards()
 			}
 		end end
 	end
+	if reward.special then
+		for _, data in ipairs(reward.special) do
+			answers[#answers+1] = {data.desc,
+				jump="done",
+				action=data.action,
+				on_select=function(npc, player)
+					game.tooltip_x, game.tooltip_y = 1, 1
+					game:tooltipDisplayAtMap(game.w, game.h, data.tooltip)
+				end,
+			}
+		end
+	end
 	return answers
 end
 

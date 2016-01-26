@@ -301,8 +301,8 @@ function _M:generateListUi()
 		self.c_list:drawItem(item)
 	end,}
 
-	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"当玩家或者NPC使用技能时，将When the player or an NPC uses a talent shows a quick popup with the talent's icon and name over its head.#WHITE#"}
-	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#T地图显示使用技能#WHITE##{normal}#", status=function(item)
+	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"当玩家或者NPC使用技能时，将在其头顶显示#WHITE#"}
+	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#地图显示使用技能#WHITE##{normal}#", status=function(item)
 		return tostring(config.settings.tome.talents_flyers and "开启" or "关闭")
 	end, fct=function(item)
 		config.settings.tome.talents_flyers = not config.settings.tome.talents_flyers

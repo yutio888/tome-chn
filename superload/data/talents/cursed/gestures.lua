@@ -46,7 +46,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damageChange = t.getDamageChange(self, t, true)
 		local counterAttackChance = t.getCounterAttackChance(self, t, true)
-		return ([[ 你 通 过 手 势 来 防 御 近 战 伤 害。 只 要 你 能 使 用 手 势 （ 要 求 空 手 或 双 持 灵 晶 ）， 你 最 多 偏 移 %d 点 伤 害（ 你 的 徒 手 最 大 伤 害 的 %0.1f%% ） ， 每 回 合 最 多 触 发 %0.1f 次 （ 基 于 你 的 灵 巧 ）。
+		return ([[ 你 通 过 手 势 来 防 御 近 战 伤 害。 只 要 你 能 使 用 手 势 （ 要 求 空 手 或 双 持 灵 晶 ）， 你 最 多 偏 移 %d 点 伤 害（ 你 的 单 手 最 大 伤 害 的 %0.1f%% ） ， 每 回 合 最 多 触 发 %0.1f 次 （ 基 于 你 的 灵 巧 ）。
 		 如 果 痛 苦 手 势 被 激 活， 你 将 有 %0.1f%% 的 概 率 造 成 反 击 状 态。 ]]):
 		format(damageChange, t.getGuardPercent(self, t), t.getDeflects(self, t, true), counterAttackChance)
 	end,

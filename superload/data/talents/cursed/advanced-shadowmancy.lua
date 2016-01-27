@@ -4,7 +4,7 @@ registerTalentTranslation{
 	id = "T_MERGE",
 	name = "融合",
 	info = function(self, t)
-		return ([[指 定 附 近 的 一 个 阴 影，命 令 它 和 附 近 的 一 个 敌 人 融 合，降 低 其 伤 害 %d%%， 持 续 5 回 合。
+		return ([[指 定 附 近 的 一 个 阴 影，命 令 它 和 附 近 的 一 个 敌 人 融 合，降 低 其 伤 害 %d%% ， 持 续 5 回 合。
 杀 死 阴 影 释 放 了 你 的 憎 恨 ，回 复 8 点 仇 恨 值 。]]):
 		format(t.getReduction(self, t))
 	end,

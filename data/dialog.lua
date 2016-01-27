@@ -227,7 +227,7 @@ function _M:yesnoLongPopup(title, text, w, fct, yes_text, no_text, no_leave, esc
 --	d.key:addBind("EXIT", function() game:unregisterDialog(d) fct(false) end)
 	if not no_leave then d.key:addBind("EXIT", function() game:unregisterDialog(d) game:unregisterDialog(d) fct(escape) end) end
 	d:loadUI{
-		{left = 3, top = 3, ui=require("engine.ui.Textzone").new{width=w+20, height=self.font_h * #list, text=text}},
+		{left = 3, top = 3, ui=require("engine.ui.Textzone").new{width=w, auto_height = true, text=text}},
 		{left = 3, bottom = 3, ui=ok},
 		{right = 3, bottom = 3, ui=cancel},
 	}

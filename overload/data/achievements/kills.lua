@@ -138,7 +138,7 @@ newAchievement{
 	name = "Kill Bill!", id = "KILL_BILL",
 	image = "object/artifact/bill_treestump.png",
 	show = "full", huge=true,
-	desc = [[用1级的人物杀死食人魔沼泽的比尔。]],
+	desc = [[用初始级别的人物杀死食人魔沼泽的比尔。]],
 	mode = "player",
 }
 

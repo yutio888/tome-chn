@@ -1,4 +1,4 @@
-﻿-- ToME - Tales of Maj'Eyal
+-- ToME - Tales of Maj'Eyal
 -- Copyright (C) 2009 - 2016 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
@@ -3786,7 +3786,7 @@ function _M:onWear(o, inven_id, bypass_set, silent)
 		for k, e in pairs(o.wielder) do
 			o.wielded[k] = self:addTemporaryValue(k, e)
 		end
-		o.wielder.wielded = true
+		-- o.wielder.wielded = true
 	end
 
 	if o.talent_on_spell then
@@ -3936,7 +3936,7 @@ function _M:onTakeoff(o, inven_id, bypass_set, silent)
 	end
 
 	if o.wielder then
-		o.wielder.wielded = nil
+		-- o.wielder.wielded = nil
 	end
 
 	if o.wielder and o.wielder.learn_talent then
@@ -5454,32 +5454,42 @@ function _M:getTalentFullDescription(t, addlevel, config, fake_mastery)
 		d:merge(config.custom)
 		d:add(true)
 	end
+	local function getCHNresourcename(name)
+			name=name:gsub("Stamina","体力"):gsub("Mana","法力"):gsub("Soul","灵魂"):gsub("Equilibrium","失衡")
+				 :gsub("Vim","活力"):gsub("Positive","正能量"):gsub("Negative","负能量"):gsub("Hate","仇恨")
+				 :gsub("Paradox","紊乱"):gsub("Psi","意念力"):gsub("Feedback","反馈")
+			return name
+		end
 	if not config.ignore_ressources then
-		if t.mana then d:add({"color",0x6f,0xff,0x83}, "法力消耗： ", {"color",0x7f,0xff,0xd4}, ""..math.round(util.getval(t.mana, self, t) * (100 + 2 * self:combatFatigue()) / 100, 0.1), true) end
-		if t.soul then d:add({"color",0x6f,0xff,0x83}, "灵魂消耗: ", {"color",190,190,190}, ""..math.round(util.getval(t.soul, self, t), 0.1), true) end
-		if util.getval(t.stamina, self, t) then d:add({"color",0x6f,0xff,0x83}, "体力消耗： ", {"color",0xff,0xcc,0x80}, ""..math.round(util.getval(t.stamina, self, t) * (100 + self:combatFatigue()) / 100, 0.1), true) end
-		if t.equilibrium then d:add({"color",0x6f,0xff,0x83}, "自然失衡值消耗： ", {"color",0x00,0xff,0x74}, ""..math.round(util.getval(t.equilibrium, self, t), 0.1), true) end
-		if t.vim then d:add({"color",0x6f,0xff,0x83}, "活力值消耗： ", {"color",0x88,0x88,0x88}, ""..math.round(util.getval(t.vim, self, t), 0.1), true) end
-		if t.positive then d:add({"color",0x6f,0xff,0x83}, "正能量消耗： ", {"color",255, 215, 0}, ""..math.round(util.getval(t.positive, self, t) * (100 + self:combatFatigue()) / 100, 0.1), true) end
-		if t.negative then d:add({"color",0x6f,0xff,0x83}, "负能量消耗： ", {"color", 127, 127, 127}, ""..math.round(util.getval(t.negative, self, t) * (100 + self:combatFatigue()) / 100, 0.1), true) end
-		if t.hate then d:add({"color",0x6f,0xff,0x83}, "仇恨值消耗：  ", {"color", 127, 127, 127}, ""..math.round(util.getval(t.hate, self, t) * (100 + 2 * self:combatFatigue()) / 100, 0.1), true) end
-		if t.paradox then d:add({"color",0x6f,0xff,0x83}, "紊乱值消耗：   ", {"color",  176, 196, 222}, ""..math.round(util.getval(t.paradox, self, t)), true) end
-		if t.psi then d:add({"color",0x6f,0xff,0x83}, "意念力消耗： ", {"color",0x7f,0xff,0xd4}, ""..math.round(util.getval(t.psi, self, t) * (100 + 2 * self:combatFatigue()) / 100, 0.1), true) end
-		if t.feedback then d:add({"color",0x6f,0xff,0x83}, "反馈值消耗： ", {"color",0xFF, 0xFF, 0x00}, ""..math.round(util.getval(t.feedback, self, t) * (100 + 2 * self:combatFatigue()) / 100, 0.1), true) end
-		if t.fortress_energy then d:add({"color",0x6f,0xff,0x83}, "堡垒能量值消耗： ", {"color",0x00,0xff,0xa0}, ""..math.round(t.fortress_energy, 0.1), true) end
-
-		if t.sustain_mana then d:add({"color",0x6f,0xff,0x83}, "持续法力消耗： ", {"color",0x7f,0xff,0xd4}, ""..(util.getval(t.sustain_mana, self, t)), true) end
-		if t.sustain_stamina then d:add({"color",0x6f,0xff,0x83}, "持续体力消耗： ", {"color",0xff,0xcc,0x80}, ""..(util.getval(t.sustain_stamina, self, t)), true) end
-		if t.sustain_equilibrium then d:add({"color",0x6f,0xff,0x83}, "持续失衡值消耗： ", {"color",0x00,0xff,0x74}, ""..(util.getval(t.sustain_equilibrium, self, t)), true) end
-		if t.sustain_vim then d:add({"color",0x6f,0xff,0x83}, "持续活力值消耗： ", {"color",0x88,0x88,0x88}, ""..(util.getval(t.sustain_vim, self, t)), true) end
-		if t.drain_vim then d:add({"color",0x6f,0xff,0x83}, "每回合活力值消耗: ", {"color",0x88,0x88,0x88}, "-"..(util.getval(t.drain_vim, self, t)), true) end
-		if t.sustain_positive then d:add({"color",0x6f,0xff,0x83}, "持续正能量消耗： ", {"color",255, 215, 0}, ""..(util.getval(t.sustain_positive, self, t)), true) end
-		if t.sustain_negative then d:add({"color",0x6f,0xff,0x83}, "持续负能量消耗： ", {"color", 127, 127, 127}, ""..(util.getval(t.sustain_negative, self, t)), true) end
-		if t.sustain_hate then d:add({"color",0x6f,0xff,0x83}, "持续仇恨值消耗：  ", {"color", 127, 127, 127}, ""..(util.getval(t.sustain_hate, self, t)), true) end
-		if t.sustain_paradox then d:add({"color",0x6f,0xff,0x83}, "持续紊乱值消耗： ", {"color",  176, 196, 222}, ("%0.1f"):format(util.getval(t.sustain_paradox, self, t)), true) end
-		if t.sustain_psi then d:add({"color",0x6f,0xff,0x83}, "持续意念力消耗： ", {"color",0x7f,0xff,0xd4}, ""..(util.getval(t.sustain_psi, self, t)), true) end
-		if t.sustain_feedback then d:add({"color",0x6f,0xff,0x83}, "持续反馈值消耗： ", {"color",0xFF, 0xFF, 0x00}, ""..(util.getval(t.sustain_feedback, self, t)), true) end
-
+		if t.feedback then d:add({"color",0x6f,0xff,0x83}, "反馈值消耗: ", {"color",0xFF, 0xFF, 0x00}, ""..math.round(util.getval(t.feedback, self, t) * (100 + 2 * self:combatFatigue()) / 100, 0.1), true) end
+		if t.fortress_energy then d:add({"color",0x6f,0xff,0x83}, "堡垒能量值消耗: ", {"color",0x00,0xff,0xa0}, ""..math.round(t.fortress_energy, 0.1), true) end
+		if t.sustain_feedback then d:add({"color",0x6f,0xff,0x83}, "持续反馈值消耗: ", {"color",0xFF, 0xFF, 0x00}, ""..(util.getval(t.sustain_feedback, self, t)), true) end
+		
+		-- resource costs?
+		for res, res_def in ipairs(_M.resources_def) do
+			if not res_def.hidden_resource then
+				-- list resource cost
+				local cost = t[res_def.short_name] and util.getval(t[res_def.short_name], self, t) or 0
+				if cost ~= 0 then
+					cost = cost * (util.getval(res_def.cost_factor, self, t) or 1)
+					d:add({"color",0x6f,0xff,0x83}, ("%s 消耗: "):format(getCHNresourcename(res_def.name:capitalize())), res_def.color or {"color",0xff,0xa8,0xa8}, ""..math.round(cost, .1), true)
+				end
+				-- list sustain cost
+				cost = t[res_def.sustain_prop] and util.getval(t[res_def.sustain_prop], self, t) or 0
+				if cost ~= 0 then
+					d:add({"color",0x6f,0xff,0x83}, ("持续 %s 消耗: "):format(getCHNresourcename(res_def.name:capitalize())), res_def.color or {"color",0xff,0xa8,0xa8}, ""..math.round(cost, .1), true)
+				end
+				-- list drain cost
+				cost = t[res_def.drain_prop] and util.getval(t[res_def.drain_prop], self, t) or 0
+				if cost ~= 0 then
+					if res_def.invert_values then
+						d:add({"color",0x6f,0xff,0x83}, ("%s %s: "):format(cost > 0 and "产生" or "消耗", getCHNresourcename(res_def.name:capitalize())), res_def.color or {"color",0xff,0xa8,0xa8}, ""..math.round(math.abs(cost), .1), true)
+					else
+						d:add({"color",0x6f,0xff,0x83}, ("%s %s: "):format(cost > 0 and "吸收" or "补充", getCHNresourcename(res_def.name:capitalize())), res_def.color or {"color",0xff,0xa8,0xa8}, ""..math.round(math.abs(cost), .1), true)
+					end
+				end
+			end
+		end
 		self:triggerHook{"Actor:getTalentFullDescription:ressources", str=d, t=t, addlevel=addlevel, config=config, fake_mastery=fake_mastery}
 	end
 	if t.mode ~= "passive" then
@@ -5487,7 +5497,7 @@ function _M:getTalentFullDescription(t, addlevel, config, fake_mastery)
 		else d:add({"color",0x6f,0xff,0x83}, "作用范围：", {"color",0xFF,0xFF,0xFF}, "近身/单体", true)
 		end
 		if not config.ignore_ressources then
-			if self:getTalentCooldown(t) then d:add({"color",0x6f,0xff,0x83}, "冷却时间：", {"color",0xFF,0xFF,0xFF}, ""..self:getTalentCooldown(t), true) end
+			if self:getTalentCooldown(t) then d:add({"color",0x6f,0xff,0x83}, ("%s冷却时间: "):format(t.fixed_cooldown and "固定 " or ""), {"color",0xFF,0xFF,0xFF}, ""..self:getTalentCooldown(t), true) end
 		end
 		local speed = self:getTalentProjectileSpeed(t)
 		if speed then d:add({"color",0x6f,0xff,0x83}, "飞行时间：", {"color",0xFF,0xFF,0xFF}, ""..(speed * 100).."% 基础速度", true)
@@ -5526,7 +5536,7 @@ function _M:getTalentFullDescription(t, addlevel, config, fake_mastery)
 		end
 	else
 		if not config.ignore_ressources then
-			if self:getTalentCooldown(t) then d:add({"color",0x6f,0xff,0x83}, "冷却时间：", {"color",0xFF,0xFF,0xFF}, ""..self:getTalentCooldown(t), true) end
+			if self:getTalentCooldown(t) then d:add({"color",0x6f,0xff,0x83}, ("%s冷却时间: "):format(t.fixed_cooldown and "固定 " or ""), {"color",0xFF,0xFF,0xFF}, ""..self:getTalentCooldown(t), true) end
 		end
 	end
 
@@ -5540,17 +5550,8 @@ function _M:getTalentFullDescription(t, addlevel, config, fake_mastery)
 
 	self:triggerHook{"Actor:getTalentFullDescription", str=d, t=t, addlevel=addlevel, config=config, fake_mastery=fake_mastery}
 
-	d:add({"color",0x6f,0xff,0x83}, "描述：", {"color",0xFF,0xFF,0xFF})
-	
-	local info
-	if type(t.info) =="function" then	info = t.info(self, t):toTString():tokenize(" ()[]")
-	elseif type(t.info) == "string" then info=t.info
-	end
-	
-	if talentInfoCHN and talentInfoCHN[t.id]
-		then info = talentInfoCHN[t.id](self,t):toTString():tokenize(" ()[]")
-	end
-	d:merge(info)
+	d:add({"color",0x6f,0xff,0x83}, "描述: ", {"color",0xFF,0xFF,0xFF})
+	d:merge(t.info(self, t):toTString():tokenize(" ()[]"))
 
 	self.talents[t.id] = old
 

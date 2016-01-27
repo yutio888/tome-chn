@@ -53,7 +53,7 @@ newChat{ id="angry-conclave",
 	}
 }
 
-if (player.descriptor.race == "Halfling") then
+if player.descriptor and player.descriptor.race == "Halfling" then
 	return "nargol-scum"
 elseif (player:findInAllInventoriesBy('define_as', 'CONCLAVE_ROBE') and player:findInAllInventoriesBy('define_as', 'CONCLAVE_ROBE').wielded and (player.descriptor.race == "Human" or player.descriptor.subrace == "Ogre")) then
 	return "conclave"

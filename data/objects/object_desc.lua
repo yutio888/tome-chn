@@ -430,9 +430,11 @@ special_t = {}
 	special_t["Random elemental explosion"] = "随机元素爆炸"
 	special_t["releases a burst of dark fire, dealing damage equal to your magic stat"] = "释放黑暗之火\n造成等于魔法属性的伤害"
 	special_t["Increases all damage dealt, and reduces all damage taken, by 1%, stacking up to 10 times. Resets after 10 turns without attacking."] = "增加全体伤害并减少受到的伤害各1%%\n效果持续10回合，最多叠加至10层\n"
-
-
-
+  special_t["Curse of Madness"] = "疯狂诅咒"
+  special_t["Curse of Misfortune"] = "不幸诅咒"
+  special_t["Curse of Shrouds"] = "屏障诅咒"
+  special_t["Curse of Corpses"] = "尸体诅咒"
+  special_t["Curse of Nightmares"] = "噩梦诅咒"
 --装备鼠标提示汉化替换
 function getObjectDescCHN(desc)
 	if not desc then return end

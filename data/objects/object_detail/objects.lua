@@ -158,6 +158,7 @@ function objects:getObjects(name,desc,subtype,short_name,is_ided,rare,unique)
 					--o.chName= name
 
 					local special = o.name:match("([()].+[()])")
+					if special then special=special:gsub("Corpses","尸体"):gsub("Nightmares","噩梦"):gsub("Misfortune","不幸"):gsub("Shrouds","屏障"):gsub("Madness","疯狂") end
 					if special then o.chName = o.chName..special end
 					o.desc = objectN[subtype][short_name].chDesc
 				end

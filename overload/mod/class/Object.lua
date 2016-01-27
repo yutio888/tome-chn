@@ -85,6 +85,11 @@ function _M:init(t, no_default)
 	engine.interface.ObjectActivable.init(self, t)
 	engine.interface.ObjectIdentify.init(self, t)
 	engine.interface.ActorTalents.init(self, t)
+
+	if self.auto_image then
+		self.auto_image = nil
+		self.image = "object/"..(self.unique and "artifact/" or "")..self.name:lower():gsub("[^a-z0-9]", "")..".png"
+	end
 end
 
 function _M:altered(t)

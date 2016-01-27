@@ -320,12 +320,13 @@ function _M:useTalentMessage(ab)
 	return str,sname,tname
 end
 
---- Called before an talent is used
+--- Called before a talent is used  
 -- Redefine as needed
--- @param ab the talent (not the id, the table)
--- @param silent no messages will be outputted
--- @param fake no actions are taken, only checks
--- @return true to continue, false to stop
+-- @param[type=table] talent the talent (not the id, the table)
+-- @param[type=boolean] silent no messages will be outputted
+-- @param[type=boolean] fake no actions are taken, only checks
+-- @return[1] true to continue
+-- @return[2] false to stop
 function _M:preUseTalent(talent, silent, fake)
 	return true
 end
@@ -346,8 +347,8 @@ function _M:onTalentLuaError(ab, err)
 	return
 end
 
---- Force a talent to activate without using energy or such
--- "def" can have a field "ignore_energy" to not consume energy; other parameters can be passed and handled by an overload of this method.
+--- Force a talent to activate without using energy or such  
+-- "def" can have a field "ignore_energy" to not consume energy; other parameters can be passed and handled by an overload of this method.  
 -- Object activation interface calls this method with an "ignore_ressources" parameter
 function _M:forceUseTalent(t, def)
 	local oldpause = game.paused

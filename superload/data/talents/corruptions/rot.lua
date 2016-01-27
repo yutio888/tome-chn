@@ -2,74 +2,73 @@ local _M = loadPrevious(...)
 
 registerTalentTranslation{
 	id = "T_INFECTIOUS_BITE",
-	name = "´«È¾ĞÔ¿ĞÒ§",
+	name = "ä¼ æŸ“æ€§å•ƒå’¬",
 	info = function(self, t)
 		local damage = t.getDamage(self, t) * 100
 		local poison = t.getPoisonDamage(self, t)
-		return ([[¿Ğ Ò§ Ä¿ ±ê£¬Ôì ³É %d%% Îä Æ÷ ÉË º¦¡£  
-		Èç ¹û ¹¥ »÷ »÷ ÖĞ Ä¿ ±ê Äã »á ×¢ Èë ÎÁ Òß ²¡ ¶¾,  Ôì ³É %0.2f ¿İ Î® ÉË º¦ ²¢ ÔÚ 4 »Ø ºÏ ÄÚ Ôì ³É %0.2f ¿İ Î® ÉË º¦¡£
-		ÉË º¦ ÊÜ ·¨Êõ Ç¿ ¶È ¼Ó ³É¡£]])
+		return ([[å•ƒ å’¬ ç›® æ ‡ï¼Œé€  æˆ %d%% æ­¦ å™¨ ä¼¤ å®³ã€‚  
+		å¦‚ æœ æ”» å‡» å‡» ä¸­ ç›® æ ‡ ä½  ä¼š æ³¨ å…¥ ç˜Ÿ ç–« ç—… æ¯’,  é€  æˆ %0.2f æ¯ è ä¼¤ å®³ å¹¶ åœ¨ 4 å› åˆ å†… é€  æˆ %0.2f æ¯ è ä¼¤ å®³ã€‚
+		ä¼¤ å®³ å— æ³•æœ¯ å¼º åº¦ åŠ  æˆã€‚]])
 		:format(damage, damDesc(self, DamageType.BLIGHT, poison/4), damDesc(self, DamageType.BLIGHT, poison) )
 	end,
 }
 
 registerTalentTranslation{
 	id = "T_INFESTATION",
-	name = "ÇÖÈÅ",
+	name = "ä¾µæ‰°",
 	info = function(self, t)
 	local resist = t.getResist(self,t)
 	local affinity = t.getAffinity(self,t)
 	local cap = t.getDamagePct(self,t)
 	local damage = t.getDamageReduction(self,t)	
-		return ([[Äã µÄ Éí Ìå ÒÑ ¾­ ¸¯ °Ü ,Ôö ¼Ó %d%% ¿İ Î® ºÍ Ëá ĞÔ ¿¹ ĞÔ ,%d%% ¿İ Î® ÉË º¦ Îü ÊÕ£¬ ²¢ ÔÊ Ğí Äã ´Ó Èä ³æ ´¦ »ñ µÃ ÖÎ ÁÆ¡£
-		Ã¿ ´Î Éú Ãü Öµ Ëğ Ê§ ´ó ÓÚ %d%% Ê±,ÉË º¦ ½« ¼õ ÉÙ %d%% £¬Í¬ Ê± ÔÚ Ïà ÁÚ µÄ ¸ñ ×Ó Éú ³É Èä ³æ, ¹¥ »÷ Äã µÄ µĞ ÈË 10 »ØºÏ ¡£
-		Í¬ Ê± Ò² »á Ôö ¼Ó Äã µÄ Èä ³æ µÄ %d%% ÉË º¦£¬²¢ ¸³ Óè Ëû ÃÇ ´« È¾ ĞÔ ¿Ğ Ò§£¨ µÈ ¼¶ %d£© ¡£
-		Èä ³æ Íê È« ¼Ì ³Ğ Äã µÄ ·¨ Êõ Ç¿ ¶È ¡£]]):
+		return ([[ä½  çš„ èº« ä½“ å·² ç» è… è´¥ ,å¢ åŠ  %d%% æ¯ è å’Œ é…¸ æ€§ æŠ— æ€§ ,%d%% æ¯ è ä¼¤ å®³ å¸ æ”¶ï¼Œ å¹¶ å… è®¸ ä½  ä» è • è™« å¤„ è· å¾— æ²» ç–—ã€‚
+		æ¯ æ¬¡ ç”Ÿ å‘½ å€¼ æŸ å¤± å¤§ äº %d%% æ—¶,ä¼¤ å®³ å°† å‡ å°‘ %d%% ï¼ŒåŒ æ—¶ åœ¨ ç›¸ é‚» çš„ æ ¼ å­ ç”Ÿ æˆ è • è™«, æ”» å‡» ä½  çš„ æ•Œ äºº 10 å›åˆ ã€‚
+		åŒ æ—¶ ä¹Ÿ ä¼š å¢ åŠ  ä½  çš„ è • è™« çš„ %d%% ä¼¤ å®³ï¼Œå¹¶ èµ‹ äºˆ ä»– ä»¬ ä¼  æŸ“ æ€§ å•ƒ å’¬ï¼ˆ ç­‰ çº§ %dï¼‰ ã€‚
+		è • è™« å®Œ å…¨ ç»§ æ‰¿ ä½  çš„ æ³• æœ¯ å¼º åº¦ ã€‚]]):
 		format(resist, affinity, cap*100, damage*100, self:getTalentLevel(t)*5, self:getTalentLevelRaw(t))
 	end,
 }
 
 registerTalentTranslation{
 	id = "T_WORM_WALK",
-	name = "Èä³æĞĞ×ß",
+	name = "è •è™«è¡Œèµ°",
 	info = function(self, t)
 		local range = self:getTalentRange(t)
 		local heal = t.getHeal(self, t) * 100
 		local vim = t.getVim(self, t)
 		local dam = t.getDam(self,t)
-		return ([[»ñ µÃ ·Ö Àë Óë ºÏ ²¢ Èä ³æ ÍÅ µÄ ÄÜ Á¦ ¡£
-Èç ¹û ¶Ô Èä ³æ ÍÅ Ê¹ ÓÃ £¬ Äã ºÍ Ëü ºÏ Ìå £¬ ÒÆ ¶¯ ÖÁ Ëü µÄ Î» ÖÃ £¬ ÖÎ ÁÆ %d%% ×î ´ó Éú Ãü Öµ , »Ø ¸´ %d »î Á¦ ¡£
-Èç ¹û ¶Ô Æä Ëû Î» ÖÃ Ê¹ ÓÃ £¬ Äã Îş Éü %d%% µ± Ç° Éú Ãü ÔÚ ¸Ã Î» ÖÃ ÖÆ Ôì Ò» ÍÅ Èä ³æ ¡£
-Í¬ Ê± Ôö ¼Ó Èä ³æ ÍÅ %d%% ÉË º¦ ºÍ ¿İ Î® ³Ø µÄ ÖÎ ÁÆ Á¿ ¡£]]):
+		return ([[è· å¾— åˆ† ç¦» ä¸ åˆ å¹¶ è • è™« å›¢ çš„ èƒ½ åŠ› ã€‚
+å¦‚ æœ å¯¹ è • è™« å›¢ ä½¿ ç”¨ ï¼Œ ä½  å’Œ å®ƒ åˆ ä½“ ï¼Œ ç§» åŠ¨ è‡³ å®ƒ çš„ ä½ ç½® ï¼Œ æ²» ç–— %d%% æœ€ å¤§ ç”Ÿ å‘½ å€¼ , å› å¤ %d æ´» åŠ› ã€‚
+å¦‚ æœ å¯¹ å…¶ ä»– ä½ ç½® ä½¿ ç”¨ ï¼Œ ä½  ç‰º ç‰² %d%% å½“ å‰ ç”Ÿ å‘½ åœ¨ è¯¥ ä½ ç½® åˆ¶ é€  ä¸€ å›¢ è • è™« ã€‚
+åŒ æ—¶ å¢ åŠ  è • è™« å›¢ %d%% ä¼¤ å®³ å’Œ æ¯ è æ±  çš„ æ²» ç–— é‡ ã€‚]]):
 format (heal, vim, dam, self:getTalentLevel(t)*8)
 	end,
 }
 
 registerTalentTranslation{
 	id = "T_PESTILENT_BLIGHT",
-	name = "ÖÂÃü¿İÎ®",
+	name = "è‡´å‘½æ¯è",
 	info = function(self, t)
 	local chance = t.getChance(self,t)
 	local duration = t.getDuration(self,t)
-		return ([[Ã¿ ´Î Ôì ³É ¿İ Î® ÉË º¦ £¬ÓĞ %d%% ¼¸ ÂÊ Áî Ä¿ ±ê ¸¯ ÀÃ £¬ ³Á Ä¬ ¡¢ÖÂ Ã¤ ¡¢ ½É Ğµ »ò Õß ¶¨ Éí %d »Ø ºÏ¡£ ¸Ã Ğ§ ¹û ÓĞ Àä È´ Ê± ¼ä¡£
-¼¼ ÄÜ µÈ ¼¶ 4 Ê± £¬ ¸Ã Ğ§ ¹û ¶Ô °ë ¾¶ 1 ÄÚ Ëù ÓĞ Ä¿ ±ê ÓĞ Ğ§ ¡£
-Í¬ Ê± £¬ Äã µÄ Èä ³æ ÔÚ ½ü Õ½ ¹¥ »÷ ÖĞ ÓĞ %d%% ¼¸ ÂÊ ¸½ ¼Ó ³Á Ä¬ ¡¢ ÖÂ Ã¤ ¡¢ ½É Ğµ »ò ¶¨ Éí Ğ§ ¹û £¬ ³Ö Ğø 2 »Ø ºÏ ¡£
-¸º Ãæ ×´ Ì¬ Ê© ¼Ó ÂÊ ÊÜ ·¨ Êõ Ç¿ ¶È Ó° Ïì¡£]]):
+		return ([[æ¯ æ¬¡ é€  æˆ æ¯ è ä¼¤ å®³ ï¼Œæœ‰ %d%% å‡  ç‡ ä»¤ ç›® æ ‡ è… çƒ‚ ï¼Œ æ²‰ é»˜ ã€è‡´ ç›² ã€ ç¼´ æ¢° æˆ– è€… å®š èº« %d å› åˆã€‚ è¯¥ æ•ˆ æœ æœ‰ å†· å´ æ—¶ é—´ã€‚
+æŠ€ èƒ½ ç­‰ çº§ 4 æ—¶ ï¼Œ è¯¥ æ•ˆ æœ å¯¹ åŠ å¾„ 1 å†… æ‰€ æœ‰ ç›® æ ‡ æœ‰ æ•ˆ ã€‚
+åŒ æ—¶ ï¼Œ ä½  çš„ è • è™« åœ¨ è¿‘ æˆ˜ æ”» å‡» ä¸­ æœ‰ %d%% å‡  ç‡ é™„ åŠ  æ²‰ é»˜ ã€ è‡´ ç›² ã€ ç¼´ æ¢° æˆ– å®š èº« æ•ˆ æœ ï¼Œ æŒ ç»­ 2 å› åˆ ã€‚
+è´Ÿ é¢ çŠ¶ æ€ æ–½ åŠ  æˆ åŠŸ ç‡ å— æ³• æœ¯ å¼º åº¦ å½± å“ã€‚]]):
 		format(chance, duration, self:getTalentLevel(t)*4)
 	end,
 }
 
 registerTalentTranslation{
 	id = "T_WORM_ROT",
-	name = "¸¯ÀÃÈä³æ",
+	name = "è…çƒ‚è •è™«",
 	info = function(self, t)
-		local duration = t.getDuration(self, t)
 		local damage = t.getDamage(self, t)
 		local burst = t.getBurstDamage(self, t)
-		return ([[Ê¹ Ä¿ ±ê ¸Ğ È¾ ¸¯ Èâ ¼Ä Éú Ó× ³æ ³Ö Ğø %d »Ø ºÏ¡£ Ã¿ »Ø ºÏ »á ÒÆ ³ı Ä¿ ±ê Ò» ¸ö Îï Àí Ôö Òæ Ğ§ ¹û ²¢ Ôì ³É %0.2f Ëá Ïµ ºÍ %0.2f ¿İ Î® ÉË º¦¡£ 
-		 Èç ¹û 5 »Ø ºÏ ºó Î´ ±» Çå ³ı Ôò Ó× ³æ »á ·õ »¯ Ôì ³É %0.2f Ëá Ïµ ÉË º¦£¬ ÒÆ ³ı Õâ ¸ö Ğ§ ¹û µ« ÊÇ »á ÔÚ Ä¿ ±ê ´¦ ³É ³¤ Îª Ò» Ìõ ³É Êì µÄ ¸¯ Èâ ³æ¡£
-		 ÉË º¦ ÊÜ ·¨ Êõ Ç¿ ¶È ¼Ó ³É¡£]]):
-		format(duration, damDesc(self, DamageType.ACID, (damage/2)), damDesc(self, DamageType.BLIGHT, (damage/2)), damDesc(self, DamageType.ACID, (burst)))
+		return ([[ä½¿ ç›® æ ‡ æ„Ÿ æŸ“ è… è‚‰ å¯„ ç”Ÿ å¹¼ è™« æŒ ç»­ 5 å› åˆã€‚ æ¯ å› åˆ ä¼š ç§» é™¤ ç›® æ ‡ ä¸€ ä¸ª ç‰© ç† å¢ ç›Š æ•ˆ æœ å¹¶ é€  æˆ %0.2f é…¸ ç³» å’Œ %0.2f æ¯ è ä¼¤ å®³ã€‚ 
+		 å¦‚ æœ 5 å› åˆ å æœª è¢« æ¸… é™¤ åˆ™ å¹¼ è™« ä¼š å­µ åŒ– é€  æˆ %0.2f é…¸ ç³» ä¼¤ å®³ï¼Œ ç§» é™¤ è¿™ ä¸ª æ•ˆ æœ ä½† æ˜¯ ä¼š åœ¨ ç›® æ ‡ å¤„ æˆ é•¿ ä¸º ä¸€ æ¡ æˆ ç†Ÿ çš„ è… è‚‰ è™«ã€‚
+		 ä¼¤ å®³ å— æ³• æœ¯ å¼º åº¦ åŠ  æˆã€‚]]):
+		format(damDesc(self, DamageType.ACID, (damage/2)), damDesc(self, DamageType.BLIGHT, (damage/2)), damDesc(self, DamageType.ACID, (burst)))
 	end,
 }
 

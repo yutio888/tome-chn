@@ -1,5 +1,4 @@
 local _M = loadPrevious(...)
-
 registerTalentTranslation{
 	id = "T_DEFILING_TOUCH",
 	name = "诅咒之触",

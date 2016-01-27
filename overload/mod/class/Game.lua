@@ -698,7 +698,7 @@ function _M:getSaveDescription()
 		description = ([[%s the level %d %s %s.
 Difficulty: %s / %s
 Campaign: %s
-Exploring level %d of %s.]]):format(
+Exploring level %s of %s.]]):format(
 		player.name, player.level, player.descriptor.subrace, player.descriptor.subclass,
 		player.descriptor.difficulty, player.descriptor.permadeath,
 		player.descriptor.world,

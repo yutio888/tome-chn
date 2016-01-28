@@ -793,7 +793,7 @@ newDamageType{
 		local realdam = DamageType.defaultProjector(src, x, y, type, dam, state)
 		local target = game.level.map(x, y, Map.ACTOR)
 		-- Spread diseases if possible
-		if realdam > 0 and target and target:attr("diseases_spread_on_blight") and (not state or not state.from_disease) then
+		if realdam > 0 and target and target:attr("diseases_spread_on_blight") and (not state or not state.from_disease) and src.callTalent then
 			src:callTalent(src.T_EPIDEMIC, "do_spread", target, realdam)
 		end
 		if src and src.knowTalent and realdam > 0 and target and src:knowTalent(src.T_PESTILENT_BLIGHT) then

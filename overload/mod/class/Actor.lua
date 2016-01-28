@@ -3936,7 +3936,8 @@ function _M:onTakeoff(o, inven_id, bypass_set, silent)
 	end
 
 	if o.wielder then
-		-- o.wielder.wielded = nil
+		-- To fix a fucking bug in 1.4; in some time we can remove that line
+		o.wielder.wielded = nil
 	end
 
 	if o.wielder and o.wielder.learn_talent then
@@ -5223,6 +5224,10 @@ function _M:postUseTalent(ab, ret, silent)
 			if q then
 				trigger = true; q.shertul_energy = q.shertul_energy - util.getval(ab.fortress_energy, self, ab)
 			end
+		end
+		-- Vim increases equilibrium
+		if ab.vim then
+			self:incEquilibrium(util.getval(ab.vim, self, ab) * 5)
 		end
 		for res, res_def in ipairs(_M.resources_def) do
 			rname = res_def.short_name

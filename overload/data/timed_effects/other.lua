@@ -1143,7 +1143,7 @@ newEffect{
 #CRIMSON# 强 度 1+: %s 从 现 实 消 失： %+d 物 理 抵 抗， %+d 物 理 抵 抗 上 限 
 #CRIMSON# 强 度 2+: %s%+d 幸 运， %+d 意 志 
 #CRIMSON# 强 度 3+: %s 你 将 恐 怖 输 注 进 那 些 虚 弱、 非 精 英 目 标， 扼 制 近 身 攻 击 你 或 你 攻 击 的 目 标。 等 级 3 及 以 上 时 损 失 %d 空 气， 每 升 一 级 再 额 外 损 失 %d 空 气。 
-#CRIMSON# 强 度 4+: %s 每 次 受 到 目 标 攻 击 有 概 率 (currently %d%%) 触 发 一 个 范 围 为 %d 码 的 噩 梦（ 有 减 速 效 果、 仇 恨 私 语 和 召 唤 恐 兽） 持 续 8 回 合。 每 次 你 受 到 打 击 时 提 高 触 发 几 率 but fades over time。]]):format(
+#CRIMSON# 强 度 4+: %s 每 次 受 到 目 标 攻 击 有 概 率 (当 前 %d%%) 触 发 一 个 范 围 为 %d 码 的 噩 梦（ 有 减 速 效 果、 憎 恨 私 语 和 召 唤 梦 魇） 持 续 8 回 合。  触 发 几 率  在 每 次 你 受 到 打 击 时 提 高，同 时 随 时 间 下 降。]]):format(
 		def.getVisionsReduction(eff, level),
 		bonusLevel >= 1 and "#WHITE#" or "#GREY#", def.getResistsPhysicalChange(math.max(level, 1)), def.getResistsCapPhysicalChange(math.max(level, 1)),
 		bonusLevel >= 2 and "#WHITE#" or "#GREY#", def.getLckChange(eff, math.max(level, 2)), def.getWilChange(math.max(level, 2)),

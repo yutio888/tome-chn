@@ -2263,12 +2263,14 @@ newEffect{
 newEffect{
 	name = "CLOAK_OF_DECEPTION", image = "shockbolt/object/artifact/black_cloak.png",
 	desc = "Cloak of Deception",
-	long_desc = function(self, eff) return "目 标 受 到 欺 诈 斗 篷 的 效 果 影 响， 使 它 看 上 去 像 一 个 活 人。" end,
+	long_desc = function(self, eff) return "目 标 受 到 欺 诈 斗 篷 的 效 果 影 响， 使 它 看 上 去 像 活 着 一 样。" end,
 	decrease = 0, no_remove = true,
 	type = "other",
 	subtype = { undead=true },
 	status = "neutral",
 	parameters = {},
+	on_gain = function(self, err) return ("#LIGHT_BLUE#An illusion appears around #Target# making %s appear human."):format(self:him_her()), "+CLOAK OF DECEPTION" end,
+	on_lose = function(self, err) return "#LIGHT_BLUE#The illusion covering #Target# disappears.", "-CLOAK OF DECEPTION" end,
 	activate = function(self, eff)
 		self.old_faction_cloak = self.faction
 		self.faction = "allied-kingdoms"

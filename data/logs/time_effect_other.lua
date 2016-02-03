@@ -357,6 +357,8 @@ logCHN:newLog{
 }
 
 
+
+
 logCHN:newLog{
 	log = "#target#周围的时间线恢复正常。",
 	fct = function(a)
@@ -365,7 +367,35 @@ logCHN:newLog{
 	end,
 }
 
+logCHN:newLog{
+	log = "#CRIMSON##Target# is wreathed in flames on the brink of death!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("#CRIMSON#%s在死亡边缘被火焰笼罩！"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#CRIMSON#The flames around #target# vanish.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("#CRIMSON#%s周围的火焰消散了。"):format(a)
+	end,
+}
 
+logCHN:newLog{
+	log = "#LIGHT_BLUE#An illusion appears around #Target# making %s appear human.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("#LIGHT_BLUE#%s周围的幻影让它看起来像活着一样。"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#LIGHT_BLUE#The illusion covering #Target# disappears.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("#LIGHT_BLUE#%s周围的幻影消失了。"):format(a)
+	end,
+}
 logCHN:newLog{
 	log = "#Target# is suffocating!",
 	fct = function(a)
@@ -405,18 +435,18 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
-	log = "#Target# converts damage into paradox.",
+	log = "Reality smears around #Target#.",
 	fct = function(a)
 		a = npcCHN:getName(a)
-		return ("%s 将伤害转化为紊乱值。"):format(a)
+		return ("%s 周围的时空扭曲了。"):format(a)
 	end,
 }
 
 logCHN:newLog{
-	log = "#Target# stops converting damage to paradox..",
+	log = "Reality around #Target# is coherent again.",
 	fct = function(a)
 		a = npcCHN:getName(a)
-		return ("%s 停止将伤害转化为紊乱值。"):format(a)
+		return ("%s 周围的时空恢复了连贯。"):format(a)
 	end,
 }
 

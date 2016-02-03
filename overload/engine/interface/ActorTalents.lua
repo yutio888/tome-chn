@@ -198,6 +198,8 @@ function _M:useTalent(id, who, force_level, ignore_cd, force_target, silent, no_
 					end
 				end
 			else
+				if self.deactivating_sustain_talent == ab.id then return end
+
 				local p = self.sustain_talents[id]
 				if p and type(p) == "table" and p.__tmpvals then
 					for i = 1, #p.__tmpvals do
@@ -211,7 +213,9 @@ function _M:useTalent(id, who, force_level, ignore_cd, force_target, silent, no_
 				end
 				local ret = ab.deactivate(who, ab, p)
 
-				if not self:postUseTalent(ab, ret, silent) then return end
+				self.deactivating_sustain_talent = ab.id
+				if not self:postUseTalent(ab, ret, silent) then self.deactivating_sustain_talent = nil return end
+				self.deactivating_sustain_talent = nil
 
 				-- Everything went ok? then start cooldown if any
 				if not ignore_cd then self:startTalentCooldown(ab) end

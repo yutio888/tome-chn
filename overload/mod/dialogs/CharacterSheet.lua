@@ -58,7 +58,7 @@ function _M:init(actor, start_tab)
 	self.c_talents = Tab.new{title="[T]技能", default=start_tab == "talents", fct=function() end, on_change=function(s) if s then self:switchTo("talents") end end}
 	-- Select equipment/switch sets
 	self.equip_set = self.actor.off_weapon_slots and "off" or "main"
-	self.c_equipment = Tab.new{title="[E]装备: "..self.equip_set:gsub("main","主手"):gsub("off","副手").." 装备", default=start_tab == "equipment",
+	self.c_equipment = Tab.new{title="[E]装备: "..self.equip_set:gsub("main","主"):gsub("off","副"), default=start_tab == "equipment",
 		fct=function()
 		end,
 		on_change=function(s)
@@ -71,7 +71,7 @@ function _M:init(actor, start_tab)
 						game.logPlayer(self.actor, "#RED#Displaying %s set for %s (equipment NOT switched)", self.equip_set, self.actor.name:capitalize())
 					end
 				end
-				self.c_equipment.title = "[E]装备: "..self.equip_set:gsub("main","主手"):gsub("off","副手").." 装备"
+				self.c_equipment.title = "[E]装备: "..self.equip_set:gsub("main","主"):gsub("off","副")
 				self:switchTo("equipment")
 				self.c_equipment:generate() -- Force redraw
 			end
@@ -91,6 +91,10 @@ function _M:init(actor, start_tab)
 	end}
 	self.b_show_equipment = Button.new{text="[I]物品", fct=function()
 		self:showInventory()
+		return
+	end}
+	self.b_levelup = Button.new{text="[L]升级", fct=function()
+		game.key:triggerVirtual("LEVELUP")
 		return
 	end}
 	
@@ -175,6 +179,7 @@ function _M:init(actor, start_tab)
 		{left=15, top=self.c_tut.h, ui=self.c_general},
 --		{right=130, top=50, ui=self.b_show_equipment}, -- misaligned mouse zone?
 		{right=200, top=self.c_tut.h, ui=self.b_show_equipment},
+		{right=self.b_show_equipment, top=self.c_tut.h, ui=self.b_levelup},
 		{left=15+self.c_general.w, top=self.c_tut.h, ui=self.c_attack},
 		{left=15+self.c_general.w+self.c_attack.w, top=self.c_tut.h, ui=self.c_defence},
 		{left=15+self.c_general.w+self.c_attack.w+self.c_defence.w, top=self.c_tut.h, ui=self.c_talents},
@@ -186,6 +191,8 @@ function _M:init(actor, start_tab)
 	}
 --	self:setFocus(self.c_general)
 	self:setupUI()
+
+	self:toggleDisplay(self.b_levelup, (self.actor == game:getPlayer()) and (self.actor.unused_stats > 0 or self.actor.unused_talents > 0 or self.actor.unused_generics > 0 or self.actor.unused_talents_types > 0))
 
 	self:switchTo(start_tab)
 
@@ -256,6 +263,8 @@ function _M:updateKeys()
 			self.c_equipment:select()
 		elseif (c == 'i' or c == 'I') then
 			self:showInventory()
+		elseif (c == 'l' or c == 'L') then
+			game.key:triggerVirtual("LEVELUP")
 		end
 	end,
 	}

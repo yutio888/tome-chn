@@ -306,7 +306,7 @@ function _M:atEnd(v)
 			save:delete()
 			save:close()
 
-			game:saveSettings("tome.default_birth", ("tome.default_birth = {permadeath=%q, difficulty=%q, sex=%q, campaign=%q}\n"):format(self.actor.descriptor.permadeath, self.actor.descriptor.difficulty, self.actor.descriptor.sex, self.actor.descriptor.world))
+			if self.actor.descriptor.difficulty ~= "Tutorial" then game:saveSettings("tome.default_birth", ("tome.default_birth = {permadeath=%q, difficulty=%q, sex=%q, campaign=%q}\n"):format(self.actor.descriptor.permadeath, self.actor.descriptor.difficulty, self.actor.descriptor.sex, self.actor.descriptor.world)) end
 
 			self.at_end(false)
 		end)

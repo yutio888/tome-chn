@@ -1,6 +1,15 @@
 ﻿--转化任务名字 
 questCHN = {}
 
+function questCHN:getquestname(name)
+			local qname = name
+			if questCHN[name] then
+				qname = questCHN[name].name
+			elseif name:find("Escort") then
+				qname = questCHN["Escort"].name(name)
+			end
+			return qname
+end
 questCHN["Hidden treasure"] = {
 name = " 隐 藏 的 财 宝 ",
 description = function(desc)

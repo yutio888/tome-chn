@@ -1,4 +1,4 @@
-﻿-- ToME - Tales of Maj'Eyal
+-- ToME - Tales of Maj'Eyal
 -- Copyright (C) 2009 - 2016 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify

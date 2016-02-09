@@ -1,4 +1,4 @@
-﻿local _M = loadPrevious(...)
+local _M = loadPrevious(...)
 
 registerInscriptionTranslation = function(t)
 	for i = 1, 6 do

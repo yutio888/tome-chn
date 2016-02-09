@@ -1,4 +1,4 @@
-﻿timeEffectCHN:newEffect{
+timeEffectCHN:newEffect{
 	id = "ITEM_NUMBING_DARKNESS",
 	enName = "Numbing Darkness",
 	chName = "黑暗麻痹",

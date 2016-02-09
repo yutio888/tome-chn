@@ -1,4 +1,4 @@
-﻿timeEffectCHN:newEffect{
+timeEffectCHN:newEffect{
 	id = "FLASH_SHIELD",
 	enName = "Protected by the sun",
 	chName = "阳光保护",

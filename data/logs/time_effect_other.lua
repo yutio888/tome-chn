@@ -1,4 +1,4 @@
-﻿
+
 logCHN:newLog{
 	log = "#Target# whirls around and a radiant shield surrounds them!",
 	fct = function(a)

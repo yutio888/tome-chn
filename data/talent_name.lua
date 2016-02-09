@@ -1,4 +1,4 @@
-﻿t_talent_name = {}
+t_talent_name = {}
 --[[local Talents = require "engine.interface.ActorTalents"
 local damDesc = Talents.main_env.damDesc
 

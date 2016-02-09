@@ -1,4 +1,4 @@
-﻿simpleLongDlg = {}
+simpleLongDlg = {}
 
 simpleLongDlg["Celia"] = function()
 	local str = [["当你挥出最后一击后，你迅速的挖出赛利亚的心脏为巫妖

@@ -1,4 +1,4 @@
-﻿logCHN:newLog{
+logCHN:newLog{
 	log = "#Target# imbues its weapon with demonic fire.",
 	fct = function(a)
 		a = npcCHN:getName(a)

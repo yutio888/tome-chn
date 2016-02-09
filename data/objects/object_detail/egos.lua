@@ -1,4 +1,4 @@
-﻿egosCHN = {}
+egosCHN = {}
 keyCHN = {}
 --ammo.lua
 -- Techniques

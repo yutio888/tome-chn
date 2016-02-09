@@ -1,4 +1,4 @@
-﻿timeEffectCHN:newEffect{
+timeEffectCHN:newEffect{
 	id = "ITEM_ANTIMAGIC_SCOURED",
 	enName = "Scoured",
 	chName = "冲刷",

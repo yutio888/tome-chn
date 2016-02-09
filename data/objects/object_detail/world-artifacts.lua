@@ -1,4 +1,4 @@
-﻿--boss-artifacts
+--boss-artifacts
 objects:addObjects({
 	unique = true,
 	enName = "Wintertide",

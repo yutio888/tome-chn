@@ -1,4 +1,4 @@
-﻿module(..., package.seeall)
+module(..., package.seeall)
 
 _M.artifactCHN = {}
 function registerArtifactTranslation(t)

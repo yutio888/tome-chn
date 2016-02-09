@@ -1,4 +1,4 @@
-﻿objects:addObjects({
+objects:addObjects({
 	subtype = "staff",
 	sName = "elm",
 	egos = "staves",

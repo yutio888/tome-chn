@@ -1,4 +1,4 @@
-﻿local _M = loadPrevious(...)
+local _M = loadPrevious(...)
 
 registerTalentTranslation{
 	id = "T_FAST_AS_LIGHTNING",

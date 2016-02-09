@@ -1,4 +1,4 @@
-﻿dofile("data-chn123/dialogs/simplePop.lua")
+dofile("data-chn123/dialogs/simplePop.lua")
 dofile("data-chn123/dialogs/yesnoPop.lua")
 dofile("data-chn123/dialogs/simpleLongPop.lua")
 dofile("data-chn123/dialogs/yesnocancelPop.lua")

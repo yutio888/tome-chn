@@ -1,4 +1,4 @@
-﻿logCHN:newLog{
+logCHN:newLog{
 	log = "An entity appears through the portal!",
 	fct = function()
 		return "有东西穿过了传送门！"

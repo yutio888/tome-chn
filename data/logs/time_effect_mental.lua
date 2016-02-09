@@ -1,4 +1,4 @@
-﻿logCHN:newLog{
+logCHN:newLog{
 	log = "#Target# is silenced!",
 	fct = function(a)
 		a = npcCHN:getName(a)

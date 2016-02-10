@@ -278,3 +278,18 @@ simpleLongDlg["Mouse Gestures"] = function()
 
 如果你不希望看到手势动作，请在游戏设置的UI栏设置关闭它。]]
 end
+
+simpleLongDlg["Welcome to #CRIMSON#Ashes of Urh'Rok"] = function()
+	local races = {"人类", "精灵", "矮人", "半身人"}
+	if profile.mod.allow_build.yeek then races[#races+1] = "夺心魔" end
+	return "欢迎来到 #CRIMSON#乌鲁洛克之烬", ([[
+感谢您购买了#CRIMSON#乌鲁洛克之烬#WHITE#，《马基埃亚尔的传说》的第一个
+扩展包。
+
+若要开始一段与恶魔共舞的毁灭旅程，请您选择毁灭使者（堕落
+系）作为您的职业，选择%s
+作为你的职业。
+
+恶魔之力，毁灭一切！
+]]):format(table.concatNice(races, '、', '或'))
+end

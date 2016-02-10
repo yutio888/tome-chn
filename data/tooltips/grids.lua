@@ -340,6 +340,9 @@ gridCHN["secret path to the cave"] = "通向山洞的秘密通道"
 gridCHN["Small lumberjack village"] = "伐木工人的小村庄"
 --spydric-infestation
 gridCHN["Portal back to the Gates of Morning"] = "返回晨曦之门的传送门"
+--temple-of-creation
+gridCHN["Portal to the Temple of Creation"] = "通向造物主神庙的传送门"
+gridCHN["Portal to the Flooded Cave"] = "通向淹没的洞穴的传送门"
 --trollmire-treasure
 gridCHN["way to the hidden trollmire treasure"] = "巨魔宝藏的隐藏入口"
 

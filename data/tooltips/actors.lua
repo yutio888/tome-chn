@@ -158,6 +158,8 @@ function getTooltipActorCHN(desc)
 					desc[i] = string.gsub(desc[i],"The Way","维网")
 				elseif string.find(desc[i],"Angolwen %(.+%)") then
 					desc[i] = string.gsub(desc[i],"Angolwen","安格利文")
+				elseif string.find(desc[i],"Keepers of Reality %(.+%)") then
+					desc[i] = string.gsub(desc[i],"Keepers of Reality","现实守卫")
 				elseif string.find(desc[i],"Dreadfell %(.+%)") then
 					desc[i] = string.gsub(desc[i],"Dreadfell","恐惧王座")
 				elseif string.find(desc[i],"Temple of Creation %(.+%)") then
@@ -188,10 +190,20 @@ function getTooltipActorCHN(desc)
 					desc[i] = string.gsub(desc[i],"Fearscape","恶魔空间")
 				elseif string.find(desc[i],"Sher'Tul %(.+%)") then
 					desc[i] = string.gsub(desc[i],"Sher'Tul","夏·图尔")
-				elseif string.find(desc[i],"Keepers of Reality %(.+%)") then
-					desc[i] = string.gsub(desc[i],"Keepers of Reality","现实守卫")
+				elseif string.find(desc[i],"Cosmic Fauna %(.+%)") then
+					desc[i] = string.gsub(desc[i],"Cosmic Fauna","太空生物")
+				elseif string.find(desc[i],"Horrors %(.+%)") then
+					desc[i] = string.gsub(desc[i],"Horrors","恐魔")
 				elseif string.find(desc[i],"Neutral %(.+%)") then
 					desc[i] = string.gsub(desc[i],"Neutral","中立")
+				elseif string.find(desc[i],"Unaligned %(.+%)") then
+					desc[i] = string.gsub(desc[i],"Unaligned","无阵营")
+				elseif string.find(desc[i],"Merchant Caravan %(.+%)") then
+					desc[i] = string.gsub(desc[i],"Merchant Caravan","商队")
+				elseif string.find(desc[i],"Point Zero Onslaught %(.+%)") then
+					desc[i] = string.gsub(desc[i],"Point Zero Onslaught","零点圣域猛攻")
+				elseif string.find(desc[i],"Point Zero Guardians %(.+%)") then
+					desc[i] = string.gsub(desc[i],"Point Zero Guardians","零点圣域守护者")
 				elseif string.find(desc[i],"Behavior:") then desc[i] = string.gsub(desc[i],"Behavior:","行为：　")
 				elseif string.find(desc[i],"Action radius:") then desc[i] = string.gsub(desc[i],"Action radius:","活动范围：　")
 				end

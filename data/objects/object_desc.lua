@@ -110,6 +110,7 @@ objDesc["Attack speed: "] = "攻击速度："
 objDesc["Block value: "] = "格挡强度："
 objDesc["Firing range: "] = "攻击距离："
 objDesc["Reload speed: "] = "装填速度："
+objDesc["Shadow Power: "] = "阴影强度："
 objDesc["Turns elapse between self-loadings: "] = "自动填弹间隔："
 objDesc["When used from stealth a simple attack with it will not break stealth."] = "潜行中使用，单纯攻击不会取消潜行。"
 objDesc["Travel speed: "] = "飞行速度："
@@ -294,27 +295,27 @@ objDesc["The wearer is asleep."] = "穿戴者陷入沉睡。"
 objDesc["Lucid Dreamer: "] = "清晰梦境："
 objDesc["This item allows the wearer to act while sleeping."] = "此装备允许装备者边睡觉边行动。"
 objDesc["Deflect projectiles away: "] = "抛射物偏斜："
-objDesc["Reduces paradox failures(equivalent to willpower): "] = "时空技能失败阀值（基于意志）："
+objDesc["Reduces paradox anomalies(equivalent to willpower): "] = "时空技能异常阀值（基于意志）："
 objDesc["Skullcracker multiplicator: "] = "铁头功加成："
-objDesc["All your damage is converted and split into arcane, fire, cold and lightning."] = "你造成的所有伤害被转化均分为奥术、火焰、\n冰冻和闪电伤害。"
+objDesc["All your damage is converted and split into arcane, fire, cold and lightning."] = "你造成的所有伤害被转化均分为奥术、火焰、冰冻和闪电伤害。"
 objDesc["Attack speed improves with your strength and size category."] = "攻击速度随力量和体型变化。"
 objDesc["Absorbs all darkness in its light radius."] = "吸收范围内一切黑暗"
 
-objDesc["Offers either offensive or defensive benefits, depending on the position of the sands."] = "根据沙的位置变化效果"
-objDesc["When you take a hit of more than 20% of your max life a shield is created equal to 130% the damage taken."] = "当你受到一次攻击损失超过20％最大生命值时，\n你获得一个护盾，可吸收那个数值130％的伤害。"
-objDesc["Detects traps.\nGives a 25% to shrug off up to three stuns, pins, and dazes each turn, with a 10 turn cooldown."] = "探测陷阱。\n每回合有25％几率从至多3个震慑、定身、眩晕状态中解除，该效果冷却时间为10个回合。"
+objDesc["Offers either offensive or defensive benefits, depending on the position of the sands.  Switching the direction of flow takes no time."] = "根据沙的位置在进攻增益和防守增益间切换。切换沙的流向不消耗时间。"
+objDesc["When you take a hit of more than 20% of your max life a shield is created equal to 130% the damage taken."] = "当你受到一次攻击损失超过20％最大生命值时，你获得一个护盾，可吸收那个数值130％的伤害。"
+objDesc["Detects traps.Gives a 25% to shrug off up to three stuns, pins, and dazes each turn, with a 10 turn cooldown."] = "探测陷阱。每回合有25％几率从至多3个震慑、定身、眩晕状态中解除，该效果冷却时间为10个回合。"
 objDesc["Automatically fires lightning bolts at nearby enemies, with a chance to inflict Daze."] = "自动向周围的敌人发射闪电，有一定几率使之眩晕。"
 objDesc["All your damage is converted and split into light and darkness."] = "你造成的所有伤害被转化均分为光系和暗影伤害。"
 objDesc["Gives all your cold damage a 20% chance to freeze the target."] = "你造成寒冷伤害有20%几率冰冻目标。"
-objDesc["When using a mental talent, gives a 10% chance to lower the current cooldowns of up to three of your wild gift, psionic, or cursed talents by three turns."] = "每次使用精神技能时，有10%几率减少\n至多3个自然、超能、诅咒系的技能冷却时间3回合。"
+objDesc["When using a mental talent, gives a 10% chance to lower the current cooldowns of up to three of your wild gift, psionic, or cursed talents by three turns."] = "每次使用精神技能时，有10%几率减少至多3个自然、超能、诅咒系的技能冷却时间3回合。"
 objDesc["25% of all damage splashes in a radius of 1 around the target."] = "你造成的伤害的25%溅射在目标周围1格"
 objDesc["Increases your solipsism threshold by 20% (if you have one). If you do, also grants 15% global speed when worn."] = "增加唯我临界点20%，之后增加15%整体速度"
 objDesc["This item does not take a turn to use."] = "使用该物品不需花费时间"
-objDesc["Your Lightning and Chain Lightning spells gain a 24% chance to daze, and your Thunderstorm spell gains a 12% chance to daze."] = "你的闪电术和连锁闪电有24%几率\n闪电风暴有12%几率令对方眩晕"
+objDesc["Your Lightning and Chain Lightning spells gain a 24% chance to daze, and your Thunderstorm spell gains a 12% chance to daze."] = "你的闪电术和连锁闪电有24%几率闪电风暴有12%几率令对方眩晕"
 objDesc["Will bring you back from death, but only once!"] = "能将你从死亡边缘拯救1次"
 objDesc["Enhances the effectiveness of Meditation by 20%"] = "强化冥想效果20%"
 objDesc["Heals all nearby living creatures by 5 points each turn."]= "每回合治疗周围所有生物5点生命值" 
-objDesc["Damage dealt by this weapon is increased by half your critical multiplier, if doing so would kill the target."] = "这把武器造成的伤害将增加一半的暴击加成，\n如果这样能秒杀目标。"
+objDesc["Damage dealt by this weapon is increased by half your critical multiplier, if doing so would kill the target."] = "这把武器造成的伤害将增加一半的暴击加成，如果这样能秒杀目标。"
 objDesc["Reduces incoming crit damage: "] = "减少直接暴击伤害： "
 objDesc["Chance to avoid any damage: "] = "无视伤害几率： "
 objDesc["Ice block penetration: "] = "冰块穿透： "
@@ -322,7 +323,7 @@ objDesc["Damage Backlash: "] = "伤害回火： "
 objDesc["Reduce all damage from unseen attackers: "] = "降低不可见目标伤害： "
 objDesc["Granted talent can block up to 1 instance of damage each 10 turns."] = "提供技能:每十回合能抵挡一次攻击。"
 objDesc["No gem"] ="没有宝石"
-objDesc["Transfers a bleed, poison, or wound to its source or a nearby enemy every 4 turns."] = "每4回合将一项流血、毒素或伤口效果\n转移给效果来源或者附近的敌人"
+objDesc["Transfers a bleed, poison, or wound to its source or a nearby enemy every 4 turns."] = "每4回合将一项流血、毒素或伤口效果转移给效果来源或者附近的敌人"
 objDesc["Can block like a shield, potentially disarming the enemy."]="能像盾牌一样格挡，可能缴械对方"
 objDesc["Increases the damage of Sun Beam by 15%."] = "增加15%阳光烈焰伤害"
 objDesc["Trails fire behind you, dealing damage based on spellpower."]="在你身后留下火焰，伤害与法术强度相关"
@@ -330,8 +331,8 @@ objDesc["Damage shields have +1 duration and +15% power"] = "伤害护盾增加�
 objDesc["% chance to summon an orc spirit"] = "% 几率召唤一个兽人灵魂"
 objDesc["Storm Duration: "] = "风暴持续时间："
 objDesc["Your Obliterating Smash can destroy walls."] = "你的歼灭挥斩能摧毁墙壁"
-objDesc["All nearby enemies take 20 fire damage each turn and healing you for 10% of the damage dealt."] = "附近的敌人每回合受到20火焰伤害。\n你受到10%伤害值的治疗"
-objDesc["Plaguefire detonates when its victim dies, spreading to other enemies up to two times."] = "疫火感染的生物死亡时，疫火将传播到附近的敌人。\n至多传播2次。"
+objDesc["All nearby enemies take 20 fire damage each turn and healing you for 10% of the damage dealt."] = "附近的敌人每回合受到20火焰伤害。你受到10%伤害值的治疗"
+objDesc["Plaguefire detonates when its victim dies, spreading to other enemies up to two times."] = "疫火感染的生物死亡时，疫火将传播到附近的敌人。至多传播2次。"
 objDesc["Status resistances shift over time to match the statuses you are being hit by."] = "依据你中的负面状态改变你的状态免疫"
 objDesc["Can be unequipped, can't be rerolled."] = "能解除装备，不能重置"
 objDesc["Can be unequipped or rerolled."] = "能解除装备或重置"
@@ -411,25 +412,27 @@ special_t = {}
         special_t["pin the target to the nearest wall"] ="将目标钉在最近的墙上"
 	special_t["deals physical damage equal to 3% of the target's missing health"] = "造成等于目标已损失生命值3%的物理伤害"
 	special_t["steals up to 50 mana from the target"] = "从目标处吸取至多50点法力"
-	special_t["release a burst of light and dark damage (scales with Magic)"] = "爆发光明和黑暗伤害\n（随魔法增加）"
+	special_t["release a burst of light and dark damage (scales with Magic)"] = "爆发光明和黑暗伤害（随魔法增加）"
 	special_t["25% chance to strike the target again."] = "25%几率再次攻击"
 	special_t["Attempt to devour a low HP enemy, striking again and possibly killing instantly."] = "试图吞噬低生命的敌人，再次攻击，可能秒杀目标。"
 	special_t["inflicts bonus temporal damage and slows target"] = "造成额外时空伤害并让目标减速"
 	special_t["25% chance to damage nearby creatures"] = "25%几率伤害附近生物"
 	special_t["deal bonus arcane and darkness damage"] = "造成额外奥术和暗影伤害"
 	special_t["Causes lightning to strike and destroy any projectiles in a radius of 10, dealing damage and dazing enemies in a radius of 5 around them."] =
-	"触发闪电,击落半径10内所有抛射物\n抛射物半径5以内的敌人受到伤害并被眩晕。"
+	"触发闪电,击落半径10内所有抛射物抛射物半径5以内的敌人受到伤害并被眩晕。"
 	special_t["Breaks enemy weapon."] = "破坏对方武器"
-	special_t["releases a burst of light, dealing damage equal to your spellpower in a 3 radius cone."]="释放光明，在半径3的锥形范围内\n造成等于法术强度的伤害"
-	special_t["deal manaburn damage equal to your mindpower in a radius 3 cone"] = "在半径3的锥形范围内\n造成相当于精神强度的法力燃烧伤害"
-	special_t["Create a Winter Storm that gradually expands, dealing cold damage to your enemies each turn and reducing their turn energy by 20%.  Melee attacks will relocate the storm on top of your target and increase its duration."]="制造不断扩张的冰风暴，每回合对敌人造成\n寒冷伤害同时减少对方20%回合能量。\n近战攻击将强化风暴并延长时间。"
+	special_t["releases a burst of light, dealing damage equal to your spellpower in a 3 radius cone."]="释放光明，在半径3的锥形范围内造成等于法术强度的伤害"
+	special_t["deal manaburn damage equal to your mindpower in a radius 3 cone"] = "在半径3的锥形范围内造成相当于精神强度的法力燃烧伤害"
+	special_t["Create a Winter Storm that gradually expands, dealing cold damage to your enemies each turn and reducing their turn energy by 20%.  Melee attacks will relocate the storm on top of your target and increase its duration."]="制造不断扩张的冰风暴，每回合对敌人造成寒冷伤害同时减少对方20%回合能量。近战攻击将强化风暴并延长时间。"
 	special_t["reduces mental save penalty"]="减少精神豁免的减益效果"
 	special_t["grows dramatically in power"]="显著增加强度"
 	special_t["swallows the victim's soul, gaining a new power"]="吞噬受害者的灵魂，得到新的能力"                
 	special_t["Enter a Rampage (Shared 30 turn cooldown)."]= "进入暴走状态（共享30回合冷却）" 
 	special_t["Random elemental explosion"] = "随机元素爆炸"
-	special_t["releases a burst of dark fire, dealing damage equal to your magic stat"] = "释放黑暗之火\n造成等于魔法属性的伤害"
-	special_t["Increases all damage dealt, and reduces all damage taken, by 1%, stacking up to 10 times. Resets after 10 turns without attacking."] = "增加全体伤害并减少受到的伤害各1%%\n效果持续10回合，最多叠加至10层\n"
+	special_t["releases a burst of dark fire, dealing damage equal to your magic stat"] = "释放黑暗之火造成等于魔法属性的伤害"
+	special_t["Increases all damage dealt, and reduces all damage taken, by 1%, stacking up to 10 times. Resets after 10 turns without attacking."] = "增加全体伤害并减少受到的伤害各1%%效果持续10回合，最多叠加至10层"
+  special_t["The breath attack has a chance to shift randomly between Fire, Ice, Lightning, Acid, and Sand each turn."] = "喷吐攻击的属性每回合有几率在火、冰、闪电、酸和沙之间随机切换。"
+  special_t["You have never taken it off."] = "你还没有把它脱下过。"
   special_t["Curse of Madness"] = "疯狂诅咒"
   special_t["Curse of Misfortune"] = "不幸诅咒"
   special_t["Curse of Shrouds"] = "屏障诅咒"
@@ -515,7 +518,7 @@ function getObjectDescCHN(desc)
 				elseif desc[i]:find("Detects traps.") then 
 					desc[i] = "探测陷阱。"
 				elseif desc[i]:find("with a 10 turn cooldown") then
-					desc[i]= "每回合有25％几率从至多3个震慑、定身、\n眩晕状态中解除,冷却时间10个回合。"
+					desc[i]= "每回合有25％几率从至多3个震慑、定身、眩晕状态中解除,冷却时间10个回合。"
 				elseif desc[i]:find("Enter Rampage") then
 					desc[i] = "生命值滑落至20%下时，进入暴走状态（30回合冷却）"
 				elseif desc[i]:find("Increases all damage by") then
@@ -523,22 +526,41 @@ function getObjectDescCHN(desc)
 				elseif desc[i]:find("Current Bonus: ") then
 					desc[i]= "当前加成："
 				elseif desc[i]:find("Reduces all damage by") then
-					desc[i]= desc[i]:gsub("Reduces all damage by ","减少"):gsub(" of current vim or 50%% of the damage, whichever is lower; but at the cost of vim equal to 5%% of the damage blocked.","当前活力值的伤害，但最多减少50%%。\n同时消耗5%%格挡值的活力值。")
+					desc[i]= desc[i]:gsub("Reduces all damage by ","减少"):gsub(" of current vim or 50%% of the damage, whichever is lower; but at the cost of vim equal to 5%% of the damage blocked.","当前活力值的伤害，但最多减少50%%。同时消耗5%%格挡值的活力值。")
 
 				elseif desc[i]:find("When your effective movement speed")  then
-					desc[i] ="当你的有效移动速度小于100%%时，\n获得等于差值的百分比减伤，\n但最多减少至30%%"
-					
+					desc[i] = "当你的有效移动速度小于100%%时，获得等于差值的百分比减伤，但最多减少70%"
+				elseif desc[i]:find("Current reduction bonus")  then
+					desc[i] = desc[i]:gsub("Current reduction bonus", "目前减伤加成")
 				elseif desc[i]:find("Cannot be unequipped or rerolled until level") then 
 					desc[i] = desc[i]:gsub("Cannot be unequipped or rerolled until level","不能解除装备也不能重置，直到等级")
 				elseif desc[i]:find("Storm Duration") then 
 					desc[i] = desc[i]:gsub("Storm Duration","冰风暴持续时间")
-					desc[i] = desc[i]:gsub("None","无")
+					desc[i] = desc[i]:gsub("None","无")            
+				elseif desc[i]:find("darkness damage %(based on Magic%) in a radius 1 around the target") then
+            		desc[i] = desc[i]:gsub("deal", "在目标周围1码范围内造成")
+            		:gsub("arcane and", "点奥术和")
+            		:gsub("darkness damage %(based on Magic%) in a radius 1 around the target", "点暗影伤害。（基于魔法）")
+				elseif desc[i]:find("releases a burst of light, dealing") then
+					desc[i] = desc[i]:gsub("releases a burst of light, dealing ", "施放一束光线，在3码半径的锥形内造成")
+					:gsub("light damage %(based on Spellpower%) in a radius 3 cone.", "点光系伤害。（基于法术强度）")
+				elseif desc[i]:find("Each step you take leaves a burning trail behind you lasting 5 turns that deals") then
+					desc[i] = desc[i]:gsub("Each step you take leaves a burning trail behind you lasting 5 turns that deals", "你每踏出一步会在脚下留下一条持续5回合的燃烧痕迹，对所有经过的生物造成")
+					:gsub("fire damage %(based on Spellpower%) to others who enter it.", "点火焰伤害。（基于法术强度）")
+				elseif desc[i]:find("release a will o' the wisp that will explode against your foes for") then
+					desc[i] = desc[i]:gsub("release a will o' the wisp that will explode against your foes for","释放一只鬼火，鬼火将会爆炸并对你的敌人造成")
+					:gsub("cold damage %(based on your Magic%)", "点寒冷伤害（基于魔法）")
+				elseif desc[i]:find("summon a stationary shining orb within range") then
+					desc[i] = desc[i]:gsub("summon a stationary shining orb within range", "在")
+					:gsub("for 15 turns that will illuminate its area and deal", "码范围内召唤一个固定的闪光球体十五回合。球体会照亮这个区域，每回合对范围内的敌人造成")
+					:gsub("light damage %(based on your Magic and Strength%) to your foes within radius", "点光系伤害（基于你的魔法和力量），半径")
+					:gsub("each turn", "码范围。")
 				else--if desc[i]:find("Special effect on block:") then
 					desc[i] = desc[i]:gsub("Special effect on block:","格挡特效：")
 							:gsub("Chance that a blast of icy cold water will spray at the target.","有30%%几率朝目标喷射冰冷的水流")
 							:gsub("30%% chance of petrifying the attacker","30%%几率石化攻击者")
 							:gsub("30%% chance of pulling in the attacker","30%%几率勒住攻击者")
-							:gsub("Unleash the fury of the cosmos, dealing light and darkness damage to your attackers","释放宇宙的愤怒\n造成光系与暗影伤害")
+							:gsub("Unleash the fury of the cosmos, dealing light and darkness damage to your attackers","释放宇宙的愤怒造成光系与暗影伤害")
 			        end
 
 			end
@@ -562,6 +584,7 @@ function getObjectDescCHN(desc)
 			desc[i] = desc[i]:gsub("Attach on","附着于"):gsub("worn on",""):gsub("slot","")
 					:gsub("mainhand","主手"):gsub("offhand","副手"):gsub("finger","手指"):gsub("body","躯干")
 			if desc[i]:find("When attach to") then desc[i] = "当附着时：" end
+			desc[i] = cutChrCHN(desc[i], 20)
 		end
         end
 	return desc

@@ -1887,21 +1887,35 @@ function _M:getUseDesc(use_actor)
 			local t_name = self.talent_cooldown == "T_GLOBAL_CD" and "所有护符" or "技能 "..use_actor:getTalentDisplayName(use_actor:getTalentFromId(self.talent_cooldown))
 			local use_name = desc:format(self:getCharmPower(use_actor))
 			use_name = use_name:gsub("fire a blast of psionic energies in a range ","释放一束长度"):gsub("beam","射线")
-												 :gsub("disarm traps","解除陷阱")
-												 :gsub(" disarm power, Magic","强度，基于魔法")
-												 :gsub("along a range","在一条长度")
-												 :gsub("line","的直线上")
-												 :gsub("fire a bolt of a random element","发射一束随机元素")
-												 :gsub("remove up to ","除去至多"):gsub("poisons or diseases from a target within range ","个毒素和疾病，距离限制"):gsub("Willpower","基于意志")
-												 :gsub("heal a target within range ","治疗距离"):gsub("(Willpower)","(基于意志)")
-												 :gsub("project a bolt from the staff (to range ","发射元素球，距离")
-												 :gsub("unleash an elemental blastwave, dealing","释放元素冲击波，造成"):gsub("damage in a radius","伤害，半径"):gsub("around the user","")
-												 :gsub("conjure elemental energy in a radius","发射锥形元素能量，半径"):gsub("cone, dealing","造成")
-												 :gsub("harden the skin for 7 turns increasing armour by","硬化皮肤7回合，并增加")
-						    				     :gsub("and armour hardiness by","护甲值和护甲硬度")
-												 :gsub("inflict","造成"):gsub("mind damage","精神伤害"):gsub("gaining psi and hate equal to 1/10 of the damage done","获 得 十 分 之 一 伤 害 值 的 超 能 力 值 和 仇 恨 值")
-                                                 :gsub("dam","伤害"):gsub("damage","伤害"):gsub("dealing","造成"):gsub("for","")
-												 use_name = use_name:gsub("create a temporary shield that absorbs ","制造一层临时护盾，至多能吸收")
+			:gsub("disarm traps","解除陷阱")
+			:gsub(" disarm power, Magic","强度，基于魔法")
+			:gsub("along a range","在一条长度")
+			:gsub("line","的直线上")
+			:gsub("remove up to ","除去至多"):gsub("poisons or diseases from a target within range ","个毒素和疾病，距离限制"):gsub("Willpower","基于意志")
+			:gsub("heal a target within range ","治疗距离"):gsub("(Willpower)","(基于意志)")
+			:gsub("project a bolt from the staff (to range ","发射元素球，距离")
+			:gsub("unleash an elemental blastwave, dealing","释放元素冲击波，造成"):gsub("damage in a radius","伤害，半径"):gsub("around the user","")
+			:gsub("conjure elemental energy in a radius","发射锥形元素能量，半径"):gsub("cone, dealing","造成")
+			if use_name:find("harden the skin for") then
+				use_name = use_name:gsub("harden the skin for 7 turns increasing armour by","硬化皮肤7回合，并增加")
+		    	:gsub("and armour hardiness by","护甲值和护甲硬度")
+		    elseif use_name:find("gaining psi and hate equal to") then
+				use_name = use_name:gsub("inflict","造成"):gsub("mind damage","精神伤害"):gsub("gaining psi and hate equal to","获得所造成伤害值"):gsub("of the damage done", "的超能力值和仇恨值")
+			elseif use_name:find("reveal the area around you, dispelling darkness") then
+				use_name = use_name:gsub("reveal the area around you, dispelling darkness %(radius", "展露你周围的地形，驱除黑暗（半径"):gsub("power", "强度"):gsub("based on Magic%), and detect the presence of nearby creatures for 3 turns", "基于魔法），并检测周围生物的行踪三回合。")
+			elseif use_name:find("creates a wall of flames lasting 4 turns") then
+				use_name = use_name:gsub("creates a wall of flames lasting 4 turns %(dealing ", "制造持续4回合的火墙（共造成"):gsub("fire damage overall%)", "点火焰伤害）")
+			elseif use_name:find("fire a bolt of a random element with") then
+				use_name = use_name:gsub("fire a bolt of a random element with %(base%) damage", "射出一束随机元素，基础伤害"):gsub("to", "到")
+			elseif use_name:find("project a melee attack out to range") then
+				use_name = use_name:gsub("project a melee attack out to range", "在")
+				:gsub(", dealing", "码范围内投射一次近战攻击，造成"):gsub("%(mind%) weapon damage", "（精神）武器伤害")
+			elseif use_name:find("bonus disarm power, based on Magic") then
+				use_name = use_name:gsub("disarm traps", "拆除陷阱")
+				:gsub("bonus disarm power, based on Magic", "点额外拆除强度，基于魔法"):gsub("along a range", "范围为长度为"):gsub("line", "的直线")
+			end
+			use_name = use_name:gsub("dam","伤害"):gsub("damage","伤害"):gsub("dealing","造成"):gsub("for","")
+			use_name = use_name:gsub("create a temporary shield that absorbs ","制造一层临时护盾，至多能吸收")
 			ret = tstring{{"color","YELLOW"}, ("可以用来施放【%s】, 使%s进入%d回合冷却。"):format(use_name, t_name, usepower(self.use_power.power)), {"color","LAST"}}
 
 --[[			local use_name_type = type(self.use_power.name)

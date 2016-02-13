@@ -274,6 +274,22 @@ logCHN:newLog{
 
 --chronomancy/spacetime-weaving
 logCHN:newLog{
+	log = "%s's space-time folding fizzles!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 的时空折叠失败了！"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "%s emerges from a space-time rift!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 从时空虫洞中出现！"):format(a)
+	end,
+}
+
+logCHN:newLog{
 	log = "#CRIMSON#%s has been yanked back to the tether!",
 	fct = function(a)
 		a = npcCHN:getName(a)
@@ -1231,11 +1247,13 @@ logCHN:newLog{
 		return "目标距离太远"
 	end,
 }
+
+
 logCHN:newLog{
 	log = "%s performs a telekinetically enhanced leap!",
 	fct = function(a)
-			a = npcCHN:getName(a)
-		return ("%s施展了灵能跳跃！"):gsub(a)
+		a = npcCHN:getName(a)
+		return ("%s 施展了灵能跳跃！"):format(a)
 	end,
 }
 

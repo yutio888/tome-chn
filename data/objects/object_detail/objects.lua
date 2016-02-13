@@ -99,6 +99,16 @@ function objects:getObjects(name,desc,subtype,short_name,is_ided,rare,unique)
 					if egosCHN[prefix] then o.chName = egosCHN[prefix]..o.chName end
 					
 					o.desc = objectW[i].chDesc
+				elseif o.name:find(objectW[i].chName) then
+					local chName = objectW[i].chName
+					local prefix = o.name:match("(.+)"..chName)
+					local suffix = o.name:match(chName.."(.+)")
+					
+					o.chName = chName
+					if egosCHN[suffix] then o.chName = egosCHN[suffix]..chName end
+					if egosCHN[prefix] then o.chName = egosCHN[prefix]..o.chName end
+					
+					o.desc = objectW[i].chDesc
 				end
 			end
 		else

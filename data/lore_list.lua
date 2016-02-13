@@ -1,4 +1,4 @@
-﻿loreList = {}
+loreList = {}
 loreCat = {}
 
 --lore cat

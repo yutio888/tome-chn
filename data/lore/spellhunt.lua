@@ -1,4 +1,4 @@
-﻿
+
 
 registerLoreTranslation{
 	id = "spellhunt-note-1",

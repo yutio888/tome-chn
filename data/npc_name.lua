@@ -1,4 +1,4 @@
-﻿npcNameCHN = {}
+npcNameCHN = {}
 npcDescCHN = {}
 
 npcCHN = {}
@@ -189,7 +189,7 @@ npcDescCHN["water imp"] = "水中的小恶魔，向你缓慢投射法术。"
 npcNameCHN["Walrog"] = "乌尔罗格"
 npcDescCHN["Walrog"] = {}
 npcDescCHN["Walrog"]["Walrog, the lord of Water, is fearsome to behold. The water writhes around him as if trying to escape, making his form indistinct. He does not seem surprised to see you."] = "乌尔罗格，水之主，是水中的恐怖恶魔。水如同想要逃离一般在他的周围沸腾，使他的影子若隐若现。他面对你的表情似乎并不惊讶。"
-npcDescCHN["Walrog"]["Walrog, the lord of Water, is #AQUAMARINE#fearsome#LAST# to behold. The water writhes around him as if trying to escape, making his form indistinct. He does not seem surprised to see you."] = "乌尔罗格，水之主，是水中的#AQUAMARINE#恐怖#LAST#恶魔。水如同想要逃离一般在他的周围沸腾，使他的影子若隐若现。他面对你的表情似乎并不惊讶。"
+npcDescCHN["Walrog"]["Walrog, the lord of Water, is #AQUAMARINE#fearsome#LAST# to behold. The water boils and writhes around him as if trying to escape, frothing steam making his form indistinct.  He does not seem surprised to see you."] = "乌尔罗格，水之主，是水中的#AQUAMARINE#恐怖#LAST#恶魔。水如同想要逃离一般在他的周围沸腾，蔓延的蒸汽使他的影子若隐若现。他面对你的表情似乎并不惊讶。"
 
 --动物——熊(bear)
 npcNameCHN["brown bear"] = "棕熊"
@@ -875,22 +875,31 @@ npcDescCHN["shade"] = "通过某种神秘的可怕手段，这只生物的影子
 
 --骷髅(skeleton)
 npcNameCHN["degenerated skeleton warrior"] = "腐化骷髅战士"
-npcDescCHN["degenerated skeleton warrior"] = "我是一只腐化的骷髅战士。"
+npcDescCHN["degenerated skeleton warrior"] = "这具仿佛是死灵法师随意收集而成的，摇摇欲坠的骨骸，生涩地从你的眼前走过，仿佛孩童手中玩弄的木偶。虽然它只有一条手臂，不过反正这对于拿一把剑也够了，对吧。"
 
-npcNameCHN["skeleton warrior"] = "骷髅战士"
-npcDescCHN["skeleton warrior"] = "你看，我的头盖骨可以拆下来再装上去呢……"
+npcNameCHN["degenerated skeleton archer"] = "腐化骷髅弓箭手"
+npcDescCHN["degenerated skeleton archer"] = "这具破烂不堪的骨架只有一根骨头是好的：它手持长弓的手臂。尽管它缺少了一只手，不过残缺的骨骼上雕刻的凹槽刚好可以卡住弓弦拉弓上箭。"
 
 npcNameCHN["skeleton mage"] = "骷髅法师"
-npcDescCHN["skeleton mage"] = "我有两处骨头，一处可以爆敌人的菊花，一处可以爆自己人的……"
+npcDescCHN["skeleton mage"] = "看着它残破的样子，你与其相信这只骷髅会释放魔法，不如相信是在它身躯逐渐破碎的同时将奥术能量胡乱喷射出来。不过，这一点也没有降低它的危险性，小心。"
+
+npcNameCHN["skeleton warrior"] = "骷髅战士"
+npcDescCHN["skeleton warrior"] = "施展在这只骷髅身上的魔法已经足够灵活，足以让它像还活着的时候那样严阵以待，挥动武器。它仍然穿着它原来的那件老盔甲，锈迹斑斑却值得信赖。"
 
 npcNameCHN["skeleton archer"] = "骷髅弓箭手"
-npcDescCHN["skeleton archer"] = "我好想射点什么……"
+npcDescCHN["skeleton archer"] = "在被复活之前，这位弓箭手的遗体上居然还保留着一张还不错的弓。你开始觉得，世界上如果有更多的盗墓贼就好了。"
 
-npcNameCHN["skeleton master archer"] = "骷髅弓箭手大师"
-npcDescCHN["skeleton master archer"] = "想射就射……"
+npcNameCHN["skeleton magus"] = "骷髅魔导师"
+npcDescCHN["skeleton magus"] = "这只骷髅的身上充盈着更加丰沛的魔法力量，作为它的主人强大魔力的明证。"
 
 npcNameCHN["armoured skeleton warrior"] = "武装骷髅战士"
-npcDescCHN["armoured skeleton warrior"] = "这只优秀的骷髅战士，可以做出如左边的骨头移到右边，右边的骨头移到左边，包括阿姆斯特朗回旋加速式托马斯回旋等高难度动作……此外，由于它生前精通8门语言，是一只多才多艺的青年骷髅，因此倍受广大死灵法师的亲睐，目前担任各种死灵魔导师秘书一职的，往往是一只优秀而精壮的武装骷髅战士。遇到它，是你的不幸……"
+npcDescCHN["armoured skeleton warrior"] = "这只骷髅战士没有任何痛感，它的动作行云流水，强大的挥斩足以将常人的肌肉撕裂。它一定是来自一具新鲜的尸体：它的骨头、装甲和武器还是崭新的。并且，他仿佛怒不可遏。"
+
+npcNameCHN["skeleton master archer"] = "骷髅弓箭手大师"
+npcDescCHN["skeleton master archer"] = "这只骷髅可以飞速的拈弓射箭，奥术的力量使它的身躯达到了常人无法企及的精确度——它的射击永远不会颤动，也永远不会疲累。"
+
+npcNameCHN["skeleton assassin"] = "骷髅刺客"
+npcDescCHN["skeleton assassin"] = "普通骷髅骨节之间的吱嘎猛响会早早暴露他们的行踪，但这只骷髅的身躯被烧焦成暗夜的黑色，关节间的软骨缓冲着骨节的转动。当你看到它时，它银光闪耀的刀刃已经出现在你的眼前。"
 
 --蛇(snake)
 npcNameCHN["large brown snake"] = "巨型棕蛇"
@@ -1337,6 +1346,15 @@ npcDescCHN["Necromancer"] = "一位穿着黑色长袍的人类。他发出刺耳
 npcNameCHN["Half-Finished Bone Giant"] = "未完成的骨巨人"
 npcDescCHN["Half-Finished Bone Giant"] = [[一只铁塔一样的怪物，由上百只尸体的骨头组成。它周身环绕着不洁的光环。
 这只看起来体型较小，似乎尚未完成。]]
+
+npcNameCHN["fleshy experiment"] = "血肉试验品"
+npcDescCHN["fleshy experiment"] = "这团腐肉抽动着，发出可怕的噪音。"
+
+npcNameCHN["boney experiment"] = "骨骸试验品"
+npcDescCHN["boney experiment"] = "这团骨头试着想要自己移动起来，但是看来它好像没法把自己变成更加强大的形态。"
+
+npcNameCHN["sanguine experiment"] = "鲜血试验品"
+npcDescCHN["sanguine experiment"] = "它看起来就像一个巨大的血块。它的创造者到底想做啥？"
 
 --briagh-lair
 npcNameCHN["Briagh, Great Sand Wyrm"] = "精英沙龙战士布莱亚"

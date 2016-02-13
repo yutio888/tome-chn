@@ -1,4 +1,4 @@
-﻿flytextCHN = {
+flytextCHN = {
 --DLC
      
 

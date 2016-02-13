@@ -1,4 +1,4 @@
-﻿--celestial/guardian
+--celestial/guardian
 logCHN:newLog{
 	log = "You cannot use Shield of Light without a shield!",
 	fct = function()

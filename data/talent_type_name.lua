@@ -242,7 +242,7 @@ t_talent_type_name = {}
 	t_talent_type_name["eldritch stone"] = "魔法岩石"
 	t_talent_type_name["deeprock"] = "深岩形态"
 --DLC
-	t_talent_type_name["demon-seeds"] = "恶魔之种"
+	t_talent_type_name["demon seeds"] = "恶魔之种"
 	t_talent_type_name["demonic pact"] = "恶魔契约"
 	t_talent_type_name["infernal combat"] = "地狱格斗"
 	t_talent_type_name["black-magic"] = "黑暗魔法"

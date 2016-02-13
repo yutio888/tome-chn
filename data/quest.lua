@@ -1,4 +1,4 @@
-﻿--转化任务名字 
+--转化任务名字 
 questCHN = {}
 
 function questCHN:getquestname(name)

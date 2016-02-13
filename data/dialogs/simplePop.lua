@@ -1,4 +1,4 @@
-﻿simplePopDlg = {}
+simplePopDlg = {}
 simplePopDlg["Caves..."] = function()
 	return "洞穴...", "当你走进洞穴时，你发现这里已经被魔法力量扭曲了，使其变得规整而曲折。"
 end

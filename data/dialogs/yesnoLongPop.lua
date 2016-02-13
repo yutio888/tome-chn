@@ -1,4 +1,4 @@
-﻿yesnoLongPopDlg = {}
+yesnoLongPopDlg = {}
 
 yesnoLongPopDlg["Open the coffin"] = function()
 	local str = [[一些富有人家在埋葬尸体时有时会用一些财宝陪葬。

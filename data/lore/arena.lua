@@ -1,4 +1,4 @@
-﻿registerLoreTranslation{
+registerLoreTranslation{
 	id = "arena-scoring",
 	name = "竞技场傻瓜指南",
 	lore = [[#{italic}#你发现了一个上面有着闪光文字的便条……

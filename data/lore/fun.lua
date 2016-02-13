@@ -1,4 +1,4 @@
-﻿registerLoreTranslation{
+registerLoreTranslation{
 	id = "troll-poem",
 	name = "巨魔诗歌",
 	lore = [[#{bold}#“我爱大棒槌”

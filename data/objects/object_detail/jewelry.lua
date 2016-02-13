@@ -1,4 +1,4 @@
-﻿objects:addObjects({
+objects:addObjects({
 	subtype = "ring",
 	sName = "copper",
 	egos = "rings",

@@ -218,9 +218,10 @@ registerTalentTranslation{
 	id = "T_ORC_FURY",
 	name = "兽族之怒",
 	info = function(self, t)
-		return ([[激 活 你 对 杀 戮 和 破 坏 的 渴 望， 增 加 %d%% 所 有 伤 害， 持 续 5 回 合。 
-		 受 意 志 影 响， 增 益 有 额 外 加 成。]]):
-		format(t.getPower(self, t))
+		return ([[激 活 你 对 杀 戮 和 破 坏 的 渴 望 ， 尤 其 是 当 你 孤 军 奋 战 之 时 。
+		 你 增 加 所 有 伤 害 10 %% + %0.1f%% × 你 视 野 内 敌 人 的 数 量 （ 最 大 5 层 ， %0.1f%% ） ， 持 续 3 回 合 。
+		 受 体 质 影 响， 增 益 有 额 外 加 成。]]):
+		format(t.getPower(self, t), 10 + t.getPower(self, t) * 5)
 	end,
 }
 
@@ -229,8 +230,9 @@ registerTalentTranslation{
 	name = "兽族忍耐",
 	info = function(self, t)
 		return ([[其 他 种 族 对 兽 族 的 猎 杀 持 续 了 上 千 年， 不 管 是 否 正 义。 他 们 已 经 学 会 忍 受 那 些 会 摧 毁 弱 小 种 族 的 灾 难。 
-		 增 加 +%d 物 理 和 精 神 豁 免。]]):
-		format(t.getSaves(self, t))
+		当 你 的 生 命 值 降 低 到 50%% 以 下 ， 你 强 大 的 意 志 移 除 你 身 上 最 多 %d 个 精 神 状 态 （ 基 于 技 能 等 级 和 意 志 ） 。 该 效 果 每 10 回 合 最 多 触 发 一 次 。
+		额 外 增 加 %d 物 理 和 精 神 豁 免。]]):
+		format(t.getDebuff(self, t), t.getSaves(self, t))
 	end,
 }
 
@@ -239,8 +241,10 @@ registerTalentTranslation{
 	name = "杀戮者",
 	info = function(self, t)
 		return ([[兽 人 们 经 历 了 许 多 次 战 争， 并 获 胜 了 许 多 次。 
-		 增 加 %d%% 所 有 伤 害 穿 透。]]):
-		format(t.getPen(self, t))
+		你 陶 醉 于 杀 戮 你 的 敌 人 ， 每 次 杀 死 敌 人 你 将 获 得 %d%% 的 伤 害 抗 性 ， 持 续 2 回 合 。
+		增 加 的 抗 性 基 于 你 的 技 能 等 级 和 意 志 。
+		被 动 增 加 %d%% 所 有 伤 害 穿 透。]]):
+		format(t.getResist(self, t), t.getPen(self, t))
 	end,
 }
 
@@ -248,11 +252,10 @@ registerTalentTranslation{
 	id = "T_PRIDE_OF_THE_ORCS",
 	name = "兽族荣耀",
 	info = function(self, t)
-		return ([[呼 唤 兽 族 荣 耀 来 和 敌 人 拼 搏。 
-		 治 疗 %d 生 命 值 并 移 除 %d 个 负 面 状 态。 
-		 该 技 能 能 在 冰 冻 状 态 下 使 用 ， 但 如 果 未 能 除 去 冰 冻 状 态 ， 将 无 法 获 得 治 疗 。
-		 受 体 质 影 响， 治 疗 量 有 额 外 加 成。]]):
-		format(t.heal(self, t), t.remcount(self,t))
+		return ([[呼 唤 兽 族 荣 耀 来 和 敌 人 拼 搏 。 
+		 移 除 %d 个 负 面 状 态 并 治 疗 %d 生 命 值 。
+		 受 意 志 影 响， 治 疗 量 有 额 外 加 成。]]):
+		format(t.remcount(self,t), t.heal(self, t))
 	end,
 }
 

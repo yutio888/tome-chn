@@ -537,6 +537,7 @@ function _M:getTextualDesc(compare_with, use_actor)
 	elseif self.unique then
 		if self.legendary then desc:add({"color", "FF4000"},"[Legendary]", {"color", "LAST"}, true)
 		elseif self.godslayer then desc:add({"color", "AAD500"},"[Godslayer]", {"color", "LAST"}, true)
+		elseif self.randart then desc:add({"color", "FF7700"},"[Random Unique]", {"color", "LAST"}, true)
 		else desc:add({"color", "FFD700"},"[Unique]", {"color", "LAST"}, true)
 		end
 	end

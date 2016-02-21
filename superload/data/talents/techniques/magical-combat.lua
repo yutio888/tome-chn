@@ -60,10 +60,10 @@ registerTalentTranslation{
 	id = "T_ARCANE_DESTRUCTION",
 	name = "奥术毁灭",
 	info = function(self, t)
-		return ([[通 过 你 的 武 器 来 传 送 原 始 的 魔 法 伤 害。 增 加 %d 点 物 理 强 度。 
+		return ([[通 过 你 的 武 器 来 传 送 原 始 的 魔 法 伤 害。 增 加 相 当 于 你 %0.2f 魔 法 属 性 值 的 物 理 强 度 （ 当 前 值 ： %d ） 。
 		每 当 你 近 战 攻 击 暴 击 时， 你 会 释 放 一 个 半 径 为 %d 码 的 火 属 性、 电 属 性 或 奥 术 属 性 的 魔 法 球， 造 成 %0.2f 的 伤 害。 
 		受 法 术 强 度 影 响， 增 益 按 比 例 加 成。]]):
-		format(self:combatSpellpower() * t.getSPMult(self, t), self:getTalentRadius(t), self:combatSpellpower() * 2)
+		format(t.getSPMult(self, t), self:getMag() * t.getSPMult(self, t), self:getTalentRadius(t), self:combatSpellpower() * 2)
 	end,
 }
 

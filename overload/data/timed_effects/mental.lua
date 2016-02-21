@@ -2268,6 +2268,24 @@ newEffect{
 }
 
 newEffect{
+	name = "ORC_TRIUMPH", image = "talents/skirmisher.png",
+	desc = "Orcish Triumph",
+	long_desc = function(self, eff) return ("你 的 胜 利 增 加 了 你 %d%%  全 体 伤 害 抗 性 。"):format(eff.resists) end,
+	type = "mental",
+	subtype = { frenzy=true },
+	status = "beneficial",
+	parameters = { resists=10 },
+	on_gain = function(self, err) return "#Target# roars triumphantly." end, -- Too spammy?
+	on_lose = function(self, err) return "#Target# is no longer inspired." end,
+	activate = function(self, eff)
+		eff.pid = self:addTemporaryValue("resists", {all=eff.resists})
+	end,
+	deactivate = function(self, eff)
+		self:removeTemporaryValue("resists", eff.pid)
+	end,
+}
+
+newEffect{
 	name = "INTIMIDATED",
 	desc = "Intimidated",
 	long_desc = function(self, eff) return ("目 标 的 斗 志 受 到 削 弱， 降 低 攻 击 强 度、 精 神 强 度 和 法 术 强 度 %d 。"):format(eff.power) end,

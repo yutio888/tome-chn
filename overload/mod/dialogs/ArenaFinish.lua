@@ -150,6 +150,16 @@ function _M:use(item)
 		game:registerDialog(require("mod.dialogs.CharacterSheet").new(self.actor))
 	elseif act == "log" then
 		game:registerDialog(require("mod.dialogs.ShowChatLog").new("Message Log", 0.6, game.uiset.logdisplay, profile.chat))
+	elseif act == "lichform" then
+		local t = self.actor:getTalentFromId(self.actor.T_LICHFORM)
+
+		self:cleanActor(self.actor)
+		self:resurrectBasic(self.actor)
+		self:restoreResources(self.actor)
+		world:gainAchievement("LICHFORM", actor)
+		t.becomeLich(self.actor, t)
+		self.actor:updateModdableTile()
+		--game:saveGame()
 	end
 end
 
@@ -164,4 +174,9 @@ function _M:generateList()
 	list[#list+1] = {name="回到主菜单", action="exit", subaction="none"}
 
 	self.list = list
+	if self.actor:isTalentActive(self.actor.T_LICHFORM) then
+		self:use{action="lichform"}
+		self.dont_show = true
+		return
+	end
 end

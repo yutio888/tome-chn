@@ -929,6 +929,22 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
+	log = "#Target# roars triumphantly.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s扬起怒吼。"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# is no longer inspired.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s冷静了下来。"):format(a)
+	end,
+}
+
+logCHN:newLog{
 	log = "#Target# has regained its confidence.",
 	fct = function(a)
 		a = npcCHN:getName(a)

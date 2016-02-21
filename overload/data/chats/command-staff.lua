@@ -133,7 +133,7 @@ local flavor_list = table.keys(flavors)
 table.sort(flavor_list)
 
 local aspect_answers = {}
-local aspect_chat_id = not is_sentient() and "welcome" or "which-aspect"
+local aspect_chat_id = not is_sentient() and "welcome" or "which_aspect"
 for _, flavor in ipairs(flavor_list) do
 	local damtypes = o:getStaffFlavor(flavor)
 	local answers = {}

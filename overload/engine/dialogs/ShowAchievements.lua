@@ -71,9 +71,10 @@ function _M:init(title, player)
 
 	self.c_list = ListColumns.new{width=math.floor(self.iw * 0.6 - 10), height=self.ih - 10 - self.c_self.h, floating_headers = true, scrollbar=true, sortable=true, columns={
 		{name="", width={24,"fixed"}, display_prop="--", direct_draw=direct_draw},
-		{name="成就", width=60, display_prop="name", sort="name"},
-		{name="完成时间", width=20, display_prop="when", sort="when"},
-		{name="完成角色", width=20, display_prop="who", sort="who"},
+		{name="成就", width=50, display_prop="name", sort="name"},
+		{name="分类", width=20, display_prop="category", sort="category"},
+		{name="完成时间", width=15, display_prop="when", sort="when"},
+		{name="完成角色", width=15, display_prop="who", sort="who"},
 	}, list=self.list, fct=function(item) end, select=function(item, sel) self:select(item) end}
 
 	local sep = Separator.new{dir="horizontal", size=self.ih - 10 - self.c_self.h}
@@ -174,13 +175,13 @@ function _M:generateList(kind)
 		if not data.notdone or a.show then
 			local name = achievementCHN:getName(a.name)
 			if a.show == "full" or not data.notdone then
-				list[#list+1] = { name=name, color=color, desc=a.desc, when=data.when, who=data.who, order=a.order, id=id, tex=tex, a=a }
+				list[#list+1] = { name=a.name, color=color, desc=a.desc, category=a.category or "--", when=data.when, who=data.who, order=a.order, id=id, tex=tex, a=a }
 			elseif a.show == "none" then
-				list[#list+1] = { name="???", color=color, desc="-- 未知 --", when=data.when, who=data.who, order=a.order, id=id, tex=tex, a=a }
+				list[#list+1] = { name="???", color=color, desc="-- Unknown --", category=a.category or "--", when=data.when, who=data.who, order=a.order, id=id, tex=tex, a=a }
 			elseif a.show == "name" then
-				list[#list+1] = { name=name, color=color, desc="-- 未知 --", when=data.when, who=data.who, order=a.order, id=id, tex=tex, a=a }
+				list[#list+1] = { name=a.name, color=color, desc="-- Unknown --", category=a.category or "--", when=data.when, who=data.who, order=a.order, id=id, tex=tex, a=a }
 			else
-				list[#list+1] = { name=name, color=color, desc=a.desc, when=data.when, who=data.who, order=a.order, id=id, tex=tex, a=a }
+				list[#list+1] = { name=a.name, color=color, desc=a.desc, category=a.category or "--", when=data.when, who=data.who, order=a.order, id=id, tex=tex, a=a }
 			end
 			i = i + 1
 		end

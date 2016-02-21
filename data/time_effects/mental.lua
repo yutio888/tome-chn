@@ -503,6 +503,14 @@ timeEffectCHN:newEffect{
 }
 
 timeEffectCHN:newEffect{
+	id = "ORC_TRIUMPH",
+	enName = "Orcish Triumph",
+	chName = "兽人凯旋",
+	type = "精神",
+	subtype = "狂热",
+}
+
+timeEffectCHN:newEffect{
 	id = "INTIMIDATED",
 	enName = "Intimidated",
 	chName = "威吓",

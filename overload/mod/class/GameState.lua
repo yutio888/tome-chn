@@ -508,18 +508,20 @@ function _M:generateRandart(data)
 	local name
 	local namescheme = data.namescheme or ((ngt ~= ngd) and rng.range(1, 4) or rng.range(1, 3))
 	if namescheme == 1 then
-		name = " '"..ngt:generate().."'"
+		name = "%s '"..ngt:generate().."'"
 	elseif namescheme == 2 then
-		name = ngd:generate().." 的 "..ngt:generate()
+		name = ngd:generate().." 的 %s"
 	elseif namescheme == 3 then
 		name = ngt:generate()
 	elseif namescheme == 4 then
 		name = ngd:generate().." 之 "..ngt:generate()
 	end
-	o.define_as = name:upper():gsub("[^A-Z]", "_")
-	o.unided_name = rng.table(unided_names).." "..(o.unided_name or o.name)
-	o.unique = name
-	o.name = name
+	o.unided_namescheme = rng.table(unided_names).." %s"
+	o.unided_name = o.unided_namescheme:format(o.unided_name or o.name)
+	o.namescheme = name
+	o.define_as = name:format(o.name):upper():gsub("[^A-Z]", "_")
+	o.unique = name:format(o.name)
+	o.name = name:format(o.name)
 	o.randart = true
 	o.no_unique_lore = true
 	o.rarity = rng.range(200, 290)

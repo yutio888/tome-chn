@@ -500,9 +500,9 @@ registerArtifactTranslation{
 
 registerArtifactTranslation{
 	originName = "Spellblaze Echoes",
-	name = "战争回响",
+	name = "魔法大爆炸回响",
 	unided_name = "深黑色的项链",
-	desc = "当你戴上这个古老的项链，似乎耳边仍回荡着第一次大战的战鼓声。",
+	desc = "当你戴上这个古老的项链，似乎耳边仍回荡着魔法大爆炸的回响。",
 	["use_power.name"] = function(self, who)
 		return ("释放毁灭哀嚎，摧毁地形，造成 %0.2f 物理伤害 (基于魔法) 伤害半径 %d"):format(engine.interface.ActorTalents.damDesc(who, engine.DamageType.PHYSICAL, self.use_power.damage(who)), self.use_power.radius)
 	end,
@@ -550,7 +550,7 @@ registerArtifactTranslation{
 
 registerArtifactTranslation{
 	originName = "Dúathedlen Heart",
-	name = "多塞德兰之心",
+	name = "多瑟顿之心",
 	unided_name = "一个暗红色的肉块",
 	desc = "这颗暗红色的心脏虽然离开了它的主人，但仍在跳动着。它还会熄灭任何靠近它的光源。",
 }
@@ -559,7 +559,8 @@ registerArtifactTranslation{
 	originName = "Guidance",
 	name = "指引者",
 	unided_name = "一颗散发着柔和光芒的水晶",
-	desc = "曾经属于魔法狩猎时期的检察官玛库斯·丹。这个拳头大小的石英晶体不断散发出柔和的白光。而且据说对冥想有相当大的帮助，不但可以帮助集中精神、身体，还可以保护持有者的灵魂，并且保护他们免遭邪恶魔法的侵蚀。",
+	desc = [[曾经属于魔法狩猎时期的检察官玛库斯·丹。这个拳头大小的石英晶体不断散发出柔和的白光。而且据说对冥想有相当大的帮助，不但可以帮助集中精神、身体，还可以保护持有者的灵魂，并且保护他们免遭邪恶魔法的侵蚀。
+似乎只有拥有反魔力量的人才能发挥它的全部潜能。]],
 }
 
 registerArtifactTranslation{
@@ -609,7 +610,7 @@ registerArtifactTranslation{
 	originName = "Unerring Scalpel",
 	name = "精准的解剖刀",
 	unided_name = "锋利的长解剖刀",
-	desc = "这把解剖刀曾经被可怕的男巫卡·普尔在尘埃纪刚开始学习通灵术时使用。许多人，生物和尸体都成为了他那可怕实验的牺牲品。",
+	desc = "这把解剖刀曾经被可怕的男巫卡·普尔在黄昏纪刚开始学习通灵术时使用。许多人，生物和尸体都成为了他那可怕实验的牺牲品。",
 }
 
 registerArtifactTranslation{
@@ -744,7 +745,7 @@ registerArtifactTranslation{
 	originName = "Crown of Command",
 	name = "领袖的皇冠",
 	unided_name = "无瑕的纯银王冠",
-	desc = "半身人国王洛帕曾佩戴这顶王冠，他曾于尘埃纪统治着纳格尔大陆。那是黑暗的年代，国王通过最残暴的手段执行他的命令和法律。任何违背他思想的人都被严厉的惩罚，任何反对他的人都被无情的镇压，这些人大部分都无声无息的消失了——被关进了国王那不计其数的监狱里。所有人都必须表示忠诚或者付出昂贵的代价。他在没有子嗣的情况下死去，皇冠失踪的同时他的国家也陷入了混乱。",
+	desc = "半身人国王洛帕曾佩戴这顶王冠，他曾于黄昏纪统治着纳格尔大陆。那是黑暗的年代，国王通过最残暴的手段执行他的命令和法律。任何违背他思想的人都被严厉的惩罚，任何反对他的人都被无情的镇压，这些人大部分都无声无息的消失了——被关进了国王那不计其数的监狱里。所有人都必须表示忠诚或者付出昂贵的代价。他在没有子嗣的情况下死去，皇冠失踪的同时他的国家也陷入了混乱。",
 }
 
 registerArtifactTranslation{
@@ -816,7 +817,7 @@ registerArtifactTranslation{
 	originName = "Firewalker",
 	name = "烈焰行者",
 	unided_name = "燃烧的长袍",
-	desc = "这件炙热的长袍曾属于疯狂的烈焰术士哈克特，他在尘埃纪威胁过很多城镇，正当人们努力从战争中恢复元气的时候，他竟然对城镇烧杀抢掠。最终他被伊格兰斯捕获了。伊格兰斯割下他的舌头，砍掉他的脑袋，并把他的身体撕成小块。他的脑袋被封在一个大冰块里，并且在附近城镇的居民欢庆中进行了游街。只有这件长袍从哈克特的烈焰中保留了下来。",
+	desc = "这件炙热的长袍曾属于疯狂的烈焰术士哈克特，他在黄昏纪威胁过很多城镇，正当人们努力从战争中恢复元气的时候，他竟然对城镇烧杀抢掠。最终他被伊格兰斯捕获了。伊格兰斯割下他的舌头，砍掉他的脑袋，并把他的身体撕成小块。他的脑袋被封在一个大冰块里，并且在附近城镇的居民欢庆中进行了游街。只有这件长袍从哈克特的烈焰中保留了下来。",
 }
 
 registerArtifactTranslation{
@@ -947,7 +948,7 @@ registerArtifactTranslation{
 	originName = "Plate Armor of the King",
 	name = "国王的板甲",
 	unided_name = "隐隐放光的沃瑞钽板甲",
-	desc = "精细描绘着国王为最后的希望浴血奋战的影像。即便是彻头彻尾的恶棍看到它，心底也会充满深深的绝望。",
+	desc = "精细描绘着国王图库纳为最后的希望浴血奋战的影像。即便是彻头彻尾的恶棍看到它，心底也会充满深深的绝望。",
 }
 
 registerArtifactTranslation{
@@ -975,7 +976,7 @@ registerArtifactTranslation{
 	originName = "Razorblade, the Cursed Waraxe",
 	name = "剃刀·诅咒战斧",
 	unided_name = "剃刀战斧",
-	desc = "这把强力的斧头可以像剑一样劈开护甲，还能招架钝器的打击。据说持有者会慢慢变得疯狂。这个，不管怎样，从来没有被证实过——没有任何持有者能活到揭开真相。",
+	desc = "这把强力的斧头可以像剑一样劈开护甲，却能造成如同钝器一般的重击。据说持有者会慢慢变得疯狂。这个，不管怎样，从来没有被证实过——没有任何持有者能活到揭开真相。",
 }
 
 registerArtifactTranslation{
@@ -1186,7 +1187,7 @@ registerArtifactTranslation{
 	originName = "Latafayn",
 	name = "焱剑·拉塔法",
 	unided_name = "附着火焰的巨剑",
-	desc = "这只沉重的、火焰覆盖的巨剑，是很久以前英雄贾斯丁·海风从某个强大的恶魔处得来。它炽热的火焰依旧可以焚烧万物。",
+	desc = "这只沉重的、火焰覆盖的巨剑，是黄昏纪中，英雄科斯汀·赫菲因偷来。这把剑曾经属于一个强大的恶魔，赤红之弗朗拉尔。它炽热的火焰怒吼着，仿佛可以焚烧万物。",
 	["use_power.name"] = function(self, who) 
 		return ("加速半径 %d 范围内的所有燃烧效果，范围 %d, 立刻造成 125%% 剩余燃烧伤害。")
 		:format(self.use_power.radius(self, who), self.use_power.range(self, who)) 
@@ -1624,7 +1625,7 @@ registerArtifactTranslation{
 	originName = "Fortune's Eye",
 	name = "幸运之眼",
 	unided_name = "金色望远镜",
-	desc = "这副精致的望远镜曾属于一位著名的冒险家和探险家贾斯丁·海风。有此宝在手，海风遍历了整个马基埃亚尔大陆，在他死前据说他搜集了许多宝贵的财富。他相信这副望远镜能带给他好运，有此物在手，无论面对任何险境，都能死里逃生。相传，他死于一名恶魔的报复，报复他偷走了恶魔私藏的一把剑。海风留给世间的最后遗言是——想要我的财富吗？那就去找吧，我的一切都在那里，大幕才刚刚拉开。",
+	desc = "这副精致的望远镜曾属于一位著名的冒险家和探险家科斯汀·赫菲因。有此宝在手，赫菲因遍历了整个马基埃亚尔大陆，在他死前据说他搜集了许多宝贵的财富。他相信这副望远镜能带给他好运，有此物在手，无论面对任何险境，都能死里逃生。相传，他死于一名恶魔的报复，报复他偷走了恶魔私藏的一把剑。海风留给世间的最后遗言是——想要我的财富吗？那就去找吧，我的一切都在那里，大幕才刚刚拉开。",
 }
 
 registerArtifactTranslation{
@@ -1652,14 +1653,14 @@ registerArtifactTranslation{
 	originName = "Pendant of the Sun and Moons",
 	name = "日月垂饰",
 	unided_name = "一个闪烁着金色灰色的垂饰",
-	desc = "一个小小的垂饰，雕刻着红月吞日的图案。传说其主人是太阳之墙的建立者之一。",
+	desc = "一个小小的垂饰，雕刻着红月吞日的图案。传说其主人是太阳堡垒的建立者之一。",
 }
 
 registerArtifactTranslation{
 	originName = "Unsetting Sun",
 	name = "永恒光辉",
 	unided_name = "闪耀着金色光芒的盾牌",
-	desc = "当冲锋队队长艾米奥·帕纳森为他的遇难船员们寻求庇护所的时候，他的盾牌反射着落日的光辉。他们在光辉照耀的地方休息宿营，之后太阳之墙在那里成立。在随后那些暗无天日的日子里，这面盾牌被人们当做美好未来希望的象征。",
+	desc = "当冲锋队队长艾米奥·帕纳森为他的遇难船员们寻求庇护所的时候，他的盾牌反射着落日的光辉。他们在光辉照耀的地方休息宿营，之后太阳堡垒在那里成立。在随后那些暗无天日的日子里，这面盾牌被人们当做美好未来希望的象征。",
 	set_desc = {dawn = "在黎明下闪耀光芒。" },
 }
 
@@ -2356,7 +2357,7 @@ registerArtifactTranslation{
 	originName = "Destala's Scales",
 	name = "德斯塔拉之鳞片",
 	unided_name = "绿色的龙鳞斗篷",
-	desc = "黄昏纪末年，一条不知名的毒龙威胁着乡村，冒险家贾斯丁·海风率领的小队杀死了这条恶龙，用它的鳞片制作了这件时尚的斗篷。",
+	desc = "黄昏纪末年，一条不知名的毒龙威胁着乡村，冒险家科斯汀·赫菲因率领的小队杀死了这条恶龙，用它的鳞片制作了这件时尚的斗篷。",
 }
 
 registerArtifactTranslation{

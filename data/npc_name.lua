@@ -1944,7 +1944,7 @@ npcDescCHN["Aluin the Fallen"] = "他曾经闪亮的盔甲如今又锈又钝且�
 
 --tutorial
 npcNameCHN["skeleton mage"] = "骷髅法师"
-npcDescCHN["skeleton mage"] = ""
+--npcDescCHN["skeleton mage"] = ""
 
 npcNameCHN["half-dead forest troll"] = "半死的森林巨魔"
 npcDescCHN["half-dead forest troll"] = "绿皮丑陋的生物，这只笨重的人形生物在盯着你并握紧了满是肉瘤的绿色拳头。他看起来受伤了。"
@@ -1957,7 +1957,7 @@ npcNameCHN["Nain the Guide"] = "指引者耐恩"
 npcDescCHN["Nain the Guide"] = "一名带着微笑留着扫把头的人类。"
 
 npcNameCHN["skeleton mage"] = "骷髅法师"
-npcDescCHN["skeleton mage"] = ""
+--npcDescCHN["skeleton mage"] = ""
 
 npcNameCHN["half-dead forest troll"] = "半死的森林巨魔"
 npcDescCHN["half-dead forest troll"] = "绿皮丑陋的生物，这只笨重的人形生物在盯着你并握紧了满是肉瘤的拳头。他看起来受伤了。"

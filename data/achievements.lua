@@ -179,3 +179,7 @@ achievementCHN["Demonic Party!"] = "恶魔狂欢！"
 achievementCHN["Hell has no fury like a demon scorned!"] = "地狱逃脱"
 achievementCHN["Once bitten, twice shy"] = "再一次的胜利"
 achievementCHN["The Old Ones"] = "古老神话"
+
+achievementCategoryCHN = {}
+achievementCategoryCHN["Maj'Eyal"] = "马基埃亚尔"
+achievementCategoryCHN["Ashes of Urh'Rok"] = "乌鲁洛克之烬"

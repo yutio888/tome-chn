@@ -9,6 +9,9 @@ local function talentstrans()
 
 	local loreC = require "data-chn123.lore"
 	loreC:loadDefinition("/data-chn123/lore/lore.lua")
+
+	local achievementC = require "data-chn123.achievements"
+	achievementC:loadDefinition("/data-chn123/achievements/achievements.lua")
 end
 class:bindHook("ToME:load", talentstrans)
 

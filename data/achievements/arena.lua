@@ -17,50 +17,50 @@
 -- Nicolas Casalini "DarkGod"
 -- darkgod@te4.org
 
-newAchievement{
+registerAchievementTranslation{
 	name = "The Arena",
-	show = "full",
+	chnName = "竞技场",
 	desc = [[开启竞技场模式。]],
 }
 
-newAchievement{
+registerAchievementTranslation{
 	name = "Arena Battler 20",
-	show = "full",
+	chnName = "竞技场20波",
 	desc = [[竞技场生存至第20轮。]],
 }
 
-newAchievement{
+registerAchievementTranslation{
 	name = "Arena Battler 50",
-	show = "full",
+	chnName = "竞技场50波",
 	desc = [[竞技场生存至第50轮。]],
 }
 
-newAchievement{
+registerAchievementTranslation{
 	name = "Almost Master of Arena",
-	show = "full", huge=true,
+	chnName = "接近竞技之王",
 	desc = [[在30波模式中成为新的竞技场之王。]],
 }
 
-newAchievement{
+registerAchievementTranslation{
 	name = "Master of Arena",
-	show = "full", huge=true,
+	chnName = "竞技之王",
 	desc = [[在60波模式中成为新的竞技场之王。]],
 }
 
-newAchievement{
+registerAchievementTranslation{
 	name = "XXX the Destroyer",
-	show = "full",
+	chnName = "毁灭者XXX",
 	desc = [[在竞技场中获得“毁灭者”称号。]],
 }
 
-newAchievement{
+registerAchievementTranslation{
 	name = "Grand Master",
-	show = "full",
+	chnName = "竞技大师",
 	desc = [[在竞技场中获得“竞技大师”称号。]],
 }
 
-newAchievement{
+registerAchievementTranslation{
 	name = "Ten at one blow",
-	show = "full",
+	chnName = "横扫千军",
 	desc = [[在竞技场中用一次攻击杀死10个或更多敌人。]],
 }

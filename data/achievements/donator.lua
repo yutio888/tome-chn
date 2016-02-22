@@ -17,28 +17,28 @@
 -- Nicolas Casalini "DarkGod"
 -- darkgod@te4.org
 
-newAchievement{
+registerAchievementTranslation{
 	name = "Bronze Donator", id = "BRONZE_DONATOR",
+	chnName = "黄铜捐赠者",
 	desc = [[为马基埃亚尔的传说捐赠不超过 5 欧元。]],
-	no_difficulty_duplicate = true, no_chat_broadcast = true,
 }
-newAchievement{
+registerAchievementTranslation{
 	name = "Silver Donator", id = "SILVER_DONATOR",
+	chnName = "白银捐赠者",
 	desc = [[为马基埃亚尔的传说捐赠至少 6 欧元。]],
-	no_difficulty_duplicate = true, no_chat_broadcast = true,
 }
-newAchievement{
+registerAchievementTranslation{
 	name = "Gold Donator", id = "GOLD_DONATOR",
+	chnName = "黄金捐赠者",
 	desc = [[为马基埃亚尔的传说捐赠至少 16 欧元。]],
-	no_difficulty_duplicate = true, no_chat_broadcast = true,
 }
-newAchievement{
+registerAchievementTranslation{
 	name = "Stralite Donator", id = "STRALITE_DONATOR",
+	chnName = "蓝锆石捐赠者",
 	desc = [[为马基埃亚尔的传说捐赠至少 31 欧元。]],
-	no_difficulty_duplicate = true, no_chat_broadcast = true,
 }
-newAchievement{
+registerAchievementTranslation{
 	name = "Voratun Donator", id = "VORATUN_DONATOR",
+	chnName = "沃瑞钽捐赠者",
 	desc = [[为马基埃亚尔的传说捐赠至少 60 欧元。]],
-	no_difficulty_duplicate = true, no_chat_broadcast = true,
 }

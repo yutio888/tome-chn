@@ -46,16 +46,18 @@ function _M:generateList(kind)
 			end
 		end
 		if not data.notdone or a.show then
-			local name = achievementCHN:getName(a.name)
-			local category = achievementCategoryCHN[a.category] or a.category
+			local ACHN = require "data-chn123.achievements"
+			local name = ACHN:getName(a.name)
+			local category = ACHN:getCategory(a.category)
+			local desc = ACHN:getDesc(a.name)
 			if a.show == "full" or not data.notdone then
-				list[#list+1] = { name=name, color=color, desc=a.desc, category=category or "--", when=data.when, who=data.who, order=a.order, id=id, tex=tex, a=a }
+				list[#list+1] = { name=name, color=color, desc=desc, category=category or "--", when=data.when, who=data.who, order=a.order, id=id, tex=tex, a=a }
 			elseif a.show == "none" then
 				list[#list+1] = { name="???", color=color, desc="-- 未知 --", category=category or "--", when=data.when, who=data.who, order=a.order, id=id, tex=tex, a=a }
 			elseif a.show == "name" then
 				list[#list+1] = { name=name, color=color, desc="-- 未知 --", category=category or "--", when=data.when, who=data.who, order=a.order, id=id, tex=tex, a=a }
 			else
-				list[#list+1] = { name=name, color=color, desc=a.desc, category=category or "--", when=data.when, who=data.who, order=a.order, id=id, tex=tex, a=a }
+				list[#list+1] = { name=name, color=color, desc=desc, category=category or "--", when=data.when, who=data.who, order=a.order, id=id, tex=tex, a=a }
 			end
 			i = i + 1
 		end

@@ -17,78 +17,80 @@
 -- Nicolas Casalini "DarkGod"
 -- darkgod@te4.org
 
-newAchievement{
+registerAchievementTranslation{
 	name = "Infinite x10",
-	show = "full",
+	hnName = "无尽10层",
 	desc = [[到达无尽地下城第10层。]],
 }
-newAchievement{
+registerAchievementTranslation{
 	name = "Infinite x20",
-	show = "full",
+	hnName = "无尽20层",
 	desc = [[到达无尽地下城第20层。]],
 }
-newAchievement{
+registerAchievementTranslation{
 	name = "Infinite x30",
-	show = "full",
+	hnName = "无尽30层",
 	desc = [[到达无尽地下城第30层。]],
 }
-newAchievement{
+registerAchievementTranslation{
 	name = "Infinite x40",
-	show = "full",
+	hnName = "无尽40层",
 	desc = [[到达无尽地下城第40层。]],
 }
-newAchievement{
+registerAchievementTranslation{
 	name = "Infinite x50",
-	show = "full",
+	hnName = "无尽50层",
 	desc = [[到达无尽地下城第50层。]],
 }
-newAchievement{
+registerAchievementTranslation{
 	name = "Infinite x60",
+	hnName = "无尽60层",
 	show = "full",
 	desc = [[到达无尽地下城第60层。]],
 }
-newAchievement{
+registerAchievementTranslation{
 	name = "Infinite x70",
+	hnName = "无尽70层",
 	show = "full",
 	desc = [[到达无尽地下城第70层。]],
 }
-newAchievement{
+registerAchievementTranslation{
 	name = "Infinite x80",
-	show = "full",
+	hnName = "无尽80层",
 	desc = [[到达无尽地下城第80层。]],
 }
-newAchievement{
+registerAchievementTranslation{
 	name = "Infinite x90",
-	show = "full",
+	hnName = "无尽90层",
 	desc = [[到达无尽地下城第90层。]],
 }
-newAchievement{
+registerAchievementTranslation{
 	name = "Infinite x100",
-	show = "full", huge=true,
+	chnName = "无尽100层",
 	desc = [[到达无尽地下城第100层。]],
 }
-newAchievement{
+registerAchievementTranslation{
 	name = "Infinite x150",
-	show = "full", huge=true,
+	chnName = "无尽150层",
 	desc = [[到达无尽地下城第150层。]],
 }
-newAchievement{
+registerAchievementTranslation{
 	name = "Infinite x200",
-	show = "full", huge=true,
+	chnName = "无尽200层",
 	desc = [[到达无尽地下城第200层。]],
 }
-newAchievement{
+registerAchievementTranslation{
 	name = "Infinite x300",
-	show = "full", huge=true,
+	chnName = "无尽300层",
 	desc = [[到达无尽地下城第300层。]],
 }
-newAchievement{
+registerAchievementTranslation{
 	name = "Infinite x400",
-	show = "full", huge=true,
+	chnName = "无尽400层",
 	desc = [[到达无尽地下城第400层。]],
 }
-newAchievement{
+registerAchievementTranslation{
 	name = "Infinite x500",
-	show = "full", huge=true,
+	chnName = "无尽500层",
 	desc = [[到达无尽地下城第500层。]],
 }

@@ -17,92 +17,70 @@
 -- Nicolas Casalini "DarkGod"
 -- darkgod@te4.org
 
-newAchievement{
+registerAchievementTranslation{
 	name = "Level 10",
-	show = "full",
+	chnName = "10级",
 	desc = [[角色达到10级。]],
 }
-newAchievement{
+registerAchievementTranslation{
 	name = "Level 20",
-	show = "full",
+	chnName = "20级",
 	desc = [[角色达到20级。]],
 }
-newAchievement{
+registerAchievementTranslation{
 	name = "Level 30",
-	show = "full",
+	chnName = "30级",
 	desc = [[角色达到30级。]],
 }
-newAchievement{
+registerAchievementTranslation{
 	name = "Level 40",
-	show = "full", huge=true,
+	chnName = "40级",
 	desc = [[角色达到40级。]],
 }
-newAchievement{
+registerAchievementTranslation{
 	name = "Level 50",
-	show = "full", huge=true,
+	chnName = "50级",
 	desc = [[角色达到50级。]],
 }
 
-newAchievement{
+registerAchievementTranslation{
 	name = "Unstoppable",
-	show = "full",
+	chnName = "无人可挡",
 	desc = [[使用生命之血复活。]],
 }
 
-newAchievement{
+registerAchievementTranslation{
 	name = "Utterly Destroyed", id = "EIDOLON_DEATH",
-	show = "name",
+	chnName = "完全毁灭",
 	desc = [[在死神幻象位面死亡。]],
 }
 
-newAchievement{
+registerAchievementTranslation{
 	name = "Fool of a Took!", id = "HALFLING_SUICIDE",
-	show = "name",
+	chnName = "蠢货！",
 	desc = [[选择半身人种族并杀死自己。]],
-	can_gain = function(self, who)
-		if who.descriptor and who.descriptor.race == "Halfling" then return true end
-	end
 }
 
-newAchievement{
+registerAchievementTranslation{
 	name = "Emancipation", id = "EMANCIPATION",
-	image = "npc/alchemist_golem.png",
-	show = "name", huge=true,
+	chnName = "自由了！",
 	desc = [[当傀儡杀死BOSS时，炼金术师已死亡。]],
-	mode = "player",
-	can_gain = function(self, who, target)
-		local p = game.party:findMember{main=true}
-		if target.rank >= 3.5 and p.dead and p.descriptor.subclass == "Alchemist" and p.alchemy_golem and game.level:hasEntity(p.alchemy_golem) and not p.alchemy_golem.dead then
-			return true
-		end
-	end,
-	on_gain = function(_, src, personal)
---		game:setAllowedBuild("construct")
---		game:setAllowedBuild("construct_runic_golem", true)
-	end,
 }
 
-newAchievement{
+registerAchievementTranslation{
 	name = "Take you with me", id = "BOSS_REVENGE",
-	show = "full", huge=true,
+	chnName = "同归于尽",
 	desc = [[与BOSS同时死亡。]],
-	mode = "player",
-	can_gain = function(self, who, target)
-		local p = game.party:findMember{main=true}
-		if target.rank >= 3.5 and p.dead then
-			return true
-		end
-	end,
 }
 
-newAchievement{
+registerAchievementTranslation{
 	name = "Look at me, I'm playing a roguelike!", id = "SELF_CENTERED",
-	show = "name",
+	chnName = "看！我正在玩Roguelike！",
 	desc = [[将自己的数据链接到聊天框。]],
 }
 
-newAchievement{
+registerAchievementTranslation{
 	name = "Fear me not!", id = "FEARSCAPE",
-	show = "full",
+	chnName = "恐惧无法挡我！",
 	desc = [[在恐惧长廊幸存下来。]],
 }

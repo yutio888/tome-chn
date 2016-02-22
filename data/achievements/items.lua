@@ -17,46 +17,26 @@
 -- Nicolas Casalini "DarkGod"
 -- darkgod@te4.org
 
-newAchievement{
+registerAchievementTranslation{
 	name = "Deus Ex Machina",
+	chnName = "上帝之佑",
 	desc = [[获得生命之血与四种特殊符文：原初纹身，野性生长纹身，反射符文，时空裂缝符文。]],
-	mode = "player",
-	can_gain = function(self, who, obj)
-		if obj:getName{force_id=true} == "Blood of Life" then self.blood = true end
-		if obj:getName{force_id=true}:toString():prefix("Primal Infusion") then self.primal = true end
-		if obj:getName{force_id=true}:toString():prefix("Infusion of Wild Growth") then self.wild = true end
-		if obj:getName{force_id=true}:toString():prefix("Rune of Reflection") then self.reflection = true end
-		if obj:getName{force_id=true}:toString():prefix("Rune of the Rift") then self.rift = true end
-		return self.blood and self.primal and self.wild and self.reflection and self.rift
-	end
 }
 
-newAchievement{
+registerAchievementTranslation{
 	name = "Treasure Hunter",
-	image = "object/money_large.png",
-	show = "name",
+	chnName = "宝藏猎人",
 	desc = [[积累1000金币。]],
-	can_gain = function(self, who)
-		return who.money >= 1000
-	end,
 }
 
-newAchievement{
+registerAchievementTranslation{
 	name = "Treasure Hoarder",
-	image = "object/money_large.png",
-	show = "name",
+	chnName = "藏金库",
 	desc = [[积累3000金币。]],
-	can_gain = function(self, who)
-		return who.money >= 3000
-	end,
 }
 
-newAchievement{ id = "DRAGON_GREED",
+registerAchievementTranslation{ id = "DRAGON_GREED",
 	name = "Dragon's Greed",
-	image = "object/money_large.png",
-	show = "name", huge=true,
+	chnName = "龙之贪婪",
 	desc = [[积累8000金币。]],
-	can_gain = function(self, who)
-		return who.money >= 8000
-	end,
 }

@@ -318,7 +318,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#LIGHT_GREEN#Personal New Achievement: %s!",
 	fct = function(a)
-		local key = achievementCHN:getName(a)
+		local key = require "data-chn123.achievements":getName(a)
 		return ("#LIGHT_GREEN#新的个人成就：%s！"):format(key)
 	end,
 }
@@ -326,7 +326,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#LIGHT_GREEN#New Achievement: %s!",
 	fct = function(a)
-		local key = achievementCHN:getName(a)
+		local key = require "data-chn123.achievements":getName(a)
 		return ("#LIGHT_GREEN#新成就：%s！"):format(key)
 	end,
 }
@@ -334,7 +334,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#GOLD#Personal New Achievement: %s!",
 	fct = function(a)
-		local key = achievementCHN:getName(a)
+		local key = require "data-chn123.achievements":getName(a)
 		return ("#GOLD#新的个人成就：%s！"):format(key)
 	end,
 }
@@ -342,7 +342,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#GOLD#New Achievement: %s!",
 	fct = function(a)
-		local key = achievementCHN:getName(a)
+		local key = require "data-chn123.achievements":getName(a)
 		return ("#GOLD#新成就：%s！"):format(key)
 	end,
 }

@@ -17,79 +17,79 @@
 -- Nicolas Casalini "DarkGod"
 -- darkgod@te4.org
 
-newAchievement{
+registerAchievementTranslation{
 	name = "The sky is falling!", id = "EVENT_METEOR",
-	show = "name",
+	chnName = "天塌了！",
 	desc = [[看到一块巨大的陨石从天而降。]],
 }
 
-newAchievement{
+registerAchievementTranslation{
 	name = "Demonic Invasion", id = "EVENT_FEARSCAPE",
-	show = "name",
+	chnName = "恶魔入侵",
 	desc = [[关闭传送门来阻止恶魔入侵。]],
 }
 
-newAchievement{
+registerAchievementTranslation{
 	name = "Invasion from the Depths", id = "EVENT_NAGA",
-	show = "name",
+	chnName = "海底入侵",
 	desc = [[关闭传送门来阻止娜迦入侵。]],
 }
 
-newAchievement{
+registerAchievementTranslation{
 	name = "The Restless Dead", id = "EVENT_OLDBATTLEFIELD",
-	show = "name",
+	chnName = "永不安息",
 	desc = [[踏入古战场并最终生还。]],
 }
 
-newAchievement{
+registerAchievementTranslation{
 	name = "The Rat Lich", id = "EVENT_RATLICH",
-	show = "name", huge=true,
+	chnName = "巫妖鼠",
 	desc = [[杀死可怕的巫妖鼠。]],
 }
 
-newAchievement{
+registerAchievementTranslation{
 	name = "Shasshhiy'Kaish", id = "EVENT_CULTISTS",
-	show = "name",
+	chnName = "莎西·凯希",
 	desc = [[在莎西·凯希成长到非常强大时杀死她。]],
 }
 
-newAchievement{
+registerAchievementTranslation{
 	name = "Bringer of Doom", id = "EVENT_PEDESTALS",
-	show = "name",
+	chnName = "厄运行者",
 	desc = [[杀死一名厄运行者。]],
 }
 
-newAchievement{
+registerAchievementTranslation{
 	name = "A living one!", id = "CALDIZAR",
-	show = "name", huge=true,
+	chnName = "一只活着的夏图尔人！",
 	desc = [[传送进凯尔帝勒的堡垒，群星中的虚空地带。]],
 }
 
-newAchievement{
+registerAchievementTranslation{
 	name = "Slimefest", id = "SLUDGENEST100",
-	show = "full",
+	chnName = "淤泥巢穴",
 	desc = [[淤泥巢穴里有超过100个墙变成了敌对生物。]],
 }
 
-newAchievement{
+registerAchievementTranslation{
 	name = "Slime killer party", id = "SLUDGENEST200",
-	show = "full", huge=true,
+	chnName = "史莱姆杀手聚会",
 	desc = [[淤泥巢穴里有超过200个墙变成了敌对生物。]],
 }
 
-newAchievement{
+registerAchievementTranslation{
 	name = "Mad slime dash", id = "SLUDGENEST300",
-	show = "full", huge=true,
+	chnName = "别在意这股史莱姆味～",
 	desc = [[淤泥巢穴里有超过300个墙变成了敌对生物。]],
 }
 
-newAchievement{
+registerAchievementTranslation{
 	name = "Don't mind the slimy smell", id = "SLUDGENEST400",
-	show = "full", huge=true,
+	chnName = "史莱姆大军",
 	desc = [[淤泥巢穴里有超过400个墙变成了敌对生物。]],
 }
 
-newAchievement{
+registerAchievementTranslation{
 	name = "In the company of slimes", id = "SLUDGENEST500",
 	show = "full", huge=true,
 	desc = [[淤泥巢穴里有超过500个墙变成了敌对生物。]],

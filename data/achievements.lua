@@ -177,7 +177,7 @@ achievementCHN["Glory to the Fearscape"] = "恐惧长廊之荣耀"
 achievementCHN["Well Seeded"] = "种子培育专家"
 achievementCHN["Demonic Party!"] = "恶魔狂欢！"
 achievementCHN["Hell has no fury like a demon scorned!"] = "地狱逃脱"
-achievementCHN["Once bitten, twice shy"] = "再一次的胜利"
+achievementCHN["Once bitten, twice shy"] = "一朝被蛇咬，十年怕井绳"
 achievementCHN["The Old Ones"] = "古老神话"
 
 achievementCategoryCHN = {}

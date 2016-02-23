@@ -36,7 +36,8 @@ function _M:init(title, a)
 	local c_image = Image.new{file=a.image or "trophy_gold.png", width=128, height=128}
 	local color = a.huge and "#GOLD#" or "#LIGHT_GREEN#"
 	local chnname = ACHN:getName(a.name)
-	local c_desc = Textzone.new{width=500, auto_height=true, text=color..chnname.."#LAST#\n"..ACHN:getDesc(a.name), font={chn123_tome_font(), 26}}
+	print("[Achievement]", title, ", ", chnname)
+	local c_desc = Textzone.new{width=500, auto_height=true, text=color..chnname.."#LAST#\n"..ACHN:getDesc(a.name, a.desc), font={chn123_tome_font(), 26}}
 	c_desc:setTextShadow(1)
 	c_desc:setShadowShader(Shader.default.textoutline and Shader.default.textoutline.shad, 1.2)
 	self:setTitleShadowShader(Shader.default.textoutline and Shader.default.textoutline.shad, 1.5)

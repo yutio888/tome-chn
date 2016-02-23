@@ -168,11 +168,6 @@ registerAchievementTranslation{
 
 registerAchievementTranslation{
 	name = "I meant to do that...", id = "AVOID_DEATH",
+	chnName = "我说…",
 	desc = [[使用技能躲避50次死亡]],
-	mode = "player",
-	can_gain = function(self, who)
-		self.nb = (self.nb or 0) + 1
-		if self.nb >= 50 then return true end
-	end,
-	track = function(self) return tstring{tostring(self.nb or 0)," / 50"} end,
 }

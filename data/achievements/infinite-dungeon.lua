@@ -19,49 +19,49 @@
 
 registerAchievementTranslation{
 	name = "Infinite x10",
-	hnName = "无尽10层",
+	chnName = "无尽10层",
 	desc = [[到达无尽地下城第10层。]],
 }
 registerAchievementTranslation{
 	name = "Infinite x20",
-	hnName = "无尽20层",
+	chnName = "无尽20层",
 	desc = [[到达无尽地下城第20层。]],
 }
 registerAchievementTranslation{
 	name = "Infinite x30",
-	hnName = "无尽30层",
+	chnName = "无尽30层",
 	desc = [[到达无尽地下城第30层。]],
 }
 registerAchievementTranslation{
 	name = "Infinite x40",
-	hnName = "无尽40层",
+	chnName = "无尽40层",
 	desc = [[到达无尽地下城第40层。]],
 }
 registerAchievementTranslation{
 	name = "Infinite x50",
-	hnName = "无尽50层",
+	chnName = "无尽50层",
 	desc = [[到达无尽地下城第50层。]],
 }
 registerAchievementTranslation{
 	name = "Infinite x60",
-	hnName = "无尽60层",
+	chnName = "无尽60层",
 	show = "full",
 	desc = [[到达无尽地下城第60层。]],
 }
 registerAchievementTranslation{
 	name = "Infinite x70",
-	hnName = "无尽70层",
+	chnName = "无尽70层",
 	show = "full",
 	desc = [[到达无尽地下城第70层。]],
 }
 registerAchievementTranslation{
 	name = "Infinite x80",
-	hnName = "无尽80层",
+	chnName = "无尽80层",
 	desc = [[到达无尽地下城第80层。]],
 }
 registerAchievementTranslation{
 	name = "Infinite x90",
-	hnName = "无尽90层",
+	chnName = "无尽90层",
 	desc = [[到达无尽地下城第90层。]],
 }
 registerAchievementTranslation{

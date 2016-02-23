@@ -8,3 +8,5 @@ load("data-chn123/achievements/lore.lua")
 load("data-chn123/achievements/player.lua")
 load("data-chn123/achievements/quests.lua")
 load("data-chn123/achievements/talents.lua")
+
+load("data-chn123/achievements/demon.lua")

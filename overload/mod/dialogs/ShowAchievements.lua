@@ -49,7 +49,7 @@ function _M:generateList(kind)
 			local ACHN = require "data-chn123.achievements"
 			local name = ACHN:getName(a.name)
 			local category = ACHN:getCategory(a.category)
-			local desc = ACHN:getDesc(a.name)
+			local desc = ACHN:getDesc(a.name, a.desc)
 			if a.show == "full" or not data.notdone then
 				list[#list+1] = { name=name, color=color, desc=desc, category=category or "--", when=data.when, who=data.who, order=a.order, id=id, tex=tex, a=a }
 			elseif a.show == "none" then

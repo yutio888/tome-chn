@@ -79,18 +79,18 @@ registerAchievementTranslation{
 
 registerAchievementTranslation{
 	name = "Mad slime dash", id = "SLUDGENEST300",
-	chnName = "别在意这股史莱姆味～",
+	chnName = "疯狂史莱姆",
 	desc = [[淤泥巢穴里有超过300个墙变成了敌对生物。]],
 }
 
 registerAchievementTranslation{
 	name = "Don't mind the slimy smell", id = "SLUDGENEST400",
-	chnName = "史莱姆大军",
+	chnName = "别在意这股史莱姆味～",
 	desc = [[淤泥巢穴里有超过400个墙变成了敌对生物。]],
 }
 
 registerAchievementTranslation{
 	name = "In the company of slimes", id = "SLUDGENEST500",
-	show = "full", huge=true,
+	chnName = "史莱姆大军",
 	desc = [[淤泥巢穴里有超过500个墙变成了敌对生物。]],
 }

@@ -3,26 +3,35 @@ module(..., package.seeall, class.make)
 _M.name = {}
 _M.desc = {}
 
+function _M:getAchName(name)
+	local ls = 0
+	while name:find(" %(", ls) do
+		_, ls = name:find(" %(", ls)
+		print(ls)
+	end
+	return name:sub(1, ls - 2)
+end
+
 function _M:getName(name)
-	if name:find(" %(") then 
-		local f=name:find(" %(")
-		local achname = name:sub(1,f-1)
+	local name = name
+	if self.name[name] then name = self.name[name]
+	elseif name:find(" %(") then 
+		local achname = self:getAchName(name)
 		local chnname = achname
 		if self.name[achname] then chnname = self.name[achname] end
 		name = name:gsub(achname,chnname):gsub("Nightmare","噩梦难度"):gsub("Insane","疯狂难度"):gsub("Madness","绝望难度")
 						 :gsub("Adventure","冒险模式"):gsub("Roguelike","永久死亡模式"):gsub("Exploration","探索模式")
 						 :gsub("mode",""):gsub("difficulty","")
-	elseif self.name[name] then name = self.name[name]
 	end
 	return name
 end
 
-function _M:getDesc(name)
-	if name:find(" %(") then 
-		local f=name:find(" %(")
-		local achname = name:sub(1,f-1)
+function _M:getDesc(name, desc)
+	local desc = desc
+	if self.desc[name] then desc = self.desc[name]
+	elseif name:find(" %(") then 
+		local achname = self:getAchName(name)
 		if self.desc[achname] then chnname = self.desc[achname] end
-	elseif self.desc[name] then desc = self.desc[name]
 	end
 	return desc
 end

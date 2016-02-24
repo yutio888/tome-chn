@@ -5463,7 +5463,7 @@ function _M:getTalentFullDescription(t, addlevel, config, fake_mastery)
 	local function getCHNresourcename(name)
 			name=name:gsub("Stamina","体力"):gsub("Mana","法力"):gsub("Soul","灵魂"):gsub("Equilibrium","失衡")
 				 :gsub("Vim","活力"):gsub("Positive","正能量"):gsub("Negative","负能量"):gsub("Hate","仇恨")
-				 :gsub("Paradox","紊乱"):gsub("Psi","意念力"):gsub("Feedback","反馈")
+				 :gsub("Paradox","紊乱"):gsub("Psi","意念力"):gsub("Feedback","反馈"):gsub("Steam","蒸汽")
 			return name
 		end
 	if not config.ignore_ressources then
@@ -5514,14 +5514,14 @@ function _M:getTalentFullDescription(t, addlevel, config, fake_mastery)
 			local no_energy = util.getval(t.no_energy, self, t)
 			local display_speed = util.getval(t.display_speed, self, t)
 			if display_speed then
-				uspeed = display_speed:gsub("Double","双倍"):gsub("Archery","弓箭"):gsub("of a turn","回合")
+				uspeed = display_speed:gsub("Double","双倍"):gsub("Archery","弓箭"):gsub("of a turn","回合"):gsub("steamtech","蒸汽科技")
 			elseif no_energy and type(no_energy) == "boolean" and no_energy == true then
 				uspeed = "瞬间 (#LIGHT_GREEN#0%#LAST# 回合)"
 			else
 				local speed = self:getTalentSpeed(t)
 				local speed_type = self:getTalentSpeedType(t)
 				if type(speed_type) == "string" then
-					speed_type = speed_type:gsub("mind","精神"):gsub("spell","法术"):gsub("weapon","武器"):gsub("archery","弓箭")
+					speed_type = speed_type:gsub("mind","精神"):gsub("spell","法术"):gsub("weapon","武器"):gsub("archery","弓箭"):gsub("steamtech","蒸汽科技")
 																 :gsub("combat","战斗"):gsub("standard","标准"):gsub("movement","移动")
 																 :gsub("Double","双倍"):gsub("Archery","弓箭"):gsub("summon","召唤"):gsub("shield","盾牌")
 				else

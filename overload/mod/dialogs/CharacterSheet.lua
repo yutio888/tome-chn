@@ -594,7 +594,7 @@ function _M:drawDialog(kind, actor_to_compare)
 		local function getCHNresourcename(name)
 			name=name:gsub("Stamina","体力"):gsub("Mana","法力"):gsub("Soul","灵魂"):gsub("Equilibrium","失衡")
 				 :gsub("Vim","活力"):gsub("Positive","正能量"):gsub("Negative","负能量"):gsub("Hate","仇恨")
-				 :gsub("Paradox","紊乱"):gsub("Psi","意念力"):gsub("Feedback","反馈")
+				 :gsub("Paradox","紊乱"):gsub("Psi","意念力"):gsub("Feedback","反馈"):gsub("Steam","蒸汽")
 			return name
 		end
 		for res, res_def in ipairs(player.resources_def) do

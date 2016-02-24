@@ -686,7 +686,7 @@ function _M:generateDifficulties()
 		if self:isDescriptorAllowed(d, {permadeath=true, race=true, subrace=true, class=true, subclass=true}) then
 			local locked = self:getLock(d)
 			if locked == true then
-				list[#list+1] = { name = tstring{{"font", "italic"}, {"color", "GREY"}, "-- 需解锁 --", {"font", "normal"}}:toString(), id=d.name, locked=true, desc=d.locked_desc..locktext }
+				list[#list+1] = { name = tstring{{"font", "italic"}, {"color", "GREY"}, "-- 需解锁 --", {"font", "normal"}}:toString(), id=d.name, locked=true, desc=util.getval(d.locked_desc, self)..locktext }
 			elseif locked == false then
 				local desc = d.desc
 				if type(desc) == "table" then desc = table.concat(d.desc, "\n") end
@@ -759,7 +759,7 @@ function _M:generateRaces()
 						if birthCHN[tname] then 
 							desc = birthCHN[tname].locked_desc
 							tname = birthCHN[tname].chname end
-						nodes[#nodes+1] = { name = tstring{{"font", "italic"}, {"color", "GREY"}, "-- 需解锁 --", {"font", "normal"}}, id=sd.name, pid=d.name, locked=true, desc=desc..locktext }
+						nodes[#nodes+1] = { name = tstring{{"font", "italic"}, {"color", "GREY"}, "-- 需解锁 --", {"font", "normal"}}, id=sd.name, pid=d.name, locked=true, desc=util.getval(desc,self)..locktext }
 					elseif locked == false then
 						local desc = sd.desc
 						local tname = sd.name
@@ -779,7 +779,7 @@ function _M:generateRaces()
 
 			local locked = self:getLock(d)
 			if locked == true then
-				tree[#tree+1] = { name = tstring{{"font", "italic"}, {"color", "GREY"}, "-- 需解锁 --", {"font", "normal"}}, id=d.name, shown = oldtree[d.name], nodes = nodes, locked=true, desc=d.locked_desc..locktext }
+				tree[#tree+1] = { name = tstring{{"font", "italic"}, {"color", "GREY"}, "-- 需解锁 --", {"font", "normal"}}, id=d.name, shown = oldtree[d.name], nodes = nodes, locked=true, desc=util.getval(d.locked_desc,self)..locktext }
 			elseif locked == false then
 				local desc = d.desc
 				if type(desc) == "table" then desc = table.concat(d.desc, "\n") end
@@ -822,9 +822,9 @@ function _M:generateClasses()
 					if locked == true then
 						--DLC 汉化
 						local desc = sd.locked_desc
-						if birthCHN[sd.name] then desc = birthCHN[sd.name].locked_desc	end
+						--if birthCHN[sd.name] then desc = birthCHN[sd.name].locked_desc	end
 
-						nodes[#nodes+1] = { name = tstring{{"font", "italic"}, {"color", "GREY"}, "-- 需解锁 --", {"font", "normal"}}, id=sd.name, pid=d.name, locked=true, desc=desc..locktext }
+						nodes[#nodes+1] = { name = tstring{{"font", "italic"}, {"color", "GREY"}, "-- 需解锁 --", {"font", "normal"}}, id=sd.name, pid=d.name, locked=true, desc=util.getval(desc,self)..locktext }
 					elseif locked == false then
 						local old = self.descriptors_by_type.subclass
 						self.descriptors_by_type.subclass = nil
@@ -850,7 +850,7 @@ function _M:generateClasses()
 
 			local locked = self:getLock(d)
 			if locked == true then
-				tree[#tree+1] = { name = tstring{{"font", "italic"}, {"color", "GREY"}, "-- 需解锁 --", {"font", "normal"}}, id=d.name, shown=oldtree[d.name], nodes = nodes, locked=true, desc=d.locked_desc..locktext }
+				tree[#tree+1] = { name = tstring{{"font", "italic"}, {"color", "GREY"}, "-- 需解锁 --", {"font", "normal"}}, id=d.name, shown=oldtree[d.name], nodes = nodes, locked=true, desc=util.getval(d.locked_desc,self)..locktext }
 			elseif locked == false then
 				local desc = d.desc
 				if type(desc) == "table" then desc = table.concat(d.desc, "\n") end

@@ -436,7 +436,7 @@ function _M:getName(t)
 	if not self:isIdentified() and not t.force_id and self:getUnidentifiedName() then name = self:getUnidentifiedName() end
 	
 	local objCHN = objects:getObjects(self.name,self.desc,self.subtype,self.short_name,self:isIdentified(),self.rare,self.unique)	
-	name = objCHN.chName
+	name = (objCHN.chName == "") and self.name or objCHN.chName
 
 	-- To extend later
 	name = name:gsub("~", ""):gsub("&", "a"):gsub("#([^#]+)#", function(attr)
@@ -1629,7 +1629,7 @@ function _M:getTextualDesc(compare_with, use_actor)
 			desc:add("Allows you to speak and read the old Sher'Tul language.", true)
 		end
 
-		self:triggerHook{"Object:descWielder", compare_with=compare_with, compare_fields=compare_fields, compare_table_fields=compare_table_fields, desc=desc, w=w, field=field}
+		self:triggerHook{"Object:descWielder", compare_with=compare_with, compare_fields=compare_fields, compare_scaled=compare_scaled, compare_table_fields=compare_table_fields, desc=desc, w=w, field=field}
 
 		-- Do not show "general effect" if nothing to show
 --		if desc[#desc-2] == "General effects: " then table.remove(desc) table.remove(desc) table.remove(desc) table.remove(desc) end

@@ -1362,7 +1362,8 @@ function _M:logMessage(source, srcSeen, target, tgtSeen, style, ...)
 	if source.name and source.name=="spatial tether" then srcname ="时空锁链" end
 	srcname = logCHN:getName(srcname)
 	if source.name and source.name:find("maelstrom") then srcname ="灵能漩涡" end
-	if logTableCHN[style] then style = logTableCHN[style].fct() end
+	if logTableCHN[style] then style = logTableCHN[style].fct(...) end
+	
     
 	style = style:gsub("#source#", srcname)
 	style = style:gsub("#Source#", (Dstring or "")..srcname:capitalize())

@@ -127,6 +127,7 @@ t_talent_type_name = {}
 	t_talent_type_name["shalore"] = "永恒精灵"
 	t_talent_type_name["thalore"] = "自然精灵"
 	t_talent_type_name["halfling"] = "半身人"
+	t_talent_type_name["orc"] = "兽人"
 	t_talent_type_name["yeek"] = "夺心魔"
 	t_talent_type_name["skeleton"] = "骷髅人"
 	t_talent_type_name["ghoul"] = "食尸鬼"

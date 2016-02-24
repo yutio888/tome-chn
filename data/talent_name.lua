@@ -1,5 +1,7 @@
 t_talent_name = {}
---[[local Talents = require "engine.interface.ActorTalents"
+--[[
+已作废，仅供参考
+local Talents = require "engine.interface.ActorTalents"
 local damDesc = Talents.main_env.damDesc
 
 

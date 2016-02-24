@@ -34,7 +34,7 @@ registerTalentTranslation{
 	end,}
 
 registerTalentTranslation{
-	id = "T_STEAM POWER",
+	id = "T_STEAM_POWER",
 	name = "Steam Power",
 	info = function(self, t)
 		return ([[Increases the efficiency of all steamtech you operate, granting %d steampower.]])

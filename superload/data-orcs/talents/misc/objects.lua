@@ -35,7 +35,7 @@ Damage dealt by this talent is increased by half your critical multiplier, if do
 	end,}
 
 registerTalentTranslation{
-	id = "T_Rocket Smash",
+	id = "T_ROCKET_SMASH",
 	name = "Rocket Smash",
 	info = function(self, t)
 		return ([[Dash forward using rockets.

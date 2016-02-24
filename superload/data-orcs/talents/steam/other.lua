@@ -1,4 +1,4 @@
-
+local _M = loadPrevious(...)
 
 registerTalentTranslation{
 	id = "T_GLOBAL_MEDICAL_CD",
@@ -31,14 +31,14 @@ registerTalentTranslation{
 	info = function(self, t)
 		return ([[Allows you to create tinkers.]])
 	end,}
-
-registerTalentTranslation{
-	id = "T_WEAPON_AUTOMATON:_ONE_HANDED",
-	name = "Weapon Automaton: One Handed",
-	info = function(self, t)
-		return ([[Deploy a Weapon Automaton based on a selected one handed melee item.  The Automaton will wield the selected weapon and drop it when it times out or is destroyed.  Aside from the weapon selected, the Automaton will scale off Tinker talent levels, your own stats, and other things that will be described in this tooltip at some point.  
-		]]):format()
-	end,}
+--
+--registerTalentTranslation{
+--	id = "T_WEAPON_AUTOMATON_ONE_HANDED",
+--	name = "Weapon Automaton: One Handed",
+--	info = function(self, t)
+--		return ([[Deploy a Weapon Automaton based on a selected one handed melee item.  The Automaton will wield the selected weapon and drop it when it times out or is destroyed.  Aside from the weapon selected, the Automaton will scale off Tinker talent levels, your own stats, and other things that will be described in this tooltip at some point.  
+--		]]):format()
+--	end,}
 
 registerTalentTranslation{
 	id = "T_TINKER_HAND_CANNON",
@@ -173,8 +173,8 @@ registerTalentTranslation{
 	end,}
 
 registerTalentTranslation{
-	id = "T_Shocking Touch", short_name = "TINKER_SHOCKING_TOUCH",
-	name = "Shocking Touch", short_name = "TINKER_SHOCKING_TOUCH",
+	id = "T_TINKER_SHOCKING_TOUCH",
+	name = "Shocking Touch",
 	info = function(self, t)
 		return ([[Touch a creature to release a nasty electrical charge into them, doing %0.2f lightning damage.
 		If this tinker is above tier 1, the electricity can arc to another target up to 2 tiles away.
@@ -183,8 +183,8 @@ registerTalentTranslation{
 	end,}
 
 registerTalentTranslation{
-	id = "T_Flash Powder", short_name = "TINKER_FLASH_POWDER",
-	name = "Flash Powder", short_name = "TINKER_FLASH_POWDER",
+	id = "T_TINKER_FLASH_POWDER",
+	name = "Flash Powder",
 	info = function(self, t)
 		return ([[Throw a handful of dust that rapidly oxidises, releasing a blinding light.
 		Creatures in a cone of radius %d are blinded for %d turns.
@@ -192,8 +192,8 @@ registerTalentTranslation{
 	end,}
 
 registerTalentTranslation{
-	id = "T_Itching Powder", short_name = "TINKER_ITCHING_POWDER",
-	name = "Itching Powder", short_name = "TINKER_ITCHING_POWDER",
+	id = "T_TINKER_ITCHING_POWDER",
+	name = "Itching Powder",
 	info = function(self, t)
 		return ([[Throw a handful of dust that is very itchy to touch.
 		Creatures in a cone of radius %d are itchy for %d turns, causing them to fail talents %d%% of the time.
@@ -201,8 +201,8 @@ registerTalentTranslation{
 	end,}
 
 registerTalentTranslation{
-	id = "T_Thunder Grenade", short_name = "TINKER_THUNDER_GRENADE",
-	name = "Thunder Grenade", short_name = "TINKER_THUNDER_GRENADE",
+	id = "T_TINKER_THUNDER_GRENADE",
+	name = "Thunder Grenade",
 	info = function(self, t)
 		return ([[Throw a grenade at your foes, dealing %0.2f physical damage in radius %d.
 		Creatures hit will also be stunned for %d turns.
@@ -210,8 +210,8 @@ registerTalentTranslation{
 	end,}
 
 registerTalentTranslation{
-	id = "T_Project Saw", short_name = "TINKER_PROJECT_SAW",
-	name = "Project Saw", short_name = "TINKER_PROJECT_SAW",
+	id = "T_TINKER_PROJECT_SAW",
+	name = "Project Saw",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		return ([[You activate hidden springs to project a saw towards your foes.
@@ -220,8 +220,8 @@ registerTalentTranslation{
 	end,}
 
 registerTalentTranslation{
-	id = "T_Voltaic Bolt", short_name = "TINKER_VOLTAIC_BOLT",
-	name = "Voltaic Bolt", short_name = "TINKER_VOLTAIC_BOLT",
+	id = "T_TINKER_VOLTAIC_BOLT",
+	name = "Voltaic Bolt",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		return ([[Fires a bolt of lightning, doing %0.2f lightning damage.
@@ -230,8 +230,8 @@ registerTalentTranslation{
 	end,}
 
 registerTalentTranslation{
-	id = "T_Voltaic Sentry", short_name = "TINKER_VOLTAIC_SENTRY",
-	name = "Voltaic Sentry", short_name = "TINKER_VOLTAIC_SENTRY",
+	id = "T_TINKER_VOLTAIC_SENTRY",
+	name = "Voltaic Sentry",
 	info = function(self, t)
 		return ([[Place an electrically charged sentry device at a location.
 		Every turn it will fire a bolt of electricity at a nearby enemy.
@@ -243,8 +243,8 @@ registerTalentTranslation{
 	end,}
 
 registerTalentTranslation{
-	id = "T_Explosive Shell", short_name = "TINKER_EXPLOSIVE_SHELL",
-	name = "Explosive Shell", short_name = "TINKER_EXPLOSIVE_SHELL",
+	id = "T_TINKER_EXPLOSIVE_SHELL",
+	name = "Explosive Shell",
 	info = function(self, t)
 		return ([[You fire a special explosive shot with your steamgun(s) at a spot within range.
 		When each shot reaches its target, it does normal steamgun damage and explodes within radius %d, which does %0.2f physical damage.
@@ -253,18 +253,19 @@ registerTalentTranslation{
 	end,}
 
 registerTalentTranslation{
-	id = "T_Flare Shell", short_name = "TINKER_FLARE_SHELL",
-	name = "Flare Shell", short_name = "TINKER_FLARE_SHELL",
+	id = "T_TINKER_FLARE_SHELL",
+	name = "Flare Shell",
 	info = function(self, t)
 		return ([[You fire a special explosive shot with your steamgun(s) at a spot within range.
 		When each shot reaches its target, it does normal steamgun damage and explodes within radius %d, which lights up the area and blinds for %d turns.
 		This talent does not use ammo as it is the ammo.]])
 		:format(self:getTalentRadius(t), t.duration(self, t))
-	end,}
+	end,
+	}
 
 registerTalentTranslation{
-	id = "T_Incendiary Shell", short_name = "TINKER_INCENDIARY_SHELL",
-	name = "Incendiary Shell", short_name = "TINKER_INCENDIARY_SHELL",
+	id = "T_TINKER_INCENDIARY_SHELL",
+	name = "Incendiary Shell",
 	info = function(self, t)
 		return ([[You fire a special explosive shot with your steamgun(s) at a spot within range.
 		When each shot reaches its target, it does normal steamgun damage and releases %d explosive charges in a radius of 2.
@@ -274,8 +275,8 @@ registerTalentTranslation{
 	end,}
 
 registerTalentTranslation{
-	id = "T_Solid Shell", short_name = "TINKER_SOLID_SHELL",
-	name = "Solid Shell", short_name = "TINKER_SOLID_SHELL",
+	id = "T_TINKER_SOLID_SHELL",
+	name = "Solid Shell",
 	info = function(self, t)
 		return ([[You fire a special solid shot with your steamgun(s) at a target for %d%% physical weapon damage.
 		The weight of the shot will knock the target back %d tiles.
@@ -284,8 +285,8 @@ registerTalentTranslation{
 	end,}
 
 registerTalentTranslation{
-	id = "T_Impaler Shell", short_name = "TINKER_IMPALER_SHELL",
-	name = "Impaler Shell", short_name = "TINKER_IMPALER_SHELL",
+	id = "T_TINKER_IMPALER_SHELL",
+	name = "Impaler Shell", 
 	info = function(self, t)
 		return ([[You fire a special stake shot with your steamgun(s) at a target for %d%% physical weapon damage.
 		The weight of the shot will knock the target back 2 tiles and they will be pinned for %d turns.
@@ -294,8 +295,8 @@ registerTalentTranslation{
 	end,}
 
 registerTalentTranslation{
-	id = "T_Saw Shell", short_name = "TINKER_SAW_SHELL",
-	name = "Saw Shell", short_name = "TINKER_SAW_SHELL",
+	id = "T_TINKER_SAW_SHELL",
+	name = "Saw Shell",
 	info = function(self, t)
 		return ([[You fire a special steamsaw shot with your steamgun(s) at a target for %d%% physical weapon damage.
 		The steamsaw will cut into the target, doing %d%% physical weapon damage over 5 turns.
@@ -304,8 +305,8 @@ registerTalentTranslation{
 	end,}
 
 registerTalentTranslation{
-	id = "T_Hook Shell", short_name = "TINKER_HOOK_SHELL",
-	name = "Hook Shell", short_name = "TINKER_HOOK_SHELL",
+	id = "T_TINKER_HOOK_SHELL",
+	name = "Hook Shell",
 	info = function(self, t)
 		return ([[You fire a special hook shot with your steamgun(s) at a target creature or location.
 		If you target a creature, they are pulled up to %d tiles towards you.
@@ -315,8 +316,8 @@ registerTalentTranslation{
 	end,}
 
 registerTalentTranslation{
-	id = "T_Magnetic Shell", short_name = "TINKER_MAGNETIC_SHELL",
-	name = "Magnetic Shell", short_name = "TINKER_MAGNETIC_SHELL",
+	id = "T_TINKER_MAGNETIC_SHELL",
+	name = "Magnetic Shell",
 	info = function(self, t)
 		return ([[You fire a special magnetic shot with your steamgun(s) at a target for normal weapon damage.
 		The shot will magnetise the target for %d turns. This lowers their defense and increases fatigue by %d.
@@ -326,8 +327,8 @@ registerTalentTranslation{
 	end,}
 
 registerTalentTranslation{
-	id = "T_Voltaic Shell", short_name = "TINKER_VOLTAIC_SHELL",
-	name = "Voltaic Shell", short_name = "TINKER_VOLTAIC_SHELL",
+	id = "T_TINKER_VOLTAIC_SHELL",
+	name = "Voltaic Shell",
 	info = function(self, t)
 		return ([[You fire a special voltaic shot with your steamgun(s) at a target for 100%% weapon damage as lightning.
 		The shot will release powerful electrical currents at up to %d nearby enemies. 
@@ -338,8 +339,8 @@ registerTalentTranslation{
 	end,}
 
 registerTalentTranslation{
-	id = "T_Antimagic Shell", short_name = "TINKER_ANTIMAGIC_SHELL",
-	name = "Antimagic Shell", short_name = "TINKER_ANTIMAGIC_SHELL",
+	id = "T_TINKER_ANTIMAGIC_SHELL",
+	name = "Antimagic Shell",
 	info = function(self, t)
 		return ([[You fire a special antimagic shot with your steamgun(s) at a target for 100%% normal weapon damage.
 		The shot will release antimagic sap on the target, doing %0.2f arcane resource burn damage.
@@ -349,8 +350,8 @@ registerTalentTranslation{
 	end,}
 
 registerTalentTranslation{
-	id = "T_Botanical Shell", short_name = "TINKER_BOTANICAL_SHELL",
-	name = "Botanical Shell", short_name = "TINKER_BOTANICAL_SHELL",
+	id = "T_TINKER_BOTANICAL_SHELL",
+	name = "Botanical Shell",
 	info = function(self, t)
 		return ([[You fire a special botanical shot with your steamgun(s) at a target for 100%% weapon damage as nature.
 		The shot will release spores which grow into Nourishing Moss in a radius of %d for %d turns.
@@ -362,8 +363,8 @@ registerTalentTranslation{
 	end,}
 
 registerTalentTranslation{
-	id = "T_Corrosive Shell", short_name = "TINKER_CORROSIVE_SHELL",
-	name = "Corrosive Shell", short_name = "TINKER_CORROSIVE_SHELL",
+	id = "T_TINKER_CORROSIVE_SHELL",
+	name = "Corrosive Shell",
 	info = function(self, t)
 		return ([[You fire a special corrosive shot with your steamgun(s) at a target for %d%% weapon damage as acid.
 		The acid released by the shot will also corrode the target, reducing its accuracy, defense and armour by %d.
@@ -373,8 +374,8 @@ registerTalentTranslation{
 	end,}
 
 registerTalentTranslation{
-	id = "T_Toxic Shell", short_name = "TINKER_TOXIC_SHELL",
-	name = "Toxic Shell", short_name = "TINKER_TOXIC_SHELL",
+	id = "T_TINKER_TOXIC_SHELL",
+	name = "Toxic Shell",
 	info = function(self, t)
 		return ([[You fire a special toxic shot with your steamgun(s) at a target for 100%% weapon damage as blight.
 		The shot will release heavy metals into the target, inflicting %0.2f blight damage per turn and reducing their global speed by %d%% for %d turns.
@@ -384,8 +385,8 @@ registerTalentTranslation{
 	end,}
 
 registerTalentTranslation{
-	id = "T_Moss Tread", short_name = "TINKER_MOSS_TREAD",
-	name = "Moss Tread", short_name = "TINKER_MOSS_TREAD",
+	id = "T_TINKER_MOSS_TREAD",
+	name = "Moss Tread",
 	info = function(self, t)
 		local dur = t.getDuration(self, t)
 		local dam = t.getDamage(self, t)

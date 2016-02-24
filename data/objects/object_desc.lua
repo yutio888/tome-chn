@@ -22,6 +22,7 @@ objectMType["organic"] = "器官"
 objectMType["lore"] = "文献"
 objectMType["corpse"] = "尸体"
 objectMType["seed"] = "种子"
+objectMType["tinker"] = "附着物"
 objectSType = {}
 objectSType["battleaxe"] = "战斧"
 objectSType["greatmaul"] = "巨槌"
@@ -89,6 +90,12 @@ objectSType["heart"] = "心脏"
 objectSType["animal"] = "动物"
 objectSType["blood"] = "血液"
 objectSType["demon"] = "恶魔"
+objectSType["steamsaw"] = "蒸汽链锯"
+objectSType["implant"] = "植入物"
+objectSType["schematic"] = "设计图"
+objectSType["steamgun"] = "蒸汽枪"
+objectSType["steamtech"] = "蒸汽科技"
+objectSType["salve"] = "药膏"
 --------------------------------------------------------
 --鼠标信息
 --------------------------------------------------------
@@ -121,6 +128,7 @@ objDesc["Damage when hit (Melee): "] = "近战反击伤害："
 objDesc["Damage (Melee): "] = "近战附加伤害："
 objDesc["Damage (ranged): "] = "远程附加伤害："
 objDesc["Damage against: "] = "伤害增幅："
+objDesc["#ORANGE#Attacks use: #LAST#"] ="#ORANGE#攻击消耗：#LAST#"
 objDesc["Reduced damage from: "] = "降低特定来源伤害："
 objDesc["Armour Penetration: "] = "护甲穿透："
 objDesc["Armour penetration: "] = "护甲穿透："
@@ -369,6 +377,18 @@ objDesc["This mindstar absorbs psionic energy that needs to be projected."] = "�
 objDesc["This mindstar projects psionic energy if enough is absorbed."] = "这个灵晶能放射出超能力"
 objDesc["This psionic mindstar hates not to be wrathful."] = "这个灵晶需要足够的愤怒"
 objDesc["This psionic mindstar is wrathful to the hated."] = "这个灵晶需要足够的仇恨"
+objDesc["No medical injector available, values are indicative only."] = "没有可用的药物注射器，数值仅供参考。"
+objDesc["Deals high light damage and increases critical multiplier."] = "造成大量光明伤害，增加暴击系数。"
+objDesc["On landing any melee attack, release a fiery shockwave, dealing fire and physical damage each equal to your steampower in a cone from the target of radius 3."] = "近战攻击将释放冲击波， 半径3的锥形范围内目标受到 等于蒸汽强度的物理火焰伤害。"
+objDesc["Strikes can trigger a thunderclap that damages and repel foes."] = "攻击能触发雷电，伤害并击退敌人。"
+objDesc["Deals fire damage and ignites the ground."] = "造成火焰伤害，点燃大地。"
+objDesc["On critical strikes generates a 3 tiles lightning beam."] = "暴击制造范围3的闪电射线。"
+objDesc["Deals lightning damage and drains resources."] = "造成闪电伤害,吸取资源。"
+objDesc["Deals stacking poison damage."] = "造成可叠加的毒素伤害。"
+objDesc["Infects targets with a stat reducing disease."] = "传染属性削减疾病"
+objDesc["Deals cold damage and slows."] = "造成寒冷伤害并减速"
+objDesc["Deals acid damage that also reduces armour."] = "造成酸性伤害并降低护甲"
+objDesc["On falling below 20% of your max life, releases a cloud of smoke, confusing nearby enemies and giving you stealth and a chance to avoid incoming damage for 5 turns."]="当生命值少于20%%时， 释放烟雾潜行， 混乱周围生物， 并有一定几率免疫伤害，持续5回合。"
 special_t = {}
 	special_t["10% chance to stun, blind, pin, or confuse the target"] = "10% 几率震慑、致盲、定身或混乱目标"
 	special_t["cripple the target"] = "致残目标"
@@ -438,6 +458,9 @@ special_t = {}
   special_t["Curse of Shrouds"] = "屏障诅咒"
   special_t["Curse of Corpses"] = "尸体诅咒"
   special_t["Curse of Nightmares"] = "噩梦诅咒"
+  special_t["Boom."] = "爆炸"
+  special_t["project a beam of lightning"] = "制造闪电射线"
+  special_t["Mana regeneration, on spell hit 25%% chances to cast lightning."] = "魔力回复，法术命中有25%%几率触发闪电术。"
 --装备鼠标提示汉化替换
 function getObjectDescCHN(desc)
 	if not desc then return end
@@ -555,8 +578,33 @@ function getObjectDescCHN(desc)
 					:gsub("for 15 turns that will illuminate its area and deal", "码范围内召唤一个固定的闪光球体十五回合。球体会照亮这个区域，每回合对范围内的敌人造成")
 					:gsub("light damage %(based on your Magic and Strength%) to your foes within radius", "点光系伤害（基于你的魔法和力量），半径")
 					:gsub("each turn", "码范围。")
+				elseif desc[i]:find("Using medical injector") then
+					desc[i] = desc[i]:gsub("Using medical injector with","使用药物注射器，注射"):gsub("efficiency and","效率和"):gsub("cooldown modifier.","冷却时间修正的药剂。")
+				elseif desc[i]:find("You cannot bleed.") then
+					desc[i] = desc[i]:gsub("You cannot bleed.\nWhen you take damage, if your life is under 20%%, heal for 30%% of your max life.","你不会流血。\n每次受伤害时，若生命值少于20%%，治疗30%%最大生命值。"):gsub("turns until ready","回合冷却剩余"):gsub("15 turn cooldown","15回合冷却时间")
+				elseif desc[i]:find("air each turn") then
+					desc[i]=desc[i]:gsub("Return","每回合回复"):gsub("air each turn","空气")
+				elseif desc[i]:find("life when you use a salve") then
+					desc[i]=desc[i]:gsub("Heals you for","每次使用药膏时恢复"):gsub("life when you use a salve.","生命")
+				elseif desc[i]:find("flashes light on your target dealing") then
+					desc[i]=desc[i]:gsub("flashes light on your target dealing","对目标造成"):gsub(" damage","伤害")
+				elseif desc[i]:find("burn your foe dealing ") then
+					desc[i]=desc[i]:gsub("burn your foe dealing ","燃烧敌人，造成"):gsub(" damage and igniting the ground for 4 turns","火焰伤害并点燃大地4回合。")
+				elseif desc[i]:find("shock your foe dealing ") then
+					desc[i]=desc[i]:gsub("shock your foe dealing ","电击敌人，造成"):gsub(" damage and draining some of their resources","伤害并吸取部分能量。")
+				elseif desc[i]:find("applies a stacking poison dealing ") then
+					desc[i]=desc[i]:gsub("applies a stacking poison dealing ","造成可累计的毒素伤害，每回合"):gsub(" damage per turn","点")
+				elseif desc[i]:find("injects a simple virus dealing ") then
+					desc[i]=desc[i]:gsub("injects a simple virus dealing ","注射一种简单的病毒，造成"):gsub(" blight damage on hit and lowering the victims highest stat","枯萎伤害并减少其最高一项基础属性。")
+				elseif desc[i]:find("chills your foe dealing ") then
+					desc[i]=desc[i]:gsub("chills your foe dealing ","使目标寒冷，造成"):gsub(" damage and slowing them by one tenth of a turn","伤害并减速一回合")
+				elseif desc[i]:find("splashes acid on your target dealing ") then
+					desc[i]=desc[i]:gsub("splashes acid on your target dealing ","释放酸液，造成"):gsub(" damage and reducing their armor","伤害并降低护甲")
+				elseif desc[i]:find("chance to avoid a detrimental acid subtype effect") then
+					desc[i]=desc[i]:gsub(" chance to avoid a detrimental acid subtype effect","几率免疫酸性负面效果")
 				else--if desc[i]:find("Special effect on block:") then
 					desc[i] = desc[i]:gsub("Special effect on block:","格挡特效：")
+							:gsub("Unleash a lightning nova of radius equal to the tinker tier.","释放半径等于材质等级的闪电新星")
 							:gsub("Chance that a blast of icy cold water will spray at the target.","有30%%几率朝目标喷射冰冷的水流")
 							:gsub("30%% chance of petrifying the attacker","30%%几率石化攻击者")
 							:gsub("30%% chance of pulling in the attacker","30%%几率勒住攻击者")
@@ -564,6 +612,7 @@ function getObjectDescCHN(desc)
 			        end
 
 			end
+			desc[i] = desc[i]:gsub("Powered by ","装备灌输力量："):gsub("steamtech","蒸汽科技"):gsub("Steamsaw Mastery","蒸汽链锯掌握"):gsub("Steamgun Mastery","蒸汽枪掌握"):gsub("Psyshot","灵能射击")
 			desc[i] = desc[i]:gsub("chance to trigger a Blood Grasp cast of level","几率触发鲜血支配，等级"):gsub("chance to trigger a Silence cast of level ","几率触发沉默，等级"):gsub("Reduces duration of detrimental effects by 40%%","减少40%%负面状态持续时间")
 			desc[i] = special_t[desc[i]] or desc[i]
 			desc[i] = itemDamagedesc(desc[i])
@@ -577,7 +626,7 @@ function getObjectDescCHN(desc)
 					:gsub("Celestial","天空"):gsub("Chronomancy","时空"):gsub("Corruption","堕落"):gsub("Cursed","诅咒")
 					:gsub("Technique","格斗"):gsub("Cunning","灵巧"):gsub("Wild","自然"):gsub("-gift",""):gsub("Psionic","超能"):gsub("Spell","法术")
 					:gsub("Undead","亡灵"):gsub("Golem","傀儡"):gsub("Race","种族技能")
-					:gsub("water","水")
+					:gsub("water","水"):gsub("Steam","蒸汽")
 					:gsub("Current Resistance:","当前抗性："):gsub("Blood Charges:","鲜血吸收:")
 					:gsub("item",""):gsub("life","生命"):gsub("silence","沉默")
 			desc[i]=desc[i]:gsub("status","状态"):gsub("alive","存活"):gsub("dead(does not provide benefits)","死亡（不提供属性）")

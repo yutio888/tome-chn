@@ -27,9 +27,9 @@ registerTalentTranslation{
 
 registerTalentTranslation{
 	id = "T_CREATE_TINKER",
-	name = "Create Tinker",
+	name = "制造附着物",
 	info = function(self, t)
-		return ([[Allows you to create tinkers.]])
+		return ([[允许你制造附着物。]])
 	end,}
 --
 --registerTalentTranslation{

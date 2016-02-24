@@ -2,42 +2,42 @@ local _M = loadPrevious(...)
 
 registerTalentTranslation{
 	id = "T_GESTALT",
-	name = "¸ñÊ½Ëþ",
+	name = "æ ¼å¼å¡”",
 	info = function(self, t)
-		return ([[Äã ÈÃ Äã µÄ ÐÄ Áé ´Ó Äã µÄ Õô Æû ·¢ ¶¯ »ú ÖÐ ¼³ È¡ ÄÜ Á¿£¬ °´ ÕÕ Äã Õô Æû µÄ ±È Àý Ôö ¼Ó Äã µÄ ¾« Éñ Ç¿ ¶È£º Âú Õô Æû Ê± %d µã£¬ 0 Õô Æû Ê± 0 µã¡£
-		Ê¹ ÓÃ ¾« Éñ ¼¼ ÄÜ »á ·´ À¡ Äã µÄ ·¢ ¶¯ »ú£¬ Îª Äã µÄ ÏÂ Ò» ¸ö Õô Æû ¼¼ ÄÜ Ôö ¼Ó %d µã Õô Æû Ç¿ ¶È¡£
-		Ê¹ ÓÃ Õô Æû ¼¼ ÄÜ »á ·´ À¡ Äã µÄ ¾« Éñ£¬ Ôö ¼Ó Äã µÄ %d µã Äã µÄ ³¬ ÄÜ Á¦¡£
-		Ð§ ¹û »á Ëæ ×Å Äã µÄ ¾« Éñ Ç¿ ¶È Ôö ¼Ó¡£]]):
+		return ([[ä½  è®© ä½  çš„ å¿ƒ çµ ä»Ž ä½  çš„ è’¸ æ±½ å‘ åŠ¨ æœº ä¸­ æ±² å– èƒ½ é‡ï¼Œ æŒ‰ ç…§ ä½  è’¸ æ±½ çš„ æ¯” ä¾‹ å¢ž åŠ  ä½  çš„ ç²¾ ç¥ž å¼º åº¦ï¼š æ»¡ è’¸ æ±½ æ—¶ %d ç‚¹ï¼Œ 0 è’¸ æ±½ æ—¶ 0 ç‚¹ã€‚
+		ä½¿ ç”¨ ç²¾ ç¥ž æŠ€ èƒ½ ä¼š å é¦ˆ ä½  çš„ å‘ åŠ¨ æœºï¼Œ ä¸º ä½  çš„ ä¸‹ ä¸€ ä¸ª è’¸ æ±½ æŠ€ èƒ½ å¢ž åŠ  %d ç‚¹ è’¸ æ±½ å¼º åº¦ã€‚
+		ä½¿ ç”¨ è’¸ æ±½ æŠ€ èƒ½ ä¼š å é¦ˆ ä½  çš„ ç²¾ ç¥žï¼Œ å¢ž åŠ  ä½  çš„ %d ç‚¹ ä½  çš„ è¶… èƒ½ åŠ›ã€‚
+		æ•ˆ æžœ ä¼š éš ç€ ä½  çš„ ç²¾ ç¥ž å¼º åº¦ å¢ž åŠ ã€‚]]):
 		format(t.getMind(self, t), t.getSteam(self, t), t.getPsi(self, t))
 	end,}
 
 registerTalentTranslation{
 	id = "T_IMPROVED_GESTALT",
-	name = "Ç¿»¯¸ñÊ½Ëþ",
+	name = "å¼ºåŒ–æ ¼å¼å¡”",
 	info = function(self, t)
 		local shield_power = t.getShieldPower(self, t)
-		return ([[Ã¿ µ± Äã ÔÚ ¸ñ Ê½ Ëþ ¼¤ »î ×´ Ì¬ ÖÐ Ê¹ ÓÃ Õô Æû ¼¼ ÄÜ Ê±£¬ Äã »á Îü È¡ Ò» Ð© ²Ð Áô µÄ Á¦ Á¿	À´ ÐÎ ³É Ò» ¸ö ¾« Éñ »¤ ¶Ü¡£
-		Õâ ¸ö »¤ ¶Ü ³Ö Ðø 3 »Ø ºÏ£¬ ²¢ ÄÜ Îü ÊÕ %d ÉË º¦¡£
-		Ð§ ¹û »á Ëæ ×Å Äã µÄ ¾« Éñ Ç¿ ¶È Ôö ¼Ó¡£]]):format(shield_power)
+		return ([[æ¯ å½“ ä½  åœ¨ æ ¼ å¼ å¡” æ¿€ æ´» çŠ¶ æ€ ä¸­ ä½¿ ç”¨ è’¸ æ±½ æŠ€ èƒ½ æ—¶ï¼Œ ä½  ä¼š å¸ å– ä¸€ äº› æ®‹ ç•™ çš„ åŠ› é‡	æ¥ å½¢ æˆ ä¸€ ä¸ª ç²¾ ç¥ž æŠ¤ ç›¾ã€‚
+		è¿™ ä¸ª æŠ¤ ç›¾ æŒ ç»­ 3 å›ž åˆï¼Œ å¹¶ èƒ½ å¸ æ”¶ %d ä¼¤ å®³ã€‚
+		æ•ˆ æžœ ä¼š éš ç€ ä½  çš„ ç²¾ ç¥ž å¼º åº¦ å¢ž åŠ ã€‚]]):format(shield_power)
 	end,}
 
 registerTalentTranslation{
 	id = "T_INSTANT_CHANNELING",
-	name = "Ë²¼äÒýµ¼",
+	name = "çž¬é—´å¼•å¯¼",
 	info = function(self, t)
-		return ([[Ë² ¼ä Òý µ¼ Äã Ê£ Óà µÄ Ëù ÓÐ Õô Æû À´ ²¹ ³ä Äã µÄ ³¬ ÄÜ Á¦ ²¢ ³ä ÄÜ »ò ÖÆ Ôì Ò» ¸ö ÐÂ µÄ ¾« Éñ »¤ ¶Ü¡£
-		»¤ ¶Ü µÄ ³Ö Ðø Ê± ¼ä »á Ôö ¼Ó 3 »Ø ºÏ£¬ ²¢ ÄÜ ¶à Îü ÊÕ %d%% Ïû ºÄ µÄ Õô Æû Êý ¶î µÄ ÉË º¦¡£
-		Äã »Ø ¸´ µÈ Í¬ ÓÚ %d%% Ëù Ïû ºÄ µÄ Õô Æû Êý ¶î µÄ ³¬ ÄÜ Á¦¡£
-		´Ë ¼¼ ÄÜ Ðè Òª ¸ñ Ê½ Ëþ ÔÚ ¼¤ »î ×´ Ì¬ ÇÒ ÓÐ Ò» ¸ö ¾« Éñ »¤ ¶Ü »ò Õß Ç¿ »¯ ¸ñ Ê½ Ëþ ²» ÔÚ Àä È´ ÖÐ¡£]]):format(t.getPower(self, t), t.getPsi(self, t))
+		return ([[çž¬ é—´ å¼• å¯¼ ä½  å‰© ä½™ çš„ æ‰€ æœ‰ è’¸ æ±½ æ¥ è¡¥ å…… ä½  çš„ è¶… èƒ½ åŠ› å¹¶ å…… èƒ½ æˆ– åˆ¶ é€  ä¸€ ä¸ª æ–° çš„ ç²¾ ç¥ž æŠ¤ ç›¾ã€‚
+		æŠ¤ ç›¾ çš„ æŒ ç»­ æ—¶ é—´ ä¼š å¢ž åŠ  3 å›ž åˆï¼Œ å¹¶ èƒ½ å¤š å¸ æ”¶ %d%% æ¶ˆ è€— çš„ è’¸ æ±½ æ•° é¢ çš„ ä¼¤ å®³ã€‚
+		ä½  å›ž å¤ ç­‰ åŒ äºŽ %d%% æ‰€ æ¶ˆ è€— çš„ è’¸ æ±½ æ•° é¢ çš„ è¶… èƒ½ åŠ›ã€‚
+		æ­¤ æŠ€ èƒ½ éœ€ è¦ æ ¼ å¼ å¡” åœ¨ æ¿€ æ´» çŠ¶ æ€ ä¸” æœ‰ ä¸€ ä¸ª ç²¾ ç¥ž æŠ¤ ç›¾ æˆ– è€… å¼º åŒ– æ ¼ å¼ å¡” ä¸ åœ¨ å†· å´ ä¸­ã€‚]]):format(t.getPower(self, t), t.getPsi(self, t))
 	end,}
 
 registerTalentTranslation{
 	id = "T_FORCED_GESTALT",
-	name = "Ç¿Á¦¸ñÊ½Ëþ",
+	name = "å¼ºåŠ›æ ¼å¼å¡”",
 	info = function(self, t)
-		return ([[ÔÝ Ê± ÑÓ Éì Äã µÄ ÐÄ Áé ÒÔ Ê¹ Äã µÄ ¸ñ Ê½ Ëþ Áý ÕÖ Äã ÖÜ Î§ °ë ¾¶ 5 Âë ÄÚ µÄ µÐ ÈË£¬ ×î ¶à ¿É Ó° Ïì %d ¸ö µÐ ÈË¡£
-		¸ñ Ê½ Ëþ »á Îü ÊÕ Ã¿ ¸ö ±» Ó° Ïì µÐ ÈË µÄ Á¦ Á¿ £¨Îï Àí Ç¿ ¶È£¬ ¾« Éñ Ç¿ ¶È£¬ ·¨ Êõ Ç¿ ¶È£¬ Õô Æû Ç¿ ¶È£© %d »Ø ºÏ¡£
-		Äã ×Ô Éí µÄ Á¦ Á¿ »á Ôö ¼Ó Ëù Îü È¡ µÄ Êý ¶î £¨Ð§ ¹û Ã¿ ¸ö ¶î Íâ µÄ µÐ ÈË ¶¼ »á Ë¥ ¼õ£©¡£
-		³ý ´Ë Ö® Íâ£¬ ÔÚ 5 »Ø ºÏ ÄÚ Äã ¿É ÒÔ ³¬ ÍÑ ÊÓ Ïß µÄ ¸Ð Öª °ë ¾¶ %d Âë ÄÚ µÄ Éú Îï¡£
-		Ð§ ¹û »á Ëæ ×Å Äã µÄ ¾« Éñ Ç¿ ¶È Ôö ¼Ó¡£]]):format(t.getNb(self, t), t.getPower(self, t), t.getSenseRadius(self, t))
+		return ([[æš‚ æ—¶ å»¶ ä¼¸ ä½  çš„ å¿ƒ çµ ä»¥ ä½¿ ä½  çš„ æ ¼ å¼ å¡” ç¬¼ ç½© ä½  å‘¨ å›´ åŠ å¾„ 5 ç  å†… çš„ æ•Œ äººï¼Œ æœ€ å¤š å¯ å½± å“ %d ä¸ª æ•Œ äººã€‚
+		æ ¼ å¼ å¡” ä¼š å¸ æ”¶ æ¯ ä¸ª è¢« å½± å“ æ•Œ äºº çš„ åŠ› é‡ ï¼ˆç‰© ç† å¼º åº¦ï¼Œ ç²¾ ç¥ž å¼º åº¦ï¼Œ æ³• æœ¯ å¼º åº¦ï¼Œ è’¸ æ±½ å¼º åº¦ï¼‰ %d å›ž åˆã€‚
+		ä½  è‡ª èº« çš„ åŠ› é‡ ä¼š å¢ž åŠ  æ‰€ å¸ å– çš„ æ•° é¢ ï¼ˆæ•ˆ æžœ æ¯ ä¸ª é¢ å¤– çš„ æ•Œ äºº éƒ½ ä¼š è¡° å‡ï¼‰ã€‚
+		é™¤ æ­¤ ä¹‹ å¤–ï¼Œ åœ¨ 5 å›ž åˆ å†… ä½  å¯ ä»¥ è¶… è„± è§† çº¿ çš„ æ„Ÿ çŸ¥ åŠ å¾„ %d ç  å†… çš„ ç”Ÿ ç‰©ã€‚
+		æ•ˆ æžœ ä¼š éš ç€ ä½  çš„ ç²¾ ç¥ž å¼º åº¦ å¢ž åŠ ã€‚]]):format(t.getNb(self, t), t.getPower(self, t), t.getSenseRadius(self, t))
 	end,}

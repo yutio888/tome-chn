@@ -2,46 +2,46 @@ local _M = loadPrevious(...)
 
 registerTalentTranslation{
 	id = "T_VAPOROUS_STEP",
-	name = "ÕôÆû²½",
+	name = "è’¸æ±½æ­¥",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
-		return ([[Äã ¼¯ ÖÐ ¾« Éñ À´ ½« Ò» Ð© Äã ·¢ ¶¯ »ú ÖÐ µÄ Õô Æû Òâ Äî ÒÆ ¶¯ µ½ Ô¶ ·½ ¡£ 
-		Ã¿ »Ø ºÏ Õô Æû ¶¼ »á ÔÚ ÄÇ Àï ÀÛ »ý £¬ ×î ¶à %d ²ã ¡£
-		µ± Äã ½â ³ý ×´ Ì¬ Ê± £¬ Äã »á ÊÍ ·Å ÀÛ »ý µÄ ¾« Éñ Á¦ ºÍ Õô Æû £¬ Ë² ¼ä ÒÆ ¶¯ µ½ ¸Ã µØ µã ²¢ ÖÆ Ôì Ò» ¸ö °ë ¾¶ 4 Âë µÄ ÖË ÈÈ µÄ Õô Æû ±¬ Õ¨ ¡£
-		±¬ Õ¨ ½« Ôì ³É %0.2f ³Ë ÒÔ Ã¿ ²ã 33%% µÄ »ð Ñæ ÉË º¦ ²¢ ¸½ ¼Ó ½þ Êª ×´ Ì¬¡£
-		Èç ¹û Ä¿ ±ê µØ µã ÒÑ ¾­ ±» Õ¼ ¾Ý »ò ²» ÔÚ ÊÓ Ïß Ö® ÄÚ £¬ Ôò ¼¼ ÄÜ ½« Ê§ °Ü ¡£
-		ÉË º¦ »á Ëæ ×Å Äã µÄ Õô Æû Öµ Ôö ¼Ó¡£]]):
+		return ([[ä½  é›† ä¸­ ç²¾ ç¥ž æ¥ å°† ä¸€ äº› ä½  å‘ åŠ¨ æœº ä¸­ çš„ è’¸ æ±½ æ„ å¿µ ç§» åŠ¨ åˆ° è¿œ æ–¹ ã€‚ 
+		æ¯ å›ž åˆ è’¸ æ±½ éƒ½ ä¼š åœ¨ é‚£ é‡Œ ç´¯ ç§¯ ï¼Œ æœ€ å¤š %d å±‚ ã€‚
+		å½“ ä½  è§£ é™¤ çŠ¶ æ€ æ—¶ ï¼Œ ä½  ä¼š é‡Š æ”¾ ç´¯ ç§¯ çš„ ç²¾ ç¥ž åŠ› å’Œ è’¸ æ±½ ï¼Œ çž¬ é—´ ç§» åŠ¨ åˆ° è¯¥ åœ° ç‚¹ å¹¶ åˆ¶ é€  ä¸€ ä¸ª åŠ å¾„ 4 ç  çš„ ç‚™ çƒ­ çš„ è’¸ æ±½ çˆ† ç‚¸ ã€‚
+		çˆ† ç‚¸ å°† é€  æˆ %0.2f ä¹˜ ä»¥ æ¯ å±‚ 33%% çš„ ç« ç„° ä¼¤ å®³ å¹¶ é™„ åŠ  æµ¸ æ¹¿ çŠ¶ æ€ã€‚
+		å¦‚ æžœ ç›® æ ‡ åœ° ç‚¹ å·² ç» è¢« å  æ® æˆ– ä¸ åœ¨ è§† çº¿ ä¹‹ å†… ï¼Œ åˆ™ æŠ€ èƒ½ å°† å¤± è´¥ ã€‚
+		ä¼¤ å®³ ä¼š éš ç€ ä½  çš„ è’¸ æ±½ å€¼ å¢ž åŠ ã€‚]]):
 		format(t.getMaxCharge(self, t), damDesc(self, DamageType.FIRE, damage))
 	end,}
 
 registerTalentTranslation{
 	id = "T_INHALE_VAPOURS",
-	name = "ÎüÈëÕôÆû",
+	name = "å¸å…¥è’¸æ±½",
 	info = function(self, t)
-		return ([[µ± Äã ½â ³ý Õô Æû ²½ Ê± £¬ Èç ¹û Òâ Äî ÒÆ ¶¯ ³É ¹¦ ÁË £¬ Äã »á Îü Èë Ò» Ð© Õô Æû £¬ »Ø ¸´ %d Õô Æû ºÍ %d Éú Ãü ¡£
-		Ð§ ¹û »á ³Ë ÒÔ Õô Æû ²½ µÄ ²ã Êý ³Ë ÒÔ 33%% ¡£
-		ÖÎ ÁÆ Á¿ »á Ëæ ×Å Äã µÄ ¾« Éñ Ç¿ ¶È Ôö ¼Ó ¡£]]):
+		return ([[å½“ ä½  è§£ é™¤ è’¸ æ±½ æ­¥ æ—¶ ï¼Œ å¦‚ æžœ æ„ å¿µ ç§» åŠ¨ æˆ åŠŸ äº† ï¼Œ ä½  ä¼š å¸ å…¥ ä¸€ äº› è’¸ æ±½ ï¼Œ å›ž å¤ %d è’¸ æ±½ å’Œ %d ç”Ÿ å‘½ ã€‚
+		æ•ˆ æžœ ä¼š ä¹˜ ä»¥ è’¸ æ±½ æ­¥ çš„ å±‚ æ•° ä¹˜ ä»¥ 33%% ã€‚
+		æ²» ç–— é‡ ä¼š éš ç€ ä½  çš„ ç²¾ ç¥ž å¼º åº¦ å¢ž åŠ  ã€‚]]):
 		format(t.getSteam(self, t), t.getHeal(self, t))
 	end,}
 
 registerTalentTranslation{
 	id = "T_PSIONIC_FOG",
-	name = "ÐÄÁéÃÔÎí",
+	name = "å¿ƒçµè¿·é›¾",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local duration = t.getDuration(self, t)
-		return ([[Äã ½« Äã ·¢ ¶¯ »ú Àï µÄ Õô Æû ËÜ ÐÎ Îª ³Ö Ðø %d »Ø ºÏ µÄ ÐÄ Áé ÃÔ Îí ¡£
-		ÈÎ ºÎ ÏÝ Èë Æä ÖÐ µÄ µÐ ÈË Ã¿ »Ø ºÏ ¶¼ »á ÊÜ µ½ %0.2f µÄ ÉË º¦ £¬ ²¢ ±» ÉÕ ½¹ £¬½µ µÍ Ëû ÃÇ %d%% »ð Ñæ ¿¹ ÐÔ ºÍ %d ¾« Éñ »í Ãâ ¡£
-		ÉË º¦ »á Ëæ ×Å Äã µÄ ¾« Éñ Ç¿ ¶È Ôö ¼Ó¡£]]):
+		return ([[ä½  å°† ä½  å‘ åŠ¨ æœº é‡Œ çš„ è’¸ æ±½ å¡‘ å½¢ ä¸º æŒ ç»­ %d å›ž åˆ çš„ å¿ƒ çµ è¿· é›¾ ã€‚
+		ä»» ä½• é™· å…¥ å…¶ ä¸­ çš„ æ•Œ äºº æ¯ å›ž åˆ éƒ½ ä¼š å— åˆ° %0.2f çš„ ä¼¤ å®³ ï¼Œ å¹¶ è¢« çƒ§ ç„¦ ï¼Œé™ ä½Ž ä»– ä»¬ %d%% ç« ç„° æŠ— æ€§ å’Œ %d ç²¾ ç¥ž è± å… ã€‚
+		ä¼¤ å®³ ä¼š éš ç€ ä½  çš„ ç²¾ ç¥ž å¼º åº¦ å¢ž åŠ ã€‚]]):
 		format(duration, damDesc(self, DamageType.MIND, damage), t.getSearing(self, t), t.getSearing(self, t))
 	end,}
 
 registerTalentTranslation{
 	id = "T_UNCERTAINTY_PRINCIPLE",
-	name = "²â²»×¼Ô­Àí",
+	name = "æµ‹ä¸å‡†åŽŸç†",
 	info = function(self, t)
-		return ([[Äã ÄÜ ÔÚ ÐÄ Áé ÃÔ Îí ÖÐ Ê¹ ÓÃ Äã ±» ¼¼ Êõ Ç¿ »¯ ¹ý µÄ ÐÄ Áé Á¦ Á¿ À´ ÕÆ ÎÕ ¿Õ ¼ä µÄ Á¿ ×Ó Ì¬ ±¾ ÖÊ ¡£
-		µ± Äã ½« ±» »÷ ÖÐ Ê± £¬ Äã »á ÉÁ ÏÖ µ½ Ò» ¸ö ÁÙ ½ü µÄ Î» ÖÃ¡£
-		Õâ ¸ö Ð§ ¹û ÓÐ Àä È´ Ê± ¼ä ¡£]]):
+		return ([[ä½  èƒ½ åœ¨ å¿ƒ çµ è¿· é›¾ ä¸­ ä½¿ ç”¨ ä½  è¢« æŠ€ æœ¯ å¼º åŒ– è¿‡ çš„ å¿ƒ çµ åŠ› é‡ æ¥ æŽŒ æ¡ ç©º é—´ çš„ é‡ å­ æ€ æœ¬ è´¨ ã€‚
+		å½“ ä½  å°† è¢« å‡» ä¸­ æ—¶ ï¼Œ ä½  ä¼š é—ª çŽ° åˆ° ä¸€ ä¸ª ä¸´ è¿‘ çš„ ä½ ç½®ã€‚
+		è¿™ ä¸ª æ•ˆ æžœ æœ‰ å†· å´ æ—¶ é—´ ã€‚]]):
 		format()
 	end,}

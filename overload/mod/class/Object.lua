@@ -1885,7 +1885,7 @@ function _M:getUseDesc(use_actor)
 		if self.show_charges then
 			ret = tstring{{"color","YELLOW"}, ("可以用来施放【 %s 】，剩余 %d 次，总共可用 %d 次。"):format(desc, math.floor(self.power / usepower(self.use_power.power)), math.floor(self.max_power / usepower(self.use_power.power))), {"color","LAST"}}
 		elseif self.talent_cooldown then
-			local t_name = self.talent_cooldown == "T_GLOBAL_CD" and "所有护符" or "技能 "..use_actor:getTalentDisplayName(use_actor:getTalentFromId(self.talent_cooldown))
+			local t_name = self.talent_cooldown == "T_GLOBAL_CD" and "所有护符" or "技能 "..use_actor:getTalentDisplayName(use_actor:getTalentFromId(self.talent_cooldown)):gsub("Medical Injector","药物注射器")
 			local use_name = desc:format(self:getCharmPower(use_actor))
 			use_name = use_name:gsub("fire a blast of psionic energies in a range ","释放一束长度"):gsub("beam","射线")
 			:gsub("disarm traps","解除陷阱")
@@ -1897,6 +1897,10 @@ function _M:getUseDesc(use_actor)
 			:gsub("project a bolt from the staff (to range ","发射元素球，距离")
 			:gsub("unleash an elemental blastwave, dealing","释放元素冲击波，造成"):gsub("damage in a radius","伤害，半径"):gsub("around the user","")
 			:gsub("conjure elemental energy in a radius","发射锥形元素能量，半径"):gsub("cone, dealing","造成")
+			:gsub("remove ","除去")
+			:gsub(" physical effects and grants a frost aura","物理效果并制造冰霜领域，获得"):gsub("cold, darkness and nature affinity","寒冷、暗影和自然伤害吸收")
+			:gsub(" magical effects and grants a fiery aura","魔法效果并制造火焰领域，获得"):gsub("fire, light and lightning affinity","火焰、光明和闪电伤害吸收")
+ 			:gsub(" mental effects and grants a water aura","精神效果并制造火焰领域，获得"):gsub("blight, mind and acid affinity","枯萎、精神和酸性伤害吸收")
 			if use_name:find("harden the skin for") then
 				use_name = use_name:gsub("harden the skin for 7 turns increasing armour by","硬化皮肤7回合，并增加")
 		    	:gsub("and armour hardiness by","护甲值和护甲硬度")

@@ -22,28 +22,28 @@ function change_infusion_eff(str)
 end
 registerInscriptionTranslation{
 	name = "Implant: Steam Generator",
-	display_name = "Implant: Steam Generator",
+	display_name = "植入物: 蒸汽制造机",
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[Steam generator that permanently creates %d steam per turn.
-		Can be activated for an instant burst of %d steam.]]):format(data.power + data.inc_stat, (data.power + data.inc_stat) * 5)
+		return ([[蒸 汽 制 造 机 每 回 合 制 造 %d 点 蒸 汽 。
+		能 直 接 使 用 ，立 即 制 造 %d 蒸 汽。]]):format(data.power + data.inc_stat, (data.power + data.inc_stat) * 5)
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[steam %d]]):format(data.power + data.inc_stat)
+		return ([[蒸汽 %d]]):format(data.power + data.inc_stat)
 	end,
 }
 
 registerInscriptionTranslation{
 	name = "Implant: Medical Injector",
-	display_name = "Implant: Medical Injector",
+	display_name = "植入物: 药物注射器",
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[Medical injector allows using therapeutics with %d%% efficiency and cooldown mod of %d%%.]])
+		return ([[该 药 物 注 射 器 注 射 药 物 效 率 为 %d%%，冷 却 时 间 修 正 为 %d%%。]])
 		:format(data.power + data.inc_stat, data.cooldown_mod)
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[efficiency %d%% / cooldown %d%%]]):format(data.power + data.inc_stat, data.cooldown_mod)
+		return ([[效率 %d%% / 冷却 %d%%]]):format(data.power + data.inc_stat, data.cooldown_mod)
 	end,
 }

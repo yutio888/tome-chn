@@ -3,7 +3,10 @@ tinkerCHN["Steamsaw"] = {
 		name = "蒸汽链锯",
 		desc = "Dismantle any one handed sword/axe/mace, add some amazing steampower to it and make a powerful steamsaw to shred your foes to pieces!",
 }
-
+tinkerCHN["Focus Lens"] = {
+		name = "聚焦镜片", 
+		desc = "A simple contraption consisting of a gem and some metal to enhance your sight, detection and infravision! At tier 4 it even allows you to fight while blinded. #{italic}#Amazing!#{normal}#",
+}
 
 tinkerCHN["Toxic Cannister Launcher"] = {
 		name = "毒弹发射器",

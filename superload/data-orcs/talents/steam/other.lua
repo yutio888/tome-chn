@@ -83,7 +83,7 @@ registerTalentTranslation{
 
 registerTalentTranslation{
 	id = "T_TINKER_SPRING_GRAPPLE",
-	name = "飞爪擒拿",
+	name = "弹簧擒拿爪",
 	info = function(self, t)
 		return ([[抓 住 目 标 把 目 标 向 你 拉 拢 ，造 成 %d%%  的 徒 手 伤 害 ，如 果 命 中 ，目 标 定 身  %d  回 合 。
 ]]):

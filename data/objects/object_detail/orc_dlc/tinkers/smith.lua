@@ -6,7 +6,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = simple[i].." focus lens",
-	chName = simplechn[i].." 聚焦镜片",
+	chName = simplechn[i].." 聚焦透镜",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -15,7 +15,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = metals[i].." toxic cannister launcher",
-	chName = metalschn[i].." 毒弹发射器",
+	chName = metalschn[i].." 毒罐发射装置",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -24,7 +24,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = metals[i].." viral needlegun",
-	chName = metalschn[i].." 病毒枪",
+	chName = metalschn[i].." 病毒针枪",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -33,7 +33,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = metals[i].." razor edge",
-	chName = metalschn[i].." 尖锐刀片",
+	chName = metalschn[i].." 锐利刀片",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -42,7 +42,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = metals[i].." armour reinforcement",
-	chName = metalschn[i].." 护甲强化",
+	chName = metalschn[i].." 装甲加固",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -51,7 +51,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = metals[i].." crystal edge",
-	chName = metalschn[i].." 尖锐水晶",
+	chName = metalschn[i].." 水晶刀刃",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -61,7 +61,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = metals[i].." crystal plating",
-	chName = metalschn[i].." 水晶板甲片",
+	chName = metalschn[i].." 水晶镀层",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -87,7 +87,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = metals[i].." back support",
-	chName = metalschn[i].." 背部支撑",
+	chName = metalschn[i].." 脊椎牵引装置",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end

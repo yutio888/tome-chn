@@ -1,69 +1,70 @@
 
 tinkerCHN["Lightning Coil"] = {
 		name = "闪电线圈",
-		desc = "Lightning coils can be attached to melee weapons to generate a short range beam of electricity on melee crits.",
+		desc = "闪电线圈可以被安装在近战武器上，在近战暴击时施放短程的闪电。",
 }
 
 
 tinkerCHN["Mana Coil"] = {
 		name = "魔力线圈",
-		desc = "Mana coils can be attached to staves to improve mana regeneration and cast a lightning spell on spell hits.",
+		desc = "魔力线圈可以被安装在法杖上，增加法力回复并在法术暴击时施放闪电法术。",
 }
 
 
 tinkerCHN["Shocking Touch"] = {
-		name = "电击装置",
-		desc = "Gives you the Electric Touch. Higher tiers will chain.",
+		name = "电击之触装置",
+		desc = "让你的碰触附带闪电。材质等级较高时，闪电可以连锁。",
 }
 
 
 tinkerCHN["Deflection Field"] = {
-		name = "折射领域装置",
-		desc = "Protect yourself with the Power of Magnetism! Attach this device to your belt and watch those bullets miss every time! (not guaranteed to work every time)",
+		name = "折射力场仪",
+		desc = "使用磁场的力量保护你！在你的腰带上安装这个设备，然后轻松躲过子弹吧！（不保证每次都奏效）",
 }
 
 
 tinkerCHN["Galvanic Retributor"] = {
-		name = "流电分配装置",
-		desc = "Fortify your shield with electricity and prepare to unleash GALVANIC RETRIBUTION against your attackers!",
+		name = "电力反击装置",
+		desc = "使用电力强化你的盾牌，准备向攻击你的人施放雷电的反击吧！",
 }
 
 
 tinkerCHN["Gauss Accelerator"] = {
 		name = "高斯加速装置",
-		desc = "Use the amazing Power of Electricity to give your Steamgun some extra punch!",
+		desc = "使用电的强大力量为你的蒸汽枪加点料！",
 }
+
 tinkerCHN["Shocking Edge"] = {
-		name = "电击刀片",
-		desc = "Attaching a capacitor to your weapon in just the right way is a great way to shock your enemies.",
+		name = "电击之刃",
+		desc = "在你的武器上安装一个电容器，电击那些被你击中的敌人。",
 }
 
 tinkerCHN["Steamsaw: Stormcutter"] = {
 		name = "蒸汽链锯：风暴切割者",
-		desc = "The pinnacle of steamsaws technology. Every one of your hits will unleash the power of the storm onto your foes, chaining between them and stunning them!",
+		desc = "蒸汽链锯技术的巅峰之作。你的每一击将会在敌人的身上施放风暴的力量，在他们的身上连锁并震慑他们！",
 }
 
 
 tinkerCHN["Voltaic Sentry"] = {
 		name = "伏特守卫装置",
-		desc = "Just drop it down and watch the sparks fly when your enemies get near.",
+		desc = "把它放在地上，它会自动电击走近的敌人。",
 }
 
 
 tinkerCHN["Mental Stimulator"] = {
 		name = "精神刺激装置",
-		desc = "Supercharge your thinking and give your brain a boost with the Mental Stimulator!",
+		desc = "强化你的思考能力，加速你的大脑！",
 }
 
 
 tinkerCHN["Power Distributor"] = {
 		name = "能量分配装置",
-		desc = "The Power Distributor V2 ensures you have the energy where and when you need it, without any of the side effects like V1 had.",
+		desc = "能量分配器V2可以确保你在任何需要的时候拥有充足的能源，并且不会像V1那样有什么负面作用。",
 }
 
 
 tinkerCHN["White Light Emitter"] = {
 		name = "白光发射装置",
-		desc = "Add more light to your light!",
+		desc = "给你的灯具加点光亮！",
 }
 

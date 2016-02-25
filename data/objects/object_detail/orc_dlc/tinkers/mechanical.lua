@@ -13,7 +13,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = metals[i].." hand cannon",
-	chName = metalschn[i].." 手持火炮",
+	chName = metalschn[i].." 手炮",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -22,7 +22,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = metals[i].." 1H weapon automaton",
-	chName = metalschn[i].." 单手武器自动化",
+	chName = metalschn[i].." 武装机器人：单手武器",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -40,7 +40,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = metals[i].." grip",
-	chName = metalschn[i].." 钢铁之手",
+	chName = metalschn[i].." 铁腕装置",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -49,7 +49,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = metals[i].." grapple",
-	chName = metalschn[i].." 飞爪",
+	chName = metalschn[i].." 弹簧飞爪",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -57,7 +57,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = metals[i].." saw projector",
-	chName = metalschn[i].." 链锯发射器",
+	chName = metalschn[i].." 链锯发射装置",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end

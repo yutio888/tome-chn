@@ -4,7 +4,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = simple[i].." poison groove",
-	chName = simplechn[i].." 毒素注射装置",
+	chName = simplechn[i].." 淬毒凹槽",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -13,7 +13,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = simple[i].." viral injector",
-	chName = simplechn[i].." 病毒注射装置",
+	chName = simplechn[i].." 病毒之槽",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -22,7 +22,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = simple[i].." winterchill edge",
-	chName = simplechn[i].." 寒冬刀片",
+	chName = simplechn[i].." 寒冬之刃",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -31,7 +31,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = simple[i].." acid groove",
-	chName = simplechn[i].." 酸液注射装置",
+	chName = simplechn[i].." 酸液之槽",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -57,7 +57,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = simple[i].." flash powder",
-	chName = simplechn[i].." 照明粉",
+	chName = simplechn[i].." 闪光粉",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end

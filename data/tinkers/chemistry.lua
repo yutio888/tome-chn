@@ -1,72 +1,72 @@
 
 tinkerCHN["Winterchill Edge"] = {
-		name = "寒冬刀片",
-		desc = "Heat is energy.  Using your knowledge of physics, chemistry, and blacksmithing you can add a chilling edge to your weapons.  While the damage this deals is relatively small each blow will also cause your enemies to lose one tenth of a turn.",
+		name = "寒冬之刃",
+		desc = "热量也是一种能量。使用你的物理学、化学和锻造只是你可以在你的武器上增加寒冷的刀锋。尽管每击的伤害不高，它还会让你的敌人失去十分之一个回合。",
 }
 
 
 tinkerCHN["Acid Groove"] = {
-		name = "酸液发射器",
-		desc = "Allows your weapon to spray caustic acid on hit, reducing armor.",
+		name = "酸液之槽",
+		desc = "让你的武器在击中时喷出腐蚀性的酸液，降低敌人护甲。",
 }
 
 
 tinkerCHN["Brain Cap"] = {
 		name = "脑帽",
-		desc = "By mounting a brain in a jar in a stralite frame this marvel will increases your mental resistances and allow you to emit a powerful magic disrupting wave.",
+		desc = "通过把一个大脑装进沃瑞钽罐子里，这个装置可以增加你的精神抗性并让你可以发射出强大的魔法干扰波。",
 }
 
 
 tinkerCHN["Brain Flare"] = {
-		name = "脑闪",
-		desc = "By mounting a brain in a jar in a stralite frame this marvel will increases your mental resistances and to invade your foe's minds, taking control.",
+		name = "脑耀",
+		desc = "通过把一个大脑装进沃瑞钽罐子里，这个装置可以增加你的精神抗性并让你可以侵入其他人的精神，操纵它们的躯体。",
 }
 
 
 tinkerCHN["Waterproof Coating"] = {
 		name = "防水涂层",
-		desc = "Old cloak not keeping you as dry as it used to? A waterproof coating it just what you need!",
+		desc = "旧的披风不能让你保持干爽？防水涂层，这就是你想要的！",
 }
 
 
 tinkerCHN["Fireproof Coating"] = {
 		name = "防火涂层",
-		desc = "New cloak doesn't have all the resistances you wanted? A fireproof coating it just what you need!",
+		desc = "新的披风没有你想要的抗性？防水涂层，这就是你想要的！",
 }
 
 
 tinkerCHN["Flash Powder"] = {
-		name = "照明粉",
-		desc = "What is better than throwing sand in someone's face? Throwing sand that shines as bright as the Sun!",
+		name = "闪光粉",
+		desc = "有什么比往别人脸上扔沙更有效？扔出会像太阳一样闪耀的沙子！",
 }
 
 
 tinkerCHN["Itching Powder"] = {
 		name = "痒痒粉",
-		desc = "The 'Crawling Ants' itching powder will distract your enemies from any complicated actions.",
+		desc = "这个“爬行的蚂蚁”牌痒痒粉能够分散你敌人的注意力，让他们无法完成复杂的行动。",
 }
 
 
 tinkerCHN["Rogue's Gallery"] = {
 		name = "盗贼画廊",
-		desc = "Lined with reactive mechanisms, this cloak is equipped for any situation you might possibly encounter, and several you couldn't possibly encounter!",
+		desc = "内衬各种机械装置，这件披风包含着让你可以应对任何你有可能或不可能遇到的情况的特殊装备！",
 }
 
 
 tinkerCHN["Rustproof Coating"] = {
 		name = "防锈涂层",
-		desc = "Protects your armour from nasty corrosives like swamp, sea spray, acids, orc sweat, drake saliva...",
+		desc = "保护你的装甲免收各种讨厌的腐蚀物侵袭，包括沼泽、浪花、酸、兽人的汗液、龙涎…",
 }
 
 
 tinkerCHN["Alchemist's Helper"] = {
 		name = "炼金助手",
-		desc = "An ingenius collection of tough no-spill pockets allows you to keep all those dangerous reagents close at hand. (increases acid, fire, nature and blight damage.)",
+		desc = "这些坚韧的口袋可以让你随身携带各种危险的试剂。（增加酸性、火焰、自然和枯萎伤害）",
 }
 
 
 tinkerCHN["Black Light Emitter"] = {
 		name = "黑光发射装置",
-		desc = "Make the invisible visible.",
+		desc = "使隐形之物现身。",
 }
 

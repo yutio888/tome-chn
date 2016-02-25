@@ -51,7 +51,7 @@ registerTalentTranslation{
 
 registerTalentTranslation{
 	id = "T_TINKER_FATAL_ATTRACTOR",
-	name = "致命吸引",
+	name = "致命诱饵",
 	info = function(self, t)
 		return ([[快 速 创 建 一 个 灵 能 增 强 金 属 诱 饵 ，引 诱 敌 人 反 弹 %d%%  攻 击 者 的 伤 害 。
 诱 饵 有 %d 生 命 值 ，持 续 5 回 合 。
@@ -73,7 +73,7 @@ registerTalentTranslation{
 
 registerTalentTranslation{
 	id = "T_TINKER_IRON_GRIP",
-	name = "钢铁之握", 
+	name = "铁腕", 
 	info = function(self, t)
 		return ([[激 活 活 塞 碾 压 你 的 目 标 在 %d  回 合 内 造 成  %d%%  的 徒 手 伤 害 .
 同 时 目 标 被 定 身 而 且 他 的 护 甲 和 闪 避 减 少  %d  。
@@ -83,7 +83,7 @@ registerTalentTranslation{
 
 registerTalentTranslation{
 	id = "T_TINKER_SPRING_GRAPPLE",
-	name = "弹簧擒拿爪",
+	name = "弹簧飞爪",
 	info = function(self, t)
 		return ([[抓 住 目 标 把 目 标 向 你 拉 拢 ，造 成 %d%%  的 徒 手 伤 害 ，如 果 命 中 ，目 标 定 身  %d  回 合 。
 ]]):
@@ -92,7 +92,7 @@ registerTalentTranslation{
 
 registerTalentTranslation{
 	id = "T_TINKER_TOXIC_CANNISTER_LAUNCHER",
-	name = "毒雾发生器", 
+	name = "毒罐发射装置", 
 	info = function(self, t)
 		return ([[发 射 一 个 充 满 有 毒 气 体 的 罐 子 。
 每 2 回 合 在 此 周 围 发 出 一 个 半 径 为 3 码 的 毒 雾 。
@@ -105,7 +105,7 @@ registerTalentTranslation{
 
 registerTalentTranslation{
 	id = "T_TINKER_POWERED_ARMOUR",
-	name = "蒸汽动力盔甲",
+	name = "蒸汽动力装甲",
 	info = function(self, t)
 		return ([[激 活 盔 甲 的 主 动 防 御 系 统 。
 　 　 你 的 盔 甲 被 电 流 的 覆 盖 。他 会 减 弱 的 对 你 的 物 理 攻 击 。
@@ -204,7 +204,7 @@ registerTalentTranslation{
 
 registerTalentTranslation{
 	id = "T_TINKER_THUNDER_GRENADE",
-	name = "雷电手榴弹",
+	name = "闪电榴弹",
 	info = function(self, t)
 		return ([[向 你 的 敌 人 投 掷 手 榴 弹 ,造 成  %0.2f  物 理 伤 害 ，半 径 %d  码 。
 　 　 目 标 也 会 震 慑  %d  回 合 。
@@ -213,7 +213,7 @@ registerTalentTranslation{
 
 registerTalentTranslation{
 	id = "T_TINKER_PROJECT_SAW",
-	name = "链锯发射",
+	name = "发射链锯",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		return ([[你 激 活 隐 藏 的 弹 簧 来 弹 射 一 个 你 的 敌 人 。任 何 生 物 被 抓 后 造 成  %0.2f  物 理 伤 害 和 5 回 合 内 一 半 的 流 血 伤 害 。
@@ -275,7 +275,7 @@ registerTalentTranslation{
 
 registerTalentTranslation{
 	id = "T_TINKER_SOLID_SHELL",
-	name = "实心弹",
+	name = "固实弹",
 	info = function(self, t)
 		return ([[你 使 用 蒸 汽 枪 发 射 特 殊 固 体 打 击 目 标 造 成 %d%%  武 器 伤 害 。
 　 　 击 退 目 标 %d 码 。
@@ -295,17 +295,17 @@ registerTalentTranslation{
 
 registerTalentTranslation{
 	id = "T_TINKER_SAW_SHELL",
-	name = "切割弹",
+	name = "链锯弹",
 	info = function(self, t)
 		return ([[你 使 用 蒸 汽 枪 发 射 特 殊 弹 药 打 击 目 标 造 成 %d%%  武 器 伤 害 。
-锯 爪 会 切 割 目 标 ，在 5 回 合 内 造 成 %d%%  武 器 伤 害 
+链 锯 会 切 割 目 标 ，在 5 回 合 内 造 成 %d%%  武 器 伤 害 
 这 个 技 能 不 使 用 弹 药 ]])
 		:format(100*t.getMultiple(self, t), 50*t.getMultiple(self, t))
 	end,}
 
 registerTalentTranslation{
 	id = "T_TINKER_HOOK_SHELL",
-	name = "锁链弹",
+	name = "钩链弹",
 	info = function(self, t)
 		return ([[你 使 用 蒸 汽 枪 发 射 特 殊 弹 药 打 击 目 标 或 某 处 
 如 果 你 的 目 标 是 一 个 生 物 ，他 们 被 拉 向 你 %d 码 
@@ -374,7 +374,7 @@ registerTalentTranslation{
 
 registerTalentTranslation{
 	id = "T_TINKER_TOXIC_SHELL",
-	name = "毒性弹",
+	name = "毒气弹",
 	info = function(self, t)
 		return ([[你 使 用 蒸 汽 枪 发 射 特 殊 弹 药 打 击 目 标 造 成 100%% 枯 萎 武 器 伤 害 。
 向 目 标 释 放 重 金 属 ，造 成 每 回 合  %0.2f  枯 萎 伤 害 ，并 且 降 低 整 体 速 度 %d%%  %d  回 合 .
@@ -385,7 +385,7 @@ registerTalentTranslation{
 
 registerTalentTranslation{
 	id = "T_TINKER_MOSS_TREAD",
-	name = "踩踏苔藓",
+	name = "苔藓之踏",
 	info = function(self, t)
 		local dur = t.getDuration(self, t)
 		local dam = t.getDamage(self, t)

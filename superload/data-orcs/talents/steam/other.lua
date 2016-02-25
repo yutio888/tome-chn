@@ -44,7 +44,7 @@ registerTalentTranslation{
 	id = "T_TINKER_HAND_CANNON",
 	name = "手炮",
 	info = function(self, t)
-		return ([[向 在 %d  码 范 围 内 的 一 个 敌 人 开 火 造 成 %d%% 的 武 器 伤 害 。如 果 手 炮 是 由 沃 沦 特 钢 制 作 的 ，你 能 多 一 次 额 外 的 射 击 。射 击 是 远 程 攻 击 将 会 触 发 弹 药 特 效 。
+		return ([[向 在 %d  码 范 围 内 的 一 个 敌 人 开 火 造 成 %d%% 的 武 器 伤 害 。如 果 手 炮 是 由 沃 瑞 坦 钢 制 作 的 ，你 能 多 一 次 额 外 的 射 击 。射 击 是 远 程 攻 击 将 会 触 发 弹 药 特 效 。
 ]]):
 		format(self:getTalentRange(t), t.getDamage(self, t)*100)
 	end,}

@@ -53,7 +53,6 @@ require "data-chn123.log_name"
 require "data-chn123.birth.birth"
 require "data-chn123.texts.texts"
 require "data-chn123.damage_type"
-
 package.loaded["engine.ui.Dialog"] = require "data-chn123.dialog"
 engine.ui.Dialog = require "data-chn123.dialog"
 function chn123_tome_font()

@@ -1955,7 +1955,7 @@ function _M:tooltip(x, y, seen_by)
 
 	if ts[#ts-1] == "Temporary Status Effects: " then table.remove(ts) table.remove(ts) table.remove(ts) table.remove(ts) end
 
-	return ts
+	return getTooltipActorCHN(ts)
 end
 
 --- Regenerate life, call it from your actor class act() method

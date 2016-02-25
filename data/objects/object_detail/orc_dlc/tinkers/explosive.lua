@@ -4,7 +4,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = simple[i].." thunderclap coating",
-	chName = simplechn[i].." thunderclap coating",
+	chName = simplechn[i].." 霹雳涂层",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -13,7 +13,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = simple[i].." head lamp",
-	chName = simplechn[i].." head lamp",
+	chName = simplechn[i].." 头灯",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -22,7 +22,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = simple[i].." ablative armour",
-	chName = simplechn[i].." ablative armour",
+	chName = simplechn[i].." 耐热护甲",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -31,7 +31,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = simple[i].." incendiary groove",
-	chName = simplechn[i].." incendiary groove",
+	chName = simplechn[i].." 燃烧槽",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -40,7 +40,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = simple[i].." thunder grenade",
-	chName = simplechn[i].." thunder grenade",
+	chName = simplechn[i].." 闪电榴弹",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -48,7 +48,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = simple[i].." explosive shell",
-	chName = simplechn[i].." explosive shell",
+	chName = simplechn[i].." 爆炸弹",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -57,7 +57,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = simple[i].." flare shell",
-	chName = simplechn[i].." flare shell",
+	chName = simplechn[i].." 照明弹",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -66,7 +66,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = simple[i].." incendiary shell",
-	chName = simplechn[i].." incendiary shell",
+	chName = simplechn[i].." 燃烧弹",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -75,7 +75,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = simple[i].." solid shell",
-	chName = simplechn[i].." solid shell",
+	chName = simplechn[i].." 实心弹",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -84,7 +84,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = simple[i].." impaler shell",
-	chName = simplechn[i].." impaler shell",
+	chName = simplechn[i].." 冲击弹",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -93,7 +93,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = simple[i].." saw shell",
-	chName = simplechn[i].." saw shell",
+	chName = simplechn[i].." 切割弹",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -102,7 +102,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = simple[i].." hook shell",
-	chName = simplechn[i].." hook shell",
+	chName = simplechn[i].." 锁链弹",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -111,7 +111,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = simple[i].." magnetic shell",
-	chName = simplechn[i].." magnetic shell",
+	chName = simplechn[i].." 磁性弹",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -120,7 +120,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = simple[i].." voltaic shell",
-	chName = simplechn[i].." voltaic shell",
+	chName = simplechn[i].." 伏特弹",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -129,7 +129,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = simple[i].." antimagic shell",
-	chName = simplechn[i].." antimagic shell",
+	chName = simplechn[i].." 反魔弹",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -138,7 +138,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = simple[i].." botanical shell",
-	chName = simplechn[i].." botanical shell",
+	chName = simplechn[i].." 植物弹",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -147,7 +147,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = simple[i].." corrosive shell",
-	chName = simplechn[i].." corrosive shell",
+	chName = simplechn[i].." 腐蚀弹",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -156,7 +156,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = simple[i].." toxic shell",
-	chName = simplechn[i].." toxic shell",
+	chName = simplechn[i].." 毒气弹",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end

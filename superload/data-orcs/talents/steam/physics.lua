@@ -2,42 +2,39 @@ local _M = loadPrevious(...)
 
 registerTalentTranslation{
 	id = "T_SMITH",
-	name = "Smith",
+	name = "铁匠",
 	info = function(self, t)
-		return ([[Allows you to create smithed tinkers of level %d.
-		You will learn a new schematic at level 1.
-		Each other talent level, you have a 20%% chance to learn one more random schematic, if you have not gained it by level 5 you are guaranteed it (unless all are known).
+		return ([[允 许 你 制 造 %d 等 级 的 铁 匠 道 具 。
+			1 级 时 必 定 获 得 一 个 配 方 。 之 后 每 一 级 有 20%% 的 概 率 获 得 一 个 新 配 方 。 如 果 到 5 级 还 没 有 获 得 第 二 个 新 配 方 ， 就 必 定 再 获 得 一 个 新 配 方 。
 		%s]])
 		:format(math.floor(self:getTalentLevel(t)), tinkers_list_for_craft_chn(self, t))
 	end,}
 
 registerTalentTranslation{
 	id = "T_MECHANICAL",
-	name = "Mechanical",
+	name = "机械",
 	info = function(self, t)
-		return ([[Allows you to create mechanical tinkers of level %d.
-		You will learn a new schematic at level 1.
-		Each other talent level, you have a 20%% chance to learn one more random schematic, if you have not gained it by level 5 you are guaranteed it (unless all are known).
+		return ([[允 许 你 制 造 %d 等 级 的 机 械 道 具 。
+			1 级 时 必 定 获 得 一 个 配 方 。 之 后 每 一 级 有 20%% 的 概 率 获 得 一 个 新 配 方 。 如 果 到 5 级 还 没 有 获 得 第 二 个 新 配 方 ， 就 必 定 再 获 得 一 个 新 配 方 。
 		%s]])
 		:format(math.floor(self:getTalentLevel(t)), tinkers_list_for_craft_chn(self, t))
 	end,}
 
 registerTalentTranslation{
 	id = "T_ELECTRICITY",
-	name = "Electricity",
+	name = "电子",
 	info = function(self, t)
-		return ([[Allows you to create electrical tinkers of level %d.
-		You will learn a new schematic at level 1.
-		Each other talent level, you have a 20%% chance to learn one more random schematic, if you have not gained it by level 5 you are guaranteed it (unless all are known).
+		return ([[允 许 你 制 造 %d 等 级 的 电 子 道 具 。
+			1 级 时 必 定 获 得 一 个 配 方 。 之 后 每 一 级 有 20%% 的 概 率 获 得 一 个 新 配 方 。 如 果 到 5 级 还 没 有 获 得 第 二 个 新 配 方 ， 就 必 定 再 获 得 一 个 新 配 方 。
 		%s]])
 		:format(math.floor(self:getTalentLevel(t)), tinkers_list_for_craft_chn(self, t))
 	end,}
 
 registerTalentTranslation{
 	id = "T_COMPACT_STEAM_TANK",
-	name = "Compact Steam Tank",
+	name = "蒸汽容量强化",
 	info = function(self, t)
-		return ([[Increases the capacity of your steam tank by %d.]])
+		return ([[增 加 你 的 蒸 汽 容 量 %d 。]])
 		:format(t.getPower(self, t))
 	end,}
 return _M

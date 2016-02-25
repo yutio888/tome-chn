@@ -128,6 +128,6 @@ objUse["grant you complete invulnerability for five turns"] = "使你5回合内�
 --orc dlc
 objUse["learn how to build this tinker"] = "学习如何制作该物品"
 objUse["heal %d"] = "治疗%d"
-objUse["let you fight up to -%%d life and reduces all damage by %d%%%% for %d turns (takes no time to activate)"] = "获得-%d生命下限和%d%%全体伤害抗性%d回合，使用不消耗时间。"
+objUse["let you fight up to -%d life and reduces all damage by %d%%%% for %d turns (takes no time to activate)"] = "获得-%d生命下限和%d%%全体伤害抗性%d回合，使用不消耗时间。"
 objUse["increases all saves by %d and healing factor by half"] = "增加全豁免%d点，增加一半治疗系数"
 objUse["cause the next damage you deal to inflict crippling poison (does not recharge until used), dealing minor poison damage and causing your target to have a 10% chance to fail all talents"] = "令你下一次伤害附带致残毒素效果，有10%几率使技能使用失败。"

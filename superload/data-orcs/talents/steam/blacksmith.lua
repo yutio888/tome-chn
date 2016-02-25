@@ -4,7 +4,7 @@ registerTalentTranslation{
 	id = "T_MASSIVE_PHYSIQUE",
 	name = "强壮体魄",
 	info = function(self, t)
-		return ([[长 期 打 铁 ， 让 你 的 身 体 格 外 强 壮 ， 增 加 %d 力 量 和 %d 体 质 。
+		return ([[长 期 打 铁 ， 让 你 的 身 体 格 外 强 壮 ， 增 加 %d 力 量 和 体 质 。
 		技 能 等 级 5 时 ， 你 的 肌 肉 是 如 此 巨 大 ， 体 型 增 大 一 个 等 级 。]])
 		:format(2 * self:getTalentLevel(t))
 	end,}

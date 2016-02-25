@@ -631,8 +631,11 @@ function getObjectDescCHN(desc)
 					:gsub("Current Resistance:","当前抗性："):gsub("Blood Charges:","鲜血吸收:")
 					:gsub("item",""):gsub("life","生命"):gsub("silence","沉默")
 			desc[i]=desc[i]:gsub("status","状态"):gsub("alive","存活"):gsub("dead(does not provide benefits)","死亡（不提供属性）")
-			desc[i] = desc[i]:gsub("Attach on","附着于"):gsub("worn on",""):gsub("slot","")
+			desc[i] = desc[i]:gsub("Attach on","附着于"):gsub("worn on",""):gsub("slot",""):gsub("of type","")
 					:gsub("mainhand","主手"):gsub("offhand","副手"):gsub("finger","手指"):gsub("body","躯干")
+					:gsub("hands","手套"):gsub("feet","脚部"):gsub("head","头部"):gsub("cloak","披风"):gsub("belt","腰带")
+					:gsub("lite","灯具"):gsub("neck","项链"):gsub("tool","工具"):gsub("quiver","弹药")
+					:gsub("armor/shield","护甲/盾牌"):gsub("weapon","武器")
 			if desc[i]:find("When attach to") then desc[i] = "当附着时：" end
 			desc[i] = cutChrCHN(desc[i], 20)
 		end

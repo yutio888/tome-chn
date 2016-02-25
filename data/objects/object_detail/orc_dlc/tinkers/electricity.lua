@@ -7,7 +7,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = simple[i].." lightning coil",
-	chName = simplechn[i].." lightning coil",
+	chName = simplechn[i].." 闪电线圈",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -16,7 +16,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = simple[i].." mana coil",
-	chName = simplechn[i].." mana coil",
+	chName = simplechn[i].." 魔力线圈",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -25,7 +25,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = metals[i].." shocking touch",
-	chName = metalschn[i].." shocking touch",
+	chName = metalschn[i].." 电击装置",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -34,7 +34,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = metals[i].." deflection field",
-	chName = metalschn[i].." deflection field",
+	chName = metalschn[i].." 折射领域装置",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -43,7 +43,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = metals[i].." galvanic retributor",
-	chName = metalschn[i].." galvanic retributor",
+	chName = metalschn[i].." 流电分配装置",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -52,7 +52,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = metals[i].." gauss accelerator",
-	chName = metalschn[i].." gauss accelerator",
+	chName = metalschn[i].." 高斯加速装置",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -60,7 +60,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = metals[i].." voltaic sentry",
-	chName = metalschn[i].." voltaic sentry",
+	chName = metalschn[i].." 伏特守卫装置",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -69,7 +69,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = metals[i].." mental stimulator",
-	chName = metalschn[i].." mental stimulator",
+	chName = metalschn[i].." 精神刺激装置",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -78,7 +78,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = metals[i].." power distributor",
-	chName = metalschn[i].." power distributor",
+	chName = metalschn[i].." 能量分配装置",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end
@@ -87,7 +87,7 @@ for i = 1, 5 do
 objects:addObjects({
 	subtype = "steamtech",
 	enName = metals[i].." white light emitter",
-	chName = metalschn[i].." white light emitter",
+	chName = metalschn[i].." 白光发射装置",
 	chDesc = "插件能装在常规装备上，用蒸汽能量强化它们!",
 })
 end

@@ -282,7 +282,7 @@ t_talent_type_name = {}
 	t_talent_type_name["automation"] = "自动化"
 	t_talent_type_name["psytech gunnery"] = "超能射击"
 	t_talent_type_name["thoughts of iron"] = "钢铁意念"
-	t_talent_type_name["mechstar"] = "机械之星"
+	t_talent_type_name["mechstar"] = "机械灵晶"
 	t_talent_type_name["dread"] = "恐惧"
 	
 	

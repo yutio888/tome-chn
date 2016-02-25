@@ -1897,7 +1897,7 @@ function _M:getUseDesc(use_actor)
 			:gsub("project a bolt from the staff (to range ","发射元素球，距离")
 			:gsub("unleash an elemental blastwave, dealing","释放元素冲击波，造成"):gsub("damage in a radius","伤害，半径"):gsub("around the user","")
 			:gsub("conjure elemental energy in a radius","发射锥形元素能量，半径"):gsub("cone, dealing","造成")
-			:gsub("remove ","除去")
+				:gsub("remove ","除去")
 			:gsub(" physical effects and grants a frost aura","物理效果并制造冰霜领域，获得"):gsub("cold, darkness and nature affinity","寒冷、暗影和自然伤害吸收")
 			:gsub(" magical effects and grants a fiery aura","魔法效果并制造火焰领域，获得"):gsub("fire, light and lightning affinity","火焰、光明和闪电伤害吸收")
  			:gsub(" mental effects and grants a water aura","精神效果并制造火焰领域，获得"):gsub("blight, mind and acid affinity","枯萎、精神和酸性伤害吸收")
@@ -1918,8 +1918,14 @@ function _M:getUseDesc(use_actor)
 			elseif use_name:find("bonus disarm power, based on Magic") then
 				use_name = use_name:gsub("disarm traps", "拆除陷阱")
 				:gsub("bonus disarm power, based on Magic", "点额外拆除强度，基于魔法"):gsub("along a range", "范围为长度为"):gsub("line", "的直线")
+			elseif use_name:find("let you fight up to") then
+				use_name = use_name:gsub("let you fight up to","令你生命为")
+				:gsub("life and reduces all damage by ","仍能生存，同时全体伤害抗性增加")
+				:gsub("for","持续")
+				:gsub("turns","回合")
+				:gsub("takes no time to activate","使用不消耗时间")
 			end
-			use_name = use_name:gsub("dam","伤害"):gsub("damage","伤害"):gsub("dealing","造成"):gsub("for","")
+			use_name = use_name:gsub("damage","伤害"):gsub("dealing","造成"):gsub("for",""):gsub("dam","伤害")
 			use_name = use_name:gsub("create a temporary shield that absorbs ","制造一层临时护盾，至多能吸收")
 			ret = tstring{{"color","YELLOW"}, ("可以用来施放【%s】, 使%s进入%d回合冷却。"):format(use_name, t_name, usepower(self.use_power.power)), {"color","LAST"}}
 

@@ -40,3 +40,4 @@ registerTalentTranslation{
 		return ([[你 向 半 径 %d 的 锥 形 内 喷 出 致 死 瘴 气。 任 何 被 喷 到 的 目 标 将 在 4  会 合 内 受 到 %0.2f 暗 影 伤 害 并 被 混 乱 灾 祸 或 致 盲 灾 祸 影 响。
 		伤 害 将 会 随 着 你 的 魔 力 增 长， 并 且 暴 击 率 基 于 你 的 魔 法 暴 击 率。]]):format(self:getTalentRadius(t), damDesc(self, DamageType.DARKNESS, self:combatTalentStatDamage(t, "mag", 30, 550)))
 	end,}
+return _M

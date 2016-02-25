@@ -40,4 +40,4 @@ registerTalentTranslation{
 		format(turn * 100)
 	end,}
 
-
+return _M

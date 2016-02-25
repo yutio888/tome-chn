@@ -56,3 +56,4 @@ registerTalentTranslation{
 		]]):
 		format(t.getNb(self, t))
 	end,}
+return _M

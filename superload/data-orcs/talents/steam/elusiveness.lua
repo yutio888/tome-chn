@@ -40,3 +40,4 @@ registerTalentTranslation{
 		The impact is so great that it ripples outwards, slowing all creatures in radius 3 by %d%% for 4 turns while the reaction force propels you %d tiles backwards.]])
 		:format(t.getRange(self, t), t.getSlow(self, t), t.getAway(self, t))
 	end,}
+return _M

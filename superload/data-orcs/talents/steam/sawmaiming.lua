@@ -45,3 +45,4 @@ registerTalentTranslation{
 		format(self:getTalentRange(t), damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t) / 6), t.getDuration(self, t))
 	end,}
 
+return _M

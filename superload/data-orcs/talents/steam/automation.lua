@@ -38,3 +38,4 @@ registerTalentTranslation{
 		技 能 持 续 4 回 合 。]]):
 		format(self:getTalentRadius(t), damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t)))
 	end,}
+return _M

@@ -36,3 +36,4 @@ registerTalentTranslation{
 		Gain %d cunning, %d physical save, %d%% resistance to self-inflicted damage, and %d%% chance to avoid being critically hit.]])
 		:format(self:getTalentLevel(t) * 2, t.physSave(self, t), t.selfResist(self, t), t.critResist(self, t))
 	end,}
+return _M

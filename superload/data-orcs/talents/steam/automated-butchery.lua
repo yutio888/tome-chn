@@ -47,3 +47,4 @@ registerTalentTranslation{
 		format(talentcount, maxlevel, inc)
 	end,}
 
+return _M

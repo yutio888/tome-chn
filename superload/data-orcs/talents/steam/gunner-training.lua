@@ -39,3 +39,4 @@ registerTalentTranslation{
 		This talent does not use ammo.]])
 		:format(self:getTalentRadius(t), 100 * t.getMultiple(self, t), t.getRemoveCount(self, t))
 	end,}
+return _M

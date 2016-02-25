@@ -1,4 +1,3 @@
-
 local _M = loadPrevious(...)
 
 registerTalentTranslation{
@@ -11,3 +10,4 @@ registerTalentTranslation{
 		:format()
 	end,
 }
+return _M

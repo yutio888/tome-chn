@@ -40,3 +40,5 @@ registerTalentTranslation{
 		return ([[Fires out a bolt of pure energy, dealing %0.2f light and %0.2f darkness damage in a radius of %d, and slowing targets hit. Their movement is reduced by %d%% and attacking, casting and mind attacks by %d%%. The bolt will attune to your current positive and negative energy amounts.]]):
 		format(damDesc(self, DamageType.LIGHT, dam * (1 - negpart)), damDesc(self, DamageType.DARKNESS, dam * negpart), radius, slow * negpart, slow * 0.6 * (1 - negpart))
 	end,}
+	
+	return _M

@@ -37,3 +37,4 @@ registerTalentTranslation{
 		 潜 行 强 度 随 蒸 汽 强 度 提 高 增 加。]]):
 		format(t.getStealth(self, t))
 	end,}
+return _M

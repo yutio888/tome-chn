@@ -116,3 +116,6 @@ registerTalentTranslation{
 	info = function(self, t)
 		return "Yeti SMASH!"
 	end,}
+
+
+return _M

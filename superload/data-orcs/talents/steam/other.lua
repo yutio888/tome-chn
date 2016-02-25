@@ -397,3 +397,4 @@ registerTalentTranslation{
 		The damage scales with your Steampower.]]):
 		format(dur*2, dur, damDesc(self, DamageType.NATURE, dam), t.getSlow(self, t), t.getPin(self, t))
 	end,}
+return _M

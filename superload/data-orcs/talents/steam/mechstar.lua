@@ -39,3 +39,4 @@ registerTalentTranslation{
 		return ([[When you use a shoot class talent to hit a creature affected by bloodstar an other shoot talent will have its current cooldown reduced by %d turns.]])
 		:format(t.getReduct(self, t))
 	end,}
+return _M

@@ -34,3 +34,5 @@ registerTalentTranslation{
 		return([[Summons a clone for %d turns which casts all the spells you cast, dealing %d%% damage and having %d%% health. Additionally, all light damage the clone deals becomes darkness damage and all darkness damage becomes light damage.]]):
 		format(duration, damage * 100, health * 100)
 	end,}
+	
+	return _M

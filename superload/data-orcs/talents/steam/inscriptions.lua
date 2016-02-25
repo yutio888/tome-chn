@@ -47,3 +47,4 @@ registerInscriptionTranslation{
 		return ([[效率 %d%% / 冷却 %d%%]]):format(data.power + data.inc_stat, data.cooldown_mod)
 	end,
 }
+return _M

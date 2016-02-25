@@ -47,3 +47,4 @@ registerTalentTranslation{
 		:format(t.getDur(self, t), damDesc(self, DamageType.FIRE, dam/2), damDesc(self, DamageType.PHYSICAL, dam/2))
 	end,}
 
+return _M

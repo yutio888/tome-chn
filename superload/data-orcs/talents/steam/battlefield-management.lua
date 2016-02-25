@@ -46,3 +46,4 @@ registerTalentTranslation{
 		#{italic}#一切尽在掌控 ！！#{normal}#]]):
 		format(math.floor(self:getTalentLevel(t)), t.getLife(self, t), t.getChance(self, t))
 	end,}
+return _M

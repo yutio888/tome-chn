@@ -15,3 +15,5 @@ Light damage slows the target by %0.2f%% per point of damage dealt for %d turns,
 Dark damage creates an effect at the tile for %d turns which deals %d%% of the damage dealt each turn. It will be refreshed as long as the target continues taking damage from it or another source while Twilit Echoes is active, dealing its remaining damage over the new duration as well as the new damage.]])
 		:format(duration, slow_per * 100, echo_dur, slow_max * 100, slow_max/slow_per, echo_dur, 100 * echo_factor)
 	end,}
+	
+	return _M

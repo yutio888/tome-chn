@@ -43,3 +43,4 @@ registerTalentTranslation{
 		这 个 效 果 每 回 合 只 能 触 发 一 次。]]):
 		format(t.getNb(self, t), t.getSave(self, t), t.getPower(self, t))
 	end,}
+return _M

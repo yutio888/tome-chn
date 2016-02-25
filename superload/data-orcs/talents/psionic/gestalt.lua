@@ -41,3 +41,4 @@ registerTalentTranslation{
 		除 此 之 外， 在 5 回 合 内 你 可 以 超 脱 视 线 的 感 知 半 径 %d 码 内 的 生 物。
 		效 果 会 随 着 你 的 精 神 强 度 增 加。]]):format(t.getNb(self, t), t.getPower(self, t), t.getSenseRadius(self, t))
 	end,}
+return _M

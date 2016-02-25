@@ -45,3 +45,4 @@ registerTalentTranslation{
 		这 个 效 果 有 冷 却 时 间 。]]):
 		format()
 	end,}
+return _M

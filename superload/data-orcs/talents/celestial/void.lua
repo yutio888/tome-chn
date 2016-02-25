@@ -43,3 +43,5 @@ registerTalentTranslation{
 		return ([[Summons the starscape in the surrounding area in a radius of %d. For %d turns, this area exists outside normal time, and in zero gravity. In addition to the effects of zero gravity, Movement of projectiles and other creatures is three times as slow. Spells and attacks cannot escape the radius until the effect ends.]]):
 		format(radius, duration)
 	end,}
+	
+	return _M

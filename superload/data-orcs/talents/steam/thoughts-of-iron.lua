@@ -40,3 +40,4 @@ registerTalentTranslation{
 		return ([[By using a direct psionic link to your body you can use even more therapeutics. %d%% efficiency and %d%% cooldown mod.]])
 		:format(data.power + data.inc_stat, data.cooldown_mod)
 	end,}
+return _M

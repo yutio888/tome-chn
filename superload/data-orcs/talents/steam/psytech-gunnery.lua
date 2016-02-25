@@ -36,3 +36,4 @@ registerTalentTranslation{
 		When it hits a foe the device activates, violently sucking all the air nearby, pulling in all creatures in radius %d.]])
 		:format(100 * t.getDam(self, t), self:getTalentRadius(t))
 	end,}
+return _M

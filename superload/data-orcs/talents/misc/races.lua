@@ -85,3 +85,5 @@ registerTalentTranslation{
 		The damage scales with your Magic stat.]]):
 		format(t.getDamage(self, t), t.getDur(self, t))
 	end,}
+
+return _M

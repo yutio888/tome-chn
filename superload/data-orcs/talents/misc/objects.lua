@@ -43,3 +43,5 @@ registerTalentTranslation{
 		This attack does 180% weapon damage.
 		You must dash from at least 2 tiles away.]])
 	end,}
+
+return _M

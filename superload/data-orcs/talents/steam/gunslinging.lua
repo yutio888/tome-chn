@@ -45,3 +45,4 @@ registerTalentTranslation{
 		Your shot deals %d%% weapon damage on its first strike, but loses %d%% damage and %d(%d%%) accuracy with each bounce.]]):
 		format(t.getNb(self, t), 100 * t.damageMult(self, t), (1-t.ricochetDamage(self, t))*100, accy*ricoaccy, ricoaccy*100)
 	end,}
+return _M

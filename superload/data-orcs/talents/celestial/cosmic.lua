@@ -41,3 +41,4 @@ registerTalentTranslation{
 		The damage and pin chance increase with your spellpower, and the damage, radius and pin duration all increase with negative energy and talent level]]):
 		format(radius, self:getTalentRange(t), damDesc(self, DamageType.DARKNESS, damage), pin)
 	end,}
+return _M

@@ -4,6 +4,9 @@ objectU = {}
 objectG = {}
 objectS = {}
 objectW = {}
+
+objectSP = {}
+
 objCHN = {}
 
 require "data-chn123.objects.object_detail.egos"
@@ -19,13 +22,16 @@ function objects:addObjects(objects)
 			objectS[#objectS+1] = objects
 		elseif objects.subtype == "wand" then
 			objectW[#objectW+1] = objects
-		else
+		elseif objects.sName then
 			if not objectN[objects.subtype] then
 				objectN[objects.subtype] = {}
-				objectN[objects.subtype][objects.sName] = objects
-			else
-				objectN[objects.subtype][objects.sName] = objects
 			end
+				objectN[objects.subtype][objects.sName] = objects
+		else
+			if not objectSP[objects.subtype] then
+				objectSP[objects.subtype] = {}
+			end
+				objectSP[objects.subtype][objects.enName] = objects
 		end
 	end
 end
@@ -112,6 +118,12 @@ function objects:getObjects(name,desc,subtype,short_name,is_ided,rare,unique)
 				end
 			end
 		else
+			if objectSP[subtype] then
+				if objectSP[subtype][name] then
+					o.chName = objectSP[subtype][name].chName
+					o.desc = objectSP[subtype][name].chDesc
+				end
+			end
 			if objectN[subtype] then
 				if objectN[subtype][short_name] then
 					local enName = objectN[subtype][short_name].enName
@@ -219,8 +231,9 @@ dofile("data-chn123/objects/object_detail/rods.lua")
 dofile("data-chn123/objects/object_detail/torques.lua")
 dofile("data-chn123/objects/object_detail/totems.lua")
 --orc DLC
---dofile("data-chn123/objects/object_detail/orc_dlc/inscriptions.lua")
+dofile("data-chn123/objects/object_detail/orc_dlc/inscriptions.lua")
 dofile("data-chn123/objects/object_detail/orc_dlc/leather-hats.lua")
---dofile("data-chn123/objects/object_detail/orc_dlc/schematics.lua")
+dofile("data-chn123/objects/object_detail/orc_dlc/schematics.lua")
 dofile("data-chn123/objects/object_detail/orc_dlc/steamgun.lua")
 dofile("data-chn123/objects/object_detail/orc_dlc/steamsaw.lua")
+dofile("data-chn123/objects/object_detail/orc_dlc/tinkers.lua")

@@ -9,3 +9,9 @@ function tinkers_list_for_craft_chn(self, t)
 	l[#l+1] = "#{italic}#* ...可能能发现更多...#{normal}#"	
 	return table.concat(l, "\n")
 end
+
+tinkerCHN = {}
+tinkerCHN["Healing Salve"] = {
+	name = "治疗药剂",
+	desc = "强力的治疗药剂，需要药剂注射器来使用。",
+	}

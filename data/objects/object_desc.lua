@@ -22,7 +22,7 @@ objectMType["organic"] = "器官"
 objectMType["lore"] = "文献"
 objectMType["corpse"] = "尸体"
 objectMType["seed"] = "种子"
-objectMType["tinker"] = "附着物"
+objectMType["tinker"] = "配件"
 objectSType = {}
 objectSType["battleaxe"] = "战斧"
 objectSType["greatmaul"] = "巨槌"
@@ -95,7 +95,7 @@ objectSType["implant"] = "植入物"
 objectSType["schematic"] = "设计图"
 objectSType["steamgun"] = "蒸汽枪"
 objectSType["steamtech"] = "蒸汽科技"
-objectSType["salve"] = "药膏"
+objectSType["salve"] = "药剂"
 --------------------------------------------------------
 --鼠标信息
 --------------------------------------------------------

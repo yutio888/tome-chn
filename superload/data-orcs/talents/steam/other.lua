@@ -27,9 +27,9 @@ registerTalentTranslation{
 
 registerTalentTranslation{
 	id = "T_CREATE_TINKER",
-	name = "ÖÆÔì¸½×ÅÎï",
+	name = "åˆ¶é€ é™„ç€ç‰©",
 	info = function(self, t)
-		return ([[ÔÊĞíÄãÖÆÔì¸½×ÅÎï¡£]])
+		return ([[å…è®¸ä½ åˆ¶é€ é™„ç€ç‰©ã€‚]])
 	end,}
 --
 --registerTalentTranslation{

@@ -126,6 +126,7 @@ objUse["grant you two additional generic talent points"] = "获得额外2点通�
 objUse["grant you complete invulnerability for five turns"] = "使你5回合内无敌"
 
 --orc dlc
+objUse["learn how to build this tinker"] = "学习如何制作该物品"
 objUse["heal %d"] = "治疗%d"
 objUse["let you fight up to -%%d life and reduces all damage by %d%%%% for %d turns (takes no time to activate)"] = "获得-%d生命下限和%d%%全体伤害抗性%d回合，使用不消耗时间。"
 objUse["increases all saves by %d and healing factor by half"] = "增加全豁免%d点，增加一半治疗系数"

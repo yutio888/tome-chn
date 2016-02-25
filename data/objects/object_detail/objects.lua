@@ -117,6 +117,9 @@ function objects:getObjects(name,desc,subtype,short_name,is_ided,rare,unique)
 					o.desc = objectW[i].chDesc
 				end
 			end
+		elseif subtype == "schematic" then
+					o.chName = "配方："..tinkerCHN:getname(name:gsub("schematic: ",""))
+					o.desc = "配方被工匠用于制作新的发明。"
 		else
 			if objectSP[subtype] then
 				if objectSP[subtype][name] then

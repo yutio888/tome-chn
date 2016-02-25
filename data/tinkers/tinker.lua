@@ -11,7 +11,14 @@ function tinkers_list_for_craft_chn(self, t)
 end
 
 tinkerCHN = {}
-tinkerCHN["Healing Salve"] = {
-	name = "治疗药剂",
-	desc = "强力的治疗药剂，需要药剂注射器来使用。",
-	}
+function tinkerCHN:getname(name)
+	if tinkerCHN[name] then return tinkerCHN[name].name
+	else return name
+	end
+end
+dofile("data-chn123/tinkers/therapeutics.lua")
+dofile("data-chn123/tinkers/smith.lua")
+dofile("data-chn123/tinkers/mechanical.lua")
+dofile("data-chn123/tinkers/explosive.lua")
+dofile("data-chn123/tinkers/electricity.lua")
+dofile("data-chn123/tinkers/chemistry.lua")

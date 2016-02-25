@@ -612,6 +612,7 @@ function getObjectDescCHN(desc)
 			        end
 
 			end
+			desc[i] = desc[i]:gsub("already known tinker","已学会")
 			desc[i] = desc[i]:gsub("Powered by ","装备灌输力量："):gsub("steamtech","蒸汽科技"):gsub("Steamsaw Mastery","蒸汽链锯掌握"):gsub("Steamgun Mastery","蒸汽枪掌握"):gsub("Psyshot","灵能射击")
 			desc[i] = desc[i]:gsub("chance to trigger a Blood Grasp cast of level","几率触发鲜血支配，等级"):gsub("chance to trigger a Silence cast of level ","几率触发沉默，等级"):gsub("Reduces duration of detrimental effects by 40%%","减少40%%负面状态持续时间")
 			desc[i] = special_t[desc[i]] or desc[i]

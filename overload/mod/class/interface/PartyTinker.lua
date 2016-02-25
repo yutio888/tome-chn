@@ -52,6 +52,7 @@ function _M:newTinkerRecipe(t)
 	if fs.exists(Tiles.baseImageFile(t.icon)) then t.display_entity = Entity.new{image=t.icon, is_tinker=true}
 	else t.display_entity = Entity.new{image="talents/default.png", is_talent=true}
 	end
+	t.enName = t.name
 	if tinkerCHN and tinkerCHN[t.name] then
 		t.desc = tinkerCHN[t.name].desc
 		t.name = tinkerCHN[t.name].name

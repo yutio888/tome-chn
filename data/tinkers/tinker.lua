@@ -22,3 +22,7 @@ dofile("data-chn123/tinkers/mechanical.lua")
 dofile("data-chn123/tinkers/explosive.lua")
 dofile("data-chn123/tinkers/electricity.lua")
 dofile("data-chn123/tinkers/chemistry.lua")
+
+for name, value in pairs(tinkerCHN) do
+	tinkerCHN[name:lower()] = value
+	end

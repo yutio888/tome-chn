@@ -6,7 +6,7 @@ tinkerCHN["Steamsaw"] = {
 
 tinkerCHN["Focus Lens"] = {
 		name = "聚焦透镜",
-		desc = "由宝石和金属组成的简单装置，可以增强你的视觉范围、夜视能力和检测隐形的能力！在材质等级4以上时，他还能让你获得心眼的能力！{italic}#太神奇了！#{normal}#",
+		desc = "由宝石和金属组成的简单装置，可以增强你的视觉范围、夜视能力和检测隐形的能力！在材质等级4以上时，他还能让你获得心眼的能力！#{italic}#太神奇了！#{normal}#",
 }
 
 tinkerCHN["Toxic Cannister Launcher"] = {

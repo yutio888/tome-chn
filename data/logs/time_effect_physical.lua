@@ -1245,7 +1245,7 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
-	log = "#Target# tweaks some of his bullets.",
+	log = "#Target# tweaks some of 他的 bullets.",
 	fct = function(a)
 		a = npcCHN:getName(a)
 		return ("%s 调整了部分弹药."):format(a)
@@ -1253,7 +1253,7 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
-	log = "#Target# tweaks some of her bullets.",
+	log = "#Target# tweaks some of 她的 bullets.",
 	fct = function(a)
 		a = npcCHN:getName(a)
 		return ("%s 调整了部分弹药."):format(a)

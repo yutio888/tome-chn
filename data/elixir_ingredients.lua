@@ -215,3 +215,89 @@ i_ingredient["pouch of luminous horror dust"] = {
 	chName = "一袋金色恐魔的粉尘",
 	chDesc = "不同于通常意义上的灰尘，这些灰尘毫无重量并发出阵阵光芒。",
 }
+
+
+i_ingredient["pouch of luminous horror dust"] = {
+	type = "内脏",
+	chName = "一袋金色恐魔的粉尘",
+	chDesc = "不同于通常意义上的灰尘，这些灰尘毫无重量并发出阵阵光芒。",
+}
+
+
+i_ingredient["lump of iron"] = {
+	type = "金属",
+	chName = "铁块",
+	chDesc = [[铁块.]],
+}
+
+i_ingredient["lump of steel"] = {
+	type = "金属",
+	chName = "钢块",
+	chDesc = [[钢块]],
+}
+
+i_ingredient["lump of dwarven steel"] = {
+	type = "金属",
+	chName = "矮人钢块",
+	chDesc = [[矮人钢块]],
+}
+
+i_ingredient["lump of stralite"] = {
+	type = "金属",
+	chName = "蓝锆石块",
+	chDesc = [[蓝锆石块]],
+}
+
+i_ingredient["lump of voratun"] = {
+	type = "金属",
+	chName = "沃瑞坦块",
+	chDesc = [[沃瑞坦块]],
+}
+
+i_ingredient["stack of herbs (viperweed)"] = {
+	type = "植物",
+	chName = "一束植物 (蛇草)",
+	chDesc = [[一束植物.]],
+}
+
+i_ingredient["stack of herbs (sessali)"] = {
+	type = "植物",
+	chName = "一束植物 (花)",
+	chDesc = [[一束植物.]],
+}
+
+i_ingredient["stack of herbs (bilberry)"] = {
+	type = "植物",
+	chName = "一束植物 (越桔)",
+	chDesc = [[一束植物.]],
+}
+
+i_ingredient["stack of herbs (burdock)"] = {
+	type = "植物",
+	chName = "一束植物 (牛蒡)",
+	chDesc = [[一束植物.]],
+}
+
+i_ingredient["stack of herbs (goldleaf)"] = {
+	type = "植物",
+	chName = "一束植物 (金叶)",
+	chDesc = [[一束植物.]],
+}
+
+i_ingredient["brain in a jar"] = {
+	type = "杂项",
+	chName = "瓶中脑",
+	chDesc = [[强大灵能生物的大脑，依然存活着。]],
+}
+
+i_ingredient["mechanical core"] = {
+	type = "杂项",
+	chName = "机械核",
+	chDesc = [[自动防御系统的核心元件。]],
+}
+
+i_ingredient["primal core"] = {
+	type = "杂项",
+	chName = "原始之核",
+	chDesc = [[伟大树木的核心之木。]],
+}

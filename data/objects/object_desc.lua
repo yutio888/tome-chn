@@ -115,6 +115,7 @@ objDesc["Mastery: "] = "武器精通类型:"
 objDesc["Accuracy bonus: "] = "命中加成："
 objDesc["Talent mastery: "] = "技能掌握："
 objDesc["Talent masteries: "] = "技能掌握："
+objDesc["Dam. multiplier: "] = "伤害倍率："
 objDesc["Requires:"] = "装备需求："
 objDesc["Damage type: "] = "伤害类型："
 objDesc["Accuracy: "] = "命中："
@@ -394,7 +395,7 @@ objDesc["Deals stacking poison damage."] = "造成可叠加的毒素伤害。"
 objDesc["Infects targets with a stat reducing disease."] = "传染属性削减疾病"
 objDesc["Deals cold damage and slows."] = "造成寒冷伤害并减速"
 objDesc["Deals acid damage that also reduces armour."] = "造成酸性伤害并降低护甲"
-objDesc["On falling below 20% of your max life, releases a cloud of smoke, confusing nearby enemies and giving you stealth and a chance to avoid incoming damage for 5 turns."]="当生命值少于20%%时， 释放烟雾潜行， 混乱周围生物， 并有一定几率免疫伤害，持续5回合。"
+objDesc["On falling below 20% of your max life, releases a cloud of smoke, confusing nearby enemies and giving you stealth and a chance to avoid incoming damage for 5 turns."]="当生命值少于20%时， 释放烟雾潜行， 混乱周围生物， 并有一定几率免疫伤害，持续5回合。"
 special_t = {}
 	special_t["10% chance to stun, blind, pin, or confuse the target"] = "10% 几率震慑、致盲、定身或混乱目标"
 	special_t["cripple the target"] = "致残目标"
@@ -589,7 +590,7 @@ function getObjectDescCHN(desc)
 				elseif desc[i]:find("You cannot bleed.") then
 					desc[i] = desc[i]:gsub("You cannot bleed.\nWhen you take damage, if your life is under 20%%, heal for 30%% of your max life.","你不会流血。\n每次受伤害时，若生命值少于20%%，治疗30%%最大生命值。"):gsub("turns until ready","回合冷却剩余"):gsub("15 turn cooldown","15回合冷却时间")
 				elseif desc[i]:find("air each turn") then
-					desc[i]=desc[i]:gsub("Return","每回合回复"):gsub("air each turn","空气")
+					desc[i]=desc[i]:gsub("Returns","每回合回复"):gsub("air each turn","空气")
 				elseif desc[i]:find("life when you use a salve") then
 					desc[i]=desc[i]:gsub("Heals you for","每次使用药膏时恢复"):gsub("life when you use a salve.","生命")
 				elseif desc[i]:find("flashes light on your target dealing") then
@@ -623,13 +624,14 @@ function getObjectDescCHN(desc)
 			desc[i] = desc[i]:gsub("chance to trigger a Blood Grasp cast of level","几率触发鲜血支配，等级"):gsub("chance to trigger a Silence cast of level ","几率触发沉默，等级"):gsub("Reduces duration of detrimental effects by 40%%","减少40%%负面状态持续时间")
 			desc[i] = special_t[desc[i]] or desc[i]
 			desc[i] = itemDamagedesc(desc[i])
+			desc[i] = desc[i]:gsub("chance of physical repulsion","几率物理击退")
 			desc[i] =desc[i]:gsub("fire","火焰"):gsub("lightning","闪电"):gsub("arcane","奥术"):gsub("cold","寒冷")
 					:gsub("blight","枯萎"):gsub("darkness","暗影"):gsub("physical","物理"):gsub("temporal","时空")
 					:gsub("chance of gloom effects","黑暗光环")
 				   	:gsub("light","光系"):gsub("acid","酸性"):gsub("mental","精神"):gsub("nature","自然"):gsub("dazing","眩晕")
 					:gsub("Unnatural","非自然生物"):gsub("Undead","不死族"):gsub("Demon","恶魔"):gsub("Major","大型"):gsub("Minor","小型")
 					:gsub("Summoned","召唤物"):gsub("Animal","动物"):gsub("Humanoid","人形生物"):gsub("Orc","兽人")
-					:gsub("Horror","恐魔"):gsub("Dragon","龙"):gsub("Canine","犬类"):gsub("Living","活物")
+					:gsub("Horror","恐魔"):gsub("Dragon","龙"):gsub("Canine","犬类"):gsub("Living","活物"):gsub("Giant","巨人")
 					:gsub("Celestial","天空"):gsub("Chronomancy","时空"):gsub("Corruption","堕落"):gsub("Cursed","诅咒")
 					:gsub("Technique","格斗"):gsub("Cunning","灵巧"):gsub("Wild","自然"):gsub("-gift",""):gsub("Psionic","超能"):gsub("Spell","法术")
 					:gsub("Undead","亡灵"):gsub("Golem","傀儡"):gsub("Race","种族技能")
@@ -641,7 +643,7 @@ function getObjectDescCHN(desc)
 					:gsub("mainhand","主手"):gsub("offhand","副手"):gsub("finger","手指"):gsub("body","躯干")
 					:gsub("hands","手套"):gsub("feet","脚部"):gsub("head","头部"):gsub("cloak","披风"):gsub("belt","腰带")
 					:gsub("lite","灯具"):gsub("neck","项链"):gsub("tool","工具"):gsub("quiver","弹药")
-					:gsub("armor/shield","护甲/盾牌"):gsub("weapon","武器")
+					:gsub("armor","护甲"):gsub("weapon","武器"):gsub("shield","盾牌"):gsub("staff","法杖")
 			if desc[i]:find("When attach to") then desc[i] = "当附着时：" end
 			desc[i] = cutChrCHN(desc[i], 20)
 		end

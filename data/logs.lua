@@ -10,8 +10,6 @@ function logCHN:newLog(l)
 	logTableCHN[l.log] = l
 end
 
-
-
 dofile("data-chn123/logs/chat.lua")
 dofile("data-chn123/logs/class.lua")
 dofile("data-chn123/logs/damage_type.lua")

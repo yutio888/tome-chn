@@ -144,8 +144,8 @@ function _M:makeTinker(who, id, ml, silent)
 		who:addObject(who.INVEN_INVEN, o)
 		who:sortInven()
 		game.zone:addEntity(game.level, o, "object")
-		game.log("Created tinker: %s", o:getName{do_color=true})
-		game.bignews:saySimple(110, "Created tinker: %s", o:getName{do_color=true})
+		game.log("制造配件: %s", o:getName{do_color=true})
+		game.bignews:saySimple(110, "制造配件: %s", o:getName{do_color=true})
 		remove(true)
 
 		if tdef.auto_hotkey_item and who.addNewHotkey then
@@ -164,6 +164,6 @@ function _M:learnTinker(id, vocal)
 	if not tdef then return end
 	if self.known_tinkers[id] then return end
 	self.known_tinkers[id] = true
-	game.log("Learnt new tinker schematic: #LIGHT_GREEN#%s", tdef.name)
+	game.log("学会新配方: #LIGHT_GREEN#%s", tdef.name)
 	if vocal then game.bignews:saySimple(180, "Learnt new tinker schematic: #LIGHT_GREEN#%s", tdef.name) end
 end

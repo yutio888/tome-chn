@@ -177,7 +177,7 @@ function hookObjectDescPowerSource(self, data)
 end
 
 function hookObjectDescWielder(self, data)
-	data.compare_scaled(data.w, data.compare_with, data.field, "combat_steampower", {"combatSteampower"}, "%+d #LAST#(%+d eff.)", "Steampower: ")
+	data.compare_scaled(data.w, data.compare_with, data.field, "combat_steampower", {"combatSteampower"}, "%+d #LAST#(%+d 有效值.)", "Steampower: ")
 	data.compare_fields(data.w, data.compare_with, data.field, "combat_steamcrit", "%+d%%", "Steam crit. chance: ")
 	data.compare_fields(data.w, data.compare_with, data.field, "combat_steamspeed", "%+d%%", "Steamtech Speed: ", 100)
 	data.compare_fields(data.w, data.compare_with, data.field, "steam_regen", "%+.2f", "Steam each turn: ")

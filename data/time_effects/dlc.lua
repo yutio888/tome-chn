@@ -1,3 +1,5 @@
+
+local DamageType = require "engine.DamageType"
 timeEffectCHN:newEffect{
 	id = "DEMON_BLADE",
 	enName = "Demon blade",

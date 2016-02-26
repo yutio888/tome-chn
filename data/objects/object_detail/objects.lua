@@ -18,7 +18,7 @@ function objects:addObjects(objects)
 	else
 		if objects.subtype == "white" or objects.subtype == "red" or objects.subtype == "yellow" or objects.subtype == "green" or objects.subtype == "blue" or objects.subtype == "black" or objects.subtype == "violet" then
 			objectG[objects.enName] = objects
-		elseif objects.subtype == "infusion" or objects.subtype == "rune" or objects.subtype == "taint" or objects.subtype == "scroll" or objects.subtype == "lore" then
+		elseif objects.subtype == "infusion" or objects.subtype == "rune" or objects.subtype == "taint" or objects.subtype == "scroll" or objects.subtype == "lore" or objects.subtype == "implant"then
 			objectS[#objectS+1] = objects
 		elseif objects.subtype == "wand" then
 			objectW[#objectW+1] = objects
@@ -77,7 +77,7 @@ function objects:getObjects(name,desc,subtype,short_name,is_ided,rare,unique)
 				o.chName = objectG[o.enName].chName
 				o.desc = objectG[o.enName].chDesc
 			end
-		elseif subtype == "infusion" or subtype == "rune" or subtype == "taint" or subtype == "scroll" or subtype == "lore" then
+		elseif subtype == "infusion" or subtype == "rune" or subtype == "taint" or subtype == "scroll" or subtype == "lore" or subtype == "implant" then
 			for i = 1,#objectS do
 				if string.find(o.name,objectS[i].enName) then
 					local enName = objectS[i].enName

@@ -101,6 +101,12 @@ objectSType["salve"] = "药剂"
 --------------------------------------------------------
 objDesc = {}
 
+objDesc["Steampower: "] = "蒸汽强度"
+objDesc["Steam crit. chance: "] = "蒸汽暴击几率："
+objDesc["Steamtech Speed: "] = "蒸汽速度："
+objDesc["Steam each turn: "] = "每回合蒸汽回复："
+objDesc["Maximum steam: "] = "蒸汽容量："
+--
 objDesc["[Plot Item]"] = "[剧情物品]"
 objDesc["It must be held with both hands."] = "你必须使用双手装备。"
 objDesc["It is part of a set of items."] = "它是某个套装中的一件。"

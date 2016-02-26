@@ -21,7 +21,7 @@ registerTalentTranslation{
 
 registerTalentTranslation{
 	id = "T_UNCANNY_RELOAD",
-	name = "诡异装填",
+	name = "神秘装填",
 	info = function(self, t)
 		return ([[你 集 中 精 力 于 蒸 汽 枪 弹 药 %d 回 合 。
 		效 果 持 续 期 间 不 消 耗 弹 药 。]])

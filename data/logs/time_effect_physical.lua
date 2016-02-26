@@ -1227,3 +1227,348 @@ logCHN:newLog{
 	end,
 }
 
+--orc DLC
+logCHN:newLog{
+	log = "#Target# is crushed by the iron grip.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 被铁腕碾压。"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# is free from the iron grip.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s从铁腕中脱离。"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# tweaks some of his bullets.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 调整了部分弹药."):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# tweaks some of her bullets.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 调整了部分弹药."):format(a)
+	end,
+}
+
+
+logCHN:newLog{
+	log = "#Target# is focuses on firing.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 集中精力开火。"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# is less focused.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 不再集中精力。"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# disappears from sight.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 从视线中消失了。"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# re-appears.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 重新出现了。"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# uses a pain suppressor salve.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 使用了痛苦压制药剂"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# is not affected anymore by the salve.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 不再受药剂影响。"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# uses a frost salve.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 使用了冰霜药剂。"):format(a)
+	end,
+}
+
+
+logCHN:newLog{
+	log = "#Target# uses a fiery salve.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 使用了烈火药剂。"):format(a)
+	end,
+}
+
+
+
+logCHN:newLog{
+	log = "#Target# uses a water salve.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 使用了静水药剂。"):format(a)
+	end,
+}
+
+
+
+logCHN:newLog{
+	log = "#Target# uses an unstoppable force salve.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 使用了势不可挡药剂。"):format(a)
+	end,
+}
+
+
+
+logCHN:newLog{
+	log = "#Target# supercharges all tinkers.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 超频了所有配件。"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target#'s supercharge is fading.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s的超频结束了。"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# overcharges saw motors.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 超频了链锯引擎。"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target#'s saw motors are back to normal.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s的链锯引擎恢复常态。"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# is #ORANGE#INFESTED#LAST# with ritch larvae!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 被里奇幼虫#ORANGE#寄生#LAST# !"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# internal structure metallises.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 内在结构金属化。."):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# internal structure returns to normal.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 内在结构恢复正常。"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# revels in the pain.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 在苦痛中狂欢。"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# no longer feels strong.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 不再强壮。"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# is trapped by the net.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 被网住了。"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# is free from the net.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s从网中脱离了。"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target#'s blood turn into molten iron.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s的血液变成了融化的铁水."):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# no longer has molten iron blood.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s的血液不再是融化的铁水."):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# is seared.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 烧焦了."):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# is no longer seared.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 不再烧焦."):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# tosses steamguns in the air, awesome!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 将蒸汽枪扔向天空，小心！"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# somehow catches the falling steamguns.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 接住了蒸汽枪."):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# is marked!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 被标记了!"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# is very itching!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 非常痒!"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# regains their concentration.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 恢复了注意力."):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# is hiding in smoke.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 在烟雾中隐藏."):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# is no longer hiding in smoke.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 不再隐藏于烟雾中."):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# is magnetised.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 被磁化了."):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# is free from the magnetism.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 从磁化中解脱."):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# is caught in the bloodstar.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 被血液灵晶抓住了."):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# is free from the bloodstar.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 从血液灵晶中解脱."):format(a)
+	end,
+}
+
+
+logCHN:newLog{
+	log = "#Target# is suffering and fails to concentrate on dealing damage.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 忍受痛苦，不能集中精力制造伤害."):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# is suffering less.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 不再忍受折磨。"):format(a)
+	end,
+}

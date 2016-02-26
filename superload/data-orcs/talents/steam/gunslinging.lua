@@ -2,13 +2,13 @@ local _M = loadPrevious(...)
 
 registerTalentTranslation{
 	id = "T_STRAFE",
-	name = "轰炸",
+	name = "扫射",
 	info = function(self, t)
 		local nb = t.getNb(self, t)
 		return ([[你 学 会 如 何 在 移 动 中 射 击 。
 		在 射 击 （100%% 武 器 伤 害 ， 射 程 -1 ）的 同 时 你 能 移 动 到 相 邻 的 一 格 。
 		该 技 能 在 冷 却 前 能 激 活 连 续 %d 个 回 合 ， 消 耗 时 间 取 决 于 蒸 汽 速 度 和 移 动 速 度 较 慢 者 。
-		轰 炸 结 束 后 ， 你 立 刻 获 得 %d 到 %d 弹 药 （ 取 决 于 轰 炸 期 间 你 消 耗 的 弹 药 与 你 的 弹 药 容 量 ） 。]]):
+		扫 射 结 束 后 ， 你 立 刻 获 得 %d 到 %d 弹 药 （ 取 决 于 扫 射 期 间 你 消 耗 的 弹 药 与 你 的 弹 药 容 量 ） 。]]):
 		format(nb, t.getReload(self, t, 1), t.getReload(self, t, nb + 1))
 	end,}
 

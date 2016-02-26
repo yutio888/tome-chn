@@ -1140,3 +1140,37 @@ logCHN:newLog{
 		return ("%s周围的时间线恢复了正常。"):format(a)
 	end,
 }
+
+
+
+logCHN:newLog{
+	log = "#Target# is overflowing with dark power!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 充满了黑暗能量!"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target#'s dark aura fades.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s的黑暗领域消退了。"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# is fluctuating in time!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 在时光中波动!"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# is no longer fluctuating.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 不再波动。"):format(a)
+	end,
+}

@@ -1225,3 +1225,18 @@ logCHN:newLog{
 	end,
 }
 
+logCHN:newLog{
+	log = "#Target# is cursed!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 被诅咒了!"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# is no longer cursed.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 不再被诅咒"):format(a)
+	end,
+}

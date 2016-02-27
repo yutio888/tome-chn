@@ -824,3 +824,22 @@ function changeElixir(desc)
 	desc = string.gsub(desc,"pouch of luminous horror dust"," 一 袋 金 色 恐 魔 的 粉 尘 ")
 	return desc
 end
+
+
+dofile("data-chn123/quests/amakthel.lua")
+dofile("data-chn123/quests/destroy-sunwall.lua")
+dofile("data-chn123/quests/free-prides.lua")
+dofile("data-chn123/quests/gem.lua")
+dofile("data-chn123/quests/kaltor-shop.lua")
+dofile("data-chn123/quests/kill-dominion.lua")
+dofile("data-chn123/quests/krimbul.lua")
+dofile("data-chn123/quests/kruk-invasion.lua")
+dofile("data-chn123/quests/palace.lua")
+dofile("data-chn123/quests/quarry.lua")
+dofile("data-chn123/quests/ritch-hive.lua")
+dofile("data-chn123/quests/start-orc.lua")
+dofile("data-chn123/quests/sunwall-observatory.lua")
+dofile("data-chn123/quests/to-mainland.lua")
+dofile("data-chn123/quests/voyage.lua")
+dofile("data-chn123/quests/weissi.lua")
+dofile("data-chn123/quests/yeti-abduction.lua")

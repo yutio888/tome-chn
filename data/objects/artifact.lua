@@ -2906,6 +2906,297 @@ registerArtifactTranslation{
 	end,
 }
 
+registerArtifactTranslation{
+	originName = "Yeti-fur Cloak",
+	name="雪人毛皮斗篷",
+	unided_name="暗淡无光的毛皮斗篷",
+	desc="这件毛皮斗篷厚重且暗淡无光，但是摸起来却不可思议的柔软。",
+}
+
+registerArtifactTranslation{
+	originName = "Korbek's Spyglass",
+	name="库贝克的小型望远镜",
+	unided_name="金色的望远镜",
+	desc="这个年代久远的小型望远镜由于使用过多有些褪色，但是仍然保养得很好。",
+}
+registerArtifactTranslation{
+	originName = "Talosis' Counterpoint",
+	name="Talosis的反驳",
+	unided_name="华丽的手枪",
+	desc="据说Talosis从没有输过一场争吵。现在你知道原因了。",
+}
+registerArtifactTranslation{
+	originName = "The Twisted Blade",
+	name="扭曲之刃",
+	unided_name="邪恶、扭曲的蒸汽锯",
+	desc="你在这块邪恶、扭曲的铁块上发现金色的斑点，暗示着它不同寻常的来历。然而曾经的辉煌，都已经成为了过去，如今已被更加邪恶的东西取代",
+}
+registerArtifactTranslation{
+	originName = "Sunstone",
+	name="太阳石",
+	unided_name="温暖的石头",
+	desc="这块奇怪的石头发出太阳的光和热。或许它可以用来产生更多的蒸汽？",
+}
+
+registerArtifactTranslation{
+	originName = "Overseer",
+	name="监视者",
+	unided_name="破裂的灵晶",
+	desc="意念之墙的力量碎片仍然依附在这块破裂的古老宝石上。",
+}
+registerArtifactTranslation{
+	originName = "crystallized drake heart",
+	name="晶化龙心",
+	unided_name="黑色的法杖",
+	desc="一把被蓝锆石和宝石覆盖的轻型法杖。即使在白天，似乎也在反射着星星的光芒。",
+}
+registerArtifactTranslation{
+	originName = "Liquid Metal Cloak",
+	name="液态金属披风",
+	unided_name="闪亮的金属披风",
+	desc="这片奇特的金属如同普通的披风一样随风摆动。打造它的人无疑是一位大师。",
+}
+
+
+registerArtifactTranslation{
+	originName = "Medical Urgency Vest",
+	name="医疗急救背心",
+	unided_name="医疗装甲",
+	desc="这件轻型皮革背心配备有一个装用的医疗注射器。",
+}
+
+registerArtifactTranslation{
+	originName = "Nacrush's Decimator",
+	name="Nacrush的屠杀者",
+	unided_name="笨重的枪",
+	desc="Nacrush因为滥杀无辜的倾向而闻名。",
+}
+registerArtifactTranslation{
+	originName = "Signal",
+	name="信号",
+	unided_name="红色枪管的蒸汽枪",
+	desc="一把奇特、粗短的枪，装有红色的枪管。",
+}
+registerArtifactTranslation{
+	originName = "Glacia",
+	name="冰川",
+	unided_name="冰冻的枪",
+	desc="奇怪的线圈环绕着这把极其冰冷的枪。",
+}
+registerArtifactTranslation{
+	originName = "工 匠 的 双 重 爆 破",
+	name="Tinkerer'sTwinblaster",
+	unided_name="双管蒸汽枪",
+	desc="你是否曾经看到一些人并且想：'你知道吗，我真的想要烧死这些人'，但是你又不想大费周章，现在有了一个更加方便的方法！",
+}
+registerArtifactTranslation{
+	originName = "S.H. Spear",
+	name="S.H.长矛",
+	unided_name="被牢记的枪",
+	desc="这并不能算是一把枪，因为它只是一把枪的概念。当你丢掉它的时候你会很容易记住它。",
+}
+registerArtifactTranslation{
+	originName = "Thoughtcaster",
+	name="思维施法者",
+	unided_name="透明的手枪",
+	desc="从物质中诞生意识。从意识中诞生物质。",
+}
+registerArtifactTranslation{
+	originName = "Spider's Fangs",
+	name="蜘蛛毒牙",
+	unided_name="一袋有毒的弹丸",
+	desc="一位热心的技师似乎将成吨的蜘蛛毒液注入了这些子弹里。不知道蜘蛛对此有多么高兴。",
+}
+registerArtifactTranslation{
+	originName = "Scattermind",
+	name="破碎意志",
+	unided_name="破碎的灵晶",
+	desc="一个亚麻布袋中装着锯齿状的灵晶碎片，让人清晰的感受到混乱和痛苦。在某个混蛋把它打成碎片之前，它一定是一个令人无法忘怀的整体。",
+}
+
+registerArtifactTranslation{
+	originName = "Thundercrack",
+	name="雷电打击",
+	unided_name="一袋铜制弹丸",
+	desc="这些弹药通过魔法和探针从天空引导强力的闪电冲击你的目标，灼烧目标及周边的单位。",
+}
+registerArtifactTranslation{
+	originName = "Vindicator",
+	name="复仇者",
+	unided_name="雕花的枪",
+	desc="恼人的不死族在你的村庄传播瘟疫？死灵法师搜刮你的墓地？复仇者可以解决你的所有敌人。",
+}
+registerArtifactTranslation{
+	originName = "Overburst",
+	name="强力爆裂",
+	unided_name="粗管蒸汽枪",
+	desc="你曾经试过向一群怪兽中发射弹药，然后觉得'一定有更好的方法？'，好了，这就是了。",
+}
+registerArtifactTranslation{
+	originName = "Murderfang's Surekill",
+	name="Murderfang的必杀",
+	unided_name="粗管蒸汽枪",
+	desc="这把枪的枪管长的出奇。你好奇到底是谁设计了它。",
+}
+registerArtifactTranslation{
+	originName = "Annihilator",
+	name="歼灭者",
+	unided_name="大型多管枪",
+	desc="这把枪的转轮上附有多支枪管，看起来由引擎驱动。看起来令人印象深刻。",
+}
+registerArtifactTranslation{
+	originName = "Jetpack",
+	name="飞行背包",
+	unided_name="一个飞行背包。",
+	desc="终于。",
+}
+registerArtifactTranslation{
+	originName = "Therapeutic Platemail",
+	name="医疗型板甲",
+	unided_name="加热的板甲",
+	desc="这个被封印的厚重板甲配备有通风设备，可以使用加热的薄雾来治疗你。",
+}
+registerArtifactTranslation{
+	originName = "Titan",
+	name="泰坦",
+	unided_name="巨型枪",
+	desc="一把可以摧毁任何事物的枪，以及周边的一切。",
+}
+registerArtifactTranslation{
+	originName = "Golden Gun",
+	name="金色的枪",
+	unided_name="金色的枪",
+	desc="一把可以摧毁任何事物的枪，以及周边的一切。",
+}
+registerArtifactTranslation{
+	originName = "Cautery Sword",
+	name="灼烧之剑",
+	unided_name="炽热的剑",
+	desc="这把剑的炽热核心可以让敌人的伤口感到更加疼痛。",
+}
+registerArtifactTranslation{
+	originName = "Stimulus",
+	name="兴奋剂",
+	unided_name="自动注射器",
+	desc="这个注射单元由皮带栓起的小型药瓶组成，里面装满了粘稠的黄色液体。论文描述这些液体可以‘使人精力充沛’并‘增加作战能力’。",
+}
+registerArtifactTranslation{
+	originName = "Qog's Essentials",
+	name="Qog的精华",
+	unided_name="奇怪的注射器",
+	desc="一个无针注射器，里面装满了某种物体。你完全不知道你给自己注射了什么。",
+}
+registerArtifactTranslation{
+	originName = "Sawrd",
+	name="锯剑",
+	unided_name="锯齿般刀刃的剑",
+	desc="有无数刀刃的凶残武器。",
+}
+
+registerArtifactTranslation{
+	originName = "Nimbus of Enlightenment",
+	name="启蒙灵气",
+	unided_name="精致的帽子",
+	desc="这件斗篷隐藏并保护着一套蒸汽压缩机。",
+}
+registerArtifactTranslation{
+	originName = "Eastern Wood Hat",
+	name="东方森林之帽",
+	unided_name="破损的皮帽",
+	desc="这顶皮帽的材料来自于遥远的树林，人们早已遗忘了树林的名字。据说它的主人曾是最早的枪手之一。",
+}
+registerArtifactTranslation{
+	originName = "Steamcatcher",
+	name="蒸汽捕捉器",
+	unided_name="管道覆盖的帽子",
+	desc="传说人体热量大部分从头部散失。对于体热来说并不是这样，但奇怪的是，蒸汽是从头部散失的。",
+}
+registerArtifactTranslation{
+	originName = "Shoes of Moving Quickly",
+	name="疾行之鞋",
+	unided_name="火箭动力靴",
+	desc="精确吗？并不。",
+}
+registerArtifactTranslation{
+	originName = "Band of Protection",
+	name="守护腰带",
+	unided_name="强化的腰带",
+	desc="这个腰带使用强化的宝石，将涌出的蒸汽聚集萎一个强力的屏障。",
+}
+registerArtifactTranslation{
+	originName = "Viletooth",
+	name="卑劣锯齿",
+	unided_name="生锈的蒸汽锯",
+	desc="这个上了年头的链锯严重生锈，而且你发现锯刃上有一层薄薄的物体。",
+}
+registerArtifactTranslation{
+	originName = "Mirrorazor",
+	name="镜面剃刀",
+	unided_name="泛起波纹的传送门",
+	desc="一张羊皮纸上，记载了一些传说。",
+}
+registerArtifactTranslation{
+	originName = "Razorlock",
+	name="剃刀平台",
+	unided_name="连锁在一起的蒸汽锯",
+	desc="我们曾经这么想：你知道比锯子更好的是什么吗？巨大的锯子。可惜没人能够拿得动它们。所以我们想了一个新颖的主意：将他们安装在一个移动的平台上，以便让我们方便的运输，并获得无与伦比的切割能力。",
+}
+registerArtifactTranslation{
+	originName = "Overcutter",
+	name="超级切割者",
+	unided_name="大型的蒸汽锯",
+	desc="显然早期的蒸汽锯不是为单手使用设计的。",
+}
+registerArtifactTranslation{
+	originName = "Turbocutter",
+	name="涡轮切割者",
+	unided_name="红色条纹的蒸汽锯",
+	desc="你曾经觉得你的蒸汽锯太慢了吗？那么，我有你需要的东西",
+}
+registerArtifactTranslation{
+	originName = "Whipsnap",
+	name="鞭笞",
+	unided_name="弹簧式蒸汽锯",
+	desc="你是否已经厌倦了恼人的敌人用武器攻击你？那么，使用装载了弹簧的鞭笞，你可以迅速制止这一切！",
+}
+registerArtifactTranslation{
+	originName = "Pinwheel",
+	name="风车",
+	unided_name="尖端装刺的蒸汽锯",
+	desc="在他人的生命中建立全新，有趣的连接，比如他们的脚和地板！",
+}
+registerArtifactTranslation{
+	originName = "Frostbite",
+	name="霜咬",
+	unided_name="冰冷的蒸汽锯",
+	desc="因为魔法的冰块而知名，非常适合雕刻冰块——尤其是里面有人的那些。",
+}
+registerArtifactTranslation{
+	originName = "The Lumberator",
+	name="播种机",
+	unided_name="爬满藤曼的蒸汽锯",
+	desc="这台能够注射种子的蒸汽锯可以更快的传播自然的奇迹。在你意识到之前，你的敌人体内将会长出一棵树！",
+	}
+registerArtifactTranslation{
+	originName = "Grinder",
+	name="绞肉机",
+	unided_name="染血的蒸汽锯",
+	desc="起初这个锯子只是被巨人们用来切割坚硬、冰冻的尸体。不过这个例子似乎有一些非常邪恶的暗示。",
+}
+
+registerArtifactTranslation{
+	originName = "Brass Goggles",
+	name="铜制护目镜",
+	unided_name="优质的护目镜",
+	desc="没有任何一个自爱的工匠会被人发现没有佩戴它！",
+}
+registerArtifactTranslation{
+	originName = "X-Ray Goggles",
+	name = "X射线护目镜",
+	unided_name = "漆黑的护目镜",
+	desc = "这玩意到底怎么用?",
+	}
+
 function _M:bindHooks()
 	local class = require "engine.class"
 	class:bindHook("Entity:loadList", function (self,data)

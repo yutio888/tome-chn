@@ -1329,3 +1329,18 @@ logCHN:newLog{
 		return "#RED#鼠巫妖再次站起，它的眼睛放射着能量的光辉！"
 	end,
 }
+
+logCHN:newLog{
+	log = "#ORCHID#Target out of range.  Hold <ctrl> to force all weapons to fire at targets out of ranges (%d - %d).",
+	fct = function(...)
+		return ("#ORCHID#目标超出范围。按住  <ctrl> 来强制射击超出范围(%d - %d)的目标."):format(...)
+	end,
+}
+
+
+logCHN:newLog{
+	log = "#ORCHID#Target out of range.  Hold <ctrl> to force your weapon to fire at targets beyond its range (%d).",
+	fct = function(...)
+		return ("#ORCHID#目标超出范围。按住  <ctrl> 来强制射击超出范围(%d)的目标."):format(...)
+	end,
+}

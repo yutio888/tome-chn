@@ -2928,3 +2928,70 @@ logCHN:newLog{
 		return ("%s抵抗了沉默！"):format(a)
 	end,
 }
+
+
+
+logCHN:newLog{
+	log = "%s dives in the sand!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 跳向沙中!"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "%s stings with her ovipositor!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 用产卵管扎了一下!"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "%s enters a deep slumber.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 进入沉睡."):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "%s spawns a tentacle near %s.",
+	fct = function(a,b)
+		a = npcCHN:getName(a)
+		b = npcCHN:getName(b)
+		return ("%s 在%s附近召唤触手."):format(b)
+	end,
+}
+logCHN:newLog{
+	log = "%s rockets forward!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 冲向前去!"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "%s breathes a wave of darkness!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 呼出一片黑暗!"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "%s tessellates %s cloak!",
+	fct = function(a)
+		a = npcCHN:getName(a,b)
+		return ("%s 镶嵌了披风!"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "%s weaves %s cloak!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 编织起披风!"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "%s strafes with %s steamguns!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 使用蒸汽枪扫射"):format(a)
+	end,
+}

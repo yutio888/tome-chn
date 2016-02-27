@@ -355,16 +355,16 @@ objDesc["Increases the range of Haste of the Doomed by 1."] = "增加种族技�
 objDesc["Increases all saves by your Shadow Power."] = "每点“阴影强度”增加1点全豁免"
 objDesc["Grants spellpower equal to your Shadow Power."] = "每点“阴影强度”增加1点法术强度"
 objDesc["Increases all damage penetration by 1% for each point of your Shadow Power."] = "每点“阴影强度”增加1%%抗性穿透"
-objDesc["Grants 2.5% movement speed for each point of Shadow Power."] = "每点“阴影强度”增加2.5%%移动速度"
-objDesc["Grants spell-crit equal to half of your Shadow Power."] = "每点“阴影强度”增加0.5%%法术暴击率"
-objDesc["Grants physical power equal to your Shadow Power."] = "每点“阴影强度”增加1%%点物理强度"
+objDesc["Grants 2.5% movement speed for each point of Shadow Power."] = "每点“阴影强度”增加2.5%移动速度"
+objDesc["Grants spell-crit equal to half of your Shadow Power."] = "每点“阴影强度”增加0.5%法术暴击率"
+objDesc["Grants physical power equal to your Shadow Power."] = "每点“阴影强度”增加1%点物理强度"
 
-objDesc["Increases all damage by 1% for each point of your Shadow Power."] = "每点“阴影强度”增加1%%全体伤害加成"
-objDesc["Increases all resists by 0.4% for each point of your Shadow Power."] = "每点“阴影强度”增加0.4%%全体抗性"
+objDesc["Increases all damage by 1% for each point of your Shadow Power."] = "每点“阴影强度”增加1%全体伤害加成"
+objDesc["Increases all resists by 0.4% for each point of your Shadow Power."] = "每点“阴影强度”增加0.4%全体抗性"
 objDesc["Latent Damage Type: "] = "潜在伤害类型："
 objDesc["Lights terrain (power 100)"] = "照亮地形（强度100）"
 objDesc["Lights terrain (power 10)"] = "照亮地形（强度10）"
-objDesc["Slows by 17%"] = "减速17%%"
+objDesc["Slows by 17%"] = "减速17%"
 
 objDesc["This harmonious mindstar will complement other natural mindstars."] = "这个和谐的灵晶能与其他自然灵晶组合成套装。"
 objDesc["This purifying mindstar will cleanse other mindstars."] = "这个灵晶能净化其他灵晶"
@@ -395,8 +395,10 @@ objDesc["Deals stacking poison damage."] = "造成可叠加的毒素伤害。"
 objDesc["Infects targets with a stat reducing disease."] = "传染属性削减疾病"
 objDesc["Deals cold damage and slows."] = "造成寒冷伤害并减速"
 objDesc["Deals acid damage that also reduces armour."] = "造成酸性伤害并降低护甲"
+objDesc["Knocks you back when fired."] = "开火时击退自己。"
 objDesc["On falling below 20% of your max life, releases a cloud of smoke, confusing nearby enemies and giving you stealth and a chance to avoid incoming damage for 5 turns."]="当生命值少于20%时， 释放烟雾潜行， 混乱周围生物， 并有一定几率免疫伤害，持续5回合。"
 special_t = {}
+	special_t["deal cold damage equal to 100 + the higher of your steam or spellpower, and attempt to freeze the target (20% chance)."] = "造成100+蒸汽强度或法术强度较高项的寒冷伤害，并有20%几率冻结目标"
 	special_t["10% chance to stun, blind, pin, or confuse the target"] = "10% 几率震慑、致盲、定身或混乱目标"
 	special_t["cripple the target"] = "致残目标"
 	special_t["wounds the target reducing their healing"] = "重创目标并降低治疗效果"
@@ -468,6 +470,42 @@ special_t = {}
   special_t["Boom."] = "爆炸"
   special_t["project a beam of lightning"] = "制造闪电射线"
   special_t["Mana regeneration, on spell hit 25%% chances to cast lightning."] = "魔力回复，法术命中有25%%几率触发闪电术。"
+	special_t["Fully heal yourself. (15 turn cooldown)"] = "完全治疗(15回合冷却)"
+	special_t["reduces mental save"] = "减少精神豁免"
+	special_t["On hitting with a mindstar, deal physical damage equal to your steampower in radius 1 around the target."] = "用灵晶命中时，在半径1范围内造成等于蒸汽强度的物理伤害"
+	special_t["bursts into an cloud of spydric poison, pinning those inside (with a 10 turn cooldown)"] = "爆发一阵具有定身效果的毒云，10回合冷却"
+	special_t["strike the target with one of Mind Sear, Psychic Lobotomy, or Sunder Mind, at random."] = "随机触发以下技能之一：心灵光束、精神切断或碾碎心灵"
+	special_t["a bolt of lightning strikes your target, dealing lightning damage to them and fire damage to those around them."] = "一道闪电击中目标，造成闪电伤害，并对周围生物造成火焰伤害。"
+	special_t["release a burst of light dealing damage equal to your cunning plus your magic in a ball of radius 2. If the target is undead, the damage and radius are doubled."] = "在半径2范围内造成等于灵巧加魔法的光明伤害。若目标为不死族，伤害和半径加倍"
+	special_t["Release a burst of shrapnel, dealing physical damage equal to your steampower in a cone from the target of radius 4."] = [[释放榴弹，在半径4锥形范围内造成等于蒸汽强度的物理伤害]]
+	special_t["You feel something is #{bold}#very wrong#{normal}# with this ring."] = "你感觉这个戒指#{bold}#非常不对劲#{normal}#."
+special_t["When you take a hit of more than 10% of your total life the suit's motors activate for the next turn, displacing you before any blow could hit you."] = "当你受到超过10%总生命值的伤害后，引擎启动，下回合内，每次受到攻击时，将自动移位来避免伤害。"
+special_t["Increases your maximum stacks of Death Momentum by 1."] = "增加死亡波纹的上限1。"
+special_t["You are immune to mental status effects."] = "你免疫精神状态效果。"
+special_t["When worn, gives you an additional prodigy point."] = "装备时，获得一点觉醒技能点。"
+special_t["Allows you to resist the most terrible assaults on your mind."] = "让你抵抗最可怕的精神攻击。"
+special_t["Burst apart, dealing physical damage equal to 25% of the original damage in a ball of radius 1."] = "产生爆炸，在半径1范围内造成25%原伤害值的伤害。"
+special_t["Fire rate increases while firing, up to 5 shots per turn. Resets after 5 turns without firing."] = "攻击频率随着射击而增加，一回合最多射5次。5回合未射击则效果消失。"
+special_t["50% chance to reload 1 ammo"] = "50% 几率装填1发弹药"
+special_t["When fired, shoots up to 4 extra shots at random foes with a radius 4 cone centered on the target."] = "发射时，在半径4的锥形范围内随机射出至多额外4发子弹。"
+special_t["every third hit always crits."] = "第三下攻击必定暴击."
+special_t["inflict fire damage based on steampower"] = "造成基于蒸汽强度的火焰伤害"
+special_t["Knocks melee attackers away. Distance scales with damage incoming."] = "击退近战攻击者。距离和其造成的伤害有关。"
+special_t["They are out to get you.\nThis is not real this is not real this is not real."] = "他们来了。\n这不是真的不是真的不是真"
+special_t["On taking fire damage: Gain 5% of the damage as steam."] = "受到的火焰伤害5%转化为蒸汽。"
+special_t["You move 3 spaces at once."] = "一次走3格"
+special_t["may infect the target with a random disease"] = "可能触发随机疾病"
+special_t["Moving builds up a stacking movement speed (caps at 25%) and damage bonus (caps at double). Hitting removes the bonus."] = "移动会带来移动速度加成（最高25%）和伤害加成（最高50%）。攻击后加成消失。"
+special_t["Increases the speed bonus from Saw Wheels by 25%."] = "链锯轮滑速度增加25%"
+special_t["15% chance to pin the target"] = "15% 几率定身"
+special_t["summon a treant (5 turn cooldown)"] = "召唤一个树人(5回合冷却)"
+special_t["On Taking Damage: Blindside the attacker (range 6)."] = "受伤触发: 闪电突袭 (范围 6)."
+special_t["Attack speed increases with paradox, up to 250% at 1000 paradox."] = "攻击速度随紊乱值增加，1000紊乱时为250%."
+special_t["increase paradox by a random amount"] = "随机增加紊乱值"
+special_t["All damage dealt by or to you (that is over 1% of max life) bleeds for an additional 20% of the damage as physical damage (ignores most status resistances).\nWhile you are bleeding, Heartrend's damage increases and it gains lifesteal."] = "你受到与造成的所有超过1%总生命的伤害将触发流血效果，无视大部分状态免疫，造成额外20%物理伤害。\n当你处于流血状态时，心脏切割伤害增加并具有吸血效果。"
+special_t["If bleed damage per turn is greater than 5% of max life, attacks cleave."] = "若每回合流血伤害伤害超过5%最大生命，攻击变为劈击。"
+special_t["deal a melee attack against all other enemies in a circle around you"] = "对周围一圈敌人进行近战攻击。"
+
 --装备鼠标提示汉化替换
 function getObjectDescCHN(desc)
 	if not desc then return end
@@ -609,6 +647,19 @@ function getObjectDescCHN(desc)
 					desc[i]=desc[i]:gsub("splashes acid on your target dealing ","释放酸液，造成"):gsub(" damage and reducing their armor","伤害并降低护甲")
 				elseif desc[i]:find("chance to avoid a detrimental acid subtype effect") then
 					desc[i]=desc[i]:gsub(" chance to avoid a detrimental acid subtype effect","几率免疫酸性负面效果")
+				elseif desc[i]:find("steam each time you walk.") then
+					desc[i]=desc[i]:gsub("Generate","每次行走生成"):gsub("steam each time you walk","点蒸汽")
+				elseif desc[i]:find("chance to fail to operate properly (reduced by Cunning).") then
+					desc[i]=desc[i]:gsub("These boots have a","火箭靴有"):gsub("chance to fail to operate properly","几率被不正确地使用"):gsub("reduced by Cunning","随灵巧降低")
+				elseif desc[i]:find("mind damage (based on Mindpower) in a radius 1 around the target") then
+					desc[i]=desc[i]:gsub("deal","在半径1范围内造成"):gsub("mind damage","精神伤害")
+												 :gsub("based on Mindpower","基于精神强度"):gsub("in a radius 1 around the target","")
+				elseif desc[i]:find("cooling down: ") then 
+					desc[i]=desc[i]:gsub("cooling down: ","冷却时间剩余："):gsub("turns","回合")
+				elseif desc[i]:find("physical damage (based on Cunning), making them bleed.") then
+					desc[i]=desc[i]:gsub("Has a","每回合有"):gsub("chance each turn to slash an adjacent enemy for","几率攻击一个相邻敌人，造成"):gsub("physical damage (based on Cunning), making them bleed.","物理伤害（基于灵巧），并使之流血。")
+				elseif desc[i]:find("If anomaly triggers, halve paradox.") then
+					desc[i]=desc[i]:gsub("increase paradox by a drastic amount with a chance to do an anomaly","大幅增加紊乱，有机率触发异常。"):gsub("chance). If anomaly triggers, halve paradox.","几率)。若触发异常，紊乱减半。")
 				else--if desc[i]:find("Special effect on block:") then
 					desc[i] = desc[i]:gsub("Special effect on block:","格挡特效：")
 							:gsub("Unleash a lightning nova of radius equal to the tinker tier.","释放半径等于材质等级的闪电新星")

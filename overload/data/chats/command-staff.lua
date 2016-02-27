@@ -131,21 +131,36 @@ local DamageType = require "engine.DamageType"
 local flavors = o:getStaffFlavorList()
 local flavor_list = table.keys(flavors)
 table.sort(flavor_list)
-
+local standard_flavors = {
+	magestaff = {engine.DamageType.FIRE, engine.DamageType.COLD, engine.DamageType.LIGHTNING, engine.DamageType.ARCANE},
+	starstaff = {engine.DamageType.LIGHT, engine.DamageType.DARKNESS, engine.DamageType.TEMPORAL, engine.DamageType.PHYSICAL},
+	vilestaff = {engine.DamageType.DARKNESS, engine.DamageType.BLIGHT, engine.DamageType.ACID, engine.DamageType.FIRE}, -- yes it overlaps, it's okay
+	powerstaff = {DamageType.ARCANE, DamageType.BLIGHT, DamageType.COLD, DamageType.DARKNESS, DamageType.ACID, DamageType.LIGHT},
+	harmonystaff = {DamageType.PHYSICAL, DamageType.MIND, DamageType.NATURE, DamageType.ARCANE},
+}
 local aspect_answers = {}
 local aspect_chat_id = not is_sentient() and "welcome" or "which_aspect"
 for _, flavor in ipairs(flavor_list) do
-	local damtypes = o:getStaffFlavor(flavor)
+--和汉化冲突，原因未知，待修复
+--[[	local damtypes = o:getStaffFlavor(flavor)
 	local answers = {}
 	for i, dtype in ipairs(damtypes) do
-		local name = ("[%s]"):format(DamageType:get(dtype).name:capitalize())
+		local name = ("[%s]"):format(DamageType:get(dtype).name)
+		
 		answers[i] = {name, action = function() set_element(dtype, flavor, game.player) end}
-	end
+	end]]
+	local answers = {}
+	if standard_flavors[flavor] then
+		for i, dtype in ipairs(standard_flavors[flavor]) do
+			local name = ("[%s]"):format(DamageType:get(dtype).name)
+		
+			answers[i] = {name, action = function() set_element(dtype, flavor, game.player) end}
+		end
 	answers[#answers + 1] = {"选择其他领域", jump = aspect_chat_id}
 	answers[#answers + 1] = {"别介意."}
 	newChat{id="element_"..flavor, text = "召唤哪种元素？", answers = answers}
-
-	local flavor_name = flavor:gsub("staff", ""):capitalize()
+	
+	local flavor_name = flavor:gsub("staff", ""):gsub("mage","法术"):gsub("star","众星"):gsub("vile","邪恶"):gsub("power","力量"):gsub("harmony","和谐")
 	aspect_answers[#aspect_answers + 1] = {("[%s]"):format(flavor_name), jump = "element_"..flavor}
 end
 

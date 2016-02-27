@@ -2930,7 +2930,7 @@ logCHN:newLog{
 }
 
 
-
+--[[
 logCHN:newLog{
 	log = "%s dives in the sand!",
 	fct = function(a)
@@ -2973,7 +2973,7 @@ logCHN:newLog{
 		a = npcCHN:getName(a)
 		return ("%s 呼出一片黑暗!"):format(a)
 	end,
-}
+}]]
 logCHN:newLog{
 	log = "%s tessellates %s cloak!",
 	fct = function(a)

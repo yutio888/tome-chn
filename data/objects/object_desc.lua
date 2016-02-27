@@ -397,6 +397,7 @@ objDesc["Deals cold damage and slows."] = "造成寒冷伤害并减速"
 objDesc["Deals acid damage that also reduces armour."] = "造成酸性伤害并降低护甲"
 objDesc["Knocks you back when fired."] = "开火时击退自己。"
 objDesc["On falling below 20% of your max life, releases a cloud of smoke, confusing nearby enemies and giving you stealth and a chance to avoid incoming damage for 5 turns."]="当生命值少于20%时， 释放烟雾潜行， 混乱周围生物， 并有一定几率免疫伤害，持续5回合。"
+objDesc["The more steam the better!"] = "蒸汽越多越好！"
 special_t = {}
 	special_t["deal cold damage equal to 100 + the higher of your steam or spellpower, and attempt to freeze the target (20% chance)."] = "造成100+蒸汽强度或法术强度较高项的寒冷伤害，并有20%几率冻结目标"
 	special_t["10% chance to stun, blind, pin, or confuse the target"] = "10% 几率震慑、致盲、定身或混乱目标"

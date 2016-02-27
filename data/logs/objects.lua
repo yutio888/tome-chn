@@ -49,3 +49,10 @@ logCHN:newLog{
 		return "一束冰冷的水流从 #Source# 的盾牌中喷射出来冲向 #Target# ！"
 	end,
 }
+logCHN:newLog{
+	log = "#LIGHT_RED#You see no place to land near there.",
+	fct = function()
+		return "#LIGHT_RED#那边你看不见着陆的空间。"
+	end,
+}
+

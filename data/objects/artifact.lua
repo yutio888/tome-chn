@@ -2905,7 +2905,9 @@ registerArtifactTranslation{
 		return [[增加纹身和符文的属性加成效果 15%%]]
 	end,
 }
-
+function registerArtifactTranslation(t)
+	_M.artifactCHN[t.originName] = t
+end
 registerArtifactTranslation{
 	originName = "Yeti-fur Cloak",
 	name="雪人毛皮斗篷",
@@ -2943,10 +2945,20 @@ registerArtifactTranslation{
 	name="监视者",
 	unided_name="破裂的灵晶",
 	desc="意念之墙的力量碎片仍然依附在这块破裂的古老宝石上。",
+	["use_power.name"] = function(self, who)
+			return ("彻底支配或者震慑（取决于免疫）一个%d码范围内的目标%d回合（成功率基于精神强度）。"):format(self.use_power.range, self.use_power.duration)
+		end,
 }
 registerArtifactTranslation{
-	originName = "crystallized drake heart",
-	name="晶化龙心",
+	originName = "Ureslak's Focus",
+	name = "乌瑞斯拉克的意志",
+	unided_name="晶化龙心",
+	desc = [[这块有裂痕的宝石从已经死亡的巨龙乌瑞斯拉克身上掉下来。它似乎已经变成了纯粹的水晶体。]],
+}
+	
+registerArtifactTranslation{
+	originName = "Starcaller",
+	name="召星者",
 	unided_name="黑色的法杖",
 	desc="一把被蓝锆石和宝石覆盖的轻型法杖。即使在白天，似乎也在反射着星星的光芒。",
 }
@@ -2956,24 +2968,81 @@ registerArtifactTranslation{
 	unided_name="闪亮的金属披风",
 	desc="这片奇特的金属如同普通的披风一样随风摆动。打造它的人无疑是一位大师。",
 }
-
-
+registerArtifactTranslation{
+	originName = "Automated Portable Extractor",
+	name="便携式自动材料提取仪",
+	unided_name="便携式自动材料提取仪",
+	desc=[[这是一个神奇的仪器。它能临时存储当层所有捡到的道具，还能融化任何道具，将其转化为金子和相应的材料。金属装备会融化为相应的矿物块]],
+	["use_power.name"] = "立刻融化并提炼仪器中所有道具（切换地图时自动执行）。",
+	}
 registerArtifactTranslation{
 	originName = "Medical Urgency Vest",
 	name="医疗急救背心",
 	unided_name="医疗装甲",
 	desc="这件轻型皮革背心配备有一个装用的医疗注射器。",
 }
-
+registerArtifactTranslation{
+	originName = "Anti-Gravity Boots",
+	name="反重力鞋",
+	unided_name = "过热金属鞋",
+	desc = [[这套鞋子似乎是被一位具有……创造力的大师制造出来的，他似乎认为用火箭将你发射到空中就是“反重力”了。
+看上去这套鞋子能用，大概。
+确实有可能。
+只要你非常非常小心。]],
+	special_desc = function(self, who) 
+		return ("这个鞋子有 %d%% 几率不能正确操作。（随灵巧减少）"):format(self.use_power.fail_chance(self, who)) end,
+	["use_power.name"] = function(self, who)
+			local dam1 = who:damDesc(engine.DamageType.FIRE, self.use_power.damage1(self, who))
+			local dam2 = who:damDesc(engine.DamageType.FIRE, self.use_power.damage2(self, who))
+			return ("跳向%d码内的位置,在跳跃点2码范围内造成%d火焰燃烧伤害与2码的击退效果,在着陆点3码范围内造成%d火焰燃烧伤害与3码的击退效果.（伤害基于灵巧）"):format(self.use_power.range, dam1, dam2)
+		end,
+}
+registerArtifactTranslation{
+	originName = "Steam Powered Boots",
+	name="蒸汽动力鞋",
+	unided_name="蒸汽动力鞋",
+	desc="蒸汽动力！",
+	special_desc = function(self, who) 
+		return ("每次行走生成 %d 蒸汽。"):format(self.steam_boots_on_move) 
+	end,
+	set_desc = { steamarmor =  "蒸汽多多益善！" },
+}
+registerArtifactTranslation{
+	originName = "Steam Powered Helm",
+	name="蒸汽动力头盔",
+	unided_name="蒸汽动力头盔",
+	desc="蒸汽动力！",
+	set_desc = { steamarmor =  "蒸汽多多益善！" },
+}
+registerArtifactTranslation{
+	originName = "Steam Powered Gauntlets",
+	name="蒸汽动力手套",
+	unided_name="蒸汽动力手套",
+	desc="蒸汽动力！",
+	set_desc = { steamarmor =  "蒸汽多多益善！" },
+}
+registerArtifactTranslation{
+	originName = "Assassin's Surprise",
+	name = "暗杀奇袭",
+	unided_name = "闪耀光辉的铁手套",
+	desc = [[这对铁手套左手大拇指处有一个精巧的毒箭发射机关。]],
+	["use_power.name"] = function(self, who)
+			local dam = self.use_power.damage(self, who)
+			local dur = dam.dur
+			local damage = who:damDesc(engine.DamageType.NATURE, dam.dam)
+			return ("发 出 射 程 %d 的 毒 箭 ， 造 成 %d 自 然 伤 害 并 施 加 致 残 毒 素 ，目 标 有 %d%% 几 率 使 用 技 能 失 败，每 回 合 受 到 %d 额 外 自 然 伤 害 ， 持 续 %d 回 合 。  （ 伤 害 基 于 灵 巧 ） "):format(self.use_power.range, damage/dur, dam.fail, damage, dur)
+		end,
+}
 registerArtifactTranslation{
 	originName = "Nacrush's Decimator",
 	name="Nacrush的屠杀者",
 	unided_name="笨重的枪",
-	desc="Nacrush因为滥杀无辜的倾向而闻名。",
+	desc="Nacrush因其滥杀而闻名。",
+	special_desc = function(self) return "开火时反冲力将击退自己。" end,
 }
 registerArtifactTranslation{
 	originName = "Signal",
-	name="信号",
+	name="信号枪",
 	unided_name="红色枪管的蒸汽枪",
 	desc="一把奇特、粗短的枪，装有红色的枪管。",
 }
@@ -2984,29 +3053,62 @@ registerArtifactTranslation{
 	desc="奇怪的线圈环绕着这把极其冰冷的枪。",
 }
 registerArtifactTranslation{
-	originName = "工 匠 的 双 重 爆 破",
-	name="Tinkerer'sTwinblaster",
+	originName = "Tinkerer's Twinblaster",
+	name="工程师的双重爆破",
 	unided_name="双管蒸汽枪",
+	desc="这把枪使用了实验性的技术一次射出多发子弹。\n设计尚未成熟，但似乎还算能用。",
+}
+registerArtifactTranslation{
+	originName = "Flashpoint",
+	name="燃点",
+	unided_name="过热的枪",
 	desc="你是否曾经看到一些人并且想：'你知道吗，我真的想要烧死这些人'，但是你又不想大费周章，现在有了一个更加方便的方法！",
 }
+
 registerArtifactTranslation{
 	originName = "S.H. Spear",
 	name="S.H.长矛",
-	unided_name="被牢记的枪",
-	desc="这并不能算是一把枪，因为它只是一把枪的概念。当你丢掉它的时候你会很容易记住它。",
+	unided_name="被雕刻的蒸汽枪",
+	desc=[[这把枪被一种能强化精神力量的神秘物质雕刻。
+装备着它，你的大脑似乎更加灵敏了。]],
 }
+registerArtifactTranslation{
+	originName = "Dreamweaver",
+	name="梦想编织者",
+	unided_name="闪光蒸汽枪",
+	desc="这并不能算是一把枪，因为它只是一把枪的概念。当你丢掉它时你就记住它了。",
+	["use_power.name"] = function(self, who) 
+		return ("扔 出 枪 令 其 爆 炸 ， 造 成 %d 精 神 伤 害 ( 基于 灵 巧 和 意 志 ），并 附 加 沉 睡 效 果 。 同 时 你 被 视 为 缴 械 3 回 合 。")
+		:format(self.use_power.dam(self, who)) end,
+}
+
 registerArtifactTranslation{
 	originName = "Thoughtcaster",
 	name="思维施法者",
 	unided_name="透明的手枪",
 	desc="从物质中诞生意识。从意识中诞生物质。",
+	special_desc = function(self)
+		return ("在半径1范围内造成等于精神强度的精神伤害。")
+	end,
+	["combat.special_on_hit.desc"] = function(self, who, special)
+				local dam = special.damage(self, who)
+				return ("在半径1范围内造成 %0.2f 精神伤害（基于精神强度）。"):format(who:damDesc(engine.DamageType.MIND, dam))
+			end,
 }
+
 registerArtifactTranslation{
 	originName = "Spider's Fangs",
 	name="蜘蛛毒牙",
 	unided_name="一袋有毒的弹丸",
 	desc="一位热心的技师似乎将成吨的蜘蛛毒液注入了这些子弹里。不知道蜘蛛对此有多么高兴。",
+	special_desc = function(self)
+		local maxp = self:min_power_to_trigger()
+		return ("%s"):format(self.power < maxp and ("(冷却剩余: %d 回合)"):format(maxp - self.power) or "准备就绪！") 
+	end,
+	["combat.special_on_crit.desc"]="爆发出一股具有定身效果的毒烟（10回合冷却）。",
 }
+
+
 registerArtifactTranslation{
 	originName = "Scattermind",
 	name="破碎意志",
@@ -3022,27 +3124,64 @@ registerArtifactTranslation{
 }
 registerArtifactTranslation{
 	originName = "Vindicator",
-	name="复仇者",
+	name="维序者",
 	unided_name="雕花的枪",
-	desc="恼人的不死族在你的村庄传播瘟疫？死灵法师搜刮你的墓地？复仇者可以解决你的所有敌人。",
+	desc="恼人的不死族在你的村庄传播瘟疫？死灵法师搜刮你的墓地？维序者可以解决一切。",
 }
 registerArtifactTranslation{
 	originName = "Overburst",
 	name="强力爆裂",
 	unided_name="粗管蒸汽枪",
-	desc="你曾经试过向一群怪兽中发射弹药，然后觉得'一定有更好的方法？'，好了，这就是了。",
+	desc="你曾经试过向一群怪兽中发射一粒粒弹药，然后觉得一定有更好的方法？好了，这就是了。",
 }
+
 registerArtifactTranslation{
 	originName = "Murderfang's Surekill",
 	name="Murderfang的必杀",
-	unided_name="粗管蒸汽枪",
-	desc="这把枪的枪管长的出奇。你好奇到底是谁设计了它。",
+	unided_name = "粗管蒸汽枪",
+	desc = [[Murderfang 昨天突然跑过来，和我讨论他对蒸汽枪的灵感。他详细地描述了这把枪的构造，几乎说了每一点细节，除了一件事——这把枪该怎么用。
+	如何才能握住这样一把枪呢？尽管如此，我还是坚持着把它做出来，虽然有一些设计没有实现。
+	他们都说这把枪做的棒极了。
+-工匠大师Pizurk
+	]],
+	}
+registerArtifactTranslation{
+	originName="The Long-Arm",
+	name="长手",
+	unided_name="长管蒸汽枪",
+	desc="这把枪的枪管长的出奇。你好奇这杆枪到底是为谁设计。",
+	["use_power.name"] = function(self, who)
+			return ("集中精力瞄准目标，令其接受死亡的印记 - 减少 %d 远程闪避和 %d%%全抗性。"):format(self.use_power.def, self.use_power.dam)
+		end,
 }
+
 registerArtifactTranslation{
 	originName = "Annihilator",
 	name="歼灭者",
 	unided_name="大型多管枪",
 	desc="这把枪的转轮上附有多支枪管，看起来由引擎驱动。看起来令人印象深刻。",
+	special_desc = function(self) return "射击速度随着射击而加快，最快1回合射5次。5回合内未射击则效果消失。" end,
+	["combat.special_on_hit.desc"]="50% 几率装填1发子弹",	
+}
+registerArtifactTranslation{
+	originName = "The Shotgonne",
+	name="火枪",
+	unided_name="巨大的枪",
+	desc=[[这把巨大的蒸汽枪一次能装填多发子弹，并以锥形弹幕射出。
+它精巧的设计令它能被双手持有。]],
+	special_desc = function(self) 
+		return "射击时，额外射出至多4发子弹，随机指向目标周围4码锥形范围内的敌人。" end,
+}
+
+registerArtifactTranslation{
+	originName = "Cloak of Daggers",
+	name="匕首披风",
+	unided_name="布满刀刃的披风",
+	desc = [[这件披风上布满了刀刃和机关。显然制作者认为'最好的防御就是进攻'。]],
+	special_desc = function(self, who)
+		local dam = who:damDesc(engine.DamageType.PHYSICAL, self:bleed_damage(who))
+		return ("每回合50%%几率攻击一次，造成 %d 物理伤害 (基于灵巧)和流血效果。"):format(dam)
+	end,
 }
 registerArtifactTranslation{
 	originName = "Jetpack",
@@ -3054,7 +3193,10 @@ registerArtifactTranslation{
 	originName = "Therapeutic Platemail",
 	name="医疗型板甲",
 	unided_name="加热的板甲",
-	desc="这个被封印的厚重板甲配备有通风设备，可以使用加热的薄雾来治疗你。",
+	desc="这个厚重的板甲配备有通风设备，可以使用加热的薄雾来治疗你。",
+	["use_power.name"] = function(self, who)
+			return "解除至多3种毒素或伤口。"
+		end,
 }
 registerArtifactTranslation{
 	originName = "Titan",
@@ -3079,12 +3221,18 @@ registerArtifactTranslation{
 	name="兴奋剂",
 	unided_name="自动注射器",
 	desc="这个注射单元由皮带栓起的小型药瓶组成，里面装满了粘稠的黄色液体。论文描述这些液体可以‘使人精力充沛’并‘增加作战能力’。",
+	["use_power.name"] = function(self, who)
+			return "注射镇痛剂，全伤害减少5点。最多叠加5次。效果结束后，每一层效果给予5%%最大生命值的伤害。"
+		end,
 }
 registerArtifactTranslation{
 	originName = "Qog's Essentials",
 	name="Qog的精华",
 	unided_name="奇怪的注射器",
-	desc="一个无针注射器，里面装满了某种物体。你完全不知道你给自己注射了什么。",
+	desc="一个无针注射器，里面装满了*某种*液体。你完全不知道你给自己注射了什么。",
+	["use_power.name"] = function(self, who)
+			return "获得随机增益。"
+		end
 }
 registerArtifactTranslation{
 	originName = "Sawrd",
@@ -3092,11 +3240,30 @@ registerArtifactTranslation{
 	unided_name="锯齿般刀刃的剑",
 	desc="有无数刀刃的凶残武器。",
 }
-
+registerArtifactTranslation{
+	originName = "Deflector",
+	name="偏转",
+	unided_name="颤动的盾牌",
+	desc = [[盾牌的正面不停地颤动，似乎有着某种你不理解的节奏。]],
+	special_desc = function(self) return "击退近战攻击者，距离和受到的伤害有关。" end,
+	}
+registerArtifactTranslation{
+	originName = "Skysmasher",
+	name="破天",
+	unided_name="火箭锤",
+	desc = [[火箭的发明被证明为极其危险。尚不清楚对谁。]],
+	}
 registerArtifactTranslation{
 	originName = "Nimbus of Enlightenment",
 	name="启蒙灵气",
 	unided_name="精致的帽子",
+	desc = [[从任何角度看，都只是一个装着天线的平凡的烹饪锅。附赠的使用手册写满了50页的疯言疯语、错乱的程序代码与杂乱无章的数字，没有任何可用的信息。
+	直接把它戴在头上似乎不是个好点子。]],
+	special_desc = function(self) return "他们来了！\n这不是真的不是真的不是真的不是真的真的不是真的不是" end,
+}
+registerArtifactTranslation{
+	originName = "Pressurizer",
+	name = "稳压器",
 	desc="这件斗篷隐藏并保护着一套蒸汽压缩机。",
 }
 registerArtifactTranslation{
@@ -3122,12 +3289,16 @@ registerArtifactTranslation{
 	name="守护腰带",
 	unided_name="强化的腰带",
 	desc="这个腰带使用强化的宝石，将涌出的蒸汽聚集萎一个强力的屏障。",
+	["use_power.name"] = function(self, who)
+			return ("产生一道超能护盾，吸收%d伤害。护盾持续期间获得%d火焰反击伤害。"):format(self.use_power.shield_power(self, who), who:damDesc(engine.DamageType.FIRE, self.use_power.retaliate_damage(self, who)))
+		end,
 }
 registerArtifactTranslation{
 	originName = "Viletooth",
-	name="卑劣锯齿",
+	name="恶毒锯齿",
 	unided_name="生锈的蒸汽锯",
-	desc="这个上了年头的链锯严重生锈，而且你发现锯刃上有一层薄薄的物体。",
+	desc="这个上了年头的链锯严重生锈，而且你发现锯刃上有一层薄薄的*东西*。",
+	["combat.special_on_hit.desc"]="可能触发随机疾病",
 }
 registerArtifactTranslation{
 	originName = "Mirrorazor",
@@ -3137,9 +3308,15 @@ registerArtifactTranslation{
 }
 registerArtifactTranslation{
 	originName = "Razorlock",
-	name="剃刀平台",
+	name="连锁刀片",
 	unided_name="连锁在一起的蒸汽锯",
-	desc="我们曾经这么想：你知道比锯子更好的是什么吗？巨大的锯子。可惜没人能够拿得动它们。所以我们想了一个新颖的主意：将他们安装在一个移动的平台上，以便让我们方便的运输，并获得无与伦比的切割能力。",
+	desc="这套蒸汽链锯以奇特的方式锁在一起，看上去非常锋利",
+}
+registerArtifactTranslation{
+	originName = "Ramroller",
+	name = "剃刀平台",
+	unided_name="一个。。。战车？",
+	desc = "我们曾经这么想：你知道比锯子更好的是什么吗？巨大的锯子。可惜没人能够拿得动它们。所以我们想了一个新颖的主意：将他们安装在一个移动的平台上，以便让我们方便的运输，并获得无与伦比的切割能力。",
 }
 registerArtifactTranslation{
 	originName = "Overcutter",
@@ -3183,7 +3360,36 @@ registerArtifactTranslation{
 	unided_name="染血的蒸汽锯",
 	desc="起初这个锯子只是被巨人们用来切割坚硬、冰冻的尸体。不过这个例子似乎有一些非常邪恶的暗示。",
 }
+registerArtifactTranslation{
+	originName = "Overclocked Radius",
+	name = "超频",
+	unided_name = "扭曲的蒸汽锯",
+	desc = [[在传统物理学的困境前，某些疯狂的工程师将时间流嵌入链锯中，以达到最大速度。\n\n当然，这样存在一些小小的副作用。]],
 
+}
+registerArtifactTranslation{
+	originName = "Heartrend",
+	name = "心脏切割",
+	unided_name = "扭曲的蒸汽锯",
+	desc = [[上面粘着一页笔记。
+ 
+'我将我的心血之作分离，感受它的跳动，像心脏一样跳动，在我的手心里。
+总有些人不到血流尽，不撒手。']],
+}
+registerArtifactTranslation{
+	originName = "Dethzaw",
+	name = "死忘链据",
+	unided_name="火焰蒸汽锯",
+	desc = [[毁灭者Grushgore发现蒸汽链锯时十分激动，他立刻抓了几个工程师，强迫他们为他做了这个。
+	他的取名技巧从没有得到提高。]],
+	}
+	
+registerArtifactTranslation{
+	originName = "Eye of the Lost",
+	name = "迷失之眼",
+	unided_name = "苍白的灵晶",
+	desc = [[灵晶周围有一层奇怪的领域。你能感觉到某个存在，但它被遮蔽了，就像它不愿意被察觉到一样。]],
+}
 registerArtifactTranslation{
 	originName = "Brass Goggles",
 	name="铜制护目镜",
@@ -3196,7 +3402,124 @@ registerArtifactTranslation{
 	unided_name = "漆黑的护目镜",
 	desc = "这玩意到底怎么用?",
 	}
+registerArtifactTranslation{
+	originName = "Yeti's Muscle Tissue (Behemoth)",
+	name = "雪人族巨大的肌肉组织",
+	unided_name = "肌肉",
+	desc = "巨大的肌肉，从一个强大的雪人身上取得。某时、某地、某物，正等你过去。",
+}
+registerArtifactTranslation{
+	originName = "Yeti's Muscle Tissue (Mech)",
+	name = "雪人族巨大的肌肉组织(机械化)",
+	unided_name = "肌肉",
+	desc = "巨大的肌肉，从一个强大的雪人身上取得。某时、某地、某物，正等你过去。",
+}
+registerArtifactTranslation{
+	originName = "Yeti's Muscle Tissue (Astral)",
+	name = "雪人族巨大的肌肉组织(星界)",
+	unided_name = "肌肉",
+	desc = "巨大的肌肉，从一个强大的雪人身上取得。某时、某地、某物，正等你过去。",
+}
+registerArtifactTranslation{
+	originName = "Yeti's Muscle Tissue (Patriarch)",
+	name = "雪人族巨大的肌肉组织(族长)",
+	unided_name = "肌肉",
+	desc = "巨大的肌肉，从一个强大的雪人身上取得。某时、某地、某物，正等你过去。",
+}
+registerArtifactTranslation{
+	originName = "Ring of Lost Love",
+	name = "逝爱指环",
+	unided_name = "纯净的深红色戒指",
+	desc = [[这个深红色指环明显充满了甜蜜与苦涩。
+它内侧刻有如下短语#{italic}#"献给我的挚爱，我的妻子，我的生命，艾琳。永远爱你的，约翰。"#{normal}#]],
+	special_desc = function(self) 
+		return "你感觉这个戒指#{bold}#不太对劲#{normal}#." 
+	end,
+}
+registerArtifactTranslation{
+	originName = "Pressure-enhanced Slashproof Combat Suit",
+	name = "压力感应式作战服",
+	unided_name = "蒸汽强化皮衣",
+	desc = [[简约的皮甲背后隐藏着精巧的系统，能感应压力启动，确保安全性能。]],
+}
+registerArtifactTranslation{
+	originName = "Brilliant Auto-loading Orc Expeller",
+	name = "自动充能式兽人驱逐装置",
+	unided_name = "昂贵的枪",
+	desc = [[精心打造的枪，专为杀兽人而设计。偶尔也杀杀巨人。]],
+}
+registerArtifactTranslation{
+	originName = "Visage of Nektosh",
+	name = "纳克托沙的视野",
+	unided_name = "带角头盔",
+	desc = [[实话是说，你觉得他的角看上去有点蠢。]],
+}
 
+registerArtifactTranslation{
+	originName = "The Forgotten",
+	name = "被遗忘者",
+	unided_name = "苍白的灵晶",
+	desc = [[奇怪的灵晶，长满花岗岩而有裂缝。看上去非常古老，严重受损，但还能用。]],
+	["use_power.name"] = "半径3内所有敌人混乱5回合。"
+	}
+registerArtifactTranslation{
+	originName = "The Cage",
+	name = "牢笼",
+	unided_name = "厚皮帽",
+	desc = "任何事物都无法再碰触你。",
+	special_desc = function(self) 
+		return "你免疫精神状态。" end,
+}
+registerArtifactTranslation{
+	originName = "Ritch Claws",
+	name = "里奇之爪",
+	unided_name = "利爪手套",
+	desc = [[从里奇穿刺者那里取下的尖锐的手套。]],
+}
+registerArtifactTranslation{
+	originName = "Stinger",
+	name = "针刺",
+	unided_name = "奇怪的蒸汽链锯",
+	desc = "这是。。。产卵管？",
+	}
+registerArtifactTranslation{
+	originName = "Gardanion, the Light of God",
+	name = "神之光辉",
+	unided_name = "纯白项链",
+	desc = [["#{italic}#阿马克泰尔降临，他创造了太阳，为世界带来生命。
+现在，你带着他的一片太阳。不要忘了是谁将它给予你，以免让你变成和那些抛弃他的可怜虫一样。#{normal}#"]],
+	special_desc = function(self) return "携带时，获得一个觉醒技能点。" end,
+	on_wear = function(self, who)
+		who.unused_prodigies = who.unused_prodigies + 1
+		self.on_wear = nil
+		self.special_desc = nil
+		game.logPlayer(who, "#GOLD#神的光辉充盈着你的全身，然后渐渐消退。你感觉更加强大了。(+1觉醒点)")
+		game.bignews:saySimple(160, "#GOLD#神的光辉充盈着你的全身，然后渐渐消退。你感觉更加强大了。(+1觉醒点)")
+	end,
+	}
+
+registerArtifactTranslation{
+	originName = "Cap of the Undisturbed Mind",
+	name = "平静思维之帽",
+	unided_name = "红色的帽子",
+	desc = [[为了避免在凝视恐怖的虚空时损伤精神，这顶帽子上镶嵌有存活的大脑组织。
+带上它，你能随意仰望星空。]],
+	}
+registerArtifactTranslation{
+	originName = "Yeti Mind Controller",
+	name = "雪人精神控制仪",
+	unided_name = "雪人精神控制仪",
+	desc = "该装置用于攻击雪人族的大脑，为战争武器而设计",
+	["use_power.name"] = "操纵虚弱雪人的思维。"
+	}			
+for i = 1, 3 do
+registerArtifactTranslation{
+	originName = "strange black disk ("..i..")",
+	name = "奇怪的黑色光盘"..i.."号",
+	unided_name = "光盘",
+	desc = "奇怪的黑色光盘",
+}
+end
 function _M:bindHooks()
 	local class = require "engine.class"
 	class:bindHook("Entity:loadList", function (self,data)

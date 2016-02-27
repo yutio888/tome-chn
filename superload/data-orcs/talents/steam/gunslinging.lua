@@ -26,7 +26,7 @@ registerTalentTranslation{
 	id = "T_EVASIVE_SHOTS",
 	name = "反击射击",
 	info = function(self, t)
-		return ([[开 启 引 擎 强 化 反 射 神 经 ， 你 能 进 行 反 击 射 击 。
+		return ([[开 启 引 擎 强 化 反 射 神 经 ， 你 能 进 行 反 击 射 击 , 造 成 %d%% 武 器 伤 害。
 		反 击 射 击 是 当 你 闪 避 或 躲 避 近 战 、 远 程 攻 击 时 触 发 的 自 动  射 击。
 		反 击 射 击 一 回 合 只 能 触 发 一 次 ， 且 照 常 消 耗 弹 药 。]])
 		:format(100 * self:combatTalentWeaponDamage(t, 0.4, 1.5))

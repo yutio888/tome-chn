@@ -365,7 +365,7 @@ registerTalentTranslation{
 	id = "T_TINKER_CORROSIVE_SHELL",
 	name = "腐蚀弹",
 	info = function(self, t)
-		return ([[你 使 用 蒸 汽 枪 发 射 特 殊 弹 药 打 击 目 标 造 成 100%% 酸 性 武 器 伤 害 。
+		return ([[你 使 用 蒸 汽 枪 发 射 特 殊 弹 药 打 击 目 标 造 成 %d%% 酸 性 武 器 伤 害 。
 释 放 的 酸 也 会 腐 蚀 的 目 标 ，降 低 其 命 中 ，闪 避 和 护 甲 %d  。
 这 个 技 能 不 使 用 弹 药 。
 腐 蚀 强 度 随 蒸 汽 强 度 增 加 。]])

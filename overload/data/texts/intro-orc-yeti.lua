@@ -18,7 +18,7 @@
 -- darkgod@te4.org
 
 return [[Welcome #LIGHT_GREEN#@name@#WHITE#.
-You are a member of the prideful but dwindling Orc race.
+You were a member of the prideful but dwindling Orc race.
 
 Throughout history your race has been hated, hunted and mercilessly killed by the others. It also committed its lot of atrocities and destructions.
 But now, the Orcs are on the brink of extinction. All their strongholds in Var'Eyal have been destroyed either by the Sunwall or the one you name the #{italic}#Scourge of the West#{normal}#.
@@ -27,9 +27,9 @@ Of the four Prides on the mainland none stood. They all fell and very few of the
 Only the Kruk Pride, stationed on the Clork Peninsula still stands, but for how long?
 The Sunwall outpost blocks the way to the mainland and the peninsula itself is home to an advanced race of aggressive giants who mastered steam technology.
 
-And now the giants have dug a tunnel through the mountains right into Kruk, pouring out of it to end the Pride once and for all while the bulk of Kruk forces are away.
-They must be stopped at any cost, if Kruk falls the Orc race dies with it.
+In your previous incarnation you were a powerful psionic and took part in a program to give Kruk a fighting advantage over the towering mass of muscles that giants are.
+Using psytech you #{bold}#hacked#{normal}# into a yeti's simple mind and took residence there, letting your own body to wither and die. You lost most of your experiences and powers in doing so but gained a powerful body to help the Pride.
 
-You grabbed a bomb from the stocks and now you must enter the tunnel and detonate it on a weak spot to make it crumble.
-For the orcs, for Garkul's legacy !
+You have been sent to the Vaporous Emporium to wreak havoc and demoralize the giants.
+For the Pride, for Garkul's legacy !
 ]]

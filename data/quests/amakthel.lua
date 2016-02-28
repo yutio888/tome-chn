@@ -13,6 +13,6 @@ questCHN["The Dead God Awaits"] = {
 		desc = desc:gsub("For now, peace reigns.  You know that this will not last forever.  You may have repelled its vanguard, but the Kar'Haïb Dominion bides its time waiting for a weakness it can exploit; the smugglers' portals from Maj'Eyal remain undiscovered, and while neither you nor King Tolak has any remaining desire to take the other's continent, the fear of invasion will linger in the backs of your minds.","终于，和平降临了。你知道这和平来之不易。虽然你驱散了他们的先锋队，但卡尔·亥巴自治领的巨魔绝不会放弃任何他们可以利用的弱点；走私者在马基·埃亚尔使用的传送门还没有被发现；此外，即使你或托拉克国王放弃了侵入对方领土的念头，对入侵的恐惧仍然在你们的头脑中环绕。")
 		desc = desc:gsub("The messages of the Lost City give you cause to remain ever vigilant for the threats they warned of, including their authors, and you wonder what your people will do now that their struggle to escape eradication, one that has defined them for their entire recorded history, has ceased to be a concern.","来自失落之城的消息让你充满警醒，无论是那些他们警告的恐怖威胁，还是他们本身。你想知道，当你的人民所极力摆脱的灭亡威胁：那个镌刻在你们整个历史中的威胁，现在已经不复存在的时候，你们的人民又将何去何从？")
 		desc = desc:gsub("Regardless...  You just killed a god and gave your people the first chance to relax in thousands of years.  It's been a pretty good day.","不管怎样…你杀死了一个神，而你的人民在数千年的征战中终于有了放松的机会。多么愉快的一天。")
-		desc = desc:gsub("You may continue playing and enjoy the rest of the world.  Your soldiers may want to speak with you outside...","你可以继续游戏，享受这个世界。")
+		desc = desc:gsub("You may continue playing and enjoy the rest of the world.  Your soldiers may want to speak with you outside...","你可以继续游戏，享受这个世界。你的士兵在外面，有些话要说")
 		return desc
 	end}

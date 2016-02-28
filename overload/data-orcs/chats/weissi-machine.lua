@@ -211,7 +211,7 @@ newChat{ id="learn_types",
 	answers = {
 		{"战斗策略", jump="learn_types_physical"},
 		{"法术", jump="learn_types_arcane"},
-		{"自然\超能力", jump="learn_types_nature"},
+		{"自然/超能力", jump="learn_types_nature"},
 		{"让我再想想", jump="give_re"},
 	}
 }
@@ -252,7 +252,7 @@ newChat{ id="learn_talents",
 	answers = {
 		{"战斗策略", jump="learn_talents_physical"},
 		{"法术", jump="learn_talents_arcane"},
-		{"自然\超能力", jump="learn_talents_nature"},
+		{"自然/超能力", jump="learn_talents_nature"},
 		{"让我再想想", jump="give_re"},
 	}
 }

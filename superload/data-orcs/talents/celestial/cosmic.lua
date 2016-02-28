@@ -2,43 +2,43 @@ local _M = loadPrevious(...)
 
 registerTalentTranslation{
 	id = "T_LUNAR_ORB",
-	name = "ÔÂ¹âÖ®Çò",
+	name = "æœˆå…‰ä¹‹çƒ",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local restore = t.getNegative(self, t)
-		return ([[Ïò Ä¿ ±ê ·½ Ïò Éä ³ö Ò» µÀ Óî Öæ ÄÜ Á¿. Ö± µ½ Åö µ½ Ç½ »ò Õß µ½ ´ï µØ Í¼ ±ß Ôµ, ¶Ô µĞ ÈË Ôì ³É %0.2f µÄ °µ Ó° ÉË º¦ ²¢ »Ø ¸´ %d ¸º ÄÜ Á¿. ¸º ÄÜ Á¿ »Ø ¸´ Á¿ ×î ´ó Îª %d, Ã¿ »÷ ÖĞ Ò» ¸ö µĞ ÈË ½« ÉÙ »Ø ¸´ 25%% µÄ ¸º ÄÜ Á¿, ±» »÷ ÖĞ µÄ µĞ ÈË ½« ×¢ Òâ µ½ Äã.]]):
+		return ([[å‘ ç›® æ ‡ æ–¹ å‘ å°„ å‡º ä¸€ é“ å®‡ å®™ èƒ½ é‡. ç›´ åˆ° ç¢° åˆ° å¢™ æˆ– è€… åˆ° è¾¾ åœ° å›¾ è¾¹ ç¼˜, å¯¹ æ•Œ äºº é€  æˆ %0.2f çš„ æš— å½± ä¼¤ å®³ å¹¶ å› å¤ %d è´Ÿ èƒ½ é‡. è´Ÿ èƒ½ é‡ å› å¤ é‡ æœ€ å¤§ ä¸º %d, æ¯ å‡» ä¸­ ä¸€ ä¸ª æ•Œ äºº å°† å°‘ å› å¤ 25%% çš„ è´Ÿ èƒ½ é‡, è¢« å‡» ä¸­ çš„ æ•Œ äºº å°† æ³¨ æ„ åˆ° ä½ .]]):
 		format(damDesc(self, DamageType.DARKNESS, damage), restore, restore * 4)
 	end,}
 
 registerTalentTranslation{
 	id = "T_ASTRAL_PATH",
-	name = "ĞÇ¹â´óµÀ",
+	name = "æ˜Ÿå…‰å¤§é“",
 	info = function(self, t)
-		return ([[ÔÚ %d Âë ÄÚ ·¢ Éä Ò» ¸ö ¸º ÄÜ Á¿ Çò.
-		µ± ¸º ÄÜ Á¿ Çò µ½ ´ï Ä¿ µÄ µØ Ê±, »á ½« Äã ´« ËÍ µ½ Æä Î» ÖÃ.
-		Æä ·É ĞĞ ËÙ ¶È (%d%%) ½« Ëæ ×Å Äã µÄ ÒÆ ¶¯ ËÙ ¶È Ôö ¼Ó.]]):format(t.range(self, t), t.proj_speed(self, t)*100)
+		return ([[åœ¨ %d ç  å†… å‘ å°„ ä¸€ ä¸ª è´Ÿ èƒ½ é‡ çƒ.
+		å½“ è´Ÿ èƒ½ é‡ çƒ åˆ° è¾¾ ç›® çš„ åœ° æ—¶, ä¼š å°† ä½  ä¼  é€ åˆ° å…¶ ä½ ç½®.
+		å…¶ é£ è¡Œ é€Ÿ åº¦ (%d%%) å°† éš ç€ ä½  çš„ ç§» åŠ¨ é€Ÿ åº¦ å¢ åŠ .]]):format(t.range(self, t), t.proj_speed(self, t)*100)
 	end,}
 
 registerTalentTranslation{
 	id = "T_GALACTIC_PULSE",
-	name = "ÒøºÓÂö³å",
+	name = "é“¶æ²³è„‰å†²",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
-		return ([[ÔÚ 8 Âë ÄÚ ·¢ ³ö Ò» ¸ö »º Âı ÒÆ ¶¯ µÄ Âİ Ğı Óî Öæ ÄÜ Á¿.
-		µ± Ëü ÒÆ ¶¯ Ê±, »á °Ñ Ïà ÁÚ µÄ Ä¿ ±ê À­ Ïò Ëü, Ôì ³É %0.2f °µ Ó° ÉË º¦ ²¢ Ã¿ »÷ ÖĞ Ò» ´Î »Ø ¸´ 1 µã ¸º ÄÜ Á¿.]]):
+		return ([[åœ¨ 8 ç  å†… å‘ å‡º ä¸€ ä¸ª ç¼“ æ…¢ ç§» åŠ¨ çš„ èº æ—‹ å®‡ å®™ èƒ½ é‡.
+		å½“ å®ƒ ç§» åŠ¨ æ—¶, ä¼š æŠŠ ç›¸ é‚» çš„ ç›® æ ‡ æ‹‰ å‘ å®ƒ, é€  æˆ %0.2f æš— å½± ä¼¤ å®³ å¹¶ æ¯ å‡» ä¸­ ä¸€ æ¬¡ å› å¤ 1 ç‚¹ è´Ÿ èƒ½ é‡.]]):
 		format(damDesc(self, DamageType.DARKNESS, damage))
 	end,}
 
 registerTalentTranslation{
 	id = "T_SUPERNOVA",
-	name = "³¬ĞÂĞÇ",
+	name = "è¶…æ–°æ˜Ÿ",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local radius = self:getTalentRadius(t)
 		local pin = t.getPinDuration(self, t)
-		return ([[ÊÍ ·Å Äã Ëù ÓĞ µÄ ¸º ÄÜ Á¿ ÔÚ %d Âë ·¶ Î§ ÄÚ Ôì ³É (·¶ Î§ %d) µÄ ´ó ¹æ Ä£ °µ ÄÜ Á¿ ±¬ ·¢.
-		Ôì ³É %0.2f µÄ °µ Ó° ÉË º¦ ²¢ ¶¨ Éí ±» »÷ ÖĞ µÄ µĞ ÈË %d »ØºÏ.
-		ÉË º¦ ¼° ¶¨ Éí »ú ÂÊ Ëæ ·¨ Êõ Ç¿ ¶È Ôö ¼Ó, ÉË º¦¡¢ ·¶ Î§¡¢ºÍ ¶¨ Éí ³Ö Ğø Ê± ¼ä È« ²¿ Ëæ ×Å ¸º ÄÜ Á¿ ºÍ ¼¼ ÄÜ µÈ ¼¶ Ôö ¼Ó.]]):
+		return ([[é‡Š æ”¾ ä½  æ‰€ æœ‰ çš„ è´Ÿ èƒ½ é‡ åœ¨ %d ç  èŒƒ å›´ å†… é€  æˆ (èŒƒ å›´ %d) çš„ å¤§ è§„ æ¨¡ æš— èƒ½ é‡ çˆ† å‘.
+		é€  æˆ %0.2f çš„ æš— å½± ä¼¤ å®³ å¹¶ å®š èº« è¢« å‡» ä¸­ çš„ æ•Œ äºº %d å›åˆ.
+		ä¼¤ å®³ åŠ å®š èº« æœº ç‡ éš æ³• æœ¯ å¼º åº¦ å¢ åŠ , ä¼¤ å®³ã€ èŒƒ å›´ã€å’Œ å®š èº« æŒ ç»­ æ—¶ é—´ å…¨ éƒ¨ éš ç€ è´Ÿ èƒ½ é‡ å’Œ æŠ€ èƒ½ ç­‰ çº§ å¢ åŠ .]]):
 		format(radius, self:getTalentRange(t), damDesc(self, DamageType.DARKNESS, damage), pin)
 	end,}
 return _M

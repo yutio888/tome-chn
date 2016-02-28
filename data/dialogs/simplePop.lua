@@ -1,6 +1,9 @@
 simplePopDlg = {}
+simplePopDlg["Sewer Detonator"] = function()
+	return "引爆", "你需要找到结构弱点才能安装炸弹。"
+end
 simplePopDlg["Caves..."] = function()
-	return "洞穴...", "当你走进洞穴时，你发现这里已经被魔法力量扭曲了，使其变得规整而曲折。"
+	return "洞穴...","当你走进洞穴时，你发现这里已经被魔法力量扭曲了，使其变得规整而曲折。"
 end
 
 simplePopDlg["Lake of Nur"] = function(str)

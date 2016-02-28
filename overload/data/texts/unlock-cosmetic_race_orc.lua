@@ -17,9 +17,10 @@
 -- Nicolas Casalini "DarkGod"
 -- darkgod@te4.org
 
-return "New Cosmetic Race Option: #LIGHT_GREEN#Orc Headgear",
-[[You have played an orc tinker up to level 10.
+return "新 的 种 族 皮 肤 : #LIGHT_GREEN#兽 人 眼 镜",
+[[你 已 经 把 一 个 兽 人 工 匠 系 职 业 提 升 到 了 十 级 。
 
-You may now create orc characters proudly sporting goggles or monocles.
-This has no effect on gameplay at all but it is fun!
+你 可 以 创 造 戴 着 护 目 镜 的 兽 人 职 业 。
+这 没 有 任 何 加 成 ， 仅 仅 是 为 了 好 玩 !
+
 ]]

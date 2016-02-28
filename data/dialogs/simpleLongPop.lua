@@ -1,5 +1,12 @@
 simpleLongDlg = {}
-
+simpleLongDlg["Cave Detonator"] = function()
+	local str = "你安装了炸弹。220回合后将爆炸。你需要在爆炸前离开。\n使用 #{bold}##GOLD#回归之杖#LAST##{normal}#!"
+	return "洞穴引爆",str
+end
+simpleLongDlg["Sewer Detonator"] = function()
+	local str= "你安装了炸弹。100回合后将爆炸。你需要在爆炸前离开。\n使用 #{bold}##GOLD#回归之杖#LAST##{normal}#!"
+		return "引爆",str
+end
 simpleLongDlg["Celia"] = function()
 	local str = [["当你挥出最后一击后，你迅速的挖出赛利亚的心脏为巫妖
 仪式做准备。小心的用魔法环绕它来保持它的跳动。"]]

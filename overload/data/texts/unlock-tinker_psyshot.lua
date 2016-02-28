@@ -17,16 +17,16 @@
 -- Nicolas Casalini "DarkGod"
 -- darkgod@te4.org
 
-return "New Class: #LIGHT_GREEN#Psyshot (Tinker)",
-[[You have found extremely old machines powered by advanced psionics and technology. Psionics without a living mind was never thought possible.
-You can now create new characters with the #LIGHT_GREEN#Psyshot class#WHITE#.
+return "新 职 业 ： #LIGHT_GREEN# 念 力 射 手 （ 工 匠 系 ）",
+[[你 找 到 了 一 台 由 超 能 力 和 科 技 驱 动 的 古 老 机 器 。 由 机 械 引 发 的 超 能 力 不 再 是 不 可 能 的 想 象 。
+现 在 你 可 以 在 创 建 人 物 时 选 择 新 的 职 业 ： #LIGHT_GREEN# 念 力 射 手 #WHITE#。
 
-Psyshots are Tinkers that merge psionics and steamtech in a lethal blend, wielding a steamgun in one hand and a mindstar in the other.
-Class features:#YELLOW#
-- Project mindstar attacks with each bullet you fire
-- Inspire dread to weaken your foes to your gunslinging
-- Manipulate the very air around your victims
-- Enter a psionic gestalt with your steam generators, boosting them#WHITE#
+念 力 射 手 是 混 合 使 用 超 能 力 和 蒸 汽 科 技 的 恐 怖 敌 人 ， 一 手 持 蒸 汽 枪 一 手 持 灵 晶 。
+职 业 特 色 ：#YELLOW#
+- 将 灵 晶 的 攻 击 投 射 到 你 发 射 的 子 弹 中 。
+- 激 发 敌 人 的 恐 惧 ， 让 敌 人 在 你 的 枪 法 前 无 处 遁 形 。
+- 操 纵 你 的 受 害 者 身 边 的 空 气 。
+- 使 用 你 的 蒸 汽 引 擎 创 造 灵 能 格 式 塔 ， 强 化 他 们 。#WHITE#
 
-All Tinker classes use Steam for their powers.
+所 有 工 匠 系 职 业 使 用 蒸 汽 作 为 能 量
 ]]

@@ -17,15 +17,17 @@
 -- Nicolas Casalini "DarkGod"
 -- darkgod@te4.org
 
-return "New Talent Category: #LIGHT_GREEN#Undead Drake",
-[[Drakes are forces of Nature, the ultimate apex predators. But as they grow old some gain sentience and some of those may wish to prolong their lives beyond death.
-You have encountered one such and vanquished it.
+return "新 的 技 能 树 ： #LIGHT_GREEN#龙 之 亡 灵 系",
+[[龙 是 自 然 力 量 的 象 征 ， 最 顶 级 的 捕 食 者 。 然 而 当 它 们 变 得 老 去 并 获 得 智 能 ， 其 中 有 的 个 体 也 会 希 望 能 够 延 长 生 命 、 超 越 死 亡 。
+你 曾 经 遇 到 过 一 个 这 样 的 个 体 并 征 服 了 它 。
 
-You can now master Undead Drake magic and create new Wyrmic characters that can learn the #LIGHT_GREEN#Undead Drake talents#WHITE#.
+你 现 在 掌 握 了 亡 灵 龙 的 魔 法 ， 创 造 的 新 龙 战 士 角 色 可 以 使 用#LIGHT_GREEN# 龙 之 亡 灵 系 #WHITE#技 能 。
 
-Talents:
-- #YELLOW#Raze: #WHITE#Augment your melee strikes with deadly energies, absorbing the souls of your foes
-- #YELLOW#Infectious Miasma: #WHITE#Release a deadly cloud of diseases and blight
-- #YELLOW#Vampiric Surge: #WHITE#Revel in the pain of others to heal yourself
-- #YELLOW#Necrotic Breath: #WHITE#Breath pure darkness
+技 能
+- #YELLOW#夷 为 平 地 ： #WHITE#使 用 死 亡 的 力 量 强 化 你 的 攻 击 ， 吞 噬 敌 人 的 灵 魂 。
+- #YELLOW#疫 毒 瘴 气 ： #WHITE#在 目 标 区 域 释 放 疾 病 和 枯 萎 的 云 团 。
+- #YELLOW#吸 血 狂 潮 ： #WHITE#使 用 敌 人 的 痛 苦 强 化 你 自 己 。
+- #YELLOW#死 灵 吐 息 ： #WHITE#吐 出 纯 粹 的 黑 暗 。
+
+
 ]]

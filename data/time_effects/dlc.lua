@@ -568,7 +568,7 @@ timeEffectCHN:newEffect{
 		local source = eff.src or self
 		return ("目 标 被 %d 个 里 奇 幼 虫 寄 生%s. 在 发 育 期 结 束 后， 幼 虫 会 从 寄 主 体 内 钻 出， 每 个 幼 虫 造 成 %0.2f 物 理 和 %0.2f 火 焰 伤 害。"):format(eff.nb,
 		eff.turns < eff.gestation and ("， 每 回 合 受 到 %0.2f 物 理 伤 害( 随 回 合 递 增)"):format(
-		source:damDesc("PHYSICAL", TemporaryEffects.tempeffect_def.EFF_RITCH_LARVA_EGGS.gestation_damage(self, eff, eff.turns + 1))) or "",
+		source:damDesc("PHYSICAL", self.tempeffect_def.EFF_RITCH_LARVA_EGGS.gestation_damage(self, eff, eff.turns + 1))) or "",
 		eff.gestation, source:damDesc("PHYSICAL", eff.dam/2), source:damDesc("FIRE", eff.dam/2))
 	end,
 	type = "物理",

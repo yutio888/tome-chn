@@ -17,9 +17,10 @@
 -- Nicolas Casalini "DarkGod"
 -- darkgod@te4.org
 
-return "New Age of Ascendancy birth option: #LIGHT_GREEN#Tinkers",
-[[You have defeated Outpost Leader John with two different tinker classes.
-You can now create new characters with any tinker classes you have unlocked #LIGHT_GREEN#in the classical Age of Ascendancy, Infinite Dungeon and Arena campaigns#WHITE#.
-Also tinker escorts may start to appear in Maj'Eyal now.
+return "新 的 原 版 战 役 选 项: #LIGHT_GREEN#工 匠 系",
+[[你 已 经 使 用 两 个 工 匠 系 职 业 击 败 了 前 哨 站 领 袖 约 翰
+你 可 以 在 原 版 战 役 、 无 尽 地 下 城 和 竞 技 场 中 使 用 在#LIGHT_GREEN# 兽 人 战 役 #WHITE#中 解 锁 的 任 何 工 匠 系 职 业 。
+马 基 · 埃 亚 尔 也 会 开 始 出 现 工 匠 护 送 任 务 。
 
-Playing characters this way is not lore-canon, but fun!]]
+原 版 战 役 的 工 匠 系 职 业 其 实 并 不 符 合 剧 情 ， 但 是 … 管 他 呢 ！
+]]

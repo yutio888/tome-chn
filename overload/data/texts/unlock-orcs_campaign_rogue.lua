@@ -17,8 +17,8 @@
 -- Nicolas Casalini "DarkGod"
 -- darkgod@te4.org
 
-return "New birth option: #LIGHT_GREEN#Rogues",
-[[You have freed the Prides from the Internment Camp.
+return "新 的 游 戏 选 项: #LIGHT_GREEN#盗 贼 系",
+[[你 已 经 解 放 了 拘 留 营 的 兽 人 。
 
-You can now create new characters in the orc campaign with any rogue classes you have unlocked #LIGHT_GREEN#in the classical Age of Ascendancy#WHITE#.
+你 可 以 在 兽 人 战 役 中 使 用 在#LIGHT_GREEN# 原 版 战 役 #WHITE#中 解 锁 的 任 何 盗 贼 系 职 业 。
 ]]

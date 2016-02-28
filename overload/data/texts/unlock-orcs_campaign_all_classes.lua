@@ -17,8 +17,7 @@
 -- Nicolas Casalini "DarkGod"
 -- darkgod@te4.org
 
-return "New birth option: #LIGHT_GREEN#All classes",
-[[You have freed the Prides from the Internment Camp for the third time.
+return "新 的 游 戏 选 项: #LIGHT_GREEN#所 有 职 业",
+[[你 已 经 第 三 次 解 放 了 拘 留 营 的 兽 人 。
 
-You can now create new characters in the orc campaign with any classes you have unlocked #LIGHT_GREEN#in the classical Age of Ascendancy#WHITE#.
-]]
+你 可 以 在 兽 人 战 役 中 使 用 任 何 在#LIGHT_GREEN# 原 版 战 役 #WHITE#中 解 锁 的 职 业 。]]

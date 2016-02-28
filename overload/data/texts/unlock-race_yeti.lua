@@ -17,16 +17,17 @@
 -- Nicolas Casalini "DarkGod"
 -- darkgod@te4.org
 
-return "New Race: #LIGHT_GREEN#Yeti",
+return "新 种 族: #LIGHT_GREEN# 雪 人",
 [[
-Yetis are native creatures to the cold mountains of the Clork peninsula, highly evolved bipedal animals they still lack true sentience.
-Their white fur covers an extremely strong body, but their minds are weak.
-Techno-psionics of the Kruk Pride have managed to devise a system to hijack a yeti's body, transferring their own mind into them to increase the Pride's fighting power.
+雪 人 是 克 拉 克 半 岛 寒 冷 山 脉 中 的 原 始 物 种 ， 尽 管 他 们 是 双 足 行 走 、 高 度 进 化 的 动 物 ， 他 们 仍 然 缺 乏 真 正 的 智 力 。
+他 们 极 其 强 壮 的 身 躯 覆 盖 白 色 毛 皮 ， 但 是 他 们 的 心 灵 十 分 脆 弱 。
+克 鲁 克 部 落 的 超 能 机 器 找 到 了 一 种 方 法 侵 入 雪 人 的 身 体 ， 将 他 们 自 己 的 灵 魂 传 输 过 去 来 强 化 部 落 的 战 斗 力 。
 
-You have helped capture multiple Yetis for such purpose and can now create a new character with the #LIGHT_GREEN#Yeti race#WHITE#.
+你 已 经 帮 忙 抓 住 了 足 够 多 的 雪 人 ， 你 现 在 可 以 创 造 新 的 种 族 ：#LIGHT_GREEN# 雪 人 #WHITE#。
 
-Race features:#YELLOW#
-- Algid Rage, call upon the harsh climate of their birthplace to freeze their foes
-- Mindwave, the controlling orc retains a small part of his psionic powers, giving them a powerful mind-tool
-- Strong body#WHITE#
+种 族 特 色 ：#YELLOW#
+- 寒 冰 之 怒 ， 使 用 它 们 故 乡 恶 劣 的 气 候 来 冻 结 他 们 的 敌 人 。
+- 脑 波 冲 击 ， 控 制 的 兽 人 仍 然 保 留 着 它 们 的 一 小 部 分 超 能 力 ， 让 他 们 有 着 强 大 的 心 灵 能 量 。
+- 强 大 的 身 躯#WHITE#
+
 ]]

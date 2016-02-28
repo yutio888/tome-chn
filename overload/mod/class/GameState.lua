@@ -508,9 +508,9 @@ function _M:generateRandart(data)
 	local name
 	local namescheme = data.namescheme or ((ngt ~= ngd) and rng.range(1, 4) or rng.range(1, 3))
 	if namescheme == 1 then
-		name = "%s '"..ngt:generate().."'"
+		name = " '"..ngt:generate().."'"
 	elseif namescheme == 2 then
-		name = ngd:generate().." 的 %s"
+		name = ngd:generate().." 的 "ngt:generate()
 	elseif namescheme == 3 then
 		name = ngt:generate()
 	elseif namescheme == 4 then

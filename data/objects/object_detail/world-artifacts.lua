@@ -1,3 +1,19 @@
+objects:addObjects({
+	unique = true,
+	enName = "Tower Detonator",
+	chName = "炸弹",
+	unIdedName = "炸弹",
+	chDesc = "炸弹，建议安装在结构脆弱的地方，需要100回合引爆。",
+})
+objects:addObjects({
+	unique = true,
+	enName = "Cave Detonator",
+	chName = "洞穴炸弹",
+	unIdedName = "炸弹",
+	chDesc = "炸弹，建议安装在结构脆弱的地方，需要220回合引爆。",
+})
+
+
 --boss-artifacts
 objects:addObjects({
 	unique = true,

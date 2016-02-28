@@ -156,6 +156,7 @@ for _, flavor in ipairs(flavor_list) do
 		
 			answers[i] = {name, action = function() set_element(dtype, flavor, game.player) end}
 		end
+		end
 	answers[#answers + 1] = {"选择其他领域", jump = aspect_chat_id}
 	answers[#answers + 1] = {"别介意."}
 	newChat{id="element_"..flavor, text = "召唤哪种元素？", answers = answers}

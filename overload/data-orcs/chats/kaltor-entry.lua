@@ -1,27 +1,29 @@
 
 
 newChat{ id="welcome",
-	text = [[#LIGHT_GREEN#*As you open the door to the shop, you are greeted by a pair of Steam Giant guards, staring at you and holding their steamguns tightly, at the ready but not aimed at you.*#WHITE#
-No sudden moves, @playername@. Kaltor's orders are to consider you a customer for now. Try anything foolish, and you'll be a live demonstration for his newest guns instead.  Understand?]],
+	text = [[#LIGHT_GREEN#*当你打开商店大门，你被一群蒸汽巨人警卫包围，他们盯着你看，手中紧握蒸汽枪，准备就绪，但并没有瞄准你。*#WHITE#
+	
+	别乱动， @playername@。卡托尔的指令让我们将你视为顾客。
+做蠢事的话，你将被他最新的枪支毁灭。明白了么?]],
 	answers = {
-		{"I have gold, you have equipment. This doesn't need to be any more complicated than that.", jump="ok"},
-		{"Those are some pretty fancy guns. Think it'll be hard to get your blood out of the gears?", jump="fight"},
+		{"我有钱，你们有装备。没什么更复杂的东西。", jump="ok"},
+		{"这些枪看起来挺有趣的。你们以为有了这些装备，我就不能打得你们头破血流了么？", jump="fight"},
 	}
 }
 
 newChat{ id="ok",
-	text = [[#LIGHT_GREEN#*She smiles, relieved but also slightly disappointed.*#WHITE#
-Couldn't have said it better myself. Come on in - and try not to scare the other patrons.]],
+	text = [[#LIGHT_GREEN#*她微微一笑，轻松却似乎有些失望。*#WHITE#
+那再好不过。进来吧 - 别吓到其他顾客。]],
 	answers = {
-		{"[enter]"},
+		{"[进入]"},
 	}
 }
 
 newChat{ id="fight",
-	text = [[Good luck with that, savage.
-#LIGHT_GREEN#*She smirks, and pulls a cord on the wall beside her as her and her partner duck behind cover; a loud bell rings, and you hear a commotion from further inside the shop.*#WHITE#]],
+	text = [[祝你好运，野蛮人。
+#LIGHT_GREEN#*她假笑着，拉下她身边墙上的绳子，她的同伴从角落里出来。一阵铃响，你听见商店里的骚动。*#WHITE#]],
 	answers = {
-		{"[fight]", action=function(npc, player)
+		{"[战斗]", action=function(npc, player)
 			engine.Faction:setFactionReaction("kaltor-shop", player.faction, -100, true)
 		end},
 	}

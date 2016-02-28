@@ -4,33 +4,35 @@
 -- For non whitehooves
 -----------------------------------------------------------------------
 newChat{ id="nw-welcome",
-	text = [[#LIGHT_GREEN#*Before you stands an impressive undead minotaur.*#WHITE#
-I would like to talk to you.]],
+	text = [[#LIGHT_GREEN#*在你面前站着一位引人注目的亡灵牛头人。*#WHITE#
+我有一些话想对你说。]],
 	answers = {
-		{"Yes?", jump="nw-explain", cond=function(npc, player) return not player:hasQuest("orcs+krimbul") end},
-		{"Your clan is free Metash, the tyrant is no more.", jump="nw-thanks", cond=function(npc, player) return player:hasQuest("orcs+krimbul") and player:isQuestStatus("orcs+krimbul", engine.Quest.DONE) end},
-		{"Not now."},
+		{"好的?", jump="nw-explain", cond=function(npc, player) return not player:hasQuest("orcs+krimbul") end},
+		{"梅塔什，你的氏族被解放了，暴君已经不复存在。", jump="nw-thanks", cond=function(npc, player) return player:hasQuest("orcs+krimbul") and player:isQuestStatus("orcs+krimbul", engine.Quest.DONE) end},
+		{"现在不行."},
 	}
 }
 
 newChat{ id="nw-explain",
-	text = [[Soft-foot of the Kruk, I come to give you a warning, an apology, and a plea for help.  An incredible magical force has awakened within one of our elders, Nektosh the One-Horned, and he has gone mad with its power.  Those who stood up against him were reduced to less than ashes by a beam from his horn, a beam that tunneled far up through the rock above him until we could see the sky.  He has convinced some of us that he can use this terrible force to conquer Eyal and terrified others into going along with him; he has announced that his first step will be to lead his followers in an attack on Kruk Pride.]],
+	text = [[克鲁克部落的软足生物，我来到这里，是为了给你警告、道歉并请求帮助。强大的魔法力量在我们的长老-独角者纳克托沙身上觉醒，而他不能承受这股力量，逐渐疯狂。所有阻挡他的，都在他的独角射线下化为灰烬。他的射线射程极长，能穿过岩石，直至天际。
+他让我们中某些人相信，他能用这股强大力量征服埃亚尔世界，同时他恐吓其他族人和他一起。
+他宣布，他的第一步行动将是带着追随者们攻击克鲁克部落。]],
 	answers = {
-		{"[listen]", jump="nw-explain2"},
+		{"[聆听]", jump="nw-explain2"},
 	}
 }
 
 newChat{ id="nw-explain2",
-	text = [[The rest of us have fled, hiding in caverns across the peninsula...  I cannot in good conscience ask you to face certain death before his magic for our sakes, but striking first may be the only way to save your people.  He appears to be stalling the invasion, buying you some time, but if you cannot catch him off-guard before he finally commits to it...  I've seen his power cut through a mountain like it was a leaf, soft-foot.  There can be no victory against that kind of magic.  Run, hide, and hope he falls victim to an accident or loses the remaining fragments of his sanity that keep him capable of casting spells.]],
+	text = [[我们其他人都跑了，藏身在洞穴中... 凭良心说，我不应让你直面他的魔法，那一定会带来死亡。但只有抢先下手，才能拯救你的族民。他暂时不会进攻，为你赢得了一些时间。	但如果你不能在他进攻前打他个措手不及...我曾经看着他的力量穿越山脉，仿佛穿过一片树叶般轻松，软足生物。算了，不可能战胜这种魔法的。跑吧，躲起来，希望他能意外身亡，或者进一步失去理智以至于不能施法吧。]],
 	answers = {
-		{"I will check it out", action=function(npc, player) player:grantQuest("orcs+krimbul") end},
+		{"我要去看看", action=function(npc, player) player:grantQuest("orcs+krimbul") end},
 	}
 }
 
 newChat{ id="nw-thanks",
-	text = [[We of the Krimbul Clan have faced our near-certain deaths all too many times, even after our hearts stopped beating; this is the first time we have been shown the kindness of utter salvation by an outsider.  Those who were not enthralled by Nektosh and are not delusionally faithful to his "cause" will reclaim the Mana Caves in time; until then, we will join your Pride in your revolution.  You have liberated us, and we will not rest until you are freed of your oppressors as well.]],
+	text = [[我们氏族曾无数次直面灭族危机，哪怕是在我们的心脏停止跳动之后；然而，这是第一次，我们被外人的友善所拯救。没被纳克托沙和他的借口迷惑的人马上将重返魔法洞穴。在此之前，我们将加入你的部落，参与你的革命。你解放了我们，而在你脱离压迫者之前，我们也不会停下脚步。]],
 	answers = {
-		{"Thanks.",},
+		{"谢谢.",},
 	}
 }
 
@@ -38,36 +40,38 @@ newChat{ id="nw-thanks",
 -- For whitehooves
 -----------------------------------------------------------------------
 newChat{ id="w-welcome",
-	text = [[Hail, @playername@!]],
+	text = [[嘿, @playername@!]],
 	answers = {
-		{"Yes?", jump="w-explain", cond=function(npc, player) return not player:hasQuest("orcs+krimbul") end},
-		{"Our is free Metash, the tyrant is no more.", jump="w-thanks", cond=function(npc, player) return player:hasQuest("orcs+krimbul") and player:isQuestStatus("orcs+krimbul", engine.Quest.DONE) end},
-		{"Not now."},
+		{"什么?", jump="w-explain", cond=function(npc, player) return not player:hasQuest("orcs+krimbul") end},
+		{"我们自由了梅塔什，暴君被打败了！", jump="w-thanks", cond=function(npc, player) return player:hasQuest("orcs+krimbul") and player:isQuestStatus("orcs+krimbul", engine.Quest.DONE) end},
+		{"现在没空."},
 	}
 }
 
 newChat{ id="w-explain",
-	text = [[I came here to warn the Kruk Pride of the threat Nektosh poses and ask for their help, but they have some more immediate threats to deal with...  We should help them repel these Steam Giants.  They are the only people who have ever treated us with respect and dignity; if they are crushed by the Atmos Tribe or the Allied Kingdoms, we will surely be next.  Their success is our survival.
+	text = [[我来这里是为了警告克鲁克部落独角者纳克托沙的危险，并请求他们的帮助。但他们有更迫切的威胁需要处理...我们应该帮他们抵抗蒸汽巨人。他们是唯一尊重我们的人，如果他们被气之部落或者联合王国摧毁，下一个就是我们。他们的成功就是我们的生存希望。
 
-Unfortunately, they cannot afford to spare the warriors to retake the Mana Caves from that tyrant, and I need to stay here to help them defend their land.  The task of freeing our clan is in your hands, when you feel ready for it.]],
+	不幸的是，他们现在分不出战士从暴君手中夺回魔法洞穴。我需要留在这保护他们。解放我们氏族的任务就交给你了，做好准备去吧。]],
 	answers = {
-		{"[listen]", jump="w-explain2"},
+		{"[聆听]", jump="w-explain2"},
 	}
 }
 
 newChat{ id="w-explain2",
-	text = [[Nektosh claims he is the invincible, omnipotent descendant of a unicorn, but I don't believe that bull for a second.  While the great magical power that suddenly awakened within him is as fearsome as it is insanity-inducing,  he has yet to use it to make a shield or teleport himself, and even with his all-powerful beam, his aim isn't always perfect...  I think he has a weakness he's trying to hide.  Fight with courage, fellow Whitehoof, and the Krimbul Clan may be free once more!]],
+	text = [[独角者纳克托沙声称他是无可战胜无所不能的独角兽后裔。但他说的每一句话我都不信。他体内的恐怖而疯狂的魔法力量觉醒后，他用能这股力量制造护盾或者传送，甚至发射强力射线。但他瞄准似乎并不精确...他一定有着某个隐藏的弱点。勇敢战斗吧，我的白蹄伙伴，氏族的解放就交给你了!]],
 	answers = {
-		{"I will!", action=function(npc, player) player:grantQuest("orcs+krimbul") end},
+		{"我会做到的!", action=function(npc, player) player:grantQuest("orcs+krimbul") end},
 	}
 }
 
 newChat{ id="w-thanks",
-	text = [[He...  he found a wand?  And he realized it was running dry, but only after taking over the tribe?  I pity him, but I cannot forgive him for being willing to sacrifice so many Whitehooves and Orcs to escape the consequences of his brief lapse into madness...  still, as a personal request I ask that you not tell others of his last thoughts.  The Nektosh we once knew saved our tribe from the corrupted magic deep under Eyal; he deserves to, at worst, be remembered as one who tragically succumbed to its influence.
+	text = [[他...  他找到了一根魔棒？然后他发现能量快用完了，只能支撑到打败部落？我对此感到遗憾，但我不能原谅他牺牲如此多的白蹄族人和兽人来逃脱他疯狂能量失效的后果...
+尽管如此，我个人请求你不要告诉别人他的想法。纳克托沙曾经将我们从埃亚尔深处的堕落魔法中拯救过，至少，他应该被认为是不幸死于堕落魔法的影响。
 
-Ultimately, though, the choice is yours; it is more important that he is no longer a threat.  There are some who may still cling to the false hope he gave them, but we will retake the Mana Caves from them in time.  We owe you a great debt, and now that we have no more pressing concerns, we can aid Kruk Pride in their rebellion.  Good travels, @playername@.]],
+	当然，选择权在你手中；更重要是他的威胁解除了。虽然仍有人沉醉于他给予的虚假希望中，但我们马上就能夺回魔法洞穴了。我们都欠你很多。现在，我们没有什么紧迫危机，该是帮助克鲁克部落的时候了。
+ 祝你好运, @playername@.]],
 	answers = {
-		{"To you too, Metash.",},
+		{"也祝你好运，梅塔什.",},
 	}
 }
 

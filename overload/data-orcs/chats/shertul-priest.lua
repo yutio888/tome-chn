@@ -13,13 +13,16 @@ local on_end = function(npc, player)
 end
 
 newChat{ id="welcome",
-	text = [[#LIGHT_GREEN#*Before you stands a tentaculous horror which you recognize for what it truly is. A living #{bold}#Sher'Tul#{normal}#!.*#WHITE#
-Who are you, young creature, to stand up to a High Priest of Amakthel? Do you not know that you are before a servant of the Almighty Creator, the Sunfather, the God of Gods, Lord of all Eyal? In the millenia I have lived I have killed whole races like yourself. I have even wrenched the spirits of immortal gods from this world. So who are you, little one, who dare defy me?]],
+	text = [[#LIGHT_GREEN#*站在你面前的是一个触手般的恐魔，然后你认出了他，
+一个活着的 #{bold}#夏图尔#{normal}#!.*#WHITE#
+	
+	站在阿马克泰尔的大祭司面前的年轻生物啊，你是谁呢？你难道不清楚，站在你面前的，是伟大的创造者、太阳之父、神上之神、埃亚尔的主人的仆从？千年以来，我曾终结过许多像你这样的种族，我甚至扭曲过这世界上不朽神明的灵魂。小家伙，你认为自己是谁，竟敢妄言打败我？
+]],
 	answers = {
-		{"I... am "..player.name..", of the seed of Garkul the Devourer. Garkul taught us to fight legends, and to flinch not from even the most desperate deed. Here and now I face you without fear or hesitation, for the spirit of Garkul burns within me. And in his name I will #{bold}#break#{normal}# you!", cond=is_orc, action=on_end},
-		{"I... am "..player.name..", though I lack my original body my mind is bound to Garkul the Devourer. Garkul taught us to fight legends, and to flinch not from even the most desperate deed. Here and now I face you without fear or hesitation, for the spirit of Garkul burns within me. And in his name I will #{bold}#break#{normal}# you!", cond=is_yeti, action=on_end},
-		{"I... am "..player.name.." and I am not mortal! Garkul taught the orcs to fight legends, and to flinch not from even the most desperate deed. We learned that from them! Here and now I face you without fear or hesitation, for cold touch of undeath is within me. And I will #{bold}#break#{normal}# you!", cond=is_whitehoof, action=on_end},
-		{"I... am "..player.name..". Here and now I face you without fear or hesitation, for the utter determination burns within me. And I will #{bold}#break#{normal}# you!", cond=function(npc, player) return not is_orc(npc, player) and not is_yeti(npc, player) and not is_whitehoof(npc, player) end, action=on_end},
+		{"我... 名为 "..player.name..", 是吞噬者加库尔的后裔。 加库尔教导我们挑战传奇，即使面前是绝望和死亡也绝不退缩。 现在，我站在这里面对着你，毫无恐惧，毫不犹豫, 因为加库尔之意志在我体内燃烧。以他之名，我一定会#{bold}#打败#{normal}# 你!", cond=is_orc, action=on_end},
+		{"我... 名为 "..player.name..", 尽管我丢失了原本的身体，我的精神仍属于吞噬者加库尔。加库尔教导我们挑战传奇，即使面前是绝望和死亡也绝不退缩。  现在，我站在这里面对着你，毫无恐惧，毫不犹豫, 因为加库尔之意志在我体内燃烧。以他之名，我一定会#{bold}#打败#{normal}# 你! ", cond=is_yeti, action=on_end},
+		{"我... 名为 "..player.name..",我超越死亡！加库尔教导兽人挑战传奇，即使面前是绝望和死亡也绝不退缩。我们从他们身上学会了这些！ 现在，我站在这里面对着你，毫无恐惧，毫不犹豫,因为亡灵冰冷的力量在我体内流淌。我一定会#{bold}#打败#{normal}# 你!", cond=is_whitehoof, action=on_end},
+		{"我... 名为 "..player.name..".现在，我站在这里面对着你，毫无恐惧，毫不犹豫,因为坚定的意志在我体内燃烧。我一定会#{bold}#打败#{normal}# 你!", cond=function(npc, player) return not is_orc(npc, player) and not is_yeti(npc, player) and not is_whitehoof(npc, player) end, action=on_end},
 	}
 }
 

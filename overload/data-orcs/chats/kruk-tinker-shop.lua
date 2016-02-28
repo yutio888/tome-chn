@@ -1,22 +1,22 @@
 
 
 newChat{ id="welcome",
-	text = [[Welcome @playername@ to my shop.]],
+	text = [[@playername@ ，欢迎来到我的商店。]],
 	answers = {
-		{"Let me see your wares.", action=function(npc, player)
+		{"让我看看货物吧。", action=function(npc, player)
 			npc.store:loadup(game.level, game.zone)
 			npc.store:interact(player)
 		end},
-		{"I am looking for special training.", jump="training"},
-		{"Sorry, I have to go!"},
+		{"我是来寻求特殊训练的。", jump="training"},
+		{"抱歉，我要走了。"},
 	}
 }
 
 newChat{ id="training",
-	text = [[I can indeed offer some training (talent category Steamtech/Physics and Steamtech/Chemistry) for a fee of 100 gold pieces each.]],
+	text = [[我能教你物理学或者化学知识，学费100金一次。]],
 	answers = {
-		{"Please train me in physics.", action=function(npc, player)
-			game.logPlayer(player, "The tinker spends some time with you, teaching you the basics of smithing.")
+		{"教我物理学知识吧。", action=function(npc, player)
+			game.logPlayer(player, "工程师花费时间传授你物理学的基础知识。")
 			player:incMoney(-100)
 			player:learnTalentType("steamtech/physics", true)
 			player:learnTalent(player.T_SMITH, true)
@@ -26,8 +26,8 @@ newChat{ id="training",
 			if player:knowTalentType("steamtech/physics") then return end
 			return true
 		end},
-		{"Please train me in chemistry.", action=function(npc, player)
-			game.logPlayer(player, "The tinker spends some time with you, teaching you the basics of therapeutics.")
+		{"教我化学知识吧。", action=function(npc, player)
+			game.logPlayer(player, "工程师花费时间传授你化学的基础知识。")
 			player:incMoney(-100)
 			player:learnTalentType("steamtech/chemistry", true)
 			player:learnTalent(player.T_THERAPEUTICS, true)

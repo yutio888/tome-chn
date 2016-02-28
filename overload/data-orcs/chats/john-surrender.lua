@@ -32,8 +32,8 @@ local function bind(npc, player)
 	ring.power = 100
 	ring.max_power = 100
 	ring.power_regen = 1
-	ring.use_power = { name = "summon Crimson Paladin John", power = 80, use = function(self, who)
-		if not who:canBe("summon") then game.logPlayer(who, "You cannot summon; you are suppressed!") return end
+	ring.use_power = { name = "召唤深红骑士约翰", power = 80, use = function(self, who)
+		if not who:canBe("summon") then game.logPlayer(who, "你不能召唤；你被压制了") return end
 
 		for i = 1, 1 do
 			-- Find space
@@ -55,8 +55,8 @@ local function bind(npc, player)
 			game:playSoundNear(who, "talents/slime")
 
 			john:doEmote(rng.table{
-				"HATE!", "PAIN!", "REGRET!", "My love...", "I feel so lost.", "Please let me die!", "RAAAAARGGGG!",
-				"Someday you will play!", "DEATH!"
+				"仇恨!", "苦痛!", "悔恨!", "我的爱人...", "我感觉迷茫.", "让我死吧!", "RAAAAARGGGG!",
+				"你会遭报应的!", "死亡!"
 			}, 120)
 		end
 		return {id=true, used=true}
@@ -71,29 +71,29 @@ local function bind(npc, player)
 end
 
 newChat{ id="welcome",
-	text = [[#LIGHT_GREEN#*The Crimson Templar looks exhausted, nearly dead. You feel the ring attuning to him and suddenly you understand you could absorb his essence to power the ring.*#WHITE#
-Go on kill me @playername@! My life is destroyed, my friends are dead, my dear Aeryn is dead. All dead by your murderous hands! Finish me, let me have some #{italic}#rest#{normal}#.]],
+	text = [[#LIGHT_GREEN#*深红圣武士看上去极其疲惫，濒临死亡。你感觉戒指在和他共鸣，突然你意识到你能吸收他的力量来强化戒指。*#WHITE#
+来杀了我吧@playername@! 我的生活被摧毁，我的朋友被杀死，我的爱人艾琳也死了。都被你无情而残忍的双手杀死了！干掉我吧，让我就这样 #{italic}#休息#{normal}#吧.]],
 	answers = {
-		{"#LIGHT_GREEN#[destroy him to power the ring]#WHITE# So be it!", action=destroy, jump="destroy"},
-		{"#LIGHT_GREEN#[bind him to the ring]#WHITE# No, you are more useful alive and broken to me!", action=bind, jump="bind"},
+		{"#LIGHT_GREEN#[杀死他来强化戒指]#WHITE# 如你所愿!", action=destroy, jump="destroy"},
+		{"#LIGHT_GREEN#[将他绑定到戒指上]#WHITE# 不，你活着对我更有用!", action=bind, jump="bind"},
 	}
 }
 
 newChat{ id="destroy",
-	text = [[#LIGHT_GREEN#*The malevolent energies around you condensate into the ring, absorbing the last remains of John.
-The ring is now much more powerful.*#WHITE#
-Aeryn... my love...]],
+	text = [[#LIGHT_GREEN#*在你周围的邪恶能量凝聚到戒指中，吸收了约翰的剩余力量。
+戒指变得更加强大了。*#WHITE#
+艾琳... 我的爱人...]],
 	answers = {
-		{"#LIGHT_GREEN#[done]#WHITE#"},
+		{"#LIGHT_GREEN#[完成]#WHITE#"},
 	}
 }
 
 newChat{ id="bind",
-	text = [[#LIGHT_GREEN#*The malevolent energies around you condense into the ring, binding John to it forever.
-The ring is now able to summon him for a few turns at will.*#WHITE#
-#{bold}#I HATE YOU!#{normal}#]],
+	text = [[#LIGHT_GREEN#*在你周围的邪恶能量凝聚到戒指中，将约翰绑定到戒指上。
+戒指现在具有召唤他的能力。*#WHITE#
+#{bold}#我恨你!#{normal}#]],
 	answers = {
-		{"#LIGHT_GREEN#[done]#WHITE#"},
+		{"#LIGHT_GREEN#[完成]#WHITE#"},
 	}
 }
 

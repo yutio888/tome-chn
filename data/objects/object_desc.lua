@@ -96,6 +96,11 @@ objectSType["schematic"] = "设计图"
 objectSType["steamgun"] = "蒸汽枪"
 objectSType["steamtech"] = "蒸汽科技"
 objectSType["salve"] = "药剂"
+objectSType["fang"] = "牙齿"
+objectSType["demonic"] = "恶魔道具"
+objectSType["injector"] = "注射器"
+objectSType["bomb"] = "炸弹"
+objectSType["power"] = "强力道具"
 --------------------------------------------------------
 --鼠标信息
 --------------------------------------------------------
@@ -109,6 +114,7 @@ objDesc["Maximum steam: "] = "蒸汽容量："
 --
 objDesc["[Plot Item]"] = "[剧情物品]"
 objDesc["It must be held with both hands."] = "你必须使用双手装备。"
+objDesc["It can be used as a weapon and offhand."] = "能当作单手武器+副手使用"
 objDesc["It is part of a set of items."] = "它是某个套装中的一件。"
 objDesc["The set is complete."] = "套装已完成。"
 objDesc["Mastery: "] = "武器精通类型:"
@@ -660,7 +666,7 @@ function getObjectDescCHN(desc)
 				elseif desc[i]:find("physical damage (based on Cunning), making them bleed.") then
 					desc[i]=desc[i]:gsub("Has a","每回合有"):gsub("chance each turn to slash an adjacent enemy for","几率攻击一个相邻敌人，造成"):gsub("physical damage (based on Cunning), making them bleed.","物理伤害（基于灵巧），并使之流血。")
 				elseif desc[i]:find("If anomaly triggers, halve paradox.") then
-					desc[i]=desc[i]:gsub("increase paradox by a drastic amount with a chance to do an anomaly","大幅增加紊乱，有机率触发异常。"):gsub("chance). If anomaly triggers, halve paradox.","几率)。若触发异常，紊乱减半。")
+					desc[i]=desc[i]:gsub("increase paradox by a drastic amount with a chance to do an anomaly","大幅增加紊乱，有机率触发异常。"):gsub("chance","几率"):gsub("If anomaly triggers, halve paradox.","若触发异常，紊乱减半。")
 				else--if desc[i]:find("Special effect on block:") then
 					desc[i] = desc[i]:gsub("Special effect on block:","格挡特效：")
 							:gsub("Unleash a lightning nova of radius equal to the tinker tier.","释放半径等于材质等级的闪电新星")
@@ -687,7 +693,7 @@ function getObjectDescCHN(desc)
 					:gsub("Celestial","天空"):gsub("Chronomancy","时空"):gsub("Corruption","堕落"):gsub("Cursed","诅咒")
 					:gsub("Technique","格斗"):gsub("Cunning","灵巧"):gsub("Wild","自然"):gsub("-gift",""):gsub("Psionic","超能"):gsub("Spell","法术")
 					:gsub("Undead","亡灵"):gsub("Golem","傀儡"):gsub("Race","种族技能")
-					:gsub("water","水"):gsub("Steam","蒸汽")
+					:gsub("water","水"):gsub("Steamtech","蒸汽"):gsub("Steam","蒸汽")
 					:gsub("Current Resistance:","当前抗性："):gsub("Blood Charges:","鲜血吸收:")
 					:gsub("item",""):gsub("life","生命"):gsub("silence","沉默")
 			desc[i]=desc[i]:gsub("status","状态"):gsub("alive","存活"):gsub("dead(does not provide benefits)","死亡（不提供属性）")

@@ -36,7 +36,7 @@ tinkerCHN["Thunder Grenade"] = {
 
 
 tinkerCHN["Steamgun: Payload"] = {
-		name = "蒸汽枪：载荷部",
+		name = "蒸汽枪：荷载",
 		desc = "蒸汽枪技术的巅峰之作。用这把枪暴击就像发射出一团爆炸的大火球！而且真的会有大火球被发射出来！",
 }
 

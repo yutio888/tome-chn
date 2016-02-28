@@ -3520,10 +3520,72 @@ registerArtifactTranslation{
 	desc = "奇怪的黑色光盘",
 }
 end
+
+registerArtifactTranslation{
+	originName = "Payload",
+	name = "荷载",
+	unided_name = "奇怪的大枪",
+	desc = [["我一点都不喜欢那个村庄。" - 疯狂科学家，查尔塔]],
+}
+registerArtifactTranslation{
+	originName = "Brain Cap",
+	name = "脑帽",
+	unided_name = "脑帽",
+	desc = [[通过把一个大脑装进沃瑞钽罐子里，这个装置可以增加你的精神抗性并让你可以发射出强大的魔法干扰波。]],
+}
+
+registerArtifactTranslation{
+		originName = "Brain Flare",
+		name = "脑耀",
+		unided_name = "脑耀",
+		desc = "通过把一个大脑装进沃瑞钽罐子里，这个装置可以增加你的精神抗性并让你可以侵入其他人的精神，操纵它们的躯体。",
+}
+registerArtifactTranslation{
+		originName ="Rogue's Gallery",
+		name = "盗贼画廊",
+		unided_name = "盗贼画廊",
+		desc = "内衬各种机械装置，这件披风包含着让你可以应对任何你有可能或不可能遇到的情况的特殊装备！",
+		special_desc = function(self) return "生命掉落至20%以下时，释放一阵烟雾,混乱周围生物，令你潜行并有一定几率免疫伤害，持续5回合。" end,
+		["use_power.name"] = function(self, who)
+			 return "你的下一次伤害会施加致残毒素（毒素消耗前不会进行充能）,造成微弱伤害并令目标有10%几率使用技能失败。" end,
+}
+registerArtifactTranslation{
+		originName ="Stormcutter",
+		name = "风暴切割者",
+		unided_name = "电化链锯",
+		desc = [["适合战斗、烹饪甚至刮胡子！我们并不负责处理刮破皮的问题。"]],
+		["combat.special_on_hit.desc"]="造成基于灵巧的闪电眩晕伤害,最多弹射至3名目标处。",
+}
+registerArtifactTranslation{
+		originName = "Steam Powered Armour",
+		name = "蒸汽动力甲",
+		unided_name = "蒸汽动力甲",
+		set_desc = {steamarmor =  "蒸汽多多益善!" },
+		desc = "使用小型蒸汽机和你最新发现的自动化技术，你可以制造蒸汽动力装甲。这个板甲增强你的行动能力并提供强大的防护能力。",
+}
+registerArtifactTranslation{
+		originName =  "Hands of Creation",
+		name = "创造之手",
+		unided_name = "平凡的手套",
+		desc = "你的手中曾经创造出了无数惊人的作品，烈火中触摸无数作品的双手也被炽焰所围绕。",
+		special_desc = function(self) 
+			return "近战攻击将释放火焰冲击波，在范围3的锥形范围内造成等于蒸汽强度的火焰和物理伤害。"
+		end,
+		}
+registerArtifactTranslation{
+		originName =  "Life Support Suit",
+		name = "生命支持服",
+		unided_name = "高级医疗护甲",
+		desc = [["我们做到了。我们能治疗死亡。"]],
+		special_desc = function(self) 
+				local maxp = self:min_power_to_trigger()
+			return ("你不会流血。\n当你生命掉落至20%%以下时，治疗30%%最大生命。 %s"):format(self.power < maxp and ("(%d 回合冷却中)"):format(maxp - self.power) or "(15 回合冷却时间)")
+		end,
+		}
 function _M:bindHooks()
 	local class = require "engine.class"
 	class:bindHook("Entity:loadList", function (self,data)
-		if data.file:find("artifact") or data.file:find("zones") then
+		if data.file:find("artifact") or data.file:find("zones") or data.file:find("tinker") then
 			for _, item in ipairs(data.res) do
 				_M.fetchArtifactTranslation(item)
 			end

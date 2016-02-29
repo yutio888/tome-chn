@@ -256,17 +256,34 @@ newChat{ id="learn_talents",
 		{"让我再想想", jump="give_re"},
 	}
 }
-for kind, tids in pairs(talents) do
-	local answers = {}
+local answers = {}
 	for _, tid in ipairs(tids) do local t = player:getTalentFromId(tid) local level = math.min(t.points - player:getTalentLevelRaw(tid), 1) if level > 0 then
-		table.insert(answers, {("[%s 技能 %s (+%d 等级)]"):format(game.player:knowTalent(tid) and "增强" or "学习", t.name, level), action=function(npc, player)
-				game.party:reward("Select the party member to receive the reward:", function(player)
-					if player:knowTalentType(t.type[1]) == nil then player:setTalentTypeMastery(t.type[1], 0.8) end
-					player:learnTalent(tid, true, level, {no_unlearn=true})
-					if t.hide then player.__show_special_talents = player.__show_special_talents or {} player.__show_special_talents[tid] = true end
-					-- player:hasQuest(npc.quest_id).reward_message = ("%s talent %s (+%d level(s))"):format(game.player:knowTalent(tid) and "improved" or "learnt", t.name, level)
-				end)
-				on_learn(npc, player)
+		table.insert(answers, {("[%s 技能 %s (+%d 等级)]"):format(game.player:knowTalent(tid) and "增强" or "学会", t.name, level), action=function(npc, player)
+				local function learn()
+					game.party:reward("Select the party member to receive the reward:", function(player)
+						if player:knowTalentType(t.type[1]) == nil then player:setTalentTypeMastery(t.type[1], 0.8) end
+						player:learnTalent(tid, true, level, {no_unlearn=true})
+						if t.hide then player.__show_special_talents = player.__show_special_talents or {} player.__show_special_talents[tid] = true end
+						-- player:hasQuest(npc.quest_id).reward_message = ("%s talent %s (+%d level(s))"):format(game.player:knowTalent(tid) and "improved" or "learnt", t.name, level)
+					end)
+					on_learn(npc, player)
+				end
+
+				if t.is_antimagic then
+					newChat{ id="learn_talent_"..t.id,
+						text = [[反魔法是一系非常特殊的技能。你学习后将不能使用奥术装备和法术技能。
+	确定要学习么?]],
+						answers = {
+							{"我再想想.", jump="learn_talents"},
+							{"好的!", action=function(npc, player)
+								learn()
+							end}					
+						}
+					}
+					return "learn_talent_"..t.id
+				else
+					learn()
+				end
 			end, on_select=function(npc, player)
 				game.tooltip_x, game.tooltip_y = 1, 1
 				local mastery = nil
@@ -277,7 +294,7 @@ for kind, tids in pairs(talents) do
 	end end
 	table.insert(answers, {"Hum no let me change my mind.", jump="give_re"})
 	newChat{ id="learn_talents_"..kind,
-		text = [[很好。我们能教授你技能树（需解锁）。你想学哪个？]],
+		text = [[很好，我们能教你一个技能树(需解锁)，你想要哪种？]],
 		answers = answers
 	}
 end

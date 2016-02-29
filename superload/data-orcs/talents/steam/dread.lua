@@ -5,7 +5,7 @@ registerTalentTranslation{
 	name = "机械巨臂",
 	info = function(self, t)
 		return ([[你 使 用 灵 能 操 控 背 后 的 两 个 恐 怖 的 机 械 巨 臂 。
-		每 回 合 机 械 巨 臂 能 够 使 用 灵 晶 自 动 攻 击 3 码 内 的 最 多 两 个 敌 人 ， 造 成 %d%% 武 器 伤 害。
+		每 个 基 础 回 合 机 械 巨 臂 能 够 使 用 灵 晶 自 动 攻 击 3 码 内 的 最 多 两 个 敌 人 ， 造 成 %d%% 武 器 伤 害。
 		被 机 械 巨 臂 攻 击 的 目 标 伤 害 降 低 %d%% ， 持 续 5 回 合 。]]):
 		format(t.getDam(self, t) * 100, t.getReduction(self, t))
 	end,}

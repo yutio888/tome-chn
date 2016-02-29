@@ -8,6 +8,7 @@ registerTalentTranslation{
 		local inc = t.getPercentInc(self, t)
 		return ([[当 使 用 蒸 汽 枪 时 ， 增 加 物 理 强 度 %d 和 武 器 伤 害 %d%% 。
 		当 你 的 子 弹 击 中 目 标 时 ， 你 利 用 动 能 将 副 手 的 灵 晶 射 出 ， 造 成 %d%% 武 器 伤 害 （ 必 定 命 中 ），
+		当 开 启 心 灵 利 刃 时 ， 灵 晶 无 法 被 射 出 。
 		能 主 动 使 用 ， 造 成 %d%% 精 神 武 器 伤 害 。]]):format(damage, inc * 100, t.mindstarMult(self, t) * 100, t.getShootDamage(self, t) * 100)
 	end,}
 

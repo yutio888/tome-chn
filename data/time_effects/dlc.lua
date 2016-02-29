@@ -634,7 +634,7 @@ timeEffectCHN:newEffect{
 	enName = "Molten Point",
 	chName = "融化点数",
 	desc = function(self, eff) return ("%d 点。"):format(eff.stacks) end,
-	type = "物理",
+	type = "其他",
 	subtype ="火焰",
 }
 

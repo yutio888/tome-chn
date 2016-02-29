@@ -98,7 +98,7 @@ function hookMapGeneratorStaticSubgenRegister(self, data)
 end
 
 function hookEntityLoadList(self, data)
-	if type(game) ~= "table" then return end
+	if type(game) ~= "table" or not game.state then return end
 	if game.state.birth.campaign_name == "orcs" then
 		if data.file == "/data/general/objects/objects.lua" then
 			self:loadList("/data-orcs/general/objects/tinker.lua", data.no_default, data.res, data.mod, data.loaded)
@@ -374,7 +374,7 @@ end
 function hookChatLoad(self, data)
 	if self.name ~= "last-hope-lost-merchant" then return end
 	if not game.state.birth.merge_tinkers_data then return end
-
+	if not self:get("make") then return end
 	local bases = {
 		"voratun steamsaw",
 		"voratun steamgun",
@@ -461,4 +461,38 @@ function hookChatLoad(self, data)
 
 		return "makereal"
 	end})
+end
+
+function hookBirtherDonatorTiles(self, data)
+	data.list[#data.list+1] = "npc/giant_yeti_astral_infused_yeti.png"
+	data.list[#data.list+1] = "npc/giant_yeti_attack_yeti.png"
+	data.list[#data.list+1] = "npc/giant_yeti_captured_yeti_behemoth.png"
+	data.list[#data.list+1] = "npc/giant_yeti_guard_yeti.png"
+	data.list[#data.list+1] = "npc/giant_yeti_half_mechanized_yeti.png"
+	data.list[#data.list+1] = "npc/giant_yeti_pet_yeti.png"
+	data.list[#data.list+1] = "npc/giant_yeti_yeti.png"
+	data.list[#data.list+1] = "npc/giant_yeti_yeti_cub.png"
+	data.list[#data.list+1] = "npc/giant_yeti_yeti_demolisher.png"
+	data.list[#data.list+1] = "npc/giant_yeti_yeti_warrior.png"
+	data.list[#data.list+1] = "npc/giant_yeti_yeti_patriarch.png"
+	data.list[#data.list+1] = "npc/humanoid_elf_elven_astromancer.png"
+	data.list[#data.list+1] = "npc/humanoid_elf_star_gazer.png"
+	data.list[#data.list+1] = "npc/humanoid_elf_sunwall_vindicator.png"
+	data.list[#data.list+1] = "npc/humanoid_halfling_halfling_pyremaster.png"
+	data.list[#data.list+1] = "npc/humanoid_halfling_mindwall.png"
+	data.list[#data.list+1] = "npc/humanoid_human_astral_conjurer.png"
+	data.list[#data.list+1] = "npc/humanoid_human_crimson_templar_john.png"
+	data.list[#data.list+1] = "npc/humanoid_human_maltoth_the_mad.png"
+	data.list[#data.list+1] = "npc/humanoid_human_outpost_leader_john.png"
+	data.list[#data.list+1] = "npc/humanoid_human_sun_paladin_recruit.png"
+	data.list[#data.list+1] = "npc/humanoid_human_sunwall_guard.png"
+	data.list[#data.list+1] = "npc/humanoid_shalore_shalore_liberator.png"
+	data.list[#data.list+1] = "npc/humanoid_orc_orc_guard.png"
+	data.list[#data.list+1] = "npc/humanoid_orc_orc_gunslinger.png"
+	data.list[#data.list+1] = "npc/undead_ghost_necropsych_s_ghost.png"
+	data.list[#data.list+1] = "npc/undead_minotaur_nektosh_the_one_horned.png"
+	data.list[#data.list+1] = "npc/undead_minotaur_whitehoof_ghoul.png"
+	data.list[#data.list+1] = "npc/undead_minotaur_whitehoof_hailstorm.png"
+	data.list[#data.list+1] = "npc/undead_minotaur_whitehoof_invoker.png"
+	data.list[#data.list+1] = "npc/undead_minotaur_whitehoof_maulotaur.png"
 end

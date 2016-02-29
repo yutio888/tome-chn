@@ -7,7 +7,6 @@ local function destroy(npc, player)
 	if not ring then return end
 
 	player:onTakeoff(ring, inven_id, true)
-	ring.wielder.talents_types_mastery_all = 0.1
 	ring.wielder.resists.all = 10
 	ring.wielder.inc_damage = {all = 10}
 	ring.wielder.inc_stats[Stats.STAT_STR] = 6

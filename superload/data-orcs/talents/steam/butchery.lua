@@ -23,7 +23,7 @@ registerTalentTranslation{
 	id = "T_TEMPEST_OF_METAL",
 	name = "金属狂怒",
 	info = function(self, t)
-		return ([[持 续 挥 舞 你 的 链 锯 ， 每 回 合 对 周 围 敌 人 造 成 %d%% 武 器 伤 害。
+		return ([[持 续 挥 舞 你 的 链 锯 ， 每 次 你 攻 击 时 对 周 围 敌 人 造 成 %d%% 武 器 伤 害。
 		你 狂 乱 的 动 作 使 你 很 难 被 命 中 ， %d%% 几 率 无 视 伤 害。
 		伤 害 无 效 概 率 随 蒸 汽 强 度 提 高 。
 		#{italic}#感受金属之怒吧！！#{normal}#]])
@@ -34,7 +34,8 @@ registerTalentTranslation{
 	id = "T_OVERCHARGE_SAWS",
 	name = "链锯过载",
 	info = function(self, t)
-		return ([[链 锯 引 擎 临 时 进 入 过 载 模 式 ， 增 加 %d%% 的 链 锯 相 关 技 能 有 效 等 级 , 持续 %d 回 合 。]])
+		return ([[链 锯 引 擎 临 时 进 入 过 载 模 式 ， 增 加 %d%% 的 链 锯 相 关 技 能 有 效 等 级 , 持续 %d 回 合 。
+		#{italic}#无尽地痛苦#{normal}#]])
 		:format(t.getPower(self, t), t.getDur(self, t))
 	end,}
 return _M

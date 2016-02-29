@@ -25,12 +25,12 @@ registerInscriptionTranslation{
 	display_name = "植入物: 蒸汽制造机",
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[蒸 汽 制 造 机 每 回 合 制 造 %d 点 蒸 汽 。
+		return ([[蒸 汽 制 造 机 每 回 合 制 造 %0.1f 点 蒸 汽 。
 		能 直 接 使 用 ，立 即 制 造 %d 蒸 汽。]]):format(data.power + data.inc_stat, (data.power + data.inc_stat) * 5)
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[蒸汽 %d]]):format(data.power + data.inc_stat)
+		return ([[蒸汽 %0.1f]]):format(data.power + data.inc_stat)
 	end,
 }
 

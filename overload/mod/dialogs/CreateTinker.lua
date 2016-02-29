@@ -96,6 +96,7 @@ function _M:select(item)
 	end
 end
 
+
 function _M:use(item)
 	if not item then return end
 	if self.current_item then self.current_item.color = self.current_item.dcolor end
@@ -104,7 +105,6 @@ function _M:use(item)
 
 	self.c_entity.entity = item.tdef.display_entity
 	self.c_cur_name:switchItem(item, "#LIGHT_BLUE#"..item.name)
-	self.c_cur_desc:switchItem(item, item.desc)
 	self:getUIElement(self.c_create).hidden = false
 	self:getUIElement(self.c_cur_desc).hidden = false
 	self:getUIElement(self.c_cur_name).hidden = false
@@ -114,11 +114,17 @@ function _M:use(item)
 	self:getUIElement(self.c_cur_tier3).hidden = true
 	self:getUIElement(self.c_cur_tier4).hidden = true
 	self:getUIElement(self.c_cur_tier5).hidden = true
-	if self.party:canMakeTinker(self.actor, self.current_item.id, 1) then self:getUIElement(self.c_cur_tier1).hidden = false self:selectTier(1) end
-	if self.party:canMakeTinker(self.actor, self.current_item.id, 2) then self:getUIElement(self.c_cur_tier2).hidden = false self:selectTier(2) end
-	if self.party:canMakeTinker(self.actor, self.current_item.id, 3) then self:getUIElement(self.c_cur_tier3).hidden = false self:selectTier(3) end
-	if self.party:canMakeTinker(self.actor, self.current_item.id, 4) then self:getUIElement(self.c_cur_tier4).hidden = false self:selectTier(4) end
-	if self.party:canMakeTinker(self.actor, self.current_item.id, 5) then self:getUIElement(self.c_cur_tier5).hidden = false self:selectTier(5) end
+	if self.party:canMakeTinker(self.actor, self.current_item.id, 1) then self:getUIElement(self.c_cur_tier1).hidden = false if not self.changing_tier then self:selectTier(1) end end
+	if self.party:canMakeTinker(self.actor, self.current_item.id, 2) then self:getUIElement(self.c_cur_tier2).hidden = false if not self.changing_tier then self:selectTier(2) end end
+	if self.party:canMakeTinker(self.actor, self.current_item.id, 3) then self:getUIElement(self.c_cur_tier3).hidden = false if not self.changing_tier then self:selectTier(3) end end
+	if self.party:canMakeTinker(self.actor, self.current_item.id, 4) then self:getUIElement(self.c_cur_tier4).hidden = false if not self.changing_tier then self:selectTier(4) end end
+	if self.party:canMakeTinker(self.actor, self.current_item.id, 5) then self:getUIElement(self.c_cur_tier5).hidden = false if not self.changing_tier then self:selectTier(5) end end
+
+	local desc_tier = util.bound(self.cur_tier or 1, item.tdef.base_ml or 1, item.tdef.max_ml or 5)
+	if not item.desc[desc_tier] then
+		item.desc[desc_tier] = self:getDescription(item.tdef, desc_tier)
+	end
+	self.c_cur_desc:switchItem(item.desc[desc_tier], item.desc[desc_tier])
 end
 
 function _M:selectTier(ml)
@@ -129,6 +135,7 @@ function _M:selectTier(ml)
 	self.c_cur_tier5.checked = false
 	self.cur_tier = ml
 	self["c_cur_tier"..ml].checked = true
+	if self.current_item then self.changing_tier = true self:use(self.current_item) self.changing_tier = false end
 end
 
 function _M:create()
@@ -266,7 +273,7 @@ function _M:generateList()
 				base_category=tdef.base_category:gsub("smith","铁匠"):gsub("chemistry","药剂学"):gsub("electricity","电子")
 																				:gsub("explosives","爆炸学"):gsub("mechanical","机械"):gsub("therapeutics","治疗学"),
 				status=upto > 0 and ("最高"..upto.."材质等级") or "缺少材料",
-				desc=self:getDescription(tdef, upto),
+				desc={},
 				tdef=tdef,
 				slot=slot,
 				max_ml = upto,

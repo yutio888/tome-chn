@@ -1721,7 +1721,7 @@ function _M:setupCommands()
 			print("===============")
 		end end,
 		[{"_g","ctrl"}] = function() if config.settings.cheat then
-			self:changeLevel(6, "orcs+palace-fumes")
+			self:changeLevel(1, "orcs+steam-quarry")
 do return end
 			local o = game.zone:makeEntity(game.level, "object", {subtype="sling", random_object=true}, nil, true)
 			if o then

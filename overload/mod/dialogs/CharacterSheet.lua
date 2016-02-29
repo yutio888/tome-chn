@@ -1231,7 +1231,28 @@ function _M:drawDialog(kind, actor_to_compare)
 				self:mouseTooltip(self.TOOLTIP_AFFINITY, s:drawColorStringBlended(self.font, ("%s%-20s: #00ff00#%s"):format((t.text_color or "#WHITE#"), t.name:capitalize().."#LAST#", text), w, h, 255, 255, 255, true)) h = h + self.font_h
 			end
 		end
+		
+--Flat resists
+		if player.flat_damage_armor and next(player.flat_damage_armor) then
+			h = h + self.font_h
+			s:drawColorStringBlended(self.font, "#LIGHT_BLUE#固定伤害数值减免:", w, h, 255, 255, 255, true) h = h + self.font_h
 
+			if player.flat_damage_armor.all or (actor_to_compare and actor_to_compare.flat_damage_armor.all) then
+				text = compare_fields(player, actor_to_compare, function(actor, ...) return actor:combatGetFlatResist("none") end, "%3d", "%+.0f")
+				if text ~= "  0%" then
+					self:mouseTooltip(self.TOOLTIP_FLAT_RESIST, s:drawColorStringBlended(self.font, ("全伤害    : #00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
+				end
+			end
+
+			for i, t in pairs(DamageType.dam_def) do if player.flat_damage_armor[DamageType[t.type]] and player.flat_damage_armor[DamageType[t.type]] ~= 0 then
+				local valn = player:combatGetFlatResist(DamageType[t.type]) or 0
+				local valo = actor_to_compare and actor_to_compare:combatGetFlatResist(DamageType[t.type]) or 0
+				if valn~=0 or valo~=0 then
+					text = compare_fields(player, actor_to_compare, function(actor, ...) return actor == player and valn or actor == actor_to_compare and valo or 0 end, "%3d", "%+.0f")
+					self:mouseTooltip(self.TOOLTIP_FLAT_RESIST, s:drawColorStringBlended(self.font, ("%s%-20s: #00ff00#%s"):format((t.text_color or "#WHITE#"), t.name:capitalize().."#LAST#", text), w, h, 255, 255, 255, true)) h = h + self.font_h
+				end
+			end end
+		end
 		-- Status Immunities
 		h = 0
 		w = self.w * 0.52

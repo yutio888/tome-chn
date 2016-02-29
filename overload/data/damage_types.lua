@@ -357,7 +357,7 @@ setDefaultProjector(function(src, x, y, type, dam, state)
 
 		-- Flat damage reduction ("armour")
 		if dam > 0 and target.flat_damage_armor then
-			local dec = math.min(dam, (target.flat_damage_armor.all or 0) + (target.flat_damage_armor[type] or 0))
+			local dec = math.min(dam, target:combatGetFlatResist(type))
 			if dec > 0 then game:delayedLogDamage(src, target, 0, ("%s(%d 护甲吸收)#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", dec), false) end
 			dam = math.max(0, dam - dec)
 			print("[PROJECTOR] after flat damage armor", dam)

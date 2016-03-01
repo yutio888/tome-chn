@@ -256,7 +256,8 @@ newChat{ id="learn_talents",
 		{"让我再想想", jump="give_re"},
 	}
 }
-local answers = {}
+for kind, tids in pairs(talents) do
+	local answers = {}
 	for _, tid in ipairs(tids) do local t = player:getTalentFromId(tid) local level = math.min(t.points - player:getTalentLevelRaw(tid), 1) if level > 0 then
 		table.insert(answers, {("[%s 技能 %s (+%d 等级)]"):format(game.player:knowTalent(tid) and "增强" or "学会", t.name, level), action=function(npc, player)
 				local function learn()

@@ -43,7 +43,7 @@ function _M:init(actor, start_tab)
 	self.actor = actor
 	start_tab = start_tab and tabs_list[start_tab] and start_tab or "general"
 
-	self.font = core.display.newFont(chn123_tome_font(), 12)
+	self.font = core.display.newFont(chn123_tome_font(), 14)
 	self.font_w, self.font_h = self.font:size('　')
 	self.font_h = self.font:lineSkip()
 

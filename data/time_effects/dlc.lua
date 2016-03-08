@@ -1,4 +1,3 @@
-
 local DamageType = require "engine.DamageType"
 timeEffectCHN:newEffect{
 	id = "DEMON_BLADE",
@@ -402,7 +401,7 @@ timeEffectCHN:newEffect{
 	id = "STRAFING",
 	enName = "Strafing",
 	chName = "扫射中",
-	desc = function(self, eff) return ("目 标 在 移 动 中 射 击 ， 效 果 结 束 后 恢 复 %d 弹 药 。"):format(self.player and self:callTalent(self.T_STRAFE, "getReload", eff.turns).." " or "") end,
+	desc = function(self, eff) return ("目 标 在 移 动 中 射 击 ， 效 果 结 束 后 恢 复 %s 弹 药 。"):format(self.player and self:callTalent(self.T_STRAFE, "getReload", eff.turns).." " or "") end,
 	type = "物理",
 	subtype ="策略",
 }

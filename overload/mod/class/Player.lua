@@ -899,7 +899,6 @@ function _M:automaticTalents()
 			end
 		end
 	end)
-	table.print(uses)
 	for _, use in ipairs(uses) do
 		use.fct()
 		if use.turns_used > 0 then break end

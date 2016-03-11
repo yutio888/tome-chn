@@ -206,11 +206,13 @@ function _M:useTalent(id, who, force_level, ignore_cd, force_target, silent, no_
 						self:removeTemporaryValue(p.__tmpvals[i][1], p.__tmpvals[i][2])
 					end
 				end
+				p.__tmpvals = nil
 				if p and type(p) == "table" and p.__tmpparticles then
 					for i = 1, #p.__tmpparticles do
 						self:removeParticles(p.__tmpparticles[i])
 					end
 				end
+				p.__tmpparticles = nil
 				local ret = ab.deactivate(who, ab, p)
 
 				self.deactivating_sustain_talent = ab.id

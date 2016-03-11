@@ -130,6 +130,7 @@ function _M:setEffect(eff_id, dur, p, silent)
 	end
 
 	self.tmp[eff_id] = p
+	p.__setting_up = true
 	if ed.on_gain then
 		local ret, fly = ed.on_gain(self, p)
 		if not silent and not had then
@@ -161,6 +162,7 @@ function _M:setEffect(eff_id, dur, p, silent)
 
 	self.changed = true
 	self:check("on_temporary_effect_added", eff_id, ed, p)
+	p.__setting_up = nil
 end
 
 --- Check timed effect
@@ -175,6 +177,18 @@ end
 function _M:removeEffect(eff, silent, force)
 	local p = self.tmp[eff]
 	if not p then return end
+
+	-- Make sure we're not trying to remove an effect currently being setup, if so we delay that order til the end of the tick (and recheck)
+	if p.__setting_up then
+		game:onTickEnd(function()
+			local p = self.tmp[eff]
+			if not p then return end
+			if p.__setting_up then return end --- WHUT ??
+			self:removeEffect(eff, silent, force)
+		end)
+		return
+	end
+
 	if _M.tempeffect_def[eff].no_remove and not force then return end
 	self.tmp[eff] = nil
 	self.changed = true

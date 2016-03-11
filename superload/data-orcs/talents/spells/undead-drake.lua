@@ -7,7 +7,7 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		return ([[你 在 死 亡 中 狂 欢， 吞 噬 你 受 害 者 们 的 灵 魂。 每 当 你 对 一 个 目 标 造 成 伤 害 时， 你 造 成 %0.2f 额 外 暗 影 伤 害。
 		除 此 之 外， 每 当 你 杀 死 敌 人 时 你 获 得 %d 个 灵 魂。
-		伤 害 将 会 随 你 法 术 强 度 和 心 灵 强 度 中 较 高 者 变 化。]]):
+		伤 害 将 会 随 你 法 术 强 度 和 心 灵 强 度 中 较 高 者 变 化 ， 且 每 回 合 最 多 触 发 十 五 次 。 ]]):
 		format(damDesc(self, DamageType.DARKNESS, damage), t.soulBonus(self,t))
 	end,}
 

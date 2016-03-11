@@ -237,7 +237,7 @@ registerTalentTranslation{
 		return ([[在 某 个 位 置 处 放 置 一 个 带 电 的 哨 兵 装 置 。
 每 一 个 回 合 ，它 会 向 附 近 的 敌 人 发 射 一 个 闪 电 球 。
 闪 电 球 造 成  %0.2f  闪 电 伤 害 。
-哨 兵 有 %d  的 生 命 ，持 续 8 回 合 。]]):
+哨 兵 有 %d  的 生 命 ，持 续 10 回 合 。]]):
 		format(damDesc(self, DamageType.LIGHTNING, t.getDam(self, t)), t.getHP(self, t))
 	end,}
 

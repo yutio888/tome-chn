@@ -6,7 +6,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		return ([[把 链 锯 深 深 插 入 地 面 ， 作 为 履 带 ， 增 强 自 己 的 行 动 能 力 （ 移 动 速 度 增 加 %d%% ） 。
 		在 你 移 动 路 线 两 侧 的 敌 人 被 链 锯 割 断 ，  被 击 退 3 码 。
-		攻 击 或 者 使 用 其 他 技 能 的 动 作 都 会 中 断 效 果 , 同 时 冲 击 力 对 周 围 的 敌 人 造 成 %d%% 武 器 伤 害。
+		攻 击 或 者 使 用 其 他 技 能 的 动 作 都 会 中 断 效 果 , 同 时 冲 击 力 对 周 围 的 敌 人 造 成 %d%% 武 器 伤 害 。 你 需 要 至 少 移 动 五 次 来 达 到 最 高 伤 害 ， 否 则 伤 害 会 降 低 。 若 不 移 动 则 没 有 伤 害 。 
 		#{italic}#冲锋 ！ 死亡之轮！！#{normal}#]]):
 		format(t.getSpeed(self, t), self:combatTalentWeaponDamage(t, 1, 2) * 100)
 	end,}

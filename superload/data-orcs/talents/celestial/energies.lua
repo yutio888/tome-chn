@@ -7,7 +7,7 @@ registerTalentTranslation{
 		local posFactor = t.getPosFactor(self, t)
 		local negFactor = t.getNegFactor(self, t)
 		local cap = t.getCap(self, t)
-		return ([[每 1% 的 正 能 量 增 加 %0.2f%% 的 移 动 速 度, 每 1% 的 负 能 量 增 加 %0.2f%% 施 法 速 度, 在 80%% 时 达 到 最 大 值, 为  %0.2f%%. 持 续 能 量 仍 然 算 向 最 大 值.]]):
+		return ([[每 1%% 的 正 能 量 增 加 %0.2f%% 的 移 动 速 度, 每 1%% 的 负 能 量 增 加 %0.2f%% 施 法 速 度, 在 80%% 时 达 到 最 大 值, 为  %0.2f%%. 持 续 能 量 仍 然 算 向 最 大 值.]]):
 		format(posFactor * 100, negFactor * 100, cap * 100)
 	end,}
 

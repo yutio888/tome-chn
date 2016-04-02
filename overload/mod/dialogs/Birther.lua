@@ -664,9 +664,9 @@ function _M:generateCampaigns()
 				local desc = d.desc
 								--DLC 汉化
 				local tname=d.display_name
-				if birthCHN[tname] then 
-					desc = birthCHN[tname].desc
-					tname = birthCHN[tname].chname end
+				if birthCHN[d.type][d.name] then 
+					desc = birthCHN[d.type][d.name].desc
+					tname = birthCHN[d.type][d.name].display_name end
 				if type(desc) == "table" then desc = table.concat(desc, "\n") end
 				list[#list+1] = { name = tstring{tname}:toString(), id=d.name, desc=desc }
 				if util.getval(d.selection_default) then self.default_campaign = d.name end
@@ -760,17 +760,17 @@ function _M:generateRaces()
 					if locked == true then
 						--DLC 汉化
 						local desc = sd.locked_desc
-						if birthCHN[tname] then 
-							desc = birthCHN[tname].locked_desc
+						if birthCHN["subrace"][tname] then 
+							desc = birthCHN["subrace"][tname].locked_desc
 						 end
 						nodes[#nodes+1] = { name = tstring{{"font", "italic"}, {"color", "GREY"}, "-- 需解锁 --", {"font", "normal"}}, id=sd.name, pid=d.name, locked=true, desc=util.getval(desc,self)..locktext }
 					elseif locked == false then
 						local desc = sd.desc
 						local tname = sd.name
 						--DLC 汉化
-						if birthCHN[tname] then 
-							desc = birthCHN[tname].desc
-							tname = birthCHN[tname].chname
+						if birthCHN["subrace"][tname] then 
+							desc = birthCHN["subrace"][tname].desc
+							tname = birthCHN["subrace"][tname].display_name
 						else
 							tname=sd.display_name
 						end
@@ -784,16 +784,15 @@ function _M:generateRaces()
 			local locked = self:getLock(d)
 			if locked == true then
 				local desc = d.locked_desc
-				if birthCHN[d.name] then desc = birthCHN[d.name].locked_desc or desc	end
+				if birthCHN["race"][d.name] then desc = birthCHN["race"][d.name].locked_desc or desc	end
 				tree[#tree+1] = { name = tstring{{"font", "italic"}, {"color", "GREY"}, "-- 需解锁 --", {"font", "normal"}}, id=d.name, shown = oldtree[d.name], nodes = nodes, locked=true, desc=util.getval(desc,self)..locktext }
 			elseif locked == false then
 				local desc = d.desc
 				
 				local tname = d.name
-				if tname=="Orc" then tname = "Orc_Race" end
-				if birthCHN[tname] then 
-					desc = birthCHN[tname].desc or desc
-					tname = birthCHN[tname].chname
+				if birthCHN["race"][tname] then 
+					desc = birthCHN["race"][tname].desc or desc
+					tname = birthCHN["race"][tname].display_name
 				else
 					tname = d.display_name	
 				end
@@ -837,7 +836,7 @@ function _M:generateClasses()
 					if locked == true then
 						--DLC 汉化
 						local desc = sd.locked_desc
-						if birthCHN[sd.name] then desc = birthCHN[sd.name].locked_desc or desc	end
+						if birthCHN["subclass"][sd.name] then desc = birthCHN["subclass"][sd.name].locked_desc or desc	end
 						nodes[#nodes+1] = { name = tstring{{"font", "italic"}, {"color", "GREY"}, "-- 需解锁 --", {"font", "normal"}}, id=sd.name, pid=d.name, locked=true, desc=util.getval(desc,self)..locktext }
 					elseif locked == false then
 						local old = self.descriptors_by_type.subclass
@@ -846,7 +845,7 @@ function _M:generateClasses()
 						self.descriptors_by_type.subclass = old
 						local desc = sd.desc
 						--DLC 汉化
-						if birthCHN[sd.name] then desc = birthCHN[sd.name].desc	end
+						if birthCHN["subclass"][sd.name] then desc = birthCHN["subclass"][sd.name].desc	end
 
 						if type(desc) == "table" then desc = table.concat(desc, "\n") end
 						if how == "nolore" and self.descriptors_by_type.subrace then
@@ -854,7 +853,7 @@ function _M:generateClasses()
 						end
 						--DLC 汉化
 						local display_name = sd.display_name
-						if birthCHN[sd.name] then display_name = birthCHN[sd.name].chname	end
+						if birthCHN["subclass"][sd.name] then display_name = birthCHN["subclass"][sd.name].display_name	end
 
 						nodes[#nodes+1] = { name = display_name, basename=display_name, id=sd.name, pid=d.name, desc=desc, def=sd }
 						if self.sel_class and self.sel_class.id == sd.name then newsel = nodes[#nodes] end
@@ -869,9 +868,9 @@ function _M:generateClasses()
 				local desc = d.desc
 								--DLC 汉化
 				local tname=d.display_name
-				if birthCHN[tname] then 
-					desc = birthCHN[tname].desc
-					tname = birthCHN[tname].chname end
+				if birthCHN["class"][tname] then 
+					desc = birthCHN["class"][tname].desc
+					tname = birthCHN["class"][tname].display_name end
 				if type(desc) == "table" then desc = table.concat(desc, "\n") end
 				tree[#tree+1] = { name = tstring{{"font", "italic"}, {"color", "LIGHT_SLATE"}, tname, {"font", "normal"}}, id=d.name, shown=oldtree[d.name], nodes = nodes, desc=desc }
 			end

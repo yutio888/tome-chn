@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> a35b9267ecb51abea72f933344024f7e1857bae8
 local DamageType = require "engine.DamageType"
 timeEffectCHN:newEffect{
 	id = "DEMON_BLADE",
@@ -402,7 +405,7 @@ timeEffectCHN:newEffect{
 	id = "STRAFING",
 	enName = "Strafing",
 	chName = "扫射中",
-	desc = function(self, eff) return ("目 标 在 移 动 中 射 击 ， 效 果 结 束 后 恢 复 %d 弹 药 。"):format(self.player and self:callTalent(self.T_STRAFE, "getReload", eff.turns).." " or "") end,
+	desc = function(self, eff) return ("目 标 在 移 动 中 射 击 ， 效 果 结 束 后 恢 复 %s 弹 药 。"):format(self.player and self:callTalent(self.T_STRAFE, "getReload", eff.turns).." " or "") end,
 	type = "物理",
 	subtype ="策略",
 }
@@ -634,7 +637,11 @@ timeEffectCHN:newEffect{
 	enName = "Molten Point",
 	chName = "融化点数",
 	desc = function(self, eff) return ("%d 点。"):format(eff.stacks) end,
+<<<<<<< HEAD
 	type = "物理",
+=======
+	type = "其他",
+>>>>>>> a35b9267ecb51abea72f933344024f7e1857bae8
 	subtype ="火焰",
 }
 
@@ -1042,4 +1049,8 @@ timeEffectCHN:newEffect{
 	desc = function(self, eff) return"目 标 处 于 月 光 的 效 果 下 。 减 少 1 点 照 明 和 视 野 ， 获 得 3 0 % 震 慑 免 疫 ,   10 潜 行 能 力   和 3 0 % 暗 影 抗 性."end,
 	type = "其他",
 	subtype = "地面",
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> a35b9267ecb51abea72f933344024f7e1857bae8

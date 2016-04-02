@@ -288,7 +288,7 @@ registerTalentTranslation{
 	name = "穿刺弹", 
 	info = function(self, t)
 		return ([[你 使 用 蒸 汽 枪 发 射 特 殊 弹 药 打 击 目 标 造 成 %d%%  武 器 伤 害 。
-击 退 目 标 %d 码 并 定 身  %d  回 合 。
+击 退 目 标 2 码 并 定 身  %d  回 合 。
      这 个 技 能 不 使 用 弹 药 ]])
 		:format(100*t.getMultiple(self, t), t.duration(self, t))
 	end,}

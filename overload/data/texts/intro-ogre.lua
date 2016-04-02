@@ -17,7 +17,7 @@
 -- Nicolas Casalini "DarkGod"
 -- darkgod@te4.org
 
-return [欢 迎 你 #LIGHT_GREEN#@name@#WHITE#.
+return [[欢 迎 你 #LIGHT_GREEN#@name@#WHITE#.
 
 你 是 一 名 食 人 魔 ， 来 自 埃 尔 瓦 拉。
 

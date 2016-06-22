@@ -207,12 +207,12 @@ function _M:newGame()
 	-- Create the entity to store various game state things
 	self.state = GameState.new{}
 	local birth_done = function()
-		if self.state.birth.__allow_rod_recall then game.state:allowRodRecall(true) self.state.birth.__allow_rod_recall = nil end
+		if self.state.birth.__allow_rod_recall then self.state:allowRodRecall(true) self.state.birth.__allow_rod_recall = nil end
 		if self.state.birth.__allow_transmo_chest and profile.mod.allow_build.birth_transmo_chest then
 			self.state.birth.__allow_transmo_chest = nil
-			local chest = game.zone:makeEntityByName(game.level, "object", "TRANSMO_CHEST")
+			local chest = self.zone:makeEntityByName(self.level, "object", "TRANSMO_CHEST")
 			if chest then
-				game.zone:addEntity(game.level, chest, "object")
+				self.zone:addEntity(self.level, chest, "object")
 				self.player:addObject(self.player:getInven("INVEN"), chest)
 			end
 		end
@@ -274,7 +274,7 @@ function _M:newGame()
 			if self.player.__game_difficulty then self:setupDifficulty(self.player.__game_difficulty) end
 			self:setupPermadeath(self.player)
 			--self:changeLevel(1, "test")
-			self:changeLevel(self.player.starting_level or 1, self.player.starting_zone, {force_down=self.player.starting_level_force_down})
+			self:changeLevel(self.player.starting_level or 1, self.player.starting_zone, {force_down=self.player.starting_level_force_down, direct_switch=true})
 			
 			print("[PLAYER BIRTH] resolve...")
 			self.player:resolve()
@@ -330,7 +330,7 @@ function _M:newGame()
 			self.to_re_add_actors = {}
 			for act, _ in pairs(self.party.members) do if self.player ~= act then self.to_re_add_actors[act] = true end end
 
-			self:changeLevel(self.player.starting_level or 1, self.player.starting_zone, {force_down=self.player.starting_level_force_down})
+			self:changeLevel(self.player.starting_level or 1, self.player.starting_zone, {force_down=self.player.starting_level_force_down, direct_switch=true})
 			self.player:grantQuest(self.player.starting_quest)
 			self.creating_player = false
 
@@ -906,14 +906,8 @@ function _M:changeLevelReal(lev, zone, params)
 
 		self.visited_zones[self.zone.short_name] = true
 		world:seenZone(self.zone.short_name)
---		if self.level.map.closed then
 			force_recreate = true
---		else
---			print("Reloading back map without having it closed")
---			recreate_nothing = true
---		end
-	-- We move to a new zone as normal
-	elseif not params.temporary_zone_shift then
+	elseif not params.temporary_zone_shift then -- We move to a new zone as normal
 		if self.zone and self.zone.on_leave then
 			local nl, nz, stop = self.zone.on_leave(lev, old_lev, zone)
 			if stop then return end
@@ -1816,9 +1810,13 @@ do return end
 					for _, node in ipairs(seen) do
 						node.actor:addParticles(engine.Particles.new("notice_enemy", 1))
 					end
-				elseif not self.player:autoExplore() then
-					self.log("这一层没有地方可以探索了。")
-					self:triggerHook{"Player:autoExplore:nowhere"}
+				else
+					if not self.player:autoExplore() then
+						self.log("这一层没有地方可以探索了。")
+						self:triggerHook{"Player:autoExplore:nowhere"}
+					else
+						while self.player:enoughEnergy() and self.player:runStep() do end
+					end
 				end
 			end end
 
@@ -1830,14 +1828,14 @@ do return end
 			end
 		end,
 
-		RUN_LEFT = function() self.player:runInit(4) end,
-		RUN_RIGHT = function() self.player:runInit(6) end,
-		RUN_UP = function() self.player:runInit(8) end,
-		RUN_DOWN = function() self.player:runInit(2) end,
-		RUN_LEFT_UP = function() self.player:runInit(7) end,
-		RUN_LEFT_DOWN = function() self.player:runInit(1) end,
-		RUN_RIGHT_UP = function() self.player:runInit(9) end,
-		RUN_RIGHT_DOWN = function() self.player:runInit(3) end,
+		RUN_LEFT = function() self.player:runInit(4) while self.player:enoughEnergy() and self.player:runStep() do end  end,
+		RUN_RIGHT = function() self.player:runInit(6) while self.player:enoughEnergy() and self.player:runStep() do end  end,
+		RUN_UP = function() self.player:runInit(8) while self.player:enoughEnergy() and self.player:runStep() do end  end,
+		RUN_DOWN = function() self.player:runInit(2) while self.player:enoughEnergy() and self.player:runStep() do end  end,
+		RUN_LEFT_UP = function() self.player:runInit(7) while self.player:enoughEnergy() and self.player:runStep() do end  end,
+		RUN_LEFT_DOWN = function() self.player:runInit(1) while self.player:enoughEnergy() and self.player:runStep() do end  end,
+		RUN_RIGHT_UP = function() self.player:runInit(9) while self.player:enoughEnergy() and self.player:runStep() do end  end,
+		RUN_RIGHT_DOWN = function() self.player:runInit(3) while self.player:enoughEnergy() and self.player:runStep() do end  end,
 
 		ATTACK_OR_MOVE_LEFT = function() self.player:attackOrMoveDir(4) end,
 		ATTACK_OR_MOVE_RIGHT = function() self.player:attackOrMoveDir(6) end,

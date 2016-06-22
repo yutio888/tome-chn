@@ -59,7 +59,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local nb = t.getNb(self, t)
 		local energy = t.getEnergy(self, t)
-		return ([[你 暂 时 性 的 和 粘 液 融 为 一 体， 净 化 你 身 上 %d 物 理 或 魔 法 效 果。 
+		return ([[你 暂 时 性 的 和 粘 液 融 为 一 体， 净 化 你 身 上 %d 物 理 或 魔 法 负 面 效 果。 
 		 然 后， 你 可 以 闪 现 到 视 野 内 任 何 有 粘 液 覆 盖 的 区 域。
 		 此 技 能 消 耗 %d%% 回 合。 
 		 只 有 当 你 站 在 粘 液 区 时 才 能 使 用。]]):

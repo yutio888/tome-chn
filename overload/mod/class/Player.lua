@@ -385,10 +385,12 @@ function _M:act()
 	-- Resting ? Running ? Otherwise pause
 	if self.player and self:enoughEnergy() then
 		if self:restStep() then
-			while self:enoughEnergy() do self:restStep() end
+			while self:enoughEnergy() and self:restStep() do end
 		elseif self:runStep() then
-			while self:enoughEnergy() do self:runStep() end
-		else
+			while self:enoughEnergy() and self:runStep() do end
+		end
+		
+		if self:enoughEnergy() then
 			game.paused = true
 			if game.uiset.logdisplay:getNewestLine() ~= "" then game.log("") end
 		end

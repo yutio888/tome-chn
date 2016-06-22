@@ -117,34 +117,36 @@ newEffect{
 		self.summoner = eff.src
 		self.summoner_gain_exp = true
 		if self.dead then return end
-		game.party:addMember(self, {
-			control="full",
-			type="thrall",
-			title="Thrall",
-			orders = {leash=true, follow=true},
-			on_control = function(self)
-				self:hotkeyAutoTalents()
-			end,
-			leave_level = function(self, party_def) -- Cancel control and restore previous actor status.
-				local eff = self:hasEffect(self.EFF_DOMINANT_WILL)
-				local uid = self.uid
-				eff.survive_domination = true
-				self:removeTemporaryValue("inc_damage", eff.pid)
-				game.party:removeMember(self)
-				self:replaceWith(require("mod.class.NPC").new(self))
-				self.uid = uid
-				__uids[uid] = self
-				self.faction = eff.oldstate.faction
-				self.ai_state = eff.oldstate.ai_state
-				self.ai = eff.oldstate.ai
-				self.remove_from_party_on_death = eff.oldstate.remove_from_party_on_death
-				self.no_inventory_access = eff.oldstate.no_inventory_access
-				self.move_others = eff.oldstate.move_others
-				self.summoner = eff.oldstate.summoner
-				self.summoner_gain_exp = eff.oldstate.summoner_gain_exp
-				self:removeEffect(self.EFF_DOMINANT_WILL)
-			end,
-		})
+		game:onTickEnd(function()
+			game.party:addMember(self, {
+				control="full",
+				type="thrall",
+				title="Thrall",
+				orders = {leash=true, follow=true},
+				on_control = function(self)
+					self:hotkeyAutoTalents()
+				end,
+				leave_level = function(self, party_def) -- Cancel control and restore previous actor status.
+					local eff = self:hasEffect(self.EFF_DOMINANT_WILL)
+					local uid = self.uid
+					eff.survive_domination = true
+					self:removeTemporaryValue("inc_damage", eff.pid)
+					game.party:removeMember(self)
+					self:replaceWith(require("mod.class.NPC").new(self))
+					self.uid = uid
+					__uids[uid] = self
+					self.faction = eff.oldstate.faction
+					self.ai_state = eff.oldstate.ai_state
+					self.ai = eff.oldstate.ai
+					self.remove_from_party_on_death = eff.oldstate.remove_from_party_on_death
+					self.no_inventory_access = eff.oldstate.no_inventory_access
+					self.move_others = eff.oldstate.move_others
+					self.summoner = eff.oldstate.summoner
+					self.summoner_gain_exp = eff.oldstate.summoner_gain_exp
+					self:removeEffect(self.EFF_DOMINANT_WILL)
+				end,
+			})
+		end)
 	end,
 	deactivate = function(self, eff)
 		if eff.survive_domination then
@@ -2464,17 +2466,17 @@ newEffect{
 newEffect{
 	name = "CLEAR_MIND", image = "talents/mental_shielding.png",
 	desc = "Clear Mind",
-	long_desc = function(self, eff) return ("使 接 下 来 的 %d 种 负 面 精 神 BUFF 无 效。"):format(self.mental_negative_status_effect_immune) end,
+	long_desc = function(self, eff) return ("使 接 下 来 的 %d 种 负 面 精 神 BUFF 无 效。"):format(self.clear_mind_immune) end,
 	type = "mental",
 	subtype = { psionic=true, },
 	status = "beneficial",
 	parameters = { power=2 },
 	activate = function(self, eff)
-		self.mental_negative_status_effect_immune = eff.power
+		self.clear_mind_immune = eff.power
 		eff.particles = self:addParticles(engine.Particles.new("generic_power", 1, {rm=0, rM=0, gm=100, gM=180, bm=180, bM=255, am=200, aM=255}))
 	end,
 	deactivate = function(self, eff)
-		self.mental_negative_status_effect_immune = nil
+		self.clear_mind_immune = nil
 		self:removeParticles(eff.particles)
 	end,
 }

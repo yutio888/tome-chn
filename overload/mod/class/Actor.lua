@@ -2524,7 +2524,7 @@ function _M:onTakeHit(value, src, death_note)
 			if self.clone_base then a = self.clone_base:clone() else a = self:clone() end
 			a.life = math.max(1, self.life - value / 2)
 			a.clone_on_hit.chance = math.ceil(self.clone_on_hit.chance / 2)
-			a.energy.val = 0
+			a.energy.value = 0
 			a.exp_worth = 0.1
 			a.inven = {}
 			a:removeAllMOs()

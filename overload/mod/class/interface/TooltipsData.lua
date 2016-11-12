@@ -484,7 +484,7 @@ TOOLTIP_STATUS_IMMUNE = [[#GOLD#状态免疫#LAST#
 百分比表示你完全免疫特效的几率。]]
 TOOLTIP_SPECIFIC_IMMUNE = [[#GOLD#特
 效免疫几率#LAST#
-表示你完全免疫特效的几率。
+表示你完全免疫特效的几率。]]
 TOOLTIP_STUN_IMMUNE = [[#GOLD#震慑免疫#LAST#
 表示你完全免疫震慑、眩晕或者冰冻的几率。
 ]]

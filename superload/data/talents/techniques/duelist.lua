@@ -6,7 +6,7 @@ registerTalentTranslation{
 		mult = t.getoffmult(self,t)*100
 		block = t.getDamageChange(self, t, true)
 		chance = t.getDeflectChance(self,t)
-		return ([[你 的 副 手 武 器 惩 罚 减 少 至  %d%%.
+		return ([[你 的 副 手 武 器 惩 罚 减 少 至  %d%% .
 		每 回 合 最 多 %0.1f 次，你 有 %d%% 概 率 抵 挡 至 多 %d 点 伤 害 （基 于 副 手 伤 害  ）。 
 		抵 挡 的 减 伤 类 似 护 甲 ，且 被 抵 挡 的 攻 击 不 会 暴 击。 很 难 抵 挡 未 发 现 的 敌 人 的 攻 击 ， 且 不 能 使 用 灵 晶 抵 挡 攻 击 。
 		]]):

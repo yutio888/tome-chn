@@ -1,7 +1,85 @@
 local _M = loadPrevious(...)
+local DamageType = require "engine.DamageType"
+local Object = require "engine.Object"
+local Map = require "engine.Map"
+
+local function knives(self)
+	local combat = {
+		talented = "knife",
+		sound = {"actions/melee_hit_squish", pitch=1.2, vol=1.2}, sound_miss = {"actions/melee_miss", pitch=1, vol=1.2},
+
+		damrange = 1.4,
+		physspeed = 1,
+		dam = 0,
+		apr = 0,
+		atk = 0,
+		physcrit = 0,
+		dammod = {dex=0.7, str=0.5},
+		melee_project = {},
+		special_on_crit = {fct=function(combat, who, target)
+			if not self:knowTalent(self.T_PRECISE_AIM) then return end
+			if not rng.percent(self:callTalent(self.T_PRECISE_AIM, "getChance")) then return end
+			local eff = rng.table{"disarm", "pin", "silence",}
+			if not target:canBe(eff) then return end
+			local check = who:combatAttack()
+			if not who:checkHit(check, target:combatPhysicalResist()) then return end
+			if eff == "disarm" then target:setEffect(target.EFF_DISARMED, 2, {})
+			elseif eff == "pin" then target:setEffect(target.EFF_PINNED, 2, {})
+			elseif eff == "silence" then target:setEffect(target.EFF_SILENCED, 2, {})
+			end
+
+		end},
+	}
+	if self:knowTalent(self.T_THROWING_KNIVES) then
+		local t = self:getTalentFromId(self.T_THROWING_KNIVES)
+		local t2 = self:getTalentFromId(self.T_PRECISE_AIM)
+		combat.dam = 0 + t.getBaseDamage(self, t)
+		combat.apr = 0 + t.getBaseApr(self, t)
+		combat.physcrit = 0 + t.getBaseCrit(self,t) + t2.getCrit(self,t2)
+		combat.crit_power = 0 + t2.getCritPower(self,t2)
+		combat.atk = 0 + self:combatAttack()
+	end
+	if self:knowTalent(self.T_LETHALITY) then 
+		combat.dammod = {dex=0.7, cun=0.5}
+	end
+	return combat
+end
+
 registerTalentTranslation{
 	id = "T_THROWING_KNIVES",
 	name = "飞刀投掷",
+	knivesInfo = function(self, t)
+		local combat = knives(self)
+		local atk = self:combatAttack(combat)
+		local talented = combat.talented or "knife"
+		local dmg =  self:combatDamage(combat)
+		local apr = self:combatAPR(combat)
+		local damrange = combat.damrange or 1.1
+		local crit = self:combatCrit(combat)
+		local crit_mult = (self.combat_critical_power or 0) + 150
+		if self:knowTalent(self.T_PRECISE_AIM) then crit_mult = crit_mult + self:callTalent(self.T_PRECISE_AIM, "getCritPower") end
+		
+		local stat_desc = {}
+		for stat, i in pairs(combat.dammod or {}) do
+			local name = engine.interface.ActorStats.stats_def[stat].short_name:capitalize()
+			if self:knowTalent(self.T_STRENGTH_OF_PURPOSE) then
+				if name == "Str" then name = "Mag" end
+			end
+			if talented == "knife" and self:knowTalent(self.T_LETHALITY) then
+				if name == "Str" then name = "Cun" end
+			end
+			stat_desc[#stat_desc+1] = ("%d%% %s"):format(i * 100, name:gsub("Cun","灵巧"):gsub("Dex","敏捷"))
+		end
+		stat_desc = table.concat(stat_desc, ", ")
+		return ([[射程: %d
+基础伤害: %d - %d
+命中: %d (%s)
+护甲穿透: %d
+暴击几率: %+d%%
+暴击伤害: %d%%
+使用属性: %s
+]]):format(t.range(self, t), dmg, dmg*damrange, atk, talented:gsub("knife","飞刀"), apr, crit, crit_mult, stat_desc)
+	end,
 	info = function (self,t)
 		local nb = t.getNb(self,t)
 		local reload = t.getReload(self,t)

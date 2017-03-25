@@ -621,6 +621,15 @@ logCHN:newLog{
 	end,
 }
 logCHN:newLog{
+	log = "#CADET_BLUE#Your %s has expired.",
+	fct = function(a)
+		if a== "trap" then return "#CADET_BLUE#你的陷阱消失了"
+		else return ("#CADET_BLUE#你的%s消失了"):format(a)
+		end
+	end,
+}
+
+logCHN:newLog{
 	log = "%s activates a prepared device.",
 	fct = function(a)
 		a = npcCHN:getName(a)

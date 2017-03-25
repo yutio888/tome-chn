@@ -33,7 +33,7 @@ registerTalentTranslation{
 		local immunities = t.getImmunities(self, t)
 		return ([[赞 美 月 之 荣 耀， 增 加 你 %d%% 震 慑、 致 盲 和 混 乱 抵 抗。 
 		 同 时 只 能 激 活 1 个 圣 诗。 ]]):
-		format(100 * (immunities), damDesc(self, DamageType.DARKNESS, darknessdamage))
+		format(100 * (immunities))
 	end,
 }
 
@@ -67,8 +67,8 @@ registerTalentTranslation{
 			local t2 = self:getTalentFromId(self.T_HYMN_OF_DETECTION)
 			local t3 = self:getTalentFromId(self.T_HYMN_OF_PERSEVERANCE)
 			ret = ([[你 学 会 了 三 种 防 御 圣 诗 ，以 此 咏 唱 对 月 亮 的 赞 颂 ：
-		 暗 影 圣 诗 ：增 加 %d%% 移 动 速 度 ，%d%%  施 法 速 度，%d 闪避 。 
-		 侦 察 圣 诗 ：增 加 %d 潜 行 侦 察 ，%d 隐 身 侦 察 ，%d%% 暴 击 伤 害 
+		 暗 影 圣 诗 ：增 加 %d%% 移 动 速 度 ， %d%%  施 法 速 度， %d 闪避 。 
+		 侦 察 圣 诗 ：增 加 %d 潜 行 侦 察 ， %d 隐 身 侦 察 ， %d%% 暴 击 伤 害 
 		 坚 毅 圣 诗 ：增 加 %d%% 震 慑 、混 乱、 致 盲 抗 性。
 		 你 同 时 只 能 激 活 一 种 赞 歌 。]]):
 			format(t1.moveSpeed(self, t1), t1.castSpeed(self, t1), t1.evade(self, t1), t2.getSeeStealth(self, t2), t2.getSeeInvisible(self, t2), t2.critPower(self, t2), t3.getImmunities(self, t3)*100)
@@ -94,8 +94,8 @@ registerTalentTranslation{
 		return ([[咏 唱 圣 诗 的 娴 熟 技 艺 让 黑 暗 不 再 阻 碍 你 的 视 线， 增 加 %d 暗 视 半 径。
 		 每 次 你 结 束 旧 的 圣 诗 时 ，你 将 获 得 圣 诗 提 供 的 增 益 效 果 。
 		 暗 影 圣 诗 ：增 加 %d%% 移 动 速 度 ，持 续 1 回 合。 
-		 侦 察 圣 诗 ：隐 身 (%d 强 度) 持 续 %d 回 合。 
-		 坚 毅 圣 诗 ：护 盾 (%d 强 度) 持 续 %d 回 合。]]):format(t.getBonusInfravision(self, t), t.getSpeed(self, t), 
+		 侦 察 圣 诗 ：隐 身 ( %d 强 度) 持 续 %d 回 合。 
+		 坚 毅 圣 诗 ：护 盾 ( %d 强 度) 持 续 %d 回 合。]]):format(t.getBonusInfravision(self, t), t.getSpeed(self, t), 
 			t.invisPower(self, t), t.invisDur(self, t), t.shieldPower(self, t), t.shieldDur(self, t))
 	end,
 }

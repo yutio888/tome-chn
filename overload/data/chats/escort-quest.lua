@@ -217,6 +217,10 @@ game.player:registerEscorts(quest.to_zigur and "zigur" or "saved")
 local saves_name = { mental="mental", spell="spell", phys="physical"}
 local saves_tooltips = { mental="MENTAL", spell="SPELL", phys="PHYS"}
 
+local function chn_stat(stat_name)
+	return stat_name:gsub("Strength","力量"):gsub("Constitution","体质"):gsub("Magic","魔法"):gsub("Willpower","意志"):gsub("Cunning","灵巧"):gsub("Dexterity","敏捷")
+end
+
 local function generate_rewards()
 	local answers = {}
 	if reward.stats then
@@ -227,7 +231,7 @@ local function generate_rewards()
 				player.changed = true
 				player:hasQuest(npc.quest_id).reward_message = ("improved %s by +%d"):format(npc.stats_def[i].name, reward.stats[i])
 			end) end
-			answers[#answers+1] = {("[提升 %s +%d]"):format(npc.stats_def[i].name, reward.stats[i]),
+			answers[#answers+1] = {("[提升 %s +%d]"):format(chn_stat(npc.stats_def[i].name), reward.stats[i]),
 				jump="done",
 				action=doit,
 				on_select=function(npc, player)

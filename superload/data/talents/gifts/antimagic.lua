@@ -1,5 +1,7 @@
 local _M = loadPrevious(...)
-
+local function combatTalentPhysicalMindDamage(self, t, b, s)
+	return math.max(self:combatTalentMindDamage(t, b, s), self:combatTalentPhysicalDamage(t, b, s))
+end
 registerTalentTranslation{
 	id = "T_RESOLVE",
 	name = "分解",

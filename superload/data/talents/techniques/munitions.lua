@@ -6,7 +6,7 @@ registerTalentTranslation{
 		return ([[你 学 会 了 制 造 和 装 备 专 门 的 弹 药:
 燃 烧 弹- 命 中 后 ，对 目 标 附 近 的 敌 人 造 成 %d%% 火 焰 武 器 伤 害 ，范 围 最 大 为 %d， 每 回 合 最 多 一 次。
 剧 毒 弹- 命 中 后 ，对 目 标 造 成 %0.2f 自 然 伤 害 并 感 染 麻 木 毒 素 , 在 5 回 合 内 造 成 %0.2f 自 然 伤 害 并 削 弱 其 %d%% 的 伤 害。
-穿 甲 弹- 命 中 后 ， 使 目 标 的 护 甲 和 豁 免 减 少 %d  3 回合, 你 的 物 理 穿 透 增 加 %d%%。
+穿 甲 弹- 命 中 后 ， 使 目 标 的 护 甲 和 豁 免 减 少 %d ，持 续 3 回合, 你 的 物 理 穿 透 增 加 %d%%。
 同 时 只 能 装 备 一 种 弹 药。
 毒 素 伤 害 、 护 甲 和 豁 免 削 减 受 物 理 强 度 加 成。]]):
 		format(t.getIncendiaryDamage(self, t)*100, t.getIncendiaryRadius(self,t), damDesc(self, DamageType.NATURE, t.getPoisonDamage(self, t)/5), damDesc(self, DamageType.NATURE, t.getPoisonDamage(self, t)), t.getNumb(self, t), t.getArmorSaveReduction(self, t), t.getResistPenalty(self,t))
@@ -56,11 +56,11 @@ registerTalentTranslation{
 		local fail = t.getPoisonFailure(self,t)
 		local nb = t.getRemoveCount(self,t)
 		return ([[根 据 当 前 装 填 的 弹 药 进 行 一 次 特 殊 的 射 击
-燃 烧 弹- 命 中 后 在 目 标 %d 格 范 围 内 造 成 %d%% 火 焰 武 器 伤 害 并 用 粘 稠 的 沥 青 包 裹 %d 回合, 减 少 全 体 速 度 %d%% 和 增 加 %d%% 所 受 到 的 火 焰 伤 害。
-剧 毒 弹- 命 中 后 造 成  %d%% 自 然 武 器 伤 害 并 爆 炸 形 成 一 个 半 径 为 %d 的 致 残 毒 气 云 %d 回 合, 每 回 合 造 成 %0.2f 自 然 伤 害 并 让 目 标 有 %d%% 几 率 使 用 技 能 失 败。
-穿 甲 弹- 命 中 后 在 目 标 %d 格 范 围 内 造 成 %d%% 物 理 武 器 伤 害 ，并 移 除 有 益 的 物 理 效 果 或 持 续 技 能。
+燃 烧 弹- %d%% 火 焰 武 器 伤 害，伤 害 半 径 %d 。 用 粘 稠 的 沥 青 包 裹 敌 人 %d 回合, 减 少 %d%% 整 体 速 度 并 增 加 其 受 到 的 火 焰 伤 害 %d%% 。
+剧 毒 弹- %d%% 自 然 武 器 伤 害。爆 炸 会 形 成 半 径 %d 的 致 残 毒 气 云 ，持 续 %d 回 合, 每 回 合 造 成 %0.2f 自 然 伤 害 并 使 目 标 使 用 技 能 有 %d%% 几 率 失 败。
+穿 甲 弹- %d%% 物 理 武 器 伤 害，伤 害 半 径 %d ，并 移 除 有 益 的 物 理 效 果 或 持 续 技 能。
 毒 素 伤 害 受 物 理 强 度 加 成, 状 态 触 发 几 率 受 命 中 加 成。]]):
-		format(dam, radius, dur, slow, fire, dam, radius, dur, damDesc(self, DamageType.NATURE, poison), fail, radius, dam, nb)
+		format(dam, radius, dur, slow, fire, dam, radius, dur, damDesc(self, DamageType.NATURE, poison), fail,  dam,radius, nb)
 	end,
 }
 registerTalentTranslation{
@@ -90,9 +90,9 @@ registerTalentTranslation{
 		local armor = t.getArmorSaveReduction(self,t)
 		local resist = t.getResistPenalty(self,t)
 		return ([[混 合 你 的 弹 药, 造 成 更 强 力 的 效 果:
-燃 烧 弹- 受 到 爆 炸 袭 击 的 目 标 护 甲 和 豁 免 减 少 %d 3 回 合, 你 的 物 理 和 火 焰 穿 透 增 加 %d%%.
-剧 毒 弹- 造 成 半 径 为 %d 的 额 外 自 然 伤 害 ( %d%% 武 器 伤 害), 根 据 异 种 弹 药 中 的 麻 木 毒 素. 每 回 合 最 多 一 次.
-穿 甲 弹- 造 成 %0.2f 物 理 伤 害 并 使 目 标 流 血, 流 血 造 成 %0.2f 物 理 伤 害 5 回 合 并 减 少 他 们 造 成 的 伤 害 %d%%.
+燃 烧 弹- 受 到 爆 炸 袭 击 的 目 标 护 甲 和 豁 免 减 少 %d 持 续 3 回 合, 你 的 物 理 和 火 焰 穿 透 增 加 %d%%.
+剧 毒 弹- 造 成 %d%% 自 然 武 器 伤 害，伤 害 半 径 %d , 并 施 加 麻 木 毒 素 效 果. 每 回 合 最 多 生 效 一 次.
+穿 甲 弹- 造 成 %0.2f 物 理 伤 害 并 使 目 标 流 血, 5 回 合 内 造 成 %0.2f 物 理 伤 害 并 减 少 他 们 造 成 的 伤 害 %d%%.
 物 理 伤 害 、 护 甲 和 豁 免 削 减 受 物 理 强 度 加 成。]]):
 		format(armor, resist, poison, radius, bleed/5, bleed, numb)
 	end,

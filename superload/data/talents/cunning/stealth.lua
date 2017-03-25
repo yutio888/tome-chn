@@ -48,7 +48,7 @@ registerTalentTranslation{
 		xs = rad_dark ~= radius and (" (在黑暗地格范围为%d)"):format(rad_dark) or ""
 		return ([[你 对 潜 行 的 精 通 让 你 能 够 随 时 从 视 野 中 消 失 。
 		 你 自 动 进 入 潜 行 模 式 ，重 置 潜 行 的 冷 却 时 间 ，并 在 %d 回 合 内 ，非 潜 行 动 作 不 会 打 破 潜 行 。如 果 使 用 时 你 尚 未 进 入 潜 行 模 式 ，所 有 对 你 有 直 接 视 线 的 敌 人 都 会 跟 丢 你 的 踪 迹 。
-		 当 你 的 阴 影 之 舞 结 束 时 ，你 必 须 对 半 径 为 %d %s之 内 的 目 标 进 行 潜 行 检 查 并 成 功 ，否 则 会 被 发 现 。
+		 当 你 的 暗 影 之 舞 结 束 时 ，你 必 须 对 半 径 为 %d %s之 内 的 目 标 进 行 潜 行 检 查 并 成 功 ，否 则 会 被 发 现 。
 ]]):
 		format(t.getDuration(self, t), radius, xs)
 	end,

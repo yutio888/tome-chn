@@ -5688,14 +5688,14 @@ function _M:getTalentFullDescription(t, addlevel, config, fake_mastery)
 	end
 	local function getCHNresourcename(name)
 			name=name:gsub("Stamina","体力"):gsub("Mana","法力"):gsub("Souls","灵魂"):gsub("Soul","灵魂"):gsub("Equilibrium","失衡")
-				 :gsub("Vim","活力"):gsub("Positive","正能量"):gsub("Negative","负能量"):gsub("Hate","仇恨")
+				 :gsub("Vim","活力"):gsub("Positive","正"):gsub("Negative","负"):gsub("energy","能量"):gsub("Hate","仇恨")
 				 :gsub("Paradox","紊乱"):gsub("Psi","意念力"):gsub("Feedback","反馈"):gsub("Steam","蒸汽")
 			return name
 		end
 	if not config.ignore_ressources then
-		if t.feedback then d:add({"color",0x6f,0xff,0x83}, "反馈值消耗: ", {"color",0xFF, 0xFF, 0x00}, ""..math.round(util.getval(t.feedback, self, t) * (100 + 2 * self:combatFatigue()) / 100, 0.1), true) end
-		if t.fortress_energy then d:add({"color",0x6f,0xff,0x83}, "堡垒能量值消耗: ", {"color",0x00,0xff,0xa0}, ""..math.round(t.fortress_energy, 0.1), true) end
-		if t.sustain_feedback then d:add({"color",0x6f,0xff,0x83}, "持续反馈值消耗: ", {"color",0xFF, 0xFF, 0x00}, ""..(util.getval(t.sustain_feedback, self, t)), true) end
+		if t.feedback then d:add({"color",0x6f,0xff,0x83}, "反馈值消耗：", {"color",0xFF, 0xFF, 0x00}, ""..math.round(util.getval(t.feedback, self, t) * (100 + 2 * self:combatFatigue()) / 100, 0.1), true) end
+		if t.fortress_energy then d:add({"color",0x6f,0xff,0x83}, "堡垒能量值消耗：", {"color",0x00,0xff,0xa0}, ""..math.round(t.fortress_energy, 0.1), true) end
+		if t.sustain_feedback then d:add({"color",0x6f,0xff,0x83}, "持续反馈值消耗：", {"color",0xFF, 0xFF, 0x00}, ""..(util.getval(t.sustain_feedback, self, t)), true) end
 		
 		-- resource costs?
 		for res, res_def in ipairs(_M.resources_def) do
@@ -5704,12 +5704,12 @@ function _M:getTalentFullDescription(t, addlevel, config, fake_mastery)
 				local cost = t[res_def.short_name] and util.getval(t[res_def.short_name], self, t) or 0
 				if cost ~= 0 then
 					cost = cost * (util.getval(res_def.cost_factor, self, t) or 1)
-					d:add({"color",0x6f,0xff,0x83}, ("%s 消耗: "):format(getCHNresourcename(res_def.name:capitalize())), res_def.color or {"color",0xff,0xa8,0xa8}, ""..math.round(cost, .1), true)
+					d:add({"color",0x6f,0xff,0x83}, ("%s 消耗："):format(getCHNresourcename(res_def.name:capitalize())), res_def.color or {"color",0xff,0xa8,0xa8}, ""..math.round(cost, .1), true)
 				end
 				-- list sustain cost
 				cost = t[res_def.sustain_prop] and util.getval(t[res_def.sustain_prop], self, t) or 0
 				if cost ~= 0 then
-					d:add({"color",0x6f,0xff,0x83}, ("持续 %s 消耗: "):format(getCHNresourcename(res_def.name:capitalize())), res_def.color or {"color",0xff,0xa8,0xa8}, ""..math.round(cost, .1), true)
+					d:add({"color",0x6f,0xff,0x83}, ("持续 %s 消耗："):format(getCHNresourcename(res_def.name:capitalize())), res_def.color or {"color",0xff,0xa8,0xa8}, ""..math.round(cost, .1), true)
 				end
 				-- list drain cost
 				cost = t[res_def.drain_prop] and util.getval(t[res_def.drain_prop], self, t) or 0
@@ -5729,7 +5729,7 @@ function _M:getTalentFullDescription(t, addlevel, config, fake_mastery)
 		else d:add({"color",0x6f,0xff,0x83}, "作用范围：", {"color",0xFF,0xFF,0xFF}, "近身/单体", true)
 		end
 		if not config.ignore_ressources then
-			if self:getTalentCooldown(t) then d:add({"color",0x6f,0xff,0x83}, ("%s冷却时间: "):format(t.fixed_cooldown and "固定 " or ""), {"color",0xFF,0xFF,0xFF}, ""..self:getTalentCooldown(t), true) end
+			if self:getTalentCooldown(t) then d:add({"color",0x6f,0xff,0x83}, ("%s冷却时间："):format(t.fixed_cooldown and "固定 " or ""), {"color",0xFF,0xFF,0xFF}, ""..self:getTalentCooldown(t), true) end
 		end
 		local speed = self:getTalentProjectileSpeed(t)
 		if speed then d:add({"color",0x6f,0xff,0x83}, "飞行时间：", {"color",0xFF,0xFF,0xFF}, ""..(speed * 100).."% 基础速度", true)
@@ -5749,13 +5749,13 @@ function _M:getTalentFullDescription(t, addlevel, config, fake_mastery)
 				if type(speed_type) == "string" then
 					speed_type = speed_type:gsub("mind","精神"):gsub("spell","法术"):gsub("weapon","武器"):gsub("archery","弓箭"):gsub("steamtech","蒸汽科技")
 																 :gsub("combat","战斗"):gsub("standard","标准"):gsub("movement","移动")
-																 :gsub("Double","双倍"):gsub("Archery","弓箭"):gsub("summon","召唤"):gsub("shield","盾牌")
+																 :gsub("Double","双倍"):gsub("Archery","弓箭"):gsub("summon","召唤"):gsub("shield","盾牌"):gsub("throwing","投掷")
 				else
 					speed_type = '特殊'
 				end
 				uspeed = ("%s (#LIGHT_GREEN#%d%%#LAST# 回合)"):format(speed_type, speed * 100)
 			end
-			d:add({"color",0x6f,0xff,0x83}, "使用速度: ", {"color",0xFF,0xFF,0xFF}, uspeed, true)
+			d:add({"color",0x6f,0xff,0x83}, "使用速度：", {"color",0xFF,0xFF,0xFF}, uspeed, true)
 			if t.no_break_stealth ~= nil and no_energy ~= true and self:knowTalent(self.T_STEALTH) then
 				local nbs, chance = t.no_break_stealth
 				if type(t.no_break_stealth) == "function" then

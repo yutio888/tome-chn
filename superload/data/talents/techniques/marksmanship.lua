@@ -2,7 +2,7 @@ local _M = loadPrevious(...)
 
 registerTalentTranslation{
 	id = "T_MASTER_MARKSMAN",
-	name = "神枪大师",
+	name = "射击精通",
 	info = function (self,t)
 		local damage = t.getDamage(self, t)
 		local inc = t.getPercentInc(self, t)

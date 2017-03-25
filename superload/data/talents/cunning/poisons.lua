@@ -18,7 +18,7 @@ registerTalentTranslation{
 
 registerTalentTranslation{
 	id = "T_VILE_POISONS",
-	name = "涂毒",
+	name = "邪恶毒素",
 	info = function(self, t)
 		return ([[你 学 会 如 何 在 近 战 武 器, 长 弓 和 投 石 索 的 弹 药 上 涂 毒。 每 等 级 你 将 会 学 到 新 的 毒 剂。 
 		 等 级 1 ： 致 命 毒 剂 
@@ -38,6 +38,20 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_VENOMOUS_STRIKE",
 	name = "毒素爆发",
+	effectsDescription = function(self, t)
+		local power = t.getPower(self,t)
+		local idam = t.getSecondaryDamage(self,t)
+		local nb = t.getNb(self,t)
+		local heal = t.getSecondaryDamage(self,t)
+		local vdam = t.getSecondaryDamage(self,t)*0.6
+		return ([[麻木毒素 - 整体速度减少 %d%% ，持续5回合。
+		阴险毒素 - 在 5 回合内 造成 %0.2f 自然伤害。
+		致残毒素 - 令 %d 个 技能 进入 %d 回合 冷却。
+		水蛭毒素 - 自己获得 %d 治疗。
+		传染毒素 - 额外 %0.2f 自然伤害，伤害半径 %d 。
+		]]):
+		format(power*100, damDesc(self, DamageType.NATURE, idam), nb, math.floor(nb*1.5), heal, damDesc(self, DamageType.NATURE, vdam), nb)
+	end,
 	info = function(self, t)
 		local dam = 100 * t.getDamage(self,t)
 		local desc = t.effectsDescription(self, t)

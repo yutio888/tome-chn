@@ -63,7 +63,16 @@ registerTalentTranslation{
 		return ([[对 目 标 进 行 快 速 的 连 刺， 每 把 武 器 进 行 3 次 打 击， 每 次 打 击 造 成 %d%% 的 伤 害。]]):format(100 * self:combatTalentWeaponDamage(t, 0.4, 1.0))
 	end,
 }
-
+registerTalentTranslation{
+	id = "T_HEARTSEEKER",
+	name = "追心刺",
+	info = function(self, t)
+		dam = t.getDamage(self,t)*100
+		crit = t.getCrit(self,t)
+		return ([[迅 速 跃 向 目 标 ， 用 双 手 武 器 发 动 一 次 强 力 的 突 刺 攻 击 ， 造 成 %d%% 武 器 伤 害 ， 该 次 攻 击 暴 击 伤 害 系 数 增 加 %d%% 。]]):
+		format(dam, crit)
+	end,
+}	
 registerTalentTranslation{
 	id = "T_SWEEP",
 	name = "拔刀斩",

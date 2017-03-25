@@ -72,9 +72,9 @@ registerTalentTranslation{
 			local t2 = self:getTalentFromId(self.T_CHANT_OF_FORTRESS)
 			local t3 = self:getTalentFromId(self.T_CHANT_OF_RESISTANCE)
 			ret = ([[你 学 会 了 三 种 防 御 赞 歌 ，以 此 咏 唱 对 太 阳 的 赞 颂 ：
-		 坚 韧 赞 歌 ：增 加 %d 精 神 豁 免 ，%d%%  最 大 生 命 值 
-		 堡 垒 赞 歌 ：增 加 %d 物 理 豁 免 ，%d 物 理 抗 性 ，%d 护 甲 ，10%%  护 甲 硬 度 
-		 元 素 赞 歌 ：增 加 %d 法 术 豁 免 ，%d%%  火 焰 /寒 冷 /闪 电 /酸 性 抗 性 ，减 少 三 格 外 敌 人 对 你 造 成 的 伤 害 %d%%  。
+		 坚 韧 赞 歌 ：增 加 %d 精 神 豁 免 ， %d%%  最 大 生 命 值 
+		 堡 垒 赞 歌 ：增 加 %d 物 理 豁 免 ， %d 物 理 抗 性 ， %d 护 甲 ， 15%%  护 甲 硬 度 
+		 元 素 赞 歌 ：增 加 %d 法 术 豁 免 ， %d%%  火 焰 /寒 冷 /闪 电 /酸 性 抗 性 ，减 少 三 格 外 敌 人 对 你 造 成 的 伤 害 %d%%  。
 		 你 同 时 只 能 激 活 一 种 赞 歌 。]]):
 			format(t1.getResists(self, t1), t1.getLifePct(self, t1)*100, t2.getResists(self, t2), t2.getPhysicalResistance(self, t2), t2.getPhysicalResistance(self, t2), t3.getSpellResists(self, t3), t3.getResists(self, t3), t3.getDamageChange(self, t3))
 		end)
@@ -97,7 +97,7 @@ registerTalentTranslation{
 	name = "赞歌专家",
 	info = function (self,t)
 		return ([[咏 唱 赞 歌 的 娴 熟 技 艺 让 光 明 得 以 扩 散， 增 加 %d 光 照 半 径。
-		 每 次 你 咏 唱 新 的 赞 歌 时 ，你 将 解 除 自 身 所 有 CT 效 果 ，并 解 除 %d 相 应 类 型 的 负 面 状 态 。
+		 每 次 你 咏 唱 新 的 赞 歌 时 ，你 将 解 除 自 身 所 有 CT 效 果 ，并 解 除 %d 项 相 应 类 型 的 负 面 状 态 。
 		 坚 韧 赞 歌 ：解 除 精 神 负 面 状 态 
 		 堡 垒 赞 歌 ：解 除 物 理 负 面 状 态 
 		 元 素 赞 歌 ：解 除 魔 法 负 面 状 态 ]]):format(t.getBonusLight(self, t), t.getDebuffCures(self, t))

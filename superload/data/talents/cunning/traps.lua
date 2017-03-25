@@ -161,7 +161,7 @@ registerTalentTranslation{
 	info = function (self,t)
 		local dam = damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t))
 		local instant = self.trap_primed == t.id and "\n#YELLOW#设 置 完 毕 后 立 刻 激 活。#LAST#" or ""
-		return ([[放 置 一 个压 力 感 应 的 捕 熊 陷 阱 ， 会 捕 获 第 一 个 经 过 的 生 物 ， 造 成 %0.2f 物 理 伤 害 ， 定 身 并 减 速 30%% 5 回 合 ， 并 在 期 间 受 到 %0.2f 流 血 伤 害 。 %s]]):format(dam, dam, instant)
+		return ([[放 置 一 个压 力 感 应 的 捕 熊 陷 阱 ， 会 捕 获 第 一 个 经 过 的 生 物 ， 造 成 %0.2f 物 理 伤 害 ， 定 身 并 减 速 30%% ，持 续 5 回 合 ， 并 在 期 间 受 到 %0.2f 流 血 伤 害 。 %s]]):format(dam, dam, instant)
 	end,
 	short_info = function(self, t)
 		local dam = damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t))

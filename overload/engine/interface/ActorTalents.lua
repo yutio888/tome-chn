@@ -1120,8 +1120,14 @@ function _M:registerTalentTranslation(t)
 	if t.short_info then
 		self.talents_def[t.id].short_info = t.short_info
 	end
+	if t.knivesInfo then
+		self.talents_def[t.id].knivesInfo = t.knivesInfo
+	end
 	if t.action then 
 		self.talents_def[t.id].action = t.action
+	end
+	if t.effectsDescription then
+		self.talents_def[t.id].effectsDescription = t.effectsDescription
 	end
 	if t.extra_data then
 		self.talents_def[t.id].extra_data = table.clone(t.extra_data)

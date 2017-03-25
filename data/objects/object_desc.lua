@@ -620,9 +620,7 @@ function getObjectDescCHN(desc)
 				elseif desc[i]:find("releases a burst of light, dealing") then
 					desc[i] = desc[i]:gsub("releases a burst of light, dealing ", "施放一束光线，在3码半径的锥形内造成")
 					:gsub("light damage %(based on Spellpower%) in a radius 3 cone.", "点光系伤害。（基于法术强度）")
-				elseif desc[i]:find("Each step you take leaves a burning trail behind you lasting 5 turns that deals") then
-					desc[i] = desc[i]:gsub("Each step you take leaves a burning trail behind you lasting 5 turns that deals", "你每踏出一步会在脚下留下一条持续5回合的燃烧痕迹，对所有经过的生物造成")
-					:gsub("fire damage %(based on Spellpower%) to others who enter it.", "点火焰伤害。（基于法术强度）")
+
 				elseif desc[i]:find("release a will o' the wisp that will explode against your foes for") then
 					desc[i] = desc[i]:gsub("release a will o' the wisp that will explode against your foes for","释放一只鬼火，鬼火将会爆炸并对你的敌人造成")
 					:gsub("cold damage %(based on your Magic%)", "点寒冷伤害（基于魔法）")
@@ -673,9 +671,6 @@ function getObjectDescCHN(desc)
 				else--if desc[i]:find("Special effect on block:") then
 					desc[i] = desc[i]:gsub("Special effect on block:","格挡特效：")
 							:gsub("Unleash a lightning nova of radius equal to the tinker tier.","释放半径等于材质等级的闪电新星")
-							:gsub("Chance that a blast of icy cold water will spray at the target.","有30%%几率朝目标喷射冰冷的水流")
-							:gsub("30%% chance of petrifying the attacker","30%%几率石化攻击者")
-							:gsub("30%% chance of pulling in the attacker","30%%几率勒住攻击者")
 							:gsub("Unleash the fury of the cosmos, dealing light and darkness damage to your attackers","释放宇宙的愤怒造成光系与暗影伤害")
 				end
 

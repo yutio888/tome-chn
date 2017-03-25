@@ -239,7 +239,7 @@ registerArtifactTranslation{
 	name = "魔力结晶",
 	unided_name = "闪耀的水晶",
 	desc = "这个水晶散发着魔力的光辉。",
-	["use_power.name"] = "安装至一把武器",
+	["use_power.name"] = "安装至一把白板武器",
 }
 
 registerArtifactTranslation{
@@ -627,6 +627,8 @@ registerArtifactTranslation{
 	name = "火龙之盾",
 	unided_name = "龙盾",
 	desc = "这个巨大的盾牌使用了很多生活在塔·埃亚尔失落之地的火龙的鳞片打造而成。",
+	["on_block.desc"] = "30% 几率对6格内的攻击者 发射具有震慑效果 的火焰吐息",
+
 }
 
 registerArtifactTranslation{
@@ -969,7 +971,20 @@ registerArtifactTranslation{
 	originName = "Ureslak's Femur",
 	name = "乌尔斯拉克的大腿",
 	unided_name = "染的稀奇古怪的骨头",
-	desc = "强大的棱晶龙被截断的腿骨，这根奇怪的棍子仍然流动着乌尔斯拉克的天性。",
+	desc = "强大的棱晶龙乌尔斯拉克被截断的腿骨，这根奇怪的棍子仍然流动着乌尔斯拉克的天性。",
+	set_desc = {ureslak = "当乌尔斯拉克更多遗物聚集在一起时 ，会发生什么呢？",},
+}
+registerArtifactTranslation{
+	originName = "Ureslak's Molted Scales",
+	name = "乌尔斯拉克之皮",
+	unided_name = "多彩鳞甲",
+	desc = "这件长袍用某些大型爬行动物的鳞片制成。它看上去可以反射出彩虹的每种颜色。",
+	set_desc = {ureslak = "当乌尔斯拉克更多遗物聚集在一起时 ，会发生什么呢？",},
+	["use_power.name"] = function(self, who)
+			local resists={"火焰", "寒冷", "闪电", "自然", "黑暗"}
+			if self.set_complete then table.insert(resists, "奥术") end
+			return ("为鳞片充能16回合，让你在受 %s 伤害前增加相应抗性15%%，持续5回合，只对一种伤害生效。"):format(table.concatNice(resists, ", ", ", or "))
+		end,
 }
 
 registerArtifactTranslation{
@@ -1016,12 +1031,7 @@ registerArtifactTranslation{
 	desc = "有人用一条黑色的粗线穿过这颗充血的眼球，把它挂在脖子上。你也应该这样做。",
 }
 
-registerArtifactTranslation{
-	originName = "Ureslak's Molted Scales",
-	name = "乌尔斯拉克之皮",
-	unided_name = "多彩鳞甲",
-	desc = "这件长袍用某些大型爬行动物的鳞片制成。它看上去可以反射出彩虹的每种颜色。",
-}
+
 
 registerArtifactTranslation{
 	originName = "Pick of Dwarven Emperors",
@@ -1432,6 +1442,8 @@ registerArtifactTranslation{
 	name = "黄蜂尾钉",
 	unided_name = "镶着尖刺的箭矢",
 	desc = "箭矢的尖端滴落着剧毒。",
+	["combat.special_on_hit.desc"] = "使目标中毒， 每回合造成20伤害， 使用技能有20%几率失败， 持续6回合。",
+	
 }
 
 registerArtifactTranslation{
@@ -1500,6 +1512,7 @@ registerArtifactTranslation{
 	name = "云雾珊瑚",
 	unided_name = "厚重的珊瑚板甲",
 	desc = "用大块的珊瑚制成，源自大海深处。",
+	["on_block.desc"] = "30% 几率朝目标喷射4格锥形冰冷的水流。", 
 }
 
 registerArtifactTranslation{
@@ -2061,7 +2074,7 @@ registerArtifactTranslation{
 	name = "黑暗之网",
 	unided_name = "一堆卷须",
 	desc = "盾牌由许多黑色的触须交织而成。当你触摸它时，你可以感受它非常明显的反应，它缠绕住你的手臂并将其包裹在一团黑色而温暖的物质中。",
-	["on_block.desc"] = "30%% 几率勒住攻击者",
+	["on_block.desc"] = "每回合一次， 将15格内一名攻击者拉到身边， 定身并使其窒息。",
 }
 
 registerArtifactTranslation{
@@ -2416,8 +2429,11 @@ registerArtifactTranslation{
 	name = "余烬之足",
 	unided_name = "一双被火焰覆盖的草鞋",
 	desc = "这是一个警示故事，讲的是有个叫凯姆的古代术士，为了勘查地狱般的恶魔荒原，也为了考验自己，自命不凡的认为可以在恶魔的老巢高达勒斯天天散步。他每次从恶魔位面归来都小心翼翼地不敢带回任何东西，生怕成为恶魔找到他的指引。不幸的是，来回很多次以后，他的草鞋浸满了恐惧之地的烟尘和灰烬。地狱之焰随他的脚步被带到了世间，同时也注定了他悲惨的命运。",
-}
-
+	special_desc = function(self, who)
+		local dam = who and who:damDesc(engine.DamageType.FIRE, self:trail_damage(who)) or 0
+		return ("你每踏出一步会在脚下留下一条持续5回合的燃烧痕迹，对所有经过的生物造成 %d 火焰伤害 (基于法术强度)"):format(dam)
+	end,
+	}
 registerArtifactTranslation{
 	originName = "Cuirass of the Dark Lord",
 	name = "黑暗领主胸甲",
@@ -3576,7 +3592,7 @@ registerArtifactTranslation{
 		originName =  "Life Support Suit",
 		name = "生命支持服",
 		unided_name = "高级医疗护甲",
-		desc = [["我们做到了。我们能治疗死亡。"]],
+		desc = "我们做到了。我们能治疗死亡。",
 		special_desc = function(self) 
 				local maxp = self:min_power_to_trigger()
 			return ("你不会流血。\n当你生命掉落至20%%以下时，治疗30%%最大生命。 %s"):format(self.power < maxp and ("(%d 回合冷却中)"):format(maxp - self.power) or "(15 回合冷却时间)")

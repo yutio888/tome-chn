@@ -21,7 +21,7 @@ registerTalentTranslation{
 	local affinity = t.getAffinity(self,t)
 	local dam = t.getDamage(self,t)
 	local reduction = t.getDamageReduction(self,t)*100
-		return ([[你 的 身 体 已 经 腐 败 ,增 加 %d%% 枯 萎 和 酸 性 抗 性 ,%d%% 枯 萎 伤 害 吸 收。
+		return ([[你 的 身 体 已 经 腐 败 ,增 加 %d%% 枯 萎 和 酸 性 抗 性 , %d%% 枯 萎 伤 害 吸 收。
 		每 次 生 命 值 损 失 大 于 15%% 时,伤 害 将 减 少 %d%% ，同 时 在 相 邻 的 格 子 生 成 蠕 虫, 攻 击 你 的 敌 人 5 回合 。
 		你 同 时 只 能 拥 有 5 只 蠕 虫 。 。
 		蠕 虫 死 亡 时 将 爆 炸 ， 产 生 半 径 2 的 枯 萎 毒 池 ， 持 续 5 回 合 ，造 成 %0.2f 枯 萎 伤 害 并 治 疗 你 %d 。]]):

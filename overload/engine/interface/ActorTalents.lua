@@ -1112,6 +1112,19 @@ function _M:registerTalentTranslation(t)
 	assert(t.name, "no talent name")
 	assert(t.info, "no talent info")
 	assert(self.talents_def[t.id], "talent id " .. t.id .. " undefineded")
+	local old_talent = self.talents_def[t.id]
+	for k, v in pairs(t) do
+		while k:find("%.") do
+			l, _ = k:find("%.")
+			old_talent = old_talent[k:sub(1, l - 1)]
+			k = k:sub(l + 1, k:len() )
+		end
+		if type(v)== "Table" then old_talent[k] = table.clone(v)
+		else old_talent[k] = v
+		end
+	end
+	
+	--[[
 	self.talents_def[t.id].name = t.name
 	self.talents_def[t.id].info = t.info
 	if t.require_special_desc then
@@ -1132,4 +1145,5 @@ function _M:registerTalentTranslation(t)
 	if t.extra_data then
 		self.talents_def[t.id].extra_data = table.clone(t.extra_data)
 	end
+	]]
 end

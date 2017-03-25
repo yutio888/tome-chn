@@ -23,7 +23,7 @@ function logCHN:getName(name)
 	name = name:gsub("unknown","未知对象"):gsub("something","某物"):gsub("area","区域"):gsub("effect","效果")
 		   :gsub("Temporal Restoration Field","时间储能")
 		   :gsub("creeping dark","黑暗之雾"):gsub("poisoned deep water","有毒的水"):gsub("unstable sand tunnel","不稳定的沙通道")
-		   :gsub("Throwing Knife","飞刀"):gsub("Fan of Knives","刀扇")
+		   :gsub("Throwing Knife","飞刀"):gsub("Fan of Knives","刀扇"):gsub("worm","蠕虫")
 	return name
 end
 

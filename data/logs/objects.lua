@@ -44,15 +44,49 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
-	log = "A wave of icy water bursts out from #Source#'s shield towards #Target#!",
+	log = "A wave of icy water sprays out from #Source# towards #Target#!",
 	fct = function()
-		return "一束冰冷的水流从 #Source# 的盾牌中喷射出来冲向 #Target# ！"
+		return "一束冰冷的水流从 #Source# 处喷射出来冲向 #Target# ！"
 	end,
 }
 logCHN:newLog{
 	log = "#LIGHT_RED#You see no place to land near there.",
 	fct = function()
 		return "#LIGHT_RED#那边你看不见着陆的空间。"
+	end,
+}
+
+logCHN:newLog{
+	log = "#ORCHID#Black tendrils from #Source# grab #Target#!",
+	fct = function()
+		return "#ORCHID#黑暗触须从#Source#处伸出，抓住了 #Target#!"
+	end,
+}
+
+logCHN:newLog{
+	log = "#ORCHID#%s resists the tendrils' pull!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("#ORCHID#%s 抵抗了触须的抓取!"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#ORCHID#%s empowers %s %s",
+	fct = function(a,b,c)
+		a = npcCHN:getName(a)
+		return ("#ORCHID#%s 强化了 %s %s"):format(a,b,c)
+	end,
+}
+logCHN:newLog{
+	log = "#YELLOW_GREEN#An ironic harmony surrounds Ureslak's remains as they reunite.",
+	fct = function()
+		return "#YELLOW_GREEN#乌尔斯拉克的遗物重聚时，和谐力量在此流转。"
+	end,
+}
+logCHN:newLog{
+	log = "#YELLOW_GREEN#Ureslak's remains seem more unsettled.",
+	fct = function()
+		return "#YELLOW_GREEN#乌尔斯拉克的遗物似乎更加不安定了。"
 	end,
 }
 

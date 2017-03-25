@@ -162,7 +162,7 @@ function _M:simpleLongPopup(title, text, w, fct, no_leave, force_height)
 end
 
 --- Requests a simple yes-no dialog
-function _M:yesnoPopup(title, text, fct, yes_text, no_text, no_leave, escape)
+function _M:yesnoPopup(title, text, fct, yes_text, no_text, no_leave, escape, preexit_fct)
 	local my_yes_text, my_no_text = nil, nil
 	if yesnoPopDlg and yesnoPopDlg[title] then
 		title,text,my_yes_text,my_no_text = yesnoPopDlg[title](text)
@@ -192,9 +192,9 @@ function _M:yesnoPopup(title, text, fct, yes_text, no_text, no_leave, escape)
 	local d = new(title, 1, 1)
 
 --	d.key:addBind("EXIT", function() game:unregisterDialog(d) fct(false) end)
-	local ok = require("engine.ui.Button").new{text=yes_text or "是", fct=function() game:unregisterDialog(d) fct(true) end}
-	local cancel = require("engine.ui.Button").new{text=no_text or "否", fct=function() game:unregisterDialog(d) fct(false) end}
-	if not no_leave then d.key:addBind("EXIT", function() game:unregisterDialog(d) game:unregisterDialog(d) fct(escape) end) end
+	local ok = require("engine.ui.Button").new{text=yes_text or "是", fct=function() if preexit_fct then preexit_fct(true) end game:unregisterDialog(d) fct(true) end}
+	local cancel = require("engine.ui.Button").new{text=no_text or "否", fct=function() if preexit_fct then preexit_fct(false) end game:unregisterDialog(d) fct(false) end}
+	if not no_leave then d.key:addBind("EXIT", function() if preexit_fct then preexit_fct(escape) end game:unregisterDialog(d) game:unregisterDialog(d) fct(escape) end) end
 	d:loadUI{
 		{left = 3, top = 3, ui=require("engine.ui.Textzone").new{width=w+20, height=h+5, text=text}},
 		{left = 3, bottom = 3, ui=ok},
@@ -208,7 +208,7 @@ function _M:yesnoPopup(title, text, fct, yes_text, no_text, no_leave, escape)
 end
 
 --- Requests a long yes-no dialog
-function _M:yesnoLongPopup(title, text, w, fct, yes_text, no_text, no_leave, escape)
+function _M:yesnoLongPopup(title, text, w, fct, yes_text, no_text, no_leave, escape, preexit_fct)
 	local my_yes_text, my_no_text = nil, nil
 	if yesnoLongPopDlg and yesnoLongPopDlg[title] then
 		title,text,my_yes_text,my_no_text = yesnoLongPopDlg[title](text)
@@ -216,8 +216,8 @@ function _M:yesnoLongPopup(title, text, w, fct, yes_text, no_text, no_leave, esc
 	yes_text = my_yes_text or yes_text
 	no_text = my_no_text or no_text
 	local d
-	local ok = require("engine.ui.Button").new{text=yes_text or "Yes", fct=function() game:unregisterDialog(d) fct(true) end}
-	local cancel = require("engine.ui.Button").new{text=no_text or "No", fct=function() game:unregisterDialog(d) fct(false) end}
+	local ok = require("engine.ui.Button").new{text=yes_text or "Yes", fct=function() if preexit_fct then preexit_fct(true) end game:unregisterDialog(d) fct(true) end}
+	local cancel = require("engine.ui.Button").new{text=no_text or "No", fct=function() if preexit_fct then preexit_fct(false) end game:unregisterDialog(d) fct(false) end}
 
 	w = math.max(w + 20, ok.w + cancel.w + 10)
 
@@ -225,7 +225,7 @@ function _M:yesnoLongPopup(title, text, w, fct, yes_text, no_text, no_leave, esc
 
 
 --	d.key:addBind("EXIT", function() game:unregisterDialog(d) fct(false) end)
-	if not no_leave then d.key:addBind("EXIT", function() game:unregisterDialog(d) game:unregisterDialog(d) fct(escape) end) end
+	if not no_leave then d.key:addBind("EXIT", function() if preexit_fct then preexit_fct(escape) end game:unregisterDialog(d) fct(escape) end) end
 	d:loadUI{
 		{left = 3, top = 3, ui=require("engine.ui.Textzone").new{width=w, auto_height = true, text=text}},
 		{left = 3, bottom = 3, ui=ok},
@@ -239,7 +239,7 @@ function _M:yesnoLongPopup(title, text, w, fct, yes_text, no_text, no_leave, esc
 end
 
 --- Requests a simple yes-no dialog
-function _M:yesnocancelPopup(title, text, fct, yes_text, no_text, cancel_text, no_leave, escape)
+function _M:yesnocancelPopup(title, text, fct, yes_text, no_text, cancel_text, no_leave, escape, preexit_fct)
 	if yesnocancelPopDlg and yesnocancelPopDlg[title] then
 		title,text = yesnocancelPopDlg[title](text)
 	end
@@ -248,10 +248,10 @@ function _M:yesnocancelPopup(title, text, fct, yes_text, no_text, cancel_text, n
 	local d = new(title, 1, 1)
 
 --	d.key:addBind("EXIT", function() game:unregisterDialog(d) fct(false) end)
-	local ok = require("engine.ui.Button").new{text=yes_text or "是", fct=function() game:unregisterDialog(d) fct(true, false) end}
-	local no = require("engine.ui.Button").new{text=no_text or "否", fct=function() game:unregisterDialog(d) fct(false, false) end}
-	local cancel = require("engine.ui.Button").new{text=cancel_text or "取消", fct=function() game:unregisterDialog(d) fct(false, true) end}
-	if not no_leave then d.key:addBind("EXIT", function() game:unregisterDialog(d) game:unregisterDialog(d) fct(false, not escape) end) end
+	local ok = require("engine.ui.Button").new{text=yes_text or "是", fct=function() if preexit_fct then preexit_fct(true, false) end game:unregisterDialog(d) fct(true, false) end}
+	local no = require("engine.ui.Button").new{text=no_text or "否", fct=function() if preexit_fct then preexit_fct(false, false) end game:unregisterDialog(d) fct(false, false) end}
+	local cancel = require("engine.ui.Button").new{text=cancel_text or "取消", fct=function() if preexit_fct then preexit_fct(false, true) end game:unregisterDialog(d) fct(false, true) end}
+	if not no_leave then d.key:addBind("EXIT", function() if preexit_fct then preexit_fct(false, not escape) end game:unregisterDialog(d) fct(false, not escape) end) end
 	d:loadUI{
 		{left = 3, top = 3, ui=require("engine.ui.Textzone").new{width=w+20, height=h + 5, text=text}},
 		{left = 3, bottom = 3, ui=ok},
@@ -266,15 +266,14 @@ function _M:yesnocancelPopup(title, text, fct, yes_text, no_text, cancel_text, n
 end
 
 --- Requests a simple yes-no dialog
-function _M:yesnocancelLongPopup(title, text, w, fct, yes_text, no_text, cancel_text, no_leave, escape)
-	local list = text:splitLines(w - 10, font)
+function _M:yesnocancelLongPopup(title, text, w, fct, yes_text, no_text, cancel_text, no_leave, escape, preexit_fct)
 	local d = new(title, 1, 1)
 
 --	d.key:addBind("EXIT", function() game:unregisterDialog(d) fct(false) end)
-	local ok = require("engine.ui.Button").new{text=yes_text or "Yes", fct=function() game:unregisterDialog(d) fct(true, false) end}
-	local no = require("engine.ui.Button").new{text=no_text or "No", fct=function() game:unregisterDialog(d) fct(false, false) end}
-	local cancel = require("engine.ui.Button").new{text=cancel_text or "Cancel", fct=function() game:unregisterDialog(d) fct(false, true) end}
-	if not no_leave then d.key:addBind("EXIT", function() game:unregisterDialog(d) game:unregisterDialog(d) fct(false, not escape) end) end
+	local ok = require("engine.ui.Button").new{text=yes_text or "Yes", fct=function() if preexit_fct then preexit_fct(true, false) end game:unregisterDialog(d) fct(true, false) end}
+	local no = require("engine.ui.Button").new{text=no_text or "No", fct=function() if preexit_fct then preexit_fct(false, false) end game:unregisterDialog(d) fct(false, false) end}
+	local cancel = require("engine.ui.Button").new{text=cancel_text or "Cancel", fct=function() if preexit_fct then preexit_fct(false, true) end game:unregisterDialog(d) fct(false, true) end}
+	if not no_leave then d.key:addBind("EXIT", function() game:unregisterDialog(d) if preexit_fct then preexit_fct(false, not escape) end game:unregisterDialog(d) fct(false, not escape) end) end
 	d:loadUI{
 		{left = 3, top = 3, ui=require("engine.ui.Textzone").new{width=w+20, auto_height=true, text=text}},
 		{left = 3, bottom = 3, ui=ok},
@@ -284,6 +283,90 @@ function _M:yesnocancelLongPopup(title, text, w, fct, yes_text, no_text, cancel_
 	d:setFocus(ok)
 	d:setupUI(true, true)
 
+	game:registerDialog(d)
+	return d
+end
+
+--- Requests a multiple-choice dialog, with a button for each choice
+-- @param title = text at top of dialog box
+-- @param text = message to display inside the box
+-- @param button_list = ordered table of button choices {choice1=, choice2=, ....}
+-- 		each choice: {name=<button text>, fct=<optional function(choice) to run on selection>, more vars...}
+-- @param choice_fct = function(choice) to handle the button pressed (if choice.fct is not defined)
+-- @param w, h = width and height of the dialog (in pixels, optional: dialog sized to its elements by default)
+-- @param no_leave set true to force a selection
+-- @param escape = the default choice (number) to select if escape is pressed
+function _M:multiButtonPopup(title, text, button_list, w, h, choice_fct, no_leave, escape)
+	escape = escape or 1
+	-- compute display limits
+	local max_w, max_h = w or game.w*.75, h or game.h*.75
+
+	-- use tex params to place text
+	local text_w, text_h = self.font:size(text)
+	local tex, text_lines, text_width = self.font:draw(text, (w or max_w)*.9, 255, 255, 255, false, true)
+	local text_height = text_lines*text_h+5
+	local button_spacing = 10
+	
+	local d = new(title, w or 1, h or 1)
+--print(("[multiButtonPopup] initialized: (w:%s,h:%s), (maxw:%s,maxh:%s) "):format(w, h, max_w, max_h))
+	if not no_leave then d.key:addBind("EXIT", function() game:unregisterDialog(d) game:unregisterDialog(d) choice_fct(button_list[escape]) end) end
+
+	local num_buttons = math.min(#button_list, 50)
+	local buttons, buttons_width, button_height = {}, 0, 0
+
+	-- build list of buttons
+	for i = 1, num_buttons do
+		local b = require("engine.ui.Button").new{text=button_list[i].name,
+			fct=function()
+				print("[multiButtonPopup] button pressed:", i, button_list[i].name) table.print(button_list[i])
+				game:unregisterDialog(d)
+				if button_list[i].fct then button_list[i].fct(button_list[i])
+				elseif choice_fct then choice_fct(button_list[i])
+				end
+			end}
+		buttons[i] = b
+		buttons_width = buttons_width + b.w
+		button_height = math.max(button_height, b.h)
+	end
+
+	local rows_threshold = (buttons_width + (num_buttons - 1)*button_spacing)*1.1/math.ceil((buttons_width + (num_buttons - 1)*button_spacing)/max_w)
+	local rows = {{buttons_width=0}}
+	local left, top, nrow = 5, 0, #rows
+	local max_buttons_width = 0
+	-- assign buttons to rows, evenly distributed
+	for i = 1, num_buttons do
+		left = left + buttons[i].w + button_spacing
+		buttons_width = buttons_width - buttons[i].w
+		if left >= max_w or left > rows_threshold then -- add a row
+			rows[nrow].left = left
+			left = 5 + buttons[i].w + button_spacing
+			table.insert(rows, {buttons_width=0})
+			nrow = #rows
+		end
+		table.insert(rows[nrow], buttons[i])
+		rows[nrow].buttons_width = rows[nrow].buttons_width + buttons[i].w
+		max_buttons_width = math.max(max_buttons_width, rows[nrow].buttons_width+button_spacing*(#rows[nrow]-1))
+	end
+	-- if needed, compute the actual dialog size
+	local width = w or math.min(max_w, math.max(text_width + 20, max_buttons_width + 20))
+	local height = h or math.min(max_h, text_height + 10 + nrow*button_height)
+	local uis = {
+		{left = (width - text_width)/2, top = 3, ui=require("engine.ui.Textzone").new{width=text_width, height=text_height, text=text}}
+	}
+	-- actually place the buttons in the dialog
+	top = math.max(text_height, text_height + (height - text_height - nrow*button_height - 5)/2)
+	for i, row in ipairs(rows) do
+		left = (width - row.buttons_width - (#row - 1)*button_spacing)/2
+		top = top + button_height
+		if top > max_h - button_height - d.iy then break end -- cut off buttons that trail out of bounds
+		for j, button in ipairs(row) do
+			uis[#uis+1] = {left=left, top=top, ui=button}
+			left = left + button.w + button_spacing
+		end
+	end
+	d:loadUI(uis)
+	if uis[escape + 1] then d:setFocus(uis[escape + 1]) end
+	d:setupUI(not w, not h)
 	game:registerDialog(d)
 	return d
 end
@@ -350,12 +433,14 @@ function _M:init(title, w, h, x, y, alpha, font, showup, skin)
 	self.frame.oy2 = self.frame.oy2 or conf.frame_oy2
 
 	if self.frame.dialog_h_middles then
-		self.frame.b8 = "ui/dialogframe_8_middle.png"
-		self.frame.b8l = "ui/dialogframe_8_left.png"
-		self.frame.b8r = "ui/dialogframe_8_right.png"
-		self.frame.b2 = "ui/dialogframe_2_middle.png"
-		self.frame.b2l = "ui/dialogframe_2_left.png"
-		self.frame.b2r = "ui/dialogframe_2_right.png"
+		local t = type(self.frame.dialog_h_middles) == "table" and table.clone(self.frame.dialog_h_middles) or {}
+		table.merge(t, self.dialog_h_middles_alter or {})
+		self.frame.b8 = t.b8 or "ui/dialogframe_8_middle.png"
+		self.frame.b8l = t.b8l or "ui/dialogframe_8_left.png"
+		self.frame.b8r = t.b8r or "ui/dialogframe_8_right.png"
+		self.frame.b2 = t.b2 or "ui/dialogframe_2_middle.png"
+		self.frame.b2l = t.b2l or "ui/dialogframe_2_left.png"
+		self.frame.b2r = t.b2r or "ui/dialogframe_2_right.png"
 	end
 
 	self.particles = {}
@@ -492,11 +577,13 @@ function _M:loadUI(t)
 end
 
 function _M:setupUI(resizex, resizey, on_resize, addmw, addmh)
+	local gamew, gameh = core.display.size()
 	local mw, mh = nil, nil
 
 	local padding = 3 -- to not glue stuff to each other
 
 --	resizex, resizey = true, true
+	local nw, nh
 	if resizex or resizey then
 		mw, mh = 0, 0
 		local addw, addh = 0, 0
@@ -528,11 +615,20 @@ function _M:setupUI(resizex, resizey, on_resize, addmw, addmh)
 		mh = mh + addh + 5 + 22 + 3 + (addmh or 0) + th + padding
 
 		if on_resize then on_resize(resizex and mw or self.w, resizey and mh or self.h) end
-		self:resize(resizex and mw or self.w, resizey and mh or self.h)
+		nw, nh = resizex and mw or self.w, resizey and mh or self.h
 	else
 		if on_resize then on_resize(self.w, self.h) end
-		self:resize(self.w, self.h)
+		nw, nh = self.w, self.h
 	end
+
+	local disx = math.floor(self.force_x or (gamew - nw) / 2)
+	local disy = math.floor(self.force_y or (gameh - nh) / 2)
+	if self.no_offscreen == "bottom" then if disy + nh >= gameh then self.force_y = gameh - nh end
+	elseif self.no_offscreen == "top" then if disy + nh < 0 then self.force_y = 0 end
+	elseif self.no_offscreen == "right" then if disx + nw >= gamew then self.force_x = gamew - nw end
+	elseif self.no_offscreen == "left" then if disx + nw < 0 then self.force_x = 0 end
+	end
+	self:resize(nw, nh)
 
 	for i, ui in ipairs(self.uis) do
 		local ux, uy
@@ -630,6 +726,17 @@ function _M:setupUI(resizex, resizey, on_resize, addmw, addmh)
 	end
 
 	self.setuped = true
+end
+
+function _M:replaceUI(oldui, newui)
+	for i, ui in ipairs(self.uis) do
+		if ui.ui == oldui then
+			ui.ui = newui
+			ui.ui.mouse.delegate_offset_x = ui.x
+			ui.ui.mouse.delegate_offset_y = ui.y
+			ui.ui:positioned(ui.x, ui.y, self.display_x + ui.x, self.display_y + ui.y)
+		end
+	end
 end
 
 function _M:setFocus(id, how)

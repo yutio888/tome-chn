@@ -41,7 +41,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damageinc = t.getDamageIncrease(self, t)
 		local ressistpen = t.getResistPenalty(self, t)
-		return ([[纯 净 的 以 太 能 量 环 绕 着 你， 增 加 %d%% 奥 术 伤 害 并 且 无 视 目 标 %d%% 奥 术 抵 抗。 
+		return ([[纯 净 的 以 太 能 量 环 绕 着 你， 增 加 %0.1f%% 奥 术 伤 害 并 且 无 视 目 标 %d%% 奥 术 抵 抗。 
 		 在 等 级 5 时， 允 许 你 在 以 太 之 体 的 形 态 下 使 用 防 护 系 技 能。]])
 		:format(damageinc, ressistpen)
 	end,

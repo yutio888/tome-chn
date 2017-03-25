@@ -43,7 +43,7 @@ registerTalentTranslation{
 	id = "T_GOLEM_RESILIENCE",
 	name = "坚韧傀儡",
 	info = function(self, t)
-		if not self.alchemy_golem then return " 提 高 傀 儡 护 甲 熟 练 度 和 伤 害 抵 抗。 " end
+		if not self.alchemy_golem then return " 提 高 傀 儡 护 甲 熟 练 度 和 伤 害 抵 抗 和 治 疗 系 数。 " end
 		local rawlev = self:getTalentLevelRaw(t)
 		local oldh, olda = self.alchemy_golem.talents[Talents.T_THICK_SKIN], self.alchemy_golem.talents[Talents.T_GOLEM_ARMOUR]
 		self.alchemy_golem.talents[Talents.T_THICK_SKIN], self.alchemy_golem.talents[Talents.T_GOLEM_ARMOUR] = rawlev, 1 + rawlev
@@ -57,7 +57,7 @@ registerTalentTranslation{
 		return ([[提 高 傀 儡 护 甲 熟 练 度 和 伤 害 抵 抗。 
 		 增 加 %d%% 所 有 伤 害 抵 抗； 增 加 %d 点 护 甲 和 %d%% 护 甲 韧 性； 当 装 备 1 件 锁 甲 或 板 甲 时， 减 少 %d%% 被 暴 击 率； 增 加 %d%% 治 疗 效 果。 
 		 傀 儡 可 以 使 用 所 有 类 型 的 护 甲， 包 括 板 甲。]]):
-		format(res, heavyarmor, hardiness, crit, rawlev * 10)
+		format(res, heavyarmor, hardiness, crit, t.getHealingFactor(self, t)*100)
 	end,
 }
 

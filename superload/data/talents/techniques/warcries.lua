@@ -15,8 +15,8 @@ registerTalentTranslation{
 	id = "T_SECOND_WIND",
 	name = "宁神之风",
 	info = function(self, t)
-		return ([[做 一 次 深 呼 吸 并 恢 复 %d%% 体 力 值。]]):
-		format(t.getRestore(self, t))
+		return ([[做 一 次 深 呼 吸 并 恢 复 %d 体 力 值。该 效 果 受 意 志 和 力 量 加 成。]]):
+		format(t.getStamina(self, t))
 	end,
 }
 

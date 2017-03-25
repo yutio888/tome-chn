@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2015 Nicolas Casalini
+-- Copyright (C) 2009 - 2017 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -62,9 +62,31 @@ local ans = {
 	{"我想改变你的技能。", action=change_talents},
 	{"我想调整你的策略。", action=change_tactics},
 	{"我想直接操控你。", action=change_control},
-	{"我想帮你改个名字。", action=change_name},
-	{"没事。走吧。"},
+	{"我想改变你的名字。", cond = function() return golem.sentient_telos == 1 end, jump="name", action=function(npc, player) npc.name = "Telos the Great and Powerful (reluctant follower of "..npc.summoner.name..")" game.log("#ROYAL_BLUE#The golem decides to change it's name to #{bold}#%s#{normal}#.", npc.name) end},
+	{"我想改变你的名字。", cond = function() return not golem.sentient_telos end, action=change_name},
+	{"你居然能说话?", cond = function() return golem.sentient_telos == 1 end, jump="how_speak"},
+	{"没事，走吧."},
 }
+
+newChat{ id="how_speak",
+	text = [[What's the good of immortality if you can't even speak? No archmage worth his salt is going to concoct some immoral life-after-death scheme without including some sort of capacity for making his opinions known. And, by the way, your energy manipulation techniques are on the same level as those of my average pair of shoes. Though I guess you are making up for it with your golem crafting skills.]],
+	answers = ans
+}
+
+newChat{ id="name",
+	text = [[Change my name? I'm quite happy being 'Telos' thankyou. Though I wouldn't mind being 'Telos the Great and Powerful'. Do that actually. Yes!]],
+	answers = ans
+}
+
+if golem.sentient_telos == 1 then
+
+newChat{ id="welcome",
+	text = [[I'm a golem. How droll!
+Oh, did you want something?]],
+	answers = ans
+}
+
+else
 
 newChat{ id="welcome",
 	text = [[#LIGHT_GREEN#*傀儡用一个单调的声音说：*#WHITE#
@@ -72,4 +94,5 @@ newChat{ id="welcome",
 	answers = ans
 }
 
+end
 return "welcome"

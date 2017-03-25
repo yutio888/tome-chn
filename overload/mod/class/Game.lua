@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2016 Nicolas Casalini
+-- Copyright (C) 2009 - 2017 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -152,7 +152,7 @@ function _M:runReal()
 	-- Create the map scroll text overlay
 	local lfont = core.display.newFont(chn123_tome_font(), 30)
 	lfont:setStyle("bold")
-	local s = core.display.drawStringBlendedNewSurface(lfont, "<Scroll mode, press keys to scroll, caps lock to exit>", unpack(colors.simple(colors.GOLD)))
+	local s = core.display.drawStringBlendedNewSurface(lfont, "<Scroll mode, press direction keys to scroll, press again to exit>", unpack(colors.simple(colors.GOLD)))
 	lfont:setStyle("normal")
 	self.caps_scroll = {s:glTexture()}
 	self.caps_scroll.w, self.caps_scroll.h = s:getSize()
@@ -240,7 +240,11 @@ function _M:newGame()
 	else
 		self.always_target = config.settings.tome.tactical_mode
 	end
-	local nb_unlocks, max_unlocks = self:countBirthUnlocks()
+	local nb_unlocks, max_unlocks, categories = self:countBirthUnlocks()
+	local unlocks_order = { class=1, race=2, cometic=3, other=4 }
+	local unlocks = {}
+	for cat, d in pairs(categories) do unlocks[#unlocks+1] = {desc=d.nb.."/"..d.max.." "..cat, order=unlocks_order[cat] or 99} end
+	table.sort(unlocks, "order")
 	self.creating_player = true
 	self.extra_birth_option_defs = {}
 	self:triggerHook{"ToME:extraBirthOptions", options = self.extra_birth_option_defs}
@@ -733,9 +737,9 @@ function _M:leaveLevel(level, lev, old_lev)
 	if level:hasEntity(self.player) then
 		level.exited = level.exited or {}
 		if lev > old_lev then
-			level.exited.down = {x=self.player.x, y=self.player.y}
+			level.exited.down = {x=self.player.x, y=self.player.y, turn=self.turn}
 		else
-			level.exited.up = {x=self.player.x, y=self.player.y}
+			level.exited.up = {x=self.player.x, y=self.player.y, turn=self.turn}
 		end
 	end
 
@@ -774,20 +778,41 @@ function _M:onLevelLoadRun()
 	self.on_level_load_fcts[self.zone.short_name.."-"..self.level.level] = nil
 end
 
-function _M:changeLevel(lev, zone, params)
+function _M:noStairsTime()
+	local nb = 2
+	if game.difficulty == game.DIFFICULTY_EASY then nb = 0
+	elseif game.difficulty == game.DIFFICULTY_NIGHTMARE then nb = 3
+	elseif game.difficulty == game.DIFFICULTY_INSANE then nb = 5
+	elseif game.difficulty == game.DIFFICULTY_MADNESS then nb = 9
+	end
+	return nb * 10
+end
+
+function _M:changeLevelCheck(lev, zone, params)
 	params = params or {}
+	if not params.direct_switch and (self:getPlayer(true).last_kill_turn and self:getPlayer(true).last_kill_turn >= self.turn - self:noStairsTime()) and not config.settings.cheat then
+		local left = math.ceil((10 + self:getPlayer(true).last_kill_turn - self.turn + self:noStairsTime()) / 10)
+		self.logPlayer(self.player, "#LIGHT_RED#You may not change level so soon after a kill (%d game turns left to wait)!", left)
+		return false
+	end
 	if not self.player.can_change_level then
 		self.logPlayer(self.player, "#LIGHT_RED#You may not change level without your own body!")
-		return
+		return false
 	end
 	if zone and not self.player.can_change_zone then
 		self.logPlayer(self.player, "#LIGHT_RED#You may not leave the zone with this character!")
-		return
+		return false
 	end
 	if self.player:hasEffect(self.player.EFF_PARADOX_CLONE) or self.player:hasEffect(self.player.EFF_IMMINENT_PARADOX_CLONE) then
 		self.logPlayer(self.player, "#LIGHT_RED#You cannot escape your fate by leaving the level!")
-		return
+		return false
 	end
+	return true
+end
+
+function _M:changeLevel(lev, zone, params)
+	params = params or {}
+	if not self:changeLevelCheck(lev, zone, params) then return end
 
 	-- Transmo!
 	local p = self:getPlayer(true)
@@ -826,7 +851,75 @@ function _M:changeLevel(lev, zone, params)
 	end
 end
 
+--- Handle level generation failure with input from the player
+-- @param lev = level (number) that failed to generate
+-- @param zone = zone to change to, either short_name (string) or a zone object
+-- @param params = table of params for changeLevel
+-- @params level = new level (that failed to generate)
+-- @params old_zone = previous zone
+-- @params old_level = previous level
+function _M:changeLevelFailure(lev, zone, params, level, old_zone, old_level)
+	local failed_zone, failed_level = self.zone, level -- store failed zone/level
+	local failed_room_map = table.get(level, "map", "room_map") -- store the room map
+
+	self.zone, self.level = failed_zone:clone(), level and level:clone() -- restore to copies so originals match memory addresses
+	local to_re_add_actors = self.to_re_add_actors
+	print("=====Level Generation Failure: Unable to create level", lev, "of zone:", failed_zone.short_name, "===")
+
+	local choices = {{name=("Stay: level %s of %s"):format(old_level.level, old_zone.name), choice="stay"},
+	{name=("Keep Trying: level %s of %s"):format(lev, failed_zone.name), choice="try"},
+	{name=("Log the problem, Stay: level %s of %s"):format(old_level.level, old_zone.name), choice="log"}}
+	if config.settings.cheat then
+		table.insert(choices, {name="Debug the problem (move to the failed zone/level)", choice="debug"})
+	end
+	local function generation_dump()
+		print("\n=====START Level Generation Failure Log=====\n")
+		print("=====Zone=====:", failed_zone, "====") table.print_shallow(failed_zone)
+		print("=====Generator Data:=====", failed_zone.generator, "====") table.print(failed_zone.generator)
+		print("=====Failed Level====:", failed_level, "====") table.print_shallow(failed_level)
+		print("\n=====END Level Generation Failure Log=====\n")
+	end
+	local choice_handler = function(sel)
+		if not sel then 
+			print("[changeLevelFailure] Stay selected by default")
+		elseif sel.choice == "try" then
+			print("[changeLevelFailure]", sel.name)
+			game:changeLevelReal(lev, zone, params)
+		elseif sel.choice == "log" then -- output zone/level/generator summary to the output log
+		-- failed_zone/failed_level are the copies of the last versions that failed to generate
+		-- Could add bug uploading here if desired
+		-- Consider grabbing last xx lines of the game.log to find out what forcing the level to be recreated.
+		-- (Search for last instance of "[Zone:newLevel]".."\t"..failed_zone.short_name.."\tbeginning level generation, count:\t1")
+
+			print("[changeLevelFailure]", sel.name)
+			generation_dump()
+			Dialog:simplePopup("Information logged", "Information on the failed zone and level dumped to the log file.")
+		elseif sel.choice == "debug" then
+			print("[changeLevelFailure]", sel.name)
+			generation_dump()
+			failed_zone._level_generation_count = nil
+			self.zone, self.level = failed_zone, failed_level
+			params._debug_mode = true
+			self.to_re_add_actors = to_re_add_actors
+			self:changeLevelReal(lev, failed_zone, params)
+			table.set(self.level, "map", "room_map", failed_room_map) -- restore the room map
+		else
+			print("[changeLevelFailure]", sel.name)
+		end
+	end
+	local text = ("The game could not generate level %s of %s after %s attempts. What do you want to do?"):format(lev, failed_zone.name, failed_zone._level_generation_count-1)
+	Dialog:multiButtonPopup("Level Generation Failure", text,
+		choices, math.max(500, game.w/2), nil, choice_handler,
+		false,
+		1 -- default to stay on the previous level
+	)
+	self.zone, self.level = old_zone, old_level
+	new_level = false
+end
+
 function _M:changeLevelReal(lev, zone, params)
+	local oz, ol = self.zone, self.level
+	
 	-- Unlock first!
 	if not params.temporary_zone_shift_back and self.level and self.level.temp_shift_zone then
 		self:changeLevelReal(1, "useless", {temporary_zone_shift_back=true})
@@ -863,11 +956,12 @@ function _M:changeLevelReal(lev, zone, params)
 	local popup = nil
 	local afternicer = nil
 
-	-- We only switch temporarily, keep the old one around
-	if params.temporary_zone_shift then
+	if params._debug_mode then
+		print("Entering zone:", self.zone.name, "level:", self.level and self.level.level, "in debug mode")	
+		if not self.level then return end
+	elseif params.temporary_zone_shift then -- We only switch temporarily, keep the old one around
 		self:leaveLevel(self.level, lev, old_lev)
 
-		local oz, ol = self.zone, self.level
 		if type(zone) == "string" then
 			self.zone = Zone.new(zone)
 		else
@@ -875,14 +969,16 @@ function _M:changeLevelReal(lev, zone, params)
 		end
 		if type(self.zone.save_per_level) == "nil" then self.zone.save_per_level = config.settings.tome.save_zone_levels and true or false end
 
-		self.zone:getLevel(self, lev, old_lev, true)
-		self.visited_zones[self.zone.short_name] = true
-		world:seenZone(self.zone.short_name)
-
-		self.level.temp_shift_zone = oz
-		self.level.temp_shift_level = ol
-	-- We switch back
-	elseif params.temporary_zone_shift_back then
+		local level, new_level = self.zone:getLevel(self, lev, old_lev, true)
+		if (not level or self.zone._level_generation_count > self.zone._max_level_generation_count) and not params._debug_mode then -- handle level generation failure
+			self:changeLevelFailure(lev, zone, params, level, oz, ol)
+		else
+			self.visited_zones[self.zone.short_name] = true
+			world:seenZone(self.zone.short_name)
+			self.level.temp_shift_zone = oz
+			self.level.temp_shift_level = ol
+		end
+	elseif params.temporary_zone_shift_back then -- We switch back
 		popup = Dialog:simpleWaiter("载入区域", "载入区域中，请稍候...", nil, 10000)
 		core.display.forceRedraw()
 
@@ -906,7 +1002,7 @@ function _M:changeLevelReal(lev, zone, params)
 
 		self.visited_zones[self.zone.short_name] = true
 		world:seenZone(self.zone.short_name)
-			force_recreate = true
+		force_recreate = true
 	elseif not params.temporary_zone_shift then -- We move to a new zone as normal
 		if self.zone and self.zone.on_leave then
 			local nl, nz, stop = self.zone.on_leave(lev, old_lev, zone)
@@ -937,12 +1033,21 @@ function _M:changeLevelReal(lev, zone, params)
 			end
 			if type(self.zone.save_per_level) == "nil" then self.zone.save_per_level = config.settings.tome.save_zone_levels and true or false end
 		end
-		local _, new_level = self.zone:getLevel(self, lev, old_lev)
-		self.visited_zones[self.zone.short_name] = true
-		world:seenZone(self.zone.short_name)
 
-		if new_level then
-			afternicer = self.state:startEvents()
+		local level, new_level = self.zone:getLevel(self, lev, old_lev)
+
+		-- handle level generation failure
+		if (not level or self.zone._level_generation_count > self.zone._max_level_generation_count) and not params._debug_mode then
+			self:changeLevelFailure(lev, zone, params, level, oz, ol)
+			self.zone, self.level = oz, ol -- by default, stay on current zone/level
+			new_level = false
+		else
+			self.visited_zones[self.zone.short_name] = true
+			world:seenZone(self.zone.short_name)
+
+			if new_level then
+				afternicer = self.state:startEvents()
+			end
 		end
 	end
 
@@ -982,8 +1087,8 @@ function _M:changeLevelReal(lev, zone, params)
 		end
 	end
 
-	-- Move back to old wilderness position
-	if self.zone.wilderness then
+	-- place the player on the level
+	if self.zone.wilderness then -- Move back to old wilderness position
 		self.player:move(self.player.wild_x, self.player.wild_y, true)
 		self.player.last_wilderness = self.zone.short_name
 	else
@@ -1010,12 +1115,21 @@ function _M:changeLevelReal(lev, zone, params)
 			if #list > 0 then x, y = unpack(rng.table(list)) end
 		end
 
-		-- Default to stairs
-		if not x then
-			if lev > old_lev and not params.force_down then x, y = self.level.default_up.x, self.level.default_up.y
-			else x, y = self.level.default_down.x, self.level.default_down.y
+		-- if self.level.exited then -- use the last location, if defined
+		-- 	local turn = 0
+		-- 	if self.level.exited.down then
+		-- 		x, y, turn = self.level.exited.down.x, self.level.exited.down.y, self.level.exited.down.turn or 0
+		-- 	end
+		-- 	if self.level.exited.up and (self.level.exited.up.turn or 0) > turn then
+		-- 		x, y = self.level.exited.up.x, self.level.exited.up.y
+		-- 	end
+		-- end
+
+		if not x then -- Default to stairs
+			if lev > old_lev and not params.force_down and self.level.default_up then x, y = self.level.default_up.x, self.level.default_up.y
+			elseif self.level.default_down then x, y = self.level.default_down.x, self.level.default_down.y
 			end
-			if not x then x, y = self.level.default_up.x, self.level.default_up.y end
+			if not x and self.level.default_up then x, y = self.level.default_up.x, self.level.default_up.y end
 		end
 
 		-- Check if there is already an actor at that location, if so move it
@@ -1244,6 +1358,7 @@ end
 
 --- Update the zone name, if needed
 function _M:updateZoneName()
+	if not self.zone_font then return end
 	local name
 	if self.zone.display_name then
 		name = self.zone.display_name()
@@ -1299,28 +1414,44 @@ function _M:tick()
 end
 
 -- Game Log management functions:
--- logVisible to determine if a message should be visible to the player
--- logMessage to add a message to the display
--- delayedLogMessage to queue an actor-specific message for display at the end of the current game tick
--- displayDelayedLogMessages() to display the queued messages (before combat damage messages)
--- delayedLogDamage to queue a combat (damage) message for display at the end of the current game tick
--- displayDelayedLogDamage to display the queued combat messages
+-- logVisible: determines if a message should be visible to the player
+-- logMessage: creates the message to be passed to the display
+-- delayedLogMessage: queues an actor-specific message for display at the end of the current game tick
+-- displayDelayedLogMessages: displays the queued delayedLogMessage messages (before combat damage messages)
+-- delayedLogDamage: queues combat damage (and associated message) for display at the end of the current game tick
+-- displayDelayedLogDamage: collates and displays queued delayedLogDamage information
 
--- output a message to the log based on the visibility of an actor to the player
+--- Output a message to the log based on the visibility of an actor to the player
+-- @param e the actor(entity) to check visibility for
+-- @param style the message to display
+-- @param ... arguments to be passed to format for style
 function _M.logSeen(e, style, ...)
 	if e and e.player or (not e.dead and e.x and e.y and game.level and game.level.map.seens(e.x, e.y) and game.player:canSee(e)) then game.log(style, ...) end
 end
 
--- determine whether an action between 2 actors should produce a message in the log and if the player
--- can identify them
--- output: src, srcSeen: source display?, identify?
--- tgt, tgtSeen: target display?, identify?
--- output: Visible? and srcSeen (source is identified by the player), tgtSeen(target is identified by the player)
+--- Determine whether an action between 2 actors (or entities or effects) should produce a message in the log
+--		and if they should be identified to the player
+-- @param source: source of the action
+-- @param target: target of the action
+-- @return[1] [type=boolean] message visible to player
+-- @return[2] [type=boolean] source is identified by player
+-- @return[3] [type=boolean] target is identified by player
 function _M:logVisible(source, target)
-	-- target should display if it's the player, an actor (or projectile) in a seen tile, or a non-actor without coordinates
-	local tgt = target and (target.player or ((target.__is_actor or target.__is_projectile) and game.level.map.seens(target.x, target.y)) or (not target.__is_actor and not target.x))
-	local tgtSeen = tgt and (target.player or game.player:canSee(target)) or false
-	local src, srcSeen = false, false
+	-- target should display if it's the player, an acting entity (actor, projectile, or trap) in a seen tile, or a non-acting entity without coordinates
+	local tgt, tgtSeen
+	if target then
+		if target.player then tgt, tgtSeen = true, true
+		else
+			if target.__is_actor or target.__is_projectile or target.__is_trap then
+				tgt = game.level.map.seens(target.x, target.y)
+			else
+				tgt = not target.x
+			end
+			tgtSeen = tgt and game.player:canSee(target) or false
+		end
+	end
+	
+	local src, srcSeen, src_act = false, false
 	-- Special cases
 	if not source.x then -- special case: unpositioned source uses target parameters (for timed effects on target)
 		if tgtSeen then
@@ -1328,18 +1459,29 @@ function _M:logVisible(source, target)
 		else
 			src, tgt = nil, nil
 		end
-	else -- source should display if it's the player or an actor (or projectile) in a seen tile, or same as target for non-actors
-		src = source.player or ((source.__is_actor or source.__is_projectile) and game.level.map.seens(source.x, source.y)) or (not source.__is_actor and tgt)
-		srcSeen = src and game.player:canSee(source) or false
-	end	
-	
+	else -- source should display if it's the player or an acting entity in a seen tile, or same as target for non-acting entities
+		if source.player then src, srcSeen = true, true
+		else
+			if source.__is_actor or source.__is_projectile or source.__is_trap then
+				src = game.level.map.seens(source.x, source.y)
+			else
+				src = tgt
+			end
+			srcSeen = src and game.player:canSee(source) or false
+		end
+	end
 	return src or tgt or false, srcSeen, tgtSeen
 end
 
--- Generate a message (string) for the log with possible source and target,
--- highlighting the player and taking visibility into account
--- srcSeen, tgtSeen = can player see(identify) the source, target?
--- style text message to display, may contain:
+--- Generate a message (string) for the log with possible source and target,
+-- 		highlights the player and takes visibility into account
+-- @param source: source (primary) actor
+-- @param srcSeen: [type=boolean] source is identified
+-- @param target: target (secondary) actor
+-- @param tgtSeen: [type=boolean] target is identified
+-- @param style the message to display
+-- @param ... arguments to be passed to format for style
+-- @return the string with certain fields replaced:
 -- #source#|#Source# -> <displayString>..self.name|self.name:capitalize()
 -- #target#|#Target# -> target.name|target.name:capitalize()
 function _M:logMessage(source, srcSeen, target, tgtSeen, style, ...)
@@ -1386,10 +1528,14 @@ function _M:logMessage(source, srcSeen, target, tgtSeen, style, ...)
 	return style
 end
 
--- log an entity-specific message for display later with displayDelayedLogDamage
--- only one message (processed with logMessage) will be logged for each source and label
+--- Log an entity-specific message for display later with displayDelayedLogMessages
 -- useful to avoid spamming repeated messages
--- target is optional and is used only to resolve the msg
+-- @param source: source (primary) actor
+-- @param target [optional]: target (secondary) actor (used only to resolve msg)
+-- @param label: a unique tag for this message
+-- @param msg raw string passed to logMessage
+--	takes visibility into account
+-- 	only one message (processed with logMessage) will be logged for each source and label
 function _M:delayedLogMessage(source, target, label, msg, ...)
 	local visible, srcSeen, tgtSeen = self:logVisible(source, target)
 	if visible then
@@ -1399,7 +1545,8 @@ function _M:delayedLogMessage(source, target, label, msg, ...)
 	end
 end
 
--- display the delayed log messages
+--- Push all queued delayed log messages to the combat log
+-- Called at the end of each game tick
 function _M:displayDelayedLogMessages()
 	if not self.uiset or not self.uiset.logdisplay then return end
 	for src, msgs in pairs(self.delayed_log_messages) do
@@ -1410,7 +1557,8 @@ function _M:displayDelayedLogMessages()
 	self.delayed_log_messages = {}
 end
 
--- Note: There can be up to a 1 tick delay in displaying log information
+--- Collate and push all queued delayed log damage information to the combat log
+-- Called at the end of each game tick
 function _M:displayDelayedLogDamage()
 	if not self.uiset or not self.uiset.logdisplay then return end
 	for real_src, psrcs in pairs(self.delayed_log_damage) do
@@ -1451,7 +1599,13 @@ function _M:displayDelayedLogDamage()
 	self.delayed_log_damage = {}
 end
 
--- log and collate combat damage for later display with displayDelayedLogDamage
+--- Queue combat damage values and messages for later display with displayDelayedLogDamage
+-- @param src: source (primary) actor dealing the damage
+-- @param target: target (secondary) actor receiving the damage
+-- @param dam: [type=number] damage effectively dealt, added to total
+--		negative dam is counted as healing and summed separately
+-- @param desc: [type=string] text description of damage dealth, passed directly to log message
+-- @param crit: [type=boolean] set true if the damage was dealt via critcal hit
 function _M:delayedLogDamage(src, target, dam, desc, crit)
 	if not target or not src then return end
 	local psrc = src.__project_source or src -- assign message to indirect damage source if available
@@ -1570,7 +1724,7 @@ function _M:displayMap(nb_keyframes)
 		self.gestures:display(map.display_x, map.display_y, nb_keyframes)
 
 		-- Inform the player that map is in scroll mode
-		if core.key.modState("caps") then
+		if self.scroll_lock_enabled then
 			local w = map.viewport.width * 0.5
 			local h = w * self.caps_scroll.h / self.caps_scroll.w
 			self.caps_scroll[1]:toScreenFull(
@@ -1617,10 +1771,12 @@ function _M:display(nb_keyframes)
 	self.ctrl_state = core.key.modState("ctrl")
 
 	-- if tooltip is in way of mouse and its not locked then move it
-	if self.tooltip.w and mx > self.w - self.tooltip.w and my > Tooltip:tooltip_bound_y2() - self.tooltip.h and not self.tooltip.locked then
-		self:targetDisplayTooltip(Map.display_x, self.h, self.old_ctrl_state~=self.ctrl_state, nb_keyframes )
-	else
-		self:targetDisplayTooltip(self.w, self.h, self.old_ctrl_state~=self.ctrl_state, nb_keyframes )
+	if not self.uiset.no_ui then
+		if self.tooltip.w and mx > self.w - self.tooltip.w and my > Tooltip:tooltip_bound_y2() - self.tooltip.h and not self.tooltip.locked then
+			self:targetDisplayTooltip(Map.display_x, self.h, self.old_ctrl_state~=self.ctrl_state, nb_keyframes )
+		else
+			self:targetDisplayTooltip(self.w, self.h, self.old_ctrl_state~=self.ctrl_state, nb_keyframes )
+		end
 	end
 
 	if self.full_fbo then
@@ -1715,12 +1871,12 @@ function _M:setupCommands()
 			print("===============")
 		end end,
 		[{"_g","ctrl"}] = function() if config.settings.cheat then
-			self:changeLevel(1, "orcs+steam-quarry")
+			self:changeLevel(game.level.level + 1)
 do return end
-			local o = game.zone:makeEntity(game.level, "object", {subtype="sling", random_object=true}, nil, true)
-			if o then
-				o:identify(true)
-				game.zone:addEntity(game.level, o, "object", game.player.x, game.player.y-1)
+			local m = game.zone:makeEntity(game.level, "actor", {name="elven mage"}, nil, true)
+			local x, y = util.findFreeGrid(game.player.x, game.player.y, 20, true, {[Map.ACTOR]=true})
+			if m and x then
+				game.zone:addEntity(game.level, m, "actor", x, y)
 			end
 do return end
 			local f, err = loadfile("/data/general/events/fearscape-portal.lua")
@@ -1762,15 +1918,17 @@ do return end
 	self.key:addBinds
 	{
 		-- Movements
-		MOVE_LEFT = function() if core.key.modState("caps") and self.level then self.level.map:scrollDir(4) else self.player:moveDir(4) end end,
-		MOVE_RIGHT = function() if core.key.modState("caps") and self.level then self.level.map:scrollDir(6) else self.player:moveDir(6) end end,
-		MOVE_UP = function() if core.key.modState("caps") and self.level then self.level.map:scrollDir(8) else self.player:moveDir(8) end end,
-		MOVE_DOWN = function() if core.key.modState("caps") and self.level then self.level.map:scrollDir(2) else self.player:moveDir(2) end end,
-		MOVE_LEFT_UP = function() if core.key.modState("caps") and self.level then self.level.map:scrollDir(7) else self.player:moveDir(7) end end,
-		MOVE_LEFT_DOWN = function() if core.key.modState("caps") and self.level then self.level.map:scrollDir(1) else self.player:moveDir(1) end end,
-		MOVE_RIGHT_UP = function() if core.key.modState("caps") and self.level then self.level.map:scrollDir(9) else self.player:moveDir(9) end end,
-		MOVE_RIGHT_DOWN = function() if core.key.modState("caps") and self.level then self.level.map:scrollDir(3) else self.player:moveDir(3) end end,
-		MOVE_STAY = function() if core.key.modState("caps") and self.level then self.level.map:centerViewAround(self.player.x, self.player.y) else if self.player:enoughEnergy() then self.player:describeFloor(self.player.x, self.player.y) self.player:waitTurn() end end end,
+		MOVE_LEFT = function() if self.scroll_lock_enabled and self.level then self.level.map:scrollDir(4) else self.player:moveDir(4) end end,
+		MOVE_RIGHT = function() if self.scroll_lock_enabled and self.level then self.level.map:scrollDir(6) else self.player:moveDir(6) end end,
+		MOVE_UP = function() if self.scroll_lock_enabled and self.level then self.level.map:scrollDir(8) else self.player:moveDir(8) end end,
+		MOVE_DOWN = function() if self.scroll_lock_enabled and self.level then self.level.map:scrollDir(2) else self.player:moveDir(2) end end,
+		MOVE_LEFT_UP = function() if self.scroll_lock_enabled and self.level then self.level.map:scrollDir(7) else self.player:moveDir(7) end end,
+		MOVE_LEFT_DOWN = function() if self.scroll_lock_enabled and self.level then self.level.map:scrollDir(1) else self.player:moveDir(1) end end,
+		MOVE_RIGHT_UP = function() if self.scroll_lock_enabled and self.level then self.level.map:scrollDir(9) else self.player:moveDir(9) end end,
+		MOVE_RIGHT_DOWN = function() if self.scroll_lock_enabled and self.level then self.level.map:scrollDir(3) else self.player:moveDir(3) end end,
+		MOVE_STAY = function() if self.scroll_lock_enabled and self.level then self.level.map:centerViewAround(self.player.x, self.player.y) else if self.player:enoughEnergy() then self.player:describeFloor(self.player.x, self.player.y) self.player:waitTurn() end end end,
+
+		SCROLL_MAP = function() self.scroll_lock_enabled = not self.scroll_lock_enabled end,
 
 		RUN = function()
 			self.log("Run in which direction?")
@@ -1893,11 +2051,9 @@ do return end
 				self.log("There is no way out of this level here.")
 			end
 		end,
-
 		REST = function()
 			self.player:restInit()
 		end,
-
 		PICKUP_FLOOR = not_wild(function()
 			if self.player.no_inventory_access then return end
 			self.player:playerPickup()
@@ -1945,7 +2101,12 @@ do return end
 		end),
 
 		LEVELUP = function()
-			if self.player.no_levelup_access then return end
+			if self.player:attr("no_levelup_access") then
+				if type(self.player.no_levelup_access_log) == "string" then
+					game.log(self.player.no_levelup_access_log)
+				end
+				return
+			end
 			self.player:playerLevelup(nil, false)
 		end,
 
@@ -2511,7 +2672,7 @@ unlocks_list = {
 	birth_zigur_sacrifice = "Birth option: Zigur sacrifice",
 	cosmetic_race_human_redhead = "Cosmetic: Redheads",
 	cosmetic_race_dwarf_female_beard = "Cosmetic: Female dwarves facial pilosity",
-	
+
 	difficulty_insane = "Difficulty: Insane",
 	difficulty_madness = "Difficulty: Madness",
 
@@ -2521,6 +2682,8 @@ unlocks_list = {
 	undead_ghoul = "Race: Ghoul",
 	undead_skeleton = "Race: Skeleton",
 	yeek = "Race: Yeek",
+
+	race_ogre = "Race: Ogre",
 
 	mage = "Class: Archmage",
 	mage_tempest = "Class tree: Storm",
@@ -2540,6 +2703,7 @@ unlocks_list = {
 	wilder_wyrmic = "Class: Wyrmic",
 	wilder_summoner = "Class: Summoner",
 	wilder_oozemancer = "Class: Oozemancer",
+	wilder_stone_warden = "Class: Stone Warden",
 
 	corrupter_reaver = "Class: Reaver",
 	corrupter_corruptor = "Class: Corruptor",
@@ -2562,12 +2726,25 @@ unlocks_list = {
 function _M:countBirthUnlocks()
 	local nb = 0
 	local max = 0
+	local categories = {
+		class = {nb = 0, max = 0},
+		race = {nb = 0, max = 0},
+		cosmetic = {nb = 0, max = 0},
+		other = {nb = 0, max = 0},
+	}
 
-	for name, _ in pairs(self.unlocks_list) do
+	for name, dname in pairs(self.unlocks_list) do
+		local cat = "other"
+		if dname:find("^Class:") then cat = "class"
+		elseif dname:find("^Race:") then cat = "race"
+		elseif dname:find("^Cosmetic:") then cat = "cosmetic"
+		else cat = "other"
+		end
 		max = max + 1
-		if profile.mod.allow_build[name] then nb = nb + 1 end
+		categories[cat].max = categories[cat].max + 1
+		if profile.mod.allow_build[name] then nb = nb + 1 categories[cat].nb = categories[cat].nb + 1 end
 	end
-	return nb, max
+	return nb, max, categories
 end
 
 -- get a text-compatible texture (icon) for an entity
@@ -2576,7 +2753,7 @@ function _M:getGenericTextTiles(en)
 	if not disp then return "" end
 	if not en.getDisplayString then
 		if en.display_entity and en.display_entity.getDisplayString then
-			disp = en.display_entity 
+			disp = en.display_entity
 		else
 			return ""
 		end

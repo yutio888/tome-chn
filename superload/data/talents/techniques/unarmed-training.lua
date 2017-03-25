@@ -18,7 +18,7 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local inc = t.getPercentInc(self, t)
 		return ([[提 高 %d 物 理 强 度， 增 加 %d%% 所 有 徒 手 伤 害（ 包 括 抓 取 / 徒 手 技）。 
-		注 意： 徒 手 战 斗 时 格 斗 家 随 等 级 每 级 增 加 0.5 物 理 强 度。（ 当 前 提 高 %0.1f 物 理 强 度） 你 的 攻 击 速 度 提 高 40%% 。]]):
+		注 意： 徒 手 战 斗 时 格 斗 家 随 等 级 每 级 增 加 0.5 物 理 强 度。（ 当 前 提 高 %0.1f 物 理 强 度） 你 的 攻 击 速 度 提 高 20%% 。]]):
 		format(damage, 100*inc, self.level * 0.5)
 	end,
 }
@@ -47,8 +47,8 @@ registerTalentTranslation{
 	name = "闪避神经",
 	info = function(self, t)
 		return ([[你 对 生 理 的 了 解 让 你 能 在 新 的 领 域 运 用 你 的 闪 避 神 经。 
-		 每 次 你 受 到 超 过 %d%% 最 大 生 命 的 伤 害 时 ， 减 少 %d%% （ 基 于 闪 避）。]]):
-		format(t.getDamagePct(self, t)*100, t.getDamageReduction(self, t)*100 )
+		 攻 击 姿 态 的 减 伤 效 果 增 强 %d%% ，对 你 的 暴 击 伤 害 的 暴 击 系 数 下 降 %d%% 。]]):
+		format(t.getFlatReduction(self,t), t.critResist(self,t) )
 	end,
 }
 

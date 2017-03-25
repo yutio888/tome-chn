@@ -613,6 +613,22 @@ logCHN:newLog{
 
 --cunning/trap
 logCHN:newLog{
+	log = "#CADET_BLUE#Placing %s...",
+	fct = function(a)
+		if a== "trap" then return "#CADET_BLUE#放置陷阱中"
+		else return ("#CADET_BLUE#放置%s中"):format(a)
+		end
+	end,
+}
+logCHN:newLog{
+	log = "%s activates a prepared device.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s激活了一项被准备的装置。"):format(a)
+	end,
+}
+
+logCHN:newLog{
 	log = "You somehow fail to set the trap.",
 	fct = function()
 		return "你没有成功放置陷阱。"

@@ -37,8 +37,8 @@ registerTalentTranslation{
 	id = "T_ONE_WITH_NATURE",
 	name = "自然之友",
 	info = function(self, t)
-		local turns = 1 + math.floor(self:getTalentLevel(t) / 2)
-		local nb = self:getTalentLevelRaw(t)
+		local turns = t.getCooldown(self, t)
+		local nb = t.getNb(self, t)
 		return ([[与 自 然 交 流， 移 除 纹 身 类 技 能 饱 和 效 果 并 减 少 %d 种 纹 身 %d 回 合 冷 却 时 间。]]):
 		format(nb, turns)
 	end,
@@ -47,11 +47,13 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_HEALING_NEXUS",
 	name = "治疗转移",
-	info = function(self, t)
+	info = function (self,t)
+		local pct = t.getPct(self, t)*100
 		return ([[在 你 的 身 旁 %d 码 半 径 范 围 内 流 动 着 一 波 自 然 能 量， 所 有 被 击 中 的 敌 人 都 会 受 到 治 疗 转 移 的 效 果， 持 续 %d 回 合。 
+		 每 次 你 被 治 疗 ， 会 回 复 %d 点 自 然 失 衡 值，治 疗 效 率 %d%% 。
 		 当 此 技 能 激 活 时， 所 有 对 敌 人 的 治 疗 都 会 转 移 到 你 身 上， 继 承 %d%% 治 疗 价 值。（ 敌 人 不 受 到 治 疗） 
-		 每 次 治 疗 转 移 同 时 会 回 复 %d 点 自 然 失 衡 值。]]):
-		format(self:getTalentRadius(t), 3 + self:getTalentLevelRaw(t), (0.4 + self:getTalentLevel(t) / 10) * 100, 5 + self:getTalentLevel(t))
+		 。]]):
+		format(self:getTalentRadius(t), t.getDur(self, t), t.getEquilibrium(self, t), 100 + pct, pct)
 	end,
 }
 

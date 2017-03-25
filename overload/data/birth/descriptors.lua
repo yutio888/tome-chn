@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2016 Nicolas Casalini
+-- Copyright (C) 2009 - 2017 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -171,6 +171,7 @@ newBirthDescriptor{
 	{
 		"#GOLD##{bold}#普通模式#WHITE##{normal}#",
 		" 普 通 难 度 的 挑 战。 ",
+		" 你 杀 死 生 物 2  回 合 内 不 能 使 用 楼 梯",
 	},
 	descriptor_choices =
 	{
@@ -194,6 +195,8 @@ newBirthDescriptor{
 		" 高 难 度 游 戏 设 定 ",
 		" 所 有 地 区 等 级 提 高 50% ",
 		" 所 有 生 物 技 能 等 级 提 高 30%",
+		" 稀 有 生 物 出 现 率 略 微 增 加",
+		" 你 杀 死 生 物 3  回 合 内 不 能 使 用 楼 梯",
 	        " 玩 家 如 果 同 时 选 择 永 久 死 亡 模 式 或 冒 险 模 式 可 以 达 成 噩 梦 模 式 成 就。 ",
 	},
 	descriptor_choices =
@@ -205,6 +208,9 @@ newBirthDescriptor{
 		instakill_immune = 1,
 		__game_difficulty = 3,
 		money = 100,
+	},
+	game_state = {
+		default_random_rare_chance = 15,
 	},
 }
 newBirthDescriptor{
@@ -223,6 +229,7 @@ newBirthDescriptor{
 		" 稀 有 怪 出 现 频 率 大 幅 增 加， 同 时 出 现 随 机 Boss。 ",
 		" 固 定 boss 拥 有 随 机 技 能",
 		" 所 有 敌 人 血 量 增 加 20%",
+		" 你 杀 死 生 物 5 回 合 内 不 能 使 用 楼 梯",
 		" 玩 家 如 果 同 时 选 择 永 久 死 亡 或 冒 险 模 式 可 以 达 成 疯 狂 模 式 成 就。 ",
 	},
 	descriptor_choices =
@@ -256,6 +263,7 @@ newBirthDescriptor{
 		" 所 有 生 物 天 赋 等 级 增 加 170%。 ",
 		" 稀 有 怪 出 现 频 率 大 幅 增 加， 同 时 出 现 随 机 Boss。 ",
 		" 固 定 boss 拥 有 随 机 技 能",
+		" 你 杀 死 生 物 9  回 合 内 不 能 使 用 楼 梯",
 		" 玩 家 处 于 被 捕 猎 的 状 态， 一 定 半 径 内 所 有 生 物 都 能 感 知 到 你 的 位 置。 ",
 		" 玩 家 如 果 同 时 选 择 永 久 死 亡 模 式 或 冒 险 模 式 可 以 达 成 绝 望 模 式 成 就。 ",
 	},

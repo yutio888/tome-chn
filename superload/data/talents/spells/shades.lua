@@ -37,10 +37,10 @@ registerTalentTranslation{
 	id = "T_FROSTDUSK",
 	name = "幽暗极冰",
 	info = function(self, t)
-		local damageinc = t.getDarknessDamageIncrease(self, t)
+		local damageinc = t.getDamageIncrease(self, t)
 		local ressistpen = t.getResistPenalty(self, t)
 		local affinity = t.getAffinity(self, t)
-		return ([[ 让 幽 暗 极 冰 围 绕 你， 增 加 你 %d%% 所 有 的 暗 影 系 和 冰 冷 系 伤 害 并 无 视 目 标 %d%% 暗 影 抵 抗。 
+		return ([[ 让 幽 暗 极 冰 围 绕 你， 增 加 你 %0.1f%% 所 有 的 暗 影 系 和 冰 冷 系 伤 害 并 无 视 目 标 %d%% 暗 影 抵 抗。 
 		 此 外， 你 受 到 的 所 有 暗 影 伤 害 可 治 疗 你。 治 疗 量 为 %d%% 暗 影 伤 害 值。]])
 		:format(damageinc, ressistpen, affinity)
 	end,

@@ -4,8 +4,8 @@ registerTalentTranslation{
 	id = "T_HIGHER_HEAL",
 	name = "高贵血统",
 	info = function(self, t)
-		return ([[召 唤 高 贵 血 统 来 使 你 的 身 体 以 %d 点 每 回 合 的 速 率 恢 复， 持 续 10 回 合。 
-		 受 意 志 影 响， 生 命 恢 复 量 有 额 外 增 益。]]):format(5 + self:getWil() * 0.5)
+		return ([[召 唤 高 贵 血 统 来 使 你 的 身 体 以 %d 点 每 回 合 的 速 率 恢 复，治 疗 系 数 增 加 %d%% ， 持 续 10 回 合。 
+		 受 意 志 影 响， 生 命 恢 复 量 有 额 外 增 益。]]):format(5 + self:getWil() * 0.5, t.getHealMod(self, t))
 	end,
 }
 
@@ -15,7 +15,8 @@ registerTalentTranslation{
 	info = function(self, t)
 		return ([[虽 然 高 贵 血 统 并 不 意 味 着 统 治 他 人（ 当 然 也 没 有 特 别 的 意 愿 去 那 样 做）， 但 是 他 们 经 常 承 担 更 高 的 义 务。 
 		 他 们 的 本 能 使 得 他 们 比 别 人 有 更 强 的 直 觉。 
-		 增 加 %d%% 目 盲 免 疫 , 提 高 %d 点 最 大 视 野 范 围 并 提 高 %d 光 照、 夜 视 及 感 应 范 围。]]):
+		 增 加 %d%% 目 盲 免 疫 , 提 高 %d 点 最 大 视 野 范 围 并 提 高 %d 光 照、 夜 视 及 感 应 范 围。
+		 技 能 等 级 5 时，每 次 你 命 中 目 标 ， 你 将 获 得 15 格 范 围 内 同 类 型 生 物 感 知 能 力 ， 持 续 5 回 合 。]]):
 		format(t.getImmune(self, t) * 100, t.getSight(self, t), t.getESight(self, t))
 	end,
 }
@@ -27,7 +28,7 @@ registerTalentTranslation{
 		local netpower = t.power(self, t)
 		return ([[高 等 人 类 们 最 初 是 在 厄 流 纪 前 由 红 衣 主 神 们 创 造 的。 他 们 天 生 具 有 魔 法 天 赋。 
 		 提 高 +%d 点 法 术 豁 免 和 %d%% 奥 术 抵 抗。
-		 每 次 释 放 伤 害 法 术 时 ， 5 回 合 内 该 伤 害 类 型 获 得 15%% 伤 害 加 成 。 （ 该 效 果 有 冷 却 时 间。）]]):
+		 每 次 释 放 伤 害 法 术 时 ， 5 回 合 内 该 伤 害 类 型 获 得 20%% 伤 害 加 成 。 （ 该 效 果 有 冷 却 时 间。）]]):
 		format(t.getSave(self, t), netpower)
 	end,
 }
@@ -47,7 +48,7 @@ registerTalentTranslation{
 	id = "T_SHALOREN_SPEED",
 	name = "不朽的恩赐",
 	info = function(self, t)
-		return ([[召 唤 不 朽 的 恩 赐 之 力 来 增 加 你 %d%% 的 基 础 速 度， 持 续 8 回 合。 
+		return ([[召 唤 不 朽 的 恩 赐 之 力 来 增 加 你 %d%% 的 基 础 速 度， 持 续 5 回 合。 
 		 受 敏 捷 和 魔 法 中 较 高 一 项 影 响 ， 速 度 会 有 额 外 的 提 升。]]):
 		format(t.getSpeed(self, t) * 100)
 	end,
@@ -129,9 +130,9 @@ registerTalentTranslation{
 	name = "钢筋铁骨",
 	info = function(self, t)
 		local params = t.getParams(self, t)
-		return ([[召 唤 矮 人 一 族 的 传 奇 血 统 来 增 加 你 +%d 点 护 甲 值， +%d 点 法 术 豁 免 和 +%d 物 理 豁 免， 持 续 8 回 合。 
+		return ([[召 唤 矮 人 一 族 的 传 奇 血 统 来 增 加 你 +%d 点 护 甲 值，+%d%% 护 甲 硬 度， +%d 点 法 术 豁 免 和 +%d 物 理 豁 免， 持 续 8 回 合。 
 		 受 你 的 体 质 影 响， 此 效 果 有 额 外 加 成。]]):
-		format(params.armor, params.physical, params.spell)
+		format(params.armor, params.armor_hardiness, params.physical, params.spell)
 	end,
 }
 
@@ -140,7 +141,8 @@ registerTalentTranslation{
 	name = "石化皮肤",
 	info = function(self, t)
 		return ([[矮 人 皮 肤 是 一 种 复 杂 的 结 构， 它 可 以 在 受 到 打 击 后 自 动 硬 化。 
-		当 被 击 打 时 有 15%% 的 概 率 增 加 %d 点 护 甲 值， 持 续 5 回 合。]]):
+		当 被 击 打 时 有 15%% 的 概 率 增 加 %d 点 护 甲 值， 持 续 5 回 合， 同 时 无 视 触 发 该 效 果 的 攻 击。
+		该 效 果 无 冷 却 时 间 ， 可 重 复 触 发 。]]):
 		format(t.armor(self, t))
 	end,
 }
@@ -173,9 +175,9 @@ registerTalentTranslation{
 	name = "小不点的幸运",
 	info = function(self, t)
 		local params = t.getParams(self, t)
-		return ([[召 唤 小 不 点 的 幸 运 和 机 智 来 提 高 你 %d%% 的 物 理、 法 术 和 精 神 暴 击 率 和 %d 点 物 理、 法 术 和 精 神 豁 免 5 回 合。 
+		return ([[召 唤 小 不 点 的 幸 运 和 机 智 来 提 高 你 %d%%  暴 击 率 和 %d  豁 免 5 回 合。 
 		 受 灵 巧 影 响， 此 效 果 有 额 外 增 益。]]):
-		format(params.mind, params.mind)
+		format(params.crit, params.save)
 	end,
 }
 
@@ -311,7 +313,7 @@ registerTalentTranslation{
 	name = "食人魔之怒",
 	info = function(self, t)
 		return ([[你 进 入 愤 怒 状 态 %d 回 合 ，获 得 20%% 震 慑 和 定 身 免 疫 ，全 体 伤 害 增 加 10%% 。
-		 同 时 ，每 当 你 攻 击 未 命 中 或 伤 害 被 护 盾 等 效 果 削 减 时 ，你 获 得 一 层 食 人 魔 之 怒 效 果 ，持 续 7 回 合 ，效 果 可 叠 加 至 最 多 5 层 。
+		 同 时 ，每 当 你 使 用 符 文 或 纹 身 、攻 击 未 命 中 或 伤 害 被 护 盾 等 效 果 削 减 时 ，你 获 得 一 层 食 人 魔 之 怒 效 果 ，持 续 7 回 合 ，效 果 可 叠 加 至 最 多 5 层 。
 		 每 层 提 供 20%% 暴 击 伤 害 和 5%% 暴 击 率 。
 		 每 次 暴 击 时 减 少 一 层 食 人 魔 之 怒 效 果 。
 		 持 续 时 间 受 力 量 加 成 。]]):format(t.getduration(self))
@@ -326,7 +328,7 @@ registerTalentTranslation{
 		return ([[食 人 魔 的 身 体 对 法 术 和 符 文 亲 和 力 很 强 。
 		 增 加 %d 法 术 豁 免 ，增 加 纹 身 和 符 文 的 属 性 加 成 效 果 %d%% 。
 		 技 能 等 级 5 时 ，你 的 身 体 变 得 如 此 强 壮 ，能 在 主 手 持 有 双 手 武 器 的 同 时 ，副 手 持 有 其 他 副 手 武 器 。
-		 这 样 做 的 话 ，你 的 物 理 法 术 精 神 强 度 会 下 降 20%% ，体 型 超 过 'Big'时 ，每 增 加 一 体 型 ，惩 罚 减 少 5%% 。同 时 你 的 武 器 附 加 伤 害 减 少 50%% 。]]):
+		 这 样 做 的 话 ，你 的 命中、物 理、 法 术、 精 神 强 度 会 下 降 20%% ，体 型 超 过 'Big'时 ，每 增 加 一 体 型 ，惩 罚 减 少 5%% 。同 时 你 的 武 器 附 加 伤 害 减 少 50%% 。]]):
 		format(t.getSave(self, t), t.getMult(self, t) * 100)
 	end,
 }
@@ -347,7 +349,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		return ([[立 刻 解 除 纹 身 紊 乱 和 符 文 紊 乱 。
 		 接 下 来 %d 回 合 内 ，你 的 纹 身 和 符 文 冷 却 速 度 加 倍 。
-		 技 能 等 级 5 时 ，你 拥 有 一 个 新 的 纹 身 位 。]]):
+		 技 能 等 级 5 时 ，你 能 解 锁 一 个 新 的 纹 身 位  。]]):
 		format(t.getDuration(self, t))
 	end,
 }

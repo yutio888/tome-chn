@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2016 Nicolas Casalini
+-- Copyright (C) 2009 - 2017 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -545,7 +545,7 @@ function _M:generateListGameplay()
 		return tostring(config.settings.tome.tinker_auto_switch and "开启" or "关闭")
 	end, fct=function(item)
 		config.settings.tome.tinker_auto_switch = not config.settings.tome.tinker_auto_switch
-		game:saveSettings("tome.tinker_auto_switch", ("tome.tinker_auto_switch = %s\n"):format(tostring(config.settings.tome.rest_before_explore)))
+		game:saveSettings("tome.tinker_auto_switch", ("tome.tinker_auto_switch = %s\n"):format(tostring(config.settings.tome.tinker_auto_switch)))
 		self.c_list:drawItem(item)
 	end,}
 
@@ -628,6 +628,20 @@ function _M:generateListMisc()
 		config.settings.censor_boot = not config.settings.censor_boot
 		game:saveSettings("censor_boot", ("censor_boot = %s\n"):format(tostring(config.settings.censor_boot)))
 		self.c_list:drawItem(item)
+	end,}
+
+	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"当戴着斗篷时，用斗篷代替头部装备图像#WHITE#"}
+	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#显示斗篷#WHITE##{normal}#", status=function(item)
+		return tostring(config.settings.tome.show_cloak_hoods and "开启" or "关闭")
+	end, fct=function(item)
+		config.settings.tome.show_cloak_hoods = not config.settings.tome.show_cloak_hoods
+		game:saveSettings("tome.show_cloak_hoods", ("tome.show_cloak_hoods = %s\n"):format(tostring(config.settings.tome.show_cloak_hoods)))
+		self.c_list:drawItem(item)
+		if self:isTome() and game.level then
+			for uid, e in pairs(game.level.entities) do
+				if e.updateModdableTile then e:updateModdableTile() end
+			end
+		end
 	end,}
 
 	self.list = list

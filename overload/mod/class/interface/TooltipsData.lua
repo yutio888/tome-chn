@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2015 Nicolas Casalini
+-- Copyright (C) 2009 - 2017 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -69,7 +69,8 @@ TOOLTIP_HEALING_MOD = [[#GOLD#治疗加值#LAST#
 代表你回血技能的效果。
 该系数表明治疗对你的生效程度。所有治
 疗的基础值需要乘上这个系数（包括生命
-自然恢复）。]]
+自然恢复）。
+体质会增加该项属性。]]
 
 TOOLTIP_AIR = [[#GOLD#空气#LAST#
 当你受到窒息效果时空气量才会显示。
@@ -185,6 +186,9 @@ TOOLTIP_ENCUMBERED = [[#GOLD#负重#LAST#
 移动了，尝试丢弃一些道具减少负重。
 ]]
 
+-------------------------------------------------------------
+-- Talents
+-------------------------------------------------------------
 TOOLTIP_INSCRIPTIONS = [[#GOLD#纹身#LAST#
 埃亚尔的人们发明了一种利用提取的植物精
 华将一些符咒纹刻到皮肤上的技术。
@@ -192,6 +196,35 @@ TOOLTIP_INSCRIPTIONS = [[#GOLD#纹身#LAST#
 人们会纹刻一种回复纹身，当然还有一些
 其他种类的纹身。
 ]]
+
+TOOLTIP_PRODIGIES = [[#GOLD#Prodigies#LAST#
+Prodigies are special talents that only the most powerful of characters can acquire.
+All of them require at least 50 in a core stat and many also have other, very specific and/or demanding requirements to learn.
+Players can learn new prodigies at levels 30 and 42.]]
+
+TOOLTIP_ITEM_TALENTS = [[#GOLD#Item Talents#LAST#
+Some objects bestow additional talents on the wearer or holder.
+These talents work like normal, learned talents, but are lost if the object granting them is taken off or dropped, even for a moment.]]
+
+TOOLTIP_ACTIVATED = [[#GOLD#Activated Talents#LAST#
+Most talents require activation (i.e. time) to use, and create a specific effect when called upon.
+Specific information on each talent appears its tooltip.]]
+
+TOOLTIP_INSTANT = [[#GOLD#Instant Talents#LAST#
+Some activated talents take no time to use, being activated with but a thought.
+Unlike most talents, instant talents are never put on cooldown from being stunned, and may be usable when most other talents are not.
+Specific information on each talent appears its tooltip.]]
+
+TOOLTIP_PASSIVE = [[#GOLD#Passive Talents#LAST#
+When learned, passive talents permanently alter the user in some way.
+The effects are always present and are usually not dispellable or removable, though other effects may counteract or negate them.
+Specific information on each talent appears its tooltip.]]
+
+TOOLTIP_SUSTAINED = [[#GOLD#Sustained Talents#LAST#
+Sustained talents are turned on and left on.
+While active, a sustained talent produces some effects on the user that stay in effect until the talent is deactivated. Activating most sustained talents require the user to put aside some resources, which become unavailable until the talent is turned off.
+Deactivating a sustained talent causes it to go on cooldown.
+Specific information on each talent appears its tooltip.]]
 
 -------------------------------------------------------------
 -- Speeds
@@ -233,6 +266,12 @@ TOOLTIP_SPEED_MENTAL = [[#GOLD#精神速度#LAST#
 -------------------------------------------------------------
 -- Stats
 -------------------------------------------------------------
+TOOLTIP_STATS = [[#GOLD#属性#LAST#
+你的角色的主要属性。基础值：你的角色
+的基础属性，能通过升级加点增加，被等
+级制约。当前值：基础值加上来自装备、
+技能等效果后的实际值。
+]]
 TOOLTIP_STR = [[#GOLD#力量#LAST#
 力量属性影响你的角色的物理能力，提升
 力量可以提高物理强度，提高使用重型武
@@ -247,8 +286,8 @@ TOOLTIP_DEX = [[#GOLD#敏捷#LAST#
 ]]
 TOOLTIP_CON = [[#GOLD#体质#LAST#
 体质属性影响你抵抗和承受伤害的能力，
-提升体质可以提高你的最大生命值和物理
-豁免。
+提升体质可以提高你的最大生命值、物理
+豁免和治疗系数。
 ]]
 TOOLTIP_MAG = [[#GOLD#魔法#LAST#
 魔法属性影响你驾驭魔法能量的能力，提
@@ -379,22 +418,36 @@ TOOLTIP_SPELL_SAVE = [[#GOLD#法术豁免#LAST#
 TOOLTIP_MENTAL_SAVE = [[#GOLD#精神豁免#LAST#
 增加你摆脱精神效果的几率，基于目标精
 神强度判定后，每超过1点减少5％不良精
-神状态持续时间。
+-------------------------------------------------------------
+-- Physical
+-------------------------------------------------------------
+TOOLTIP_PHYSICAL_POWER = [[#GOLD#物理强度#LAST#
+你的物理强度代表了你的物理能力，该
+属性受武器、力量等因素影响。
+另外当造成基于物理强度的负面效果时，
+敌人的相应豁免每超过物理强度一点将
+减少5％持续时间。
 ]]
+TOOLTIP_PHYSICAL_CRIT = [[#GOLD#物理暴击#LAST#
+每次造成物理伤害时你都有一定几率
+暴击造成额外伤害。
+一些技能可以提高这个几率。
+提升灵巧属性值可以提高法术暴击率。
 
+]]
 -------------------------------------------------------------
 -- Spells
 -------------------------------------------------------------
 TOOLTIP_SPELL_POWER = [[#GOLD#法术强度#LAST#
 你的法术强度决定了你施放法术技能的威
 力。
-另外当造成基于法术强度的持续性法术效
-果的时候，敌人的法术豁免每超过法术强
-度一点减少5％持续时间。
+另外当造成基于法术强度的负面效果时，
+敌人的相应豁免每超过法术强度一点将
+减少5％持续时间。
 ]]
 TOOLTIP_SPELL_CRIT = [[#GOLD#法术暴击#LAST#
-每次造成法术伤害时你都有一定几率造成
-一次150%普通伤害量的致命攻击。
+每次造成法术伤害时你都有一定几率
+暴击造成额外伤害。
 一些技能可以提高这个几率。
 提升灵巧属性值可以提高法术暴击率。
 ]]
@@ -414,13 +467,13 @@ TOOLTIP_SPELL_COOLDOWN = [[#GOLD#冷却速度#LAST#
 TOOLTIP_MINDPOWER = [[#GOLD#精神强度#LAST#
 你的精神强度决定了你施放精神法术的威
 力。
-另外当造成基于精神强度的持续性法术效
-果的时候，敌人的精神豁免每超过精神强
-度一点减少5％持续时间。
+另外当造成基于精神强度的负面效果时，
+敌人的相应豁免每超过精神强度一点将
+减少5％持续时间。
 ]]
 TOOLTIP_MIND_CRIT = [[#GOLD#精神暴击#LAST#
-每次造成精神伤害时你都有一定几率造成
-一次150％普通伤害量的致命攻击。
+每次造成精神伤害时你都有一定几率
+暴击造成额外伤害。
 一些技能可以提高这个几率。
 提升灵巧属性值可以提高精神暴击。
 ]]
@@ -497,6 +550,18 @@ TOOLTIP_NEGATIVE_STATUS_IMMUNE = [[#GOLD#负面状态效果免疫#LAST#
 TOOLTIP_ON_HIT_DAMAGE = [[#GOLD#伤害反弹#LAST#
 生物每次近战攻击你时所受到的反弹伤害。
 ]]
+TOOLTIP_MELEE_PROJECT = [[#GOLD#近战附加伤害#LAST#
+每次近战攻击都会额外造成的伤害。
+]]
+TOOLTIP_MELEE_PROJECT_INNATE = TOOLTIP_MELEE_PROJECT..[[
+这和你的武器伤害相互独立。
+]]
+TOOLTIP_RANGED_PROJECT = [[#GOLD#远程附加伤害#LAST#
+每次远程攻击都会额外造成的伤害。
+]]
+TOOLTIP_RANGED_PROJECT_INNATE = TOOLTIP_RANGED_PROJECT..[[
+这和你的武器伤害相互独立。
+]]
 TOOLTIP_RESISTS_PEN_ALL = [[#GOLD#伤害穿透：全体#LAST#
 减少你造成伤害时目标的所有有效伤害抗
 性。
@@ -570,6 +635,13 @@ TOOLTIP_VISION_SEE_INVISIBLE = [[#GOLD#侦测隐形#LAST#
 你发现隐形生物的能力，该值越高你发现
 的几率也越高（受目标自身隐形等级的影
 响）。
-如果你侦测隐形等级为0，那你永远也看
-不到隐形生物。
+TOOLTIP_SEE_TRAPS = [[#GOLD#侦察陷阱#LAST#
+你侦察陷阱的能力，该属性越高，你就越
+容易发现陷阱。
+]]
+TOOLTIP_ANTIMAGIC_USER = [[#GOLD#反魔法#LAST#
+你决心反对并摧毁世界上的魔法与奥术
+力量。
+拒绝使用法术，不能装备力量来源为奥术
+的装备。
 ]]

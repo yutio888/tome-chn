@@ -41,6 +41,7 @@ newChat{ id="welcome",
 		{"你叫我来，是关于召回之杖？", jump="recall", cond=function() return q:isCompleted("recall") and not q:isCompleted("recall-done") end},
 		{"可以让我的转化之盒自动转化宝石么？", jump="transmo-gems", cond=function(npc, player) return not q:isCompleted("transmo-chest-extract-gems") and q:isCompleted("transmo-chest") and player:knowTalent(player.T_EXTRACT_GEMS) end},
 		{"这里是不是有一间训练室？", jump="training", cond=function() return not q:isCompleted("training") end},
+		{"你能用魔法改变我装备的外形么?", jump="shimmer", cond=function() return not q:isCompleted("shimmer") end},
 		{"你的样子看上去让我不舒服，你可以改变外形么？", jump="changetile", cond=function() return q:isCompleted("recall-done") end},
 		{"我到这里来是为了寻求帮助。 #LIGHT_GREEN#[告诉它梅琳达的事]", jump="cure-melinda", cond=function() return ql and ql:isStatus(engine.Quest.COMPLETED, "saved-beach") and not ql:isStatus(engine.Quest.FAILED) and not ql:isStatus(engine.Quest.COMPLETED, "can_come_fortress") end},
 		{"[离开]"},
@@ -147,6 +148,14 @@ newChat{ id="training",
 	answers = {
 		{"算了，以后再说吧。"},
 		{"那应该很有用，请帮我吧。", cond=function() return q.shertul_energy >= 50 end, action=function() q:open_training() end},
+	}
+}
+
+newChat{ id="shimmer",
+	text = [[好的主人。反射之镜能满足您的需求，它需要10点能量激活。.]]..(profile:isDonator(1) and "" or "\n#{italic}##CRIMSON#这项特性只对捐赠用户有效。#{normal}#"),
+	answers = {
+		{"以后再说。"},
+		{"非常好，就这么做吧。", cond=function() return q.shertul_energy >= 10 end, action=function() q:open_shimmer() end},
 	}
 }
 

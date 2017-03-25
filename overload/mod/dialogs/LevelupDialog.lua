@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2016 Nicolas Casalini
+-- Copyright (C) 2009 - 2017 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -28,6 +28,7 @@ local UIContainer = require "engine.ui.UIContainer"
 local TalentTrees = require "mod.dialogs.elements.TalentTrees"
 local StatusBox = require "mod.dialogs.elements.StatusBox"
 local Separator = require "engine.ui.Separator"
+local Checkbox = require "engine.ui.Checkbox"
 local Empty = require "engine.ui.Empty"
 local DamageType = require "engine.DamageType"
 local FontPackage = require "engine.FontPackage"
@@ -192,11 +193,12 @@ function _M:finish()
 	if talents ~= "" then
 		game.logPlayer(self.actor, txt:format(talents))
 	end
+	self.actor.turn_procs.resetting_talents = true
 	for i, tid in ipairs(reset) do
 		self.actor:forceUseTalent(tid, {ignore_energy=true, ignore_cd=true, no_talent_fail=true})
 		if self.actor:knowTalent(tid) then self.actor:forceUseTalent(tid, {ignore_energy=true, ignore_cd=true, no_talent_fail=true, talent_reuse=true}) end
 	end
-	
+	self.actor.turn_procs.resetting_talents = nil
 	-- Prodigies
 	if self.on_finish_prodigies then
 		for tid, ok in pairs(self.on_finish_prodigies) do if ok then self.actor:learnTalent(tid, true, nil, {no_unlearn=true}) end end
@@ -216,7 +218,21 @@ function _M:finish()
 			local lvl_raw = self.actor:getTalentLevelRaw(t_id)
 			local old_lvl = self.actor_dup:getTalentLevel(t_id)
 			local old_lvl_raw = self.actor_dup:getTalentLevelRaw(t_id)
-			t.on_levelup_close(self, t, lvl, old_lvl, lvl_raw, old_lvl_raw, true)
+			t.on_levelup_close(self.actor, t, lvl, old_lvl, lvl_raw, old_lvl_raw, true)
+		end
+	end
+
+	if self.actor.player then
+		if self.actor.descriptor and self.actor.descriptor.race == "Dwarf" then
+			local count_nature, count_spell = 0, 0
+			for tid, lev in pairs(self.actor.talents) do
+				local t = self.actor:getTalentFromId(tid)
+				if t and t.is_spell then count_spell = count_spell + lev end
+				if t and t.is_nature then count_nature = count_nature + lev end
+			end
+			if count_nature >= 10 and count_spell >= 10 then
+				game:setAllowedBuild("wilder_stone_warden", true)
+			end
 		end
 	end
 	return true
@@ -274,7 +290,7 @@ function _M:computeDeps(t)
 
 	-- Check number of talents
 	for id, nt in pairs(self.actor.talents_def) do
-		if nt.type[1] == t.type[1] then
+		if nt.type[1] == t.type[1] and not t.no_levelup_category_deps then
 			d[id] = true
 --			print("Talent deps: ", t.id, "same category as", id)
 		end
@@ -462,9 +478,9 @@ function _M:generateList()
 	local gtree = {}
 	self.talents_deps = {}
 	for i, tt in ipairs(self.actor.talents_types_def) do
-		if not tt.hide and not (self.actor.talents_types[tt.type] == nil) then
+		local ttknown = self.actor:knowTalentType(tt.type)
+		if (ttknown or not self.actor.levelup_hide_unknown_catgories) and not tt.hide and not (self.actor.talents_types[tt.type] == nil) then
 			local cat = tt.type:gsub("/.*", "")
-			local ttknown = self.actor:knowTalentType(tt.type)
 			local isgeneric = self.actor.talents_types_def[tt.type].generic
 			local tshown = (self.actor.__hidden_talent_types[tt.type] == nil and ttknown) or (self.actor.__hidden_talent_types[tt.type] ~= nil and not self.actor.__hidden_talent_types[tt.type])
 			local node = {
@@ -665,46 +681,49 @@ function _M:createDisplay()
 	if self.actor.unused_prodigies > 0 then self.b_prodigies.glow = 0.6 end
 	if self.actor.unused_talents_types > 0 and self.b_inscriptions then self.b_inscriptions.glow = 0.6 end
 
-	self.c_ctree = TalentTrees.new{
-		font = core.display.newFont(chn123_tome_font(), 14),
-		tiles=game.uiset.hotkeys_display_icons,
-		tree=self.ctree,
-		width=320, height=self.ih-50,
-		tooltip=function(item)
-			local x = self.display_x + self.uis[5].x - game.tooltip.max
-			if self.display_x + self.w + game.tooltip.max <= game.w then x = self.display_x + self.w end
-			local ret = self:getTalentDesc(item), x, nil
-			if self.no_tooltip then
-				self.c_desc:erase()
-				self.c_desc:switchItem(ret, ret)
-			end
-			return ret
-		end,
-		on_use = function(item, inc) self:onUseTalent(item, inc) end,
-		on_expand = function(item) self.actor.__hidden_talent_types[item.type] = not item.shown end,
-		scrollbar = true, no_tooltip = self.no_tooltip,
-		message_box = self.t_
-	}
+	local recreate_trees = function()
+		self.c_ctree = TalentTrees.new{
+			font = core.display.newFont(chn123_tome_font(), 14),
+			tiles=game.uiset.hotkeys_display_icons,
+			tree=self.ctree,
+			width=320, height=self.ih-50,
+			tooltip=function(item)
+				local x = self.display_x + self.uis[5].x - game.tooltip.max
+				if self.display_x + self.w + game.tooltip.max <= game.w then x = self.display_x + self.w end
+				local ret = self:getTalentDesc(item), x, nil
+				if self.no_tooltip then
+					self.c_desc:erase()
+					self.c_desc:switchItem(ret, ret)
+				end
+				return ret
+			end,
+			on_use = function(item, inc) self:onUseTalent(item, inc) end,
+			on_expand = function(item) self.actor.__hidden_talent_types[item.type] = not item.shown end,
+			scrollbar = true, no_tooltip = self.no_tooltip,
+			message_box = self.t_
+		}
 
-	self.c_gtree = TalentTrees.new{
-		font = core.display.newFont(chn123_tome_font(), 14),
-		tiles=game.uiset.hotkeys_display_icons,
-		tree=self.gtree,
-		width=320, height=(self.no_tooltip and self.ih - 50) or self.ih-50 - math.max((not self.b_prodigies and 0 or self.b_prodigies.h + 5), (not self.b_inscriptions and 0 or self.b_inscriptions.h + 5)),
-		tooltip=function(item)
-			local x = self.display_x + self.uis[8].x - game.tooltip.max
-			if self.display_x + self.w + game.tooltip.max <= game.w then x = self.display_x + self.w end
-			local ret = self:getTalentDesc(item), x, nil
-			if self.no_tooltip then
-				self.c_desc:erase()
-				self.c_desc:switchItem(ret, ret)
-			end
-			return ret
-		end,
-		on_use = function(item, inc) self:onUseTalent(item, inc) end,
-		on_expand = function(item) self.actor.__hidden_talent_types[item.type] = not item.shown end,
-		scrollbar = true, no_tooltip = self.no_tooltip,
-	}
+		self.c_gtree = TalentTrees.new{
+			font = core.display.newFont(chn123_tome_font(), 14),
+			tiles=game.uiset.hotkeys_display_icons,
+			tree=self.gtree,
+			width=320, height=(self.no_tooltip and self.ih - 50) or self.ih-50 - math.max((not self.b_prodigies and 0 or self.b_prodigies.h + 5), (not self.b_inscriptions and 0 or self.b_inscriptions.h + 5)),
+			tooltip=function(item)
+				local x = self.display_x + self.uis[8].x - game.tooltip.max
+				if self.display_x + self.w + game.tooltip.max <= game.w then x = self.display_x + self.w end
+				local ret = self:getTalentDesc(item), x, nil
+				if self.no_tooltip then
+					self.c_desc:erase()
+					self.c_desc:switchItem(ret, ret)
+				end
+				return ret
+			end,
+			on_use = function(item, inc) self:onUseTalent(item, inc) end,
+			on_expand = function(item) self.actor.__hidden_talent_types[item.type] = not item.shown end,
+			scrollbar = true, no_tooltip = self.no_tooltip,
+		}
+	end
+	recreate_trees()
 
 	self.c_stat = TalentTrees.new{
 		font = core.display.newFont(chn123_tome_font(), 14),
@@ -763,6 +782,15 @@ function _M:createDisplay()
 		end
 	end}
 
+	self.c_hide_unknown = Checkbox.new{title="隐藏未学习技能树", default=self.actor.levelup_hide_unknown_catgories, fct=function() end, on_change=function(s)
+		self.actor.levelup_hide_unknown_catgories = s
+		self:generateList()
+		local oldctree, oldgtree = self.c_ctree, self.c_gtree
+		recreate_trees()
+		self:replaceUI(oldctree, self.c_ctree)
+		self:replaceUI(oldgtree, self.c_gtree)
+	end}
+
 	self.t_messages = StatusBox.new{
 		font = core.display.newFont("/data/font/DroidSans.ttf", 16),
 		width = math.floor(2 * self.iw / 3), delay = 1,
@@ -797,6 +825,7 @@ function _M:createDisplay()
 		{hcenter=self.b_types, top=-self.t_messages.h, ui=self.t_messages},
 	}
 	if self.b_inscriptions then table.insert(ret, {right=self.b_prodigies.w, bottom=0, ui=self.b_inscriptions}) end
+	table.insert(ret, {right=self.b_inscriptions or self.b_prodigies, bottom=0, ui=self.c_hide_unknown})
 
 	if self.no_tooltip then
 		local vsep3 = Separator.new{dir="horizontal", size=self.ih - self.b_stat.h - 10}
@@ -827,6 +856,7 @@ function _M:getStatDesc(item)
 		local multi_life = 4 + (self.actor.inc_resource_multi.life or 0)
 		text:add("生命值上限： ", color, ("%0.2f"):format(diff * multi_life), dc, true)
 		text:add("物理豁免： ", color, ("%0.2f"):format(diff * 0.35), dc, true)
+		text:add("治疗系数： ", color, ("%0.1f%%"):format((self.actor:combatStatLimit("con", 1.5, 0, 0.5) - self.actor_dup:combatStatLimit("con", 1.5, 0, 0.5))*100), dc, true)
 	elseif stat_id == self.actor.STAT_WIL then
 		if self.actor:knowTalent(self.actor.T_MANA_POOL) then
 			local multi_mana = 5 + (self.actor.inc_resource_multi.mana or 0)

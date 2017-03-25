@@ -13,7 +13,7 @@ registerTalentTranslation{
 	name = "被捕猎",
 	info = function(self, t) return ([[你 被 捕 猎 了 ！
 		每 回 合 有 %d%% 几 率 半 径 %d 的 怪 能 在 30 回 合 内 察 觉 你 的 位 置。]]):
-		format(1 + self.level / 7, 10 + self.level / 5)
+		format(math.min(100, 1 + self.level / 7), 10 + self.level / 5)
 	end,
 }
 
@@ -42,17 +42,16 @@ return[[允 许 你 传 送 至 时 空 守 卫 的 大 本 营： 零 点 圣 �
 registerTalentTranslation{
 	id = "T_RELENTLESS_PURSUIT",
 	name = "无尽追踪",
-	info = function(self, t)
-		local physical_reduction = math.floor(self:combatPhysicalResist(true)/5)
-		local spell_reduction = math.floor(self:combatSpellResist(true)/5)
-		local mental_reduction = math.floor(self:combatMentalResist(true)/5)
+	info = function (self,t)
+		local eff_desc = ""
+		for e_type, fn in pairs(self.save_for_effects) do
+			eff_desc = eff_desc .. ("\n%s 效 果 -%d 回 合"):format(e_type:gsub("physical","物理"):gsub("magical","魔法"):gsub("mental","精神"), t.getReduction(self, t, e_type))
+		end
 		return ([[无 论 是 领 主 大 人、 失 落 之 地 的 瑞 库 纳 兽 人 还 是 瑞 库 纳 传 送 门 外 那 些 令 人 恐 怖 的 未 知 生 物 都 无 法 阻 止 你 寻 找 虹 吸 法 杖 的 魔 力。 
 		 孩 子 们 会 在 将 来 用 童 谣 来 传 唱 你 的 无 情。 
-		 当 激 活 时， 可 以 缩 短 所 有 不 利 效 果 的 有 效 时 间。 
-		 物 理 效 果 持 续 时 间 缩 短 %d 回 合 
-		 魔 法 效 果 持 续 时 间 缩 短 %d 回 合 
-		 精 神 效 果 持 续 时 间 缩 短 %d 回 合]]):
-		format(physical_reduction, spell_reduction, mental_reduction)
+		 当 激 活 时， 可 以 缩 短 所 有 不 利 效 果 的 有 效 时 间 ,20%% 相 应 豁 免 的 回 合 或 者 2 回 合 , 取 较 低 项。
+		%s]]):
+		format(eff_desc)
 	end,
 }
 

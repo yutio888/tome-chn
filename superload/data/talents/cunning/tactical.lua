@@ -17,8 +17,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t) * 100
 		return ([[当 你 闪 避 一 次 紧 靠 着 你 的 对 手 的 近 战 攻 击 时 你 有 %d%% 的 概 率 对 对 方 造 成 一 次 %d%% 伤 害 的 反 击 , 每 回 合 最 多 触 发 %0.1f 次。 
-		 徒 手 格 斗 时 会 被 视 作 是 攻 击 姿 态（ 如 果 有 的 话） 的 一 种 结 果， 且 会 产 生 额 外 伤 害 加 成。 
-		 装 备 武 器 使 用 此 技 能 时 不 产 生 额 外 伤 害。 
+		 徒 手 格 斗 时 会 尝 试 将 敌 人 掀 翻 在 地，眩 晕 两 回 合 ， 如 果 处 于 抓 取 状 态 改 为 震 慑 。 
 		 受 灵 巧 影 响， 反 击 概 率 和 反 击 数 目 有 额 外 加 成。]]):format(t.counterchance(self,t), damage,  t.getCounterAttacks(self, t))
 	end,
 }

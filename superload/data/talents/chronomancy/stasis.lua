@@ -32,7 +32,7 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local radius = self:getTalentRadius(t)
 		local duration = t.getDuration(self, t)
-		return ([[造 成  %0.2f  时 空 伤 害 ，并 试 图 震 慑 半 径  %d  码 的 球 星 范 围 内 所 有 目 标  %d  回 合 。
+		return ([[造 成  %0.2f  时 空 伤 害 ，并 试 图 震 慑 半 径  %d  码  范 围 内 所 有 目 标  %d  回 合 。
 		 受 法 术 强 度 影 响 ，伤 害 按 比 例 加 成 。]]):
 		format(damDesc(self, DamageType.TEMPORAL, damage), radius, duration)
 	end,

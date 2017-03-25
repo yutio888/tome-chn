@@ -36,7 +36,8 @@ registerTalentTranslation{
 	name = "光环掌握",
 	info = function(self, t)
 		return ([[随 着 你 逐 渐 强 大， 黑 暗 能 量 的 影 响 范 围 增 加。 
-		 增 加 亡 灵 光 环 %d 码 半 径， 并 减 少 光 环 范 围 外 亡 灵 随 从 每 回 合 掉 血 量 %d%% 。]]):
+		 增 加 亡 灵 光 环 %d 码 半 径， 并 减 少 光 环 范 围 外 亡 灵 随 从 每 回 合 掉 血 量 %d%% 。
+		 技 能 等 级 3 后，光 环 内 亡 灵 随 从 死 亡 时 有 25%% 几 率 返 还 灵 魂，若 其 转 换 为 鬼 火 ， 则 在 鬼 火 爆 炸 时 返 还 。.]]):
 		format(math.floor(t.getbonusRadius(self, t)), math.min(7, self:getTalentLevelRaw(t)))
 	end,
 }
@@ -57,7 +58,7 @@ registerTalentTranslation{
 	name = "黑暗共享",
 	info = function(self, t)
 		return ([[你 和 你 的 亡 灵 随 从 分 享 你 的 能 量， 随 从 获 得 你 的 抵 抗 和 豁 免 的 %d%% 。 
-		 此 外， 所 有 随 从 对 你 造 成 的 伤 害 减 少 %d%% 。 
+		 此 外， 所 有 随 从 对 你 和 其 他 随 从 造 成 的 伤 害 减 少 %d%% 。 
 		 受 法 术 强 度 影 响， 此 效 果 有 额 外 加 成。]]):
 		format(t.getPerc(self, t), self:getTalentLevelRaw(t) * 20)
 	end,

@@ -1,5 +1,5 @@
 -- TE4 - T-Engine 4
--- Copyright (C) 2009 - 2016 Nicolas Casalini
+-- Copyright (C) 2009 - 2017 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -75,12 +75,26 @@ function _M:generate()
 		end
 
 		self.c_tabs.no_keyboard_focus = true
-		if _M._last_tabs then
-			for _, l in ipairs(_M._last_tabs) do self.c_tabs.dlist[l[1]][l[2]].selected = true end
-			if _M._last_tabs_i then self.c_tabs.sel_i = _M._last_tabs_i end
-		else
+
+		local found_tab = false
+		if _M._last_tabs then -- reselect previously selected tabs if possible
+			local sel_all = _M._last_tabs.all
+			local last_kinds = {}
+			for _, lt in ipairs(_M._last_tabs) do if lt.kind then last_kinds[lt.kind] = true end end
+			for j, row in ipairs(self.c_tabs.dlist) do for i, item in ipairs(row) do
+				if sel_all or last_kinds[item.data.kind] then
+					item.selected = true
+					found_tab = true
+					self.c_tabs.sel_i, self.c_tabs.sel_j = i, j
+					if sel_all and item.data.filter=="all" then _M._last_tabs_i = i end
+				end
+			end end
+		end
+		if not found_tab then
+			self.c_tabs.sel_i, self.c_tabs.sel_j = 1, 1
 			self.c_tabs.dlist[1][1].selected = true
 		end
+
 		self.uis[#self.uis+1] = {x=0, y=0, ui=self.c_tabs}
 		self.c_tabs.on_focus_change = function(ui_self, status)
 			if status == true then
@@ -241,14 +255,17 @@ function _M:updateTabFilterList(list)
 		return false
 	end
 
-	-- Save for next dialogs
+	-- Save for next dialog
 	if not self.dont_update_last_tabs then
 		_M._last_tabs = self.c_tabs:getAllSelectedKeys()
 		if not is_all then
 			local i = 1
-			for _, d in ipairs(_M._last_tabs) do i = math.max(i, d[2]) end
+			for _, d in ipairs(_M._last_tabs) do
+				i = math.max(i, d[2]) d.kind = self.c_tabs.dlist[d[1]][d[2]].data.kind
+			end
 			_M._last_tabs_i = i
 		else
+			_M._last_tabs.all = true
 			_M._last_tabs_i = #self.tabslist
 		end
 	end

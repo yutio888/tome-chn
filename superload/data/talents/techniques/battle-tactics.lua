@@ -5,7 +5,7 @@ registerTalentTranslation{
 	name = "专注打击",
 	info = function(self, t)
 		return ([[专 注 于 你 的 攻 击， 每 次 攻 击 有 %d%% 概 率 对 目 标 造 成 一 次 类 似 的 附 加 伤 害， 持 续 %d 回 合。 
-		此 效 果 对 所 有 攻 击， 甚 至 是 技 能 攻 击 或 盾 击 都 有 效 果。 
+		此 效 果 对 所 有 攻 击， 甚 至 是 技 能 攻 击 或 盾 击 都 有 效 果， 但 每 回 合 每 把 武 器 最 多 获 得 一 次 额 外 攻 击。 
 		受 敏 捷 影 响， 概 率 有 额 外 加 成。]]):format(t.getchance(self, t), t.getdur(self, t))
 	end,
 }
@@ -42,7 +42,7 @@ registerTalentTranslation{
 		当 你 受 伤 后 ， 你 获 得 相 当 于 %d%% 损 失 生 命 值 百 分 比 的 全 体 伤 害 抗 性。
 		例 如：当你 损 失 70%% 生 命 时 获 得 %d%% 抗 性。
 		同 时，你 的 全 体 伤 害 抗 性 上 限 相 比 于 100%% 差 距 将 减 少 %0.1f%% 。
-		每 回 合 体 力 值 %d 。
+		该 技 能 消 耗 体 力 迅 速，体 力 值 基 础 消 耗 %d ，每 回 合 增 加 0.3 。
 		效 果 在 每 回 合 开 始 时 刷 新。]]):
 		format(resistC, resistC*0.7, t.getCapApproach(self, t)*100, drain)
 	end,

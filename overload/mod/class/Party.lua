@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2016 Nicolas Casalini
+-- Copyright (C) 2009 - 2017 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -48,6 +48,12 @@ function _M:addMember(actor, def)
 		print("[PARTY] error trying to add existing actor: ", actor.uid, actor.name)
 		return false
 	end
+
+	-- Notify existing party members (but not the new one) that a new member is joining
+	for i, pm in ipairs(self.m_list) do
+		pm:fireTalentCheck("callbackOnPartyAdd", actor, def)
+	end
+
 	if type(def.control) == "nil" then def.control = "no" end
 	def.title = def.title or "Party member"
 	self.members[actor] = def
@@ -88,6 +94,7 @@ function _M:removeMember(actor, silent)
 		end
 		return false
 	end
+	local olddef = self.members[actor]
 	table.remove(self.m_list, self.members[actor].index)
 	self.members[actor] = nil
 
@@ -96,6 +103,11 @@ function _M:removeMember(actor, silent)
 	-- Update indexes
 	for i = 1, #self.m_list do
 		self.members[self.m_list[i]].index = i
+	end
+
+	-- Notify existing party members (but not the old one) that a new member is leaving
+	for i, pm in ipairs(self.m_list) do
+		pm:fireTalentCheck("callbackOnPartyRemove", actor, def)
 	end
 
 	-- Notify the UI

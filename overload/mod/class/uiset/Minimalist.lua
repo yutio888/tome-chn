@@ -500,6 +500,8 @@ function _M:activate()
 		game.uiset.logdisplay(...) else game.uiset.logdisplay(style, ...) end
 		if game.uiset.show_userchat then game.uiset.logdisplay.changed = old end
 	end
+	game.logRollback = function(line, ...) return self.logdisplay:rollback(line, ...) end
+	game.logNewest = function() return self.logdisplay:getNewestLine() end
 --	game.logSeen = function(e, style, ...) if e and e.player or (not e.dead and e.x and e.y and game.level and game.level.map.seens(e.x, e.y) and game.player:canSee(e)) then game.log(style, ...) end end
 	game.logPlayer = function(e, style, ...) if e == game.player or e == game.party then game.log(style, ...) end end
 
@@ -777,7 +779,7 @@ function _M:displayResources(scale, bx, by, a)
 
 		local life_regen = player.life_regen * util.bound((player.healing_factor or 1), 0, 2.5)
 		if not self.res.life or self.res.life.vc ~= player.life or self.res.life.vm ~= player.max_life or self.res.life.vr ~= life_regen then
-			local status_text = ("%s/%d"):format(player.life > 0 and math.round(player.life) or "???", math.round(player.max_life))
+			local status_text = ("%s/%d"):format(math.round(player.life), math.round(player.max_life))
 			local reg_text = string.limit_decimals(life_regen,3, "+")
 			self.res.life = {
 				vc = player.life, vm = player.max_life, vr = life_regen,
@@ -1379,7 +1381,7 @@ function _M:displayBuffs(scale, bx, by)
 
 		for eff_id, p in pairs(good_e) do
 			local e = player.tempeffect_def[eff_id]
-			self:handleEffect(player, eff_id, e, p, x, y, hs, bx, by, is_first, scale, (e.status == "beneficial") or config.settings.cheat)
+			self:handleEffect(player, eff_id, e, p, x, y, hs, bx, by, is_first, scale, (e.status == "beneficial" and not e.no_player_remove) or config.settings.cheat)
 			is_first = false
 			x, y = self:buffOrientStep(orient, bx, by, scale, x, y, hs, hs)
 		end
@@ -1680,15 +1682,17 @@ function _M:displayMinimap(scale, bx, by)
 		game.mouse:registerZone(bx, by, mm_bg[6], mm_bg[7], desc_fct, nil, "minimap", true, scale)
 	end
 
-	game.zone_name_s:toScreenFull(
-		(mm_bg[6] - game.zone_name_w) / 2,
-		0,
-		game.zone_name_w, game.zone_name_h,
-		game.zone_name_tw, game.zone_name_th
-	)
+	if game.zone_name_s then
+		game.zone_name_s:toScreenFull(
+			(mm_bg[6] - game.zone_name_w) / 2,
+			0,
+			game.zone_name_w, game.zone_name_h,
+			game.zone_name_tw, game.zone_name_th
+		)
+	end
 
 	-- Compute how much space to reserve on the side
-	self:computePadding("minimap", bx, by, bx + mm_bg[6] * scale, by + (mm_bg[7] + game.zone_name_h) * scale)
+	self:computePadding("minimap", bx, by, bx + mm_bg[6] * scale, by + (mm_bg[7] + (game.zone_name_h or 0)) * scale)
 end
 
 function _M:displayGameLog(scale, bx, by)

@@ -1204,6 +1204,13 @@ logCHN:newLog{
 		return ("你搜集了一个新的材料: #LIGHT_GREEN#%s%s#WHITE#."):format(a,b)
 	end,
 }
+logCHN:newLog{
+	log = "You collect a new ingredient: #LIGHT_GREEN#%s%s (%d)#WHITE#.",
+	fct = function(a,b,c)
+		b = changeElixir(b)
+		return ("你搜集了一个新的材料: #LIGHT_GREEN#%s%s (%d)#WHITE#."):format(a,b,c)
+	end,
+}
 
 logCHN:newLog{
 	log = "The damage shield reflects %d damage back to %s!",

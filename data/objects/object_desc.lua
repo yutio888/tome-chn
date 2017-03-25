@@ -360,7 +360,7 @@ objDesc["Can be unequipped or rerolled."] = "能解除装备或重置"
 objDesc["Increases the range of Haste of the Doomed by 1."] = "增加种族技能“加速”的范围1码"
 objDesc["Increases all saves by your Shadow Power."] = "每点“阴影强度”增加1点全豁免"
 objDesc["Grants spellpower equal to your Shadow Power."] = "每点“阴影强度”增加1点法术强度"
-objDesc["Increases all damage penetration by 1% for each point of your Shadow Power."] = "每点“阴影强度”增加1%%抗性穿透"
+objDesc["Increases all damage penetration by 1% for each point of your Shadow Power."] = "每点“阴影强度”增加1%抗性穿透"
 objDesc["Grants 2.5% movement speed for each point of Shadow Power."] = "每点“阴影强度”增加2.5%移动速度"
 objDesc["Grants spell-crit equal to half of your Shadow Power."] = "每点“阴影强度”增加0.5%法术暴击率"
 objDesc["Grants physical power equal to your Shadow Power."] = "每点“阴影强度”增加1%点物理强度"
@@ -667,6 +667,8 @@ function getObjectDescCHN(desc)
 					desc[i]=desc[i]:gsub("Has a","每回合有"):gsub("chance each turn to slash an adjacent enemy for","几率攻击一个相邻敌人，造成"):gsub("physical damage (based on Cunning), making them bleed.","物理伤害（基于灵巧），并使之流血。")
 				elseif desc[i]:find("If anomaly triggers, halve paradox.") then
 					desc[i]=desc[i]:gsub("increase paradox by a drastic amount with a chance to do an anomaly","大幅增加紊乱，有机率触发异常。"):gsub("chance","几率"):gsub("If anomaly triggers, halve paradox.","若触发异常，紊乱减半。")
+				elseif desc[i]:find("wounds the target for 7 turns: ") then
+					desc[i]=desc[i]:gsub("wounds the target for 7 turns:","对目标造成持续7回合的 伤口:"):gsub("bleeding,","流血伤害"):gsub(" reduced healing","治疗系数下降")
 				else--if desc[i]:find("Special effect on block:") then
 					desc[i] = desc[i]:gsub("Special effect on block:","格挡特效：")
 							:gsub("Unleash a lightning nova of radius equal to the tinker tier.","释放半径等于材质等级的闪电新星")
@@ -674,7 +676,7 @@ function getObjectDescCHN(desc)
 							:gsub("30%% chance of petrifying the attacker","30%%几率石化攻击者")
 							:gsub("30%% chance of pulling in the attacker","30%%几率勒住攻击者")
 							:gsub("Unleash the fury of the cosmos, dealing light and darkness damage to your attackers","释放宇宙的愤怒造成光系与暗影伤害")
-			        end
+				end
 
 			end
 			desc[i] = desc[i]:gsub("already known tinker","已学会")

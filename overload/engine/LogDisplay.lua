@@ -1,5 +1,5 @@
 -- TE4 - T-Engine 4
--- Copyright (C) 2009 - 2016 Nicolas Casalini
+-- Copyright (C) 2009 - 2017 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -149,9 +149,9 @@ function _M:call(str, ...)
 	self.changed = true
 end
 
---- Gets the last log line
+--- Gets the newest log line
 function _M:getNewestLine()
-	if self.log[1] then return self.log[1].str end
+	if self.log[1] then return self.log[1].str, self.log[1] end
 	return nil
 end
 
@@ -162,7 +162,35 @@ function _M:empty()
 	self.changed = true
 end
 
---- Get Last Lines From Log
+--- Remove some lines from the log, starting with the newest
+-- @param line = number of lines to remove (default 1) or the last line (table, reference) to leave in the log
+-- @param [type=table, optional] ret table in which to append removed lines
+-- @param [type=number, optional] timestamp of the oldest line to remove
+-- @return the table of removed lines or nil
+function _M:rollback(line, ret, timestamp)
+	local nb = line or 1
+	if type(line) == "table" then
+		nb = 0
+		for i, ln in ipairs(self.log) do
+			if ln == line then nb = i - 1 break end
+		end
+	end
+	if nb > 0 then
+		for i = 1, nb do
+			local removed = self.log[1]
+			if not timestamp or removed.timestamp >= timestamp then
+				print("[LOG][remove]", removed.timestamp, removed.str)
+				table.remove(self.log, 1)
+				if ret then ret[#ret+1] = removed end
+			else break
+			end
+		end
+		self.changed = true
+	end
+	return ret
+end
+
+--- Get the oldest lines from the log
 -- @param number number of lines to retrieve
 function _M:getLines(number)
 	local from = number

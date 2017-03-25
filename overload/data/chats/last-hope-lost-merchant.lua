@@ -21,18 +21,23 @@ if q and q:isStatus(q.COMPLETED, "saved") then
 
 local p = game:getPlayer(true)
 
+local trap = p:knowTalentType("cunning/trapping") and not game.state:unlockTalentCheck(player.T_AMBUSH_TRAP, player)
+local poison = p:getTalentFromId(p.T_STONING_POISON)
+local poison = poison and p:knowTalentType("cunning/poisons") and not p:knowTalent(poison) and p:canLearnTalent(poison)
 newChat{ id="welcome",
-	text = [[啊，我#{italic}#亲爱的#{normal}#朋友 @playername@!
-多亏了你我安全回到了这个伟大的城市！我的精品商店过些日子正打算开张营业。不过既然我欠你个人情，要是你需要一些稀有物品的话也许我可以为你提前开张。]]
-..((p:knowTalent(p.T_TRAP_MASTERY) and not p:knowTalent(p.T_FLASH_BANG_TRAP)) and "\n在逃亡过程中我找到了个好点子——#YELLOW#闪光陷阱#LAST#, 你应该会对它感兴趣吧?" or "")
-..((game.state:isAdvanced() and "\n噢我的好朋友，我告诉过你我可以为你打造一件真正的 #{italic}#史诗#{normal}# 物品，专门为你量身定做哦，而且价格非常公道。" or "\n我准备为最有眼光的那位顾客提供一件真正独特的服务。如果你过会儿回来，我将做好充分准备后给你一个大大的惊喜。而且价格绝对#{italic}#公道#{normal}#哦！当然！")),
+	text = [[啊, 我 #{italic}#亲爱的#{normal}# 朋友 @playername@!
+多亏了你我安全回到了这个伟大的城市！ 我的精品商店过些日子正打算开张营业。不过既然我欠你个人情，要是你需要一些稀有物品的话也许我可以为你提前开张。]]]
+..((trap or poison) and ("\n顺便一提, "..((trap and "在逃亡过程中我找到了个好点子—— #YELLOW#伏击陷阱#LAST#" or "")
+..(poison and (trap and " ，同时在" or "在").. " 我整理货物时, 我发现了一些 #YELLOW#石化毒剂#LAST# ，据说能把生物变成石头。  真正的剧毒!" or ".")).."\nY你应该会对它感兴趣吧?") or "")
+..((game.state:isAdvanced() and "\n噢我的好朋友，我告诉过你我可以为你打造一件真正的 #{italic}#史诗#{normal}# 物品，专门为你量身定做哦，而且价格非常公道..." or "\n我准备为最有眼光的那位顾客提供一件真正独特的服务。如果你过会儿回来，我将做好充分准备后给你一个大大的惊喜。而且价格绝对#{italic}#公道#{normal}#哦！当然！")),
 	answers = {
-		{"是，让我看看你的货物。", action=function(npc, player)
+		{"好吧，让我看看你的货物。", action=function(npc, player)
 			npc.store:loadup(game.level, game.zone)
 			npc.store:interact(player)
 		end},
 		{"不如说说那个特殊物品？", cond=function(npc, player) return game.state:isAdvanced() end, jump="unique1"},
-		{"闪光陷阱？听上去很不错.", cond=function(npc, player) return p:knowTalent(p.T_TRAP_MASTERY) and not p:knowTalent(p.T_FLASH_BANG_TRAP) end, jump="trap"},
+		{"闪光陷阱？听上去很不错.", cond=function(npc, player) return trap end, jump="trap"},
+		{"石化毒素?", cond=function(npc, player) return poison end, jump="poison"},
 		{"抱歉，我得走了！"},
 	}
 }
@@ -47,12 +52,30 @@ newChat{ id="trap",
 }
 
 newChat{ id="traplearn",
-	text = [[和你做生意真好，我的朋友。再见！]],
+	text = [[和你做生意真愉快!]],
 	answers = {
-		{"多谢。", action=function(npc, player)
-			p:learnTalent(p.T_FLASH_BANG_TRAP, 1, nil, {no_unlearn=true})
-			p:incMoney(-3000)
-			game.log("#LIGHT_GREEN#你学会了这门技术，你能设置闪光陷阱了!")
+		{"谢了.", action=function(npc, player)
+			game.state:unlockTalent(player.T_AMBUSH_TRAP, player)
+			player:incMoney(-3000)
+		end},
+	}
+}
+
+newChat{ id="poison",
+	text = [[Ungrol发现这种物质含有某些稀有成分，.
+“比毒药还要毒” ，但他没钱买下来。 基于我们的良好关系，我很愿意卖给你，#{italic}#只需要#{normal}# -- 1500 金币!]],
+	answers = {
+		{"有点贵，不过应该能派上用场。我要了!", cond=function(npc, player) return player.money >= 1500 end, jump="poisonlearn"},
+		{"这个价格 ... 还是算了吧..."},
+	}
+}
+
+newChat{ id="poisonlearn",
+	text = [[给你了。别洒在自己身上了!]],
+	answers = {
+		{"谢了.", action=function(npc, player)
+			player:incMoney(-1500)
+			player:learnTalent(player.T_STONING_POISON, true, 1)
 		end},
 	}
 }

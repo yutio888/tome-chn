@@ -10,30 +10,38 @@ registerTalentTranslation{
 
 registerTalentTranslation{
 	id = "T_DUAL_WEAPON_DEFENSE",
-	name = "格挡训练",
+	name = "抵挡训练",
 	info = function(self, t)
-		local xs = ([[  当 技 能 等 级 超 过 5 时 ， 你 能 用 副 手 武 器 挡 住 近 战 攻 击（ 灵 晶 除 外） 。 
-		 你 现 在 有 %d%% 的 概 率 偏 移 至 多 %d 点 伤 害 （ 你 副 手 伤 害 的 %d%% ） ， 每 回 合 至 多 触 发 %0.1f 次 （ 基 于 你 的 灵 巧）。 ]]):
-		format(t.getDeflectChance(self,t),t.getDamageChange(self, t, true), t.getDeflectPercent(self,t), t.getDeflects(self, t, true))
-		return ([[你 已 经 学 会 用 你 的 武 器 招 架 攻 击。 当 你 双 持 时， 增 加 %d 点 近 身 闪 避。 
-		受 敏 捷 影 响， 闪 避 增 益 按 比 例 加 成。 %s]]):format(t.getDefense(self, t),xs)
+		return ([[你 已 经 学 会 用 你 的 武 器 招 架 攻 击。 当 你 双 持 时， 增 加 %d 点 近 身 闪 避。
+		每 回 合 最 多 %0.1f 次，你 有 %d%% 概 率 抵 挡 至 多 %d 点 伤 害 （基 于 副 手 伤 害  ）。 
+		抵 挡 的 减 伤 类 似 护 甲 ，且 被 抵 挡 的 攻 击 不 会 暴 击。 很 难 抵 挡 未 发 现 的 敌 人 的 攻 击 ， 且 不 能 使 用 灵 晶 抵 挡 攻 击 。
+		受 敏 捷 影 响， 闪 避 增 益 按 比 例 加 成。 
+		受 灵 巧 影 响， 抵 挡 次 数 有 额 外 加 成。
+		]]):format(t.getDefense(self, t), t.getDeflects(self, t, true), t.getDeflectChance(self,t), t.getDamageChange(self, t, true))
 	end,
 }
 
 registerTalentTranslation{
-	id = "T_PRECISION",
-	name = "弱点打击",
-	info = function(self, t)
-		return ([[你 已 经 学 会 打 击 弱 点 位 置， 双 持 时 增 加 你 %d 点 护 甲 穿 透。 
-		受 敏 捷 影 响， 护 甲 穿 透 有 额 外 加 成。 ]]):format(t.getApr(self, t))
+	id = "T_CLOSE_COMBAT_MANAGEMENT",
+	name = "近战训练",
+	info = function (self,t)
+		return ([[你 近 战 格 斗 的 技 巧 更 加 精 湛 了。
+		用 双 持 武 器 命 中 对 手 时， 你 每 命 中 一 个 敌 人 获 得 %d 伤 害 减 免 （受 敏 捷 加 成，灵 晶 无 效）。
+		此 外， 该 技 能 开 启 时 ，你 能 反 弹 %d%% 伤 害。]]):
+		format(t.getReflectArmour(self, t), t.getPercent(self, t))
 	end,
 }
 
 registerTalentTranslation{
-	id = "T_MOMENTUM",
-	name = "急速切割",
-	info = function(self, t)
-		return ([[当 你 双 持 武 器 时， 增 加 %d%% 攻 击 速 度， 快 速 消 耗 体 力 （ -6 体 力 / 回 合）。  ]]):format(t.getSpeed(self, t)*100)
+	id = "T_OFFHAND_JAB",
+	name = "副手猛击",
+	info = function (self,t)
+		local dam = 100 * t.getDamage(self, t)
+		return ([[你 迅 速 移 动 ，用 徒 手 攻 击 敌 人。
+		造 成 %d%% 主 手 武 器 伤 害 ，%d%% 徒 手 伤 害 。
+		若 徒 手 攻 击 命 中 ， 敌 人 将 被 混 乱 （ %d%% 强 度 ） %d 回 合 。
+		混 乱 几 率 受 命 中 加 成 。]])
+		:format(dam, dam*1.25, t.getConfusePower(self, t), t.getConfuseDuration(self, t))
 	end,
 }
 
@@ -70,7 +78,10 @@ registerTalentTranslation{
 	id = "T_WHIRLWIND",
 	name = "旋风斩",
 	info = function(self, t)
-		return ([[挥 砍 一 周， 用 2 把 武 器 对 你 周 围 的 所 有 敌 人 造 成 %d%% 伤 害。]]):format(100 * self:combatTalentWeaponDamage(t, 1.2, 1.9))
+		local damage = t.getDamage(self, t)
+		local range = self:getTalentRange(t)
+		return ([[你 迅 速 跳 跃 至 %d 格 内 的 敌 人 身 边 并 在 移 动 中 用 2 把 武 器 对 路 径 周 围 的 所 有 敌 人 造 成 %d%% 伤 害，并 使 其 流 血 5 回 合 受 到 额 外 50%% 伤 害 。]]):
+		format(range, damage*100)
 	end,
 }
 

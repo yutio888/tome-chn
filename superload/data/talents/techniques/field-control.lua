@@ -1,24 +1,6 @@
 local _M = loadPrevious(...)
 
 registerTalentTranslation{
-	id = "T_DISENGAGE",
-	name = "逃脱",
-	info = function(self, t)
-		return ([[跳 离 你 的 目 标 %d 码。 ]]):format(t.getDist(self, t))
-	end,
-}
-
-registerTalentTranslation{
-	id = "T_TRACK",
-	name = "追踪",
-	info = function(self, t)
-		local rad = self:getTalentRadius(t)
-		return ([[感 受 你 周 围 %d 码 半 径 范 围 敌 人 的 踪 迹， 持 续 %d 回 合。 
-		受 灵 巧 影 响， 半 径 有 额 外 加 成。 ]]):format(rad, 3 + self:getTalentLevel(t))
-	end,
-}
-
-registerTalentTranslation{
 	id = "T_HEAVE",
 	name = "前踢",
 	info = function(self, t)

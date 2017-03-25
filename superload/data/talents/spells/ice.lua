@@ -51,7 +51,7 @@ registerTalentTranslation{
 		local damageinc = t.getColdDamageIncrease(self, t)
 		local ressistpen = t.getResistPenalty(self, t)
 		local pierce = t.getPierce(self, t)
-		return ([[使 你 周 围 的 温 度 骤 降， 增 加 你 %d%% 冰 系 伤 害 并 无 视 目 标 %d%% 冰 冷 抵 抗。 
+		return ([[使 你 周 围 的 温 度 骤 降， 增 加 你 %0.1f%% 冰 系 伤 害 并 无 视 目 标 %d%% 冰 冷 抵 抗。 
 		 同 时， 你 的 破 冰 动 作 变 的 更 加 容 易， 减 少 %d%% 冰 层 对 你 的 攻 击 伤 害 格 挡 值。]])
 		:format(damageinc, ressistpen, pierce)
 	end,

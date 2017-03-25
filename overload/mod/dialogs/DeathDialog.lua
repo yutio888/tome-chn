@@ -345,7 +345,7 @@ function _M:innerDisplayBack(x, y, nb_keyframes, tx, ty)
 		d.t:toScreenFull(x, y, d.w, d.h, d.tw, d.th, 1, 1, 1, 1)
 	end
 	if self.possible_items.skeleton then
-		local d = self.graphical_options.skeleton[self.cur_item and self.cur_item.action == "skeleton" and "available" or "unavailable"]
+		local d = self.graphical_options.skeleton[self.cur_item and (self.cur_item.action == "skeleton" or self.cur_item.action == "lichform") and "available" or "unavailable"]
 		d.t:toScreenFull(x, y + self.frame.h - d.h, d.w, d.h, d.tw, d.th, 1, 1, 1, 1)
 	end
 end

@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2016 Nicolas Casalini
+-- Copyright (C) 2009 - 2017 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -208,7 +208,17 @@ function _M:onEnterLevel(zone, level)
 end
 
 function _M:onEnterLevelEnd(zone, level)
+	if level._player_enter_scatter then return end
+	level._player_enter_scatter = true
 
+	if level.data.generator and level.data.generator.map and level.data.generator.map.class == "engine.generator.map.Static" and not level.data.static_force_scatter then return end
+
+	self:project({type="ball", radius=5}, self.x, self.y, function(px, py)
+		local a = level.map(px, py, Map.ACTOR)
+		if a and self:reactionToward(a) < 0 then
+			a:teleportRandom(self.x, self.y, 50, 5)
+		end
+	end)
 end
 
 function _M:onLeaveLevel(zone, level)
@@ -436,7 +446,7 @@ function _M:updateMainShader()
 			if solipsism_power > 0 then game.fbo_shader:setUniform("solipsism_warning", solipsism_power)
 			else game.fbo_shader:setUniform("solipsism_warning", 0) end
 		end
-		if (self:attr("no_healing") or ((self.healing_factor or 1) <= 0)) ~= self.old_healwarn then
+		if ((self:attr("no_healing") or ((self.healing_factor or 1) <= 0)) ~= self.old_healwarn) and not self:attr("no_healing_no_warning") then
 			if (self:attr("no_healing") or ((self.healing_factor or 1) <= 0)) then
 				game.fbo_shader:setUniform("intensify", {0.3,1.3,0.3,1})
 			else
@@ -554,6 +564,19 @@ function _M:playerFOV()
 			cache and map._fovcache["block_sight"]
 		)
 	end
+
+	core.fov.calc_circle(self.x, self.y, game.level.map.w, game.level.map.h, 10,
+		function(d, x, y)end, -- block
+		function(d, x, y) -- apply
+			local act = game.level.map(x, y, game.level.map.ACTOR)
+			if act then
+			local eff = act:hasEffect(act.EFF_MARKED)
+				if eff and eff.src==self then
+					game.level.map.seens(x, y, 0.6)
+				end
+			end
+		end,
+	nil)
 
 	-- Handle Preternatural Senses talent, a simple FOV, using cache.
 	if self:knowTalent(self.T_PRETERNATURAL_SENSES) then
@@ -858,6 +881,8 @@ local function spotHostiles(self, actors_only)
 	return seen
 end
 
+_M.spotHostiles = spotHostiles
+
 --- Try to auto use listed talents
 -- This should be called in your actors "act()" method
 function _M:automaticTalents()
@@ -977,13 +1002,17 @@ function _M:restCheck()
 	if ammo and ammo.combat.shots_left < ammo.combat.capacity then return true end
 	-- Spacetime Tuning handles Paradox regen
 	if self:hasEffect(self.EFF_SPACETIME_TUNING) then return true end
+	if self:knowTalent(self.T_THROWING_KNIVES) then
+		local eff = self:hasEffect(self.EFF_THROWING_KNIVES)
+		if not eff or (eff and eff.stacks < eff.max_stacks) then return true end
+	end
 	
 	-- Check resources, make sure they CAN go up, otherwise we will never stop
 	if not self.resting.rest_turns then
 		if self.air_regen < 0 then return false, "窒息！" end
 		if self.life_regen <= 0 then return false, "生命值下降！" end
 
-		if self.life < self.max_life and self.life_regen> 0 then return true end
+		if self.life < self.max_life and self.life_regen > 0 and not self:attr("no_life_regen") then return true end
 		if self.air < self.max_air and self.air_regen > 0 and not self.is_suffocating then return true end
 		for act, def in pairs(game.party.members) do if game.level:hasEntity(act) and not act.dead then
 			if act.life < act.max_life and act.life_regen > 0 and not act:attr("no_life_regen") then return true end
@@ -996,7 +1025,7 @@ function _M:restCheck()
 				if not res_def.invert_values then
 					if self[res_def.regen_prop] > 0.0001 and self:check(res_def.getFunction) < self:check(res_def.getMaxFunction) then return true end
 				else
-					if self[res_def.regen_prop] < 0.0001 and self:check(res_def.getFunction) > self:check(res_def.getMinFunction) then return true end
+					if self[res_def.regen_prop] < -0.0001 and self:check(res_def.getFunction) > self:check(res_def.getMinFunction) then return true end
 				end
 			end
 		end
@@ -1413,6 +1442,12 @@ function _M:onWear(o, slot, bypass_set)
 
 	if o.power_source and o.power_source.antimagic and not game.party:knownLore("nature-vs-magic") and self:attr("has_arcane_knowledge") then
 		game.party:learnLore("nature-vs-magic")
+	end
+
+	-- Shimmer stuff
+	local invendef = self:getInvenDef(slot)
+	if invendef and invendef.infos and invendef.infos.shimmerable then
+		world:unlockShimmer(o)
 	end
 end
 

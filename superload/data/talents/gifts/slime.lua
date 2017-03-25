@@ -25,8 +25,8 @@ registerTalentTranslation{
 	id = "T_ACIDIC_SKIN",
 	name = "酸性皮肤",
 	info = function(self, t)
-		return ([[你 的 皮 肤 浸 泡 着 酸 液， 对 所 有 攻 击 你 的 目 标 造 成 %0.1f 酸 性 伤 害， 并 有 %d%% 几 率 缴 械 目 标 3 回 合。
-		 受 精 神 强 度 影 响 ， 伤 害 有 额 外 加 成 。 ]]):format(damDesc(self, DamageType.ACID, t.getDamage(self, t)), t.getChance(self, t))
+		return ([[你 的 皮 肤 浸 泡 着 酸 液， 对 所 有 攻 击 你 的 目 标 造 成 %0.1f 酸 性 缴 械 伤 害。
+		 受 精 神 强 度 影 响 ， 伤 害 有 额 外 加 成 。 ]]):format(damDesc(self, DamageType.ACID, t.getDamage(self, t)))
 	end,
 }
 

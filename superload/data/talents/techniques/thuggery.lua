@@ -35,8 +35,10 @@ registerTalentTranslation{
 	name = "不择手段",
 	info = function(self, t)
 		return ([[你 疯 狂 地 杀 戮， 试 图 尽 快 击 倒 你 的 敌 人。 
-		战 斗 中， 每 次 攻 击 增 加 +%d%% 暴 击 率 和 +%d%% 物 理 抵 抗 穿 透， 但 是 每 次 攻 击 消 耗 %0.1f 体 力。]]):
-		format(t.getCrit(self, t), t.getPen(self, t), t.getDrain(self, t))
+		增 加 %d%% 攻 击 速 度， %d%% 暴 击 率 和 %d%% 物 理 抵 抗 穿 透， 但 是 每 次 攻 击 消 耗 6 点 体 力。
+		该 效 果 在 休 息 或 者 奔 跑 时 自 动 解 除。
+		]]):
+		format(t.getSpeed(self,t)*100, t.getCrit(self, t), t.getPen(self, t))
 	end,
 }
 

@@ -3,6 +3,7 @@ t_talent_type_name = {}
 
 	--celestial
 	t_talent_type_name["chants"] = "赞歌系"
+	t_talent_type_name["chants-chants"] = "赞歌-赞歌系"
 	t_talent_type_name["circles"] = "法阵系"
 	t_talent_type_name["combat"] = "圣战系"
 	t_talent_type_name["crusader"] = "十字军系"
@@ -61,6 +62,8 @@ t_talent_type_name = {}
 	t_talent_type_name["rot"] = "腐烂系"
 	--cunning
 	t_talent_type_name["ambush"] = "伏击系"
+	t_talent_type_name["artifice"] = "诡计系"
+	t_talent_type_name["tools"] = "工具系"
 	t_talent_type_name["dirty fighting"] = "卑劣攻击系"
 	t_talent_type_name["lethality"] = "致命攻击系"
 	t_talent_type_name["poisons"] = "毒药系"
@@ -235,6 +238,14 @@ t_talent_type_name = {}
 	t_talent_type_name["Buckler Training"] = "盾牌训练系"
 	t_talent_type_name["Skirmisher - Slings"] = "散兵-投石索系"
 	t_talent_type_name["Tireless Combatant"] = "不倦战斗系"
+	t_talent_type_name["assassination"] = "暗杀系"
+	t_talent_type_name["throwing knives"] = "飞刀系"
+	t_talent_type_name["duelist"] = "双持系" 
+	t_talent_type_name["marksmanship"] = "神枪手系"
+	t_talent_type_name["reflexes"] = "反射神经系"
+	t_talent_type_name["munitions"] = "弹药系"
+	t_talent_type_name["agility"] = "敏捷系"
+	t_talent_type_name["sniper"] = "狙击系" 	
 --stone warden
 	t_talent_type_name["dwarven nature"] = "矮人之自然力量"	
 	t_talent_type_name["earthen power"] = "大地力量"

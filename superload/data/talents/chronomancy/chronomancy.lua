@@ -31,7 +31,7 @@ registerTalentTranslation{
 		local trigger = t.getTrigger(self, t) * 100
 		local cooldown = self:getTalentCooldown(t)
 		local talent = self:isTalentActive(t.id) and self:getTalentFromId(self:isTalentActive(t.id).talent).name or "None"
-		return ([[选 择 一 个 只 会 影 响 你 并 且 不 需 要 选 中 目 标 的 可 激 活 法 术 。当 你 受 到 伤 害 并 使 生 命 值 降 低 到  %d%%  以 下 时 ，自 动 释 放 这 个 技 能 。
+		return ([[选 择 一 个 只 会 影 响 你 并 且 不 需 要 选 中 目 标 的 非 固 定 CD 主 动 法 术 。当 你 受 到 伤 害 并 使 生 命 值 降 低 到  %d%%  以 下 时 ，自 动 释 放 这 个 技 能 。
 		 即 使 选 择 的 技 能 处 于 冷 却 状 态 也 可 以 释 放   ，并 且 不 消 耗 回 合 或 资 源 ，技 能 等 级 为 该 技 能 和 指 定 技 能 当 中 较 低 的 一 方 。		 这 个 效 果 每  %d  回 合 只 能 触 发 一 次 ，并 且 在 伤 害 结 算 之 后 生 效 。
 
 		 当 前 选 择 技 能 ： %s ]]):

@@ -7,7 +7,8 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local radius = self:getTalentRadius(t)
 		return ([[召 唤 1 个 冰 冷 的 球 体 射 向 目 标 并 产 生 死 亡 的 冰 冷 爆 炸 对 目 标 造 成 %0.2f 冰 冷 伤 害， 范 围 %d 码。 
-		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成。]]):
+		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成。
+		 同 时，当 鬼 火 开 启 时 ， 被 这 个 法 术 杀 死 的 单 位 将 产 生 鬼 火。]]):
 		format(damDesc(self, DamageType.COLD, damage), radius)
 	end,
 }

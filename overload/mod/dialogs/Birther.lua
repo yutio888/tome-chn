@@ -1,5 +1,5 @@
 -- TE4 - T-Engine 4
--- Copyright (C) 2009 - 2016 Nicolas Casalini
+-- Copyright (C) 2009 - 2017 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -106,7 +106,7 @@ function _M:init(title, actor, order, at_end, quickbirth, w, h)
 	self:setDescriptor("sex", "Female")
 
 	self:generateRaces()
-	self.c_race = TreeList.new{width=math.floor(self.iw / 3 - 10), height=self.ih - self.c_female.h - self.c_ok.h - self.c_difficulty.h - self.c_campaign.h - 10, scrollbar=true, columns={
+	self.c_race = TreeList.new{width=math.floor(self.iw / 3 - 10), height=self.ih - self.c_female.h - self.c_ok.h - (self.c_extra_options.hide and 0 or self.c_extra_options.h) - self.c_difficulty.h - self.c_campaign.h - 10, scrollbar=true, columns={
 		{width=100, display_prop="name"},
 	}, tree=self.all_races,
 		fct=function(item, sel, v) self:raceUse(item, sel, v) end,
@@ -331,6 +331,7 @@ end
 function _M:makeDefault()
 	self:setDescriptor("sex", "Female")
 	self:setDescriptor("world", "Maj'Eyal")
+	-- self:setDescriptor("world", "Infinite")
 	self:setDescriptor("difficulty", "Normal")
 	self:setDescriptor("permadeath", "Adventure")
 	self:setDescriptor("race", "Human")
@@ -1144,12 +1145,13 @@ function _M:setTile(f, w, h, last)
 		local ps = self.actor:getParticlesList("all")
 		for i, p in ipairs(ps) do self.actor:removeParticles(p) end
 		if self.actor.shader_auras then self.actor.shader_auras = {} end
+		self.replace_display = nil
 		if self.descriptors_by_type.subclass then
 			local d = self.birth_descriptor_def.subclass[self.descriptors_by_type.subclass]
 			if d and d.birth_example_particles then
 				local p = d.birth_example_particles
 				if type(p) == "table" then p = rng.table(p) end
-				p = util.getval(p, self.actor)
+				p = util.getval(p, self.actor, self)
 				if type(p) == "string" then self.actor:addParticles(Particles.new(p, 1)) end
 			end
 		end

@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2016 Nicolas Casalini
+-- Copyright (C) 2009 - 2017 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -32,7 +32,6 @@ local function floorEffect(t)
 	t.type = "other"
 	t.subtype = { floor=true }
 	t.status = "neutral"
-	t.parameters = {}
 	t.on_gain = function(self, err) return nil, "+"..t.desc end
 	t.on_lose = function(self, err) return nil, "-"..t.desc end
 
@@ -51,14 +50,18 @@ floorEffect{
 
 floorEffect{
 	desc = "Font of Life", image = "talents/grand_arrival.png",
-	long_desc = function(self, eff) return ([[目 标 靠 近 生 命 之 泉， 增 加 +%0.2f 生 命 回 复， -%0.2f 失 衡 值 回 复， +%0.2f 耐 力 回 复 和 +%0.2f 超 能 力 回 复。 不 死 族 无 法 获 得 此 效 果。]]):format(eff.power, eff.power, eff.power, eff.power) end,
+	long_desc = function(self, eff) return ([[目 标 靠 近 生 命 之 泉， 增 加 +%0.2f 生 命 回 复， +%0.2f 失 衡 值 回 复， +%0.2f 体 力 回 复 和 +%0.2f 超 能 力 回 复。 不 死 族 无 法 获 得 此 效 果。]]):format(eff.power, eff.equilibrium, eff.stamina, eff.psi) end,
+	parameters = {power=1, equilibrium=0, stamina=0, psi=0},
 	activate = function(self, eff)
-		if self:attr("undead") then eff.power = 0 return end
+		if not self:checkClassification("living") then eff.power = 0 return end
 		eff.power = 3 + game.zone:level_adjust_level(game.level, game.zone, "object") / 2
+		eff.psi = (eff.power/5)^.75
+		eff.stamina = eff.psi
+		eff.equilibrium = -eff.psi
 		self:effectTemporaryValue(eff, "life_regen", eff.power)
-		self:effectTemporaryValue(eff, "stamina_regen", eff.power)
-		self:effectTemporaryValue(eff, "psi_regen", eff.power)
-		self:effectTemporaryValue(eff, "equilibrium_regen", -eff.power)
+		self:effectTemporaryValue(eff, "stamina_regen", eff.stamina)
+		self:effectTemporaryValue(eff, "psi_regen", eff.psi)
+		self:effectTemporaryValue(eff, "equilibrium_regen", eff.equilibrium)
 	end,
 }
 
@@ -94,11 +97,14 @@ floorEffect{
 
 floorEffect{
 	desc = "Protective Aura", image = "talents/barrier.png",
-	long_desc = function(self, eff) return ([[目 标 靠 近 防 御 光 环， 获 得 +%d 点 护 甲 和 +%d 物 理 豁 免。]]):format(eff.power, eff.power * 3) end,
+	long_desc = function(self, eff) return ([[目 标 靠 近 防 御 光 环， 获 得 +%d 点 护 甲 和 +%d 物 理 豁 免。]]):format(eff.armor, eff.power) end,
+	parameters = {power=1, armor=1},
 	activate = function(self, eff)
-		eff.power = 3 + game.zone:level_adjust_level(game.level, game.zone, "object") / 5
+		local power = 3 + game.zone:level_adjust_level(game.level, game.zone, "object") / 2
+		eff.power = power
+		eff.armor = power^.75
 		self:effectTemporaryValue(eff, "combat_armor", eff.power)
-		self:effectTemporaryValue(eff, "combat_physresist", eff.power * 3)
+		self:effectTemporaryValue(eff, "combat_physresist", eff.armor)
 	end,
 }
 

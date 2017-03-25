@@ -1,5 +1,5 @@
 -- TE4 - T-Engine 4
--- Copyright (C) 2009 - 2016 Nicolas Casalini
+-- Copyright (C) 2009 - 2017 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -75,7 +75,7 @@ function _M:generateList()
 
 	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"如果你有一个高分辨率的屏幕，你可以调高该数值。重启后生效。#WHITE#"}
 	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#Screen Zoom#WHITE##{normal}#", status=function(item)
-		return tostring(config.settings.screen_zoom * 100)
+		return tostring(config.settings.screen_zoom * 100).."%"
 	end, fct=function(item)
 		game:registerDialog(GetQuantitySlider.new("Enter Zoom %", "From 50 to 400", math.floor(config.settings.screen_zoom * 100), 50, 400, 5, function(qty)
 			qty = util.bound(qty, 50, 400)
@@ -84,7 +84,7 @@ function _M:generateList()
 			self.c_list:drawItem(item)
 		end))
 	end,}
-	
+
 	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"帧密度选项。\n降低帧密度可以减轻CPU占用，提高可以提升显示效果。#WHITE#"}
 	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#帧密度设定#WHITE##{normal}#", status=function(item)
 		return tostring(config.settings.display_fps)
@@ -102,7 +102,7 @@ function _M:generateList()
 	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#粒子效果密度#WHITE##{normal}#", status=function(item)
 		return tostring(config.settings.particles_density)
 	end, fct=function(item)
-		game:registerDialog(GetQuantity.new("输入密度", "从 0 到 100", config.settings.particles_density, 0, 100, 1, function(qty)
+		game:registerDialog(GetQuantitySlider.new("输入密度", "从 0 到 100", config.settings.particles_density, 0, 100, 1, function(qty)
 			game:saveSettings("particles_density", ("particles_density = %d\n"):format(qty))
 			config.settings.particles_density = qty
 			self.c_list:drawItem(item)
@@ -119,6 +119,17 @@ function _M:generateList()
 		self.c_list:drawItem(item)
 	end,}
 
+	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"全局字体大小调整，重启游戏后生效"}
+	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#字体大小#WHITE##{normal}#", status=function(item)
+		return tostring(config.settings.font_scale).."%"
+	end, fct=function(item)
+		game:registerDialog(GetQuantity.new("Font Scale %", "从 50 到 300", config.settings.font_scale, 300, function(qty)
+			qty = util.bound(qty, 50, 300)
+			game:saveSettings("font_scale", ("font_scale = %d\n"):format(qty))
+			config.settings.font_scale = qty
+			self.c_list:drawItem(item)
+		end, 50))
+	end,}
 	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"激活帧缓冲。\n这个选项可以激活一些特殊的视频效果。\n如果画面碰到异常请尝试关闭这个效果。\n\n#LIGHT_RED#你必须重启游戏才能看到效果。#WHITE#"}
 	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#帧缓冲#WHITE##{normal}#", status=function(item)
 		return tostring(config.settings.fbo_active and "启用" or "关闭")

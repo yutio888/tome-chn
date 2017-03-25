@@ -14,7 +14,8 @@ registerTalentTranslation{
 	id = "T_GHOULISH_LEAP",
 	name = "定向跳跃",
 	info = function(self, t)
-		return ([[跳 向 你 的 目 标。]])
+		return ([[跳 向 你 的 目 标。
+		落 地 后 你 的 整 体 速 度 增 加 %d%% ，持 续 4 回 合 。]]):format(t.getSpeed(self, t))
 	end,
 }
 

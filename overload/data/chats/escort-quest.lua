@@ -98,8 +98,8 @@ local reward_types = {
 		},
 		talents = {
 			[Talents.T_HEIGHTENED_SENSES] = 1,
-			[Talents.T_CHARM_MASTERY] = 1,
-			[Talents.T_PIERCING_SIGHT] = 1,
+			[Talents.T_DEVICE_MASTERY] = 1,
+			[Talents.T_TRACK] = 1,
 		},
 		stats = {
 			[Stats.STAT_DEX] = 2,
@@ -119,12 +119,12 @@ local reward_types = {
 			[Stats.STAT_MAG] = 1,
 		},
 		antimagic = {
-			types = {
-				["technique/mobility"] = 0.8,
-			},
+--			types = {
+--				["technique/mobility"] = 0.8, --imagine a world where paradox mage/archmage etc could access trained reactions
+--			},
 			talents = {
-				[Talents.T_HACK_N_BACK] = 1,
-				[Talents.T_LIGHT_OF_FOOT] = 1,
+				[Talents.T_DISENGAGE] = 1,
+				[Talents.T_EVASION] = 1,
 			},
 			saves = { spell = 4, phys = 4 },
 			stats = {
@@ -147,11 +147,11 @@ local reward_types = {
 		},
 		antimagic = {
 			types = {
-				["technique/field-control"] = 0.8,
+				["psionic/feedback"] = 0.8,
 			},
 			talents = {
-				[Talents.T_TRACK] = 1,
-				[Talents.T_HEAVE] = 1,
+				[Talents.T_BIOFEEDBACK] = 1,
+				[Talents.T_CONVERSION] = 1,
 			},
 			saves = { spell = 4, mental = 4 },
 			stats = {

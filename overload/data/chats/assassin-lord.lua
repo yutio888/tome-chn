@@ -26,14 +26,13 @@ local function evil(npc, player)
 	local p = game.party:findMember{main=true}
 	if p.descriptor.subclass == "Rogue"  then
 		if p:knowTalentType("cunning/poisons") == nil then
-			p:learnTalentType("cunning/poisons", false)
+			p:learnTalentType("cunning/poisons", true)
 			p:setTalentTypeMastery("cunning/poisons", 1.3)
 		end
 	end
-
-	if p:knowTalent(p.T_TRAP_MASTERY) then
-		p:learnTalent(p.T_FLASH_BANG_TRAP, 1, nil, {no_unlearn=true})
-		game.log("#LIGHT_GREEN#Before you leave the Lord teaches you how to create flash bang traps!")
+	if p:knowTalentType("cunning/trapping") then
+		game.log("#LIGHT_GREEN#你和强盗首领进行了深入的讨论, 交流了刺客技艺与一些陷阱技巧。")
+		game.state:unlockTalent(player.T_AMBUSH_TRAP, player)
 	end
 
 	game:changeLevel(1, "wilderness")

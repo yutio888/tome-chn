@@ -1,5 +1,5 @@
 -- TE4 - T-Engine 4
--- Copyright (C) 2009 - 2016 Nicolas Casalini
+-- Copyright (C) 2009 - 2017 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -175,6 +175,7 @@ function _M:use(item, button)
 		table.insert(list, 2, {name=autoMark:getDisplayString()..(automode==2 and ds or "").."当无可见敌人时自动使用", what=(automode==2 and "auto-dis" or "auto-en-2")})
 		table.insert(list, 2, {name=autoMark:getDisplayString()..(automode==3 and ds or "").."当敌人可见时自动使用", what=(automode==3 and "auto-dis" or "auto-en-3")})
 		table.insert(list, 2, {name=autoMark:getDisplayString()..(automode==4 and ds or "").."附近有可见敌人时自动使用", what=(automode==4 and "auto-dis" or "auto-en-4")})
+		self:triggerHook{"UseTalents:generate", actor=self.actor, talent=t, menu=list}
 
 		for i = 1, 12 * self.actor.nb_hotkey_pages do list[#list+1] = {name="快捷键 "..i, what=i} end
 		Dialog:listPopup("绑定技能： "..item.name:toString(), "如何绑定技能？", list, 400, 500, function(b)
@@ -211,6 +212,8 @@ function _M:use(item, button)
 				self.actor:checkSetTalentAuto(item.talent, true, 4)
 			elseif b.what == "auto-dis" then
 				self.actor:checkSetTalentAuto(item.talent, false)
+			else
+				self:triggerHook{"UseTalents:use", what=b.what, actor=self.actor, talent=t, item=item}
 			end
 			self.c_list:drawTree()
 			self.actor.changed = true

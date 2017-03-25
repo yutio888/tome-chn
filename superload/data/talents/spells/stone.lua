@@ -54,7 +54,7 @@ registerTalentTranslation{
 		local damageinc = t.getPhysicalDamageIncrease(self, t)
 		local ressistpen = t.getResistPenalty(self, t)
 		local saves = t.getSaves(self, t)
-		return ([[你 专 注 于 维 持 水 晶 力 场， 增 加 你 %d%% 所 有 物 理 伤 害 并 忽 略 目 标 %d%% 的 物 理 伤 害 抵 抗。 
+		return ([[你 专 注 于 维 持 水 晶 力 场， 增 加 你 %0.1f%% 所 有 物 理 伤 害 并 忽 略 目 标 %d%% 的 物 理 伤 害 抵 抗。 
 		 同 时 增 加 你 %d 点 物 理 和 魔 法 豁 免。]])
 		:format(damageinc, ressistpen, saves)
 	end,

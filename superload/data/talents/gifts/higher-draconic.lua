@@ -41,9 +41,8 @@ registerTalentTranslation{
 	name = "天龙之怒",
 	info = function(self, t)
 		return ([[你 获 得 了 七 彩 巨 龙 的 传 承， 并 且 你 对 元 素 的 掌 控 达 到 了 新 的 高 峰。 
-		 增 加 %d%% 物 理、 火 焰、 寒 冷、 闪 电 和 酸 性 伤 害 , 同 时 增 加 %d%% 对 应 的 抵 抗 穿 透。 
-		 每 提 升 1 级 天 龙 之 怒 也 会 增 加 0.5 ％ 物 理、 火 焰、 寒 冷、 闪 电 和 酸 性 抵 抗。]])
-		:format(2*self:getTalentLevelRaw(t), t.resistPen(self:getTalentLevelRaw(t)))
+		 增 加 %0.1f%% 物 理、 火 焰、 寒 冷、 闪 电 和 酸 性 抗 性，增 加 %0.1f%% 相 应 伤 害 与 %d%% 对 应 抵 抗 穿 透。]]) 
+		:format(t.getResists(self, t), t.getDamageIncrease(self, t), t.getResistPen(self, t))
 	end,
 }
 

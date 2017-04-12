@@ -276,6 +276,7 @@ registerTalentTranslation{
 		return ([[爆炸 (范围 2): 震慑 并在3回合内每回合 造成 %d 火焰伤害。范围火焰 (%d 火焰伤害) 持续5 回合。]]):format(dam/3, dam/2)
 	end,
 }
+
 registerTalentTranslation{
 	id = "T_GRAVITIC_TRAP",
 	name = "引力陷阱",
@@ -286,13 +287,14 @@ registerTalentTranslation{
 		 陷 阱 可 以 多 次 触 发 ， 需 要 两 回 合 冷 却。
 		 该 技 能 不 需 要 高 级 技 能 来 准 备。
 		 ]]):
-		format(damDesc(self, engine.DamageType.TEMPORAL, t.getDamage(self, t)))
+		format(damDesc(self, engine.DamageType.TEMPORAL, t.getDamage(self, t)), t.getDuration(self,t))
 	end,
 	short_info = function(self, t)
 		return ([[制造 范围5 的 黑洞，持续 %d 回合。敌对生物受到 %d 时空伤害并被拉过去。 触发范围+1。]]):
 		format(t.getDuration(self,t), damDesc(self, engine.DamageType.TEMPORAL, t.getDamage(self, t)))
 	end,
 }
+
 registerTalentTranslation{
 	id = "T_AMBUSH_TRAP",
 	name = "伏击陷阱",

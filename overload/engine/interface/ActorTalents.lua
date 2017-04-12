@@ -1052,7 +1052,8 @@ end
 function _M:callTalent(tid, name, ...)
 	local t = _M.talents_def[tid]
 	name = name or "trigger"
-	if t[name] then return t[name](self, t, ...) end
+	if t[name] then return t[name](self, t, ...) 
+	end
 end
 
 --- Trigger all talents matching
@@ -1113,10 +1114,10 @@ end
 function _M:registerTalentTranslation(t)
 	assert(t.id, "no talent id")
 	assert(t.name, "no talent name")
-	assert(t.info, "no talent info")
+	--assert(t.info, "no talent info")
 	assert(self.talents_def[t.id], "talent id " .. t.id .. " undefineded")
-	local old_talent = self.talents_def[t.id]
 	for k, v in pairs(t) do
+		local old_talent = self.talents_def[t.id]
 		while k:find("%.") do
 			l, _ = k:find("%.")
 			old_talent = old_talent[k:sub(1, l - 1)]
@@ -1126,13 +1127,13 @@ function _M:registerTalentTranslation(t)
 		else old_talent[k] = v
 		end
 	end
-	
-	--[[
-	self.talents_def[t.id].name = t.name
-	self.talents_def[t.id].info = t.info
 	if t.require_special_desc then
 		self.talents_def[t.id].require.special.desc = t.require_special_desc
 	end
+	--[[
+	self.talents_def[t.id].name = t.name
+	self.talents_def[t.id].info = t.info
+	
 	if t.short_info then
 		self.talents_def[t.id].short_info = t.short_info
 	end

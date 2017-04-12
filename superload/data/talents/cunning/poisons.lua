@@ -104,11 +104,12 @@ registerTalentTranslation{
 	format(t.getEffect(self, t))
 	end,
 }
+
 registerTalentTranslation{
 	id = "T_VULNERABILITY_POISON",
 	name = "奥术毒剂",
 	info = function(self, t)
-		return ([[在 你 的 武 器 上 涂 上 奥 术 毒 剂， 每 回 合 造 成 每 轮 %0.2f 点 奥 术 伤 害 且 所 有 伤 害 抗 性 将 被 减 少 %d%% ，毒 素 免 疫 减 少 50%% 。 ]]):
+		return ([[在 你 的 武 器 上 涂 上 奥 术 毒 剂， 每 回 合 造 成 每 轮 %0.2f 点 奥 术 伤 害 且 所 有 伤 害 抗 性 将 被 减 少 10%% ，毒 素 免 疫 减 少 50%% 。 ]]):
 	format(damDesc(self, DamageType.ARCANE, t.getDamage(self,t)))
 	end,
 }

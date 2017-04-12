@@ -1,4 +1,4 @@
-﻿local _M = loadPrevious(...)
+local _M = loadPrevious(...)
 for i = 1, 8 do
 registerTalentTranslation{
 	id = "T_POSSESSION_TALENT_"..i,
@@ -26,14 +26,9 @@ local function bodies_desc(self)
 	return b_list
 end
 
-newTalent{
+registerTalentTranslation{
 	id = "T_DESTROY_BODY",
 	name = "摧 毁 身 体",
-	type = {"psionic/other", 1},
-	no_unlearn_last = true,
-	points = 1,
-	no_npc_use = true,
-	no_energy = true,
 	on_pre_use = function(self, t, silent) if #self.bodies_storage == 0 then if not silent then game.logPlayer(self, "You have no stored bodies to delete.") end return false end return true end,
 	action = function(self, t)
 		package.loaded['mod.dialogs.AssumeForm'] = nil

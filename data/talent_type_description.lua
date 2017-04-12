@@ -273,3 +273,14 @@ t_talent_type_description["Fire is your lifeblood; it revitalizes you as it burn
 t_talent_type_description["Infuse your body with the power of Demons."] = "使 用 恶 魔 之 力 强 化 自 身 。"
 t_talent_type_description["Make your blows terrify your foes and manipulate their fear."] = "你 的 攻 击 令 敌 人 闻 风 丧 胆 。"
 
+--possesor
+
+t_talent_type_description["Your mind hungers for pain and suffering! Feed it!"] = "你 的 精 神 渴 望 痛 苦 ！ 满 足 它 吧！"
+t_talent_type_description["Learn to possess the bodies of your foes!" ] = "学 会 支 配 敌 人 的 身 体！"
+t_talent_type_description["Manipulate your dead foes bodies for power and success!"]="复 制 敌 人 的 身 体 ， 获 取 力 量 和 胜 利！" 
+t_talent_type_description["Laught terrible mind attacks to wear down your foes from afar with your double mindstars!"]="使 用 双 持 灵 晶 远 程 击 败 敌 人" 
+t_talent_type_description["Wield a two handed weapon to channel your psionics into your foes' faces!"] = "用 超 能 力 操 控 双 手 武 器 攻 击 对 手！" 
+t_talent_type_description["Dual wield a one handed weapon and a mindstar to assail your enemies's minds and bodies!"] = "使 用 单 手 武 器 和 灵 晶 攻 击 敌 人 的 身 体 和 精 神！"
+t_talent_type_description["Through your psionic powers you become a nightmare for your foes."  ] = "通 过 超 能 力 量 ， 你 成 为 了 敌 人 的 梦 魇！"
+
+

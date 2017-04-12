@@ -295,8 +295,15 @@ t_talent_type_name = {}
 	t_talent_type_name["thoughts of iron"] = "钢铁意念"
 	t_talent_type_name["mechstar"] = "机械灵晶"
 	t_talent_type_name["dread"] = "恐惧"
-	
-	
+--possessor
+	t_talent_type_name["possession"] = "支配" 
+	t_talent_type_name["body snatcher"] = "躯体夺取"
+	t_talent_type_name["psionic menace"] = "超能威吓"
+	t_talent_type_name["psychic blows"] = "超能打击"
+	t_talent_type_name["battle psionics"] = "超能战斗"
+	t_talent_type_name["deep horror"] = "无尽恐惧" 
+	t_talent_type_name["ravenous mind"] = "极度饥渴"
+
 --技能大分类名称	
 t_talent_cat = {}
 

@@ -5790,7 +5790,7 @@ function _M:getTalentFullDescription(t, addlevel, config, fake_mastery)
 		local replaces = self:getReplacedSustains(t)
 		if #replaces > 0 then
 			for k, v in pairs(replaces) do replaces[k] = self:getTalentFromId(v).name end
-			d:add({"color",0x6f,0xff,0x83}, "Will Deactivate: ", {"color",0xFF,0xFF,0xFF}, table.concat(replaces, ', '), true)
+			d:add({"color",0x6f,0xff,0x83}, "将关闭: ", {"color",0xFF,0xFF,0xFF}, table.concat(replaces, ', '), true)
 		end
 	end
 
@@ -5866,7 +5866,12 @@ function _M:startTalentCooldown(t, v)
 		self.talents_cd[t.id] = math.max(v, self.talents_cd[t.id] or 0)
 	else
 		if not t.cooldown then return end
-		self.talents_cd[t.id] = self:getTalentCooldown(t)
+		local cd = self:getTalentCooldown(t)
+
+		local hd = {"Actor:startTalentCooldown", t=t, cd=cd}
+		if self:triggerHook(hd) then cd = hd.cd end
+
+		self.talents_cd[t.id] = cd
 
 		if t.id ~= self.T_REDUX and self:hasEffect(self.EFF_REDUX) then
 			local eff = self:hasEffect(self.EFF_REDUX)

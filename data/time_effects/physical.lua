@@ -88,7 +88,7 @@ timeEffectCHN:newEffect{
 timeEffectCHN:newEffect{
 	id = "NUMBING_POISON",
 	enName = "Numbing Poison",
-	chName = "痳痹毒药",
+	chName = "麻痹毒药",
 	type = "物理",
 	subtype = "自然/毒素",
 }

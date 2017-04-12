@@ -36,7 +36,7 @@ registerTalentTranslation{
 
 registerTalentTranslation{
 	id = "T_SHADOW_VEIL",
-	name = "暗影之舞",
+	name = "暗影面纱",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local duration = t.getDuration(self, t)

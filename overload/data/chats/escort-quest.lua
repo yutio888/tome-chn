@@ -290,7 +290,7 @@ local function generate_rewards()
 			local tt_def = npc:getTalentTypeFrom(tt)
 			local cat = tt_def.type:gsub("/.*", "")
 			local doit = function(npc, player) game.party:reward("Select the party member to receive the reward:", function(player)
-				if player:knowTalentType(tt) == nil then player:setTalentTypeMastery(tt, mastery) end
+				if player:knowTalentType(tt) == nil then player:setTalentTypeMastery(tt, mastery - 1 + player:getTalentTypeMastery(tt)) end
 				player:learnTalentType(tt, false)
 				player:hasQuest(npc.quest_id).reward_message = ("gained talent category %s (at mastery %0.2f)"):format(cat:capitalize().." / "..tt_def.name:capitalize(), mastery)
 			end) end

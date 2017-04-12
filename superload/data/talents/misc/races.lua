@@ -130,7 +130,7 @@ registerTalentTranslation{
 	name = "钢筋铁骨",
 	info = function(self, t)
 		local params = t.getParams(self, t)
-		return ([[召 唤 矮 人 一 族 的 传 奇 血 统 来 增 加 你 +%d 点 护 甲 值，+%d%% 护 甲 硬 度， +%d 点 法 术 豁 免 和 +%d 物 理 豁 免， 持 续 8 回 合。 
+		return ([[召 唤 矮 人 一 族 的 传 奇 血 统 来 增 加 你 +%d 点 护 甲 值， +%d%% 护 甲 硬 度， +%d 点 法 术 豁 免 和 +%d 物 理 豁 免， 持 续 8 回 合。 
 		 受 你 的 体 质 影 响， 此 效 果 有 额 外 加 成。]]):
 		format(params.armor, params.armor_hardiness, params.physical, params.spell)
 	end,
@@ -153,7 +153,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		return ([[金 钱 是 矮 人 王 国 的 心 脏， 它 控 制 了 所 有 其 他 决 策。 
 		 基 于 你 的 金 币 持 有 量， 增 加 物 理、 精 神 和 法 术 抵 抗。 
-		+1 豁 免 值 每 %d 单 位 金 币， 最 大 +%d (currently +%d)。]]):
+		+1 豁 免 值 每 %d 单 位 金 币， 最 大 +%d (当 前 +%d)。]]):
 		format(t.getGold(self, t), t.getMaxSaves(self, t), t.getSaves(self, t))
 	end,
 }

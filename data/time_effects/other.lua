@@ -200,7 +200,7 @@ timeEffectCHN:newEffect{
 timeEffectCHN:newEffect{
 	id = "SHADOW_VEIL",
 	enName = "Shadow Veil",
-	chName = "暗影之舞",
+	chName = "暗影面纱",
 	type = "其他",
 	subtype = "暗影",
 }

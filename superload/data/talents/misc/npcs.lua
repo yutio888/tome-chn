@@ -276,7 +276,8 @@ registerTalentTranslation{
 	id = "T_LAY_WEB",
 	name = "撒网",
 	info = function(self, t)
-		return ([[投 掷 一 个 隐 形 的 蜘 蛛 网(侦 察 强 度 %d , 解 除 强 度 %d )， 困 住 所 有 经 过 它 的 非 蜘 蛛 生 物 %d 回 合。]]):
+		local dur = t.getDuration(self, t)
+		return ([[投 掷 一 个 隐 形 的 蜘 蛛 网(侦 察 强 度 %d , 解 除 强 度 %d )，持 续 %d 回 合， 困 住 所 有 经 过 它 的 非 蜘 蛛 生 物 %d 回 合。]]):
 		format(t.getDetect(self, t), t.getDisarm(self, t), dur*5, dur)
 	end,
 }

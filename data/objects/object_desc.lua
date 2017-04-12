@@ -201,6 +201,7 @@ objDesc["Stamina each turn: "] = "每回合体力回复："
 objDesc["Mana each turn: "] = "每回合法力回复："
 objDesc["Hate each turn: "] = "每回合仇恨值回复："
 objDesc["Psi each turn: "] = "每回合超能力值回复："
+objDesc["Equilibrium each turn: "] = "每回合失衡值回复："
 objDesc["Vim each turn: "] = "每回合活力值回复："
 objDesc["P.Energy each turn: "] = "每回合正能量值回复："
 objDesc["N.Energy each turn: "] = "每回合负能量值回复："
@@ -286,6 +287,7 @@ objDesc["Ammo reloads per turn: "] = "弹药每回合装填："
 objDesc["Damage Shield penetration (this weapon only): "] = "护盾穿透（仅限此武器）："
 objDesc["Lifesteal (this weapon only): "] = "生命偷取（仅限此武器）: " 
 objDesc["Multiple attacks: "] = "多次攻击："
+objDesc["Multiple attacks procs power reduction: "] = "多次攻击强度衰减："
 objDesc["Burst (radius 1) on hit: "] = "击中时溅射伤害（1格半径）："
 objDesc["Burst (radius 2) on hit: "] = "击中时溅射伤害（2格半径）："
 objDesc["Burst (radius 2) on crit: "] = "暴击时溅射伤害（2格半径）："
@@ -668,6 +670,8 @@ function getObjectDescCHN(desc)
 					desc[i]=desc[i]:gsub("increase paradox by a drastic amount with a chance to do an anomaly","大幅增加紊乱，有机率触发异常。"):gsub("chance","几率"):gsub("If anomaly triggers, halve paradox.","若触发异常，紊乱减半。")
 				elseif desc[i]:find("wounds the target for 7 turns: ") then
 					desc[i]=desc[i]:gsub("wounds the target for 7 turns:","对目标造成持续7回合的 伤口:"):gsub("bleeding,","流血伤害"):gsub(" reduced healing","治疗系数下降")
+				elseif desc[i]:find("Projects up to") then
+					desc[i]=desc[i]:gsub("Projects up to","投射最多"):gsub("attacks dealing","次攻击，造成"):gsub("weapon damage to random targets in range 7","武器伤害，随机攻击7格内敌人"):gsub("cannot hit the initial target"," 不会再击中初始目标")
 				else--if desc[i]:find("Special effect on block:") then
 					desc[i] = desc[i]:gsub("Special effect on block:","格挡特效：")
 							:gsub("Unleash a lightning nova of radius equal to the tinker tier.","释放半径等于材质等级的闪电新星")

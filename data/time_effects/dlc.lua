@@ -1043,3 +1043,119 @@ timeEffectCHN:newEffect{
 	subtype = "地面",
 
 }
+
+
+
+--possessor
+timeEffectCHN:newEffect{
+	id = "OMINOUS_FORM",
+	enName = "Ominous Form",
+	chName = "不详躯体",
+	desc = function (self, eff) return "你 偷 取 了 当 前 形 态 ， 并 和 它 共 享 伤 害 与治 疗 。"  end,
+	type = "其他",
+	subtype = "超能/支配",
+}
+timeEffectCHN:newEffect{
+	id = "POSSESSION",
+	enName = "Assume Form",
+	chName = "附身",
+	desc = function (self, eff) return "你 使 用 你 最 近 消 灭 的 敌 人 的 身 体 。 在 这 个 状 态 下你 不 能 被 治 疗 。"  end,
+	type = "其他",
+	subtype = "超能/支配",
+}
+timeEffectCHN:newEffect{
+	id = "POSSESSION_AFTERSHOCK",
+	enName = "Possession Aftershock",
+	chName = "支配余震",
+	desc = function (self, eff) return ("目 标 正 承 受 支 配 身 体 被 摧 毁 的 余 震，伤 害 减 少 60%%, 移 动 速 度 减 少 50%%."):format()  end,
+	type = "其他",
+	subtype = "震慑/支配/超能",
+}
+timeEffectCHN:newEffect{
+	id = "POSSESS",
+	enName = "Possess",
+	chName = "支配",
+	desc = function (self, eff) return ("目 标 被 超 能 力 网 困 住，将 会 被 支 配， 每 回 合 受 到 %0.2f 精 神 伤 害。"):format(eff.power)  end,
+	type = "其他",
+	subtype = "超能/支配/精神",
+}
+timeEffectCHN:newEffect{
+	id = "PSYCHIC_WIPE",
+	enName = "Psychic Wipe",
+	chName = "精神鞭打",
+	desc = function (self, eff) return ("空 灵 手 指 摧 毁 目 标 大 脑， 每 回 合 造 成 %0.2f 精 神 伤 害 ， 并 减 少 %d 精 神 豁 免。"):format(eff.dam, eff.reduct)  end,
+	type = "精神",
+	subtype = "超能/精神",
+}
+timeEffectCHN:newEffect{
+	id = "GHASTLY_WAIL",
+	enName = "Ghastly Wail",
+	chName = "恐怖嚎叫",
+	desc = function (self, eff) return "目 标 被 眩 晕 ， 不 能 移 动，减 半 伤 害 、 闪 避 、 豁 免 、 命 中 、 强 度 ，受 伤 害 后 解 除。"  end,
+	type = "精神",
+	subtype = "震慑/超能",
+}
+timeEffectCHN:newEffect{
+	id = "MIND_STEAL_REMOVE",
+	enName = "Mind Steal",
+	chName = "精神窃取",
+	desc = function (self, eff) return ("偷取技能: %s"):format(self:getTalentFromId(eff.tid).name)  end,
+	type = "其他",
+	subtype = "超能",
+}
+timeEffectCHN:newEffect{
+	id = "MIND_STEAL",
+	enName = "Mind Steal",
+	chName = "精神窃取",
+	desc = function (self, eff) return ("偷取技能: %s"):format(self:getTalentFromId(eff.tid).name)  end,
+	type = "其他",
+	subtype = "超能",
+}
+timeEffectCHN:newEffect{
+	id = "WRITHING_PSIONIC_MASS",
+	enName = "Writhing Psionic Mass",
+	chName = "扭曲装甲",
+	desc = function (self, eff) return ("所 有 抗 性 增 加 %d%%, 被 暴 击 率 减 少 %d%%。"):format(eff.resists, eff.crit)  end,
+	type = "物理",
+	subtype = "超能",
+}
+timeEffectCHN:newEffect{
+	id = "PSIONIC_DISRUPTION",
+	enName = "Psionic Disruption",
+	chName = "灵能瓦解",
+	desc = function (self, eff) return ("%d 层。 每 层 效 果 每 回 合 造 成 %0.2f 精 神 伤 害。"):format(eff.stacks, eff.dam)  end,
+	type = "精神",
+	subtype = "超能/伤害",
+}
+timeEffectCHN:newEffect{
+	id = "PSIONIC_BLOCK",
+	enName = "Psionic Block",
+	chName = "灵能格挡",
+	desc = function (self, eff) return ("%d%% 几 率 无 视 伤 害 并 反 击 %0.2f 精 神 伤 害。"):format(eff.chance, eff.dam)  end,
+	type = "精神",
+	subtype = "超能/伤害",
+}
+timeEffectCHN:newEffect{
+	id = "SADIST",
+	enName = "Sadist",
+	chName = "虐待狂",
+	desc = function (self, eff) return ("精 神 强 度 ( 原 始 值 ) 增 加 %d。"):format(eff.stacks * eff.power)  end,
+	type = "精神",
+	subtype = "超能",
+}
+timeEffectCHN:newEffect{
+	id = "RADIATE_AGONY",
+	enName = "Radiate Agony",
+	chName = "痛苦辐射",
+	desc = function (self, eff) return ("所 有 伤 害 减 少 %d%%."):format(eff.power)  end,
+	type = "精神",
+	subtype = "超能",
+}
+timeEffectCHN:newEffect{
+	id = "TORTURE_MIND",
+	enName = "Tortured Mind",
+	chName = "精神拷打",
+	desc = function (self, eff) return ("%d 项技能不能使用。"):format(eff.nb)  end,
+	type = "精神",
+	subtype = "超能/锁定",
+}

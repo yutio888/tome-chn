@@ -40,3 +40,18 @@ registerBirthDescriptorTranslation{
 		"#GOLD# 每 等 级 生 命 加 值： #LIGHT_BLUE# -4 (* 特 殊 *)",
 	},
 }
+registerBirthDescriptorTranslation{
+	type = "subclass",
+	name = "Possessor",
+	display_name = "支 配 者",
+	desc = {
+		"#CRIMSON#注意: 该职业机制相当 #{italic}#奇怪#{normal}# ，可能不适合新手使用。#LAST#",
+		"支 配 者 是 一 类 极 其 稀 有 的 超 能 力 者。 有 些 人 称 其 为 身 体 掠 夺 者 ，有 些 人 视 其 为 噩 梦。",
+		"他 们 擅 长 偷 取 敌 人 死 亡 后 的 身 体，能 暂 时 抛 弃 自 己 的 躯 体 ， 使 用 其 他 身 体。",
+		" 他 们 最 重 要 的 属 性 是 : 意 志 和 灵 巧 ",
+		"#GOLD# 属 性 修 正： ",
+		"#LIGHT_BLUE# * +2 力 量 , +2 敏 捷 , +0 体 质 ",
+		"#LIGHT_BLUE# * +0 魔 法 , +3 意 志 , +2 灵 巧 ",
+		"#GOLD# 每 等 级 生 命 加 值： #LIGHT_BLUE# -4 ",		
+	},
+}

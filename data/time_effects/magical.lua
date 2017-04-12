@@ -479,7 +479,7 @@ timeEffectCHN:newEffect{
 timeEffectCHN:newEffect{
 	id = "IMPENDING_DOOM",
 	enName = "Impending Doom",
-	chName = "末日迫近",
+	chName = "灾厄降临",
 	type = "魔法",
 	subtype = "奥术",
 }

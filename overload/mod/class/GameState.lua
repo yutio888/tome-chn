@@ -2037,6 +2037,10 @@ print("   power types: not_power_source =", table.concat(table.keys(b.not_power_
 							ok = false
 						end
 					end
+					if t.type[1]:find("/other$") then
+						print("Random boss forbase talent because category /other", t.name, t.id, t.type[1])
+						ok = false
+					end
 					if ok then list[t.id] = true end
 				end
 			end

@@ -789,9 +789,9 @@ function _M:displayResources(scale, bx, by, a)
 		end
 
 		local shield, max_shield = 0, 0
-		if player:attr("time_shield") then shield = shield + player.time_shield_absorb max_shield = max_shield + player.time_shield_absorb_max end
-		if player:attr("damage_shield") then shield = shield + player.damage_shield_absorb max_shield = max_shield + player.damage_shield_absorb_max end
-		if player:attr("displacement_shield") then shield = shield + player.displacement_shield max_shield = max_shield + player.displacement_shield_max end
+		if player:attr("time_shield") then shield = shield + (player.time_shield_absorb or 0) max_shield = max_shield + (player.time_shield_absorb_max or 0) end
+		if player:attr("damage_shield") then shield = shield + (player.damage_shield_absorb or 0) max_shield = max_shield + (player.damage_shield_absorb_max or 0) end
+		if player:attr("displacement_shield") then shield = shield + (player.displacement_shield or 0) max_shield = max_shield + (player.displacement_shield_max or 0) end
 		
 		local front = fshat_life_dark
 		if max_shield > 0 then

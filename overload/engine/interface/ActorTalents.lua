@@ -840,6 +840,9 @@ function _M:updateTalentTypeMastery(tt)
 			end
 		end
 	end
+	if self.talents_types_def[tt] and self.talents_types_def[tt].on_mastery_change then
+		self.talents_types_def[tt].on_mastery_change(self, self:getTalentTypeMastery(tt), tt)
+	end
 end
 
 --- Return talent definition from id

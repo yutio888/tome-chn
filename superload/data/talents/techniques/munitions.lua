@@ -39,7 +39,7 @@ registerTalentTranslation{
 	info = function (self,t)
 		local reduce = t.getArmorSaveReduction(self, t)
 		local resist = t.getResistPenalty(self,t)
-		return ([[装 填 穿 甲 弹, 使 目 标 的 护 甲 和 豁 免 减 少 %d  3 回合, 你 的 物 理 穿 透 增 加 %d%%。
+		return ([[装 填 穿 甲 弹, 使 目 标 的 护 甲 和 豁 免 减 少 %d 持 续 3 回合, 你 的 物 理 穿 透 增 加 %d%%。
 		护 甲 和 豁 免 削 减 随 物 理 强 度 增 加.]]):format(reduce, resist)
 	end,
 }

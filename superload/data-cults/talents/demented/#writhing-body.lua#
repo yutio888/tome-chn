@@ -1,6 +1,6 @@
 local _M = loadPrevious(...)
 registerTalentTranslation{
-	id = "T_Mutated_HERERAGEGAND",
+	id = "T_MUTATED_HERERAGEGAND",
 	name = "Mutated Hereragegand",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)

@@ -2,51 +2,51 @@ local _M = loadPrevious(...)
 
 registerTalentTranslation{
 	id = "T_ACCELERATE",
-	name = "Accelerate",
+	name = "窃速神偷",
 	info = function(self, t)
 		local dur = t.getDuration(self, t)
 		local speed = t.getSpeed(self, t)
-		return ([[Distorting spacetime around yourself, you reduce the movement speed of all enemies in radius 7 by 50%% for %d turns.
-You use the siphoned speed to grant yourself incredible quickness for 1 turn, increasing movement speed by %d%%, increased by a further %d%% for each enemy slowed, to a maximum of 4.
-Any actions other than movement will cancel the effect.]]):
+		return ([[扭 曲 周 围 时 空 ， 周 围 7 码 内 敌 人 移 动 速 度 降 低 50%% ， 持 续 %d 回 合 。
+		你 使 用 偷 取 的 速 度 强 化 自 身 ， 使 自 己 获 得 一 回 合 神 速 状 态 ， 移 动 速 度 提 高 %d%%， 每 减 速 一 个 敌 人 ， 额 外 提 高 %d%%， 最 大 个 数 4 个 。
+		移 动 外 的 任 何 行 动 将 终 止 加 速 效 果。]]):
 		format(dur, speed, speed/8)
 	end,
 }
 
 registerTalentTranslation{
 	id = "T_SWITCH",
-	name = "Switch",
+	name = "偷天换日",
 	info = function(self, t)
 		local nb = t.getNb(self,t)
 		local dur = t.getDuration(self,t)
-		return ([[Release a surge of entropy, cleansing yourself of afflictions while draining the energy from others. All enemies in range 10 will have the duration of %d beneficial effects reduced by %d turns, while you will have an equal number of detrimental effects reduced by the same duration.]]):
-		format(nb, dur)
+		return ([[释 放 熵 浪 潮 ，清 除 自 己 的 灾 祸 ， 同 时 吸 取 他 人 的 能 量 。 10 码 内 所 有 敌 人 的 %d 项 有 益 效 果 持 续 时 间 缩 短 %d 回 合 ， 自 身 %d 个 有 害 效 果 持 续 时 间 缩 短 %d 回 合 。]]):
+		format(nb, dur, nd, dur)
 	end,
 }
 
 registerTalentTranslation{
 	id = "T_SUSPEND",
-	name = "Suspend",
+	name = "窃命凝固",
 	info = function(self, t)
 		local rad = self:getTalentRadius(t)
 		local dur = t.getDuration(self,t)
-		return ([[You and all enemies within radius %d will be frozen in time for %d turns, preventing you from taking any action but preventing any damage taken.
-For yourself, negative effects and cooldowns will decrease in duration, while beneficial effects will remain at their current duration.
-For enemies, negative effects and cooldowns will not decrease, while beneficial effects decrease in duration.]]):format(rad, dur)
+		return ([[你 和 %d 码 内 所 有 敌 人 在 时 间 中 凝 固 %d 回 合 ， 无 法 行 动 但 也 无 法 被 伤 害。
+		自 身 的 有 害 效 果 持 续 时 间 和 技 能 CD 会 正 常 扣 减 ， 有 益 效 果 持 续 时 间 不 变。
+		敌 人 的 有 害 效 果 持 续 时 间 和 技 能 CD 不 会 扣 减 ， 有 益 效 果 持 续 时 间 正 常 扣 减。]]):format(rad, dur)
 	end,
 }
 
 registerTalentTranslation{
 	id = "T_SPLIT",
-	name = "Split",
+	name = "命运裂解",
 	info = function(self, t)
 		local dur = t.getDuration(self, t)
 		local power = t.getPower(self,t)
 		local res = 80 - power
 		local dam = 40 + power
 		local life = 20 + power
-		return ([[The target enemy will be partially removed from the normal flow of time for %d turns, inhibiting their ability to interact with the world. All damage taken will be reduced by %d%%, while all damage dealt will be reduced by %d%%.
-While active, you form the frayed threads of their timeline into a temporal clone of them for the same duration, which assists you in combat. This clone is identical, but has %d%% reduced life and deals %d%% damage.]]):
+		return ([[将 目 标 敌 人 从 正 常 时 间 流 部 分 移 除 ， 持 续 %d 回 合 ， 隔 绝 他 们 与 现 实 世 界 交 互 的 能 力 。 移 除 期 间 敌 人 受 到 的 伤 害 降 低 %d%% ， 造 成 的 伤 害 也 降 低 %d%% 。
+		技 能 启 动 时 ， 你 从 受 损 的 时 间 线 中 召 唤 敌 人 的 时 空 克 隆 体 协 助 你 战 斗 ， 持 续 时 间 与 敌 人 移 除 时 间 相 同 ， 克 隆 体 生 命 值 降 低 %d%% ， 造 成 伤 害 降 低 %d%% ， 其 他 能 力 与 本 体 相 同。]]):
 		format(dur, res, dam, life, dam)
 	end,
 }

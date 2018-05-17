@@ -269,6 +269,7 @@ function _M:use(item)
 		self:restoreResources(self.actor)
 		world:gainAchievement("UNSTOPPABLE", actor)
 		self.actor:check("on_resurrect", "consume", o)
+		o:check("on_resurrect", self.actor)
 		game:saveGame()
 	end
 end

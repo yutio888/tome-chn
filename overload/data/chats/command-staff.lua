@@ -50,6 +50,7 @@ local function intro(o)
 		telos = [[要知道，你可以给我找个更好的环境。现在嘛，我还是留在我原来的旧水晶里吧，这根法杖有一股狐臭的味道。]],
 		telos_full = [[在泰勒斯的强大力量下颤抖吧！]],
 	}
+	cur_chat:triggerHook{"CommandStaff:SentientOptions", o=o, mode="intro", list=sentient_responses}
 	if o.no_command then
 		return [[在这根法杖上没有合适的位置镶嵌此物品。这样做会带来破坏。]]
 	end
@@ -70,6 +71,7 @@ local function how_speak(o)
 		telos = [[如果不能说话，那这样的永生还有何意义？凡是想要达到永生不死的大法师，没有一个留下一种方法让自己的伟大知识永久流传。而且，顺便说一句，你的能量操纵水平只配给我提鞋，给我仔细的听着，如果你不想因为遗漏我说的话而死的不明不白。]],
 		telos_full = [[如果不能说话，那这样的永生还有何意义？凡是想要达到永生不死的大法师，没有一个留下一种方法让自己的伟大知识永久流传。而且，顺便说一句，你的能量操纵水平只配给我提鞋，给我仔细的听着，如果你不想因为遗漏我说的话而死的不明不白。]],
 	}
+	class:triggerHook{"CommandStaff:SentientOptions", o=o, mode="how_speak", list=sentient_responses}
 	return sentient_responses[o.combat.sentient] or sentient_responses["default"]
 end
 
@@ -93,6 +95,7 @@ local function alter_combat(o)
 		default = [[当然。顺带一提，我可以做的事情会让你印象深刻。大多数较弱者实践我的艺术时会感觉有困难。我要不要改变一下？]],
 		aggressive = [[很好，只要它能快速的引爆某物。你要我换成什么？]],
 	}
+	class:triggerHook{"CommandStaff:SentientOptions", o=o, mode="alter_combat", list=sentient_responses}
 	return sentient_responses[o.combat.sentient] or sentient_responses["default"]
 end
 

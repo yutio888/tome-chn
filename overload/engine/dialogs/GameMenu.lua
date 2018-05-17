@@ -126,8 +126,10 @@ function _M:generateList(actions)
 		if type(act) == "string" then
 			if act ~= "steam" or core.steam then
 				local a = default_actions[act]
-				list[#list+1] = { name=a[1], fct=a[2] }
-				i = i + 1
+				if a then
+					list[#list+1] = { name=a[1], fct=a[2] }
+					i = i + 1
+				end
 			end
 		else
 			local a = act

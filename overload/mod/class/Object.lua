@@ -337,7 +337,9 @@ function _M:use(who, typ, inven, item)
 	if not typ and #types == 1 then typ = types[1] end
 
 	if typ == "use" then
+		who.__object_use_running = self
 		local ret = self:useObject(who, inven, item)
+		who.__object_use_running = nil
 		if ret.used then
 			if self.charm_on_use then
 				for i, d in ipairs(self.charm_on_use) do
@@ -473,7 +475,8 @@ end
 --- Gets the color in which to display the object in lists
 function _M:getDisplayColor(fake)
 	if not fake and not self:isIdentified() then return {180, 180, 180}, "#B4B4B4#" end
-	if self.lore then return {0, 128, 255}, "#0080FF#"
+	if self.cosmetic then return {0xC5, 0x75, 0xC6}, "#C578C6#"
+	elseif self.lore then return {0, 128, 255}, "#0080FF#"
 	elseif self.unique then
 		if self.randart then
 			return {255, 0x77, 0}, "#FF7700#"
@@ -618,13 +621,523 @@ function _M:descAccuracyBonus(desc, weapon, use_actor)
 	end
 end
 
+--- Static
+function _M:compareFields(item1, items, infield, field, outformat, text, mod, isinversed, isdiffinversed, add_table)
+	add_table = add_table or {}
+	mod = mod or 1
+	isinversed = isinversed or false
+	isdiffinversed = isdiffinversed or false
+	local ret = tstring{}
+	local added = 0
+	local add = false
+	ret:add(text)
+	local outformatres
+	local resvalue = ((item1[field] or 0) + (add_table[field] or 0)) * mod
+	local item1value = resvalue
+	if type(outformat) == "function" then
+		outformatres = outformat(resvalue, nil)
+	else outformatres = outformat:format(resvalue) end
+	if isinversed then
+		ret:add(((item1[field] or 0) + (add_table[field] or 0)) > 0 and {"color","RED"} or {"color","LIGHT_GREEN"}, outformatres, {"color", "LAST"})
+	else
+		ret:add(((item1[field] or 0) + (add_table[field] or 0)) < 0 and {"color","RED"} or {"color","LIGHT_GREEN"}, outformatres, {"color", "LAST"})
+	end
+	if item1[field] then
+		add = true
+	end
+	for i=1, #items do
+		if items[i][infield] and items[i][infield][field] then
+			if added == 0 then
+				ret:add(" (")
+			elseif added > 1 then
+				ret:add(" / ")
+			end
+			added = added + 1
+			add = true
+			if items[i][infield][field] ~= (item1[field] or 0) then
+				local outformatres
+				local resvalue = (items[i][infield][field] + (add_table[field] or 0)) * mod
+				if type(outformat) == "function" then
+					outformatres = outformat(item1value, resvalue)
+				else outformatres = outformat:format(item1value - resvalue) end
+				if isdiffinversed then
+					ret:add(items[i][infield][field] < (item1[field] or 0) and {"color","RED"} or {"color","LIGHT_GREEN"}, outformatres, {"color", "LAST"})
+				else
+					ret:add(items[i][infield][field] > (item1[field] or 0) and {"color","RED"} or {"color","LIGHT_GREEN"}, outformatres, {"color", "LAST"})
+				end
+			else
+				ret:add("-")
+			end
+		end
+	end
+	if added > 0 then
+		ret:add(")")
+	end
+	if add then
+		ret:add(true)
+		return ret
+	end
+end
+
+function _M:compareTableFields(item1, items, infield, field, outformat, text, kfunct, mod, isinversed, filter)
+	mod = mod or 1
+	isinversed = isinversed or false
+	local ret = tstring{}
+	local added = 0
+	local add = false
+	ret:add(text)
+	local tab = {}
+	if item1[field] then
+		for k, v in pairs(item1[field]) do
+			tab[k] = {}
+			tab[k][1] = v
+		end
+	end
+	for i=1, #items do
+		if items[i][infield] and items[i][infield][field] then
+			for k, v in pairs(items[i][infield][field]) do
+				tab[k] = tab[k] or {}
+				tab[k][i + 1] = v
+			end
+		end
+	end
+	local count1 = 0
+	for k, v in pairs(tab) do
+		if not filter or filter(k, v) then
+			local count = 0
+			if isinversed then
+				ret:add(("%s"):format((count1 > 0) and " / " or ""), (v[1] or 0) > 0 and {"color","RED"} or {"color","LIGHT_GREEN"}, outformat:format((v[1] or 0)), {"color","LAST"})
+			else
+				ret:add(("%s"):format((count1 > 0) and " / " or ""), (v[1] or 0) < 0 and {"color","RED"} or {"color","LIGHT_GREEN"}, outformat:format((v[1] or 0)), {"color","LAST"})
+			end
+			count1 = count1 + 1
+			if v[1] then
+				add = true
+			end
+			for kk, vv in pairs(v) do
+				if kk > 1 then
+					if count == 0 then
+						ret:add("(")
+					elseif count > 0 then
+						ret:add(" / ")
+					end
+					if vv ~= (v[1] or 0) then
+						if isinversed then
+							ret:add((v[1] or 0) > vv and {"color","RED"} or {"color","LIGHT_GREEN"}, outformat:format((v[1] or 0) - vv), {"color","LAST"})
+						else
+							ret:add((v[1] or 0) < vv and {"color","RED"} or {"color","LIGHT_GREEN"}, outformat:format((v[1] or 0) - vv), {"color","LAST"})
+						end
+					else
+						ret:add("-")
+					end
+					add = true
+					count = count + 1
+				end
+			end
+			if count > 0 then
+				ret:add(")")
+			end
+			ret:add(kfunct(k))
+		end
+	end
+
+	if add then
+		ret:add(true)
+		return ret
+	end
+end
+
+--- Static
+function _M:descCombat(use_actor, combat, compare_with, field, add_table, is_fake_add)
+	local desc = tstring{}
+	add_table = add_table or {}
+	add_table.dammod = add_table.dammod or {}
+	combat = table.clone(combat[field] or {})
+	compare_with = compare_with or {}
+
+	local compare_fields = function(item1, items, infield, field, outformat, text, mod, isinversed, isdiffinversed, add_table)
+		local add = self:compareFields(item1, items, infield, field, outformat, text, mod, isinversed, isdiffinversed, add_table)
+		if add then desc:merge(add) end
+	end
+	local compare_table_fields = function(item1, items, infield, field, outformat, text, kfunct, mod, isinversed, filter)
+		local add = self:compareTableFields(item1, items, infield, field, outformat, text, kfunct, mod, isinversed, filter)
+		if add then desc:merge(add) end
+	end
+
+	local dm = {}
+	combat.dammod = table.mergeAdd(table.clone(combat.dammod or {}), add_table.dammod)
+	local dammod = use_actor:getDammod(combat)
+	for stat, i in pairs(dammod) do
+		local name = Stats.stats_def[stat].short_name:capitalize()
+		if use_actor:knowTalent(use_actor.T_STRENGTH_OF_PURPOSE) then
+			if name == "Str" then name = "Mag" end
+		end
+		if self.subtype == "dagger" and use_actor:knowTalent(use_actor.T_LETHALITY) then
+			if name == "Str" then name = "Cun" end
+		end
+		dm[#dm+1] = ("%d%% %s"):format(i * 100, name)
+	end
+	if #dm > 0 or combat.dam then
+		local diff_count = 0
+		local any_diff = false
+		if config.settings.tome.advanced_weapon_stats then
+			local base_power = use_actor:combatDamagePower(combat, add_table.dam)
+			local base_range = use_actor:combatDamageRange(combat, add_table.damrange)
+			local power_diff, range_diff = {}, {}
+			for _, v in ipairs(compare_with) do
+				if v[field] then
+					local base_power_diff = base_power - use_actor:combatDamagePower(v[field], add_table.dam)
+					local base_range_diff = base_range - use_actor:combatDamageRange(v[field], add_table.damrange)
+					power_diff[#power_diff + 1] = ("%s%+d%%#LAST#"):format(base_power_diff > 0 and "#00ff00#" or "#ff0000#", base_power_diff * 100)
+					range_diff[#range_diff + 1] = ("%s%+.1fx#LAST#"):format(base_range_diff > 0 and "#00ff00#" or "#ff0000#", base_range_diff)
+					diff_count = diff_count + 1
+					if base_power_diff ~= 0 or base_range_diff ~= 0 then
+						any_diff = true
+					end
+				end
+			end
+			if any_diff then
+				local s = ("Power: %3d%% (%s)  Range: %.1fx (%s)"):format(base_power * 100, table.concat(power_diff, " / "), base_range, table.concat(range_diff, " / "))
+				desc:merge(s:toTString())
+			else
+				desc:add(("Power: %3d%%  Range: %.1fx"):format(base_power * 100, base_range))
+			end
+		else
+			local power_diff = {}
+			for i, v in ipairs(compare_with) do
+				if v[field] then
+					local base_power_diff = ((combat.dam or 0) + (add_table.dam or 0)) - ((v[field].dam or 0) + (add_table.dam or 0))
+					local dfl_range = (1.1 - (add_table.damrange or 0))
+					local multi_diff = (((combat.damrange or dfl_range) + (add_table.damrange or 0)) * ((combat.dam or 0) + (add_table.dam or 0))) - (((v[field].damrange or dfl_range) + (add_table.damrange or 0)) * ((v[field].dam or 0) + (add_table.dam or 0)))
+					power_diff [#power_diff + 1] = ("%s%+.1f#LAST# - %s%+.1f#LAST#"):format(base_power_diff > 0 and "#00ff00#" or "#ff0000#", base_power_diff, multi_diff > 0 and "#00ff00#" or "#ff0000#", multi_diff)
+					diff_count = diff_count + 1
+					if base_power_diff ~= 0 or multi_diff ~= 0 then
+						any_diff = true
+					end
+				end
+			end
+			if any_diff == false then
+				power_diff = ""
+			else
+				power_diff = ("(%s)"):format(table.concat(power_diff, " / "))
+			end
+			desc:add(("Base power: %.1f - %.1f"):format((combat.dam or 0) + (add_table.dam or 0), ((combat.damrange or (1.1 - (add_table.damrange or 0))) + (add_table.damrange or 0)) * ((combat.dam or 0) + (add_table.dam or 0))))
+			desc:merge(power_diff:toTString())
+		end
+		desc:add(true)
+		desc:add(("Uses stat%s: %s"):format(#dm > 1 and "s" or "",table.concat(dm, ', ')), true)
+		local col = (combat.damtype and DamageType:get(combat.damtype) and DamageType:get(combat.damtype).text_color or "#WHITE#"):toTString()
+		desc:add("Damage type: ", col[2],DamageType:get(combat.damtype or DamageType.PHYSICAL).name:capitalize(),{"color","LAST"}, true)
+	end
+
+	if combat.talented then
+		local t = use_actor:combatGetTraining(combat)
+		if t and t.name then desc:add("Mastery: ", {"color","GOLD"}, t.name, {"color","LAST"}, true) end
+	end
+
+	self:descAccuracyBonus(desc, combat, use_actor)
+
+	if combat.wil_attack then
+		desc:add("Accuracy is based on willpower for this weapon.", true)
+	end
+
+	compare_fields(combat, compare_with, field, "atk", "%+d", "Accuracy: ", 1, false, false, add_table)
+	compare_fields(combat, compare_with, field, "apr", "%+d", "Armour Penetration: ", 1, false, false, add_table)
+	compare_fields(combat, compare_with, field, "physcrit", "%+.1f%%", "Crit. chance: ", 1, false, false, add_table)
+	compare_fields(combat, compare_with, field, "crit_power", "%+.1f%%", "Crit. power: ", 1, false, false, add_table)
+	local physspeed_compare = function(orig, compare_with)
+		orig = 100 / orig
+		if compare_with then return ("%+.0f%%"):format(orig - 100 / compare_with)
+		else return ("%2.0f%%"):format(orig) end
+	end
+	compare_fields(combat, compare_with, field, "physspeed", physspeed_compare, "Attack speed: ", 1, false, true, add_table)
+
+	compare_fields(combat, compare_with, field, "block", "%+d", "Block value: ", 1, false, false, add_table)
+
+	compare_fields(combat, compare_with, field, "dam_mult", "%d%%", "Dam. multiplier: ", 100, false, false, add_table)
+	compare_fields(combat, compare_with, field, "range", "%+d", "Firing range: ", 1, false, false, add_table)
+	compare_fields(combat, compare_with, field, "capacity", "%d", "Capacity: ", 1, false, false, add_table)
+	compare_fields(combat, compare_with, field, "shots_reloaded_per_turn", "%+d", "Reload speed: ", 1, false, false, add_table)
+	compare_fields(combat, compare_with, field, "ammo_every", "%d", "Turns elapse between self-loadings: ", 1, false, false, add_table)
+
+	local talents = {}
+	if combat.talent_on_hit then
+		for tid, data in pairs(combat.talent_on_hit) do
+			talents[tid] = {data.chance, data.level}
+		end
+	end
+	for i, v in ipairs(compare_with or {}) do
+		for tid, data in pairs(v[field] and (v[field].talent_on_hit or {})or {}) do
+			if not talents[tid] or talents[tid][1]~=data.chance or talents[tid][2]~=data.level then
+				desc:add({"color","RED"}, ("When this weapon hits: %s (%d%% chance level %d)."):format(self:getTalentFromId(tid).name, data.chance, data.level), {"color","LAST"}, true)
+			else
+				talents[tid][3] = true
+			end
+		end
+	end
+	for tid, data in pairs(talents) do
+		desc:add(talents[tid][3] and {"color","WHITE"} or {"color","GREEN"}, ("When this weapon hits: %s (%d%% chance level %d)."):format(self:getTalentFromId(tid).name, talents[tid][1], talents[tid][2]), {"color","LAST"}, true)
+	end
+
+	local talents = {}
+	if combat.talent_on_crit then
+		for tid, data in pairs(combat.talent_on_crit) do
+			talents[tid] = {data.chance, data.level}
+		end
+	end
+	for i, v in ipairs(compare_with or {}) do
+		for tid, data in pairs(v[field] and (v[field].talent_on_crit or {})or {}) do
+			if not talents[tid] or talents[tid][1]~=data.chance or talents[tid][2]~=data.level then
+				desc:add({"color","RED"}, ("When this weapon crits: %s (%d%% chance level %d)."):format(self:getTalentFromId(tid).name, data.chance, data.level), {"color","LAST"}, true)
+			else
+				talents[tid][3] = true
+			end
+		end
+	end
+	for tid, data in pairs(talents) do
+		desc:add(talents[tid][3] and {"color","WHITE"} or {"color","GREEN"}, ("When this weapon crits: %s (%d%% chance level %d)."):format(self:getTalentFromId(tid).name, talents[tid][1], talents[tid][2]), {"color","LAST"}, true)
+	end
+
+	local special = ""
+	if combat.special_on_hit then
+		special = combat.special_on_hit.desc
+	end
+
+	--[[ I couldn't figure out how to make this work because tdesc goes in the same list as special_on_Hit
+	local found = false
+	for i, v in ipairs(compare_with or {}) do
+		if v[field] and v[field].special_on_hit then
+			if special ~= v[field].special_on_hit.desc then
+				desc:add({"color","RED"}, "When this weapon hits: "..v[field].special_on_hit.desc, {"color","LAST"}, true)
+			else
+				found = true
+			end
+		end
+	end
+	--]]
+
+	-- get_items takes the combat table and returns a table of items to print.
+	-- Each of these items one of the following:
+	-- id -> {priority, string}
+	-- id -> {priority, message_function(this, compared), value}
+	-- header is the section header.
+	local compare_list = function(header, get_items)
+		local priority_ordering = function(left, right)
+			return left[2][1] < right[2][1]
+		end
+
+		if next(compare_with) then
+			-- Grab the left and right items.
+			local left = get_items(combat)
+			local right = {}
+			for i, v in ipairs(compare_with) do
+				for k, item in pairs(get_items(v[field])) do
+					if not right[k] then
+						right[k] = item
+					elseif type(right[k]) == 'number' then
+						right[k] = right[k] + item
+					else
+						right[k] = item
+					end
+				end
+			end
+
+			-- Exit early if no items.
+			if not next(left) and not next(right) then return end
+
+			desc:add(header, true)
+
+			local combined = table.clone(left)
+			table.merge(combined, right)
+
+			for k, _ in table.orderedPairs2(combined, priority_ordering) do
+				l = left[k]
+				r = right[k]
+				message = (l and l[2]) or (r and r[2])
+				if type(message) == 'function' then
+					desc:add(message(l and l[3], r and r[3] or 0), true)
+				elseif type(message) == 'string' then
+					local prefix = '* '
+					local color = 'WHITE'
+					if l and not r then
+						color = 'GREEN'
+						prefix = '+ '
+					end
+					if not l and r then
+						color = 'RED'
+						prefix = '- '
+					end
+					desc:add({'color',color}, prefix, message, {'color','LAST'}, true)
+				end
+			end
+		else
+			local items = get_items(combat)
+			if next(items) then
+				desc:add(header, true)
+				for k, v in table.orderedPairs2(items, priority_ordering) do
+					message = v[2]
+					if type(message) == 'function' then
+						desc:add(message(v[3]), true)
+					elseif type(message) == 'string' then
+						desc:add({'color','WHITE'}, '* ', message, {'color','LAST'}, true)
+					end
+				end
+			end
+		end
+	end
+
+	local get_special_list = function(combat, key)
+		local special = combat[key]
+
+		-- No special
+		if not special then return {} end
+		-- Single special
+		if special.desc then
+			return {[special.desc] = {10, util.getval(special.desc, self, use_actor, special)}}
+		end
+
+		-- Multiple specials
+		local list = {}
+		for _, special in pairs(special) do
+			list[special.desc] = {10, util.getval(special.desc, self, use_actor, special)}
+		end
+		return list
+	end
+
+	compare_list(
+		"On weapon hit:",
+		function(combat)
+			if not combat then return {} end
+			local list = {}
+			-- Get complex damage types
+			for dt, amount in pairs(combat.melee_project or combat.ranged_project or {}) do
+				local dt_def = DamageType:get(dt)
+				if dt_def and dt_def.tdesc then
+					list[dt] = {0, dt_def.tdesc, amount}
+				end
+			end
+			-- Get specials
+			table.merge(list, get_special_list(combat, 'special_on_hit'))
+			return list
+		end
+	)
+
+	compare_list(
+		"On weapon crit:",
+		function(combat)
+			if not combat then return {} end
+			return get_special_list(combat, 'special_on_crit')
+		end
+	)
+
+	compare_list(
+		"On weapon kill:",
+		function(combat)
+			if not combat then return {} end
+			return get_special_list(combat, 'special_on_kill')
+		end
+	)
+
+	local found = false
+	for i, v in ipairs(compare_with or {}) do
+		if v[field] and v[field].no_stealth_break then
+			found = true
+		end
+	end
+
+	if combat.no_stealth_break then
+		desc:add(found and {"color","WHITE"} or {"color","GREEN"},"When used from stealth a simple attack with it will not break stealth.", {"color","LAST"}, true)
+	elseif found then
+		desc:add({"color","RED"}, "When used from stealth a simple attack with it will not break stealth.", {"color","LAST"}, true)
+	end
+
+	if combat.crushing_blow then
+		desc:add({"color", "YELLOW"}, "Crushing Blows: ", {"color", "LAST"}, "Damage dealt by this weapon is increased by half your critical multiplier, if doing so would kill the target.", true)
+	end
+
+	compare_fields(combat, compare_with, field, "travel_speed", "%+d%%", "Travel speed: ", 100, false, false, add_table)
+
+	compare_fields(combat, compare_with, field, "phasing", "%+d%%", "Damage Shield penetration (this weapon only): ", 1, false, false, add_table)
+
+	compare_fields(combat, compare_with, field, "lifesteal", "%+d%%", "Lifesteal (this weapon only): ", 1, false, false, add_table)
+	
+	local attack_recurse_procs_reduce_compare = function(orig, compare_with)
+		orig = 100 - 100 / orig
+		if compare_with then return ("%+d%%"):format(-(orig - (100 - 100 / compare_with)))
+		else return ("%d%%"):format(-orig) end
+	end
+	compare_fields(combat, compare_with, field, "attack_recurse", "%+d", "Multiple attacks: ", 1, false, false, add_table)
+	compare_fields(combat, compare_with, field, "attack_recurse_procs_reduce", attack_recurse_procs_reduce_compare, "Multiple attacks procs power reduction: ", 1, true, false, add_table)
+
+	if combat.tg_type and combat.tg_type == "beam" then
+		desc:add({"color","YELLOW"}, ("Shots beam through all targets."), {"color","LAST"}, true)
+	end
+
+	compare_table_fields(
+		combat, compare_with, field, "melee_project", "%+d", "Damage (Melee): ",
+		function(item)
+			local col = (DamageType.dam_def[item] and DamageType.dam_def[item].text_color or "#WHITE#"):toTString()
+			return col[2], (" %s"):format(DamageType.dam_def[item].name),{"color","LAST"}
+		end,
+		nil, nil,
+		function(k, v) return not DamageType.dam_def[k].tdesc end)
+
+	compare_table_fields(
+		combat, compare_with, field, "ranged_project", "%+d", "Damage (Ranged): ",
+		function(item)
+			local col = (DamageType.dam_def[item] and DamageType.dam_def[item].text_color or "#WHITE#"):toTString()
+			return col[2], (" %s"):format(DamageType.dam_def[item].name),{"color","LAST"}
+		end,
+		nil, nil,
+		function(k, v) return not DamageType.dam_def[k].tdesc end)
+
+	compare_table_fields(combat, compare_with, field, "burst_on_hit", "%+d", "Burst (radius 1) on hit: ", function(item)
+			local col = (DamageType.dam_def[item] and DamageType.dam_def[item].text_color or "#WHITE#"):toTString()
+			return col[2], (" %s"):format(DamageType.dam_def[item].name),{"color","LAST"}
+		end)
+
+	compare_table_fields(combat, compare_with, field, "burst_on_crit", "%+d", "Burst (radius 2) on crit: ", function(item)
+			local col = (DamageType.dam_def[item] and DamageType.dam_def[item].text_color or "#WHITE#"):toTString()
+			return col[2], (" %s"):format(DamageType.dam_def[item].name),{"color","LAST"}
+		end)
+
+	compare_table_fields(combat, compare_with, field, "convert_damage", "%d%%", "Damage conversion: ", function(item)
+			local col = (DamageType.dam_def[item] and DamageType.dam_def[item].text_color or "#WHITE#"):toTString()
+			return col[2], (" %s"):format(DamageType.dam_def[item].name),{"color","LAST"}
+		end)
+
+	compare_table_fields(combat, compare_with, field, "inc_damage_type", "%+d%% ", "Damage against: ", function(item)
+			local _, _, t, st = item:find("^([^/]+)/?(.*)$")
+			if st and st ~= "" then
+				return st:capitalize()
+			else
+				return t:capitalize()
+			end
+		end)
+
+	-- resources used to attack
+	compare_table_fields(
+		combat, compare_with, field, "use_resources", "%0.1f", "#ORANGE#Attacks use: #LAST#",
+		function(item)
+			local res_def = ActorResource.resources_def[item]
+			local col = (res_def and res_def.color or "#SALMON#"):toTString()
+			return col[2], (" %s"):format(res_def and res_def.name or item:capitalize()),{"color","LAST"}
+		end,
+		nil,
+		true)
+
+	self:triggerHook{"Object:descCombat", compare_with=compare_with, compare_fields=compare_fields, compare_scaled=compare_scaled, compare_scaled=compare_scaled, compare_table_fields=compare_table_fields, desc=desc, combat=combat}
+	return desc
+end
+
 --- Gets the full textual desc of the object without the name and requirements
 function _M:getTextualDesc(compare_with, use_actor)
-	use_actor = use_actor or game.player
+use_actor = use_actor or game.player
 	compare_with = compare_with or {}
 	local desc = tstring{}
 
 	if self.quest then desc:add({"color", "VIOLET"},"[Plot Item]", {"color", "LAST"}, true)
+	elseif self.cosmetic then desc:add({"color", "C578C6"},"[Cosmetic Item]", {"color", "LAST"}, true)
 	elseif self.unique then
 		if self.legendary then desc:add({"color", "FF4000"},"[Legendary]", {"color", "LAST"}, true)
 		elseif self.godslayer then desc:add({"color", "AAD500"},"[Godslayer]", {"color", "LAST"}, true)
@@ -708,60 +1221,8 @@ function _M:getTextualDesc(compare_with, use_actor)
 	end
 
 	local compare_fields = function(item1, items, infield, field, outformat, text, mod, isinversed, isdiffinversed, add_table)
-		add_table = add_table or {}
-		mod = mod or 1
-		isinversed = isinversed or false
-		isdiffinversed = isdiffinversed or false
-		local ret = tstring{}
-		local added = 0
-		local add = false
-		ret:add(text)
-		local outformatres
-		local resvalue = ((item1[field] or 0) + (add_table[field] or 0)) * mod
-		local item1value = resvalue
-		if type(outformat) == "function" then
-			outformatres = outformat(resvalue, nil)
-		else outformatres = outformat:format(resvalue) end
-		if isinversed then
-			ret:add(((item1[field] or 0) + (add_table[field] or 0)) > 0 and {"color","RED"} or {"color","LIGHT_GREEN"}, outformatres, {"color", "LAST"})
-		else
-			ret:add(((item1[field] or 0) + (add_table[field] or 0)) < 0 and {"color","RED"} or {"color","LIGHT_GREEN"}, outformatres, {"color", "LAST"})
-		end
-		if item1[field] then
-			add = true
-		end
-		for i=1, #items do
-			if items[i][infield] and items[i][infield][field] then
-				if added == 0 then
-					ret:add(" (")
-				elseif added > 1 then
-					ret:add(" / ")
-				end
-				added = added + 1
-				add = true
-				if items[i][infield][field] ~= (item1[field] or 0) then
-					local outformatres
-					local resvalue = (items[i][infield][field] + (add_table[field] or 0)) * mod
-					if type(outformat) == "function" then
-						outformatres = outformat(item1value, resvalue)
-					else outformatres = outformat:format(item1value - resvalue) end
-					if isdiffinversed then
-						ret:add(items[i][infield][field] < (item1[field] or 0) and {"color","RED"} or {"color","LIGHT_GREEN"}, outformatres, {"color", "LAST"})
-					else
-						ret:add(items[i][infield][field] > (item1[field] or 0) and {"color","RED"} or {"color","LIGHT_GREEN"}, outformatres, {"color", "LAST"})
-					end
-				else
-					ret:add("-")
-				end
-			end
-		end
-		if added > 0 then
-			ret:add(")")
-		end
-		if add then
-			desc:merge(ret)
-			desc:add(true)
-		end
+		local add = self:compareFields(item1, items, infield, field, outformat, text, mod, isinversed, isdiffinversed, add_table)
+		if add then desc:merge(add) end
 	end
 
 	-- included - if we should include the value in the present total.
@@ -781,441 +1242,13 @@ function _M:getTextualDesc(compare_with, use_actor)
 	end
 
 	local compare_table_fields = function(item1, items, infield, field, outformat, text, kfunct, mod, isinversed, filter)
-		mod = mod or 1
-		isinversed = isinversed or false
-		local ret = tstring{}
-		local added = 0
-		local add = false
-		ret:add(text)
-		local tab = {}
-		if item1[field] then
-			for k, v in pairs(item1[field]) do
-				tab[k] = {}
-				tab[k][1] = v
-			end
-		end
-		for i=1, #items do
-			if items[i][infield] and items[i][infield][field] then
-				for k, v in pairs(items[i][infield][field]) do
-					tab[k] = tab[k] or {}
-					tab[k][i + 1] = v
-				end
-			end
-		end
-		local count1 = 0
-		for k, v in pairs(tab) do
-			if not filter or filter(k, v) then
-				local count = 0
-				if isinversed then
-					ret:add(("%s"):format((count1 > 0) and " / " or ""), (v[1] or 0) > 0 and {"color","RED"} or {"color","LIGHT_GREEN"}, outformat:format((v[1] or 0)), {"color","LAST"})
-				else
-					ret:add(("%s"):format((count1 > 0) and " / " or ""), (v[1] or 0) < 0 and {"color","RED"} or {"color","LIGHT_GREEN"}, outformat:format((v[1] or 0)), {"color","LAST"})
-				end
-				count1 = count1 + 1
-				if v[1] then
-					add = true
-				end
-				for kk, vv in pairs(v) do
-					if kk > 1 then
-						if count == 0 then
-							ret:add("(")
-						elseif count > 0 then
-							ret:add(" / ")
-						end
-						if vv ~= (v[1] or 0) then
-							if isinversed then
-								ret:add((v[1] or 0) > vv and {"color","RED"} or {"color","LIGHT_GREEN"}, outformat:format((v[1] or 0) - vv), {"color","LAST"})
-							else
-								ret:add((v[1] or 0) < vv and {"color","RED"} or {"color","LIGHT_GREEN"}, outformat:format((v[1] or 0) - vv), {"color","LAST"})
-							end
-						else
-							ret:add("-")
-						end
-						add = true
-						count = count + 1
-					end
-				end
-				if count > 0 then
-					ret:add(")")
-				end
-				ret:add(kfunct(k))
-			end
-		end
-
-		if add then
-			desc:merge(ret)
-			desc:add(true)
-		end
+		local add = self:compareTableFields(item1, items, infield, field, outformat, text, kfunct, mod, isinversed, filter)
+		if add then desc:merge(add) end
 	end
 
-	local desc_combat = function(combat, compare_with, field, add_table, is_fake_add)
-		add_table = add_table or {}
-		add_table.dammod = add_table.dammod or {}
-		combat = table.clone(combat[field] or {})
-		compare_with = compare_with or {}
-		local dm = {}
-		combat.dammod = table.mergeAdd(table.clone(combat.dammod or {}), add_table.dammod)
-		local dammod = use_actor:getDammod(combat)
-		for stat, i in pairs(dammod) do
-			local name = Stats.stats_def[stat].short_name:capitalize()
-			if use_actor:knowTalent(use_actor.T_STRENGTH_OF_PURPOSE) then
-				if name == "Str" then name = "Mag" end
-			end
-			if self.subtype == "dagger" and use_actor:knowTalent(use_actor.T_LETHALITY) then
-				if name == "Str" then name = "Cun" end
-			end
-			dm[#dm+1] = ("%d%% %s"):format(i * 100, name)
-		end
-		if #dm > 0 or combat.dam then
-			local diff_count = 0
-			local any_diff = false
-			if config.settings.tome.advanced_weapon_stats then
-				local base_power = use_actor:combatDamagePower(combat, add_table.dam)
-				local base_range = use_actor:combatDamageRange(combat, add_table.damrange)
-				local power_diff, range_diff = {}, {}
-				for _, v in ipairs(compare_with) do
-					if v[field] then
-						local base_power_diff = base_power - use_actor:combatDamagePower(v[field], add_table.dam)
-						local base_range_diff = base_range - use_actor:combatDamageRange(v[field], add_table.damrange)
-						power_diff[#power_diff + 1] = ("%s%+d%%#LAST#"):format(base_power_diff > 0 and "#00ff00#" or "#ff0000#", base_power_diff * 100)
-						range_diff[#range_diff + 1] = ("%s%+.1fx#LAST#"):format(base_range_diff > 0 and "#00ff00#" or "#ff0000#", base_range_diff)
-						diff_count = diff_count + 1
-						if base_power_diff ~= 0 or base_range_diff ~= 0 then
-							any_diff = true
-						end
-					end
-				end
-				if any_diff then
-					local s = ("伤害: %3d%% (%s)　范围: %.1fx (%s)"):format(base_power * 100, table.concat(power_diff, " / "), base_range, table.concat(range_diff, " / "))
-					desc:merge(s:toTString())
-				else
-					desc:add(("伤害: %3d%%　范围: %.1fx"):format(base_power * 100, base_range))
-				end
-			else
-				local power_diff = {}
-				for i, v in ipairs(compare_with) do
-					if v[field] then
-						local base_power_diff = ((combat.dam or 0) + (add_table.dam or 0)) - ((v[field].dam or 0) + (add_table.dam or 0))
-						local dfl_range = (1.1 - (add_table.damrange or 0))
-						local multi_diff = (((combat.damrange or dfl_range) + (add_table.damrange or 0)) * ((combat.dam or 0) + (add_table.dam or 0))) - (((v[field].damrange or dfl_range) + (add_table.damrange or 0)) * ((v[field].dam or 0) + (add_table.dam or 0)))
-						power_diff [#power_diff + 1] = ("%s%+.1f#LAST# - %s%+.1f#LAST#"):format(base_power_diff > 0 and "#00ff00#" or "#ff0000#", base_power_diff, multi_diff > 0 and "#00ff00#" or "#ff0000#", multi_diff)
-						diff_count = diff_count + 1
-						if base_power_diff ~= 0 or multi_diff ~= 0 then
-							any_diff = true
-						end
-					end
-				end
-				if any_diff == false then
-					power_diff = ""
-				else
-					power_diff = ("(%s)"):format(table.concat(power_diff, " / "))
-				end
-				desc:add(("Base power: %.1f - %.1f"):format((combat.dam or 0) + (add_table.dam or 0), ((combat.damrange or (1.1 - (add_table.damrange or 0))) + (add_table.damrange or 0)) * ((combat.dam or 0) + (add_table.dam or 0))))
-				desc:merge(power_diff:toTString())
-			end
-			desc:add(true)
-			desc:add(("Uses stat%s: %s"):format(#dm > 1 and "s" or "",table.concat(dm, ', ')), true)
-			local col = (combat.damtype and DamageType:get(combat.damtype) and DamageType:get(combat.damtype).text_color or "#WHITE#"):toTString()
-			desc:add("Damage type: ", col[2],DamageType:get(combat.damtype or DamageType.PHYSICAL).name:capitalize(),{"color","LAST"}, true)
-		end
-
-		if combat.talented then
-			local t = use_actor:combatGetTraining(combat)
-			if t and t.name then desc:add("Mastery: ", {"color","GOLD"}, t.name, {"color","LAST"}, true) end
-		end
-
-		self:descAccuracyBonus(desc, combat, use_actor)
-
-		if combat.wil_attack then
-			desc:add("Accuracy is based on willpower for this weapon.", true)
-		end
-
-		compare_fields(combat, compare_with, field, "atk", "%+d", "Accuracy: ", 1, false, false, add_table)
-		compare_fields(combat, compare_with, field, "apr", "%+d", "Armour Penetration: ", 1, false, false, add_table)
-		compare_fields(combat, compare_with, field, "physcrit", "%+.1f%%", "Crit. chance: ", 1, false, false, add_table)
-		compare_fields(combat, compare_with, field, "crit_power", "%+.1f%%", "Crit. power: ", 1, false, false, add_table)
-		local physspeed_compare = function(orig, compare_with)
-			orig = 100 / orig
-			if compare_with then return ("%+.0f%%"):format(orig - 100 / compare_with)
-			else return ("%2.0f%%"):format(orig) end
-		end
-		compare_fields(combat, compare_with, field, "physspeed", physspeed_compare, "Attack speed: ", 1, false, true, add_table)
-
-		compare_fields(combat, compare_with, field, "block", "%+d", "Block value: ", 1, false, false, add_table)
-
-		compare_fields(combat, compare_with, field, "dam_mult", "%d%%", "Dam. multiplier: ", 100, false, false, add_table)
-		compare_fields(combat, compare_with, field, "range", "%+d", "Firing range: ", 1, false, false, add_table)
-		compare_fields(combat, compare_with, field, "capacity", "%d", "Capacity: ", 1, false, false, add_table)
-		compare_fields(combat, compare_with, field, "shots_reloaded_per_turn", "%+d", "Reload speed: ", 1, false, false, add_table)
-		compare_fields(combat, compare_with, field, "ammo_every", "%d", "Turns elapse between self-loadings: ", 1, false, false, add_table)
-
-		local talents = {}
-		if combat.talent_on_hit then
-			for tid, data in pairs(combat.talent_on_hit) do
-				talents[tid] = {data.chance, data.level}
-			end
-		end
-		for i, v in ipairs(compare_with or {}) do
-			for tid, data in pairs(v[field] and (v[field].talent_on_hit or {})or {}) do
-				if not talents[tid] or talents[tid][1]~=data.chance or talents[tid][2]~=data.level then
-					desc:add({"color","RED"}, ("When this weapon hits: %s (%d%% chance level %d)."):format(self:getTalentFromId(tid).name, data.chance, data.level), {"color","LAST"}, true)
-				else
-					talents[tid][3] = true
-				end
-			end
-		end
-		for tid, data in pairs(talents) do
-			desc:add(talents[tid][3] and {"color","WHITE"} or {"color","GREEN"}, ("When this weapon hits: %s (%d%% chance level %d)."):format(self:getTalentFromId(tid).name, talents[tid][1], talents[tid][2]), {"color","LAST"}, true)
-		end
-
-		local talents = {}
-		if combat.talent_on_crit then
-			for tid, data in pairs(combat.talent_on_crit) do
-				talents[tid] = {data.chance, data.level}
-			end
-		end
-		for i, v in ipairs(compare_with or {}) do
-			for tid, data in pairs(v[field] and (v[field].talent_on_crit or {})or {}) do
-				if not talents[tid] or talents[tid][1]~=data.chance or talents[tid][2]~=data.level then
-					desc:add({"color","RED"}, ("When this weapon crits: %s (%d%% chance level %d)."):format(self:getTalentFromId(tid).name, data.chance, data.level), {"color","LAST"}, true)
-				else
-					talents[tid][3] = true
-				end
-			end
-		end
-		for tid, data in pairs(talents) do
-			desc:add(talents[tid][3] and {"color","WHITE"} or {"color","GREEN"}, ("When this weapon crits: %s (%d%% chance level %d)."):format(self:getTalentFromId(tid).name, talents[tid][1], talents[tid][2]), {"color","LAST"}, true)
-		end
-
-		local special = ""
-		if combat.special_on_hit then
-			special = combat.special_on_hit.desc
-		end
-
-		--[[ I couldn't figure out how to make this work because tdesc goes in the same list as special_on_Hit
-		local found = false
-		for i, v in ipairs(compare_with or {}) do
-			if v[field] and v[field].special_on_hit then
-				if special ~= v[field].special_on_hit.desc then
-					desc:add({"color","RED"}, "When this weapon hits: "..v[field].special_on_hit.desc, {"color","LAST"}, true)
-				else
-					found = true
-				end
-			end
-		end
-		--]]
-
-		-- get_items takes the combat table and returns a table of items to print.
-		-- Each of these items one of the following:
-		-- id -> {priority, string}
-		-- id -> {priority, message_function(this, compared), value}
-		-- header is the section header.
-		local compare_list = function(header, get_items)
-			local priority_ordering = function(left, right)
-				return left[2][1] < right[2][1]
-			end
-
-			if next(compare_with) then
-				-- Grab the left and right items.
-				local left = get_items(combat)
-				local right = {}
-				for i, v in ipairs(compare_with) do
-					for k, item in pairs(get_items(v[field])) do
-						if not right[k] then
-							right[k] = item
-						elseif type(right[k]) == 'number' then
-							right[k] = right[k] + item
-						else
-							right[k] = item
-						end
-					end
-				end
-
-				-- Exit early if no items.
-				if not next(left) and not next(right) then return end
-
-				desc:add(header, true)
-
-				local combined = table.clone(left)
-				table.merge(combined, right)
-
-				for k, _ in table.orderedPairs2(combined, priority_ordering) do
-					l = left[k]
-					r = right[k]
-					message = (l and l[2]) or (r and r[2])
-					if type(message) == 'function' then
-						desc:add(message(l and l[3], r and r[3] or 0), true)
-					elseif type(message) == 'string' then
-						local prefix = '* '
-						local color = 'WHITE'
-						if l and not r then
-							color = 'GREEN'
-							prefix = '+ '
-						end
-						if not l and r then
-							color = 'RED'
-							prefix = '- '
-						end
-						desc:add({'color',color}, prefix, message, {'color','LAST'}, true)
-					end
-				end
-			else
-				local items = get_items(combat)
-				if next(items) then
-					desc:add(header, true)
-					for k, v in table.orderedPairs2(items, priority_ordering) do
-						message = v[2]
-						if type(message) == 'function' then
-							desc:add(message(v[3]), true)
-						elseif type(message) == 'string' then
-							desc:add({'color','WHITE'}, '* ', message, {'color','LAST'}, true)
-						end
-					end
-				end
-			end
-		end
-
-		local get_special_list = function(combat, key)
-			local special = combat[key]
-
-			-- No special
-			if not special then return {} end
-			-- Single special
-			if special.desc then
-				return {[special.desc] = {10, util.getval(special.desc, self, use_actor, special)}}
-			end
-
-			-- Multiple specials
-			local list = {}
-			for _, special in pairs(special) do
-				list[special.desc] = {10, util.getval(special.desc, self, use_actor, special)}
-			end
-			return list
-		end
-
-		compare_list(
-			"On weapon hit:",
-			function(combat)
-				if not combat then return {} end
-				local list = {}
-				-- Get complex damage types
-				for dt, amount in pairs(combat.melee_project or combat.ranged_project or {}) do
-					local dt_def = DamageType:get(dt)
-					if dt_def and dt_def.tdesc then
-						list[dt] = {0, dt_def.tdesc, amount}
-					end
-				end
-				-- Get specials
-				table.merge(list, get_special_list(combat, 'special_on_hit'))
-				return list
-			end
-		)
-
-		compare_list(
-			"On weapon crit:",
-			function(combat)
-				if not combat then return {} end
-				return get_special_list(combat, 'special_on_crit')
-			end
-		)
-
-		compare_list(
-			"On weapon kill:",
-			function(combat)
-				if not combat then return {} end
-				return get_special_list(combat, 'special_on_kill')
-			end
-		)
-
-		local found = false
-		for i, v in ipairs(compare_with or {}) do
-			if v[field] and v[field].no_stealth_break then
-				found = true
-			end
-		end
-
-		if combat.no_stealth_break then
-			desc:add(found and {"color","WHITE"} or {"color","GREEN"},"When used from stealth a simple attack with it will not break stealth.", {"color","LAST"}, true)
-		elseif found then
-			desc:add({"color","RED"}, "When used from stealth a simple attack with it will not break stealth.", {"color","LAST"}, true)
-		end
-
-		if combat.crushing_blow then
-			desc:add({"color", "YELLOW"}, "Crushing Blows: ", {"color", "LAST"}, "Damage dealt by this weapon is increased by half your critical multiplier, if doing so would kill the target.", true)
-		end
-
-		compare_fields(combat, compare_with, field, "travel_speed", "%+d%%", "Travel speed: ", 100, false, false, add_table)
-
-		compare_fields(combat, compare_with, field, "phasing", "%+d%%", "Damage Shield penetration (this weapon only): ", 1, false, false, add_table)
-
-		compare_fields(combat, compare_with, field, "lifesteal", "%+d%%", "Lifesteal (this weapon only): ", 1, false, false, add_table)
-		
-		local attack_recurse_procs_reduce_compare = function(orig, compare_with)
-			orig = 100 - 100 / orig
-			if compare_with then return ("%+d%%"):format(-(orig - (100 - 100 / compare_with)))
-			else return ("%d%%"):format(-orig) end
-		end
-		compare_fields(combat, compare_with, field, "attack_recurse", "%+d", "Multiple attacks: ", 1, false, false, add_table)
-		compare_fields(combat, compare_with, field, "attack_recurse_procs_reduce", attack_recurse_procs_reduce_compare, "Multiple attacks procs power reduction: ", 1, true, false, add_table)
-
-		if combat.tg_type and combat.tg_type == "beam" then
-			desc:add({"color","YELLOW"}, ("Shots beam through all targets."), {"color","LAST"}, true)
-		end
-
-		compare_table_fields(
-			combat, compare_with, field, "melee_project", "%+d", "Damage (Melee): ",
-			function(item)
-				local col = (DamageType.dam_def[item] and DamageType.dam_def[item].text_color or "#WHITE#"):toTString()
-				return col[2], (" %s"):format(DamageType.dam_def[item].name),{"color","LAST"}
-			end,
-			nil, nil,
-			function(k, v) return not DamageType.dam_def[k].tdesc end)
-
-		compare_table_fields(
-			combat, compare_with, field, "ranged_project", "%+d", "Damage (Ranged): ",
-			function(item)
-				local col = (DamageType.dam_def[item] and DamageType.dam_def[item].text_color or "#WHITE#"):toTString()
-				return col[2], (" %s"):format(DamageType.dam_def[item].name),{"color","LAST"}
-			end,
-			nil, nil,
-			function(k, v) return not DamageType.dam_def[k].tdesc end)
-
-		compare_table_fields(combat, compare_with, field, "burst_on_hit", "%+d", "Burst (radius 1) on hit: ", function(item)
-				local col = (DamageType.dam_def[item] and DamageType.dam_def[item].text_color or "#WHITE#"):toTString()
-				return col[2], (" %s"):format(DamageType.dam_def[item].name),{"color","LAST"}
-			end)
-
-		compare_table_fields(combat, compare_with, field, "burst_on_crit", "%+d", "Burst (radius 2) on crit: ", function(item)
-				local col = (DamageType.dam_def[item] and DamageType.dam_def[item].text_color or "#WHITE#"):toTString()
-				return col[2], (" %s"):format(DamageType.dam_def[item].name),{"color","LAST"}
-			end)
-
-		compare_table_fields(combat, compare_with, field, "convert_damage", "%d%%", "Damage conversion: ", function(item)
-				local col = (DamageType.dam_def[item] and DamageType.dam_def[item].text_color or "#WHITE#"):toTString()
-				return col[2], (" %s"):format(DamageType.dam_def[item].name),{"color","LAST"}
-			end)
-
-		compare_table_fields(combat, compare_with, field, "inc_damage_type", "%+d%% ", "Damage against: ", function(item)
-				local _, _, t, st = item:find("^([^/]+)/?(.*)$")
-				if st and st ~= "" then
-					return st:capitalize()
-				else
-					return t:capitalize()
-				end
-			end)
-
-		-- resources used to attack
-		compare_table_fields(
-			combat, compare_with, field, "use_resources", "%0.1f", "#ORANGE#Attacks use: #LAST#",
-			function(item)
-				local res_def = ActorResource.resources_def[item]
-				local col = (res_def and res_def.color or "#SALMON#"):toTString()
-				return col[2], (" %s"):format(res_def and res_def.name or item:capitalize()),{"color","LAST"}
-			end,
-			nil,
-			true)
-
-		self:triggerHook{"Object:descCombat", compare_with=compare_with, compare_fields=compare_fields, compare_scaled=compare_scaled, compare_scaled=compare_scaled, compare_table_fields=compare_table_fields, desc=desc, combat=combat}
+	local desc_combat = function(...)
+		local cdesc = self:descCombat(use_actor, ...)
+		desc:merge(cdesc)
 	end
 
 	local desc_wielder = function(w, compare_with, field)
@@ -2409,6 +2442,7 @@ local standard_flavors = {
 	starstaff = {engine.DamageType.LIGHT, engine.DamageType.DARKNESS, engine.DamageType.TEMPORAL, engine.DamageType.PHYSICAL},
 	vilestaff = {engine.DamageType.DARKNESS, engine.DamageType.BLIGHT, engine.DamageType.ACID, engine.DamageType.FIRE}, -- yes it overlaps, it's okay
 }
+_M.staves_standard_flavors = standard_flavors
 
 -- from command-staff.lua
 local function update_staff_table(o, d_table_old, d_table_new, old_element, new_element, tab, v, is_greater)

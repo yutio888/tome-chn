@@ -20,7 +20,7 @@
 long_name = "CHN Addons for ToME"
 short_name = "chn123"
 for_module = "tome"
-version = {1,5,3}
+version = {1,4,8}
 tags = {'Chinese','translation'}
 weight = 15
 author = { "Grammier&Marblezls&Yutio888", "Grammier@3DMGAME","Marblezls@3DMGAME","Yutio888@mail.qq.com"}

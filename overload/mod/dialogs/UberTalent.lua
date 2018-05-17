@@ -122,14 +122,14 @@ end
 -- UI Stuff
 -----------------------------------------------------------------
 
-local tuttext = [[觉醒技是角色足够强大时才能获得的特殊技能。
+_M.tuttext = [[觉醒技是角色足够强大时才能获得的特殊技能。
 所有觉醒技能必须在人物某项核心属性达到50点并满足所需
 的特殊要求后才能习得。
 你可以在人物等级达到30级和42级时各获得一个觉醒技能点。
 #LIGHT_GREEN#当前可用觉醒技能点： %d]]
 
 function _M:createDisplay()
-	self.c_tut = Textzone.new{ width=self.iw, auto_height = true, text=tuttext:format(self.actor.unused_prodigies or 0)}
+	self.c_tut = Textzone.new{ width=self.iw, auto_height = true, text=self.tuttext:format(self.actor.unused_prodigies or 0)}
 	
 	local vsep = Separator.new{dir="horizontal", size=self.ih - 20 - self.c_tut.h}
 	self.c_desc = TextzoneList.new{ focus_check = true, scrollbar = true, pingpong = 20, width=self.iw - 370 - vsep.w - 20, height = self.ih - self.c_tut.h, dest_area = { h = self.ih - self.c_tut.h } }
@@ -167,14 +167,14 @@ function _M:use(item)
 	elseif self.levelup_end_prodigies[item.talent] then
 		self.levelup_end_prodigies[item.talent] = false
 		self.actor.unused_prodigies = self.actor.unused_prodigies + 1
-		self.c_tut.text = tuttext:format(self.actor.unused_prodigies or 0)
+		self.c_tut.text = self.tuttext:format(self.actor.unused_prodigies or 0)
 		self.c_tut:generate()
 	elseif (self.actor:canLearnTalent(self.actor:getTalentFromId(item.talent)) and self.actor.unused_prodigies > 0) or config.settings.cheat then
 		if not self.levelup_end_prodigies[item.talent] then
 			self.levelup_end_prodigies[item.talent] = true
 			self.actor.unused_prodigies = math.max(0, self.actor.unused_prodigies - 1)
 		end
-		self.c_tut.text = tuttext:format(self.actor.unused_prodigies or 0)
+		self.c_tut.text = self.tuttext:format(self.actor.unused_prodigies or 0)
 		self.c_tut:generate()
 	else
 	end

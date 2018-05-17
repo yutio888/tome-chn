@@ -2551,7 +2551,7 @@ newEffect{
 	parameters = { power=10 },
 	decrease = 0,
 	callbackOnTakeDamage = function(self, eff, src, x, y, type, dam, state)
-		if src ~= self and src:hasEffect(src.EFF_TEMPORAL_FUGUE) then
+		if src ~= self and src.hasEffect and src:hasEffect(src.EFF_TEMPORAL_FUGUE) then
 			-- Find our clones
 			for i = 1, #eff.targets do
 				local target = eff.targets[i]
@@ -2573,21 +2573,21 @@ newEffect{
 		end
 		
 		-- Split the damage
-		if #clones > 0 and not self.turn_procs.temporal_fugue_damage then
-			self.turn_procs.temporal_fugue_damage = true
+		if #clones > 0 and not self.turn_procs.temporal_fugue_damage_self and not self.turn_procs.temporal_fugue_damage_target then
+			self.turn_procs.temporal_fugue_damage_self = true
 			cb.value = cb.value/#clones
 			game:delayedLogMessage(self, nil, "fugue_damage", "#STEEL_BLUE##Source# shares damage with %s fugue clones!", string.his_her(self))
 			for i = 1, #clones do
 				local target = clones[i]
 				if target ~= self then
-					target.turn_procs.temporal_fugue_damage = true
+					target.turn_procs.temporal_fugue_damage_target = true
 					target:takeHit(cb.value, src)
 					game:delayedLogDamage(src or self, self, 0, ("#STEEL_BLUE#(%d shared)#LAST#"):format(cb.value), nil)
-					target.turn_procs.temporal_fugue_damage = nil
+					target.turn_procs.temporal_fugue_damage_target = nil
 				end
 			end
 			
-			self.turn_procs.temporal_fugue_damage = nil
+			self.turn_procs.temporal_fugue_damage_self = nil
 		end
 		
 		-- If we're the last clone remove the effect
@@ -3251,5 +3251,30 @@ newEffect{
 	activate = function(self, eff)
 	end,
 	deactivate = function(self, eff)
+	end,
+}
+newEffect{
+	name = "RECALL", image = "effects/recall.png",
+	desc = "Recalling",
+	long_desc = function(self, eff) return "目 标 等 待 被 召 回 至 世 界 地 图。" end,
+	type = "other",
+	subtype = { unknown=true },
+	status = "beneficial",
+	cancel_on_level_change = true,
+	parameters = { },
+	activate = function(self, eff)
+		eff.leveid = game.zone.short_name.."-"..game.level.level
+	end,
+	deactivate = function(self, eff)
+		if (eff.allow_override or (self == game:getPlayer(true) and self:canBe("worldport") and not self:attr("never_move"))) and eff.dur <= 0 then
+			game:onTickEnd(function()
+				if eff.leveid == game.zone.short_name.."-"..game.level.level and game.player.can_change_zone then
+					game.logPlayer(self, "You are yanked out of this place!")
+					game:changeLevel(1, eff.where or game.player.last_wilderness)
+				end
+			end)
+		else
+			game.logPlayer(self, "Space restabilizes around you.")
+		end
 	end,
 }

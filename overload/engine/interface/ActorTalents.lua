@@ -1045,14 +1045,23 @@ function _M:triggerTalent(tid, name, ...)
 
 	local t = _M.talents_def[tid]
 	name = name or "trigger"
-	if t[name] then return t[name](self, t, ...) end
+	if t[name] then
+		self.__talent_running = t
+		local ret = {t[name](self, t, ...)}
+		self.__talent_running = nil
+		return unpack(ret, 1, table.maxn(ret))
+	end
 end
 
 --- Trigger a talent method
 function _M:callTalent(tid, name, ...)
 	local t = _M.talents_def[tid]
 	name = name or "trigger"
-	if t[name] then return t[name](self, t, ...) 
+	if t[name] then
+		self.__talent_running = t
+		local ret = {t[name](self, t, ...)}
+		self.__talent_running = nil
+		return unpack(ret, 1, table.maxn(ret))
 	end
 end
 

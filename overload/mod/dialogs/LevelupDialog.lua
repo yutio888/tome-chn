@@ -97,6 +97,10 @@ function _M:init(actor, on_finish, on_birth)
 	self:setupUI()
 
 	self.key:addCommands{
+		[{"_l","ctrl"}] = function() if profile.auth and profile.hash_valid then
+			local tid = self.last_drawn_talent
+			if tid then profile.chat.uc_ext:sendTalentLink(tid) end
+		end end,
 		__TEXTINPUT = function(c)
 			if self.focus_ui.ui.last_mz then
 				if c == "+" and self.focus_ui and self.focus_ui.ui.onUse then

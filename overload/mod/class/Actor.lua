@@ -108,6 +108,9 @@ _M.temporary_values_conf.force_melee_damtype = "last"
 -- AI
 _M.temporary_values_conf.ai_move = "last"
 
+-- Misc
+_M.temporary_values_conf.death_dialog = "last"
+
 _M.projectile_class = "mod.class.Projectile"
 
 function _M:init(t, no_default)
@@ -580,6 +583,8 @@ function _M:actBase()
 
 	-- Cooldown talents after effects, because some of them involve breaking sustains.
 	if not self:attr("no_talents_cooldown") then self:cooldownTalents() end
+
+	self:checkStillInCombat()
 end
 
 function _M:act()
@@ -1756,6 +1761,10 @@ function _M:getRankSaveAdjust()
 	end
 end
 
+function _M:allowedRanks()
+	return { 1, 2, 3, 3.2, 3.5, 4, 5, 10 }
+end
+
 function _M:TextRank()
 	local rank, color = "normal", "#ANTIQUE_WHITE#"
 	if self.rank == 1 then rank, color = "critter", "#C0C0C0#"
@@ -1838,7 +1847,9 @@ function _M:tooltip(x, y, seen_by)
 	if self.type == "humanoid" or self.type == "giant" then ts:add({"font","italic"}, "(", self.female and "female" or "male", ")", {"font","normal"}, true) else ts:add(true) end
 	ts:add(self.type:capitalize(), " / ", self.subtype:capitalize(), true)
 	ts:add("Rank: ") ts:merge(rank_color:toTString()) ts:add(rank, {"color", "WHITE"}, true)
-	ts:add({"color", 0, 255, 255}, ("Level: %d"):format(self.level), {"color", "WHITE"}, true)
+	if self.hide_level_tooltip then ts:add({"color", 0, 255, 255}, "Level: unknown", {"color", "WHITE"}, true)
+	else ts:add({"color", 0, 255, 255}, ("Level: %d"):format(self.level), {"color", "WHITE"}, true) end
+	if self:attr("invulnerable") then ts:add({"color", "PURPLE"}, "INVULNERABLE!", true) end
 	ts:add({"color", 255, 0, 0}, ("HP: %d (%d%%)"):format(self.life, self.life * 100 / self.max_life), {"color", "WHITE"})
 
 	if self:knowTalent(self.T_SOLIPSISM) then
@@ -1952,6 +1963,15 @@ function _M:tooltip(x, y, seen_by)
 	if config.settings.cheat and self.descriptor and self.descriptor.classes then
 		ts:add("Classes:", table.concat(self.descriptor.classes or {}, ","), true)
 	end
+
+	if self.custom_tooltip then
+		local cts = self:custom_tooltip():toTString()
+		if cts then
+			ts:merge(cts)
+			ts:add(true)
+		end
+	end
+
 	if self.faction and Faction.factions[self.faction] then ts:add("Faction: ") ts:merge(factcolor:toTString()) ts:add(("%s (%s, %d)"):format(Faction.factions[self.faction].name, factstate, factlevel), {"color", "WHITE"}, true) end
 	if game.player ~= self then ts:add("Personal reaction: ") ts:merge(pfactcolor:toTString()) ts:add(("%s, %d"):format(pfactstate, pfactlevel), {"color", "WHITE"} ) end
 
@@ -2052,7 +2072,7 @@ function _M:regenAmmo()
 	if not r then return end
 	if ammo.combat.shots_left >= ammo.combat.capacity then ammo.combat.shots_left = ammo.combat.capacity return end
 	ammo.combat.reload_counter = (ammo.combat.reload_counter or 0) + 1
-	if ammo.combat.reload_counter == r then
+	if ammo.combat.reload_counter >= r then
 		ammo.combat.reload_counter = 0
 		ammo.combat.shots_left = util.bound(ammo.combat.shots_left + 1, 0, ammo.combat.capacity)
 	end
@@ -2309,6 +2329,12 @@ function _M:onTakeHit(value, src, death_note)
 				game:delayedLogMessage(self, src, "reflection" ,"#CRIMSON##Source# 反射伤害至 #Target#!#LAST#")
 			end
 		end
+
+		local eff = self:hasEffect(self.EFF_DAMAGE_SHIELD)
+		if adjusted_value > 0 and eff and eff.on_absorb then
+			eff.on_absorb(self, eff, src, adjusted_value)
+		end
+
 		-- If we are at the end of the capacity, release the time shield damage
 		if not self.damage_shield_absorb or self.damage_shield_absorb <= 0 then
 			game.logPlayer(self, "你的护盾在伤害下破碎!")
@@ -2832,6 +2858,9 @@ function _M:onTakeHit(value, src, death_note)
 end
 
 function _M:takeHit(value, src, death_note)
+	self:enterCombatStatus(src)
+	if src and src.enterCombatStatus then src:enterCombatStatus(self) end
+
 	for eid, p in pairs(self.tmp) do
 		local e = self.tempeffect_def[eid]
 		if e.damage_feedback then
@@ -2844,7 +2873,6 @@ function _M:takeHit(value, src, death_note)
 			t.damage_feedback(self, t, p, src, value)
 		end
 	end
-
 
 	local dead, val = mod.class.interface.ActorLife.takeHit(self, value, src, death_note)
 
@@ -3060,12 +3088,7 @@ function _M:die(src, death_note)
 		local rsrc = src:resolveSource()
 		local p = rsrc:isTalentActive(src.T_NECROTIC_AURA)
 		if self.x and self.y and src.x and src.y and core.fov.distance(self.x, self.y, rsrc.x, rsrc.y) <= rsrc.necrotic_aura_radius then
-			rsrc:incSoul(1)
-			if rsrc:attr("extra_soul_chance") and rng.percent(rsrc:attr("extra_soul_chance")) then
-				rsrc:incSoul(1)
-				game.logPlayer(rsrc, "%s rips more animus from its victim. (+1 more soul)", rsrc.name:capitalize())
-			end
-			rsrc.changed = true
+			rsrc:callTalent(rsrc.T_NECROTIC_AURA, "absorbSoul", self)
 		end
 	end
 
@@ -3289,7 +3312,7 @@ function _M:resetToFull()
 				self.mana = self:getMaxMana()
 			end
 		else
-			if res_def.invert_values then
+			if res_def.invert_values or res_def.switch_direction then
 				self[res_def.short_name] = self:check(res_def.getMinFunction) or self[res_def.short_name] or res_def.min
 			else
 				self[res_def.short_name] = self:check(res_def.getMaxFunction) or self[res_def.short_name] or res_def.max
@@ -3667,11 +3690,11 @@ function _M:updateModdableTile()
 	add[#add+1] = {image = base..basebody, auto_tall=1}
 
 	if not self:attr("disarmed") then
-		i = self.inven[self.INVEN_MAINHAND]; if i and i[1] and i[1].moddable_tile_back then
-			add[#add+1] = {image = base..(i[1].moddable_tile_back):format("right")..".png", auto_tall=1}
+		i = self:getObjectModdableTile(self.INVEN_MAINHAND); if i and i.moddable_tile_back then
+			add[#add+1] = {image = base..(i.moddable_tile_back):format("right")..".png", auto_tall=1}
 		end
-		i = self.inven[self.INVEN_OFFHAND]; if i and i[1] and i[1].moddable_tile_back then
-			add[#add+1] = {image = base..(i[1].moddable_tile_back):format("left")..".png", auto_tall=1}
+		i = self:getObjectModdableTile(self.INVEN_OFFHAND); if i and i.moddable_tile_back then
+			add[#add+1] = {image = base..(i.moddable_tile_back):format("left")..".png", auto_tall=1}
 		end
 	end
 
@@ -4071,6 +4094,13 @@ function _M:onTakeoff(o, inven_id, bypass_set, silent)
 
 	self:breakReloading()
 	self:fireTalentCheck("callbackOnTakeoff", o, bypass_set)
+
+	-- If objected buffed us, remove
+	local todel = {}
+	for eff_id, p in pairs(self.tmp) do
+		if p.__object_source == o then todel[#todel+1] = eff_id end
+	end
+	if #todel > 0 then for _, eff_id in ipairs(todel) do self:removeEffect(eff_id) end end
 
 	self:checkTwoHandedPenalty()
 
@@ -4475,6 +4505,13 @@ function _M:unlearnTalent(t_id, nb, no_unsustain, extra)
 	-- Unsustain ?
 	if not no_unsustain and not self:knowTalent(t_id) and t.mode == "sustained" and self:isTalentActive(t_id) then self:forceUseTalent(t_id, {ignore_energy=true, save_cleanup=true}) end
 
+	-- Remove buffs ?
+	local todel = {}
+	for eff_id, p in pairs(self.tmp) do
+		if p.__talent_source == t_id then todel[#todel+1] = eff_id end
+	end
+	if #todel > 0 then for _, eff_id in ipairs(todel) do self:removeEffect(eff_id) end end
+
 	self:recomputeRegenResources()
 
 	if t.is_spell then self:attr("has_arcane_knowledge", -nb) end
@@ -4789,6 +4826,10 @@ function _M:getFeedbackDecay(mult)
 	end
 end
 
+function _M:alterTalentCost(t, rname, cost)
+	return cost
+end
+
 --- Called before a talent is used
 -- Check the actor can cast it
 -- @param ab the talent (not the id, the table)
@@ -4857,6 +4898,7 @@ function _M:preUseTalent(ab, silent, fake)
 				cost = ab[res_def.sustain_prop]
 				if cost then
 					cost = util.getval(cost, self, ab) or 0
+					cost = self:alterTalentCost(ab, res_def.sustain_prop, cost)
 					rmin, rmax = self[res_def.getMinFunction](self), self[res_def.getMaxFunction](self)
 					if cost ~= 0 and self[res_def.minname] and self[res_def.maxname] and self[res_def.minname] + cost > self[res_def.maxname] then
 						if not silent then game.logPlayer(self, "You %s %s to activate %s.", res_def.invert_values and "have too much committed" or "do not have enough uncommitted", res_def.name, ab.name) end
@@ -4886,10 +4928,11 @@ function _M:preUseTalent(ab, silent, fake)
 			cost = ab[rname]
 			if cost then
 				cost = (util.getval(cost, self, ab) or 0) * (util.getval(res_def.cost_factor, self, ab, true) or 1)
+				cost = self:alterTalentCost(ab, rname, cost)
 				if cost ~= 0 then
 					rmin, rmax = self[res_def.getMinFunction](self), self[res_def.getMaxFunction](self)
 					if res_def.invert_values then
-						if rmax and self[res_def.getFunction](self) + cost > rmax then -- too much
+						if not res_def.ignore_max_use and rmax and self[res_def.getFunction](self) + cost > rmax then -- too much
 							if not silent then game.logPlayer(self, "You have too much %s to use %s.", res_def.name, ab.name) end
 							self.on_preuse_checking_resources = nil
 							return false
@@ -5054,6 +5097,7 @@ local sustainCallbackCheck = {
 	callbackOnActBase = "talents_on_act_base",
 	callbackOnMove = "talents_on_move",
 	callbackOnRest = "talents_on_rest",
+	callbackOnCombat = "talents_on_combat",
 	callbackOnRun = "talents_on_run",
 	callbackOnLevelup = "talents_on_levelup",
 	callbackOnDeath = "talents_on_death",
@@ -5088,6 +5132,7 @@ local sustainCallbackCheck = {
 	callbackOnEffectSave = "talents_on_effect_save",
 	callbackOnPartyAdd = "talents_on_party_add",
 	callbackOnPartyRemove = "talents_on_party_remove",
+	callbackOnTargeted = "talents_on_targeted",
 }
 _M.sustainCallbackCheck = sustainCallbackCheck
 
@@ -5197,7 +5242,9 @@ function _M:fireTalentCheck(event, ...)
 				ret = self:callEffect(tid, event, ...) or ret
 			elseif kind == "object" then
 				self.__project_source = tid
+				self.__object_use_running = tid
 				ret = tid:check(event, self, ...) or ret
+				self.__object_use_running = nil
 			else
 				self.__project_source = self.sustain_talents[tid]
 				ret = self:callTalent(tid, event, ...) or ret
@@ -5354,6 +5401,7 @@ function _M:postUseTalent(ab, ret, silent)
 				cost = ab[res_def.sustain_prop]
 				if cost then
 					cost = (util.getval(cost, self, ab) or 0)
+					cost = self:alterTalentCost(ab, res_def.sustain_prop, cost)
 					if cost ~= 0 then
 						trigger = true
 						ret._applied_costs[res_def.short_name] = cost
@@ -5368,6 +5416,7 @@ function _M:postUseTalent(ab, ret, silent)
 				cost = ab[res_def.drain_prop]
 				if cost then
 					cost = util.getval(cost, self, ab) or 0
+					cost = self:alterTalentCost(ab, res_def.drain_prop, cost)
 					if cost ~= 0 then
 						trigger = true
 						ret._applied_drains[res_def.short_name] = cost
@@ -5452,6 +5501,7 @@ function _M:postUseTalent(ab, ret, silent)
 		for res, res_def in ipairs(_M.resources_def) do
 			rname = res_def.short_name
 			cost = ab[rname] and util.getval(ab[rname], self, ab) or 0
+			cost = self:alterTalentCost(ab, rname, cost)
 			if cost ~= 0 then
 				trigger = true
 				cost = cost * (util.getval(res_def.cost_factor, self, ab) or 1)
@@ -5702,17 +5752,20 @@ function _M:getTalentFullDescription(t, addlevel, config, fake_mastery)
 			if not res_def.hidden_resource then
 				-- list resource cost
 				local cost = t[res_def.short_name] and util.getval(t[res_def.short_name], self, t) or 0
+				cost = self:alterTalentCost(t, res_def.short_name, cost)
 				if cost ~= 0 then
 					cost = cost * (util.getval(res_def.cost_factor, self, t) or 1)
 					d:add({"color",0x6f,0xff,0x83}, ("%s 消耗："):format(getCHNresourcename(res_def.name:capitalize())), res_def.color or {"color",0xff,0xa8,0xa8}, ""..math.round(cost, .1), true)
 				end
 				-- list sustain cost
 				cost = t[res_def.sustain_prop] and util.getval(t[res_def.sustain_prop], self, t) or 0
+				cost = self:alterTalentCost(t, res_def.sustain_prop, cost)
 				if cost ~= 0 then
 					d:add({"color",0x6f,0xff,0x83}, ("持续 %s 消耗："):format(getCHNresourcename(res_def.name:capitalize())), res_def.color or {"color",0xff,0xa8,0xa8}, ""..math.round(cost, .1), true)
 				end
 				-- list drain cost
 				cost = t[res_def.drain_prop] and util.getval(t[res_def.drain_prop], self, t) or 0
+				cost = self:alterTalentCost(t, res_def.drain_prop, cost)
 				if cost ~= 0 then
 					if res_def.invert_values then
 						d:add({"color",0x6f,0xff,0x83}, ("%s %s: "):format(cost > 0 and "产生" or "消耗", getCHNresourcename(res_def.name:capitalize())), res_def.color or {"color",0xff,0xa8,0xa8}, ""..math.round(math.abs(cost), .1), true)
@@ -5771,6 +5824,7 @@ function _M:getTalentFullDescription(t, addlevel, config, fake_mastery)
 			end
 		end
 		local is_a = {}
+
 		if t.is_spell then is_a[#is_a+1] = "法术" end
 		if t.is_mind then is_a[#is_a+1] = "精神力量" end
 		if t.is_nature then is_a[#is_a+1] = "自然之赐" end
@@ -6506,11 +6560,23 @@ end
 function _M:on_temporary_effect_added(eff_id, e, p)
 	self:registerCallbacks(e, eff_id, "effect")
 	self:fireTalentCheck("callbackOnTemporaryEffectAdd", eff_id, e, p)
+	if e.status == "detrimental" then self:enterCombatStatus() end
+
+	-- Register talent source if any
+	if (e.status == "beneficial" or e.status == "neutral") then
+		if self.__talent_running then
+			p.__talent_source = self.__talent_running.id
+		end
+		if self.__object_use_running then
+			p.__object_source = self.__object_use_running
+		end
+	end
 end
 
 function _M:on_temporary_effect_removed(eff_id, e, p)
 	self:unregisterCallbacks(e, eff_id)
 	self:fireTalentCheck("callbackOnTemporaryEffectRemove", eff_id, e, p)
+	if e.status == "detrimental" then self:enterCombatStatus() end
 end
 
 --- Called when we are initiating a projection
@@ -7019,4 +7085,66 @@ function _M:findTinkerSpot(tinker)
 		end
 	end)
 	return possible[1].inven, possible[1].item, possible[1].free == 0
+end
+
+function _M:postFOVCombatCheck()
+	if self.fov and self.fov.actors_dist then
+		for i = 1, #self.fov.actors_dist do
+			local act = self.fov.actors_dist[i]
+			if act and act.x and not act.dead and not act.ignore_from_combat_compute and self:reactionToward(act) < 0 then
+				self:enterCombatStatus(act)
+				break
+			end
+		end
+	end
+end
+
+function _M:enterCombatStatus(src)
+	if src and src.ignore_from_combat_compute then return end
+	
+	if not self.in_combat then -- Start combat mode
+		self.in_combat = game.turn
+		self:updateInCombatStatus()
+	else -- Update last turn we started combat mode
+		self.in_combat = game.turn
+	end
+end
+
+function _M:checkStillInCombat()
+	if not self.in_combat then return end -- Not in combat anyway
+	if game.turn - self.in_combat < 50 then return end -- In combat for less than 5 turns, nothing to do
+
+	-- FOV needs no recheck, it's always updating
+
+	-- Damage taken needs no recheck, it's always updating
+
+	-- Damage done needs no recheck, it's always updating
+
+	-- Status effects need rechecking
+	for eff_id, p in pairs(self.tmp) do
+		local e = self:getEffectFromId(eff_id)
+		if e.status == "detrimental" and e.decrease > 0 then self:enterCombatStatus() break end
+	end
+
+	if game.turn - self.in_combat < 50 then return end -- Still good?
+
+	-- Ok no more in combat!
+	self.in_combat = nil
+	self:updateInCombatStatus()
+end
+
+function _M:updateInCombatStatus()
+	-- if config.settings.cheat then
+	-- 	if self.in_combat then
+	-- 		game.log("#CRIMSON#--- %s IN COMBAT since %d turns", self.name, (game.turn - self.in_combat) / 10)
+	-- 	else
+	-- 		game.log("#YELLOW#--- %s OUT OF COMBAT", self.name)
+	-- 	end
+	-- end
+
+	if self.in_combat then
+		self:fireTalentCheck("callbackOnCombat", true)
+	else
+		self:fireTalentCheck("callbackOnCombat", false)
+	end
 end

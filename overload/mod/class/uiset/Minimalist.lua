@@ -1975,7 +1975,7 @@ function _M:display(nb_keyframes)
 	self.now = core.game.getTime()
 
 	-- Now the map, if any
-	game:displayMap(nb_keyframes)
+	game:displayMap(nb_keyframes, game.full_fbo)
 
 	if game.creating_player then return end
 	if self.no_ui then return end

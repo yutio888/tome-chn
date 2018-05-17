@@ -39,8 +39,21 @@ local Particles = require "engine.Particles"
 local CharacterVaultSave = require "engine.CharacterVaultSave"
 local Object = require "mod.class.Object"
 local OptionTree = require "mod.dialogs.OptionTree"
+local Entity = require "engine.Entity"
 
 module(..., package.seeall, class.inherit(Birther))
+
+function _M:setSubclassIcon(t)
+	t.image32 = "class-icons/"..(t.name:lower():gsub("[^a-z0-9]", "_")).."_32_bg.png"
+	t.image128 = "class-icons/"..(t.name:lower():gsub("[^a-z0-9]", "_")).."_128_bg.png"
+	if not fs.exists(Tiles.baseImageFile(t.image32)) then
+		t.image32 = "class-icons/unknown_32_bg.png"
+		t.image128 = "class-icons/unknown_128_bg.png"
+	end
+	t.display_entity32 = Entity.new{image=t.image32}
+	t.display_entity128 = Entity.new{image=t.image128}
+end
+for _, t in pairs(_M.birth_descriptor_def.subclass) do _M:setSubclassIcon(t) end
 
 --- Instanciates a birther for the given actor
 function _M:init(title, actor, order, at_end, quickbirth, w, h)
@@ -112,7 +125,6 @@ function _M:init(title, actor, order, at_end, quickbirth, w, h)
 		fct=function(item, sel, v) self:raceUse(item, sel, v) end,
 		select=function(item, sel) self:updateDesc(item) end,
 		on_expand=function(item) end,
-		on_drawitem=function(item) end,
 	}
 
 	self:generateClasses()
@@ -122,7 +134,12 @@ function _M:init(title, actor, order, at_end, quickbirth, w, h)
 		fct=function(item, sel, v) self:classUse(item, sel, v) end,
 		select=function(item, sel) self:updateDesc(item) end,
 		on_expand=function(item) end,
-		on_drawitem=function(item) end,
+		on_drawitem=function(item, s, startx, h)
+			if not item.def or not item.def.display_entity32 then return startx end
+			local sc = item.def.display_entity32:getEntityFinalSurface(self.tiles, h, h)
+			s:merge(sc, startx, 0)
+			return startx + h
+		end,
 	}
 
 	self.cur_order = 1
@@ -187,13 +204,38 @@ function _M:init(title, actor, order, at_end, quickbirth, w, h)
 end
 
 function _M:checkNew(fct)
-	local savename = self.c_name.text:gsub("[^a-zA-Z0-9_-.]", "_")
-	if fs.exists(("/save/%s/game.teag"):format(savename)) then
-		Dialog:yesnoPopup("Overwrite character?", "There is already a character with this name, do you want to overwrite it?", function(ret)
-			if not ret then fct() end
-		end, "No", "Yes")
+	local function checkfct()
+		local savename = self.c_name.text:gsub("[^a-zA-Z0-9_-.]", "_")
+		if fs.exists(("/save/%s/game.teag"):format(savename)) then
+			Dialog:yesnoPopup("Overwrite character?", "There is already a character with this name, do you want to overwrite it?", function(ret)
+				if not ret then fct() end
+			end, "No", "Yes")
+		else
+			fct()
+		end
+	end
+
+	local is_antimagic, is_magic = false, false
+	for i, d in ipairs(self.descriptors) do
+		if d.copy then
+			if d.copy.forbid_arcane then is_antimagic = true end
+		end
+		if d.talents_types then
+			local tt = d.talents_types
+			if type(tt) == "function" then tt = tt(self) end
+			for t, v in pairs(tt) do
+				local ttdef = self.actor:getTalentTypeFrom(t)
+				if ttdef and ttdef.is_spell then is_magic = true break end
+			end
+		end
+	end
+
+	if is_magic and is_antimagic then
+		Dialog:yesnoPopup("Antimagic Magic combo", "The selected race/class has both magic and antimagic, this is unlikely to work. Continue?", function(ret) if not ret then
+			checkfct()
+		end end, "No", "Yes I'm sure")
 	else
-		fct()
+		checkfct()
 	end
 end
 
@@ -1054,6 +1096,13 @@ function _M:innerDisplay(x, y, nb_keyframes)
 		self.actor:toScreen(self.tiles, x + self.iw - 64, y, 64, 64)
 	elseif self.actor.image and self.actor.add_mos then
 		self.actor:toScreen(self.tiles, x + self.iw - 64, y - 64, 128, 64)
+	end
+
+	if self.descriptors_by_type.subclass then
+		local sc = self.birth_descriptor_def.subclass[self.descriptors_by_type.subclass]
+		if sc.display_entity128 then
+			sc.display_entity128:toScreen(self.tiles, x + self.iw - self.c_desc.w, y + 16, 64, 64)
+		end
 	end
 end
 

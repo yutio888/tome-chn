@@ -114,7 +114,13 @@ function _M:removeMember(actor, silent)
 	game.player.changed = true
 end
 
-function _M:leftLevel()
+function _M:switchParty(new_party)
+	new_party.old_party = self
+	game.party = new_party
+	game.party:setPlayer(game:getPlayer(true), true)
+end
+
+function _M:leftLevel(leaving_zone)
 	local todel = {}
 	local newplayer = false
 	for i, actor in ipairs(self.m_list) do
@@ -133,6 +139,21 @@ function _M:leftLevel()
 	end
 	if not game.player or not self.members[game.player] or not self.members[game.player].keep_between_levels then
 		self:findSuitablePlayer()
+	end
+
+	if leaving_zone and self.switch_party_back_on_zone then
+		self:switchToOldParty()
+	end
+end
+
+function _M:switchToOldParty()
+	if self.old_party then
+		game.party = self.old_party
+		game.party:setPlayer(game:getPlayer(true), true)
+		if self.on_dispose then self:on_dispose(game.party) end
+		return true
+	else
+		return false
 	end
 end
 

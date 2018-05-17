@@ -670,7 +670,7 @@ newEffect{
 				bc = table.clone(eff.color) bc[4] = 1
 				ac = table.clone(eff.color) ac[4] = 1
 			end
-			eff.particle = self:addParticles(Particles.new("shader_shield", 1, {size_factor=1.3, img="runicshield"}, {type="runicshield", shieldIntensity=0.14, ellipsoidalFactor=1.2, time_factor=5000, bubbleColor=bc, auraColor=ac}))
+			eff.particle = self:addParticles(Particles.new("shader_shield", 1, {size_factor=1.3, img=eff.aegis_image or "runicshield"}, {type="runicshield", shieldIntensity=0.14, ellipsoidalFactor=1.2, time_factor=5000, bubbleColor=bc, auraColor=ac}))
 		end		
 	end,
 	damage_feedback = function(self, eff, src, value)
@@ -691,7 +691,7 @@ newEffect{
 		self.damage_shield_absorb = eff.power
 		self.damage_shield_absorb_max = eff.power
 		if core.shader.active(4) then
-			eff.particle = self:addParticles(Particles.new("shader_shield", 1, nil, {type="shield", shieldIntensity=0.2, color=eff.color or {0.4, 0.7, 1.0}}))
+			eff.particle = self:addParticles(Particles.new("shader_shield", 1, {img=eff.image or "shield7"}, {type="shield", shieldIntensity=0.2, color=eff.color or {0.4, 0.7, 1.0}}))
 		else
 			eff.particle = self:addParticles(Particles.new("damage_shield", 1))
 		end
@@ -1002,31 +1002,7 @@ newEffect{
 	end,
 }
 
-newEffect{
-	name = "RECALL", image = "effects/recall.png",
-	desc = "Recalling",
-	long_desc = function(self, eff) return "目 标 等 待 被 召 回 至 世 界 地 图。" end,
-	type = "magical",
-	subtype = { unknown=true },
-	status = "beneficial",
-	cancel_on_level_change = true,
-	parameters = { },
-	activate = function(self, eff)
-		eff.leveid = game.zone.short_name.."-"..game.level.level
-	end,
-	deactivate = function(self, eff)
-		if (eff.allow_override or (self == game:getPlayer(true) and self:canBe("worldport") and not self:attr("never_move"))) and eff.dur <= 0 then
-			game:onTickEnd(function()
-				if eff.leveid == game.zone.short_name.."-"..game.level.level and game.player.can_change_zone then
-					game.logPlayer(self, "You are yanked out of this place!")
-					game:changeLevel(1, eff.where or game.player.last_wilderness)
-				end
-			end)
-		else
-			game.logPlayer(self, "Space restabilizes around you.")
-		end
-	end,
-}
+
 
 newEffect{
 	name = "TELEPORT_ANGOLWEN", image = "talents/teleport_angolwen.png",

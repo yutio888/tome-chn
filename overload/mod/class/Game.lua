@@ -158,6 +158,11 @@ function _M:runReal()
 	self.caps_scroll.w, self.caps_scroll.h = s:getSize()
 
 	self.zone_font = core.display.newFont(chn123_tome_font(), 12)
+	
+	self.shake_time = nil
+	self.shake_force = 0
+	self.shake_x = 0
+	self.shake_y = 0
 
 	self.inited = true
 
@@ -169,7 +174,6 @@ end
 function _M:rebuildCalendar()
 	self.calendar = Calendar.new("/data/calendar_"..(self.player.calendar or "allied")..".lua", "今天是 %s %s 第 %s 年 卓越纪，马基埃亚尔。\n现在时间是 %02d:%02d.", 122, 167, 11) 
 end
-
 
 --- Resize the hotkeys
 function _M:resizeIconsHotkeysToolbar()
@@ -406,7 +410,7 @@ function _M:loaded()
 
 	if self.always_target == true or self.always_target == "old" then Map:setViewerFaction(self.player.faction) end
 	if self.player and config.settings.cheat then self.player.__cheated = true end
-	self:updateCurrentChar()
+	self:onTickEnd(function() self:updateCurrentChar() end)
 
 	if self.zone and self.zone.on_loaded then self.zone.on_loaded(self.level.level) end
 end
@@ -692,6 +696,53 @@ function _M:updateCurrentChar()
 	if not self.party then return end
 	local player = self.party:findMember{main=true}
 	profile:currentCharacter(self.__mod_info.full_version_string, ("%s the level %d %s %s"):format(player.name, player.level, player.descriptor.subrace, player.descriptor.subclass), player.__te4_uuid)
+	if core.discord and self.zone then
+		local all_kills_kind = player.all_kills_kind or {}
+
+		self.total_playtime = (self.total_playtime or 0) + (os.time() - (self.last_update or self.real_starttime or os.time()))
+		self.last_update = os.time()
+
+		local playtime = ""
+		local days = math.floor(self.total_playtime/86400)
+		local hours = math.floor(self.total_playtime/3600) % 24
+		local minutes = math.floor(self.total_playtime/60) % 60
+		local seconds = self.total_playtime % 60
+
+		if days > 0 then
+			playtime = ("%id %ih %im %ss"):format(days, hours, minutes, seconds)
+		elseif hours > 0 then
+			playtime = ("%ih %im %ss"):format(hours, minutes, seconds)
+		elseif minutes > 0 then
+			playtime = ("%im %ss"):format(minutes, seconds)
+		else
+			playtime = ("%ss"):format(seconds)
+		end
+
+		local info = {}
+		info.zone = self:getZoneName()
+		info.char = ("Lvl %d %s %s"):format(player.level, player.descriptor.subrace, player.descriptor.subclass)
+		info.splash = "default"
+		info.splash_text = ("%d elite/%d rare/%d boss kills; playtime %s"):format(all_kills_kind.elite or 0, all_kills_kind.rare or 0, all_kills_kind.boss or 0, playtime)
+		
+		local sc = Birther:getBirthDescriptor("subclass", player.descriptor.subclass)
+		if sc then
+			info.icon = sc.name:lower():gsub("[^a-z0-9]", "_")
+			info.icon_text = ("%s playing on %s %s; died %d time%s!"):format(player.name, player.descriptor.permadeath, player.descriptor.difficulty, player.died_times and #player.died_times or 0, (player.died_times and #player.died_times == 1) and "" or "s")
+		end
+
+		-- Determine which dlc it originates from
+		local _, _, addon = self.zone.short_name:find("^([^+]+)%+(.*)$")
+		if addon then
+			local addon_data = self.__mod_info.addons[addon]
+			if addon_data and addon_data.id_dlc then
+				info.splash = addon
+			end
+		end
+		-- Let the DLC override it in a more smart way
+		self:triggerHook{"Discord:check", info=info}
+
+		core.discord.updatePresence{state=info.zone, details=info.char, large_image=info.splash, large_image_text=info.splash_text, small_image=info.icon, small_image_text=info.icon_text}
+	end
 end
 
 function _M:getSaveDescription()
@@ -746,13 +797,30 @@ function _M:leaveLevel(level, lev, old_lev)
 	if level.no_remove_entities then return end
 
 	level.last_turn = self.turn
-	for act, _ in pairs(self.party.members) do
-		if self.player ~= act and level:hasEntity(act) then
-			level:removeEntity(act)
-			self.to_re_add_actors[act] = true
+
+	if self.change_level_party then
+		game.party:switchParty(self.change_level_party)
+		for act, _ in pairs(self.party.members) do
+			if self.player ~= act then -- No check, we will add all the party
+				level:removeEntity(act)
+				self.to_re_add_actors[act] = true
+			end
 		end
+	elseif self.change_level_party_back then
+		for act, _ in pairs(self.party.members) do
+			if level:hasEntity(act) then -- Just remove it all, it's a temporary party
+				level:removeEntity(act)
+			end
+		end
+	else
+		for act, _ in pairs(self.party.members) do
+			if self.player ~= act and level:hasEntity(act) then
+				level:removeEntity(act)
+				self.to_re_add_actors[act] = true
+			end
+		end
+		if level:hasEntity(self.player) then level:removeEntity(self.player) end
 	end
-	if level:hasEntity(self.player) then level:removeEntity(self.player) end
 end
 
 function _M:onLevelLoad(id, fct, data)
@@ -921,7 +989,7 @@ function _M:changeLevelReal(lev, zone, params)
 	local oz, ol = self.zone, self.level
 	
 	-- Unlock first!
-	if not params.temporary_zone_shift_back and self.level and self.level.temp_shift_zone then
+	if not params.temporary_zone_shift_back and self.zone and self.zone.temp_shift_zone and zone and zone == self.zone.short_name then
 		self:changeLevelReal(1, "useless", {temporary_zone_shift_back=true})
 	end
 
@@ -934,7 +1002,7 @@ function _M:changeLevelReal(lev, zone, params)
 	-- Finish stuff registered for the previous level
 	self:onTickEndExecute()
 
-	if self.zone and self.level then self.party:leftLevel() end
+	if self.zone and self.level then self.party:leftLevel(params.temporary_zone_shift_back or (zone and zone == self.zone.short_name)) end
 
 	if self.player:isTalentActive(self.player.T_JUMPGATE) then
 		self.player:forceUseTalent(self.player.T_JUMPGATE, {ignore_energy=true})
@@ -945,7 +1013,7 @@ function _M:changeLevelReal(lev, zone, params)
 	end
 
 	-- clear chrono worlds and their various effects
-	if self._chronoworlds then self._chronoworlds = nil end
+	if self._chronoworlds and not params.keep_chronoworlds then self._chronoworlds = nil end
 
 	local left_zone = self.zone
 	local old_lev = (self.level and not zone) and self.level.level or -1000
@@ -955,11 +1023,14 @@ function _M:changeLevelReal(lev, zone, params)
 	local recreate_nothing = false
 	local popup = nil
 	local afternicer = nil
+	local force_back_pos = nil
 
 	if params._debug_mode then
 		print("Entering zone:", self.zone.name, "level:", self.level and self.level.level, "in debug mode")	
-		if not self.level then return end
+		if not self.level then self.change_level_party = nil self.change_level_party_back = nil return end
 	elseif params.temporary_zone_shift then -- We only switch temporarily, keep the old one around
+		if params.temporary_zone_shift_party then self.change_level_party = params.temporary_zone_shift_party end
+
 		self:leaveLevel(self.level, lev, old_lev)
 
 		if type(zone) == "string" then
@@ -975,18 +1046,28 @@ function _M:changeLevelReal(lev, zone, params)
 		else
 			self.visited_zones[self.zone.short_name] = true
 			world:seenZone(self.zone.short_name)
-			self.level.temp_shift_zone = oz
-			self.level.temp_shift_level = ol
+			self.zone.temp_shift_zone = oz
+			self.zone.temp_shift_level = ol
+			if params.temporary_zone_shift_save_pos then
+				local p = self:getPlayer(true)
+				self.zone.temp_shift_pos = {x=p.x, y=p.y}
+			end
+
+			if new_level then
+				afternicer = self.state:startEvents()
+			end
 		end
 	elseif params.temporary_zone_shift_back then -- We switch back
 		popup = Dialog:simpleWaiter("载入区域", "载入区域中，请稍候...", nil, 10000)
 		core.display.forceRedraw()
 
-		local old = self.level
+		if self.zone.zone_party then self.change_level_party_back = true end
+
+		local old = self.zone
 
 		if self.zone and self.zone.on_leave then
-			local nl, nz, stop = self.zone.on_leave(lev, old_lev, zone)
-			if stop then return end
+			local nl, nz, stop = self.zone.on_leave(lev, old_lev, old.temp_shift_zone)
+			if stop then self.change_level_party = nil self.change_level_party_back = nil return end
 			if nl then lev = nl end
 			if nz then zone = nz end
 		end
@@ -999,6 +1080,7 @@ function _M:changeLevelReal(lev, zone, params)
 
 		self.zone = old.temp_shift_zone
 		self.level = old.temp_shift_level
+		if old.temp_shift_pos then force_back_pos = old.temp_shift_pos end
 
 		self.visited_zones[self.zone.short_name] = true
 		world:seenZone(self.zone.short_name)
@@ -1006,7 +1088,7 @@ function _M:changeLevelReal(lev, zone, params)
 	elseif not params.temporary_zone_shift then -- We move to a new zone as normal
 		if self.zone and self.zone.on_leave then
 			local nl, nz, stop = self.zone.on_leave(lev, old_lev, zone)
-			if stop then return end
+			if stop then self.change_level_party = nil self.change_level_party_back = nil return end
 			if nl then lev = nl end
 			if nz then zone = nz end
 		end
@@ -1051,6 +1133,9 @@ function _M:changeLevelReal(lev, zone, params)
 		end
 	end
 
+	-- Store for later
+	if params.temporary_zone_shift_party then self.zone.zone_party = true end
+
 	-- Post process walls
 	self.nicer_tiles:postProcessLevelTiles(self.level)
 
@@ -1087,22 +1172,32 @@ function _M:changeLevelReal(lev, zone, params)
 		end
 	end
 
-	-- place the player on the level
-	if self.zone.wilderness then -- Move back to old wilderness position
+	-- No placements to do, old party is still there, jsut switch it on
+	if self.change_level_party_back then
+		game.party:switchToOldParty()
+	-- Move back to old wilderness position
+	elseif self.zone.wilderness then
 		self.player:move(self.player.wild_x, self.player.wild_y, true)
 		self.player.last_wilderness = self.zone.short_name
+	-- Place the player on the level
 	else
 		local x, y = nil, nil
-		if params.auto_zone_stair and left_zone then
+		if force_back_pos then
+			x, y = force_back_pos.x, force_back_pos.y
+		elseif (params.auto_zone_stair or self.level.data.auto_zone_stair) and left_zone then
 			-- Dirty but quick
-			local list = {}
+			local list, catchall = {}, {}
 			for i = 0, self.level.map.w - 1 do for j = 0, self.level.map.h - 1 do
 				local idx = i + j * self.level.map.w
 				if self.level.map.map[idx][Map.TERRAIN] and self.level.map.map[idx][Map.TERRAIN].change_zone == left_zone.short_name then
 					list[#list+1] = {i, j}
+				elseif self.level.map.map[idx][Map.TERRAIN] and self.level.map.map[idx][Map.TERRAIN].change_zone_catchall then
+					catchall[#catchall+1] = {i, j}
 				end
 			end end
-			if #list > 0 then x, y = unpack(rng.table(list)) end
+			if #list > 0 then x, y = unpack((rng.table(list)))
+			elseif #catchall  > 0 then x, y = unpack((rng.table(catchall)))
+			end
 		elseif params.auto_level_stair then
 			-- Dirty but quick
 			local list = {}
@@ -1112,7 +1207,7 @@ function _M:changeLevelReal(lev, zone, params)
 					list[#list+1] = {i, j}
 				end
 			end end
-			if #list > 0 then x, y = unpack(rng.table(list)) end
+			if #list > 0 then x, y = unpack((rng.table(list))) end
 		end
 
 		-- if self.level.exited then -- use the last location, if defined
@@ -1269,6 +1364,9 @@ function _M:changeLevelReal(lev, zone, params)
 
 	if popup then popup:done() end
 
+	self.change_level_party = nil
+	self.change_level_party_back = nil
+
 	self:dieClonesDie()
 end
 
@@ -1355,11 +1453,7 @@ function _M:chronoRestore(name, remove)
 	if game.player.resetMainShader then game.player:resetMainShader() end
 	return true
 end
-
---- Update the zone name, if needed
-function _M:updateZoneName()
-	if not self.zone_font then return end
-	local name
+function _M:getZoneName()
 	if self.zone.display_name then
 		name = self.zone.display_name()
 		if name == "Maj'Eyal" then name = "马基埃亚尔"
@@ -1375,6 +1469,13 @@ function _M:updateZoneName()
 			name = ("%s (%d)"):format(zoneName[self.zone.name] or self.zone.name, lev)
 		end
 	end
+	return name
+
+end
+--- Update the zone name, if needed
+function _M:updateZoneName()
+	if not self.zone_font then return end
+	local name = self:getZoneName()
 	if self.zone_name_s and self.old_zone_name == name then return end
 
 	name = zoneName[name] or name
@@ -1578,7 +1679,7 @@ function _M:displayDelayedLogDamage()
 				local rsrc = real_src.resolveSource and real_src:resolveSource() or real_src
 				local rtarget = target.resolveSource and target:resolveSource() or target
 				local x, y = target.x or -1, target.y or -1
-				local sx, sy = self.level.map:getTileToScreen(x, y)
+				local sx, sy = self.level.map:getTileToScreen(x, y, true)
 				if target.dead then
 					if dams.tgtSeen and (rsrc == self.player or rtarget == self.player or self.party:hasMember(rsrc) or self.party:hasMember(rtarget)) then
 						self.flyers:add(sx, sy, 30, (rng.range(0,2)-1) * 0.5, rng.float(-2.5, -1.5), ("Kill (%d)!"):format(dams.total), {255,0,255}, true)
@@ -1653,10 +1754,31 @@ function _M:updateFOV()
 	self.player:playerFOV()
 end
 
-function _M:displayMap(nb_keyframes)
+function _M:shakeScreen(time, force)
+	self.shake_time = time
+	self.shake_force = force
+end
+
+function _M:displaySeensMap(map, x, y, nb_keyframe)
+	map._map:drawSeensTexture(x, y)
+end
+
+function _M:displayMap(nb_keyframes, prev_fbo)
 	-- Now the map, if any
 	if self.level and self.level.map and self.level.map.finished then
 		local map = self.level.map
+
+		if self.shake_time then
+			if self.shake_time <= 0 then
+				self.shake_time = nil
+				self.shake_x = 0
+				self.shake_y = 0
+			else
+				self.shake_time = self.shake_time - nb_keyframes
+				self.shake_x = self.shake_x + rng.range(-self.shake_force, self.shake_force)
+				self.shake_y = self.shake_y + rng.range(-self.shake_force, self.shake_force)
+			end
+		end
 
 		-- Display the map and compute FOV for the player if needed
 		local changed = map.changed
@@ -1679,7 +1801,7 @@ function _M:displayMap(nb_keyframes)
 				if self.level.data.foreground then self.level.data.foreground(self.level, 0, 0, nb_keyframes) end
 				if self.level.data.weather_particle then self.state:displayWeather(self.level, self.level.data.weather_particle, nb_keyframes) end
 				if self.level.data.weather_shader then self.state:displayWeatherShader(self.level, self.level.data.weather_shader, map.display_x, map.display_y, nb_keyframes) end
-			self.fbo:use(false, self.full_fbo)
+			self.fbo:use(false, prev_fbo)
 
 			-- 2nd pass to apply distorting particles
 			self.fbo2:use(true)
@@ -1688,18 +1810,18 @@ function _M:displayMap(nb_keyframes)
 				if self.posteffects and self.posteffects.line_grids and self.posteffects.line_grids.shad then self.posteffects.line_grids.shad:use(true) end
 				map._map:toScreenLineGrids(map.display_x, map.display_y)
 				if self.posteffects and self.posteffects.line_grids and self.posteffects.line_grids.shad then self.posteffects.line_grids.shad:use(false) end
-				if config.settings.tome.smooth_fov then map._map:drawSeensTexture(0, 0, nb_keyframes) end
-			self.fbo2:use(false, self.full_fbo)
+				if config.settings.tome.smooth_fov then self:displaySeensMap(map, 0, 0, nb_keyframes) end
+			self.fbo2:use(false, prev_fbo)
 
 			_2DNoise:bind(1, false)
-			self.fbo2:postEffects(self.fbo, self.full_fbo, map.display_x, map.display_y, map.viewport.width, map.viewport.height, unpack(self.posteffects_use))
-			if self.target then self.target:display(nil, nil, self.full_fbo, nb_keyframes) end
+			self.fbo2:postEffects(self.fbo, prev_fbo, map.display_x + self.shake_x, map.display_y + self.shake_y, map.viewport.width, map.viewport.height, unpack(self.posteffects_use))
+			if self.target then self.target:display(nil, nil, prev_fbo, nb_keyframes) end
 
 		-- Basic display; no FBOs
 		else
 			if self.level.data.background then self.level.data.background(self.level, map.display_x, map.display_y, nb_keyframes) end
 			map:display(nil, nil, nb_keyframes, config.settings.tome.smooth_fov, nil)
-			if self.target then self.target:display(nil, nil, self.full_fbo, nb_keyframes) end
+			if self.target then self.target:display(nil, nil, prev_fbo, nb_keyframes) end
 			if self.level.data.foreground then self.level.data.foreground(self.level, map.display_x, map.display_y, nb_keyframes) end
 			if self.level.data.weather_particle then self.state:displayWeather(self.level, self.level.data.weather_particle, nb_keyframes) end
 			if self.level.data.weather_shader then self.state:displayWeatherShader(self.level, self.level.data.weather_shader, map.display_x, map.display_y, nb_keyframes) end
@@ -1707,7 +1829,7 @@ function _M:displayMap(nb_keyframes)
 			if self.posteffects and self.posteffects.line_grids and self.posteffects.line_grids.shad then self.posteffects.line_grids.shad:use(true) end
 			map._map:toScreenLineGrids(map.display_x, map.display_y)
 			if self.posteffects and self.posteffects.line_grids and self.posteffects.line_grids.shad then self.posteffects.line_grids.shad:use(false) end
-			if config.settings.tome.smooth_fov then map._map:drawSeensTexture(map.display_x, map.display_y, nb_keyframes) end
+			if config.settings.tome.smooth_fov then self:displaySeensMap(map, map.display_x, map.display_y, nb_keyframes) end
 		end
 
 		-- Handle ambient sounds
@@ -1883,8 +2005,6 @@ do return end
 			print(f, err)
 			setfenv(f, setmetatable({level=self.level, zone=self.zone}, {__index=_G}))
 			print(pcall(f))
-do return end
-			self:registerDialog(require("mod.dialogs.DownloadCharball").new())
 		end end,
 		[{"_f","ctrl"}] = function() if config.settings.cheat then
 			self.player.quests["love-melinda"] = nil
@@ -2481,6 +2601,11 @@ function _M:onDealloc()
 	print("Played ToME for "..time.." seconds")
 end
 
+function _M:allowJSONDump()
+	if not self.party or self.party.temporary_party then return false
+	else return true end
+end
+
 function _M:saveVersion(token)
 	if token == "new" then
 		token = util.uuid()
@@ -2542,7 +2667,7 @@ function _M:saveGame()
 	-- savefile_pipe is created as a global by the engine
 	local clone = savefile_pipe:push(self.save_name, "game", self)
 	world:saveWorld()
-	if not self.creating_player then
+	if not self.creating_player and config.settings.tome.upload_charsheet then
 		local oldplayer = self.player
 		self.party:setPlayer(self:getPlayer(true), true)
 

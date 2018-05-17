@@ -24,7 +24,7 @@ registerTalentTranslation{
 		return ([[你 的 身 体 已 经 腐 败 ,增 加 %d%% 枯 萎 和 酸 性 抗 性 , %d%% 枯 萎 伤 害 吸 收。
 		每 次 生 命 值 损 失 大 于 15%% 时,伤 害 将 减 少 %d%% ，同 时 在 相 邻 的 格 子 生 成 蠕 虫, 攻 击 你 的 敌 人 5 回合 。
 		你 同 时 只 能 拥 有 5 只 蠕 虫 。 。
-		蠕 虫 死 亡 时 将 爆 炸 ， 产 生 半 径 2 的 枯 萎 毒 池 ， 持 续 5 回 合 ，造 成 %0.2f 枯 萎 伤 害 并 治 疗 你 %d 。]]):
+		蠕 虫 死 亡 时 将 爆 炸 ， 产 生 半 径 2 的 枯 萎 毒 池 ， 持 续 5 回 合 ，造 成 %0.2f 枯 萎 伤 害 并 治 疗 你 33%% 伤 害 量 。]]):
 		format(resist, affinity, reduction, damDesc(self, DamageType.BLIGHT, dam), dam)
 	end,
 }
@@ -34,11 +34,11 @@ registerTalentTranslation{
 	name = "蠕虫行走",
 	info = function(self, t)
 		local radius = self:getTalentRadius(t)
-		local heal = t.getHeal(self, t) * 100
+		local heal = t.getHeal(self, t) 
 		local vim = t.getVim(self, t)
 
 		return ([[你 解 体 为 蠕 虫 ， 并 在 目 标 处 合 并。（误 差 %d）
-如 果 对 蠕 虫 团 使 用 ， 你 和 它 合 体  ， 治 疗 %d%% 最 大 生 命 值 , 回 复 %d 活 力 。]]):
+如 果 对 蠕 虫 团 使 用 ， 你 和 它 合 体  ， 治 疗 %d 生 命 值 , 回 复 %d 活 力 。]]):
 format (radius, heal, vim)
 	end,
 }

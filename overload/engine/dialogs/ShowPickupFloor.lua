@@ -43,9 +43,9 @@ function _M:init(title, x, y, filter, action, takeall, actor)
 	self.c_list = ListColumns.new{width=math.floor(self.iw / 2 - 10), height=self.ih - 10 - takeall.h, scrollbar=true, columns={
 		{name="", width={20,"fixed"}, display_prop="char"},
 		{name="", width={24,"fixed"}, display_prop="object", sort="sortname", direct_draw=function(item, x, y) item.object:toScreen(nil, x+4, y, 16, 16) end},
-		{name="物品", width=70, display_prop="sortname"},
+		{name="物品", width=72, display_prop="sortname"},
 		{name="分类", width=20, display_prop="cat"},
-		{name="负重", width=10, display_prop="encumberance"},
+		{name="负重", width=8, display_prop="encumberance"},
 	}, list={}, fct=function(item) self:use(item) end, select=function(item, sel) self:select(item) end}
 
 	self:generateList()

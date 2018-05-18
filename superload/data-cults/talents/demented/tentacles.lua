@@ -3,20 +3,19 @@ local Object = require "mod.class.Object"
 
 registerTalentTranslation{
 	id = "T_MUTATED_HAND",
-	name = "Mutated Hand",
+	name = "异变之手",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local inc = t.getPercentInc(self, t)
 		local allow_tcombat = t.canTentacleCombat(self, t)
 		local tcombat = {combat=t.getTentacleCombat(self, t, true)}
 		local tcombatdesc = Object:descCombat(self, tcombat, {}, "combat")
-		return ([[Your left hand mutates into a disgusting mass of tentacles.
-		When you have your offhand empty you automatically hit your target and those on the side whenever you hit with a basic attack.
-		Also increases Physical Power by %d, and increases weapon damage by %d%% for your tentacles attacks.
-		Each time you make an attack with your tentacle you gain %d insanity.
-		You generate a low power psionic field around you when around #{italic}#'civilized people'#{normal}# that prevents them from seeing you for the horror you are.
-
-		Your tentacle hand currently has these stats%s:
+		return ([[你的左手异变成为大量的恶心触手。
+		副手空闲时，当使用普通攻击，触手会自动攻击目标以及目标同侧的其他单位。
+		物理强度提高%d，触手伤害提高%d。
+		每次触手攻击时，获得%d疯狂值。
+		附近有#{italic}#'普通人'#{normal}#时会自动生成微弱的心灵护盾，避免被他们发现你的恐魔形态。
+		你的触手当前属性为%s:
 		%s]]):
 		format(damage, 100*inc, t.getInsanityBonus(self, t), allow_tcombat and "" or ", #CRIMSON# but is currently disabled due to non-empty offhand#WHITE#", tostring(tcombatdesc))
 	end,
@@ -24,42 +23,38 @@ registerTalentTranslation{
 
 registerTalentTranslation{
 	id = "T_LASH_OUT",
-	name = "Lash Out",
+	name = "旋风鞭挞",
 	info = function(self, t)
-		return ([[Spin around, extending your weapon and damaging all targets around you for %d%% weapon damage while your tentacle hand extends and hits all targets in radius 3 for %d%% tentacle damage.
-				
-				If the mainhand attack hits at least one enemy you gain %d insanity.
-				If the tentacle attack hits at least one enemy you gain %d insanity.
-		
-		#YELLOW_GREEN#When constricting:#WHITE# Your tentacle attack is centered around your constricted target (but not your weapon attack) and only in radius 1 but it also dazes anything hit for 5 turns.]]):
+		return ([[飞速旋转，伸展武器对周围单位造成%d%%武器伤害，并且伸展触手对3码内单位造成%d%%触手伤害。
+				如果武器击中敌人，你获得%d疯狂值。
+				如果触手击中敌人，你获得%d疯狂值。
+				#YELLOW_GREEN#当触手处于缠绕状态:#WHITE#你的触手攻击以被缠绕目标为中心展开，攻击范围只有1码，但是会使被击中单位眩晕5回合。]]):
 		format(100 * t.getDamage(self, t), 100 * t.getDamageTentacle(self, t), t.getMHInsanity(self, t), t.getTentacleInsanity(self, t))
 	end,
 }
 
 registerTalentTranslation{
 	id = "T_TENDRILS_ERUPTION",
-	name = "Tendrils Eruption",
+	name = "触手地狱",
 	info = function(self, t)
-		return ([[You plant your tentacle hand in the ground where it splits up and extends to a target zone of radius %d.
-		The zone will erupt with many black tendrils to hit all foes caught inside dealing %d%% tentacle damage.
-		Any creature hit by the tentacle must save against spell or be numbed by the attack, reducing its damage by %d%% for 5 turns.
-
-		If at least one enemy is hit you gain %d insanity.
-
-		#YELLOW_GREEN#When constricting:#WHITE#The tendrils pummel your constricted target for %d%% tentacle damage and if adjacent you make an additional mainhand weapon attack.  Talent cooldown reduced to 10.]]):
+		return ([[你的触手钻入地下，分布到%码范围的目标区域。
+		该区域喷发出大量黑色触手，对区域内所有敌人造成%d触手伤害。
+		被触手击中的生物需要进行法术检定，检定失败将被麻痹，伤害降低%d%%，持续5回合。
+		如果有敌人被触手击中，你获得%d疯狂值。
+		#YELLOW_GREEN#当触手处于缠绕状态:#WHITE#触手对缠绕对象连续突击，造成%d%%触手伤害。如果你与被缠绕对象相邻，则进行一次额外的主手打击。技能CD缩短为10回合。]]):
 		format(self:getTalentRadius(t), t.getDamageTentacle(self, t) * 100, t.getNumb(self, t), t.getInsanity(self, t), t.getDamageTentacle(self, t) * 1.5 * 100)
 	end,
 }
 
 registerTalentTranslation{
-	name = "Constrict", 
+	name = "触手缠绕", 
 	id = "T_TENTACLE_CONSTRICT",
 	info = function(self, t)
-		return ([[You extend your tentacle to grab a distant target, pulling it to you.
-		As long as Constrict stays active the target is bound by your tentacle, it can try to move away but each turn you pull it back in 1 tile.
-		While constricting you can not use your tentacle to enhance your normal attacks but you deal %d%% tentacle damage each turn to your target.
-		Enemies can resist the attempt to pull them but Constrict will always work for purposes of modifying your talents.
-		Your other tentacle talents may act differently when used while constricting (check their descriptions).]]):
+		return ([[伸展触手缠绕一个远处的目标，并向你拖拽。
+		目标被触手缠绕后，可以尝试向远处移动，但是每回合会被拖回一码。
+		当缠绕了敌人，普通攻击不会额外附加触手攻击，单每回合对缠绕敌人造成%d%%触手伤害。
+		敌人可以抵抗触手拖拽，但是缠绕状态会持续生效。
+		其他触手技能在缠绕状态下会发生变化，具体请查看相应技能描述。]]):
 		format(t.getDamageTentacle(self, t) * 100)
 	end,
 }

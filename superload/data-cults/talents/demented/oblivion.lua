@@ -1,36 +1,37 @@
 local _M = loadPrevious(...)
 registerTalentTranslation{
 	id = "T_NIHIL",
-	name = "Nihil",
+	name = "虚无之力",
 	info = function(self, t)
 		local targetcount = t.getTargetCount(self, t)
 		local power = t.getPower(self, t)*100
-		return ([[Your entropy bleeds into the world around you. On having entropic backlash applied or increased to you, %d random enemies you can see within radius 10 will be shrouded in entropic forces for 4 turns. This increases the duration of new negative effects and reduces the duration of new beneficial effects applied to the target by %d%%.]]):
+		return ([[将你身体上的熵能向周围辐射。每当你受到熵能反馈时，在你10码距离内随机的%d个可见敌人都将被熵能侵蚀4回合。
+		增加(减少)它们受到的新的负面(正面)效果%d%%的持续时间。]]):
 		format(targetcount, power)
 	end,
 }
 
 registerTalentTranslation{
 	id = "T_UNRAVEL_EXISTENCE",
-	name = "Unravel Existence",
+	name = "解析存在",
 	info = function(self, t)
 		local dur = t.getDuration(self,t)
-		return ([[Your Nihil unravels the existence of the target, tearing them apart with entropy.
-		If 6 effects are applied before Nihil expires a Herald of Oblivion will be summoned to assist you for %d turns.
-		The Herald will have a bonus to all attributes equal to your Magic.  Many other stats will scale with level.
-		Your increased damage, damage penetration, critical strike chance, and critical strike multiplier stats will all be inherited.]]):
+		return ([[你的虚无之力能够分解目标的存在，通过熵能将它们摧毁。
+		在熵能侵蚀效果结束之前，如果目标身上同时存在6个效果，将召唤出持续%d回合的湮灭使者。
+		湮灭使者的全部属性点提升你魔法属性的相同数值。其他属性根据本身等级提升。
+		湮灭使者会继承你的伤害加成、伤害穿透、暴击几率和暴击倍率加成。]]):
 		format(dur)
 	end,
 }
 
 registerTalentTranslation{
 	id = "T_ERASE",
-	name = "Erase",
+	name = "存在消除",
 	info = function(self, t)
 		local dam = t.getDamage(self, t)
 		local power = t.getNumb(self, t)
-		return ([[Those affected by your Nihil find themselves increasingly removed from reality, reducing all damage they deal by %d%% and taking %0.2f temporal damage each turn for each negative magical effect they have. 
-		The damage will scale with your Spellpower.]])
+		return ([[受到你虚无之力影响的生物逐渐被从现实中被抹除，造成的伤害降低%d%%，同时每具有一个负面魔法效果，每回合受到%0.2f的时空伤害。 
+		伤害受到法术强度加成。]])
 		:format(power, damDesc(self, DamageType.TEMPORAL, dam))
 	end
 }
@@ -42,17 +43,17 @@ registerTalentTranslation{
 	info = function(self, t)
 		local duration = t.getDuration(self, t)
 		local damage = t.getDamage(self, t)
-		return ([[Summon a radius 4 storm of all-consuming oblivion at the targeted location for %d turns, reducing those within to nothing. Targets within will take %0.2f darkness damage and %0.2f temporal damage each turn.  Walls and other terrain within the storm will be disintegrated.
-		Each time the storm deals damage enemies will have any detrimental magical effect with less than 3 duration set to 3 duration, and all enemy projectiles will be destroyed.
-		The damage will scale with your Spellpower.]]):format(duration, damDesc(self, DamageType.DARKNESS, damage), damDesc(self, DamageType.TEMPORAL, damage))
+		return ([[在目标区域召唤出范围4码、持续%d回合的湮灭风暴，使受到影响的物质化为虚无，每回合造成%0.2f的暗影伤害和%0.2f的时空伤害。
+		每次受到风暴伤害时，敌人身上不足3回合的负面魔法效果都将重置为3回合。风暴范围内敌人的投射物都将被扯碎。
+		伤害受到法术强度加成。]]):format(duration, damDesc(self, DamageType.DARKNESS, damage), damDesc(self, DamageType.TEMPORAL, damage))
 	end,
 }
 
 registerTalentTranslation{
 	id = "T_VOID_CRASH",
-	name = "Void Crash",
+	name = "虚空破碎",
 	info = function(self, t)
-		return ([[Slam your weapons into the ground, creating a radius 2 explosion of void energy dealing %d%% damage split between darkness and temporal.]]):
+		return ([[用武器撞击地面, 产生2码的虚空爆炸，造成%d%%的武器伤害，伤害类型为暗影时空各半。]]):
 		format(t.getDamage(self, t) * 100)
 	end,
 }

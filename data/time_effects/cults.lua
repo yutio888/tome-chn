@@ -180,40 +180,40 @@ timeEffectCHN:newEffect{
 timeEffectCHN:newEffect{
 		id = "HALO_OF_RUIN",
 		enName = "Halo of Ruin",
-		chName = "Halo of Ruin",
-		desc = function(self, eff) return ("Increases spell critical chance by %d%%. At 5 stacks, next Nether spell is empowered."):format(eff.power * eff.charges) end,
+		chName = "毁灭光环",
+		desc = function(self, eff) return ("增 加 法 术 暴 击 率 %d%% ， 在 5 层 时 ，下 一 个 虚 境 法 术 获 得 加 成 。"):format(eff.power * eff.charges) end,
 		type = "魔法",
 		subtype = " blight ",
 }
 timeEffectCHN:newEffect{
 		id = "VOIDBURN",
 		enName = "Voidburn",
-		chName = "Voidburn",
-		desc = function(self, eff) return ("The target has been seared by the void, taking %0.2f darkness and %0.2f temporal damage each turn."):format(math.floor(eff.power/2), math.floor(eff.power/2)) end,
+		chName = "虚空灼烧",
+		desc = function(self, eff) return ("目 标 被 虚 空 折 磨 ， 每 回 合 造 成 %0.2f 暗 影 和 %0.2f 时 空 伤 害 。 "):format(math.floor(eff.power/2), math.floor(eff.power/2)) end,
 		type = "魔法",
 		subtype = " temporal/ darkness ",
 }
 timeEffectCHN:newEffect{
 		id = "DARK_WHISPERS",
 		enName = "Dark Whispers",
-		chName = "Dark Whispers",
-		desc = function(self, eff) return ("The target is being driven mad by the void, taking %0.2f darkness damage per turn and reducing all powers by %d."):format(eff.dam, eff.power) end,
+		chName = "黑暗低语",
+		desc = function(self, eff) return ("目 标 被 虚 空 压 迫 至 疯 狂 ，每 回 合 受 到 %0.2f 点 暗 影 伤 害 并 且 降 低 %d 点 全 部 强 度。"):format(eff.dam, eff.power) end,
 		type = "魔法",
 		subtype = " darkness ",
 }
 timeEffectCHN:newEffect{
 		id = "HIDEOUS_VISIONS",
 		enName = "Hideous Visions",
-		chName = "Hideous Visions",
-		desc = function(self, eff) return ("The target is being distracted by a hallucination, reducing all damage dealt to non-hallucinations targets by %d%%."):format(eff.power) end,
+		chName = "丑恶幻视",
+		desc = function(self, eff) return ("目 标 被 幻 觉 所 困 , 降 低 其 对 非 幻 觉 单 位 造 成 的 伤 害  %d%% 。"):format(eff.power) end,
 		type = "其它",
 		subtype = " darkness ",
 }
 timeEffectCHN:newEffect{
 		id = "CACOPHONY",
 		enName = "Cacophony",
-		chName = "Cacophony",
-		desc = function(self, eff) return ("The target is overwhelmed by voices from the void, giving them a 20%% higher chance to spawn hallucinations from Dark Whispers and causing them to take an additional %d%% temporal damage from Dark Whispers and Hideous Visions."):format(eff.power) end,
+		chName = "虚空魔音",
+		desc = function(self, eff) return ("目 标 被 虚 空 之 声 淹 没 , 让 他 们 从 黑 暗 低 语 中 产 生 幻 觉 的 几 率 增 加 20%% ，并 使 他 们 从 黑 暗 低 语 和 丑 恶 幻 视 中 受 到 额 外 %d%% 点 时 空 伤 害 。"):format(eff.power) end,
 		type = "魔法",
 		subtype = " temporal ",
 }

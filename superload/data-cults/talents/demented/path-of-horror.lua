@@ -1,44 +1,44 @@
 local _M = loadPrevious(...)
 registerTalentTranslation{
 	id = "T_CARRION_FEET",
-	name = "Carrion Feet",
+	name = "蠕动之足",
 	info = function(self, t)
-		return ([[Your feet start to continuously produce carrion worms that are constantly crushed as you walk, passively increasing movement speed by %d%%.
-		You can also activate this talent to instantly destroy more worms, letting you jump in range %d to visible terrain.
-		Upon landing you crush more worms, creating a radius 2 cone of gore; any creatures caught inside deals 70%% less damage for one turn.
-		If at least 1 enemy is effected by the cone you gain an additional 20 insanity.]]):
+		return ([[你的脚底开始不断的产生蠕虫，它们在你行走的时候不断爆裂，被动地增加你%d%%的移动速度
+		你也可以激活这个天赋来引爆更多的蠕虫，让你跳跃到 %d 码外的可见地形。
+		着陆时更多的蠕虫爆裂，形成范围2码的脓液喷射；范围内的生物下回合造成的伤害降低70%%。
+		如果有敌人受到脓液喷射的影响，你会得到额外20点疯狂值。]]):
 		format(t.getPassiveSpeed(self, t)*100, self:getTalentRange(t))
 	end,
 }
 
 registerTalentTranslation{
-	name = "Horrific Evolution",
+	name = "恐怖进化",
 	id = "T_DECAYING_GUTS",
 	info = function(self, t)
-		return ([[Your mutations have enhanced your offense even farther.
-		You gain %d Accuracy and %d Spellpower.
-		The effects will increase with your Magic stat.]])
+		return ([[你的突变强化了你的攻击能力。
+		你获得%d 命中和 %d 法术强度.
+		技能效果会随着你的魔法属性增强。]])
 		:format(t.getAccuracy(self, t), t.getSpellpower(self, t))
 	end,
 }
 
 registerTalentTranslation{
-	name = "Overgrowth", 
+	name = "巨型变异", 
 	id = "T_CULTS_OVERGROWTH",
 	info = function(self, t)
-		return ([[You trigger a cascade of rapidly mutating cells in your body for %d turns.
-		Your body grows much bigger, gaining 2 size categories, making you able to walk through walls and increasing all your damage by %d%% and all your resistances by %d%%.
-		Each time you take a step your monstrous form causes a small quake destroying and rearranging nearby terrain.]]):
+		return ([[你激发了一次持续%d回合的体细胞急速变异。
+		你的身体急速变大，获得+2体型，并使你能够在行走时随意撞碎墙壁。增加%d%%的全体伤害和%d%%的全体抗性。
+		你的巨大体型使你在每次行走时都导致一场小型的地震，破坏并重组周围的地形。]]):
 		format(t.getDur(self, t), t.getDam(self, t), t.getResist(self, t))
 	end,
 }
 
 registerTalentTranslation{
 	id = "T_WRITHING_ONE",
-	name = "Writhing One",
+	name = "终极异变",
 	info = function(self, t)
-		return ([[At last you unlock the true power of your mutated body!
-		You gain %d%% stun immunity, %d%% chances to ignore critical strikes and your darkness and blight damage are increased by %d%%.]]):
+		return ([[你终于解开了这具变异身体的最终力量！
+		你获得%d%%的晕眩免疫, %d%%几率无视受到的暴击，并且增加%d%%黑暗及枯萎伤害。]]):
 		format(t.getImmunities(self, t) * 100, t.getCritResist(self, t), t.getDam(self, t))
 	end,
 }

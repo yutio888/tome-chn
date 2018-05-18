@@ -204,7 +204,7 @@ timeEffectCHN:newEffect{
 timeEffectCHN:newEffect{
 		id = "HIDEOUS_VISIONS",
 		enName = "Hideous Visions",
-		chName = "丑恶幻视",
+		chName = "惊骇幻象",
 		desc = function(self, eff) return ("目 标 被 幻 觉 所 困 , 降 低 其 对 非 幻 觉 单 位 造 成 的 伤 害  %d%% 。"):format(eff.power) end,
 		type = "其它",
 		subtype = " darkness ",
@@ -212,7 +212,7 @@ timeEffectCHN:newEffect{
 timeEffectCHN:newEffect{
 		id = "CACOPHONY",
 		enName = "Cacophony",
-		chName = "虚空魔音",
+		chName = "心灵尖啸",
 		desc = function(self, eff) return ("目 标 被 虚 空 之 声 淹 没 , 让 他 们 从 黑 暗 低 语 中 产 生 幻 觉 的 几 率 增 加 20%% ，并 使 他 们 从 黑 暗 低 语 和 丑 恶 幻 视 中 受 到 额 外 %d%% 点 时 空 伤 害 。"):format(eff.power) end,
 		type = "魔法",
 		subtype = " temporal ",
@@ -220,104 +220,104 @@ timeEffectCHN:newEffect{
 timeEffectCHN:newEffect{
 		id = "ENTROPIC_WASTING",
 		enName = "Entropic Wasting",
-		chName = "Entropic Wasting",
-		desc = function(self, eff) return ("The target is wasting away from entropic forces, taking %d damage per turn."):format(eff.power) end,
+		chName = "熵能冲击",
+		desc = function(self, eff) return ("目 标 被 熵 能 冲 击 中， 每 回 合 受 到 %d 伤 害。"):format(eff.power) end,
 		type = "其它",
 		subtype = " temporal/ darkness ", no_ct_effect = true,
 }
 timeEffectCHN:newEffect{
 		id = "ENTROPIC_GIFT",
 		enName = "Entropic Gift",
-		chName = "Entropic Gift",
-		desc = function(self, eff) return ("The full force of entropy has been brought to bear on the target, inflicting %0.2f darkness and %0.2f temporal damage each turn."):format(eff.power/2, eff.power/2) end,
+		chName = "熵能掌控",
+		desc = function(self, eff) return ("熵 能 冲 击 被 施 加 给 目 标 ， 每 回 合 造 成 %0.2f 暗 影 和 %0.2f 时 空 伤 害。"):format(eff.power/2, eff.power/2) end,
 		type = "魔法",
 		subtype = " temporal/ darkness ",
 }
 timeEffectCHN:newEffect{
 		id = "PROPHECY_OF_MADNESS",
 		enName = "Prophecy of Madness",
-		chName = "Prophecy of Madness",
-		desc = function(self, eff) return ("The target is doomed to madness. All talent cooldowns are increased by %d%%."):format(eff.power*100) end,
+		chName = "疯狂预言",
+		desc = function(self, eff) return ("目 标 被 诅 咒 进入 疯 狂 状 态 。 技 能 冷 却 时 间 增 加 %d%%。"):format(eff.power*100) end,
 		type = "魔法",
 		subtype = " darkness/ prophecy ",
 }
 timeEffectCHN:newEffect{
 		id = "PROPHECY_OF_RUIN",
 		enName = "Prophecy of Ruin",
-		chName = "Prophecy of Ruin",
-		desc = function(self, eff) return ("The target is doomed to ruin.  On falling below 75%%, 50%% or 25%% life all enemies in radius %d will take %d darkness damage"):format(eff.rad, eff.dam) end,
+		chName = "毁灭预言",
+		desc = function(self, eff) return ("目 标 被 诅 咒 进 入 毁 灭 状 态 。 当 生 命 值 下 降 至 75%%, 50%% 或 25%% life 时， %d 格 内 敌 人 将 受 到 %d 暗 影 伤 害。"):format(eff.rad, eff.dam) end,
 		type = "魔法",
 		subtype = " darkness/ prophecy ",
 }
 timeEffectCHN:newEffect{
 		id = "PROPHECY_OF_TREASON",
 		enName = "Prophecy of Treason",
-		chName = "Prophecy of Treason",
-		desc = function(self, eff) return ("The target is doomed to treason. Each turn they have a %d%% chance to attack an adjacent creature.  If no creatures are adjacent they will attack themself."):format(eff.power) end,
+		chName = "背叛预言",
+		desc = function(self, eff) return ("目 标 被 诅 咒 进 入 背 叛 状 态。 每 回 合 由 %d%%几 率 攻 击 友 方 单 位 ， 若 无 临 近 友 方 单 位 则 攻 击 自 身。"):format(eff.power) end,
 		type = "魔法",
 		subtype = " darkness/ prophecy ",
 }
 timeEffectCHN:newEffect{
 		id = "MARK_OF_TREASON",
 		enName = "Mark of Treason",
-		chName = "Mark of Treason",
-		desc = function(self, eff) return ("When this target is damaged %d%% of the damage will also be done to the source of this effect."):format(eff.power) end,
+		chName = "背叛印记",
+		desc = function(self, eff) return ("当 目 标 受 伤 时 ， 效 果 来 源 将 受 到 %d%% 伤 害。"):format(eff.power) end,
 		type = "魔法",
 		subtype = " darkness/ prophecy ",
 }
 timeEffectCHN:newEffect{
 		id = "NIHIL",
 		enName = "Nihil",
-		chName = "Nihil",
-		desc = function(self, eff) return ("The target is engulfed in entropy, reducing the duration of new beneficial effects and increasing the duration of new negative effects by %d%%."):format(eff.power*100) end,
+		chName = "虚无",
+		desc = function(self, eff) return ("目 标 被 熵 覆 盖 ， 缩 短 新 有 益 状 态 并 延 长 新 负 面 状 态 %d%% 持 续 时 间 。"):format(eff.power*100) end,
 		type = "其它",
 		subtype = " temporal/ darkness ",
 }
 timeEffectCHN:newEffect{
 		id = "ATROPHY",
 		enName = "Atrophy",
-		chName = "Atrophy",
-		desc = function(self, eff) return ("The target's mind and body is wasting away, reducing all stats by %d."):format(eff.power*eff.charges) end,
+		chName = "衰亡",
+		desc = function(self, eff) return ("目 标 的 身 体 和 精 神 迅 速 老 化、凋 零 ，所 有 属 性 降 低 %d 。"):format(eff.power*eff.charges) end,
 		type = "其它",
 		subtype = " temporal ",
 }
 timeEffectCHN:newEffect{
 		id = "TEMPORAL_FEAST",
 		enName = "Temporal Feast",
-		chName = "Temporal Feast",
-		desc = function(self, eff) return ("Increases spellcast speed by %d%%."):format(eff.power * 100 * eff.charges) end,
+		chName = "盛宴",
+		desc = function(self, eff) return ("施 法 速 度 增 加%d%%."):format(eff.power * 100 * eff.charges) end,
 		type = "魔法",
 		subtype = " speed/ temporal ",
 }
 timeEffectCHN:newEffect{
 		id = "VOID_RIFT",
 		enName = "Void Rift",
-		chName = "Void Rift",
-		desc = function(self, eff) return ("The target has %d active void rift(s)."):format(eff.charges) end,
+		chName = "虚空裂口",
+		desc = function(self, eff) return ("目 标 拥 有 %d 个 激 活 的 虚 空 裂 口。"):format(eff.charges) end,
 		type = "其它",
 		subtype = " darkness/ temporal ",
 }
 timeEffectCHN:newEffect{
 		id = "NETHER_BREACH",
 		enName = "Nether Breach",
-		chName = "Nether Breach",
-		desc = function(self, eff) return ("The target has a nether breach open firing beams at nearby enemies."):format() end,
+		chName = "深渊裂隙",
+		desc = function(self, eff) return ("目 标 拥 有 一 个 深 渊 裂 隙， 朝 周 围 敌 人 发 射 光 束。"):format() end,
 		type = "其它",
 		subtype = " darkness/ temporal ",
 }
 timeEffectCHN:newEffect{
 		id = "TEMPORAL_VORTEX",
 		enName = "Temporal Vortex",
-		chName = "Temporal Vortex",
-		desc = function(self, eff) return ("The target has a temporal vortex open slowing nearby enemies."):format() end,
+		chName = "时空漩涡",
+		desc = function(self, eff) return ("目 标 拥 有 一 个 时 空 漩 涡  ，减 速 周 围 敌人 。"):format() end,
 		type = "其它",
 		subtype = " darkness/ temporal ",
 }
 timeEffectCHN:newEffect{
 		id = "DIMENSIONAL_GATEWAY",
 		enName = "Dimensional Gateay",
-		chName = "Dimensional Gateay",
-		desc = function(self, eff) return ("The target has a dimensional gateway open summoning Void Skitterers."):format() end,
+		chName = "维度之门",
+		desc = function(self, eff) return ("目 标 拥 有 一 个 维 度 之 门 ， 可 以 召 唤 虚 空 造 物。"):format() end,
 		type = "其它",
 		subtype = " darkness/ temporal ",
 }

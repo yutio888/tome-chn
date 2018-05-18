@@ -65,7 +65,7 @@ registerTalentTranslation{
 	name = "双重诅咒",
 	info = function(self, t)
 		local talent = self:isTalentActive(t.id) and self:getTalentFromId(self:isTalentActive(t.id).talent).name or "None"		
-		return ([[对 你 的 听 众 施 加 双 重 诅 咒。 每 当 你 施 加 其 他 预 言 时 ， 你 选 择 的 预 言 将 同 时 施 加 给 主 要 目 标。 
+		return ([[对 你 的 听 众 施 加 双 重 诅 咒。 每 当 你 施 加 其 他 预 言 时 ， 你 选 择 的 预 言 将 同 时 施 加 给 主 要 目 标 (技 能 等 级 %d)。 
 		同 一 种 预 言 只 能 以 一 种 方 式 进 行 强 化，隆 重 演 说， 双 重 诅 咒 或 者 天 启 。
 		当 前 预 言 : %s]]):
 		format(self:getTalentLevel(t), talent)

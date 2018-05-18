@@ -6,7 +6,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local saves = t.getSaves(self,t)
 		local crit = t.getCrit(self,t)
-		return ([[你 的 触 碰 伴 随 着 熵 之 诅 咒 ， 为 目 标 带 来 悲 惨 的 命 运 。 每 当 你 对 目 标 造 成 伤 害 时， 目 标 将 被 厄 运 诅 咒 1 0 回 合 。 厄 运 可 以 叠 加  1 0 层， 每 层 减 少 %d 豁 免 和 防 御 ，%d%% 暴 击 率 。
+		return ([[你 的 触 碰 伴 随 着 熵 之 诅 咒 ， 为 目 标 带 来 悲 惨 的 命 运 。 每 当 你 对 目 标 造 成 伤 害 时， 目 标 将 被 厄 运 诅 咒 1 0 回 合 。 厄 运 可 以 叠 加  1 0 层， 每 层 减 少 %d 豁 免 和 防 御 ， %d%% 暴 击 率 。
 		每 个 目 标 每 回 合 只 能 受 到 一 层 诅 咒。
 		如 果 在 过 去 2 回 合 里 你 没 有 对 目 标 造 成 伤 害 ， 目 标 每 回 合 将 会 失 去 一 层 诅 咒。]]):
 		format(saves, crit)
@@ -29,7 +29,7 @@ registerTalentTranslation{
 		local saves = t.getSaves(self,t)
 		local crit = t.getCrit(self,t)
 		local avoid = t.getAvoid(self,t)
-		return ([[每 当 你 向 敌 人 施 加 厄 运 诅 咒， 有 %d%% 几 率 吸 取 敌 人 的 运 气 为 你 所 用 ， 持 续 1  0 回 合 。 这 个 效 果 最 多 叠 加 1 0 层 ， 每 层 增 加 %d 豁 免 和 防 御 ，%d%% 暴 击 率。
+		return ([[每 当 你 向 敌 人 施 加 厄 运 诅 咒， 有 %d%% 几 率 吸 取 敌 人 的 运 气 为 你 所 用 ， 持 续 1  0 回 合 。 这 个 效 果 最 多 叠 加 1 0 层 ， 每 层 增 加 %d 豁 免 和 防 御 ， %d%% 暴 击 率。
 		如 果 你 同 时 学  会 了 命 中 注 定 ， 六 层 以 上 的 每 层 幸 运 使 你 获 得 %d%% 几 率 完 全 避 免 受 到 的 伤 害。]]):
 		format(chance, saves, crit, avoid)
 	end,

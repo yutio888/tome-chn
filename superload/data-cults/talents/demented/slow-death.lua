@@ -25,7 +25,7 @@ registerTalentTranslation{
 
 registerTalentTranslation{
 	id = "T_INNER_TENTACLES",
-	name = "内在触手",
+	name = "内部触手",
 	info = function(self, t)
 		return ([[你 的 肚 子 内 产 生 小 型 触 手， 对 消 化 中 的 目 标 造 成 更 多 折 磨。
 		每 次 你 暴 击 时， 触 手 将 进 一 步 折 磨 目 标， 为 你 提 供 更 多 能 量， 持 续 3 回 合。

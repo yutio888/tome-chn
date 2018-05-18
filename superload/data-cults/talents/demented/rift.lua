@@ -35,11 +35,11 @@ registerTalentTranslation{
 		local ndam = t.getNetherDamage(self,t)
 		local tdam = t.getTemporalDamage(self,t)
 		local dur = t.getDimensionalDuration(self,t)
-		return ([[Pouring more energy into your rifts, you have a %d%% chance for each one to instead appear as a more powerful type.
-#PURPLE#Nether Breach:#LAST# Fires a beam dealing %0.2f darkness damage at a random target in radius 10.
-#PURPLE#Temporal Vortex:#LAST# Inflicts %0.2f temporal damage each turn to enemies in radius 4 and reduces their global speed by 30%%.
-#PURPLE#Dimensional Gate:#LAST# Each turn has a 50%% chance to summon a voidling lasting %d turns, a fast melee attacker that can teleport.
-The stats of your Void Skitterers will scale with your Magic stat and level.]])
+		return ([[向你的裂口注入能量，你将有%d%%概率为让每一个裂口进化成为更强大的形态。
+#PURPLE#深渊裂隙:#LAST# 向半径10内随机敌人发射光束，造成 %0.2f 点暗影伤害。
+#PURPLE#时空漩涡:#LAST# 每回合对半径4内的敌人造成%0.2f点时空伤害，并且减少他们30%%的全局速度.
+#PURPLE#维度之门:#LAST# 每回合有50%%概率召唤一个虚空造物，持续%d回合, 是一个能传送的高速物理伤害
+你的虚空造物属性随你的等级和魔法属性提高而提高。]])
 		:format(chance, damDesc(self, DamageType.DARKNESS, ndam), damDesc(self, DamageType.TEMPORAL, tdam), dur)
 	end
 }
@@ -59,10 +59,10 @@ registerTalentTranslation{
 	info = function(self, t)
 		local power = t.getPower(self,t)
 		return ([[你从虚空深处汲取能量，让你的实境撕裂技能强化任何已存在的虚空裂口。
-#GREY#Void Rift虚空裂口:#LAST# 造成 %d%% 点额外伤害， 并且投射物在半径1范围内爆炸。
-#PURPLE#Nether Breach深渊裂隙:#LAST# 造成 %d%% 点额外伤害，并且连锁至3个额外目标。
-#PURPLE#Temporal Vortex时空漩涡:#LAST# 造成 %d%% 点额外伤害， 增加1效果半径, 并且减速效果提高至 50%%.
-#PURPLE#Dimensional Gate维度之门:#LAST# Voidling Skitterers虚空行者将会变得狂暴, 增加他们 %d%%的全局速度。]])
+#GREY#虚空裂口:#LAST# 造成 %d%% 点额外伤害， 并且投射物在半径1范围内爆炸。
+#PURPLE#深渊裂隙:#LAST# 造成 %d%% 点额外伤害，并且连锁至3个额外目标。
+#PURPLE#时空漩涡:#LAST# 造成 %d%% 点额外伤害， 增加1效果半径, 并且减速效果提高至 50%%.
+#PURPLE#维度之门:#LAST# 虚空造物将会变得狂暴, 增加他们 %d%%的全局速度。]])
 		:format(power, power, power, power)
 	end,
 }

@@ -9,7 +9,7 @@ registerTalentTranslation{
 		local inc = t.getPercentInc(self, t)
 		local allow_tcombat = t.canTentacleCombat(self, t)
 		local tcombat = {combat=t.getTentacleCombat(self, t, true)}
-		local tcombatdesc = Object:descCombat(self, tcombat, {}, "combat")
+		local tcombatdesc = getObjectDescCHN(Object:descCombat(self, tcombat, {}, "combat"))
 		return ([[你 的 左 手 异 变 成 为 大 量 的 恶 心 触 手 。
 		副 手 空 闲 时 ， 当 使 用 普 通 攻 击 ， 触 手 会 自 动 攻 击 目 标 以 及 目 标 同 侧 的 其 他 单 位 。
 		物 理 强 度 提 高 %d ， 触 手 伤 害 提 高 %d 。

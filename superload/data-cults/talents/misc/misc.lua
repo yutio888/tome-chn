@@ -2,10 +2,10 @@ local _M = loadPrevious(...)
 registerTalentTranslation{
 	id = "T_TELEPORT_KROSHKKUR",
 	name = "传送: 克诺什库尔",
-	info = [[允 许 传 送 至 克 诺 什 库 尔。
+	info = function(self, t) return ([[允 许 传 送 至 克 诺 什 库 尔。
 	你 学 习 了 那 里 的 禁 忌 秘 密， 因 此 获 得 了 传 送 至 克 诺 什 库 尔 的 法 术。
 	该 法 术 必 须 保 持 机 密； 它 在 有 其 他 人 在 场 时 不 能 使 用 。
-	该 法 术 需 要 40 回 合 生 效 ，在 此 期 间 你 需 要 处 于 任 何 生 物 视 线 外 。]]
+	该 法 术 需 要 40 回 合 生 效 ，在 此 期 间 你 需 要 处 于 任 何 生 物 视 线 外 。]]) end,
 }
 
 registerTalentTranslation{

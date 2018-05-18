@@ -324,34 +324,34 @@ timeEffectCHN:newEffect{
 timeEffectCHN:newEffect{
 		id = "ACCELERATE",
 		enName = "Accelerate",
-		chName = "Accelerate",
-		desc = function(self, eff) return ("Moving at extreme speed (%d%% faster).  Any action other than movement will cancel it."):format(eff.power) end,
+		chName = "窃速神偷",
+		desc = function(self, eff) return ("移 动 速 度 加 快 %d%% 。任 何 移 动 外 的 行 动 将 取 消 该 效 果。"):format(eff.power) end,
 		type = "魔法",
 		subtype = " temporal/ speed ",
 }
 timeEffectCHN:newEffect{
 		id = "SUSPEND_DET",
 		enName = "Suspend",
-		chName = "Suspend",
-		desc = function(self, eff) return "The target is removed from the normal time stream, unable to act but unable to take any damage. Each turn, beneficial effects decrease in duration." end,
+		chName = "窃命凝固",
+		desc = function(self, eff) return "目 标 从 常 规 时 间 流 中 移 除 ， 无 法 行 动 ， 免 疫 伤害 。 每 回 合 有 益 效 果 正 常 衰 减。" end,
 		type = "其它",
 		subtype = " temporal ",
 }
 timeEffectCHN:newEffect{
 		id = "SUSPEND_BEN",
 		enName = "Suspend",
-		chName = "Suspend",
-		desc = function(self, eff) return "The target is removed from the normal time stream, unable to act but unable to take any damage. Each turn, negative effects and cooldowns will decrease in duration." end,
+		chName = "窃命凝固",
+		desc = function(self, eff) return "目 标 从 常 规 时 间 流 中 移 除 ， 无 法 行 动 ， 免 疫 伤害 。 每 回 合 负 面 效 果 和 技 能 冷 却 正 常 衰 减 。" end,
 		type = "其它",
 		subtype = " temporal ",
 }
 timeEffectCHN:newEffect{
 		id = "JINX",
 		enName = "Jinxed",
-		chName = "Jinxed",
+		chName = "不幸",
 		desc = function(self, eff)
-		local desc = "The target has %d reduced saves and defense, and %d%% reduced critical chance."
-		if eff.stacks > 6 and eff.fail then desc = "The target has %d reduced saves and defense, %d%% reduced critical chance, and %d%% chance to fail talent use." end
+		local desc = "目 标 豁 免 和 闪 避 降 低 %d , 暴 击 率 降 低 %d%%。"
+		if eff.stacks > 6 and eff.fail then desc = "目 标 豁 免 和 闪 避 降 低 %d , 暴 击 率 降 低 %d%%，使 用 技 能 有 %d%% 几 率 失 败 。" end
 		return desc:format(eff.power * eff.stacks, eff.crit * eff.stacks, (eff.stacks - 7) * eff.fail)
 	end,
 		type = "其它",
@@ -360,208 +360,208 @@ timeEffectCHN:newEffect{
 timeEffectCHN:newEffect{
 		id = "FORTUNE",
 		enName = "Fortune",
-		chName = "Fortune",
-		desc = function(self, eff) return ("The target has %d increased saves and defense, and %d%% increased critical chance."):format(eff.power * eff.stacks, eff.crit * eff.stacks) end,
+		chName = "幸运",
+		desc = function(self, eff) return ("目 标 豁 免 和 闪 避 增 加 %d , 暴 击 率 增 加 %d%%."):format(eff.power * eff.stacks, eff.crit * eff.stacks) end,
 		type = "其它",
 		subtype = " temporal ",
 }
 timeEffectCHN:newEffect{
 		id = "UNRAVEL_EXISTENCE",
 		enName = "Unravelling",
-		chName = "Unravelling",
-		desc = function(self, eff) return ("The target is being erased from reality. Each time a magical effect is applied, they will take %0.2f darkness damage and %0.2f temporal damage. If 5 effects are applied, a powerful void horror will appear."):format(eff.power, eff.power) end,
+		chName = "拆解",
+		desc = function(self, eff) return ("目 标 正 被 从 现 实 中 抹 去。 每 次 受 到 魔 法 效 果 时， 它 承 受 %0.2f 暗 影 %0.2f 时 空 伤 害。当 承 受 5 次 效 果 后 ， 强 大 的 虚 空 恐 魔 将 出  现。"):format(eff.power, eff.power) end,
 		type = "魔法",
 		subtype = " temporal/ darkness ",
 }
 timeEffectCHN:newEffect{
 		id = "FATEBREAKER",
 		enName = "Fatebreaker",
-		chName = "Fatebreaker",
-		desc = function(self, eff) return ("The target has tied itself to the fate of another. If it dies, it's chosen target will die in it's place and it will be healed by %d for each stack of Fortune and Jinx."):format(eff.power) end,
+		chName = "打破命运",
+		desc = function(self, eff) return ("目 标 将 自 身 的 命 运 和 另 一 个 人 相 连 ， 当 它 死 亡 时 ， 选 择 的 目 标 将 出 现 在 它 当 前 位 置 并 代 替 它 死 亡 。   此 时 ， 它 和 目 标 身 上 每 一 层 幸 运 和 不 幸 将 转 化 为 %d 点 治 疗 。"):format(eff.power) end,
 		type = "魔法",
 		subtype = " temporal/ darkness ",
 }
 timeEffectCHN:newEffect{
 		id = "FATEBREAKER_TEMP",
 		enName = "Fatebreaker",
-		chName = "Fatebreaker",
-		desc = function(self, eff) return ("Redirecting all damage as temporal and darkness to %s."):format(eff.target.name) end,
+		chName = "打破命运",
+		desc = function(self, eff) return ("所 有 伤 害 转 为 时 空 和 暗 影 类 型， 转 移 至 %s。"):format(npcCHN:getName(eff.target.name)) end,
 		type = "其它",
 		subtype = " temporal/ darkness ",
 }
 timeEffectCHN:newEffect{
 		id = "DECAYING_GROUND",
 		enName = "Decaying Ground",
-		chName = "Decaying Ground",
-		desc = function(self, eff) return ("All cooldowns increased by %d%%."):format(eff.power * 100) end,
+		chName = "腐朽之地",
+		desc = function(self, eff) return ("冷 却 时 间 增 加 %d%%。"):format(eff.power * 100) end,
 		type = "魔法",
 		subtype = " blight/ corrupted ",
 }
 timeEffectCHN:newEffect{
 		id = "CRIPPLING_DISEASE",
 		enName = "Crippling Disease",
-		chName = "Crippling Disease",
-		desc = function(self, eff) return ("The target is infected by a disease, reducing its speed by %d%% and doing %0.2f blight damage per turn."):format(eff.speed*100, eff.dam) end,
+		chName = "致残疾病",
+		desc = function(self, eff) return ("目 标 被 疾 病 感 染 ， 速 度 降 低 %d%% ， 每 轮 受 到 %0.2f 枯 萎 伤 害 。"):format(eff.speed*100, eff.dam) end,
 		type = "魔法",
 		subtype = "slow/ disease/ blight",
 }
 timeEffectCHN:newEffect{
 		id = "DEFILED_BLOOD",
 		enName = "Defiled Blood",
-		chName = "Defiled Blood",
-		desc = function(self, eff) return ("Covered in defiled blood, healing the source for %d%% of all damage done."):format(eff.power) end,
+		chName = "污血",
+		desc = function(self, eff) return ("目 标 被 污 血 覆 盖， 造 成 的 伤 害 的 %d%% 将 治 疗 效 果 来 源。"):format(eff.power) end,
 		type = "魔法",
 		subtype = "blood/ leech",
 }
 timeEffectCHN:newEffect{
 		id = "TELEPORT_KROSHKKUR",
 		enName = "Teleport: Kroshkkur",
-		chName = "Teleport: Kroshkkur",
-		desc = function(self, eff) return "The target is waiting to be recalled back to Kroshkkur." end,
+		chName = "传送: 克诺什库尔",
+		desc = function(self, eff) return "目 标 在 等 待 传 送 至 克诺什库尔 。" end,
 		type = "魔法",
 		subtype = " teleport ",
 }
 timeEffectCHN:newEffect{
 		id = "CULTS_BOOK_TIMEOUT",
 		enName = "Forbidden Tome",
-		chName = "Forbidden Tome",
-		desc = function(self, eff) return "Slowly transfered to a Forbidden Tome." end,
+		chName = "禁忌之书",
+		desc = function(self, eff) return "缓 慢 地 转 移 至 禁 忌 之 书。" end,
 		type = "魔法",
 		subtype = "book",
 }
 timeEffectCHN:newEffect{
 		id = "CULTS_BOOK_HOME_TIMEOUT",
 		enName = "Forbidden Tome",
-		chName = "Forbidden Tome",
-		desc = function(self, eff) return ("Inside Forbidden Tome: \"Home, Horrific Home\" for %d turns."):format(eff.dur) end,
+		chName = "禁忌之书",
+		desc = function(self, eff) return ("进 入 禁 忌 之 书 中：\"家 ，可 怕 的 家 \" %d 回 合。"):format(eff.dur) end,
 		type = "其它",
 		subtype = "book",
 }
 timeEffectCHN:newEffect{
 		id = "KROG_WRATH",
 		enName = "Wrath of the Wilds",
-		chName = "Wrath of the Wilds",
-		desc = function(self, eff) return ("%d%% chance to stun any foes hit."):format(eff.power) end,
+		chName = "自然之怒",
+		desc = function(self, eff) return ("%d%% 几 率 震 慑 被 击 中 的 敌 人。"):format(eff.power) end,
 		type = "精神",
 		subtype = " frenzy ",
 }
 timeEffectCHN:newEffect{
 		id = "WARBORN",
 		enName = "Warborn",
-		chName = "Warborn",
-		desc = function(self, eff) return ("Reduces all damage taken by %d%%."):format(eff.power) end,
+		chName = "为战而生",
+		desc = function(self, eff) return ("减 少 %d%%受 到 的 伤 害。"):format(eff.power) end,
 		type = "物理",
 		subtype = " protection ",
 }
 timeEffectCHN:newEffect{
 		id = "HYPOSTASIS_AWAKEN",
 		enName = "Awoken",
-		chName = "Awoken",
-		desc = function(self, eff) return ("True power is revealed!") end,
+		chName = "觉醒",
+		desc = function(self, eff) return ("真 正 的 力 量 正 被 揭 示 ！") end,
 		type = "其它",
 		subtype = " opness ",
 }
 timeEffectCHN:newEffect{
 		id = "TOTAL_COLLAPSE",
 		enName = "Total Collapse",
-		chName = "Total Collapse",
-		desc = function(self, eff) return ("Your body can not function properly here, it is slowly wasting away. Each turn you take %0.2f void damage and any new debuff on you lasts %d%% longer. Each turn those penalties increase until the effect is removed."):format(eff.dam, eff.debuffdur) end,
+		chName = "完全崩溃",
+		desc = function(self, eff) return ("你 的 身 体 无 法 正 常 运 转 ， 被 逐 渐 损 耗 。 每 回 合 你 受 到 %0.2f 虚 空 伤 害 ， 任 何 新 的 负 面 效 果 持 续 时 间 延 长 %d%%  。   每 回 合 这 些 惩 罚 都会 增 长 ， 直 到 效 果 结 束 。"):format(eff.dam, eff.debuffdur) end,
 		type = "其它",
 		subtype = " entropy ",
 }
 timeEffectCHN:newEffect{
 		id = "SAVE_KROSHKKUR",
 		enName = "Save Kroshkkur",
-		chName = "Save Kroshkkur",
-		desc = function(self, eff) return ("Kroshkkur is still under threat from %s."):format(eff.threat) end,
+		chName = "拯救克诺什库尔",
+		desc = function(self, eff) return ("克诺什库尔 仍 处于 %s 威胁 中。"):format(eff.threat) end,
 		type = "其它",
 		subtype = " threat ",
 }
 timeEffectCHN:newEffect{
 		id = "GASTRIC_WAVE_BUFF",
 		enName = "Covered in Gastric Fluids",
-		chName = "Covered in Gastric Fluids",
-		desc = function(self, eff) return ("Reduces all damage taken by %d%% and remove all detrimental effects on application."):format(eff.power) end,
+		chName = "被胃液覆盖",
+		desc = function(self, eff) return ("降 低 受 到 的 伤 害 %d%%。 该 b u f f 施 加 时 解 除 所 有 负 面 状 态"):format(eff.power) end,
 		type = "魔法",
 		subtype = " protection ",
 }
 timeEffectCHN:newEffect{
 		id = "GASTRIC_WAVE_DEBUFF",
 		enName = "Covered in Gastric Fluids",
-		chName = "Covered in Gastric Fluids",
-		desc = function(self, eff) return ("Reduces all damage done by %d%% and increase all detrimental effects durations by 6 turns on application."):format(eff.power) end,
+		chName = "被胃液覆盖",
+		desc = function(self, eff) return ("降 低 造 成 的 伤 害 %d%%。 该 d e b u f f 施 加 时 所 有 负 面 状 态 延 长 6 回 合。"):format(eff.power) end,
 		type = "魔法",
 		subtype = " debilitate ",
 }
 timeEffectCHN:newEffect{
 		id = "GODFEASTER_EVENT_BLINDED",
 		enName = "Blinded",
-		chName = "Blinded",
-		desc = function(self, eff) return "The target is blinded, unable to see anything." end,
+		chName = "致盲",
+		desc = function(self, eff) return "目标被致盲，什么也看不见。" end,
 		type = "其它",
 		subtype = " blind ",
 }
 timeEffectCHN:newEffect{
 		id = "ILLUSORY_CASTLE_MADNESS",
 		enName = "Lost in a weird place",
-		chName = "Lost in a weird place",
-		desc = function(self, eff) return ("The target is starting to get mad (%d stacks), reducing mind damage resistance by %d%%, mental save by %d, confusion resistance by %d%%, generating %0.1f insanity per turn."):format(eff.stacks, eff.stacks * 6, eff.stacks * 5, eff.stacks * 4, eff.stacks * 0.5) end,
+		chName = "迷失在奇怪的地方",
+		desc = function(self, eff) return ("目 标 开 始 疯 狂 (%d 层), 降 低 %d%% 精 神 伤 害 抗 性 , %d 精 神 豁 免,%d%% 混 乱 免 疫， 每 回 合 获 得 %0.1f 疯 狂 值 。"):format(eff.stacks, eff.stacks * 6, eff.stacks * 5, eff.stacks * 4, eff.stacks * 0.5) end,
 		type = "其它",
 		subtype = " insanity/ confusion/ madness ",
 }
 timeEffectCHN:newEffect{
 		id = "GLASS_SPLINTERS",
 		enName = "Glass Splinters",
-		chName = "Glass Splinters",
-		desc = function(self, eff) return ("Nasty glass splinters that make you bleed, doing %0.2f arcane damage per turn. Deals %0.2f arcane damage on move. Talents have %d%% chances to fail."):format(eff.bleed, eff.move, eff.fail) end,
+		chName = "玻璃碎片",
+		desc = function(self, eff) return ("令 人 讨 厌 的 玻 璃 碎 片 令 你 流 血，每 回 合 造 成 %0.2f 奥 术 伤害 。 行 走 时 造 成 %0.2f 奥 术 伤害。 技 能 失 败 率 增 加 %d%% 。"):format(eff.bleed, eff.move, eff.fail) end,
 		type = "魔法",
 		subtype = " wound/ cut/ bleed/ fail ",
 }
 timeEffectCHN:newEffect{
 		id = "PERSISTANT_WILL",
 		enName = "Persistant Will",
-		chName = "Persistant Will",
-		desc = function(self, eff) return ("Convinced that arcane users are filth to be destroyed."):format() end,
+		chName = "坚定意志",
+		desc = function(self, eff) return ("相 信 奥 术 使 用 者 应 该 被 消 灭。"):format() end,
 		type = "精神",
 		subtype = " will/ domination ",
 }
 timeEffectCHN:newEffect{
 		id = "TWISTED_SPEED",
 		enName = "Twisted Evolution: Speed",
-		chName = "Twisted Evolution: Speed",
-		desc = function(self, eff) return ("The target is evolved increasing its global speed by %d%%."):format(eff.speed*100) end,
+		chName = "扭曲进化: 速度",
+		desc = function(self, eff) return ("整体速度增加 %d%%."):format(eff.speed*100) end,
 		type = "其它",
 		subtype = "speed",
 }
 timeEffectCHN:newEffect{
 		id = "TWISTED_FORM",
 		enName = "Twisted Evolution: Form",
-		chName = "Twisted Evolution: Form",
-		desc = function(self, eff) return ("The target is evolved increasing all its stats by %d."):format(eff.stat) end,
+		chName = "扭曲进化：形态",
+		desc = function(self, eff) return ("全属性增加 %d."):format(eff.stat) end,
 		type = "其它",
 		subtype = "",
 }
 timeEffectCHN:newEffect{
 		id = "TWISTED_POWER",
 		enName = "Twisted Evolution: Power",
-		chName = "Twisted Evolution: Power",
-		desc = function(self, eff) return ("The target is evolved increasing its damage by %d%%."):format(eff.dam) end,
+		chName = "扭曲形态：力量",
+		desc = function(self, eff) return ("全伤害增加 %d%%."):format(eff.dam) end,
 		type = "其它",
 		subtype = "",
 }
 timeEffectCHN:newEffect{
 		id = "SHOES_SLOWLY",
 		enName = "Shoes of Moving Slowly",
-		chName = "Shoes of Moving Slowly",
-		desc = function(self, eff) return ("Stay put, increasing your armour and defense by %d."):format(eff.stacks * 2) end,
+		chName = "慢速移动之鞋",
+		desc = function(self, eff) return ("保持装备， 增加 %d 护甲和闪避."):format(eff.stacks * 2) end,
 		type = "魔法",
 		subtype = " speed ",
 }
 timeEffectCHN:newEffect{
 		id = "ENTROPIC_ROD",
 		enName = "Entropic Feedback",
-		chName = "Entropic Feedback",
-		desc = function(self, eff) return ("The target healing is distorted by entropy for %d%% of the healing done over 8 turns."):format(eff.power) end,
+		chName = "熵能反馈",
+		desc = function(self, eff) return ("目 标 受 到 的 %d%% 治 疗 将 被 扭 曲 为 持 续 8 回 合 的 熵 能 冲 击 。"):format(eff.power) end,
 		type = "魔法",
 		subtype = "",
 }

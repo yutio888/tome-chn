@@ -40,7 +40,7 @@ registerTalentTranslation{
 	name = "共享疯狂",
 	info = function(self, t)
 		return ([[ 你 和 蠕 虫 合 体 建 立 强 大 的 精 神 链 接。
-		只 要 你 和 它 的 距 离 不 超 过 3 格， 你 们 均 获 得 持 续 3 回 合 的 %d%% 全 体 抗 性。
+		只 要 你 和 它 的 距 离 不 超 过 3 格， 你 们 均 获 得 持 续 5 回 合 的 %d%% 全 体 抗 性。
 		该 技 能 每 增 加 两 级 原 始 等 级 ，你 的 蠕 虫 合 体 获 得 一 个 纹 身 位 （ 当 前 ： %d ）。 ]])
 		:format(t.getResist(self, t), t.getInscriptions(self, t))
 	end,

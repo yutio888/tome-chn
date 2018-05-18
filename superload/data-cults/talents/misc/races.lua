@@ -30,7 +30,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		return ([[你 无 面 孔 的 脸 没 有 情 感 ，令 人 困 惑。 这 让 你 更 容 易 抵 抗 精 神 冲 击。
 		你 获 得 %d 精 神 豁 免， %d%% 混 乱 免 疫 。]]):
-		format(t.getSave(self, t), t.getImmune(self, t))
+		format(t.getSave(self, t), t.getImmune(self, t)*100)
 	end,
 }
 

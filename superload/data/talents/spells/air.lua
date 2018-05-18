@@ -33,10 +33,12 @@ registerTalentTranslation{
 	info = function(self, t)
 		local encumberance = t.getEncumberance(self, t)
 		local rangedef = t.getRangedDefence(self, t)
-		return ([[一 股 温 柔 的 风 围 绕 着 施 法 者， 增 加 %d 点 负 重 能 力 并 增 加 %d 点 对 抛 射 物 的 闪 避。 
+		local stun = t.getStunImmune(self, t)
+		local pin = t.getPinImmune(self, t)
+		return ([[一 股 温 柔 的 风 围 绕 着 施 法 者， 增 加 %d 点 负 重 能 力 ， 增 加 %d 点 对 抛 射 物 的 闪 避， 获 得 %d%% 定 身 免 疫 和 %d%% 震 慑 免 疫。 
 		 在 等 级 4 时， 它 会 使 你 轻 微 的 漂 浮 在 空 中， 可 忽 略 部 分 陷 阱。 
 		 在 等 级 5 时， 同 时 还 会 提 升 你 %d%% 的 移 动 速 度 并 且 移 除 %d 点 负 重。]]):
-		format(encumberance, rangedef, t.getSpeed(self, t) * 100, t.getFatigue(self, t))
+		format(encumberance, rangedef, pin*100, stun*100, t.getSpeed(self, t) * 100, t.getFatigue(self, t))
 	end,
 }
 

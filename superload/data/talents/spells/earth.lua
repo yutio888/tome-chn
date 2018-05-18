@@ -6,8 +6,9 @@ registerTalentTranslation{
 	info = function(self, t)
 		local armor = t.getArmor(self, t)
 		return ([[施 法 者 的 皮 肤 变 的 和 岩 石 一 样 坚 硬， 提 高 %d 点 护 甲。 
+		 每 次 你 被 近 战 攻 击 击 中， 你 有 %d%% 几 率 减 少 一 个 土 系 或 石 系 法 术 2 回 合 冷 却（一 回 合 最 多 一 次）。
 		 受 法 术 强 度 影 响， 护 甲 有 额 外 加 成。]]):
-		format(armor)
+		format(armor, t.getCDChance(self, t))
 	end,
 }
 

@@ -19,8 +19,8 @@ registerTalentTranslation{
 	info = function(self, t)
 		local nb = t.getNb(self,t)
 		local dur = t.getDuration(self,t)
-		return ([[释 放 熵 浪 潮 ，清 除 自 己 的 灾 祸 ， 同 时 吸 取 他 人 的 能 量 。 10 码 内 所 有 敌 人 的 %d 项 有 益 效 果 持 续 时 间 缩 短 %d 回 合 ， 自 身 %d 个 有 害 效 果 持 续 时 间 缩 短 %d 回 合 。]]):
-		format(nb, dur, nd, dur)
+		return ([[释 放 熵 浪 潮 ，清 除 自 己 的 灾 祸 ， 同 时 吸 取 他 人 的 能 量 。 10 码 内 所 有 敌 人 的 %d 项 有 益 效 果 持 续 时 间 缩 短 %d 回 合 。 自 身 同 等 数 量 的 有 害 效 果 持 续 时 间 缩 短 同 等 回 合 。]]):
+		format(nb, dur)
 	end,
 }
 

@@ -242,3 +242,74 @@ registerBirthDescriptorTranslation{
 		"#GOLD#每 等 级 生 命 加 值:#LIGHT_BLUE# -1",
 	},
 }
+registerBirthDescriptorTranslation{
+	type = "class",
+	name = "Demented",
+	display_name = "疯 狂",
+	desc = {
+		"他 们 对 知 识 的 渴 望 被 大 部 分 奥 术  使 用 者 认 可",
+		"但 某 些 人 走 得 太 远， 某 些 人 陷 入 失 落 的 知 识 中。 他 们 或 许 得 到 了 巨 大 的 力 量， 但 代 价 是 什 么 呢 ？"
+	},
+}
+registerBirthDescriptorTranslation{
+	type = "subclass",
+	name = "Cultist of Entropy",
+	display_name = "熵 教 徒",
+	locked_desc = "万 物 终 将 消 亡 。 这 一 点 可 以 被 利 用 。",
+	desc = {
+		"熵 教 徒 是 被 诅 咒 的 存 在 ， 他 们 能 使 用 熵 作 为 武 器。 他 们 的 法 术 产 生 熵 能 反 冲 伤 害 自 身， 但 他 们 学 会 如 何 抵 抗 反 冲 甚 至 将 其 转 移 至 敌 人 身 上。",
+		"他 们 最 重 要 的 属 性 是：魔 法 和 灵 巧",
+		"#GOLD#属 性 修 正:",
+		"#LIGHT_BLUE# * +0 力 量, +0 敏 捷, +0 体 质",
+		"#LIGHT_BLUE# * +6 魔 法, +0 意 志, +3 灵 巧",
+		"#GOLD#每 等 级 生 命 加 值:#LIGHT_BLUE# -4",
+	},
+}
+registerBirthDescriptorTranslation{
+	type = "subclass",
+	name = "Writhing One",
+	display_name = "苦 痛 者",
+	desc = {
+		"苦 痛 者 了 解 我 们 所 谓 的 #{italic}#恐 魔#{normal}# 是 通 往 远 古 知 识 和 阴 影 纪 力 量 的 钥 匙 。 他 们 愿 意 付 出 一 切 代 价 来 获 取。",
+		"在 极 度 渴 求 力 量 的 同 时， 他 们 似 乎 失 去 了 部 分 自 我， 和 他 们 所 研 究 的 恐 魔 越 来 越 相 似 。",
+		"他 们 中 大 部 分 人 选 择 将 一 整 只 手 臂 化 作 致 命 触 手 。",
+		"某 些 人 甚 至 拒 绝 在 没 有 蠕 虫 合 体 的 陪 同 下 离 开 避 难 所 。",
+		"他 们 最 重 要 的 属 性 是：力 量 和 魔 法",
+		"#GOLD#属 性 修 正:",
+		"#LIGHT_BLUE# * +3 力 量, +0 敏 捷, +3 体 质",
+		"#LIGHT_BLUE# * +3 魔 法, +0 意 志, +0 灵 巧",
+		"#GOLD#每 等 级 生 命 加 值:#LIGHT_BLUE# +3",
+	},
+}
+
+registerBirthDescriptorTranslation{
+	type = "subrace",
+	name = "Drem",
+	display_name = "德瑞姆",
+	locked = function() return profile.mod.allow_build.race_drem end,
+	locked_desc = [[无 面 ， 但 不 无 心]],
+	desc = {
+		"德 瑞 姆 是 生 存 于 地 底 深 处 异 变 种， 直 到 最 近 才 发 现 具 有 思 维 能 力 的 个 体。 他 们 仍 生 存 于 地 底 ， 认 为 他 们 不 会 被 地 上 种 族 欢 迎 。",
+		"他 们 拥 有 #GOLD#狂 热#WHITE# 天 赋， 让 他 们 能 在 短 时 间 内 无 视 冷 却 时 间。",
+		"#GOLD#属 性 修 正:",
+		"#LIGHT_BLUE# * +3 力 量, +1 敏 捷, +1 体 质",
+		"#LIGHT_BLUE# * +2 魔 法, -1 意 志, +0 灵 巧",
+		"#GOLD#每 等 级 生 命 加 值:#LIGHT_BLUE# 12",
+		"#GOLD#经 验 惩 罚 :#LIGHT_BLUE# 25%",
+	},
+}
+registerBirthDescriptorTranslation{
+	type = "subrace",
+	name = "Krog",
+	display_name = "克罗格",
+	locked_desc = [[曾 为 憎 恶 ， 现 为 武 器 ]],
+	desc = {
+		"克 罗 格 是 从 巨 魔 改 变 来 的 种 族。 除 去 了 身 上 的 魔 法 符 文， 伊 格 兰 斯  使 用 自 然 纹 身 和 龙 血 维 持 他 们 的 生 命。 克 罗 格 专 注 于 反 魔 战 争 ， 似 乎 不 了 解 也 不 关 心 其 他 事 物。",
+		"他 们 拥 有 #GOLD#自 然 之 怒 #WHITE# 技 能 ， 让 他 们 能 震 慑 敌 人 。",
+		"#GOLD#属 性 修 正:",
+		"#LIGHT_BLUE# * +3 力 量, -1 敏 捷, +2 体 质",
+		"#LIGHT_BLUE# * -2 魔 法, +2 意 志, +0 灵 巧",
+		"#GOLD#每 等 级 生 命 加 值:#LIGHT_BLUE# 13",
+		"#GOLD#经 验 惩 罚 :#LIGHT_BLUE# 30%",
+	},
+}

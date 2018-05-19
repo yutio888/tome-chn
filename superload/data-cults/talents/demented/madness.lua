@@ -32,7 +32,7 @@ registerTalentTranslation{
 		local dam = t.getDamage(self,t)
 		local radius = self:getTalentRadius(t)
 		return ([[每 当 幻 象 被 消 灭 时， 它 将 释 放 心 灵 冲 击 ，对 %d 格 内 的 敌 人 造 成 %0.2f 暗 影 伤 害 。 ]]):
-		format(damDesc(self, DamageType.DARKNESS, dam), radius)
+		format(radius,damDesc(self, DamageType.DARKNESS, dam))
 	end,
 }
 

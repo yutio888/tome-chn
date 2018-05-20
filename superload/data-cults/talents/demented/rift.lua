@@ -35,10 +35,10 @@ registerTalentTranslation{
 		local ndam = t.getNetherDamage(self,t)
 		local tdam = t.getTemporalDamage(self,t)
 		local dur = t.getDimensionalDuration(self,t)
-		return ([[向 你 的 裂 口 注 入 能 量 ，你 将 有 %d%%概 率 为 让 每 一 个 裂 口 进 化 成 为 更 强 大 的 形 态 。
+		return ([[向 你 的 裂 口 注 入 能 量 ，你 将 有 %d%%概 率 让 每 一 个 裂 口 进 化 成 为 更 强 大 的 形 态 。
 #PURPLE#深 渊 裂 隙 :#LAST#  向 半 径 10 内 随 机 敌 人 发 射 光 束 ，造 成  %0.2f  点 暗 影 伤 害 。
-#PURPLE#时 空 漩 涡 :#LAST#  每 回 合 对 半 径 4 内 的 敌 人 造 成 %0.2f 点 时 空 伤 害 ，并 且 减 少 他 们 30%%的 全 局 速 度 .
-#PURPLE#维 度 之 门 :#LAST#  每 回 合 有 50%%概 率 召 唤 一 个 虚 空 造 物 ，持 续 %d 回 合 ,  是 一 个 能 传 送 的 高 速 物 理 伤 害 
+#PURPLE#时 空 漩 涡 :#LAST#  每 回 合 对 半 径 4 内 的 敌 人 造 成 %0.2f 点 时 空 伤 害 ，并 且 减 少 他 们 30%% 的 全 局 速 度 .
+#PURPLE#维 度 之 门 :#LAST#  每 回 合 有 50%% 概 率 召 唤 一 个 虚 空 造 物 ，持 续 %d 回 合 ,  是 一 个 能 传 送 的 高 速 物 理 输 出 
 你 的 虚 空 造 物 属 性 随 你 的 等 级 和 魔 法 属 性 提 高 而 提 高 。]])
 		:format(chance, damDesc(self, DamageType.DARKNESS, ndam), damDesc(self, DamageType.TEMPORAL, tdam), dur)
 	end
@@ -49,7 +49,7 @@ registerTalentTranslation{
 	name = "维度迅击",
 	info = function(self, t)
 		local range = self:getTalentRange(t)
-		return ([[传 送 到 范 围 10 内 的 一 个 敌 人 处 ，并 用 你 的 尖 牙 攻 击 它 ，造 成 %d%%武 器 伤 害 。]]):format(t.getDamage(self, t)*100)
+		return ([[传 送 到 范 围 10 内 的 一 个 敌 人 处 ，并 用 你 的 尖 牙 攻 击 它 ，造 成 %d%% 武 器 伤 害 。]]):format(t.getDamage(self, t)*100)
 	end,
 }
 
@@ -58,7 +58,7 @@ registerTalentTranslation{
 	name = "零点能量",	
 	info = function(self, t)
 		local power = t.getPower(self,t)
-		return ([[你 从 虚 空 深 处 汲 取 能 量 ，让 你 的 实 境 撕 裂 技 能 强 化 任 何 已 存 在 的 虚 空 裂 口 。
+		return ([[你 从 虚 空 深 处 汲 取 能 量 ，每 当 你 激 活 实 境 撕 裂 时 ，你 可 以 强 化 任 何 已 存 在 的 裂 口 。
 #GREY#虚 空 裂 口 :#LAST#  造 成  %d%%  点 额 外 伤 害 ，  并 且 投 射 物 在 半 径 1 范 围 内 爆 炸 。
 #PURPLE#深 渊 裂 隙 :#LAST#  造 成  %d%%  点 额 外 伤 害 ，并 且 连 锁 至 3 个 额 外 目 标 。
 #PURPLE#时 空 漩 涡 :#LAST#  造 成  %d%%  点 额 外 伤 害 ，  增 加 1 效 果 半 径 ,  并 且 减 速 效 果 提 高 至  50%%.

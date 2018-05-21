@@ -303,7 +303,33 @@ t_talent_type_name = {}
 	t_talent_type_name["battle psionics"] = "超能战斗"
 	t_talent_type_name["deep horror"] = "无尽恐惧" 
 	t_talent_type_name["ravenous mind"] = "极度饥渴"
+	
+--cults
 
+	t_talent_type_name["tentacles"] = "触手"
+	t_talent_type_name["horrific body"] = "恐怖身躯"
+	t_talent_type_name["writhing body"] = "扭曲身体"
+	t_talent_type_name["path of horror"] = "恐魔之路"
+	t_talent_type_name["controlled horrors"] = "恐魔操控"
+	t_talent_type_name["slow death"] = "慢性死亡"
+	t_talent_type_name["disfigured face"] = "毁容"
+	t_talent_type_name["friend of the worm"] = "蠕虫之友"
+	t_talent_type_name["nether"] = "虚空"
+	t_talent_type_name["madness"] = "疯狂"
+	t_talent_type_name["void"] = "虚无"
+	t_talent_type_name["entropy"] = "熵"
+	t_talent_type_name["timethief"] = "时间窃贼"
+	t_talent_type_name["oblivion"] = "毁灭"
+	t_talent_type_name["rift"] = "裂隙"
+	t_talent_type_name["chronophage"] = "耗竭"
+	t_talent_type_name["scourge drake"] = "天谴之龙"
+	t_talent_type_name["doom"] = "末日"
+	t_talent_type_name["prophecy"] = "预言"
+	t_talent_type_name["calamity"] = "不幸"
+	t_talent_type_name["beyond sanity"] = "非理性"
+	
+	t_talent_type_name["drem"] = "德瑞姆"
+	t_talent_type_name["krog"] = "克罗格"
 --技能大分类名称	
 t_talent_cat = {}
 
@@ -320,3 +346,4 @@ t_talent_cat["technique"] = "格斗"
 t_talent_cat["spell"] = "法术"
 t_talent_cat["steamtech"] = "蒸汽"
 t_talent_cat["golem"] = "傀儡"
+t_talent_cat["demented"] = "疯狂"

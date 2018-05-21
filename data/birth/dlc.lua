@@ -245,7 +245,7 @@ registerBirthDescriptorTranslation{
 registerBirthDescriptorTranslation{
 	type = "class",
 	name = "Demented",
-	display_name = "疯 狂",
+	display_name = "疯狂系",
 	desc = {
 		"他 们 对 知 识 的 渴 望 被 大 部 分 奥 术  使 用 者 认 可",
 		"但 某 些 人 走 得 太 远， 某 些 人 陷 入 失 落 的 知 识 中。 他 们 或 许 得 到 了 巨 大 的 力 量， 但 代 价 是 什 么 呢 ？"
@@ -254,7 +254,7 @@ registerBirthDescriptorTranslation{
 registerBirthDescriptorTranslation{
 	type = "subclass",
 	name = "Cultist of Entropy",
-	display_name = "熵 教 徒",
+	display_name = "熵教徒",
 	locked_desc = "万 物 终 将 消 亡 。 这 一 点 可 以 被 利 用 。",
 	desc = {
 		"熵 教 徒 是 被 诅 咒 的 存 在 ， 他 们 能 使 用 熵 作 为 武 器。 他 们 的 法 术 产 生 熵 能 反 冲 伤 害 自 身， 但 他 们 学 会 如 何 抵 抗 反 冲 甚 至 将 其 转 移 至 敌 人 身 上。",
@@ -268,7 +268,7 @@ registerBirthDescriptorTranslation{
 registerBirthDescriptorTranslation{
 	type = "subclass",
 	name = "Writhing One",
-	display_name = "苦 痛 者",
+	display_name = "苦痛者",
 	desc = {
 		"苦 痛 者 了 解 我 们 所 谓 的 #{italic}#恐 魔#{normal}# 是 通 往 远 古 知 识 和 阴 影 纪 力 量 的 钥 匙 。 他 们 愿 意 付 出 一 切 代 价 来 获 取。",
 		"在 极 度 渴 求 力 量 的 同 时， 他 们 似 乎 失 去 了 部 分 自 我， 和 他 们 所 研 究 的 恐 魔 越 来 越 相 似 。",

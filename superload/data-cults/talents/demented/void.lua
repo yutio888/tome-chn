@@ -40,7 +40,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)/2
 		local nb = t.getNb(self,t)
-		return ([[撕 开 目 标 的 核 心 部 位 ，汲 取 生 命 转 化 为 虚 空 之 星 。 目 标 受 到 %0.2f 黑 暗 和 %0.2f 时 空 伤 害 ， 你 获 得 %d 黑 暗 之 星 。
+		return ([[撕 开 目 标 的 核 心 部 位 ，汲 取 生 命 转 化 为 虚 空 之 星 。 目 标 受 到 %0.2f 黑 暗 和 %0.2f 时 空 伤 害 ， 你 获 得 %d 虚 空 之 星 。
 		伤 害 随 法 术 强 度 升 高 。]]):
 		format(damDesc(self, DamageType.DARKNESS, (damage)), damDesc(self, DamageType.TEMPORAL, (damage)), nb)
 	end,

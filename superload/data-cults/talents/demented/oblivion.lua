@@ -44,6 +44,7 @@ registerTalentTranslation{
 		local duration = t.getDuration(self, t)
 		local damage = t.getDamage(self, t)
 		return ([[在 目 标 区 域 召 唤 出 范 围 4 码 、 持 续 %d 回 合 的 湮 灭 风 暴 ， 使 受 到 影 响 的 物 质 化 为 虚 无 ， 每 回 合 造 成 %0.2f 暗 影 %0.2f 时 空 伤 害 。
+		范 围 内 的 墙 壁 和 部 分 其 他 地 形 将 被 粉 粹。
 		每 次 受 到 风 暴 伤 害 时 ， 敌  人 身 上 不 足 3 回 合 的 负 面 魔 法 效 果 都 将 重 置 为 3 回 合 。 风 暴 范 围 内 敌 人 的 投 射 物 都 将 被 扯 碎。
 		伤 害 受 到 法 术 强 度 加 成 。]]):format(duration, damDesc(self, DamageType.DARKNESS, damage), damDesc(self, DamageType.TEMPORAL, damage))
 	end,

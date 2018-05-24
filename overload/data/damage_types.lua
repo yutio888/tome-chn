@@ -696,7 +696,7 @@ newDamageType{
 }
 
 newDamageType{
-	name = "physical", type = "PHYSICAL",
+	name = "physical", type = "PHYSICAL", text_color = "#WHITE#",
 	projector = function(src, x, y, type, dam, state)
 		state = initState(state)
 		useImplicitCrit(src, state)
@@ -2430,7 +2430,6 @@ newDamageType{
 		local realdam = DamageType:get(DamageType.BLIGHT).projector(src, x, y, DamageType.BLIGHT, dam.dam, state)
 		if target and realdam > 0 and not src:attr("dead") then
 			src:heal(realdam * dam.healfactor, target)
-			src:logCombat(target, "#Source# drains life from #Target#!")
 		end
 		return realdam
 	end,
@@ -3775,9 +3774,9 @@ newDamageType{
 		useImplicitCrit(src, state)
 		local target = game.level.map(x, y, Map.ACTOR)
 		if target and target:attr("worm") then
-			target:heal(dam, src)
+			target:heal(dam / 3, src)
 			return -dam
-		elseif target then
+		elseif target and not target.carrion_worm then  -- Carrion worms are immune but not healed by the damage, this spams the log so we just don't hit them instead
 			DamageType:get(DamageType.BLIGHT).projector(src, x, y, DamageType.BLIGHT, dam)
 			return dam
 		end
@@ -3806,7 +3805,6 @@ newDamageType{
 		useImplicitCrit(src, state)
 		local target = game.level.map(x, y, Map.ACTOR)
 		if target then
-			game:delayedLogDamage(src, target, 0, ("%s<%d%%%% 几率枯萎>#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", dam), false)
 			if rng.percent(dam) then
 			local check = src:combatSpellpower()
 			if not src:checkHit(check, target:combatSpellResist()) then return end

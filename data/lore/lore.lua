@@ -34,3 +34,7 @@ load("data-chn123/lore/trollmire.lua")
 load("data-chn123/lore/zigur.lua")
 
 load("data-chn123/lore/demon.lua")
+
+load("data-chn123/lore/orcs/destructicus.lua")
+load("data-chn123/lore/orcs/dominion-port.lua")
+load("data-chn123/lore/orcs/emporium.lua")

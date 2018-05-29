@@ -384,3 +384,28 @@ simplePopDlg["Screenshot taken"] = function(str)
 	str = str:gsub("File: ", "文件存放位置：")
 	return "截图已保存", str
 end
+
+simplePopDlg["The air is pestilent"] = function()
+	return "空气里充斥着瘟疫的味道", "你瞬间闻到了枯萎的味道……"
+end
+
+simplePopDlg["Strange metallic capsule"] = function()
+	return "诡异的金属舱", [[你已经找遍了你能理解和使用的东西]]
+end
+
+simplePopDlg["Grung"] = function(text)
+	text = text:gsub("Grung story does not end yet, find more food and bring it here.", "Grung的故事还未结束，找到更多的食物带来这里。")
+	text = text:gsub("Grung story ends there, he manages to gather enough food to survive some more days.", "Grung的故事已经结束，他找到了足够的食物存活数日。")
+	return "Grung", text
+end
+
+simplePopDlg["Illusory Castle"] = function(text)
+	text = text:gsub("Something blocks the way to this chapter...", "有什么东西阻挡了通往本章的道路……")
+	text = text:gsub("Strange, it seems the book only serves as an entry to an actual physical zone... somewhere.", "奇妙的是，这本书似乎只是通往某个实际存在的区域的……入口")
+	return "虚幻城堡", text
+end
+
+simplePopDlg["Captive Krogs"] = function()
+	return "被俘的克罗格", [[被从时间牢笼里被解救的克罗格是非常脆弱的！]]
+end
+

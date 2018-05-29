@@ -3645,8 +3645,8 @@ registerArtifactTranslation{
 registerArtifactTranslation{
 	originName = 'Forbidden Tome: "A View From The Gallery"',
 	name = "禁忌之书：《画廊一瞥》",
-	desc = "这本书讲述着格鲁格的故事，他是远古时代的一个半身人，从部落中走散。他只是想生存下去，然而一场毁天灭地的大战正在他的身边肆虐。",
-	book_party_dead_msg = function(self) if self.book_ended then return else return "可怜的格鲁格。他只想找到食物，但他得到的却是死亡。" end end,
+	desc = "这本书讲述着Grung的故事，他是远古时代的一个半身人，从部落中走散。他只是想生存下去，然而一场毁天灭地的大战正在他的身边肆虐。",
+	book_party_dead_msg = function(self) if self.book_ended then return else return "可怜的Grung。他只想找到食物，但他得到的却是死亡。" end end,
 }
 registerArtifactTranslation{
 	originName = 'Forbidden Tome: "The Illusory Castle"',
@@ -3676,8 +3676,8 @@ registerArtifactTranslation{
 }
 registerArtifactTranslation{
 	originName = "Perseverance",
-	name = "永远锋利的剑",
-	unided_name = "毅力",
+	name = "毅力",
+	unided_name = "永远锋利的剑",
 	desc = [[人们说克鲁格首选的武器是一手拿剑一手拿锤。用一只手传播伊格兰斯的讯息，而用另一只手来让自己能够坚持到把这一信息传达到最后。
 	剑象征着克鲁格坚守着他们对抗奥术力量的任务。直到最后一个敌人倒下之前，克鲁格都会用这把剑坚持战斗。]],
 	set_desc = {
@@ -3685,9 +3685,9 @@ registerArtifactTranslation{
 	},
 }
 registerArtifactTranslation{
-	originName = "Perseverance",
-	name = "永远钝的锤",
-	unided_name = "忠诚",
+	originName = "Dedication",
+	name = "忠诚",
+	unided_name = "永远钝的锤",
 	desc = [[人们说克鲁格首选的武器是一手拿剑一手拿锤。用一只手传播伊格兰斯的讯息，而用另一只手来让自己能够坚持到把这一信息传达到最后。
 	锤象征着克鲁格愿意抵抗奥术力量的侵袭直到最后。这把锤子用来击打那些法师，可以让那些法师失去施展魔法的能力。]],
 	set_desc = {

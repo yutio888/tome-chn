@@ -217,3 +217,35 @@ yesnoPopDlg["Talent Use Confirmation"] = function(str)
 	str = str:gsub("Use", "确认使用")
 	return "技能使用确认", str, "取消", "继续"
 end
+
+yesnoPopDlg["Giant Digestive Sack"] = function()
+	return "巨大的消化袋", "打开袋子？", "打开", "离开"
+end
+
+yesnoPopDlg["Font of Knowledge"] = function()
+	return "知识文字", "你想要碰触吗？", "否", "是"
+end
+
+yesnoPopDlg["Tentacle Tree"] = function()
+	return "触手树", "你 #{strong}#真的确定#{normal}# 想要触摸它吗？", "否", "是"
+end
+
+yesnoPopDlg["Portal"] = function()
+	return "传送门", "你感觉这个传送门通向的地方可能让你有去无回。", "进入传送门", "保命要紧"
+end
+
+yesnoPopDlg["Torture tools"] = function()
+	return "拷问工具", "把拷问工具用在自己身上？", "否", "拷问自己"
+end
+
+yesnoPopDlg["Forbidden Tome"] = function()
+	return "禁忌之书", "你真的要离开这本书吗？一旦离开就无法再次进入。", "留下", "离开"
+end
+
+yesnoPopDlg["Locked Chest"] = function()
+	return "上锁的宝箱", "守卫的傀儡已经不在了，打开这个宝箱？", "打开", "离开"
+end
+
+yesnoPopDlg["S.M.A.C.K"] = function()
+	return "S.M.A.C.K", "你想要在战斗中逃跑吗？"
+end

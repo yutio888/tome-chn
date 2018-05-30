@@ -91,13 +91,15 @@ function _M:generateList()
 			--local quest_CHN = getQuestCHN(q.name,q:desc(self.actor))
 			local qname = q.name
 			local qdesc = q:desc(self.actor)
-			if questCHN[q.name] then
-				qname = questCHN[q.name].name
-				qdesc = questCHN[q.name].description(q:desc(self.actor))
-			elseif q.name:find("Escort") then
-				qname = questCHN["Escort"].name(q.name)
-				qdesc = questCHN["Escort"].description(q:desc(self.actor))
-			end
+			--if questCHN[q.name] then
+			--	qname = questCHN[q.name].name
+			--	qdesc = questCHN[q.name].description(q:desc(self.actor))
+			--elseif q.name:find("Escort") then
+			--	qname = questCHN["Escort"].name(q.name)
+			--	qdesc = questCHN["Escort"].description(q:desc(self.actor))
+			--end
+			qname = questCHN:getquestname(q.name);
+			qdesc = questCHN:getquestdesc(q.name, q:desc(self.actor));
 			list[#list+1] = {  name=qname, quest=q, color = color, status=getQuestStat(q.status_text[q.status]), status_order=q.status, desc=qdesc, list_id=#list+1  }
 		end
 	end

@@ -249,3 +249,23 @@ end
 yesnoPopDlg["S.M.A.C.K"] = function()
 	return "S.M.A.C.K", "你想要在战斗中逃跑吗？"
 end
+
+yesnoPopDlg["Challenge: #PURPLE#Mirror Match"] = function(desc)
+	return "挑战： #PURPLE#镜像对战", "挑 战 你 的 镜 像 克 隆 并 取 得 胜 利 ！", "拒绝", "接受"
+end
+
+yesnoPopDlg["Challenge: #PURPLE#Near Sighted"] = function(desc)
+	return "挑战： #PURPLE#近视眼", "在-7视野下完成本层，获得奖励。", "拒绝", "接受"
+end
+
+yesnoPopDlg["Challenge: #PURPLE#Multiplicity"] = function(desc)
+	desc = desc:gsub("All foes %(including bosses%) gain the ability to multiply up to 3 times.  You must survive for at least", "所 有 敌 人 （ 包 括 Boss ） 都 获 得 了 复 制 最 多 3 次 的 能 力 。 在 离 开 本 层 前 你 至 少 要 存 活")
+	desc = desc:gsub("turns before exiting.", "个 回 合 。")
+	return "挑战： #PURPLE#复制", desc, "拒绝", "接受"
+end
+
+yesnoPopDlg["Challenge: #PURPLE#Headhunter"] = function(desc)
+	desc = desc:gsub("Kill", "在 本 层 杀 死 任 何 精 英 或 以 上 怪 物 之 前 ， 先 要 杀 死 ")
+	desc = desc:gsub("spawns of Urh'Rok on the level before killing any other elite %(or higher rank%) creatures, for an uncommon reward.", " 个 乌 鲁 克 的 子 嗣， 获 得 稀 有 奖 励 。")
+	return "挑战： #PURPLE#猎头者", desc, "拒绝", "接受"
+end

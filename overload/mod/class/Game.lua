@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2017 Nicolas Casalini
+-- Copyright (C) 2009 - 2018 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -57,7 +57,6 @@ local Gestures = require "engine.ui.Gestures"
 local Dialog = require "engine.ui.Dialog"
 local MapMenu = require "mod.dialogs.MapMenu"
 
-require "data-chn123.delayed_damage"
 module(..., package.seeall, class.inherit(engine.GameTurnBased, engine.interface.GameMusic, engine.interface.GameSound, engine.interface.GameTargeting))
 
 -- Difficulty settings
@@ -99,7 +98,7 @@ end
 function _M:runReal()
 	self.delayed_log_damage = {}
 	self.delayed_log_messages = {}
-	self.calendar = Calendar.new("/data/calendar_allied.lua", "今天是 %s %s 第 %s 年 卓越纪，马基埃亚尔。\n现在时间是 %02d:%02d.", 122, 167, 11)
+	self.calendar = Calendar.new("/data/calendar_allied.lua", "Today is the % %s of the %s year of the Age of Ascendancy of Maj'Eyal.\nThe time is %02d:%02d.", 122, 167, 11)
 
 	self.uiset:activate()
 
@@ -110,7 +109,7 @@ function _M:runReal()
 	self.flyers:enableShadow(0.6)
 	game:setFlyingText(self.flyers)
 
-	self.bignews = BigNews.new(chn123_tome_font(), 30)
+	self.bignews = BigNews.new(FontPackage:getFont("bignews"))
 
 	self.nicer_tiles = NicerTiles.new()
 
@@ -151,15 +150,15 @@ function _M:runReal()
 	end)
 
 	-- Create the map scroll text overlay
-	local lfont = core.display.newFont(chn123_tome_font(), 30)
+	local lfont = FontPackage:get("bignews", true)
 	lfont:setStyle("bold")
 	local s = core.display.drawStringBlendedNewSurface(lfont, "<Scroll mode, press direction keys to scroll, press again to exit>", unpack(colors.simple(colors.GOLD)))
 	lfont:setStyle("normal")
 	self.caps_scroll = {s:glTexture()}
 	self.caps_scroll.w, self.caps_scroll.h = s:getSize()
 
-	self.zone_font = core.display.newFont(chn123_tome_font(), 12)
-	
+	self.zone_font = FontPackage:get("zone")
+
 	self.shake_time = nil
 	self.shake_force = 0
 	self.shake_x = 0
@@ -173,7 +172,7 @@ function _M:runReal()
 end
 
 function _M:rebuildCalendar()
-	self.calendar = Calendar.new("/data/calendar_"..(self.player.calendar or "allied")..".lua", "今天是 %s %s 第 %s 年 卓越纪，马基埃亚尔。\n现在时间是 %02d:%02d.", 122, 167, 11) 
+	self.calendar = Calendar.new("/data/calendar_"..(self.player.calendar or "allied")..".lua", "Today is the %s %s of the %s year of the Age of Ascendancy of Maj'Eyal.\nThe time is %02d:%02d.", (self.player.calendar_start_year or 122), (self.player.calendar_start_day or 167), (self.player.calendar_start_hour or 11))
 end
 
 --- Resize the hotkeys
@@ -253,9 +252,9 @@ function _M:newGame()
 	self.creating_player = true
 	self.extra_birth_option_defs = {}
 	self:triggerHook{"ToME:extraBirthOptions", options = self.extra_birth_option_defs}
-	local birth; birth = Birther.new("角色创建 ("..nb_unlocks.."/"..max_unlocks.." 未解锁项)", self.player, {"base", "world", "difficulty", "permadeath", "race", "subrace", "sex", "class", "subclass" }, function(loaded)
+	local birth; birth = Birther.new("Character Creation ("..table.concat(table.extract_field(unlocks, "desc", ipairs), ", ").." unlocked options)", self.player, {"base", "world", "difficulty", "permadeath", "race", "subrace", "sex", "class", "subclass" }, function(loaded)
 		if not loaded then
-			self.calendar = Calendar.new("/data/calendar_"..(self.player.calendar or "allied")..".lua", "今天是 %s %s 第 %s 年 卓越纪，马基埃亚尔。\n现在时间是 %02d:%02d.", 122, 167, 11)
+			self.calendar = Calendar.new("/data/calendar_"..(self.player.calendar or "allied")..".lua", "Today is the %s %s of the %s year of the Age of Ascendancy of Maj'Eyal.\nThe time is %02d:%02d.", 122, 167, 11)
 			self.player:check("make_tile")
 			self.player.make_tile = nil
 			self.player:check("before_starting_zone")
@@ -284,7 +283,7 @@ function _M:newGame()
 			self:setupPermadeath(self.player)
 			--self:changeLevel(1, "test")
 			self:changeLevel(self.player.starting_level or 1, self.player.starting_zone, {force_down=self.player.starting_level_force_down, direct_switch=true})
-			
+
 			print("[PLAYER BIRTH] resolve...")
 			self.player:resolve()
 			self.player:resolve(nil, true)
@@ -295,7 +294,7 @@ function _M:newGame()
 			self.paused = true
 			print("[PLAYER BIRTH] resolved!")
 			local birthend = function()
-				local d = require("engine.dialogs.ShowText").new("欢迎来到 #LIGHT_BLUE#马基埃亚尔", "intro-"..self.player.starting_intro, {name=self.player.name}, nil, nil, function()
+				local d = require("engine.dialogs.ShowText").new("Welcome to #LIGHT_BLUE#Tales of Maj'Eyal", "intro-"..self.player.starting_intro, {name=self.player.name}, nil, nil, function()
 					self.player:resetToFull()
 					self.player:registerCharacterPlayed()
 					self.player:onBirth(birth)
@@ -320,7 +319,7 @@ function _M:newGame()
 			else self.player:playerLevelup(birthend, true) end
 		-- Player was loaded from a premade
 		else
-			self.calendar = Calendar.new("/data/calendar_"..(self.player.calendar or "allied")..".lua", "今天是 %s %s 第 %s 年 卓越纪，马基埃亚尔。\n现在时间是 %02d:%02d.", 122, 167, 11)
+			self.calendar = Calendar.new("/data/calendar_"..(self.player.calendar or "allied")..".lua", "Today is the %s %s of the %s year of the Age of Ascendancy of Maj'Eyal.\nThe time is %02d:%02d.", 122, 167, 11)
 			Map:setViewerFaction(self.player.faction)
 			if self.player.__game_difficulty then self:setupDifficulty(self.player.__game_difficulty) end
 			self:setupPermadeath(self.player)
@@ -1059,7 +1058,7 @@ function _M:changeLevelReal(lev, zone, params)
 			end
 		end
 	elseif params.temporary_zone_shift_back then -- We switch back
-		popup = Dialog:simpleWaiter("载入区域", "载入区域中，请稍候...", nil, 10000)
+		popup = Dialog:simpleWaiter("Loading level", "Please wait while loading the level...", nil, 10000)
 		core.display.forceRedraw()
 
 		if self.zone.zone_party then self.change_level_party_back = true end
@@ -1319,11 +1318,11 @@ function _M:changeLevelReal(lev, zone, params)
 		local lev = self.zone.base_level + self.level.level - 1
 		if self.zone.level_adjust_level then lev = self.zone:level_adjust_level(self.level) end
 		local diff = lev - self.player.level
-		if diff >= 5 then feeling = "你因恐惧而感到不安，你觉得你的心跳开始加速， 你感到进入这个区域对你有极大的威胁。"
-		elseif diff >= 2 then feeling = "你感到稍微有点不安，开始小心前行。"
+		if diff >= 5 then feeling = "You feel a thrill of terror and your heart begins to pound in your chest. You feel terribly threatened upon entering this area."
+		elseif diff >= 2 then feeling = "You feel mildly anxious, and walk with caution."
 		elseif diff >= -2 then feeling = nil
-		elseif diff >= -5 then feeling = "你充满自信地进入了这个区域。"
-		else feeling = "你大步流星地走进这片区域，打了个哈欠，你感到待在这里可能是浪费时间， 最好到别的地方去看看。"
+		elseif diff >= -5 then feeling = "You feel very confident walking into this place."
+		else feeling = "You stride into this area without a second thought, while stifling a yawn. You feel your time might be better spent elsewhere."
 		end
 	end
 	if feeling then self.log("#TEAL#%s", feeling) end
@@ -1454,32 +1453,27 @@ function _M:chronoRestore(name, remove)
 	if game.player.resetMainShader then game.player:resetMainShader() end
 	return true
 end
+
 function _M:getZoneName()
 	if self.zone.display_name then
 		name = self.zone.display_name()
-		if name == "Maj'Eyal" then name = "马基埃亚尔"
-		else
-			name = name:gsub("Yiilkgur, the Sher'Tul Fortress","伊克格 夏·图尔堡垒"):gsub("Control Room","控制室"):gsub("Storage Room","储藏室"):gsub("Portal Room","传送室"):gsub("Exploratory Farportal","探险传送门"):gsub("Library of Lost Mysteries","失落的秘密图书馆")
-		end
 	else
 		local lev = self.level.level
 		if self.level.data.reverse_level_display then lev = 1 + self.level.data.max_level - lev end
 		if self.zone.max_level == 1 then
 			name = self.zone.name
 		else
-			name = ("%s (%d)"):format(zoneName[self.zone.name] or self.zone.name, lev)
+			name = ("%s (%d)"):format(self.zone.name, lev)
 		end
 	end
 	return name
-
 end
+
 --- Update the zone name, if needed
 function _M:updateZoneName()
 	if not self.zone_font then return end
 	local name = self:getZoneName()
 	if self.zone_name_s and self.old_zone_name == name then return end
-
-	name = zoneName[name] or name
 
 	local s = core.display.drawStringBlendedNewSurface(self.zone_font, name, unpack(colors.simple(colors.GOLD)))
 	self.zone_name_w, self.zone_name_h = s:getSize()
@@ -1587,7 +1581,6 @@ end
 -- #source#|#Source# -> <displayString>..self.name|self.name:capitalize()
 -- #target#|#Target# -> target.name|target.name:capitalize()
 function _M:logMessage(source, srcSeen, target, tgtSeen, style, ...)
-	if logTableCHN[style] then style = logTableCHN[style].fct(...) end
 	style = style:format(...)
 	local srcname = "something"
 	local Dstring
@@ -1597,28 +1590,18 @@ function _M:logMessage(source, srcSeen, target, tgtSeen, style, ...)
 			srcname = engine.Entity.check(source, "getName") or source.name or "unknown"
 		end
 		if srcname ~= "something" then Dstring = source.__is_actor and source.getDisplayString and source:getDisplayString() end
-	if source.name and source.name=="spatial tether" then srcname ="时空锁链" end
-	srcname = logCHN:getName(srcname)
-	if source.name and source.name:find("maelstrom") then srcname ="灵能漩涡" end
-	if logTableCHN[style] then style = logTableCHN[style].fct(...) end
-	
-    
 	style = style:gsub("#source#", srcname)
 	style = style:gsub("#Source#", (Dstring or "")..srcname:capitalize())
+	local tgtname = "something"
 	if target then
-		local tgtname = "something"
-			if target.player then
-				tgtname = "#fbd578#"..target.name.."#LAST#"
-			elseif tgtSeen then
-				tgtname = engine.Entity.check(target, "getName") or target.name or "unknown"
-			end
-		if target and target.name=="Iceblock" then tgtname = "冰块"
-		else tgtname = logCHN:getName(tgtname) end
-		
-		style = style:gsub("#target#", tgtname)
-		style = style:gsub("#Target#", tgtname:capitalize())
+		if target.player then
+			tgtname = "#fbd578#"..target.name.."#LAST#"
+		elseif tgtSeen then
+			tgtname = engine.Entity.check(target, "getName") or target.name or "unknown"
+		end
 	end
-	style = delayed_damage_trans(style)
+	style = style:gsub("#target#", tgtname)
+	style = style:gsub("#Target#", tgtname:capitalize())
 	return style
 end
 
@@ -1659,14 +1642,14 @@ function _M:displayDelayedLogDamage()
 		for src, tgts in pairs(psrcs) do
 			for target, dams in pairs(tgts) do
 				if #dams.descs > 1 then
-					game.uiset.logdisplay(self:logMessage(src, dams.srcSeen, target, dams.tgtSeen, "#Source# 击中 #Target# 造成 %s (%0.0f 总伤害)%s。", table.concat(dams.descs, ", "), dams.total, dams.healing<0 and (" #LIGHT_GREEN#[%0.0f 治疗]#LAST#"):format(-dams.healing) or ""))
+					game.uiset.logdisplay(self:logMessage(src, dams.srcSeen, target, dams.tgtSeen, "#Source# hits #Target# for %s (%0.0f total damage)%s.", table.concat(dams.descs, ", "), dams.total, dams.healing<0 and (" #LIGHT_GREEN#[%0.0f healing]#LAST#"):format(-dams.healing) or ""))
 				else
 					if dams.healing >= 0 then
-						game.uiset.logdisplay(self:logMessage(src, dams.srcSeen, target, dams.tgtSeen, "#Source# 击中 #Target# 造成 %s 伤害。", table.concat(dams.descs, ", ")))
+						game.uiset.logdisplay(self:logMessage(src, dams.srcSeen, target, dams.tgtSeen, "#Source# hits #Target# for %s damage.", table.concat(dams.descs, ", ")))
 					elseif src == target then
-						game.uiset.logdisplay(self:logMessage(src, dams.srcSeen, target, dams.tgtSeen, "#Source# 受到 %s。", table.concat(dams.descs, ", ")))
+						game.uiset.logdisplay(self:logMessage(src, dams.srcSeen, target, dams.tgtSeen, "#Source# receives %s.", table.concat(dams.descs, ", ")))
 					else
-						game.uiset.logdisplay(self:logMessage(src, dams.srcSeen, target, dams.tgtSeen, "#Target# 从 #Source#处受到%s。", table.concat(dams.descs, ", ")))
+						game.uiset.logdisplay(self:logMessage(src, dams.srcSeen, target, dams.tgtSeen, "#Target# receives %s from #Source#.", table.concat(dams.descs, ", ")))
 					end
 				end
 				local rsrc = real_src.resolveSource and real_src:resolveSource() or real_src
@@ -1676,7 +1659,7 @@ function _M:displayDelayedLogDamage()
 				if target.dead then
 					if dams.tgtSeen and (rsrc == self.player or rtarget == self.player or self.party:hasMember(rsrc) or self.party:hasMember(rtarget)) then
 						self.flyers:add(sx, sy, 30, (rng.range(0,2)-1) * 0.5, rng.float(-2.5, -1.5), ("Kill (%d)!"):format(dams.total), {255,0,255}, true)
-						self:delayedLogMessage(target, nil,  "death", self:logMessage(src, dams.srcSeen, target, dams.tgtSeen, "#{bold}##Source#杀死了#Target#!#{normal}#"))
+						self:delayedLogMessage(target, nil,  "death", self:logMessage(src, dams.srcSeen, target, dams.tgtSeen, "#{bold}##Source# killed #Target#!#{normal}#"))
 					end
 				elseif dams.total > 0 or dams.healing == 0 then
 					if dams.tgtSeen and (rsrc == self.player or self.party:hasMember(rsrc)) then
@@ -1688,7 +1671,7 @@ function _M:displayDelayedLogDamage()
 			end
 		end
 	end
-	if self.delayed_death_message then game.log(self.delayed_death_message) end
+	if self.delayed_death_message then game.log("%s", self.delayed_death_message) end
 	self.delayed_death_message = nil
 	self.delayed_log_damage = {}
 end
@@ -2065,25 +2048,16 @@ do return end
 							self.player:canSee(actor) and self.level.map.seens(x, y) then seen[#seen + 1] = {x=x, y=y, actor=actor} end
 					end, nil)
 				if self.zone.no_autoexplore or self.level.no_autoexplore then
-					self.log("你不能自动探索这一层。")
+					self.log("You may not auto-explore this level.")
 				elseif #seen > 0 then
 					local dir = game.level.map:compassDirection(seen[1].x - self.player.x, seen[1].y - self.player.y)
-					if dir == "northwest" then dir = "西北方向"
-					elseif dir == "northeast" then dir = "东北方向"
-					elseif dir == "southwest" then dir = "西南方向"
-					elseif dir == "southeast" then dir = "东南方向"
-					elseif dir == "east" then dir = "东面"
-					elseif dir == "west" then dir = "西面"
-					elseif dir == "south" then dir = "南面"
-					elseif dir == "north" then dir = "北面"
-					end
-					self.log("当有敌人在视野里时，你不能自动探索！ (%s 在 %s方%s)!", npcCHN:getName(seen[1].actor.name), dir, self.level.map:isOnScreen(seen[1].x, seen[1].y) and "" or " - 屏幕外")
+					self.log("You may not auto-explore with enemies in sight (%s to the %s%s)!", seen[1].actor.name, dir, self.level.map:isOnScreen(seen[1].x, seen[1].y) and "" or " - offscreen")
 					for _, node in ipairs(seen) do
 						node.actor:addParticles(engine.Particles.new("notice_enemy", 1))
 					end
 				else
 					if not self.player:autoExplore() then
-						self.log("这一层没有地方可以探索了。")
+						self.log("There is nowhere left to explore.")
 						self:triggerHook{"Player:autoExplore:nowhere"}
 					else
 						while self.player:enoughEnergy() and self.player:runStep() do end
@@ -2301,14 +2275,14 @@ do return end
 			local menu
 			local l = {
 				"resume",
-				{ "查看成就", function() self:unregisterDialog(menu) self:registerDialog(require("mod.dialogs.ShowAchievements").new("Tales of Maj'Eyal Achievements", self.player)) end },
-				{ "查看手札", function() self:unregisterDialog(menu) self:registerDialog(require("mod.dialogs.ShowLore").new("马基埃亚尔札记", self.party)) end },
-				{ "查看材料", function() self:unregisterDialog(menu) self:registerDialog(require("mod.dialogs.ShowIngredients").new(self.party)) end },
+				{ "Show Achievements", function() self:unregisterDialog(menu) self:registerDialog(require("mod.dialogs.ShowAchievements").new("Tales of Maj'Eyal Achievements", self.player)) end },
+				{ "Show known Lore", function() self:unregisterDialog(menu) self:registerDialog(require("mod.dialogs.ShowLore").new("Tales of Maj'Eyal Lore", self.party)) end },
+				{ "Show ingredients", function() self:unregisterDialog(menu) self:registerDialog(require("mod.dialogs.ShowIngredients").new(self.party)) end },
 				"highscores",
-				{ "查看物品", function() self:unregisterDialog(menu) self.key:triggerVirtual("SHOW_INVENTORY") end },
-				{ "角色面板", function() self:unregisterDialog(menu) self.key:triggerVirtual("SHOW_CHARACTER_SHEET") end },
+				{ "Inventory", function() self:unregisterDialog(menu) self.key:triggerVirtual("SHOW_INVENTORY") end },
+				{ "Character Sheet", function() self:unregisterDialog(menu) self.key:triggerVirtual("SHOW_CHARACTER_SHEET") end },
 				"keybinds",
-				{ "游戏选项", function() self:unregisterDialog(menu) self:registerDialog(require("mod.dialogs.GameOptions").new()) end},
+				{"Game Options", function() self:unregisterDialog(menu) self:registerDialog(require("mod.dialogs.GameOptions").new()) end},
 				"video",
 				"sound",
 				"save",

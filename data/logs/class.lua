@@ -1339,3 +1339,48 @@ logCHN:newLog{
 		return ("#ORCHID#目标超出范围。按住  <ctrl> 来强制射击超出范围(%d)的目标."):format(...)
 	end,
 }
+
+
+--mod/class/Game.lua
+logCHN:newLog{
+	log = "#TEAL#%s",
+	fct = function(a)
+	    a = a:gsub("You feel a thrill of terror and your heart begins to pound in your chest. You feel terribly threatened upon entering this area.", "你因恐惧而感到不安，你觉得你的心跳开始加速， 你感到进入这个区域对你有极大的威胁。")
+	      	:gsub("You feel mildly anxious, and walk with caution.","你感到稍微有点不安，开始小心前行。")
+		:gsub("You feel very confident walking into this place.","你充满自信地进入了这个区域。")
+		:gsub("You stride into this area without a second thought, while stifling a yawn. You feel your time might be better spent elsewhere.","你大步流星地走进这片区域，打了个哈欠，你感到待在这里可能是浪费时间， 最好到别的地方去看看。")
+	    return a
+	end,		
+}
+logCHN:newLog{
+	log = "You may not auto-explore with enemies in sight (%s to the %s%s)!",
+	fct = function(name,dir,c)
+	    	if dir == "northwest" then dir = "西北方向"
+		elseif dir == "northeast" then dir = "东北方向"
+		elseif dir == "southwest" then dir = "西南方向"
+		elseif dir == "southeast" then dir = "东南方向"
+		elseif dir == "east" then dir = "东面"
+		elseif dir == "west" then dir = "西面"
+		elseif dir == "south" then dir = "南面"
+		elseif dir == "north" then dir = "北面"
+		end
+		c = c:gsub("offscreen","屏幕外")
+	return ("当有敌人在视野里时，你不能自动探索！ (%s 在 %s方%s)!"):format(npcCHN:getName(name), dir, c)
+	end,
+}
+			
+
+
+logCHN:newLog{
+	log = "You may not auto-explore this level.",
+	fct = function()
+	    return "你不能自动探索这一层"
+	end,
+}
+
+logCHN:newLog{
+	log = "There is nowhere left to explore.",
+	fct = function()
+	    return "这一层没有地方可以探索了。"
+	    end,  
+}

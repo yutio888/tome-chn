@@ -135,6 +135,7 @@ local flavors = o:getStaffFlavorList()
 local flavor_list = table.keys(flavors)
 table.sort(flavor_list)
 local standard_flavors = {
+	bonestaff = {engine.DamageType.DARKNESS, engine.DamageType.BLIGHT, engine.DamageType.ACID, engine.DamageType.COLD},
 	magestaff = {engine.DamageType.FIRE, engine.DamageType.COLD, engine.DamageType.LIGHTNING, engine.DamageType.ARCANE},
 	starstaff = {engine.DamageType.LIGHT, engine.DamageType.DARKNESS, engine.DamageType.TEMPORAL, engine.DamageType.PHYSICAL},
 	vilestaff = {engine.DamageType.DARKNESS, engine.DamageType.BLIGHT, engine.DamageType.ACID, engine.DamageType.FIRE}, -- yes it overlaps, it's okay
@@ -164,7 +165,7 @@ for _, flavor in ipairs(flavor_list) do
 	answers[#answers + 1] = {"别介意."}
 	newChat{id="element_"..flavor, text = "召唤哪种元素？", answers = answers}
 	
-	local flavor_name = flavor:gsub("staff", ""):gsub("mage","法术"):gsub("star","众星"):gsub("vile","邪恶"):gsub("power","力量"):gsub("harmony","和谐")
+	local flavor_name = flavor:gsub("staff", ""):gsub("mage","法术"):gsub("star","众星"):gsub("vile","邪恶"):gsub("power","力量"):gsub("harmony","和谐"):gsub("bone","骨系")
 	aspect_answers[#aspect_answers + 1] = {("[%s]"):format(flavor_name), jump = "element_"..flavor}
 end
 

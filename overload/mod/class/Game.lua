@@ -57,6 +57,7 @@ local Gestures = require "engine.ui.Gestures"
 local Dialog = require "engine.ui.Dialog"
 local MapMenu = require "mod.dialogs.MapMenu"
 
+require "data-chn123.delayed_damage"
 module(..., package.seeall, class.inherit(engine.GameTurnBased, engine.interface.GameMusic, engine.interface.GameSound, engine.interface.GameTargeting))
 
 -- Difficulty settings
@@ -1617,15 +1618,7 @@ function _M:logMessage(source, srcSeen, target, tgtSeen, style, ...)
 		style = style:gsub("#target#", tgtname)
 		style = style:gsub("#Target#", tgtname:capitalize())
 	end
-	style = style:gsub("blocked","格挡"):gsub("knocks back","击退了"):gsub("summons","召唤了"):gsub("something","某物"):gsub("projectile","抛射物")
-		     :gsub("to psi shield","超能护盾吸收"):gsub(" to armor","护甲吸收"):gsub("smeared","时空转化"):gsub("antimagic","反魔盾吸收")
-		     :gsub("dissipated","驱散"):gsub("reduction","减免"):gsub("gestured","手势防御"):gsub("parried","回避"):gsub("absorbed","护盾吸收")
-		     :gsub("warded","守护"):gsub("resist armor","护盾减免"):gsub("STATIC","静电"):gsub("dismissed","豁免")
-		     :gsub("misses","未命中")
-		     :gsub("fire","火焰"):gsub("lightning","闪电"):gsub("arcane","奥术"):gsub("cold","寒冷")
-		     :gsub("blight","枯萎"):gsub("darkness","暗影"):gsub("physical","物理"):gsub("temporal","时空")
-		     :gsub("light","光系"):gsub("acid","酸性"):gsub("mental","精神"):gsub("nature","自然")
-		     :gsub("turned into osmosis","渗透吸收"):gsub("webs of fate","命运之网")
+	style = delayed_damage_trans(style)
 	return style
 end
 

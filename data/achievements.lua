@@ -5,7 +5,7 @@ _M.desc = {}
 
 function _M:getAchName(name)
 	local ls = 0
-	while name:find(" %(", ls) do
+	if name:find(" %(", ls) then
 		_, ls = name:find(" %(", ls)
 		print(ls)
 	end

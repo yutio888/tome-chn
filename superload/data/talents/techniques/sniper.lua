@@ -35,7 +35,7 @@ registerTalentTranslation{
 		local dam = t.getDamage(self,t)
 		local mark = t.getMarkChance(self,t)
 		return ([[进 入 一 个 平 静, 专 注 的 姿 态, 增 加 %d 物 理 强 度 和 命 中, 抛 射 物 速 度 增 加 %d%% 并 且 标 记 目 标 的 几 率 增 加 %d%%.
-这 让 你 在 射 程 内 射 击 更 有 效：对 三 格 外 目 标 的 距 离 每 增 加 一 格 ，伤 害 增 加 %0.1f%% , 8 格 距 离 时 达 到 最 大值 （%0.1f%% ）。
+这 让 你 在 射 程 内 射 击 更 有 效：对 三 格 外 目 标 的 距 离 每 增 加 一 格 ，伤 害 增 加 %0.1f%% , 8 格 距 离 时 达 到 最 大值 （ %0.1f%% ）。
 物 理 强 度 和 命 中 随 敏 捷 增 加.]]):
 		format(power, speed, mark, dam, dam*5)
 	end,

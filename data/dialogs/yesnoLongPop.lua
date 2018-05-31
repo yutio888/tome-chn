@@ -121,7 +121,7 @@ yesnoLongPopDlg["Alter of Dreams"] = function()
 end
 
 yesnoLongPopDlg["Encounter"] = function ()
-	return "遭遇", "你发现了一个古老地窖的入口，里面笼罩着恐怖的恶魔气息，仅仅站在门口你就已经感受到了它的威胁。\n你听到里面传来了模糊的女人的哭声。", "进入地窖", "悄悄离开"
+	return "遭遇", "你发现了一个古老地窖的入口，里 面 笼 罩 着 恐 怖 的 恶 魔 气 息 ， 仅 仅 站 在 门 口 你 就 已 经 感 受 到了 它 的 威 胁 。\n你听到里面传来了模糊的女人的哭声。", "进入地窖", "悄悄离开"
 end
 
 yesnoLongPopDlg["Cursed Fate"] = function(str)

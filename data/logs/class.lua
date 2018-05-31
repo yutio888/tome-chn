@@ -680,9 +680,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#LIGHT_GREEN#Accepted quest '%s'! #WHITE#(Press 'j' to see the quest log)",
 	fct = function(a)
-		if questCHN[a] then
-			a = questCHN[a].name
-		end
+		a = questCHN:getquestname(a)
 		if a:find("Escort") then a= "护送" end
 		return ("#LIGHT_GREEN#接受了任务“ %s ”！ #WHITE#（按下“j”查看任务日志）"):format(a)
 	end,
@@ -691,9 +689,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#LIGHT_GREEN#Quest '%s' status updated! #WHITE#(Press 'j' to see the quest log)",
 	fct = function(a)
-		if questCHN[a] then
-			a = questCHN[a].name
-		end
+		a = questCHN:getquestname(a)
 		return ("#LIGHT_GREEN#任务 “ %s ”状态已经更新！ #WHITE#（按下“j”查看任务日志）"):format(a)
 	end,
 }
@@ -701,9 +697,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#LIGHT_GREEN#Quest '%s' completed! #WHITE#(Press 'j' to see the quest log)",
 	fct = function(a)
-		if questCHN[a] then
-			a = questCHN[a].name
-		end
+		a = questCHN:getquestname(a)
 		if a:find("Escort") then a= "护送" end
 		return ("#LIGHT_GREEN#任务 “ %s ”完成！ #WHITE#（按下“j”查看任务日志）"):format(a)
 	end,
@@ -712,9 +706,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#LIGHT_GREEN#Quest '%s' is done! #WHITE#(Press 'j' to see the quest log)",
 	fct = function(a)
-		if questCHN[a] then
-			a = questCHN[a].name
-		end
+		a = questCHN:getquestname(a)
 		if a:find("Escort") then a= "护送" end
 		return ("#LIGHT_GREEN#任务 “ %s ”完成！ #WHITE#（按下“j”查看任务日志）"):format(a)
 	end,
@@ -723,9 +715,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#LIGHT_RED#Quest '%s' is failed! #WHITE#(Press 'j' to see the quest log)",
 	fct = function(a)
-		if questCHN[a] then
-			a = questCHN[a].name
-		end
+		a = questCHN:getquestname(a)
 		if a:find("Escort") then a= "护送" end
 		return ("#LIGHT_RED#任务 “ %s ”失败！ #WHITE#（按下“j”查看任务日志）"):format(a)
 	end,
@@ -848,9 +838,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#AQUAMARINE#You leech a part of %s vim.",
 	fct = function(a)
-		if questCHN[a] then
-			a = questCHN[a].name
-		end
+		a = npcCHN:getName(a)
 		return ("#AQUAMARINE#你吸收了 %s 部分活力。"):format(a)
 	end,
 }
@@ -1200,14 +1188,14 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "You collect a new ingredient: #LIGHT_GREEN#%s%s#WHITE#.",
 	fct = function(a,b)
-		b = changeElixir(b)
+		b = i_ingredient[b].chName
 		return ("你搜集了一个新的材料: #LIGHT_GREEN#%s%s#WHITE#."):format(a,b)
 	end,
 }
 logCHN:newLog{
 	log = "You collect a new ingredient: #LIGHT_GREEN#%s%s (%d)#WHITE#.",
 	fct = function(a,b,c)
-		b = changeElixir(b)
+		b = i_ingredient[b].chName
 		return ("你搜集了一个新的材料: #LIGHT_GREEN#%s%s (%d)#WHITE#."):format(a,b,c)
 	end,
 }

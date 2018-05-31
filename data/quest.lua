@@ -2,13 +2,26 @@
 questCHN = {}
 
 function questCHN:getquestname(name)
-			local qname = name
-			if questCHN[name] then
-				qname = questCHN[name].name
-			elseif name:find("Escort") then
-				qname = questCHN["Escort"].name(name)
-			end
-			return qname
+	local qname = name
+	if questCHN[name] then
+		qname = questCHN[name].name
+	elseif name:find("Escort") then
+		qname = questCHN["Escort"].name(name)
+	elseif name:find("Infinite Dungeon Challenge") then
+		qname = questCHN["Infinite Dungeon Challenge"].name(name)
+	end
+	return qname
+end
+function questCHN:getquestdesc(name, desc)
+	local qdesc = desc
+	if questCHN[name] then
+		qdesc = questCHN[name].description(desc)
+	elseif name:find("Escort") then
+		qdesc = questCHN["Escort"].description(desc)
+	elseif name:find("Infinite Dungeon Challenge") then
+		qdesc = questCHN["Infinite Dungeon Challenge"].description(desc)
+	end
+	return qdesc
 end
 questCHN["Hidden treasure"] = {
 name = " 隐 藏 的 财 宝 ",
@@ -699,7 +712,37 @@ description = function(desc)
 
 	return desc
 end}
-
+questCHN["Infinite Dungeon Challenge"] = {
+	name = function(name)
+		name = name:gsub("Infinite Dungeon Challenge", "无尽地下城挑战")
+		name = name:gsub("Level", "层数")
+		name = name:gsub("Pacifist", "和平主义者")
+		name = name:gsub("Exterminator", "歼灭者")
+		name = name:gsub("Rush Hour", "决胜时刻")
+		name = name:gsub("Dream Hunter", "梦境猎手")
+		name = name:gsub("Mirror Match", "镜像战斗")
+		name = name:gsub("Near Sighted", "近视眼")
+		name = name:gsub("Multiplicity", "复制")
+		name = name:gsub("Headhunter", "猎头者")
+		return name
+	end,
+	description = function(desc)
+		desc = desc:gsub("Leave the level %(to the next level%) without killing a single creature. You will get #{italic}#two#{normal}# rewards.", "在 不 杀 死 任 何 怪 物 的 情 况 下 离 开 这 一 层 （ 到 达 下 一 层 ） 。 你 将 得 到 #{italic}#两 份#{normal}# 奖 励。")
+		desc = desc:gsub("Exterminate every foe on the level.", "杀 死 这 一 层 的 所 有 敌 人 。")
+		desc = desc:gsub("Foes left:", "剩 余 敌 人：")
+		desc = desc:gsub("Leave the level in less than", "在 ")
+		desc = desc:gsub("turns %(exit is revealed on your map%).", "回 合 内 离 开 该 层 。 （ 出 口 已 标 记 在 地 图 上 ）")
+		desc = desc:gsub("Turns left:", "剩 余 回 合：")
+		desc = desc:gsub("Wake up and kill the dreaming horror boss", "唤 醒 并 杀 死 梦 魇 恐 魔")
+		desc = desc:gsub("Find, challenge, and kill your mirror clone on the level.", "在 本 层 找 到 ， 挑 战 并 杀 死 你 的 克 隆 体 。")
+		desc = desc:gsub("Finish the level with -7 sight range.", "在 -7 视 野 下 完 成 本 层 。")
+		desc = desc:gsub("All foes have the multiply talent!", "所 有 敌 人 都 有 复 制 能 力 ！")
+		desc = desc:gsub("Kill ", "在 杀 死 任 何 精 英 怪 之 前 ， 先 杀 死 ")
+		desc = desc:gsub("spawns of Urh'Rok on the level before killing any elite creatures.", " 个 乌 鲁 克 的 子 嗣 。")
+		desc = desc:gsub("You completed the challenge and received:", "你 完 成 了 挑 战 ， 获 得 了 ：")
+		return desc
+	end,
+}
 
 --	quest.name =  string.gsub(string.gsub(string.gsub(string.gsub(string.gsub(string.gsub(string.gsub(string.gsub(txt,"Escort: "),),),),),),),)
 		

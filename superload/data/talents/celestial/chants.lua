@@ -6,7 +6,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local saves = t.getResists(self, t)
 		local life = t.getLifePct(self, t)
-		return ([[颂 赞 日 之 荣 耀 ，使 你 获 得 %d 精 神 豁 免 ，并 增 加 %0.1f%% 最 大 生 命 值 （当 前 加 成 ：%d ）。
+		return ([[颂 赞 日 之 荣 耀 ，使 你 获 得 %d 精 神 豁 免 ，并 增 加 %0.1f%% 最 大 生 命 值 （当 前 加 成 ： %d ）。
 		 同 时 只 能 激 活 一 种 赞 歌 。
 		 效 果 受 法 术 强 度 加 成。
 		 ]]):
@@ -20,7 +20,7 @@ registerTalentTranslation{
 	info = function (self,t)
 		local physicalresistance = t.getPhysicalResistance(self, t)
 		local saves = t.getResists(self, t)
-		return ([[颂 赞 日 之 荣 耀 ，使 你 获 得 %d 物 理 抗 性 ，%d 物 理 豁 免 ，%d 护 甲 与 15%% 护 甲 硬 度 。
+		return ([[颂 赞 日 之 荣 耀 ，使 你 获 得 %d 物 理 抗 性 ， %d 物 理 豁 免 ，%d 护 甲 与 15%% 护 甲 硬 度 。
 		 同 时 只 能 激 活 一 种 赞 歌 。
 		 效 果 受 法 术 强 度 加 成。]]):
 		format(physicalresistance, saves, physicalresistance)
@@ -34,7 +34,7 @@ registerTalentTranslation{
 		local resists = t.getResists(self, t)
 		local saves = t.getSpellResists(self, t)
 		local range = -t.getDamageChange(self, t)
-		return ([[颂 赞 日 之 荣 耀 ，使 你 获 得 %d 火 焰、闪 电、酸 性 和 寒 冷 抗 性 ，%d 法 术 豁 免 ，并 减 少 三 格 外 敌 人 对 你 造 成 的 伤 害 %d%% 。
+		return ([[颂 赞 日 之 荣 耀 ，使 你 获 得 %d 火 焰、闪 电、酸 性 和 寒 冷 抗 性 ， %d 法 术 豁 免 ，并 减 少 三 格 外 敌 人 对 你 造 成 的 伤 害 %d%% 。
 		 同 时 只 能 激 活 一 种 赞 歌 。
 		 效 果 受 法 术 强 度 加 成。]]):
 		format(resists, saves, range)

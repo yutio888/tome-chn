@@ -13,6 +13,9 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_COMMAND_STAFF",
 	name = "法杖掌控",
+	message = function(self, t)
+		return ("@Source@ 重 新 汇 集 %s 法 杖 中 的 能 量。"):format(self:his_her())
+	end,
 	info = function(self, t)
 		return ([[改 变 法 杖 中 流 动 的 能 量 性 质。]])
 	end,

@@ -34,7 +34,7 @@ registerTalentTranslation{
 		return ([[你 的 分 身 学 会 新 的 技 能。
 		水 晶 分 身 : 尖 刺 之 雨 —— 被 动 技 能 ， 令 周 围 敌 人 流 血 。
 		岩 石 分 身 : 岩 石 链 接 —— 一 层 保 护 护 盾 ， 将 周 围 友 方 受 到 的 所 有 伤 害 转 移 至 岩 石 分 身。
-		技 能 等 级 为 %d.]]):
+		技 能 等 级 为 %d 。]]):
 		format(math.floor(self:getTalentLevel(t)))
 	end,
 }

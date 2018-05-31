@@ -10,3 +10,4 @@ load("data-chn123/achievements/quests.lua")
 load("data-chn123/achievements/talents.lua")
 
 load("data-chn123/achievements/demon.lua")
+load("data-chn123/achievements/cults.lua")

@@ -234,7 +234,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "The shopkeeper spends a great deal of time going over the finer details of channeling energy through mindstars with you.",
 	fct = function()
-	    return ("商人花了大量时间，教授你使用灵晶的全部技巧%s。"):format()
+	    return ("商人花了大量时间，教授你使用灵晶的全部技巧。"):format()
 	    end,
 }
 

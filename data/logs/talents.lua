@@ -862,6 +862,31 @@ logCHN:newLog{
 }
 --cunning/dirty
 logCHN:newLog{
+	log = "#CRIMSON#%s's %s was extended!#LAST#",
+	fct = function(a,b)
+		a = npcCHN:getName(a)
+		b = timeEffectCHN:getName(b)
+		return ("#CRIMSON# %s的%s 被延长了！#LAST#"):format(a,b)
+		end,
+		}
+
+logCHN:newLog{
+	log = "#CRIMSON#%s's %s was stripped!#LAST#",
+	fct = function(a,b)
+		a = npcCHN:getName(a)
+		b = timeEffectCHN:getName(b)
+		return ("#CRIMSON# %s的%s 被解除了！#LAST#"):format(a,b)
+		end,
+		}
+logCHN:newLog{
+	log = "#CRIMSON#%s's %s was disrupted!#LAST#",
+	fct = function(a,b)
+		a = npcCHN:getName(a)
+		b = timeEffectCHN:getName(b)
+		return ("#CRIMSON# %s的%s 被干扰了！#LAST#"):format(a,b)
+		end,
+		}
+logCHN:newLog{
 	log = "#Target# resists the stun and #Source# quickly regains its footing!",
 	fct = function()
 		return "#Target# 抵抗了震慑，#Source# 迅速恢复过来!"
@@ -879,13 +904,35 @@ logCHN:newLog{
 	log = "#Source# #GOLD#tests the defenses#LAST# of #target#.",
 	fct = "#Source# 测试了 #target# 的 #GOLD#防守#LAST# .",
 }
-
+--cunning/poison
+logCHN:newLog{
+	log = "#GREEN#Poison bursts out of %s's corpse!",
+	fct = function(a)
+		return ("#GREEN#毒素从%s的尸体中爆发出来！"):format(npcCHN:getName(a))
+		end,
+}
+logCHN:newLog{
+	log = "#GREEN#%s's %s is disrupted by crippling poison!",
+	fct = function(a,b)
+		return ("#GREEN#%s 的%s被致残毒素打断了！"):format(npcCHN:getName(a),b)
+		end,
+}
 --cunning/scoundrel
 logCHN:newLog{
 	log = "You can not do that currently.",
 	fct = function()
 		return "目前你不能这样做。"
 	end,
+}
+logCHN:newLog{
+	log = "#CRIMSON#%s's %s is disrupted by %s wounds!",
+	fct = function(a,b,c)
+		return("#CRIMSON#%s的%s被%s伤口干扰了！"):format(npcCHN:getName(a),b,c)
+		end,
+		}
+logCHN:newLog{
+	log = "#ORANGE#%s redirects the effect '%s'!",
+	fct = function(a,b) return("#ORANGE#%s 重定向了'%s'效果!"):format(npcCHN:getName(a),timeEffectCHN:getName(b)) end,
 }
 logCHN:newLog{
 	log = "You cannot dash through that!",
@@ -1063,6 +1110,37 @@ logCHN:newLog{
 	end,
 }
 
+logCHN:newLog{
+	log = "#PINK#A %s materializes from the shadows!",
+	fct = function(a) return("#PINK#%s从阴影中出现！"):format(npcCHN:getName(a)) end,
+}
+
+logCHN:newLog{
+	log = "%s disappears into a collapsing pit!",
+	fct = function(a) return("%s 消失在落穴中!"):format(npcCHN:getName(a)) end,
+}
+logCHN:newLog{
+	log = "%s is partially buried in a collapsing pit!",
+	fct = function(a) return("%s 被部分埋在落穴中!"):format(npcCHN:getName(a)) end,
+}
+logCHN:newLog{
+	log = "%s avoids a collapsing pit!",
+	fct = function(a) return("%s 躲开了落穴!"):format(npcCHN:getName(a)) end,
+}
+logCHN:newLog{
+	log = "%s emerges from a collapsed pit.",
+	fct = function(a) return("%s 从落穴出现!"):format(npcCHN:getName(a)) end,
+}
+logCHN:newLog{
+	log = "#LIGHT_STEEL_BLUE#%s distorts time and space!",
+	fct = function(a) return("#LIGHT_STEEL_BLUE#%s 扭曲了时空!"):format(npcCHN:getName(a)) end,
+}
+--curse/strife
+logCHN:newLog{
+	log = "The blindside fizzles!",
+	fct = "闪电突袭失败了！",
+}
+
 --curse/cursed-aura
 logCHN:newLog{
 	log = "You cannot use %s without a weapon in your inventory!",
@@ -1090,7 +1168,13 @@ logCHN:newLog{
 		return ("#F53CBE#%s化为了灰烬。"):format(a)
 	end,
 }
-
+logCHN:newLog{
+	log = "#F53CBE#%s drops to the ground.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("#F53CBE#%s落在地上。"):format(a)
+	end,
+}
 --curse/darkness
 logCHN:newLog{
 	log = "The dark tendrils dissipate.",
@@ -1882,7 +1966,22 @@ logCHN:newLog{
 		return ("%s装备了%s"):format(a,name)
 	end,
 }
-
+logCHN:newLog{
+	log = "%s telekinetically seizes: %s.",
+	fct = function(a,b)
+		a = npcCHN:getName(a)
+		local name = objects:getObjectsChnName(b)
+		return ("%s用念力装备了%s"):format(a,name)
+	end,
+}
+logCHN:newLog{
+	log = "%s telekinetically grabs %s.",
+	fct = function(a,b)
+		a = npcCHN:getName(a)
+		local name = objects:getObjectsChnName(b)
+		return ("%s用念力抓住了%s"):format(a,name)
+	end,
+}
 --psionic/projection
 logCHN:newLog{
 	log = "You may only sustain two auras at once. Aura activation cancelled.",
@@ -1902,7 +2001,10 @@ logCHN:newLog{
 	log = "You cannot do that without a weapon in your telekinetic slot.",
 	fct = "你不能在没有念力武器时这么做。",
 }
-
+logCHN:newLog{
+	log = "#CRIMSON#%s shatters %s shield!",
+	fct = function(a,b) return ("#CRIMSON#%s粉碎了%s的护盾！"):format(npcCHN:getName(a),npcCHN:getName(b)) end,
+}
 --psionic/psychic-assault
 logCHN:newLog{
 	log = "%s resists the lobotomy!",
@@ -2114,7 +2216,17 @@ logCHN:newLog{
 		return "#Target# 将注意力集中到 #Source#。"
 	end,
 }
-
+--spell/energy-alchemy
+logCHN:newLog{
+	log = "%s is energized by the attack, reducing some talent cooldowns!",
+	fct = function(a)
+		return("%s被这次攻击充能，减少了部分技能冷却时间。"):format(npcCHN:getName(a)) end,
+}
+logCHN:newLog{
+	log = "#LIGHT_STEEL_BLUE#%s is energized by all the damage taken!",
+	fct = function(a)
+		return("#LIGHT_STEEL_BLUE#%s从承受的伤害中获得了能量！"):format(npcCHN:getName(a)) end,
+}
 --spell/fire-alchemy
 logCHN:newLog{
 	log = "#FF8000#%s turns into pure flame!",
@@ -2582,13 +2694,7 @@ logCHN:newLog{
 		return "你需要一把弓或者投石索来施放这个技能。"
 	end,
 }
-logCHN:newLog{
-	log = "%s resists the stunning shot!",
-	fct = function(a)
-		a = npcCHN:getName(a)
-		return ("%s抵抗了震慑！"):format(a)
-	end,
-}
+
 logCHN:newLog{
 	log = "You must wield a sling!",
 	fct = function()
@@ -2621,6 +2727,12 @@ logCHN:newLog{
 		return "你必须装备一把弓！"
 	end,
 }
+
+logCHN:newLog{
+	log = "%s resists the scattershot!",
+	fct = function(a) return("%s抵抗了分散射击"):format(npcCHN:getName(a)) end,
+}
+
 --technique/excellence
 logCHN:newLog{
 	log = "#Source# shoots down '#Target#'.",
@@ -2696,7 +2808,14 @@ logCHN:newLog{
 	log = "#Target# avoids a garrote from #Source#!",
 	fct = "#Target# 避免了被 #Source# 勒住喉咙!",
 }
-
+logCHN:newLog{
+	log = "%s resists the Coup de Grace!",
+	fct = function(a) return("%s抵抗了致命一击!"):format(npcCHN:getName(a)) end,
+}
+logCHN:newLog{
+	log = "#GREY#%s slips into shadow.",
+	fct = function(a) return("#GREY#%s进入了阴影中。"):format(npcCHN:getName(a)) end,
+}
 --technique/buckler-traning
 logCHN:newLog{
 	log = "You require a ranged weapon and a shield to use this talent.",
@@ -2775,7 +2894,13 @@ logCHN:newLog{
 		return "你只有在双持状态下才能使用这个技能。"
 	end,
 }
-
+logCHN:newLog{
+	log = "%s resists the surprise strike!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 抵抗了这次打击！"):format(a)
+	end,
+}
 logCHN:newLog{
 	log = "%s resists the stunning strike!",
 	fct = function(a)
@@ -2813,6 +2938,12 @@ logCHN:newLog{
 	log = "There is no open space in which to land near there.",
 	fct = "目标周围没有空余空间。"
 }
+
+logCHN:newLog{
+	log = "%s becomes a whirlwind of weapons!",
+	fct = function(a) return("%s 施展了旋风斩!"):format(npcCHN:getName(a)) end,
+}
+
 --technique/munitions
 logCHN:newLog{
 	log = "You require incendiary, venomous or piercing ammunition to use this talent!",
@@ -2967,7 +3098,19 @@ logCHN:newLog{
 		return ("%s 抵抗了铁头功！"):format(a)
 	end,
 }
-
+--technique/reflexes
+logCHN:newLog{
+	log = "%s's %s is disrupted by the shot!",
+	fct = function(a,b)
+		return("%s的%s被射击干扰了！"):format(npcCHN:getName(a),b,c)
+		end,
+		}
+		
+--undead
+logCHN:newLog{
+	log = "%s #YELLOW_GREEN#VOMITS#LAST# on the ground!",
+	fct = function(a) return ("%s 在地面上#YELLOW_GREEN#呕吐#LAST# !"):format(npcCHN:getName(a)) end,
+}
 --uber
 logCHN:newLog{
 	log = "%s's draconic body hardens and heals!",
@@ -2992,7 +3135,14 @@ logCHN:newLog{
 		return ("#LIGHT_BLUE#%s 达到了临界速度!"):format(a)
 	end,
 }
-
+logCHN:newLog{
+	log = "#VIOLET#%s assembles %s!",
+	fct = function(a,b)
+		a = npcCHN:getName(a)
+		b = npcCHN:getName(b)
+		return ("#VIOLET#%s 重组为 %s!"):format(a,b)
+	end,
+}
 logCHN:newLog{
 	log = "#CRIMSON#%s fiery attack invokes a cleansing flame!",
 	fct = function(a)
@@ -3029,6 +3179,11 @@ logCHN:newLog{
 }
 
 --misc/race
+logCHN:newLog{
+	log = "#CRIMSON#%s roars with rage shaking off %d mental debuffs!",
+	fct = function(a,b)return ("#CRIMSON#%s%s愤怒地咆哮，解除了%d项精神负面状态！"):format(npcCHN:getName(a),b)	end,
+}
+
 logCHN:newLog{
 	log = "%s resists the mental assault!",
 	fct = function(a)
@@ -3083,6 +3238,11 @@ logCHN:newLog{
 	fct = function()
 		return "挖掘需要装备锄头。"
 	end,
+}
+
+logCHN:newLog{
+	log = "#CRIMSON#%s's shield deflects the blow!",
+	fct = function(a) return ("#CRIMSON#%s的盾牌偏转了这次攻击"):format(npcCHN:getName(a)) end,
 }
 
 logCHN:newLog{
@@ -3229,7 +3389,13 @@ logCHN:newLog{
 		return ("%s 产生了一只触手！"):format(a)
 	end,
 }
-
+logCHN:newLog{
+	log = "%s spawns a tentacle!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 产生了一只触手！"):format(a)
+	end,
+}
 logCHN:newLog{
 	log = "%s is pulled in!",
 	fct = function(a)
@@ -3252,6 +3418,11 @@ logCHN:newLog{
 		a = npcCHN:getName(a)
 		return ("%s 抵抗了推挤！"):format(a)
 	end,
+}
+
+logCHN:newLog{
+	log = "#VIOLET#%s is freed from the suspended state!",
+	fct = function(a) return ("#VIOLET#%s从状态中解脱！"):format(npcCHN:getName(a)) end,
 }
 
 logCHN:newLog{
@@ -3597,9 +3768,9 @@ logCHN:newLog{
 
 logCHN:newLog{
 	log = "#ORCHID#%s cleverly deflects the attack with %s shield!#LAST#",
-	fct = function(a)
+	fct = function(a,b)
 		a = npcCHN:getName(a)
-		return ("#ORCHID#%s 用他的盾牌机智地躲避了攻击!#LAST#"):format(a)
+		return ("#ORCHID#%s 用%s盾牌机智地躲避了攻击!#LAST#"):format(a,b)
 	end,
 }
 

@@ -100,8 +100,18 @@ logCHN:newLog{
 	fct = "#LIGHT_RED#当有配件附着时，你不能这么做。先移除配件。"
 }
 
+logCHN:newLog{
+	log = "%s releases an icy blast from %s %s!",
+	fct = function(a,b,c) return("%s用%s %s释放一股冰冷冲击！"):format(npcCHN:getName(a),b,objects:getObjectsChnName(c)) end,
+		
+}
+
+logCHN:newLog{
+	log = "%s uses %s %s!",
+	fct = function(a,b,c) return("%s使用了%s %s！"):format(npcCHN:getName(a),b,objects:getObjectsChnName(c)) end,
+		
+}
 --[[to add 
-./data/general/objects/boss-artifacts-far-east.lua:			game.logSeen(who, "%s releases an icy blast from %s %s!", who.name:capitalize(), who:his_her(), self:getName({do_color = true, no_add_name = true}))
 ./data/general/objects/boss-artifacts-far-east.lua:				game.logSeen(who, "%s's %s shakes the ground with its impact!", who.name:capitalize(), o:getName({no_add_name = true}))
 ./data/general/objects/boss-artifacts-far-east.lua:			game.logSeen(who, "%s slams %s %s into the ground, sending out a shockwave!", who.name:capitalize(), who:his_her(), self:getName({do_color = true, no_add_name = true}))
 ./data/general/objects/boss-artifacts-maj-eyal.lua:					game.logSeen(target, "#LIGHT_BLUE#A Winter Storm forms around %s.", target.name:capitalize())
@@ -113,50 +123,13 @@ logCHN:newLog{
 ./data/general/objects/boss-artifacts-maj-eyal.lua:				game.logSeen(actor, "#CRIMSON#%s twitches, alerting %s that a hidden trap is nearby.", self:getName(), actor.name:capitalize())
 ./data/general/objects/boss-artifacts-maj-eyal.lua:				game.logSeen(who, "%s shrugs off some effects!", who.name:capitalize())
 ./data/general/objects/boss-artifacts-maj-eyal.lua:			game.logSeen(who, "%s's %s sends out a blast of psionic energy!", who.name:capitalize(), self:getName({no_add_name = true, do_color = true}))
-./data/general/objects/egos/ammo.lua:				game.logSeen(target, "%s resists the pin!", target.name:capitalize())
-./data/general/objects/egos/ammo.lua:			if not who:checkHit(check, target:combatMentalResist()) then game.logSeen(target, "%s resists!", target.name:capitalize()) return nil end
-./data/general/objects/egos/ammo.lua:				game.logSeen(target, "%s's magic has been #ORCHID#purged#LAST#!", target.name:capitalize())
-./data/general/objects/egos/ammo.lua:			if not who:checkHit(check, target:combatMentalResist()) then game.logSeen(target, "%s resists!", target.name:capitalize()) return nil end
 ./data/general/objects/egos/ammo.lua:			game.logSeen(target, "%s's %s has been #ORCHID#burned#LAST#!", target.name:capitalize(), t.name)
-./data/general/objects/egos/ammo.lua:			if not who:checkHit(check, target:combatPhysicalResist()) then game.logSeen(target, "%s resists!", target.name:capitalize()) return nil end
-./data/general/objects/egos/ammo.lua:				game.logSeen(target, "%s is knocked back!", target.name:capitalize())
-./data/general/objects/egos/ammo.lua:			if not who:checkHit(check, target:combatMentalResist()) then game.logSeen(target, "%s resists!", target.name:capitalize()) return nil end
-./data/general/objects/egos/ammo.lua:				game.logSeen(target, "%s has temporarily forgotten %s!", target.name:capitalize(), t.name)
-./data/general/objects/egos/amulets.lua:		game.logSeen(who, "%s uses %s!", who.name:capitalize(), self:getName{no_add_name = true, do_color = true, no_count=true})
-./data/general/objects/egos/amulets.lua:		game.logSeen(who, "%s uses %s!", who.name:capitalize(), self:getName{no_count=true})
-./data/general/objects/egos/belt.lua:		game.logSeen(who, "%s uses %s!", who.name:capitalize(), self:getName{no_add_name=true, do_color=true})
-./data/general/objects/egos/boots.lua:		game.logSeen(who, "%s uses %s!", who.name:capitalize(), self:getName{no_add_name=true, do_color=true})
-./data/general/objects/egos/cloak.lua:		game.logSeen(who, "%s uses %s!", who.name:capitalize(), self:getName{no_add_name=true, do_color=true})
-./data/general/objects/egos/light-armor.lua:		game.logSeen(who, "%s uses %s %s!", who.name:capitalize(), who:his_her(), self:getName{no_add_name=true, do_color=true})
-./data/general/objects/egos/mindstars.lua:			if not who:checkHit(check, target:combatMentalResist()) then game.logSeen(target, "%s resists!", target.name:capitalize()) return nil end
-./data/general/objects/egos/mindstars.lua:			game.logSeen(target, "%s's %s has been #ORCHID#burned#LAST#!", target.name:capitalize(), t.name)
 ./data/general/objects/egos/mindstars.lua:				game.logSeen(who, "%s feeds %s %s with psychic energy from %s!", who.name:capitalize(), who:his_her(), self:getName({no_add_name = true, do_color = true}), target.name:capitalize())
-./data/general/objects/egos/mindstars.lua:					game.logSeen(target, "%s resists the mind attack!", target.name:capitalize())
-./data/general/objects/egos/ranged.lua:			game.logSeen(who, "%s uses %s %s!", who.name:capitalize(), who:his_her(), self:getName{no_add_name=true, do_color=true})
 ./data/general/objects/egos/staves.lua:			game.logSeen(who, "%s fires a bolt of %s%s#LAST# energy from %s %s!", who.name:capitalize(), damTyp.text_color, damTyp.name, who:his_her(), self:getName({no_add_name = true, do_color = true}))
 ./data/general/objects/egos/staves.lua:			game.logSeen(who, "%s unleashes a blastwave of %s%s#LAST# energy from %s %s!", who.name:capitalize(), damTyp.text_color, damTyp.name, who:his_her(), self:getName({no_add_name = true, do_color = true}))
 ./data/general/objects/egos/staves.lua:				game.logSeen(who, "%s channels mana through %s %s!", who.name:capitalize(), who:his_her(), self:getName({no_add_name = true, do_color = true}))
 ./data/general/objects/egos/staves.lua:			game.logSeen(who, "%s channels a cone of %s%s#LAST# energy through %s %s!", who.name:capitalize(), damTyp.text_color, damTyp.name, who:his_her(), self:getName({no_add_name = true, do_color = true}))
-./data/general/objects/egos/staves.lua:		game.logSeen(who, "%s uses %s!", who.name:capitalize(), self:getName{no_count=true})
-./data/general/objects/egos/torques-powers.lua:			game.logSeen(who, "%s uses %s!", who.name:capitalize(), self:getName{no_add_name=true, do_color=true})
-./data/general/objects/egos/torques-powers.lua:		game.logSeen(who, "%s uses %s!", who.name:capitalize(), self:getName{no_add_name=true, do_color=true})
-./data/general/objects/egos/torques-powers.lua:		game.logSeen(who, "%s uses %s!", who.name:capitalize(), self:getName{no_add_name=true, do_color=true})
-./data/general/objects/egos/torques-powers.lua:		game.logSeen(who, "%s uses %s!", who.name:capitalize(), self:getName{no_add_name=true, do_color=true})
-./data/general/objects/egos/torques-powers.lua:		game.logSeen(who, "%s uses %s!", who.name:capitalize(), self:getName{no_add_name=true, do_color=true})
-./data/general/objects/egos/torques-powers.lua:			game.logSeen(who, "%s uses %s %s!", who.name:capitalize(), who:his_her(), self:getName{no_add_name=true, do_color=true})
-./data/general/objects/egos/totems-powers.lua:		game.logSeen(who, "%s activates %s %s!", who.name:capitalize(), who:his_her(), self:getName{no_add_name = true, do_color = true})
-./data/general/objects/egos/totems-powers.lua:		game.logSeen(who, "%s activates %s %s!", who.name:capitalize(), who:his_her(), self:getName{no_add_name = true, do_color = true})
-./data/general/objects/egos/totems-powers.lua:			game.logSeen(who, "%s activates %s %s!", who.name:capitalize(), who:his_her(), self:getName{no_add_name = true, do_color = true})
-./data/general/objects/egos/wands-powers.lua:		game.logSeen(who, "%s uses %s %s!", who.name:capitalize(), who:his_her(), self:getName({no_add_name = true, do_color = true}))
-./data/general/objects/egos/wands-powers.lua:		game.logSeen(who, "%s uses %s %s!", who.name:capitalize(), who:his_her(), self:getName({no_add_name = true, do_color = true}))
 ./data/general/objects/egos/wands-powers.lua:		game.logSeen(who, "%s conjures a wall of fire from %s %s!", who.name:capitalize(), who:his_her(), self:getName({no_add_name = true, do_color = true}))
-./data/general/objects/egos/wands-powers.lua:			game.logSeen(who, "%s activates %s %s!", who.name:capitalize(), who:his_her(), self:getName({no_add_name = true, do_color = true}))
-./data/general/objects/egos/weapon.lua:				game.logSeen(target, "%s's magic has been #ORCHID#purged#LAST#!", target.name:capitalize())
-./data/general/objects/egos/weapon.lua:			if not who:checkHit(check, target:combatMentalResist()) then game.logSeen(target, "%s resists!", target.name:capitalize()) return nil end
-./data/general/objects/egos/weapon.lua:			game.logSeen(target, "%s's %s has been #ORCHID#burned#LAST#!", target.name:capitalize(), t.name)
-./data/general/objects/egos/weapon.lua:			if not who:checkHit(check, target:combatMentalResist()) then game.logSeen(target, "%s resists!", target.name:capitalize()) return nil end
-./data/general/objects/egos/weapon.lua:				game.logSeen(target, "#YELLOW#%s has temporarily forgotten %s!", target.name:capitalize(), t.name)
-./data/general/objects/egos/weapon.lua:				game.logSeen(target, "%s resists the pin!", target.name:capitalize())
 ./data/general/objects/special-artifacts.lua:			game.logSeen(who, "%s brandishes %s %s, turning into a corrupted losgoroth!", who.name:capitalize(), who:his_her(), self:getName({do_color = true, no_add_name =true}))
 ./data/general/objects/world-artifacts-far-east.lua:			game.logSeen(who, "#GOLD#As the blade touches %s's spilt blood, the blood rises, animated!", target.name:capitalize())
 ./data/general/objects/world-artifacts-far-east.lua:				game.logSeen(who, "#GOLD#%s draws power from the spilt blood!", who.name:capitalize())
@@ -184,7 +157,6 @@ logCHN:newLog{
 ./data/general/objects/world-artifacts.lua:			game.logSeen(who, "%s holds %s %s close, cleansing %s of corruption!", who.name:capitalize(), who:his_her(), self:getName({do_color = true, no_add_name = true}), who:his_her_self())
 ./data/general/objects/world-artifacts.lua:			if known then game.logSeen(who, "%s is purged of diseases!", who.name:capitalize()) end
 ./data/general/objects/world-artifacts.lua:				game.logSeen(who, "%s rejects the inferior psionic blade!", self.name:capitalize())
-./data/general/objects/world-artifacts.lua:--		game.logSeen(self.worn_by, "#GOLD#The %s shifts colour!", self.name:capitalize())
 ./data/general/objects/world-artifacts.lua:			game.logSeen(who, "%s's %s lashes out in a flaming arc, intensifying the burning of %s enemies!", who.name:capitalize(), self:getName({do_color = true, no_add_name = true}), who:his_her())
 ./data/general/objects/world-artifacts.lua:			game.logSeen(who, "%s focuses a beam of force from %s %s!", who.name:capitalize(), who:his_her(), self:getName({do_color = true, no_add_name = true}))
 ./data/general/objects/world-artifacts.lua:		game.logSeen(who, "Corpathus bursts open, unleashing a horrific mass!")
@@ -208,13 +180,9 @@ logCHN:newLog{
 ./data/general/objects/world-artifacts.lua:			game.logSeen(who, "%s rebalances the bulky plates of %s %s, and thngs slow down a bit.", who.name:capitalize(), who:his_her(), self:getName({do_color = true, no_add_name = true}))
 ./data/general/objects/world-artifacts.lua:			game.logSeen(who, "%s revels in the bloodlust of %s %s!", who.name:capitalize(), who:his_her(), self:getName({do_color = true, no_add_name = true}))
 ./data/general/objects/world-artifacts.lua:			game.logSeen(who, "#GREEN#You feel the seasons in perfect balance.")
-./data/general/objects/world-artifacts.lua:			game.logSeen(who, "#GREEN#You feel the seasons in perfect balance.")
 ./data/general/objects/world-artifacts.lua:			game.logSeen(who, "%s's weapon returns to %s!", who.name:capitalize(), who:him_her())
-./data/general/objects/world-artifacts.lua:			game.logSeen(who, "#YELLOW#You feel psionic energy linking the mindstars.")
-./data/general/objects/world-artifacts.lua:			game.logSeen(who, "#YELLOW#You feel psionic energy linking the mindstars.")
 ./data/general/objects/world-artifacts.lua:			game.logSeen(who, "#YELLOW#You feel psionic energy linking the mindstars.")
 
 ]]
-
 
 

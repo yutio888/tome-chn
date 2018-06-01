@@ -19,14 +19,19 @@ logCHN:newLog{
 		return "#VIOLET#虫洞吸收了能量变得稳定， 现在你可以使用它来传送了。"
 	end,
 }
-
 logCHN:newLog{
-	log = "%s appears out of the thin air!",
-	fct = function(a)
-		a = npcCHN:getName(a)
-		return ("%s 从空气中消失了。"):format(a)
+	log = "#VIOLET#The wormhole absorbs energies of the spell and explodes in a burst of nullmagic!",
+	fct = function()
+		return "#VIOLET#虫洞吸收了法术能量，并产生了原始能量爆炸！"
 	end,
 }
+logCHN:newLog{
+	log = "#VIOLET#The wormhole absorbs energie of the spell and teleports %s away!",
+	fct = function(a)
+		return ("#VIOLET#虫洞吸收了法术能量，将%s传送走了！。"):format(npcCHN:getName(a)) 
+	end,
+}
+
 
 logCHN:newLog{
 	log = "#ANTIQUE_WHITE#The Crown of Eternal Night seems to react with the Bindings, you feel tremendous dark power.",
@@ -84,12 +89,23 @@ logCHN:newLog{
 		return ("#CRIMSON#%s 似乎无懈可击，一定有什么其他方法可以杀死它！"):format(a)
 	end,
 }
+
+
 logCHN:newLog{
 	log = "#AQUAMARINE#As #Source# falls you notice that #Target# seems to shudder in pain!",
 	fct = function()
 		return "#AQUAMARINE#当#Source# 倒下时，你发现#Target#似乎因为痛苦而颤抖!"
 	end,
 }
+logCHN:newLog{
+	log = "%s taps %s %s together!",
+	fct = function(a,b,c)
+		a = npcCHN:getName(a)
+		local name = objects:getObjectsChnName(c)
+		return ("%s将%s %s拼在一起 。"):format(a,b,name)
+	end,
+}
+
 
 logCHN:newLog{
 	log = "You receive: %s",
@@ -695,6 +711,14 @@ logCHN:newLog{
 	fct = function(a)
 		a = npcCHN:getName(a)
 		return ("#YELLOW_GREEN#一面墙壁颤抖了一会，变成了 %s!"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "The ground shakes as %s steps!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("当 %s前进时，大地在震动!"):format(a)
 	end,
 }
 

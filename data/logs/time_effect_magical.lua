@@ -547,8 +547,20 @@ logCHN:newLog{
 		return ("%s恢复了稳定。"):format(a)
 	end,
 }
-
-
+logCHN:newLog{
+	log = "%s has unraveled",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s被拆解。"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "%s is being removed from the timeline.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s被从时间线中移除。"):format(a)
+	end,
+}
 logCHN:newLog{
 	log = "#Target# is being removed from the timeline.",
 	fct = function(a)

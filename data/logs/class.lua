@@ -170,6 +170,24 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
+	log = "%s has been disrupted by #ORCHID#anti-magic forces#LAST#!",
+	fct = function(a)
+		return("%s被#ORCHID#反魔法力量#LAST#打断了！"):format(a)
+		end,
+}
+logCHN:newLog{
+	log = "%s's %s has been disrupted by #ORCHID#anti-magic forces#LAST#!",
+	fct = function(a,b)
+		return("%s的%s被#ORCHID#反魔法力量#LAST#打断了！"):format(npcCHN:getName(a),b)
+		end,
+}
+logCHN:newLog{
+	log = "%s's %s has been disrupted by #ORCHID#anti-nature forces#LAST#!",
+	fct = function(a,b)
+		return("%s的%s被#ORCHID#反自然力量#LAST#打断了！"):format(npcCHN:getName(a),b)
+		end,
+}
+logCHN:newLog{
 	log = "%s temporarily fights the paralyzation.",
 	fct = function(a)
 		a = npcCHN:getName(a)
@@ -342,7 +360,13 @@ logCHN:newLog{
 		return ("%s 使用 %s 时失败。"):format(a,b)
 	end,
 }
-
+logCHN:newLog{
+	log = "%s fumbles and fails to use %s, injuring %s!",
+	fct = function(a,b,c)
+		a = npcCHN:getName(a)
+		return ("%s 使用 %s 失败,还弄伤了%s!"):format(a,b,c)
+	end,
+}
 logCHN:newLog{
 	log = "%s is too terrified to use %s.",
 	fct = function(a,b)
@@ -350,7 +374,21 @@ logCHN:newLog{
 		return ("%s 由于恐惧而无法使用 %s 。"):format(a,b)
 	end,
 }
-
+logCHN:newLog{
+	log = "%s's %s is interrupted by the shot.",
+	fct = function(a,b)
+		a = npcCHN:getName(a)
+		return ("%s的%s被射击打断 。"):format(a,b)
+	end,
+}
+logCHN:newLog{
+	log = "%s %s %s.",
+	fct = function(a,b,c)
+		a = npcCHN:getName(a)
+		b = b:gsub("deactivates","关闭"):gsub("activates","激活")
+		return ("%s 激活了 %s 。"):format(a,b,c)
+	end,
+}
 logCHN:newLog{
 	log = "%s activates %s.",
 	fct = function(a,b)
@@ -1551,6 +1589,25 @@ logCHN:newLog{
 
 --mod/class/Actor
 logCHN:newLog{
+	log = "%s warps space-time to equip: %s.",
+	fct = function(a,b)
+		local name = objects:getObjectsChnName(b):gsub("and", "和")
+		return ("%s扭曲空间，切换武器至： %s 。"):format(npcCHN:getName(a),name)
+	end,
+}
+logCHN:newLog{
+	log = "%s switches %s weapons to: %s.",
+	fct = function(a,b,c)
+		local name = objects:getObjectsChnName(c):gsub("and", "和")
+		return ("%s切换武器至： %s 。"):format(npcCHN:getName(a),b,name)
+	end,
+}
+logCHN:newLog{
+	log = "%s can not use %s.",
+	fct = function(a,b) return("%s不能使用%s"):format(npcCHN:getName(a),b) end,
+}
+
+logCHN:newLog{
 	log = "#DARK_GREEN##Source# shares damage with %s oozes!",
 	fct = function(...)
 	    return ("#DARK_GREEN##Source# 和 %s 软泥怪平分伤害!"):format(...)
@@ -1704,4 +1761,20 @@ logCHN:newLog{
 	log = "You already have a tinker on this item.",
 	fct = "这个物品上已经有了配件",
 }
+logCHN:newLog{
+	log = "The shattering blow creates a shockwave!",
+	fct = "这次攻击引发了冲击波！",
+}
 
+logCHN:newLog{
+	log = "#ORCHID#%s parries the attack with %s dual weapons!#LAST#",
+	fct = function(a,b)
+		a = npcCHN:getName(a)
+		return ("#ORCHID#%s 用%s双持武器使这次攻击发生偏斜!#LAST#"):format(a,b)
+	end,
+}
+logCHN:newLog{
+	log = "#ORCHID#%s instinctively hardens %s skin and ignores the attack!#LAST#",
+	fct = function(a,b)
+		return ("#ORCHID#%s本能地硬化%s皮肤，无视了这次攻击！#LAST#"):format(npcCHN:getName(a),b) end,
+}

@@ -1,3 +1,5 @@
+
+
 logCHN:newLog{
 	log = "#Target#'s power is greatly reduced!",
 	fct = function(a)
@@ -848,7 +850,20 @@ logCHN:newLog{
 		return ("%s再次遭受被诅咒的创伤。"):format(a)
 	end,
 }
-
+logCHN:newLog{
+	log = "%s has re-opened a cursed wound!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s再次遭受被诅咒的创伤。"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "%s resists the disarming attempt!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s抵抗了缴械！"):format(a)
+	end,
+}
 logCHN:newLog{
 	log = "#Target# has been illuminated.",
 	fct = function(a)
@@ -1600,4 +1615,8 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "You have been detected!",
 	fct = "你被发现了！",
+}
+logCHN:newLog{
+	log = "#GREY#%s looks stony for a moment, but resists the transformation.",
+	fct = function(a) return("#GREY#%s 似乎短暂地变成了石头，但马上抵抗了变形。"):format(npcCHN:getName(a)) end,
 }

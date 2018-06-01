@@ -309,6 +309,14 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
+	log = "#F53CBE#%s begins to choke from a suffocating curse. (-%d air)",
+	fct = function(a,b)
+		a = npcCHN:getName(a)
+		return ("#F53CBE#%s因诅咒而窒息。（-%d空气值）"):format(a,b)
+	end,
+}
+
+logCHN:newLog{
 	log = "#F53CBE#The air around %s grows cold and terrifying shapes begin to coalesce. A nightmare has begun.",
 	fct = function(a)
 		a = npcCHN:getName(a)
@@ -320,7 +328,7 @@ logCHN:newLog{
 	log = "#F53CBE#%s suffers an unfortunate end.",
 	fct = function(a)
 		a = npcCHN:getName(a)
-		return ("#F53CBE#%s的厄运终结。"):format(a)
+		return ("#F53CBE#%s遭受厄运。"):format(a)
 	end,
 }
 
@@ -344,26 +352,6 @@ logCHN:newLog{
 	fct = function(a)
 		local name = objects:getObjectsChnName(a)
 		return ("你的 %s 满了。"):format(a)
-	end,
-}
-
-
-logCHN:newLog{
-	log = "强大的时空能量在 #target#周围形成能量场。",
-	fct = function(a)
-		a = npcCHN:getName(a)
-		return ("强大的时空能量在%s周围形成能量场。"):format(a)
-	end,
-}
-
-
-
-
-logCHN:newLog{
-	log = "#target#周围的时间线恢复正常。",
-	fct = function(a)
-		a = npcCHN:getName(a)
-		return ("%s周围的时间线恢复正常。"):format(a)
 	end,
 }
 
@@ -493,4 +481,33 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#LIGHT_BLUE#You go back in time to rewrite history!",
 	fct = "#LIGHT_BLUE#你及时返回，改写了历史！",
+}
+
+logCHN:newLog{
+	log = "%s succumbs to heightening fears!",
+	fct = function(a) return("%s屈服于恐惧！"):format(npcCHN:getName(a)) end,
+}
+logCHN:newLog{
+	log = "%s feels a little less afraid!",
+	fct = function(a) return("%s感到不那么恐惧了！"):format(npcCHN:getName(a)) end,
+}
+logCHN:newLog{
+	log  = "#LIGHT_RED#%s writhes in agony as a fragment of its mind is destroyed!",
+	fct  = function(a) return("#LIGHT_RED#%s在痛苦中挣扎，它的部分思维被摧毁！"):format(npcCHN:getName(a)) end,
+}
+logCHN:newLog{
+	log  = "#LIGHT_BLUE#%s has spawned a dream projection to protect its mind!",
+	fct  = function(a) return("#LIGHT_BLUE#%s产生了一个梦境投影来保护它的精神！"):format(npcCHN:getName(a)) end,
+}
+logCHN:newLog{
+	log  = "#LIGHT_RED#%s's mind shatters into %d tiny fragments!",
+	fct  = function(a,b) return("#LIGHT_RED#%s的思维被摧毁为%d个碎片！"):format(npcCHN:getName(a),b) end,
+}
+logCHN:newLog{
+	log  = "#LIGHT_RED#%s suffered a %s of self in the Dreamscape!",
+	fct  = function(a,b) return("#LIGHT_RED#%s在梦境空间中失去了%s ！"):format(npcCHN:getName(a),b) end,
+}
+logCHN:newLog{
+	log  = "#LIGHT_RED#%s explodes into a shower of gore!",
+	fct  = function(a) return("#LIGHT_RED#%s爆炸了！"):format(npcCHN:getName(a)) end,
 }

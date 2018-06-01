@@ -33,7 +33,7 @@ registerTalentTranslation{
 	name = "精 神 拷 打",
 	info = function (self,t)
 		return ([[当 你 至 少 有 一 层 虐 待 狂 效 果 时 ，你 可 以 精 神 鞭 打 一 个 目 标 ，发 送 恐 怖 的 图 像 到 目 标 的 脑 海 中 。
-		目 标 因 效 果 趔 趄 %d 回 合 ， 随 机 %d 个 技 能 在 持 续 时 间 内 无 法 使 用 。]]):
+		在 %d 回 合 内， 目 标 随 机 %d 个 技 能 将 无 法 使 用 。]]):
 		format(t.getDur(self, t), t.getNb(self, t))
 	end,
 }

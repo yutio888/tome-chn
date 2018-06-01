@@ -32,6 +32,8 @@ function logCHN:trans(str,...)
 		str = str:gsub("Option unlocked","选项解锁")
 	 elseif str:find("(press '<', '>' or right click to use") then
 		str = str:gsub("There is ","这里是"):gsub("here (press '<', '>' or right click to use)","，按'<''>'或者右键单击使用")
+	 elseif str:find("strikes twice with Wave of Power") then
+	    str = str:gsub("strikes twice with Wave of Power","使用光明力量攻击了两次")
 	end
 	 return str
 end

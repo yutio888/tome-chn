@@ -69,6 +69,13 @@ logCHN:newLog{
 		return ("%s 抵抗了震慑！"):format(a)
 	end,
 }
+logCHN:newLog{
+	log = "%s resists the silence!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 抵抗了沉默！"):format(a)
+	end,
+}
 
 logCHN:newLog{
 	log = "%s resists!",
@@ -82,7 +89,15 @@ logCHN:newLog{
 	log = "%s resists the blinding light!",
 	fct = function(a)
 		a = npcCHN:getName(a)
-		return ("%s 抵抗了致盲伤害！"):format(a)
+		return ("%s 抵抗了致盲！"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "%s resists the blinding flare!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 抵抗了致盲！"):format(a)
 	end,
 }
 
@@ -173,6 +188,13 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
+	log = "#LIGHT_STEEL_BLUE#%s can't gain any more energy this turn!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return("#LIGHT_STELL_BLUE#%s 这回合不能获得更多时间！"):format(a)
+	end,
+}
+logCHN:newLog{
 	log = "%s resists the sandstorm!",
 	fct = function(a)
 		a = npcCHN:getName(a)
@@ -219,7 +241,7 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
-	log = "%s resists the blindness!",
+	log = "%s resists the blind!",
 	fct = function(a)
 		a = npcCHN:getName(a)
 		return ("%s 抵抗了致盲！"):format(a)
@@ -258,13 +280,33 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
-	log = "%s resists the bane!",
+	log = "%s resists the baneful energy!",
 	fct = function(a)
 		a = npcCHN:getName(a)
-		return ("%s 抵抗了毒药！"):format(a)
+		return ("%s 抵抗了毒素！"):format(a)
 	end,
 }
-
+logCHN:newLog{
+	log = "%s resists the freezing!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 抵抗了冰冻！"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "%s resists entanglement!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 抵抗了纠缠！"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "%s has no mana to burn",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 没有可供燃烧的法力。"):format(a)
+	end,
+}
 logCHN:newLog{
 	log = "%s resists the forge bellow!",
 	fct = function(a)
@@ -280,6 +322,14 @@ logCHN:newLog{
 		return ("%s 抵抗了梦境熔炉！"):format(a)
 	end,
 }
+logCHN:newLog{
+	log = "%s resists the shove!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 抵抗了推拉！"):format(a)
+	end,
+}
+
 
 logCHN:newLog{
 	log = "asked the Eidolon to let %s die in peace",

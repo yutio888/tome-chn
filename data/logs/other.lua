@@ -86,3 +86,7 @@ logCHN:newLog{
 	fct = "你成功死于艾德隆位面！安息吧！",
 }
 
+logCHN:newLog{
+	log = "The corrupted lava reanimates %s's corpse!",
+	fct = function(a) return("腐化熔岩重新支配了%s的尸体！"):format(npcCHN:getName(a)) end,
+}

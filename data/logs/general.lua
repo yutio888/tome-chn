@@ -21,7 +21,23 @@ logCHN:newLog{
 		return ("%s 爆炸产生了一团酸雾。"):format(a)
 	end,
 }
+logCHN:newLog{
+	log = "%s raises %s %s, and a red light flashes from it's eye sockets!",
+	fct = function(a,b,c)
+		a = npcCHN:getName(a)
+		c = npcCHN:getName(c)
+		return ("%s 令 %s %s站了起来, 一道红光从它眼中闪过！"):format(a,b,c)
+		end,
+}
+logCHN:newLog{
+	log = "#RED#Rising again, the Rat Lich's eyes glow with renewed energy!",
+	fct = "#RED#鼠巫妖再次复活，眼中充满了新的能量！",
+}
 
+logCHN:newLog{
+	log = "From the dust of decay a %s forms!",
+	fct = function(a) return("从灰尘中%s站了起来！"):format(npcCHN:getName(a)) end,
+}
 logCHN:newLog{
 	log = "#LIGHT_RED#%s raises from the dead!",
 	fct = function(a)
@@ -599,19 +615,27 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
-	log = "A rift opens, spawning a free floating blade!",
+	log = "#AQUAMARINE#A rift opens, spawning a free floating blade!",
 	fct = function()
-		return "一道传送门打开了，释放出了1个漂浮的次元之刃！"
+		return "#AQUAMARINE#一道传送门打开了，释放出了1个漂浮的次元之刃！"
 	end,
 }
-
 logCHN:newLog{
-	log = "A rift opens, a blade emerging. It does not look like the others.",
+	log = "#AQUAMARINE#The %s no longer seems to be controlled and clatters to the ground before vanishing into a rift.",
+	fct = function(a)
+		return ("#AQUAMARINE#%s 似乎不再被控制，从传送门消失前坠落在地面。"):format(npcCHN:getName(a)) end,
+		}
+logCHN:newLog{
+	log = "#AQUAMARINE#A rift opens, a blade emerging. It does not look like the others.",
 	fct = function()
-		return "一道传送门打开了，1只次元之刃浮现了出来。它似乎和那些其他的剑刃有所不同。"
+		return "#AQUAMARINE#一道传送门打开了，1只次元之刃浮现了出来。它似乎和那些其他的剑刃有所不同。"
 	end,
 }
-
+logCHN:newLog{
+	log = "#LIGHT_BLUE#%s explodes into a huge bubble of air!",
+	fct = function(a)
+		return ("#LIGHT_BLUE#%s 爆裂为大量空气泡!"):format(npcCHN:getName(a)) end,
+}
 logCHN:newLog{
 	log = "%s is affected by the glimmerstone!",
 	fct = function(a)
@@ -655,6 +679,15 @@ logCHN:newLog{
 		a = npcCHN:getName(a)
 		return ("%s 拿出了一把匕首，扎进了自己的胸膛。瞬间，他身后的石头发出了七彩的光芒。"):format(a)
 	end,
+}
+
+logCHN:newLog{
+	log = "#VIOLET#A demon steps out of the portal!",
+	fct = "#VIOLET#一个恶魔从传送门中出来了！",
+}
+logCHN:newLog{
+	log = "#VIOLET#A naga steps out of the portal!",
+	fct = "#VIOLET#一个娜迦从传送门中出来了！",
 }
 
 logCHN:newLog{
@@ -985,6 +1018,11 @@ logCHN:newLog{
 	end,
 }
 
+logCHN:newLog{
+	log = "%s's severed flesh starts crawling!",
+	fct = function(a)
+		return ("%s 被切割的血肉开始爬行！"):format(npcCHN:getName(a)) end,
+}
 
 logCHN:newLog{
 	log = "#Source# burns #Target#!",
@@ -1265,4 +1303,19 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#DARK_GREEN#The armor molds comfortably to one of its caretakers.",
 	fct = "#DARK_GREEN#护甲对看守者来说非常合身。",
+}
+
+logCHN:newLog{
+	log = "#VIOLET#As the necrotic abomination is destroyed you see the remaining bones and flesh reassembling in the form of new foes!",
+	fct = "#VIOLET#当亡灵憎恶被摧毁时，你发现它的剩余部分重组为新的敌人！",
+}
+logCHN:newLog{
+	log = "#VIOLET#As the bone horror is destroyed you see the remaining bones reassembling in the form of new foes!",
+	fct = "#VIOLET#当骨灵恐魔被摧毁时，你发现它的剩余部分重组为新的敌人！",
+}
+logCHN:newLog{
+	log = "#AQUAMARINE#As %s falls all its eyes fall to the ground!",
+	fct = function(a)
+		return("#AQUAMARINE#当 %s 被消灭时，所有眼睛都落在了地上！ "):format(npcCHN:getName(a))
+		end,
 }

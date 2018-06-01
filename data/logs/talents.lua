@@ -34,7 +34,7 @@ logCHN:newLog{
 	log = "#DARK_GREY#A shroud of shadow dances around %s!",
 	fct = function(a)
 		a = npcCHN:getName(a)
-		return ("#DARK_GREY#一个阴影围绕着%s起舞！"):format(a)
+		return ("#DARK_GREY#阴影围绕着%s起舞！"):format(a)
 	end,
 }
 
@@ -189,7 +189,13 @@ logCHN:newLog{
 		return ("%s 被卷入重力漩涡！"):format(a)
 	end,
 }
-
+logCHN:newLog{
+	log = "%s slams into something solid!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s撞到了某个坚实的物体！"):format(a)
+		end,
+}
 
 logCHN:newLog{
 	log = "#F53CBE#%s's %s is disrupted!",
@@ -227,7 +233,23 @@ logCHN:newLog{
 		return "几率发生了倾斜。"
 	end,
 }
+--chronomancy/blade-threading
+logCHN:newLog{
+	log = "%s has been cut from the timeline!",
+	fct = function(a)
+		return ("%s被从时间线中切除"):format(npcCHN:getName(a))
+		end,
+}
+logCHN:newLog{
+	log = "%s resists the temporal shear!",
+	fct = function(a) return ("%s抵抗了时空切变！"):format(npcCHN:getName(a)) end,
+}
 
+--chronomancy/bow-threading
+logCHN:newLog{
+	log ="%s is drawn in by the singularity!",
+	fct = function(a) return("%s被拉向奇点！"):format(npcCHN:getName(a)) end,
+}
 --chronomancy/chronomancy
 logCHN:newLog{
 	log = "#LIGHT_RED#Your Contingency has failed to cast %s!",
@@ -283,7 +305,12 @@ logCHN:newLog{
 }
 
 --chronomancy/matter
-
+logCHN:newLog{
+	log = "#CRIMSON#%s's beneficial effect was stripped!#LAST#",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("#CRIMSON#%s的有益效果被除去了！#LAST"):format(a) end,
+}
 logCHN:newLog{
 	log = "%s has been pulled apart at a molecular level!",
 	fct = function(a)
@@ -303,19 +330,31 @@ logCHN:newLog{
 --chronomancy/paradox
 logCHN:newLog{
 	log = "#LIGHT_BLUE#%s never existed, this never happened!",
-	fct = function(...)
-		return ("#LIGHT_BLUE#%s 不存在，也不会发生！"):format(...)
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("#LIGHT_BLUE#%s 不存在，也不会发生！"):format(a)
 	end,
 }
 
 logCHN:newLog{
 	log = "#LIGHT_STEEL_BLUE#%s tries to remove %sself from existance!",
-	fct = function(...)
-		return ("#LIGHT_STELL_BLUE#%s试图抹杀%s自己！"):format(...)
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("#LIGHT_STELL_BLUE#%s试图抹杀自己！"):format(a)
 	end,
 }
 
 --chronomancy/spacetime-weaving
+logCHN:newLog{
+	log = "#CRIMSON#%s has been banished!",
+	fct = function(a)
+		return ("#CRIMSON#%s 被放逐了!"):format(npcCHN:getName(a)) end,
+}
+logCHN:newLog{
+	log = "%s resists the banishment!",
+	fct = function(a)
+		return ("%s 抵抗了放逐!"):format(npcCHN:getName(a)) end,
+}
 logCHN:newLog{
 	log = "%s's space-time folding fizzles!",
 	fct = function(a)
@@ -432,10 +471,24 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
+	log = "%s is drawn in by gravity!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s被重力拖动！"):format(a)
+	end,
+}
+
+logCHN:newLog{
 	log = "Reality asserts itself and forces the wormhole shut.",
 	fct = function()
 		return "现实世界进行自我调谐强行关闭了虫洞。"
 	end,
+}
+
+logCHN:newLog{
+	log = "#STEEL_BLUE#%s has stopped time!#LAST#",
+	fct = function(a)
+		return ("#STEEL_BLUE#%s 停止了时间!#LAST#"):format(npcCHN:getName(a)) end,
 }
 --chronomancy/thread-combat
 logCHN:newLog{
@@ -512,7 +565,11 @@ logCHN:newLog{
 		return "#LIGHT_BLUE##Source# 将伤害转化为紊乱值!"
 	end,
 }
-
+logCHN:newLog{
+	log = "%s calls forth a temporal warden from another timeline.",
+	fct = function(a)
+		return ("%s 从另一条时间线召唤了时空守卫。"):format(npcCHN:getName(a)) end,
+}
 --chronomancy/guardian
 logCHN:newLog{
 	log = "Not enough space to summon warden!",
@@ -571,6 +628,13 @@ logCHN:newLog{
 	fct = function(a)
 		a = npcCHN:getName(a)
 		return ("%s抵抗了疫病！"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "The diseases of %s spread!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+	return("%s的疾病在传播！"):format(a)
 	end,
 }
 --corruption/sanguisuge
@@ -644,6 +708,18 @@ logCHN:newLog{
 		return "法术失败了..."
 	end,
 }
+logCHN:newLog{
+	log = "The spell fizzles on %s",
+	fct = function(a)
+		return ("法术在%s身上失败了。"):format(npcCHN:getName(a))
+	end,
+}
+logCHN:newLog{
+	log = "The teleport fizzles!",
+	fct = function()
+		return "传送失败了!"
+	end,
+}
 
 logCHN:newLog{
 	log = "#LIGHT_RED#You are taken to the Fearscape!",
@@ -677,6 +753,19 @@ logCHN:newLog{
 }
 --cunning/artifice
 logCHN:newLog{
+	log = "#GREY#You notice %s has prepared: %s.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("#GREY#你发现 %s 准备了: %s。"):format(a,b)
+		end,
+}
+logCHN:newLog{
+	log = "%s resists the sedation!",
+	fct = function(a)
+	return ("%s 抵抗了睡眠!"):format(npcCHN:getName(a))
+	end,
+}
+logCHN:newLog{
 	log = "You cannot move",
 	fct = "你不能移动",
 }
@@ -696,6 +785,14 @@ logCHN:newLog{
 	log = "#Source#'s grappling hook latches onto #target#!",
 	fct = "#Source# 的钩爪命中了 #target#!",
 	}
+logCHN:newLog{
+	log = "%s uses a grappling hook to pull %s %s!",
+	fct = function(a,b,c)
+		a = npcCHN:getName(a)
+		b = npcCHN:getName(b)
+		return ("%s使用钩爪来拉动%s."):format(a,b) end,
+		--省略了一部分
+}
 logCHN:newLog{
 	log = "#Source# is dragged towards #target#!",
 	fct = "#Source# 被拉向 #target#!",
@@ -1469,7 +1566,7 @@ logCHN:newLog{
 	log = "%s resists the tornado!",
 	fct = function(a)
 		a = npcCHN:getName(a)
-		return ("%s免疫了龙卷风！"):format(a)
+		return ("%s抵抗了龙卷风！"):format(a)
 	end,
 }
 
@@ -2839,6 +2936,13 @@ logCHN:newLog{
 	fct = function(a)
 		a = npcCHN:getName(a)
 		return ("%s 已经恢复！"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#ORCHID#%s has recovered!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("#ORCHID#%s 已经恢复！"):format(a)
 	end,
 }
 --technique/sniper

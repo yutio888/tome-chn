@@ -295,6 +295,7 @@
 ./data/general/encounters/maj-eyal.lua:				game.logPlayer(who, "#LIGHT_RED#As you enter you notice the door has no visible handle on the inside. You are stuck here!")
 ./data/general/encounters/fareast.lua:		game.logPlayer(who, "#LIGHT_BLUE#You notice an entrance to an underwater cave.")
 ./data/general/events/rat-lich.lua:			if not who:canBe("summon") then game.logPlayer(who, "You cannot summon; you are suppressed!") return end
+
 ./data/chats/jewelry-store.lua:				game.logPlayer(player, "%s creates: %s", npc.name:capitalize(), ring:getName{do_colour=true, no_count=true})
 ./data/chats/jewelry-store.lua:					game.logPlayer(player, "%s creates: %s", npc.name:capitalize(), amulet:getName{do_colour=true, no_count=true})
 ./data/chats/fallen-aeryn.lua:	game.logPlayer(player, "%s grabs her amulet and disappears in a whirl of arcane energies.", npc.name:capitalize())
@@ -334,6 +335,7 @@
 ./data/maps/vaults/trickvault.lua:		game.logPlayer(who, "#YELLOW#The air comes alive with terrible magics!")
 ./data/maps/vaults/trickvault.lua:		game.logPlayer(actor, "#YELLOW#The world spins around you!")
 ./data/maps/vaults/auto/greater/orc-hatred.lua:		game.logPlayer(actor, "Something in the floor clicks ominously.")
+--------------------------------------------------------------------------------------
 ./data/talents/corruptions/rot.lua:			game.logPlayer(self, "#GREEN#A carrion worm mass bursts forth from your wounds, softening the blow and reducing damage taken by #ORCHID#" .. math.ceil(damageReduction) .. "#LAST#.")
 ./data/talents/corruptions/rot.lua:			game.logPlayer(self, "You do not have line of sight to this location.")
 ./data/talents/corruptions/shadowflame.lua:			game.logPlayer(self, "This spell cannot be used from within the Fearscape.")

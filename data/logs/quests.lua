@@ -66,7 +66,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "A stairway out appears at your feet. The Lord says: 'And remember, you are MINE. I will call you.'",
 	fct = function()
-		return "一道出去的楼梯在你的脚下出现了。 上帝说：“记住，你是我的，我会召唤你。”"
+		return "一道出去的楼梯在你的脚下出现了。 强盗头子说：“记住，你是我的，我会召唤你。”"
 	end,
 }
 
@@ -247,7 +247,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#LIGHT_RED#Fallen Sun Paladin Aeryn: '%s YOU BROUGHT ONLY DESTRUCTION TO THE SUNWALL! YOU WILL PAY!'",
 	fct = function(...)
-		return ("#LIGHT_RED#太阳骑士艾伦倒下了：“%s 你只会给太阳堡垒带来毁灭！ 你会为此付出代价！”"):format(...)
+		return ("#LIGHT_RED#堕落太阳骑士艾琳：“%s 你只给太阳堡垒带来了毁灭！ 你会为此付出代价！”"):format(...)
 	end,
 }
 

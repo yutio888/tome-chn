@@ -7,6 +7,16 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
+	log = "You end your target with a crushing blow!",
+	fct = "你的毁灭一击终结了对手！",
+}
+
+logCHN:newLog{
+	log = "#DARK_ORCHID#Your damage shield cannot be extended any farther and has exploded.",
+	fct = "#DARK_ORCHID#你的伤害护盾不能再被延长，终于破碎了",
+}
+
+logCHN:newLog{
 	log = "#Source# strikes #Target# in the darkness (%+d%%%%%%%% damage).",
 	fct = function(a)
 		return ("#Source# 在黑暗中打击了 #Target#  (%+d%%%%%%%%%%%%%%%% 伤害)!"):format(a)

@@ -1105,8 +1105,10 @@ logCHN:newLog{
 
 logCHN:newLog{
 	log = "#LIGHT_RED#You have %s left.",
-	fct = function(...)
-		return ("#LIGHT_RED#你还剩下 %s 条命。"):format(...)
+	fct = function(a)
+	      a = a:gsub("life(s)","条命")
+	      	  :gsub("no more lives","0条命")
+		return ("#LIGHT_RED#你还剩下 %s 。"):format(a)
 	end,
 }
 
@@ -1224,13 +1226,7 @@ logCHN:newLog{
 		return ("你不再拥有%s。"):format(name)
 	end,
 }
-logCHN:newLog{
-	log = "You have no more %s.",
-	fct = function(a)
-		local name = objects:getObjectsChnName(a)
-		return ("你不再拥有%s。"):format(name)
-	end,
-}
+
 logCHN:newLog{
 	log = "You cannot do that on the world map.",
 	fct = function()
@@ -1549,4 +1545,10 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#Source# shoves #Target# forward.",
 	fct = "#Source# 将 #Target# 推到前面.",
+}
+
+--mod/class/world
+logCHN:newLog{
+	log = "#LIGHT_BLUE#New shimmer option unlocked: #{italic}#%s#{normal}",
+	fct = function(...) return ("#LIGHT_BLUE#新的闪烁选项被解锁: #{italic}#%s#{normal}"):format(...) end,
 }

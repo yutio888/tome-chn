@@ -82,6 +82,12 @@ logCHN:newLog{
 		return "现实世界发生了变化。"
 	end,
 }
+logCHN:newLog{
+	log = "%s forces the tear shut!",
+	fct = function(a)
+		return ("%s 令时空撕裂停止!"):format(npcCHN:getName(a))
+	end,
+}
 
 logCHN:newLog{
 	log = "%s has caused a hiccup in the fabric of spacetime.",
@@ -224,6 +230,26 @@ logCHN:newLog{
 
 --chronomancy/chronomancy
 logCHN:newLog{
+	log = "#LIGHT_RED#Your Contingency has failed to cast %s!",
+	fct = "#LIGHT_RED#你的意外术没能触发%s!",
+}
+
+logCHN:newLog{
+	log = "#STEEL_BLUE#Your Contingency triggered %s!",
+	fct = "#STEEL_BLUE#你的意外术触发了%s!",
+}
+
+logCHN:newLog{
+	log = "The timeline is too fractured to do this now.",
+	fct = "目前的时间线过于破碎。",
+}
+
+logCHN:newLog{
+	log = "You've seen as much as you can here.",
+	fct = "你在这里已经看完了能看到的一切。",
+}
+
+logCHN:newLog{
 	log = "Your current failure chance is %d%%, your current anomaly chance is %d%%, and your current backfire chance is %d%%.",
 	fct = function(...)
 		return ("你当前的失败几率是 %d%% ，你当前的异常几率是 %d%% ，你当前的回火几率是 %d%% 。"):format(...)
@@ -237,6 +263,23 @@ logCHN:newLog{
 		a = npcCHN:getName(a)
 		return ("%s 的 %s 被能量吸收所打断！"):format(a,...)
 	end,
+}
+--chronomancy/flux
+logCHN:newLog{
+	log = "You must have a twisted anomaly to cast this spell.",
+	fct = "你必须有被捕获的异常来使用该法术。",
+}
+logCHN:newLog{
+	log = "#STEEL_BLUE#Casts %s.",
+	fct = "#STEEL_BLUE#释放 %s.",
+}
+logCHN:newLog{
+	log = "#STEEL_BLUE#You take control of %s.",
+	fct = "#STEEL_BLUE#你控制了一次%s."
+}
+logCHN:newLog{
+	log = "#STEEL_BLUE#You've moved to another time thread.",
+	fct = "#STEEL_BLUE#你移动到了另一条时间线",
 }
 
 --chronomancy/matter
@@ -344,7 +387,12 @@ logCHN:newLog{
 		return "你不能在这里安置一个虫洞入口。"
 	end,
 }
-
+logCHN:newLog{
+	log = "You can't place a wormhole exit here.",
+	fct = function()
+		return "你不能在这里安置一个虫洞出口。"
+	end,
+}
 logCHN:newLog{
 	log = "Pick a valid location.",
 	fct = function()
@@ -389,9 +437,39 @@ logCHN:newLog{
 		return "现实世界进行自我调谐强行关闭了虫洞。"
 	end,
 }
+--chronomancy/thread-combat
+logCHN:newLog{
+	log = "range %d",
+	fct = "范围%d",
+}
+logCHN:newLog{
+	log = "You cannot use Thread Walk without an appropriate weapon!",
+	fct = "你需要装备合适的武器来使用该技能",
+}
+logCHN:newLog{
+	log = "You cannot use Thread the Needle without an appropriate weapon!",
+	fct = "你需要装备合适的武器来使用该技能",
+}
+
 
 --chronomancy/timetravel
-
+logCHN:newLog{
+	log = "Something has prevented the timetravel.",
+	fct = "某物阻止了时空旅行",
+	}
+logCHN:newLog{
+	log = "#STEEL_BLUE#You time travel to a quiet place.",
+	fct = "#STEEL_BLUE##你时空旅行到了一个寂静的地方。",
+}
+logCHN:newLog{
+	log = "This talent cannot be used from within the reprieve.",
+	fct = "该技能不能在此时使用。",
+}	
+logCHN:newLog{
+	log = "You can't place a tether here",
+	fct = "你不能在这里安置一个时空束缚。",
+}
+	
 logCHN:newLog{
 	log = "%s has moved forward in time!",
 	fct = function(a)
@@ -416,6 +494,17 @@ logCHN:newLog{
 		return ("%s 操纵了时间流。"):format(a)
 	end,
 }
+--chronomancy/temporal-hounds
+logCHN:newLog{
+	log = "Temporal Hounds must be sustained to cast this spell.",
+	fct = "必须开启时空猎犬来使用该技能。",
+}
+
+logCHN:newLog{
+	log = "You must have temporal hounds to use this talent.",
+	fct = "你必须拥有时空猎犬来使用该技能",
+}
+
 --chronomancy/flux
 logCHN:newLog{
 	log = "#LIGHT_BLUE##Source# converts damage to paradox!",
@@ -426,11 +515,25 @@ logCHN:newLog{
 
 --chronomancy/guardian
 logCHN:newLog{
+	log = "Not enough space to summon warden!",
+	fct = "没有足够的空间召唤守卫！",
+}
+logCHN:newLog{
+	log = "You require a weapon to use this talent.",
+	fct = "你需要武器来施展这个技能。",
+}
+logCHN:newLog{
+	log = "You must pick a focus target.",
+	fct = "你必须选择一个集中目标",
+}
+logCHN:newLog{
 	log = "#STEEL_BLUE##Source# shares damage with %s guardian!",
 	fct = function(a)
 		return ("#STEEL_BLUE##Source# 和 %s 的守卫共享伤害!"):format(a)
 	end,
 }
+
+
 --chronomancy/other
 logCHN:newLog{
 	log = "#PINK##Source# displaces some damage onto #Target#!",
@@ -574,6 +677,10 @@ logCHN:newLog{
 }
 --cunning/artifice
 logCHN:newLog{
+	log = "You cannot move",
+	fct = "你不能移动",
+}
+logCHN:newLog{
 	log = "#Source# strikes #target# with hidden blades!",
 	fct = "#Source# 使用隐藏的刀片击中了 #target# !",
 	}
@@ -597,6 +704,25 @@ logCHN:newLog{
 	log = "#Target# is dragged towards #source#!",
 	fct = "#Target# 被拉向 #source#!",
 }
+
+logCHN:newLog{
+	log = "You must have Hidden Blades prepared to use this talent.",
+	fct = "你必须准备好隐藏刀片来使用该技能。",
+}
+
+logCHN:newLog{
+	log = "You are too close to your target to swing your hook effectively!",
+	fct = "你距离目标太近了，不方便使用钩爪！"
+}
+logCHN:newLog{
+	log = "You need more room to swing your hook effectively.",
+	fct = "你需要更多空间来使用钩爪。",
+}
+
+logCHN:newLog{
+	log = "You must anchor the hook to something solid.",
+	fct = "你需要将钩爪固定在某个坚固的物体上",
+	}
 --cunning/ambush
 
 logCHN:newLog{
@@ -695,6 +821,20 @@ logCHN:newLog{
 	end,
 }
 --cunning/survival
+logCHN:newLog{
+	log = "#CADET_BLUE#You don't have the skill to disarm traps.",
+	fct = "#CADET_BLUE#你没有能解除陷阱的技能",
+}
+
+logCHN:newLog{
+	log = "#CADET_BLUE#You cannot disarm traps in grids you cannot enter.",
+	fct = "#CADET_BLUE#你不能解除你无法到达的陷阱",
+}
+
+logCHN:newLog{
+	log = "#CADET_BLUE#You don't see a trap there.",
+	fct = "你在这里并没有发现陷阱",
+}
 
 logCHN:newLog{
 	log = "#CADET_BLUE#Disarm A Trap: (direction keys to select where to disarm, shift+direction keys to move freely)",
@@ -718,6 +858,27 @@ logCHN:newLog{
 	    return ("#YELLOW_GREEN#放置 %s中"):format(a)
 	    end,
 }
+logCHN:newLog{
+	log = "#YELLOW_GREEN#Dismantling %s (instant trigger)",
+	fct = function(a)
+	    return ("#YELLOW_GREEN#放置 %s中(立刻触发)"):format(a)
+	    end,
+}
+
+logCHN:newLog{
+	log = "You cannot place a trap there",
+	fct = "你不能在这里放置陷阱",
+}
+
+logCHN:newLog{
+	log = "There is already a trap there.",
+	fct = "这里已经有一个陷阱了",
+}
+
+logCHN:newLog{
+	log = "You somehow fail to set the trap.",
+	fct = "你没能设置陷阱。",
+	}
 
 logCHN:newLog{
 	log = "#LIGHT_GREEN#Preparing %s%s",
@@ -725,6 +886,38 @@ logCHN:newLog{
 	    return ("#LIGHT_GREEN#准备%s%s中"):format(a,b:gsub("normal trigger","常规触发"))
 	    end,
 	    }
+logCHN:newLog{
+	log = "#LIGHT_GREEN#Preparing %s (instant trigger)",
+	fct = function(a)
+	    return ("#LIGHT_GREEN#准备%s中(立刻触发)"):format(a)
+	    end,
+	    }
+logCHN:newLog{
+	log = "#LIGHT_BLUE#No changes to trap preparation.",
+	fct = "#LIGHT_BLUE#陷阱准备未作更改",
+}
+
+logCHN:newLog{
+	log = "#LIGHT_BLUE#Cancelled Trap Priming.",
+	fct = "#LIGHT_BLUE#取消即爆陷阱",
+}
+
+logCHN:newLog{
+	log = "You cannot do that currently.",
+	fct = function()
+		return "你现在不能使用该技能。"
+	end,
+}
+
+logCHN:newLog{
+	log = "Something has prevented the pit.",
+	fct = "某物阻止了落穴",
+}
+
+logCHN:newLog{
+	log = "#LIGHT_BLUE#Aim the catapult",
+	fct = "#LIGHT_BLUE#请瞄准弹射陷阱",
+}
 
 logCHN:newLog{
 	log = "#CADET_BLUE#Placing %s...",
@@ -779,6 +972,11 @@ logCHN:newLog{
 	fct = function(...)
 		return ("使用 %s 你的物品栏内必须得有装备！"):format(...)
 	end,
+}
+
+logCHN:newLog{
+	log = "Your animated sentry struggles for a moment and then drops to the ground inexplicably.",
+	fct = "你的诅咒守卫挣扎了一会，落在了地面上。"
 }
 
 logCHN:newLog{
@@ -1027,7 +1225,11 @@ logCHN:newLog{
 		return "#F53CBE#你的暴走被你的猛攻鼓舞！（+1 持续时间）。"
 	end,
 }
-
+--curse/dark-figure
+logCHN:newLog{
+	log = "You are too far to from the target!",
+	fct = "你距离目标太远了！",
+}
 --curse/shadow
 
 logCHN:newLog{
@@ -1057,7 +1259,11 @@ logCHN:newLog{
 		return ("#PINK#阴影被集中至 #Target# ！")
 	end,
 }
-
+--curse/advaced-shadowmancy
+logCHN:newLog{
+	log = "You need a shadow in sight range!",
+	fct = "你需要视野内有阴影才能使用该技能",
+	}
 --curse/slaughter
 logCHN:newLog{
 	log = "#Source# knocks back #Target#!",
@@ -1078,6 +1284,17 @@ logCHN:newLog{
 	fct = function()
 		return "#Source# 劈中了#Target#！"
 	end,
+}
+
+--gift/mindstar-mastery
+logCHN:newLog{
+	log = "You require a psiblade in your mainhand to use this talent.",
+	fct = "你需要主手的心灵利刃来使用该技能",
+}
+
+logCHN:newLog{
+	log = "You require two psiblades in your hands to use this talent.",
+	fct = "你需要双手的心灵利刃来使用该技能",
 }
 
 --gift-breathes
@@ -1159,6 +1376,11 @@ logCHN:newLog{
 		return "你没能设置腐蚀之种。"
 	end,
 }
+--gift/gift
+logCHN:newLog{
+	log = "#PINK#You can manage a maximum of %d summons at any time. You need %d Cunning to increase your limit.",
+	fct = "#PINK#你能同时拥有最多 %d 名召唤物。 你需要 %d 灵巧来提升上限。"
+}
 
 --gift/eyals-fury
 logCHN:newLog{
@@ -1184,6 +1406,12 @@ logCHN:newLog{
 		return("%s喷射史莱姆！"):format(a)
 	end,
 }
+--gift/ooze
+logCHN:newLog{
+	log = "You try to split, but there is no free space close enough to summon!",
+	fct = "你尝试分裂，但是周围空余空间不足！"
+}
+
 --gift/sand-drake
 
 logCHN:newLog{
@@ -2099,6 +2327,13 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
+	log = "You cannot use Shield Slam without a shield!",
+	fct = function()
+		return "必须装备一面盾牌施展该技能！"
+	end,
+}
+
+logCHN:newLog{
 	log = "%s resists the shield bash!",
 	fct = function(a)
 		a = npcCHN:getName(a)
@@ -2147,7 +2382,59 @@ logCHN:newLog{
 		return "你需要一面盾牌来施展这个技能。"
 	end,
 }
+--technique/marksmanship
 
+logCHN:newLog{
+	log = "You are currently disarmed and cannot use this talent.",
+	fct = "你当前被缴械，不能使用该技能。",
+}
+logCHN:newLog{
+	log = "You require a missile launcher to use this talent.",
+	fct = "你需要弹药发射器来使用该技能",
+}
+logCHN:newLog{
+	log = "You require a bow to use this talent.",
+	fct = "你需要一把弓来使用该技能",
+}
+logCHN:newLog{
+	log = "You require ammo to use this talent.",
+	fct = "你需要弹药来使用技能。",
+}
+logCHN:newLog{
+	log = "Your ammo cannot be used.",
+	fct = "你的弹药不能使用。",
+}
+logCHN:newLog{
+	log = "Your ammo is incompatible with your missile launcher.",
+	fct = "你的弹药类型不匹配。",
+}
+logCHN:newLog{
+	log = "You do not have enough ammo left",
+	fct = "你剩余弹药不足以使用该技能",
+}
+--technique/mobility
+logCHN:newLog{
+	log = "%s is not usable while wearing heavy armour.",
+	fct = "%s 在身着重甲时无法使用",
+}
+logCHN:newLog{
+	log = "You must disengage directly away from your target in a straight line",
+	fct = "你后跳的方向必须和目标在一条直线上。"
+}
+logCHN:newLog{
+	log = "You must land in an empty space",
+	fct = "你必须落在未被占据的空间。",
+}
+
+logCHN:newLog{
+	log = "Your Disengage was partially blocked.",
+	fct = "你的后跳被部分阻挡了。",
+}
+
+logCHN:newLog{
+	log = "You are not able to Disengage in that direction.",
+	fct = "你不能朝这个方向后跳。",
+}
 --technique/archery
 
 logCHN:newLog{
@@ -2192,6 +2479,12 @@ logCHN:newLog{
 	end,
 }
 
+logCHN:newLog{
+	log = "You cannot use Rapid Fire without a bow or sling!",
+	fct = function()
+		return "你需要一把弓或者投石索来施放这个技能。"
+	end,
+}
 logCHN:newLog{
 	log = "%s resists the stunning shot!",
 	fct = function(a)
@@ -2275,11 +2568,32 @@ logCHN:newLog{
 		return "你需要有空位来滚动。"
 	end,
 }
+--technique/duelist
+logCHN:newLog{
+	log = "You must be able to move to use this talent.",
+	fct = "你必须处于可以移动的状态才能使用该技能。",
+}
+logCHN:newLog{
+	log = "You must be able to move to use %s.",
+	fct = "你必须处于可以移动的状态才能使用%s。",
+}
+logCHN:newLog{
+	log = "%s cannot move!",
+	fct = function(a) return("%s不能移动！"):format(npcCHN:getName(a)) end,
+}
+logCHN:newLog{
+	log = "You cannot use Lunge without dual wielding!",
+	fct = "你需要双持武器来施展这个技能。",
+}
 
 --technique/assasination
 logCHN:newLog{
 	log = "#Source# delivers a Coup de Grace against #Target#!",
 	fct = "#Source# 对 #Target# 发起致命一击!",
+}
+logCHN:newLog{
+	log = "You cannot use Coup de Grace without dual wielding!",
+	fct = "你需要双持武器来施展这个技能。"
 }
 logCHN:newLog{
 	log = "#Target# avoids a garrote from #Source#!",
@@ -2317,6 +2631,24 @@ logCHN:newLog{
 }
 
 --technique/dualweapon
+logCHN:newLog{
+	log = "You must dual wield to use this talent.",
+	fct = function()
+		return "你只有在双持状态下才能使用这个技能。"
+	end,
+}
+logCHN:newLog{
+	log = "You must dual wield to manage contact with your target!",
+	fct = function()
+		return "你只有在双持状态下才能使用这个技能。"
+	end,
+}
+logCHN:newLog{
+	log = "You must dual wield to perform an Offhand Jab!",
+	fct = function()
+		return "你只有在双持状态下才能使用这个技能。"
+	end,
+}
 
 logCHN:newLog{
 	log = "You require two weapons to use this talent.",
@@ -2332,12 +2664,6 @@ logCHN:newLog{
 	end,
 }
 
-logCHN:newLog{
-	log = "You require two weapons to use this talent.",
-	fct = function()
-		return "你只有在双持状态下才能使用这个技能。"
-	end,
-}
 
 logCHN:newLog{
 	log = "You cannot use Momentum without dual wielding!",
@@ -2380,6 +2706,22 @@ logCHN:newLog{
 		return "你只有在双持状态下才能使用这个技能。"
 	end,
 }
+
+logCHN:newLog{
+	log = "The target location must be within range and within view",
+	fct = "目标位置必须可见且在范围内",
+}
+
+logCHN:newLog{
+	log = "There is no open space in which to land near there.",
+	fct = "目标周围没有空余空间。"
+}
+--technique/munitions
+logCHN:newLog{
+	log = "You require incendiary, venomous or piercing ammunition to use this talent!",
+	fct = "你需要至少一种特殊弹药（燃烧弹、剧毒弹、穿甲弹）来使用该技能！"
+}
+
 --technique/unarmed-discipline
 logCHN:newLog{
 	log = "#Source# slams #Target# into the ground!",
@@ -2499,6 +2841,12 @@ logCHN:newLog{
 		return ("%s 已经恢复！"):format(a)
 	end,
 }
+--technique/sniper
+logCHN:newLog{
+	log = "You are being observed too closely to enter Concealment!",
+	fct = "你被近距离观察，不能进入 隐匿 状态。", 
+}
+
 --technique/superiority
 logCHN:newLog{
 	log = "%s is called to battle!",
@@ -2584,6 +2932,10 @@ logCHN:newLog{
 		return ("%s抵抗了精神攻击！"):format(a)
 	end,
 }
+logCHN:newLog{
+	log = "#PURPLE#Your mastery over inscriptions is unmatched! One more inscriptions slot available to buy.",
+	fct = "#PURPLE#你对纹身的掌握无人能及！ 你可以消耗一个大系点进一步解锁一个纹身位",
+}
 --misc/inscription
 
 logCHN:newLog{
@@ -2596,7 +2948,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "Your nonexistant mana regeneration rate is unaffected by the rune.",
 	fct = function()
-		return "你的法力回复率不受符文影响。"
+		return "你没有法力回复率，不受符文影响。"
 	end,
 }
 
@@ -2609,6 +2961,11 @@ logCHN:newLog{
 }
 
 --misc/object
+logCHN:newLog{
+	log = "You must be holding a staff.",
+	fct = "你必须持有法杖。",
+}
+
 logCHN:newLog{
 	log = "%s's animating magic is disrupted! ",
 	fct = function(a)

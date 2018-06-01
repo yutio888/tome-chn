@@ -460,3 +460,37 @@ logCHN:newLog{
 	log = "#F53CBE##Source# spreads confusion to #Target#.",
 	fct = "#F53CBE##Source# 将混乱传播至 #Target#.",
 }
+
+
+logCHN:newLog{
+	log = "#LIGHT_RED#You lost sight of your golem for too long; direct control is broken!",
+	fct = "#LIGHT_RED#傀儡脱离视线太久；直接链接中断！",
+}
+logCHN:newLog{
+	log = "#LIGHT_RED#You lost sight of your shadow for too long; it dissipates!",
+	fct = "#LIGHT_RED#阴影脱离视线太久；它消失了！",
+}
+logCHN:newLog{
+	log = "#LIGHT_RED#You lost sight of your husk for too long; it disintegrates!",
+	fct = "#LIGHT_RED#傀儡脱离视线太久；它碎裂了！",
+}
+logCHN:newLog{
+	log = "#LIGHT_BLUE#You unfold the space time continuum to the start of the time threads!",
+	fct = "#LIGHT_BLUE#你折叠了时空，回到时间线开头",
+}
+logCHN:newLog{
+	log = "#LIGHT_BLUE#You've been pulled into the past!",
+	fct = "#LIGHT_BLUE#你被拉往过去！",
+}
+logCHN:newLog{
+	log = "#LIGHT_BLUE#You've been returned to the present!",
+	fct = "#LIGHT_BLUE#你回到了现在!",
+}
+logCHN:newLog{
+	log = "#LIGHT_BLUE#You enter a zero gravity zone, beware!",
+	fct = "#LIGHT_BLUE#你进入了无重力区域，小心！",
+}
+logCHN:newLog{
+	log = "#LIGHT_BLUE#You go back in time to rewrite history!",
+	fct = "#LIGHT_BLUE#你及时返回，改写了历史！",
+}

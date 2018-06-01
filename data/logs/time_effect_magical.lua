@@ -330,7 +330,12 @@ logCHN:newLog{
 		return "你“呼”的一下被带离了这个地方！"
 	end,
 }
-
+logCHN:newLog{
+	log = "You are yanked out of this time!",
+	fct = function()
+		return "你“呼”的一下被带离了这个地方！"
+	end,
+}
 logCHN:newLog{
 	log = "Space restabilizes around you.",
 	fct = function()
@@ -352,6 +357,11 @@ logCHN:newLog{
 		a = npcCHN:getName(a)
 		return ("%s的保护护盾消失了。"):format(a)
 	end,
+}
+
+logCHN:newLog{
+	log = "Your %s ward absorbs the damage!",
+	fct = "你的%s守护吸收了伤害！",
 }
 
 logCHN:newLog{

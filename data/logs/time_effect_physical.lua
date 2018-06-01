@@ -1585,3 +1585,19 @@ logCHN:newLog{
 	log = "#CRIMSON##Source# heals from blocking with %s shield!",
 	fct = function(a) return ("#CRIMSON##Source# 用 %s 盾牌格挡，获得了治疗!"):format(a) end,
 }
+logCHN:newLog{
+	log = "#ORCHID#You cannot block any more attacks!#LAST#",
+	fct = "#ORCHID#你不能格挡更多攻击了！#LAST#",
+}
+logCHN:newLog{
+	log = "#GREY#You begin your Shadow Dance.",
+	fct = "#GREY#你开始了你的暗影之舞",
+}
+logCHN:newLog{
+	log = "#GREY#You end your Shadow Dance.",
+	fct = "#GREY#你结束了你的暗影之舞",
+}
+logCHN:newLog{
+	log = "You have been detected!",
+	fct = "你被发现了！",
+}

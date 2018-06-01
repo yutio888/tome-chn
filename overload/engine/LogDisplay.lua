@@ -123,7 +123,7 @@ function _M:call(str, ...)
 	--str = str:format(...)
 	str = str or ""
 	print("[logerr]"..str)
-	str = logCHN:trans(str)
+	str = logCHN:trans(str,...)
 	print("[LOG]", str)
 	local tstr = str:toString()
 	if self.out_f then self.out_f:write(tstr:removeColorCodes()) self.out_f:write("\n") end

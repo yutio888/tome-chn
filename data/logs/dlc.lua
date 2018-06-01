@@ -312,6 +312,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#CRIMSON#You extract a %s and add it to your inventory.",
 	fct = function(a)
+		a = objects:getObjectsChnName(a)
 		return("#CRIMSON#你提取了%s并将其收入物品栏。"):format(a)
 	end,
 }
@@ -319,6 +320,8 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#CRIMSON#You extract a %s and bind it to your %s.",
 	fct = function(a,b)
+		a = objects:getObjectsChnName(a)
+		b = objects:getObjectsChnName(b)
 		return("#CRIMSON#你提取了%s并将其附着于%s。"):format(a,b)
 	end,
 }
@@ -326,6 +329,8 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "You attach %s to your %s.",
 	fct = function(a,b)
+		a = objects:getObjectsChnName(a)
+		b = objects:getObjectsChnName(b)
 		return("你将%s附着于%s"):format(a,b)
 	end,
 }
@@ -333,15 +338,12 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "You detach %s from your %s.",
 	fct = function(a,b)
+		a = objects:getObjectsChnName(a)
+		b = objects:getObjectsChnName(b)
 		return("你解除了%s在%s上的附着"):format(a,b)
 	end,
 }
-logCHN:newLog{
-	log = "You cannot use a tinker without the corresponding item.",
-	fct = function()
-		return "你不能在没有装备的情况下进行附着。"
-	end,
-}
+
 logCHN:newLog{
 	log = "#PURPLE#As %s falls down you see %s reach to it, devour its essence and raise it back as a demonic husk.",
 	fct = function(a,b)

@@ -45,3 +45,44 @@ logCHN:newLog{
 	log = "starting trap selection dialog",
 	fct = "开始选择陷阱",
 }
+
+logCHN:newLog{
+	log = "#RED#Displaying %s set for %s (equipment NOT switched)",
+	fct = "#RED#展示 %s 套装给 %s 看 (装备未切换)",
+	}
+	
+logCHN:newLog{
+	log = "You need more skill to prepare this trap.",
+	fct = "你需要更多技能等级来使用该陷阱",
+}
+
+logCHN:newLog{
+	log = "#LIGHT_BLUE#Preparing trap with normal trigger.",
+	fct = "#LIGHT_BLUE#准备了常规触发的陷阱",
+}
+
+logCHN:newLog{
+	log = "#LIGHT_BLUE#You cannot prepare more than %d traps.",
+	fct = "#LIGHT_BLUE#你不能准备多于%d个陷阱",
+}
+logCHN:newLog{
+	log = "#LIGHT_BLUE#Warning: You have increased some of your statistics. Talent %s is actually sustained; if it is dependent on one of the stats you changed, you need to re-use it for the changes to take effect.",
+	fct = "#LIGHT_BLUE#警告：你的属性有变化。技能%s 是维持技能；如果它基于你某些属性，你可能需要重新开启它。",
+}
+logCHN:newLog{
+	log = "#LIGHT_BLUE#You resurrect! CHEATER!",
+	fct = "#LIGHT_BLUE#你复活了！ 作弊者！",
+}
+logCHN:newLog{
+	log = "#YELLOW#Your bones magically knit back together. You are once more able to dish out pain to your foes!",
+	fct = "#YELLOW#你的骨头魔法般拼合在一起，你复活了！",
+}
+logCHN:newLog{
+	log = "#YELLOW#Your %s is consumed and disappears! You come back to life!",
+	fct = function(a) a =  objects:getObjectsChnName(a) return ("#YELLOW#你的%s被消耗了，你复活了！"):format(a) end,
+}
+logCHN:newLog{
+	log = "You managed to die on the eidolon plane! DIE!",
+	fct = "你成功死于艾德隆位面！安息吧！",
+}
+

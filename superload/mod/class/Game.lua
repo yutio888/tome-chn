@@ -49,8 +49,9 @@ function _M:updateZoneName()
 end
 function _M:logMessage(source, srcSeen, target, tgtSeen, style, ...)
 	print("logMsgCheck", style)
-	if logTableCHN[style] then style = logTableCHN[style].fct(...) end
-	style = style:format(...)
+	style = logCHN:trans(style,...)
+	print("logMsgTrans", style)
+	--style = style:format(...)
 	local srcname = "something"
 	local Dstring
 		if source.player then
@@ -62,7 +63,7 @@ function _M:logMessage(source, srcSeen, target, tgtSeen, style, ...)
 	if source.name and source.name=="spatial tether" then srcname ="时空锁链" end
 	srcname = logCHN:getName(srcname)
 	if source.name and source.name:find("maelstrom") then srcname ="灵能漩涡" end
-	if logTableCHN[style] then style = logTableCHN[style].fct(...) end
+	--if logTableCHN[style] then style = logTableCHN[style].fct(...) end
 	
     
 	style = style:gsub("#source#", srcname)

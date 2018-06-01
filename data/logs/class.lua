@@ -509,7 +509,12 @@ logCHN:newLog{
 		return "你无法移动！"
 	end,
 }
-
+logCHN:newLog{
+	log = "You are asleep and unable to move!",
+	fct = function()
+		return "你睡着了无法移动！"
+	end,
+}
 logCHN:newLog{
 	log = "You have found a trap (%s)!",
 	fct = function(a)
@@ -523,7 +528,19 @@ logCHN:newLog{
 		return ("你发现了一个陷阱（ %s ）！"):format(a)
 	end,
 }
-
+logCHN:newLog{
+	log = "#CADET_BLUE#You notice a trap (%s)!",
+	fct = function(a)
+		if a:find("'s") then 
+			local f,e=a:find("'s ")
+			local owner=string.sub(a,1,f-1)
+			local trapname=a:gsub(owner,""):gsub(" 's ","")
+			a= npcCHN:getName(owner) .."的" ..trapCHN:getName(trapname)
+		else a = trapCHN[a] or a 
+		end
+		return ("#CADET_BLUE#你发现了一个陷阱（ %s ）！"):format(a)
+	end,
+}
 logCHN:newLog{
 	log = "Can not switch control to this creature.",
 	fct = function()
@@ -602,7 +619,13 @@ logCHN:newLog{
 		return ("你摧毁了 %s 。"):format(name)
 	end,
 }
-
+logCHN:newLog{
+	log = "You can not destroy %s.",
+	fct = function(a)
+		local name = objects:getObjectsChnName(a)
+		return ("你不能摧毁 %s 。"):format(name)
+	end,
+}
 logCHN:newLog{
 	log = "You cannot use items on the world map.",
 	fct = function()
@@ -617,7 +640,18 @@ logCHN:newLog{
 		return ("你的反魔法技能打断了 %s 。"):format(name)
 	end,
 }
-
+logCHN:newLog{
+	log = "You cannot change your equipment while sleeping!",
+	fct = "你不能在睡眠中切换装备!",
+}
+logCHN:newLog{
+	log = "You cannot change your equipment!",
+	fct = "你不能切换装备!",
+}
+logCHN:newLog{
+	log = "You had to drop %s due to lack of space.",
+	fct = function(a) return ("由于没有空间你被迫丢下%s"):format(objects:getObjectsChnName(a)) end,
+}
 logCHN:newLog{
 	log = "You switch your weapons to: %s.",
 	fct = function(a)
@@ -843,7 +877,18 @@ logCHN:newLog{
 		return "你的护盾在攻击下被打破！"
 	end,
 }
-
+logCHN:newLog{
+	log = "Your time shield crumbles under the damage!",
+	fct = function()
+		return "你的时间护盾在攻击下被打破！"
+	end,
+}
+logCHN:newLog{
+	log = "Your resonance field crumbles under the damage!",
+	fct = function()
+		return "你的共鸣领域在攻击下被打破！"
+	end,
+}
 logCHN:newLog{
 	log = "#AQUAMARINE#You leech a part of %s vim.",
 	fct = function(a)
@@ -865,6 +910,13 @@ logCHN:newLog{
 		a = npcCHN:getName(a)
 		return ("%s从受害者处拿到了更多的灵魂。（+1灵魂）"):format(a,b)
 	end,
+}
+
+logCHN:newLog{
+	log = "%s feeds you hate from its latest victim. (+%d hate)",
+	fct = function(a,b)
+		a = npcCHN:getName(a)
+		return ("%s最近的受害者为你提供%d仇恨"):format(a,b) end,
 }
 
 logCHN:newLog{
@@ -908,6 +960,11 @@ logCHN:newLog{
 	fct = function()
 		return "#00FF00#你不再超重。"
 	end,
+}
+
+logCHN:newLog{
+	log = "You cannot switch equipment while sleeping!",
+	fct = "你不能在睡眠中切换装备",
 }
 
 logCHN:newLog{
@@ -955,14 +1012,24 @@ logCHN:newLog{
 		return "#LIGHT_RED#时间和空间都失去了控制！"
 	end,
 }
-
+logCHN:newLog{
+	log = "#LIGHT_RED#Spacetime fights against your control!",
+	fct = function()
+		return "#LIGHT_RED#时空失去了控制！"
+	end,
+}
 logCHN:newLog{
 	log = "#LIGHT_BLUE#Space and time have calmed...  somewhat.",
 	fct = function()
 		return "#LIGHT_BLUE#时间和空间...稍微稳定了些。"
 	end,
 }
-
+logCHN:newLog{
+	log = "#LIGHT_BLUE#Spacetime has calmed...  somewhat.",
+	fct = function()
+		return "#LIGHT_BLUE#时空稍微稳定了些..."
+	end,
+}
 logCHN:newLog{
 	log = "You do not have enough mana to activate %s.",
 	fct = function(...)
@@ -1011,7 +1078,10 @@ logCHN:newLog{
 		return ("你没有足够的仇恨值施展： %s"):format(...)
 	end,
 }
-
+logCHN:newLog{
+	log = "You do not have enough feedback to use %s",
+	fct = "你没有足够的反馈值施展：%s",
+}
 logCHN:newLog{
 	log = "You do not have enough energy to activate %s.",
 	fct = function(...)
@@ -1069,6 +1139,13 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
+	log = "You do not have enough %s to use %s.",
+	fct = function(a,b)
+		return ("你没有足够的%s施展：%s#")
+		end,
+}
+
+logCHN:newLog{
 	log = "You fail to use %s due to your equilibrium!",
 	fct = function(...)
 		return ("由于你的失衡值过高你使用 %s 失败！"):format(...)
@@ -1081,6 +1158,21 @@ logCHN:newLog{
 		return ("施展 %s 失败！"):format(...)
 	end,
 }
+
+logCHN:newLog{
+	log = "You can not drop items while sleeping",
+	fct = "你不能在睡眠中丢弃物品",
+}
+
+logCHN:newLog{
+	log = "You can not drop %s(plot item)",
+	fct = function(a) a = objects:getObjectsChnName(a)  return("你不能丢弃%s(剧情物品)"):format(a) end,
+}
+logCHN:newLog{
+	log = "You can not drop %s(tagged)",
+	fct = function(a) a = objects:getObjectsChnName(a)  return("你不能丢弃%s(带标签)"):format(a) end,
+}
+
 
 logCHN:newLog{
 	log = "#LIGHT_RED#You lose control and unleash an anomaly!",
@@ -1242,6 +1334,11 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
+	log = "#LIGHT_RED#You may not change level so soon after a kill (%d game turns left to wait)!",
+	fct = "#LIGHT_RED#在完成一次杀戮后，你现在不能离开该层！（等待%d回合）",
+}
+
+logCHN:newLog{
 	log = "#LIGHT_RED#You may not change level without your own body!",
 	fct = function()
 		return "#LIGHT_RED#你只能用自己的身体离开地图!"
@@ -1329,6 +1426,10 @@ logCHN:newLog{
 	end,
 }
 
+
+
+
+
 logCHN:newLog{
 	log = "#RED#Rising again, the Rat Lich's eyes glow with renewed energy!",
 	fct = function()
@@ -1351,6 +1452,10 @@ logCHN:newLog{
 	end,
 }
 
+logCHN:newLog{
+	log = "You have unlocked a new talent: %s!",
+	fct = "你学会了新技能：%s！",
+}
 
 --mod/class/Game.lua
 logCHN:newLog{
@@ -1528,7 +1633,10 @@ logCHN:newLog{
 	log = "You cannot pick up items from the floor while asleep!",
 	fct = function() return "你不能在睡眠中捡起物品" end,
 	}
-	
+logCHN:newLog{
+	log = "Automatic use of talent %s #DARK_RED#skipped#LAST#: cooldown too low (%d).",
+	fct = "%s 的自动施法被#DARK_RED#跳过#LAST#了：冷却时间太低(%d)",
+}
 --mod/class/worldnpc
 
 logCHN:newLog{
@@ -1552,3 +1660,48 @@ logCHN:newLog{
 	log = "#LIGHT_BLUE#New shimmer option unlocked: #{italic}#%s#{normal}",
 	fct = function(...) return ("#LIGHT_BLUE#新的闪烁选项被解锁: #{italic}#%s#{normal}"):format(...) end,
 }
+
+--mod/class/interface/actorinscriptions
+logCHN:newLog{
+	log = "You are unable to use this kind of inscription",
+	fct = "你不能使用这种纹身",
+}
+
+--mod/class/object
+logCHN:newLog{
+	log = "%s is still recharging.",
+	fct = function(a)
+		a = objects:getObjectsChnName(a)
+		return ("%s正在被充能"):format(a)
+		end,
+	}
+	
+logCHN:newLog{
+	log = "%s can not be used anymore.",
+	fct = function(a)
+		a = objects:getObjectsChnName(a)
+		return ("%s不能再被使用"):format(a)
+		end,
+	}
+	
+	
+	
+	
+logCHN:newLog{
+	log = "You can not use a tinker without the corresponding item.",
+	fct = "你不能在没有相关物品时使用配件",
+}
+	
+logCHN:newLog{
+	log = "This item is not usable: %s.",
+	fct = "该物品不能使用: %s.",
+}
+logCHN:newLog{
+	log = "This tinker can not be applied to this item.",
+	fct = "这个配件不能装在该物品上",
+}
+logCHN:newLog{
+	log = "You already have a tinker on this item.",
+	fct = "这个物品上已经有了配件",
+}
+

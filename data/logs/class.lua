@@ -1369,7 +1369,10 @@ logCHN:newLog{
 	log = "#{bold}##Source# killed #Target#!#{normal}#",
 	fct = function() return "#{bold}##Source# 击杀了 #Target#!#{normal}#" end,
 	}
-
+logCHN:newLog{
+	log = "You cannot go into the wilds with the following effects: %s",
+	fct = function(...) return ("你不能带以下效果进入大地图: %s"):format(...) end,
+}
 logCHN:newLog{
 	log = "#TEAL#%s",
 	fct = function(a)
@@ -1509,13 +1512,13 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#VIOLET#Following build order %s; learning talent category %s.",
 	fct = function(...)
-	    return ("#VIOLET"遵循加点顺序%s;学会技能树%s):format(...)
+	    return ("#VIOLET#遵循加点顺序%s;学会技能树%s"):format(...)
 	    end,
 }
 logCHN:newLog{
 	log = "#VIOLET#Following build order %s; learning talent %s.",
 	fct = function(...)
-	    return ("#VIOLET"遵循加点顺序%s;学会技能%s):format(...)
+	    return ("#VIOLET#遵循加点顺序%s;学会技能%s"):format(...)
 	    end,
 }
 

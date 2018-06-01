@@ -17,23 +17,26 @@ logCHN:newLog{
 	log = "#LIGHT_BLUE# You enhance your preparation of %s.",
 	fct = function(a)
 	    return("#LIGHT_BLUE# 你强化了你准备的%s."):format(a)
+		end,
 }
 
 logCHN:newLog{
 	log = "#CADET_BLUE#%s already equipped at level %d.",
 	fct = function(a,b)
 	    return("#CADET_BLUE#%s 已经被装备了，等级 %d."):format(a,b)
+		end,
 }
 
 logCHN:newLog{
 	log = "#CADET_BLUE#Equipping %s with %s (level %d).",
 	fct = function(a,b,c)
 	    return("#CADET_BLUE# 装备 %s，用 %s (等级 %d)."):format(a,b,c)
+		end,
 }
 
 logCHN:newLog{
 	log = "#LIGHT_GREEN#You and the Lord discuss your new relationship at some length, including the merits of assassination by proxy and some additional trapping techniques.",
-	fct = #LIGHT_GREEN# 你和盗贼头子讨论了你们的新关系，同时还讨论了部分暗杀和陷阱技巧。",
+	fct = "#LIGHT_GREEN# 你和盗贼头子讨论了你们的新关系，同时还讨论了部分暗杀和陷阱技巧。",
 }
 
 logCHN:newLog{

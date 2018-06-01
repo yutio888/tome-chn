@@ -1371,7 +1371,7 @@ logCHN:newLog{
 	}
 logCHN:newLog{
 	log = "You cannot go into the wilds with the following effects: %s",
-	fct = function(...) return ("你不能带以下效果进入大地图: %s"):format(...) end,
+	fct = function(...) return ("你不能带着负面效果进入大地图"):format(...) end,
 }
 logCHN:newLog{
 	log = "#TEAL#%s",

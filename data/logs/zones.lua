@@ -186,6 +186,11 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
+	log = "#Source# heals #Target#!",
+	fct = "#Source# 治疗了 #Target#!",
+	}
+
+logCHN:newLog{
 	log = "Your %s is magically sorted by the storage room.",
 	fct = function(a)
 		local name = objects:getObjectsChnName(a)

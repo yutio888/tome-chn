@@ -449,4 +449,14 @@ logCHN:newLog{
 		return ("%s 周围的时空恢复了连贯。"):format(a)
 	end,
 }
+logCHN:newLog{
+	log = "#STEEL_BLUE##Source# shares damage with %s fugue clones!",
+	fct = function(a)
+		return ("#STEEL_BLUE##Source# 和 %s 时空克隆共享伤害!"):format(a)
+	end,
+}
 
+logCHN:newLog{
+	log = "#F53CBE##Source# spreads confusion to #Target#.",
+	fct = "#F53CBE##Source# 将混乱传播至 #Target#.",
+}

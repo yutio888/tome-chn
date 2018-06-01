@@ -1572,3 +1572,16 @@ logCHN:newLog{
 		return ("%s 不再忍受折磨。"):format(a)
 	end,
 }
+
+logCHN:newLog{
+	log = "#YELLOW_GREEN##Source# steals healing from #Target#!",
+	fct = function() return "#YELLOW_GREEN##Source# 从 #Target# 偷取了治疗!" end,
+}
+logCHN:newLog{
+	log = "#YELLOW_GREEN##Source#'s healing is amplified!",
+	fct = function() return "#YELLOW_GREEN##Source# 的治疗被增幅了!" end,
+}
+logCHN:newLog{
+	log = "#CRIMSON##Source# heals from blocking with %s shield!",
+	fct = function(a) return ("#CRIMSON##Source# 用 %s 盾牌格挡，获得了治疗!"):format(a) end,
+}

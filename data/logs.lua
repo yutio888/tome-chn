@@ -1,12 +1,16 @@
 logCHN = {}
 logTableCHN = {}
 --logCount = 0
-
 function logCHN:newLog(l)
 	if not l then return end
 	--if logTableCHN[l.log] then print(l.log .."重复了！") end
 	--logCount = logCount + 1
 	--print ("LOG总数："..logCount)
+	if not l.fct then return end
+	if type(l.fct) == "string" then 
+		local d = l.fct
+		l.fct = function() return d end
+		end
 	logTableCHN[l.log] = l
 end
 
@@ -25,3 +29,4 @@ dofile("data-chn123/logs/zones.lua")
 dofile("data-chn123/logs/engine.lua")
 dofile("data-chn123/logs/traps.lua")
 dofile("data-chn123/logs/dlc.lua")
+dofile("data-chn123/logs/other.lua")

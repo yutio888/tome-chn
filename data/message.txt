@@ -6,7 +6,8 @@
 ./techniques/pugilism.lua:	message = "@Source@ lashes out with a spinning backhand.",
 ./techniques/pugilism.lua:	message = "@Source@ raises their leg and snaps it downward in a devastating axe kick.",
 ./techniques/pugilism.lua:	message = "@Source@ lashes out with a flurry of fists.",
-./techniques/combat-techniques.lua:	message = "@Source@ rushes out!",
+./techniques/combat-techniques.lua:	message = "@Source@ rushes out!", 
+------------------------------- todo
 ./techniques/unarmed-discipline.lua:	message = "@Source@ unleashes a flurry of disrupting kicks.",
 ./techniques/unarmed-discipline.lua:	message = "@Source@ prepares to block incoming attacks.",
 ./techniques/unarmed-discipline.lua:	message = "@Source@ strikes a deadly pressure point on the target.",

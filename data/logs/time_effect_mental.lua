@@ -895,12 +895,8 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
-	log = "%s is mimicking %s. (no gains).",
-	fct = function(a,b)
-		a = npcCHN:getName(a)
-		b = npcCHN:getName(b)
-		return ("%s正在仿生%s（无增益）。"):format(a,b)
-	end,
+	log = "#Source# is mimicking #Target#. (no gains).",
+	fct = "#Source#正在仿生#Target#（无增益）。",
 }
 
 logCHN:newLog{
@@ -1239,4 +1235,9 @@ logCHN:newLog{
 		a = npcCHN:getName(a)
 		return ("%s 不再被诅咒"):format(a)
 	end,
+}
+
+logCHN:newLog{
+	log = "#CRIMSON##Source# blocks #Target#'s attack and retaliates with %s telekinetically wielded weapon!#LAST#",
+	fct = "#CRIMSON##Source# 格挡了 #Target# 的攻击，并用 %s 灵能武器进行反击!#LAST#",
 }

@@ -2,7 +2,6 @@ local _M = loadPrevious(...)
 
 
 require "data-chn123.delayed_damage"
--- 出生界面，跳出的intro标题未翻译
 -- 选择职业界面，标题未翻译
 class:bindHook("Game:alterGameMenu", function (self, data)
 	data.menu[2][1] = data.menu[2][1]:gsub("Show Achievements","查看成就")
@@ -49,6 +48,7 @@ function _M:updateZoneName()
 	print("Updating zone name", name)
 end
 function _M:logMessage(source, srcSeen, target, tgtSeen, style, ...)
+	print("logMsgCheck", style)
 	if logTableCHN[style] then style = logTableCHN[style].fct(...) end
 	style = style:format(...)
 	local srcname = "something"
@@ -80,50 +80,28 @@ function _M:logMessage(source, srcSeen, target, tgtSeen, style, ...)
 		style = style:gsub("#target#", tgtname)
 		style = style:gsub("#Target#", tgtname:capitalize())
 	end
-	style = delayed_damage_trans(style)
+	--style = delayed_damage_trans(style)
 	return style
 end
 
---- Collate and push all queued delayed log damage information to the combat log
--- Called at the end of each game tick
-function _M:displayDelayedLogDamage()
-	if not self.uiset or not self.uiset.logdisplay then return end
-	for real_src, psrcs in pairs(self.delayed_log_damage) do
-		for src, tgts in pairs(psrcs) do
-			for target, dams in pairs(tgts) do
-				if #dams.descs > 1 then
-					game.uiset.logdisplay(self:logMessage(src, dams.srcSeen, target, dams.tgtSeen, "#Source# 击中 #Target# 造成 %s (%0.0f 总伤害)%s。", table.concat(dams.descs, ", "), dams.total, dams.healing<0 and (" #LIGHT_GREEN#[%0.0f 治疗]#LAST#"):format(-dams.healing) or ""))
-				else
-					if dams.healing >= 0 then
-						game.uiset.logdisplay(self:logMessage(src, dams.srcSeen, target, dams.tgtSeen, "#Source# 击中 #Target# 造成 %s 伤害。", table.concat(dams.descs, ", ")))
-					elseif src == target then
-						game.uiset.logdisplay(self:logMessage(src, dams.srcSeen, target, dams.tgtSeen, "#Source# 受到 %s。", table.concat(dams.descs, ", ")))
-					else
-						game.uiset.logdisplay(self:logMessage(src, dams.srcSeen, target, dams.tgtSeen, "#Target# 从 #Source#处受到%s。", table.concat(dams.descs, ", ")))
-					end
-				end
-				local rsrc = real_src.resolveSource and real_src:resolveSource() or real_src
-				local rtarget = target.resolveSource and target:resolveSource() or target
-				local x, y = target.x or -1, target.y or -1
-				local sx, sy = self.level.map:getTileToScreen(x, y, true)
-				if target.dead then
-					if dams.tgtSeen and (rsrc == self.player or rtarget == self.player or self.party:hasMember(rsrc) or self.party:hasMember(rtarget)) then
-						self.flyers:add(sx, sy, 30, (rng.range(0,2)-1) * 0.5, rng.float(-2.5, -1.5), ("Kill (%d)!"):format(dams.total), {255,0,255}, true)
-						self:delayedLogMessage(target, nil,  "death", self:logMessage(src, dams.srcSeen, target, dams.tgtSeen, "#{bold}##Source#杀死了#Target#!#{normal}#"))
-					end
-				elseif dams.total > 0 or dams.healing == 0 then
-					if dams.tgtSeen and (rsrc == self.player or self.party:hasMember(rsrc)) then
-						self.flyers:add(sx, sy, 30, (rng.range(0,2)-1) * 0.5, rng.float(-3, -2), tostring(-math.ceil(dams.total)), {0,255,dams.is_crit and 200 or 0}, dams.is_crit)
-					elseif dams.tgtSeen and (rtarget == self.player or self.party:hasMember(rtarget)) then
-						self.flyers:add(sx, sy, 30, (rng.range(0,2)-1) * 0.5, -rng.float(-3, -2), tostring(-math.ceil(dams.total)), {255,dams.is_crit and 200 or 0,0}, dams.is_crit)
-					end
-				end
-			end
+--I don't know why I cannot use local old=_m.delayedLogDamage and I need to paste the function from Game.lua
+function _M:delayedLogDamage(src, target, dam, desc, crit)
+	desc = delayed_damage_trans(desc)
+	if not target or not src then return end
+	local psrc = src.__project_source or src -- assign message to indirect damage source if available
+	local visible, srcSeen, tgtSeen = self:logVisible(psrc, target)
+	if visible then -- only log damage the player is aware of
+		local t = table.getTable(self.delayed_log_damage, src, psrc, target)
+		table.update(t, {total=0, healing=0, descs={}})
+		t.descs[#t.descs+1] = desc
+		if dam>=0 then
+			t.total = t.total + dam
+		else
+			t.healing = t.healing + dam
 		end
+		t.is_crit = t.is_crit or crit
+		t.srcSeen = srcSeen
+		t.tgtSeen = tgtSeen
 	end
-	if self.delayed_death_message then game.log(self.delayed_death_message) end
-	self.delayed_death_message = nil
-	self.delayed_log_damage = {}
 end
-
 return _M

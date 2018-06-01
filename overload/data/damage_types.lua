@@ -176,7 +176,7 @@ setDefaultProjector(function(src, x, y, type, dam, state)
 			local e = target.tempeffect_def[target.EFF_WARD]
 			dam = e.absorb(type, dam, target.tmp[target.EFF_WARD], target, src)
 			if dam ~= lastdam then
-				game:delayedLogDamage(src, target, 0, ("%s(%d 守护)#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", lastdam-dam), false)
+				game:delayedLogDamage(src, target, 0, ("%s(%d warded)#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", lastdam-dam), false)
 			end
 		end
 
@@ -185,13 +185,13 @@ setDefaultProjector(function(src, x, y, type, dam, state)
 			local e = target.tempeffect_def[target.EFF_BLOCKING]
 			lastdam = dam
 			dam = e.do_block(type, dam, target.tmp[target.EFF_BLOCKING], target, src)
-			if lastdam - dam > 0 then game:delayedLogDamage(src, target, 0, ("%s(%d 格挡)#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", lastdam-dam), false) end
+			if lastdam - dam > 0 then game:delayedLogDamage(src, target, 0, ("%s(%d blocked)#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", lastdam-dam), false) end
 		end
 		if dam > 0 and target.isTalentActive and target:isTalentActive(target.T_FORGE_SHIELD) then
 			local t = target:getTalentFromId(target.T_FORGE_SHIELD)
 			lastdam = dam
 			dam = t.doForgeShield(type, dam, t, target, src)
-			if lastdam - dam > 0 then game:delayedLogDamage(src, target, 0, ("%s(%d 格挡)#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", lastdam-dam), false) end
+			if lastdam - dam > 0 then game:delayedLogDamage(src, target, 0, ("%s(%d blocked)#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", lastdam-dam), false) end
 		end
 
 		-- Increases damage
@@ -382,7 +382,7 @@ setDefaultProjector(function(src, x, y, type, dam, state)
 			dam = t.cs_on_damage(target, t, type, dam)
 		end
 		if dam ~= lastdam then
-			game:delayedLogDamage(src, target, 0, ("%s(%d 超能力护盾)#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", lastdam-dam), false)
+			game:delayedLogDamage(src, target, 0, ("%s(%d to psi shield)#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", lastdam-dam), false)
 		end
 
 		--Vim based defence
@@ -397,13 +397,13 @@ setDefaultProjector(function(src, x, y, type, dam, state)
 			local t = target:getTalentFromId(target.T_ANTIMAGIC_SHIELD)
 			lastdam = dam
 			dam = t.on_damage(target, t, type, dam, src)
-			if lastdam - dam  > 0 then game:delayedLogDamage(src, target, 0, ("%s(%d 反魔盾)#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", lastdam - dam), false) end
+			if lastdam - dam  > 0 then game:delayedLogDamage(src, target, 0, ("%s(%d antimagic)#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", lastdam - dam), false) end
 		end
 
 		-- Flat damage reduction ("armour")
 		if dam > 0 and target.flat_damage_armor then
 			local dec = math.min(dam, target:combatGetFlatResist(type))
-			if dec > 0 then game:delayedLogDamage(src, target, 0, ("%s(%d 固定吸收)#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", dec), false) end
+			if dec > 0 then game:delayedLogDamage(src, target, 0, ("%s(%d resist armour)#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", dec), false) end
 			dam = math.max(0, dam - dec)
 			print("[PROJECTOR] after flat damage armor", dam)
 		end
@@ -503,7 +503,7 @@ setDefaultProjector(function(src, x, y, type, dam, state)
 		end
 
 		if dam > 0 and src.attr and src:attr("martyrdom") and not state.no_reflect then
-			game:delayedLogMessage(src, target, "martyrdom", "#CRIMSON##Source# 因为殉难伤害了自身！")
+			game:delayedLogMessage(src, target, "martyrdom", "#CRIMSON##Source# damages %s through Martyrdom!", string.his_her_self(src))
 			state.no_reflect = true
 			DamageType.defaultProjector(target, src.x, src.y, type, dam * src.martyrdom / 100, state)
 			state.no_reflect = nil
@@ -549,7 +549,7 @@ setDefaultProjector(function(src, x, y, type, dam, state)
 		-- damage affinity healing
 		if not target.dead and affinity_heal > 0 then
 			target:heal(affinity_heal, src)
-			game:delayedLogMessage(target, nil, "Affinity"..type, "#Source#因为"..(DamageType:get(type).text_color or "#aaaaaa#")..DamageType:get(type).name.."#LAST# 伤害 受到#LIGHT_GREEN# 治疗#LAST#!")
+			game:delayedLogMessage(target, nil, "Affinity"..type, "#Source##LIGHT_GREEN# HEALS#LAST# from "..(DamageType:get(type).text_color or "#aaaaaa#")..DamageType:get(type).name.."#LAST# damage!")
 		end
 
 		if dam > 0 and src.damage_log and src.damage_log.weapon then
@@ -2048,19 +2048,19 @@ newDamageType{
 					if target:canBe("confusion") and not target:hasEffect(target.EFF_GLOOM_CONFUSED) then
 						target:setEffect(target.EFF_GLOOM_CONFUSED, 2, {power=25, no_ct_effect=true} )
 					end
-					name = "混乱"
+					name = "confusion"
 				elseif effect == 2 then
 					-- stun
 					if target:canBe("stun") and not target:hasEffect(target.EFF_GLOOM_STUNNED) then
 						target:setEffect(target.EFF_GLOOM_STUNNED, 2, {no_ct_effect=true})
 					end
-					name = "震慑"
+					name = "stun"
 				elseif effect == 3 then
 					-- slow
 					if target:canBe("slow") and not target:hasEffect(target.EFF_GLOOM_SLOW) then
 						target:setEffect(target.EFF_GLOOM_SLOW, 2, {power=0.3, no_ct_effect=true})
 					end
-					name = "减速'"
+					name = "slow'"
 				end
 			end
 		end
@@ -3264,11 +3264,11 @@ newDamageType{
 		if not target then return end
 		if game.party:hasMember(src) and game.party:findMember{type="garkul spirit"} then return end
 		if not rng.percent(dam) then
-			game:delayedLogDamage(src, target, 0, ("%s<%d%%%% 几率召唤兽人>#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", dam), false)
+			game:delayedLogDamage(src, target, 0, ("%s<%d%%%% orc summon chance>#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", dam), false)
 			return
 		end
 
-		game:delayedLogDamage(src, target, 0, ("%s<召唤兽人>#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#"), false)
+		game:delayedLogDamage(src, target, 0, ("%s<orc summon>#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#"), false)
 
 		-- Find space
 		local x, y = util.findFreeGrid(src.x, src.y, 5, true, {[engine.Map.ACTOR]=true})
@@ -3932,7 +3932,7 @@ newDamageType{
 		useImplicitCrit(src, state)
 		local target = game.level.map(x, y, Map.ACTOR)
 		if target then
-			game:delayedLogDamage(src, target, 0, ("%s<致盲粉>#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#"), false)
+			game:delayedLogDamage(src, target, 0, ("%s<blinding powder>#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#"), false)
 			if not src:checkHit(src:combatAttack(), target:combatPhysicalResist()) then return end
 			
 			if target:canBe("blind") then
@@ -3953,7 +3953,7 @@ newDamageType{
 		useImplicitCrit(src, state)
 		local target = game.level.map(x, y, Map.ACTOR)
 		if target and src:reactionToward(target) < 0 then
-			game:delayedLogDamage(src, target, 0, ("%s<烟雾>#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#"), false)
+			game:delayedLogDamage(src, target, 0, ("%s<smoke>#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#"), false)
 			if target:canBe("blind") then
 				target:setEffect(target.EFF_DIM_VISION, 2, {sight=dam.dam, apply_power=src:combatAttack(), no_ct_effect=true})
 			else

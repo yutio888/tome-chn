@@ -141,7 +141,12 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
-	log = "#Source#'s grapple fails because #Target# is too big",
+	log = "#Source# counter attacks #Target# with %s shield shards!",
+	fct = "#Source# 用%s的盾牌碎片反击了 #Target# !",
+}
+
+logCHN:newLog{
+	log = "#Source#'s grapple fails because #Target# is too big!",
 	fct = function()
 		return ("#Source#的抓取失败了，因为#Target#体型过大!")
 	end,
@@ -628,11 +633,18 @@ logCHN:newLog{
 		return ("你将 %s 传送到了手中。"):format(name)
 	end,
 }
+logCHN:newLog{
+	log = "#Source# deflects the projectile from #Target# %s",
+	fct = function(b)
+		b = b:gsub("northeast","东北"):gsub("northwest","西北"):gsub("southeast","东南"):gsub("southwest","西南")
+			:gsub("north","北"):gsub("south","南"):gsub("east","东"):gsub("west","西")
+			:gsub("but fumbles",",但是失败了"):gsub("offscreen","屏幕外"):gsub("to the","偏折至")
+		return ("#Source# 将 #Target# 的抛射物 %s"):format(b) end,
+}
 
 logCHN:newLog{
-	log = "You can not use the Orb with foes in sight (%s to the %s%s)",
-	fct = function(a,b,c)
-		a = npcCHN:getName(a)
+	log = "You can not use the Orb with foes in sight (#Target# to the %s%s)",
+	fct = function(b,c)
 		if b == "north" then b = "北"
 		elseif b == "south" then b = "南"
 		elseif b == "east" then b = "东"
@@ -643,7 +655,7 @@ logCHN:newLog{
 		elseif b == "southwest" then b = "西南"
 		end
 		if c == " - offscreen" then c = "- 在屏幕外" end
-		return ("你无法在你的视野中有敌人的情况下使用水晶球。(%s，%s方向%s)"):format(a,b,c)
+		return ("你无法在你的视野中有敌人的情况下使用水晶球。(#Target# %s方向%s)"):format(b,c)
 	end,
 }
 
@@ -764,11 +776,8 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
-	log = "%s notices you at the last moment!",
-	fct = function(a)
-		a = npcCHN:getName(a)
-		return ("%s在最后时刻注意到了你！"):format(a)
-	end,
+	log = "#Target# notices you at the last moment!",
+	fct = "#Target#在最后时刻注意到了你！",
 }
 
 logCHN:newLog{
@@ -1343,6 +1352,11 @@ logCHN:newLog{
 
 --mod/class/Game.lua
 logCHN:newLog{
+	log = "#{bold}##Source# killed #Target#!#{normal}#",
+	fct = function() return "#{bold}##Source# 击杀了 #Target#!#{normal}#" end,
+	}
+
+logCHN:newLog{
 	log = "#TEAL#%s",
 	fct = function(a)
 	    a = a:gsub("You feel a thrill of terror and your heart begins to pound in your chest. You feel terribly threatened upon entering this area.", "你因恐惧而感到不安，你觉得你的心跳开始加速， 你感到进入这个区域对你有极大的威胁。")
@@ -1369,6 +1383,38 @@ logCHN:newLog{
 	end,
 }
 			
+logCHN:newLog{
+	log = "#Source# hits #Target# for %s (%0.0f total damage)%s.",
+	fct = function(a,b,c)
+		c = c:gsub("healing","治疗")
+		return ("#Source# 击中 #Target# 造成 %s (%0.0f 合计伤害)%s."):format(a,b,c)
+	end,
+}
+logCHN:newLog{
+	log = "#Source# hits #Target# for %s damage.",
+	fct = function(a)
+		return ("#Source# 击中 #Target# 造成 %s 伤害。"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Source# receives %s.",
+	fct = function(a)
+		return ("#Source# 受到 %s 。"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# receives %s from #Source#.",
+	fct = function(a)
+		return ("#Target# 受到来自#Source#的 %s 。"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#{bold}##Source# killed #Target#!#{normal}#",
+	fct = function()
+		return ("#{bold}##Source# 击杀了 #Target#!#{normal}#")
+	end,
+}
 
 
 logCHN:newLog{
@@ -1383,4 +1429,88 @@ logCHN:newLog{
 	fct = function()
 	    return "这一层没有地方可以探索了。"
 	    end,  
+}
+
+--mod/class/Actor
+logCHN:newLog{
+	log = "#DARK_GREEN##Source# shares damage with %s oozes!",
+	fct = function(...)
+	    return ("#DARK_GREEN##Source# 和 %s 软泥怪平分伤害!"):format(...)
+	    end,  
+}
+
+logCHN:newLog{
+	log = "#CRIMSON##Source# teleports some damage to #Target#!",
+	fct = function(...)
+	    return ("#CRIMSON##Source#将部分伤害转移给 #Target#!"):format(...)
+	    end,  
+}
+logCHN:newLog{
+	log = "#CRIMSON##Source# shares some damage with a shadow!",
+	fct = function() return "#CRIMSON##Source# 和一个阴影共享伤害!" end,
+	}
+
+logCHN:newLog{
+	log = "#LIGHT_BLUE##Source# converts damage to mana!",
+	fct = function() return "#LIGHT_BLUE##Source# 将伤害转化为法力值!" end,
+	}
+
+
+
+logCHN:newLog{
+	log = "#YELLOW##Source# converts some damage to Psi!",
+	fct = function() return "#YELLOW##Source# 将伤害转移至超能力值!" end,
+	}
+logCHN:newLog{
+	log = "#aaaaaa##Source# converts some damage to Psi!",
+	fct = function() return "#YELLOW##Source# 将伤害转移至超能力值!" end,
+	}
+	
+logCHN:newLog{
+	log = "#RED##Source# is unstoppable!",
+	fct = function() return "#RED##Source# 不可阻挡！" end, 
+	}
+logCHN:newLog{
+	log = "#CRIMSON##Source# leeches life from #Target#!",
+	fct = function() return "#CRIMSON##Source# 吸取了 #Target#的生命!" end,
+	}
+
+logCHN:newLog{
+	log = "#CRIMSON##Source# steals life from #Target#!",
+	fct = function() return "#CRIMSON##Source# 偷取了 #Target#的生命!" end,
+	}
+
+logCHN:newLog{
+	log = "#OLIVE_DRAB##Source# redirects damage from #Target# to %s!",
+	fct = function(a) return ("#OLIVE_DRAB##Source# 将 #Target# 的伤害转移至 %s!"):format(a) end,
+	}
+
+
+logCHN:newLog{
+	log = "#CRIMSON##Source# leeches energies from #Target#!",
+	fct = function() return "#CRIMSON##Source# 吸取了 #Target# 的能量!" end,
+	}
+
+--mod/class/player
+logCHN:newLog{
+	log = "You cannot pick up items from the floor while asleep!",
+	fct = function() return "你不能在睡眠中捡起物品" end,
+	}
+	
+--mod/class/worldnpc
+
+logCHN:newLog{
+	log = "#Source# kills #Target#.",
+	fct = "#Source# 击杀了 #Target#." ,
+	}
+
+logCHN:newLog{
+	log = "#Target# kills #Source#.",
+	fct = "#Target# 击杀了 #Source#." ,
+	}
+	
+--mod/class/NPC
+logCHN:newLog{
+	log = "#Source# shoves #Target# forward.",
+	fct = "#Source# 将 #Target# 推到前面.",
 }

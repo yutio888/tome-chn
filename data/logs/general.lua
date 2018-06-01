@@ -932,3 +932,16 @@ logCHN:newLog{
 		return "#LIGHT_BLUE#有人打扰了沉睡者的沉眠..."
 	end,
 }
+
+
+logCHN:newLog{
+	log = "#Source# burns #Target#!",
+	fct = "#Source# 灼烧了 #Target#!",
+}
+
+logCHN:newLog{
+	log = "#Source# poisons #Target#!",
+	fct = "#Source# 让 #Target# 中毒!",
+}
+
+

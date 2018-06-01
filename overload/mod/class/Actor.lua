@@ -1653,9 +1653,10 @@ function _M:reactionToward(target, no_reflection)
 	if rsrc == target and self ~= target and target:attr("encased_in_ice") then return -50 end  -- summons shouldn't hate each other and shouldn't hate summoner more than enemies
 
 	-- Neverending hatred
-	if rsrc:attr("hates_everybody") and rtarget ~= rsrc then return -100 end
-	if rsrc:attr("hates_arcane") and rtarget:attr("has_arcane_knowledge") and not rtarget:attr("forbid_arcane") then return -100 end
-	if rsrc:attr("hates_antimagic") and rtarget:attr("forbid_arcane") then return -100 end
+	if rtarget.attr and rtarget:attr("hated_by_everybody") and rtarget ~= rsrc then return -100 end
+	if rsrc.attr and rsrc:attr("hates_everybody") and rtarget ~= rsrc then return -100 end
+	if rsrc.attr and rtarget.attr and rsrc:attr("hates_arcane") and rtarget:attr("has_arcane_knowledge") and not rtarget:attr("forbid_arcane") then return -100 end
+	if rsrc.attr and rtarget.attr and rsrc:attr("hates_antimagic") and rtarget:attr("forbid_arcane") then return -100 end
 
 	local v = engine.Actor.reactionToward(rsrc, rtarget)
 
@@ -2125,9 +2126,9 @@ function _M:onHeal(value, src)
 			game.flyers:add(sx, sy, 30, rng.float(-3, -2), (rng.range(0,2)-1) * 0.5, tostring(math.ceil(value)), {255,255,0})
 		end
 		if psi_heal > 0 then
-			game:delayedLogDamage(src or self, self, -value-psi_heal, ("#LIGHT_GREEN#%d点治疗 #LAST##AQUAMARINE#(%d点超能力值治疗)#LAST#"):format(value, psi_heal), false)
+			game:delayedLogDamage(src or self, self, -value-psi_heal, ("#LIGHT_GREEN#%d healing #LAST##AQUAMARINE#(%d psi heal)#LAST#"):format(value, psi_heal), false)
 		else
-			game:delayedLogDamage(src or self, self, -value, ("#LIGHT_GREEN#%d点治疗#LAST#"):format(value), false)
+			game:delayedLogDamage(src or self, self, -value, ("#LIGHT_GREEN#%d healing#LAST#"):format(value), false)
 		end
 	end
 	return value
@@ -2184,7 +2185,7 @@ function _M:onTakeHit(value, src, death_note)
 			local ox, oy = self.x, self.y
 			self:move(nx, ny, true)
 			game.level.map:particleEmitter(ox, oy, math.max(math.abs(nx-ox), math.abs(ny-oy)), "lightning", {tx=nx-ox, ty=ny-oy})
-			game:delayedLogDamage(src or {}, self, 0, ("#STEEL_BLUE#(%d 消失)#LAST#"):format(value), nil)
+			game:delayedLogDamage(src or {}, self, 0, ("#STEEL_BLUE#(%d shifted)#LAST#"):format(value), nil)
 			return 0
 		end
 	end
@@ -2192,7 +2193,7 @@ function _M:onTakeHit(value, src, death_note)
 	if self:attr("retribution") then
 	-- Absorb damage into the retribution
 		local absorb = math.min(value/2, self.retribution_absorb)
-		game:delayedLogDamage(src, self, 0, ("#SLATE#(%d 吸收)#LAST#"):format(absorb), false)
+		game:delayedLogDamage(src, self, 0, ("#SLATE#(%d absorbed)#LAST#"):format(absorb), false)
 		if absorb < self.retribution_absorb then
 			self.retribution_absorb = self.retribution_absorb - absorb
 			value = value - absorb
@@ -2251,7 +2252,7 @@ function _M:onTakeHit(value, src, death_note)
 			end
 		end
 		if #acts > 0 then
-			game:delayedLogMessage(self, nil, "mitosis_damage", "#DARK_GREEN##Source# 和 %s 软泥怪平分伤害!", string.his_her(self):gsub("his","他的"):gsub("her","她的"))
+			game:delayedLogMessage(self, nil, "mitosis_damage", "#DARK_GREEN##Source# shares damage with %s oozes!", string.his_her(self))
 			value = value / (#acts+1)
 			for _, act in ipairs(acts) do
 				act:takeHit(value, src)
@@ -6603,7 +6604,7 @@ function _M:on_project_acquire(tx, ty, who, t, x, y, damtype, dam, particles, is
 		else
 			dir = "to the "..dir.."!"
 		end
-		self:logCombat(who, "#Source# 偏移了#Target# 的抛射物", dir)
+		self:logCombat(who, "#Source# deflects the projectile from #Target# %s", dir)
 		return true
 	end
 end

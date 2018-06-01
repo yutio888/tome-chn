@@ -29,7 +29,9 @@ function _M:init(title, file, replace, w, h, on_exit, accept_key)
 	local rw, rh = w, h
 	w = math.floor(w or game.w * 0.6)
 	h = math.floor(h or game.h * 0.8)
-
+	
+	if title == "Welcome to #LIGHT_BLUE#Tales of Maj'Eyal" then title = "欢迎来到#LIGHT_BLUE#马基埃亚尔" end
+	
 	Dialog.init(self, title or "Text", w, h)
 
 	self:generateList(file, replace)

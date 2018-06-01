@@ -1029,6 +1029,10 @@ logCHN:newLog{
 	end,
 }
 logCHN:newLog{
+	log = "#CRIMSON##Source# damages #Target# through the Braid!",
+	fct = function() return "#CRIMSON##Source# 通过生命编织伤害了 #Target# !" end,
+	}
+logCHN:newLog{
 	log = "#Target#'s lifeline has been braided.",
 	fct = function(a)
 		a = npcCHN:getName(a)

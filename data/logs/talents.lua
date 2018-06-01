@@ -329,6 +329,16 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
+	log = "#Source# folds space with with #target#!",
+	fct = "#Source# 折叠了与 #target# 之间的空间!",
+}
+
+logCHN:newLog{
+	log = "#Source#'s space-time folding with #target# fizzles!",
+	fct = "#Source# 和 #target# 的时空折叠失败了！",
+}
+
+logCHN:newLog{
 	log = "You can't place a wormhole entrance here.",
 	fct = function()
 		return "你不能在这里安置一个虫洞入口。"
@@ -404,6 +414,28 @@ logCHN:newLog{
 	fct = function(a)
 		a = npcCHN:getName(a)
 		return ("%s 操纵了时间流。"):format(a)
+	end,
+}
+--chronomancy/flux
+logCHN:newLog{
+	log = "#LIGHT_BLUE##Source# converts damage to paradox!",
+	fct = function()
+		return "#LIGHT_BLUE##Source# 将伤害转化为紊乱值!"
+	end,
+}
+
+--chronomancy/guardian
+logCHN:newLog{
+	log = "#STEEL_BLUE##Source# shares damage with %s guardian!",
+	fct = function(a)
+		return ("#STEEL_BLUE##Source# 和 %s 的守卫共享伤害!"):format(a)
+	end,
+}
+--chronomancy/other
+logCHN:newLog{
+	log = "#PINK##Source# displaces some damage onto #Target#!",
+	fct = function()
+		return "#PINK##Source# 将部分伤害转移至 #Target#!"
 	end,
 }
 
@@ -522,6 +554,38 @@ logCHN:newLog{
 	end,
 }
 
+--corruption/vile-life
+logCHN:newLog{
+	log = "#CRIMSON##Source# transfers an effect (%s) to #Target#!",
+	fct = function(a)
+		return ("#CRIMSON##Source# 将一项效果 (%s) 转移至 #Target#!"):format(a)
+	end,
+}
+--cunning/artifice
+logCHN:newLog{
+	log = "#Source# strikes #target# with hidden blades!",
+	fct = "#Source# 使用隐藏的刀片击中了 #target# !",
+	}
+logCHN:newLog{
+	log = "#Source# strikes at a vital spot on #target#!",
+	fct = "#Source# 攻向 #target#的要害!",
+	}
+logCHN:newLog{
+	log = "#Source# throws a grappling hook at #target#!",
+	fct = "#Source# 朝 #target# 扔出钩爪!",
+}
+logCHN:newLog{
+	log = "#Source#'s grappling hook latches onto #target#!",
+	fct = "#Source# 的钩爪命中了 #target#!",
+	}
+logCHN:newLog{
+	log = "#Source# is dragged towards #target#!",
+	fct = "#Source# 被拉向 #target#!",
+}
+logCHN:newLog{
+	log = "#Target# is dragged towards #source#!",
+	fct = "#Target# 被拉向 #source#!",
+}
 --cunning/ambush
 
 logCHN:newLog{
@@ -556,8 +620,12 @@ logCHN:newLog{
 		return ("%s抵抗了震慑。"):format(a)
 	end,
 }
-
-
+logCHN:newLog{
+	log = "#DARK_ORCHID##Source# snipes #Target# (%+d%%%%%%%% weapon bonus for range)!#LAST#",
+	fct = function(a)
+		return ("#DARK_ORCHID##Source# 狙击了 #Target# (%+d%%%%%%%% 远程武器伤害加成)!#LAST#"):format(a)
+	end,
+}
 --cunning/dirty
 logCHN:newLog{
 	log = "#Target# resists the stun and #Source# quickly regains its footing!",
@@ -571,6 +639,11 @@ logCHN:newLog{
 	fct = function()
 		return "地形阻止了 #Source# 与 #Target#的换位."
 	end,
+}
+--cunning/lethality
+logCHN:newLog{
+	log = "#Source# #GOLD#tests the defenses#LAST# of #target#.",
+	fct = "#Source# 测试了 #target# 的 #GOLD#防守#LAST# .",
 }
 
 --cunning/scoundrel
@@ -610,7 +683,16 @@ logCHN:newLog{
 		return "你不能在周围有怪物注视你的情况下潜行！"
 	end,
 }
-
+--cunning/tactical
+logCHN:newLog{
+	log = "#Source# slams #Target# into the ground!",
+	fct = "#Source# 将 #Target# 击倒在地！",
+}
+logCHN:newLog{
+	log ="#Source# throws #Target# to the ground!",
+	fct ="#Source# 将 #Target# 扔在地上!",
+	}
+	
 --cunning/trap
 logCHN:newLog{
 	log = "#CADET_BLUE#Placing %s...",
@@ -1045,6 +1127,14 @@ logCHN:newLog{
 		return "你没能设置腐蚀之种。"
 	end,
 }
+
+--gift/eyals-fury
+logCHN:newLog{
+	log = "#CRIMSON#%s drains magical energy!",
+	fct = function(a)
+		return ("#CRIMSON#%s 吸取了魔法能量!"):format(timeEffectCHN:getName(a) or a) 
+		end,
+		}
 --gift/fire-drake
 
 logCHN:newLog{
@@ -2109,6 +2199,16 @@ logCHN:newLog{
 	end,
 }
 
+--technique/assasination
+logCHN:newLog{
+	log = "#Source# delivers a Coup de Grace against #Target#!",
+	fct = "#Source# 对 #Target# 发起致命一击!",
+}
+logCHN:newLog{
+	log = "#Target# avoids a garrote from #Source#!",
+	fct = "#Target# 避免了被 #Source# 勒住喉咙!",
+}
+
 --technique/buckler-traning
 logCHN:newLog{
 	log = "You require a ranged weapon and a shield to use this talent.",
@@ -2124,7 +2224,20 @@ logCHN:newLog{
 	end,
 }
 
-
+--technique/berserker
+logCHN:newLog{
+	log = "#Source#'s rage awakens!",
+	fct = "#Source#的愤怒被激发！",
+}
+logCHN:newLog{
+	log = "#Source#'s rage subsides!",
+	fct = "#Source#的愤怒消退了！",
+}
+--technique/warcries
+logCHN:newLog{
+	log = "#Source# shaters '#Target#'.",
+	fct = "#Source# 粉碎了 #Target#.",
+}
 
 --technique/dualweapon
 
@@ -2381,6 +2494,10 @@ logCHN:newLog{
 		return ("%s向%s释放闪电！"):format(a,b)
 	end,
 }
+logCHN:newLog{
+	log = "#Source# hurls a huge boulder at #target#!",
+	fct = "#Source# 朝 #target# 投掷巨石!",
+}
 
 --misc/race
 logCHN:newLog{
@@ -2475,13 +2592,11 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
-	log = "#GREEN#%s absorbs part of the blow. %s is closer to nature.",
-	fct = function(a,b)
-		a = npcCHN:getName(a)
-		b = npcCHN:getName(b)
-		return ("#GREEN#%s吸收了部分攻击，%s更加贴近自然了。"):format(a,b)
-	end,
+	log = "#GREEN##Source# absorbs part of the blow. #Target# is closer to nature.",
+	fct = "#GREEN##Source#吸收了部分攻击，#Target#更加贴近自然了。",
 }
+
+
 
 logCHN:newLog{
 	log = "%s holds on to its sanity.",
@@ -2546,6 +2661,11 @@ logCHN:newLog{
 		b = npcCHN:getName(b)
 		return ("%s 召唤了 %s ！"):format(a,b)
 	end,
+}
+
+logCHN:newLog{
+	log = "#Source# summons #Target#!",
+	fct = "#Source# 召唤了 #Target#!",
 }
 
 logCHN:newLog{

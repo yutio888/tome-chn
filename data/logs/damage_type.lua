@@ -5,14 +5,14 @@ logCHN:newLog{
 		return ("%s 摆脱了暴击伤害！"):format(a)
 	end,
 }
---[[
+
 logCHN:newLog{
 	log = "#Source# strikes #Target# in the darkness (%+d%%%%%%%% damage).",
 	fct = function(a)
 		return ("#Source# 在黑暗中打击了 #Target#  (%+d%%%%%%%% 伤害)!"):format(a)
 	end,
 }
-]]
+
 logCHN:newLog{
 	log = "#CRIMSON##Source# damages %s through Martyrdom!",
 	fct = function(a)
@@ -278,5 +278,30 @@ logCHN:newLog{
 	end,
 }
 
+local normal_damtype = {
+	["物理"] = "#WHITE#",
+	["奥术"] = "#PURPLE#",
+	["寒冷"] = "#1133F3#",
+	["火焰"] = "#LIGHT_RED#",
+	["闪电"] = "#ROYAL_BLUE#",
+	["酸性"] = "#GREEN#",
+	["自然"] = "#LIGHT_GREEN#",
+	["枯萎"] = "#DARK_GREEN#",
+	["光系"] = "#YELLOW#",
+	["暗影"] = "#GREY#",
+	["精神"] = "#YELLOW#",
+	["时空"] = "#LIGHT_STELL_BLUE",
+}
 
 
+for i,k in pairs(normal_damtype) do
+print("DAMCHECK",i)
+logCHN:newLog{
+	log = "#Source##LIGHT_GREEN# HEALS#LAST# from "..k..i.."#LAST# damage!",
+	fct = function() return "#Source# 因 "..k..i.."#LAST# 伤害受到了#LIGHT_GREEN# 治疗 #LAST#!" end,
+}
+logCHN:newLog{
+	log = "#Source##LIGHT_GREEN# HEALS#LAST# from #aaaaaa#"..i.."#LAST# damage!",
+	fct = function() return "#Source# 因 #aaaaaa#"..i.."#LAST# 伤害受到了#LIGHT_GREEN# 治疗 #LAST#!" end,
+}
+end

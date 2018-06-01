@@ -135,6 +135,8 @@
 ./mod/class/Game.lua:						self.log("There is nowhere left to explore.")
 ./mod/class/Game.lua:		HOTKEY_PREV_PAGE = not_wild(function() self.player:prevHotkeyPage() self.log("Hotkey page %d is now displayed.", self.player.hotkey_page) end),
 ./mod/class/Game.lua:		HOTKEY_NEXT_PAGE = not_wild(function() self.player:nextHotkeyPage() self.log("Hotkey page %d is now displayed.", self.player.hotkey_page) end),
+
+--------------------------------------
 ./mod/class/Game.lua:				if self.player:attr("never_move") then self.log("You cannot currently leave the level.") return end
 ./mod/class/Game.lua:					self.log("You cannot go into the wilds with the following effects: %s", table.concat(stop, ", "))
 ./mod/class/Game.lua:				self.log("There is no way out of this level here.")

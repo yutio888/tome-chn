@@ -330,6 +330,13 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
+	log = "#VIOLET#Your transmogrification chest glows brightly for a moment.",
+	fct = function()
+		return "#VIOLET#你的转化之盒闪了一下光。"
+	end,
+}
+
+logCHN:newLog{
 	log = "The orb seems to fizzle without the Blood Master.",
 	fct = function()
 		return "水晶球离开鲜血领主之后发出了吱吱声。"
@@ -367,7 +374,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "This rift in time has been created by the paradox. You dare not enter it; it could make things worse. Another Warden will have to fix your mess.",
 	fct = function()
-		return "这个时间裂隙是由于混乱造成的。你不敢进入， 事情会变得更糟，另外一个守卫会修复混乱。"
+		return "这个时间裂隙是时空紊乱造成的。 你不敢进入， 事情可能会变得更糟， 另外一个守卫将不得不前去修复混乱。"
 	end,
 }
 

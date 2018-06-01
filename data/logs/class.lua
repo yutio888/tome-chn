@@ -1313,6 +1313,12 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
+	log = "Run in which direction?",
+	fct = "朝哪个方向跑？",
+}
+
+
+logCHN:newLog{
 	log = "#CRIMSON##Source# steals life from #Target#!",
 	fct = function()
 		return "#CRIMSON##Source#从#Target#处吸取生命!"
@@ -1351,6 +1357,14 @@ logCHN:newLog{
 
 
 --mod/class/Game.lua
+logCHN:newLog{
+	log = "Hotkey page %d is now displayed.",
+	fct = function(...) return ("快捷键页码%d正被显示。"):format(...) end,
+}
+logCHN:newLog{
+	log = "You cannot currently leave the level.",
+	fct = "你现在不能离开该层",
+	}
 logCHN:newLog{
 	log = "#{bold}##Source# killed #Target#!#{normal}#",
 	fct = function() return "#{bold}##Source# 击杀了 #Target#!#{normal}#" end,
@@ -1485,6 +1499,25 @@ logCHN:newLog{
 	fct = function(a) return ("#OLIVE_DRAB##Source# 将 #Target# 的伤害转移至 %s!"):format(a) end,
 	}
 
+
+logCHN:newLog{
+	log = "#VIOLET#Following build order %s; increasing %s by 1.",
+	fct = function(...)
+	    return ("#VIOLET#遵循加点顺序%s;增加一点%s"):format(...)
+	    end,
+}
+logCHN:newLog{
+	log = "#VIOLET#Following build order %s; learning talent category %s.",
+	fct = function(...)
+	    return ("#VIOLET"遵循加点顺序%s;学会技能树%s):format(...)
+	    end,
+}
+logCHN:newLog{
+	log = "#VIOLET#Following build order %s; learning talent %s.",
+	fct = function(...)
+	    return ("#VIOLET"遵循加点顺序%s;学会技能%s):format(...)
+	    end,
+}
 
 logCHN:newLog{
 	log = "#CRIMSON##Source# leeches energies from #Target#!",

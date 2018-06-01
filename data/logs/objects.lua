@@ -90,3 +90,16 @@ logCHN:newLog{
 	end,
 }
 
+logCHN:newLog{
+	log = "#LIGHT_BLUE#Ice and snow form a barrier!",
+	fct = "#LIGHT_BLUE# 冰和雪组成了屏障",
+}
+
+logCHN:newLog{
+	log = "#LIGHT_RED#You can not do that with a tinker attached. Remove it first.",
+	fct = "#LIGHT_RED#当有配件附着时，你不能这么做。先移除配件。"
+}
+
+
+
+

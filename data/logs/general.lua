@@ -944,4 +944,21 @@ logCHN:newLog{
 	fct = "#Source# 让 #Target# 中毒!",
 }
 
+logCHN:newLog{
+	log = "#VIOLET#The portal is already broken!",
+	fct = "#VIOLET#传送门已经被破坏!",
+}
+logCHN:newLog{
+	log = "#VIOLET#The portal is broken!",
+	fct = "#VIOLET#传送门被破坏了!",
+}
+logCHN:newLog{
+	log = "#VIOLET# The stairway collapses completely as you ascend!",
+	fct = "#VIOLET# 当你下楼后，楼梯彻底崩塌了！",
+}
+
+logCHN:newLog{
+	log = "#VIOLET# The decrepit stairs crumble some more as you climb them",
+	fct = "#VIOLET# 当你上楼后，破旧的楼梯更加碎裂",
+}
 

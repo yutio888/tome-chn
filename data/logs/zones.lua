@@ -227,7 +227,12 @@ logCHN:newLog{
 		return ("你有 %d 属性点数，按下p来使用。"):format(...)
 	end,
 }
-
+logCHN:newLog{
+	log = "%s have %d stat point(s) to spend. Press p to use them.",
+	fct = function(...)
+		return ("%s有 %d 属性点数，按下p来使用。"):format(...)
+	end,
+}
 logCHN:newLog{
 	log = "You have %d class talent point(s) to spend. Press p to use them.",
 	fct = function(...)
@@ -589,7 +594,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "You were not the first here: the corpse was turned into an undead.",
 	fct = function()
-		return "你不是这里第一个变成亡灵的尸体！"
+		return "你不是第一个来到这里的：那个人的尸体已经变成了亡灵！"
 	end,
 }
 
@@ -710,4 +715,8 @@ logCHN:newLog{
 	fct = function()
 		return "#Source# 在你的脚下释放了黑暗的能量。"
 	end,
+}
+logCHN:newLog{
+	log = "You have not finished your romantic time at the beach.",
+	fct = "你还没享受完在海滩的浪漫时光",
 }

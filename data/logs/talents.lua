@@ -683,6 +683,13 @@ logCHN:newLog{
 		return "你不能在周围有怪物注视你的情况下潜行！"
 	end,
 }
+--cunning/survival
+
+logCHN:newLog{
+	log = "#CADET_BLUE#Disarm A Trap: (direction keys to select where to disarm, shift+direction keys to move freely)",
+	fct = "#CADET_BLUE#解除陷阱：（方向键选择解除方向，Shift+方向键可以移动）",
+}
+
 --cunning/tactical
 logCHN:newLog{
 	log = "#Source# slams #Target# into the ground!",
@@ -694,6 +701,20 @@ logCHN:newLog{
 	}
 	
 --cunning/trap
+logCHN:newLog{
+	log = "#YELLOW_GREEN#Dismantling %s",
+	fct = function(a)
+	    return ("#YELLOW_GREEN#放置 %s中"):format(a)
+	    end,
+}
+
+logCHN:newLog{
+	log = "#LIGHT_GREEN#Preparing %s%s",
+	fct = function(a,b)
+	    return ("#LIGHT_GREEN#准备%s%s中"):format(a,b:gsub("normal trigger","常规触发"))
+	    end,
+	    }
+
 logCHN:newLog{
 	log = "#CADET_BLUE#Placing %s...",
 	fct = function(a)
@@ -1904,6 +1925,12 @@ logCHN:newLog{
 		return "选择目标传送..."
 	end,
 }
+
+logCHN:newLog{
+	log = "You cannot teleport there",
+	fct = "你不能传送到那里",
+}
+
 
 logCHN:newLog{
 	log = "The targetted phase door fizzles and works randomly!",

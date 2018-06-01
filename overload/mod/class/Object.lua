@@ -1475,6 +1475,7 @@ use_actor = use_actor or game.player
 				local tt = Talents.talents_types_def[ttn]
 				if tt then
 					local cat = tt.type:gsub("/.*", "")
+					cat = t_talent_cat[cat] or cat
 					local name = cat:capitalize().." / "..tt.name:capitalize()
 					local diff = (ttid[2] or 0) - (ttid[1] or 0)
 					if diff ~= 0 then

@@ -9,7 +9,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#Source# strikes #Target# in the darkness (%+d%%%%%%%% damage).",
 	fct = function(a)
-		return ("#Source# 在黑暗中打击了 #Target#  (%+d%%%%%%%% 伤害)!"):format(a)
+		return ("#Source# 在黑暗中打击了 #Target#  (%+d%%%%%%%%%%%%%%%% 伤害)!"):format(a)
 	end,
 }
 

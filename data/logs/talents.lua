@@ -623,7 +623,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#DARK_ORCHID##Source# snipes #Target# (%+d%%%%%%%% weapon bonus for range)!#LAST#",
 	fct = function(a)
-		return ("#DARK_ORCHID##Source# 狙击了 #Target# (%+d%%%%%%%% 远程武器伤害加成)!#LAST#"):format(a)
+		return ("#DARK_ORCHID##Source# 狙击了 #Target# (%+d%%%%%%%%%%%%%%%% 远程武器伤害加成)!#LAST#"):format(a)
 	end,
 }
 --cunning/dirty

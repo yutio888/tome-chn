@@ -396,6 +396,7 @@
 ./data/talents/spells/staff-combat.lua:	on_pre_use = function(self, t, silent) if not self:hasStaffWeapon() then if not silent then game.logPlayer(self, "You need a staff to use this spell.") end return false end return true end,
 ./data/talents/spells/staff-combat.lua:	on_pre_use = function(self, t, silent) if not self:hasStaffWeapon() then if not silent then game.logPlayer(self, "You need a staff to use this spell.") end return false end return true end,
 ./data/talents/spells/staff-combat.lua:			game.logPlayer(self, "You cannot use Blunt Thrust without a staff weapon!")
+
 ./data/talents/spells/golem.lua:		if self:attr("never_move") then game.logPlayer(self, "Your golem cannot do that currently.") return end
 ./data/talents/spells/golem.lua:				game.logPlayer(self, "You are too close to build up momentum!")
 ./data/talents/spells/golem.lua:		if self:attr("never_move") then game.logPlayer(self, "Your golem cannot do that currently.") return end
@@ -438,6 +439,8 @@
 ./data/talents/spells/conveyance.lua:			game.logPlayer(self, "Select a target to teleport...")
 ./data/talents/spells/conveyance.lua:			game.logPlayer(self, "Select a teleport location...")
 ./data/talents/spells/conveyance.lua:				game.logPlayer(self, "The targetted teleport fizzles and works randomly!")
+
+------------------------
 ./data/talents/techniques/bow.lua:		if not self:hasArcheryWeapon("bow") then game.logPlayer(self, "You must wield a bow!") return nil end
 ./data/talents/techniques/bow.lua:		if not self:hasArcheryWeapon("bow") then game.logPlayer(self, "You must wield a bow!") return nil end
 ./data/talents/techniques/bow.lua:		if not self:hasArcheryWeapon("bow") then game.logPlayer(self, "You must wield a bow!") return nil end

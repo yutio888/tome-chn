@@ -470,6 +470,16 @@ logCHN:newLog{
 		return ("%s抵抗了疫病！"):format(a)
 	end,
 }
+--corruption/sanguisuge
+logCHN:newLog{
+	log = "Doing this would kill you",
+	fct = "这么做会杀死你自己",
+}
+
+logCHN:newLog{
+	log = "There are no foes in sight",
+	fct = "视野内没有敌人",
+}
 
 --corruption/scourge
 
@@ -509,6 +519,7 @@ logCHN:newLog{
 		return ("%s 抵抗了暗影。"):format(a)
 	end,
 }
+
 --corruption/shadowflame
 
 logCHN:newLog{
@@ -1413,6 +1424,12 @@ logCHN:newLog{
 		return "#Source#将#Target#拉了进来!"
 	end,
 }
+--psionic/discharge
+logCHN:newLog{
+	log = "You have no feedback to start a feedback loop!",
+	fct = "你没有反馈值，不能这么做！",
+}
+
 --psionic/dream-forge
 logCHN:newLog{
 	log = "#ORANGE#%s forges a dream shield to block the attack!",
@@ -1528,6 +1545,11 @@ logCHN:newLog{
 
 --psionic/other
 logCHN:newLog{
+	log = "You require a telekinetically wielded weapon or gem for your psionic focus.",
+	fct = "你需要念力武器或者宝石来使用灵能聚焦",
+}
+
+logCHN:newLog{
 	log = "%s wears: %s.",
 	fct = function(a,b)
 		a = npcCHN:getName(a)
@@ -1550,6 +1572,11 @@ logCHN:newLog{
 		return "光环没有造成漩涡就消失了。"
 	end,
 }
+--psionic/psy-fighting
+logCHN:newLog{
+	log = "You cannot do that without a weapon in your telekinetic slot.",
+	fct = "你不能在没有念力武器时这么做。",
+}
 
 --psionic/psychic-assault
 logCHN:newLog{
@@ -1561,6 +1588,11 @@ logCHN:newLog{
 }
 
 --psionic/slumber
+logCHN:newLog{
+	log = "You feel it unwise to travel to the dreamscape in such a fragile form.",
+	fct = "你感觉在梦境空间里使用如此脆弱的形态非常不明智",
+}
+
 logCHN:newLog{
 	log = "This talent cannot be used from within the Dreamscape.",
 	fct = function()
@@ -1912,9 +1944,22 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
+	log = "%s rips more animus from its victim. (+1 more soul)",
+	fct = "%s 从受害者身上获取了更多灵魂（+1额外灵魂）。",
+}
+
+logCHN:newLog{
 	log = "#GREY##Source# rips apart the animus of #target# and creates an undead husk.",
 	fct = function()
 		return "#GREY##Source# 抹杀了 #target# 的灵魂，制造了一个不死傀儡。"
+	end,
+}
+
+logCHN:newLog{
+	log = "A soul returns to %s",
+	fct = function(a)
+	    a = npcCHN:getName(a)
+	    return ("一个灵魂回到了%s手中。"):format(a)
 	end,
 }
 
@@ -1924,6 +1969,11 @@ logCHN:newLog{
 	fct = function()
 		return "选择目标传送..."
 	end,
+}
+
+logCHN:newLog{
+	log = "Select a teleport location...",
+	fct = "选择传送位置...",
 }
 
 logCHN:newLog{

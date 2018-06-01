@@ -14,6 +14,22 @@ function logCHN:newLog(l)
 	logTableCHN[l.log] = l
 end
 
+function logCHN:trans(str,...)
+
+	 if not str then return end
+	 if logTableCHN[str] then
+	    str = logTableCHN[str].fct(...)
+	 else str = str:format(...)
+	 end
+	 if str:find("A carrion worm mass bursts forth from your wounds") then
+	    str = str:gsub("A carrion worm mass bursts forth from your wounds, softening the blow and reducing damage taken by","一群蠕虫从伤口处爆发生长，减少伤害")
+	 elseif str:find("#CRIMSON#The ") and str:find("glows ominously.") then
+		str = "#CRIMSON#恶魔雕像闪耀着光芒。"
+	 end
+	 return str
+end
+
+
 dofile("data-chn123/logs/chat.lua")
 dofile("data-chn123/logs/class.lua")
 dofile("data-chn123/logs/damage_type.lua")

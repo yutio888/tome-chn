@@ -32,7 +32,7 @@ registerTalentTranslation{
 		local range = self:getTalentRange(t)
 		local damage = t.getDamage(self, t)
 		return ([[你 的 潜 意 识 会 报 复 那 些 伤 害 你 的 人。 
-		 当 攻 击 者 在 %d 码 范 围 内 时， 你 会 对 目 标 造 成 伤 害， 伤 害 值 为 因 承 受 此 攻 击 而 获 得 的 反 馈 数 值 （但 不 超 过 %0.2f）。
+		 当 攻 击 者 在 %d 码 范 围 内 时， 你 会 对 目 标 造 成 伤 害， 伤 害 值 为 因 承 受 此 攻 击 而 获 得 的 反 馈 数 值 （但 不 超 过 %0.2f ）。
 		 此 效 果 每 回 合 对 同 一 生 物 最 多 只 能 触 发 1 次。
 		 受 精 神 强 度 影 响， 伤 害 按 比 例 加 成。]]):format(range, damDesc(self, DamageType.MIND, damage))
 	end,

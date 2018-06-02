@@ -20,7 +20,7 @@ registerTalentTranslation{
 	info = function (self,t)
 		local physicalresistance = t.getPhysicalResistance(self, t)
 		local saves = t.getResists(self, t)
-		return ([[颂 赞 日 之 荣 耀 ，使 你 获 得 %d 物 理 抗 性 ， %d 物 理 豁 免 ，%d 护 甲 与 15%% 护 甲 硬 度 。
+		return ([[颂 赞 日 之 荣 耀 ，使 你 获 得 %d 物 理 抗 性 ， %d 物 理 豁 免 ， %d 护 甲 与 15%% 护 甲 硬 度 。
 		 同 时 只 能 激 活 一 种 赞 歌 。
 		 效 果 受 法 术 强 度 加 成。]]):
 		format(physicalresistance, saves, physicalresistance)

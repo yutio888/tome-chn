@@ -694,6 +694,7 @@ logCHN:newLog{
 	log = "You switch your weapons to: %s.",
 	fct = function(a)
 		local name = objects:getObjectsChnName(a):gsub("and", "和")
+		name = name:gsub("unarmed","空手")
 		return ("你切换了你的装备至： %s 。"):format(name)
 	end,
 }
@@ -1592,6 +1593,7 @@ logCHN:newLog{
 	log = "%s warps space-time to equip: %s.",
 	fct = function(a,b)
 		local name = objects:getObjectsChnName(b):gsub("and", "和")
+		name = name:gsub("unarmed","空手")
 		return ("%s扭曲空间，切换武器至： %s 。"):format(npcCHN:getName(a),name)
 	end,
 }
@@ -1599,6 +1601,7 @@ logCHN:newLog{
 	log = "%s switches %s weapons to: %s.",
 	fct = function(a,b,c)
 		local name = objects:getObjectsChnName(c):gsub("and", "和")
+		name = name:gsub("unarmed","空手")
 		return ("%s切换武器至： %s 。"):format(npcCHN:getName(a),b,name)
 	end,
 }

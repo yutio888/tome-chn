@@ -57,10 +57,26 @@ registerTalentTranslation{
 		format(t.getChance(self, t))
 	end,
 }
-
+local Dialog = require "engine.ui.Dialog"
 registerTalentTranslation{
 	id = "T_DRAKE-INFUSED_BLOOD",
 	name = "灌输龙血",
+	action = function(self, t)
+		local possibles = {
+			{name=DamageType:get(DamageType.FIRE).text_color.."火龙 / 火焰抗性", damtype=DamageType.FIRE},
+			{name=DamageType:get(DamageType.COLD).text_color.."冰龙 / 寒冷抗性", damtype=DamageType.COLD},
+			{name=DamageType:get(DamageType.LIGHTNING).text_color.."风暴龙 / 闪电抗性", damtype=DamageType.LIGHTNING},
+			{name=DamageType:get(DamageType.PHYSICAL).text_color.."沙龙 / 物理抗性 (数值减半)", damtype=DamageType.PHYSICAL},
+			{name=DamageType:get(DamageType.NATURE).text_color.."野性龙 / 自然抗性", damtype=DamageType.NATURE},
+		}
+		local damtype = self:talentDialog(Dialog:listPopup("选择龙种", "选择你希望灌输的龙血种类:", possibles, 400, 400, function(item) self:talentDialogReturn(item) end))
+		if damtype then
+			self.drake_infused_blood_type = damtype.damtype
+			self:updateTalentPassives(t.id)
+		end
+		self.krog_kills = 0
+		return true
+	end,
 	info = function(self, t)
 		local damtype = self.drake_infused_blood_type or DamageType.FIRE
 		local resist = t.getResist(self, t)

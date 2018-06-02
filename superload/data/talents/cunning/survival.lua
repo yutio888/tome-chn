@@ -37,9 +37,9 @@ registerTalentTranslation{
 	name = "危机感知",
 	info = function (self,t)
 		return ([[你 拥 有 了 更 高 级  的 自 我 保 护 感 知 力，敏 锐 的 直 觉 让 你 察 觉 到 他 人 会 忽 略 的 危 险 。
-		你 感 知 陷 阱 的 能 力 提 升 了 （+%d 点 侦 察 强 度 ）。
-		对 你 发 动 的 攻 击 的 暴 击 率 减 少 %0.1f%%，同 时 潜 行 单 位 因 未 被 发 现 而 对 你 造 成 的 额 外 伤 害 的 倍 率 减 小 %d%%。
-		抵 抗 负 面 状 态 效 果 时， 豁 免 +%d 。
+		你 感 知 陷 阱 的 能 力 提 升 了 （ +%d 点 侦 察 强 度 ）。
+		对 你 发 动 的 攻 击 的 暴 击 率 减 少 %0.1f%% ，同 时 潜 行 单 位 因 未 被 发 现 而 对 你 造 成 的 额 外 伤 害 的 倍 率 减 小 %d%% 。
+		你 获 得 一 次 机 会 重 新 抵 抗 未 成 功 抵 抗 的 负 面 效 果 ， 豁 免 为 正 常 豁 免 %d 。
 		侦 测 点 数 和 豁 免  随 灵 巧 提 升 。]]):
 		format(t.trapDetect(self, t), t.critResist(self, t), t.getUnseenReduction(self, t)*100, -t.savePenalty(self, t))
 	end,

@@ -38,7 +38,7 @@ registerTalentTranslation{
 	name = "轻甲训练",
 	info = function (self,t)
 		local defense = t.getDefense(self,t)
-		return ([[你 学 会 在 身 着 轻 甲 时 保 持 敏 捷， 增 加 %d 闪 避 ，%d%% 护 甲 硬 度 ，减 少 %d%% 疲 劳。
+		return ([[你 学 会 在 身 着 轻 甲 时 保 持 敏 捷， 增 加 %d 闪 避 ， %d%% 护 甲 硬 度 ，减 少 %d%% 疲 劳。
 		此 外 ，每 当 你 进 入 和 （可 见 的 ） 敌 人 相 邻 的 位 置 时 ， 你 获 得 %d 闪避，持 续 2 回 合 。
 		闪 避 受 敏 捷 加 成 。]]):
 		format(defense, t.getArmorHardiness(self,t), t.getFatigue(self, t, true), defense/2)

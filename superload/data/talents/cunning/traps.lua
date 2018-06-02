@@ -10,7 +10,7 @@ registerTalentTranslation{
 	name = "陷阱专精",
 	action = function(self, t)
 		local nb = t.getNbTraps(self,t)
-		local txt = ("准备哪个陷阱? (最多: %d, 最大材质等级 %d)%s"):format(nb, math.min(5, self:getTalentLevelRaw(t)), self.turn_procs.free_trap_mastery and "\n游戏开始: 新准备的陷阱不会进入冷却。" or "\n#YELLOW#新准备的陷阱会进入冷却。#LAST#")
+		local txt = ("准备哪个陷阱? (最多: %d , 最大材质等级 %d )%s"):format(nb, math.min(5, self:getTalentLevelRaw(t)), self.turn_procs.free_trap_mastery and "\n游戏开始: 新准备的陷阱不会进入冷却。" or "\n#YELLOW#新准备的陷阱会进入冷却。#LAST#")
 		local traps_dialog = require("mod.dialogs.TrapsSelect").new("选择准备陷阱", self,
 		txt, t, nb, trap_mastery_tids)
 		local traps_sel, traps_prev = self:talentDialog(traps_dialog)
@@ -64,7 +64,7 @@ registerTalentTranslation{
 		table.sort(show_traps, function(a, b) return a.tier < b.tier end)
 		local trap_descs = ""
 		for i, trap in ipairs(show_traps) do
-			trap_descs = trap_descs.."\n\t"..("%s材质等级 %d: %s#LAST#\n%s"):format(trap.known and "#YELLOW#" or "#YELLOW_GREEN#", trap.tier, trap.name, trap.info)
+			trap_descs = trap_descs.."\n\t"..("%s材质等级 %d : %s#LAST#\n%s"):format(trap.known and "#YELLOW#" or "#YELLOW_GREEN#", trap.tier, trap.name, trap.info)
 		end
 		self.turn_procs.trap_mastery_tid = nil
 		return ([[该 技 能 允 许 你 准 备 %d 个 不 同 的 陷 阱 ， 最 高 材 质 等  级 为 %d 。 （ 使 用 该 技 能 选 择 需 要 准 备  的 陷 阱 。） 
@@ -86,7 +86,7 @@ registerTalentTranslation{
 		local t2 = self:getTalentFromId(self.T_TAUNT)
 		local rad = t2.radius(self, t)	
 		return ([[抛 出 一 个 诱 饵 来 吸 引 %d 码 半 径 内 的 敌 人，持 续 %d 回 合  。
-		 诱 饵 有 %d 生 命 ( 基 于 灵 巧)，%d 护 甲 和 %d%% 非 物 理 伤 害 抗 性。 
+		 诱 饵 有 %d 生 命 ( 基 于 灵 巧)， %d 护 甲 和 %d%% 非 物 理 伤 害 抗 性。 
 		 在 等 级 5 时， 当 诱 饵 被 摧 毁 时， 它 会 自 动 触 发 在 它 周 围 2 码 范 围 内 的 陷 阱（ 可 鉴 定 某 些 陷 阱 是 否 能 被 触 发 )。 
 		 此 技 能 不 会 打 断 潜 行 状 态。]]):format(rad, t.getDuration(self,t), t.getLife(self, t), t.getArmor(self, t), t.getResist(self, t))
 	end,
@@ -97,7 +97,7 @@ registerTalentTranslation{
 	short_name = "TRAP_LAUNCHER",
 	info = function (self,t)
 		return ([[你 学 会 放 置 陷 阱 的 新 技 巧 。
-		 选 择 一 个 陷 阱 ，你 能 在 %d 格 外 放 置 ，减 少 %d%%消 耗 时 间 ，有 %d%%几 率 不 打 破 潜 行 ]]):format(trap_range(self, t), (1 - t.trapSpeed(self, t))*100, t.trapStealth(self, t))
+		 选 择 一 个 陷 阱 ，你 能 在 %d 格 外 放 置 ，减 少 %d%% 消 耗 时 间 ，有 %d%% 几 率 不 打 破 潜 行 。 ]]):format(trap_range(self, t), (1 - t.trapSpeed(self, t))*100, t.trapStealth(self, t))
 	end,
 }
 registerTalentTranslation{
@@ -127,14 +127,14 @@ registerTalentTranslation{
 		table.sort(show_traps, function(a, b) return a.tier < b.tier end)
 		local trap_descs = ""
 		for i, trap in ipairs(show_traps) do
-			trap_descs = trap_descs.."\n\t"..("%s材质等级 %d: %s#LAST#\n%s"):format(trap.instant and "#YELLOW#" or "#YELLOW_GREEN#", trap.tier, trap.name, trap.info)
+			trap_descs = trap_descs.."\n\t"..("%s材质等级 %d : %s#LAST#\n%s"):format(trap.instant and "#YELLOW#" or "#YELLOW_GREEN#", trap.tier, trap.name, trap.info)
 		end
 		return ([[你 额 外 准 备 一 个 陷 阱 （最 高 材 质 等 级 %d ），带 有 特 殊 的 控 制 机 关 ，能 在 设 置 后 立 刻 生 效 。 (使 用 该 技 能 来 选 择 需 要 准 备 的 陷 阱 。)
 		 并 非 所 有 陷 阱 都 能 这 样 准 备 ，每 种 陷 阱 只 有 一 种 改 进 方 式 。
 		 已 学 会 的 引 爆 方 式 :
 %s 
 
-带 有 特 殊 启 动 机 关 的 陷 阱 强 度 增 加  %+d%% (取 代 陷 阱 专 精 的 加 成 )  ，有 %d%%几 率 不 破 坏 潜 行 。
+带 有 特 殊 启 动 机 关 的 陷 阱 强 度 增 加  %+d%% (取 代 陷 阱 专 精 的 加 成 )  ，有 %d%% 几 率 不 破 坏 潜 行 。
 #YELLOW#当 前 选 择 的 陷 阱 : %s#LAST#]]):
 		format(self:getTalentLevelRaw(t), trap_descs, mastery, stealth_chance, instant)
 	end,
@@ -146,12 +146,12 @@ registerTalentTranslation{
 		local dam = t.getDamage(self, t)
 		local power = t.getPower(self,t)
 		local instant = self.trap_primed == t.id and "\n#YELLOW#设 置 完 毕 后 立 刻 激 活。#LAST#" or ""
-		return ([[放 置 压 力 感 应 陷 阱，触 发 后 爆 炸 形 成 半 径 2 格 的 刀 片 风 暴 ,造 成 %0.2f 物 理 伤 害。被 击 中 的 目 标 的 命 中 、护 甲 和 闪 避 下 降 %d.
+		return ([[放 置 压 力 感 应 陷 阱，触 发 后 爆 炸 形 成 半 径 2 格 的 刀 片 风 暴 ,造 成 %0.2f 物 理 伤 害。被 击 中 的 目 标 的 命 中 、护 甲 和 闪 避 下 降 %d 。
 		该 陷 阱 可 以 被 设 置 为 直 接 激 活 ， 也 可 以 被 诱 饵 激 活。%s]]):
 		format(damDesc(self, DamageType.PHYSICAL, dam), power, instant)
 	end,
 	short_info = function(self, t)
-		return ([[刀 片（范 围2）  %d 物理伤害, 减少命中、护甲 和闪避  %d.]]):
+		return ([[刀 片（范 围2）  %d 物理伤害, 减少命中、护甲 和闪避  %d 。]]):
 		format(damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t)), t.getPower(self,t))
 	end,
 }
@@ -257,7 +257,7 @@ registerTalentTranslation{
 	end,
 	short_info = function(self, t)
 		local dam = damDesc(self, DamageType.COLD, t.getDamage(self, t))
-		return ([[爆炸 (范围 2):  %d 寒冷伤害 并定身 3 回合。范围冻结 (%d 寒冷伤害， 25%% 冻结几率) 5回合。]]):format(dam, dam/3)
+		return ([[爆炸 (范围 2):  %d 寒冷伤害 并定身 3 回合。范围冻结 ( %d 寒冷伤害， 25%% 冻结几率) 5回合。]]):format(dam, dam/3)
 	end,
 }
 registerTalentTranslation{
@@ -273,7 +273,7 @@ registerTalentTranslation{
 	end,
 	short_info = function(self, t)
 		dam = damDesc(self, DamageType.FIRE, t.getDamage(self, t))
-		return ([[爆炸 (范围 2): 震慑 并在3回合内每回合 造成 %d 火焰伤害。范围火焰 (%d 火焰伤害) 持续5 回合。]]):format(dam/3, dam/2)
+		return ([[爆炸 (范围 2): 震慑 并在3回合内每回合 造成 %d 火焰伤害。范围火焰 ( %d 火焰伤害) 持续5 回合。]]):format(dam/3, dam/2)
 	end,
 }
 
@@ -330,7 +330,7 @@ registerTalentTranslation{
 		local mana = base
 		local dur = t.getDuration(self,t)
 		local nb = t.getNb(self,t)
-		return ([[半径2 反魔: 吸收至多%d 法力, %d 活力, %d 正负能量, 造成 至多%d 奥术伤害。解除 %d 项魔法效果 ，沉默 %d 回合。]]):
+		return ([[半径2 反魔: 吸收至多 %d 法力, %d 活力, %d 正负能量, 造成 至多 %d 奥术伤害。解除 %d 项魔法效果 ，沉默 %d 回合。]]):
 		format(base, base/2, base/4, damDesc(self, DamageType.ARCANE, base), nb, dur)
 	end,
 }
@@ -358,7 +358,7 @@ registerTalentTranslation{
 		format(t.getDistance(self, t), t.resetChance(self, t))
 	end,
 	short_info = function(self, t)
-		return ([[击退%d 格，并 眩晕。]]):
+		return ([[击退 %d 格，并 眩晕。]]):
 		format(t.getDistance(self, t))
 	end,
 }

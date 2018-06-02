@@ -3598,6 +3598,183 @@ registerArtifactTranslation{
 			return ("你不会流血。\n当你生命掉落至20%%以下时，治疗30%%最大生命。 %s"):format(self.power < maxp and ("(%d 回合冷却中)"):format(maxp - self.power) or "(15 回合冷却时间)")
 		end,
 		}
+registerArtifactTranslation{
+	originName = "Spinal Cage",
+	name = "脊髓笼",
+	unided_name = "一团脊髓物质",
+	desc = "一团脊髓物质，差不多可以用来当做护甲",
+}
+registerArtifactTranslation{
+	originName = "Infused Cerebrum",
+	name = "被灌注的大脑",
+	unided_name = "一团令人厌恶的大脑组织",
+	desc = "这个 #{italic}# “帽子” #{normal}# 似乎是由已经半腐烂的大脑组成的。你真的还想把它呆在自己的头上吗？",
+	["use_power.name"] = "攻击并完全控制敌人的心灵",
+}
+registerArtifactTranslation{
+	originName = "Writhing Ring of the Hunter",
+	name = "猎手的扭曲指环",
+	unided_name = "绿色粘乎乎的指环",
+	desc = "大量扭曲的触须弯曲成了指环的形状。一团黑暗的恶意力量从里面散发出来",
+	special_desc = function(self) return "当你第一次戴上戒指的时候，选择一个觉醒技能，你将在戴上这个戒指的时候获得这个觉醒技能（一旦选择就不能改变。如果你第一次没有选择，可以在重新装备的时候进行选择）" end,
+	on_cantakeoff = function(self, who)
+		if who.in_combat then
+			game.logPlayer(who, "#DARK_SEA_GREEN#当这个戒指感受到战斗的时候，它会使劲抓住你的手指，你无法把它拿下来。")
+			return true
+		end
+	end,
+}
+registerArtifactTranslation{
+	originName = "Staff of Bones",
+	name = "白骨法杖",
+	unided_name = "骨制法杖",
+	desc = [[由被击败的敌人的白骨制成的法杖。令人厌恶而强大。]],
+	special_desc = function(self) return "它似乎愿意和你交谈（使用法杖掌控）" end,
+}
+registerArtifactTranslation{
+	originName = 'Forbidden Tome: "Of Knowledge And Horrors"',
+	name = "禁忌之书：《知识与恐怖》",
+	desc = "一本有关逝去的古老知识的书。光是触摸它就足以让你感到不适。",
+}
+registerArtifactTranslation{
+	originName = 'Forbidden Tome: "The Day It Came"',
+	name = "禁忌之书：《到来之日》",
+	desc = "这本书的封皮老而枯干。当你拿着它的时候，你感受到绝望、困难，痛苦，无助的感情向你袭来。书中的存在许诺着强大的力量，但是，代价是什么呢？",
+	book_party_dead_msg = function(self) if self.book_ended then return else return "希瑟尔死了。啊，好像故事本来不应该是这样的。" end end,
+}
+registerArtifactTranslation{
+	originName = 'Forbidden Tome: "A View From The Gallery"',
+	name = "禁忌之书：《画廊一瞥》",
+	desc = "这本书讲述着Grung的故事，他是远古时代的一个半身人，从部落中走散。他只是想生存下去，然而一场毁天灭地的大战正在他的身边肆虐。",
+	book_party_dead_msg = function(self) if self.book_ended then return else return "可怜的Grung。他只想找到食物，但他得到的却是死亡。" end end,
+}
+registerArtifactTranslation{
+	originName = 'Forbidden Tome: "The Illusory Castle"',
+	name = "禁忌之书：《虚幻城堡》",
+	desc = "在你面前的似乎是皮革和羊皮纸制成的梦幻般的东西。水晶般的碎片在它的表面起舞，让你觉得似乎世界在你的眼前以你无法察觉的逻辑发生着变化的感觉。",
+}
+registerArtifactTranslation{
+	originName = "Cut Drem Arm",
+	name = "被切下来的德瑞姆手臂",
+	unided_name = "血淋淋的手臂",
+	desc = "这条手臂看上去已经风干了，但你可以发誓，你看到有什么东西在它的皮肤下蠕动。",
+	special_desc = function(self) return "这条手臂有时可以伸向半径5范围内的一个敌人，用触手把他拉到你的身边。这个行为并不出自于你的选择，而是出于它自己的意志。" end,
+}
+registerArtifactTranslation{
+	originName = "Monolith Armour",
+	name = "巨石铠甲",
+	unided_name = "黑色的石头铠甲",
+	desc = "这块护甲似乎是由一整块符文巨石组成，它与某种高度灵活的黑色网状物融为一体。毋庸置疑，巨大的石块可以阻挡对你身上的任何打击，但你需要巨大的力量才能穿着它移动。刻在上面的符文有时候会自动点亮，放出小型的魔法爆炸。",
+	special_desc = function(self) return "击中时有15%的几率撕裂周围的现实，在身边创造一个时空裂痕来帮助你（免费释放一次等级4的实境撕裂）这个效果的冷却时间为30回合。\n#PURPLE#如果在你使用它的时候你的体质值降低到了装备的需求以下，因为它太重了，你会立刻解除装备。要小心#LAST#" end,
+}
+registerArtifactTranslation{
+	originName = "Fanged Collar",
+	name = "利牙项环",
+	unided_name = "有尖牙的项链",
+	desc = "这个奇怪的生物围绕着你的脖子，把嘴大长到牙齿刚好不会碰到你的距离。你怀疑，如果你哪天掉了脑袋，这个生物就会把你的脖子当做它的家。",
+	special_desc = function(self) if self.on_cantakeoff then return "你已经死了，不过看起来这个项环上的生物一点也不在乎…" else return "你最好不要死…" end end,
+}
+registerArtifactTranslation{
+	originName = "Perseverance",
+	name = "毅力",
+	unided_name = "永远锋利的剑",
+	desc = [[人们说克鲁格首选的武器是一手拿剑一手拿锤。用一只手传播伊格兰斯的讯息，而用另一只手来让自己能够坚持到把这一信息传达到最后。
+	剑象征着克鲁格坚守着他们对抗奥术力量的任务。直到最后一个敌人倒下之前，克鲁格都会用这把剑坚持战斗。]],
+	set_desc = {
+		dedication = "人们说毅力之剑与忠诚之锤配合。",
+	},
+}
+registerArtifactTranslation{
+	originName = "Dedication",
+	name = "忠诚",
+	unided_name = "永远钝的锤",
+	desc = [[人们说克鲁格首选的武器是一手拿剑一手拿锤。用一只手传播伊格兰斯的讯息，而用另一只手来让自己能够坚持到把这一信息传达到最后。
+	锤象征着克鲁格愿意抵抗奥术力量的侵袭直到最后。这把锤子用来击打那些法师，可以让那些法师失去施展魔法的能力。]],
+	set_desc = {
+		dedication = "人们说毅力之剑与忠诚之锤配合。",
+	},
+}
+registerArtifactTranslation{
+	originName = "Persistant Will",
+	name = "不息意志",
+	unided_name = "燃烧的木棍",
+	desc = [[在黄昏纪的魔法大爆炸后，纳格尔王国迅速爆发了反对法师的活动。民众包围那些使用魔法的人，将他们绑在木头上活活烧死。纳格尔王国镇压了这些肇事者，把他们的人头插在遍布首都的柱子上。
+	然而尽管如此，人民还是继续与大自然的敌人战斗。当局所不知道的事，那些死去的反抗者的头颅在他们死后仍然继续传递着他们的反抗意志。
+	
+	这段木头似乎是曾经戳着一个被处决的人的人头的。它似乎吸收了被它刺穿的头颅的意志，拿着它，你可以感受到伊格兰斯的意志在你在你的脑海回响。]],
+	["use_power.name"] = function(self, who) return ("在6回合内，说服你周围半径10范围内所有的非奥术使用者攻击他们身边的法师（几率随精神强度上升）"):format() end,
+}
+registerArtifactTranslation{
+	originName = "Worm Nest",
+	name = "虫穴",
+	unided_name = "恶心的长袍",
+	desc = "这件异常厚重的长袍不断蠕动。上面的小蠕虫有时会从上面跳出来，掉到地板上。这些蠕虫会缓冲敌人对你的攻击，但是让这这么多寄生生物如此接近你脆弱的肉体…实在是太恶心了",
+}
+registerArtifactTranslation{
+	originName = "Light of Revelation",
+	name = "揭示之光",
+	unided_name = "",
+	desc = "这个“灯笼”似乎是一块发光的玻璃状物体的碎片。尽管它十分明亮，但它的光却让你深感不安。它照亮了身边的一切，包括你不愿意看到的东西。你内心的一部分想要把它扔掉，但另一部分却又渴望着它向你揭示的超自然的真相。",
+	special_desc = function(self) return "有时会揭示你不应该知道的隐藏真相。" end,
+}
+registerArtifactTranslation{
+	originName = "Glowing Core",
+	name = "光亮之核",
+	unided_name = "燃烧的核心",
+	desc = "这是灼热恐魔的残余部分。即使是在它死后，这个物体还是在你手中如同它活着的时候一样发出闪耀的光芒。",
+}
+registerArtifactTranslation{
+	originName = "Shoes of Moving Slowly",
+	name = "缓步之靴",
+	unided_name = "放松的鞋子",
+	desc = [[快不一定是好事。
+
+#GOLD#有人说这可以和疾行之靴结合。]],
+	special_desc = function(self) return "每个你没有移动的回合都能得到2点防御和护甲值增益。最多叠加12次。" end,
+	["use_simple.name"] = "与疾行之靴结合",
+}
+registerArtifactTranslation{
+	originName = "Shoes of Slowly Moving Quickly",
+	name = "缓步疾行之靴",
+	desc = "这是鞋子的奇迹！你可以让一只脚待在原地不动，另一只脚走得飞快，形成一道龙卷风！",
+	special_desc = function(self) return "每个你没有移动的回合都能得到2点防御和护甲值增益。最多叠加12次。\n一次走3格。" end,
+}
+registerArtifactTranslation{
+	originName = "Rod of Entropy",
+	name = "熵之魔杖",
+	unided_name = "吸收光的魔杖",
+	desc = "这根魔杖似乎能够熄灭周围的光。光是看着它你就觉得很累了。",
+	["use_power.name"] = function(self, who) return ("暂时使目标每当接受治疗的时候受到%d回合的相当于%d%%治疗量的熵反馈。效果随你的魔法属性提升。"):
+		format(self.use_power.duration, self.use_power.getpower(self, who))
+	end,
+}
+registerArtifactTranslation{
+	originName = "Seeds of the Black Tree",
+	name = "黑色树之种",
+	unided_name = "被污染的石头",
+	desc = [[这团扭曲的触手似乎感染了一块灵晶，在自然和超自然之间形成了一种奇异的混合。曾经清晰的宝石现在看起来更像一块黑曜石碎片，触手在上面伸出，宛如鞭子一般。你无法想象，恐魔竟然能够和大自然混合。]],
+	["combat.special_on_hit.desc"] = "15% 几率对目标释放3级的触手地狱。",
+}
+registerArtifactTranslation{
+	originName = 'Forbidden Tome: "Home, Horrific Home"',
+	name = "禁忌之书：《家，可怕的家》",
+	desc = "一本有关逝去的古老知识的书。触摸它让你同时感到不适和不知名的安心感。",
+}
+registerArtifactTranslation{
+	originName = "Helm of Knowledge",
+	name = "知识头盔",
+	unided_name = "超能力之冠",
+	desc = "一个大头盔，一半金属一半玻璃，放射出灵能力量。",
+	special_desc = function(self) return "不必装备也可以使用。" end,
+	["use_power.name"] = "感知神器的存在。"
+}
+registerArtifactTranslation{
+	originName = "Bizzare Contraption",
+	name = "奇怪的设备",
+	unided_name = "奇怪的设备",
+	desc = "这个奇怪的装置看上去是完全机械制的，但是你根本不明白这些组件到底是怎么工作的。在它的侧面有着某种金属的网格，有时会发出奇怪的噪声。",
+	special_desc = function(self) if not self.helper_mode then return end return "被击中时 10% 几率吸收这次攻击的所有伤害，冷却时间30回合。" end,
+}
 function _M:bindHooks()
 	local class = require "engine.class"
 	class:bindHook("Entity:loadList", function (self,data)

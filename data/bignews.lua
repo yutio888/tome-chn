@@ -40,41 +40,34 @@ bigNewsCHN:newLog{
 	log = "#STEEL_BLUE#Targeting %s",
 	translation = "#STEEL_BLUE#请设定 %s 的目标。",
 }
-local get_quest_cname = function(name)
-	if questCHN[name] then
-		return questCHN[name].name
-	else
-		return name
-	end
-end
 bigNewsCHN:newLog{
 	log = "#LIGHT_GREEN#Accepted quest '%s'!",
 	translation = function(log, name)
-		return "#LIGHT_GREEN#接受任务 '%s'!", get_quest_cname(name)
+		return "#LIGHT_GREEN#接受任务 '%s'!", questCHN:getquestname(name)
 	end,
 }
 bigNewsCHN:newLog{
 	log = "#LIGHT_GREEN#Quest '%s' updated!",
 	translation = function(log, name)
-		return "#LIGHT_GREEN#任务 '%s' 更新了！", get_quest_cname(name)
+		return "#LIGHT_GREEN#任务 '%s' 更新了！", questCHN:getquestname(name)
 	end,
 }
 bigNewsCHN:newLog{
 	log = "#LIGHT_GREEN#Quest '%s' completed!",
 	translation = function(log, name)
-		return "#LIGHT_GREEN#任务 '%s' 完成了！", get_quest_cname(name)
+		return "#LIGHT_GREEN#任务 '%s' 完成了！", questCHN:getquestname(name)
 	end,
 }
 bigNewsCHN:newLog{
 	log = "#LIGHT_GREEN#Quest '%s' done!",
 	translation = function(log, name)
-		return "#LIGHT_GREEN#任务 '%s' 终结了！", get_quest_cname(name)
+		return "#LIGHT_GREEN#任务 '%s' 终结了！", questCHN:getquestname(name)
 	end,
 }
 bigNewsCHN:newLog{
 	log = "#LIGHT_RED#Quest '%s' failed!",
 	translation = function(log, name)
-		return "#LIGHT_RED#任务 '%s' 失败了！", get_quest_cname(name)
+		return "#LIGHT_RED#任务 '%s' 失败了！", questCHN:getquestname(name)
 	end,
 }
 bigNewsCHN:newLog{

@@ -97,6 +97,20 @@ function _M:listPopup(title, text, list, w, h, fct)
 		text = "选择一项用途："
 		list[1].name=list[1].name:gsub("Attack for","攻击造成"):gsub("blight damage","枯萎伤害")
 		list[2].name=list[2].name:gsub("Restore","恢复"):gsub("vim","活力")
+	elseif title == "The Day It Came" then
+		title = "到来之日"
+		text = "本书教会你许多重要的课程，你学到了什么吗？"
+		list[1].name=list[1].name:gsub("The importance of power","力量的重要性"):gsub("spell critical chance","法术暴击率")
+		list[2].name=list[2].name:gsub("The importance of thought","思考的重要性"):gsub("spell save","法术豁免")
+		list[3].name=list[3].name:gsub("The importance of magic","魔法的重要性"):gsub("magic","魔法")
+		list[4].name=list[4].name:gsub("The importance of wisdom","智慧的重要性"):gsub("willpower","毅力")
+	elseif title == "A View From The Gallery" then
+		title = "画廊一瞥"
+		text = "本书教会教会你一些生存技巧，你学到了什么吗？"
+		list[1].name=list[1].name:gsub("The importance of evading blows","闪避攻击的重要性"):gsub("defense","防御")
+		list[2].name=list[2].name:gsub("The importance of speed","速度的重要性"):gsub("movement speed","移动速度")
+		list[3].name=list[3].name:gsub("The importance of reflexes","反应力的重要性"):gsub("dexterity","敏捷")
+		list[4].name=list[4].name:gsub("The importance of a honed mind","磨砺心智的重要性"):gsub("cunning","灵巧")
 	end
 	local d = new(title, 1, 1)
 	local desc = require("engine.ui.Textzone").new{width=w, auto_height=true, text=text, scrollbar=true}
@@ -116,6 +130,11 @@ end
 
 --- Requests a simple, press any key, dialog
 function _M:simplePopup(title, text, fct, no_leave, any_leave)
+	text = text:gsub("The book story is done already.", "这本书的故事已经结束了。")
+	text = text:gsub("You can not enter a book while already inside one.", "你不能在进入这本书的时候进入另一本书。")
+	text = text:gsub("You can not enter a book while the timeline is split.", "你不能在进入这本书的时候进入另一本书。")
+	text = text:gsub("You can not enter this book while in combat.", "你不能在战斗途中进入这本书。")
+	text = text:gsub("The protagonist of the story is dead.", "书里的主角已经死了")
 	if simplePopDlg and simplePopDlg[title] then
 		title,text = simplePopDlg[title](text)
 	end
@@ -164,6 +183,11 @@ end
 --- Requests a simple yes-no dialog
 function _M:yesnoPopup(title, text, fct, yes_text, no_text, no_leave, escape, preexit_fct)
 	local my_yes_text, my_no_text = nil, nil
+	if text == "You feel this book is extremely dangerous for you. Proceed?" then
+		text = "你觉得这本书对你来说极度危险。确认继续吗？"
+		yes_text = "取消"
+		no_text = "读书"
+	end
 	if yesnoPopDlg and yesnoPopDlg[title] then
 		title,text,my_yes_text,my_no_text = yesnoPopDlg[title](text)
 	end

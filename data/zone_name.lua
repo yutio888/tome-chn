@@ -103,6 +103,10 @@ zoneName["Mark of the Spellblaze"] = "魔法大爆炸之痕"
 zoneName["Old Conclave Vault"] = "古老的孔克雷夫地下实验室"
 zoneName["Tranquil Meadow"] = "宁静的草原"
 
+--ashes DLC
+zoneName["Anteroom of Agony"] = "痛苦前厅"
+zoneName["Searing Halls"] = "灼热大厅"
+
 --orc DLC
 zoneName["Cave of Hatred"] = "仇恨洞穴"
 zoneName["Dominion Port: Sewers 1"] = "自治领之港：水沟1"
@@ -148,3 +152,18 @@ zoneName["Kruk Pride"] = "克鲁克部落"
 zoneName["Ureslak's Host"] = "乌瑞斯拉克沉睡处"
 zoneName["Vaporous Emporium"] = "蒸汽商场"
 zoneName["Yetis Cave"] = "雪人洞穴"
+
+--cults DLC
+zoneName["The Teacher's Abode"] = "导师的处所"
+zoneName["A cave from ages old"] = "远古洞穴"
+zoneName["The Home Which Is Not"] = "并非是家的场所"
+zoneName["The Place Which Does Not Exist"] = "不存在的地方"
+zoneName["Entropic Void"] = "熵之虚空"
+zoneName["Dremshor Tunnels"] = "德瑞姆通道"
+zoneName["The Maggot"] = "蛆虫之胃"
+zoneName["Necromancers' Ruins"] = "死灵法师的遗迹"
+zoneName["Occult Egress"] = "神秘的出口"
+zoneName["Scourged Pits"] = "瘟疫之穴"
+zoneName["Kroshkkur, the Hidden Sanctuary"] = "克诺什库尔，隐藏的避难所"
+zoneName["The Godfeaster"] = "噬神者"
+zoneName["Safe Multiverse Arena for Commotion and Killing"] = "杀戮与战争的安全的多元宇宙竞技场"

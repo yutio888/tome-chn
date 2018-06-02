@@ -38,7 +38,7 @@ registerTalentTranslation{
 	info = function (self,t)
 		local dam = 100 * t.getDamage(self, t)
 		return ([[你 迅 速 移 动 ，用 徒 手 攻 击 敌 人。
-		造 成 %d%% 主 手 武 器 伤 害 ，%d%% 徒 手 伤 害 。
+		造 成 %d%% 主 手 武 器 伤 害 ， %d%% 徒 手 伤 害 。
 		若 徒 手 攻 击 命 中 ， 敌 人 将 被 混 乱 （ %d%% 强 度 ） %d 回 合 。
 		混 乱 几 率 受 命 中 加 成 。]])
 		:format(dam, dam*1.25, t.getConfusePower(self, t), t.getConfuseDuration(self, t))

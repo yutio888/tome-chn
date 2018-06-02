@@ -355,7 +355,7 @@ local normal_damtype = {
 
 
 for i,k in pairs(normal_damtype) do
-print("DAMCHECK",i)
+--print("DAMCHECK",i)
 logCHN:newLog{
 	log = "#Source##LIGHT_GREEN# HEALS#LAST# from "..k..i.."#LAST# damage!",
 	fct = function() return "#Source# 因 "..k..i.."#LAST# 伤害受到了#LIGHT_GREEN# 治疗 #LAST#!" end,

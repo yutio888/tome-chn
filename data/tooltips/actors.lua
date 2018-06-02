@@ -110,6 +110,7 @@ actorCHN["#0080FF#S. save#FFFFFF#:  "] = "#0080FF#法术豁免#FFFFFF#："
 actorCHN["#FFD700#M. power#FFFFFF#: "] = "#FFD700#精神强度#FFFFFF#："
 actorCHN["#0080FF#M. save#FFFFFF#:  "] = "#0080FF#精神豁免#FFFFFF#："
 
+actorCHN["Critical Mult: "] = "暴击系数："
 actorCHN["Time left: "] = "时间剩余："
 			
 --阵营

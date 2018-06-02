@@ -659,7 +659,16 @@ timeEffectCHN:newEffect{
 	type = "物理",
 	subtype = "自然",
 }
-
+timeEffectCHN:newEffect{
+	id = "PARRY",
+	enName = "Parrying",
+	chName = "抵挡攻击",
+	desc = function(self, eff)
+		return ("抵挡近战%s攻击 :有 %d%% 几率减轻 %d 伤害， 一回合最多触发 %0.1f 次。 被减轻的攻击不能暴击。"):format(eff.parry_ranged and " 和远程" or "", math.floor(self:callEffect(self.EFF_PARRY, "deflectchance")), eff.dam, math.max(eff.deflects, 1))
+	end,
+	type = "物理",
+	subtype = "策略",
+	}
 timeEffectCHN:newEffect{
 	id = "BLOCKING",
 	enName = "Blocking",

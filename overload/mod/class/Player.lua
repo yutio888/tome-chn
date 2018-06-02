@@ -312,8 +312,8 @@ function _M:move(x, y, force)
 	local moved = mod.class.Actor.move(self, x, y, force)
 
 	if not moved and self.encumbered then
-		game.logPlayer(self, "#FF0000#你携带的物品过重--你走不动了!")
-		game.logPlayer(self, "#FF0000#扔掉一些东西吧。")
+		game.logPlayer(self, "#FF0000#You carry too much--you are encumbered!")
+		game.logPlayer(self, "#FF0000#Drop some of your items.")
 	end
 
 	if not force and ox == self.x and oy == self.y and self.doPlayerSlide then
@@ -1299,7 +1299,7 @@ function _M:playerPickup()
 		local titleupdator = self:getEncumberTitleUpdator("Pickup")
 		local d d = self:showPickupFloor(titleupdator(), nil, function(o, item)
 			if self:attr("sleep") and not self:attr("lucid_dreamer") then
-				game:delayedLogMessage(self, nil, "sleep pickup", "你不能在睡眠中捡物品!")
+				game:delayedLogMessage(self, nil, "sleep pickup", "You cannot pick up items from the floor while asleep!")
 				return
 			end
 			local o = self:pickupFloor(item, true)

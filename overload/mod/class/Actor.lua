@@ -1905,7 +1905,7 @@ function _M:tooltip(x, y, seen_by)
 	ts:add({"color", "WHITE"})
 
 	if (150 + (self.combat_critical_power or 0) ) > 150 then
-		ts:add("暴击系数: ", ("%d%%"):format(150 + (self.combat_critical_power or 0) ), true )
+		ts:add("Critical Mult: ", ("%d%%"):format(150 + (self.combat_critical_power or 0) ), true )
 	end
 
 	if self.summon_time then
@@ -2263,11 +2263,11 @@ function _M:onTakeHit(value, src, death_note)
 	if value > 0 and self:attr("displacement_shield") then
 		-- Absorb damage into the displacement shield
 		if rng.percent(self.displacement_shield_chance) then
-			game:delayedLogMessage(self, src,  "displacement_shield"..(self.displacement_shield_target.uid or ""), "#CRIMSON##Source#将部分伤害转移给 #Target#!")
+			game:delayedLogMessage(self, src,  "displacement_shield"..(self.displacement_shield_target.uid or ""), "#CRIMSON##Source# teleports some damage to #Target#!")
 			local displaced = math.min(value, self.displacement_shield)
 			self.displacement_shield_target:takeHit(displaced, src)
-			game:delayedLogDamage(src, self, 0, ("#CRIMSON#(%d 转移)#LAST#"):format(displaced), false)
-			game:delayedLogDamage(src, self.displacement_shield_target, displaced, ("#CRIMSON#%d 转移#LAST#"):format(displaced), false)
+			game:delayedLogDamage(src, self, 0, ("#CRIMSON#(%d teleported)#LAST#"):format(displaced), false)
+			game:delayedLogDamage(src, self.displacement_shield_target, displaced, ("#CRIMSON#%d teleported#LAST#"):format(displaced), false)
 			if self.displacement_shield and displaced < self.displacement_shield then
 				self.displacement_shield = self.displacement_shield - displaced
 				value = 0
@@ -2281,7 +2281,7 @@ function _M:onTakeHit(value, src, death_note)
 	if value > 0 and self:attr("time_shield") then
 		-- Absorb damage into the time shield
 		self.time_shield_absorb = self.time_shield_absorb or 0
-		game:delayedLogDamage(src, self, 0, ("#STEEL_BLUE#(%d 时光盾)#LAST#"):format(math.min(value, self.time_shield_absorb)), false)
+		game:delayedLogDamage(src, self, 0, ("#STEEL_BLUE#(%d to time)#LAST#"):format(math.min(value, self.time_shield_absorb)), false)
 		if value < self.time_shield_absorb then
 			self.time_shield_absorb = self.time_shield_absorb - value
 			value = 0
@@ -2292,7 +2292,7 @@ function _M:onTakeHit(value, src, death_note)
 
 		-- If we are at the end of the capacity, release the time shield damage
 		if self.time_shield_absorb <= 0 then
-			game.logPlayer(self, "你的时光盾在伤害下破碎!")
+			game.logPlayer(self, "Your time shield crumbles under the damage!")
 			self:removeEffect(self.EFF_TIME_SHIELD)
 		end
 	end
@@ -2320,14 +2320,14 @@ function _M:onTakeHit(value, src, death_note)
 			adjusted_value = self.damage_shield_absorb
 			self.damage_shield_absorb = 0
 		end
-		game:delayedLogDamage(src, self, 0, ("#SLATE#(%d 吸收)#LAST#"):format(adjusted_value), false)
+		game:delayedLogDamage(src, self, 0, ("#SLATE#(%d absorbed)#LAST#"):format(adjusted_value), false)
 		if reflection and reflect_damage and reflection > 0 and reflect_damage > 0 and src.y and src.x and not src.dead then
 			local a = game.level.map(src.x, src.y, Map.ACTOR)
 			if a and self:reactionToward(a) < 0 then
 				local reflected = reflect_damage * reflection
 				a:takeHit(reflected, self)
-				game:delayedLogDamage(self, src, reflected, ("#SLATE#%d 反射#LAST#"):format(reflected), false)
-				game:delayedLogMessage(self, src, "reflection" ,"#CRIMSON##Source# 反射伤害至 #Target#!#LAST#")
+				game:delayedLogDamage(self, src, reflected, ("#SLATE#%d reflected#LAST#"):format(reflected), false)
+				game:delayedLogMessage(self, src, "reflection" ,"#CRIMSON##Source# reflects damage back to #Target#!#LAST#")
 			end
 		end
 
@@ -2338,7 +2338,7 @@ function _M:onTakeHit(value, src, death_note)
 
 		-- If we are at the end of the capacity, release the time shield damage
 		if not self.damage_shield_absorb or self.damage_shield_absorb <= 0 then
-			game.logPlayer(self, "你的护盾在伤害下破碎!")
+			game.logPlayer(self, "Your shield crumbles under the damage!")
 			self:removeEffect(self.EFF_DAMAGE_SHIELD)
 			self:removeEffect(self.EFF_PSI_DAMAGE_SHIELD)
 		end
@@ -2348,11 +2348,11 @@ function _M:onTakeHit(value, src, death_note)
 		-- Absorb damage into a random shadow
 		local shadow = self:callTalent(self.T_SHADOW_EMPATHY, "getRandomShadow")
 		if shadow then
-			game:delayedLogMessage(self, src,  "displacement_shield"..(shadow.uid or ""), "#CRIMSON##Source# 和阴影平分伤害!")
+			game:delayedLogMessage(self, src,  "displacement_shield"..(shadow.uid or ""), "#CRIMSON##Source# shares some damage with a shadow!")
 			local displaced = math.min(value * self.shadow_empathy / 100, shadow.life)
 			shadow:takeHit(displaced, src)
-			game:delayedLogDamage(src, self, 0, ("#PINK#(%d 链接)#LAST#"):format(displaced), false)
-			game:delayedLogDamage(src, shadow, displaced, ("#PINK#%d 链接#LAST#"):format(displaced), false)
+			game:delayedLogDamage(src, self, 0, ("#PINK#(%d linked)#LAST#"):format(displaced), false)
+			game:delayedLogDamage(src, shadow, displaced, ("#PINK#%d linked#LAST#"):format(displaced), false)
 			value = value - displaced
 		end
 	end
@@ -2361,8 +2361,8 @@ function _M:onTakeHit(value, src, death_note)
 		local mana = math.max(0, self:getMaxMana() - self:getMana())
 		local mana_val = value * self:attr("disruption_shield")
 		local converted = math.min(value, mana / self:attr("disruption_shield"))
-		game:delayedLogMessage(self, nil,  "disruption_shield", "#LIGHT_BLUE##Source# 将伤害转为法力!")
-		game:delayedLogDamage(src, self, 0, ("#LIGHT_BLUE#(%d 转化)#LAST#"):format(converted), false)
+		game:delayedLogMessage(self, nil,  "disruption_shield", "#LIGHT_BLUE##Source# converts damage to mana!")
+		game:delayedLogDamage(src, self, 0, ("#LIGHT_BLUE#(%d converted)#LAST#"):format(converted), false)
 
 		-- We have enough to absorb the full hit
 		if mana_val <= mana then
@@ -2389,7 +2389,7 @@ function _M:onTakeHit(value, src, death_note)
 	if value > 0 and self:isTalentActive(self.T_BONE_SHIELD) then
 		local t = self:getTalentFromId(self.T_BONE_SHIELD)
 		if t.absorb(self, t, self:isTalentActive(self.T_BONE_SHIELD)) then
-			game:delayedLogDamage(src, self, 0, ("#SLATE#(%d 骨盾)#LAST#"):format(value), false)
+			game:delayedLogDamage(src, self, 0, ("#SLATE#(%d to bones)#LAST#"):format(value), false)
 			value = 0
 		end
 	end
@@ -2409,7 +2409,7 @@ function _M:onTakeHit(value, src, death_note)
 			local oldval = value
 			value = self:callTalent(self.T_DEFLECTION, "do_onTakeHit", tal, value)
 			if value ~= oldval then
-				game:delayedLogDamage(src, self, 0, ("#SLATE#(%d 偏移)#LAST#"):format(oldval - value), false)
+				game:delayedLogDamage(src, self, 0, ("#SLATE#(%d deflected)#LAST#"):format(oldval - value), false)
 			end
 		end
 	end
@@ -2441,7 +2441,7 @@ function _M:onTakeHit(value, src, death_note)
 			absorb = absorb - absorb * (util.bound(src:attr("iceblock_pierce") or 0, 0, 100)) / 100
 		end
 		eff.hp = eff.hp - value * absorb
-		game:delayedLogDamage(src or {}, self, 0, ("#STEEL_BLUE#(%d 冰块吸收)#LAST#"):format(value*absorb), nil)
+		game:delayedLogDamage(src or {}, self, 0, ("#STEEL_BLUE#(%d to ice)#LAST#"):format(value*absorb), nil)
 		value = value * (1 - absorb)
 		if eff.hp < 0 and not eff.begone then
 			game:onTickEnd(function() self:removeEffect(self.EFF_FROZEN) end)
@@ -2478,11 +2478,11 @@ function _M:onTakeHit(value, src, death_note)
 	-- Resonance Field, must be called after Feedback gains
 	if self:attr("resonance_field") then
 		local absorb = math.min(value/2, self.resonance_field_absorb)
-		game:delayedLogDamage(src, self, 0, ("#SLATE#(%d 共鸣领域吸收)#LAST#"):format(absorb), false)
+		game:delayedLogDamage(src, self, 0, ("#SLATE#(%d resonance)#LAST#"):format(absorb), false)
 		if absorb < self.resonance_field_absorb then
 			self.resonance_field_absorb = self.resonance_field_absorb - absorb
 		else
-			game.logPlayer(self, "你的共鸣领域在伤害下破碎!")
+			game.logPlayer(self, "Your resonance field crumbles under the damage!")
 			self:removeEffect(self.EFF_RESONANCE_FIELD)
 		end
 		value = value - absorb
@@ -2547,19 +2547,19 @@ function _M:onTakeHit(value, src, death_note)
 		if value / self.max_life >= 0.15 then
 			-- you take a big hit..adds 2 + 2 for each 5% over 15%
 			hateGain = hateGain + 2 + (((value / self.max_life) - 0.15) * 100 * 0.5)
-			hateMessage = "#F53CBE#你在痛苦中战斗!"
+			hateMessage = "#F53CBE#You fight through the pain!"
 		end
 
 		if value / self.max_life >= 0.05 and (self.life - value) / self.max_life < 0.25 then
 			-- you take a hit with low health
 			hateGain = hateGain + 4
-			hateMessage = "#F53CBE#当你生命流失的时候，你的恨意加深了!"
+			hateMessage = "#F53CBE#Your hatred grows even as your life fades!"
 		end
 
 		if hateGain >= 1 then
 			self:incHate(hateGain)
 			if hateMessage then
-				game.logPlayer(self, hateMessage.." (+ %d 仇恨)", hateGain)
+				game.logPlayer(self, hateMessage.." (+%d hate)", hateGain)
 			end
 		end
 	end
@@ -2571,13 +2571,13 @@ function _M:onTakeHit(value, src, death_note)
 		if value / src.max_life > 0.33 then
 			-- you deliver a big hit
 			hateGain = hateGain + src.hate_per_powerful_hit
-			hateMessage = "#F53CBE#你强有力的攻击增进了你的疯狂！"
+			hateMessage = "#F53CBE#Your powerful attack feeds your madness!"
 		end
 
 		if hateGain >= 0.1 then
 			src.hate = math.min(src.max_hate, src.hate + hateGain)
 			if hateMessage then
-				game.logPlayer(src, hateMessage.." (+%d 仇恨)", hateGain)
+				game.logPlayer(src, hateMessage.." (+%d hate)", hateGain)
 			end
 		end
 	end
@@ -2625,8 +2625,8 @@ function _M:onTakeHit(value, src, death_note)
 			self:incPsi(-damage_to_psi)
 		end
 		local mindcolor = DamageType:get(DamageType.MIND).text_color or "#aaaaaa#"
-		game:delayedLogMessage(self, nil, "Solipsism hit", mindcolor.."#Source#将伤害转化为超能力值减少!")
-		game:delayedLogDamage(src, self, damage_to_psi*psi_damage_resist, ("%s%d %s#LAST#"):format(mindcolor, damage_to_psi*psi_damage_resist, "超能力值"), false)
+		game:delayedLogMessage(self, nil, "Solipsism hit", mindcolor.."#Source# converts some damage to Psi!")
+		game:delayedLogDamage(src, self, damage_to_psi*psi_damage_resist, ("%s%d %s#LAST#"):format(mindcolor, damage_to_psi*psi_damage_resist, "to psi"), false)
 
 		value = value - damage_to_psi
 	end
@@ -2668,10 +2668,10 @@ function _M:onTakeHit(value, src, death_note)
 	
 	if self:attr("unstoppable") then
 		if value > self.life - 1 then
-			game:delayedLogDamage(src, self, 0, ("#RED#(%d 拒绝)#LAST#"):format(value - (self.life - 1)), false)
+			game:delayedLogDamage(src, self, 0, ("#RED#(%d refused)#LAST#"):format(value - (self.life - 1)), false)
 			value = self.life - 1
 			if self.life <= 1 then value = 0 end
-			game:delayedLogMessage(self, nil, "unstoppable", "#RED##Source# 无可阻挡!")
+			game:delayedLogMessage(self, nil, "unstoppable", "#RED##Source# is unstoppable!")
 		end
 	end
 
@@ -2722,7 +2722,7 @@ function _M:onTakeHit(value, src, death_note)
 		local vt = self:getTalentFromId(self.T_LEECH)
 		self:incVim(vt.getVim(self, vt))
 		self:heal(vt.getHeal(self, vt), src)
-		if self.player then src:logCombat(src, "#AQUAMARINE#你吸收了 #Target#的活力.") end
+		if self.player then src:logCombat(src, "#AQUAMARINE#You leech a part of #Target#'s vim.") end
 	end
 
 	-- Invisible on hit
@@ -2785,7 +2785,7 @@ function _M:onTakeHit(value, src, death_note)
 		if self.flat_damage_cap[death_note.damtype] then cap = self.flat_damage_cap[death_note.damtype] end
 		if cap and cap > 0 then
 			local ignored = math.max(0, value - cap * self.max_life / 100)
-			if ignored > 0 then game:delayedLogDamage(src, self, 0, ("#LIGHT_GREY#(%d 弹性吸收)#LAST#"):format(ignored), false) end
+			if ignored > 0 then game:delayedLogDamage(src, self, 0, ("#LIGHT_GREY#(%d resilience)#LAST#"):format(ignored), false) end
 			value = value - ignored
 			print("[TAKE HIT] after flat damage cap", value)
 		end
@@ -2804,7 +2804,7 @@ function _M:onTakeHit(value, src, death_note)
 			value = value - abs
 			self:removeEffect(self.EFF_ELDRITCH_STONE)
 		end
-		game:delayedLogDamage(src, self, 0, ("#SLATE#(%d 石头)#LAST#"):format(abs), false)
+		game:delayedLogDamage(src, self, 0, ("#SLATE#(%d to stone)#LAST#"):format(abs), false)
 	end
 
 	if self:knowTalent(self.T_STONESHIELD) and not self.turn_procs.stoneshield then
@@ -2820,10 +2820,10 @@ function _M:onTakeHit(value, src, death_note)
 		if eff.src:attr("dead") then
 			self:removeEffect(self.EFF_STONE_LINK)
 		else
-			game:delayedLogMessage(eff.src, self, "stone_link"..(self.uid or ""), "#OLIVE_DRAB##Source# 将伤害从 #Target# 转移至自身!#LAST#")
-			game:delayedLogDamage(src, self, 0, ("#OLIVE_DRAB#(%d 转移)#LAST#"):format(value), false)
+			game:delayedLogMessage(eff.src, self, "stone_link"..(self.uid or ""), "#OLIVE_DRAB##Source# redirects damage from #Target# to %s!#LAST#", string.his_her_self(eff.src))
+			game:delayedLogDamage(src, self, 0, ("#OLIVE_DRAB#(%d redirected)#LAST#"):format(value), false)
 			eff.src:takeHit(value, src)
-			game:delayedLogDamage(src, eff.src, value, ("#OLIVE_DRAB#%d 转移#LAST#"):format(value), false)
+			game:delayedLogDamage(src, eff.src, value, ("#OLIVE_DRAB#%d redirected#LAST#"):format(value), false)
 			value = 0
 		end
 	end
@@ -3103,7 +3103,7 @@ function _M:die(src, death_note)
 	if src and src.summoner and src.summoner_hate_per_kill then
 		if src.summoner.knowTalent and src.summoner:knowTalent(src.summoner.T_HATE_POOL) then
 			src.summoner.hate = math.min(src.summoner.max_hate, src.summoner.hate + src.summoner_hate_per_kill)
-			game.logPlayer(src.summoner, "%s 从受害者处为你提供了仇恨值。 (+%d 仇恨)", npcCHN:getName(src.name), src.summoner_hate_per_kill)
+			game.logPlayer(src.summoner, "%s feeds you hate from its latest victim. (+%d hate)", src.name:capitalize(), src.summoner_hate_per_kill)
 		end
 	end
 
@@ -3756,7 +3756,7 @@ end
 function _M:quickSwitchWeapons(free_swap, message, silent)
 	if self.no_inventory_access then return end
 	if self:attr("sleep") and not self:attr("lucid_dreamer") then
-		game.logPlayer(self, "你不能在睡眠中切换装备！")
+		game.logPlayer(self, "You cannot switch equipment while sleeping!")
 		return
 	end
 
@@ -3837,9 +3837,9 @@ function _M:quickSwitchWeapons(free_swap, message, silent)
 		-- Special Messages
 		if #names == 0 then names = "unarmed" end
 		if message == "warden" then
-			game.logSeen(self, "%s 扭曲了时空来装备: %s.", self.name:capitalize(), names)
+			game.logSeen(self, "%s warps space-time to equip: %s.", self.name:capitalize(), names)
 		else
-			game.logSeen(self, "%s 切换武器到: %s.", self.name:capitalize(), names)
+			game.logSeen(self, "%s switches %s weapons to: %s.", self.name:capitalize(), self:his_her(), names)
 		end
 	end
 	-- Make sure sustains are still active
@@ -4963,37 +4963,37 @@ function _M:preUseTalent(ab, silent, fake)
 			end
 		end
 
-	-- Spells can fail
-	if (ab.is_spell and not self:isTalentActive(ab.id)) and not fake and self:attr("spell_failure") then
-		if rng.percent(self:attr("spell_failure")) then
-			if not silent then game.logSeen(self, "%s的 %s 因 #ORCHID#反魔法力量#LAST#而施放失败！", npcCHN:getName(self.name), ab.name) end
-			self:useEnergy()
-			self:fireTalentCheck("callbackOnTalentDisturbed", ab)
-			return false
-		end
-	end
-
-	-- Nature can fail
-	if (ab.is_nature and not self:isTalentActive(ab.id)) and not fake and self:attr("nature_failure") then
-		if rng.percent(self:attr("nature_failure")) then
-			if not silent then game.logSeen(self, "%s的 %s 因 #ORCHID#反自然力量LAST#而释放失败！", self.name:capitalize(), ab.name) end
-			self:useEnergy()
-			self:fireTalentCheck("callbackOnTalentDisturbed", ab)
-			return false
-		end
-	end
-
-	-- Chronomancy can fail, causing an anomaly but returning Paradox
-	if (ab.paradox or (ab.sustain_paradox and not self:isTalentActive(ab.id))) and not fake and not self:attr("force_talent_ignore_ressources") then
-		-- Random anomalies reduce paradox by twice the talent's paradox cost
-		local cost = util.getval(ab.paradox or ab.sustain_paradox, self, ab)
-		if cost > 0 then
-			if self:paradoxDoAnomaly(self:paradoxFailChance(), cost * 2, {anomaly_type=ab.anomaly_type or nil, silent=silent}) then
-				game:playSoundNear(self, "talents/dispel")
+		-- Spells can fail
+		if (ab.is_spell and not self:isTalentActive(ab.id)) and not fake and self:attr("spell_failure") then
+			if rng.percent(self:attr("spell_failure")) then
+				if not silent then game.logSeen(self, "%s's %s has been disrupted by #ORCHID#anti-magic forces#LAST#!", self.name:capitalize(), ab.name) end
+				self:useEnergy()
+				self:fireTalentCheck("callbackOnTalentDisturbed", ab)
 				return false
 			end
 		end
-	end
+
+		-- Nature can fail
+		if (ab.is_nature and not self:isTalentActive(ab.id)) and not fake and self:attr("nature_failure") then
+			if rng.percent(self:attr("nature_failure")) then
+				if not silent then game.logSeen(self, "%s's %s has been disrupted by #ORCHID#anti-nature forces#LAST#!", self.name:capitalize(), ab.name) end
+				self:useEnergy()
+				self:fireTalentCheck("callbackOnTalentDisturbed", ab)
+				return false
+			end
+		end
+
+		-- Chronomancy can fail, causing an anomaly but returning Paradox
+		if (ab.paradox or (ab.sustain_paradox and not self:isTalentActive(ab.id))) and not fake and not self:attr("force_talent_ignore_ressources") then
+			-- Random anomalies reduce paradox by twice the talent's paradox cost
+			local cost = util.getval(ab.paradox or ab.sustain_paradox, self, ab)
+			if cost > 0 then
+				if self:paradoxDoAnomaly(self:paradoxFailChance(), cost * 2, {anomaly_type=ab.anomaly_type or nil, silent=silent}) then
+					game:playSoundNear(self, "talents/dispel")
+					return false
+				end
+			end
+		end
 	end
 	if self:triggerHook{"Actor:preUseTalent", t=ab, silent=silent, fake=fake} then
 		return false
@@ -5032,7 +5032,7 @@ function _M:preUseTalent(ab, silent, fake)
 		if self:attr("scoundrel_failure") and (ab.mode ~= "sustained" or not self:isTalentActive(ab.id)) and util.getval(ab.no_energy, self, ab) ~= true and not fake and not self:attr("force_talent_ignore_ressources") then
 			local eff = self:hasEffect(self.EFF_FUMBLE)
 			if rng.percent(self:attr("scoundrel_failure")) then
-				if not silent then game.logSeen(self, "%s 笨拙地行动，未能使用 %s, 并弄伤了自己!", self.name:capitalize(), ab.name) end
+				if not silent then game.logSeen(self, "%s fumbles and fails to use %s, injuring %s!", self.name:capitalize(), ab.name, self:his_her_self()) end
 				self:useEnergy()
 				self:fireTalentCheck("callbackOnTalentDisturbed", ab)
 				return false
@@ -5040,7 +5040,7 @@ function _M:preUseTalent(ab, silent, fake)
 		end
 		
 		if self:hasEffect(self.EFF_SENTINEL) and (ab.mode ~= "sustained" or not self:isTalentActive(ab.id)) and util.getval(ab.no_energy, self, ab) ~= true and not fake and not self:attr("force_talent_ignore_ressources") then
-			if not silent then game.logSeen(self, "%s 的 %s 被攻击中断了！", self.name:capitalize(), ab.name) end
+			if not silent then game.logSeen(self, "%s's %s is interrupted by the shot!", self.name:capitalize(), ab.name) end
 			self.tempeffect_def[self.EFF_SENTINEL].do_proc(self, self:hasEffect(self.EFF_SENTINEL))
 			self:useEnergy()
 			self:fireTalentCheck("callbackOnTalentDisturbed", t)
@@ -5065,9 +5065,9 @@ function _M:preUseTalent(ab, silent, fake)
 	-- Special checks -- AI
 	if not self.player and ab.on_pre_use_ai and not (ab.mode == "sustained" and self:isTalentActive(ab.id)) and not ab.on_pre_use_ai(self, ab, silent, fake) then return false end
 
-
 	return true
 end
+
 --- Display the talent use message in the game log
 -- called when the talent is used after successful preUseTalent check
 -- @param ab the talent (not the id, the table)
@@ -6735,7 +6735,7 @@ end
 function _M:doDrop(inven, item, on_done, nb)
 	if self.no_inventory_access then return end
 	if self:attr("sleep") and not self:attr("lucid_dreamer") then
-		game.logPlayer(self, "你不能在睡眠中丢弃物品。")
+		game.logPlayer(self, "You can not drop items while sleeping.")
 		return
 	end
 	local o = self:getInven(inven) and self:getInven(inven)[item]
@@ -6750,7 +6750,7 @@ function _M:doDrop(inven, item, on_done, nb)
 	end
 
 	if game.zone.wilderness then
-		Dialog:yesnoLongPopup("Warning", "任何扔在世界地图上的物品将永远消失。", 300, function(ret)
+		Dialog:yesnoLongPopup("Warning", "Any item dropped on the world map will be lost forever.", 300, function(ret)
 			-- The test is reversed because the buttons are reversed, to prevent mistakes
 			if not ret then
 				local o = self:getInven(inven) and self:getInven(inven)[item]

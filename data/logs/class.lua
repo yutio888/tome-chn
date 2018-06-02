@@ -6,6 +6,11 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
+	log = "#AQUAMARINE#Most stores should have new stock now.",
+	fct = "#AQUAMARINE#大部分商店现在应该有新货物了。",
+}
+
+logCHN:newLog{
 	log = "Limmir summons a blast of holy light!",
 	fct = function()
 		return "利米尔召唤出一道圣光！"
@@ -929,6 +934,13 @@ logCHN:newLog{
 	end,
 }
 logCHN:newLog{
+	log = "#AQUAMARINE#You leech a part of #Target# vim.",
+	fct = function()
+		return ("#AQUAMARINE#你吸收了 #Target# 部分活力。"):format()
+	end,
+}
+
+logCHN:newLog{
 	log = "#AQUAMARINE#You leech a part of %s vim.",
 	fct = function(a)
 		a = npcCHN:getName(a)
@@ -1781,3 +1793,20 @@ logCHN:newLog{
 	fct = function(a,b)
 		return ("#ORCHID#%s本能地硬化%s皮肤，无视了这次攻击！#LAST#"):format(npcCHN:getName(a),b) end,
 }
+
+logCHN:newLog{
+	log = "#F53CBE#You fight through the pain! (+%d hate)",
+	fct = "#F53CBE#你在痛苦中战斗！（+%d仇恨）",
+	
+}
+logCHN:newLog{
+	log = "#F53CBE#Your hatred grows even as your life fades! (+%d hate)",
+	fct = "#F53CBE#当你失去生命时，你的仇恨增长了！（+%d仇恨）",
+	
+}
+logCHN:newLog{
+	log = "#F53CBE#Your powerful attack feeds your madness! (+%d hate)",
+	fct = "#F53CBE#你强有力的攻击增进了你的疯狂！（+%d仇恨）",
+	
+}
+

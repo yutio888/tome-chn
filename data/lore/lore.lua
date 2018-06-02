@@ -38,3 +38,7 @@ load("data-chn123/lore/demon.lua")
 load("data-chn123/lore/orcs/destructicus.lua")
 load("data-chn123/lore/orcs/dominion-port.lua")
 load("data-chn123/lore/orcs/emporium.lua")
+
+load("data-chn123/lore/cults/misc.lua")
+load("data-chn123/lore/cults/zones.lua")
+load("data-chn123/lore/cults/dremwarves.lua")

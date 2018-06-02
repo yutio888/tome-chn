@@ -41,3 +41,4 @@ load("data-chn123/lore/orcs/emporium.lua")
 
 load("data-chn123/lore/cults/misc.lua")
 load("data-chn123/lore/cults/zones.lua")
+load("data-chn123/lore/cults/dremwarves.lua")

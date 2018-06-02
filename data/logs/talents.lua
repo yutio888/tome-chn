@@ -3181,7 +3181,7 @@ logCHN:newLog{
 --misc/race
 logCHN:newLog{
 	log = "#CRIMSON#%s roars with rage shaking off %d mental debuffs!",
-	fct = function(a,b)return ("#CRIMSON#%s%s愤怒地咆哮，解除了%d项精神负面状态！"):format(npcCHN:getName(a),b)	end,
+	fct = function(a,b)return ("#CRIMSON#%s愤怒地咆哮，解除了%d项精神负面状态！"):format(npcCHN:getName(a),b)	end,
 }
 
 logCHN:newLog{

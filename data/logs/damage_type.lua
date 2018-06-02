@@ -5,14 +5,24 @@ logCHN:newLog{
 		return ("%s 摆脱了暴击伤害！"):format(a)
 	end,
 }
---[[
+
+logCHN:newLog{
+	log = "You end your target with a crushing blow!",
+	fct = "你的毁灭一击终结了对手！",
+}
+
+logCHN:newLog{
+	log = "#DARK_ORCHID#Your damage shield cannot be extended any farther and has exploded.",
+	fct = "#DARK_ORCHID#你的伤害护盾不能再被延长，终于破碎了",
+}
+
 logCHN:newLog{
 	log = "#Source# strikes #Target# in the darkness (%+d%%%%%%%% damage).",
 	fct = function(a)
-		return ("#Source# 在黑暗中打击了 #Target#  (%+d%%%%%%%% 伤害)!"):format(a)
+		return ("#Source# 在黑暗中打击了 #Target#  (%+d%%%%%%%%%%%%%%%% 伤害)!"):format(a)
 	end,
 }
-]]
+
 logCHN:newLog{
 	log = "#CRIMSON##Source# damages %s through Martyrdom!",
 	fct = function(a)
@@ -59,6 +69,13 @@ logCHN:newLog{
 		return ("%s 抵抗了震慑！"):format(a)
 	end,
 }
+logCHN:newLog{
+	log = "%s resists the silence!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 抵抗了沉默！"):format(a)
+	end,
+}
 
 logCHN:newLog{
 	log = "%s resists!",
@@ -72,7 +89,15 @@ logCHN:newLog{
 	log = "%s resists the blinding light!",
 	fct = function(a)
 		a = npcCHN:getName(a)
-		return ("%s 抵抗了致盲伤害！"):format(a)
+		return ("%s 抵抗了致盲！"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "%s resists the blinding flare!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 抵抗了致盲！"):format(a)
 	end,
 }
 
@@ -163,6 +188,13 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
+	log = "#LIGHT_STEEL_BLUE#%s can't gain any more energy this turn!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return("#LIGHT_STELL_BLUE#%s 这回合不能获得更多时间！"):format(a)
+	end,
+}
+logCHN:newLog{
 	log = "%s resists the sandstorm!",
 	fct = function(a)
 		a = npcCHN:getName(a)
@@ -209,7 +241,7 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
-	log = "%s resists the blindness!",
+	log = "%s resists the blind!",
 	fct = function(a)
 		a = npcCHN:getName(a)
 		return ("%s 抵抗了致盲！"):format(a)
@@ -248,13 +280,33 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
-	log = "%s resists the bane!",
+	log = "%s resists the baneful energy!",
 	fct = function(a)
 		a = npcCHN:getName(a)
-		return ("%s 抵抗了毒药！"):format(a)
+		return ("%s 抵抗了毒素！"):format(a)
 	end,
 }
-
+logCHN:newLog{
+	log = "%s resists the freezing!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 抵抗了冰冻！"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "%s resists entanglement!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 抵抗了纠缠！"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "%s has no mana to burn",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 没有可供燃烧的法力。"):format(a)
+	end,
+}
 logCHN:newLog{
 	log = "%s resists the forge bellow!",
 	fct = function(a)
@@ -270,6 +322,14 @@ logCHN:newLog{
 		return ("%s 抵抗了梦境熔炉！"):format(a)
 	end,
 }
+logCHN:newLog{
+	log = "%s resists the shove!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 抵抗了推拉！"):format(a)
+	end,
+}
+
 
 logCHN:newLog{
 	log = "asked the Eidolon to let %s die in peace",
@@ -278,5 +338,30 @@ logCHN:newLog{
 	end,
 }
 
+local normal_damtype = {
+	["物理"] = "#WHITE#",
+	["奥术"] = "#PURPLE#",
+	["寒冷"] = "#1133F3#",
+	["火焰"] = "#LIGHT_RED#",
+	["闪电"] = "#ROYAL_BLUE#",
+	["酸性"] = "#GREEN#",
+	["自然"] = "#LIGHT_GREEN#",
+	["枯萎"] = "#DARK_GREEN#",
+	["光系"] = "#YELLOW#",
+	["暗影"] = "#GREY#",
+	["精神"] = "#YELLOW#",
+	["时空"] = "#LIGHT_STELL_BLUE",
+}
 
 
+for i,k in pairs(normal_damtype) do
+--print("DAMCHECK",i)
+logCHN:newLog{
+	log = "#Source##LIGHT_GREEN# HEALS#LAST# from "..k..i.."#LAST# damage!",
+	fct = function() return "#Source# 因 "..k..i.."#LAST# 伤害受到了#LIGHT_GREEN# 治疗 #LAST#!" end,
+}
+logCHN:newLog{
+	log = "#Source##LIGHT_GREEN# HEALS#LAST# from #aaaaaa#"..i.."#LAST# damage!",
+	fct = function() return "#Source# 因 #aaaaaa#"..i.."#LAST# 伤害受到了#LIGHT_GREEN# 治疗 #LAST#!" end,
+}
+end

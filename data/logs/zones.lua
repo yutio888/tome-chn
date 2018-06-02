@@ -19,14 +19,19 @@ logCHN:newLog{
 		return "#VIOLET#虫洞吸收了能量变得稳定， 现在你可以使用它来传送了。"
 	end,
 }
-
 logCHN:newLog{
-	log = "%s appears out of the thin air!",
-	fct = function(a)
-		a = npcCHN:getName(a)
-		return ("%s 从空气中消失了。"):format(a)
+	log = "#VIOLET#The wormhole absorbs energies of the spell and explodes in a burst of nullmagic!",
+	fct = function()
+		return "#VIOLET#虫洞吸收了法术能量，并产生了原始能量爆炸！"
 	end,
 }
+logCHN:newLog{
+	log = "#VIOLET#The wormhole absorbs energie of the spell and teleports %s away!",
+	fct = function(a)
+		return ("#VIOLET#虫洞吸收了法术能量，将%s传送走了！。"):format(npcCHN:getName(a)) 
+	end,
+}
+
 
 logCHN:newLog{
 	log = "#ANTIQUE_WHITE#The Crown of Eternal Night seems to react with the Bindings, you feel tremendous dark power.",
@@ -84,12 +89,23 @@ logCHN:newLog{
 		return ("#CRIMSON#%s 似乎无懈可击，一定有什么其他方法可以杀死它！"):format(a)
 	end,
 }
+
+
 logCHN:newLog{
 	log = "#AQUAMARINE#As #Source# falls you notice that #Target# seems to shudder in pain!",
 	fct = function()
 		return "#AQUAMARINE#当#Source# 倒下时，你发现#Target#似乎因为痛苦而颤抖!"
 	end,
 }
+logCHN:newLog{
+	log = "%s taps %s %s together!",
+	fct = function(a,b,c)
+		a = npcCHN:getName(a)
+		local name = objects:getObjectsChnName(c)
+		return ("%s将%s %s拼在一起 。"):format(a,b,name)
+	end,
+}
+
 
 logCHN:newLog{
 	log = "You receive: %s",
@@ -153,7 +169,7 @@ logCHN:newLog{
 	log = "You cannot bring yourself to drop the %s",
 	fct = function(a)
 		local name = objects:getObjectsChnName(a)
-		return ("你不能丢弃 %s"):format(name)
+		return ("你无法丢弃 %s"):format(name)
 	end,
 }
 
@@ -184,6 +200,11 @@ logCHN:newLog{
 		return "火山的岩浆治疗了你！"
 	end,
 }
+
+logCHN:newLog{
+	log = "#Source# heals #Target#!",
+	fct = "#Source# 治疗了 #Target#!",
+	}
 
 logCHN:newLog{
 	log = "Your %s is magically sorted by the storage room.",
@@ -222,7 +243,12 @@ logCHN:newLog{
 		return ("你有 %d 属性点数，按下p来使用。"):format(...)
 	end,
 }
-
+logCHN:newLog{
+	log = "%s have %d stat point(s) to spend. Press p to use them.",
+	fct = function(...)
+		return ("%s有 %d 属性点数，按下p来使用。"):format(...)
+	end,
+}
 logCHN:newLog{
 	log = "You have %d class talent point(s) to spend. Press p to use them.",
 	fct = function(...)
@@ -235,6 +261,14 @@ logCHN:newLog{
 	fct = function(...)
 		return ("你有 %d 通用技能点数，按下p来使用。"):format(...)
 	end,
+}
+logCHN:newLog{
+	log = "#00FFFF#You consume the heart and feel the knowledge of this very old creature fill you!",
+	fct = "#00FFFF#你消耗了心脏，你感觉被这个古老生物的知识充满。",
+}
+logCHN:newLog{
+	log = "#00FFFF#You consume the heart and feel corruption fill you!",
+	fct = "#00FFFF#你消耗了心脏，你感觉你充满了堕落力量。",
 }
 
 logCHN:newLog{
@@ -259,7 +293,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#00FF00#You gain an affinity for blight. You can now learn new Vile Life talents (press p).",
 	fct = function()
-		return "#00FF00#你获得了与自然的紧密联系， 现在你可以学习新的邪恶生命技能（按下p）"
+		return "#00FF00#你获得了与枯萎的紧密联系， 现在你可以学习新的邪恶生命技能（按下p）"
 	end,
 }
 logCHN:newLog{
@@ -393,7 +427,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#AQUAMARINE#You arrive deep under water, at the sea floor, as you look upwards you only see a glimpse of light coming through.",
 	fct = function()
-		return "#AQUAMARINE#你深入了水下， 在海床上， 当你抬头看时 你看到有道光亮一闪而过。"
+		return "#AQUAMARINE#你深入了水下， 在海床上， 当你抬头看时 你看到有光亮一闪而过。"
 	end,
 }
 
@@ -415,7 +449,7 @@ logCHN:newLog{
 	log = "The Eidolon Plane seems to not physicaly exists in the same way the normal world does, you can not seem to drop anything here. %s comes back into your backpack.",
 	fct = function(a)
 		local name = objects:getObjectsChnName(a)
-		return ("艾德隆位面似乎并不在现实世界中真实存在， 似乎你在这里不能丢弃任何东西， %s 又回到了你的手中。"):format(name)
+		return ("艾德隆位面似乎并不像现实世界一样真实存在， 你在这里似乎不能丢弃任何东西， %s 又回到了你的手中。"):format(name)
 	end,
 }
 
@@ -584,7 +618,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "You were not the first here: the corpse was turned into an undead.",
 	fct = function()
-		return "你不是这里第一个变成亡灵的尸体！"
+		return "你不是第一个来到这里的：那个人的尸体已经变成了亡灵！"
 	end,
 }
 
@@ -681,6 +715,14 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
+	log = "The ground shakes as %s steps!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("当 %s前进时，大地在震动!"):format(a)
+	end,
+}
+
+logCHN:newLog{
 	log = "#GREEN#You put the heart on the altar. The heart shrivels and shakes, vibrating with new corrupt forces.",
 	fct = function()
 		return "#GREEN#你将心脏放在祭坛上。心脏跳动、收缩，最终被堕落力量腐化。"
@@ -705,4 +747,44 @@ logCHN:newLog{
 	fct = function()
 		return "#Source# 在你的脚下释放了黑暗的能量。"
 	end,
+}
+logCHN:newLog{
+	log = "You have not finished your romantic time at the beach.",
+	fct = "你还没享受完在海滩的浪漫时光",
+}
+
+logCHN:newLog{
+	log = "You touch the dreamstone and it disappears. You feel better.",
+	fct = "你触碰了梦境之石，它消失了。你感觉好多了。",
+}
+
+
+logCHN:newLog{
+	log = "#LIGHT_BLUE#You feel this robe was made for you!",
+	fct = "#LIGHT_BLUE#你感觉这件袍子就是为你制作的!",
+}
+
+logCHN:newLog{
+	log = "#VIOLET#You seem to understand the basic martial pratices. (Combat Training talents unlocked)",
+	fct = "#VIOLET#你似乎理解了一些基础的训练。（战斗训练系解锁）",
+}
+
+logCHN:newLog{
+	log = "#VIOLET#You seem to now know how to properly use a bow or a sling.",
+	fct = "#VIOLET#你似乎学会了如何使用弓和投石索",
+}
+
+logCHN:newLog{
+	log = "#VIOLET#Images of yourself beating people with a stick spring into your mind. (Staff Combat category can be bought)",
+	fct = "#VIOLET#你用木棒击打敌人的镜像进入了你的大脑。（能购买法杖格斗系）",
+}
+
+logCHN:newLog{
+	log = "#VIOLET#You suddenly understand how to channel your mental force through mindstars. (Mindstar Mastery category can be bought)",
+	fct = "#VIOLET#你突然理解如何用灵晶调用精神力量。（能购买灵晶掌握系）",
+}
+
+logCHN:newLog{
+	log = "#VIOLET#It seems you already knew all the elixir could teach you.",
+	fct = "#VIOLET#似乎你已经学会了它能教你的一切",
 }

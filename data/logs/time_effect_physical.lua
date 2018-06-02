@@ -1,3 +1,5 @@
+
+
 logCHN:newLog{
 	log = "#Target#'s power is greatly reduced!",
 	fct = function(a)
@@ -848,7 +850,20 @@ logCHN:newLog{
 		return ("%s再次遭受被诅咒的创伤。"):format(a)
 	end,
 }
-
+logCHN:newLog{
+	log = "%s has re-opened a cursed wound!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s再次遭受被诅咒的创伤。"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "%s resists the disarming attempt!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s抵抗了缴械！"):format(a)
+	end,
+}
 logCHN:newLog{
 	log = "#Target# has been illuminated.",
 	fct = function(a)
@@ -1571,4 +1586,37 @@ logCHN:newLog{
 		a = npcCHN:getName(a)
 		return ("%s 不再忍受折磨。"):format(a)
 	end,
+}
+
+logCHN:newLog{
+	log = "#YELLOW_GREEN##Source# steals healing from #Target#!",
+	fct = function() return "#YELLOW_GREEN##Source# 从 #Target# 偷取了治疗!" end,
+}
+logCHN:newLog{
+	log = "#YELLOW_GREEN##Source#'s healing is amplified!",
+	fct = function() return "#YELLOW_GREEN##Source# 的治疗被增幅了!" end,
+}
+logCHN:newLog{
+	log = "#CRIMSON##Source# heals from blocking with %s shield!",
+	fct = function(a) return ("#CRIMSON##Source# 用 %s 盾牌格挡，获得了治疗!"):format(a) end,
+}
+logCHN:newLog{
+	log = "#ORCHID#You cannot block any more attacks!#LAST#",
+	fct = "#ORCHID#你不能格挡更多攻击了！#LAST#",
+}
+logCHN:newLog{
+	log = "#GREY#You begin your Shadow Dance.",
+	fct = "#GREY#你开始了你的暗影之舞",
+}
+logCHN:newLog{
+	log = "#GREY#You end your Shadow Dance.",
+	fct = "#GREY#你结束了你的暗影之舞",
+}
+logCHN:newLog{
+	log = "You have been detected!",
+	fct = "你被发现了！",
+}
+logCHN:newLog{
+	log = "#GREY#%s looks stony for a moment, but resists the transformation.",
+	fct = function(a) return("#GREY#%s 似乎短暂地变成了石头，但马上抵抗了变形。"):format(npcCHN:getName(a)) end,
 }

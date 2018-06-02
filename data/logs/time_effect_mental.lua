@@ -31,7 +31,7 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
-	log = "#Target# collapses.",
+	log = "%s collapses.",
 	fct = function(a)
 		a = npcCHN:getName(a)
 		return ("%s 的精神瓦解。"):format(a)
@@ -785,7 +785,7 @@ logCHN:newLog{
 	log = "%s's increased life fades, leaving it stunned by the loss.",
 	fct = function(a)
 		a = npcCHN:getName(a)
-		return ("%s失去了额外的生命值，并被Boss震慑。"):format(a)
+		return ("%s失去了额外的生命值，并被震慑。"):format(a)
 	end,
 }
 
@@ -895,12 +895,8 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
-	log = "%s is mimicking %s. (no gains).",
-	fct = function(a,b)
-		a = npcCHN:getName(a)
-		b = npcCHN:getName(b)
-		return ("%s正在仿生%s（无增益）。"):format(a,b)
-	end,
+	log = "#Source# is mimicking #Target#. (no gains).",
+	fct = "#Source#正在仿生#Target#（无增益）。",
 }
 
 logCHN:newLog{
@@ -1239,4 +1235,19 @@ logCHN:newLog{
 		a = npcCHN:getName(a)
 		return ("%s 不再被诅咒"):format(a)
 	end,
+}
+
+logCHN:newLog{
+	log = "#CRIMSON##Source# blocks #Target#'s attack and retaliates with %s telekinetically wielded weapon!#LAST#",
+	fct = "#CRIMSON##Source# 格挡了 #Target# 的攻击，并用 %s 灵能武器进行反击!#LAST#",
+}
+
+logCHN:newLog{
+	log =  "An unseen force begins to swirl around %s!",
+	fct = function(a) return("一股无形力量环绕在%d周围！"):format(npcCHN:getName(a)) end,
+}
+
+logCHN:newLog{
+	log =  "The unseen force around %s subsides.",
+	fct = function(a) return("环绕在%d的无形力量消退了。"):format(npcCHN:getName(a)) end,
 }

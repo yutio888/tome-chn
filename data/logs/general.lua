@@ -21,7 +21,23 @@ logCHN:newLog{
 		return ("%s 爆炸产生了一团酸雾。"):format(a)
 	end,
 }
+logCHN:newLog{
+	log = "%s raises %s %s, and a red light flashes from it's eye sockets!",
+	fct = function(a,b,c)
+		a = npcCHN:getName(a)
+		c = npcCHN:getName(c)
+		return ("%s 令 %s %s站了起来, 一道红光从它眼中闪过！"):format(a,b,c)
+		end,
+}
+logCHN:newLog{
+	log = "#RED#Rising again, the Rat Lich's eyes glow with renewed energy!",
+	fct = "#RED#鼠巫妖再次复活，眼中充满了新的能量！",
+}
 
+logCHN:newLog{
+	log = "From the dust of decay a %s forms!",
+	fct = function(a) return("从灰尘中%s站了起来！"):format(npcCHN:getName(a)) end,
+}
 logCHN:newLog{
 	log = "#LIGHT_RED#%s raises from the dead!",
 	fct = function(a)
@@ -162,7 +178,7 @@ logCHN:newLog{
 	log = "%s brandishes the %s, calling forth the might of the oceans!",
 	fct = function(a,b)
 		a = npcCHN:getName(a)
-		local name = objects:getObjectsChnName(a)
+		local name = objects:getObjectsChnName(b)
 		return ("%s 挥舞着 %s ，唤起海洋的力量！"):format(a,name)
 	end,
 }
@@ -260,6 +276,13 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
+	log = "#GOLD#You feel a swell of positive energy.",
+	fct = function()
+		return "#GOLD#你感受到一股正能量在膨胀。"
+	end,
+}
+
+logCHN:newLog{
 	log = "#LIGHT_BLUE#You carefully get away without making a sound.",
 	fct = function()
 		return "#LIGHT_BLUE#你小心翼翼地悄悄离开了。"
@@ -275,6 +298,13 @@ logCHN:newLog{
 
 logCHN:newLog{
 	log = "#LIGHT_RED#As you enter you notice the trap door has no visible handle on the inside. You are stuck here!",
+	fct = function()
+		return "#LIGHT_RED#当你进入了地道你发现活门没有出去的开关， 你被关在这里了！"
+	end,
+}
+
+logCHN:newLog{
+	log = "#LIGHT_RED#As you enter you notice the door has no visible handle on the inside. You are stuck here!",
 	fct = function()
 		return "#LIGHT_RED#当你进入了地道你发现活门没有出去的开关， 你被关在这里了！"
 	end,
@@ -348,7 +378,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "Your negative mana regeneration rate is unaffected by the staff.",
 	fct = function()
-		return "你的负能量回复率不受法杖影响。"
+		return "你法力值的负回复率不受法杖影响。"
 	end,
 }
 
@@ -362,7 +392,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "Your nonexistant mana regeneration rate is unaffected by the staff.",
 	fct = function()
-		return "你的法力恢复效果不受法杖影响。"
+		return "你没有法力恢复效果，不受法杖影响。"
 	end,
 }
 
@@ -523,14 +553,14 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#LIGHT_BLUE#You feel as surge of power as you wield the axe of your ancestors!",
 	fct = function()
-		return "#LIGHT_BLUE#你一装备这把战斧你感到全身涌入了一股力量！"
+		return "#LIGHT_BLUE#你装备这把先祖的战斧，感到全身涌入了一股力量！"
 	end,
 }
 
 logCHN:newLog{
 	log = "#LIGHT_BLUE#You feel a great hero watching over you!",
 	fct = function()
-		return "#LIGHT_BLUE#你感到有位伟大的英雄正在守护着你！"
+		return "#LIGHT_BLUE#你感到有位伟大的英雄正在注视着你！"
 	end,
 }
 
@@ -585,19 +615,27 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
-	log = "A rift opens, spawning a free floating blade!",
+	log = "#AQUAMARINE#A rift opens, spawning a free floating blade!",
 	fct = function()
-		return "一道传送门打开了，释放出了1个漂浮的次元之刃！"
+		return "#AQUAMARINE#一道传送门打开了，释放出了1个漂浮的次元之刃！"
 	end,
 }
-
 logCHN:newLog{
-	log = "A rift opens, a blade emerging. It does not look like the others.",
+	log = "#AQUAMARINE#The %s no longer seems to be controlled and clatters to the ground before vanishing into a rift.",
+	fct = function(a)
+		return ("#AQUAMARINE#%s 似乎不再被控制，从传送门消失前坠落在地面。"):format(npcCHN:getName(a)) end,
+		}
+logCHN:newLog{
+	log = "#AQUAMARINE#A rift opens, a blade emerging. It does not look like the others.",
 	fct = function()
-		return "一道传送门打开了，1只次元之刃浮现了出来。它似乎和那些其他的剑刃有所不同。"
+		return "#AQUAMARINE#一道传送门打开了，1只次元之刃浮现了出来。它似乎和那些其他的剑刃有所不同。"
 	end,
 }
-
+logCHN:newLog{
+	log = "#LIGHT_BLUE#%s explodes into a huge bubble of air!",
+	fct = function(a)
+		return ("#LIGHT_BLUE#%s 爆裂为大量空气泡!"):format(npcCHN:getName(a)) end,
+}
 logCHN:newLog{
 	log = "%s is affected by the glimmerstone!",
 	fct = function(a)
@@ -644,6 +682,15 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
+	log = "#VIOLET#A demon steps out of the portal!",
+	fct = "#VIOLET#一个恶魔从传送门中出来了！",
+}
+logCHN:newLog{
+	log = "#VIOLET#A naga steps out of the portal!",
+	fct = "#VIOLET#一个娜迦从传送门中出来了！",
+}
+
+logCHN:newLog{
 	log = "There is nothing there.",
 	fct = function()
 		return "那里什么也没有。"
@@ -684,7 +731,12 @@ logCHN:newLog{
 		return "#CRIMSON#刺客契约将一项效果转移给其来源!"
 	end,
 }
-
+logCHN:newLog{
+	log = "#CRIMSON#Rogue Plight transfers an effect to a nearby enemy!",
+	fct = function()
+		return "#CRIMSON#刺客契约将一项效果转移给周围敌人!"
+	end,
+}
 logCHN:newLog{
 	log = "A wave of icy water bursts out from #Source#'s shield towards #Target#!",
 	fct = function()
@@ -814,6 +866,11 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
+	log = "#DARK_GREEN#You feel nature's power protecting you!",
+	ftc = "#DARK_GREEN#你感到自然之力庇护着你！",
+}
+
+logCHN:newLog{
 	log = "#DARK_GREEN#You feel like Nature's Wrath incarnate!",
 	fct = function()
 		return "#DARK_GREEN#你感受到了自然的怒火！"
@@ -866,6 +923,22 @@ logCHN:newLog{
 		return("#SLATE#灵晶间的联系消失了。")
 	end,
 }
+
+logCHN:newLog{
+	log = "#GREEN#Your mindstars resonate with Nature's purity.",
+	fct = "#GREEN#你的灵晶因自然的纯洁而相互共鸣。",
+}
+
+logCHN:newLog{
+	log = "#YELLOW#Your mindstars resonate with psionic energy.",
+	fct = "#YELLOW#你的灵晶因超能力而相互共鸣。",
+}
+
+logCHN:newLog{
+	log = "#YELLOW#Psionic energy flows through your mindstars.",
+	fct = "#YELLOW#超能力在你的灵晶中流淌。",
+}
+
 logCHN:newLog{
 	log = "#Source# strikes #Target# with %s %s, sending out an arc of lightning!",
 	fct = function(a,b)
@@ -896,6 +969,18 @@ logCHN:newLog{
 		return("#GOLD#沙子缓慢地流向 %s"):format(a)
 	end,
 }
+
+logCHN:newLog{
+	log = "#GOLD#As the final sands drop into place, you feel a surge of power",
+	fct = "#GOLD#当最后一粒沙落下，你感受到一股力量。",
+}
+
+logCHN:newLog{
+	log = "#GOLD#As the final sands drop into place, you suddenly feel safer.",
+	fct = "#GOLD#当最后一粒沙落下，你感觉安全了不少。",
+}
+
+
 logCHN:newLog{
 	log = "%s evokes a mental assault from %s %s!",
 	fct = function(a,b,c)
@@ -931,4 +1016,306 @@ logCHN:newLog{
 	fct = function()
 		return "#LIGHT_BLUE#有人打扰了沉睡者的沉眠..."
 	end,
+}
+
+logCHN:newLog{
+	log = "%s's severed flesh starts crawling!",
+	fct = function(a)
+		return ("%s 被切割的血肉开始爬行！"):format(npcCHN:getName(a)) end,
+}
+
+logCHN:newLog{
+	log = "#Source# burns #Target#!",
+	fct = "#Source# 灼烧了 #Target#!",
+}
+
+logCHN:newLog{
+	log = "#Source# poisons #Target#!",
+	fct = "#Source# 让 #Target# 中毒!",
+}
+
+logCHN:newLog{
+	log = "#VIOLET#The portal is already broken!",
+	fct = "#VIOLET#传送门已经被破坏!",
+}
+logCHN:newLog{
+	log = "#VIOLET#The portal is broken!",
+	fct = "#VIOLET#传送门被破坏了!",
+}
+logCHN:newLog{
+	log = "#VIOLET# The stairway collapses completely as you ascend!",
+	fct = "#VIOLET# 当你下楼后，楼梯彻底崩塌了！",
+}
+
+logCHN:newLog{
+	log = "#VIOLET# The decrepit stairs crumble some more as you climb them",
+	fct = "#VIOLET# 当你上楼后，破旧的楼梯更加碎裂",
+}
+
+logCHN:newLog{
+	log = "#LIGHT_BLUE#The legacy of Dwarven Emperors grants you their wisdom.",
+	fct = "#LIGHT_BLUE#传奇矮人皇帝将他们的智慧授予你",
+}
+
+logCHN:newLog{
+	log = "#LIGHT_BLUE#As you don the %s, you gain understanding of the might of your race.",
+	fct = function(a) return ("#LIGHT_BLUE当你拥有%s时， 你理解了你种族的力量"):format(a) end,
+}
+
+logCHN:newLog{
+	log = "#GOLD#You grow to immense size!",
+	fct = "#GOLD#你身躯巨大化！",
+}
+
+logCHN:newLog{
+	log = "#LIGHT_BLUE#You feel a lot smaller...",
+	fct = "#LIGHT_BLUE#你感觉变小了……",
+}
+logCHN:newLog{
+	log = "#STEEL_BLUE#A time vortex briefly appears in front of you.",
+	fct = "#STEEL_BLUE#一个时间漩涡在你面前出现",
+}
+
+logCHN:newLog{
+	log = "#DARK_BLUE#The skin seems pleased to be worn by the unliving, and grows silent.",
+	fct = "#DARK_BLUE#这件人皮似乎很满意被亡灵穿着，沉默了下来。",
+}
+
+logCHN:newLog{
+	log = "#LIGHT_BLUE#You feel your dwarven power swelling to meet the challenge of this armor!",
+	fct = "#LIGHT_BLUE#你感到你的矮人力量在这件护甲的挑战面前被激发！",
+}
+
+logCHN:newLog{
+	log = "#LIGHT_BLUE#You feel the power of the Way within you!",
+	fct = "#LIGHT_BLUE#你感到了维网的力量！",
+}
+
+logCHN:newLog{
+	log = "#RED#The Way rejects its former captors!",
+	fct = "#RED#维网拒绝它之前的奴役者！",
+}
+
+logCHN:newLog{
+	log = "#LIGHT_BLUE#You feel the power of the sceptre flow over your undead form!",
+	fct = "#LIGHT_BLUE#在亡灵形态下你感受到了强大的力量流动！",
+}
+
+logCHN:newLog{
+	log = "#DARK_GREEN#The Heart pulses with antimagic forces as you grasp it.",
+	fct = "#DARK_GREEN#当你握住它时，心脏辐射出反魔能量。",
+	}
+
+logCHN:newLog{
+	log = "#CRIMSON#Your eyesight fades!",
+	fct = "#CRIMSON#你的视野变暗了！",
+}
+
+logCHN:newLog{
+	log = "#CRIMSON#The tentacles release your arm, sated.",
+	fct = "#CRIMSON#触手厌烦地释放了你的手臂。",
+}
+
+logCHN:newLog{
+	log = "#CRIMSON#As you tear the tentacles from your arm, horrible images enter your mind!",
+	fct = "#CRIMSON#当你将触手从手臂上扯下，可怕的景象进入了你的大脑！",
+}
+
+logCHN:newLog{
+	log = "#CRIMSON#As you wield the sword, the tentacles on its hilt wrap around your arm. You feel the sword's will invading your mind!",
+	fct = "#CRIMSON#当你持有这把剑时，触手开始在你手臂环绕。你感觉这把剑的意志侵入了你的大脑！",
+}
+
+logCHN:newLog{
+	log = "You crush the %s, and the gloves take on an illustrious shine!",
+	fct = function(a)
+	    a = objects:getObjectsChnName(a)
+	    return ("你摧毁了%s,手套开始发光！"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#ORCHID#Umbraphage is fully powered!",
+	fct = "#ORCHID#暗影吞噬者充分获得了能量！",
+}
+
+logCHN:newLog{
+	log = "#DARK_GREEN#You feel a great power rise within you!",
+	fct = "#DARK_GREEN#你感到体内涌现出一股强大的力量！",
+}
+
+logCHN:newLog{
+	log = "#CRIMSON# A powerful healing aura appears around you as you equip the %s.",
+	fct = function(a)
+	     a = objects:getObjectsChnName(a)
+	    return ("#CRIMSON#当你装备%s后，强大的治疗光环在你身边出现。"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#DARK_GREEN#You feel the strength of the whole world behind you!",
+	fct = "#DARK_GREEN#你感受到了世界的力量！",
+}
+
+logCHN:newLog{
+	log = "#LIGHT_BLUE#A barrier bursts from the leather jacket!",
+	fct = "#LIGHT_BLUE#这件皮夹克突然爆发出一股护盾能量！",
+}
+
+logCHN:newLog{
+	log = "#DARK_GREY#Your ring releases a burst of necromantic energy!",
+	fct = "#DARK_GREY#你的戒指释放出一股死灵能量！",
+}
+
+logCHN:newLog{
+	log = "#DARK_GREY#Your ring's power fades away.",
+	fct = "#DARK_GREY#你的戒指的力量消退了。",
+}
+
+logCHN:newLog{
+	log = "#GREEN#Shantiz strikes down a projectile!",
+	fct = "#GREEN#风暴之刃击落了抛射物！",
+}
+
+logCHN:newLog{
+	log = "#STEEL_BLUE#The fist and the mangled clothing glow ominously!",
+	fct = "#STEEL_BLUE#拳套和衣服开始发出不祥的光！",
+}
+
+logCHN:newLog{
+	log = "#STEEL_BLUE#The ominous glow dies down.",
+	fct = "#STEEL_BLUE#不祥的光芒停止了。",
+}
+
+logCHN:newLog{
+	log = "#GREEN#The seasons no longer feel balanced.",
+	fct = "#GREEN#四季不再平衡",
+}
+
+logCHN:newLog{
+	log = "#GOLD#As you wield the sword and shield of the Sunwall, you feel the Sun's light radiating from your core.",
+	fct = "#GOLD#当你握住晨曦之门的剑与盾，你感觉到从你身体内部散发出太阳的光辉。",
+}
+
+logCHN:newLog{
+	log = "Your %s has already been divided.",
+	fct = function(a)
+	    local name = objects:getObjectsChnName(a)
+	    return ("你的%s已经分裂过了。"):format(name)
+	end,
+}
+
+logCHN:newLog{
+	log = "You must have a free hand to divide the %s.",
+	fct = function(a)
+	    local name = objects:getObjectsChnName(a)
+	    return ("你想分裂 %s 必须有一个空闲的武器栏。"):format(name)
+	end,
+}
+
+logCHN:newLog{
+	log = "You cannot split your %s while it has a tinker inside.",
+	fct = function(a)
+	    local name = objects:getObjectsChnName(a)
+	    return ("你不能分裂%s，因为目前有配件附着在上面。"):format(name)
+	end,
+}
+
+logCHN:newLog{
+	log = "You cannot split your %s while using it as a psionic focus.",
+	fct = function(a)
+	    local name = objects:getObjectsChnName(a)
+	    return ("你不能分裂%s，你正用其作为灵能聚焦。"):format(name)
+	end,
+}
+
+logCHN:newLog{
+	log = "Your %s is too flawed to divide..",
+	fct = function(a)
+	    local name = objects:getObjectsChnName(a)
+	    return ("你不能分裂%s，它存在缺陷……"):format(name)
+	end,
+}
+
+logCHN:newLog{
+	log = "You divide your %s in two, forming a linked set.",
+	fct = function(a)
+	    local name = objects:getObjectsChnName(a)
+	    return ("你分裂了%s，使其组成套装。"):format(name)
+	end,
+}
+
+logCHN:newLog{
+	log = "#GREEN#The mindstars pulse with life as it synergises with its twin.",
+	fct = "#GREEN#灵晶和它的孪生兄弟产生共鸣",
+}
+
+logCHN:newLog{
+	log = "#GREY#You feel a swell of hatred from your mindstars.",
+	fct = "#GREY#你感受到灵晶中的憎恨。",
+}
+
+logCHN:newLog{
+	log = "#DARK_GREEN#You feel the cleansing power of Penitence attune to you.",
+	fct = "#DARK_GREEN#你感受到忏悔法杖的净化力量。",
+}
+
+logCHN:newLog{
+	log = "#LIGHT_BLUE#You feel invincible!",
+	fct = "#LIGHT_BLUE#你感觉自己不可战胜！",
+}
+
+logCHN:newLog{
+	log = "#DARK_GREEN#You understand this bow-and its connection to nature-in a way few can.",
+	fct = "#DARK_GREEN#你理解了这把弓—— 以及它和自然的联系—— 这是很多人无法理解的。",
+}
+
+logCHN:newLog{
+	log = "#DARK_BLUE#You feel a kindred spirit in this bow...",
+	fct = "#DARK_BLUE#你感受到弓内类似的灵魂……",
+}
+
+logCHN:newLog{
+	log = "#LIGHT_BLUE#Herah's guile and luck is with you, her successor!",
+	fct = "#LIGHT_BLUE#Herah的狡诈和幸运与你同在，她的继承人！",
+}
+
+logCHN:newLog{
+	log = "#LIGHT_BLUE#You feel nature defending you.",
+	fct = "#LIGHT_BLUE#你感觉自然在保卫你。",
+}
+
+logCHN:newLog{
+	log = "#CRIMSON#The unearthly glow fades away.",
+	fct = "#CRIMSON# 非自然的光芒消退了。",
+}
+
+logCHN:newLog{
+	log = "#DARK_GREEN#Nessilla's belt seems to come alive as you put it on.",
+	fct = "#DARK_GREEN#当你穿上它时，奈希拉之腰带似乎活过来了。",
+}
+
+logCHN:newLog{
+	log = "#DARK_GREEN#You feel especially blessed.",
+	fct = "#DARK_GREEN#你感觉自己被特别祝福了。",
+}
+
+logCHN:newLog{
+	log = "#DARK_GREEN#The armor molds comfortably to one of its caretakers.",
+	fct = "#DARK_GREEN#护甲对看守者来说非常合身。",
+}
+
+logCHN:newLog{
+	log = "#VIOLET#As the necrotic abomination is destroyed you see the remaining bones and flesh reassembling in the form of new foes!",
+	fct = "#VIOLET#当亡灵憎恶被摧毁时，你发现它的剩余部分重组为新的敌人！",
+}
+logCHN:newLog{
+	log = "#VIOLET#As the bone horror is destroyed you see the remaining bones reassembling in the form of new foes!",
+	fct = "#VIOLET#当骨灵恐魔被摧毁时，你发现它的剩余部分重组为新的敌人！",
+}
+logCHN:newLog{
+	log = "#AQUAMARINE#As %s falls all its eyes fall to the ground!",
+	fct = function(a)
+		return("#AQUAMARINE#当 %s 被消灭时，所有眼睛都落在了地上！ "):format(npcCHN:getName(a))
+		end,
 }

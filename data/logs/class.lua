@@ -6,6 +6,11 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
+	log = "#AQUAMARINE#Most stores should have new stock now.",
+	fct = "#AQUAMARINE#大部分商店现在应该有新货物了。",
+}
+
+logCHN:newLog{
 	log = "Limmir summons a blast of holy light!",
 	fct = function()
 		return "利米尔召唤出一道圣光！"
@@ -141,7 +146,12 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
-	log = "#Source#'s grapple fails because #Target# is too big",
+	log = "#Source# counter attacks #Target# with %s shield shards!",
+	fct = "#Source# 用%s的盾牌碎片反击了 #Target# !",
+}
+
+logCHN:newLog{
+	log = "#Source#'s grapple fails because #Target# is too big!",
 	fct = function()
 		return ("#Source#的抓取失败了，因为#Target#体型过大!")
 	end,
@@ -164,6 +174,24 @@ logCHN:newLog{
 	end,
 }
 
+logCHN:newLog{
+	log = "%s has been disrupted by #ORCHID#anti-magic forces#LAST#!",
+	fct = function(a)
+		return("%s被#ORCHID#反魔法力量#LAST#打断了！"):format(a)
+		end,
+}
+logCHN:newLog{
+	log = "%s's %s has been disrupted by #ORCHID#anti-magic forces#LAST#!",
+	fct = function(a,b)
+		return("%s的%s被#ORCHID#反魔法力量#LAST#打断了！"):format(npcCHN:getName(a),b)
+		end,
+}
+logCHN:newLog{
+	log = "%s's %s has been disrupted by #ORCHID#anti-nature forces#LAST#!",
+	fct = function(a,b)
+		return("%s的%s被#ORCHID#反自然力量#LAST#打断了！"):format(npcCHN:getName(a),b)
+		end,
+}
 logCHN:newLog{
 	log = "%s temporarily fights the paralyzation.",
 	fct = function(a)
@@ -337,7 +365,13 @@ logCHN:newLog{
 		return ("%s 使用 %s 时失败。"):format(a,b)
 	end,
 }
-
+logCHN:newLog{
+	log = "%s fumbles and fails to use %s, injuring %s!",
+	fct = function(a,b,c)
+		a = npcCHN:getName(a)
+		return ("%s 使用 %s 失败,还弄伤了%s!"):format(a,b,c)
+	end,
+}
 logCHN:newLog{
 	log = "%s is too terrified to use %s.",
 	fct = function(a,b)
@@ -345,7 +379,21 @@ logCHN:newLog{
 		return ("%s 由于恐惧而无法使用 %s 。"):format(a,b)
 	end,
 }
-
+logCHN:newLog{
+	log = "%s's %s is interrupted by the shot.",
+	fct = function(a,b)
+		a = npcCHN:getName(a)
+		return ("%s的%s被射击打断 。"):format(a,b)
+	end,
+}
+logCHN:newLog{
+	log = "%s %s %s.",
+	fct = function(a,b,c)
+		a = npcCHN:getName(a)
+		b = b:gsub("deactivates","关闭"):gsub("activates","激活")
+		return ("%s 激活了 %s 。"):format(a,b,c)
+	end,
+}
 logCHN:newLog{
 	log = "%s activates %s.",
 	fct = function(a,b)
@@ -504,7 +552,12 @@ logCHN:newLog{
 		return "你无法移动！"
 	end,
 }
-
+logCHN:newLog{
+	log = "You are asleep and unable to move!",
+	fct = function()
+		return "你睡着了无法移动！"
+	end,
+}
 logCHN:newLog{
 	log = "You have found a trap (%s)!",
 	fct = function(a)
@@ -518,7 +571,19 @@ logCHN:newLog{
 		return ("你发现了一个陷阱（ %s ）！"):format(a)
 	end,
 }
-
+logCHN:newLog{
+	log = "#CADET_BLUE#You notice a trap (%s)!",
+	fct = function(a)
+		if a:find("'s") then 
+			local f,e=a:find("'s ")
+			local owner=string.sub(a,1,f-1)
+			local trapname=a:gsub(owner,""):gsub(" 's ","")
+			a= npcCHN:getName(owner) .."的" ..trapCHN:getName(trapname)
+		else a = trapCHN[a] or a 
+		end
+		return ("#CADET_BLUE#你发现了一个陷阱（ %s ）！"):format(a)
+	end,
+}
 logCHN:newLog{
 	log = "Can not switch control to this creature.",
 	fct = function()
@@ -597,7 +662,13 @@ logCHN:newLog{
 		return ("你摧毁了 %s 。"):format(name)
 	end,
 }
-
+logCHN:newLog{
+	log = "You can not destroy %s.",
+	fct = function(a)
+		local name = objects:getObjectsChnName(a)
+		return ("你不能摧毁 %s 。"):format(name)
+	end,
+}
 logCHN:newLog{
 	log = "You cannot use items on the world map.",
 	fct = function()
@@ -612,11 +683,23 @@ logCHN:newLog{
 		return ("你的反魔法技能打断了 %s 。"):format(name)
 	end,
 }
-
+logCHN:newLog{
+	log = "You cannot change your equipment while sleeping!",
+	fct = "你不能在睡眠中切换装备!",
+}
+logCHN:newLog{
+	log = "You cannot change your equipment!",
+	fct = "你不能切换装备!",
+}
+logCHN:newLog{
+	log = "You had to drop %s due to lack of space.",
+	fct = function(a) return ("由于没有空间你被迫丢下%s"):format(objects:getObjectsChnName(a)) end,
+}
 logCHN:newLog{
 	log = "You switch your weapons to: %s.",
 	fct = function(a)
 		local name = objects:getObjectsChnName(a):gsub("and", "和")
+		name = name:gsub("unarmed","空手")
 		return ("你切换了你的装备至： %s 。"):format(name)
 	end,
 }
@@ -628,11 +711,18 @@ logCHN:newLog{
 		return ("你将 %s 传送到了手中。"):format(name)
 	end,
 }
+logCHN:newLog{
+	log = "#Source# deflects the projectile from #Target# %s",
+	fct = function(b)
+		b = b:gsub("northeast","东北"):gsub("northwest","西北"):gsub("southeast","东南"):gsub("southwest","西南")
+			:gsub("north","北"):gsub("south","南"):gsub("east","东"):gsub("west","西")
+			:gsub("but fumbles",",但是失败了"):gsub("offscreen","屏幕外"):gsub("to the","偏折至")
+		return ("#Source# 将 #Target# 的抛射物 %s"):format(b) end,
+}
 
 logCHN:newLog{
-	log = "You can not use the Orb with foes in sight (%s to the %s%s)",
-	fct = function(a,b,c)
-		a = npcCHN:getName(a)
+	log = "You can not use the Orb with foes in sight (#Target# to the %s%s)",
+	fct = function(b,c)
 		if b == "north" then b = "北"
 		elseif b == "south" then b = "南"
 		elseif b == "east" then b = "东"
@@ -643,7 +733,7 @@ logCHN:newLog{
 		elseif b == "southwest" then b = "西南"
 		end
 		if c == " - offscreen" then c = "- 在屏幕外" end
-		return ("你无法在你的视野中有敌人的情况下使用水晶球。(%s，%s方向%s)"):format(a,b,c)
+		return ("你无法在你的视野中有敌人的情况下使用水晶球。(#Target# %s方向%s)"):format(b,c)
 	end,
 }
 
@@ -764,11 +854,8 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
-	log = "%s notices you at the last moment!",
-	fct = function(a)
-		a = npcCHN:getName(a)
-		return ("%s在最后时刻注意到了你！"):format(a)
-	end,
+	log = "#Target# notices you at the last moment!",
+	fct = "#Target#在最后时刻注意到了你！",
 }
 
 logCHN:newLog{
@@ -834,6 +921,24 @@ logCHN:newLog{
 		return "你的护盾在攻击下被打破！"
 	end,
 }
+logCHN:newLog{
+	log = "Your time shield crumbles under the damage!",
+	fct = function()
+		return "你的时间护盾在攻击下被打破！"
+	end,
+}
+logCHN:newLog{
+	log = "Your resonance field crumbles under the damage!",
+	fct = function()
+		return "你的共鸣领域在攻击下被打破！"
+	end,
+}
+logCHN:newLog{
+	log = "#AQUAMARINE#You leech a part of #Target# vim.",
+	fct = function()
+		return ("#AQUAMARINE#你吸收了 #Target# 部分活力。"):format()
+	end,
+}
 
 logCHN:newLog{
 	log = "#AQUAMARINE#You leech a part of %s vim.",
@@ -856,6 +961,13 @@ logCHN:newLog{
 		a = npcCHN:getName(a)
 		return ("%s从受害者处拿到了更多的灵魂。（+1灵魂）"):format(a,b)
 	end,
+}
+
+logCHN:newLog{
+	log = "%s feeds you hate from its latest victim. (+%d hate)",
+	fct = function(a,b)
+		a = npcCHN:getName(a)
+		return ("%s最近的受害者为你提供%d仇恨"):format(a,b) end,
 }
 
 logCHN:newLog{
@@ -899,6 +1011,11 @@ logCHN:newLog{
 	fct = function()
 		return "#00FF00#你不再超重。"
 	end,
+}
+
+logCHN:newLog{
+	log = "You cannot switch equipment while sleeping!",
+	fct = "你不能在睡眠中切换装备",
 }
 
 logCHN:newLog{
@@ -946,14 +1063,24 @@ logCHN:newLog{
 		return "#LIGHT_RED#时间和空间都失去了控制！"
 	end,
 }
-
+logCHN:newLog{
+	log = "#LIGHT_RED#Spacetime fights against your control!",
+	fct = function()
+		return "#LIGHT_RED#时空失去了控制！"
+	end,
+}
 logCHN:newLog{
 	log = "#LIGHT_BLUE#Space and time have calmed...  somewhat.",
 	fct = function()
 		return "#LIGHT_BLUE#时间和空间...稍微稳定了些。"
 	end,
 }
-
+logCHN:newLog{
+	log = "#LIGHT_BLUE#Spacetime has calmed...  somewhat.",
+	fct = function()
+		return "#LIGHT_BLUE#时空稍微稳定了些..."
+	end,
+}
 logCHN:newLog{
 	log = "You do not have enough mana to activate %s.",
 	fct = function(...)
@@ -1002,7 +1129,10 @@ logCHN:newLog{
 		return ("你没有足够的仇恨值施展： %s"):format(...)
 	end,
 }
-
+logCHN:newLog{
+	log = "You do not have enough feedback to use %s",
+	fct = "你没有足够的反馈值施展：%s",
+}
 logCHN:newLog{
 	log = "You do not have enough energy to activate %s.",
 	fct = function(...)
@@ -1060,6 +1190,13 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
+	log = "You do not have enough %s to use %s.",
+	fct = function(a,b)
+		return ("你没有足够的%s施展：%s#")
+		end,
+}
+
+logCHN:newLog{
 	log = "You fail to use %s due to your equilibrium!",
 	fct = function(...)
 		return ("由于你的失衡值过高你使用 %s 失败！"):format(...)
@@ -1072,6 +1209,21 @@ logCHN:newLog{
 		return ("施展 %s 失败！"):format(...)
 	end,
 }
+
+logCHN:newLog{
+	log = "You can not drop items while sleeping",
+	fct = "你不能在睡眠中丢弃物品",
+}
+
+logCHN:newLog{
+	log = "You can not drop %s(plot item)",
+	fct = function(a) a = objects:getObjectsChnName(a)  return("你不能丢弃%s(剧情物品)"):format(a) end,
+}
+logCHN:newLog{
+	log = "You can not drop %s(tagged)",
+	fct = function(a) a = objects:getObjectsChnName(a)  return("你不能丢弃%s(带标签)"):format(a) end,
+}
+
 
 logCHN:newLog{
 	log = "#LIGHT_RED#You lose control and unleash an anomaly!",
@@ -1096,8 +1248,10 @@ logCHN:newLog{
 
 logCHN:newLog{
 	log = "#LIGHT_RED#You have %s left.",
-	fct = function(...)
-		return ("#LIGHT_RED#你还剩下 %s 条命。"):format(...)
+	fct = function(a)
+	      a = a:gsub("life(s)","条命")
+	      	  :gsub("no more lives","0条命")
+		return ("#LIGHT_RED#你还剩下 %s 。"):format(a)
 	end,
 }
 
@@ -1215,13 +1369,7 @@ logCHN:newLog{
 		return ("你不再拥有%s。"):format(name)
 	end,
 }
-logCHN:newLog{
-	log = "You have no more %s.",
-	fct = function(a)
-		local name = objects:getObjectsChnName(a)
-		return ("你不再拥有%s。"):format(name)
-	end,
-}
+
 logCHN:newLog{
 	log = "You cannot do that on the world map.",
 	fct = function()
@@ -1234,6 +1382,11 @@ logCHN:newLog{
 	fct = function()
 		return "#LIGHT_RED#警告!瑞吉·阿卡提斯,竞技场之主，出现了!!!"
 	end,
+}
+
+logCHN:newLog{
+	log = "#LIGHT_RED#You may not change level so soon after a kill (%d game turns left to wait)!",
+	fct = "#LIGHT_RED#在完成一次杀戮后，你现在不能离开该层！（等待%d回合）",
 }
 
 logCHN:newLog{
@@ -1304,6 +1457,12 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
+	log = "Run in which direction?",
+	fct = "朝哪个方向跑？",
+}
+
+
+logCHN:newLog{
 	log = "#CRIMSON##Source# steals life from #Target#!",
 	fct = function()
 		return "#CRIMSON##Source#从#Target#处吸取生命!"
@@ -1317,6 +1476,10 @@ logCHN:newLog{
 		return ("%s正处于睡眠中，不能这样做。"):format(a)
 	end,
 }
+
+
+
+
 
 logCHN:newLog{
 	log = "#RED#Rising again, the Rat Lich's eyes glow with renewed energy!",
@@ -1339,3 +1502,311 @@ logCHN:newLog{
 		return ("#ORCHID#目标超出范围。按住  <ctrl> 来强制射击超出范围(%d)的目标."):format(...)
 	end,
 }
+
+logCHN:newLog{
+	log = "You have unlocked a new talent: %s!",
+	fct = "你学会了新技能：%s！",
+}
+
+--mod/class/Game.lua
+logCHN:newLog{
+	log = "Hotkey page %d is now displayed.",
+	fct = function(...) return ("快捷键页码%d正被显示。"):format(...) end,
+}
+logCHN:newLog{
+	log = "You cannot currently leave the level.",
+	fct = "你现在不能离开该层",
+	}
+logCHN:newLog{
+	log = "#{bold}##Source# killed #Target#!#{normal}#",
+	fct = function() return "#{bold}##Source# 击杀了 #Target#!#{normal}#" end,
+	}
+logCHN:newLog{
+	log = "You cannot go into the wilds with the following effects: %s",
+	fct = function(...) return ("你不能带着负面效果进入大地图"):format(...) end,
+}
+logCHN:newLog{
+	log = "#TEAL#%s",
+	fct = function(a)
+	    a = a:gsub("You feel a thrill of terror and your heart begins to pound in your chest. You feel terribly threatened upon entering this area.", "你因恐惧而感到不安，你觉得你的心跳开始加速， 你感到进入这个区域对你有极大的威胁。")
+	      	:gsub("You feel mildly anxious, and walk with caution.","你感到稍微有点不安，开始小心前行。")
+		:gsub("You feel very confident walking into this place.","你充满自信地进入了这个区域。")
+		:gsub("You stride into this area without a second thought, while stifling a yawn. You feel your time might be better spent elsewhere.","你大步流星地走进这片区域，打了个哈欠，你感到待在这里可能是浪费时间， 最好到别的地方去看看。")
+	    return a
+	end,		
+}
+logCHN:newLog{
+	log = "You may not auto-explore with enemies in sight (%s to the %s%s)!",
+	fct = function(name,dir,c)
+	    	if dir == "northwest" then dir = "西北方向"
+		elseif dir == "northeast" then dir = "东北方向"
+		elseif dir == "southwest" then dir = "西南方向"
+		elseif dir == "southeast" then dir = "东南方向"
+		elseif dir == "east" then dir = "东面"
+		elseif dir == "west" then dir = "西面"
+		elseif dir == "south" then dir = "南面"
+		elseif dir == "north" then dir = "北面"
+		end
+		c = c:gsub("offscreen","屏幕外")
+	return ("当有敌人在视野里时，你不能自动探索！ (%s 在 %s方%s)!"):format(npcCHN:getName(name), dir, c)
+	end,
+}
+			
+logCHN:newLog{
+	log = "#Source# hits #Target# for %s (%0.0f total damage)%s.",
+	fct = function(a,b,c)
+		c = c:gsub("healing","治疗")
+		return ("#Source# 击中 #Target# 造成 %s (%0.0f 合计伤害)%s."):format(a,b,c)
+	end,
+}
+logCHN:newLog{
+	log = "#Source# hits #Target# for %s damage.",
+	fct = function(a)
+		return ("#Source# 击中 #Target# 造成 %s 伤害。"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Source# receives %s.",
+	fct = function(a)
+		return ("#Source# 受到 %s 。"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# receives %s from #Source#.",
+	fct = function(a)
+		return ("#Target# 受到来自#Source#的 %s 。"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#{bold}##Source# killed #Target#!#{normal}#",
+	fct = function()
+		return ("#{bold}##Source# 击杀了 #Target#!#{normal}#")
+	end,
+}
+
+
+logCHN:newLog{
+	log = "You may not auto-explore this level.",
+	fct = function()
+	    return "你不能自动探索这一层"
+	end,
+}
+
+logCHN:newLog{
+	log = "There is nowhere left to explore.",
+	fct = function()
+	    return "这一层没有地方可以探索了。"
+	    end,  
+}
+
+--mod/class/Actor
+logCHN:newLog{
+	log = "%s warps space-time to equip: %s.",
+	fct = function(a,b)
+		local name = objects:getObjectsChnName(b):gsub("and", "和")
+		name = name:gsub("unarmed","空手")
+		return ("%s扭曲空间，切换武器至： %s 。"):format(npcCHN:getName(a),name)
+	end,
+}
+logCHN:newLog{
+	log = "%s switches %s weapons to: %s.",
+	fct = function(a,b,c)
+		local name = objects:getObjectsChnName(c):gsub("and", "和")
+		name = name:gsub("unarmed","空手")
+		return ("%s切换武器至： %s 。"):format(npcCHN:getName(a),b,name)
+	end,
+}
+logCHN:newLog{
+	log = "%s can not use %s.",
+	fct = function(a,b) return("%s不能使用%s"):format(npcCHN:getName(a),b) end,
+}
+
+logCHN:newLog{
+	log = "#DARK_GREEN##Source# shares damage with %s oozes!",
+	fct = function(...)
+	    return ("#DARK_GREEN##Source# 和 %s 软泥怪平分伤害!"):format(...)
+	    end,  
+}
+
+logCHN:newLog{
+	log = "#CRIMSON##Source# teleports some damage to #Target#!",
+	fct = function(...)
+	    return ("#CRIMSON##Source#将部分伤害转移给 #Target#!"):format(...)
+	    end,  
+}
+logCHN:newLog{
+	log = "#CRIMSON##Source# shares some damage with a shadow!",
+	fct = function() return "#CRIMSON##Source# 和一个阴影共享伤害!" end,
+	}
+
+logCHN:newLog{
+	log = "#LIGHT_BLUE##Source# converts damage to mana!",
+	fct = function() return "#LIGHT_BLUE##Source# 将伤害转化为法力值!" end,
+	}
+
+
+
+logCHN:newLog{
+	log = "#YELLOW##Source# converts some damage to Psi!",
+	fct = function() return "#YELLOW##Source# 将伤害转移至超能力值!" end,
+	}
+logCHN:newLog{
+	log = "#aaaaaa##Source# converts some damage to Psi!",
+	fct = function() return "#YELLOW##Source# 将伤害转移至超能力值!" end,
+	}
+	
+logCHN:newLog{
+	log = "#RED##Source# is unstoppable!",
+	fct = function() return "#RED##Source# 不可阻挡！" end, 
+	}
+logCHN:newLog{
+	log = "#CRIMSON##Source# leeches life from #Target#!",
+	fct = function() return "#CRIMSON##Source# 吸取了 #Target#的生命!" end,
+	}
+
+logCHN:newLog{
+	log = "#CRIMSON##Source# steals life from #Target#!",
+	fct = function() return "#CRIMSON##Source# 偷取了 #Target#的生命!" end,
+	}
+
+logCHN:newLog{
+	log = "#OLIVE_DRAB##Source# redirects damage from #Target# to %s!",
+	fct = function(a) return ("#OLIVE_DRAB##Source# 将 #Target# 的伤害转移至 %s!"):format(a) end,
+	}
+
+
+logCHN:newLog{
+	log = "#VIOLET#Following build order %s; increasing %s by 1.",
+	fct = function(...)
+	    return ("#VIOLET#遵循加点顺序%s;增加一点%s"):format(...)
+	    end,
+}
+logCHN:newLog{
+	log = "#VIOLET#Following build order %s; learning talent category %s.",
+	fct = function(...)
+	    return ("#VIOLET#遵循加点顺序%s;学会技能树%s"):format(...)
+	    end,
+}
+logCHN:newLog{
+	log = "#VIOLET#Following build order %s; learning talent %s.",
+	fct = function(...)
+	    return ("#VIOLET#遵循加点顺序%s;学会技能%s"):format(...)
+	    end,
+}
+
+logCHN:newLog{
+	log = "#CRIMSON##Source# leeches energies from #Target#!",
+	fct = function() return "#CRIMSON##Source# 吸取了 #Target# 的能量!" end,
+	}
+
+--mod/class/player
+logCHN:newLog{
+	log = "You cannot pick up items from the floor while asleep!",
+	fct = function() return "你不能在睡眠中捡起物品" end,
+	}
+logCHN:newLog{
+	log = "Automatic use of talent %s #DARK_RED#skipped#LAST#: cooldown too low (%d).",
+	fct = "%s 的自动施法被#DARK_RED#跳过#LAST#了：冷却时间太低(%d)",
+}
+--mod/class/worldnpc
+
+logCHN:newLog{
+	log = "#Source# kills #Target#.",
+	fct = "#Source# 击杀了 #Target#." ,
+	}
+
+logCHN:newLog{
+	log = "#Target# kills #Source#.",
+	fct = "#Target# 击杀了 #Source#." ,
+	}
+	
+--mod/class/NPC
+logCHN:newLog{
+	log = "#Source# shoves #Target# forward.",
+	fct = "#Source# 将 #Target# 推到前面.",
+}
+
+--mod/class/world
+logCHN:newLog{
+	log = "#LIGHT_BLUE#New shimmer option unlocked: #{italic}#%s#{normal}",
+	fct = function(...) return ("#LIGHT_BLUE#新的闪烁选项被解锁: #{italic}#%s#{normal}"):format(...) end,
+}
+
+--mod/class/interface/actorinscriptions
+logCHN:newLog{
+	log = "You are unable to use this kind of inscription",
+	fct = "你不能使用这种纹身",
+}
+
+--mod/class/object
+logCHN:newLog{
+	log = "%s is still recharging.",
+	fct = function(a)
+		a = objects:getObjectsChnName(a)
+		return ("%s正在被充能"):format(a)
+		end,
+	}
+	
+logCHN:newLog{
+	log = "%s can not be used anymore.",
+	fct = function(a)
+		a = objects:getObjectsChnName(a)
+		return ("%s不能再被使用"):format(a)
+		end,
+	}
+	
+	
+	
+	
+logCHN:newLog{
+	log = "You can not use a tinker without the corresponding item.",
+	fct = "你不能在没有相关物品时使用配件",
+}
+	
+logCHN:newLog{
+	log = "This item is not usable: %s.",
+	fct = "该物品不能使用: %s.",
+}
+logCHN:newLog{
+	log = "This tinker can not be applied to this item.",
+	fct = "这个配件不能装在该物品上",
+}
+logCHN:newLog{
+	log = "You already have a tinker on this item.",
+	fct = "这个物品上已经有了配件",
+}
+logCHN:newLog{
+	log = "The shattering blow creates a shockwave!",
+	fct = "这次攻击引发了冲击波！",
+}
+
+logCHN:newLog{
+	log = "#ORCHID#%s parries the attack with %s dual weapons!#LAST#",
+	fct = function(a,b)
+		a = npcCHN:getName(a)
+		return ("#ORCHID#%s 用%s双持武器使这次攻击发生偏斜!#LAST#"):format(a,b)
+	end,
+}
+logCHN:newLog{
+	log = "#ORCHID#%s instinctively hardens %s skin and ignores the attack!#LAST#",
+	fct = function(a,b)
+		return ("#ORCHID#%s本能地硬化%s皮肤，无视了这次攻击！#LAST#"):format(npcCHN:getName(a),b) end,
+}
+
+logCHN:newLog{
+	log = "#F53CBE#You fight through the pain! (+%d hate)",
+	fct = "#F53CBE#你在痛苦中战斗！（+%d仇恨）",
+	
+}
+logCHN:newLog{
+	log = "#F53CBE#Your hatred grows even as your life fades! (+%d hate)",
+	fct = "#F53CBE#当你失去生命时，你的仇恨增长了！（+%d仇恨）",
+	
+}
+logCHN:newLog{
+	log = "#F53CBE#Your powerful attack feeds your madness! (+%d hate)",
+	fct = "#F53CBE#你强有力的攻击增进了你的疯狂！（+%d仇恨）",
+	
+}
+

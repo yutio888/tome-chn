@@ -3,6 +3,7 @@ local _M = loadPrevious(...)
 registerTalentTranslation{
 	id = "T_INFECTIOUS_BITE",
 	name = "传染性啃咬",
+	message = "@Source@ 将 瘟 疫 病 毒 注 入 @target@.",
 	info = function(self, t)
 		local damage = t.getDamage(self, t) * 100
 		local poison = t.getPoisonDamage(self, t)

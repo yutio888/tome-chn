@@ -330,7 +330,12 @@ logCHN:newLog{
 		return "你“呼”的一下被带离了这个地方！"
 	end,
 }
-
+logCHN:newLog{
+	log = "You are yanked out of this time!",
+	fct = function()
+		return "你“呼”的一下被带离了这个地方！"
+	end,
+}
 logCHN:newLog{
 	log = "Space restabilizes around you.",
 	fct = function()
@@ -352,6 +357,11 @@ logCHN:newLog{
 		a = npcCHN:getName(a)
 		return ("%s的保护护盾消失了。"):format(a)
 	end,
+}
+
+logCHN:newLog{
+	log = "Your %s ward absorbs the damage!",
+	fct = "你的%s守护吸收了伤害！",
 }
 
 logCHN:newLog{
@@ -537,8 +547,20 @@ logCHN:newLog{
 		return ("%s恢复了稳定。"):format(a)
 	end,
 }
-
-
+logCHN:newLog{
+	log = "%s has unraveled",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s被拆解。"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "%s is being removed from the timeline.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s被从时间线中移除。"):format(a)
+	end,
+}
 logCHN:newLog{
 	log = "#Target# is being removed from the timeline.",
 	fct = function(a)
@@ -1028,6 +1050,10 @@ logCHN:newLog{
 		return ("%s不再被禁止传送。"):format(a)
 	end,
 }
+logCHN:newLog{
+	log = "#CRIMSON##Source# damages #Target# through the Braid!",
+	fct = function() return "#CRIMSON##Source# 通过生命编织伤害了 #Target# !" end,
+	}
 logCHN:newLog{
 	log = "#Target#'s lifeline has been braided.",
 	fct = function(a)

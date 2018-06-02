@@ -5,7 +5,7 @@ _M.desc = {}
 
 function _M:getAchName(name)
 	local ls = 0
-	while name:find(" %(", ls) do
+	if name:find(" %(", ls) then
 		_, ls = name:find(" %(", ls)
 		print(ls)
 	end
@@ -54,7 +54,8 @@ end
 _M.category = {}
 _M.category["Maj'Eyal"] = "马基埃亚尔"
 _M.category["Ashes of Urh'Rok"] = "乌鲁洛克之烬"
-
+_M.category["Embers of Rage"] = "余烬怒火"
+_M.category["Forbidden Cults"] = "禁忌教徒"
 function _M:getCategory(name)
 	return self.category[name] or name
 end

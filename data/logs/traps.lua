@@ -64,6 +64,11 @@ logCHN:newLog{
 end,
 }
 logCHN:newLog{
+	log = "The poison spore looks somewhat drained.",
+	fct = "毒性孢子的能量似乎被抽取了",
+}
+
+logCHN:newLog{
 	log = "A poisonous vine strikes at @Target@!",
 	fct = function(a)
 		a = npcCHN:getName(a)
@@ -116,6 +121,20 @@ logCHN:newLog{
 	fct = function(a)
 		a = npcCHN:getName(a)
 		return ("%s 被传送了。"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "%s is teleported away.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 被传送了。"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "%s resists being teleported!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 抵抗传送!"):format(a)
 	end,
 }
 logCHN:newLog{

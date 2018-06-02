@@ -1,4 +1,45 @@
 logCHN:newLog{
+	log = "#ROYAL_BLUE#The golem decides to change it's name to #{bold}#%s#{normal}#.",
+	fct = function(a)
+	    a = npcCHN:getName(a)
+	    return("#ROYAL_BLUE#傀儡决定将名字更改为 #{bold}#%s#{normal}#."):format(a)
+	    end,
+}
+
+logCHN:newLog{
+	log = "#CADET_BLUE#%s already mastered.",
+	fct = function(a)
+	    return("#CADET_BLUE#%s 已经被强化过了"):format(a)
+	    end,
+}
+
+logCHN:newLog{
+	log = "#LIGHT_BLUE# You enhance your preparation of %s.",
+	fct = function(a)
+	    return("#LIGHT_BLUE# 你强化了你准备的%s."):format(a)
+		end,
+}
+
+logCHN:newLog{
+	log = "#CADET_BLUE#%s already equipped at level %d.",
+	fct = function(a,b)
+	    return("#CADET_BLUE#%s 已经被装备了，等级 %d."):format(a,b)
+		end,
+}
+
+logCHN:newLog{
+	log = "#CADET_BLUE#Equipping %s with %s (level %d).",
+	fct = function(a,b,c)
+	    return("#CADET_BLUE# 装备 %s，用 %s (等级 %d)."):format(a,b,c)
+		end,
+}
+
+logCHN:newLog{
+	log = "#LIGHT_GREEN#You and the Lord discuss your new relationship at some length, including the merits of assassination by proxy and some additional trapping techniques.",
+	fct = "#LIGHT_GREEN# 你和盗贼头子讨论了你们的新关系，同时还讨论了部分暗杀和陷阱技巧。",
+}
+
+logCHN:newLog{
 	log = "#LIGHT_BLUE#You select the timeline and re-arrange the universe to your liking!",
 	fct = function()
 		return "#LIGHT_BLUE#你选择了时间线，依照你喜欢的方式重组了这个世界！"
@@ -16,7 +57,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "Aeryn points to the known locations on your map.",
 	fct = function()
-		return "艾伦在你的地图上指出了位置。"
+		return "艾琳在你的地图上指出了位置。"
 	end,
 }
 
@@ -39,7 +80,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "High Sun Paladin Aeryn appears next to you!",
 	fct = function()
-		return "高阶太阳骑士在你的身边出现了！"
+		return "高阶太阳骑士艾琳在你的身边出现了！"
 	end,
 }
 
@@ -74,9 +115,18 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
+	log = "Aeryn gives you: %s.",
+	fct = function(a)
+		local name = objects:getObjectsChnName(a)
+		return ("艾琳交给了你 %s 。"):format(name)
+	end,
+}
+
+
+logCHN:newLog{
 	log = "The contact with the Wayist mind has improved your mental shields. (+15 mental save, +10%% confusion resistance)",
 	fct = function()
-		return "与维网的联系提高了你的精神护盾。 （+15精神豁免，+10%混乱抵抗）"
+		return "与夺心魔的接触提高了你的精神防御。 （+15精神豁免，+10%混乱抵抗）"
 	end,
 }
 
@@ -133,6 +183,7 @@ logCHN:newLog{
 		return ("#00FF00#你获得了真菌系技能树。"):format(name)
 	end,
 }
+
 logCHN:newLog{
 	log = "#CRIMSON#Your timetravel has no effect on pre-determined outcomes such as this.",
 	fct = function()
@@ -140,3 +191,77 @@ logCHN:newLog{
 	end,
 }
 
+logCHN:newLog{
+	log = "The staff carver spends some time with you, teaching you the basics of staff combat.",
+	fct = "法杖商人花了一些时间，教授你法杖格斗的基础知识。",
+}
+
+logCHN:newLog{
+	log = "He is surprised at how quickly you are able to follow his tutelage.",
+	fct = "他对你学习速度之快感到惊讶。",
+}
+
+logCHN:newLog{
+	log = "The staff carver spends a substantial amount of time teaching you all of the techniques of staff combat.",
+	fct = "法杖商人花了大量时间，教授你法杖格斗的全部知识",
+}
+
+logCHN:newLog{
+	log = "The staff carver spends a great deal of time going over the finer details of staff combat with you%s.",
+	fct = function(a)
+	    a = a:gsub("including some esoteric techniques","以及一些高深的技巧")
+	    return ("法杖商人花了大量时间，教授你法杖格斗的最终知识%s。"):format(a)
+	    end,
+}
+
+logCHN:newLog{
+	log = "He is impressed with your mastery and shows you a few extra techniques.%s",
+	fct = function()
+	    return ("他对你已经掌握的知识印象深刻，并展示给你一些额外技巧。")
+	    end,
+}
+
+logCHN:newLog{
+	log = "The shopkeeper spends some time with you, teaching you the basics of channeling energy through mindstars.",
+	fct = "商人花了一些时间，教授你使用灵晶的基础技巧",
+}
+
+logCHN:newLog{
+	log = "He is impressed with your affinity for natural forces.",
+	fct = "他对你同自然力量的亲和度感到惊讶",
+}
+
+logCHN:newLog{
+	log = "The shopkeeper spends a great deal of time going over the finer details of channeling energy through mindstars with you.",
+	fct = function()
+	    return ("商人花了大量时间，教授你使用灵晶的全部技巧。"):format()
+	    end,
+}
+
+
+logCHN:newLog{
+	log = "The shopkeeper spends a great deal of time going over the finer details of channeling energy through mindstars with you%s.",
+	fct = function(a)
+	    a = a:gsub(" and teaches you enhanced mental discipline needed to maintain powerful energy fields","教授你一些进阶技术来维持强大的能量领域")
+	    return ("商人花了大量时间，教授你使用灵晶的全部技巧%s。"):format(a)
+	    end,
+}
+
+logCHN:newLog{
+	log = "He is impressed with your mastery and shows you a few tricks to handle stronger energy flows.",
+	fct = "他对你已经掌握的知识印象深刻，并展示给你一些对抗强敌的技巧",
+}
+
+logCHN:newLog{
+	log = "#LIGHT_BLUE#You cannot prepare this trap: %s.",
+	fct = function(a)
+	    return ("#LIGHT_BLUE#你不能准备这个陷阱: %s."):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#PURPLE#A paradox has already destroyed other timelines!",
+	fct = "#PURPLE#一个时空紊乱摧毁了其他时间线!",
+}
+
+	

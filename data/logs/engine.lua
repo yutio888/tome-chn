@@ -53,7 +53,7 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
-	log = "There is nothing to pick up there.",
+	log = "There is nothing to pick up here.",
 	fct = function()
 		return "没什么可以拾取的东西。"
 	end,

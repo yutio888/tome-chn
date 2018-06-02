@@ -8,15 +8,15 @@ function itemDamagedesc(data)
 	if data:find("random insanity") then return data:gsub("chance to cause","几率"):gsub("random insanity","随机疯狂")
 	elseif data:find("random gloom") then return data:gsub("chance to cause","几率"):gsub("random gloom","黑暗光环")
 	elseif data:find("damage reduction") then return data:gsub("chance to inflict","几率"):gsub("damage reduction","减少对方伤害")
-	elseif data:find("10%% of a turn") then return data:gsub("chance to gain","几率获得"):gsub("10%% of a turn","10%%回合")
-	elseif data:find("corrode armour") then return  data:gsub("chance to","几率"):gsub("corrode armour","腐蚀护甲")
+	elseif data:find("10%% of a turn") then return data:gsub("chance to gain","几率获得"):gsub("10%% of a turn","10%%回合"):gsub("(3/turn limit)","(限制3次/回合)")
+	elseif data:find("corrode armour") then return  data:gsub("chance to","几率"):gsub("corrode armour","腐蚀护甲"):gsub("by","")
 	elseif data:find("blind") then return  data:gsub("chance to","几率"):gsub("blind","致盲")
-	elseif data:find("daze") then return  data:gsub("chance to","几率"):gsub("daze","眩晕")
+	elseif data:find("daze") then return  data:gsub("chance to","几率"):gsub("daze","眩晕"):gsub("at end of turn","于回合结束时")
 	elseif data:find("disease") then return  data:gsub("chance to","几率"):gsub("disease","疾病")
 	elseif data:find("arcane resource") then return  data:gsub("arcane resource","奥术能量"):gsub("burn","燃烧")
 	elseif data:find("Slows") then return  data:gsub("Slows global speed by","整体速度减少")
 	elseif data:find("blind") then return  data:gsub("chance to","几率"):gsub("blind","致盲")
-	elseif data:find("reduce powers") then return  data:gsub("chance to","几率"):gsub("reduce powers","降低强度"):gsub("by","")
+	elseif data:find("reduce effective powers") then return  data:gsub("chance to","几率"):gsub("reduce effective powers","降低有效强度"):gsub("by","")
 	else return data;
 	end
 end
@@ -47,9 +47,9 @@ damageTypeCHN["gloom"] = "黑暗光环"
 damageTypeCHN["blindness"] = "致盲"
 damageTypeCHN["blinding ink"] = "墨汁致盲"
 damageTypeCHN["shadowflame"] = "暗影烈焰"
-damageTypeCHN["cold"] = "寒冰"
+damageTypeCHN["cold"] = "寒冷"
 damageTypeCHN["flameshock"] = "烈焰冲击"
-damageTypeCHN["ice"] = "冰系"
+damageTypeCHN["ice"] = "寒冰"
 damageTypeCHN["ice storm"] = "冰风暴"
 damageTypeCHN["glacial vapour"] = "极寒冰雾"
 damageTypeCHN["cold ground"] = "冻足"
@@ -143,3 +143,14 @@ damageTypeCHN["physical repulsion"] = "物理排斥"
 damageTypeCHN["slowing ice"] = "冰系减速"
 damageTypeCHN["stunning fire"] = "火焰震慑"
 damageTypeCHN["phase pulse"] = "相位脉动"
+
+damageTypeCHN["item mind gloom"] = "黑暗光环"
+damageTypeCHN["item darkness numbing"] = "黑暗麻木"
+damageTypeCHN["item temporal energize"] = "时空充能"
+damageTypeCHN["item acid corrode"] = "腐蚀护甲"
+damageTypeCHN["item light blind"] = "致盲"
+damageTypeCHN["item lightning daze"] = "眩晕"
+damageTypeCHN["item blight disease"] = "疾病"
+damageTypeCHN["item manaburn arcane"] = "法力燃烧"
+damageTypeCHN["item nature slow"] = "减速"
+

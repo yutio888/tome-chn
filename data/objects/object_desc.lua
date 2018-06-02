@@ -515,7 +515,9 @@ special_t["increase paradox by a random amount"] = "随机增加紊乱值"
 special_t["All damage dealt by or to you (that is over 1% of max life) bleeds for an additional 20% of the damage as physical damage (ignores most status resistances).\nWhile you are bleeding, Heartrend's damage increases and it gains lifesteal."] = "你受到与造成的所有超过1%总生命的伤害将触发流血效果，无视大部分状态免疫，造成额外20%物理伤害。\n当你处于流血状态时，心脏切割伤害增加并具有吸血效果。"
 special_t["If bleed damage per turn is greater than 5% of max life, attacks cleave."] = "若每回合流血伤害伤害超过5%最大生命，攻击变为劈击。"
 special_t["deal a melee attack against all other enemies in a circle around you"] = "对周围一圈敌人进行近战攻击。"
-
+special_t["deal bonus physical damage equal to your armor"] = "造成等于护甲值的伤害"
+special_t["smash the target with your shield crippling them"] = "盾击目标并致残"
+special_t["reduce the cooldown of your ward talent by 1"] = "减少你的守护技能1回合冷却时间"
 --装备鼠标提示汉化替换
 function getObjectDescCHN(desc)
 	if not desc then return end
@@ -684,21 +686,20 @@ function getObjectDescCHN(desc)
 			desc[i] = desc[i]:gsub("chance to trigger a Blood Grasp cast of level","几率触发鲜血支配，等级"):gsub("chance to trigger a Silence cast of level ","几率触发沉默，等级"):gsub("Reduces duration of detrimental effects by 40%%","减少40%%负面状态持续时间")
 			desc[i] = special_t[desc[i]] or desc[i]
 			desc[i] = itemDamagedesc(desc[i])
-			desc[i] = desc[i]:gsub("chance of physical repulsion","几率物理击退")
-			desc[i] =desc[i]:gsub("fire","火焰"):gsub("lightning","闪电"):gsub("arcane","奥术"):gsub("cold","寒冷")
+			desc[i] = desc[i]:gsub("chance of physical repulsion","几率物理击退"):gsub("Unnatural","非自然生物"):gsub("Undead","不死族"):gsub("Demon","恶魔"):gsub("Major","大型"):gsub("Minor","小型")
+					:gsub("Summoned","召唤物"):gsub("Animal","动物"):gsub("Humanoid","人形生物"):gsub("Orc","兽人")
+					:gsub("Horror","恐魔"):gsub("Dragon","龙"):gsub("Canine","犬类"):gsub("Living","活物"):gsub("Giant","巨人")
+					:gsub("Current Resistance:","当前抗性："):gsub("Blood Charges:","鲜血吸收:")
+			--[[desc[i] =desc[i]:gsub("fire","火焰"):gsub("lightning","闪电"):gsub("arcane","奥术"):gsub("cold","寒冷")
 					:gsub("blight","枯萎"):gsub("darkness","暗影"):gsub("physical","物理"):gsub("temporal","时空")
 					:gsub("chance of gloom effects","黑暗光环")
 				   	:gsub("light","光系"):gsub("acid","酸性"):gsub("mental","精神"):gsub("nature","自然"):gsub("dazing","眩晕")
-					:gsub("Unnatural","非自然生物"):gsub("Undead","不死族"):gsub("Demon","恶魔"):gsub("Major","大型"):gsub("Minor","小型")
-					:gsub("Summoned","召唤物"):gsub("Animal","动物"):gsub("Humanoid","人形生物"):gsub("Orc","兽人")
-					:gsub("Horror","恐魔"):gsub("Dragon","龙"):gsub("Canine","犬类"):gsub("Living","活物"):gsub("Giant","巨人")
 					:gsub("Celestial","天空"):gsub("Chronomancy","时空"):gsub("Corruption","堕落"):gsub("Cursed","诅咒")
 					:gsub("Technique","格斗"):gsub("Cunning","灵巧"):gsub("Wild","自然"):gsub("-gift",""):gsub("Psionic","超能"):gsub("Spell","法术")
 					:gsub("Undead","亡灵"):gsub("Golem","傀儡"):gsub("Race","种族技能")
 					:gsub("water","水"):gsub("Steamtech","蒸汽"):gsub("Steam","蒸汽")
-					:gsub("Current Resistance:","当前抗性："):gsub("Blood Charges:","鲜血吸收:")
-					:gsub("item",""):gsub("life","生命"):gsub("silence","沉默")
-			desc[i]=desc[i]:gsub("status","状态"):gsub("alive","存活"):gsub("dead(does not provide benefits)","死亡（不提供属性）")
+					:gsub("item",""):gsub("life","生命"):gsub("silence","沉默")]]
+			desc[i]= desc[i]:gsub("status","状态"):gsub("alive","存活"):gsub("dead(does not provide benefits)","死亡（不提供属性）")
 			desc[i] = desc[i]:gsub("Attach on","附着于"):gsub("worn on",""):gsub("slot",""):gsub("of type","")
 					:gsub("mainhand","主手"):gsub("offhand","副手"):gsub("finger","手指"):gsub("body","躯干")
 					:gsub("hands","手套"):gsub("feet","脚部"):gsub("head","头部"):gsub("cloak","披风"):gsub("belt","腰带")

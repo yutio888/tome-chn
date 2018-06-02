@@ -1475,6 +1475,7 @@ use_actor = use_actor or game.player
 				local tt = Talents.talents_types_def[ttn]
 				if tt then
 					local cat = tt.type:gsub("/.*", "")
+					cat = t_talent_cat[cat] or cat
 					local name = cat:capitalize().." / "..tt.name:capitalize()
 					local diff = (ttid[2] or 0) - (ttid[1] or 0)
 					if diff ~= 0 then
@@ -2019,6 +2020,7 @@ function _M:getUseDesc(use_actor)
 		elseif self.talent_cooldown then
 			local t_name = self.talent_cooldown == "T_GLOBAL_CD" and "所有护符" or "技能 "..use_actor:getTalentDisplayName(use_actor:getTalentFromId(self.talent_cooldown)):gsub("Medical Injector","药物注射器")
 			local use_name = desc:format(self:getCharmPower(use_actor))
+			
 			use_name = use_name:gsub("fire a blast of psionic energies in a range ","释放一束长度"):gsub("beam","射线")
 			:gsub("disarm traps","解除陷阱")
 			:gsub(" disarm power, Magic","强度，基于魔法")
@@ -2057,7 +2059,7 @@ function _M:getUseDesc(use_actor)
 				:gsub("turns","回合")
 				:gsub("takes no time to activate","使用不消耗时间")
 			end
-			use_name = use_name:gsub("damage","伤害"):gsub("dealing","造成"):gsub("for",""):gsub("dam","伤害")
+			use_name = use_name:gsub("damage","伤害"):gsub("dealing","造成"):gsub("for",""):gsub("dam","伤害"):gsub(" to ","到")
 			use_name = use_name:gsub("create a temporary shield that absorbs ","制造一层临时护盾，至多能吸收")
 			ret = tstring{{"color","YELLOW"}, ("可以用来施放【%s】, 使%s进入%d回合冷却。"):format(use_name, t_name, usepower(self.use_power.power)), {"color","LAST"}}
 

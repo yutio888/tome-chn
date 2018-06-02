@@ -144,13 +144,19 @@ function objects:getObjects(name,desc,subtype,short_name,is_ided,rare,unique)
 						elseif o.name:find(" vilestaff") then
 							chName = chName .. "（邪恶）"
 							enName = meta .. " vilestaff"
+						elseif o.name:find(" bonestaff") then
+							chName = chName .. "（白骨）"
+							enName = meta .. " bonestaff"
 						end
 					end
+					
+					if o.name:find("leather cap") then o.name = o.name:gsub("leather cap","leather hat") end
 					
 					local prefix = o.name:match("(.+)"..enName)
 					if subtype == "shot" and prefix then prefix = prefix:gsub("pouch of ","") 
 					elseif subtype == "arrow" and prefix then prefix = prefix:gsub("quiver of ","") end 
 					local suffix = o.name:match(enName.."([^()]+)")
+
 					if subtype == "torque" then
 						if name:find("portation") then suffix = " of psychoportation"
 						elseif name:find("kinetic") then suffix = " of kinetic psionic shield"

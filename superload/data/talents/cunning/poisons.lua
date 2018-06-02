@@ -118,7 +118,7 @@ registerTalentTranslation{
 	name = "石化毒剂",
 	info = function(self, t)
 		local dam = damDesc(self, DamageType.NATURE, t.getDOT(self, t))
-		return ([[在 你 的 武 器 上 涂 上 石 化 毒 剂，额 外 造 成 每 轮 %d 点 自 然 伤 害（可 叠 加 至 %d），持 续 %d 回 合。 。 
+		return ([[在 你 的 武 器 上 涂 上 石 化 毒 剂，额 外 造 成 每 轮 %d 点 自 然 伤 害（可 叠 加 至 %d ），持 续 %d 回 合。 。 
 		 %d 回 合 后 或 者 毒 素 效 果 结 束 后 目 标 将 被 石 化 %d 回 合。 
 		 受 灵 巧 影 响， 伤 害 按 比 例 加 成。]]):
 		format(dam, dam*4, t.getDuration(self, t), t.stoneTime(self, t), t.getEffect(self, t))

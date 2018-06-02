@@ -23,7 +23,7 @@ registerTalentTranslation{
 		return ([[在 %d 码 范 围 内 随 机 传 送 。 
 		 在 等 级 4 时， 你 可 以 传 送 指 定 生 物（ 怪 物 或 被 护 送 者）。 
 		 在 等 级 5 时， 你 可 以 选 择 传 送 位 置（ 半 径 %d ）。 
-		 随 机 传 送 的 最 小 半 径 为 %d。
+		 随 机 传 送 的 最 小 半 径 为 %d 。
 		 受 法 术 强 度 影 响， 影 响 范 围 有 额 外 加 成。]]):format(range, radius, t.minRange)
 	end,
 }

@@ -17,7 +17,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local duration = t.getConfuseDuration(self, t)
 		local radius = self:getTalentRadius(t)
-		return ([[将 %d 码 锥 形 半 径 范 围 内 敌 人 的 心 智 降 低 到 婴 儿 水 平， 混 乱 目 标 (%d%% 强 度) %d 回 合。 ]]):
+		return ([[将 %d 码 锥 形 半 径 范 围 内 敌 人 的 心 智 降 低 到 婴 儿 水 平， 混 乱 目 标 ( %d%% 强 度) %d 回 合。 ]]):
 		format(radius, t.getConfuseEfficency(self, t), duration)
 	end,
 }

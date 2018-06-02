@@ -7,7 +7,7 @@ registerTalentTranslation{
 		local m, mm, e, em = t.getValues(self, t)
 		local damage = t.getDamage(self, t)
 		local inc = t.getPercentInc(self, t)
-		return ([[每 回 合 第 一 次 承 受 伤 害 时 ， 你 将 %d%% 的 伤 害 转 化 为 法 力 ( 至 多 %0.2f 点 ) ， %d%% 的 伤 害 转 化 为 失 衡 值 ( 至 多 回 复 %0.2f)。
+		return ([[每 回 合 第 一 次 承 受 伤 害 时 ， 你 将 %d%% 的 伤 害 转 化 为 法 力 ( 至 多 %0.2f 点 ) ， %d%% 的 伤 害 转 化 为 失 衡 值 ( 至 多 回 复 %0.2f )。
 		增 加 物 理 强 度 %d , 增 加 盾 牌 伤 害 %d%% , 并 让 你 能 够 双 持 盾 牌 。
 		同 时 ， 你 的 近 战 攻 击 附 带 一 次 盾 牌 攻 击 。]]):format(100 * m, mm, 100 * e, em, damage, inc*100)
 	end,

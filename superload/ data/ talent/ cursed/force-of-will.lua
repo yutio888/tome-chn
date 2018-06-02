@@ -18,7 +18,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local maxDamage = t.getMaxDamage(self, t)
 		local recharge_rate = t.getRechargeRate(self, t)
-		return ([[用 你 的 意 志 力 折 射 50%% 的 伤 害。 你 可 以 折 射 最 多 %d 点 伤 害， 护 盾 值 每 回 合 回 复 最 大 值 的 1/%d 。（ 技 能 激 活 时 -0.2 仇 恨 值 回 复）。 
+		return ([[用 你 的 意 志 力 折 射 50%% 的 伤 害。 你 可 以 折 射 最 多 %d 点 伤 害， 护 盾 值 每 回 合 回 复 最 大 值 的 1 / %d 。（ 技 能 激 活 时 -0.2 仇 恨 值 回 复）。 
 		 你 灌 注 力 量 的 能 力 使 你 增 加 %d%% 所 有 暴 击 伤 害。（ 当 前： %d%% ） 
 		 受 精 神 强 度 影 响， 最 大 伤 害 折 射 值 有 额 外 加 成。]]):format(maxDamage, recharge_rate, t.critpower(self, t),self.combat_critical_power or 0)
 	end,

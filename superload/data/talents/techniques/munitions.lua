@@ -4,7 +4,7 @@ registerTalentTranslation{
 	name = "异种弹药",
 	info = function (self,t)
 		return ([[你 学 会 了 制 造 和 装 备 专 门 的 弹 药:
-燃 烧 弹- 命 中 后 ，对 目 标 附 近 的 敌 人 造 成 %d%% 火 焰 武 器 伤 害 ，范 围 最 大 为 %d， 每 回 合 最 多 一 次。
+燃 烧 弹- 命 中 后 ，对 目 标 附 近 的 敌 人 造 成 %d%% 火 焰 武 器 伤 害 ，范 围 最 大 为 %d ， 每 回 合 最 多 一 次。
 剧 毒 弹- 命 中 后 ，对 目 标 造 成 %0.2f 自 然 伤 害 并 感 染 麻 木 毒 素 , 在 5 回 合 内 造 成 %0.2f 自 然 伤 害 并 削 弱 其 %d%% 的 伤 害。
 穿 甲 弹- 命 中 后 ， 使 目 标 的 护 甲 和 豁 免 减 少 %d ，持 续 3 回合, 你 的 物 理 穿 透 增 加 %d%%。
 同 时 只 能 装 备 一 种 弹 药。
@@ -18,7 +18,7 @@ registerTalentTranslation{
 	info = function (self,t)
 		local damage = t.getIncendiaryDamage(self, t)*100
 		local radius = self:getTalentRadius(t)
-		return ([[装 填 燃 烧 弹, 对 目 标 附 近 的 敌 人 造 成 %d%% 火 焰 武 器 伤 害 ，范 围 最 大 为 %d。
+		return ([[装 填 燃 烧 弹, 对 目 标 附 近 的 敌 人 造 成 %d%% 火 焰 武 器 伤 害 ，范 围 最 大 为 %d 。
 		该 技 能 每 回 合 最 多 触 发 一 次.
 		伤 害 受 物 理 强 度 加 成。]]):format(damage, radius)
 	end,

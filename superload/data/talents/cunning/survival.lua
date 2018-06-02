@@ -6,7 +6,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		return ([[你 注 意 到 他 人 注 意 不 到 的 细 节， 甚 至 能 在 阴 影 区 域 “ 看 到 ” 怪 物， %d 码 半 径 范 围。 
 		 注 意 此 能 力 不 属 于 心 灵 感 应， 仍 然 受 到 视 野 的 限 制。 
-		 同 时 你 的 细 致 观 察 也 能 使 你 发 现 周 围 的 陷 阱 (%d 侦 查 强 度 )。  
+		 同 时 你 的 细 致 观 察 也 能 使 你 发 现 周 围 的 陷 阱 ( %d 侦 查 强 度 )。  
 		 受 灵 巧 影 响， 陷 阱 侦 查 强 度 有 额 外 加 成。]]):
 		format(t.sense(self,t),t.seePower(self,t))
 	end,
@@ -50,7 +50,7 @@ registerTalentTranslation{
 	info = function (self,t)
 		local tdm = self:getTalentFromId(self.T_DEVICE_MASTERY)
 		local t_det, t_dis = self:attr("see_traps") or 0, tdm.trapDisarm(self, tdm)
-		return ([[你 搜 索 周 围 地 格 的 陷 阱 （ %d 侦 察 强 度），并 尝 试 解 除 (%d 解 除 强 度 ，基 于 技 能 %s)。
+		return ([[你 搜 索 周 围 地 格 的 陷 阱 （ %d 侦 察 强 度），并 尝 试 解 除 ( %d 解 除 强 度 ，基 于 技 能 %s)。
 		解 除 陷 阱 有 最 低 技 能 等 级 需 求，且 你 必 须 能 够 移 动 到 陷 阱 的 所 在 格 ，尽 管 你 仍 然 留 在 你 的 当 前 位 置。
 		解 除 陷 阱 失 败 可 能 会 触 发 陷 阱。
 		Your skill improves with your your Cunning.]]):format(t_det, t_dis, tdm.name)

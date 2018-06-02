@@ -153,7 +153,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		return ([[金 钱 是 矮 人 王 国 的 心 脏， 它 控 制 了 所 有 其 他 决 策。 
 		 基 于 你 的 金 币 持 有 量， 增 加 物 理、 精 神 和 法 术 抵 抗。 
-		+1 豁 免 值 每 %d 单 位 金 币， 最 大 +%d (当 前 +%d)。]]):
+		+1 豁 免 值 每 %d 单 位 金 币， 最 大 +%d (当 前 +%d )。]]):
 		format(t.getGold(self, t), t.getMaxSaves(self, t), t.getSaves(self, t))
 	end,
 }

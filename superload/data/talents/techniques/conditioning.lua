@@ -9,7 +9,7 @@ registerTalentTranslation{
 		local duration = t.getDuration(self, t)
 		local totalheal = baseheal + self.max_life*healpct/duration
 		return ([[你 受 中 毒、 疾 病 和 创 伤 的 影 响 较 小， 减 少 %d%% 此 类 效 果 的 持 续 时 间。 
-		此 外 在 生 命 低 于 50%% 时 你 会 得 到 回 复 效 果 ，回 复 总 量为 %0.1f 加 上 %0.1f%% 最 大 生 命 值(%0.1f 点) ，持 续 %d 回 合 ， 但 每 隔 %d 回 合 才 能 触 发 一 次。
+		此 外 在 生 命 低 于 50%% 时 你 会 得 到 回 复 效 果 ，回 复 总 量为 %0.1f 加 上 %0.1f%% 最 大 生 命 值( %0.1f 点) ，持 续 %d 回 合 ， 但 每 隔 %d 回 合 才 能 触 发 一 次。
 		受 体 质 影 响， 治 疗 加 成 和 生 命 回 复 有 额 外 加 成。]]):
 		format(wounds, baseheal, healpct/duration*100, totalheal, duration, self:getTalentCooldown(t))
 	end,

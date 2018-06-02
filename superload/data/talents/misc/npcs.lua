@@ -266,7 +266,7 @@ registerTalentTranslation{
 	id = "T_THROW_BONES",
 	name = "投掷白骨",
 	info = function(self, t)
-		return ([[向 目 标 投 掷 白 骨 造 成 %0.2f 物 理 流 血 伤 害，最 远 距 离 %d。 
+		return ([[向 目 标 投 掷 白 骨 造 成 %0.2f 物 理 流 血 伤 害，最 远 距 离 %d 。
 		 受 力 量 影 响， 伤 害 有 额 外 加 成。]]):
 		format(damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t)), self:getTalentRadius(t))
 	end,
@@ -296,7 +296,7 @@ registerTalentTranslation{
 	id = "T_THROW_BOULDER",
 	name = "投掷巨石",
 	info = function(self, t)
-		return ([[向 目 标 投 掷 一 块 巨 大 的 石 头， 造 成 %0.2f 伤 害 并 将 其 击 退 %d 码,投 掷 半 径 %d。 
+		return ([[向 目 标 投 掷 一 块 巨 大 的 石 头， 造 成 %0.2f 伤 害 并 将 其 击 退 %d 码,投 掷 半 径 %d 。 
 		 受 力 量 影 响， 伤 害 有 额 外 加 成。]]):format(damDesc(self, DamageType.PHYSICAL, t.getDam(self, t)), t.getDist(self, t), self:getTalentRadius(t))
 	end,
 }
@@ -418,7 +418,7 @@ registerTalentTranslation{
 	id = "T_SEVER_LIFELINE",
 	name = "生命离断",
 	info = function(self, t)
-		return ([[引 导 法 术 离 断 目 标 的 生 命 线， 如 果 4 回 合 之 后 目 标 仍 然 在 视 线 内 则 会 立 即 死 亡(%d 时 空 伤 害 )。]]):format(damDesc(self, "TEMPORAL", t.getDamage(self, t)))
+		return ([[引 导 法 术 离 断 目 标 的 生 命 线， 如 果 4 回 合 之 后 目 标 仍 然 在 视 线 内 则 会 立 即 死 亡( %d 时 空 伤 害 )。]]):format(damDesc(self, "TEMPORAL", t.getDamage(self, t)))
 	end,
 }
 

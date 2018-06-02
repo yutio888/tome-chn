@@ -37,7 +37,7 @@ registerTalentTranslation{
 		local heal = t.getHeal(self, t) 
 		local vim = t.getVim(self, t)
 
-		return ([[你 解 体 为 蠕 虫 ， 并 在 目 标 处 合 并。（误 差 %d）
+		return ([[你 解 体 为 蠕 虫 ， 并 在 目 标 处 合 并。（误 差 %d ）
 如 果 对 蠕 虫 团 使 用 ， 你 和 它 合 体  ， 治 疗 %d 生 命 值 , 回 复 %d 活 力 。]]):
 format (radius, heal, vim)
 	end,

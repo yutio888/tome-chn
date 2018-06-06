@@ -4,12 +4,14 @@ local _M = loadPrevious(...)
 require "data-chn123.delayed_damage"
 -- 选择职业界面，标题未翻译
 class:bindHook("Game:alterGameMenu", function (self, data)
-	data.menu[2][1] = data.menu[2][1]:gsub("Show Achievements","查看成就")
-	data.menu[3][1] = data.menu[3][1]:gsub("Show known Lore","查看手札")
-	data.menu[4][1] = data.menu[4][1]:gsub("Show ingredients","查看原料")
-	data.menu[6][1] = data.menu[6][1]:gsub("Inventory","查看物品")
-	data.menu[7][1] = data.menu[7][1]:gsub("Character Sheet","查看面板")
-	data.menu[9][1] = data.menu[9][1]:gsub("Game Options","游戏选项")
+	for i,k in pairs(data.menu) do 
+		if data.menu[i][1] then 
+		data.menu[i][1] = data.menu[i][1]:gsub("Show Achievements","查看成就")
+						:gsub("Show known Lore","查看手札")	:gsub("Show ingredients","查看原料")
+						:gsub("Inventory","查看物品"):gsub("Character Sheet","查看面板")
+						:gsub("Game Options","游戏选项")
+	end
+	end
 	end
 )
 

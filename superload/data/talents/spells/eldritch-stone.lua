@@ -9,7 +9,7 @@ registerTalentTranslation{
 			xs = ("中 毒 6 回 合 受 到 合 计 %0.1f 点 自 然 伤 害 （同 时 减 少 %d%% 治 疗 效 果） "):format(self:callTalent(self.T_POISONED_SPIKES, "getDamage"), self:callTalent(self.T_POISONED_SPIKES, "getHeal"))
 		end
 		if self:knowTalent(self.T_ELDRITCH_SPIKES) then
-			xs = xs..(", 受 到 %0.1f点 奥 术 伤 害（ 同 时 沉 默 %d 回 合 ）,"):format(self:callTalent(self.T_ELDRITCH_SPIKES, "getDamage"), self:callTalent(self.T_ELDRITCH_SPIKES, "getSilence"))
+			xs = xs..(", 受 到 %0.1f 点 奥 术 伤 害（ 同 时 沉 默 %d 回 合 ）,"):format(self:callTalent(self.T_ELDRITCH_SPIKES, "getDamage"), self:callTalent(self.T_ELDRITCH_SPIKES, "getSilence"))
 		end
 		if self:knowTalent(self.T_IMPALING_SPIKES) then
 			xs = xs..(" 受 到 %0.1f 点 物 理 伤 害（同 时 缴 械 %d 回 合）,"):format( self:callTalent(self.T_IMPALING_SPIKES, "getDamage"), self:callTalent(self.T_IMPALING_SPIKES, "getDisarm"))

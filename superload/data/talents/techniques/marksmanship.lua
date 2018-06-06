@@ -8,7 +8,7 @@ registerTalentTranslation{
 		local inc = t.getPercentInc(self, t)
 		local reload = t.getReload(self,t)
 		local chance = t.getChance(self,t)
-		return ([[使 用 弓 和 投 石 索 时 增 加 %d 物 理 强 度 、%d%% 武 器 伤 害 和 %d 填 弹 速 度。
+		return ([[使 用 弓 和 投 石 索 时 增 加 %d 物 理 强 度 、 %d%% 武 器 伤 害 和 %d 填 弹 速 度。
 		射 击 技 能 有 %d%% 几 率 标 记 目 标。
 		标 记 持 续 5 回 合，令 你 能 感 知 到 目 标 ，同 时 让 他 们 面 对 爆 头 、 齐 射 和 精 巧 射 击 更 脆 弱 。]]):
 format(damage, inc * 100, reload, chance)

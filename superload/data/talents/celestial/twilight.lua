@@ -37,7 +37,7 @@ registerTalentTranslation{
 	name = "心灵震爆",
 	info = function(self, t)
 		local duration = t.getConfuseDuration(self, t)
-		return ([[在 3 码 半 径 范 围 内 释 放 一 股 精 神 冲 击， 摧 毁 目 标 的 意 志， 使 他 们 混 乱 (%d%% 几率随机行动) %d 回 合。 
+		return ([[在 3 码 半 径 范 围 内 释 放 一 股 精 神 冲 击， 摧 毁 目 标 的 意 志， 使 他 们 混 乱 ( %d%% 几率随机行动) %d 回 合。 
 		 受 灵 巧 影 响， 持 续 时 间 有 额 外 加 成。]]):
 		format(t.getConfuseEfficency(self,t),duration)
 	end,

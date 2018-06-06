@@ -6,7 +6,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local rad = self:getTalentRadius(t)
 		local turns, dam, arcanedam = t.getValues(self, t)
-		local xs = arcanedam and (" 和 %0.1f奥术伤害"):format(arcanedam) or ""
+		local xs = arcanedam and (" 和 %0.1f 奥术伤害"):format(arcanedam) or ""
 		return ([[你 周 围 的 地 面 开 始 生 成 岩 石 藤 蔓。
 		每 回 合 藤 蔓 将 试 图 抓 住 半 径 %d 内 的 一 个 随 机 目 标 。
 		受 影 响 的 目 标 将 被 定 身 ， 同 时 每 回 合 受 到 %0.1f 物 理 伤 害 %s, 持 续 %d 回 合 。

@@ -638,6 +638,49 @@ registerLoreTranslation{
 ——#{italic}#科斯汀·赫菲因#{normal}#]],
 }
 
+-- TODO: I can't fully understand and skipped the sentences that I won't understand
+registerLoreTranslation{
+	id = "galsame-orientation-notes",
+	name = "时空守卫大师加尔萨麦的时空导航笔记",
+	lore = [[女士们先生们，恭喜你。无论是你受到了时空的邀请，是你自己发现了这一切的秘密，还是作为我们曾经的眼中钉，觉得比起对付还是招揽你更好，总之，你已经了解了有光时空魔法的能力。我们掌握有关时间的终极力量——能够在你失败时不断重试，能够通过预知结果来节约时间，甚至是未卜先知地在观测前就看到事情的结果。尽管我们的能力被限制在于魔法大爆炸后的埃亚尔，只要你有足够的耐心，我们将可以无所不知，无所不能。
+	
+不过，相信我——“足够的耐心”已经是足够令人讨厌的限制了。如果你曾经花费整整一周的时间，试图拆解黄昏纪暴君你方唱罢我登场的政治游戏，既不意外导致矮人的灭绝，也没有因为突然爆发的瘟疫毁掉你满盘的计划，尝试了六次也没能得出结果的话——很快你也会丧失耐心的。
+
+看。这就是问题的关键。就像那些任务说明和邀请可不能由那些没有亲自上战场的人撰写——你也有同样的幸运，我们知道在你的工作中需要的“灵活性”远比理想主义更重要。我们的小队知道要保持理智，我们也知道“每过一秒就有一秒钟的时间流过”也只是我们要打破的众多规律之一。如果你能够预见到一个有罪判决，在时空中不经审判处理掉一个潜在的罪犯也不是什么大事——只要你的调查可以被证明是确凿可信的（而且总有一天你要亲自做这件事，否则你只能看到自己不停拖延）而且，乳沟你只是想要一个不被监视的地方，你知道，在黄昏纪的一些时代被我和其他几个小队当做了“公平竞赛”的区域——无论你想要做什么样的实验，或者想要给其他人带来怎样的恐怖，只要你到那些有关无尽的被遗忘的邪恶的时间段去做，这不会对事情的大局产生任何影响。相信我，我们已经确认了——这段时间发生的一切事情都无足轻重，除非你真有本事引发第二次魔法大爆炸。
+
+不过你还是要知道一些最重要的事情：虽然伊莫克斯比我还懒，但他也有他要维持的东西。如果你不停违抗他的意志，总有一天，你会被告知，你已经被抓到了，请你停止抵抗。接受他为你安排的命运。如果你仍然负隅顽抗的话，很快，他会不得不把你作为一个严厉的例子，以至于整个宇宙都会注意到你的灭亡。很显然，我们也不确定他真的对谁做过这样的事情，或者是他到底会做什么，不过，我们可以确定，你的命运会和某个以“W-”开头的东西差不多。
+
+这里的每个人都想要同样的东西 —— 保持时空稳定，玩弄你的力量，鼓捣彩票发点小财 —— 但是我们还是有需要维护的东西。并且，理论上，如果有什么东西击穿了夏·图尔护盾或是Greigu找到了穿透传送门屏障的方法，我们也有一些工作要做。当你撕裂时空时要注意，不要造成太大的噪音，以免时空的系统在你的头上崩溃。这样，你就可以好好享受你在永恒中度过的岁月。
+
+欢迎来到零点圣域，特工。这里面装的时空坐标指向的东西，只有我们可以毫不客气地说，是有史以来可能存在的最好的烤雪人餐厅——我的小队会在那里等你。一会儿谢。
+[i]-加尔萨麦[/i]
+
+注：你可能会在旅途中遇到一些……某种意义上的恩人。当你看到它时，你就会明白的。如果你亲眼见证了这一切，也就是在死亡的边缘挣扎的时候，我们必须很遗憾的告知你，你已经向着E4-RL时间轴走向了一条注定灭亡的单程旅行，除非“他愿意”重新把你编织进时空的路线——而且他似乎一般只会青睐那些通过无可替代的力量或运气来避免自己被设计好的灭亡的人。如果你被它的方案所选择了，那么你可能会从E4-EXPADV时间轴子网络的时间坟场回来。 我们不知道它是什么 —— 到底是我们自己失控的创造物，是某个竞争对手的武器，或者远远超出我们自己的东西 —— 但是如果它有敌意，它已经赢了。到目前为止，它一直是……处在合作的状态。请注意不要提醒它我们是它的竞争对手。]]
+}
+
+-- FIXME: I was too tired to translate this obscure lore.
+registerLoreTranslation{
+	id = "shiiak-mantra",
+	name = "Mantra of a Shiiak",
+    lore = [[Each morning I wake, happy I'm alive;
+the traps of this tomb won't claim me today.
+Though its curse of hunger eats at my insides,
+I curse it one better by having outstayed.
+
+Say a curse for the goblins' tortures that remained,
+and a curse for the gods who stole half the world.
+Say a curse for the chill that leaves magic drained,
+and a curse for the star that grew dark as it swirled
+
+But most important of all is to note,
+in spite of fate's bias, only we survived.
+Curse the dead all you want, but we've stayed afloat;
+we're the only ones blessed with the skillset to thrive.
+
+Our wit, strength, and teamwork outweigh cosmic powers;
+they've done what they could but Spydrë is [b]ours.[/b] ]]
+}
+
 
 
 --------------------------------------------------------------

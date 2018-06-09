@@ -515,6 +515,7 @@ end
 
 --- Gets the full name of the object
 function _M:getName(t)
+	if self.display_name then return self.display_name end
 	t = t or {}
 	local qty = self:getNumber()
 	local name = self.name

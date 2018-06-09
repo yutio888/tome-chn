@@ -698,17 +698,20 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "You switch your weapons to: %s.",
 	fct = function(a)
-		local name = objects:getObjectsChnName(a):gsub("and", "和")
-		name = name:gsub("unarmed","空手")
-		return ("你切换了你的装备至： %s 。"):format(name)
+		if type(a) == "string" then 
+		a = a:gsub("unarmed","空手"):gsub("and", "和")
+		end
+		return ("你切换了你的装备至： %s 。"):format(a)
 	end,
 }
 
 logCHN:newLog{
 	log = "You teleport %s into your hands.",
 	fct = function(a)
-		local name = objects:getObjectsChnName(a):gsub("and", "和")
-		return ("你将 %s 传送到了手中。"):format(name)
+		if type(a) == "string" then 
+		a = a:gsub("unarmed","空手"):gsub("and", "和")
+		end
+		return ("你将 %s 传送到了手中。"):format(a)
 	end,
 }
 logCHN:newLog{
@@ -1604,17 +1607,19 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "%s warps space-time to equip: %s.",
 	fct = function(a,b)
-		local name = objects:getObjectsChnName(b):gsub("and", "和")
-		name = name:gsub("unarmed","空手")
-		return ("%s扭曲空间，切换武器至： %s 。"):format(npcCHN:getName(a),name)
+		if type(b) == "string" then 
+		b = b:gsub("unarmed","空手"):gsub("and", "和")
+		end
+		return ("%s扭曲空间，切换武器至： %s 。"):format(npcCHN:getName(a),b)
 	end,
 }
 logCHN:newLog{
 	log = "%s switches %s weapons to: %s.",
 	fct = function(a,b,c)
-		local name = objects:getObjectsChnName(c):gsub("and", "和")
-		name = name:gsub("unarmed","空手")
-		return ("%s切换武器至： %s 。"):format(npcCHN:getName(a),b,name)
+		if type(c) == "string" then 
+		c = c:gsub("unarmed","空手"):gsub("and", "和")
+		end
+		return ("%s切换武器至： %s %s 。"):format(npcCHN:getName(a),b,c)
 	end,
 }
 logCHN:newLog{

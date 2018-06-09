@@ -34,7 +34,7 @@ registerTalentTranslation{
 	id = "T_CALL_OF_THE_OOZE",
 	name = "软泥召唤",
 	info = function(self, t)
-		return ([[立 刻 召 集 所 有 的 浮 肿 软 泥 怪 来 战 斗， 如 果 现 有 浮 肿 软 泥 怪 数 目 比 最 大 值 小， 最 多 可 以 制 造 %d 个 浮 肿 软 泥 怪， 每 一 个 的 生 命 值 不 能 超 过 有 丝 分 裂 技 能 允 许 的 生 命 最 大 值 的 %d%% 。 
+		return ([[立 刻 召 集 所 有 的 浮 肿 软 泥 怪 来 战 斗， 如 果 现 有 浮 肿 软 泥 怪 数 目 比 最 大 值 小， 最 多 可 以 制 造 %d 个 浮 肿 软 泥 怪， 每 一 个 的 生 命 值 为 %d （ 有 丝 分 裂 技 能 允 许 的 生 命 最 大 值 的 %d%% ） 。 
 		 每 一 个 浮 肿 软 泥 怪 将 被 传 送 到 其 视 野 内 的 敌 人 附 近，并 吸 引 其 注 意 力 。 
 		 利 用 这 一 形 势， 你 将 对 浮 肿 软 泥 怪 面 对 的 敌 人 各 造 成 一 次 近 战 酸 性 伤 害， 数 值 为 武 器 伤 害 的 %d%% 。 ]]):
 		format(t.getMax(self, t), t.getLife(self, t), t.getModHP(self, t)*100, t.getWepDamage(self, t) * 100)

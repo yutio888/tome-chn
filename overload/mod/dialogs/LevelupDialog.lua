@@ -877,9 +877,9 @@ function _M:getStatDesc(item)
 		text:add("精神强度： ", color, ("%0.2f"):format(diff * 0.7), dc, true)
 		text:add("精神豁免： ", color, ("%0.2f"):format(diff * 0.35), dc, true)
 		text:add("法术豁免： ", color, ("%0.2f"):format(diff * 0.35), dc, true)
-		if self.actor:attr("use_psi_combat") then
-			text:add("命中： ", color, ("%0.2f"):format(diff * 0.35), dc, true)
-		end
+--		if self.actor:attr("use_psi_combat") then
+--			text:add("命中： ", color, ("%0.2f"):format(diff * 0.35), dc, true)
+--		end
 	elseif stat_id == self.actor.STAT_STR then
 		text:add("物理强度： ", color, ("%0.2f"):format(diff), dc, true)
 		text:add("负重上限： ", color, ("%0.2f"):format(diff * 1.8), dc, true)
@@ -905,6 +905,18 @@ function _M:getStatDesc(item)
 		text:add({"color", "LIGHT_BLUE"}, "职业强度：", dc, true)
 		text:add(self.desc_def.getStatDesc(stat_id, self.actor))
 	end
+	
+	if self.actor:knowTalent(self.actor.T_STEAM_POOL) then
+		local stat_id = item.stat
+		local diff = self.actor:getStat(stat_id, nil, nil, true) - self.actor_dup:getStat(stat_id, nil, nil, true)
+		local color = diff >= 0 and {"color", "LIGHT_GREEN"} or {"color", "RED"}
+		local dc = {"color", "LAST"}
+
+		if stat_id == self.actor.STAT_CUN then
+			text:add("蒸汽强度: ", color, ("%0.2f"):format(diff), dc, true)
+		end
+	end
+
 	return text
 end
 

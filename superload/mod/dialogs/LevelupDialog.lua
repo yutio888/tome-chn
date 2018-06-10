@@ -21,7 +21,6 @@ local _M = loadPrevious(...)
 
 local getStatDesc = _M.getStatDesc
 function _M:getStatDesc(item)
-
 	local stat_id = item.stat
 	if not stat_id then return item.desc end
 	local text = tstring{}
@@ -39,6 +38,7 @@ function _M:getStatDesc(item)
 		local multi_life = 4 + (self.actor.inc_resource_multi.life or 0)
 		text:add("生命值上限： ", color, ("%0.2f"):format(diff * multi_life), dc, true)
 		text:add("物理豁免： ", color, ("%0.2f"):format(diff * 0.35), dc, true)
+		text:add("治疗系数： ", color, ("%0.1f%%"):format((self.actor:combatStatLimit("con", 1.5, 0, 0.5) - self.actor_dup:combatStatLimit("con", 1.5, 0, 0.5))*100), dc, true)
 	elseif stat_id == self.actor.STAT_WIL then
 		if self.actor:knowTalent(self.actor.T_MANA_POOL) then
 			local multi_mana = 5 + (self.actor.inc_resource_multi.mana or 0)
@@ -55,9 +55,9 @@ function _M:getStatDesc(item)
 		text:add("精神强度： ", color, ("%0.2f"):format(diff * 0.7), dc, true)
 		text:add("精神豁免： ", color, ("%0.2f"):format(diff * 0.35), dc, true)
 		text:add("法术豁免： ", color, ("%0.2f"):format(diff * 0.35), dc, true)
-		if self.actor:attr("use_psi_combat") then
-			text:add("命中： ", color, ("%0.2f"):format(diff * 0.35), dc, true)
-		end
+--		if self.actor:attr("use_psi_combat") then
+--			text:add("命中： ", color, ("%0.2f"):format(diff * 0.35), dc, true)
+--		end
 	elseif stat_id == self.actor.STAT_STR then
 		text:add("物理强度： ", color, ("%0.2f"):format(diff), dc, true)
 		text:add("负重上限： ", color, ("%0.2f"):format(diff * 1.8), dc, true)
@@ -66,9 +66,6 @@ function _M:getStatDesc(item)
 		text:add("暴击几率： ", color, ("%0.2f"):format(diff * 0.3), dc, true)
 		text:add("精神豁免： ", color, ("%0.2f"):format(diff * 0.35), dc, true)
 		text:add("精神强度： ", color, ("%0.2f"):format(diff * 0.4), dc, true)
-		if(mod.class.OrcCampaign) then
-			text:add("蒸汽强度： ", color, ("%0.2f"):format(diff), dc, true)
-		end
 		if self.actor:attr("use_psi_combat") then
 			text:add("命中： ", color, ("%0.2f"):format(diff * 0.35), dc, true)
 		end
@@ -86,6 +83,18 @@ function _M:getStatDesc(item)
 		text:add({"color", "LIGHT_BLUE"}, "职业强度：", dc, true)
 		text:add(self.desc_def.getStatDesc(stat_id, self.actor))
 	end
+
+	if self.actor:knowTalent(self.actor.T_STEAM_POOL) then
+		local stat_id = item.stat
+		local diff = self.actor:getStat(stat_id, nil, nil, true) - self.actor_dup:getStat(stat_id, nil, nil, true)
+		local color = diff >= 0 and {"color", "LIGHT_GREEN"} or {"color", "RED"}
+		local dc = {"color", "LAST"}
+
+		if stat_id == self.actor.STAT_CUN then
+			text:add("蒸汽强度: ", color, ("%0.2f"):format(diff), dc, true)
+		end
+	end
+
 	return text
 end
 

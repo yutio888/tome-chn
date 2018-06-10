@@ -1604,17 +1604,18 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "%s warps space-time to equip: %s.",
 	fct = function(a,b)
-		local name = objects:getObjectsChnName(b):gsub("and", "和")
-		name = name:gsub("unarmed","空手")
+		print(objects:getObjectsChnName(b));
+		local name = objects:getObjectsChnName(b)
+		if name == "unarmed" then name = "空手" end
 		return ("%s扭曲空间，切换武器至： %s 。"):format(npcCHN:getName(a),name)
 	end,
 }
 logCHN:newLog{
 	log = "%s switches %s weapons to: %s.",
 	fct = function(a,b,c)
-		local name = objects:getObjectsChnName(c):gsub("and", "和")
-		name = name:gsub("unarmed","空手")
-		return ("%s切换武器至： %s 。"):format(npcCHN:getName(a),b,name)
+		local name = objects:getObjectsChnName(c)
+		if name == "unarmed" then name = "空手" end
+		return ("%s切换武器至： %s 。"):format(npcCHN:getName(a),name)
 	end,
 }
 logCHN:newLog{

@@ -1619,7 +1619,8 @@ logCHN:newLog{
 		if type(c) == "string" then 
 		c = c:gsub("unarmed","空手"):gsub("and", "和")
 		end
-		return ("%s切换武器至： %s %s 。"):format(npcCHN:getName(a),b,c)
+		return ("%s切换%s武器至 %s 。"):format(npcCHN:getName(a),b,c)
+
 	end,
 }
 logCHN:newLog{

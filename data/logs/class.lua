@@ -1604,7 +1604,6 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "%s warps space-time to equip: %s.",
 	fct = function(a,b)
-		print(objects:getObjectsChnName(b));
 		local name = objects:getObjectsChnName(b)
 		if name == "unarmed" then name = "空手" end
 		return ("%s扭曲空间，切换武器至： %s 。"):format(npcCHN:getName(a),name)

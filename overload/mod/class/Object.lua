@@ -515,7 +515,7 @@ end
 
 --- Gets the full name of the object
 function _M:getName(t)
-	if self.display_name then return self.display_name end
+	
 	t = t or {}
 	local qty = self:getNumber()
 	local name = self.name
@@ -525,21 +525,24 @@ function _M:getName(t)
 	end
 
 	if not self:isIdentified() and not t.force_id and self:getUnidentifiedName() then name = self:getUnidentifiedName() end
+	if self.display_name then
+		name = self.display_name 
+	else
 	
-	local objCHN = objects:getObjects(self.name,self.desc,self.subtype,self.short_name,self:isIdentified(),self.rare,self.unique)	
-	name = (objCHN.chName == "") and self.name or objCHN.chName
-
-	-- To extend later
-	name = name:gsub("~", ""):gsub("&", "a"):gsub("#([^#]+)#", function(attr)
-		return self:descAttribute(attr)
-	end)
-
+		local objCHN = objects:getObjects(self.name,self.desc,self.subtype,self.short_name,self:isIdentified(),self.rare,self.unique)	
+		name = (objCHN.chName == "") and self.name or objCHN.chName
+		
+		-- To extend later
+		name = name:gsub("~", ""):gsub("&", "a"):gsub("#([^#]+)#", function(attr)
+			return self:descAttribute(attr)
+		end)
+	end
 	if not t.no_add_name and self.add_name and self:isIdentified() then
 		name = name .. self.add_name:gsub("#([^#]+)#", function(attr)
 			return self:descAttribute(attr)
 		end)
 	end
-
+	
 	if not t.no_add_name and self.tinker then
 		name = name .. ' #{italic}#<' .. self.tinker:getName(t) .. '>#{normal}#'
 	end

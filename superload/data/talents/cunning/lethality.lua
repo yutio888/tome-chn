@@ -19,12 +19,12 @@ registerTalentTranslation{
 		local bonus = damDesc(self, DamageType.PHYSICAL, t.getBonusDamage(self, t))
 		local duration = t.getDuration(self, t)
 		return ([[集 中 精 力 试 探 目 标 ， 寻 找 其 弱 点 ,造 成 %d%% 武 器 伤 害。
-		试 探 攻 击 未 命 中 将 使 你 接 下 来 的 攻 击 命 中 追 加 %d 点 有 效 值。
-		试 探 攻 击 命 中 将 使 你 接 下 来 的 攻 击 武 器 伤 害 增 加 %0.1f ，护 甲 穿 透 增 加 %d 。
+		每 次 未 命 中 的 试 探 攻 击 将 使 你 接 下 来 的 攻 击 命 中 追 加 %d 点 有 效 值。
+		每 次 命 中 的 试 探 攻 击 将 使 你 接 下 来 的 攻 击 武 器 伤 害 增 加 %0.1f ，武 器 抗 性 穿 透 增 加 %d%% 。
 		以 上 效 果 持 续 %d 回合 。
 		此 外， 你 额 外 获 得 %d 护 甲 穿 透。
 		效 果 受 灵 巧 加 成 。]]):
-		format(100 * damage, duration, t.getAccuracy(self, t), bonus, t.penetration(self, t), t.getAPR(self, t))
+		format(100 * damage,t.getAccuracy(self, t), bonus, t.penetration(self, t),  duration, t.getAPR(self, t))
 	end,
 }
 

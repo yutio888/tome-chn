@@ -659,26 +659,29 @@ registerLoreTranslation{
 }
 
 -- FIXME: I was too tired to translate this obscure lore.
+-- yutio888: 随便翻译了一下，看其他人有没有更好的版本
 registerLoreTranslation{
 	id = "shiiak-mantra",
 	name = "Mantra of a Shiiak",
-    lore = [[Each morning I wake, happy I'm alive;
-the traps of this tomb won't claim me today.
-Though its curse of hunger eats at my insides,
-I curse it one better by having outstayed.
+    lore = [[每个清晨醒来都很愉快
+    坟墓里的陷阱今天仍能躲开
+    尽管饥饿诅咒让我痛苦难耐
+    我的诅咒更加强力，持久不改
 
-Say a curse for the goblins' tortures that remained,
-and a curse for the gods who stole half the world.
-Say a curse for the chill that leaves magic drained,
-and a curse for the star that grew dark as it swirled
+    诅咒哥布林的厄运
+    诅咒窃取世界的神祇
+    诅咒吸取魔力的冰寒
+    诅咒群星旋转变暗
 
-But most important of all is to note,
-in spite of fate's bias, only we survived.
-Curse the dead all you want, but we've stayed afloat;
-we're the only ones blessed with the skillset to thrive.
+    纵使命运不公
+    如今仅我存活
+    尽情诅咒亡者
+    我等兴盛蓬勃
 
-Our wit, strength, and teamwork outweigh cosmic powers;
-they've done what they could but Spydrë is [b]ours.[/b] ]]
+    智慧力量协作
+    三者胜过万物
+    他人尽其所能
+    蜘蛛已然归我]]
 }
 
 

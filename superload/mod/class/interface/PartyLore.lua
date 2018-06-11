@@ -1,13 +1,11 @@
 
 local _M = loadPrevious(...)
 local loreC = require "data-chn123.lore"
-local r = require "data-chn123.rewrite_descriptor"
 
 local slt2 = require "slt2"
 local chn123_old_getLore = _M.getLore
 
 function _M:getLore(lore, silent)
-	r.rewrite()
 	l = chn123_old_getLore(self, lore, silent)
 	if l == nil then return nil end
 	l.chn_translated = false
@@ -21,7 +19,6 @@ function _M:getLore(lore, silent)
 		l.chn_translated = true
 	end
 	if l.category == "artifacts" then l.chn_translated = true end
-	r.recover()
 	return l
 end
 

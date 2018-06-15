@@ -33,16 +33,16 @@ load("data-chn123/lore/sunwall.lua")
 load("data-chn123/lore/tannen.lua")
 load("data-chn123/lore/trollmire.lua")
 load("data-chn123/lore/zigur.lua")
-if require "engine.Game":isAddonActive("ashes-urhrok") then
+
 load("data-chn123/lore/demon.lua")
+local PartyLore = require "mod.class.interface.PartyLore"
+if PartyLore.lore_defs["destructicus"] ~= nil then
+    load("data-chn123/lore/orcs/destructicus.lua")
+    load("data-chn123/lore/orcs/dominion-port.lua")
+    load("data-chn123/lore/orcs/emporium.lua")
 end
-if require "engine.Game":isAddonActive("orcs") then
-load("data-chn123/lore/orcs/destructicus.lua")
-load("data-chn123/lore/orcs/dominion-port.lua")
-load("data-chn123/lore/orcs/emporium.lua")
-end
-if require "engine.Game":isAddonActive("cults") then
-load("data-chn123/lore/cults/misc.lua")
-load("data-chn123/lore/cults/zones.lua")
-load("data-chn123/lore/cults/dremwarves.lua")
+if PartyLore.lore_defs["cults-lost-merchant-glyph"] ~= nil then
+    load("data-chn123/lore/cults/misc.lua")
+    load("data-chn123/lore/cults/zones.lua")
+    load("data-chn123/lore/cults/dremwarves.lua")
 end

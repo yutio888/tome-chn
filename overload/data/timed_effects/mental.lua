@@ -3371,11 +3371,11 @@ newEffect{
 	desc = "Exploiting Weaknesses",
 	long_desc = function(self, eff)
 		local bonuses = {}
-		if eff.bonus_accuracy > 0 then table.insert(bonuses, ("have %+d accuracy"):format(eff.bonus_accuracy)) end
-		if eff.bonus_power > 0 then table.insert(bonuses, ("deal %+0.1f damage"):format(eff.bonus_power)) end
-		if eff.bonus_pen > 0 then table.insert(bonuses, ("have %+d%% resistance penetration"):format(eff.bonus_pen)) end
+		if eff.bonus_accuracy > 0 then table.insert(bonuses, (" %+d 命中"):format(eff.bonus_accuracy)) end
+		if eff.bonus_power > 0 then table.insert(bonuses, (" %+0.1f 武器伤害"):format(eff.bonus_power)) end
+		if eff.bonus_pen > 0 then table.insert(bonuses, (" %+d%% 抗性穿透"):format(eff.bonus_pen)) end
 		if #bonuses > 0 then bonuses = table.concatNice(bonuses, ", ", " and ") else bonuses = "are not affected" end
-		return ("You are focused on weaknesses you have found in your target's defences.  Your melee attacks against %s %s."):format(eff.target and eff.target.name:capitalize() or "noone", bonuses)
+		return ("你集中精神寻找目标的弱点，你对%s 的 武器攻击获得以下加成： %s。"):format(eff.target and eff.target.name:capitalize() or "noone", bonuses)
 	end,
 	type = "mental",
 	subtype = { tactical=true},

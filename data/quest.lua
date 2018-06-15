@@ -567,12 +567,12 @@ end}
 questCHN["The Temple of Creation"] = {
 name = " 造 物 者 神 庙 ",
 description = function(desc)
-	desc = string.gsub(desc,"Ukllmswwik asked you to take his portal to the Temple of Creation and kill Slasul who has turned mad."," 乌 克 勒 姆 斯 维 奇 请 求 你 穿 过 他 的 传 送 门 到 造 物 者 神 庙 去 杀 死 发 疯 了 的 斯 拉 苏 尔。 ")
-	desc = string.gsub(desc,"Slasul told you his side of the story. Now you must decide: which of them is corrupt%?"," 斯 拉 苏 尔 告 诉 了 你 关 于 他 的 故 事， 你 现 在 必 须 决 定： 到 底 谁 才 是 真 正 的 堕 落 者。 ")
-	desc = string.gsub(desc,"You have killed both Ukllmswwik and Slasul, betraying them both."," 你 把 乌 克 勒 姆 斯 维 奇 和 斯 拉 苏 尔 都 杀 掉 了， 同 时 背 叛 了 他 们 两 个。 ")
-	desc = string.gsub(desc,"You have sided with Ukllmswwik and killed Slasul."," 你 选 择 相 信 乌 克 勒 姆 斯 维 奇 并 杀 死 了 斯 拉 苏 尔。 ")
-	desc = string.gsub(desc,"You have sided with Slasul and killed Ukllmswwik."," 你 选 择 相 信 斯 拉 苏 尔 并 杀 死 了 乌 克 勒 姆 斯 维 奇。 ")
-	desc = string.gsub(desc,"Slasul bound his lifeforce to yours and gave your a powerful trident in return."," 斯 拉 苏 尔 赋 予 你 他 的 生 命 之 力， 并 交 给 你 一 把 强 力 的 三 叉 戟。 ")
+	desc = string.gsub(desc,"Ukllmswwik asked you to take his portal to the Temple of Creation and kill Slasul who has turned mad."," 乌 克 勒 姆 斯 维 奇 请 求 你 穿 过 他 的 传 送 门 到 造 物 者 神 庙 去 杀 死 发 疯 了 的 萨 拉 苏 尔。 ")
+	desc = string.gsub(desc,"Slasul told you his side of the story. Now you must decide: which of them is corrupt%?"," 萨 拉 苏 尔 告 诉 了 你 关 于 他 的 故 事， 你 现 在 必 须 决 定： 到 底 谁 才 是 真 正 的 堕 落 者。 ")
+	desc = string.gsub(desc,"You have killed both Ukllmswwik and Slasul, betraying them both."," 你 把 乌 克 勒 姆 斯 维 奇 和 萨 拉 苏 尔 都 杀 掉 了， 同 时 背 叛 了 他 们 两 个。 ")
+	desc = string.gsub(desc,"You have sided with Ukllmswwik and killed Slasul."," 你 选 择 相 信 乌 克 勒 姆 斯 维 奇 并 杀 死 了 萨 拉 苏 尔。 ")
+	desc = string.gsub(desc,"You have sided with Slasul and killed Ukllmswwik."," 你 选 择 相 信 萨 拉 苏 尔 并 杀 死 了 乌 克 勒 姆 斯 维 奇。 ")
+	desc = string.gsub(desc,"Slasul bound his lifeforce to yours and gave your a powerful trident in return."," 萨 拉 苏 尔 赋 予 你 他 的 生 命 之 力， 并 交 给 你 一 把 强 力 的 三 叉 戟。 ")
 	return desc
 end}
 

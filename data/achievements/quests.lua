@@ -162,7 +162,7 @@ registerAchievementTranslation{
 registerAchievementTranslation{
 	name = "Destroyer of the creation", id = "SLASUL_DEAD",
 	chnName = "创造神终结者",
-	desc = [[杀死斯拉苏尔。]],
+	desc = [[杀死萨拉苏尔。]],
 }
 registerAchievementTranslation{
 	name = "Treacherous Bastard", id = "SLASUL_DEAD_PRODIGY_LEARNT",

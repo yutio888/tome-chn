@@ -59,6 +59,12 @@ engine.ui.Dialog = require "data-chn123.dialog"
 function chn123_tome_font()
 	return config.settings.tome.show_spaces and "/data-chn123/font/main_spaced.ttf" or "/data-chn123/font/main.ttf"
 end
+function getCHNresourcename(name)
+	name=name:gsub("Stamina","体力"):gsub("Mana","法力"):gsub("Souls","灵魂"):gsub("Soul","灵魂"):gsub("Equilibrium","失衡")
+		:gsub("Vim","活力"):gsub("Positive","正"):gsub("Negative","负"):gsub("energy","能量"):gsub("Hate","仇恨")
+		:gsub("Paradox","紊乱"):gsub("Psi","意念力"):gsub("Feedback","反馈"):gsub("Steam","蒸汽"):gsub("Insanity","疯狂")
+		return name
+end
 --------------------------------END
 
 -- Entities that are ASCII are outline

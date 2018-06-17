@@ -1195,7 +1195,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "You do not have enough %s to use %s.",
 	fct = function(a,b)
-		return ("你没有足够的%s施展：%s#")
+		return ("你没有足够的%s施展：%s#"):format(getCHNresourcename(a),b)
 		end,
 }
 

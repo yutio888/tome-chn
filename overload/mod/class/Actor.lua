@@ -5737,12 +5737,7 @@ function _M:getTalentFullDescription(t, addlevel, config, fake_mastery)
 		d:merge(config.custom)
 		d:add(true)
 	end
-	local function getCHNresourcename(name)
-			name=name:gsub("Stamina","体力"):gsub("Mana","法力"):gsub("Souls","灵魂"):gsub("Soul","灵魂"):gsub("Equilibrium","失衡")
-				 :gsub("Vim","活力"):gsub("Positive","正"):gsub("Negative","负"):gsub("energy","能量"):gsub("Hate","仇恨")
-				 :gsub("Paradox","紊乱"):gsub("Psi","意念力"):gsub("Feedback","反馈"):gsub("Steam","蒸汽"):gsub("Insanity","疯狂")
-			return name
-		end
+
 	if not config.ignore_ressources then
 		if t.feedback then d:add({"color",0x6f,0xff,0x83}, "反馈值消耗：", {"color",0xFF, 0xFF, 0x00}, ""..math.round(util.getval(t.feedback, self, t) * (100 + 2 * self:combatFatigue()) / 100, 0.1), true) end
 		if t.fortress_energy then d:add({"color",0x6f,0xff,0x83}, "堡垒能量值消耗：", {"color",0x00,0xff,0xa0}, ""..math.round(t.fortress_energy, 0.1), true) end

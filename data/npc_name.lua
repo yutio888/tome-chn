@@ -12,10 +12,19 @@ function npcCHN:getName(name)
 	elseif name:find("enthralled ") then name = "被奴役的"..npcCHN:getName(name:gsub("enthralled ",""))
 	elseif name:find("demonic husk") then name = npcCHN:getName(name:gsub(" %(demonic husk%)","")).."(恶魔傀儡)"
 	elseif name:find("servant") then 
-		local tname = name:gsub("golem %(servant of ",""):gsub("Golem %(servant of ",""):gsub("worm that walks %(servant of ",""):gsub("Worm that walks %(servant of ",""):gsub("%)","")
+		local tname = name:gsub("golem %(servant of ","")
+			:gsub("Golem %(servant of ","")
+			:gsub("worm that walks %(servant of ","")
+			:gsub("Worm that walks %(servant of ","")
+			:gsub("%)","")
+		if tname:find("servant") then return name end
 		local chnname = npcCHN:getName(tname)
-		name = name:gsub("golem %(servant of","傀儡%("):gsub("Golem %(servant of","傀儡%("):gsub("%)","的仆人)"):gsub(tname,chnname)
-			:gsub("worm that walks %(servant of ","蠕虫合体%("):gsub("Worm that walks %(servant of ","蠕虫合体%(")
+		name = name:gsub("golem %(servant of","傀儡(")
+			:gsub("Golem %(servant of","傀儡(")
+			:gsub("%)","的仆人)")
+			:gsub("worm that walks %(servant of ","蠕虫合体(")
+			:gsub("Worm that walks %(servant of ","蠕虫合体(")
+			:gsub(tname,chnname)
 	elseif name:find("\'s dream projection") then
 		name = npcCHN:getName(name:gsub("\'s dream projection","")).."的梦境守卫"
 	elseif name:find(" :") then

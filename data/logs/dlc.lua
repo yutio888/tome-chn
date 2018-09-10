@@ -69,7 +69,7 @@ logCHN:newLog{
 	end,
 }
 logCHN:newLog{
-	log = "#Target# is surrounded with an all-consuming flame!",
+	log = "#Target#'s is surrounded with an all-consuming flame!",
 	fct = function(a)
 		a = npcCHN:getName(a)
 		return ("%s被吞噬性的火焰环绕！"):format(a)
@@ -353,3 +353,9 @@ logCHN:newLog{
 	end,
 }
 
+logCHN:newLog{
+	log = "#CRIMSON#The portal is kept shut for you by a malovelant creature nearby.",
+	fct = function(a)
+		return "#CRIMSON#这附近有一个不怀好意的生物阻止你使用这个传送门。"
+	end,
+}

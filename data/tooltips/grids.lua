@@ -345,6 +345,8 @@ gridCHN["Portal to the Temple of Creation"] = "通向造物主神庙的传送门
 gridCHN["Portal to the Flooded Cave"] = "通向淹没的洞穴的传送门"
 --trollmire-treasure
 gridCHN["way to the hidden trollmire treasure"] = "巨魔宝藏的隐藏入口"
+--krogs-rescue
+gridCHN["trapdoor into the necromancer's ruins"] = "通往死灵法师遗迹的暗门"
 
 --events
 --antimagic-bush

@@ -16,6 +16,15 @@ function bigNewsCHN:getLog(l, ...)
 		return l, ...
 	end
 end
+
+bigNewsCHN:newLog{
+	log = "#DARK_SEA_GREEN#You can feel tremors in the tentacle.. A gastric wave is coming!",
+	translation = "#DARK_SEA_GREEN#你感觉到触手的颤动.. 它的胃好像开始蠕动了！",
+}
+bigNewsCHN:newLog{
+	log = "#DARK_SEA_GREEN#The gastric wave is upon you!",
+	translation = "#DARK_SEA_GREEN#触手的胃里地动山摇！",
+}
 bigNewsCHN:newLog{
 	log = "#GOLD#This portal looks like it reacts only to the Orb of Many Ways.",
 	translation = "#GOLD#这个传送门似乎需要多元水晶球来激活。",

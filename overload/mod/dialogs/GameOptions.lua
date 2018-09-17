@@ -39,10 +39,10 @@ function _M:init()
 	self.c_desc = Textzone.new{width=math.floor((self.iw - self.vsep.w)/2), height=self.ih, text=""}
 
 	local tabs = {
-		{title="UI", kind="ui"},
-		{title="Gameplay", kind="gameplay"},
-		{title="Online", kind="online"},
-		{title="Misc", kind="misc"}
+		{title=" 界面 ", kind="ui"},
+		{title=" 游戏 ", kind="gameplay"},
+		{title=" 连接 ", kind="online"},
+		{title=" 其他 ", kind="misc"}
 	}
 	self:triggerHook{"GameOptions:tabs", tab=function(title, fct)
 		local id = #tabs+1
@@ -575,8 +575,8 @@ function _M:generateListOnline()
 		return "select to configure"
 	end, fct=function(item)	game:registerDialog(require("engine.dialogs.ChatChannels").new()) end,}
 
-	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"Open links in external browser instead of the embedded one.\nThis does not affect addons browse and installation which always stays ingame."}
-	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#外部浏览器打开超链接#WHITE##{normal}#", status=function(item)
+	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"点击超链接时用外部浏览器打开。\n不会影响插件的浏览和安装。"}
+	list[#list + 1] = {zone = zone, name = string.toTString"#GOLD##{bold}#外部浏览器打开超链接#WHITE##{normal}#", status = function(item)
 		return tostring(config.settings.open_links_external and "开启" or "关闭")
 	end, fct=function(item)
 		config.settings.open_links_external = not config.settings.open_links_external
@@ -584,18 +584,18 @@ function _M:generateListOnline()
 		self.c_list:drawItem(item)
 	end,}
 
-	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"Enable Discord's Rich Presence integration to show your current character on your currently playing profile on Discord (restart the game to apply).\n#ANTIQUE_WHITE#If you do not use Discord this option doesn't do anything in either state."}
-	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#Discord's Rich Presence#WHITE##{normal}#", status=function(item)
-		return tostring(not config.settings.disable_discord and "enabled" or "disabled")
+	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"开启Discord实时状态可以让你的朋友在Discord上看见你正在玩什么角色(重启游戏后生效)。\n#ANTIQUE_WHITE#如果你不使用Discord, 那么这个选项就是无效的。"}
+	list[#list + 1] = {zone = zone, name = string.toTString"#GOLD##{bold}#Discord实时状态#WHITE##{normal}#", status=function(item)
+		return tostring(not config.settings.disable_discord and "开启" or "关闭")
 	end, fct=function(item)
 		config.settings.disable_discord = not config.settings.disable_discord
 		game:saveSettings("disable_discord", ("disable_discord = %s\n"):format(tostring(config.settings.disable_discord)))
 		self.c_list:drawItem(item)
 	end,}
 
-	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"Keep a copy of your character sheets (not the whole savefile) on the online vault at te4.org.\nFor each characters you will be given a link to this online character sheet so that you drag about your heroic deeds or sad deaths to your friends or the whole community.#WHITE#"}
-	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#Upload characters sheets to the online vault#WHITE##{normal}#", status=function(item)
-		return tostring(config.settings.upload_charsheet and "enabled" or "disabled")
+	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"在te4.org上保存一份你的角色信息(不是整个存档)。\n每个角色你都会得到一个链接, 用来分享你的巅峰时刻和突然死亡。"}
+	list[#list + 1] = {zone = zone, name = string.toTString"#GOLD##{bold}#上传角色信息到te4.org#WHITE##{normal}#", status = function(item)
+		return tostring(config.settings.upload_charsheet and "开启" or "关闭")
 	end, fct=function(item)
 		config.settings.upload_charsheet = not config.settings.upload_charsheet
 		game:saveSettings("tome.upload_charsheet", ("tome.upload_charsheet = %s\n"):format(tostring(config.settings.upload_charsheet)))
@@ -614,27 +614,26 @@ function _M:generateListOnline()
 		self.c_list:drawItem(item)
 	end,}
 
-	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, scrollbar=true, text=string.toTString[[Disables all connectivity to the network.
-This includes, but is not limited to:
-- Player profiles: You will not be able to login, register
-- Characters vault: You will not be able to upload any character to the online vault to show your glory
-- Item's Vault: You will not be able to access the online item's vault, this includes both storing and retrieving items.
-- Ingame chat: The ingame chat requires to connect to the server to talk to other players, this will not be possible.
-- Donator benefits: The base game being free, the only way to give donators their bonuses fairly is to check their online profile. This will thus be disabled.
-- Expansions & DLCs: Similarly any and all official expansions to the game works under the same principles as the donator benfits and will thus also be disabled.
-- Easy addons downloading & installation: You will not be able to see ingame the list of available addons, nor to one-click install them. You may still do so manually.
-- Version checks: Addons will not be checked for new versions.
-- Steam: If you are running the game from this this will disable any and all Steam features and services as the game as no way to control what Steam would do.
-- Discord: If you use Discord Rich Presence integration this will also be disabled byt this setting.
-- Ingame game news: The main menu will stop showing you info about new updates to the game.
-
-Note that this setting only affects the game itself. If you use the game launcher, whose sole purpose is to make sure the game is up to date, it will still do so.
-If you do not want that, simply run the game directly: the #{bold}#only#{normal}# of the launcher is to update the game.
-
-#{bold}##CRIMSON#This is an extremely restrictive setting. It is recommended you only activate it if you have no other choice as it will remove many fun and acclaimed features.
-A full exit and restart of the game is neccessary to apply this setting.#{normal}#]]}
-	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#Disable all connectivity#WHITE##{normal}#", status=function(item)
-		return tostring(config.settings.disable_all_connectivity and "yes" or "no")
+	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, scrollbar=true, text=string.toTString[[禁止所有网络请求
+包括但不仅限于:
+- 用户信息: 不能登录或者注册。
+- 角色备份: 不能在te4.org上保存你的角色信息(用来给其他人分享你的炫酷角色)。
+- 物品仓库: 不能访问你的在线物品仓库(包括保存和恢复)。
+- 游戏内聊天: 聊天要联网, 谢谢。
+- 氪金福利: 联网才能获取你的氪金状态。
+- 扩展包&DLC: 和氪金状态一样, 无法获取DLC的购买状态。
+- 便捷的插件安装: 无法在游戏内看见插件列表, 但是你还可以手动安装插件。
+- 插件版本更新: 无法更新插件的版本。
+- Steam: 无法使用Steam相关的任何功能。
+- Discord: 无法同步到Discord的实时状态。
+- 游戏内新闻: 主菜单将不再显示新闻。
+ 
+这个选项只适用于游戏本身。如果你使用一个游戏启动器, 它还是会更新你的游戏版本。
+ 
+#{bold}##CRIMSON#这是一个极端的选项。如果不是迫不得已, 推荐你不要打开它, 这会让你失去很多好用的功能和一些游戏体验。
+应用这个选项必须退出重新进入游戏。#{normal}#]]}
+	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#禁用所有网络请求#WHITE##{normal}#", status=function(item)
+		return tostring(config.settings.disable_all_connectivity and "是" or "否")
 	end, fct=function(item)
 		config.settings.disable_all_connectivity = not config.settings.disable_all_connectivity
 		game:saveSettings("disable_all_connectivity", ("disable_all_connectivity = %s\n"):format(tostring(config.settings.disable_all_connectivity)))

@@ -89,7 +89,7 @@ function _M:generateList()
 	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#帧密度设定#WHITE##{normal}#", status=function(item)
 		return tostring(config.settings.display_fps)
 	end, fct=function(item)
-		game:registerDialog(GetQuantity.new("设定密度", "从 5 到 60", config.settings.display_fps, 5, 60, 1, function(qty)
+		game:registerDialog(GetQuantitySlider.new("设定密度", "从 5 到 60", config.settings.display_fps, 5, 60, 1, function(qty)
 			qty = util.bound(qty, 5, 60)
 			game:saveSettings("display_fps", ("display_fps = %d\n"):format(qty))
 			config.settings.display_fps = qty

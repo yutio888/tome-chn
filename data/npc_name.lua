@@ -974,6 +974,12 @@ npcDescCHN["ungolmor"] = "它是体型最大的蜘蛛，它褶皱的皮肤看起
 npcNameCHN["losselhing"] = "卢瑟尔荷"
 npcDescCHN["losselhing"] = "这只寒冷的蜘蛛似乎使周围的空气都凝固了。"
 
+npcNameCHN["xhaiak arachnomancer"] = "蜘蛛学家Xhaiak"
+npcDescCHN["xhaiak arachnomancer"] = "一个奇怪的人形蜘蛛，它的身体一半被流光的长袍覆盖。看起来小蜘蛛正在他的皮肤上爬行。"
+
+npcNameCHN["shiaak venomblade"] = "毒刃Shiaak"
+npcDescCHN["shiaak venomblade"] = "一个奇怪的人形，覆盖着黑色的角质皮肤。他双手挥舞着蜿蜒的匕首，似乎一心想把它们插入你的身体里。"
+
 npcNameCHN["weaver young"] = "编织者幼体"
 npcDescCHN["weaver young"] = "一只小小的蜘蛛，它在不断的出入相位现实。"
 npcNameCHN["weaver hatchling"] = "编织者幼体"

@@ -23,7 +23,7 @@ bigNewsCHN:newLog{
 }
 bigNewsCHN:newLog{
 	log = "#DARK_SEA_GREEN#The gastric wave is upon you!",
-	translation = "#DARK_SEA_GREEN#胃里地动地动山摇！",
+	translation = "#DARK_SEA_GREEN#触手的胃里地动山摇！",
 }
 bigNewsCHN:newLog{
 	log = "#GOLD#This portal looks like it reacts only to the Orb of Many Ways.",

@@ -381,6 +381,7 @@ objDesc["This mindstar will resonate with other psionic mindstars."] = "这个�
 objDesc["This honing mindstar will focus other psionic mindstars."] = "这个灵晶能和其他超能力灵晶共鸣"
 objDesc["This parasitic mindstar will draw strength from other psionic mindstars"] = "这个灵晶能从其他超能力灵晶吸取力量"
 objDesc["This natural mindstar calls for a summoner."] = "这个自然灵晶需要一个召唤者"
+objDesc["This natural mindstar summons a caller."] = "这个自然灵晶可以召集一个呼唤者"
 objDesc["The natural wyrm seeks an element."] = "龙战士寻求一种元素"
 objDesc["This natural fire should be returned to the wyrm."] = "自然之火应该回归龙战士"
 objDesc["This natural frost should be returned to the wyrm."] = "自然之冰应该回归龙战士"

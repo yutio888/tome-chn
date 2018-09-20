@@ -444,6 +444,18 @@ npcDescCHN["oozing horror"] = "一个巨大的有着绿色斑点的黏糊糊的�
 npcNameCHN["umbral horror"] = "暗影恐魔"
 npcDescCHN["umbral horror"] = "一个闪过黑暗的阴影，迅速遁入了无尽的黑暗。"
 
+npcNameCHN["saw horror"] = "链锯恐魔"
+npcDescCHN["saw horror"] = "惊呆了!它是从哪里来的?"
+
+npcNameCHN["parasitic horror"] = "寄生恐魔"
+npcDescCHN["parasitic horror"] = "你不想知道这个像七鳃鳗一样的恐魔是吃什么才能长这么大的。它的皮肤不停的扭动，就像有东西在下面移动一样..."
+
+npcNameCHN["maelstrom"] = "灵能漩涡"
+npcDescCHN["maelstrom"] = "这个强大的灵能漩涡莫名其妙地给你一种利齿尖牙和饥饿的印象..."
+
+npcNameCHN["mass of parasitic leeches"] = "大团寄生虫"
+npcDescCHN["mass of parasitic leeches"] = "几十个，也许几百个？各种形状和大小的血腥蠕虫，形成一个扭动的，布满锋利牙齿的血盆大口和生病的绿色皮肤组成的脓水海洋，随时准备缠住你并吸你的血，直到它们胀破或着你的静脉干涸。"
+
 npcNameCHN["dreaming horror"] = "梦境恐魔"
 npcDescCHN["dreaming horror"] = {}
 npcDescCHN["dreaming horror"][ [[A vaguely tentacled yet constantly changing form rests here apparently oblivious to your existence.
@@ -551,6 +563,12 @@ npcDescCHN["halfling"] = "半身人"
 
 npcNameCHN["dwarf"] = "矮人"
 npcDescCHN["dwarf"] = "矮人"
+
+npcNameCHN["krog"] = "克罗格"
+npcDescCHN["krog"] = "克罗格"
+
+npcNameCHN["giant"] = "巨人"
+npcDescCHN["giant"] = "巨人"
 
 --果冻怪(jelly)
 npcNameCHN["green jelly"] = "绿果冻怪"
@@ -1084,6 +1102,9 @@ npcDescCHN["assassin"] = "只见眼前闪过一道……金属光芒……你死
 
 npcNameCHN["shadowblade"] = "影武者"
 npcDescCHN["shadowblade"] = "隐形的斗士，他们一直在追求欺诈的巅峰技巧。小心，他们会随时偷走你的生命！"
+
+npcNameCHN["rogue sapper"] = "盗贼工兵"
+npcDescCHN["rogue sapper"] = "狡猾的骗子，他们会留下死亡陷阱和其他危险的东西。他们真的只会让事态变得糟糕。"
 
 --巨魔(troll)
 npcNameCHN["forest troll"] = "森林巨魔"

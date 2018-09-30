@@ -942,3 +942,10 @@ egosCHN[" of the sentry"] = "警卫之"
 -- ego "psion's " defined.
 -- ego "mindwoven " defined.
 -- ego "spellwoven " defined.
+
+egosCHN["gunslinger's "] = "枪手的"
+egosCHN["strafer's "] = "扫射的"
+egosCHN[" of true shot"] = "真实射击之"
+egosCHN[" of life draining"] = "生命枯竭之"
+egosCHN["overgrown "] = "野蛮生长的"
+

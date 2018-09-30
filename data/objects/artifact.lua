@@ -3162,7 +3162,7 @@ registerArtifactTranslation{
 	]],
 	}
 registerArtifactTranslation{
-	originName="The Long-Arm",
+	originName = "The Long-Arm",
 	display_name ="长手",
 	unided_name="长管蒸汽枪",
 	desc="这把枪的枪管长的出奇。你好奇这杆枪到底是为谁设计。",

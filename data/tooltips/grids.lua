@@ -522,10 +522,16 @@ function getLineTooltipGridCHN(line)
         local b = line:sub(f, string.len(line))
         if gridsuffixCHN[b] then return getLineTooltipGridCHN(a) .. ' ' .. gridsuffixCHN[b] end
     end
+    if line:find("ladder back to ") then
+    	zone = line:gsub("ladder back to ","")
+    	zone = zoneName[zone] or zone
+    	return "回" .. zone .. "的楼梯"
+    end
     line = gridCHN[line] or line
     if string.find(line,"range:") then line = line:gsub("range","距离") end
     return line
 end
+
 function getTooltipGridCHN(desc)
 	if not desc then return end
 

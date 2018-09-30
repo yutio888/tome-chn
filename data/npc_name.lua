@@ -11,6 +11,7 @@ function npcCHN:getName(name)
 	elseif name:find("Stone Half") then name = npcCHN:getName(name:gsub("Stone Half","")).."的岩石分身"
 	elseif name:find("enthralled ") then name = "被奴役的"..npcCHN:getName(name:gsub("enthralled ",""))
 	elseif name:find("demonic husk") then name = npcCHN:getName(name:gsub(" %(demonic husk%)","")).."(恶魔傀儡)"
+	elseif name:find("(wild summon)") then name = npcCHN:getName(name:gsub(" %(wild summon%)","")).."(野性召唤)"
 	elseif name:find("servant") then 
 		local tname = name:gsub("golem %(servant of ","")
 			:gsub("Golem %(servant of ","")

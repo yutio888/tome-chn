@@ -3805,7 +3805,7 @@ registerArtifactTranslation{
 function _M:bindHooks()
 	local class = require "engine.class"
 	class:bindHook("Entity:loadList", function (self,data)
-		if data.file:find("artifact") or data.file:find("zones") or data.file:find("tinker") then
+		if data.file:find("artifact") or data.file:find("zones") or data.file:find("tinker") or data.file:find("special-misc") or data.file:find("events") then
 			for _, item in ipairs(data.res) do
 				_M.fetchArtifactTranslation(item)
 			end

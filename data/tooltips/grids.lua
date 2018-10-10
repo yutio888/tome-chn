@@ -402,7 +402,9 @@ gridCHN["weird pedestal"] = "奇怪的基座"
 gridCHN["weird pedestal (glowing)"] = "奇怪的发光基座"
 --whistling-vortex
 gridsuffixCHN[" (whistling vortex)"] = "（尖啸漩涡）"
-
+--digest-sack
+gridCHN["giant digestive sack"] = "巨大的消化袋"
+gridCHN["giant digestive sack (opened)"] = "打开的巨大消化袋"
 
 --maps\towns\last-hope.lua
 gridCHN["Statue of King Tolak the Fair"] = "公正大帝托拉克的雕像"

@@ -102,7 +102,7 @@ simplePopDlg["Tannen's Tower"] = function()
 	return "泰恩之塔", "传送门将你送到了这座高塔的一个小房间里。你必须逃离！"
 end
 simplePopDlg["Thanks"] = function(str)
-	str = str:gsub("You saved all of us, ", "你救了我们所有人")
+	str = str:gsub("You saved all of us", "你救了我们所有人")
 	str = str:gsub("You saved most of us", "你救了我们大多数人")
 	str = str:gsub("please take this as a reward. (They give you", "请把这个带走作为礼物。(他们给了你")
 	str = str:gsub("The remaining lumberjacks collect some gold to thank you","幸存的伐木工们搜集了一些金币来感谢你")

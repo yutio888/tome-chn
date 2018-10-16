@@ -109,7 +109,7 @@ simplePopDlg["Thanks"] = function(str)
 	return "谢谢",str
 end
 
-simplePopDlg["Fortress Shadow"] = function()
+simplePopDlg["Fortress Shadow"] = function(str)
 	str = str:gsub("The energy is too low. It needs to be at least ", "能量太低了。至少需要")
 	str = str:gsub("%.", "点能量。")
 	return "堡垒之影", ""

@@ -54,7 +54,7 @@ File.open("#{chn_path}/data/zone_name.lua").each{|line|
 }
 
 names_mp.each{|k,v|
-	puts "Untranslated npc name: [#{k}], location: #{v}"
+	puts "Untranslated zone name: [#{k}], location: #{v}"
 }
 
 

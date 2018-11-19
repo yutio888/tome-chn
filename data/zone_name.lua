@@ -102,6 +102,7 @@ zoneName["Dream of loss"] = "迷失之梦"
 zoneName["Mark of the Spellblaze"] = "魔法大爆炸之痕"
 zoneName["Old Conclave Vault"] = "古老的孔克雷夫地下实验室"
 zoneName["Tranquil Meadow"] = "宁静的草原"
+zoneName["orbital fearscape platform"] = "恶魔空间平台"
 
 --ashes DLC
 zoneName["Anteroom of Agony"] = "痛苦前厅"
@@ -168,3 +169,4 @@ zoneName["Kroshkkur, the Hidden Sanctuary"] = "克诺什库尔，隐藏的避难
 zoneName["The Godfeaster"] = "噬神者"
 zoneName["Safe Multiverse Arena for Commotion and Killing"] = "杀戮与战争的安全的多元宇宙竞技场"
 zoneName["inside a giant tentacle"] = "巨大触手内部"
+zoneName["Eerie Cave"] = "恐怖洞穴"

@@ -112,7 +112,7 @@ loreList["how to be a necromancer, part 2"] =  "怎样成为死灵法师　第�
 loreList["how to be a necromancer, part 3"] =  "怎样成为死灵法师　第三章"
 loreList["how to be a necromancer, part 4"] =  "怎样成为死灵法师　第四章"
 loreList["of halfling feet"] =  "半身人的脚"
-loreList["Rogues do it from behind"] =  "盗贼在你身后"
+loreList["rogues do it from behind"] =  "盗贼在你身后"
 loreList["Dust to Dust"] =  "尘归尘"
 
 --high-peak

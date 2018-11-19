@@ -402,7 +402,9 @@ gridCHN["weird pedestal"] = "奇怪的基座"
 gridCHN["weird pedestal (glowing)"] = "奇怪的发光基座"
 --whistling-vortex
 gridsuffixCHN[" (whistling vortex)"] = "（尖啸漩涡）"
-
+--digest-sack
+gridCHN["giant digestive sack"] = "巨大的消化袋"
+gridCHN["giant digestive sack (opened)"] = "打开的巨大消化袋"
 
 --maps\towns\last-hope.lua
 gridCHN["Statue of King Tolak the Fair"] = "公正大帝托拉克的雕像"
@@ -447,6 +449,53 @@ gridCHN["portal to previous level"] = "通向上一层的传送门"
 gridCHN["portal back"] = "返回传送门"
 gridCHN["portal"] = "传送门"
 gridCHN["ice"] = "寒冰"
+
+--
+gridCHN["entropic breach"] = "entropic breach"
+gridCHN["Entropic Wormhole Control Orb"] = "Entropic Wormhole Control Orb"
+gridCHN["candle"] = "candle"
+gridCHN["Gladium Control Orb"] = "Gladium Control Orb"
+gridCHN["Mirror of Reflection"] = "Mirror of Reflection"
+gridCHN["Arena Control Orb"] = "竞技场控制水晶"
+gridCHN["book of exit"] = "书的出口"
+gridCHN["locked chest"] = "上锁的箱子"
+gridCHN["ritual circle"] = "仪式法阵"
+gridCHN["stale sewer water"] = "下水道污水"
+gridCHN["booty chest"] = "战利品箱子"
+gridCHN["Way into the caves"] = "通往洞穴的道路"
+gridCHN["giant mole hull"] = "巨大的鼹鼠外壳"
+gridCHN["breach into the giant mole hull"] = "通往巨大的鼹鼠内部的缺口"
+gridCHN["dug rubble"] = "dug rubble"
+gridCHN["airship hull"] = "飞艇"
+gridCHN["breach into the airship hull"] = "通往飞艇内部的缺口"
+gridCHN["Old Psi-Machine"] = "Old Psi-Machine"
+gridCHN["Phonograph"] = "留声机"
+gridCHN["huge primal tree"] = "参天古树"
+gridCHN["way up"] = "往上走"
+gridCHN["giant steam valve"] = "巨大的蒸汽阀门"
+gridCHN["way into a strange cave"] = "奇怪洞穴的入口"
+gridCHN["stairs to the previous level"] = "通往上一层的楼梯"
+gridCHN["stairs to the cavern"] = "通往洞穴的楼梯"
+gridCHN["pillar of the sun"] = "日之柱"
+gridCHN["pillar of the moons"] = "月之柱"
+gridCHN["merchant stall"] = "货摊"
+gridCHN["bridge to the mainland"] = "通往大陆的桥梁"
+gridCHN["Entrance to the Yeti Caves"] = "雪人洞穴入口"
+gridCHN["Entrance to Krimbul territory"] = "克里布尔领土入口"
+gridCHN["Entrance to the Vaporous Emporium"] = "蒸汽商场入口"
+gridCHN["Huge door to Kaltor's Shop"] = "卡托尔商店的大门"
+gridCHN["Entrance to the Sunwall Outpost"] = "太阳堡垒前哨站入口"
+gridCHN["Entrance to the Dominion Port"] = "自治领之港入口"
+gridCHN["Destroyed Dominion Port"] = "被摧毁的自治领之港"
+gridCHN["Entrance to a Ritch Hive"] = "里奇虫巢入口"
+gridCHN["Path to a peak leading to the Sunwall Observatory"] = "通往太阳堡垒观星台的路"
+gridCHN["Entrance to the Pride's Internment Camp"] = "部落拘留营入口"
+gridCHN["Strange mechanical mole"] = "奇怪的机械鼹鼠"
+gridCHN["Path to a Ureslak's Host"] = "乌瑞斯拉克沉睡处入口"
+gridCHN["Entrance to the Steam Quarry"] = "蒸汽采石场入口"
+gridCHN["Entrance to the Palace of Fumes"] = "烟雾宫殿入口"
+gridCHN["Way into a primal forest"] = "通往原始森林的路"
+gridCHN["a crude mural painting"] = "粗糙的壁画"
 
 --地图描述
 
@@ -522,10 +571,16 @@ function getLineTooltipGridCHN(line)
         local b = line:sub(f, string.len(line))
         if gridsuffixCHN[b] then return getLineTooltipGridCHN(a) .. ' ' .. gridsuffixCHN[b] end
     end
+    if line:find("ladder back to ") then
+    	zone = line:gsub("ladder back to ","")
+    	zone = zoneName[zone] or zone
+    	return "回" .. zone .. "的楼梯"
+    end
     line = gridCHN[line] or line
     if string.find(line,"range:") then line = line:gsub("range","距离") end
     return line
 end
+
 function getTooltipGridCHN(desc)
 	if not desc then return end
 

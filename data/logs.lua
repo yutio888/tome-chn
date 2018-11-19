@@ -19,7 +19,12 @@ function logCHN:trans(str,...)
 	 if not str then return end
 	 if logTableCHN[str] then
 		if logTableCHN[str].fct then   
-			str = logTableCHN[str].fct(...)
+			local ok, ret = pcall(logTableCHN[str].fct, ...)
+			if ok then
+				str = ret
+			else
+				print("[CHN-ERROR] bad arguement when translate log " .. str)
+			end
 		else print("Error"..str)
 		end
 	 else str = str:format(...)

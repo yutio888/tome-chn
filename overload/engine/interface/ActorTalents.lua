@@ -1,5 +1,5 @@
 -- TE4 - T-Engine 4
--- Copyright (C) 2009 - 2016 Nicolas Casalini
+-- Copyright (C) 2009 - 2019 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -57,7 +57,7 @@ function _M:newTalentType(t)
 	-----------END
 	
 	t.description = t.description or ""
-	
+	t.category = t.category or t.type:gsub("/.*", "")
 	-----------技能分类描述汉化
 	if t_talent_type_description[t.description] then t.description = t_talent_type_description[t.description] end
 	-----------END
@@ -76,7 +76,7 @@ function _M:newTalent(t)
 	assert(t.type, "no or unknown talent type")
 	if type(t.type) == "string" then t.type = {t.type, 1} end
 	if not t.type[2] then t.type[2] = 1 end
-	t.short_name = t.short_name or t.name	
+	t.short_name = t.short_name or t.name
 	t.short_name = t.short_name:upper():gsub("[ ']", "_")
 	t.mode = t.mode or "activated"
 	t.points = t.points or 1
@@ -106,7 +106,8 @@ end
 function _M:init(t)
 	self.talents = t.talents or {}
 	self.talents_types = t.talents_types or {}
-	self.talents_types_mastery = self.talents_types_mastery  or {}
+	self.talents_types_mastery = self.talents_types_mastery or {}
+	self.talents_mastery_bonus = self.talents_mastery_bonus or {}
 	self.talents_cd = self.talents_cd or {}
 	self.sustain_talents = self.sustain_talents or {}
 	self.talents_auto = self.talents_auto or {}
@@ -199,6 +200,7 @@ function _M:useTalent(id, who, force_level, ignore_cd, force_target, silent, no_
 			
 			local ok, ret, special
 			if not self.sustain_talents[id] then -- activating
+				if self.deactivating_sustain_talent == ab.id then return end
 				ok, ret, special = xpcall(function() return ab.activate(who, ab) end, debug.traceback)
 				if not ok then self:onTalentLuaError(ab, ret) error(ret) end
 				if ret == true then ret = {} end -- fix for badly coded talents
@@ -387,6 +389,7 @@ function _M:logTalentMessage(ab)
 		game.logSeen(self, "%s uses %s.", self.name:capitalize(), ab.name)
 	end
 end
+
 --- Called BEFORE a talent is used -- CAN it be used?
 -- Redefine as needed
 -- @param[type=table] ab the talent (not the id, the table)
@@ -446,6 +449,65 @@ end
 --- Is the sustained talent activated ?
 function _M:isTalentActive(t_id)
 	return self.sustain_talents[t_id]
+end
+
+--- Checks a talent against a filter
+-- @param[type=table] t the talent definition
+-- @param[type=table, optional] filter a table of filter parameters
+-- @return true if the talent satisfies the filter
+-- Filter parameters:
+--	mode: the mode of the talent (must match exactly)
+--	not_mode: forbidden talent mode
+--	ignore: additional filter that must NOT be satisfied
+--	type: talent type[1] and subtype[2] that must be matched (if defined)
+--	name: talent name (must match exactly)
+--	short_name: talent short_name
+--	define_as: talent define_as parameter
+--	properties: list of properties (fields) that must be defined in the talent definition
+--	properties_match: list of all required properties (fields) that must match exactly
+--	not_properties: list of properties (fields) that must be nil or false in the talent definition
+--	not_properties_match: list of all property values that must not match exactly
+--	properties_include: list of properties (fields) to include (at least one must be defined)
+--	preUse <boolean>: check self:preUseTalent(t, true, filter.fake)
+--	aiPreUse <boolean>: check self:aiPreUseTalent(t, true, filter.fake)
+--	special: function(t, self) that must return true (checked last)
+-- Actor parameters:
+--	self.filter_talents: additional filter to be applied to all talents for this actor
+function _M:filterTalent(t, filter)
+	if not filter then return true end
+	if filter.ignore and self:filterTalent(t, filter.ignore) then return false end
+
+	if filter.mode and filter.mode ~= t.mode then return false end
+	if filter.not_mode and filter.not_mode == t.mode then return false end
+	if filter.type then -- talent type
+		if filter.type[1] ~= t.type[1] then return false end
+		if filter.type[2] and filter.type[2] ~= t.type[2] then return false	end
+	end
+	if filter.name and filter.name ~= t.name then return false end
+	if filter.short_name and filter.short_name ~= t.short_name then return false end
+	if filter.properties then -- list of required properties
+		for i = 1, #filter.properties do if t[filter.properties[i]] == nil then return false end end
+	end
+	if filter.properties_match then -- list of all required properties that must match exactly
+		for prop, val in pairs(filter.properties_match) do if t[prop] ~= val then return false end end
+	end
+	if filter.not_properties then -- list of forbidden properties
+		for i = 1, #filter.not_properties do if t[filter.not_properties[i]] then return false end end
+	end
+	if filter.not_properties_match then -- list of forbidden property values
+		for prop, val in pairs(filter.not_properties_match) do if t[prop] == val then return false end end
+	end
+	if filter.properties_include then -- list of properties to include (at least one must be defined)
+		local ok = false
+		for i = 1, #filter.properties_include do if t[filter.properties_include[i]] ~= nil then ok = true break end end
+		if not ok then return false end
+	end
+	if filter.preUse and not self:preUseTalent(t, true, filter.fake) then return false end
+	if filter.aiPreUse and not self:aiPreUseTalent(t, true, filter.fake) then return false	end
+	
+	if self.filter_talents and not self:filterTalent(t, self.filter_talents) then return false end
+	if filter.special and not filter.special(t, self) then return false end
+	return true
 end
 
 --- Returns how many talents of this type the actor knows
@@ -797,7 +859,8 @@ function _M:getTalentLevel(id)
 	else
 		t = _M.talents_def[id]
 	end
-	return t and (self:getTalentLevelRaw(id)) * ((self.talents_types_mastery[t.type[1]] or 0) + 1) or 0
+	return t and (self:getTalentLevelRaw(id)) * (self:getTalentMastery(t) or 0) or 0
+
 end
 
 --- Talent type level, sum of all raw levels of talents inside
@@ -963,12 +1026,13 @@ function _M:getTalentDisplayName(t)
 	return t.display_name
 end
 
---- Cooldown all talents by one
+--- Cooldown all talents
 -- This should be called in your actors "act()" method
-function _M:cooldownTalents()
+-- @param turns the number of turns to cooldown the talents
+function _M:cooldownTalents(turns)
 	for tid, c in pairs(self.talents_cd) do
 		self.changed = true
-		self.talents_cd[tid] = self.talents_cd[tid] - 1
+		self.talents_cd[tid] = self.talents_cd[tid] - (turns or 1)
 		if self.talents_cd[tid] <= 0 then
 			self.talents_cd[tid] = nil
 			if self.onTalentCooledDown then self:onTalentCooledDown(tid) end
@@ -997,7 +1061,7 @@ end
 function _M:automaticTalents()
 	for tid, c in pairs(self.talents_auto) do
 		local t = self.talents_def[tid]
-		if not t.np_npc_use and (t.mode ~= "sustained" or not self.sustain_talents[tid]) and not self.talents_cd[tid] and self:preUseTalent(t, true, true) and (not t.auto_use_check or t.auto_use_check(self, t)) then
+		if not t.no_npc_use and (t.mode ~= "sustained" or not self.sustain_talents[tid]) and not self.talents_cd[tid] and self:preUseTalent(t, true, true) and (not t.auto_use_check or t.auto_use_check(self, t)) then
 			self:useTalent(tid)
 		end
 	end

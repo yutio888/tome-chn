@@ -1,5 +1,5 @@
 -- TE4 - T-Engine 4
--- Copyright (C) 2009 - 2017 Nicolas Casalini
+-- Copyright (C) 2009 - 2019 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -86,7 +86,7 @@ function _M:resize(x, y, w, h)
 	self.mouse:registerZone(0, 0, self.w, self.h, function(button, x, y, xrel, yrel, bx, by, event) self:mouseEvent(button, x, y, xrel, yrel, bx, by, event) end)
 end
 
---- Returns the full log
+--- Returns a clone of the full log
 function _M:getLog(extra, timestamp)
 	local log = {}
 	for i = 1, #self.log do
@@ -120,7 +120,6 @@ local urlmatch = lpeg.anywhere(lpeg.C(urlfind))
 -- log = LogDisplay.new(...)<br/>
 -- log("foo %s", s)
 function _M:call(str, ...)
-	--str = str:format(...)
 	str = str or ""
 	print("[logerr]"..str)
 	str = logCHN:trans(str,...)

@@ -149,7 +149,10 @@ function _M:generateList()
 	if self.on_player then list[#list+1] = {name="自动探索", action="autoexplore", color=colors.simple(colors.ANTIQUE_WHITE)} end
 	if self.on_player then list[#list+1] = {name="查看物品", action="inventory", color=colors.simple(colors.ANTIQUE_WHITE)} end
 	if self.on_player then list[#list+1] = {name="查看任务", action="quests", color=colors.simple(colors.ANTIQUE_WHITE)} end
-	if a then list[#list+1] = {name="查看生物", action="character_sheet", color=colors.simple(colors.ANTIQUE_WHITE), actor=a} end
+	if a and game.player:canSee(a) then list[#list+1] = {name="查看生物", action="character_sheet", color=colors.simple(colors.ANTIQUE_WHITE), actor=a} end
+		-- can add extended inspection commands here by including the start tab with the dialog
+	-- space separating inspect from active actions
+	list[#list+1] = {name=" ", action=nil, color=colors.simple(colors.ANTIQUE_WHITE)}
 	if not self.on_player and a and profile.auth and profile.hash_valid then list[#list+1] = {name="链接生物至聊天栏", action="chat-link"} end
 	if self.on_player and (player.unused_stats > 0 or player.unused_talents > 0 or player.unused_generics > 0 or player.unused_talents_types > 0) then list[#list+1] = {name="升级！", action="levelup", color=colors.simple(colors.YELLOW)} end
 

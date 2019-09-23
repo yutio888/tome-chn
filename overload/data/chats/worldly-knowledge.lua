@@ -21,21 +21,24 @@ local reward = {
 	all = {
 		["technique/conditioning"] = true,
 		["cunning/survival"] = true,
+		["wild-gift/harmony"] = true,
 	},
 	normal = {
 		["spell/divination"] = true,
 		["spell/staff-combat"] = true,
 		["spell/stone-alchemy"] = true,
 		["celestial/chants"] = true,
-		["celestial/light"] = true,
 		["chronomancy/chronomancy"] = true,
+		["corruption/curses"] = true,
+		["corruption/vile-life"] = true,
+		["corruption/hexes"] = true,
 	},
 	antimagic = {
 		["wild-gift/call"] = true,
 		["wild-gift/mindstar-mastery"] = true,
-		["technique/mobility"] = true,
-		["technique/field-control"] = true,
 		["psionic/dreaming"] = true,
+		["psionic/augmented-mobility"] = true,
+		["psionic/feedback"] = true,
 	},
 }
 local function generate_rewards()
@@ -47,10 +50,10 @@ local function generate_rewards()
 			local tt_def = game.player:getTalentTypeFrom(tt)
 			local cat = tt_def.type:gsub("/.*", "")
 			local doit = function(npc, player)
-				if player:knowTalentType(tt) == nil then player:setTalentTypeMastery(tt, 0.9) end
+				if player:knowTalentType(tt) == nil then player:setTalentTypeMastery(tt, 1.0) end
 				player:learnTalentType(tt, true)
 			end
-			answers[#answers+1] = {("[%s (at mastery %0.2f)]"):format(cat:capitalize().." / "..tt_def.name:capitalize(), 0.9),
+			answers[#answers+1] = {("[%s (at mastery %0.2f)]"):format(cat:capitalize().." / "..tt_def.name:capitalize(), 1.0),
 				action=doit,
 				on_select=function(npc, player)
 					game.tooltip_x, game.tooltip_y = 1, 1

@@ -42,61 +42,22 @@ _M.projectile_class = "mod.class.Projectile"
 _M.logCombat = Combat.logCombat
 
 -- ego fields that are appended as a list when the ego is applied (by Zone:applyEgo)
-_M._special_ego_rules = {special_on_hit=true, special_on_crit=true, special_on_kill=true, charm_on_use=true}
+_M._special_ego_rules = {special_on_hit=true, special_on_crit=true, special_on_kill=true, charm_on_use=true, on_block=true}
+
+_M.requirement_flags_names = {
+	allow_wear_massive = "Massive armour training",
+	allow_wear_heavy = "Heavy armour training",
+	allow_wear_shield = "Shield usage training",
+}
 
 function _M:getRequirementDesc(who)
 	local base_getRequirementDesc = engine.Object.getRequirementDesc
-	if self.subtype == "shield" and type(self.require) == "table" and who:knowTalent(who.T_SKIRMISHER_BUCKLER_EXPERTISE) then
-		local oldreq = rawget(self, "require")
-		self.require = table.clone(oldreq, true)
-		if self.require.stat and self.require.stat.str then
-			self.require.stat.cun, self.require.stat.str = self.require.stat.str, nil
-		end
-		if self.require.talent then for i, tr in ipairs(self.require.talent) do
-			if tr[1] == who.T_ARMOUR_TRAINING then
-				self.require.talent[i] = {who.T_SKIRMISHER_BUCKLER_EXPERTISE, 1}
-				break
-			end
-		end end
-
-		local desc = base_getRequirementDesc(self, who)
-
-		self.require = oldreq
-
-		return desc
-	elseif self.subtype == "shield" and type(self.require) == "table" and who:knowTalent(who.T_AGILE_DEFENSE) then
-		local oldreq = rawget(self, "require")
-		self.require = table.clone(oldreq, true)
-		if self.require.stat and self.require.stat.str then
-			self.require.stat.dex, self.require.stat.str = self.require.stat.str, nil
-		end
-		if self.require.talent then for i, tr in ipairs(self.require.talent) do
-			if tr[1] == who.T_ARMOUR_TRAINING then
-				self.require.talent[i] = {who.T_AGILE_DEFENSE, 1}
-				break
-			end
-		end end
-
-		local desc = base_getRequirementDesc(self, who)
-
-		self.require = oldreq
-
-		return desc
-	elseif (self.type =="weapon" or self.type=="ammo") and type(self.require) == "table" and who:knowTalent(who.T_STRENGTH_OF_PURPOSE) then
-		local oldreq = rawget(self, "require")
-		self.require = table.clone(oldreq, true)
-		if self.require.stat and self.require.stat.str then
-			self.require.stat.mag, self.require.stat.str = self.require.stat.str, nil
-		end
-
-		local desc = base_getRequirementDesc(self, who)
-
-		self.require = oldreq
-
-		return desc
-	else
-		return base_getRequirementDesc(self, who)
-	end
+	
+	local oldreq
+	self.require, oldreq = who:updateObjectRequirements(self)
+	local ret = base_getRequirementDesc(self, who)
+	self.require = oldreq
+	return ret
 end
 
 local auto_moddable_tile_slots = {
@@ -237,7 +198,7 @@ end
 ---	Does the actor have inadequate AI to use this object intelligently?
 --	@param who = the potential object user
 function _M:restrictAIUseObject(who)
-	return not (who.ai == "tactical" or who.ai_real == "tactical" or (who.ai_state and who.ai_state.ai_party) == "tactical")
+	return not (who.ai == "tactical" or who.ai_real == "tactical" or who.ai_state._advanced_ai or (who.ai_state and who.ai_state.ai_party) == "tactical")
 end
 
 function _M:useObject(who, ...)
@@ -360,6 +321,70 @@ function _M:use(who, typ, inven, item)
 	end
 end
 
+--- Find the best locations (inventory and slot) to try to wear an object in
+--		applies inventory filters, optionally sorted, does not check if the object can actually be worn
+-- @param use_actor: the actor to wear the object
+-- @param weight_fn[1]: a function(o, inven) returning a weight value for an object
+--		default is (1 + o:getPowerRank())*o.material_level, (0 for no object)
+-- @param weight_fn[2]: true weight is 1 (object) or 0 (no object) return empty locations (sorted)
+-- @param weight_fn[3]: false weight is 1 (object) or 0 (no object) return all locations (unsorted)
+-- @param filter_field: field to check in each inventory for an object filter (defaults: "auto_equip_filter")
+-- 		(sets filter._equipping_entity == use_actor before testing the filter)
+-- @param no_type_check: set to allow locations with objects of different type/subtype (automatic if a filter is defined)
+-- @return[1] nil if no locations could be found
+-- @return[2] an ordered list (table) of locations where the object can be worn, each with format:
+--		{inv=inventory (table), wt=sort weight, slot=slot within inventory}
+--		The sort weight for each location is computed = weight_fn(self, inven)-weight_fn(worn object, inven)
+--		(weight for objects that fail inventory filter checks is 0)
+--  	The list is sorted by descending weight, removing locations with sort weight <= 0
+function _M:wornLocations(use_actor, weight_fn, filter_field, no_type_check)
+	if not use_actor then return end
+	filter_field = filter_field == nil and "auto_equip_filter" or filter_field
+	if weight_fn == nil then
+		weight_fn = function(o, inven) return (1 + o:getPowerRank())*(o.material_level or 1) end
+	elseif weight_fn == true then
+		weight_fn = function(o, inven) return o and 1 or 0 end
+	end
+	-- considers main and offslot (could check others here)
+	-- Note: psionic focus needs code similar to that in the Telekinetic Grasp talent
+	local inv_ids = {self:wornInven()}
+	inv_ids[#inv_ids+1] = use_actor:getObjectOffslot(self)
+	local invens = {}
+	local new_wt = weight_fn and weight_fn(self) or 1
+	--print("[Object:wornLocations] found inventories", self.uid, self.name) table.print(inv_ids)
+	for i, id in ipairs(inv_ids) do
+		local inv = use_actor:getInven(id)
+		if inv then
+			local flt = inv[filter_field]
+			local match_types = not (no_type_check or flt)
+			if flt then
+				flt._equipping_entity = use_actor
+				if not game.zone:checkFilter(self, flt, "object") then inv = nil end
+			end
+			if inv then
+				local inv_name = use_actor:getInvenDef(id).short_name
+				for k = 1, math.min(inv.max, #inv + 1) do
+					local wo, wt = inv[k], new_wt
+					if wo then
+						if match_types and (self.type ~= wo.type or self.subtype ~= wo.subtype) and (inv_name == wo.slot or inv_name == use_actor:getObjectOffslot(wo)) then
+							wt = 0
+						elseif not flt or game.zone:checkFilter(wo, flt, "object") then
+							wt = wt - (weight_fn and weight_fn(wo) or 1)
+						end
+					end
+					if weight_fn == false or wt > 0 then invens[#invens+1] = {inv=inv, wt=wt, slot=k} end
+					if not wo then break end -- 1st open inventory slot
+				end
+			end
+			if flt then flt._equipping_entity = nil end
+		end
+	end
+	if #invens > 0 then
+		if weight_fn then table.sort(invens, function(a, b) return a.wt > b.wt end)	end
+		return invens
+	end
+end
+
 --- Returns a tooltip for the object
 function _M:tooltip(x, y, use_actor)
 	local str = self:getDesc({do_color=true}, game.player:getInven(self:wornInven()))
@@ -416,7 +441,7 @@ function _M:descAttribute(attr)
 		return power(c)..", "..("%d"):format((c.apr or 0)).." 穿透, "..DamageType:get(c.element or DamageType.PHYSICAL).name.." 元素伤害"
 	elseif attr == "SHIELD" then
 		local c = self.special_combat
-		if c and (game.player:knowTalentType("technique/shield-offense") or game.player:knowTalentType("technique/shield-defense") or game.player:attr("show_shield_combat")) then
+		if c and (game.player:knowTalentType("technique/shield-offense") or game.player:knowTalentType("technique/shield-defense") or game.player:attr("show_shield_combat") or config.settings.tome.display_shield_stats) then
 			return power(c)..", "..c.block.." 格挡"
 		else
 			return c.block.." 格挡"
@@ -467,8 +492,9 @@ function _M:getPowerRank()
 	if self.godslayer then return 10 end
 	if self.legendary then return 5 end
 	if self.unique then return 3 end
-	if self.egoed and self.greater_ego then return 2 end
-	if self.egoed or self.rare then return 1 end
+	if self.egoed then
+		return math.min(2.5, 1 + (self.greater_ego and self.greater_ego or 0) + (self.rare and 1 or 0))
+	end
 	return 0
 end
 
@@ -613,15 +639,15 @@ function _M:descAccuracyBonus(desc, weapon, use_actor)
 
 	local m = weapon.accuracy_effect_scale or 1
 	if kind == "sword" then
-		desc:add("Accuracy bonus: ", {"color","LIGHT_GREEN"}, showpct(0.4, m), {"color","LAST"}, " 暴击加成 / 命中", true)
+		desc:add("Accuracy bonus: ", {"color","LIGHT_GREEN"}, showpct(0.4, m), {"color","LAST"}, " 暴击加成 (最高 40%)", true)
 	elseif kind == "axe" then
-		desc:add("Accuracy bonus: ", {"color","LIGHT_GREEN"}, showpct(0.2, m), {"color","LAST"}, " 暴击率 / 命中", true)
+		desc:add("Accuracy bonus: ", {"color","LIGHT_GREEN"}, showpct(0.25, m), {"color","LAST"}, " 暴击率 (最高 25%)", true)
 	elseif kind == "mace" then
-		desc:add("Accuracy bonus: ", {"color","LIGHT_GREEN"}, showpct(0.1, m), {"color","LAST"}, " 伤害 / 命中", true)
+		desc:add("Accuracy bonus: ", {"color","LIGHT_GREEN"}, showpct(0.2, m), {"color","LAST"}, " 基础伤害 (最高 20%)", true)
 	elseif kind == "staff" then
-		desc:add("Accuracy bonus: ", {"color","LIGHT_GREEN"}, showpct(2.5, m), {"color","LAST"}, " 附加伤害 / 命中", true)
+		desc:add("Accuracy bonus: ", {"color","LIGHT_GREEN"}, showpct(2.5, m), {"color","LAST"}, " 附加伤害 (最高 200%)", true)
 	elseif kind == "knife" then
-		desc:add("Accuracy bonus: ", {"color","LIGHT_GREEN"}, showpct(0.5, m), {"color","LAST"}, " 护甲穿透 / 命中", true)
+		desc:add("Accuracy bonus: ", {"color","LIGHT_GREEN"}, showpct(0.5, m), {"color","LAST"}, " 护甲穿透 (最高 50%)", true)
 	end
 end
 
@@ -907,19 +933,6 @@ function _M:descCombat(use_actor, combat, compare_with, field, add_table, is_fak
 		special = combat.special_on_hit.desc
 	end
 
-	--[[ I couldn't figure out how to make this work because tdesc goes in the same list as special_on_Hit
-	local found = false
-	for i, v in ipairs(compare_with or {}) do
-		if v[field] and v[field].special_on_hit then
-			if special ~= v[field].special_on_hit.desc then
-				desc:add({"color","RED"}, "When this weapon hits: "..v[field].special_on_hit.desc, {"color","LAST"}, true)
-			else
-				found = true
-			end
-		end
-	end
-	--]]
-
 	-- get_items takes the combat table and returns a table of items to print.
 	-- Each of these items one of the following:
 	-- id -> {priority, string}
@@ -1009,7 +1022,7 @@ function _M:descCombat(use_actor, combat, compare_with, field, add_table, is_fak
 	end
 
 	compare_list(
-		"On weapon hit:",
+		"#YELLOW#On weapon hit:#LAST#",
 		function(combat)
 			if not combat then return {} end
 			local list = {}
@@ -1017,7 +1030,11 @@ function _M:descCombat(use_actor, combat, compare_with, field, add_table, is_fak
 			for dt, amount in pairs(combat.melee_project or combat.ranged_project or {}) do
 				local dt_def = DamageType:get(dt)
 				if dt_def and dt_def.tdesc then
-					list[dt] = {0, dt_def.tdesc, amount}
+					local desc = function(dam)
+						return dt_def.tdesc(dam, nil, use_actor)
+					end
+					list[dt] = {0, desc, amount}
+					--list[dt] = {0, dt_def.tdesc, amount}
 				end
 			end
 			-- Get specials
@@ -1027,7 +1044,7 @@ function _M:descCombat(use_actor, combat, compare_with, field, add_table, is_fak
 	)
 
 	compare_list(
-		"On weapon crit:",
+		"#YELLOW#On weapon crit:#LAST#",
 		function(combat)
 			if not combat then return {} end
 			return get_special_list(combat, 'special_on_crit')
@@ -1035,7 +1052,7 @@ function _M:descCombat(use_actor, combat, compare_with, field, add_table, is_fak
 	)
 
 	compare_list(
-		"On weapon kill:",
+		"#YELLOW#On weapon kill:#LAST#",
 		function(combat)
 			if not combat then return {} end
 			return get_special_list(combat, 'special_on_kill')
@@ -1095,12 +1112,12 @@ function _M:descCombat(use_actor, combat, compare_with, field, add_table, is_fak
 		nil, nil,
 		function(k, v) return not DamageType.dam_def[k].tdesc end)
 
-	compare_table_fields(combat, compare_with, field, "burst_on_hit", "%+d", "Burst (radius 1) on hit: ", function(item)
+	compare_table_fields(combat, compare_with, field, "burst_on_hit", "%+d", "Damage (radius 1) on hit: ", function(item)
 			local col = (DamageType.dam_def[item] and DamageType.dam_def[item].text_color or "#WHITE#"):toTString()
 			return col[2], (" %s"):format(DamageType.dam_def[item].name),{"color","LAST"}
 		end)
 
-	compare_table_fields(combat, compare_with, field, "burst_on_crit", "%+d", "Burst (radius 2) on crit: ", function(item)
+	compare_table_fields(combat, compare_with, field, "burst_on_crit", "%+d", "Damage (radius 2) on crit: ", function(item)
 			local col = (DamageType.dam_def[item] and DamageType.dam_def[item].text_color or "#WHITE#"):toTString()
 			return col[2], (" %s"):format(DamageType.dam_def[item].name),{"color","LAST"}
 		end)
@@ -1161,11 +1178,11 @@ use_actor = use_actor or game.player
 		local combat = self.combat
 		if not combat and self.wielded then
 			-- shield combat
-			if self.subtype == "shield" and self.special_combat and ((use_actor:knowTalentType("technique/shield-offense") or use_actor:knowTalentType("technique/shield-defense") or use_actor:attr("show_shield_combat"))) then
+			if self.subtype == "shield" and self.special_combat and ((use_actor:knowTalentType("technique/shield-offense") or use_actor:knowTalentType("technique/shield-defense") or use_actor:attr("show_shield_combat") or config.settings.tome.display_shield_stats)) then
 				combat = self.special_combat
 			end
 			-- gloves combat
-			if self.subtype == "hands" and self.wielder and self.wielder.combat and (use_actor:knowTalent(use_actor.T_EMPTY_HAND) or use_actor:attr("show_gloves_combat")) then
+			if self.subtype == "hands" and self.wielder and self.wielder.combat and (use_actor:knowTalent(use_actor.T_EMPTY_HAND) or use_actor:attr("show_gloves_combat") or config.settings.tome.display_glove_stats) then
 				combat = self.wielder.combat
 			end
 		end
@@ -1279,7 +1296,7 @@ use_actor = use_actor or game.player
 		for i, v in pairs(w.melee_project or {}) do
 			local def = DamageType.dam_def[i]
 			if def and def.tdesc then
-				local d = def.tdesc(v)
+				local d = def.tdesc(v, nil, use_actor)
 				found = true
 				dt_string:add(d, {"color","LAST"}, true)
 			else
@@ -1298,7 +1315,7 @@ use_actor = use_actor or game.player
 		for i, v in pairs(w.ranged_project or {}) do
 			local def = DamageType.dam_def[i]
 			if def and def.tdesc then
-				local d = def.tdesc(v)
+				local d = def.tdesc(v, nil, use_actor)
 				ranged_found = true
 				ranged:add(d, {"color","LAST"}, true)
 			else
@@ -1312,7 +1329,7 @@ use_actor = use_actor or game.player
 		for i, v in pairs(w.on_melee_hit or {}) do
 			local def = DamageType.dam_def[i]
 			if def and def.tdesc then
-				local d = def.tdesc(v)
+				local d = def.tdesc(v, nil, use_actor)
 				found = true
 				onhit:add(d, {"color","LAST"}, true)
 			else
@@ -1345,7 +1362,103 @@ use_actor = use_actor or game.player
 				return col[2],(" %s"):format(DamageType.dam_def[item].name),{"color","LAST"}
 			end)
 
---		desc:add({"color","ORANGE"}, "General effects: ", {"color","LAST"}, true)
+		-- get_items takes the object table and returns a table of items to print.
+		-- Each of these items one of the following:
+		-- id -> {priority, string}
+		-- id -> {priority, message_function(this, compared), value}
+		-- header is the section header.
+		local compare_list = function(header, get_items)
+			local priority_ordering = function(left, right)
+				return left[2][1] < right[2][1]
+			end
+
+			if next(compare_with) then
+				-- Grab the left and right items.
+				local left = get_items(self)
+				local right = {}
+				for i, v in ipairs(compare_with) do
+					for k, item in pairs(get_items(v[field])) do
+						if not right[k] then
+							right[k] = item
+						elseif type(right[k]) == 'number' then
+							right[k] = right[k] + item
+						else
+							right[k] = item
+						end
+					end
+				end
+				if not left then game.log("No left") end
+				if not right then game.log("No right") end
+				-- Exit early if no items.
+				if not next(left) and not next(right) then return end
+
+				desc:add(header, true)
+
+				local combined = table.clone(left)
+				table.merge(combined, right)
+
+				for k, _ in table.orderedPairs2(combined, priority_ordering) do
+					l = left[k]
+					r = right[k]
+
+					message = (l and l[2]) or (r and r[2])
+					if type(message) == 'function' then
+						desc:add(message(l and l[3], r and r[3] or 0), true)
+					elseif type(message) == 'string' then
+						local prefix = '* '
+						local color = 'WHITE'
+						if l and not r then
+							color = 'GREEN'
+							prefix = '+ '
+						end
+						if not l and r then
+							color = 'RED'
+							prefix = '- '
+						end
+						desc:add({'color',color}, prefix, message, {'color','LAST'}, true)
+					end
+				end
+			else
+				local items = get_items(self)
+				if next(items) then
+					desc:add(header, true)
+					for k, v in table.orderedPairs2(items, priority_ordering) do
+						message = v[2]
+						if type(message) == 'function' then
+							desc:add(message(v[3]), true)
+						elseif type(message) == 'string' then
+							desc:add({'color','WHITE'}, '* ', message, {'color','LAST'}, true)
+						end
+					end
+				end
+			end
+		end
+
+		local get_special_list = function(o, key)
+			local special = o[key]
+
+			-- No special
+			if not special then return {} end
+			-- Single special
+			if special.desc then
+				return {[special.desc] = {10, util.getval(special.desc, self, use_actor, special)}}
+			end
+
+			-- Multiple specials
+			local list = {}
+			for _, special in pairs(special) do
+				list[special.desc] = {10, util.getval(special.desc, self, use_actor, special)}
+			end
+			return list
+		end
+
+		compare_list(
+			"#YELLOW#On shield block:#LAST#",
+			function(o)
+				if not o then return {} end
+				return get_special_list(o, 'on_block')
+			end
+		)
 
 		compare_table_fields(w, compare_with, field, "inc_stats", "%+d", "Changes stats: ", function(item)
 				return (" %s"):format(Stats.stats_def[item].short_name:capitalize())
@@ -1390,6 +1503,23 @@ use_actor = use_actor or game.player
 			end)
 
 		compare_table_fields(w, compare_with, field, "resists_actor_type", "%+d%% ", "Reduced damage from: ", function(item)
+		local _, _, t, st = item:find("^([^/]+)/?(.*)$")
+			if st and st ~= "" then
+				return st:capitalize()
+			else
+				return t:capitalize()
+			end
+		end)
+
+		local _, _, t, st = item:find("^([^/]+)/?(.*)$")
+			if st and st ~= "" then
+				return st:capitalize()
+			else
+				return t:capitalize()
+			end
+		end)
+
+		compare_table_fields(w, compare_with, field, "talents_mastery_bonus", "+%0.2f ", "Talent category bonus: ", function(item)
 		local _, _, t, st = item:find("^([^/]+)/?(.*)$")
 			if st and st ~= "" then
 				return st:capitalize()
@@ -1780,10 +1910,12 @@ use_actor = use_actor or game.player
 			compare_unarmed[i] = compare_with[i].wielder or {}
 		end
 
-		if (w and w.combat or can_combat_unarmed) and (use_actor:knowTalent(use_actor.T_EMPTY_HAND) or use_actor:attr("show_gloves_combat")) then
+		if (w and w.combat or can_combat_unarmed) and (use_actor:knowTalent(use_actor.T_EMPTY_HAND) or use_actor:attr("show_gloves_combat") or config.settings.tome.display_glove_stats) then
 			desc:add({"color","YELLOW"}, "When used to modify unarmed attacks:", {"color", "LAST"}, true)
-			compare_tab = { dam=1, atk=1, apr=0, physcrit=0, physspeed =(use_actor:knowTalent(use_actor.T_EMPTY_HAND) and 0.6 or 1), dammod={str=1}, damrange=1.1 }
+			compare_tab = { dam=1, atk=1, apr=0, physcrit=0, physspeed =(use_actor:knowTalent(use_actor.T_EMPTY_HAND) and 0.8 or 1), dammod={str=1}, damrange=1.1 }
 			desc_combat(w, compare_unarmed, "combat", compare_tab, true)
+		elseif (w and w.combat or can_combat_unarmed) then
+			desc:add({"color","LIGHT_BLUE"}, "Learn an unarmed attack talent or enable 'Always show glove combat' to see combat stats.", {"color", "LAST"}, true)
 		end
 	end
 	local can_combat = false
@@ -1814,9 +1946,11 @@ use_actor = use_actor or game.player
 		desc_combat(self, compare_with, "combat")
 	end
 
-	if (self.special_combat or can_special_combat) and (use_actor:knowTalentType("technique/shield-offense") or use_actor:knowTalentType("technique/shield-defense") or use_actor:attr("show_shield_combat")) then
+	if (self.special_combat or can_special_combat) and (use_actor:knowTalentType("technique/shield-offense") or use_actor:knowTalentType("technique/shield-defense") or use_actor:attr("show_shield_combat") or config.settings.tome.display_shield_stats) then
 		desc:add({"color","YELLOW"}, "When used to attack (with talents):", {"color", "LAST"}, true)
 		desc_combat(self, compare_with, "special_combat")
+	elseif (self.special_combat or can_special_combat) then
+		desc:add({"color","LIGHT_BLUE"}, "Learn shield attack talent or enable 'Always show shield combat' to see combat stats.", {"color", "LAST"}, true)
 	end
 
 	local found = false
@@ -2065,8 +2199,7 @@ function _M:getUseDesc(use_actor)
 			end
 			use_name = use_name:gsub("damage","伤害"):gsub("dealing","造成"):gsub("for",""):gsub("dam","伤害"):gsub(" to ","到")
 			use_name = use_name:gsub("create a temporary shield that absorbs ","制造一层临时护盾，至多能吸收")
-			ret = tstring{{"color","YELLOW"}, ("可以用来施放【%s】, 使%s进入%d回合冷却。"):format(use_name, t_name, usepower(self.use_power.power)), {"color","LAST"}}
-
+			ret = tstring{{"color","YELLOW"}, ("可以用来施放【 %s 】\n\n。激活使%s进入%d回合冷却。"):format(desc:format(self:getCharmPower(use_actor)), t_name, usepower(self.use_power.power)), {"color","LAST"}}
 --[[			local use_name_type = type(self.use_power.name)
 			local use_name = util.getval(objUse[self.use_power.name] or self.use_power.name, self):format(self:getCharmPower())
 			if use_name_type == "function" then
@@ -2079,7 +2212,7 @@ function _M:getUseDesc(use_actor)
 			use_name = use_name:gsub("create a temporary shield that absorbs ","制造一层临时护盾，至多能吸收"):gsub("damage","伤害")
 			ret = tstring{{"color","YELLOW"}, ("可以用来施放【 %s 】，使其他所有护符进入 %d 回合冷却。"):format(use_name, self.use_power.power), {"color","LAST"}}]]
 		else
-			ret = tstring{{"color","YELLOW"}, ("可以用来施放【 %s 】，消耗 %d 能量，剩余能量%d/%d。"):format(desc, usepower(self.use_power.power), self.power, self.max_power), {"color","LAST"}}
+			ret = tstring{{"color","YELLOW"}, ("可以用来施放【 %s 】\n\n 激活消耗 %d 能量（共 %d/%d ）。"):format(desc, usepower(self.use_power.power), self.power, self.max_power), {"color","LAST"}}
 		end
 	elseif self.use_simple then
 		ret = tstring{{"color","YELLOW"}, ("可以用来【%s】"):format(util.getval(objUse[self.use_simple.name] or self.use_simple.name, self, use_actor)), {"color","LAST"}}
@@ -2099,9 +2232,6 @@ function _M:getUseDesc(use_actor)
 	if self.charm_on_use then
 		ret:add(true, "当使用时:", true)
 		for fct, d in pairs(self.charm_on_use) do
-			local charm_on_use = d[2](self, use_actor)
-			local energy_type = charm_on_use:match("regenerate %d+ (.+)")
-			charm_on_use = charm_on_use:gsub("regenerate","回复")
 			if energy_type == "mana" then charm_on_use = charm_on_use:gsub("mana","法力")
 			elseif energy_type == "vim" then charm_on_use = charm_on_use:gsub("vim","活力")
 			elseif energy_type == "positive energy" then charm_on_use = charm_on_use:gsub("positive energy","正能量")
@@ -2110,8 +2240,13 @@ function _M:getUseDesc(use_actor)
 			elseif energy_type == "hate" then charm_on_use = charm_on_use:gsub("hate","仇恨值")
 			elseif energy_type == "equilibrium" then charm_on_use = charm_on_use:gsub("equilibrium","自然失衡值")
 			elseif energy_type == "stamina" then charm_on_use = charm_on_use:gsub("stamina","体力值")
+			-- Clean up the description if our chance to proc is 100%
+			local percent = d[1]
+			if percent < 100 then
+				ret:add({"color","ORCHID"}, "* ", tostring(d[1]), "% chance to ", d[2](self, use_actor), ".", true, {"color","LAST"})
+			else
+				ret:add({"color","ORCHID"}, "* ", d[2](self, use_actor):capitalize(), ".", true, {"color","LAST"})
 			end
-			ret:add(tostring(d[1]), "% 几率 ", charm_on_use, ".", true)
 		end
 	end
 
@@ -2400,10 +2535,19 @@ function _M:specialWearAdd(prop, value)
 	self._special_wear[prop] = self:addTemporaryValue(prop, value)
 end
 
---- Add some special properties right when completting a set
-function _M:specialSetAdd(prop, value)
+--- Add some special properties right when completing a set
+-- Items with overlapping sets (such as Kinetic/Thermal/Charged focus) must
+-- include the set_id parameter identifying which of the overlapping sets the
+-- bonus belongs to. Otherwise, breaking one of the overlapping sets will
+-- remove ALL set bonuses from the other item(s).
+function _M:specialSetAdd(prop, value, set_id)
 	self._special_set = self._special_set or {}
-	self._special_set[prop] = self:addTemporaryValue(prop, value)
+	if set_id then
+		self._special_set[set_id] = self._special_set[set_id] or {}
+		self._special_set[set_id][prop] = self:addTemporaryValue(prop, value)
+	else
+		self._special_set[prop] = self:addTemporaryValue(prop, value)
+	end
 end
 
 function _M:getCharmPower(who, raw)

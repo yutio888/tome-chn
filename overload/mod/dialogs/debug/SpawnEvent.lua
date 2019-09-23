@@ -26,9 +26,9 @@ module(..., package.seeall, class.inherit(engine.ui.Dialog))
 
 function _M:init()
 	self:generateList()
-	engine.ui.Dialog.init(self, "调试 -- 接任务/重接任务", 1, 1)
+	engine.ui.Dialog.init(self, "DEBUG -- Spawn Event", 1, 1)
 
-	local list = List.new{width=400, height=500, list=self.list, fct=function(item) self:use(item) end}
+	local list = List.new{width=400, height=500, scrollbar=true, list=self.list, fct=function(item) self:use(item) end}
 
 	self:loadUI{
 		{left=0, top=0, ui=list},
@@ -62,24 +62,21 @@ function _M:use(item)
 	if not item then return end
 	game:unregisterDialog(self)
 
---	if not item.hasit then
-	game.player:removeQuest(item.quest)
-	game.player:grantQuest(item.quest)
---	else
---	game:registerDialog(GetQuantity.new("Quest: "..item.name, "Level "..item.min.."-"..item.max, 1, item.max, function(qty)
---		game:changeLevel(qty, item.zone)
---	end), 1)
---	end
+
+	local f, err = loadfile(item.path)
+	if not f then error(err) end
+	setfenv(f, setmetatable({level=game.level, zone=game.zone, event_id="test-event-"..rng.range(1, 9999999), params={}, Map=engine.Map}, {__index=_G}))
+	f()
 end
 
 function _M:generateList()
 	local list = {}
 
 	local function parse(base, add, add_simple)
-		for i, file in ipairs(fs.list(base.."/quests/")) do
-			if file:find(".lua$") then
-				local n = file:gsub(".lua$", "")
-				list[#list+1] = {name=n..(add_simple and " ["..add_simple.."]" or ""), quest=add..n, hasit=game.player:hasQuest(n)}
+		for i, file in ipairs(fs.list(base.."/general/events/")) do
+			local f = loadfile(base.."/general/events/"..file)
+			if f then
+				list[#list+1] = {name=file..(add_simple and " ["..add_simple.."]" or ""), path=base.."/general/events/"..file}
 			end
 		end
 	end

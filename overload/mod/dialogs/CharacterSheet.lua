@@ -202,27 +202,49 @@ function _M:init(actor, start_tab)
 	self:updateKeys()
 end
 
--- Immunity types to display matching Actor:attr(<immunity>)
-_M.status_immunities = {
-	poison_immune 	= "毒素     ",
-	disease_immune 	= "疾病     ", 
-	cut_immune 	= "流血     ",
-	confusion_immune= "混乱     ",
-	blind_immune 	= "致盲     ",
-	silence_immune 	= "沉默     ",
-	disarm_immune 	= "缴械     ",
-	pin_immune 	= "定身     ",
-	stun_immune 	= "震慑/冻结",
-	sleep_immune	= "睡眠     ",
-	fear_immune 	= "恐惧     ",
-	knockback_immune= "击退     ",
-	stone_immune 	= "石化     ",
-	instakill_immune= "即死     ",
-	teleport_immune = "传送     ",
-	negative_status_effect_immune = "全体     "}
--- Specific tooltips to use for certain immunity types
-_M.immunity_tooltips = {instakill_immune = "TOOLTIP_INSTAKILL_IMMUNE", negative_status_effect_immune = "TOOLTIP_NEGATIVE_STATUS_IMMUNE", stun_immune="TOOLTIP_STUN_IMMUNE"}
+--- immunity types to be displayed
+_M.immune_types = table.clone(mod.class.Actor.StatusTypes)
+table.merge(_M.immune_types, {negative_status_effect = "negative_status_effect_immune",
+	mental_negative_status_effect = "mental_negative_status_effect_immune",
+	physical_negative_status_effect = "physical_negative_status_effect_immune",
+	spell_negative_status_effect = "spell_negative_status_effect_immune",
+	worldport = table.NIL_MERGE,
+	planechange = table.NIL_MERGE})
 
+--- specific labels to use for certain immunity types
+_M.immune_labels = {poison = "毒素",
+	disease = "疾病", cut = "流血", confusion= "混乱",
+	blind = "致盲", silence = "沉默", disarm = "缴械",
+	pin = "定身", stun = "震慑/冻结", sleep = "睡眠",
+	fear = "恐惧", knockback = "击退", stone = "石化",
+	instakill = "即死", teleport = "传送",
+	negative_status_effect 			= "#GOLD#全体     ",
+	mental_negative_status_effect 	= "#ORANGE#精神负面效果  ",
+	physical_negative_status_effect = "#ORANGE#物理负面效果 ",
+	spell_negative_status_effect 	= "#ORANGE#魔法负面效果 ",
+}
+
+--- specific tooltips to use for certain immunity types
+_M.immune_tooltips = {instakill_immune = "TOOLTIP_INSTAKILL_IMMUNE", stun_immune="TOOLTIP_STUN_IMMUNE", negative_status_effect_immune = "TOOLTIP_NEGATIVE_STATUS_IMMUNE", mental_negative_status_effect_immune = "TOOLTIP_NEGATIVE_MENTAL_STATUS_IMMUNE",
+	physical_negative_status_effect_immune = "TOOLTIP_NEGATIVE_PHYSICAL_STATUS_IMMUNE",
+	spell_negative_status_effect_immune = "TOOLTIP_NEGATIVE_SPELL_STATUS_IMMUNE",
+	anomaly_immune = "TOOLTIP_ANOMALY_IMMUNE",
+}
+
+-- assign implied immunity attributes for functional immunity types and update labels
+for typ, atr in pairs(_M.immune_types) do
+	if type(atr) ~= "string" then _M.immune_types[typ] = typ.."_immune" end
+	_M.immune_labels[typ] = ("%-15s"):format(_M.immune_labels[typ] or typ:bookCapitalize())
+end
+
+-- sets the order to display the immunity types
+--local orderf = function(tb1, tb2) return tb1[2] < tb2[2] end
+--_M.immune_order = table.orderedPairs2(_M.immune_types, orderf)
+_M.immune_order = table.keys(_M.immune_types)
+table.sort(_M.immune_order, function(a, b)
+		return (_M.immune_labels[a] or "_") < (_M.immune_labels[b] or "_")
+	end)
+	
 function _M:innerDisplay(x, y, nb_keyframes)
 	self.actor:toScreen(nil, x + self.iw - 128, y + 6, 128, 128)
 end
@@ -407,7 +429,7 @@ end
 
 -- show the inventory screen
 function _M:showInventory()
-	if self.actor.no_inventory_access or not self.actor.player then return end
+	if not config.settings.cheat and (self.actor.no_inventory_access or not self.actor.player) then return end
 	local d
 	local titleupdator = self.actor:getEncumberTitleUpdator("Inventory")
 	local offset = self.actor.off_weapon_slots
@@ -924,7 +946,7 @@ function _M:drawDialog(kind, actor_to_compare)
 				aspeed = 1/actor:combatSpeed(mean)
 			end
 			if type == "psionic" then actor:attr("use_psi_combat", -1) end
-			return {obj=o, atk=atk, dmg=dmg, apr=apr, crit=crit, crit_power=crit_power, aspeed=aspeed, range=range, mspeed=mspeed, archery=archery, mean=mean, ammo=ammo, block=mean.block, talented=mean.talented}
+			return {obj=o, atk=atk, dmg=dmg, apr=apr, crit=crit, crit_power=crit_power or 0, aspeed=aspeed, range=range, mspeed=mspeed, archery=archery, mean=mean, ammo=ammo, block=mean.block, talented=mean.talented}
 		end
 		local function getCHNweaptype(weap_type)
 			weap_type=weap_type:gsub("knife","匕首"):gsub("staff","法杖"):gsub("axe","斧头"):gsub("sword","剑"):gsub("bow","弓"):gsub("mace","狼牙棒"):gsub("sling","投石索"):gsub("mindstar","灵晶"):gsub("whip","鞭子"):gsub("trident","三叉戟"):gsub("unarmed","空手")
@@ -957,6 +979,169 @@ function _M:drawDialog(kind, actor_to_compare)
 				self:mouseTooltip(self.TOOLTIP_COMBAT_BLOCK, s:drawColorStringBlended(self.font, ("格挡 : #00ff00#%s"):format(text), self.w*.14, h, 255, 255, 255, true))-- h = h + self.font_h
 			end
 			h = h + self.font_h
+
+-- DGDGDGDG Display old damage with previously unscaled stats
+
+	--- Previous combatDamage function with unscaled stat bonuses and old weapon masteries
+	-- Calculate combat damage for a weapon (with an optional damage field for ranged)
+	-- Talent bonuses are always based on the base weapon
+	local function combatDamageOld2(self, weapon, adddammod, damage)
+	
+		-- Old weapon mastery functions hardcoded to their old values
+		local function combatTrainingDamageOld(self, weapon)
+			local t = self:combatGetTraining(weapon)
+			if not t then return 0 end
+			return self:getTalentLevel(t) * 10
+		end
+
+		-- Gets the percent increase for a weapon based on training.
+		local function combatTrainingPercentIncOld(self, weapon)
+			local t = self:combatGetTraining(weapon)
+			if not t then return 0 end
+			return math.sqrt(self:getTalentLevel(t) / 5) / 2
+		end
+
+		local old_combatTrainingDamage = rawget(self, "combatTrainingDamage")
+		self.combatTrainingDamage = combatTrainingDamageOld
+
+		local old_combatTrainingPercentInc = rawget(self, "combatTrainingPercentInc")
+		self.combatTrainingPercentInc = combatTrainingPercentIncOld
+
+		weapon = weapon or self.combat or {}
+		local dammod = self:getDammod(damage or weapon)
+		local totstat = 0
+		for stat, mod in pairs(dammod) do
+			totstat = totstat + self:getStat(stat) * mod
+		end
+		if adddammod then
+			for stat, mod in pairs(adddammod) do
+				totstat = totstat + self:getStat(stat) * mod
+			end
+		end
+		if self:knowTalent(self["T_FORM_AND_FUNCTION"]) then totstat = totstat + self:callTalent(self["T_FORM_AND_FUNCTION"], "getDamBoost", weapon) end
+		local talented_mod = 1 + self:combatTrainingPercentInc(weapon)
+		local power = self:combatDamagePower(damage or weapon)
+		local phys = self:combatPhysicalpower(nil, weapon) + totstat
+
+		self.combatTrainingDamage = old_combatTrainingDamage
+		self.combatTrainingPercentInc = old_combatTrainingPercentInc
+		--	return self:rescaleDamage(0.3*self:combatPhysicalpower(nil, weapon, totstat) * power * talented_mod)
+
+		return self:rescaleDamage(0.3 * phys * power * talented_mod)
+	end
+	
+
+--- Previous combatDamage function with scaled stat bonuses and old weapon masteries
+-- Calculate combat damage for a weapon (with an optional damage field for ranged)
+-- Talent bonuses are always based on the base weapon
+local function combatDamageOld(self, weapon, adddammod, damage)
+
+	-- Old weapon mastery functions hardcoded to their old values
+	local function combatTrainingDamageOld(self, weapon)
+		local t = self:combatGetTraining(weapon)
+		if not t then return 0 end
+		return self:getTalentLevel(t) * 10
+	end
+
+	-- Gets the percent increase for a weapon based on training.
+	local function combatTrainingPercentIncOld(self, weapon)
+		local t = self:combatGetTraining(weapon)
+		if not t then return 0 end
+		return math.sqrt(self:getTalentLevel(t) / 5) / 2
+	end
+
+	self.combatTrainingDamage = combatTrainingDamageOld
+	self.combatTrainingPercentInc = combatTrainingPercentIncOld
+
+	weapon = weapon or self.combat or {}
+	local dammod = self:getDammod(damage or weapon)
+	local totstat = 0
+	for stat, mod in pairs(dammod) do
+		totstat = totstat + self:getStat(stat) * mod
+	end
+	if adddammod then
+		for stat, mod in pairs(adddammod) do
+			totstat = totstat + self:getStat(stat) * mod
+		end
+	end
+	if self:knowTalent(self["T_FORM_AND_FUNCTION"]) then totstat = totstat + self:callTalent(self["T_FORM_AND_FUNCTION"], "getDamBoost", weapon) end
+	local talented_mod = 1 + self:combatTrainingPercentInc(weapon)
+	local power = self:combatDamagePower(damage or weapon, totstat)
+	local phys = self:combatPhysicalpower(nil, weapon, totstat)
+
+	self.combatTrainingDamage = old_combatTrainingDamage
+	self.combatTrainingPercentInc = old_combatTrainingPercentInc
+	--	return self:rescaleDamage(0.3*self:combatPhysicalpower(nil, weapon, totstat) * power * talented_mod)
+
+	return self:rescaleDamage(0.3 * phys * power * talented_mod)
+end
+
+local p_old_combatDamage, atc_old_combatDamage = rawget(player, "combatDamage")
+player.combatDamage = combatDamageOld
+local combat = get_combat_stats(player, type, inven_id, item)
+local combatc = {}
+if actor_to_compare then
+	atc_old_combatDamage = actor_to_compare and rawget(actor_to_compare, "combatDamage")
+	actor_to_compare.combatDamage = combatDamageOld
+	combatc = get_combat_stats(actor_to_compare, type, inven_id, item)
+end
+local dm = {}
+local dammod = player:getDammod(combat.ammo and combat.ammo.combat or combat.mean)
+--table.set(game, "debug", "combat", combat)
+for stat, i in pairs(dammod) do
+	local name = Stats.stats_def[stat].short_name:capitalize()
+	if player:knowTalent(player.T_STRENGTH_OF_PURPOSE) then
+		if name == "Str" then name = "Mag" end
+	end
+	if combat.talented == "knife" and player:knowTalent(player.T_LETHALITY) then
+		if name == "Str" then name = "Cun" end
+	end
+	dm[#dm+1] = ("%d%% %s"):format(i * 100, name)
+end
+text = compare_fields(player, actor_to_compare,
+	function(actor, ...)
+		return actor == actor_to_compare and combatc.dmg or combat.dmg
+	end,
+	"%3d", "%+.0f", 1, false, false, dam)
+self:mouseTooltip("OLD DAMAGE (scaled stat bonuses, old masteries)", s:drawColorStringBlended(self.font, ("Old Damage   : #00ff00#%s [%s]"):format(text, table.concatNice(dm, ", ")), w, h, 255, 255, 255, true))
+	h = h + self.font_h
+player.combatDamage = p_old_combatDamage
+if actor_to_compare then actor_to_compare.combatDamage = atc_old_combatDamage end
+
+----------------------
+local p_old_combatDamage, atc_old_combatDamage = rawget(player, "combatDamage")
+player.combatDamage = combatDamageOld2
+local combat = get_combat_stats(player, type, inven_id, item)
+local combatc = {}
+if actor_to_compare then
+	atc_old_combatDamage = actor_to_compare and rawget(actor_to_compare, "combatDamage")
+	actor_to_compare.combatDamage = combatDamageOld2
+	combatc = get_combat_stats(actor_to_compare, type, inven_id, item)
+end
+local dm = {}
+local dammod = player:getDammod(combat.ammo and combat.ammo.combat or combat.mean)
+--table.set(game, "debug", "combat", combat)
+for stat, i in pairs(dammod) do
+	local name = Stats.stats_def[stat].short_name:capitalize()
+	if player:knowTalent(player.T_STRENGTH_OF_PURPOSE) then
+		if name == "Str" then name = "Mag" end
+	end
+	if combat.talented == "knife" and player:knowTalent(player.T_LETHALITY) then
+		if name == "Str" then name = "Cun" end
+	end
+	dm[#dm+1] = ("%d%% %s"):format(i * 100, name)
+end
+text = compare_fields(player, actor_to_compare,
+	function(actor, ...)
+		return actor == actor_to_compare and combatc.dmg or combat.dmg
+	end,
+	"%3d", "%+.0f", 1, false, false, dam)
+self:mouseTooltip("OLDEST DAMAGE (unscaled and old masteries)", s:drawColorStringBlended(self.font, ("Oldest Damage   : #00ff00#%s [%s]"):format(text, table.concatNice(dm, ", ")), w, h, 255, 255, 255, true))
+	h = h + self.font_h
+player.combatDamage = p_old_combatDamage
+if actor_to_compare then actor_to_compare.combatDamage = atc_old_combatDamage end
+-- DGDGDGDG end old damage display
+
 			text = compare_fields(player, actor_to_compare, function(actor, ...) return actor == actor_to_compare and combatc.apr or combat.apr end, "%3d", "%+.0f", 1, false, false, dam)
 			self:mouseTooltip(self.TOOLTIP_COMBAT_APR,    s:drawColorStringBlended(self.font, ("护甲穿透          : #00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
 			text = compare_fields(player, actor_to_compare, function(actor, ...) return actor == actor_to_compare and combatc.crit or combat.crit end, "%3d%%", "%+.0f%%", 1, false, false, dam)
@@ -1321,13 +1506,36 @@ function _M:drawDialog(kind, actor_to_compare)
 		w = self.w * 0.52
 		self:mouseTooltip(self.TOOLTIP_STATUS_IMMUNE, s:drawColorStringBlended(self.font, "#LIGHT_BLUE#状态效果免疫:", w, h, 255, 255, 255, true)) h = h + self.font_h
 
-		for immune_type, immune_name in pairs(self.status_immunities) do
-			text = compare_fields(player, actor_to_compare, function(actor, ...) return util.bound((actor:attr(...) or 0) * 100, 0, 100) end, "%3d%%", "%+.0f%%", 1, false, false, immune_type)
-			if text ~= "  0%" then
-				self:mouseTooltip(self[self.immunity_tooltips[immune_type] or "TOOLTIP_SPECIFIC_IMMUNE"], s:drawColorStringBlended(self.font, ("%s: #00ff00#%s"):format(immune_name, text), w, h, 255, 255, 255, true))
+		-- list the status immunities in pre-sorted order
+		for i, immune_type in ipairs(self.immune_order) do
+			local immune_attr = self.immune_types[immune_type]
+			-- print("character sheet checking immune_type", immune_type, immune_attr)
+			if player:attr(immune_attr) or actor_to_compare and actor_to_compare:attr(immune_attr) then
+				local std = mod.class.Actor.StatusTypes[immune_type]
+				text = compare_fields(player, actor_to_compare, function(actor, ...)
+					local ok, chance
+					if std then
+						local ok, chance = actor:canBe(immune_type)
+						return util.bound(100-(chance or 100), 0, 100)
+					else
+						return util.bound((actor:attr(immune_attr) or 0) * 100, 0, 100)
+					end
+				end,
+				"%3d%%", "%+.0f%%", 1, false, false, self.immune_labels[immune_type] or immune_type:bookCapitalize())
+				self:mouseTooltip(self[self.immune_tooltips[immune_attr] or "TOOLTIP_SPECIFIC_IMMUNE"], s:drawColorStringBlended(self.font, ("%-14s: #00ff00#%s"):format(self.immune_labels[immune_type] or immune_type:bookCapitalize(), text), w, h, 255, 255, 255, true))
 				h = h + self.font_h
 			end
 		end
+		
+--[[ -- debugging previous immunity display
+		for immune_type, immune_name in pairs(self.status_immunities) do
+			text = compare_fields(player, actor_to_compare, function(actor, ...) return util.bound((actor:attr(...) or 0) * 100, 0, 100) end, "%3d%%", "%+.0f%%", 1, false, false, immune_type)
+			if text ~= "  0%" then
+				self:mouseTooltip(self[self.immune_tooltips[immune_type] or "TOOLTIP_SPECIFIC_IMMUNE"], s:drawColorStringBlended(self.font, ("%s: #00ff00#%s"):format(immune_name, text), w, h, 255, 255, 255, true))
+				h = h + self.font_h
+			end
+		end
+--]] -- end debugging
 
 		h = 0
 		w = self.w * 0.75
@@ -1370,9 +1578,9 @@ function _M:drawDialog(kind, actor_to_compare)
 					elseif tt.type:match(".*/objects") then
 						return "物品技能"
 					end
-
+					local mastery = player:getTalentTypeMastery(tt.type)
 					local cat = tt.type:gsub("/.*", "")
-					return (t_talent_cat[cat] or cat) .."/"..(tt.name or ""):bookCapitalize()
+					return (t_talent_cat[cat] or cat) .."/"..(tt.name or ""):bookCapitalize().." ("..mastery..")"
 				end
 			elseif self.talent_sorting == 2 then -- Alphabetically, so no groups at all.
 				get_group = function(t, tt)

@@ -17,16 +17,28 @@
 -- Nicolas Casalini "DarkGod"
 -- darkgod@te4.org
 
-newChat{ id="welcome",
-	text = [[#LIGHT_GREEN#*你面前站着……你自己。你看上去稍微有点年老，而且你的样子看上去好像经历过地狱一般。*#WHITE#
-不！你不能！不能去那儿！你……我……你不许去那儿！
-这是不允许的！我必须阻止它！请不要这样！
-我必须杀死我自己来保护自己！
-#LIGHT_GREEN#*在你来得及做出反应之前，你…我…你自己消失在半空中的裂缝里*#WHITE#
-]],
-	answers = {
-		{"我X！"},
-	}
-}
+require "engine.class"
+require "engine.ui.Dialog"
+local Zone = require "engine.Zone"
+local Savefile = require "engine.Savefile"
 
-return "welcome"
+module(..., package.seeall, class.make)
+
+function _M:run()
+	local zname, llevel = game.zone.short_name, game.level.level
+	local zid = Savefile:nameLoadZone(zname)
+	local lid = Savefile:nameLoadLevel(zname, llevel)
+
+	-- Delete the files to force a regen by the Zone class
+	local save = Savefile.new(game.save_name)
+	fs.delete(save.save_dir..zid)
+	fs.delete(save.save_dir..lid)
+
+	-- Delete from memory cache
+	Zone:removeLastPersistZone(zname)
+
+	-- Now fake entering
+	game.zone = nil
+	game.level = nil
+	game:changeLevelReal(llevel, zname, {})
+end

@@ -23,6 +23,7 @@ local TreeList = require "engine.ui.TreeList"
 local Textzone = require "engine.ui.Textzone"
 local Separator = require "engine.ui.Separator"
 local GetQuantity = require "engine.dialogs.GetQuantity"
+local GetQuantitySlider = require "engine.dialogs.GetQuantitySlider"
 local Tabs = require "engine.ui.Tabs"
 local GraphicMode = require("mod.dialogs.GraphicMode")
 local FontPackage = require "engine.FontPackage"
@@ -419,6 +420,24 @@ function _M:generateListUi()
 		self.c_list:drawItem(item)
 	end,}
 
+	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"Always display the combat properties of gloves even if you don't know unarmed attack talents.#WHITE#"}
+	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#Always show glove combat properties#WHITE##{normal}#", status=function(item)
+		return tostring(config.settings.tome.display_glove_stats and "enabled" or "disabled")
+	end, fct=function(item)
+		config.settings.tome.display_glove_stats = not config.settings.tome.display_glove_stats
+		game:saveSettings("tome.display_glove_stats", ("tome.display_glove_stats = %s\n"):format(tostring(config.settings.tome.display_glove_stats)))
+		self.c_list:drawItem(item)
+	end,}
+
+	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"Always display combat properties of shields even if you don't know shield attack talents.#WHITE#"}
+	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#Always show shield combat properties#WHITE##{normal}#", status=function(item)
+		return tostring(config.settings.tome.display_shield_stats and "enabled" or "disabled")
+	end, fct=function(item)
+		config.settings.tome.display_shield_stats = not config.settings.tome.display_shield_stats
+		game:saveSettings("tome.display_shield_stats", ("tome.display_shield_stats = %s\n"):format(tostring(config.settings.tome.display_shield_stats)))
+		self.c_list:drawItem(item)
+	end,}
+
 	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"当你用右键画出鼠标手势时，会显示彩色的轨迹提示。#WHITE#"}
 	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#显示鼠标手势轨迹#WHITE##{normal}#", status=function(item)
 		return tostring(config.settings.hide_gestures and "关闭" or "开启")
@@ -435,6 +454,19 @@ function _M:generateListUi()
 		config.settings.tome.quest_popup = not config.settings.tome.quest_popup
 		game:saveSettings("tome.quest_popup", ("tome.quest_popup = %s\n"):format(tostring(config.settings.tome.quest_popup)))
 		self.c_list:drawItem(item)
+	end,}
+
+	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"Sharpen Visuals, set to 0 to disable.#WHITE#"}
+	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#Sharpen Visuals#WHITE##{normal}#", status=function(item)
+		return tostring((config.settings.tome.sharpen_display or 0))
+	end, fct=function(item)
+		game:registerDialog(GetQuantitySlider.new("Enter Sharpen Power", "From 0(disable) to 10", math.floor(config.settings.tome.sharpen_display), 0, 10, 1, function(qty)
+			qty = util.bound(qty, 0, 10)
+			game:saveSettings("tome.sharpen_display", ("tome.sharpen_display = %f\n"):format(qty))
+			config.settings.tome.sharpen_display = qty
+			self.c_list:drawItem(item)
+			if self:isTome() and game.player then game.player:updateMainShader() end
+		end))
 	end,}
 
 	self.list = list
@@ -627,8 +659,9 @@ function _M:generateListOnline()
 - Steam: 无法使用Steam相关的任何功能。
 - Discord: 无法同步到Discord的实时状态。
 - 游戏内新闻: 主菜单将不再显示新闻。
- 
-这个选项只适用于游戏本身。如果你使用一个游戏启动器, 它还是会更新你的游戏版本。
+注意这个设置只影响游戏本身。如果你使用游戏启动器，它的唯一目的就是确保游戏是最新的，因此它仍然会连接网络。
+如果你不想这样，直接运行游戏即可。启动器#{bold}#只#{normal}#是用来更新游戏的。
+
  
 #{bold}##CRIMSON#这是一个极端的选项。如果不是迫不得已, 推荐你不要打开它, 这会让你失去很多好用的功能和一些游戏体验。
 应用这个选项必须退出重新进入游戏。#{normal}#]]}

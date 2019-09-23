@@ -179,10 +179,10 @@ local possible_types = {
 			sunwall_query = true,
 		},
 	},
-	{ name="lost anorithil", random="female", chance=70,
+	{ name="lost defiler", random="female", chance=70,
 		text = [[帮帮我！我在这地方迷路了，我有个朋友给我留下了一个传送门，不过我打了太多仗恐怕靠我自己是到不了那里了，你能帮我一下吗？]],
 		actor = {
-			name = "%s, 迷路的星月术士",
+			name = "%s, 迷路的堕落者",
 			type = "humanoid", subtype = "human", female=true, image = "player/higher_female.png",
 			display = "@", color=colors.YELLOW,
 			desc = [[她看起来又累又饿，且身受重伤。]],
@@ -192,7 +192,7 @@ local possible_types = {
 
 			body = { INVEN = 10, MAINHAND=1, OFFHAND=1, BODY=1, QUIVER=1 },
 			resolvers.equip{ {type="weapon", subtype="staff", autoreq=true} },
-			resolvers.talents{ [Talents.T_HYMN_OF_PERSEVERANCE]=1, },
+			resolvers.talents{ [Talents.T_CURSE_OF_IMPOTENCE]=1, },
 			lite = 4,
 			rank = 2,
 			exp_worth = 1,
@@ -202,8 +202,7 @@ local possible_types = {
 			combat_armor = 3, combat_def = 3,
 			inc_damage = {all=-50},
 
-			reward_type = "anorithil",
-			sunwall_query = true,
+			reward_type = "defiler",
 		},
 	},
 	{ name="temporal explorer", random="player", portal="temporal portal", chance=30,
@@ -349,6 +348,7 @@ on_grant = function(self, who)
 			if rng.percent(self.kind.chance) then break end
 		end
 	end
+
 	escorts_seen[self.kind.name] = (escorts_seen[self.kind.name] or 0) + 1
 
 	if self.kind.random == "player" then
@@ -418,6 +418,7 @@ on_grant = function(self, who)
 
 	g:resolve() g:resolve(nil, true)
 	game.zone:addEntity(game.level, g, "terrain", gx, gy)
+	game.state:locationRevealAround(gx, gy)
 	npc.escort_target = {x=gx, y=gy}
 	npc.x, npc.y = nil, nil
 	game.zone:addEntity(game.level, npc, "actor", x, y)

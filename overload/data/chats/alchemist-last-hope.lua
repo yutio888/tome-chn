@@ -21,7 +21,7 @@ local art_list = mod.class.Object:loadList("/data/general/objects/brotherhood-ar
 local alchemist_num = 4
 local other_alchemist_nums = {1, 2, 3}
 local q = game.player:hasQuest("brotherhood-of-alchemists")
-local final_reward = "TAINT_TELEPATHY"
+local final_reward = "TAINT_PURGING"
 local e = {
 	{
 	short_name = "brawn",
@@ -150,7 +150,7 @@ newChat{ id="help",
 }
 
 newChat{ id="competition",
-	text = [[很简单，每份药剂我都会让你先喝个痛快的。喝下这些药剂会让你更有男子汉气概，而且，要是你的帮助能起决定性作用的话，我还会额外给你一件真正的宝物：传说中马基埃亚尔唯一的堕落印记——感应印记哦！]],
+	text = [[很简单，每份药剂我都会让你先喝个痛快的。喝下这些药剂会让你更有男子汉气概，而且，要是你的帮助能起决定性作用的话，我还会额外给你一件真正的宝物：传说中马基埃亚尔唯一的堕落印记——清除印记哦！]],
 	answers = {
 		{"我接受了。", jump="choice", action = function(npc, player) player:grantQuest("brotherhood-of-alchemists") end,},
 		{"我现在没空帮你。"},
@@ -403,7 +403,7 @@ newChat{ id="complete3",
 --Final elixir:
 newChat{ id="totally-complete3",
 	text = [[#LIGHT_GREEN#*那个矮人终于回来了，手里拿着一个药瓶和一个小袋子。*#WHITE#
-这里面我给你带来个好东西，尽管也许明天早上对你没什么用。小心使用这个“感应印记”,如果下次你敲门的时候，是我老婆开门的话，你可要小心点，哈！]],
+这里面我给你带来个好东西，尽管也许明天早上对你没什么用。小心使用这个“清除印记”,如果下次你敲门的时候，是我老婆开门的话，你可要小心点，哈！]],
 	answers = {
 		{"多谢，我走了。",
 			cond = function(npc, player) return q and q:isCompleted(e[1].almost) and not q:isCompleted(e[1].full) end,

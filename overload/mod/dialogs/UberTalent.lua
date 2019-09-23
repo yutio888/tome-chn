@@ -75,7 +75,7 @@ function _M:generateList()
 	local cols = {}
 	local list = {}
 	for tid, t in pairs(self.actor.talents_def) do
-		if t.uber then
+		if t.uber and not t.not_listed then
 			cols[t.type[1]] = cols[t.type[1]] or {}
 			local c = cols[t.type[1]]
 			c[#c+1] = t

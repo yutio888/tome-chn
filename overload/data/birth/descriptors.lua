@@ -17,138 +17,378 @@
 -- Nicolas Casalini "DarkGod"
 -- darkgod@te4.org
 
-require "engine.class"
-local Dialog = require "engine.ui.Dialog"
-local TreeList = require "engine.ui.TreeList"
-local ListColumns = require "engine.ui.ListColumns"
-local Textzone = require "engine.ui.Textzone"
-local TextzoneList = require "engine.ui.TextzoneList"
-local Separator = require "engine.ui.Separator"
+setAuto("subclass", false)
+setAuto("subrace", false)
 
-module(..., package.seeall, class.inherit(Dialog))
+setStepNames{
+	world = "Campaign",
+	race = "Race Category",
+	subrace = "Race",
+	class = "Class Category",
+	subclass = "Class",
+}
 
--- Generate talent status separately to enable quicker refresh of Dialog
-local function TalentStatus(who,t) 
-	local status = tstring{{"color", "LIGHT_GREEN"}, "Active"} 
+newBirthDescriptor{
+	type = "base",
+	name = "base",
+	desc = {
+	},
+	descriptor_choices =
+	{
+		difficulty =
+		{
+			Tutorial = "disallow",
+		},
+		world =
+		{
+			["Maj'Eyal"] = "allow",
+			Infinite = "allow",
+			Arena = "allow",
+		},
+		class =
+		{
+			-- Specific to some races
+			None = "disallow",
+		},
+	},
+	talents = {},
+	experience = 1.0,
+	body = { INVEN = 1000, QS_MAINHAND = 1, QS_OFFHAND = 1, MAINHAND = 1, OFFHAND = 1, FINGER = 2, NECK = 1, LITE = 1, BODY = 1, HEAD = 1, CLOAK = 1, HANDS = 1, BELT = 1, FEET = 1, TOOL = 1, QUIVER = 1, QS_QUIVER = 1 },
 
-	return tostring(status) 
-end
+	copy = {
+		-- Some basic stuff
+		move_others = true,
+		no_auto_resists = true, no_auto_saves = true,
+		no_auto_high_stats = true,
+		resists_cap = {all=70},
+		keep_inven_on_death = true,
+		can_change_level = true,
+		can_change_zone = true,
+		save_hotkeys = true,
 
-function _M:init(actor)
-	self.actor = actor
-	actor.hotkey = actor.hotkey or {}
-	Dialog.init(self, "Arcane Combat", game.w * 0.6, game.h * 0.8)
+		-- Mages are unheard of at first, nobody but them regenerates mana
+		mana_rating = 6,
+		mana_regen = 0,
 
-	local vsep = Separator.new{dir="horizontal", size=self.ih - 10}
-	self.c_tut = Textzone.new{width=math.floor(self.iw / 2 - vsep.w / 2), height=1, auto_height=true, no_color_bleed=true, text=[[
-锟斤拷锟斤拷锟窖★拷锟揭伙拷罘拷锟斤拷诮锟秸斤拷锟斤拷锟斤拷锟斤拷远锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟窖★拷锟�"锟斤拷锟斤拷锟斤拷锟�"锟斤拷
-]]}
-	self.c_desc = TextzoneList.new{width=math.floor(self.iw / 2 - vsep.w / 2), height=self.ih - self.c_tut.h - 20, scrollbar=true, no_color_bleed=true}
-
-	self:generateList()
-
-	local cols = {
-		{name="", width={40,"fixed"}, display_prop="char"},
-		{name="Talent", width=80, display_prop="name"},
-	}
-	self.c_list = TreeList.new{width=math.floor(self.iw / 2 - vsep.w / 2), height=self.ih - 10, all_clicks=true, scrollbar=true, columns=cols, tree=self.list, fct=function(item, sel, button) self:use(item, button) end, select=function(item, sel) self:select(item) end}
-	self.c_list.cur_col = 2
-
-	self:loadUI{
-		{left=0, top=0, ui=self.c_list},
-		{right=0, top=self.c_tut.h + 20, ui=self.c_desc},
-		{right=0, top=0, ui=self.c_tut},
-		{hcenter=0, top=5, ui=vsep},
-	}
-	self:setFocus(self.c_list)
-	self:setupUI()
-
-	self.key:addCommands{
-		__TEXTINPUT = function(c)
-			if c == '~' then
-				self:use(self.cur_item)
-			end
-			if self.list and self.list.chars[c] then
-				self:use(self.list.chars[c])
-			end
+		max_level = 50,
+		money = 15,
+		resolvers.equip{ id=true,
+			{type="lite", subtype="lite", name="brass lantern", ignore_material_restriction=true, ego_chance=-1000},
+		},
+		make_tile = function(e)
+			if not e.image then e.image = "player/"..e.descriptor.subrace:lower():gsub("[^a-z0-9_]", "_").."_"..e.descriptor.sex:lower():gsub("[^a-z0-9_]", "_")..".png" end
 		end,
+	},
+	game_state = {
+		force_town_respec = 1,
+		rare_minimum_level = 8,  -- Player level rare NPCs start appearing, handled by the actor generator defined by zones
+		random_boss_minimum_level = 10,  -- Player level random bosses above rare start spawning, handled by the actor generator typically defined by zones
+		fixedboss_class_minimum_level = 10,  -- Player level fixed bosses can gain levels in bonus classes, handled in Actor.levelupClass
+		default_fixedboss_class_level_rate = 0.5,  -- Default level rate of classes applied to fixedbosses, handled in NPC.addedToLevel
+		default_fixedboss_class_start_level_pct = 0.8, -- Default % of level to use as start level if not explicitly defined, handled in NPC.addedToLevel
+		
+		--random_boss_adjust_fct = function(act) act.testRAF = true end,  -- Function to be applied to all randbosses after they're fully resolved and added to level
+
 	}
-	engine.interface.PlayerHotkeys:bindAllHotkeys(self.key, function(i) self:defineHotkey(i) end)
-	self.key:addBinds{
-		EXIT = function() game:unregisterDialog(self) end,
-	}
-end
+}
 
-function _M:on_register()
-	game:onTickEnd(function() self.key:unicodeInput(true) end)
-end
 
-function _M:select(item)
-	if item then
-		self.c_desc:switchItem(item, item.desc)
-		self.cur_item = item
-	end
-end
+--------------- Difficulties
+newBirthDescriptor{
+	type = "difficulty",
+	name = "Tutorial",
+	never_show = true,
+	desc =
+	{
+		"#GOLD##{bold}#Tutorial mode",
+		"#WHITE#Start with a simplified character and discover the game in a simple quest.#{normal}#",
+		"All damage done to the player reduced by 20%",
+		"All healing for the player increased by 10%",
+		"No main game achievements possible.",
+	},
+	descriptor_choices =
+	{
+		race =
+		{
+			__ALL__ = "forbid",
+			["Tutorial Human"] = "allow",
+		},
+		subrace =
+		{
+			__ALL__ = "forbid",
+			["Tutorial Human"] = "allow",
+		},
+		class =
+		{
+			__ALL__ = "forbid",
+			["Tutorial Adventurer"] = "allow",
+		},
+		subclass =
+		{
+			__ALL__ = "forbid",
+			["Tutorial Adventurer"] = "allow",
+		},
+	},
+	copy = {
+		auto_id = 2,
+		no_birth_levelup = true,
+		infinite_lifes = 1,
+		__game_difficulty = 1,
+		__allow_rod_recall = false,
+		__allow_transmo_chest = false,
+		instakill_immune = 1,
+	},
+	game_state = {
+		grab_online_event_forbid = true,
+		always_learn_birth_talents = true,
+		force_town_respec = false,
+	},
+}
+newBirthDescriptor{
+	type = "difficulty",
+	name = "Easy",
+	display_name = "Easier",
+	selection_default = config.settings.tome.default_birth and config.settings.tome.default_birth.difficulty == "Easy",
+	desc =
+	{
+		"#GOLD##{bold}#Easier mode#WHITE##{normal}#",
+		"Provides an easier game experience.",
+		"Use it if you feel uneasy tackling the harder modes.",
+		"All damage done to the player decreased by 30%",
+		"All healing for the player increased by 30%",
+		"All detrimental status effects durations reduced by 50%",
+		"Achievements are not granted.",
+	},
+	descriptor_choices =
+	{
+		race = { ["Tutorial Human"] = "forbid", },
+		class = { ["Tutorial Adventurer"] = "forbid", },
+	},
+	copy = {
+		instakill_immune = 1,
+		__game_difficulty = 1,
+	},
+}
+newBirthDescriptor{
+	type = "difficulty",
+	name = "Normal",
+	selection_default = (config.settings.tome.default_birth and config.settings.tome.default_birth.difficulty == "Normal") or (not config.settings.tome.default_birth) or (config.settings.tome.default_birth and not config.settings.tome.default_birth.difficulty),
+	desc =
+	{
+		"#GOLD##{bold}#Normal mode#WHITE##{normal}#",
+		"Provides the normal level of challenges.",
+		"Stairs can not be used for 2 turns after a kill.",
+	},
+	descriptor_choices =
+	{
+		race = { ["Tutorial Human"] = "forbid", },
+		class = { ["Tutorial Adventurer"] = "forbid", },
+	},
+	copy = {
+		instakill_immune = 1,
+		__game_difficulty = 2,
+	},
+}
+newBirthDescriptor{
+	type = "difficulty",
+	name = "Nightmare",
+	selection_default = config.settings.tome.default_birth and config.settings.tome.default_birth.difficulty == "Nightmare",
+	desc =
+	{
+		"#GOLD##{bold}#Nightmare mode#WHITE##{normal}#",
+		"Unfair game setting",
+		"All zone levels increased by 50% by the time Player reaches level 10",
+		"All creature talent levels increased by 30%",
+		"Unique (fixed) bosses advance in bonus classes 30% faster",		
+		"All enemies have 10% more life",
+		"Rare creatures are slightly more frequent",
+		"Stairs can not be used for 3 turns after a kill.",
+		"Player can earn Nightmare version of achievements if also playing in Roguelike or Adventure permadeath mode.",
+	},
+	descriptor_choices =
+	{
+		race = { ["Tutorial Human"] = "forbid", },
+		class = { ["Tutorial Adventurer"] = "forbid", },
+	},
+	copy = {
+		instakill_immune = 1,
+		__game_difficulty = 3,
+	},
+	game_state = {
+		default_random_rare_chance = 15,
+		
+		difficulty_level_mult = 1.5,  -- Level multiplier for Zone.level_range, handled in Game.applyDifficulty
+		difficulty_level_add = 0,  -- Flat value added to Zone.level_range, handled in Game.applyDifficulty 
 
--- Don't close the dialog until the player clicks an appropriate option
-function _M:use(item)
-	if item and (item.talent or item.use_random) then
-		self.actor:talentDialogReturn(item.talent, item.use_random)
-		game:unregisterDialog(self)
-	else
-		return
-	end
-end
+		difficulty_talent_mult = 1.3,  -- Talent level multiplier for non-summoned NPC talents and base (non-autoclass) fixedboss talents, handled in NPC.addedToLevel
+		difficulty_life_mult = 1.1,  -- Max life multiplier for hostile non-summoned NPCs, handled in NPC.addedToLevel
+		fixedboss_class_level_rate_mult = 1.3,  -- Multiplier for auto_classes level rates, handled in Actor.levelupClass
+	},
+}
+newBirthDescriptor{
+	type = "difficulty",
+	name = "Insane",
+	locked = function() return profile.mod.allow_build.difficulty_insane end,
+	locked_desc = "Easy is for the weak! Normal is for the weak! Nightmare is too easy! Bring on the true pain!",
+	selection_default = config.settings.tome.default_birth and config.settings.tome.default_birth.difficulty == "Insane",
+	desc =
+	{
+		"#GOLD##{bold}#Insane mode#WHITE##{normal}#",
+		"Similar rules to Nightmare, but with more random bosses!",
+		"All zone levels increased by 50% + 1 by the time Player reaches level 10",
+		"All creature talent levels increased by 80%",
+		"Unique (fixed) bosses advance in bonus classes 80% faster",
+		"All enemies have 20% more life",
+		"Rare creatures are far more frequent and random bosses start to appear",
+		"Stairs can not be used for 5 turns after a kill.",
+		"Player can earn Insane version of achievements if also playing in Roguelike or Adventure permadeath mode.",
+	},
+	descriptor_choices =
+	{
+		race = { ["Tutorial Human"] = "forbid", },
+		class = { ["Tutorial Adventurer"] = "forbid", },
+	},
+	copy = {
+		instakill_immune = 1,
+		__game_difficulty = 4,
+	},
+	game_state = {
+		default_random_rare_chance = 3,
+		default_random_boss_chance = 20,
 
--- Display the player tile
-function _M:innerDisplay(x, y, nb_keyframes)
-	if self.cur_item and self.cur_item.entity then
-		self.cur_item.entity:toScreen(game.uiset.hotkeys_display_icons.tiles, x + self.iw - 64, y + self.iy + self.c_tut.h - 32 + 10, 64, 64)
-	end
-end
+		difficulty_level_mult = 1.5,  -- Level multiplier for Zone.level_range, handled in Game.applyDifficulty
+		difficulty_level_add = 1,  -- Flat value added to Zone.level_range, handled in Game.applyDifficulty 
 
-function _M:generateList()
-	local list = {}
-	local letter = 1
+		difficulty_talent_mult = 1.8,  -- Talent level multiplier for non-summoned NPC talents and base (non-autoclass) fixedboss talents, handled in NPC.addedToLevel
+		difficulty_life_mult = 1.2,  -- Max life multiplier for hostile non-summoned NPCs, handled in NPC.addedToLevel
+		fixedboss_class_level_rate_mult = 1.8,  -- Multiplier for auto_classes level rates, handled in Actor.levelupClass
+	},
+}
+newBirthDescriptor{
+	type = "difficulty",
+	name = "Madness",
+	locked = function() return profile.mod.allow_build.difficulty_madness end,
+	locked_desc = "Insane is for the weak! Bring on the true mind-shattering experience!",
+	selection_default = config.settings.tome.default_birth and config.settings.tome.default_birth.difficulty == "Madness",
+	desc =
+	{
+		"#GOLD##{bold}#Madness mode#WHITE##{normal}#",
+		"Absolutely unfair game setting.  You are really mentally ill and wish to get worse to play this mode!",
+		"All zone levels increased by 150% + 2 by the time Player reaches level 10",
+		"All creature talent levels increased by 170%",
+		"Unique (fixed) bosses advance in bonus classes 170% faster",
+		"All enemies have 200% more life",
+		"Rare creatures are far more frequent and random bosses start to appear",
+		"Stairs can not be used for 9 turns after a kill.",
+		"Player is being hunted! Randomly all foes in a radius will get a feeling of where she/he is",
+		"Player can earn Madness version of achievements if also playing in Roguelike or Adventure permadeath mode.",
+	},
+	descriptor_choices =
+	{
+		race = { ["Tutorial Human"] = "forbid", },
+		class = { ["Tutorial Adventurer"] = "forbid", },
+	},
+	talents = {
+		[ActorTalents.T_HUNTED_PLAYER] = 1,
+	},
+	copy = {
+		instakill_immune = 1,
+		__game_difficulty = 5,
+	},
+	game_state = {
+		default_random_rare_chance = 3,
+		default_random_boss_chance = 20,
 
-	local talents = {}
-	local chars = {}
+		difficulty_level_mult = 2.5,  -- Level multiplier for Zone.level_range, handled in Game.applyDifficulty
+		difficulty_level_add = 2,  -- Flat value added to Zone.level_range, handled in Game.applyDifficulty 
 
-	for _, t in pairs(self.actor.talents_def) do
-		if t.allow_for_arcane_combat and self.actor:knowTalent(t) then
-			local status = tstring{{"color", "LIGHT_GREEN"}, "Talents"}
-			
-			-- Pregenerate icon with the Tiles instance that allows images
-			if t.display_entity then t.display_entity:getMapObjects(game.uiset.hotkeys_display_icons.tiles, {}, 1) end
+		difficulty_talent_mult = 2.7,  -- Talent level multiplier for non-summoned NPC talents and base (non-autoclass) fixedboss talents, handled in NPC.addedToLevel
+		difficulty_life_mult = 3,  -- Max life multiplier for hostile non-summoned NPCs, handled in NPC.addedToLevel
+		fixedboss_class_level_rate_mult = 2.7,  -- Multiplier for auto_classes level rates, handled in Actor.levelupClass
+	},
+}
 
-			talents[#talents+1] = {
-				name = ((t.display_entity and t.display_entity:getDisplayString() or "")..t.name):toTString(),
-				cname = t.name,
-				status = status,
-				entity = t.display_entity,
-				talent = t.id,
-				desc = self.actor:getTalentFullDescription(t),
-				color = function() return {0xFF, 0xFF, 0xFF} end
-			}
-		end
-	end
-	table.sort(talents, function(a,b) return a.cname < b.cname end)
-	
-	talents[#talents+1] = {
-		name = "锟斤拷锟斤拷锟斤拷锟�",
-		use_random = true,
-		desc = "Each time Arcane Combat is triggered, a random allowed spell will be used."
-	}
-	
-	for _, node in ipairs(talents) do
-		node.char = self:makeKeyChar(letter)
-		chars[node.char] = node
-		letter = letter + 1
-	end
+--------------- Permadeath
+newBirthDescriptor{
+	type = "permadeath",
+	name = "Exploration",
+	locked = function(birther) return birther:isDonator() end,
+	locked_desc = "Exploration mode: Infinite lives (donator feature)",
+	locked_select = function(birther) birther:selectExplorationNoDonations() end,
+	selection_default = config.settings.tome.default_birth and config.settings.tome.default_birth.permadeath == "Exploration",
+	desc =
+	{
+		"#GOLD##{bold}#Exploration mode#WHITE#",
+		"Provides you with infinite lives.#{normal}#",
+		"This is not the way the game is meant to be played, but it allows you to have a more forgiving experience.",
+		"Remember though that dying is an integral part of the game and helps you become a better player.",
+		"Exploration version of achievements will be granted in this mode.",
+		"Full talent respec is always available.",
+	},
+	game_state = {
+		force_town_respec = false,
+	},
+	copy = {
+		infinite_respec = 1,
+		infinite_lifes = 1,
+	},
+}
+newBirthDescriptor{
+	type = "permadeath",
+	name = "Adventure",
+	selection_default = (not config.settings.tome.default_birth) or (config.settings.tome.default_birth and config.settings.tome.default_birth.permadeath == "Adventure"),
+	desc =
+	{
+		"#GOLD##{bold}#Adventure mode#WHITE#",
+		"Provides you with limited extra lives.",
+		"Use it if you want normal playing conditions but do not feel ready for just one life.#{normal}#",
+		"At level 1,2,5,7,14,24,35 get one more 'life' that allows you to resurrect at the start of the level.",
+	},
+	copy = {
+		easy_mode_lifes = 1,
+	},
+}
+newBirthDescriptor{
+	type = "permadeath",
+	name = "Roguelike",
+	selection_default = config.settings.tome.default_birth and config.settings.tome.default_birth.permadeath == "Roguelike",
+	desc =
+	{
+		"#GOLD##{bold}#Roguelike mode#WHITE#",
+		"Provides the closer experience to 'classic' roguelike games.",
+		"You will only have one life; you *ARE* your character.#{normal}#",
+		"Only one life, unless ways to self-resurrect are found in-game.",
+	},
+}
 
-	list = {
-		{ char='', name=('#{bold}#选锟斤拷一锟筋法锟斤拷#{normal}#'):toTString(), status='', hotkey='', desc="All known spells that can be used with Arcane Combat.", color=function() return colors.simple(colors.LIGHT_GREEN) end, nodes=talents, shown=true },
-		chars = chars,
-	}
-	self.list = list
-end
+
+-- Worlds
+load("/data/birth/worlds.lua")
+
+-- Races
+load("/data/birth/races/tutorial.lua")
+load("/data/birth/races/human.lua")
+load("/data/birth/races/elf.lua")
+load("/data/birth/races/halfling.lua")
+load("/data/birth/races/dwarf.lua")
+load("/data/birth/races/yeek.lua")
+load("/data/birth/races/giant.lua")
+load("/data/birth/races/undead.lua")
+load("/data/birth/races/construct.lua")
+
+-- Sexes
+load("/data/birth/sexes.lua")
+
+-- Classes
+load("/data/birth/classes/tutorial.lua")
+load("/data/birth/classes/warrior.lua")
+load("/data/birth/classes/rogue.lua")
+load("/data/birth/classes/mage.lua")
+load("/data/birth/classes/wilder.lua")
+load("/data/birth/classes/celestial.lua")
+load("/data/birth/classes/corrupted.lua")
+load("/data/birth/classes/afflicted.lua")
+load("/data/birth/classes/chronomancer.lua")
+load("/data/birth/classes/psionic.lua")
+load("/data/birth/classes/adventurer.lua")
+load("/data/birth/classes/none.lua")

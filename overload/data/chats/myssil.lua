@@ -36,7 +36,10 @@ newChat{ id="welcome",
 我是守护者米歇尔，欢迎来到伊格。]],
 	answers = {
 		{"我需要一切可以获得的帮助，不是为我自己，是为了东北部的德斯小镇。", jump="save-derth", cond=function(npc, player) local q = player:hasQuest("lightning-overload") return q and q:isCompleted("saved-derth") and not q:isCompleted("tempest-entrance") and not q:isStatus(q.DONE) end},
-		{"守护者，我已经按您的意思将风暴术士杀死了……", jump="tempest-dead", cond=function(npc, player) local q = player:hasQuest("lightning-overload") return q and q:isCompleted("tempest-entrance") and not q:isCompleted("antimagic-reward") and q:isStatus(q.DONE) end},
+		{"守护者，我已经按您的意思将风暴术士杀死了。", jump="tempest-dead", cond=function(npc, player) 
+			local q = player:hasQuest("lightning-overload") 
+			return q and q:isCompleted("tempest-urkis-slain") and not q:isCompleted("antimagic-reward")
+		end},
 		{"再见，守护者。"},
 	}
 }
@@ -70,11 +73,13 @@ newChat{ id="tempest-dead",
 			end
 			-- Make sure a previous amulet didnt bug it out
 			if player:getTalentTypeMastery("wild-gift/fungus") == 0 then player:setTalentTypeMastery("wild-gift/fungus", 1) end
-			game.logPlayer(player, "#00FF00#You gain the fungus talents school.")
+			game.logPlayer(player, "#00FF00#You gain the fungus talents school and your Mana Clash is enhanced.")
+			game.player:learnTalent(game.player.T_ANTIMAGIC_ADEPT, true, nil, {no_unlearn=true})		
 			if player:knowTalentType("cunning/trapping") then
 				game.party:learnLore("zigur-purging-trap")
 			end	
 			player:hasQuest("lightning-overload"):setStatus(engine.Quest.COMPLETED, "antimagic-reward")
+			player:setQuestStatus("lightning-overload", engine.Quest.COMPLETED)
 		end},
 	}
 }

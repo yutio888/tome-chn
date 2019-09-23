@@ -26,7 +26,7 @@ module(..., package.seeall, class.inherit(Dialog))
 
 function _M:init()
 	self:generateList()
-	Dialog.init(self, "创造陷阱", 1, 1)
+	Dialog.init(self, "调试——创造陷阱", 1, 1)
 
 	local list = List.new{width=400, height=500, list=self.list, fct=function(item) self:use(item) end}
 
@@ -45,7 +45,13 @@ function _M:init()
 			if v.name:sub(1, 1):lower() == c:lower() then list:select(i) return end
 		end
 	end}
-	self.key:addBinds{ EXIT = function() game:unregisterDialog(self) end, }
+	self.key:addBinds{ EXIT = function() game:unregisterDialog(self) end,
+		LUA_CONSOLE = function()
+			if config.settings.cheat then
+				local DebugConsole = require "engine.DebugConsole"
+				game:registerDialog(DebugConsole.new())
+			end
+		end,}
 end
 
 function _M:on_register()
@@ -56,15 +62,36 @@ function _M:use(item)
 	if not item then return end
 	game:unregisterDialog(self)
 
+	local t = game.zone:finishEntity(game.level, "trap", item.e)
 	if item.unique then
-		local n = game.zone:finishEntity(game.level, "trap", item.e)
-		n:identify(true)
-		game.zone:addEntity(game.level, n, "trap", game.player.x, game.player.y)
+		t:identify(true)
 	else
-		local n = game.zone:finishEntity(game.level, "trap", item.e)
-		n:setKnown(game.player, true)
-		game.zone:addEntity(game.level, n, "trap", game.player.x, game.player.y)
+		t:setKnown(game.player, true) t:identify(true)
 	end
+	self:placeTrap(t)
+end
+
+function _M:placeTrap(t)
+	local p = game.player
+	local tg = {type="hit", range=100, no_restrict=true, nowarning=true, act_exclude={[p.uid]=true}}
+	local x, y, trap
+	local co = coroutine.create(function()
+			x, y = p:getTarget(tg)
+			if x and y then
+				trap = game.level.map(x, y, engine.Map.TRAP)
+				if trap then
+					game.log("#LIGHT_BLUE#Trap [%s]%s already occupies (%d, %d)", trap.uid, trap.name, x, y)
+					return
+				end
+				game.zone:addEntity(game.level, t, "trap", x, y)
+				local Dstring = t.getDisplayString and t:getDisplayString() or ""
+				game.log("#LIGHT_BLUE#Added %s[%s]%s at (%d, %d)", Dstring, t.uid, t.name, x, y)
+				return x, y, trap
+			end
+			return
+		end
+	)
+	coroutine.resume(co)
 end
 
 function _M:generateList()

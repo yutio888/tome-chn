@@ -213,6 +213,7 @@ newChat{ id="permanent-cloak",
 		{"好，就这么办。", action=function(npc, player)
 			local cloak = player:findInAllInventoriesBy("define_as", "CLOAK_DECEPTION")
 			cloak.upgraded_cloak = true
+			player.permanent_undead_cloak = true  -- Prevents the effect being removed from moving the flags
 			q.shertul_energy = q.shertul_energy - 10
 			q:setStatus(engine.Quest.COMPLETED, "permanent-cloak")
 		end},

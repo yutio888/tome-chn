@@ -51,10 +51,10 @@ registerTalentTranslation{
 	id = "T_SHIELD_WALL",
 	name = "盾墙",
 	info = function (self,t)
-		return ([[进 入 防 御 姿 态， 提 高 %d 闪 避 、 %d 护 甲 值 和 %d 格挡值。
-		 受 敏 捷 影 响， 闪 避 和 护 甲 值 增 益 有 额 外 加 成。
-		 受 力 量 影 响 格 挡 值 有 额 外 加 成。
-		另 外 它 同 时 也 会 提 供 %d%% 震 慑 和 击 退 免 疫。]]):
+		return ([[进入一个保护性的战斗姿态，让你在使用盾牌的同时更熟练地保护自己。
+		提升护甲值%d，格挡值%d，减少格挡冷却2回合。
+		提升眩晕和击退抗性%d%%。
+		护甲和格挡值加成受你的敏捷和力量值影响。]]):
 		format(t.getDefense(self, t), t.getArmor(self, t), t.getBlock(self, t), 100*t.stunKBresist(self, t))
 	end,
 
@@ -76,7 +76,7 @@ registerTalentTranslation{
 	id = "T_SHIELD_EXPERTISE",
 	name = "盾牌专精",
 	info = function(self, t)
-		return ([[当 你 用 盾 牌 攻 击 时 提 高 你 的 伤 害 和 闪 避， 并 提 高 法 术 豁 免（ +%d ） 和 物 理 豁 免（ +%d ）。]]):format(t.getSpell(self, t), t.getPhysical(self, t))
+		return ([[当 你 用 盾 牌 攻 击 时 提 高 你 的 伤 害， 并 提 高 法 术 豁 免（ +%d ） 和 物 理 豁 免（ +%d ）。]]):format(t.getSpell(self, t), t.getPhysical(self, t))
 	end,
 }
 

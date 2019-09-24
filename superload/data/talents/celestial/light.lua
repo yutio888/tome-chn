@@ -32,9 +32,9 @@ registerTalentTranslation{
 	id = "T_BARRIER",
 	name = "护盾术",
 	info = function(self, t)
-		local absorb = t.getAbsorb(self, t)
+		local absorb = t.getAbsorb(self, t) * (100 + (self:attr("shield_factor") or 0)) / 100
 		return ([[一 个 持 续 10 回 合 的 保 护 性 圣 盾 围 绕 着 你， 可 吸 收 %d 点 伤 害。 
-		 受 法 术 强 度 影 响， 圣 盾 的 最 大 吸 收 量 有 额 外 加 成。]]):
+		 受 法 术 强 度 影 响， 圣 盾 的 最 大 吸 收 量 有 额 外 加 成 ， 该技能可以暴击。]]):
 		format(absorb)
 	end,
 }

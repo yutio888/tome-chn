@@ -30,7 +30,7 @@ registerTalentTranslation{
 	name = "酸火",
 	info = function(self, t)
 		return ([[ 你 召 唤 酸 云 覆 盖 半 径 %d 的 地 面 ， 持 续 %d 回 合 。 酸 云 具 有 腐 蚀 性 ， 能 致 盲 敌 人 。
-		 每 回 合 ， 酸 云 对 每 个 敌 人 造 成 %0.1f 点 酸 性 伤 害 ，25%% 几 率 致 盲， 同 时 有 %d%% 几 率 除 去 一 个 有 益 的 魔 法 效 果。
+		 每 回 合 ， 酸 云 对 每 个 敌 人 造 成 %0.1f 点 酸 性 伤 害 ，25%% 几 率 致 盲， 同 时 有 %d%% 几 率 除 去 一 个 有 益 的 魔 法 效 果或魔法持续技能。
 		 受 精 神 强 度 影 响 ， 伤 害 有 额 外 加 成。]]):
 		format(self:getTalentRadius(t), t.getDuration(self, t), damDesc(self, DamageType.ACID, t.getDamage(self, t)), t.getChance(self, t))
 	end,

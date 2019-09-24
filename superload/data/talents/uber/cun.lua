@@ -27,15 +27,30 @@ registerTalentTranslation{
 	name = "无尽灾厄",
 	["require.special.desc"] = "曾 造 成 超 过 50000 点 酸 性、 枯 萎、 暗 影、 精 神 或 时 空 伤 害",
 	info = function(self, t)
-		return ([[你 被 灾 厄 光 环 笼 罩。 
-		 你 造 成 的 酸 液 伤 害， 有 20％ 几 率 对 敌 人 造 成 原 伤 害 值 %d%% 的 伤 害， 持 续 5 回 合， 同 时 降 低 %d 点 命 中； 
-		 你 造 成 的 枯 萎 伤 害， 有 20％ 几 率 导 致 敌 人 染 上 随 机 疾 病， 造 成 持 续 5 回 合 的 %d%% 原 始 伤 害， 降 低 随 机 某 项 属 性 %d 点； 
-		 你 造 成 的 暗 影 伤 害， 有 20％ 几 率 使 敌 人 失 明， 持 续 5 回 合。 
-		 你 造 成 的 时 空 伤 害， 有 20％ 几 率 使 敌 人 减 速 30％， 持 续 5 回 合。 
-		 你 造 成 的 精 神 伤 害， 有 20％ 几 率 使 敌 人 混 乱， 持 续 5 回 合。 
-		 以 上 效 果 只 有 在 伤 害 超 过 150 点 才 会 触 发。 
-		 受 灵 巧 影 响， 伤 害 有 额 外 加 成 。 ]])
-		:format(100*t.cunmult(self) / 2.5, self:getCun() / 2, 100*t.cunmult(self) / 2.5, self:getCun() / 3)
+		local blight_dam, blight_disease = t.getBlight(self, t)
+		local cooldowns = {}
+		local str = ""
+		-- Display the remaining cooldowns in the talent tooltip only if its learned
+		if self:knowTalent(self.T_ENDLESS_WOES) then
+			for dt, _ in pairs(t.dts) do
+				local proc = self:hasProc("endless_woes_"..dt:lower())
+				if proc then cooldowns[#cooldowns+1] = (dt:lower()):capitalize()..": "..proc.turns end
+			end
+			str = "(冷却)".."\n"..table.concat(cooldowns, "\n")
+		end
+		return ([[你 被 灾 厄 光 环 笼 罩，存储你造成的元素伤害。
+		当你积累的元素伤害达到%d时，你会向一个随机的敌人发射一次强力的爆炸，在半径%d范围内造成%d的该类型伤害，并对敌人附加以下的附加效果：
+
+		#GREEN#酸性:#LAST#  每回合受到 %d 酸性伤害，持续5回合。
+		#DARK_GREEN#枯萎:#LAST#  每回合受到 %d 枯萎伤害， 力量、体质和敏捷减少 %d，持续5回合
+		#GREY#黑暗:#LAST#  造成的所有伤害减少 %d%% ，持续5回合。
+		#LIGHT_STEEL_BLUE#时空:#LAST#  整体速度降低 %d%%，持续5回合。
+		#YELLOW#精神:#LAST#  混乱 (强度 %d%%) ，持续5回合。
+
+		同种效果最多每12回合触发一次。这不是普通的技能冷却。
+		伤害和效果强度随你的灵巧值增加，伤害阈值随你的等级增加，施加附加效果的强度由你的精神强度和法术强度的最高值决定。
+		%s]])
+		:format(t.getThreshold(self, t), t.getDamage(self, t), self:getTalentRadius(t), t.getAcid(self, t), blight_dam, blight_disease, t.getDarkness(self, t), t.getTemporal(self, t), t.getMind(self, t), str)
 	end,
 }
 
@@ -55,17 +70,32 @@ registerTalentTranslation{
 	name = "元素狂潮",
 	["require.special.desc"] = "曾 造 成 50000 点 奥 术、 火 焰、 冰 冷、 闪 电、 光 系 或 自 然 伤 害",
 	info = function(self, t)
-		local cold = t.getColdEffects(self, t)
-		return ([[你 被 元 素 光 环 笼 罩， 当 使 用 某 种 元 素 造 成 暴 击 时， 有 一 定 几 率 触 发 以 下 特 效： 
-		 奥 术 伤 害 有 30％ 几 率 使 自 身 增 加 20％ 施 法 速 度， 持 续 5 回 合。 
-		 火 焰 伤 害 有 30％ 几 率 移 除 自 身 所 有 物 理 和 魔 法 的 负 面 效 果。
-		 寒 冷 伤 害 有 30％ 几 率 获 得 持 续 5 回 合 的 冰 晶 皮 肤， 受 到 的 物 理 伤 害 减 少 %d%%， 提 升 %d 护 甲，并 且 攻 击 者 会 受 到 %d 点 冰 冷 反 弹 伤 害。 
-		 闪 电 伤 害 有 30％ 几 率 化 为 闪 电 之 体 5 回 合， 受 到 的 任 何 攻 击 会 让 你 向 相 邻 位 置 传 送 一 码， 从 而 使 伤 害 无 效（ 此 效 果 每 回 合 只 能 生 效 一 次）。 
-		 光 系 伤 害 有 30％ 几 率 形 成 一 个 吸 收 %d 伤 害 的 护 盾， 持 续 5 回 合。 
-		 自 然 伤 害 有 30％ 几 率 强 化 你 的 皮 肤， 对 任 何 魔 法 负 面 效 果 免 疫， 持 续 5 回 合。 
-		 寒 冷 和 光 系 效 果 随 灵 巧 增 长 。 
-		 以 上 效 果 只 有 在 伤 害 超 过 %d 点 的 情 况 下 才 会 触 发（ 由 你 的 等 级 决 定）。 ]])
-		:format(cold.physresist, cold.armor, cold.dam, t.getShield(self, t), t.getThreshold(self, t))
+		local cooldowns = {}
+		local str = ""
+		local cold = t.getCold(self, t)
+		-- Display the remaining cooldowns in the talent tooltip only if its learned
+		if self:knowTalent(self.T_ELEMENTAL_SURGE) then
+			for dt, _ in pairs(t.dts) do
+				local proc = self:hasProc("elemental_surge_"..dt:lower())
+				if proc then cooldowns[#cooldowns+1] = (dt:lower()):capitalize()..": "..proc.turns end
+			end
+		str = "(冷却)".."\n"..table.concat(cooldowns, "\n")
+		end
+		return ([[你被元素光环笼罩，存储你造成的元素伤害。
+		当你积累的元素伤害达到%d时，你会向一个随机的敌人发射一次强力的爆炸，在半径%d范围内造成%d的该类型伤害，并对你自己附加以下的附加效果：
+
+		物理:		清除1个物理负面特效并给予2回合物理负面特效豁免。
+		#PURPLE#奥术:#LAST#		增加你的精神和施法速度30%%，持续3回合。
+		#LIGHT_RED#火焰:#LAST#		增加你所造成的所有伤害%d%%，持续3回合。
+		#1133F3#寒冷:#LAST#		将你的皮肤变成冰，增加护甲%d，对攻击者造成%d冰冻伤害，持续3回合
+		#ROYAL_BLUE#闪电:#LAST#	你的移动速度提升%d%%，持续2回合。
+		#YELLOW#光系:#LAST#		技能冷却时间减少20%%，持续3回合。
+		#LIGHT_GREEN#自然:#LAST#		清除1个魔法负面特效并给予2回合魔法负面特效豁免。
+
+		同种效果最多每10回合触发一次。这不是普通的技能冷却。
+		伤害和效果强度随你的灵巧值增加，伤害阈值随你的等级增加。
+		%s]])
+		:format(t.getThreshold(self, t), t.getDamage(self, t), self:getTalentRadius(t), t.getFire(self, t), cold.armor, cold.dam, t.getLightning(self, t), str)
 	end,
 }
 
@@ -76,9 +106,9 @@ eye_of_the_tiger_data = {
 		reduce = 2,
 	},
 	spell = {
-		desc = "所 有 的 法 术 暴 击 减 少 随 机 的 1 个 冷 却 中 的 法 术  技 能 1 回 合 冷 却 时 间。 ",
+		desc = "所 有 的 法 术 暴 击 减 少 随 机 的 1 个 冷 却 中 的 法 术  技 能 2 回 合 冷 却 时 间。 ",
 		types = { "^spell/", "^corruption/", "^celestial/", "^chronomancy/" },
-		reduce = 1,
+		reduce = 2,
 	},
 	mind = {
 		desc = "所 有 的 精 神 暴 击 减 少 随 机 的 1 个 冷 却 中 的 自 然 / 心 灵 / 痛 苦 系 技 能 2 回 合 冷 却 时 间。 ",
@@ -90,7 +120,8 @@ registerTalentTranslation{
 	id = "T_EYE_OF_THE_TIGER",
 	name = "猛虎之眼",
 	trigger = function(self, t, kind)
-		if self.turn_procs.eye_tiger then return end
+		local kind_str = "eye_tiger_"..kind
+		if self:hasProc(kind_str) then return end
 
 		local tids = {}
 
@@ -113,13 +144,13 @@ registerTalentTranslation{
 		self.talents_cd[tid] = self.talents_cd[tid] - (d and d.reduce or 1)
 		if self.talents_cd[tid] <= 0 then self.talents_cd[tid] = nil end
 		self.changed = true
-		self.turn_procs.eye_tiger = true
+		self:setProc(kind_str)
 	end,
 	info = function(self, t)
 		local list = {}
 		for _, d in pairs(eye_of_the_tiger_data) do list[#list+1] = d.desc end
 		return ([[%s		
-		每 回 合 最 多 触 发 一 次 ， 不 能 影 响 触 发 该 效 果 的 技 能。]])
+		每种类型 每 回 合 最 多 触 发 一 次 ， 不 能 影 响 触 发 该 效 果 的 技 能。]])
 		:format(table.concat(list, "\n"))
 	end,
 
@@ -136,22 +167,35 @@ registerTalentTranslation{
 		 分 组 1：
 		- 格 斗 / 体 质 强 化 系
 		- 灵 巧 / 生 存 系
+		- 自 然 / 自 然 协 调 系
 		 分 组 2：
-		- 格 斗 / 移 动 系
-		- 格 斗 / 阵 地 控 制 系
 		- 自 然 / 自 然 召 唤 系
 		- 自 然 / 灵 晶 掌 握 系
 		- 超 能 / 梦 境 系
+		- 超 能 / 强 化 移 动 系
+		- 超 能 / 反 馈 系
 		 分 组 3：
 		- 法 术 / 侦 查 系 
 		- 法 术 / 法 杖 格 斗 系
 		- 法 术 / 岩 石 炼 金 系
+		- 堕 落 / 邪 恶 生 命 系
+		- 堕 落 / 邪 术 系
+		- 堕 落 / 诅 咒 系
 		- 天 空 / 赞 歌 系
-		- 天 空 / 圣 光 系
 		- 时 空 / 时 空 系]])
 		:format()
 	end,
 }
+
+registerTalentTranslation{
+	id = "T_ADEPT",
+	name = "熟能生巧",
+	info = function(self, t)
+		return ([[你的技能树系数增加0.3。请注意，许多技能不会从这一增长中受益。]])
+		:format()
+	end,
+}
+
 
 registerTalentTranslation{
 	id = "T_TRICKS_OF_THE_TRADE",

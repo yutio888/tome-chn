@@ -40,13 +40,13 @@ registerTalentTranslation{
 	id = "T_DISRUPTION_SHIELD",
 	name = "干扰护盾",
 	info = function(self, t)
-		return ([[使 周 身 围 绕 着 奥 术 能 量， 阻 止 任 何 伤 害 并 回 复 法 力 值。 
-		 每 受 到 1 点 伤 害 得 到 %0.2f 点 法 力 值（ 奥 术 护 盾 影 响 此 系 数）。 
-		 如 果 你 的 法 力 值 因 为 该 护 盾 而 回 复 过 多， 则 它 会 中 断 并 在 3 码 半 径 范 围 内 释 放 一 股 持 续 10 回 合 的 致 命 奥 术 风 暴， 每 回 合 造 成 10%% 已 吸 收 伤 害 值, 最 多 造 成 共 计 %d 点 伤 害。  
-		 当 奥 术 风 暴 激 活 时， 你 同 样 会 增 加 %d%% 奥 术 抵 抗。 
-		 只 有 在 法 力 值 低 于 25 ％ 时 方 可 使 用。 
-		 受 法 术 强 度 影 响， 每 点 伤 害 可 回 复 更 少 法 力 值。]]):
-		format(t.getManaRatio(self, t), t.getMaxDamage(self, t), t.getArcaneResist(self, t))
+		local radius = self:hasEffect(self.EFF_AETHER_AVATAR) and 10 or 3
+		return ([[你的身边充满奥术力量，阻止你受到的伤害，并将其改为扣减法力值。
+		你受到的25%%的伤害将会被改为扣减法力值，每点伤害扣减%0.2f点法力值。伤害护盾会降低这一消耗。
+		当你解除干扰护盾时，你会获得100点法力值，并在你周围产生半径为%d的致命的奥数风暴，持续10回合，每回合造成10%%的吸收的总伤害，共造成%d点伤害。
+		当你的法力值不足10%%时，你会自动解除这一技能。
+		伤害到魔法的比例受你的法术强度加成。]]):
+		format(t.getManaRatio(self, t), radius, damDesc(self, DamageType.ARCANE, t.getMaxDamage(self, t)))
 	end,
 }
 

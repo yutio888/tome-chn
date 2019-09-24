@@ -14,7 +14,7 @@ registerTalentTranslation{
 	id = "T_ONSLAUGHT",
 	name = "猛攻",
 	info = function(self, t)
-		return ([[采 取 一 个 猛 攻 姿 态， 当 你 经 过 你 的 敌 人 时， 你 会 将 前 方 弧 形 范 围 内 的 敌 人 全 部 击 退。（ 上 限 %d 码）。 
+		return ([[采 取 一 个 猛 攻 姿 态， 当 你 攻击 你 的 敌 人 时， 你 会 把目标和目标周围的敌人全部击退。（ 上 限 %d 码）。 
 		这 个 姿 态 会 快 速 减 少 体 力 值（ -1 体 力 / 回 合）。]]):
 		format(t.range(self, t))
 	end,

@@ -25,7 +25,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		return ([[当 你 杀 死 一 个 敌 人 后， 多 余 的 伤 害 不 会 消 失。 
 		 反 之 %d%% 的 伤 害 会 溅 落 在 2 码 范 围 内， 造 成 枯 萎 伤 害。 
-		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成。]]):format(t.oversplash(self,t))
+		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成。]]):format(t.getOversplash(self,t))
 	end,
 }
 
@@ -35,6 +35,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local l, c = t.getPower(self, t)
 		return ([[当 你 遭 受 到 超 过 至 少 %d%% 总 生 命 值 的 伤 害 时， 你 有 %d%% 概 率 降 低 所 有 技 能 1 回 合 冷 却 时 间。 
+		鲜血灌注带来的额外生命值，不会影响该技能的伤害阈值。
 		 受 法 术 强 度 影 响， 概 率 有 额 外 加 成。]]):
 		format(l, c)
 	end,

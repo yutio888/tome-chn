@@ -12,6 +12,17 @@ registerTalentTranslation{
 }
 
 registerTalentTranslation{
+	id = "T_DARK_PORTAL",
+	name = "黑暗之门",
+	info = function(self, t)
+		return ([[开 启 一 扇 通 往 目 标 地 点 的 黑 暗 之 门。 所 有 在 目 标 地 点 的 怪 物 将 和 你 调 换 位 置。 
+		 所 有 怪 物（ 除 了 你） 在 传 送 过 程 中 都 会 随 机 感 染 一 种 疾 病， 每 回 合 受 到 %0.2f 枯 萎 伤 害， 持 续 6 回 合。 
+		 同 时， 减 少 其 某 项 物 理 属 性（ 力 量， 体 质 或 敏 捷） %d 点。 
+		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成。]]):format(damDesc(self, DamageType.BLIGHT, self:combatTalentSpellDamage(t, 12, 80)), self:combatTalentSpellDamage(t, 5, 25))
+	end,
+}
+
+registerTalentTranslation{
 	id = "T_VIMSENSE",
 	name = "活力感知",
 	info = function(self, t)
@@ -31,16 +42,6 @@ registerTalentTranslation{
 	end,
 }
 
-registerTalentTranslation{
-	id = "T_DARK_PORTAL",
-	name = "黑暗之门",
-	info = function(self, t)
-		return ([[开 启 一 扇 通 往 目 标 地 点 的 黑 暗 之 门。 所 有 在 目 标 地 点 的 怪 物 将 和 你 调 换 位 置。 
-		 所 有 怪 物（ 除 了 你） 在 传 送 过 程 中 都 会 随 机 感 染 一 种 疾 病， 每 回 合 受 到 %0.2f 枯 萎 伤 害， 持 续 6 回 合。 
-		 同 时， 减 少 其 某 项 物 理 属 性（ 力 量， 体 质 或 敏 捷） %d 点。 
-		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成。]]):format(damDesc(self, DamageType.BLIGHT, self:combatTalentSpellDamage(t, 12, 80)), self:combatTalentSpellDamage(t, 5, 25))
-	end,
-}
 
 
 

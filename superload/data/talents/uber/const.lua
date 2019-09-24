@@ -26,7 +26,7 @@ registerTalentTranslation{
 	name = "永恒防御",
 	["require.special.desc"] = "掌握格挡技能",
 	info = function(self, t)
-		return ([[你 的 格 挡 技 能 持 续 时 间 增 加 1 回 合， 并 且 被 击 中 后 不 会 结 束。  ]])
+		return ([[你 的 格 挡 技 能 持 续 时 间 2 回 合，并且你可以反击任意数量的敌人。]])
 		:format()
 	end,
 }
@@ -46,9 +46,11 @@ registerTalentTranslation{
 	name = "影之护甲",
 	["require.special.desc"] = "曾造成超过50000点暗影伤害",
 	info = function(self, t)
-		return ([[你 懂 得 如 何 融 入 阴 影， 当 你 站 在 黑 暗 地 形 上 时 将 增 加 %d 点 护 甲、 50％ 护 甲 韧 性 和 20%% 闪 避。 同 时， 你 造 成 的 暗 影 伤 害 会 使 你 当 前 所 在 区 域 和 目 标 区 域 陷 入 黑 暗。  
+		return ([[你 懂 得 如 何 融 入 阴 影， 当 你 站 在 黑 暗 地 形 上 时 将 增 加 %d 点 护 甲、 50％ 护 甲 硬度 和 20%% 闪 避。
+		同 时， 你 造 成 的 暗 影 伤 害 会 使 你 当 前 所 在 区 域 和 目 标 区 域 陷 入 黑 暗。  
+		被动增加%d的潜行强度。
 		 受 体 质 影 响, 护 甲 加 值 有 额 外 加 成。]])
-		:format(t.ArmourBonus(self,t))
+		 :format(t.ArmourBonus(self,t), t.getStealth(self, t))
 	end,
 }
 
@@ -80,7 +82,7 @@ registerTalentTranslation{
 	["require.special.desc"] = "承 受 过 至 少 7500 点 枯 萎 伤 害 并 和 大 堕 落 者 一 起 摧 毁 伊 格。",
 	info = function(self, t)
 		return ([[多 亏 了 你 在 堕 落 能 量 上 的 新 发 现， 你 学 到 一 些 方 法 来 增 强 你 的 体 质。 但 是 只 有 当 你 有 一 副 强 壮 的 体 魄 时 方 能 承 受 这 剧 烈 的 变 化。 
-		 增 加 你 250 点 生 命 上 限， %d 点 闪 避， %d 护 甲 值，20%% 护 甲 硬 度 , %d 所 有 豁 免， 你 的 身 体 已 经 突 破 了 自 然 界 的 范 畴 和 大 自 然 的 限 制。 
+		 增 加 你 500 点 生 命 上 限， %d 点 闪 避， %d 护 甲 值，20%% 护 甲 硬 度 , %d 所 有 豁 免， 你 的 身 体 已 经 突 破 了 自 然 界 的 范 畴 和 大 自 然 的 限 制。 
 		 受 体 质 影 响， 豁 免 、护 甲 和 闪 避 有 额 外 加 成。]])
 		:format(self:getCon() / 3, self:getCon() / 3.5, self:getCon() / 3)
 	end,

@@ -33,17 +33,16 @@ registerTalentTranslation{
 	info = function(self, t)
 		local rad = t.getRadius(self, t)
 		local duration = t.getStunDuration(self, t)
-		return ([[召 唤 1 个 龙 卷 风， 缓 慢 跟 随 目 标。 
-		 任 何 在 龙 卷 风 移 动 路 径 上 的 敌 人 会 受 到 %0.2f 闪 电 伤 害。 
-		 当 它 到 达 目 标 时， 它 会 在 %d 码 半 径 范 围 内 爆 炸 并 造 成 %0.2f 闪 电 伤 害， %0.2f 物 理 伤 害。 所 有 受 到 影 响 的 生 物 都 会 被 击 退 并 且 目 标 会 被 震 慑 %d 回 合，爆 炸 不 会 伤 害 释 放 者。 
+		return ([[召 唤 一个 龙 卷 风，它会向着目标极为缓慢地移动，并在目标移动时跟随目标，持续最多20回合。
+		 每当它移动时，半径2范围内的所有敌人会受 到 %0.2f 闪 电 伤 害，并被击退2格。
+		 当 它 到 达 目 标 时， 它 会 在 %d 码 半 径 范 围 内 爆 炸 并 造 成 %0.2f 闪 电 伤 害， %0.2f 物 理 伤 害。 所 有 受 到 影 响 的 生 物 都 会 被 击 退。爆 炸 不 会 伤 害 释 放 者。 
 		 龙 卷 风 持 续 %d 回 合 或 直 到 它 到 达 目 标 为 止。 
 		 受 精 神 强 度 影 响， 伤 害 有 额 外 加 成。 
 		 每 点 雷 龙 系 的 天 赋 可 以 使 你 增 加 闪 电 抵 抗 1%% 。]]):format(
-			damDesc(self, DamageType.LIGHTNING, self:combatTalentMindDamage(t, 10, 110)),
+			damDesc(self, DamageType.LIGHTNING, t.getMoveDamage(self, t)),
 			rad,
-			damDesc(self, DamageType.LIGHTNING, self:combatTalentMindDamage(t, 15, 190)),
-			damDesc(self, DamageType.PHYSICAL, self:combatTalentMindDamage(t, 15, 190)),
-			duration,
+			damDesc(self, DamageType.LIGHTNING, t.getDamage(self, t)),
+			damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t)),
 			self:getTalentRange(t)
 		)
 	end,

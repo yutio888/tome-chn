@@ -6,10 +6,10 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local inc = t.getPercentInc(self, t)
-		return ([[增 加 物 理 强 度  %d ，增 加 剑 、斧 、权 杖 、匕 首 或 者 弓 箭 的 武 器 伤 害  %d%% 。
+		return ([[当使用剑 、斧 、权 杖 、匕 首 或 者 弓 箭 时，增加武 器 伤 害  %d%% ， 物理强度30。
 		 当 装 备 武 器 、弹 药 或 者 计 算 武 器 伤 害 时 ，你 使 用 魔 法 取 代 你 的 力 量 属 性 进 行 计 算 。
 		 这 个 技 能 的 奖 励 伤 害 取 代 武 器 掌 握 、匕 首 掌 握 和 弓 箭 掌 握 的 加 成 。]]):
-		format(damage, 100*inc)
+		format(100*inc)
 	end,
 }
 

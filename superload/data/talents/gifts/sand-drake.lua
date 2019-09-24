@@ -5,11 +5,26 @@ registerTalentTranslation{
 	name = "吞噬",
 	info = function(self, t)
 		return ([[对 目 标 造 成 %d%% 自 然 武 器 伤 害。 
-		 如 果 此 攻 击 将 目 标 生 命 值 降 低 到 %d%% 以 下 或 杀 死 它 时 你 可 以 吞 噬 它 并 杀 死 它， 依 目 标 等 级 恢 复 你 的 生 命 和 自 然 失 衡 值。 
-		 吞 噬 几 率 取 决 于 技 能 等 级 和 对 方 体 型 大 小。 
-		 同 时 ， 这 个 技 能 还 能 被 动 提 升 你 的 物 理 和 精 神 暴 击 率 %d%% 。
-		 每 点 土 龙 系 的 天 赋 可 以 使 你 增 加 物 理 抵 抗 0.5%% 。]]):
-		format(100 * self:combatTalentWeaponDamage(t, 1.6, 2.5), t.maxSwallow(self, t, self), t.getPassiveCrit(self, t))
+		如果这个攻击将目标的生命值降低到其最大生命值的一定比例以下（基于技能等级和两者体型大小）或杀死了它，你会吞噬它，立刻将其杀死，并根据其等级恢复生命值和失衡值。
+		对方会与你的物理强度进行豁免对抗，以防被吞噬。
+		同 时 ， 这 个 技 能 还 能 被 动 提 升 你 的 物 理 和 精 神 暴 击 率 %d%% 。
+		每 点 土 龙 系 的 天 赋 可 以 使 你 增 加 物 理 抵 抗 0.5%% 。
+		如果你装备了盾牌，这一技能也会用你的盾牌攻击。
+
+		基于你目前的体型，吞噬的生命值上限如下所示：
+		微小:  %d%%
+		矮小:  %d%%
+		中等:  %d%%
+		高大:  %d%%
+		庞大:  %d%%
+		巨型:  %d%%]]):
+		format(100 * t.getDamage(self, t), t.getPassiveCrit(self, t),
+			t.maxSwallow(self, t, 1),
+			t.maxSwallow(self, t, 2),
+			t.maxSwallow(self, t, 3),
+			t.maxSwallow(self, t, 4),
+			t.maxSwallow(self, t, 5),
+			t.maxSwallow(self, t, 6))
 	end,
 }
 
@@ -44,7 +59,7 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local duration = t.getDuration(self, t)
 		return ([[你 在 前 方 %d 码 锥 形 范 围 内 喷 出 流 沙。 此 范 围 内 的 目 标 会 受 到 %0.2f 物 理 伤 害 并 被 致 盲 %d 回 合。 
-		 受 力 量 影 响， 伤 害 有 额 外 加 成。 技 能 暴 击 率 基 于 精 神 暴 击 值 计 算。
+		 受 力 量 影 响， 伤 害 有 额 外 加 成。 技 能 暴 击 率 基 于 精 神 暴 击 值 计 算，致盲几率基于你的精神强度。
 		 每 点 土 龙 系 的 天 赋 可 以 使 你 增 加 物 理 抵 抗 0.5%% 。]]):format(self:getTalentRadius(t), damDesc(self, DamageType.PHYSICAL, damage), duration)
 	end,
 }

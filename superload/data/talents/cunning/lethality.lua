@@ -19,12 +19,10 @@ registerTalentTranslation{
 		local bonus = damDesc(self, DamageType.PHYSICAL, t.getBonusDamage(self, t))
 		local duration = t.getDuration(self, t)
 		return ([[集 中 精 力 试 探 目 标 ， 寻 找 其 弱 点 ,造 成 %d%% 武 器 伤 害。
-		每 次 未 命 中 的 试 探 攻 击 将 使 你 接 下 来 的 攻 击 命 中 追 加 %d 点 有 效 值。
-		每 次 命 中 的 试 探 攻 击 将 使 你 接 下 来 的 攻 击 武 器 伤 害 增 加 %0.1f ，武 器 抗 性 穿 透 增 加 %d%% 。
-		以 上 效 果 持 续 %d 回合 。
-		此 外， 你 额 外 获 得 %d 护 甲 穿 透。
-		效 果 受 灵 巧 加 成 。]]):
-		format(100 * damage,t.getAccuracy(self, t), bonus, t.penetration(self, t),  duration, t.getAPR(self, t))
+		在接下来的%d回合内，你获得%d护甲穿透，%d命中，%d%%所有伤害穿透。
+		学习这一技能还会使你的近战和弓箭攻击永久获得%d护甲穿透。
+		护甲穿透和命中加成受灵巧加成。]]):
+		format(100 * damage, duration, t.getAPRBuff(self, t), t.getAccuracy(self, t), t.getPenetration(self, t), t.getAPR(self, t))
 	end,
 }
 
@@ -33,7 +31,7 @@ registerTalentTranslation{
 	name = "剑刃乱舞",
 	info = function (self,t)
 		return ([[如 疾 风 般 挥 舞 武 器 ，攻 击 速 度 增 加  %d%%  ，每 次 攻 击 追 加 一 名 目 标 ，造 成  %d%%  武 器 伤 害 。
-该 技 能 每 回 合 抽 取 6 点 体 力 。]]):format(t.getSpeed(self, t)*100, t.getDamage(self,t)*100)
+该 技 能 每 回 合 抽 取 4 点 体 力 。]]):format(t.getSpeed(self, t)*100, t.getDamage(self,t)*100)
 	end,
 }
 

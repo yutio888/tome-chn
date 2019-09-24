@@ -20,7 +20,7 @@ registerTalentTranslation{
 		local radius = self:getTalentRadius(t)
 		local sight = t.getSightLoss(self,t)
 		local cooldown = t.getCooldownReduction(self,t)
-		return ([[发 射 一 个 带 着 烟 雾 弹 的 箭 头 造 成 %d%% 伤 害 并 制 造 一 个 半 径 为 %d 的 烟 雾. 被 困 在 内 的 人 将 被 混 乱( 强 度 50%%) 并 减 少 视 野 %d 格 5 回 合.
+		return ([[发 射 一 个 带 着 烟 雾 弹 的 箭 头 造 成 %d%% 伤 害 并 制 造 一 个 半 径 为 %d 的 烟 雾. 被 困 在 内 的 人 将 减 少 视 野 %d 格 5 回 合.
 此 效 果 将 减 少 你 隐 匿 技 能 %d 回 合 冷 却 时 间. 如 果 冷 却 时 间 减 到 0, 无 论 敌 人 是 否 太 近, 都 可 立 即 激 活 隐 匿.
 烟 雾 弹 影 响 目 标 的 几 率 随 你 命 中 增 加.]]):
 		format(dam, radius, sight, cooldown)

@@ -8,7 +8,13 @@ registerTalentTranslation{
 		 受 精 神 强 度 影 响， 伤 害 有 额 外 加 成。]]):format(damDesc(self, DamageType.FIRE, self:combatTalentMindDamage(t, 8, 120)))
 	end,
 }
-
+registerTalentTranslation{
+	id = "T_WILD_RITCH_FLAMESPITTER_BOLT"
+	name = "火焰喷射",
+	info = function(self, t)
+		return ([[吐 出 一 枚 火 球 造 成 %0.2f 火 焰 伤 害。 
+		 受 精 神 强 度 影 响， 伤 害 有 额 外 加 成。]]):format(damDesc(self, DamageType.FIRE, self:combatTalentMindDamage(t, 8, 120)))
+}
 registerTalentTranslation{
 	id = "T_FLAME_FURY",
 	name = "火焰之怒",
@@ -24,16 +30,26 @@ registerTalentTranslation{
 	id = "T_ACID_BREATH",
 	name = "酸液吐息",
 	info = function(self, t)
-		return ([[向 目 标 喷 射 酸 液 造 成 %0.2f 伤 害。 
+		return ([[向 单体目标 喷 射 酸 液 造 成 %0.2f 伤 害。 
 		 受 意 志 影 响， 伤 害 有 额 外 加 成。]]):format(damDesc(self, DamageType.ACID, self:combatTalentStatDamage(t, "wil", 30, 430)))
 	end,
 }
 
 registerTalentTranslation{
+	id = "T_ACID_SPIT",
+	name = "酸液喷吐",
+	info = function(self, t)
+		return ([[向 敌人 喷 射 酸 液 造 成 %0.2f 伤 害。 
+		 受 意 志 影 响， 伤 害 有 额 外 加 成。]]):format(damDesc(self, DamageType.ACID, self:combatTalentStatDamage(t, "wil", 30, 430)))
+	end,
+}
+
+
+registerTalentTranslation{
 	id = "T_LIGHTNING_BREATH_HYDRA",
 	name = "闪电吐息",
 	info = function(self, t)
-		return ([[喷 出 闪 电 吐 息 造 成 %d 到 %d 伤 害。 
+		return ([[向敌人喷 出 闪 电 吐 息 造 成 %d 到 %d 伤 害。 
 		 受 意 志 影 响， 伤 害 有 额 外 加 成。]]):
 		format(
 			damDesc(self, DamageType.LIGHTNING, (self:combatTalentStatDamage(t, "wil", 30, 500)) / 3),
@@ -43,13 +59,37 @@ registerTalentTranslation{
 }
 
 registerTalentTranslation{
+	id = "T_LIGHTNING_SPIT_HYDRA",
+	name = "闪电喷吐",
+	info = function(self, t)
+		return ([[向单体敌人喷吐闪电 造 成 %d 到 %d 伤 害。 
+		 受 意 志 影 响， 伤 害 有 额 外 加 成。]]):
+		format(
+			damDesc(self, DamageType.LIGHTNING, (self:combatTalentStatDamage(t, "wil", 30, 500)) / 3),
+			damDesc(self, DamageType.LIGHTNING, self:combatTalentStatDamage(t, "wil", 30, 500))
+		)
+	end,
+}
+
+
+registerTalentTranslation{
 	id = "T_POISON_BREATH",
 	name = "毒性吐息",
 	info = function(self, t)
-		return ([[施 放 剧 毒 吐 息 至 你 的 目 标 造 成 %d 伤 害， 持 续 数 回 合。 
+		return ([[向敌人施 放 剧 毒 吐 息 至 你 的 目 标 造 成 %d 伤 害， 持 续 数 回 合。 
 		 受 意 志 影 响， 伤 害 有 额 外 加 成。]]):format(damDesc(self, DamageType.NATURE, self:combatTalentStatDamage(t, "wil", 30, 460)))
 	end,
 }
+
+registerTalentTranslation{
+	id = "T_POISON_SPIT_HYDRA",
+	name = "毒性喷吐",
+	info = function(self, t)
+		return ([[向单体敌人施 放 剧 毒 喷吐 至 你 的 目 标 造 成 %d 伤 害， 持 续 数 回 合。 
+		 受 意 志 影 响， 伤 害 有 额 外 加 成。]]):format(damDesc(self, DamageType.NATURE, self:combatTalentStatDamage(t, "wil", 30, 460)))
+	end,
+}
+
 
 registerTalentTranslation{
 	id = "T_WINTER_S_FURY",
@@ -64,14 +104,25 @@ registerTalentTranslation{
 }
 
 registerTalentTranslation{
+	id = "T_WINTER_S_GRASP",
+	name = "严冬抓握",
+	info = function(self, t)
+		return ([[将目标抓取到自己的身边，用寒霜覆盖它，使其移动速度减少50%%，持续%d回合。
+		寒冰还会对其造成%0.2f寒冷伤害。
+		伤害和减速几率受精神强度加成。]]):
+		format(t.getDuration(self, t), damDesc(self, DamageType.COLD, self:combatTalentMindDamage(t, 5, 140)))
+	end,
+}
+
+registerTalentTranslation{
 	id = "T_RITCH_FLAMESPITTER",
-	name = "契约：里奇之焰",
+	name = "契约：火焰里奇",
 	info = function(self, t)
 		local incStats = t.incStats(self, t, true)
-		return ([[召 唤 1 只 里 奇 之 焰 来 燃 烧 敌 人， 持 续 %d 回 合。 里 奇 之 焰 是 非 常 脆 弱 的， 但 是 它 们 可 以 远 远 地 燃 烧 敌 人。 
+		return ([[召 唤 一只 火焰里 奇 来 燃 烧 敌 人， 持 续 %d 回 合。 火焰里 奇很脆弱， 但 是 它 们 可 以 远 远 地 燃 烧 敌 人。 
 		 它 拥 有 %d 点 意 志， %d 点 灵 巧 和 %d 点 体 质。 
-		 你 的 召 唤 物 继 承 你 部 分 属 性： 增 加 百 分 比 伤 害、 震 慑 / 定 身 / 混 乱 / 致 盲 抵 抗 和 护 甲 穿 透。 
-		 受 精 神 强 度 影 响， 里 奇 之 焰 的 意 志 和 灵 巧 有 额 外 加 成。]])
+		 你 的 召 唤 物 继 承 你 部 分 属 性： 增 加 百 分 比 伤 害、抗性穿透、 震 慑 / 定 身 / 混 乱 / 致 盲 抵 抗 和 护 甲 穿 透。 
+		 受 精 神 强 度 影 响， 火焰里 奇 的 意 志 和 灵 巧 有 额 外 加 成。]])
 		:format(t.summonTime(self, t), incStats.wil, incStats.cun, incStats.con)
 	end,
 }
@@ -81,7 +132,7 @@ registerTalentTranslation{
 	name = "契约：三头蛇",
 	info = function(self, t)
 		local incStats = t.incStats(self, t, true)
-		return ([[召 唤 1 只 三 头 蛇 来 摧 毁 敌 人， 持 续 %d 回 合。 
+		return ([[召 唤 一只 三 头 蛇 来 摧 毁 敌 人， 持 续 %d 回 合。 
 		 三 头 蛇 可 以 喷 出 毒 系、 酸 系、 闪 电 吐 息。 
 		 它 拥 有 %d 点 意 志， %d 点 体 质 和 18 点 力 量。 
 		 你 的 召 唤 物 继 承 你 部 分 属 性： 增 加 百 分 比 伤 害、 震 慑 / 定 身 / 混 乱 / 致 盲 抵 抗 和 护 甲 穿 透。 
@@ -109,7 +160,7 @@ registerTalentTranslation{
 	name = "契约：火龙",
 	info = function(self, t)
 		local incStats = t.incStats(self, t, true)
-		return ([[召 唤 1 只 火 龙 来 摧 毁 敌 人， 持 续 %d 回 合。 
+		return ([[召 唤 一只 火 龙 来 摧 毁 敌 人， 持 续 %d 回 合。 
 		 火 龙 是 可 以 从 很 远 的 地 方 烧 毁 敌 人 的 强 大 生 物。 
 		 它 拥 有 %d 点 力 量， %d 点 体 质 和 38 点 意 志。 
 		 你 的 召 唤 物 继 承 你 部 分 属 性： 增 加 百 分 比 伤 害、 震 慑 / 定 身 / 混 乱 / 致 盲 抵 抗 和 护 甲 穿 透。 

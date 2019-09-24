@@ -44,8 +44,7 @@ registerTalentTranslation{
 		local insightdam = t.getFireDamageInSight(self, t)
 		local res = t.getResistance(self, t)
 		local manadrain = t.getManaDrain(self, t)
-		return ([[将 你 的 身 体 转 化 为 纯 净 的 火 焰， 增 加 你 %d%% 火 焰 抵 抗。 对 任 何 攻 击 你 的 怪 物 造 成 %0.2f 火 焰 伤 害 并 向 附 近 目 标 每 回 合 随 机 射 出 %d 个 缓 慢 移 动 的 火 焰 球， 每 个 火 球 造 成 %0.2f 火 焰 伤 害。 
-		 当 此 技 能 激 活 时， 每 回 合 消 耗 %0.2f 法 力 值。 
+		return ([[将 你 的 身 体 转 化 为 纯 净 的 火 焰， 增 加 你 %d%% 火 焰 抵 抗。 对 任 何 进展攻 击 你 的 怪 物 造 成 %0.2f 火 焰 伤 害 并 向 附 近 目 标 每 回 合 随 机 射 出 %d 个 缓 慢 移 动 的 火 焰 球， 每 个 火 球 造 成 %0.2f 火 焰 伤 害。 
 		 受 法 术 强 度 影 响， 伤 害 和 火 焰 抵 抗 有 额 外 加 成。]]):
 		format(res,onhitdam, math.floor(self:getTalentLevel(t)), insightdam,-manadrain)
 	end,

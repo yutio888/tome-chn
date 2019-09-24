@@ -102,7 +102,7 @@ registerTalentTranslation{
 	name = "刀扇",
 	info = function (self,t)
 		return ([[额 外 存 储 %d 把 飞 刀,可 以 一 次 性 扔 出 ，每 把 飞 刀 对 %d 格 锥 形 范 围 内 的 敌 人 造 成 %d%% 伤 害 .
-		如 果 飞 刀 数 量 多 于 敌 人, 每 个 目 标 最 多 被 同 时 击 中 3 次. 飞 刀 无 法 穿 透 生 物.]]):
+		如 果 飞 刀 数 量 多 于 敌 人, 每 个 目 标 最 多 被 同 时 击 中 5 次. 飞 刀 无 法 穿 透 生 物.]]):
 		format(t.getNb(self,t), self:getTalentRadius(t), t.getDamage(self, t)*100)
 	end,
 }

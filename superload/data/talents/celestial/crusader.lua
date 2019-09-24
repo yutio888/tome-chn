@@ -15,7 +15,7 @@ registerTalentTranslation{
 	id = "T_MARK_OF_LIGHT",
 	name = "光之印记",
 	info = function(self, t)
-		return ([[你 用 光 标 记 目 标 5 回 合，你 对 它 近 战 攻 击 时 ， 将 受 到 相 当 于 %d%% 伤 害 的 治 疗 。]]):
+		return ([[你 用 光 标 记 目 标 3 回 合，你 对 它 近 战 攻 击 时 ， 将 受 到 相 当 于 %d%% 伤 害 的 治 疗 。]]):
 		format(t.getPower(self, t))
 	end,
 }

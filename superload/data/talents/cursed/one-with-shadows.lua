@@ -11,14 +11,12 @@ registerTalentTranslation{
 }
 
 registerTalentTranslation{
-	id = "T_SHADOW_EMPATHY",
+	id = "T_SHADOWS_EMPATHY",
 	name = "阴影链接",
 	info = function(self, t)
-		local power = t.getPower(self, t)
-		local duration = t.getDur(self, t)
-		return ([[ 你 连 接 到 你 的 阴 影 ， 持 续 %d 回 合 ，将 你 受 到 的 伤 害 的 %d%% 转 移 至 随 机 某 个 阴 影 上。
-		 受 精 神 强 度 影 响， 效 果 有 额 外 加 成。 ]]):
-		format(duration, power)
+		return ([[你与你的阴影链接，你和你的阴影之间的界限渐渐模糊。
+		你失去%d%%光系伤害抗性，获得%d%%暗影伤害抗性和伤害吸收。你的队伍里每有一个暗影，就获得%0.2f%%所有伤害抗性。]]):
+		format(t.getLightResist(self, t), t.getDarkResist(self, t), t.getAllResScale(self, t))
 	end,
 }
 

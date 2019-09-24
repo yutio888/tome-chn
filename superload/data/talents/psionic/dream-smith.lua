@@ -57,7 +57,7 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local radius = self:getTalentRadius(t)
 		local project = t.getProject(self, t) /2
-		return ([[用 梦 之 巨 锤 对 目 标 挥 出 强 力 的 一 击， 造 成 %d%% 武 器 伤 害。 如 果 攻 击 命 中， 挥 击 所 产 生 的 回 音 会 伤 害 %d 码 范 围 内 的 所 有 目 标。 
+		return ([[用 梦 之 巨 锤 对 近 身 目 标 挥 出 强 力 的 一 击， 造 成 %d%% 武 器 伤 害。 如 果 攻 击 命 中， 挥 击 所 产 生 的 回 音 会 伤 害 %d 码 范 围 内 的 所 有 目 标。 
 		 学 习 此 技 能 会 使 你 的 梦 之 巨 锤 附 加 %0.2f 精 神 伤 害 和 %0.2f 燃 烧 伤 害。 
 		 受 精 神 强 度 影 响， 梦 之 巨 锤 附 加 的 精 神 伤 害 和 燃 烧 伤 害 按 比 例 加 成。]]):format(damage * 100, radius, damDesc(self, DamageType.MIND, project), damDesc(self, DamageType.FIRE, project))
 	end,

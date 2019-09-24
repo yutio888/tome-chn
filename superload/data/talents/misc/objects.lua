@@ -64,9 +64,14 @@ registerTalentTranslation{
 			br_text = " 所 有 格 挡 的 伤 害 值 会 治 疗 玩 家 ."
 		end
 		local bt, bt_string = t.getBlockedTypes(self, t)
-		return ([[举 起 你 的 盾 牌 进 入 防 御 姿 态 一 回 合， 减 少 所 有 	%s 类 攻 击 伤 害 %d 。 如 果 你 完 全 格 挡 了 一 次 攻 击， 攻 击 者 将 遭 到 一 次 致 命 的 反 击（ 一 次 普 通 攻 击 将 造 成 200%% 伤 害）， 持 续 1 回 合。 
-	    %s%s%s]]):format(bt_string, t.getBlockValue(self, t), sp_text, ref_text, br_text)
-	end,
+		return ([[举 起 你 的 盾 牌 进 入 防 御 姿 态 2 回 合， 减 少 所 有 非 精 神 攻 击 伤 害 %d 。 如 果 你 完 全 格 挡 了 一 次 攻 击， 攻 击 者 将 遭 到 一 次 致 命 的 反 击（ 一 次 普 通 攻 击 将 造 成 200%% 伤 害）， 持 续 1 回 合。 
+		每次格挡通常只能反击一个敌人。
+		如果有任何伤害被成功格挡，此效果将在回合开始时移除。
+		如果盾牌对格挡伤害类型有伤害抗性，则格挡值增加50%。
+		
+		当前加成:  %s%s%s%s]]):
+		format(t.getBlockValue(self, t), bt_string, sp_text, ref_text, br_text)
+end,
 }
 
 registerTalentTranslation{
@@ -158,5 +163,12 @@ registerTalentTranslation{
 	end,
 }
 
+registerTalentTranslation{
+	id = "T_MELLE_RETALIATION",
+	name = "近战报复"
+	info = function(self, t)
+		return ([[近战报复中介。]])
+	end,
+}
 
 return _M

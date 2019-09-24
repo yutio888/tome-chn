@@ -7,7 +7,7 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local duration = t.getDuration(self, t)
 		local power = t.getPower(self,t)
-		return ([[你 攻 击 目 标 的 敏 感 部 位，造 成 %d%% 徒 手 伤 害。如 果 攻 击 命 中， 目 标 身 受 重 创，物 理 豁 免 减 少 %d ，震 慑 、 致 盲 、 混 乱 、 定 身 免 疫 降 低 为 原 来 的 50%% ，持 续 %d 回合。
+		return ([[你 攻 击 目 标 的 敏 感 部 位，造 成 %d%% 武器 伤 害。如 果 攻 击 命 中， 目 标 身 受 重 创，物 理 豁 免 减 少 %d ，震 慑 、 致 盲 、 混 乱 、 定 身 免 疫 降 低 为 原 来 的 50%% ，持 续 %d 回合。
 该 效 果 无 视 豁 免。]]):
 		format(100 * damage, power, duration)
 	end,

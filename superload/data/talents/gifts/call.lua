@@ -11,10 +11,10 @@ registerTalentTranslation{
 		local heal = (5 + self:combatTalentMindDamage(t, 12, 30)) * boost
 		local rest = 0.5 * self:getTalentLevelRaw(t)
 		return ([[你 进 入 冥 想， 与 大 自 然 进 行 沟 通。 
-		 冥 想 时 每 回 合 你 能 回 复 %d 失 衡 值， 你 的 精 神 豁 免 提 高 %d ， 你 的 治 疗 效 果 提 高 %d%% 。 
+		 冥 想 时 每 回 合 你 能 回 复 %0.2f 失 衡 值， 你 的 精 神 豁 免 提 高 %d ， 你 的 治 疗 效 果 提 高 %d%% 。 
 		 冥 想 时 你 无 法 集 中 精 力 攻 击， 你 和 你 的 召 唤 物 造 成 的 伤 害 减 少 50 ％。 
 		 另 外， 你 在 休 息 时（ 即 使 未 开 启 冥 想） 会 自 动 进 入 冥 想 状 态， 使 你 每 回 合 能 回 复 %d 点 失 衡 值。 
-		 受 精 神 强 度 影 响， 效 果 有 额 外 加 成。]]):
+		 受 精 神 强 度 影 响， 激活时效 果 有 额 外 加 成。]]):
 		format(pt, save, heal, rest)
 	end,
 }
@@ -25,7 +25,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		return ([[对 你 自 己 或 某 个 目 标 注 入 大 自 然 的 能 量， 治 疗 %d 点 生 命 值（ 对 不 死 族 无 效）。 
 		 受 精 神 强 度 影 响， 治 疗 量 有 额 外 加 成。]]):
-		format(20 + self:combatTalentMindDamage(t, 20, 500))
+		format(t.getHeal(self, t))
 	end,
 }
 

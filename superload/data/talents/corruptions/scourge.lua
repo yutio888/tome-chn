@@ -4,9 +4,8 @@ registerTalentTranslation{
     id = "T_REND",
     name = "撕裂",
 	info = function(self, t)
-		return ([[向 目 标 挥 舞 2 把 武 器， 每 次 攻 击 造 成 %d%% 伤 害。 每 次 攻 击 会 使 目 标 流 血， 每 回 合 造 成 %0.2f 伤 害， 持 续 5 回 合。 
-		 受 法 术 强 度 影 响， 流 血 效 果 有 额 外 加 成。]]):
-		format(100 * self:combatTalentWeaponDamage(t, 0.8, 1.6), self:combatTalentSpellDamage(t, 5, 40))
+		return ([[向目标挥舞两把武器，每次攻击造成 %d%%伤害，每次攻击将会使目标身上持续时间最短的疾病效果的持续时间延长%d回合。]]):
+		format(100 * t.getDamage(self, t), t.getIncrease(self, t))
 	end,
 }
 
@@ -26,20 +25,18 @@ registerTalentTranslation{
     name = "酸性打击",
 	info = function(self, t)
 		return ([[用 每 把 武 器 打 击 目 标， 每 次 攻 击 造 成 %d%% 酸 性 武 器 伤 害。 
-		 如 果 有 至 少 一 次 攻 击 命 中 目 标， 则 会 产 生 酸 系 溅 射， 对 临 近 目 标 的 敌 人 造 成 %0.2f 酸 性 伤 害。 
+		 如 果 有 至 少 一 次 攻 击 命 中 目 标， 则 会 产 生 酸 系 溅 射， 对%d范围内的所有敌 人 造 成 %0.2f 酸 性 伤 害。 
 		 受 法 术 强 度 影 响， 溅 射 伤 害 有 额 外 加 成。]]):
-		format(100 * self:combatTalentWeaponDamage(t, 0.8, 1.6), damDesc(self, DamageType.ACID, self:combatTalentSpellDamage(t, 10, 130)))
-	end,
+		 format(100 * t.getDamage(self, t), damDesc(self, DamageType.ACID, t.getSplash(self, t)), self:getTalentRadius(t))
+		end,
 }
 
 registerTalentTranslation{
     id = "T_DARK_SURPRISE",
     name = "黑暗连击",
 	info = function(self, t)
-		return ([[用 你 的 主 武 器 打 击 目 标 并 造 成 %d%% 暗 影 武 器 伤 害。 
-		 如 果 主 武 器 命 中， 则 你 会 使 用 副 武 器 打 击 目 标 并 造 成 %d%% 枯 萎 武 器 伤 害， 此 次 攻 击 必 定 暴 击。 
-		 如 果 副 武 器 命 中， 则 目 标 会 被 致 盲 4 回 合。]]):
-		format(100 * self:combatTalentWeaponDamage(t, 0.6, 1.4), 100 * self:combatTalentWeaponDamage(t, 0.6, 1.4))
+		return ([[腐化目标，2回合内降低其100%%的疾病免疫，并去除其2个自然持续效果。然后用你的两把武器打击敌人，造成%d%%伤害，]]):
+			format(100 * t.getDamage(self, t))
 	end,
 }
 

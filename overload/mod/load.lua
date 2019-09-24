@@ -57,7 +57,8 @@ require "data-chn123.tinkers.tinker"
 package.loaded["engine.ui.Dialog"] = require "data-chn123.dialog"
 engine.ui.Dialog = require "data-chn123.dialog"
 function chn123_tome_font()
-	return config.settings.tome.show_spaces and "/data-chn123/font/main_spaced.ttf" or "/data-chn123/font/main.ttf"
+	return "/data-chn123/font/main_spaced.ttf"
+	--return config.settings.tome.show_spaces and "/data-chn123/font/main_spaced.ttf" or "/data-chn123/font/main.ttf"
 end
 function getCHNresourcename(name)
 	name=name:gsub("Stamina","体力"):gsub("Mana","法力"):gsub("Souls","灵魂"):gsub("Soul","灵魂"):gsub("Equilibrium","失衡")

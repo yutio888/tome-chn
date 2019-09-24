@@ -1,10 +1,13 @@
 local _M = loadPrevious(...)
 
 registerTalentTranslation{
-	id = "T_FLEXIBLE_COMBAT",
-	name = "自由格斗",
+	id = "T_GIANT_LEAP",
+	name = "战争践踏",
+	["require.special.desc"] = "曾使用武器或徒手造成超过50000点伤害",
 	info = function(self, t)
-		return ([[每 当 你 进 行 近 战 攻 击 时， 有 60％ 几 率 追 加 一 次 额 外 的 徒 手 攻 击。  ]])
+		return ([[你 跃 向 目 标 地 点， 对 1 码 半 径 范 围 内 的 所 有 敌 人 造 成 200％ 的 武 器 伤 害， 并 眩 晕 目 标 3 回 合。  
+		落 地 后 ，你 解 除 自 身 眩 晕 、定 身 和 震 慑 效 果。
+		]])
 		:format()
 	end,
 }
@@ -14,8 +17,8 @@ registerTalentTranslation{
 	name = "化作星星吧！！",
 	["require.special.desc"] = "体型至少为巨大（使用也要满足此条件）",
 	info = function(self, t)
-		return ([[对 敌 人 进 行 一 次 猛 击， 造 成 350％ 的 武 器 伤 害 并 击 退 目 标 6 码。 
-		所 有 击 退 路 径 上 的 敌 人 会 被 撞 至 一 旁 并 被 震 慑 3 回 合。
+		return ([[对 敌 人 进 行 一 次 猛 击， 造 成 350％ 的 武 器 伤 害 并 击 退 目 标 5 码，路 径 上 的 敌 人 都会被击中。
+		所有受影响的目标都会 被 震 慑 3 回 合。
 		体 型 超 过  “Big” 时， 每 增 加 一 级 ， 额 外 增 加 80%% 武 器 伤 害。 ]])
 		:format()
 	end,
@@ -49,8 +52,8 @@ registerTalentTranslation{
 	name = "无御之日",
 	["require.special.desc"] = "曾造成50000点以上的光系或者火系伤害",
 	info = function(self, t)
-		local dam = (50 + self:getStr() * 1.7) / 3
-		return ([[你 获 得 6 回 合 的 星 之 引 力， 将 周 围 5 码 范 围 内 的 所 有 生 物 向 你 拉 扯， 并 对 所 有 敌 人 造 成 %0.2f 火 焰、 %0.2f 光 系 和 %0.2f 物 理 伤 害。 
+		local dam = (35 + self:getStr() * 1.3) / 3
+		return ([[你 获 得 8 回 合 的 星 之 引 力， 将 周 围 5 码 范 围 内 的 所 有 生 物 向 你 拉 扯， 并 对 所 有 敌 人 造 成 %0.2f 火 焰、 %0.2f 光 系 和 %0.2f 物 理 伤 害。他们所造成的伤害减少30%%。 
 		最 靠 近 你 的 敌 人 受 到 额 外 的 150％ 伤 害。 
 		受 力 量 影 响， 伤 害 值 有 额 外 加 成。  ]])
 		:format(damDesc(self, DamageType.FIRE, dam), damDesc(self, DamageType.LIGHT, dam), damDesc(self, DamageType.PHYSICAL, dam))

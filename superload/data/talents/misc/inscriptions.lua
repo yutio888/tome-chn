@@ -34,7 +34,7 @@ registerInscriptionTranslation{
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[治 疗 %d 持 续 %d 回 合  ]]):format(data.heal + data.inc_stat, data.dur)
+		return ([[治疗 %d; 冷却 %d]]):format(data.heal + data.inc_stat, data.cooldown)
 	end,
 }
 
@@ -43,11 +43,11 @@ registerInscriptionTranslation{
 	display_name = "纹身：治疗",
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[激 活 纹 身 立 即 治 疗 你 %d 生 命 值, 同 时 去 除 一 个 流 血 或 毒 素 效 果 。]]):format(data.heal + data.inc_stat)
+		return ([[激 活 纹 身 立 即 治 疗 你 %d 生 命 值，然后 去 除 一 个 流 血 或 毒 素 效 果 。]]):format(data.heal + data.inc_stat)
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[治 疗 %d]]):format(data.heal + data.inc_stat)
+		return ([[治疗 %d; 冷却 %d]]):format(data.heal + data.inc_stat, data.cooldown)
 	end,
 }
 
@@ -63,7 +63,7 @@ registerInscriptionTranslation{
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
 		local what = table.concat(table.keys(data.what), ", ")
-		return ([[减 伤 %d%%; 解 除 %s]]):format(data.power + data.inc_stat, what:gsub("physical"," 物 理 "):gsub("magical"," 魔 法 "):gsub("mental"," 精 神 ").." 效 果 ")
+		return ([[减伤 %d%%; 解除 %s; 持续 %d; 冷却 %d]]):format(data.power + data.inc_stat, what:gsub("physical"," 物理 "):gsub("magical"," 魔法 "):gsub("mental"," 精神 ").." 效果 ", data.dur, data.cooldown)
 	end,
 }
 
@@ -74,14 +74,13 @@ registerInscriptionTranslation{
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
 		local what = table.concatNice(table.keys(data.what), ", ", " 或者 ")
-		return ([[ 激 活 这 个 纹 身 ， 解 除 %s 效 果 并 将 你 受 到 的 %d%% 全 体 伤 害 转 化 为 治 疗 ， 持 续 %d 回 合 。
-同 时 除 去 对 应 类 型 的 CT 效 果 。
-	伤 害 吸 收 效 果 受 体 质 加 成。]]):format(change_infusion_eff(what), data.power+data.inc_stat, data.dur)
+		return ([[激活这个纹身，将会把你受到%d%%的所有伤害转化为治疗（在伤害减免之前计算），每回合减少一个随机负面效果的持续时间%d回合，持续%d回合]]):
+			format(data.power+data.inc_stat*10, data.reduce + data.inc_stat, data.dur)
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
 		local what = table.concat(table.keys(data.what), ", ")
-		return ([[伤 害 治 疗 %d%%; 解 除 %s]]):format(data.power + data.inc_stat,change_infusion_eff(what))
+		return ([[伤害吸收 %d%%; 减伤 %d; 持续 %d; 冷却 %d]]):format(data.power + data.inc_stat,change_infusion_eff(what))
 	end,
 }
 
@@ -90,17 +89,304 @@ registerInscriptionTranslation{
 	display_name = "纹身：移动",
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[激 活 这 个 纹 身 可 以 在 1 个 游 戏 回 合 内 提 升 移 动 速 度 %d%% 。 除 移 动 以 外 其 他 动 作 会 取 消 这 个 效 果。 
-		 同 时 免 疫 眩 晕、 震 慑 和 定 身 效 果 %d 回 合。 
-		 注 意： 由 于 你 的 速 度 非 常 快， 游 戏 回 合 会 相 对 很 慢。 ]]):format(data.speed + data.inc_stat, data.dur)
+		return ([[激 活 这 个 纹 身 可 以 在 1 个 游 戏 回 合 内 提 升 移 动 速 度 %d%% 。
+		同 时 免 疫 眩 晕、 震 慑 和 定 身 效 果。
+		除 移 动 以 外 其 他 动 作 会 取 消 这 个 效 果。 
+		 注 意： 由 于 你 的 速 度 非 常 快， 游 戏 回 合 会 相 对 很 慢。 ]]):format(data.speed + data.inc_stat)
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[%d%% 加 速 ; %d 回 合 ]]):format(data.speed + data.inc_stat, data.dur)
+		return ([[%d%% 加速 ; %d 冷却 ]]):format(data.speed + data.inc_stat, data.cooldown)
 	end,
 }
 
+registerInscriptionTranslation{
+	name = "Infusion: Heroism",
+	display_name = "纹身：英勇",
+	info = function(self, t)
+		local data = self:getInscriptionData(t.short_name)
+		local bonus = 1 + (1 - self.life / self.max_life)
+		local bonus1 = data.die_at + data.inc_stat * 30 * bonus
+		local bonus2 = math.floor(data.dur * bonus)
+		return ([[激 活 这 个 纹 身 可 以让你忍受致死的伤害，持续%d回合。
+		当 应用 纹 身 激 活 时， 你 的 生 命 值 只 有 在 降 低 到 -%d 生 命 时 才 会 死 亡。
+		你每失去1%生命值，持续时间和生命值下限就会增加1%%。（目前 %d 生命值， %d 持续时间）
+		效 果 结 束 时， 如 果 你 的 生 命 值 在 0 以 下 ， 会 变 为 1 点。 ]]):formatformat(data.dur, data.die_at + data.inc_stat * 30, bonus1, bonus2)
+	end,
+	short_info = function(self, t)
+		local data = self:getInscriptionData(t.short_name)
+		return ([[-%d时死亡; 持续 %d; 冷却 %d]]):format(data.die_at + data.inc_stat * 30, data.dur, data.cooldown)
+	end,
+}
 
+-- Opportunity cost for this is HUGE, it should not hit friendly, also buffed duration
+registerInscriptionTranslation{
+	name = "Infusion: Wild Growth",
+	display_name = "纹身：野性生长",
+	info = function(self, t)
+		local data = self:getInscriptionData(t.short_name)
+		local damage = t.getDamage(self, t)
+		return ([[从 土 地 中 召 唤 坚 硬 的 藤 蔓， 缠 绕 %d 码 范 围 内 所 有 生 物， 持 续 %d 回 合。 将 其 定 身 并 造 成 每 回 合 %0.2f 物 理 和 %0.2f 自 然 伤 害。 
+		 藤 蔓 也 会 生 长 在 你 的 身 边 ， 增 加 %d 护 甲 和 %d%% 护 甲 硬 度 。]]):
+		format(self:getTalentRadius(t), data.dur, damDesc(self, DamageType.PHYSICAL, damage)/3, damDesc(self, DamageType.NATURE, 2*damage)/3, data.armor or 50, data.hard or 30)
+	end,
+	short_info = function(self, t)
+		local data = self:getInscriptionData(t.short_name)
+		return ([[范围 %d 持续 %d]]):format(self:getTalentRadius(t), data.dur)
+	end,
+}
+
+-----------------------------------------------------------------------
+-- Runes
+-----------------------------------------------------------------------
+registerInscriptionTranslation{
+	name = "Rune: Teleportation",
+	display_name = "符文：传送",
+	info = function(self, t)
+		local data = self:getInscriptionData(t.short_name)
+		return ([[激 活 这 个 符 文 随 机 传 送 %d 码 范 围 内 位 置， 至 少 传 送 15 码 以 外。 ]]):format(data.range + data.inc_stat)
+	end,
+	short_info = function(self, t)
+		local data = self:getInscriptionData(t.short_name)
+		return ([[范 围 %d; 冷却 %d]]):format(data.range + data.inc_stat, data.cooldown)
+	end,
+}
+
+registerInscriptionTranslation{
+	name = "Rune: Shielding",
+	display_name = "符文：护盾",
+	info = function(self, t)
+		local data = self:getInscriptionData(t.short_name)
+		return ([[激 活 这 个 符 文 产 生 一 个 防 护 护 盾， 吸 收 最 多 %d 伤 害 持 续 %d 回 合。 ]]):format((data.power + data.inc_stat) * (100 + (self:attr("shield_factor") or 0)) / 100, data.dur)
+	end,
+	short_info = function(self, t)
+		local data = self:getInscriptionData(t.short_name)
+		return ([[吸 收 %d; 持 续 %d; 冷却 %d ]]):format((data.power + data.inc_stat) * (100 + (self:attr("shield_factor") or 0)) / 100, data.dur, data.cooldown)
+	end,
+}
+
+registerInscriptionTranslation{
+	name = "Rune: Reflection Shield",
+	display_name = "符文：反射盾",
+	info = function(self, t)
+		local data = self:getInscriptionData(t.short_name)
+		local power = 100+5*self:getMag()
+		if data.power and data.inc_stat then power = data.power + data.inc_stat end
+		return ([[激 活 这 个 符 文 产 生 一 个 防 御 护 盾， 吸 收 并 反 弹 最 多 %d 伤 害 值， 持 续 %d 回 合。 效 果 与 魔 法 成 比 例 增 长。 ]])
+		:format(power, 5)
+	end,
+	short_info = function(self, t)
+		local data = self:getInscriptionData(t.short_name)
+		local power = 100+5*self:getMag()
+		if data.power and data.inc_stat then power = data.power + data.inc_stat end
+
+		return ([[吸 收 并 反 弹 %d 持续 %d ; 冷却 %d]]):format(power, 5)
+	end,
+}
+
+registerInscriptionTranslation{
+	name = "Rune: Biting Gale",
+	display_name = "符文：冰风",
+	info = function(self, t)
+		local data = self:getInscriptionData(t.short_name)
+		return ([[激 活 这 个 符 文 ， 形 成 一 股 锥 形 寒 风 ， 造 成 %0.2f 寒 冷 伤 害。
+			寒 风 会 浸湿敌人，减 半 敌 人 的  震 慑 抗 性  ， 并 试 图 冻 结 他 们 %d 回合。
+			这一效果可以被抵抗，但不能被豁免]]):
+			format(damDesc(self, DamageType.COLD, data.power + data.inc_stat), data.dur)
+	end,
+	short_info = function(self, t)
+		local data = self:getInscriptionData(t.short_name)
+		return ([[伤害 %d; 持续 %d; 冷却 %d]]):format(damDesc(self, DamageType.COLD, data.power + data.inc_stat), data.dur, data.cooldown)
+	end,
+}
+
+registerInscriptionTranslation{
+	name = "Rune: Acid Wave",
+	display_name = "符文：酸性冲击波",
+	info = function(self, t)
+		  local data = self:getInscriptionData(t.short_name)		  
+		  return ([[发 射 锥 形 酸 性 冲 击 波 造 成 %0.2f 酸 性 伤 害。
+		 酸 性 冲 击 波 会 缴械目标 %d 回 合。
+		 这一效果可以被抵抗，但不能被豁免]]):
+		 format(damDesc(self, DamageType.ACID, data.power + data.inc_stat), data.dur or 3)
+	end,
+	short_info = function(self, t)
+		local data = self:getInscriptionData(t.short_name)
+		local pow = data.power
+		return ([[伤害 %d; 持续 %d; 冷却 %d]]):format(damDesc(self, DamageType.ACID, data.power + data.inc_stat), data.dur or 3, data.cooldown)
+	end,
+}
+
+registerInscriptionTranslation{
+	name = "Rune: Manasurge",
+	display_name = "符文：魔力",
+	info = function(self, t)
+		local data = self:getInscriptionData(t.short_name)
+		return ([[激 活 这 个 符 文 对 你 自 己 释 放 法 力 回 复， 增 加 %d%% 回 复 量 持 续 %d 回 合， 并 立 即 回 复 %d 法 力 值。 
+			同 时 ， 在 你 休 息 时 增 加 每 回 合 0.5 的 魔 力 回 复。 ]]):format(data.mana + data.inc_stat, data.dur, (data.mana + data.inc_stat) / 20)
+	end,
+	short_info = function(self, t)
+		local data = self:getInscriptionData(t.short_name)
+		return ([[ 回 复 %d%% 持 续 %d 回 合 ; %d 法力瞬回; 冷却 %d]]):format(data.mana + data.inc_stat, data.dur, (data.mana + data.inc_stat) / 20, data.cooldown)
+	end,
+}
+-- This is mostly a copy of Time Skip :P
+registerInscriptionTranslation{
+	name = "Rune of the Rift",
+	display_name = "符文：时空裂缝",
+	info = function(self, t)
+		local damage = t.getDamage(self, t)
+		local duration = t.getDuration(self, t)
+		return ([[造 成 %0.2f 时 空 伤 害。 如 果 你 的 目 标 存 活， 则 它 会 被 传 送 %d 回 合 至 未 来。 
+		 它 也 能 降 低 你 60 紊 乱 值 ( 如 果 你 拥 有 该 能 量 )。 
+		 注 意， 若 与 其 他 时 空 效 果 相 混 合 则 可 能 产 生 无 法 预 料 的 后 果。 ]]):format(damDesc(self, DamageType.TEMPORAL, damage), duration)
+	end,
+	short_info = function(self, t)
+		return ("%0.2f 时 空 伤 害， 从 时 间 中 移 除 %d 回 合 "):format(t.getDamage(self, t), t.getDuration(self, t))
+	end,
+}
+
+registerInscriptionTranslation{
+	name = "Rune: Blink",
+	display_name = "符文：闪烁",
+	info = function(self, t)
+		local data = self:getInscriptionData(t.short_name)
+		local power = data.power + data.inc_stat * 3
+		return ([[激活符文，传送到视野内 %d 格内的指定位置。之后，你会脱离相位 %d 回合。在这种状态下，所有新的负面效果的持续时间减少 %d%%，你的闪避增加%d，你的全体伤害抗性增加%d%%。]]):
+			format(data.range + data.inc_stat, t.getDur(self, t), power, power, power)
+	end,
+	short_info = function(self, t)
+		local data = self:getInscriptionData(t.short_name)
+		local power = data.power + data.inc_stat * 3
+		return ([[范围 %d; 相位 %d; 冷却 %d]]):format(self:getTalentRange(t), power, data.cooldown )
+	end,
+}
+
+registerInscriptionTranslation{
+	name = "Rune: Ethereal",
+	display_name = "符文：虚幻",
+	info = function(self, t)
+		local data = self:getInscriptionData(t.short_name)
+		return ([[启动符文，使你变得虚幻，持续 %d 回合。
+		在虚幻状态下，你造成的伤害减少 %d%%，你获得%d%% 全体伤害抗性，你的移动速度提升%d%%，你获得隐形(强度 %d)。]]):
+			format(t.getDur(self, t),t.getReduction(self, t) * 100, t.getResistance(self, t), t.getMove(self, t), t.getPower(self, t))
+	end,
+	short_info = function(self, t)
+		local data = self:getInscriptionData(t.short_name)
+		return ([[强度 %d; 抗性 %d%%; 移动 %d%%; 持续 %d; 冷却 %d]]):format(t.getPower(self, t), t.getResistance(self, t), t.getMove(self, t), t.getDur(self, t), data.cooldown)
+	end,
+}
+registerTalentTranslation{
+	name = "Rune: Stormshield",
+	display_name = "符文：风暴护盾",
+	info = function(self, t)
+		local data = self:getInscriptionData(t.short_name)
+		return ([[启动这个符文，在你的身边召唤一团保护性的风暴，持续%d回合。
+			当符文生效时，风暴可以抵挡大于%d的任何伤害最多%d次。]])
+				:format(t.getDur(self, t), t.getThreshold(self, t), t.getBlocks(self, t) )
+	end,
+	short_info = function(self, t)
+		local data = self:getInscriptionData(t.short_name)
+		return ([[阈值 %d; 次数 %d; 持续 %d; 冷却 %d]]):format(t.getThreshold(self, t), t.getBlocks(self, t), t.getDur(self, t), data.cooldown  )
+	end,
+}
+
+registerTalentTranslation{
+	name = "Rune: Prismatic",
+	display_name = "符文：棱彩",
+	info = function(self, t)
+		local data = self:getInscriptionData(t.short_name)
+		local str = ""
+		for k,v in pairs(data.wards) do
+			str = str .. ", " .. v .. " " .. k:lower()
+		end
+		str = string.sub(str, 2)
+		return ([[激活符文展开一个护盾，在 %d 回合内，抵挡以下类型的伤害:%s]]) -- color me
+				:format(t.getDur(self, t), str)
+	end,
+	short_info = function(self, t)
+		local data = self:getInscriptionData(t.short_name)
+		local str = table.concat(table.keys(data.wards), ", ")
+		return ([[%d 回合; %s]]):format(t.getDur(self, t), str:lower() )
+	end,
+}
+
+registerInscriptionTranslation{
+	name = "Rune: Mirror Image",
+	display_name = "符文：镜像",
+	info = function(self, t)
+		return ([[激活符文，最多召唤你的3个镜像，镜像会嘲讽周围的敌人。
+			在半径10范围内每有一个敌人才能召唤一个镜像，第一个镜像会被召唤在最近的敌人旁边。
+			镜像继承你的生命值、抗性、护甲、闪避和护甲硬度。]])
+				:format(t.getInheritance(self, t)*100 )
+	end,
+	short_info = function(self, t)
+		local data = self:getInscriptionData(t.short_name)
+		return ([[持续 %d; 冷却 %d]]):format(t.getDur(self, t), data.cooldown)
+	end
+}
+registerInscriptionTranslation{
+	name = "Rune: Shatter Afflictions",
+	display_name = "符文: 粉碎痛苦",
+	info = function(self, t)
+		return ([[激活符文，立刻清除你身上的负面效果。
+			清除所有CT效果，以及物理、精神和魔法负面效果各1个。
+			每清除一个负面效果，你都会获得一个抵挡%d伤害的护盾，持续3回合。]]):format(t.getShield(self, t) * (100 + (self:attr("shield_factor") or 0)) / 100)
+	end,
+	short_info = function(self, t)
+		local data = self:getInscriptionData(t.short_name)
+		return ([[吸收 %d; 冷却 %d]]):format(t.getShield(self, t) * (100 + (self:attr("shield_factor") or 0)) / 100, data.cooldown)
+	end,
+}
+
+registerTalentTranslation{
+	name = "Rune: Dissipation",
+	display_name = "符文: 耗散",
+	info = function(self, t)
+		local data = self:getInscriptionData(t.short_name)
+		return ([[激活这个符文，从敌人身上移除4个正面魔法持续效果，或从自己身上移除所有魔法负面效果。]]):
+		format()
+	end,
+	short_info = function(self, t)
+		local data = self:getInscriptionData(t.short_name)
+		return ([[ ]]):format()
+	end,
+}
+
+-----------------------------------------------------------------------
+-- Taints
+-----------------------------------------------------------------------
+registerInscriptionTranslation{
+	name = "Taint: Devourer",
+	display_name = "堕落印记：吞噬",
+	info = function(self, t)
+		local data = self:getInscriptionData(t.short_name)
+		return ([[对 目 标 激 活 此 印 记， 移 除 其 %d 个 效 果 并 将 其 转 化 为 治 疗 你 每 个 效 果 %d 生 命 值。 ]]):format(data.effects, data.heal + data.inc_stat)
+	end,
+	short_info = function(self, t)
+		local data = self:getInscriptionData(t.short_name)
+		return ([[%d 效 果 / %d 治 疗 ]]):format(data.effects, data.heal + data.inc_stat)
+	end,
+}
+
+registerInscriptionTranslation{
+	name = "Taint: Purging",
+	display_name = "堕落印记: 清除",
+	info = function(self, t)
+		local data = self:getInscriptionData(t.short_name)
+		return ([[激活这个堕落印记，清除你身上的物理痛苦，持续%d回合。
+		每一回合，这个印记将会尝试从你的身上解除一个物理负面效果。
+		如果它解除了一个负面效果，它的持续时间会增加1回合。]])
+				:format(t.getDur(self, t) )
+	end,
+	short_info = function(self, t)
+		return ([[%d 回合]]):format(t.getDur(self, t) )
+	end,
+}
+
+-----------------------------------------------------------------------
+-- Legacy:  These inscriptions aren't on the drop tables and are only kept for legacy compatibility and occasionally NPC use
+-----------------------------------------------------------------------
 
 registerInscriptionTranslation{
 	name = "Infusion: Sun",
@@ -120,142 +406,43 @@ registerInscriptionTranslation{
 }
 
 registerInscriptionTranslation{
-	name = "Infusion: Heroism",
-	display_name = "纹身：英勇",
+	name = "Taint: Telepathy",
+	display_name = "堕落印记：感应",
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[激 活 这 个 纹 身 可 以 增 加 你 3 项 基 础 属 性 %d ， 持 续 %d 回 合。
-		同 时， 当 英 雄 纹 身 激 活 时， 你 的 生 命 值 只 有 在 降 低 到 -%d 生 命 时 才 会 死 亡。 然 而， 当 生 命 值 低 于 0 时， 你 无 法 看 到 你 还 剩 下 多 少 生 命。
-		属 性 提 高 以 你 最 高 的 三 个 属 性 为 准。
-		效 果 结 束 时， 如 果 你 的 生 命 值 在 0 以 下 ， 会 变 为 1 点。 ]]):format(data.power + data.inc_stat, data.dur, data.die_at + data.inc_stat * 30)
+		return ([[解 除 你 的 精 神 束 缚 %d 回 合， 感 应 %d 码 范 围 内 的 所 有 生 物 ， 减 少 %d 精 神 豁 免 持 续 10 回 合 并 增 加 %d 点 精 神 强 度。 ]]):format(data.dur, self:getTalentRange(t), 10, 35)
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[+%d 持 续 %d 回 合， 死 亡 限 值 -%d]]):format(data.power + data.inc_stat, data.dur, data.die_at + data.inc_stat * 30)
+		return ([[范 围 %d 码 心 灵 感 应 持 续 %d 回 合 ]]):format(self:getTalentRange(t), data.dur)
 	end,
 }
 
 registerInscriptionTranslation{
-	name = "Infusion: Insidious Poison",
-	display_name = "纹身：下毒",
+	name = "Rune: Frozen Spear",
+	display_name = "符文：冰矛",
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[激 活 这 个 纹 身 会 发 射 一 个 毒 气 弹 造 成 每 回 合 %0.2f 自 然 伤 害 持 续 7 回 合， 并 降 低 目 标 治 疗 效 果 %d%% 。
-		 突 然 涌 动 的 自 然 力 量 会 除 去 你 受 到 的 一 个 负 面 魔 法 效 果 。 ]]):format(damDesc(self, DamageType.NATURE, data.power + data.inc_stat) / 7, data.heal_factor)
+		return ([[激 活 这 个 符 文 发 射 一 束 冰 枪， 造 成 %0.2f 冰 冻 伤 害 并 有 一 定 几 率 冻 结 你 的 目 标。 
+               	 寒 冰 同 时 会 解 除 你 受 到 的 一 个 负 面 精 神 状 态。 ]]):format(damDesc(self, DamageType.COLD, data.power + data.inc_stat))
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[%d 自 然 伤 害， %d%% 治 疗 下 降 ]]):format(damDesc(self, DamageType.NATURE, data.power + data.inc_stat) / 7, data.heal_factor)
-	end,
-}
-
--- Opportunity cost for this is HUGE, it should not hit friendly, also buffed duration
-registerInscriptionTranslation{
-	name = "Infusion: Wild Growth",
-	display_name = "纹身：野性生长",
-	info = function(self, t)
-		local data = self:getInscriptionData(t.short_name)
-		local damage = t.getDamage(self, t)
-		return ([[从 土 地 中 召 唤 坚 硬 的 藤 蔓， 缠 绕 %d 码 范 围 内 所 有 生 物， 持 续 %d 回 合。 将 其 定 身 并 造 成 每 回 合 %0.2f 物 理 和 %0.2f 自 然 伤 害。 
-		 藤 蔓 也 会 生 长 在 你 的 身 边 ， 增 加 %d 护 甲 和 %d%% 护 甲 硬 度 。]]):
-		format(self:getTalentRadius(t), data.dur, damDesc(self, DamageType.PHYSICAL, damage)/3, damDesc(self, DamageType.NATURE, 2*damage)/3, data.armor or 50, data.hard or 30)
-	end,
-	short_info = function(self, t)
-		local data = self:getInscriptionData(t.short_name)
-		return ([[范 围 %d 持 续 %d 回 合 ]]):format(self:getTalentRadius(t), data.dur)
-	end,
-}
-
------------------------------------------------------------------------
--- Runes
------------------------------------------------------------------------
-registerInscriptionTranslation{
-	name = "Rune: Phase Door",
-	display_name = "符文：相位门",
-	info = function(self, t)
-		local data = self:getInscriptionData(t.short_name)
-		local power = (data.power or data.range) + data.inc_stat * 3
-		return ([[激 活 这 个 符 文 会 使 你 在 %d 码 范 围 内 随 机 传 送。 
-		 之 后 ， 你 会 出 入 现 实 空 间 % d 回 合 ， 所 有 新 的 负 面 状 态 持 续 时 间 减 少 %d%% ， 闪 避 增 加 %d ， 全 体 伤 害 抗 性 增 加 %d%%。 ]]):
-		format(data.range + data.inc_stat, data.dur or 3, power, power, power)
-	end,
-	short_info = function(self, t)
-		local data = self:getInscriptionData(t.short_name)
-		local power = (data.power or data.range) + data.inc_stat * 3
-		return ([[范 围 %d; 强 度 %d; 持 续 %d]]):format(data.range + data.inc_stat, power, data.dur or 3)
+		return ([[%d 寒 冰 伤 害 ]]):format(damDesc(self, DamageType.COLD, data.power + data.inc_stat))
 	end,
 }
 
 registerInscriptionTranslation{
-	name = "Rune: Controlled Phase Door",
-	display_name = "符文：可控相位门",
+	name = "Rune: Heat Beam",
+	display_name = "符文：热能射线",
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[激 活 这 个 符 文， 传 送 至 %d 码 内 的 指 定 位 置。 ]]):format(data.range + data.inc_stat)
+		return ([[激 活 这 个 符 文 发 射 一 束 射 线， 造 成 %0.2f 火 焰 伤 害 持 续 5 回 合。 
+		 高 温 同 时 会 解 除 你 受 到 的 一 个 负 面 物 理 状 态。 ]]):format(damDesc(self, DamageType.FIRE, data.power + data.inc_stat))
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[范 围 %d]]):format(data.range + data.inc_stat)
-	end,
-}
-
-registerInscriptionTranslation{
-	name = "Rune: Teleportation",
-	display_name = "符文：传送",
-	info = function(self, t)
-		local data = self:getInscriptionData(t.short_name)
-		return ([[激 活 这 个 符 文 随 机 传 送 %d 码 范 围 内 位 置， 至 少 传 送 15 码 以 外。 ]]):format(data.range + data.inc_stat)
-	end,
-	short_info = function(self, t)
-		local data = self:getInscriptionData(t.short_name)
-		return ([[范 围 %d]]):format(data.range + data.inc_stat)
-	end,
-}
-
-registerInscriptionTranslation{
-	name = "Rune: Shielding",
-	display_name = "符文：护盾",
-	info = function(self, t)
-		local data = self:getInscriptionData(t.short_name)
-		return ([[激 活 这 个 符 文 产 生 一 个 防 护 护 盾， 吸 收 最 多 %d 伤 害 持 续 %d 回 合。 ]]):format(data.power + data.inc_stat, data.dur)
-	end,
-	short_info = function(self, t)
-		local data = self:getInscriptionData(t.short_name)
-		return ([[吸 收 %d 持 续 %d 回 合 ]]):format(data.power + data.inc_stat, data.dur)
-	end,
-}
-
-registerInscriptionTranslation{
-	name = "Rune: Reflection Shield",
-	display_name = "符文：反射盾",
-	info = function(self, t)
-		local data = self:getInscriptionData(t.short_name)
-		local power = 100+5*self:getMag()
-		if data.power and data.inc_stat then power = data.power + data.inc_stat end
-		return ([[激 活 这 个 符 文 产 生 一 个 防 御 护 盾， 吸 收 并 反 弹 最 多 %d 伤 害 值， 持 续 %d 回 合。 效 果 与 魔 法 成 比 例 增 长。 ]])
-		:format(power, 5)
-	end,
-	short_info = function(self, t)
-		local data = self:getInscriptionData(t.short_name)
-		local power = 100+5*self:getMag()
-		if data.power and data.inc_stat then power = data.power + data.inc_stat end
-
-		return ([[吸 收 并 反 弹 %d 持 续 %d 回 合 ]]):format(power, 5)
-	end,
-}
-
-registerInscriptionTranslation{
-	name = "Rune: Invisibility",
-	display_name = "符文：隐身",
-	info = function(self, t)
-		local data = self:getInscriptionData(t.short_name)
-		return ([[激 活 这 个 符 文 使 你 变 得 隐 形（ %d 隐 形 等 级） 持 续 %d 回 合。 
-		 由 于 你 的 隐 形 使 你 从 现 实 相 位 中 脱 离， 你 的 所 有 伤 害 降 低 40%%。 
-		]]):format(data.power + data.inc_stat, data.dur)
-	end,
-	short_info = function(self, t)
-		local data = self:getInscriptionData(t.short_name)
-		return ([[强 度 %d 持 续 %d 回 合 ]]):format(data.power + data.inc_stat, data.dur)
+		return ([[%d 火 焰 伤 害 ]]):format(damDesc(self, DamageType.FIRE, data.power + data.inc_stat))
 	end,
 }
 
@@ -295,56 +482,32 @@ registerInscriptionTranslation{
 }
 
 registerInscriptionTranslation{
-	name = "Rune: Heat Beam",
-	display_name = "符文：热能射线",
+	name = "Rune: Phase Door",
+	display_name = "符文：相位门",
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[激 活 这 个 符 文 发 射 一 束 射 线， 造 成 %0.2f 火 焰 伤 害 持 续 5 回 合。 
-		 高 温 同 时 会 解 除 你 受 到 的 一 个 负 面 物 理 状 态。 ]]):format(damDesc(self, DamageType.FIRE, data.power + data.inc_stat))
+		local power = (data.power or data.range) + data.inc_stat * 3
+		return ([[激 活 这 个 符 文 会 使 你 在 %d 码 范 围 内 随 机 传 送。 
+		 之 后 ， 你 会 出 入 现 实 空 间 % d 回 合 ， 所 有 新 的 负 面 状 态 持 续 时 间 减 少 %d%% ， 闪 避 增 加 %d ， 全 体 伤 害 抗 性 增 加 %d%%。 ]]):
+		format(data.range + data.inc_stat, data.dur or 3, power, power, power)
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[%d 火 焰 伤 害 ]]):format(damDesc(self, DamageType.FIRE, data.power + data.inc_stat))
+		local power = (data.power or data.range) + data.inc_stat * 3
+		return ([[范 围 %d; 强 度 %d; 持 续 %d]]):format(data.range + data.inc_stat, power, data.dur or 3)
 	end,
 }
 
 registerInscriptionTranslation{
-	name = "Rune: Biting Gale",
-	display_name = "符文：冰风",
+	name = "Rune: Controlled Phase Door",
+	display_name = "符文：可控相位门",
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		local apply = self:rescaleCombatStats((data.apply + data.inc_stat))
-		return ([[激 活 这 个 符 文 ， 形 成 一 股 锥 形 寒 风 ， 造 成 %0.2f 寒 冷 伤 害。
-			寒 风 会 减 半 敌 人 的  震 慑 抗 性  ， 并 试 图 冻 结 他 们 3 回合 ，强 度 %d。
-			寒 冷 同 时 净 化 了 你 的 精 神， 解 除 一  项 随 机 负 面 精 神 效 果。 ]]):
-			format(damDesc(self, DamageType.COLD, data.power + data.inc_stat), apply)
+		return ([[激 活 这 个 符 文， 传 送 至 %d 码 内 的 指 定 位 置。 ]]):format(data.range + data.inc_stat)
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		local apply = self:rescaleCombatStats((data.apply + data.inc_stat))
-		return ([[%d 寒冷伤害; %d 强度]]):format(damDesc(self, DamageType.COLD, data.power + data.inc_stat), apply)
-	end,
-}
-
-registerInscriptionTranslation{
-	name = "Rune: Acid Wave",
-	display_name = "符文：酸性冲击波",
-	info = function(self, t)
-		  local data = self:getInscriptionData(t.short_name)
-		  local pow = data.apply + data.inc_stat
-		  local apply = self:rescaleCombatStats((data.apply + data.inc_stat))
-		  
-		  return ([[发 射 锥 形 酸 性 冲 击 波 造 成 %d 码 %0.2f 酸 性 伤 害。
-		 酸 性 冲 击 波 会 腐 蚀 目 标， 缴 械 %d 回 合 ，强 度 %d。
-		 酸 性 能 量 同 时 会 除 去 你 的 一 项 负 面 魔 法 效 果。]]):
-			 format(self:getTalentRadius(t), damDesc(self, DamageType.ACID, data.power + data.inc_stat), data.dur or 3, apply)
-	   end,
-	short_info = function(self, t)
-		local data = self:getInscriptionData(t.short_name)
-		local pow = data.power
-		local apply = self:rescaleCombatStats((data.apply + data.inc_stat))
-
-		return ([[%d 酸 性 伤 害; 持 续 %d; 强 度 %d]]):format(damDesc(self, DamageType.ACID, data.power + data.inc_stat), data.dur or 3, apply)
+		return ([[范 围 %d]]):format(data.range + data.inc_stat)
 	end,
 }
 
@@ -365,79 +528,32 @@ registerInscriptionTranslation{
 }
 
 registerInscriptionTranslation{
-	name = "Rune: Manasurge",
-	display_name = "符文：魔力",
+	name = "Infusion: Insidious Poison",
+	display_name = "纹身：下毒",
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[激 活 这 个 符 文 对 你 自 己 释 放 法 力 回 复， 增 加 %d%% 回 复 量 持 续 %d 回 合， 并 立 即 回 复 %d 法 力 值。 
-			同 时 ， 在 你 休 息 时 增 加 每 回 合 0.5 的 魔 力 回 复。 ]]):format(data.mana + data.inc_stat, data.dur, (data.mana + data.inc_stat) / 20)
+		return ([[激 活 这 个 纹 身 会 发 射 一 个 毒 气 弹 造 成 每 回 合 %0.2f 自 然 伤 害 持 续 7 回 合， 并 降 低 目 标 治 疗 效 果 %d%% 。
+		 突 然 涌 动 的 自 然 力 量 会 除 去 你 受 到 的 一 个 负 面 魔 法 效 果 。 ]]):format(damDesc(self, DamageType.NATURE, data.power + data.inc_stat) / 7, data.heal_factor)
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[%d%% 回 复 持 续 %d 回 合 ; %d 法 力 瞬 回 ]]):format(data.mana + data.inc_stat, data.dur, (data.mana + data.inc_stat) / 20)
+		return ([[%d 自 然 伤 害， %d%% 治 疗 下 降 ]]):format(damDesc(self, DamageType.NATURE, data.power + data.inc_stat) / 7, data.heal_factor)
 	end,
 }
 
 registerInscriptionTranslation{
-	name = "Rune: Frozen Spear",
-	display_name = "符文：冰矛",
+	name = "Rune: Invisibility",
+	display_name = "符文：隐身",
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[激 活 这 个 符 文 发 射 一 束 冰 枪， 造 成 %0.2f 冰 冻 伤 害 并 有 一 定 几 率 冻 结 你 的 目 标。 
-               	 寒 冰 同 时 会 解 除 你 受 到 的 一 个 负 面 精 神 状 态。 ]]):format(damDesc(self, DamageType.COLD, data.power + data.inc_stat))
+		return ([[激 活 这 个 符 文 使 你 变 得 隐 形（ %d 隐 形 等 级） 持 续 %d 回 合。 
+		 由 于 你 的 隐 形 使 你 从 现 实 相 位 中 脱 离， 你 的 所 有 伤 害 降 低 40%%。 
+		]]):format(data.power + data.inc_stat, data.dur)
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[%d 寒 冰 伤 害 ]]):format(damDesc(self, DamageType.COLD, data.power + data.inc_stat))
+		return ([[强 度 %d 持 续 %d 回 合 ]]):format(data.power + data.inc_stat, data.dur)
 	end,
 }
-
-
--- This is mostly a copy of Time Skip :P
-registerInscriptionTranslation{
-	name = "Rune of the Rift",
-	display_name = "符文：时空裂缝",
-	info = function(self, t)
-		local damage = t.getDamage(self, t)
-		local duration = t.getDuration(self, t)
-		return ([[造 成 %0.2f 时 空 伤 害。 如 果 你 的 目 标 存 活， 则 它 会 被 传 送 %d 回 合 至 未 来。 
-		 它 也 能 降 低 你 60 紊 乱 值 ( 如 果 你 拥 有 该 能 量 )。 
-		 注 意， 若 与 其 他 时 空 效 果 相 混 合 则 可 能 产 生 无 法 预 料 的 后 果。 ]]):format(damDesc(self, DamageType.TEMPORAL, damage), duration)
-	end,
-	short_info = function(self, t)
-		return ("%0.2f 时 空 伤 害， 从 时 间 中 移 除 %d 回 合 "):format(t.getDamage(self, t), t.getDuration(self, t))
-	end,
-}
-
------------------------------------------------------------------------
--- Taints
------------------------------------------------------------------------
-registerInscriptionTranslation{
-	name = "Taint: Devourer",
-	display_name = "堕落印记：吞噬",
-	info = function(self, t)
-		local data = self:getInscriptionData(t.short_name)
-		return ([[对 目 标 激 活 此 印 记， 移 除 其 %d 个 效 果 并 将 其 转 化 为 治 疗 你 每 个 效 果 %d 生 命 值。 ]]):format(data.effects, data.heal + data.inc_stat)
-	end,
-	short_info = function(self, t)
-		local data = self:getInscriptionData(t.short_name)
-		return ([[%d 效 果 / %d 治 疗 ]]):format(data.effects, data.heal + data.inc_stat)
-	end,
-}
-
-
-registerInscriptionTranslation{
-	name = "Taint: Telepathy",
-	display_name = "堕落印记：感应",
-	info = function(self, t)
-		local data = self:getInscriptionData(t.short_name)
-		return ([[解 除 你 的 精 神 束 缚 %d 回 合， 感 应 %d 码 范 围 内 的 所 有 生 物 ， 减 少 %d 精 神 豁 免 持 续 10 回 合 并 增 加 %d 点 精 神 强 度。 ]]):format(data.dur, self:getTalentRange(t), 10, 35)
-	end,
-	short_info = function(self, t)
-		local data = self:getInscriptionData(t.short_name)
-		return ([[范 围 %d 码 心 灵 感 应 持 续 %d 回 合 ]]):format(self:getTalentRange(t), data.dur)
-	end,
-}
-
 
 return _M

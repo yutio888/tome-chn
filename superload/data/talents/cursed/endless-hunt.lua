@@ -19,6 +19,22 @@ registerTalentTranslation{
 }
 
 registerTalentTranslation{
+	id = "T_HARASS_PREY",
+	name = "痛苦折磨",
+	info = function(self, t)
+		local damageMultipler = t.getDamageMultiplier(self, t)
+		local cooldownDuration = t.getCooldownDuration(self, t)
+		local targetDamageChange = t.getTargetDamageChange(self, t)
+		local duration = t.getDuration(self, t)
+		return ([[用 两 次 快 速 的 攻 击 折 磨 你 追 踪 的 目 标 , 每 次 攻 击 造 成 %d%% （ 0 仇 恨） ～ %d%% （ 100+ 仇 恨） 的 伤 害。 并 且 每 次 攻 击 都 将 干扰 目 标 某 项 技 能 、纹身或 符 文， 持 续 %d 回 合。 目 标 会 因 为 你 的 攻 击 而 气 馁， 它 的 伤 害 降 低 %d%% ， 持 续 %d 回 合。 
+		 受 意 志 影 响， 伤 害 降 低 有 额 外 加 成。
+		 
+		如果你装备了盾牌，这一技能也会用你的盾牌攻击。]]):format(t.getDamageMultiplier(self, t, 0) * 100, t.getDamageMultiplier(self, t, 100) * 100, cooldownDuration, -targetDamageChange, duration)
+	end,
+}
+
+
+registerTalentTranslation{
 	id = "T_BECKON",
 	name = "引诱思维",
 	info = function(self, t)
@@ -35,19 +51,6 @@ registerTalentTranslation{
 }
 
 registerTalentTranslation{
-	id = "T_HARASS_PREY",
-	name = "痛苦折磨",
-	info = function(self, t)
-		local damageMultipler = t.getDamageMultiplier(self, t)
-		local cooldownDuration = t.getCooldownDuration(self, t)
-		local targetDamageChange = t.getTargetDamageChange(self, t)
-		local duration = t.getDuration(self, t)
-		return ([[用 两 次 快 速 的 攻 击 折 磨 你 追 踪 的 目 标 , 每 次 攻 击 造 成 %d%% （ 0 仇 恨） ～ %d%% （ 100+ 仇 恨） 的 伤 害。 并 且 每 次 攻 击 都 将 中 断 目 标 某 项 技 能 或 符 文， 持 续 %d 回 合。 目 标 会 因 为 你 的 攻 击 而 气 馁， 它 的 伤 害 降 低 %d%% ， 持 续 %d 回 合。 
-		 受 意 志 影 响， 伤 害 降 低 有 额 外 加 成。]]):format(t.getDamageMultiplier(self, t, 0) * 100, t.getDamageMultiplier(self, t, 100) * 100, cooldownDuration, -targetDamageChange, duration)
-	end,
-}
-
-registerTalentTranslation{
 	id = "T_SURGE",
 	name = "杀意涌动",
 	info = function(self, t)
@@ -55,7 +58,7 @@ registerTalentTranslation{
 		local defenseChange = t.getDefenseChange(self, t, true)
 		return ([[让 杀 意 激 发 你 敏 捷 的 身 手 , 提 高 你 %d%% 移 动 速 度。 不 顾 一 切 的 移 动 会 带 给 你 厄 运 (-3 幸 运 )。 
 		 分 裂 攻 击、 杀 意 涌 动 和 无 所 畏 惧 不 能 同 时 开 启， 并 且 激 活 其 中 一 个 也 会 使 另 外 两 个 进 入 冷 却。 
-		 你 的 移 动 速 度 与 双 武 器 提 供 的 完 美 平 衡， 使 你 在 双 持 的 同 时 闪 避 增 加 %d 点。 
+		双持武器时，杀意涌动还会提高你%d的闪避。
 		 受 意 志 影 响， 移 动 速 度 和 双 持 时 的 闪 避 增 益 有 额 外 加 成。]]):format(movementSpeedChange * 100, defenseChange)
 	end,
 }

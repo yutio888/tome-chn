@@ -9,7 +9,17 @@ registerTalentTranslation{
 		:format()
 	end,
 }
+registerTalentTranslation{
+	id = "T_ETHEREAL_FORM",
+	name = "虚幻形态",
+	["require.special.desc"]  = "闪避有效值超过40。",
+	info = function(self, t)
+		return ([[你获得 25%% 绝对伤害抗性，25%% 所有抗性穿透。每当你被武器攻击的时候，这项增益会减少 5%% ，但会在8回合后完全恢复。
+		此外，你将获得相当于你魔法值和敏捷值中最高的一项 70%% 的闪避值(%d)]])
+		:format(math.max(self:getMag(), self:getDex()) * 0.7)
+	end,
 
+}
 registerTalentTranslation{
 	id = "T_AETHER_PERMEATION",
 	name = "以太渗透",
@@ -125,9 +135,12 @@ registerTalentTranslation{
 			end
 		end
 		return ([[通 过 对 奥 术 之 力 的 研 究， 你 开 发 出 了 新 的 陷 阱 和 毒 药（ 由 学 习 此 进 阶 时 掌 握 的 技 能 决 定） 
+		你在灵巧/毒药系和灵巧/陷阱系技能树上获得1.0系数。
+		你的毒素爆发技能冷却时间减少3。
+		你的诱饵技能冷却时间减少5。
+
 		你 可 以 学 会： 
-%s
-		同 时， 你 的 魔 法 豁 免 永 久 提 高 20 点。]])
+%s]])
 		:format(descs)
 	end,
 

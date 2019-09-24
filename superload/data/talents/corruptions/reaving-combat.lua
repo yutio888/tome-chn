@@ -6,19 +6,19 @@ registerTalentTranslation{
 	info = function(self, t)
 		return ([[允 许 你 双 持 单 手 武 器 并 使 副 手 武 器 伤 害 增 加 至 %d%% 。 
 		 同 时 每 释 放 1 个 法 术（ 消 耗 1 回 合） 会 给 予 近 战 范 围 内 的 1 个 随 机 目 标 一 次 附 加 攻 击， 造 成 %d%% 枯 萎 伤 害。]]):
-		format(100*t.getoffmult(self,t), 100 * self:combatTalentWeaponDamage(t, 0.5, 1.1))
-	end,
+		 format(100*t.getoffmult(self,t), 100 * self:combatTalentWeaponDamage(t, 0.2, 0.7))
+		end,
 }
 
 registerTalentTranslation{
 	id = "T_BLOODLUST",
 	name = "嗜血杀戮",
 	info = function(self, t)
-		local SPbonus, maxDur = t.getParams(self, t)
-		return ([[当 你 对 敌 人 造 成 伤 害 时， 你 进 入 嗜 血 状 态， 每 伤 害 1 个 目 标 增 加 1 点 法 术 强 度，并 延 长 现 有 状 态 1 回 合。  
-		 此 技 能 每 回 合 最 多 使 你 增 加 共 计 +%d 点 法 术 强 度，且 总 计 最 多 增 加 +%d 点 法 术 强 度。
-		 嗜 血 状 态 持 续 %d 回 合， 每 经 过 一 个 未 造 成 伤 害 的 回 合， 法 术 强 度 加 成 下 降 %0.1f%% 。]]):
-		format(SPbonus, SPbonus*6, maxDur, 100/maxDur)
+		local SPbonus = t.getSpellpower(self, t)
+		return ([[每当你使用近战武器击中一个目标，你进入嗜血状态，增加你的法术强度%0.1f。
+		这一效果最多叠加10层，共获得%d法术强度。
+		嗜血状态持续3回合。]]):
+		format(SPbonus, SPbonus*10)
 	end,
 }
 

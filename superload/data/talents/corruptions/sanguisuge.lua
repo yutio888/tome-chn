@@ -15,8 +15,8 @@ registerTalentTranslation{
     id = "T_BLOODCASTING",
     name = "血祭施法",
 	info = function(self, t)
-		return ([[当 法 术 消 耗 大 于 你 当 前 的 活 力 值 时， 你 的 堕 落 系 法 术 会 用 生 命 代 替 活 力 被 消 耗， 持 续 %d 回 合。]]):
-		format(t.getDuration(self,t))
+		return ([[使用生命值取代活力值释放技能时，生命值消耗减少到%d%%。]]):
+		format(t.getLifeCost(self,t))
 	end,
 }
 
@@ -34,7 +34,9 @@ registerTalentTranslation{
     id = "T_LIFE_TAP",
     name = "生命源泉",
 	info = function(self, t)
-		return ([[解 除 生 命 的 限 制 获 得 强 大 的 力 量， 增 加 %0.1f%% 所 有 伤 害， 持 续 7 回 合。]]):
+		return ([[从你对敌人的痛苦中汲取力量。
+		在2回合内，你的所有伤害获得%d%%的吸血。
+		吸血比例受法术强度加成。]]):
 		format(t.getMult(self,t))
 	end,
 }

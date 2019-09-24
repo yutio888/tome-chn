@@ -1,5 +1,13 @@
 local _M = loadPrevious(...)
 
+registerTalentTranslation{
+	id = "T_FLEXIBLE_COMBAT",
+	name = "自由格斗",
+	info = function(self, t)
+		return ([[每 当 你 进 行 近 战 攻 击 时， 有 30％ 几 率 追 加 一 次 额 外 的 徒 手 攻 击。  ]])
+		:format()
+	end,
+}
 
 registerTalentTranslation{
 	id = "T_THROUGH_THE_CROWD",
@@ -39,22 +47,10 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_WINDTOUCHED_SPEED",
 	name = "和风守护",
-	["require.special.desc"] = "掌握至少20级使用失衡值的技能",
+	["require.special.desc"] = "掌握至少10级使用失衡值的技能",
 	info = function(self, t)
 		return ([[你 和 大 自 然 产 生 共 鸣， 在 与 奥 术 势 力 的 战 斗 中 受 到 她 的 赐 福。 
 		 你 的 整 体 速 度 永 久 提 高 20%%，技 能 冷 却 时 间 缩 短 10%%， 且 不 会 触 发 压 力 式 陷 阱。 ]])
-		:format()
-	end,
-}
-
-registerTalentTranslation{
-	id = "T_GIANT_LEAP",
-	name = "战争践踏",
-	["require.special.desc"] = "曾使用武器或徒手造成超过50000点伤害",
-	info = function(self, t)
-		return ([[你 跃 向 目 标 地 点， 对 1 码 半 径 范 围 内 的 所 有 敌 人 造 成 200％ 的 武 器 伤 害， 并 眩 晕 目 标 3 回 合。  
-		落 地 后 ，你 解 除 自 身 眩 晕 、定 身 和 震 慑 效 果。
-		]])
 		:format()
 	end,
 }

@@ -983,7 +983,7 @@ keyCHN["crackling"] = "爆裂"
 -- Much like Gloom this is better than any of the others and has the strictest reqs
 egosCHN[" of winter"] = "寒冬之"
 keyCHN["wintry"] = "寒冬"
-egosCHN["windwalling "] "风墙的"
+egosCHN["windwalling "] = "风墙的"
 keyCHN["windwalling"] = "风墙"
 -- Lesser Misc
 -- ego "reinforced " defined.
@@ -994,7 +994,7 @@ keyCHN["living"] = "生存"
 -- Meh needed to re-use Scouring needed AM shield egos whatever
 -- ego "scouring " defined.
 egosCHN["warded "] = "守护的"
-keyCHN["ward" = "守护"
+keyCHN["ward"] = "守护"
 -- ego "wrathful " defined.
 egosCHN["cosmic "] = "浩瀚的"
 keyCHN["cosmic"] = "浩瀚"

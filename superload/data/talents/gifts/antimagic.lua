@@ -62,10 +62,10 @@ registerTalentTranslation{
 }
 
 registerTalentTranslation{
-	id = "T_ANTIMAGIC_ADEPT"
-	name = "反魔专家"
+	id = "T_ANTIMAGIC_ADEPT",
+	name = "反魔专家",
 	info = function(self, t)
-		return ([[你的奥数对撞技能还会从目标身上移除4个持续魔法技能。]]):
+		return ([[你的奥术对撞技能还会从目标身上移除4个持续魔法技能。]]):
 		format()
 	end,
 }

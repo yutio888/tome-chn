@@ -164,8 +164,8 @@ registerTalentTranslation{
 }
 
 registerTalentTranslation{
-	id = "T_MELLE_RETALIATION",
-	name = "近战报复"
+	id = "T_MELEE_RETALIATION",
+	name = "近战报复",
 	info = function(self, t)
 		return ([[近战报复中介。]])
 	end,

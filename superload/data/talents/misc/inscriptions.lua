@@ -276,7 +276,7 @@ registerInscriptionTranslation{
 		return ([[强度 %d; 抗性 %d%%; 移动 %d%%; 持续 %d; 冷却 %d]]):format(t.getPower(self, t), t.getResistance(self, t), t.getMove(self, t), t.getDur(self, t), data.cooldown)
 	end,
 }
-registerTalentTranslation{
+registerInscriptionTranslation{
 	name = "Rune: Stormshield",
 	display_name = "符文：风暴护盾",
 	info = function(self, t)
@@ -291,7 +291,7 @@ registerTalentTranslation{
 	end,
 }
 
-registerTalentTranslation{
+registerInscriptionTranslation{
 	name = "Rune: Prismatic",
 	display_name = "符文：棱彩",
 	info = function(self, t)
@@ -339,7 +339,7 @@ registerInscriptionTranslation{
 	end,
 }
 
-registerTalentTranslation{
+registerInscriptionTranslation{
 	name = "Rune: Dissipation",
 	display_name = "符文: 耗散",
 	info = function(self, t)

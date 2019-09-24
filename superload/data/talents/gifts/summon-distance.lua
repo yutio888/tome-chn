@@ -9,11 +9,12 @@ registerTalentTranslation{
 	end,
 }
 registerTalentTranslation{
-	id = "T_WILD_RITCH_FLAMESPITTER_BOLT"
+	id = "T_WILD_RITCH_FLAMESPITTER_BOLT",
 	name = "火焰喷射",
 	info = function(self, t)
 		return ([[吐 出 一 枚 火 球 造 成 %0.2f 火 焰 伤 害。 
 		 受 精 神 强 度 影 响， 伤 害 有 额 外 加 成。]]):format(damDesc(self, DamageType.FIRE, self:combatTalentMindDamage(t, 8, 120)))
+	end,
 }
 registerTalentTranslation{
 	id = "T_FLAME_FURY",
@@ -36,7 +37,7 @@ registerTalentTranslation{
 }
 
 registerTalentTranslation{
-	id = "T_ACID_SPIT",
+	id = "T_ACID_SPIT_HYDRA",
 	name = "酸液喷吐",
 	info = function(self, t)
 		return ([[向 敌人 喷 射 酸 液 造 成 %0.2f 伤 害。 

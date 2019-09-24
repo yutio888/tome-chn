@@ -55,7 +55,7 @@ registerTalentTranslation{
 		提升护甲值%d，格挡值%d，减少格挡冷却2回合。
 		提升眩晕和击退抗性%d%%。
 		护甲和格挡值加成受你的敏捷和力量值影响。]]):
-		format(t.getDefense(self, t), t.getArmor(self, t), t.getBlock(self, t), 100*t.stunKBresist(self, t))
+		format(t.getArmor(self, t), t.getBlock(self, t), 100*t.stunKBresist(self, t))
 	end,
 
 }

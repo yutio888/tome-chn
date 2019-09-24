@@ -1511,14 +1511,6 @@ use_actor = use_actor or game.player
 			end
 		end)
 
-		local _, _, t, st = item:find("^([^/]+)/?(.*)$")
-			if st and st ~= "" then
-				return st:capitalize()
-			else
-				return t:capitalize()
-			end
-		end)
-
 		compare_table_fields(w, compare_with, field, "talents_mastery_bonus", "+%0.2f ", "Talent category bonus: ", function(item)
 		local _, _, t, st = item:find("^([^/]+)/?(.*)$")
 			if st and st ~= "" then
@@ -2240,6 +2232,7 @@ function _M:getUseDesc(use_actor)
 			elseif energy_type == "hate" then charm_on_use = charm_on_use:gsub("hate","仇恨值")
 			elseif energy_type == "equilibrium" then charm_on_use = charm_on_use:gsub("equilibrium","自然失衡值")
 			elseif energy_type == "stamina" then charm_on_use = charm_on_use:gsub("stamina","体力值")
+			end
 			-- Clean up the description if our chance to proc is 100%
 			local percent = d[1]
 			if percent < 100 then

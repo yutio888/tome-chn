@@ -1,7 +1,7 @@
 local _M = loadPrevious(...)
 registerTalentTranslation{
-	id = "T_JELLY_PBAOE"
-	name = "果冻散布"
+	id = "T_JELLY_PBAOE",
+	name = "果冻散布",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local duration = t.getDuration(self, t)
@@ -9,12 +9,11 @@ registerTalentTranslation{
 	end,
 }
 registerTalentTranslation{
-	id = "T_JELLY_MITOTIC_SPLIT"
-	name = "有丝分裂"
+	id = "T_JELLY_MITOTIC_SPLIT",
+	name = "有丝分裂",
 	info = function(self, t)
 		return ([[当受到最大生命值 %d%% 的攻击的时候，有%d%%的几率分裂。]]):format(t.getDamage(self, t), t.getChance(self, t))
 	end,
-in
 }
 registerTalentTranslation{
 	id = "T_WAR_HOUND",

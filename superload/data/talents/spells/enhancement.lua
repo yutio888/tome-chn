@@ -1,7 +1,7 @@
 local _M = loadPrevious(...)
 
 registerTalentTranslation{
-	id = "T_ARCANE_STRIKE",
+	id = "T_EARTHEN_BARRIER",
 	name = "奥术打击",
 	info = function(self, t)
 		return ([[使用你的主手武器打击两次目标，造成%d%% 奥术伤害。

@@ -43,7 +43,7 @@ registerTalentTranslation{
 		return ([[当你的圣印触发时，你将会获得一层星空能量的潮涌，增加你的暗影、光系抵抗和伤害吸收各%5%%，持续%d回合，最多叠加%d次。该效果每回合最多触发3次。]]):format(t.getTurns(self, t), t.getMaxStacks(self, t))
 	end,
 }
-newTalent{
+registerTalentTranslation{
 	id = "T_TWILIGHT_GLYPH",
 	name = "圣印之暮",
 	info = function(self, t)

@@ -21,7 +21,7 @@ registerTalentTranslation{
 		return ([[你 发 出 一 声 咆 哮 使 %d 码 半 径 范 围 内 的 敌 人 陷 入 彻 底 的 混 乱（强度 %d%%）， 持 续 3 回 合。 
 		 如 此 强 烈 的 咆 哮 使 你 的 敌 人 受 到 %0.2f 物 理 伤 害。 
 		 受 力 量 影 响， 伤 害 有 额 外 加 成。 
-		 每 点 火 龙 系 的 技 能 可 以 使 你 增 加 火 焰 抵 抗 1%% 。]]):format(radius, self:combatTalentStatDamage(t, "str", 30, 380))
+		 每 点 火 龙 系 的 技 能 可 以 使 你 增 加 火 焰 抵 抗 1%% 。]]):format(radius, power, self:combatTalentStatDamage(t, "str", 30, 380))
 	end,
 }
 

@@ -89,9 +89,7 @@ objUse["release a radius %d blast of frozen vapors that deal %0.2f cold damage (
 objUse["attempt to destroy all magic effects and sustains on creatures in a radius %d cone (unnatural creaters are additionally dealt %0.2f arcane damage and stunned)"]="试 图 摧 毁 %d 码 锥 形 范 围 内 所 有 魔 法 效 果 ， 并 对 非 自 然 生 物 造 成 %0.2f 奥 术 伤 害 并 震 慑。"
 objUse["inflict %0.2f mind damage (range 10), gaining psi and hate equal to 1/10 of the damage done"] = "在 距 离 1 0 的 范 围 内 造 成 %0.2f 精 神 伤 害 ， 回 复 10%% 伤 害 值 的 超 能 力 值 和 仇 恨 值。 "
 objUse["strike all targets in a line (for 100%% weapon damage as mind) out to range 4"] = "打击一条长度为4码的直线上的所有目标，\n造成相当于100%%武器伤害的精神伤害。"
-objUse["phase door up to range 6, within radius 2 of the target location"] = "传送到6码范围内的地点，误差在两码范围内。"
 objUse["boost movement speed by 300% for up to 5 turns (or until you perform a non-movement action)"] = "增加移动速度300%五回合。（任何非移动行动会打断这个效果）"
-objUse["call forth an immobile antimagic pillar for 15 turns.  (It spits slime, pulls in, stuns, and burns the arcane resources of your foes, while emitting an aura of silence against them within range 5, and will silence you for 5 turns when first summoned.)"] = "召唤一个无法移动的反魔神柱十五回合。（它可以喷吐史莱姆、抓取怪物、对敌人施放法力燃烧效果，和在范围5码之内产生一个沉默光环。召唤它同时也会沉默你五回合。）"
 objUse["shoot a bolt of spydric poison out to range %d, dealing %0.2f nature damage (based on Magic) over %d turns while rendering the target unable to move"] = "发射蜘蛛毒素, 对%d码内的敌人造成%0.2f点自然伤害(基于魔法), 并使其在%d回合内无法移动"
 objUse["raise one or two undead rats to fight beside you"] = "召唤1-2个亡灵鼠为你作战"
 --护符技能

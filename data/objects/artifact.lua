@@ -67,6 +67,7 @@ registerArtifactTranslation{
 	display_name = "踏雪",
 	unided_name = "覆盖着冰霜的皮靴",
 	desc = "一双摸起来冰凉的皮靴，闪烁着冰冷的蓝色光芒。",
+	special_desc = function(self) return "你走出的每一步都会在周围1码范围内产生冻结地面效果，持续5回合，使你获得20%寒冷伤害加成，持续3回合。此外，所有踩在冻结地面上的敌人在3回合内有20%几率技能使用失败。" end,
 }
 
 registerArtifactTranslation{
@@ -181,7 +182,7 @@ registerArtifactTranslation{
 	display_name = "恐惧护符",
 	unided_name = "黑暗的护符",
 	desc = "这件护符散发着不死生物的邪恶气息。",
-	["use_power.name"] = "召唤一个吸血鬼为你服务 15 回合。",
+	["use_power.name"] = "召唤一个会使用嘲讽的吸血鬼长老为你服务 15 回合。",
 }
 
 registerArtifactTranslation{
@@ -477,7 +478,7 @@ registerArtifactTranslation{
 	desc = "这个海蓝色的戒指看上去总是水汪汪的。",
 	["use_power.name"] = function(self, who)
 	local dam = self.use_power.damage(self, who)
-		return ("召唤缓慢扩张的半径 %d 的潮汐，持续 %d 回合，每回合造成 %0.2f 寒冷和 %0.2f 物理伤害，并击退敌人。")
+		return ("召唤缓慢扩张的半径 %d 的潮汐，持续 %d 回合，每回合造成 %0.2f 寒冷和 %0.2f 物理伤害，击退敌人，并降低他们的震慑抗性。")
 		:format(self.use_power:radius(who), self.use_power.duration(self, who), who:damDesc(engine.DamageType.COLD, dam/2), who:damDesc(engine.DamageType.PHYSICAL, dam/2)) 
 	end,
 }
@@ -533,10 +534,11 @@ registerArtifactTranslation{
 registerArtifactTranslation{
 	originName = "Summertide Phial",
 	display_name = "夏日之殇",
-	unided_name = "通红的小药瓶",
+	unided_name = "发光的小药瓶",
 	desc = "一个小水晶瓶里捕获了夏日的阳光。",
+	special_desc = function(self) return "近战攻击时，在1码半径内造成15光系伤害并照亮区域。" end,
 	["use_power.name"] = function(self, who) 
-		return ("召唤阳光 (%d强度 ,基于意志 )"):format(self.use_power.litepower(self, who)) 
+		return ("召唤阳光，驱除黑暗并照亮20格内的地面。 (%d强度 ,基于意志 )"):format(self.use_power.litepower(self, who)) 
 	end,
 }
 
@@ -552,6 +554,7 @@ registerArtifactTranslation{
 	originName = "Dúathedlen Heart",
 	display_name = "多瑟顿之心",
 	unided_name = "一个暗红色的肉块",
+	special_desc = function(self) return "这颗心脏在你造成黑暗伤害的时候会吸收光亮。站在未照亮的方格上，你会变得更强。" end,
 	desc = "这颗暗红色的心脏虽然离开了它的主人，但仍在跳动着。它还会熄灭任何靠近它的光源。",
 }
 
@@ -590,6 +593,7 @@ registerArtifactTranslation{
 	display_name = "艾德瑞尔的最后手段",
 	unided_name = "精良的投石器",
 	desc = "投石器的把手上有一段铭文：“愿持有者于对抗黑暗之时被赐予神一般的机智。”",
+	special_desc = function(self) return "当你的生命降低到最大生命值30%的时候，在5回合内，你获得20%攻击速度，降低100%疲劳，且射击不消耗弹药。冷却时间30回合。" end,
 }
 
 registerArtifactTranslation{
@@ -675,6 +679,7 @@ registerArtifactTranslation{
 	display_name = "静寂之刃",
 	unided_name = "光辉的匕首",
 	desc = "一把锋利，阴暗，完全融入了阴影中的匕首。",
+	["combat.special_on_kill.desc"] = "进入潜行3回合。",
 }
 
 registerArtifactTranslation{
@@ -683,6 +688,16 @@ registerArtifactTranslation{
 	unided_name = "月牙形匕首",
 	desc = "一把弧形的匕首，传说是用取自月亮的材料打造的。它吞噬了周围的光芒，显得黯淡。",
 	set_desc = {moon = "没有星星的天空里，月亮显得非常孤单。" }	,
+	["combat.special_on_hit.desc"] = function(self, who, special)
+		local dam = special.damage(self, who)
+		local str
+		if self.set_complete then
+			str = ("造成相当于你200%%灵巧值的暗影伤害(%d)."):format(dam)
+		else
+			str = ("造成%d暗影伤害。"):format(dam)
+		end
+		return str
+	end,
 }
 
 registerArtifactTranslation{
@@ -691,6 +706,16 @@ registerArtifactTranslation{
 	unided_name = "锯齿短刃",
 	desc = "传说之刃，闪耀如星。由取自陨石的材料锻造而成，它散发着光芒。",
 	set_desc = {star = "没有月亮的天空里，星星显得非常孤单。" },
+	["combat.special_on_hit.desc"] = function(self, who, special)
+		local dam = special.damage(self, who)
+		local str
+		if self.set_complete then
+			str = ("造成相当于你200%%敏捷值的光系伤害(%d)."):format(dam)
+		else
+			str = ("造成%d暗影伤害。"):format(dam)
+		end
+		return str
+	end,
 }
 
 registerArtifactTranslation{
@@ -716,9 +741,10 @@ registerArtifactTranslation{
 
 registerArtifactTranslation{
 	originName = "Crooked Club",
-	display_name = "畸形法杖",
+	display_name = "畸形棒槌",
 	unided_name = "不可思议的棍子",
-	desc = "诡异扭曲的法杖，尾部异常沉重。",
+	desc = "诡异扭曲的棒槌，尾部异常沉重。",
+	["combat.special_on_hit.desc"] = "降低目标命中和强度5，可叠加5次。"
 }
 
 registerArtifactTranslation{
@@ -820,6 +846,7 @@ registerArtifactTranslation{
 	display_name = "烈焰行者",
 	unided_name = "燃烧的长袍",
 	desc = "这件炙热的长袍曾属于疯狂的烈焰术士哈克特，他在黄昏纪威胁过很多城镇，正当人们努力从战争中恢复元气的时候，他竟然对城镇烧杀抢掠。最终他被伊格兰斯捕获了。伊格兰斯割下他的舌头，砍掉他的脑袋，并把他的身体撕成小块。他的脑袋被封在一个大冰块里，并且在附近城镇的居民欢庆中进行了游街。只有这件长袍从哈克特的烈焰中保留了下来。",
+	special_desc = function(self) return "每回合对周围4码范围内的敌人造成40火焰伤害，对你自己造成5火焰伤害。" end,
 }
 
 registerArtifactTranslation{
@@ -1090,9 +1117,10 @@ registerArtifactTranslation{
 
 registerArtifactTranslation{
 	originName = "Amethyst of Sanctuary",
-	display_name = "紫水晶的庇护",
+	display_name = "庇护的紫水晶",
 	unided_name = "深紫色灵晶",
 	desc = "这颗明亮的紫色宝石渗透出宁静、专注的力量，当你紧握它时，你可以感受到它保护你与外界力量隔绝。",
+	special_desc = function(self) return "来自3格外的敌人造成的伤害降低25%。" end,
 }
 
 registerArtifactTranslation{
@@ -1129,7 +1157,6 @@ registerArtifactTranslation{
 	display_name = "七彩龙之眼",
 	unided_name = "多彩的灵晶",
 	desc = "灵晶的核心穿过一道彩虹，投射出七色的光芒，不断变换着颜色。",
-	set_desc = {wyrm = "七彩龙之眼寻求一种元素。" },
 }
 
 registerArtifactTranslation{
@@ -1137,6 +1164,7 @@ registerArtifactTranslation{
 	display_name = "伟大的召唤师",
 	unided_name = "吟唱的灵晶",
 	desc = "这只灵晶不断的发出低鸣，你感觉到生命能量似乎在向它聚拢。",
+	special_desc = function(self) return "你的自然召唤有30%的几率升级为野性模式的召唤兽。" end,
 }
 
 registerArtifactTranslation{
@@ -1151,6 +1179,7 @@ registerArtifactTranslation{
 	display_name = "影之刃",
 	unided_name = "黝黑的匕首",
 	desc = "这只匕首覆盖着一层纯净的阴影，并且似乎有一团瘴气围绕着它。",
+	["combat.special_on_hit.desc"] = "有20%的几率让目标幻影流血。你击中幻影流血的目标时，恢复15生命值。"
 }
 
 registerArtifactTranslation{
@@ -1179,6 +1208,7 @@ registerArtifactTranslation{
 	display_name = "风暴之鞭",
 	unided_name = "缠绕着电弧的鞭子",
 	desc = "这根钢质的鞭子缠绕着许多电弧。你可以感受这根鞭子上散发出的力量强大且不可控制。",
+	["combat.special_on_crit.desc"] = "将雷霆的力量释放在敌人身上",
 	["use_power.name"] = function(self, who)
 		local dam = who:damDesc(engine.DamageType.LIGHTNING, self.use_power.damage(self, who))
 		return ("攻击距离 %d 内的敌人，造成 100%% 闪电武器伤害并在半径 %d 内释放电弧，造成 %0.2f 到 %0.2f 点闪电伤害 ( 基于魔法和敏捷)")
@@ -1191,6 +1221,7 @@ registerArtifactTranslation{
 	display_name = "聚灵鞭",
 	unided_name = "镶有宝石的柄",
 	desc = "这只手柄上镶有一颗小小的灵晶。当你触摸它时，一根半透明的绳子浮现在你面前，并随着你的意志闪烁。",
+	["combat.special_on_crit.desc"] = "试图封锁敌人的大脑（25%几率锁脑）"
 }
 
 registerArtifactTranslation{
@@ -1255,6 +1286,7 @@ registerArtifactTranslation{
 	display_name = "魔法狩猎遗物",
 	unided_name = "破旧的沃瑞钽臂铠",
 	desc = "你从这副锈迹斑斑的臂铠上勉强能看出其曾经的辉煌。它起源于魔法狩猎时期，用于摧毁奥术类装备，以惩罚法师们对这个世界的暴行。",
+	special_desc = function(self) return "奥术魔法使用者无法穿戴" end,
 }
 
 registerArtifactTranslation{
@@ -1270,7 +1302,7 @@ registerArtifactTranslation{
 	unided_name = "镶有锁链的镜片",
 	desc = "据说是由一位强大的魔法师在他的家园被猎魔行动的暴民摧毁后制造。虽然他逃脱了追捕，但是他的财产都被破坏和烧毁殆尽。当他回去时，发现家里已成废墟，墙上的斑驳和地上的碎片说明了这里曾遭到怎样的劫难。最终，他捡起了其中一块镜子残片，将其做成了这副项链。",
 	["use_power.name"] = function(self, who) 
-		return ("制造反射护盾（50%%反射率， %d 吸收量，基于魔法) 持续5 回合。"):format(self.use_power.shield(self, who)) 
+		return ("制造反射护盾（50%%反射率， %d 吸收量，基于魔法) 持续5 回合。"):format(self.use_power.shield(self, who) * (100 + (who:attr("shield_factor") or 0)) / 100)
 		end,
 }
 
@@ -1356,6 +1388,16 @@ registerArtifactTranslation{
 }
 
 registerArtifactTranslation{
+	originName = "Prismatic Rune",
+	display_name = "棱彩符文",
+}
+
+registerArtifactTranslation{
+	originName = "Mirror Image Rune",
+	display_name = "镜像符文",
+}
+
+registerArtifactTranslation{
 	originName = "Swordbreaker",
 	display_name = "破剑匕",
 	unided_name = "带锯齿的匕首",
@@ -1397,6 +1439,12 @@ registerArtifactTranslation{
 	display_name = "抹杀者",
 	unided_name = "巨型锤子",
 	desc = "这柄巨大的锤子挥击时拥有能粉碎骨头的巨力。",
+	["combat.special_on_hit.desc"] = function(self, who, special)
+		local damage = special.damage(self, who)
+		local s = ("使大地震颤裂开，露出尖石，在5码直线上造成%d物理伤害（与你的力量值相等，最高150），并使击中的目标流血，在5回合内额外造成50伤害。流血伤害可以叠加。"):format(damage)
+		return s
+	end,
+
 }
 
 registerArtifactTranslation{
@@ -1421,6 +1469,8 @@ registerArtifactTranslation{
 	display_name = "以太漫步者",
 	unided_name = "飘渺的靴子",
 	desc = "一圈紫色光环围绕着这双半透明的黑色靴子。",
+	special_desc = function(self, who) return ("使用者传送后，在周围3码范围内造成奥术爆发，造成%d奥术伤害，伤害基于魔法值。"):format(who:combatStatScale("mag", 50, 250)) end,
+	["use_power.name"] = "传送到6码范围内的地点，误差在两码范围内。"
 }
 
 registerArtifactTranslation{
@@ -1480,6 +1530,7 @@ registerArtifactTranslation{
 	display_name = "守卫者图腾",
 	unided_name = "损坏的石头图腾",
 	desc = "这个古老的石制图腾的石缝里不断涌出粘液。尽管如此，你仍能感受到它的巨大能量。",
+	["use_power.name"] = "召唤一个无法移动的反魔图腾10回合。（它可以喷吐史莱姆、抓取怪物、对敌人施放法力燃烧效果，和在范围5码之内产生一个沉默光环。召唤它同时也会沉默你五回合。）"
 }
 
 registerArtifactTranslation{
@@ -1726,9 +1777,10 @@ registerArtifactTranslation{
 
 registerArtifactTranslation{
 	originName = "Mandible of Ungolmor",
-	display_name = "恩格莫的上颚",
+	display_name = "阿格尔莫的上颚",
 	unided_name = "弯曲的锯齿状黑色匕首",
-	desc = "这把黑曜石打造的利刃镶嵌有恩格莫的致命毒牙。光明在它周围消逝，无尽的黑暗缠绕着它。",
+	desc = "这把黑曜石打造的利刃镶嵌有阿格尔莫的致命毒牙。光明在它周围消逝，无尽的黑暗缠绕着它。",
+	["combat.special_on_crit.desc"] = "注入蜘蛛毒素，在3回合内造成200伤害，并定身目标。"
 }
 
 registerArtifactTranslation{
@@ -2273,6 +2325,7 @@ registerArtifactTranslation{
 	display_name = "慈悲",
 	unided_name = "异常尖锐的匕首",
 	desc = "这柄匕首曾被黄昏纪一名无名的医生使用。瘟疫袭击了城镇，而医者终究是凡人，他只能用这柄匕首结束那些绝望的病人的痛苦。尽管初衷是好的，这柄匕首现在已经被黑暗力量污染，用它伤害虚弱的敌人威力更大。",
+	["combat.special_on_hit.desc"] = "造成60物理伤害。敌人每失去1%体力，伤害增加1%。"
 }
 
 registerArtifactTranslation{
@@ -2447,6 +2500,7 @@ registerArtifactTranslation{
 	display_name = "雅尔丹宝石",
 	unided_name = "昏暗的头盔",
 	desc = "这顶金色的王冠属于传说之城雅尔丹之王——Veluca。【待翻译】他比他的任何亲戚活得都长，在生命的最后日子里，他行走在早期的世界上，教育人们反抗黑暗。临死前，这顶王冠交给了他的继任者，一同交付的还有他的遗言——勿惧邪恶",
+	["use_power.name"] = function(self, who) return ("降低头盔的视野，使你致盲6回合并免疫其他致盲效果6回合。如果脱下这件装备，致盲效果会提前结束。"):format(self.use_power.range) end,
 }
 
 registerArtifactTranslation{
@@ -2769,8 +2823,8 @@ registerArtifactTranslation{
 }
 
 registerArtifactTranslation{
-	originName = "Taint of Telepathy",
-	display_name = "堕落印记：感应",
+	originName = "Taint of Purge",
+	display_name = "堕落印记：清除",
 	unided_name = "",
 	desc = "",
 }
@@ -2814,7 +2868,8 @@ registerArtifactTranslation{
 	originName = "Cloud Caller",
 	display_name = "唤云者",
 	unided_name = "宽边帽",
-	desc = [[这顶帽子宽阔的帽檐保护您免受恶劣的阳光和突如其来的暴风雨.]],
+	desc = [[这顶帽子宽阔的帽檐保护您免受呼啸的寒风和突如其来的暴风雨.]],
+	special_desc = function(self) return "一团小小的风暴包围着你，每回合对周围3码内的敌人造成15闪电伤害。" end,
 }
 
 registerArtifactTranslation{
@@ -2822,8 +2877,12 @@ registerArtifactTranslation{
 	display_name = "震撼",
 	unided_name = "刺痛项圈",
 	desc = [[这项圈摸起来让人觉得刺痛,但似乎增强了你的思考.]],
-	special_desc = function(self) 
-		return "每次当你的雷电伤害超过了目标 10%% 最大生命时，将附加锁脑状态。" end,
+	special_desc = function(self) return [[你的精神与电力连接。
+		你对敌人造成的超过其最大生命值10%的伤害时，会试图附加锁脑效果。
+		当你受到相当于最大生命值10%的闪电伤害时，你的精神会发起反击，对敌人造成30%的原伤害，并试图附加锁脑效果。
+		当你受到相当于最大生命值10%的精神伤害时，你会快速启动这个项圈，朝敌人射出一团震慑的闪电，伤害基于意志。
+		这个物品可以存储两次充能，每次充能冷却时间4回合。]]
+	end,
 }
 
 registerArtifactTranslation{

@@ -32,7 +32,6 @@ registerTalentTranslation{
 	name = "龙卷风",
 	info = function(self, t)
 		local rad = t.getRadius(self, t)
-		local duration = t.getStunDuration(self, t)
 		return ([[召 唤 一个 龙 卷 风，它会向着目标极为缓慢地移动，并在目标移动时跟随目标，持续最多20回合。
 		 每当它移动时，半径2范围内的所有敌人会受 到 %0.2f 闪 电 伤 害，并被击退2格。
 		 当 它 到 达 目 标 时， 它 会 在 %d 码 半 径 范 围 内 爆 炸 并 造 成 %0.2f 闪 电 伤 害， %0.2f 物 理 伤 害。 所 有 受 到 影 响 的 生 物 都 会 被 击 退。爆 炸 不 会 伤 害 释 放 者。 
@@ -53,15 +52,13 @@ registerTalentTranslation{
 	name = "闪电吐息",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
-		local daze = t.getDaze(self, t)
 		return ([[你 在 前 方 %d 码 锥 形 范 围 内 喷 出 闪 电。 
-		 此 范 围 内 的 目 标 会 受 到 %0.2f ～ %0.2f 闪 电 伤 害 并 有 %d%% 几 率 被 眩 晕 3 回 合。 
+		 此 范 围 内 的 目 标 会 受 到 %0.2f ～ %0.2f 闪 电 伤 害 并 被 眩 晕 3 回 合。 
 		 受 力 量 影 响， 伤 害 有 额 外 加 成。 技 能 暴 击 率 基 于 精 神 暴 击 值 计 算。
 		 每 点 雷 龙 系 的 天 赋 可 以 使 你 增 加 闪 电 抵 抗 1%% 。]]):format(
 			self:getTalentRadius(t),
 			damDesc(self, DamageType.LIGHTNING, damage / 3),
-			damDesc(self, DamageType.LIGHTNING, damage),
-			daze
+			damDesc(self, DamageType.LIGHTNING, damage)
 		)
 	end,
 }

@@ -45,9 +45,9 @@ _M.logCombat = Combat.logCombat
 _M._special_ego_rules = {special_on_hit=true, special_on_crit=true, special_on_kill=true, charm_on_use=true, on_block=true}
 
 _M.requirement_flags_names = {
-	allow_wear_massive = "Massive armour training",
-	allow_wear_heavy = "Heavy armour training",
-	allow_wear_shield = "Shield usage training",
+	allow_wear_massive = "板甲训练",
+	allow_wear_heavy = "重甲训练",
+	allow_wear_shield = "盾牌使用训练",
 }
 
 function _M:getRequirementDesc(who)

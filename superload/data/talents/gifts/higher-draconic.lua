@@ -42,7 +42,7 @@ registerTalentTranslation{
 	name = "天龙之怒",
 	info = function(self, t)
 		return ([[你获得了世界中数不清的龙的力量传承，你对物理、火焰、寒冷、酸性、自然、枯萎和暗影属性伤害的抵抗力和适应力增强了。
-		你对这些属性的抗性提升%0.1f%%，使用这些属性的时候伤害提升 %0.1f%% ，获得 %0.1f%% 伤害穿透。
+		你对这些属性的 %0.1f%% ，使用这些属性的时候伤害提升 %0.1f%% ，获得 %0.1f%% 伤害穿透。
 
 		学习这一技能还会给你的吐息技能伤害增加意志值加成。若你的这两项属性相等，则这相当于加成值翻倍。]]) 
 		:format(t.getResists(self, t), t.getDamageIncrease(self, t), t.getResistPen(self, t))

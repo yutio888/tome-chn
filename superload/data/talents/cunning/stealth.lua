@@ -48,7 +48,7 @@ registerTalentTranslation{
 	name = "暗影之舞",
 	info = function (self,t)
 		return ([[你 对 潜 行 的 精 通 让 你 能 够 随 时 从 视 野 中 消 失 。
-		你自动进入潜行模式。在%d回合内，你非潜行的行动不会使你主动显形。]]):
+		你自动进入潜行模式。在 %d 回合内，你非潜行的行动不会使你主动显形。]]):
 		format(t.getDuration(self, t))
 	end,
 }

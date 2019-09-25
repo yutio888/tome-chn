@@ -4,7 +4,7 @@ registerTalentTranslation{
 	id = "T_EARTHEN_BARRIER",
 	name = "奥术打击",
 	info = function(self, t)
-		return ([[使用你的主手武器打击两次目标，造成%d%% 奥术伤害。
+		return ([[使用你的主手武器打击两次目标，造成 %d%% 奥术伤害。
 		如果任何一击命中目标，你获得 %d 法力值。
 		法力值恢复受法术强度加成。]]):
 		format(t.getDamage(self, t)*100, t.getMana(self, t))
@@ -45,7 +45,7 @@ registerTalentTranslation{
 		local statinc = t.getStatIncrease(self, t)
 		local absorb = t.getShield(self, t) * (100 + (self:attr("shield_factor") or 0)) / 100
 		return ([[你 专 注 于 你 的 内 心， 增 加 你 %d 点力量，敏捷，魔法和灵巧。
-		在你受到伤害前，你会产生一个吸收%d伤害的护盾，该效果最多每%d回合触发一次。
+		在你受到伤害前，你会产生一个吸收 %d 伤害的护盾，该效果最多每%d回合触发一次。
 		属性值增长和护盾强度受法术强度加成。]]):
 		format(statinc, absorb, self:getTalentCooldown(t) )
 	end,

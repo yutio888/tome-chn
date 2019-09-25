@@ -37,7 +37,7 @@ registerTalentTranslation{
 	name = "心灵震爆",
 	info = function(self, t)
 		local duration = t.getConfuseDuration(self, t)
-		return ([[在%d码半径范围内释放一股精神冲击，摧毁目标的意志，对其造成%0.2f暗影伤害，并使其混乱(%d%%几率随机行动），持续%d回合。
+		return ([[在 %d 码半径范围内释放一股精神冲击，摧毁目标的意志，对其造成 %0.2f 暗影伤害，并使其混乱( %d%% 几率随机行动），持续 %d 回合。
 		伤害受法术强度加成，持续时间受灵巧值加成。]]):
 		format(self:getTalentRadius(t), damDesc(self, DamageType.DARKNESS, t.getDamage(self, t)), t.getConfuseEfficency(self,t), duration)
 	end,
@@ -48,8 +48,8 @@ registerTalentTranslation{
 	name = "阴影幻象",
 	info = function(self, t)
 		local duration = t.getDuration(self, t)
-		return ([[用阴影复制一个敌对目标的幻象。这个幻象会立刻攻击它的原型，持续%d回合。
-		幻象拥有%d%%的目标生命，+50%%暗影伤害抵抗，-50%%光系伤害抵抗，造成-50%%的伤害。
+		return ([[用阴影复制一个敌对目标的幻象。这个幻象会立刻攻击它的原型，持续 %d 回合。
+		幻象拥有 %d%% 的目标生命， +50%% 暗影伤害抵抗， -50%% 光系伤害抵抗，造成 -50%% 的伤害。
 		持续时间和幻象生命受你的灵巧值影响。]]):
 		format(duration, t.getPercent(self, t))
 	end,

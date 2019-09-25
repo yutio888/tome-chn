@@ -5,11 +5,11 @@ registerTalentTranslation{
 	name = "活力",
 	info = function(self, t)
 		local wounds = t.getWoundReduction(self, t) * 100
-		local baseheal, healpct = t.getHealValues(self, t)
+		local baseheal = t.getHealValues(self, t)
 		local duration = t.getDuration(self, t)
-		local totalheal = baseheal + self.max_life*healpct/duration
+		local totalheal = baseheal
 		return ([[你 受 中 毒、 疾 病 和 创 伤 的 影 响 较 小， 减 少 %d%% 此 类 效 果 的 持 续 时 间。 
-		此 外 在 生 命值 低 于 50%% 时 ，你的生命回复将会增加%0.1f ，持 续 %d 回 合 ，共回复%d生命值， 但 每 隔 %d 回 合 才 能 触 发 一 次。
+		此 外 在 生 命值 低 于 50%% 时 ，你的生命回复将会增加 %0.1f ，持 续 %d 回 合 ，共回复 %d 生命值， 但 每 隔 %d 回 合 才 能 触 发 一 次。
 		受 体 质 影 响， 生 命 回 复 有 额 外 加 成。]]):
 		format(wounds, baseheal, duration, baseheal*duration, self:getTalentCooldown(t))
 	end,
@@ -39,7 +39,7 @@ registerTalentTranslation{
 		local radius = t.getRadius(self, t)
 		local penalty = t.getPenalty(self, t)
 		return ([[敌 人 因 你 的存在而恐 惧。 
-		半径%d范围内的敌人的物理强度，精神强度和法术强度会降低%d。
+		半径 %d 码范围内的敌人的物理强度，精神强度和法术强度会降低 %d 。
 		受 物 理 强 度 影 响， 威 胁 效 果 有 加 成。 ]]):
 		format(radius, penalty)
 	end,

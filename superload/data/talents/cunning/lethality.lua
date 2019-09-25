@@ -16,11 +16,10 @@ registerTalentTranslation{
 	name = "弱点暴露",
 	info = function (self,t)
 		local damage = t.getDamage(self, t)
-		local bonus = damDesc(self, DamageType.PHYSICAL, t.getBonusDamage(self, t))
 		local duration = t.getDuration(self, t)
 		return ([[集 中 精 力 试 探 目 标 ， 寻 找 其 弱 点 ,造 成 %d%% 武 器 伤 害。
-		在接下来的%d回合内，你获得%d护甲穿透，%d命中，%d%%所有伤害穿透。
-		学习这一技能还会使你的近战和弓箭攻击永久获得%d护甲穿透。
+		在接下来的 %d 回合内，你获得 %d 护甲穿透， %d 命中， %d%% 所有伤害穿透。
+		学习这一技能还会使你的近战和弓箭攻击永久获得 %d 护甲穿透。
 		护甲穿透和命中加成受灵巧加成。]]):
 		format(100 * damage, duration, t.getAPRBuff(self, t), t.getAccuracy(self, t), t.getPenetration(self, t), t.getAPR(self, t))
 	end,

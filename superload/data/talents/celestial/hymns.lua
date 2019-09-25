@@ -8,7 +8,7 @@ registerTalentTranslation{
 		 移 动 速 度 增 加 %d%% ， 施 法 速 度 增 加 %d%%
 		 同 时 只 能 激 活 一 种 圣 诗 。
 		 效 果 受 法 术 强 度 加 成 。]]):
-		format(t.moveSpeed(self, t), t.castSpeed(self, t), t.evade(self, t))
+		 format(t.moveSpeed(self, t), t.castSpeed(self, t))
 	end,
 }
 
@@ -71,7 +71,7 @@ registerTalentTranslation{
 		 侦 察 圣 诗 ：增 加 %d 潜 行 侦 察 ， %d 隐 身 侦 察 ， %d%% 暴 击 伤 害 
 		 坚 毅 圣 诗 ：增 加 %d%% 震 慑 、混 乱、 致 盲 抗 性。
 		 你 同 时 只 能 激 活 一 种 赞 歌 。]]):
-			format(t1.moveSpeed(self, t1), t1.castSpeed(self, t1), t1.evade(self, t1), t2.getSeeStealth(self, t2), t2.getSeeInvisible(self, t2), t2.critPower(self, t2), t3.getImmunities(self, t3)*100)
+		 	format(t1.moveSpeed(self, t1), t1.castSpeed(self, t1), t2.getSeeStealth(self, t2), t2.getSeeInvisible(self, t2), t2.critPower(self, t2), t3.getImmunities(self, t3)*100)
 		end)
 		self.talents[self.T_HYMN_OF_SHADOWS] = old1
 		self.talents[self.T_HYMN_OF_DETECTION] = old2

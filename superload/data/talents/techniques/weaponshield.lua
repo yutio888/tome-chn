@@ -52,8 +52,8 @@ registerTalentTranslation{
 	name = "盾墙",
 	info = function (self,t)
 		return ([[进入一个保护性的战斗姿态，让你在使用盾牌的同时更熟练地保护自己。
-		提升护甲值%d，格挡值%d，减少格挡冷却2回合。
-		提升眩晕和击退抗性%d%%。
+		提升护甲值 %d ，格挡值 %d ，减少格挡冷却 2 回合。
+		提升眩晕和击退抗性 %d%% 。
 		护甲和格挡值加成受你的敏捷和力量值影响。]]):
 		format(t.getArmor(self, t), t.getBlock(self, t), 100*t.stunKBresist(self, t))
 	end,

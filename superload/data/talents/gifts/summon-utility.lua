@@ -69,7 +69,7 @@ registerTalentTranslation{
 	id = "T_SUMMON_CONTROL",
 	name = "信息素",
 	info = function(self, t)
-		return ([[用信息素标记一个生物，向它的%d格内的所有召唤兽发出信号，将攻击目标转移到被标记的生物身上，持续%d回合。]]):format(t.getRad(self,t), t.getDur(self,t))
+		return ([[用信息素标记一个生物，向它周围 %d 码范围内的所有召唤兽发出信号，将攻击目标转移到被标记的生物身上，持续 %d 回合。]]):format(t.getRad(self,t), t.getDur(self,t))
 	end,
 }
 

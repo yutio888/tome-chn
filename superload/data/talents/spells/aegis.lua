@@ -43,6 +43,7 @@ registerTalentTranslation{
 	name = "守护印记",
 	info = function(self, t)
 		local shield = t.getShield(self, t)
+		local disruption = (self.disruption_shield_absorb or 0) * t.getDisruption(self, t) / 100
 		return ([[释 放 奥 术 能 量 充 满 当 前 保 护 你 的 魔 法 护 盾， 进 一 步 强 化 它。
 		 它 会 影 响 最 多 %d 种 护 盾 效 果。 
 		 伤 害 护 盾， 时 间 护 盾， 转 移 护 盾：提 高 %d%% 最 大 伤 害 吸 收 值。 

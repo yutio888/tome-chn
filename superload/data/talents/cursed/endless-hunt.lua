@@ -58,7 +58,7 @@ registerTalentTranslation{
 		local defenseChange = t.getDefenseChange(self, t, true)
 		return ([[让 杀 意 激 发 你 敏 捷 的 身 手 , 提 高 你 %d%% 移 动 速 度。 不 顾 一 切 的 移 动 会 带 给 你 厄 运 (-3 幸 运 )。 
 		 分 裂 攻 击、 杀 意 涌 动 和 无 所 畏 惧 不 能 同 时 开 启， 并 且 激 活 其 中 一 个 也 会 使 另 外 两 个 进 入 冷 却。 
-		双持武器时，杀意涌动还会提高你%d的闪避。
+		双持武器时，杀意涌动还会提高你 %d 的闪避。
 		 受 意 志 影 响， 移 动 速 度 和 双 持 时 的 闪 避 增 益 有 额 外 加 成。]]):format(movementSpeedChange * 100, defenseChange)
 	end,
 }

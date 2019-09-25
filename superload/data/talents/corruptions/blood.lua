@@ -16,7 +16,7 @@ registerTalentTranslation{
 	name = "鲜血支配",
 	info = function(self, t)
 		return ([[释 放 一 个 堕 落 血 球， 造 成 %0.2f 枯 萎 伤 害 并 恢 复 你 20%% 伤 害 值 的 生 命。 
-		造成的伤害的50%%会增加你的最大生命值，持续7回合。（这一效果发生在治疗之前）
+		造成的伤害的 50%% 会增加你的最大生命值，持续 7 回合。（这一效果发生在治疗之前）
 		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成。]]):format(damDesc(self, DamageType.BLIGHT, self:combatTalentSpellDamage(t, 10, 290)))
 	end,
 }
@@ -25,8 +25,8 @@ registerTalentTranslation{
 	id = "T_BLOOD_BOIL",
 	name = "鲜血沸腾",
 	info = function(self, t)
-		return ([[使你周围半径%d之内生物的不纯之血沸腾。
-		每个被任何疾病、毒素或伤口影响的敌人将会随机移除一个上述效果，造成%0.2f枯萎伤害，使你恢复%d生命值，并将其减速%d%%，持续5回合。
+		return ([[使你周围半径 %d 之内生物的不纯之血沸腾。
+		每个被任何疾病、毒素或伤口影响的敌人将会随机移除一个上述效果，造成 %0.2f 枯萎伤害，使你恢复 %d 生命值，并将其减速 %d%% ，持续 5 回合。
 		伤害值受你的法术强度影响。]]):format(self:getTalentRadius(t), damDesc(self, DamageType.BLIGHT, t.getDamage(self, t)), t.getHeal(self, t), t.getSlow(self, t))
 	end,
 }

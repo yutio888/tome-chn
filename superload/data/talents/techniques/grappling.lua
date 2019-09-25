@@ -59,9 +59,9 @@ registerTalentTranslation{
 	id = "T_HURRICANE_THROW",
 	name = "关节技：飓风投",
 	info = function(self, t)
-		return ([[你 使 出 全 力 将 抓 取 的 目 标 扔 到 空 中 ， 对 他 和 着 陆 点 周 围 半径%d的 生 物 造 成 %d%% 伤 害 。
+		return ([[你 使 出 全 力 将 抓 取 的 目 标 扔 到 空 中 ， 对 他 和 着 陆 点 周 围 半径 %d 的 生 物 造 成 %d%% 伤 害 。
 		如果至少有一个敌人被击中，被投掷的敌人将会因为冲击而失去一个回合。
-		你只能投掷那些可以移动的敌人。]]):format(t.getDamage(self, t)*100, self:getTalentRadius(t))
+		你只能投掷那些可以移动的敌人。]]):format(self:getTalentRadius(t), t.getDamage(self, t)*100)
 	end,
 }
 

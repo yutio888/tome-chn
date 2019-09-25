@@ -27,8 +27,8 @@ registerTalentTranslation{
 		每 沉 默 一 个 目 标 ， 你 回 复 %d 失 衡 值 ， 至 多 5 次。
 		受 精 神 或 物 理 强 度 较 高 者 影 响， 沉 默 几 率 有 额 外 加 成。
 		
-		学会这个技能，也会让你的自然伤害加成和伤害穿透属性。可以对法力燃烧伤害生效，不管这一伤害的来源是什么。]]):
-		format(t.getduration(self,t), rad, t.getEquiRegen(self, t))
+		学会这个技能，也会让你的自然伤害加成和伤害穿透属性，对所有法力燃烧伤害生效，不管这一伤害的来源是什么。]]):
+		format(t.getduration(self,t), rad, t.getFloorDuration(self,t), t.getDamage(self, t), t.getEquiRegen(self, t))
 	end,
 }
 

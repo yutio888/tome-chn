@@ -17,7 +17,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local spellpower = t.getSpellpower(self, t)
 		local bonus = self:getCun()*spellpower/100
-		return ([[你 的 充 分 准 备 提 高 了 你 的 魔 法 运 用 能 力。 增 加 相 当 于 你 %d%% 灵 巧 的 法 术 强 度。目前的法术强度加成：%d]]):
+		return ([[你 的 充 分 准 备 提 高 了 你 的 魔 法 运 用 能 力。 增 加 相 当 于 你 %d%% 灵 巧 的 法 术 强 度。目前的法术强度加成： %d]]):
 		format(spellpower, bonus)
 	end,
 }

@@ -45,7 +45,7 @@ registerTalentTranslation{
 		local dur = t.getDuration(self,t)
 		local speed = t.getSpeed(self,t)*100
 		local mark = t.getMarkChance(self,t)
-		return ([[进 入 专 注 状 态 %d 回 合 ，远 程 攻 击 速 度 增 加 %d%%,射 击 不 消 耗 弹 药 ，标 记 概 率增加 %d%%。]]):
+		return ([[进 入 专 注 状 态 %d 回 合 ，远 程 攻 击 速 度 增 加 %d%% ，射 击 不 消 耗 弹 药 ，标 记 概 率增加 %d%%。]]):
 		format(dur, speed, mark)
 	end,
 }

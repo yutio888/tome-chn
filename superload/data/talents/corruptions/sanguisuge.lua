@@ -15,7 +15,7 @@ registerTalentTranslation{
     id = "T_BLOODCASTING",
     name = "血祭施法",
 	info = function(self, t)
-		return ([[使用生命值取代活力值释放技能时，生命值消耗减少到%d%%。]]):
+		return ([[使用生命值取代活力值释放技能时，生命值消耗减少到 %d%% 。]]):
 		format(t.getLifeCost(self,t))
 	end,
 }
@@ -35,7 +35,7 @@ registerTalentTranslation{
     name = "生命源泉",
 	info = function(self, t)
 		return ([[从你对敌人的痛苦中汲取力量。
-		在2回合内，你的所有伤害获得%d%%的吸血。
+		在2回合内，你的所有伤害获得 %d%% 的吸血。
 		吸血比例受法术强度加成。]]):
 		format(t.getMult(self,t))
 	end,

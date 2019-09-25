@@ -829,8 +829,13 @@ function _M:generateDifficulties()
 				list[#list+1] = { name = tstring{{"font", "italic"}, {"color", "GREY"}, "-- 需解锁 --", {"font", "normal"}}:toString(), id=d.name, locked=true, desc=util.getval(d.locked_desc, self)..locktext }
 			elseif locked == false then
 				local desc = d.desc
-				if type(desc) == "table" then desc = table.concat(d.desc, "\n") end
-				list[#list+1] = { name = tstring{d.display_name}:toString(), id=d.name, desc=desc }
+				-- 汉化
+				local tname=d.display_name
+				if birthCHN[d.type][d.name] then 
+					desc = birthCHN[d.type][d.name].desc
+					tname = birthCHN[d.type][d.name].display_name end
+				if type(desc) == "table" then desc = table.concat(desc, "\n") end
+				list[#list+1] = { name = tstring{tname}:toString(), id=d.name, desc=desc }
 				if oldsel == d.name then oldsel = #list end
 				if util.getval(d.selection_default) then self.default_difficulty = d.name end
 			end
@@ -861,8 +866,14 @@ function _M:generatePermadeaths()
 				list[#list+1] = { name = tstring{{"font", "italic"}, {"color", "GREY"}, "-- 需解锁 --", {"font", "normal"}}:toString(), id=d.name, locked=true, desc=d.locked_desc..locktext, locked_select=d.locked_select }
 			elseif locked == false then
 				local desc = d.desc
-				if type(desc) == "table" then desc = table.concat(d.desc, "\n") end
-				list[#list+1] = { name = tstring{d.display_name}:toString(), id=d.name, desc=desc }
+				-- 汉化
+				local tname=d.display_name
+				if birthCHN[d.type][d.name] then 
+					desc = birthCHN[d.type][d.name].desc
+					tname = birthCHN[d.type][d.name].display_name 
+				end
+				if type(desc) == "table" then desc = table.concat(desc, "\n") end
+				list[#list+1] = { name = tstring{tname}:toString(), id=d.name, desc=desc }
 				if oldsel == d.name then oldsel = #list end
 				if util.getval(d.selection_default) then self.default_permadeath = d.name end
 			end

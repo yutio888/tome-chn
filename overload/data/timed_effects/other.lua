@@ -1145,7 +1145,7 @@ newEffect{
 #CRIMSON# 惩 罚 : #WHITE# 扰 乱 心 智： %+d%% 精 神 抵 抗 , %+d%% 混 乱 免 疫 
 #CRIMSON# 强 度 1+: %s 解 除 束 缚： %+d%% 暴 击 伤 害， %+d%% 副 手 武 器 伤 害。 
 #CRIMSON# 强 度 2+: %s%+d 幸 运， %+d 敏 捷 
-#CRIMSON# 强 度 3+: % 阴 谋: 你 的 疯 狂 是 会 传 染 的 。 每 次 你 对 敌 人 造 成 暴 击 伤 害 时 ， 都 有 %d%% 的 几 率 将 你 当 前 的 负 面 精 神 效 果 传 播 给 他 们 。
+#CRIMSON# 强 度 3+: %s 阴 谋: 你 的 疯 狂 是 会 传 染 的 。 每 次 你 对 敌 人 造 成 暴 击 伤 害 时 ， 都 有 %d%% 的 几 率 将 你 当 前 的 负 面 精 神 效 果 传 播 给 他 们 。
 #CRIMSON# 强 度 4+: %s 狂 热: 每 回 合 一 次 ， 当 一 次 攻 击 超 过 你 生 命 的 %0.1f% 时 ， 你 所 有 技 能 的 剩 余 冷 却 时 间 减 少 1 。]]):format(
 		def.getMindResistChange(eff, level), def.getConfusionImmuneChange(eff, level) * 100,
 		bonusLevel >= 1 and "#WHITE#" or "#GREY#", def.getCombatCriticalPowerChange(math.max(level, 1)), def.getOffHandMultChange(math.max(level, 1)),
@@ -1725,7 +1725,7 @@ newEffect{
 #CRIMSON# 强 度 1+: %s 失 败 的 努 力: 围 绕 你 的 努 力 都 会 失 败  (+%d%% 检 测 陷 阱 的 几 率 )。
 #CRIMSON# 强 度 2+: %s%+d 幸 运， %+d 灵 巧 
 #CRIMSON# 强 度 3+: %s 错 失 良 机: 机 会 转 瞬 即 逝 ， 你 身 边 的 人 会 错 失 良 机 (+%d%% 闪 避 攻 击 概 率)。
-#CRIMSON# 强 度 4+: % 厄 运 终 结: 如 果 提 高 后 的 伤 害 足 够 杀 死 对 手 的 话， 你 将 可 以 提 高 %d%% 的 伤 害]]):format(
+#CRIMSON# 强 度 4+: %s 厄 运 终 结: 如 果 提 高 后 的 伤 害 足 够 杀 死 对 手 的 话， 你 将 可 以 提 高 %d%% 的 伤 害]]):format(
 		bonusLevel >= 1 and "#WHITE#" or "#GREY#", def.getMissplacedEndeavours(math.max(level, 1)),
 		bonusLevel >= 2 and "#WHITE#" or "#GREY#", def.getLckChange(eff, math.max(level, 2)), def.getCunChange(math.max(level, 2)),
 		bonusLevel >= 3 and "#WHITE#" or "#GREY#", def.getMissedOpportunities(math.max(level, 3)),

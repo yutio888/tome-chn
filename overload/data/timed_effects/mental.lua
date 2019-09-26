@@ -168,7 +168,7 @@ newEffect{
 			ai = self.ai,
 		}
 		self.faction = eff.src.faction
-		
+
 		self.ai_state.tactic_leash = 100
 		self.remove_from_party_on_death = true
 		self.no_inventory_access = true
@@ -313,7 +313,7 @@ newEffect{
 	on_lose = function(self, err) return "#F53CBE##Target# is no longer weakened." end,
 	activate = function(self, eff)
 		eff.particle = self:addParticles(Particles.new("gloom_weakness", 1))
-		eff.incDamageId = self:addTemporaryValue("inc_damage", {all = eff.incDamageChange})
+		eff.incDamageId = self:addTemporaryValue("inc_damage", {all = -eff.incDamageChange})
 	end,
 	deactivate = function(self, eff)
 		self:removeParticles(eff.particle)
@@ -385,7 +385,7 @@ newEffect{
 	status = "detrimental",
 	parameters = { power = 10 },
 	on_gain = function(self, err) return "#F53CBE##Target# is lost in despair!", "+Confused" end,
-	on_lose = function(self, err) return "#Target# overcomes the gloom.", "-Confused" end,
+	on_lose = function(self, err) return "#Target# overcomes the gloom", "-Confused" end,
 	activate = function(self, eff)
 		eff.particle = self:addParticles(Particles.new("gloom_confused", 1))
 		eff.power = util.bound(eff.power, 0, 50)
@@ -421,7 +421,7 @@ newEffect{
 	name = "STALKER", image = "talents/stalk.png",
 	desc = "Stalking",
 	display_desc = function(self, eff)
-		return ([[追 踪 %d/%d +%d ]]):format(eff.target.life, eff.target.max_life, eff.bonus)
+		return ([[Stalking %d/%d +%d ]]):format(eff.target.life, eff.target.max_life, eff.bonus)
 	end,
 	long_desc = function(self, eff)
 		local t = self:getTalentFromId(self.T_STALK)
@@ -438,10 +438,10 @@ newEffect{
 	status = "beneficial",
 	parameters = {},
 	activate = function(self, eff)
-		self:logCombat(eff.target, "#F53CBE##Target# 正被 #Source#追踪!")
+		self:logCombat(eff.target, "#F53CBE##Target# is being stalked by #Source#!")
 	end,
 	deactivate = function(self, eff)
-		self:logCombat(eff.target, "#F53CBE##Target# 不再被 #Source#追踪.")
+		self:logCombat(eff.target, "#F53CBE##Target# is no longer being stalked by #Source#.")
 	end,
 	on_timeout = function(self, eff)
 		if not eff.target or eff.target.dead or not eff.target:hasEffect(eff.target.EFF_STALKED) then
@@ -1055,7 +1055,7 @@ newEffect{
 	status = "detrimental",
 	parameters = {},
 	on_gain = function(self, err) return "#F53CBE##Target# has been maligned!", "+Maligned" end,
-	on_lose = function(self, err) return "#Target# is no longer maligned.", "-Maligned" end,
+	on_lose = function(self, err) return "#Target# is no longer maligned", "-Maligned" end,
 	activate = function(self, eff)
 		eff.particle = self:addParticles(Particles.new("maligned", 1))
 		eff.resistAllChangeId = self:addTemporaryValue("resists", { all=eff.resistAllChange })
@@ -1213,7 +1213,7 @@ newEffect{
 newEffect{
 	name = "DISPAIR", image = "effects/despair.png",
 	desc = "Despair",
-	long_desc = function(self, eff) return ("目 标 陷 入 绝 望， 护 甲， 闪 避 ， 精 神 豁 免 和 精 神 抵 抗 降 低 %d%% 。"):format(-eff.resistAllChange) end,
+	long_desc = function(self, eff) return ("目 标 陷 入 绝 望， 护 甲， 闪 避 ， 精 神 豁 免 和 精 神 抵 抗 降 低 %d%% 。"):format(-eff.statChange) end,
 	type = "mental",
 	subtype = { fear=true },
 	status = "detrimental",
@@ -1522,7 +1522,7 @@ newEffect{
 newEffect{
 	name = "PSIFRENZY", image = "talents/frenzied_focus.png",
 	desc = "Frenzied Focus",
-	long_desc = function(self, eff) return ("使 念 力 控 制 武 器 每 回 合 攻 击 %d 个 目 标。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("这个生物用念力控制的物品进入了暴走模式！"):format() end,
 	type = "mental",
 	subtype = { telekinesis=true, frenzy=true },
 	status = "beneficial",
@@ -1536,8 +1536,8 @@ newEffect{
 	desc = "Spiked Kinetic Shield",
 	long_desc = function(self, eff)
 		local tl = self:getTalentLevel(self.T_ABSORPTION_MASTERY)
-		local xs = (tl>=3 and ", nature" or "")..(tl>=6 and ", temporal" or "")
-		return ("目 标 施 放 一 个 念 力 护 盾 吸 收 %d/%d 物 理 或 酸 性 伤 害。"):format(self.kinspike_shield_absorb, eff.power, xs)
+		local xs = (tl>=3 and "、 自然" or "")..(tl>=6 and "、 时空" or "")
+		return ("目 标 施 放 一 个 念 力 护 盾 吸 收 %d/%d 物 理 %s 或 酸 性 伤 害。"):format(self.kinspike_shield_absorb, eff.power, xs)
 	end,
 	type = "mental",
 	subtype = { telekinesis=true, shield=true },
@@ -1566,8 +1566,8 @@ newEffect{
 	desc = "Spiked Thermal Shield",
 	long_desc = function(self, eff)
 		local tl = self:getTalentLevel(self.T_ABSORPTION_MASTERY)
-		local xs = (tl>=3 and ", light" or "")..(tl>=6 and ", arcane" or "")
-		return ("目 标 施 放 一 个 热 能 护 盾 吸 收 %d/%d 热 能 伤 害。"):format(self.thermspike_shield_absorb, eff.power, xs)
+		local xs = (tl>=3 and "、光系" or "")..(tl>=6 and "、奥术" or "")
+		return ("目 标 施 放 一 个 热 能 护 盾 吸 收 %d/%d 热 能 %s 或寒冷 伤 害。"):format(self.thermspike_shield_absorb, eff.power, xs)
 	end,
 	type = "mental",
 	subtype = { telekinesis=true, shield=true },
@@ -1596,8 +1596,8 @@ newEffect{
 	desc = "Spiked Charged Shield",
 	long_desc = function(self, eff)
 		local tl = self:getTalentLevel(self.T_ABSORPTION_MASTERY)
-		local xs = (tl>=3 and ", darkness" or "")..(tl>=6 and ", mind" or "")
-	return ("目 标 施 放 一 个 充 电 护 盾 吸 收 %d/%d 闪 电 或 枯 萎 伤 害。"):format(self.chargespike_shield_absorb, eff.power, xs)
+		local xs = (tl>=3 and "、暗影" or "")..(tl>=6 and "、精神" or "")
+	return ("目 标 施 放 一 个 充 电 护 盾 吸 收 %d/%d 闪 电 %s 或 枯 萎 伤 害。"):format(self.chargespike_shield_absorb, eff.power, xs)
 	end,
 	type = "mental",
 	subtype = { telekinesis=true, shield=true },
@@ -2067,7 +2067,7 @@ newEffect{
 		-- restore damage shield
 		if eff.damageShieldMax and eff.damageShield ~= eff.damageShieldMax and not self.dead then
 			eff.damageShieldUsed = (eff.damageShieldUsed or 0) + eff.damageShieldMax - eff.damageShield
-			game.logSeen(self, "%s豁免了%d伤害，仍意犹未尽。", npcCHN:getName(self.name), eff.damageShieldMax - eff.damageShield)
+			game.logSeen(self, "%s has shrugged off %d damage and is ready for more.", self.name:capitalize(), eff.damageShieldMax - eff.damageShield)
 			eff.damageShield = eff.damageShieldMax
 
 			if eff.damageShieldBonus and eff.damageShieldUsed >= eff.damageShieldBonus and eff.actualDuration < eff.maxDuration then
@@ -2075,7 +2075,7 @@ newEffect{
 				eff.dur = eff.dur + 1
 				eff.damageShieldBonus = nil
 
-				game.logPlayer(self, "#F53CBE##F53CBE#你的猛攻强化了你的暴走！（+1持续时间）。")
+				game.logPlayer(self, "#F53CBE#Your rampage is invigorated by the intense onslaught! (+1 duration)")
 			end
 		end
 	end,
@@ -2093,7 +2093,7 @@ newEffect{
 		if eff.dur > 0 then
 			eff.dur = eff.dur - 1
 
-			game.logPlayer(self, "#F53CBE#你感受到你的暴走开始减速。（-1持续时间）。")
+			game.logPlayer(self, "#F53CBE#You feel your rampage slowing down. (-1 duration)")
 		end
 	end,
 }
@@ -2140,7 +2140,7 @@ newEffect{
 			-- apply hate bonus
 			if isSubtype and self:knowTalent(self.T_HATE_POOL) then
 				self:incHate(eff.hateBonus)
-				game.logPlayer(self, "#F53CBE#猎物的死亡增加了你的仇恨。(+%d 仇恨)", eff.hateBonus)
+				game.logPlayer(self, "#F53CBE#The death of your prey feeds your hate. (+%d hate)", eff.hateBonus)
 			end
 
 			-- apply mimic effect
@@ -2496,35 +2496,35 @@ newEffect{
 	status = "beneficial",
 	parameters = { power=10, kind="kinetic" },
 	activate = function(self, eff)
-	if eff.kind == "kinetic" then
+		if eff.kind == "kinetic" then
 			eff.sid = self:addTemporaryValue("flat_damage_armor", {
 				[DamageType.PHYSICAL] = eff.power,
 				[DamageType.ACID] = eff.power,
 				[DamageType.NATURE] = eff.power,
 				[DamageType.TEMPORAL] = eff.power,
 			})
-			eff.what = "物理、自然、酸性、时空"
+			eff.what = "physical, nature, acid, temporal"
 		elseif eff.kind == "thermal" then
 			eff.sid = self:addTemporaryValue("flat_damage_armor", {
-				[DamageType.FIRE] = eff.power, 
+				[DamageType.FIRE] = eff.power,
 				[DamageType.COLD] = eff.power,
 				[DamageType.LIGHT] = eff.power,
 				[DamageType.ARCANE] = eff.power,
 				})
-			eff.what = "火焰、寒冷、光系、奥术"
+			eff.what = "fire, cold, light, arcane"
 		elseif eff.kind == "charged" then
 			eff.sid = self:addTemporaryValue("flat_damage_armor", {
-				[DamageType.LIGHTNING] = eff.power, 
+				[DamageType.LIGHTNING] = eff.power,
 				[DamageType.BLIGHT] = eff.power,
 				[DamageType.MIND] = eff.power,
 				[DamageType.DARKNESS] = eff.power,
 				})
-			eff.what = "闪电、枯萎、精神、黑暗"
+			eff.what = "lightning, blight, mind, darkness"
 		elseif eff.kind == "all" then
 			eff.sid = self:addTemporaryValue("flat_damage_armor", {
 				all = eff.power,
 				})
-			eff.what = "所有"
+			eff.what = "all"
 		end
 	end,
 	deactivate = function(self, eff)
@@ -2537,7 +2537,7 @@ newEffect{
 newEffect{
 	name = "CLEAR_MIND", image = "talents/mental_shielding.png",
 	desc = "Clear Mind",
-	long_desc = function(self, eff) return ("使 接 下 来 的 %d 种 负 面 精 神 BUFF 无 效。"):format(self.clear_mind_immune) end,
+	long_desc = function(self, eff) return ("使 接 下 来 的 %d 种 负 面 精 神效果无 效。"):format(self.clear_mind_immune) end,
 	type = "mental",
 	subtype = { psionic=true, },
 	status = "beneficial",
@@ -3104,7 +3104,7 @@ newEffect{
 			local t = self:getTalentFromId(self.T_WARDING_WEAPON)
 			for i, o in ipairs(self:getInven(self.INVEN_PSIONIC_FOCUS)) do
 				if o.combat and not o.archery then
-					self:logCombat(target, "#CRIMSON##Source# 格挡了 #Target# 的攻击，并用念力武器进行反击!#LAST#", string.his_her(self))
+					self:logCombat(target, "#CRIMSON##Source# blocks #Target#'s attack and retaliates with %s telekinetically wielded weapon!#LAST#", string.his_her(self))
 					self:attackTargetWith(target, o.combat, nil, t.getWeaponDamage(self, t))
 				end
 			end
@@ -3189,7 +3189,7 @@ newEffect{
 newEffect{
 	name = "TRANSCENDENT_TELEKINESIS", image = "talents/transcendent_telekinesis.png",
 	desc = "Transcendent Telekinesis",
-	long_desc = function(self, eff) return ("你 的 动 能 操 控 能 力 超 越 了 极 限，增 加 %d%% 物 理 伤 害 与 %d%% 物 理 抗 性 穿 透 ， 同 时 你 的 动 能 效 果 得 到 强 化。"):format(eff.power, eff.penetration) end,
+	long_desc = function(self, eff) return ("你 的 动 能 操 控 能 力 超 越 了 极 限，增 加 %d 物 理 伤 害 与 %d%% 物 理 抗 性 穿 透 ， 同 时 你 的 动 能 效 果 得 到 强 化。"):format(eff.power, eff.penetration) end,
 	type = "mental",
 	subtype = { physical=true },
 	status = "beneficial",

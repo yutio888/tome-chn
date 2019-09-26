@@ -298,7 +298,7 @@ newEffect{
 			add_mos = {{image = "npc/giant_treant_wrathroot.png", 
 			display_y = -1, 
 			display_h = 2}},
-        }
+		}
 		
 		self:removeAllMOs()
 		game.level.map:updateMap(self.x, self.y)
@@ -474,8 +474,8 @@ newEffect{
 	subtype = { time=true },
 	status = "beneficial",
 	parameters = { power=10 },
-	on_gain = function(self, err) return "The powerful time-altering energies generate a restoration field on #target#.", "+时间储能" end,
-	on_lose = function(self, err) return "The fabric of time around #target# returns to normal.", "-时间储能" end,
+	on_gain = function(self, err) return "The powerful time-altering energies generate a restoration field on #target#.", "+Temporal Restoration Field" end,
+	on_lose = function(self, err) return "The fabric of time around #target# returns to normal.", "-Temporal Restoration Field" end,
 	activate = function(self, eff)
 		eff.particle = self:addParticles(Particles.new("time_shield", 1))
 	end,
@@ -495,7 +495,7 @@ newEffect{
 	subtype = { miscellaneous=true },
 	status = "detrimental",
 	parameters = { },
-	on_gain = function(self, err) return "#LIGHT_RED##Target# is out of sight of its master; direct control will break!", "+Out of sight" end,
+	on_gain = function(self, err) return "#LIGHT_RED##Target# is out of sight of its master; direct control will break!.", "+Out of sight" end,
 	activate = function(self, eff)
 	end,
 	deactivate = function(self, eff)
@@ -522,7 +522,7 @@ newEffect{
 	subtype = { miscellaneous=true },
 	status = "detrimental",
 	parameters = { },
-	on_gain = function(self, err) return "#LIGHT_RED##Target# is out of sight of its master; direct control will break!", "+Out of sight" end,
+	on_gain = function(self, err) return "#LIGHT_RED##Target# is out of sight of its master; direct control will break!.", "+Out of sight" end,
 	activate = function(self, eff)
 	end,
 	deactivate = function(self, eff)
@@ -532,7 +532,7 @@ newEffect{
 
 		if eff.dur <= 1 then
 			game:onTickEnd(function()
-				game.logPlayer(self, "#LIGHT_RED#你 视 野 内 失 去 阴 影 的 痕 迹 过 久，它 消 失 了!")
+				game.logPlayer(self, "#LIGHT_RED#You lost sight of your shadow for too long; it dissipates!")
 				game.player:runStop("shadow out of sight")
 				game.player:restStop("shadow out of sight")
 				game.party:setPlayer(self.summoner)
@@ -549,7 +549,7 @@ newEffect{
 	subtype = { miscellaneous=true },
 	status = "detrimental",
 	parameters = { },
-	on_gain = function(self, err) return "#LIGHT_RED##Target# is out of sight of its master; direct control will break!", "+Out of sight" end,
+	on_gain = function(self, err) return "#LIGHT_RED##Target# is out of sight of its master; direct control will break!.", "+Out of sight" end,
 	activate = function(self, eff)
 	end,
 	deactivate = function(self, eff)
@@ -559,7 +559,7 @@ newEffect{
 
 		if eff.dur <= 1 then
 			game:onTickEnd(function()
-				game.logPlayer(self, "#LIGHT_RED#你 视 野 内 失 去 傀 儡 的 痕 迹 过 久，它 消 失 了!")
+				game.logPlayer(self, "#LIGHT_RED#You lost sight of your husk for too long; it disintegrates!")
 				game.player:runStop("husk out of sight")
 				game.player:restStop("husk out of sight")
 				game.party:setPlayer(self.summoner)
@@ -675,7 +675,7 @@ newEffect{
 		end
 		
 		game:onTickEnd(function()
-
+	                        
 			if game._chronoworlds == nil then
 				game.logSeen(self, "#LIGHT_RED#The see the threads spell fizzles and cancels, leaving you in this timeline.")
 				return
@@ -872,7 +872,7 @@ newEffect{
 		self:removeTemporaryValue("resists", eff.rstid)
 		self:removeTemporaryValue("inc_damage", eff.dmgid)
 	end,
-	}
+}
 
 newEffect{
 	name = "SHADOW_VEIL", image = "talents/shadow_veil.png",
@@ -1146,7 +1146,7 @@ newEffect{
 #CRIMSON# 强 度 1+: %s 解 除 束 缚： %+d%% 暴 击 伤 害， %+d%% 副 手 武 器 伤 害。 
 #CRIMSON# 强 度 2+: %s%+d 幸 运， %+d 敏 捷 
 #CRIMSON# 强 度 3+: %s 阴 谋: 你 的 疯 狂 是 会 传 染 的 。 每 次 你 对 敌 人 造 成 暴 击 伤 害 时 ， 都 有 %d%% 的 几 率 将 你 当 前 的 负 面 精 神 效 果 传 播 给 他 们 。
-#CRIMSON# 强 度 4+: %s 狂 热: 每 回 合 一 次 ， 当 一 次 攻 击 超 过 你 生 命 的 %0.1f% 时 ， 你 所 有 技 能 的 剩 余 冷 却 时 间 减 少 1 。]]):format(
+#CRIMSON# 强 度 4+: %s 狂 热: 每 回 合 一 次 ， 当 一 次 攻 击 超 过 你 生 命 的 %0.1f%% 时 ， 你 所 有 技 能 的 剩 余 冷 却 时 间 减 少 1 。]]):format(
 		def.getMindResistChange(eff, level), def.getConfusionImmuneChange(eff, level) * 100,
 		bonusLevel >= 1 and "#WHITE#" or "#GREY#", def.getCombatCriticalPowerChange(math.max(level, 1)), def.getOffHandMultChange(math.max(level, 1)),
 		bonusLevel >= 2 and "#WHITE#" or "#GREY#", def.getLckChange(eff, math.max(level, 2)), def.getDexChange(math.max(level, 2)),
@@ -1351,7 +1351,7 @@ newEffect{
 #CRIMSON# 惩 罚 : #WHITE# 虚 弱 屏 障： 小 概 率 被 包 裹 在 虚 弱 屏 障 内 ( 降 低 所 造 成 伤 害 %d%%) 持 续 4 回 合。 
 #CRIMSON# 强 度 1+: %s 暗 夜 行 者： %+d 暗 影 抵 抗， %+d%% 最 大 暗 影 抵 抗， %+d 看 破 隐 形 强 度 
 #CRIMSON# 强 度 2+: %s%+d 幸 运， %+d 体 质 
-#CRIMSON# 强 度 3+: %s 穿 越 屏 障： 你 的 身 形 在 移 动 时 消 失， 移 动 后 1 回 合 减 少 %d%% for 所 受 伤 害。 
+#CRIMSON# 强 度 3+: %s 穿 越 屏 障： 你 的 身 形 在 移 动 时 消 失， 移 动 后 1 回 合 减 少 %d%% 所 受 伤 害。 
 #CRIMSON# 强 度 4+: %s 死 亡 屏 障： 每 一 次 杀 死 目 标 可 以 让 你 笼 罩 在 一 个 屏 障 内， 减 少 %d%% 所 受 伤 害 持 续 3 回 合。]]):format(
 		-def.getShroudIncDamageChange(eff, level),
 		bonusLevel >= 1 and "#WHITE#" or "#GREY#", def.getResistsDarknessChange(math.max(level, 1)), def.getResistsCapDarknessChange(math.max(level, 1)), def.getSeeInvisible(math.max(level, 1)),
@@ -2386,7 +2386,7 @@ newEffect{
 	name = "ZONE_AURA_LIGHT",
 	desc = "Aura of light",
 	no_stop_enter_worlmap = true,
-	long_desc = function(self, eff) return (" 围 效 果： +10% 光 系 伤 害， -10% 光 系 抗 性， -10% 命 中， -20% 致 盲 抗 性。") end,
+	long_desc = function(self, eff) return ("范 围 效 果： +10% 光 系 伤 害， -10% 光 系 抗 性， -10% 命 中， -20% 致 盲 抗 性。") end,
 	decrease = 0, no_remove = true,
 	type = "other",
 	subtype = { aura=true },
@@ -2511,7 +2511,7 @@ newEffect{
 newEffect{
 	name = "VAULTED", image = "talents/time_prison.png",
 	desc = "In Vault",
-	long_desc = function(self, eff) return "目 标 陷 入 迷 宫， 不 能 做 任 何 动 作 直 到 走 出 迷 宫 为 止。" end,
+	long_desc = function(self, eff) return "目标在宝藏房间里。除非房间被打开，否则不会行动。" end,
 	decrease = 0, no_remove = true,
 	type = "other",
 	subtype = { vault=true },
@@ -2626,10 +2626,10 @@ newEffect{
 	status = "detrimental",
 	decrease = 0, no_remove = true,
 	parameters = { dam=20 },
-	on_gain = function(self, err) return "#Target# is suffocating!", "+SUFFOCATING" end,
+	on_gain = function(self, err) return "#Target# is suffocating.", "+SUFFOCATING" end,
 	on_lose = function(self, err) return "#Target# can breathe again.", "-Suffocating" end,
 	on_timeout = function(self, eff)
-		if self.air > self.air_regen then -- We must be over our natural regen
+		if not self.is_suffocating then
 			self:removeEffect(self.EFF_SUFFOCATING, false, true)
 			return
 		end
@@ -2736,7 +2736,7 @@ newEffect{
 newEffect{
 	name = "SPACETIME_TUNING", image = "talents/spacetime_tuning.png",
 	desc = "Spacetime Tuning",
-	long_desc = function(self, eff) return ("调 整 紊 乱 值 ， 每 回 合 +调 整 %d 点。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("调 整 紊 乱 值 ， 每 回 合 调 整 %+d 点。"):format(eff.power) end,
 	type = "other",
 	subtype = { time=true },
 	status = "beneficial",
@@ -2974,8 +2974,8 @@ newEffect{
 	subtype = { time=true },
 	status = "detrimental",
 	parameters = { paradox=10 },
-	on_gain = function(self, err) return "#Target# converts damage into paradox.", "+Smearing" end,
-	on_lose = function(self, err) return "#Target# stops converting damage to paradox..", "-Smearing" end,
+	on_gain = function(self, err) return "Reality smears around #Target#.", "+Smearing" end,
+	on_lose = function(self, err) return "Reality around #Target# is coherent again.", "-Smearing" end,
 	on_merge = function(self, old_eff, new_eff)
 		-- Merge the flames!
 		local oldparadox = old_eff.paradox * old_eff.dur
@@ -3161,7 +3161,7 @@ newEffect{
 	long_desc = function(self, eff) return ("目 标 吸 入 有 毒 的 催 眠 气 体 ， 每 回 合 损 失 %d 生 命 。"):format(eff.power) end,
 	on_timeout = function(self, eff)
 		local dead, val = self:takeHit(eff.power, self, {special_death_msg="killed in a dream"})
-		game:delayedLogDamage(eff, self, val, ("%s%d %s#LAST#"):format(DamageType:get(DamageType.MIND).text_color or "#aaaaaa#", math.ceil(val), "睡梦"), false)
+		game:delayedLogDamage(eff, self, val, ("%s%d %s#LAST#"):format(DamageType:get(DamageType.MIND).text_color or "#aaaaaa#", math.ceil(val), "dream"), false)
 	end,
 }
 

@@ -160,8 +160,8 @@ newEffect{
 	subtype = { wound=true, cut=true, bleed=true },
 	status = "detrimental",
 	parameters = {power=10, heal_factor=30},
-	on_gain = function(self, err) return "#Target# starts to bleed.", "+Deep Wounds" end,
-	on_lose = function(self, err) return "#Target# stops bleeding.", "-Deep Wounds" end,
+	on_gain = function(self, err) return "#Target# is cut deeply.", "+Deep Wounds" end,
+	on_lose = function(self, err) return "#Target#'s deep wound closes.", "-Deep Wounds" end,
 	activate = function(self, eff)
 		eff.healid = self:addTemporaryValue("healing_factor", -eff.heal_factor / 100)
 		if eff.src and eff.src:knowTalent(self.T_BLOODY_BUTCHER) then
@@ -1108,7 +1108,7 @@ newEffect{
 newEffect{
 	name = "BURROW", image = "talents/burrow.png",
 	desc = "Burrow",
-	long_desc = function(self, eff) return "目 标 可 以 穿 墙。" end,
+	long_desc = function(self, eff) return ("目标可以挖入墙中，获得%d护甲穿透，%d%%物理抗性穿透。"):format(eff.power, eff.power / 2) end,
 	type = "physical",
 	subtype = { earth=true },
 	status = "beneficial",
@@ -1233,7 +1233,7 @@ newEffect{
 	subtype = { nature=true, speed=true },
 	status = "beneficial",
 	parameters = {power=1000},
-	on_gain = function(self, err) return "#Target# prepares for the next kill!", "+Hunter" end,
+	on_gain = function(self, err) return ("#Target# prepares %s!"):format(not self.player and self.ai_state.tactic == "escape" and "to escape" or "for the next kill"), "+Hunter" end,
 	on_lose = function(self, err) return "#Target# slows down.", "-Hunter" end,
 	
 	on_timeout = function(self, eff)--make sure that NPC's that catch their target (or can't get away) can fight
@@ -1788,7 +1788,7 @@ newEffect{
 
 newEffect{
 	name = "HEALING_NEXUS", image = "talents/healing_nexus.png",
-	desc = "治疗转移",
+	desc = "Healing Nexus Redirection",
 	long_desc = function(self, eff)
 		return ("目 标 受 到 的 直 接 治 疗 将 被 转 移 至 %s ( %d%% 效率)."):format(eff.src.name, eff.pct * 100, eff.src.name)
 	end,
@@ -2456,7 +2456,7 @@ newEffect{
 		print("[PALM CALLBACK] dam start", value)
 
 		local dam = value
-		game:delayedLogDamage(src, self, 0, ("#STEEL_BLUE#(%d 格挡)#LAST#"):format(math.min(dam, self.brawler_block)), false)
+		game:delayedLogDamage(src, self, 0, ("#STEEL_BLUE#(%d blocked)#LAST#"):format(math.min(dam, self.brawler_block)), false)
 		if dam < self.brawler_block then
 			self.brawler_block = self.brawler_block - dam
 			dam = 0
@@ -2467,7 +2467,7 @@ newEffect{
 
 		-- If we are at the end of the capacity, release the time shield damage
 		if self.brawler_block <= 0 then
-			game.logPlayer(self, "#ORCHID#你不能格挡更多伤害!#LAST#")
+			game.logPlayer(self, "#ORCHID#You cannot block any more attacks!#LAST#")
 			self:removeEffect(self.EFF_BRAWLER_BLOCK)
 		end
 
@@ -2979,7 +2979,7 @@ newEffect {
 	end,
 	long_desc = function(self, eff)
 		return ([[目 标 单 方 向 （%s） 移 动 时 获 得 %d%% 额 外 速 度 。 停 止 或 者 改 变 方 向 将 取 消 此 效 果。]])
-		:format(eff.compass or "unknown",eff.move_speed_bonus * 100 )
+		:format(eff.compass or "未知",eff.move_speed_bonus * 100 )
 	end,
 }
 
@@ -3076,7 +3076,7 @@ newEffect {
 		-- percent of all damage to ignore
 		reduce = 50
 	},
-	on_gain = function(self, eff) return "#Target# rolls to avoid some damage!" end,
+	on_gain = function(self, eff) return "#Target# assumes an extreme defensive posture, avoiding some damage!" end,
 	activate = function(self, eff)
 		self:effectTemporaryValue(eff, "incoming_reduce", eff.reduce)
 	end,
@@ -3093,7 +3093,7 @@ newEffect {
 	subtype = {cooldown = true},
 	status = "detrimental",
 	no_stop_resting = true,
-	on_lose = function(self, eff) return "#LIGHT_BLUE##Target# 能 再 次 进 行 躲 避 了。", "+Trained Reactions" end,
+	on_lose = function(self, eff) return "#LIGHT_BLUE##Target# may dodge again.", "+Trained Reactions" end,
 	long_desc = function(self, eff)
 		return "训 练 反 射 暂 时 不 能 触 发。"
 	end,
@@ -3142,7 +3142,7 @@ newEffect{
 newEffect{
 	name = "PARASITIC_LEECHES", image = "talents/blood_suckers.png",
 	desc = "Parasitic Leeches",
-	display_desc = function(self, eff) return "寄生虫: "..eff.nb.." 堆" end,
+	display_desc = function(self, eff) return "Parasitic Leeches: "..eff.nb.." masses" end,
 	long_desc = function(self, eff)
 		local source = eff.src or self
 		return ("目 标 被 %d 堆 寄 生 虫 寄 生 ， 每 回 合 受 到 %0.2f 物 理 和 %0.2f 酸 性 伤 害。 每 隔 %d 回 合 ， 一 堆 寄 生 虫 将 脱 落 并 繁 殖 。"):format(eff.nb,

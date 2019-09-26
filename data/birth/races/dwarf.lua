@@ -20,6 +20,6 @@ registerBirthDescriptorTranslation{
 		"#LIGHT_BLUE# * +4 力 量， -2 敏 捷， +3 体 质 ",
 		"#LIGHT_BLUE# * -2 魔 法， +3 意 志， +0 灵 巧 ",
 		"#GOLD# 每 等 级 增 加 生 命 值： #LIGHT_BLUE# 12",
-		"#GOLD# 经 验 惩 罚： #LIGHT_BLUE# 25%",
+		"#GOLD# 经 验 惩 罚： #LIGHT_BLUE# 0%",
 	},
 }

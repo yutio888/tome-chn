@@ -5,9 +5,9 @@ registerTalentTranslation{
 	name = "冰爪",
 	info = function(self, t)
 		return ([[你 召 唤 强 大 的 冰 龙 之 爪，在 半 径 %d 范 围 内 造 成 %d%% 寒 冰 武 器 伤 害，有 一 定 几 率 冻 结 目 标。
-		同 时 ， 该 技 能 每 等 级 增 加 物 理豁 免 2 点。 
+		同 时 ， 该 技 能 每 等 级 增 加 物 理 豁 免 2 点。 
 		每 一 点 冰 龙 系 技 能 同 时 也 能 增 加 你 的 寒 冷 抵 抗 1%% 。
-		如果你装备了盾牌，这一技能也会用你的盾牌攻击。]]):format(self:getTalentRadius(t),100 * t.damagemult(self, t))
+		如 果 你 装 备 了 盾 牌 ，这 一 技 能 也 会 用 你 的 盾 牌 攻 击 。]]):format(self:getTalentRadius(t),100 * t.damagemult(self, t))
 	end,
 }
 
@@ -40,7 +40,7 @@ registerTalentTranslation{
 	name = "冰息术",
 	info = function(self, t)
 		return ([[向 前 方 %d 码 范 围 施 放 一 个 锥 形 冰 冻 吐 息， 范 围 内 所 有 目 标 受 到 %0.2f 寒 冷 伤 害，并被冻结3回合。
-		受 力 量 影 响， 伤 害 有 额 外 加 成。 技 能 暴 击 率 基 于 精 神 暴 击 值 计 算，冻结几率受精神强度影响。 
+		受 力 量 影 响， 伤 害 有 额 外 加 成。 技 能 暴 击 率 基 于 精 神 暴 击 值 计 算 ， 冻 结 几 率 受 精 神 强 度 影 响 。 
 		每 一 点 冰 龙 系 技 能 同 时 也 能 增 加 你 的 寒 冷 抵 抗 1%% 。]]):format(self:getTalentRadius(t), damDesc(self, DamageType.COLD, t.getDamage(self, t)))
 	end,
 }

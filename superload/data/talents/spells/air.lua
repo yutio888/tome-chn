@@ -5,10 +5,11 @@ registerTalentTranslation{
 	name = "闪电术",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
-		return ([[用 魔 法 召 唤 一 次 强 力 的 闪 电 造 成 %0.2f ～ %0.2f 伤 害。 
+		return ([[用 魔 法 召 唤 一 次 强 力 的 闪 电 造 成 %0.2f ～ %0.2f 伤 害（平均%0.2f）。 
 		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成。]]):
 		format(damDesc(self, DamageType.LIGHTNING, damage / 3),
-		damDesc(self, DamageType.LIGHTNING, damage))
+		damDesc(self, DamageType.LIGHTNING, damage),
+		damDesc(self, DamageType.LIGHTNING, (damage + damage / 3) / 2))
 	end,
 }
 
@@ -18,13 +19,14 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local targets = t.getTargetCount(self, t)
-		return ([[召 唤 一 次 叉 状 闪 电 造 成 %0.2f ～ %0.2f 伤 害 并 连 锁 到 另 外 一 个 目 标。 
+		return ([[召 唤 一 次 叉 状 闪 电 造 成 %0.2f ～ %0.2f 伤 害（平均%0.2f） 并 连 锁 到 另 外 一 个 目 标。 
 		 它 最 多 可 以 连 锁 10 码 范 围 内 %d 个 目 标 并 且 不 会 对 同 一 目 标 伤 害 2 次， 同 样 它 不 会 伤 害 到 施 法 者。 
 		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成。]]):
-		format(damDesc(self, DamageType.LIGHTNING, damage / 3),
+		 format(damDesc(self, DamageType.LIGHTNING, damage / 3),
 			damDesc(self, DamageType.LIGHTNING, damage),
+			damDesc(self, DamageType.LIGHTNING, (damage + damage / 3) / 2),
 			targets)
-	end,
+ end,
 }
 
 registerTalentTranslation{
@@ -50,10 +52,9 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local manadrain = t.getManaDrain(self, t)
 		return ([[当 此 技 能 激 活 时， 在 6 码 半 径 范 围 内 召 唤 一 阵 强 烈 的 闪 电 风 暴 跟 随 你。 
-		 每 回 合 闪 电 风 暴 会 随 机 伤 害 %d 个 敌 方 单 位， 对 1 码 半 径 范 围 造 成 1 ～ %0.2f 伤 害。 
-		 这 个 强 力 的 技 能 每 击 会 减 少 你 %0.2f 法 力 值。 
+		 每 回 合 闪 电 风 暴 会 随 机 伤 害 %d 个 敌 方 单 位， 对 1 码 半 径 范 围 造 成 1 ～ %0.2f 伤 害（平均%0.2f）。 
 		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成。]]):
-		format(targetcount, damDesc(self, DamageType.LIGHTNING, damage),-manadrain)
+		 format(targetcount, damDesc(self, DamageType.LIGHTNING, damage), damDesc(self, DamageType.LIGHTNING, damage / 2))
 	end,
 }
 

@@ -1,11 +1,26 @@
 local _M = loadPrevious(...)
-
+registerTalentTranslation{
+	id = "T_JELLY_PBAOE",
+	name = "果冻散布",
+	info = function(self, t)
+		local damage = t.getDamage(self, t)
+		local duration = t.getDuration(self, t)
+		return ([[在1码范围内的地板上散布腐蚀性的粘液，持续%d回合，对上面所有的敌对生物造成%d自然伤害。]]):format(duration, damDesc(self, DamageType.NATURE, damage))
+	end,
+}
+registerTalentTranslation{
+	id = "T_JELLY_MITOTIC_SPLIT",
+	name = "有丝分裂",
+	info = function(self, t)
+		return ([[当受到最大生命值 %d%% 的攻击的时候，有%d%%的几率分裂。]]):format(t.getDamage(self, t), t.getChance(self, t))
+	end,
+}
 registerTalentTranslation{
 	id = "T_WAR_HOUND",
 	name = "契约：战争猎犬",
 	info = function(self, t)
 		local incStats = t.incStats(self, t, true)
-		return ([[召 唤 1 只 战 争 猎 犬 来 攻 击 敌 人， 持 续 %d 回 合。 
+		return ([[召 唤 一只 战 争 猎 犬 来 攻 击 敌 人， 持 续 %d 回 合。 
 		 战 争 猎 犬 是 非 常 好 的 基 础 近 战 单 位。 
 		 它 拥 有 %d 点 力 量， %d 点 敏 捷 和 %d 点 体 质。 
 		 你 的 召 唤 物 继 承 你 部 分 属 性： 增 加 百 分 比 伤 害、 震 慑 / 定 身 / 混 乱 / 致 盲 抵 抗 和 护 甲 穿 透。 
@@ -19,7 +34,7 @@ registerTalentTranslation{
 	name = "契约：果冻怪",
 	info = function(self, t)
 		local incStats = t.incStats(self, t, true)
-		return ([[召 唤 1 只 果 冻 怪 来 攻 击 敌 人， 持 续 %d 回 合。 
+		return ([[召 唤 一只 果 冻 怪 来 攻 击 敌 人， 持 续 %d 回 合。 
 		 果 冻 怪 不 会 移 动。 
 		 它 拥 有 %d 点 体 质 和 %d 点 力 量。 
 		 每 当 果 冻 怪 受 到 伤 害 时， 你 降 低 等 同 于 它 受 到 伤 害 值 的 10 ％ 失 衡 值。 
@@ -34,7 +49,7 @@ registerTalentTranslation{
 	name = "契约：米诺陶",
 	info = function(self, t)
 		local incStats = t.incStats(self, t, true)
-		return ([[召 唤 1 只 米 诺 陶 来 攻 击 敌 人， 持 续 %d 回 合。 米 诺 陶 不 会 呆 很 长 时 间， 但 是 它 们 会 造 成 极 大 伤 害。 
+		return ([[召 唤 一只 米 诺 陶 来 攻 击 敌 人， 持 续 %d 回 合。 米 诺 陶 不 会 呆 很 长 时 间， 但 是 它 们 会 造 成 极 大 伤 害。 
 		 它 拥 有 %d 点 力 量， %d 点 体 质 和 %d 点 敏 捷。 
 		 你 的 召 唤 物 继 承 你 部 分 属 性： 增 加 百 分 比 伤 害、 震 慑 / 定 身 / 混 乱 / 致 盲 抵 抗 和 护 甲 穿 透。 
 		 受 精 神 强 度 影 响， 米 诺 陶 的 力 量 和 敏 捷 有 额 外 加 成。]])
@@ -47,7 +62,7 @@ registerTalentTranslation{
 	name = "契约：岩石傀儡",
 	info = function(self, t)
 		local incStats = t.incStats(self, t,true)
-		return ([[召 唤 1 只 岩 石 傀 儡 来 攻 击 敌 人， 持 续 %d 回 合。 岩 石 傀 儡 是 可 怕 的 敌 人 并 且 不 可 阻 挡。 
+		return ([[召 唤 一只 岩 石 傀 儡 来 攻 击 敌 人， 持 续 %d 回 合。 岩 石 傀 儡 是 可 怕 的 敌 人 并 且 不 可 阻 挡。 
 		 它 有 %d 点 力 量， %d 点 体 质 和 %d 点 敏 捷。 
 		 你 的 召 唤 物 继 承 你 部 分 属 性： 增 加 百 分 比 伤 害、 震 慑 / 定 身 / 混 乱 / 致 盲 抵 抗 和 护 甲 穿 透。 
 		 受 精 神 强 度 影 响， 傀 儡 的 力 量 和 敏 捷 有 额 外 加 成。]])

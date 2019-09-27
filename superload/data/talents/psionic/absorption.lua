@@ -63,9 +63,11 @@ registerTalentTranslation{
 	id = "T_FORCEFIELD",
 	name = "超能力场",
 	info = function(self, t)
+		local drain = t.getDrain(self, t)
 		return ([[用 力 场 环 绕 自 己 ，减 少 受 到 的 所 有 伤 害 %d%%
-		维 持 这 样 的 护 盾 代 价 非 常 昂 贵 ，开 启 时 每 回 合 叠 加 消 耗 5%% 你 的 最 大 超 能 值 ，第 二 回 合 将 消 耗 10%% ，依 次 递 增 。]]):
-		format(t.getResist(self,t))
+		维 持 这 样 的 护 盾 代 价 非 常 昂 贵 ，开启的第一回合会消耗你5%%的超能力值，之后每维持一回合就会多消耗5%%的超能力值。例如，第二回合会消耗10%%的超能力值。
+		目前的超能力值消耗：每回合%0.1f超能力值]]):
+		format(t.getResist(self,t), drain)
 	end,
 }
 

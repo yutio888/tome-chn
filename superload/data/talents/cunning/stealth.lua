@@ -8,10 +8,13 @@ registerTalentTranslation{
 		local radius, rad_dark = t.getRadius(self, t, true)
 		xs = rad_dark ~= radius and (" (在黑暗地格范围为 %d )"):format(rad_dark) or ""
 		return ([[进 入 潜 行 模 式 （潜 行 点 数 %d ，基 于 灵 巧 ），让 你 更 难 被 侦 测 到 。
-		 如 果 成 功 （每 回 合 都 重 新 检 查 ），敌 人 将 不 会 知 道 你 在 哪 里 ，或 者 根 本 不 会 注 意 到 你 。
-		 潜 行 将 光 照 半 径 减 小 至 0 ，并 且 不 能 在 装 备 重 甲 或 板 甲 时 使 用 。
-		 如 果 敌 人 在 半 径 %d %s 内 ，你 不 能 进 入 潜 行 。
-		]]):
+		如 果 成 功 （每 回 合 都 重 新 检 查 ），敌 人 将 不 会 知 道 你 在 哪 里 ，或 者 根 本 不 会 注 意 到 你 。
+		潜 行 将 光 照 半 径 减 小 至 0，增加3点夜视能力 ，并 且 不 能 在 装 备 重 甲 或 板 甲 时 使 用 。
+		如 果 敌 人 在 半 径 %d %s 内 ，你 不 能 进 入 潜 行 。
+		除非特别说明，任何非顺发的非移动能力都会打破潜行。
+
+		即使不知道你位置的敌人，仍然会猜测你可能在的位置。
+		在潜行时，敌人无法分享有关你位置的信息，并且会一直相信你还在那里。]]):
 		format(stealthpower, radius, xs)
 	end,
 }
@@ -44,13 +47,9 @@ registerTalentTranslation{
 	id = "T_SHADOW_DANCE",
 	name = "暗影之舞",
 	info = function (self,t)
-		local radius, rad_dark = t.getRadius(self, t, true)
-		xs = rad_dark ~= radius and (" (在黑暗地格范围为 %d )"):format(rad_dark) or ""
 		return ([[你 对 潜 行 的 精 通 让 你 能 够 随 时 从 视 野 中 消 失 。
-		 你 自 动 进 入 潜 行 模 式 ，重 置 潜 行 的 冷 却 时 间 ，并 在 %d 回 合 内 ，非 潜 行 动 作 不 会 打 破 潜 行 。如 果 使 用 时 你 尚 未 进 入 潜 行 模 式 ，所 有 对 你 有 直 接 视 线 的 敌 人 都 会 跟 丢 你 的 踪 迹 。
-		 当 你 的 暗 影 之 舞 结 束 时 ，你 必 须 对 半 径 为 %d %s 之 内 的 目 标 进 行 潜 行 检 查 并 成 功 ，否 则 会 被 发 现 。
-]]):
-		format(t.getDuration(self, t), radius, xs)
+		你自动进入潜行模式。在 %d 回合内，你非潜行的行动不会使你主动显形。]]):
+		format(t.getDuration(self, t))
 	end,
 }
 

@@ -4,6 +4,9 @@ birthCHN["subrace"] = {}
 birthCHN["class"] = {}
 birthCHN["subclass"] = {}
 birthCHN["world"] = {}
+birthCHN["sex"] = {}
+birthCHN["difficulty"] = {}
+birthCHN["permadeath"] = {}
 
 function registerBirthDescriptorTranslation(t)
 	birthCHN[t.name] = t
@@ -35,3 +38,6 @@ dofile("data-chn123/birth/races/undead.lua")
 dofile("data-chn123/birth/races/yeek.lua")
 
 dofile("data-chn123/birth/dlc.lua")
+dofile("data-chn123/birth/descriptors.lua")
+dofile("data-chn123/birth/sexes.lua")
+dofile("data-chn123/birth/worlds.lua")

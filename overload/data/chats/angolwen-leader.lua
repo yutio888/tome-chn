@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2015 Nicolas Casalini
+-- Copyright (C) 2009 - 2019 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -22,7 +22,10 @@ newChat{ id="welcome",
 我是卡库罗尔的莱娜尼尔。欢迎来到我们的城市。@playerdescriptor.subclass@有什么需要帮忙的么？]],
 	answers = {
 		{"我寻求一切能帮助我的力量，不是为我自己而是为了东北地区的德斯小镇。", jump="save-derth", cond=function(npc, player) local q = player:hasQuest("lightning-overload") return q and q:isCompleted("saved-derth") and not q:isCompleted("tempest-located") and not q:isStatus(q.DONE) end},
-		{"我准备好了，送我去厄奇斯！", jump="teleport-urkis", cond=function(npc, player) local q = player:hasQuest("lightning-overload") return q and not q:isEnded("tempest-located") and q:isCompleted("tempest-located") end},
+		{"我准备好了，送我去厄奇斯！", jump="teleport-urkis", cond=function(npc, player) local q = player:hasQuest("lightning-overload") return q and not q:isEnded("tempest-located") and q:isCompleted("tempest-located") and not q:isCompleted("angolwen-reward") end},
+		{"厄奇斯被我干掉了。", jump="reward-urkis", cond=function(npc, player) 
+			local q = player:hasQuest("lightning-overload") 
+			return q and q:isCompleted("tempest-urkis-slain") and not q:isCompleted("angolwen-reward") and not q:isStatus(q.DONE) end},
 		{"目前没事，抱歉耽误了你的时间，再见我的女士。"},
 	}
 }
@@ -49,6 +52,21 @@ newChat{ id="teleport-urkis",
 		{"谢谢。", action=function(npc, player)
 			player:hasQuest("lightning-overload"):teleport_urkis()
 			game:unlockBackground("linaniil", "Archmage Linaniil")
+		end},
+	}
+}
+
+newChat{ id="reward-urkis",
+	text = [[我看到风暴平息了。拿走这符文，作为我的谢意。]],
+	answers = {
+		{"谢谢。", action=function(npc, player)
+			local o = game.zone:makeEntityByName(game.level, "object", "RUNE_DISSIPATION")
+			if not o then return end
+			o:identify(true)
+			game.zone:addEntity(game.level, o, "object")
+			player:addObject(player:getInven("INVEN"), o)
+			player:setQuestStatus("lightning-overload", engine.Quest.COMPLETED, "angolwen-reward")
+			player:setQuestStatus("lightning-overload", engine.Quest.COMPLETED)
 		end},
 	}
 }

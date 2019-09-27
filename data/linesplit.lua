@@ -153,7 +153,7 @@ function translateSub(str)
 	str = str:gsub("%)","%%)")
 	str = str:gsub("%?","%%?")
 	str = str:gsub("%.","%%.")
-	
+
 	return str
 end
 

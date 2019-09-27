@@ -20,9 +20,8 @@ registerTalentTranslation{
 		local time_reduc = t.getTimeReduction(self,t)
 		return ([[这 个 复 杂 的 法 术 在 施 法 者 周 围 立 刻 制 造 一 个 时 间 屏 障， 吸 收 你 受 到 的 伤 害。 
 		 一 旦 达 到 最 大 伤 害 吸 收 值（ %d ） 或 持 续 时 间（ %d 回 合） 结 束， 存 储 的 能 量 会 治 疗 你， 持 续 5 回合 ，每 回 合 回 复 总 吸 收 伤 害 的 10%% ( 强 化 护 盾 技 能 会 影 响 该 系 数 )。   
-		 当 激 活 时 光 之 盾 时， 所 有 新 获 得 的 负 面 魔 法、 物 理 和 精 神 效 果 都 会 减 少 %d%% 回 合 的 持 续 时 间。 
 		 受 法 术 强 度 影 响， 最 大 吸 收 值 有 额 外 加 成。 ]]):
-		format(maxabsorb, duration, time_reduc)
+		 format(maxabsorb, duration)
 	end,
 }
 

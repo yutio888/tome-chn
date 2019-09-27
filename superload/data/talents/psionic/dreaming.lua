@@ -31,8 +31,9 @@ registerTalentTranslation{
 	name = "梦境穿梭",
 	info = function(self, t)
 		local radius = self:getTalentRadius(t)
-		return ([[你 穿 越 梦 境， 出 现 在 某 个 目 标 地 点 附 近 （ %d 码 传 送 误 差）。
-		 如 果 目 标 为 处 于 睡 眠 状 态 的 生 物， 你 将 会 出 现 在 离 目 标 最 近 的 地 方。]]):format(radius)
+		return ([[你 穿 越 梦 境， 出 现 在 某 个 目 标 地 点 附 近。
+		 如 果 目 标 为 处 于 睡 眠 状 态 的 生 物， 你 将 会 出 现 在 离 目 标 最 近 的 地 方。
+		 否则，你会出现在目标位置的%d码范围内。]]):format(radius)
 	end,
 }
 
@@ -41,7 +42,7 @@ registerTalentTranslation{
 	name = "梦境牢笼",
 	info = function(self, t)
 		local drain = t.getDrain(self, t)
-		return ([[将 范 围 内 所 有 睡 眠 状 态 的 目 标 囚 禁 在 梦 境 牢 笼 里， 有 效 地 延 长 他 们 的 睡 眠 效 果， 这 个 强 大 的 技 能 每 回 合 会 持 续 消 耗 %d 点 超 能 力 值， 并 且 运 用 了 灵 能 通 道， 所 以 当 你 移 动 时 会 中 断 此 技 能。 
+		return ([[将 范 围 内 所 有 睡 眠 状 态 的 目 标 囚 禁 在 梦 境 牢 笼 里， 有 效 地 延 长 他 们 的 睡 眠 效 果， 这 个 强 大 的 技 能 每 回 合 会 持 续 消 耗 %d%% 最大超 能 力 值（本技能除外）， 并 且 运 用 了 灵 能 通 道， 所 以 当 你 移 动 时 会 中 断 此 技 能。 
 		 注 意： 每 回 合 可 产 生 的 睡 眠 附 加 状 态， 如 梦 靥 的 伤 害 和 入 梦 的 传 染 效 果， 将 在 此 效 果 持 续 过 程 中 失 效。]]):format(drain)
 	end,
 }

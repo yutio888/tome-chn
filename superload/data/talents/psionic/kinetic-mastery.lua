@@ -31,8 +31,7 @@ registerTalentTranslation{
 		
 		对 你 自 己 使 用 时 ， 击 退 线 路 上 所 有 目 标 并 造 成  %0.1f 物 理 伤 害 。
 		同 时 能 破 坏 至 多 %d 面 墙 壁。
-		受 精 神 强 度 影 响， 伤 害 有 额 外 加 成。 
-		受 精 神 强 度 和 力 量 影 响， 投 掷 距 离 有 额 外 加 成。]]):
+		受 精 神 强 度 影 响， 伤 害 和 投 掷 距 离 有 额 外 加 成。 ]]):
 		format(range, dam, math.floor(range/2), dam/2, t.getKBResistPen(self, t), dam, math.floor(range/2))
 	end,
 }

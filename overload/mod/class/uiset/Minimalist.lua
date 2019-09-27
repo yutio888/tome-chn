@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2016 Nicolas Casalini
+-- Copyright (C) 2009 - 2019 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -131,6 +131,9 @@ local pf_money_x, pf_money_y = 0, 0
 local pf_exp_cur_x, pf_exp_cur_y = 0, 0
 local pf_name_x, pf_name_y = 0, 0
 local pf_level_x, pf_level_y = 0, 0
+local pf_mtx = {imageLoader("playerframe/mtx_coin_button.png"):glTexture()}
+local pf_mtx_sel = {imageLoader("playerframe/mtx_coin_button_sel.png"):glTexture()}
+local pf_mtx_x, pf_mtx_y = 0, 0
 
 local mm_bg_x, mm_bg_y = 0, 0
 local mm_bg = {imageLoader("minimap/back.png"):glTexture()}
@@ -176,6 +179,8 @@ _M:bindHook("UISet:Minimalist:Load", function(self, data)
 	data.alterlocal("pf_money_y", -2)
 	data.alterlocal("pf_exp_cur_x", 7)
 	data.alterlocal("pf_exp_cur_y", -1)
+	data.alterlocal("pf_mtx_x", 5)
+	data.alterlocal("pf_mtx_y", -15)
 	data.alterlocal("mm_bg_x", -5)
 	data.alterlocal("mm_bg_y", -3)
 end)
@@ -471,6 +476,7 @@ function _M:activate()
 
 	self.buff_font = core.display.newFont(font_mono, size_mono * 2, true)
 	self.buff_font_small = core.display.newFont(font_mono, size_mono * 1.4, true)
+	self.buff_font_smallmed = core.display.newFont(font_mono, size_mono * 1.2, true)
 	self.buff_font_smaller = core.display.newFont(font_mono, size_mono * 1, true)
 
 	self.hotkeys_display_text = HotkeysDisplay.new(nil, self.places.hotkeys.x, self.places.hotkeys.y, self.places.hotkeys.w, self.places.hotkeys.h, nil, font_mono, size_mono)
@@ -1189,7 +1195,8 @@ function _M:handleEffect(player, eff_id, e, p, x, y, hs, bx, by, is_first, scale
 			txt.fw, txt.fh = font:size(dur)
 		end
 		if e.charges then
-			local font = e.decrease > 0 and self.buff_font_small or self.buff_font
+			local font = e.decrease > 0 and self.buff_font_smallmed or self.buff_font
+
 			txt2 = font:draw(charges, 40, colors.WHITE.r, colors.WHITE.g, colors.WHITE.b, true)[1]
 			txt2.fw, txt2.fh = font:size(charges)
 			dur = dur..":"..charges
@@ -1266,9 +1273,9 @@ function _M:handleEffect(player, eff_id, e, p, x, y, hs, bx, by, is_first, scale
 					shader:uniOutlineSize(1, 1)
 					shader:uniTextSize(txt2._tex_w, txt2._tex_h)
 				else
-					txt2._tex:toScreenFull(x+4+2, y+4+2 + (32 - txt2.fh)/2+5, txt2.w, txt2.h, txt2._tex_w, txt2._tex_h, 0, 0, 0, 0.7)
+					txt2._tex:toScreenFull(x+4+1, y+4+6 + (32 - txt2.fh)/2+5, txt2.w, txt2.h, txt2._tex_w, txt2._tex_h, 0, 0, 0, 0.7)
 				end
-				txt2._tex:toScreenFull(x+4, y+4 + (32 - txt2.fh)/2+5, txt2.w, txt2.h, txt2._tex_w, txt2._tex_h, 0, 1, 0, 1)
+				txt2._tex:toScreenFull(x+3, y+8 + (32 - txt2.fh)/2+5, txt2.w, txt2.h, txt2._tex_w, txt2._tex_h, 0, 1, 0, 1)
 			end
 
 			if shader and (txt or txt2) then shader:use(false) end
@@ -1480,7 +1487,7 @@ function _M:displayParty(scale, bx, by)
 						p = (game.player == a) and portrait_lev or portrait_unsel_lev
 					end
 					p[1]:toScreenFull(x, y, p[6], p[7], p[2], p[3])
-					-- Display turns remaining on summon's portrait Marson
+					-- Display turns remaining on summon's portrait ?Marson
 					if a.summon_time and a.name ~= "shadow" then
 						local gtxt = self.party[a].txt_summon_time
 						if not gtxt or self.party[a].cur_summon_time ~= a.summon_time then
@@ -1595,6 +1602,10 @@ function _M:displayPlayer(scale, bx, by)
 		pf_encumber[1]:toScreenFull(162, 38, pf_encumber[6], pf_encumber[7], pf_encumber[2], pf_encumber[3], 1, 1, 1, glow / 255)
 	end
 
+	if profile:canMTXN() then
+		pf_mtx[1]:toScreenFull(298 + pf_mtx_x, 6 + pf_mtx_y, pf_mtx[6], pf_mtx[7], pf_mtx[2], pf_mtx[3], 1, 1, 1, 1)
+	end
+
 	if not self.locked then
 		move_handle[1]:toScreenFull(self.mhandle_pos.player.x, self.mhandle_pos.player.y, move_handle[6], move_handle[7], move_handle[2], move_handle[3])
 	end
@@ -1618,6 +1629,13 @@ function _M:displayPlayer(scale, bx, by)
 			elseif bx >= 269 and bx <= 269 + pf_levelup[6] and by >= 78 and by <= 78 + pf_levelup[7] and (player.unused_stats > 0 or player.unused_talents > 0 or player.unused_generics > 0 or player.unused_talents_types > 0) then
 				game.tooltip_x, game.tooltip_y = 1, 1; game:tooltipDisplayAtMap(game.w, game.h, "点击来分配你的属性和技能点！")
 				if event == "button" and button == "left" then game.key:triggerVirtual("LEVELUP") end
+			-- MTX
+			elseif bx >= 298 + pf_mtx_x and bx <= 298 + pf_mtx_x + pf_mtx[6] and by >= 6 + pf_mtx_y and by <= 6 + pf_mtx_y + pf_mtx[7] and profile:canMTXN() then
+				game.tooltip_x, game.tooltip_y = 1, 1; game:tooltipDisplayAtMap(game.w, game.h, "Show available cosmetic & fun microtransation")
+				if event == "button" and button == "left" then
+					package.loaded["engine.dialogs.microtxn.MTXMain"] = nil
+					game:registerDialog(require("engine.dialogs.microtxn.MTXMain").new())
+				end
 			-- Move handle
 			elseif not self.locked and bx >= self.mhandle_pos.player.x and bx <= self.mhandle_pos.player.x + move_handle[6] and by >= self.mhandle_pos.player.y and by <= self.mhandle_pos.player.y + move_handle[7] then
 				self:uiMoveResize("player", button, mx, my, xrel, yrel, bx, by, event)

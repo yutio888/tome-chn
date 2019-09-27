@@ -8,8 +8,9 @@ registerTalentTranslation{
 		local armor = t.getHardiness(self, t)
 		return ([[允 许 你 装 备 盾 牌， 使 用 灵 巧 作 为 属 性 需 求。
 		当 你 受 到 近 战 攻 击，你 有 %d%% 的 几 率 用 盾 牌 使 这 次 攻 击 偏 斜， 并 完 全 躲 避 它。
+		另外，若你没有装备重甲，你获得%d护甲值和%d%%护甲硬度。
 		受 到 灵 巧 影 响， 偏 斜 几 率 有 加 成。]])
-			:format(block, armor)
+		:format(block, armour, hardiness)
 	end,
 }
 

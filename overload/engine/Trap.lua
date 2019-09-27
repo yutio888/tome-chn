@@ -1,5 +1,5 @@
 -- TE4 - T-Engine 4
--- Copyright (C) 2009 - 2017 Nicolas Casalini
+-- Copyright (C) 2009 - 2019 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -102,7 +102,7 @@ end
 --- Try to disarm the trap
 function _M:disarm(x, y, who)
 	if not self:canDisarm(x, y, who) then
-		game.logSeen(who, "%s fails to disarm a trap (%s).", who.name:capitalize(), self:getName())
+		if not self.no_disarm_message then game.logSeen(who, "%s fails to disarm a trap (%s).", who.name:capitalize(), self:getName()) end
 		return false
 	end
 	game.logSeen(who, "%s disarms a trap (%s).", who.name:capitalize(), self:getName())
@@ -132,10 +132,10 @@ function _M:trigger(x, y, who)
 		-- Nothing
 	else
 		local tname = who.name
-		local str = self.message
-		--str = str:gsub("@target@", "%%s")
-		--str = str:gsub("@Target@", "%%s")
-		game.logSeen(who, str, tname)
+		local str =self.message
+		-- str = str:gsub("@target@", tname)
+		-- str = str:gsub("@Target@", tname:capitalize())
+		game.logSeen(who, "%s", str)
 	end
 	local known, del = false, false
 	if self.summoner then self.summoner.__project_source = self end -- intermediate projector source

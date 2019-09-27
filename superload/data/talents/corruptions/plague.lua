@@ -4,10 +4,11 @@ registerTalentTranslation{
 	id = "T_VIRULENT_DISEASE",
 	name = "剧毒瘟疫",
 	info = function(self, t)
-		return ([[射 出 一 个 疾 病 之 球， 目 标 会 随 机 感 染 一 种 疾 病， 每 回 合 受 到 %0.2f 枯 萎 伤 害， 持 续 6 回 合。 同 时， 减 少 目 标 某 种 物 理 属 性（ 力 量、 体 质 或 敏 捷） %d 点。 三 种 疾 病 可 叠 加。 
-		 剧 毒 瘟 疫 通 常 会 使 目 标 感 染 其 目 前 所 没 有 的 一 种 疾 病， 并 且 会 使 目 标 感 染 大 幅 度 衰 竭 其 主 属 性 的 疾 病。 
-		 受 法 术 强 度 影 响， 效 果 有 额 外 加 成。]]):
-		format(damDesc(self, DamageType.BLIGHT, 7 + self:combatTalentSpellDamage(t, 6, 65)), self:combatTalentSpellDamage(t, 5, 35))
+		return ([[每当你造成一个非疾病的枯萎伤害时，你将会对目标施加一项疾病，每回合造成 %0.2f 枯萎伤害，持续6回合，并降低其一项物理能力值（力量、体质、敏捷） %d 。三种疾病可以叠加。
+		剧毒瘟疫总是会使目标感染一项其所没有的疾病，并试图附加一项对目标有着最大负面效果的疾病。
+		疾病会优先附加在目标周围感染疾病数量最多的单位身上。
+		疾病效果随法术强度提升。]]):
+		format(damDesc(self, DamageType.BLIGHT, 7 + self:combatTalentSpellDamage(t, 6, 45)), self:combatTalentSpellDamage(t, 5, 35))
 	end,
 }
 
@@ -16,10 +17,10 @@ registerTalentTranslation{
 	name = "瘟疫爆发",
 	info = function(self, t)
 		return ([[使 目 标 的 疾 病 爆 发， 每 种 疾 病 造 成 %0.2f 枯 萎 伤 害。 
-		 同 时 会 向 %d 码 半 径 范 围 内 任 意 敌 人 散 播 衰 老、 虚 弱、 腐 烂 或 传 染 性 疾 病。 
+		 同 时 会 向 %d 码 半 径 范 围 内 任 意 敌 人 散 播 衰 老、 虚 弱、 腐 烂 或 传 染 性 疾 病，疾病的持续时间最少为6回合。
 		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成。]]):
-		format(damDesc(self, DamageType.BLIGHT, self:combatTalentSpellDamage(t, 15, 85)), self:getTalentRadius(t))
-	end,
+		 format(damDesc(self, DamageType.BLIGHT, self:combatTalentSpellDamage(t, 15, 115)), self:getTalentRadius(t))
+		end,
 }
 
 registerTalentTranslation{

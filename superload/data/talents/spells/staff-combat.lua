@@ -19,7 +19,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local inc = t.getPercentInc(self, t)
-		return ([[增 加 %d 点 物 理 强 度。 同 时 法 杖 伤 害 增 加 %d%% 。]]):
+		return ([[使用法杖时，增 加 %d%% 法 杖 伤 害 ，同时增加30物理强度。]]):
 		format(damage, 100 * inc)
 	end,
 }

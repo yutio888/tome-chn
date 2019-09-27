@@ -83,7 +83,7 @@ registerTalentTranslation{
 		for slot_id, tool_id in pairs(self.artifice_tools or {}) do
 			if tool_id == t.id then slot = self:getTalentFromId(slot_id).name break end
 		end
-		return ([[你 将 刀 片 隐 藏 在 装 备 中 ， 暴 击 时 ， 刀 片 自 动 弹 出 ，造 成 %d%% 徒 手 武 器 伤 害。
+		return ([[你 将 刀 片 隐 藏 在 装 备 中 ， 当你对临近目标造成暴 击 时 ， 刀 片 自 动 弹 出 ，造 成 %d%% 徒 手 武 器 伤 害。
 该 技 能 有 冷 却 时 间。 
 #YELLOW#准备于: %s#LAST#]]):format(dam*100, slot)
 	end,

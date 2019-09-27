@@ -36,7 +36,7 @@ registerTalentTranslation{
 		local slow = t.getSlow(self, t)
 		
 		return ([[增 强 你 的 抓 取 ， 获 得 额 外 效 果 ， 所 有 效 果 不 需 通 过 其 他 豁 免 或 抵 抗 鉴 定。
-		#RED# 等 级 1 ： 减 少 %d 基 础 武 器 伤 害
+		#RED# 等 级 1 ： 减 少 %d 物理强度
 		等 级 3 ： 沉 默 
 		等 级 5 ： 目 标 减 速 %d%% ]])
 		:format(reduction, slow*100)
@@ -59,7 +59,9 @@ registerTalentTranslation{
 	id = "T_HURRICANE_THROW",
 	name = "关节技：飓风投",
 	info = function(self, t)
-		return ([[你 使 出 全 力 将 抓 取 的 目 标 扔 到 空 中 ， 对 他 和 着 陆 点 周 围 的 生 物 造 成 %d%% 伤 害 。]]):format(t.getDamage(self, t)*100)	
+		return ([[你 使 出 全 力 将 抓 取 的 目 标 扔 到 空 中 ， 对 他 和 着 陆 点 周 围 半径 %d 的 生 物 造 成 %d%% 伤 害 。
+		如果至少有一个敌人被击中，被投掷的敌人将会因为冲击而失去一个回合。
+		你只能投掷那些可以移动的敌人。]]):format(self:getTalentRadius(t), t.getDamage(self, t)*100)
 	end,
 }
 

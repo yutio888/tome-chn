@@ -29,7 +29,7 @@ registerTalentTranslation{
 		 同 时 你 还 可 以 向 世 界 上 特 定 的 人 学 习 新 毒 剂。 
 		 同 时 提 高 你 %d%% 的 毒 素 效 果。
 		 在 你 的 武 器 上 涂 毒 不 会 打 破 潜 行 状 态。 
-		 每 次 只 能 同 时 使 用 2 种 毒 剂 效 果。 ]]):
+		 每 次 只 能 同 时 使 用 2 种 毒 剂 效 果。使用第三种毒剂效果会随机取消一种已启用的效果。]]):
 		format(self:getTalentLevel(t) * 20)
 	end,
 }
@@ -99,7 +99,7 @@ registerTalentTranslation{
 	id = "T_VOLATILE_POISON",
 	name = "传染毒素",
 	info = function (self,t)
-	return ([[在 你 的 武 器 上 涂 上 传 染 毒 剂, 毒 素 造 成 额 外 %d%% 伤害，且 会 对 周 围 敌 人 造 成 伤 害 。]]):
+	return ([[在 你 的 武 器 上 涂 上 传 染 毒 剂, 毒 素 造 成 额 外 %d%% 伤害，且 会 对 周 围 敌 人 造 成 50%%的伤 害 。]]):
 	format(t.getEffect(self, t))
 	end,
 }

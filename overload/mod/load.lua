@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2016 Nicolas Casalini
+-- Copyright (C) 2009 - 2019 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -57,7 +57,8 @@ require "data-chn123.tinkers.tinker"
 package.loaded["engine.ui.Dialog"] = require "data-chn123.dialog"
 engine.ui.Dialog = require "data-chn123.dialog"
 function chn123_tome_font()
-	return config.settings.tome.show_spaces and "/data-chn123/font/main_spaced.ttf" or "/data-chn123/font/main.ttf"
+	return "/data-chn123/font/main_spaced.ttf"
+	--return config.settings.tome.show_spaces and "/data-chn123/font/main_spaced.ttf" or "/data-chn123/font/main.ttf"
 end
 function getCHNresourcename(name)
 	name=name:gsub("Stamina","体力"):gsub("Mana","法力"):gsub("Souls","灵魂"):gsub("Soul","灵魂"):gsub("Equilibrium","失衡")
@@ -171,7 +172,7 @@ WorldAchievements:loadDefinition("/data/achievements/")
 PartyLore:loadDefinition("/data/lore/lore.lua")
 
 -- Useful keybinds
-KeyBind:load("chn_move,chn_hotkeys,chn_inventory,chn_actions,chn_interface,tome,chn_debug")
+KeyBind:load("move,hotkeys,inventory,actions,interface,tome,debug,mtxn")
 
 -- Additional entities resolvers
 dofile("/mod/resolvers.lua")
@@ -356,5 +357,16 @@ for i, t in ipairs(stype_tot) do
 	print("[SCHOOL TOTAL]", t[2], t[1])
 end
 ]]
+
 ------------------------------------------------------------------------
+--Initialize some AI stuff (done last to update addon talents and resources)
+------------------------------------------------------------------------
+-- This updates talent and resource definitions to work with data for some AI functions
+-- use mod.class.interface.ActorAI.aiParseTalent(t) to parse any new talents defined later 
+mod.class.interface.ActorAI.AI_InitializeData()
+engine.interface.ActorTalents.aiParseTalent = mod.class.interface.ActorAI.aiParseTalent
+print("[Tome:load] Updated AI tactics list:")
+--table.print(mod.class.interface.ActorAI.AI_TACTICS_BENEFIT)
+table.print(mod.class.interface.ActorAI.AI_TACTICS)
+
 return {require "mod.class.Game", require "mod.class.World"}

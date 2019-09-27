@@ -4,7 +4,7 @@ registerTalentTranslation{
 	id = "T_MULTIPLY",
 	name = "繁殖",
 	info = function(self, t)
-		return ([[复 制 你 自 身！]])
+		return ([[复 制 你 自 身！ (最多 %d 次)]]):format(self.can_multiply or 0)
 	end,
 }
 
@@ -129,7 +129,7 @@ registerTalentTranslation{
 	id = "T_MIND_DISRUPTION",
 	name = "精神崩溃",
 	info = function(self, t)
-		return ([[试 图 使 目 标 混 乱 %d 回 合。]]):format(t.getDuration(self, t))
+		return ([[试 图 使 目 标 混 乱 %d 回 合 (强度 %d%%)。]]):format(t.getDuration(self, t), t.getConfusion(self, t))
 	end,
 }
 
@@ -240,6 +240,16 @@ registerTalentTranslation{
 	info = function(self, t)
 		return ([[向 目 标 喷 射 毒 液 造 成 共 计 %0.2f 毒 素 伤 害， 持 续 6 回 合。 
 		 受 力 量 或 敏 捷（ 取 较 高 值） 影 响， 伤 害 有 额 外 加 成。]]):
+		format(damDesc(self, DamageType.POISON, t.getDamage(self,t)))
+	end,
+}
+
+registerTalentTranslation{
+	id = "T_POISON_STRIKE",
+	name = "毒性打击",
+	info = function(self, t)
+		return ([[用毒素攻击目标，在六回合内造成 %0.2f 毒素伤害。
+		伤害受精神强度加成]]):
 		format(damDesc(self, DamageType.POISON, t.getDamage(self,t)))
 	end,
 }
@@ -398,7 +408,7 @@ registerTalentTranslation{
 	name = "减速",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
-		return ([[降 低 目 标 30%% 速 度 并 在 3 回 合 内 造 成 %0.2f 时 空 伤 害。]]):format(damDesc(self, DamageType.TEMPORAL, damage))
+		return ([[降 低 目 标 30%% 速 度，增加你等量的速度， 并 在 3 回 合 内 造 成 %0.2f 时 空 伤 害。]]):format(damDesc(self, DamageType.TEMPORAL, damage))
 	end,
 }
 
@@ -708,3 +718,87 @@ registerTalentTranslation{
 		:format(self:reloadRate())
 	end,
 }
+
+registerTalentTranslation{
+	id = "T_BONE_NOVA",
+	name = "白骨新星",
+	info = function(self, t)
+		return ([[向 所 有 方 向 射 出 骨 矛， 对 %d 码 范 围 内 所 有 敌 人 造 成 %0.2f 物 理 伤 害,同 时 在 5 回 合 内 造 成 %0.2f 流 血 伤 害 。  
+		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成。]]):format(self:getTalentRadius(t), damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t)), damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t)/2))
+	end,
+}
+
+registerTalentTranslation{
+	id = "T_SHADOW_AMBUSH",
+	name = "暗影伏击",
+	info = function(self, t)
+		local duration = t.getDuration(self, t)
+		return ([[你 向 目 标 甩 出 1 道 影 之 绳 索， 将 目 标 拉 向 你 并 沉 默 它 %d 回 合， 同 时 眩 晕 目 标 2 回 合。 
+		 受 命 中 影 响， 技 能 命 中 率 有 额 外 加 成。]]):
+		format(duration)
+	end,
+}
+
+registerTalentTranslation{
+	id = "T_AMBUSCADE",
+	name = "影分身",
+	info = function(self, t)
+		return ([[你 在 %d 回 合 内 完 全 控 制 你 的 影 子。 
+		 你 的 影 子 继 承 了 你 的 天 赋 和 属 性， 拥 有 你 %d%% 的 生 命 值 并 造 成 等 同 于 你 %d%% 的 伤 害， -30%% 所 有 抵 抗， -100%% 光 属 性 抵 抗 并 增 加 100%% 暗 影 抵 抗。 
+		 你 的 影 子 处 于 永 久 潜 行 状 态（ %d 潜 行 强 度） 并 且 它 所 造 成 的 所 有 近 战 伤 害 均 会 转 化 为 暗 影 伤 害。 
+		 如 果 你 提 前 解 除 控 制 或 者 它 离 开 你 的 视 野 时 间 过 长， 你 的 影 分 身 会 自 动 消 失。]]):
+		format(t.getDuration(self, t), t.getHealth(self, t) * 100, t.getDam(self, t) * 100, t.getStealthPower(self, t))
+	end,
+}
+
+registerTalentTranslation{
+	id = "T_SHADOW_LEASH",
+	name = "暗影束缚",
+	info = function(self, t)
+		local duration = t.getDuration(self, t)
+		return ([[使 你 的 武 器 立 刻 转 化 为 暗 影 之 缚 形 态， 夺 取 目 标 武 器， 缴 械 目 标 %d 回 合。 
+		 受 命 中 影 响， 技 能 命 中 率 有 额 外 加 成。]]):
+		format(duration)
+	end,
+}
+
+
+registerTalentTranslation{
+	id = "T_DISMAY",
+	name = "黑暗痛苦",
+	info = function(self, t)
+		local chance = t.getChance(self, t)
+		local duration = t.getDuration(self, t)
+		local mindpowerChange = gloomTalentsMindpower(self)
+		return ([[在 黑 暗 光 环 里 的 每 一 个 目 标 每 回 合 必 须 与 你 的 精 神 强 度 进 行 豁 免 鉴 定， 未 通 过 鉴 定 则 有 %0.1f%% 概 率 受 到 黑 暗 痛 苦 持 续 %d 回 合， 你 对 受 黑 暗 痛 苦 折 磨 的 目 标 进 行 的 首 次 近 战 攻 击 必 定 暴 击。 ]]):format(chance, duration, mindpowerChange)
+	end,
+}
+
+registerTalentTranslation{
+	id = "T_SHADOW_EMPATHY",
+	name = "阴影链接",
+	info = function(self, t)
+		local power = t.getPower(self, t)
+		local duration = t.getDur(self, t)
+		return ([[ 你 连 接 到 你 的 阴 影 ， 持 续 %d 回 合 ，将 你 受 到 的 伤 害 的 %d%% 转 移 至 随 机 某 个 阴 影 上。
+		 受 精 神 强 度 影 响， 效 果 有 额 外 加 成。 ]]):
+		format(duration, power)
+	end,
+}
+
+
+registerTalentTranslation{
+	id = "T_CIRCLE_OF_BLAZING_LIGHT",
+	name = "炽焰之阵",
+	info = function(self, t)
+		local damage = t.getDamage(self, t)
+		local duration = t.getDuration(self, t)
+		local radius = self:getTalentRadius(t)
+		return ([[在 你 的 脚 下 制 造 一 个 %d 码 半 径 的 法 阵， 它 会 照 亮 范 围 区 域， 每 回 合 增 加 %d 正 能 量 并 造 成 %0.2f 光 系 伤 害 和 %0.2f 火 焰 伤 害。 
+		 阵 法 持 续 %d 回 合。 
+		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成。]]):
+		format(radius, 1 + (damage / 4), (damDesc (self, DamageType.LIGHT, damage)), (damDesc (self, DamageType.FIRE, damage)), duration)
+	end,
+}
+
+return _M

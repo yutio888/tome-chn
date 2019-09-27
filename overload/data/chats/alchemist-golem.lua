@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2017 Nicolas Casalini
+-- Copyright (C) 2009 - 2019 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -57,6 +57,12 @@ local change_name = function(npc, player)
 	game:registerDialog(d)
 end
 
+local change_appearance = function(npc, player)
+	require("mod.dialogs.Birther"):showCosmeticCustomizer(npc, "Golem Cosmetic Options", function()
+		npc.golem_appearance_set = true
+	end)
+end
+
 local ans = {
 	{"我想更换你的护甲。", action=change_inven},
 	{"我想改变你的技能。", action=change_talents},
@@ -65,6 +71,7 @@ local ans = {
 	{"我想改变你的名字。", cond = function() return golem.sentient_telos == 1 end, jump="name", action=function(npc, player) npc.name = "Telos the Great and Powerful (reluctant follower of "..npc.summoner.name..")" game.log("#ROYAL_BLUE#The golem decides to change it's name to #{bold}#%s#{normal}#.", npc.name) end},
 	{"我想改变你的名字。", cond = function() return not golem.sentient_telos end, action=change_name},
 	{"你居然能说话?", cond = function() return golem.sentient_telos == 1 end, jump="how_speak"},
+	{"我想要改变你的外观 (只能进行一次)。", cond = function(npc, player) return profile:isDonator() and not npc.golem_appearance_set end, action=change_appearance},
 	{"没事，走吧."},
 }
 

@@ -8,9 +8,10 @@ registerTalentTranslation{
 		local radius = self:getTalentRadius(t)
 		local speed = t.getPassiveSpeed(self, t)
 		return ([[向 你 的 敌 人 释 放 原 始 的 混 乱 元 素 攻 击。 
-		 你 有 几 率 使 用 致 盲 之 沙、 缴 械 酸 雾、 冰 结 之 息、 震 慑 闪 电 或 燃 烧 之 焰 攻 击 敌 人， 造 成 %d%% 点 对 应 伤 害 类 型 的 武 器 伤 害。 
-		 此 外， 无 论 你 的 元 素 攻 击 是 否 命 中 敌 人 你 都 会 对 %d 码 半 径 范 围 内 的 敌 人 造 成 %0.2f 伤 害。 
-		 每 提 升 1 级 五 灵 挥 击 会 增 加 你 的 物 理、 法 术 和 精 神 速 度 %d%% 。]]):format(100 * self:combatTalentWeaponDamage(t, 1.2, 2.0), radius,burstdamage , 100*speed)
+		你 有 几 率 使 用 致 盲 之 沙、 缴 械 酸 雾、 冰 结 之 息、 震 慑 闪 电 或 燃 烧 之 焰 攻 击 敌 人， 造 成 %d%% 点 对 应 伤 害 类 型 的 武 器 伤 害。 
+		此 外， 无 论 你 的 元 素 攻 击 是 否 命 中 敌 人 你 都 会 对 %d 码 半 径 范 围 内 的 生物 造 成 %0.2f 伤 害。 
+		五 灵 挥 击 还会 增 加 你 的 物 理、 法 术 和 精 神 速 度 %d%% 。
+		如果你装备了盾牌，这一技能也会用你的盾牌攻击。]]):format(100 * self:combatTalentWeaponDamage(t, 1.2, 2.0), radius,burstdamage , 100*speed)
 	end,
 }
 
@@ -30,9 +31,9 @@ registerTalentTranslation{
 	id = "T_WYRMIC_GUILE",
 	name = "龙之狡诈",
 	info = function(self, t)
-		return ([[你 继 承 了 龙 族 的 狡 诈。 
-		 你 的 灵 巧 增 加 %d 点， 同 时 你 的 吐 息 技 能 冷 却 减 少 %d 。 
-		 你 获 得 %d%% 击 退 抵 抗 和 %d%% 致 盲、 震 慑 抵 抗。]]):format(2*self:getTalentLevelRaw(t), t.CDreduce(self, t), 100*t.resistKnockback(self, t), 100*t.resistBlindStun(self, t))
+		return ([[你熟练掌握了巨龙的本性。 
+		你的力量和意志值增加%d。
+		你 获 得 %d%% 击 退 抵 抗 和 %d%% 致 盲、 震 慑 抵 抗。]]):format(t.getStat(self, t), 100*t.resistKnockback(self, t), 100*t.resistBlindStun(self, t))
 	end,
 }
 
@@ -40,8 +41,10 @@ registerTalentTranslation{
 	id = "T_CHROMATIC_FURY",
 	name = "天龙之怒",
 	info = function(self, t)
-		return ([[你 获 得 了 七 彩 巨 龙 的 传 承， 并 且 你 对 元 素 的 掌 控 达 到 了 新 的 高 峰。 
-		 增 加 %0.1f%% 物 理、 火 焰、 寒 冷、 闪 电 和 酸 性 抗 性，增 加 %0.1f%% 相 应 伤 害 与 %d%% 对 应 抵 抗 穿 透。]]) 
+		return ([[你获得了世界中数不清的龙的力量传承，你对物理、火焰、寒冷、酸性、自然、枯萎和暗影属性伤害的抵抗力和适应力增强了。
+		你对这些属性的 %0.1f%% ，使用这些属性的时候伤害提升 %0.1f%% ，获得 %0.1f%% 伤害穿透。
+
+		学习这一技能还会给你的吐息技能伤害增加意志值加成。若你的这两项属性相等，则这相当于加成值翻倍。]]) 
 		:format(t.getResists(self, t), t.getDamageIncrease(self, t), t.getResistPen(self, t))
 	end,
 }

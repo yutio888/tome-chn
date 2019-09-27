@@ -9,11 +9,10 @@ registerTalentTranslation{
 		local xs = arcanedam and (" 和 %0.1f 奥术伤害"):format(arcanedam) or ""
 		return ([[你 周 围 的 地 面 开 始 生 成 岩 石 藤 蔓。
 		每 回 合 藤 蔓 将 试 图 抓 住 半 径 %d 内 的 一 个 随 机 目 标 。
-		受 影 响 的 目 标 将 被 定 身 ， 同 时 每 回 合 受 到 %0.1f 物 理 伤 害 %s, 持 续 %d 回 合 。
+		受 影 响 的 目 标 将 被 定 身 ， 同 时 每 回 合 受 到 %0.1f 自然 伤 害 %s, 持 续 %d 回 合 。
 		被 岩 石 藤 蔓 抓 住 的 生 物 每 回 合 有 一 定 几 率 逃 脱 ， 如 果 距 离 你 超 过 %d 码 则 自 动 逃 脱 。 
-		该 技 能 开 启 时 ， 移 动 速 度 下 降 50%% 。
 		定 身 几 率 和 伤 害 受 法 术 强 度 与 技 能 等 级 加 成。]]):
-		format(rad, dam, xs, turns, rad+4)
+		format(rad, damDesc(self, DamageType.NATURE, dam), xs, turns, rad+4)
 	end,
 }
 
@@ -42,7 +41,7 @@ registerTalentTranslation{
 	id = "T_ROCKSWALLOW",
 	name = "岩石吞噬",
 	info = function(self, t)
-		return ([[将 半 径 %d 内 的 目 标 连 同 岩 石 藤 蔓 一 起 拉 过 来 ， 造 成 %0.1f 物 理 伤 害 。
+		return ([[将 半 径 %d 内 的 目 标 连 同 岩 石 藤 蔓 一 起 拉 过 来 ， 造 成 %0.1f 自然 伤 害 。
 		伤 害 受 法 术 强 度 加 成 。]])
 		:format(self:getTalentRange(t), 80 + self:combatTalentStatDamage(t, "wil", 40, 330))
 	end,

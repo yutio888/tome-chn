@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2017 Nicolas Casalini
+-- Copyright (C) 2009 - 2019 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -109,10 +109,11 @@ TOOLTIP_VIM = [[#GOLD#活力#LAST#
 术需要消耗活力值。
 活力值不会自动回复，你需要从你自身和
 你的目标身上吸取。
-每杀死一个生物可以吸收意志属性10%的
-活力值。
-当你用堕落技能杀死一个生物时你可以吸
-收回你消耗的活力值。
+每杀死一个生物可以吸收意志属性30%+1
+的活力值。该数值乘以生物分级的一半。
+如果你无法支付使用一个技能的活力值，
+你可以改为支付活力值消耗200%的生命
+值。
 ]]
 
 TOOLTIP_EQUILIBRIUM = [[#GOLD#失衡值#LAST#
@@ -230,38 +231,39 @@ Specific information on each talent appears its tooltip.]]
 -- Speeds
 -------------------------------------------------------------
 TOOLTIP_SPEED_GLOBAL = [[#GOLD#整体速度#LAST#
-你所有的活动都受到整体速度的影响。
-当你达到一个特定的数量时，它可以影响
-你每回合所能做的事。
-例如：在200%整体速度情况下，你的行动
-速度可以提升一倍，一个回合别的生物只
-能完成一个动作而你可以完成两个。
+整体速度表示你的速度有多快，并
+影响你所做的一切。
+越高越快，所以在200%的整体速度
+下，您可以执行的操作数是在100%
+速度下的两倍。
+注意，移动、施法和攻击等各种动作
+的执行时间也会受到它们各自速度的
+影响。
 ]]
 TOOLTIP_SPEED_MOVEMENT = [[#GOLD#移动速度#LAST#
-你移动时消耗的时间。
-它表示同一时间内你能移动的数量。
-例如：当你有200%移动速度时，你比
-在0%时移动速度提升一倍。
+表示你移动的速度有多快。
+越高越快，当你有200%移动速度时，你
+移动的速度是平常的两倍。
+最小值：40%
 ]]
 TOOLTIP_SPEED_SPELL = [[#GOLD#施法速度#LAST#
-你施放法术需要消耗的时间。
-它表示你在同一时间内能够施放的法术数
-量。
-例如：当你有200%施法速度时，你比
-0%时同样回合内多施放一次法术。
+表示你施放法术的速度有多快。
+越高越快，当你有200%施法速度时，你
+施法的速度是平常的两倍。
+最小值：40%
 ]]
 TOOLTIP_SPEED_ATTACK = [[#GOLD#战斗速度#LAST#
-你近战或远程攻击时需要消耗的时间。
-它表示你在同一时间内的攻击频率。
-例如：当你有200%攻击速度时，你比
-0%时同样回合内多攻击一次。
+表示你近战或远程攻击的速度。
+越高越快，当你有200%战斗速度时，你
+攻击的速度是平常的两倍。
+攻击速度还受到你使用的武器的影响。
+最小值：40%
 ]]
 TOOLTIP_SPEED_MENTAL = [[#GOLD#精神速度#LAST#
-使用精神能力需要消耗的时间。
-它表示你在同一时间内的可使用的精神技
-能频率。
-例如：当你有200%攻击速度时，你比
-0%时同样回合内多施放一次。
+表示你使用精神能力的速度。
+越高越快，当你有200%精神速度时，你
+使用精神能力的速度是平常的两倍。
+最小值：40%
 ]]
 -------------------------------------------------------------
 -- Stats
@@ -316,6 +318,9 @@ TOOLTIP_COMBAT_ATTACK = [[#GOLD#命中#LAST#
 当造成基于命中的持续性物理效果的时候，
 敌人的相关豁免每超过命中一点减少5％持
 续时间。
+不同的武器还具有不同的命中加值，这是取
+决于你的命中比目标的防御高多少点产生的
+额外效果。
 ]]
 TOOLTIP_COMBAT_PHYSICAL_POWER = [[#GOLD#物理强度#LAST#
 物理强度表示你在战斗中造成物理伤害的
@@ -330,6 +335,12 @@ TOOLTIP_COMBAT_DAMAGE = [[#GOLD#伤害#LAST#
 免伤属性所减免。
 提升力量和敏捷属性可以提升伤害，一些
 技能也可以改变影响伤害值的属性。
+]]
+TOOLTIP_COMBAT_BLOCK = [[#GOLD#盾牌格挡值#LAST#
+盾牌在激活是所能阻挡的伤害量。
+通常这只对物理伤害有效，但是一些特殊
+的护盾(和技能)允许穿戴者阻挡其他类型
+的伤害。
 ]]
 TOOLTIP_COMBAT_APR = [[#GOLD#护甲穿透#LAST#
 护甲穿透可以让你忽视部分目标护甲值（
@@ -396,14 +407,14 @@ TOOLTIP_CRIT_SHRUG = [[#GOLD#暴击摆脱#LAST#
 额外伤害。
 ]]
 TOOLTIP_DEFENSE = [[#GOLD#近身闪避#LAST#
-近身闪避表示你免受近战物理攻击的几率，
+近身闪避表示你免受近战武器攻击的几率，
 并减少被攻击失去平衡的几率，受攻击者命
 中值影响。
 ]]
 TOOLTIP_RDEFENSE = [[#GOLD#远程防御#LAST#
-远程防御表示你免收远程物理攻击的几率，
-并减少被攻击失去平衡的几率受攻击者命中
-值影响。
+远程防御表示你免收远程武器攻击的几率，
+并减少被攻击失去平衡的几率，受攻击者命
+中值影响。
 ]]
 TOOLTIP_PHYS_SAVE = [[#GOLD#物理豁免#LAST#
 增加你摆脱物理效果的几率，基于目标物
@@ -537,17 +548,28 @@ TOOLTIP_AFFINITY = [[#GOLD#伤害吸收: 指定#LAST#
 TOOLTIP_STATUS_IMMUNE = [[#GOLD#状态免疫#LAST#
 大部分状态效果可以被特定的免疫来抵消。
 百分比表示你完全免疫特效的几率。]]
-TOOLTIP_SPECIFIC_IMMUNE = [[#GOLD#特
-效免疫几率#LAST#
+TOOLTIP_SPECIFIC_IMMUNE = [[#GOLD#特效免疫几率#LAST#
 表示你完全免疫特效的几率。]]
 TOOLTIP_STUN_IMMUNE = [[#GOLD#震慑免疫#LAST#
 表示你完全免疫震慑、眩晕或者冰冻的几率。
 ]]
+TOOLTIP_ANOMALY_IMMUNE = [[#GOLD#异常免疫几率#LAST#
+这代表你免疫大部分时空异常效果的几率。
+]]
 TOOLTIP_INSTAKILL_IMMUNE = [[#GOLD#即死免疫#LAST#
 表示你对立即死亡类效果的抵抗几率。
 ]]
-TOOLTIP_NEGATIVE_STATUS_IMMUNE = [[#GOLD#负面状态效果免疫#LAST#
-表示你完全免疫负面特效的几率。
+TOOLTIP_NEGATIVE_STATUS_IMMUNE = [[#GOLD#负面状态效果免疫几率#LAST#
+表示你完全免疫由其他人造成的负面状态的几率。
+]]
+TOOLTIP_NEGATIVE_MENTAL_STATUS_IMMUNE = [[#GOLD#负面精神状态免疫几率#LAST#
+表示你免疫由其他人造成的任何负面精神状态的几率。
+]]
+TOOLTIP_NEGATIVE_PHYSICAL_STATUS_IMMUNE = [[#GOLD#负面物理状态免疫几率#LAST#
+表示你免疫由其他人造成的任何负面物理状态的几率。
+]]
+TOOLTIP_NEGATIVE_SPELL_STATUS_IMMUNE = [[#GOLD#负面魔法状态免疫几率#LAST#
+表示你免疫由其他人造成的任何负面魔法状态的几率。
 ]]
 TOOLTIP_ON_HIT_DAMAGE = [[#GOLD#伤害反弹#LAST#
 生物每次近战攻击你时所受到的反弹伤害。
@@ -583,9 +605,6 @@ TOOLTIP_RESISTS_PEN = [[#GOLD#伤害穿透：指定#LAST#
 TOOLTIP_FLAT_RESIST = [[#GOLD#伤害减免#LAST#
 按固定数值减免某种类型（或所有类型）
 伤害。
-该效果会递减，每40点为一等级；每增加
-一等级，一点有效值需要的原始值加一。
-显示在面板上的为有效值。
 ]]
 
 

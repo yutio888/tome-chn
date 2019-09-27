@@ -25,7 +25,7 @@ registerTalentTranslation{
 	id = "T_CLEANSING_FLAMES",
 	name = "净化之焰",
 	info = function(self, t)
-		return ([[当 你 的 无 尽 之 炎 激 活 时， 你 的 地 狱 火 和 无 尽 之 炎 均 有 %d%% 概 率 净 化 目 标 身 上 一 种 状 态。（ 物 理， 法 术， 诅 咒 或 巫 术） 
+		return ([[当 你 的 无 尽 之 炎 激 活 时， 你 的 地 狱 火 和 无 尽 之 炎 均 有 %d%% 概 率 净 化 目 标 身 上 一 种 状 态。（ 物 理 或 法 术） 
 		 如 果 目 标 是 敌 人， 则 净 化 其 增 益 状 态。 
 		 如 果 目 标 时 友 方 单 位， 则 净 化 负 面 状 态（ 仍 然 有 燃 烧 效 果）。]]):format(t.getChance(self, t))
 	end,

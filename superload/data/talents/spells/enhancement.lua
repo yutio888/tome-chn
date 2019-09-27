@@ -1,6 +1,17 @@
 local _M = loadPrevious(...)
 
 registerTalentTranslation{
+	id = "T_EARTHEN_BARRIER",
+	name = "奥术打击",
+	info = function(self, t)
+		return ([[使用你的主手武器打击两次目标，造成 %d%% 奥术伤害。
+		如果任何一击命中目标，你获得 %d 法力值。
+		法力值恢复受法术强度加成。]]):
+		format(t.getDamage(self, t)*100, t.getMana(self, t))
+	end,
+}
+
+registerTalentTranslation{
 	id = "T_FIERY_HANDS",
 	name = "燃烧之手",
 	info = function(self, t)
@@ -13,16 +24,6 @@ registerTalentTranslation{
 	end,
 }
 
-registerTalentTranslation{
-	id = "T_EARTHEN_BARRIER",
-	name = "土质屏障",
-	info = function(self, t)
-		local reduction = t.getPhysicalReduction(self, t)
-		return ([[运 用 土 壤 的 力 量 增 强 你 的 皮 肤， 减 少 %d%% 所 承 受 物 理 伤 害， 持 续 10 回 合。 
-		 受 法 术 强 度 影 响， 伤 害 减 免 有 额 外 加 成。]]):
-		format(reduction)
-	end,
-}
 
 registerTalentTranslation{
 	id = "T_SHOCK_HANDS",
@@ -42,9 +43,11 @@ registerTalentTranslation{
 	name = "心灵之力",
 	info = function(self, t)
 		local statinc = t.getStatIncrease(self, t)
-		return ([[你 专 注 于 你 的 内 心， 增 加 你 %d 点 所 有 属 性。 
-		 受 法 术 强 度 影 响， 属 性 有 额 外 加 成。]]):
-		format(statinc)
+		local absorb = t.getShield(self, t) * (100 + (self:attr("shield_factor") or 0)) / 100
+		return ([[你 专 注 于 你 的 内 心， 增 加 你 %d 点力量，敏捷，魔法和灵巧。
+		在你受到伤害前，你会产生一个吸收 %d 伤害的护盾，该效果最多每%d回合触发一次。
+		属性值增长和护盾强度受法术强度加成。]]):
+		format(statinc, absorb, self:getTalentCooldown(t) )
 	end,
 }
 

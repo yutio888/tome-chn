@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2015 Nicolas Casalini
+-- Copyright (C) 2009 - 2019 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@ local Stats = require("engine.interface.ActorStats")
 local reward_types = {
 	warrior = {
 		types = {
-			["technique/conditioning"] = 0.8,
+			["technique/conditioning"] = 1.0,
 		},
 		talents = {
 			[Talents.T_VITALITY] = 1,
@@ -31,13 +31,13 @@ local reward_types = {
 			[Talents.T_EXOTIC_WEAPONS_MASTERY] = 1,
 		},
 		stats = {
-			[Stats.STAT_STR] = 2,
-			[Stats.STAT_CON] = 1,
+			[Stats.STAT_STR] = 5,
+			[Stats.STAT_CON] = 5,
 		},
 	},
 	divination = {
 		types = {
-			["spell/divination"] = 0.8,
+			["spell/divination"] = 1.0,
 		},
 		talents = {
 			[Talents.T_ARCANE_EYE] = 1,
@@ -45,12 +45,12 @@ local reward_types = {
 			[Talents.T_VISION] = 1,
 		},
 		stats = {
-			[Stats.STAT_MAG] = 2,
-			[Stats.STAT_WIL] = 1,
+			[Stats.STAT_MAG] = 5,
+			[Stats.STAT_WIL] = 5,
 		},
 		antimagic = {
 			types = {
-				["wild-gift/call"] = 0.8,
+				["wild-gift/call"] = 1.0,
 			},
 			saves = { mental = 4 },
 			talents = {
@@ -58,15 +58,15 @@ local reward_types = {
 				[Talents.T_EARTH_S_EYES] = 1,
 			},
 			stats = {
-				[Stats.STAT_CUN] = 1,
-				[Stats.STAT_WIL] = 2,
+				[Stats.STAT_CUN] = 5,
+				[Stats.STAT_WIL] = 5,
 			},
 		},
 	},
 	alchemy = {
 		types = {
-			["spell/staff-combat"] = 0.8,
-			["spell/stone-alchemy"] = 0.8,
+			["spell/staff-combat"] = 1.0,
+			["spell/stone-alchemy"] = 1.0,
 		},
 		talents = {
 			[Talents.T_CHANNEL_STAFF] = 1,
@@ -74,12 +74,12 @@ local reward_types = {
 			[Talents.T_STONE_TOUCH] = 1,
 		},
 		stats = {
-			[Stats.STAT_MAG] = 2,
-			[Stats.STAT_DEX] = 1,
+			[Stats.STAT_MAG] = 5,
+			[Stats.STAT_DEX] = 5,
 		},
 		antimagic = {
 			types = {
-				["wild-gift/mindstar-mastery"] = 0.8,
+				["wild-gift/mindstar-mastery"] = 1.0,
 			},
 			talents = {
 				[Talents.T_PSIBLADES] = 1,
@@ -87,94 +87,97 @@ local reward_types = {
 			},
 			saves = { spell = 4 },
 			stats = {
-				[Stats.STAT_WIL] = 1,
-				[Stats.STAT_DEX] = 2,
+				[Stats.STAT_WIL] = 5,
+				[Stats.STAT_DEX] = 5,
 			},
 		},
 	},
 	survival = {
 		types = {
-			["cunning/survival"] = 0.8,
+			["cunning/survival"] = 1.0,
+			["cunning/scoundrel"] = 1.0,
 		},
 		talents = {
 			[Talents.T_HEIGHTENED_SENSES] = 1,
-			[Talents.T_DEVICE_MASTERY] = 1,
 			[Talents.T_TRACK] = 1,
+			[Talents.T_LACERATING_STRIKES] = 1,
+			[Talents.T_MISDIRECTION] = 1,
 		},
 		stats = {
-			[Stats.STAT_DEX] = 2,
-			[Stats.STAT_CUN] = 1,
+			[Stats.STAT_DEX] = 5,
+			[Stats.STAT_CUN] = 5,
 		},
 	},
 	sun_paladin = {
 		types = {
-			["celestial/chants"] = 0.8,
+			["celestial/chants"] = 1.0,
 		},
 		talents = {
 			[Talents.T_CHANT_OF_FORTITUDE] = 1,
 			[Talents.T_CHANT_OF_FORTRESS] = 1,
 		},
 		stats = {
-			[Stats.STAT_STR] = 2,
-			[Stats.STAT_MAG] = 1,
+			[Stats.STAT_STR] = 5,
+			[Stats.STAT_MAG] = 5,
 		},
 		antimagic = {
---			types = {
---				["technique/mobility"] = 0.8, --imagine a world where paradox mage/archmage etc could access trained reactions
---			},
+			types = {
+				["psionic/augmented-mobility"] = 1.0,
+			},
 			talents = {
 				[Talents.T_DISENGAGE] = 1,
 				[Talents.T_EVASION] = 1,
 			},
 			saves = { spell = 4, phys = 4 },
 			stats = {
-				[Stats.STAT_CUN] = 1,
-				[Stats.STAT_WIL] = 2,
+				[Stats.STAT_CUN] = 5,
+				[Stats.STAT_WIL] = 5,
 			},
 		},
 	},
-	anorithil = {
+	defiler = {
 		types = {
-			["celestial/light"] = 0.8,
+			["corruption/curses"] = 1.0,
 		},
 		talents = {
-			[Talents.T_BATHE_IN_LIGHT] = 1,
-			[Talents.T_HEALING_LIGHT] = 1,
+			[Talents.T_CURSE_OF_DEFENSELESSNESS] = 1,
+			[Talents.T_CURSE_OF_IMPOTENCE] = 1,
+			[Talents.T_CURSE_OF_DEATH] = 1,
 		},
 		stats = {
-			[Stats.STAT_CUN] = 2,
-			[Stats.STAT_MAG] = 1,
+			[Stats.STAT_CUN] = 5,
+			[Stats.STAT_MAG] = 5,
 		},
 		antimagic = {
 			types = {
-				["psionic/feedback"] = 0.8,
+				["psionic/feedback"] = 1.0,
 			},
 			talents = {
-				[Talents.T_BIOFEEDBACK] = 1,
+				[Talents.T_RESONANCE_FIELD] = 1,
 				[Talents.T_CONVERSION] = 1,
 			},
 			saves = { spell = 4, mental = 4 },
 			stats = {
-				[Stats.STAT_CUN] = 1,
-				[Stats.STAT_WIL] = 2,
+				[Stats.STAT_CUN] = 5,
+				[Stats.STAT_WIL] = 5,
 			},
 		},
 	},
 	temporal = {
 		types = {
-			["chronomancy/chronomancy"] = 0.8,
+			["chronomancy/chronomancy"] = 1.0,
 		},
 		talents = {
 			[Talents.T_PRECOGNITION] = 1,
 			[Talents.T_FORESIGHT] = 1,
 		},										
 		stats = {
-			[Stats.STAT_MAG] = 2,
-			[Stats.STAT_WIL] = 1,
+			[Stats.STAT_MAG] = 5,
+			[Stats.STAT_WIL] = 5,
 		},
 		antimagic = {
 			types = {
-				["psionic/dreaming"] = 0.8,
+				["psionic/dreaming"] = 1.0,
 			},
 			talents = {
 				[Talents.T_SLEEP] = 1,
@@ -182,8 +185,8 @@ local reward_types = {
 			},
 			saves = { spell = 4 },
 			stats = {
-				[Stats.STAT_WIL] = 1,
-				[Stats.STAT_CUN] = 2,
+				[Stats.STAT_WIL] = 5,
+				[Stats.STAT_CUN] = 5,
 			},
 		},
 	},
@@ -195,12 +198,12 @@ local reward_types = {
 			[Talents.T_MIND_SEAR] = 1,
 		},
 		stats = {
-			[Stats.STAT_STR] = 2,
-			[Stats.STAT_DEX] = 2,
-			[Stats.STAT_MAG] = 2,
-			[Stats.STAT_WIL] = 2,
-			[Stats.STAT_CUN] = 2,
-			[Stats.STAT_CON] = 2,
+			[Stats.STAT_STR] = 5,
+			[Stats.STAT_DEX] = 5,
+			[Stats.STAT_MAG] = 5,
+			[Stats.STAT_WIL] = 5,
+			[Stats.STAT_CUN] = 5,
+			[Stats.STAT_CON] = 5,
 		},
 	},
 }
@@ -266,7 +269,7 @@ local function generate_rewards()
 			level = math.min(t.points - game.player:getTalentLevelRaw(tid), level)
 			if level > 0 then
 				local doit = function(npc, player) game.party:reward("选择队伍中获得奖励的成员：", function(player)
-					if game.player:knowTalentType(t.type[1]) == nil then player:setTalentTypeMastery(t.type[1], 0.8) end
+					if game.player:knowTalentType(t.type[1]) == nil then player:setTalentTypeMastery(t.type[1], 1.0) end
 					player:learnTalent(tid, true, level, {no_unlearn=true})
 					if t.hide then player.__show_special_talents = player.__show_special_talents or {} player.__show_special_talents[tid] = true end
 					player:hasQuest(npc.quest_id).reward_message = ("%s talent %s (+%d level(s))"):format(game.player:knowTalent(tid) and "improved" or "learnt", t.name, level)
@@ -278,7 +281,7 @@ local function generate_rewards()
 						on_select=function(npc, player)
 							game.tooltip_x, game.tooltip_y = 1, 1
 							local mastery = nil
-							if player:knowTalentType(t.type[1]) == nil then mastery = 0.8 end
+							if player:knowTalentType(t.type[1]) == nil then mastery = 1.0 end
 							game:tooltipDisplayAtMap(game.w, game.h, "#GOLD#"..t.name.."#LAST#\n"..tostring(player:getTalentFullDescription(t, 1, nil, mastery)))
 						end,
 					}

@@ -33,7 +33,7 @@ registerTalentTranslation{
 	name = "相位护盾",
 	info = function(self, t)
 		local chance = t.getTransferChange(self, t)
-		local maxabsorb = t.getMaxAbsorb(self, t)
+		local maxabsorb = t.getMaxAbsorb(self, t) * (100 + (self:attr("shield_factor") or 0)) / 100
 		local duration = t.getDuration(self, t)
 		return ([[这 个 复 杂 的 法 术 可 以 扭 曲 施 法 者 周 围 的 空 间， 此 空 间 可 连 接 至 范 围 内 的 另 外 1 个 目 标。 
 		 任 何 时 候， 施 法 者 所 承 受 的 伤 害 有 %d%% 的 概 率 转 移 给 指 定 连 接 的 目 标。 

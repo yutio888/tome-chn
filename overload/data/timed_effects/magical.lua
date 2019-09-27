@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2017 Nicolas Casalini
+-- Copyright (C) 2009 - 2019 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -26,26 +26,7 @@ local Map = require "engine.Map"
 local Level = require "engine.Level"
 
 ---------- Item specific 
-newEffect{
-	name = "ITEM_NUMBING_DARKNESS", image = "effects/bane_blinded.png",
-	desc = "Numbing Darkness",
-	long_desc = function(self, eff) return ("目 标 失 去 希 望 ， 它 造 成 的 伤 害 减 少 %d%%。"):format(eff.reduce) end,
-	type = "magical",
-	subtype = { darkness=true,}, no_ct_effect = true,
-	status = "detrimental",
-	parameters = {power=10, reduce=5},
-	on_gain = function(self, err) return "#Target# is weakened by the darkness!", "+Numbing Poison" end,
-	on_lose = function(self, err) return "#Target# regains their energy.", "-Darkness" end,
-	on_timeout = function(self, eff)
 
-	end,
-	activate = function(self, eff)
-		eff.tmpid = self:addTemporaryValue("numbed", eff.reduce)
-	end,
-	deactivate = function(self, eff)
-		self:removeTemporaryValue("numbed", eff.tmpid)
-	end,
-}
 
 -- Use a word other than disease because diseases are associated with damage
 -- Add dummy power/dam parameters to try to stay in line with other diseases for subtype checks
@@ -53,6 +34,7 @@ newEffect{
 	name = "ITEM_BLIGHT_ILLNESS", image = "talents/decrepitude_disease.png",
 	desc = "Illness",
 	long_desc = function(self, eff) return ("目 标 被 疾 病 感 染 ， 减 少 敏 捷 、 力 量 、 体 质 各 %d 点 ."):format(eff.reduce) end,
+	charges = function(self, eff) return (tostring(math.floor(eff.reduce))) end,
 	type = "magical",
 	subtype = {disease=true, blight=true},
 	status = "detrimental",
@@ -67,7 +49,7 @@ newEffect{
 		})
 	end,
 	deactivate = function(self, eff)
-		self:removeTemporaryValue("inc_stats", eff.tmpid)
+		self:removeTemporaryValue("inc_stats", eff.tmpid) eff.tmpid = nil
 	end,
 }
 
@@ -76,6 +58,7 @@ newEffect{
 	name = "ITEM_ACID_CORRODE", image = "talents/acidic_skin.png",
 	desc = "Armor Corroded",
 	long_desc = function(self, eff) return ("目 标 被 酸 液 覆 盖 ， 护 甲 减 少 %d%%（#RED#%d#LAST#）."):format(eff.pct*100 or 0, eff.reduce or 0) end,
+	charges = function(self, eff) return (tostring(math.floor(eff.reduce))) end,
 	type = "magical",
 	subtype = { acid=true, sunder=true },
 	status = "detrimental",
@@ -85,7 +68,7 @@ newEffect{
 	on_timeout = function(self, eff)
 	end,
 	activate = function(self, eff)
-		local armor = self.combat_armor * eff.pct
+		local armor = math.max(0, self.combat_armor * eff.pct)
 		eff.reduce = armor
 		self:effectTemporaryValue(eff, "combat_armor", -armor)
 	end,
@@ -164,9 +147,6 @@ newEffect{
 			[DamageType.LIGHTNING]=50,}
 			)
 	end,
-	on_timeout = function(self, eff)
-		if eff.dur > 7 then eff.dur = 7 end -- instakilling players is dumb and this is still lethal at 7s
-	end,
 	deactivate = function(self, eff)
 		self:removeTemporaryValue("stoned", eff.tmpid)
 		self:removeTemporaryValue("poison_immune", eff.poison)
@@ -180,7 +160,7 @@ newEffect{
 newEffect{
 	name = "ARCANE_STORM", image = "talents/disruption_shield.png",
 	desc = "Arcane Storm",
-	long_desc = function(self, eff) return ("目 标 处 于 巨 大 奥 术 风 暴 的 中 心， 增 加 +%d%% 奥 术 抵 抗。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("目 标 处 于 巨 大 奥 术 风 暴 的 中 心， 提 供 +%d%% 奥 术 抵 抗。"):format(eff.power) end,
 	type = "magical",
 	subtype = { arcane=true},
 	status = "beneficial",
@@ -256,23 +236,25 @@ newEffect{
 newEffect{
 	name = "VIMSENSE", image = "talents/vimsense.png",
 	desc = "Vimsense",
-	long_desc = function(self, eff) return ("降 低 枯 萎 抵 抗 %d%% 。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("降 低 枯 萎 抵 抗 %d%% ， 所 有 豁 免 %d 。"):format(eff.power, eff.saves) end,
 	type = "magical",
 	subtype = { blight=true },
 	status = "detrimental",
-	parameters = { power=10 },
+	parameters = { power=10, saves=0 },
 	activate = function(self, eff)
-		eff.tmpid = self:addTemporaryValue("resists", {[DamageType.BLIGHT]=-eff.power})
+		self:effectTemporaryValue(eff, "resists", {[DamageType.BLIGHT]=-eff.power})
+		self:effectTemporaryValue(eff, "combat_mindresist",  -eff.saves)
+		self:effectTemporaryValue(eff, "combat_spellresist", -eff.saves)
+		self:effectTemporaryValue(eff, "combat_physresist", -eff.saves)
 	end,
 	deactivate = function(self, eff)
-		self:removeTemporaryValue("resists", eff.tmpid)
 	end,
 }
 
 newEffect{
 	name = "INVISIBILITY", image = "effects/invisibility.png",
 	desc = "Invisibility",
-	long_desc = function(self, eff) return ("提 升 / 获 得 隐 形 状 态（ %d 隐 形 等 级）。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("提 升 / 获 得 隐 形 状 态（ %d 隐 形 等 级），减少其所造成的伤害%d%%%s。"):format(eff.power, eff.penalty*100, eff.regen and "并阻止治疗生命回复" or "") end,
 	type = "magical",
 	subtype = { phantasm=true },
 	status = "beneficial",
@@ -310,8 +292,131 @@ newEffect{
 }
 
 newEffect{
+	name = "ETHEREAL", image = "effects/invisibility.png",
+	desc = "Ethereal",
+	long_desc = function(self, eff) return ("隐 形 ( 隐 形 等 级 %d), 造 成 的 伤 害 减 少 %d%%, 所 有 抗 性 增 加 %d%%, 移 动 速 度 增 加 %d%%."):
+		format(eff.power, eff.reduction * 100, eff.resist, eff.move) end,
+	type = "magical",
+	subtype = { phantasm=true },
+	status = "beneficial",
+	parameters = { power=10, resist=0, reduction=0, move=0},
+	on_gain = function(self, err) return "#Target# becomes ethereal.", "+Ethereal" end,
+	on_lose = function(self, err) return "#Target# is no longer ethereal.", "-Ethereal" end,
+	activate = function(self, eff)
+		eff.tmpid = self:addTemporaryValue("invisible", eff.power)
+		eff.penaltyid = self:addTemporaryValue("invisible_damage_penalty", eff.reduction)
+		eff.damid = self:addTemporaryValue("resists", {all = eff.resist})
+		eff.moveid = self:addTemporaryValue("movement_speed", eff.move / 100)
+
+		if not self.shader then
+			eff.set_shader = true
+			self.shader = "invis_edge"
+			self:removeAllMOs()
+			game.level.map:updateMap(self.x, self.y)
+		end
+	end,
+	deactivate = function(self, eff)
+		if eff.set_shader then
+			self.shader = nil
+			self:removeAllMOs()
+			game.level.map:updateMap(self.x, self.y)
+		end
+		self:removeTemporaryValue("invisible", eff.tmpid)
+		self:removeTemporaryValue("invisible_damage_penalty", eff.penaltyid)
+		self:removeTemporaryValue("resists", eff.damid)
+		self:removeTemporaryValue("movement_speed", eff.moveid)
+		self:resetCanSeeCacheOf()
+	end,
+}
+
+newEffect{
+	name = "STORMSHIELD", image = "talents/rune__lightning.png",
+	desc = "Stormshield",
+	long_desc = function(self, eff) return ("单 位 被 一 团 风 暴 保 护 ， 可 转 移 来 自 %d 个 目 标 的 超 过 %d 的 伤 害 。"):
+		format(eff.blocks, eff.threshold) end,
+	type = "magical",
+	subtype = { lightning=true, shield=true },
+	status = "beneficial",
+	charges = function(self, eff) return eff.blocks end,
+	parameters = {threshold = 1, blocks = 1,},
+	on_gain = function(self, err) return "#Target# summons a storm to protect him!", "+Stormshield" end,
+	on_lose = function(self, err) return "#Target#'s storm dissipates.", "-Stormshield" end,
+	activate = function(self, eff)
+	end,
+	deactivate = function(self, eff)
+	end,
+	callbackOnTakeDamage = function(self, eff, src, x, y, type, dam, state)
+		if dam < eff.threshold then return end
+		local d_color = DamageType:get(type).text_color or "#ORCHID#"
+		game:delayedLogDamage(src, self, 0, ("%s(%d stormshielded#LAST#%s)#LAST#"):format(d_color, dam, d_color), false)
+		eff.blocks = eff.blocks - 1
+		if eff.blocks <= 0 then
+			src:logCombat(self, "#BLUE##Target#'s stormshield is out of charges and disspitates!#LAST#.")
+			self:removeEffect(self.EFF_STORMSHIELD)
+		end
+		return {dam = 0}
+	end,
+}
+
+newEffect{
+	name = "PRISMATIC_SHIELD", image = "talents/ward.png",
+	desc = "Prismatic Shield",
+	long_desc = function(self, eff)
+		local str = ""
+		for k,v in pairs(eff.wards) do
+			str = str .. ", " .. v .. " " .. k:lower()
+		end
+		str = string.sub(str, 2)
+		return ("目 标 受 到 棱 彩 护 盾 的 保 护 ， 可 以 阻 挡 许 多 伤 害 。 剩 余 时 间:  %s"):format(str) -- add tooltip
+	end,
+	type = "magical",
+	subtype = { ward=true, },
+	status = "beneficial",
+	parameters = { wards = {} },
+	on_gain = function(self, err) return "#Target# summons a prismatic shield to protect him!", "+Prismatic" end,
+	on_lose = function(self, err) return "#Target#'s prismatic shield fades.", "-Prismatic" end,
+	activate = function(self, eff)
+	end,
+	deactivate = function(self, eff)
+	end,
+	callbackOnTakeDamage = function(self, eff, src, x, y, type, dam, state)
+		if dam <= 0 then return end
+		for k,v in pairs(eff.wards) do
+			if k == type then
+				local d_color = DamageType:get(type).text_color or "#ORCHID#" -- fix display
+				game:delayedLogDamage(src, self, 0, ("%s(%d to prism#LAST#%s)#LAST#"):format(d_color, dam, d_color), false)
+				eff.wards[k] = eff.wards[k] - 1
+				if eff.wards[k] <= 0 then eff.wards[k] = nil end
+				return {dam = 0}
+			end
+		end
+		return {dam=dam}
+	end,
+}
+
+newEffect{
+	name = "PURGING", image = "talents/willful_tormenter.png", -- re-used icon
+	desc = "PURGING",
+	long_desc = function(self, eff) return ("目 标 每 回 合 清 除 一 项 物 理 疾 病 。"):
+		format() end,
+	type = "magical",
+	subtype = { arcane=true, },
+	status = "beneficial",
+	parameters = {},
+	on_gain = function(self, err) return "#Target# is being purged of his physical ailments!", "+Purging" end,
+	on_lose = function(self, err) return "#Target#'s is no longer being purged.", "-Purging" end,
+	activate = function(self, eff)
+	end,
+	deactivate = function(self, eff)
+	end,
+	on_timeout = function(self, eff)
+		local cleanse = self:removeEffectsFilter({type="physical", status="detrimental"}, 1)
+		if cleanse > 0 then eff.dur = eff.dur + 1 end
+	end,
+}
+newEffect{
 	name = "VIMSENSE_DETECT", image = "talents/vimsense.png",
-	desc = "感知 (活力)",
+	desc = "Sensing (Vim)",
 	long_desc = function(self, eff) return "强 化 感 知 ， 能 侦 察 到 不 可 见 目 标." end,
 	type = "magical",
 	subtype = { sense=true, corruption=true },
@@ -391,6 +496,7 @@ newEffect{
 	name = "BANE_CONFUSED", image = "effects/bane_confused.png",
 	desc = "Bane of Confusion",
 	long_desc = function(self, eff) return ("目 标 处 于 混 乱， 随 机 行 动 ( %d%% 几 率 )， 不 能 完 成 复 杂 的 动 作， 每 回 合 受 到 %0.2f 暗 影 伤 害。"):format(eff.power, eff.dam) end,
+	charges = function(self, eff) return (tostring(math.floor(eff.power)).."%") end,	
 	type = "magical",
 	subtype = { bane=true, confusion=true },
 	status = "detrimental",
@@ -401,7 +507,6 @@ newEffect{
 		DamageType:get(DamageType.DARKNESS).projector(eff.src, self.x, self.y, DamageType.DARKNESS, eff.dam)
 	end,
 	activate = function(self, eff)
-		eff.power = math.floor(math.max(eff.power - (self:attr("confusion_immune") or 0) * 100, 10))
 		eff.power = util.bound(eff.power, 0, 50)
 		eff.tmpid = self:addTemporaryValue("confused", eff.power)
 		if eff.power <= 0 then eff.dur = 0 end
@@ -458,18 +563,24 @@ newEffect{
 newEffect{
 	name = "LIFE_TAP", image = "talents/life_tap.png",
 	desc = "Life Tap",
-	long_desc = function(self, eff) return ("目 标 发 掘 生 命 中 的 隐 藏 力 量， 提 升 造 成 的 伤 害 %d%% 。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("目 标 发 掘 血 液 中 的 隐 藏 力 量， 将 其 造 成 伤 害 的 %d%% 转 化 为 治 疗 。"):format(eff.power) end,
 	type = "magical",
 	subtype = { blight=true },
 	status = "beneficial",
-	parameters = { power=10 },
-	on_gain = function(self, err) return "#Target# is overloaded with power.", "+Life Tap" end,
-	on_lose = function(self, err) return "#Target# seems less dangerous.", "-Life Tap" end,
+	parameters = { power=0 },
+	on_gain = function(self, err) return "#Target# looks healthier as he deals damage.", "+Life Tap" end,
+	on_lose = function(self, err) return "#Target# stops leeching life.", "-Life Tap" end,
 	activate = function(self, eff)
-		eff.pid = self:addTemporaryValue("inc_damage", {all=eff.power})
 	end,
 	deactivate = function(self, eff)
-		self:removeTemporaryValue("inc_damage", eff.pid)
+	end,
+	callbackOnDealDamage = function(self, eff, value, target, dead, death_node)
+		-- Lifesteal done here to avoid stacking in bad ways with other LS effects
+		if value <= 0 or not target then return end
+			local leech = math.min(value, target.life) * eff.power / 100
+			if leech > 0 then
+				self:heal(leech, self)
+			end
 	end,
 }
 
@@ -566,7 +677,7 @@ newEffect{
 		if core.shader.active(4) then
 			self:removeParticles(eff.particle)
 			eff.particle = self:addParticles(Particles.new("shader_shield", 1, {size_factor=1.3, img="runicshield"}, {type="runicshield", shieldIntensity=0.14, ellipsoidalFactor=1.2, time_factor=4000, bubbleColor={0.5, 1, 0.2, 1.0}, auraColor={0.4, 1, 0.2, 1}}))
-		end		
+		end
 	end,
 	damage_feedback = function(self, eff, src, value)
 		if eff.particle and eff.particle._shader and eff.particle._shader.shad and src and src.x and src.y then
@@ -608,7 +719,7 @@ newEffect{
 newEffect{
 	name = "DAMAGE_SHIELD", image = "talents/barrier.png",
 	desc = "Damage Shield",
-	long_desc = function(self, eff) return ("目 标 被 一 层 魔 法 护 盾（ %d / %d ）包 围 。"):format(self.damage_shield_absorb, eff.power, ((self.damage_shield_reflect and self.damage_shield_reflect > 0) and ("(反 射 %d%% 伤 害 给 攻 击 者 )"):format(self.damage_shield_reflect))) end,
+	long_desc = function(self, eff) return ("目 标 被 一 层 魔 法 护 盾（ %d / %d ）包 围 。"):format(self.damage_shield_absorb, eff.power, ((self.damage_shield_reflect and self.damage_shield_reflect > 0) and ("(反 射 %d%% 伤 害 给 攻 击 者 )"):format(self.damage_shield_reflect) or "")) end,
 	type = "magical",
 	subtype = { arcane=true, shield=true },
 	status = "beneficial",
@@ -671,7 +782,7 @@ newEffect{
 				ac = table.clone(eff.color) ac[4] = 1
 			end
 			eff.particle = self:addParticles(Particles.new("shader_shield", 1, {size_factor=1.3, img=eff.aegis_image or "runicshield"}, {type="runicshield", shieldIntensity=0.14, ellipsoidalFactor=1.2, time_factor=5000, bubbleColor=bc, auraColor=ac}))
-		end		
+		end
 	end,
 	damage_feedback = function(self, eff, src, value)
 		if eff.particle and eff.particle._shader and eff.particle._shader.shad and src and src.x and src.y then
@@ -727,7 +838,7 @@ newEffect{
 newEffect{
 	name = "RADIANCE_DIM", image = "talents/curse_of_vulnerability.png",
 	desc = "Radiance Lost",
-	long_desc = function(self, eff) return ("你 身 边 的 光 亮 变 得 暗 淡 了。"):format() end,
+	long_desc = function(self, eff) return ("你 身 边 的 光 亮 变 得 暗 淡 了， 光照半径降低到1码。"):format() end,
 	type = "other",
 	subtype = { radiance=true },
 	parameters = { },
@@ -852,48 +963,40 @@ newEffect{
 }
 
 newEffect{
+	name = "CORRUPTING_STRIKE", image = "talents/dark_surprise.png",
+	desc = "Corrupting Strike",
+	long_desc = function(self, eff) return ("The targets natural essence in corrupted reducing disease resistance by 100%%."):format() end,
+	type = "magical",
+	subtype = {blight=true},
+	status = "detrimental",
+	parameters = {},
+	on_gain = function(self, err) return "#Target# is completely vulnerable to disease!" end,
+	on_lose = function(self, err) return "#Target# no longer vulnerable to disease." end,
+	activate = function(self, eff)
+		self:effectTemporaryValue(eff, "disease_immune", -1)
+	end,
+	deactivate = function(self, eff)
+	end,
+}
+
+newEffect{
 	name = "BLOODLUST", image = "talents/bloodlust.png",
 	desc = "Bloodlust",
-	long_desc = function(self, eff) return ("目 标 进 入 魔 法 狂 暴 状 态， 提 升 法 术 强 度 %d 。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("目 标 进 入 魔 法 狂 暴 状 态， 提 升 法 术 强 度 %d 。"):format(eff.spellpower * eff.stacks) end,
 	type = "magical",
 	subtype = { frenzy=true },
 	status = "beneficial",
-	parameters = { power=1 },
-	on_timeout = function(self, eff)
-		if eff.refresh_turn + 10 < game.turn then -- Decay only if it's not refreshed
-			eff.power = math.max(0, eff.power*(100-eff.decay)/100)
-		end
-	end,
+	charges = function(self, eff) return math.floor(eff.spellpower * eff.stacks) end,
+	parameters = { spellpower=1, stacks=1, max_stacks=1 },
 	on_merge = function(self, old_eff, new_eff)
-		local dur = new_eff.dur
-		local max_turn, maxDur = self:callTalent(self.T_BLOODLUST, "getParams")
-		local maxSP = max_turn * 6 -- max total sp
-		local power = new_eff.power
-
-		if old_eff.last_turn + 10 <= game.turn then -- clear limits every game turn (10 ticks)
-			old_eff.used_this_turn = 0
-			old_eff.last_turn = game.turn
-		end
-		if old_eff.used_this_turn >= max_turn then
-			dur = 0
-			power = 0
-		else
-			power = math.min(max_turn-old_eff.used_this_turn, power)
-			old_eff.power = math.min(old_eff.power + power, maxSP)
-			old_eff.used_this_turn = old_eff.used_this_turn + power
-		end
-
-		old_eff.decay = 100/maxDur
-		old_eff.dur = math.min(old_eff.dur + dur, maxDur)
-		old_eff.refresh_turn = game.turn
+		old_eff.dur = new_eff.dur
+		old_eff.stacks = old_eff.stacks + 1
+		old_eff.max_stacks = new_eff.max_stacks
+		old_eff.stacks = math.min(old_eff.max_stacks, old_eff.stacks)
 		return old_eff
 	end,
 	activate = function(self, eff)
-		eff.last_turn = game.turn
-		local SPbonus, maxDur = self:callTalent(self.T_BLOODLUST, "getParams")
-		eff.used_this_turn = eff.power
-		eff.decay = 100/maxDur
-		eff.refresh_turn = game.turn
+		eff.stacks = 1
 	end,
 	deactivate = function(self, eff)
 	end,
@@ -1060,7 +1163,7 @@ newEffect{
 		-- Check for visible monsters, only see LOS actors, so telepathy wont prevent it
 		core.fov.calc_circle(self.x, self.y, game.level.map.w, game.level.map.h, 20, function(_, x, y) return game.level.map:opaque(x, y) end, function(_, x, y)
 			local actor = game.level.map(x, y, game.level.map.ACTOR)
-			if actor and actor ~= self then 
+			if actor and actor ~= self then
 				if actor.summoner and actor.summoner == self then
 					seen = false
 				else
@@ -1127,7 +1230,7 @@ newEffect{
 		eff.finaldam = eff.finaldam + (cb.value * eff.rate)
 		return true
 	end,
-	
+
 	on_die = function(self, eff)
 		local tg = {type="ball", radius=4, selffire=false, x=self.x, y=self.y}
 		eff.src:project(tg, self.x, self.y, DamageType.ACID, eff.finaldam, {type="acid"})
@@ -1148,6 +1251,7 @@ newEffect{
 		eff.tmpid = self:addTemporaryValue("can_pass", {pass_wall=20})
 		eff.defid = self:addTemporaryValue("combat_def", eff.def)
 		eff.armid = self:addTemporaryValue("combat_armor", eff.armor)
+		self:effectTemporaryValue(eff, "no_breath", 1)
 		if not self.shader then
 			eff.set_shader = true
 			self.shader = "moving_transparency"
@@ -1225,6 +1329,26 @@ newEffect{
 }
 
 newEffect{
+	name = "SOLAR_INFUSION", image = "talents/sun_flare.png",
+	desc = "Solar Infusion",
+	long_desc = function(self, eff) return ("The target's light, darkness, and fire resistance has been increased by %d%%."):format(eff.resist) end,
+	type = "magical",
+	subtype = { },
+	status = "beneficial",
+	parameters = { resist=10 },
+	activate = function(self, eff)
+		self:effectTemporaryValue(eff, "resists", {
+			[DamageType.DARKNESS] = eff.resist,
+			[DamageType.LIGHT] = eff.resist,
+			[DamageType.FIRE] = eff.resist,
+
+		})
+	end,
+	deactivate = function(self, eff)
+	end,
+}
+
+newEffect{
 	name = "TOTALITY", image = "talents/totality.png",
 	desc = "Totality",
 	long_desc = function(self, eff) return ("目 标 的 光 系 和 黑 暗 法 术 穿 透 增 加 %d%% 。"):format(eff.power) end,
@@ -1243,6 +1367,92 @@ newEffect{
 	end,
 }
 
+newEffect{
+	name = "DIVINE_GLYPHS", image = "talents/glyph_of_explosion.png",
+	desc = "Divine Glyphs",
+	long_desc = function(self, eff)
+		return ("A divine glyph recently triggered, providing %d%% light and darkness affinity and resistence."):format(math.min(eff.maxStacks, eff.glyphstacks or 1)*5)
+	end,
+	type = "magical",
+	subtype = {light=true, darkness=true},
+	status = "beneficial",
+	paramters ={},
+	activate = function(self, eff)
+		local power = math.min(eff.maxStacks, eff.glyphstacks or 1)*5
+		self:effectTemporaryValue(eff, "damage_affinity", {[DamageType.LIGHT]=power, [DamageType.DARKNESS]=power})
+		self:effectTemporaryValue(eff, "resists", {[DamageType.LIGHT]=power, [DamageType.DARKNESS]=power})
+	end,
+	on_merge = function(self, old_eff, new_eff)
+		old_eff.glyphstacks = (old_eff.glyphstacks or 0) + 1
+		old_eff.dur = new_eff.dur
+		return old_eff
+	end,
+}
+
+newEffect{
+	name = "STARLIGHT_FATIGUE", image = "talents/glyph_of_fatigue.png",
+	desc = "Fatiguing Starlight",
+	long_desc = function(self, eff)
+		return ("Inflicted with a fatiguing starlight, taking %d darkness damage and increasing the cooldown of a cooling-down talent by 1 whenever they act"):format(eff.src.summoner:damDesc(DamageType.DARKNESS, eff.dam))
+	end,
+	type = "magical",
+	subtype = {darkness = true},
+	status = "detrimental",
+	paramters = {},
+	callbackOnAct = function(self, eff)
+		DamageType:get(DamageType.DARKNESS).projector(eff.src, self.x, self.y, DamageType.DARKNESS, eff.dam)
+		local tids = {}
+		for tid, lev in pairs(self.talents) do
+			local t = self:getTalentFromId(tid)
+			if t and self.talents_cd[tid] and not t.fixed_cooldown then tids[#tids+1] = t end
+			local t2 = rng.tableRemove(tids)
+			if t2 then self.talents_cd[t2.id] = self.talents_cd[t2.id] + 1 end
+		end
+	end,
+}
+
+newEffect{
+	name = "SUNBURST", image = "talents/sunburst.png",
+	desc = "Sunburst",
+	long_desc = function(self, eff)
+		return ("Light damage has been increased by %d%% to +%d%%."):format(eff.damInc, self.inc_damage.LIGHT)
+	end,
+	type = "magical",
+	subtype = {light=true, darkness=true},
+	status = "beneficial",
+	paramters ={},
+	activate = function(self, eff)
+		self:effectTemporaryValue(eff, "inc_damage", {[DamageType.LIGHT]=eff.damInc})
+	end,
+}
+
+newEffect{
+	name = "DARKLIGHT", image = "talents/darkest_light.png",
+	desc = "Shrouded in Darklight",
+	long_desc = function(self, eff)
+		return ("%d%% of the targets damage is being split between light and darkness and they are taking %d light and %d darkness damage each turn."):format(eff.conversion * 100, eff.src:damDesc(DamageType.LIGHT, eff.dotDam), eff.src:damDesc(DamageType.DARKNESS, eff.dotDam))
+	end,
+	type = "magical",
+	subtype = {light=true, darkness=true},
+	status = "detrimental",
+	paramters = {},
+	activate = function(self, eff)
+		self:effectTemporaryValue(eff, "darklight", eff.conversion)
+		if core.shader.active() then
+			eff.particle1 = self:addParticles(Particles.new("shader_ring_rotating", 1, {rotation=0.5, a=0.4, radius=0.8, img="healdark"}))
+			eff.particle2 = self:addParticles(Particles.new("shader_ring_rotating", 1, {rotation=0.5, a=0.4, radius=0.6, img="healcelestial"}))
+		end
+	end,
+	deactivate = function(self, eff)
+		if eff.particle1 then self:removeParticles(eff.particle1) end
+		if eff.particle2 then self:removeParticles(eff.particle2) end
+	end,
+	on_timeout = function(self, eff)
+		DamageType:get(DamageType.LIGHT).projector(eff.src, self.x, self.y, DamageType.LIGHT, eff.dotDam)
+		DamageType:get(DamageType.DARKNESS).projector(eff.src, self.x, self.y, DamageType.DARKNESS, eff.dotDam)
+	end,
+}
+
 -- Circles
 newEffect{
 	name = "SANCTITY", image = "talents/circle_of_sanctity.png",
@@ -1258,6 +1468,9 @@ newEffect{
 	deactivate = function(self, eff)
 		self:removeTemporaryValue("silence_immune", eff.silence)
 	end,
+	on_timeout = function(self, eff)
+		if self:hasEffect(self.EFF_SURGING_CIRCLES) then self:incPositive(1) end
+	end,
 }
 
 newEffect{
@@ -1270,9 +1483,18 @@ newEffect{
 	parameters = {power = 1},
 	activate = function(self, eff)
 		eff.defense = self:addTemporaryValue("combat_def", eff.power)
+		eff.physsave = self:addTemporaryValue("combat_physresist", eff.power)
+		eff.spellsave = self:addTemporaryValue("combat_spellresist", eff.power)
+		eff.mentalsave = self:addTemporaryValue("combat_mentalresist", eff.power)
 	end,
 	deactivate = function(self, eff)
 		self:removeTemporaryValue("combat_def", eff.defense)
+		self:removeTemporaryValue("combat_physresist", eff.physsave)
+		self:removeTemporaryValue("combat_spellresist", eff.spellsave)
+		self:removeTemporaryValue("combat_mentalresist", eff.mentalsave)
+	end,
+	on_timeout = function(self, eff)
+		if self:hasEffect(self.EFF_SURGING_CIRCLES) then self:incNegative(1) end
 	end,
 }
 
@@ -1305,6 +1527,9 @@ newEffect{
 	end,
 	deactivate = function(self, eff)
 		self:removeTemporaryValue("slow_projectiles", eff.ward)
+	end,
+	on_timeout = function(self, eff)
+		if self:hasEffect(self.EFF_SURGING_CIRCLES) then self:incPositive(0.5) self:incNegative(0.5) end
 	end,
 }
 
@@ -1390,7 +1615,7 @@ newEffect{
 	desc = "Invigorate",
 	long_desc = function(self, eff) return ("目 标 每 回 合 回 复 %d 体 力 值 并 且 以 两 倍 正 常 速 度 刷 新 技 能。 "):format(eff.power) end,
 	type = "magical",
-	subtype = { temporal=true },
+	subtype = { temporal=true, regeneration=true },
 	status = "beneficial",
 	parameters = {power = 10},
 	on_gain = function(self, err) return "#Target# is invigorated.", "+Invigorate" end,
@@ -1523,7 +1748,7 @@ newEffect{
 newEffect{
 	name = "BONE_SHIELD", image = "talents/bone_shield.png",
 	desc = "Bone Shield",
-	long_desc = function(self, eff) return ("有 超 过 你 生 命 值 %d%% 的 伤 害 都 会 被 降 低 至 %d%% 。"):format(eff.power, eff.power) end,
+	long_desc = function(self, eff) return ("所 有 超 过 你 生 命 值 %d%% 的 伤 害 都 会 被 降 低 至 %d%% 。"):format(eff.power, eff.power) end,
 	type = "magical",
 	subtype = { arcane=true, shield=true },
 	status = "beneficial",
@@ -1608,7 +1833,7 @@ newEffect{
 	desc = "Celerity",
 	long_desc = function(self, eff) return ("目 标 移 动 速 度 增 加 %d%%"):format(eff.speed * 100 * eff.charges) end,
 	type = "magical",
-	display_desc = function(self, eff) return eff.charges.." 敏 捷" end,
+	display_desc = function(self, eff) return eff.charges.." Celerity" end,
 	charges = function(self, eff) return eff.charges end,
 	subtype = { speed=true, temporal=true },
 	status = "beneficial",
@@ -1616,13 +1841,13 @@ newEffect{
 	on_merge = function(self, old_eff, new_eff)
 		-- remove the old value
 		self:removeTemporaryValue("movement_speed", old_eff.tmpid)
-		
+
 		-- add a charge
 		old_eff.charges = math.min(old_eff.charges + 1, new_eff.max_charges)
-		
-		-- and apply the current values	
+
+		-- and apply the current values
 		old_eff.tmpid = self:addTemporaryValue("movement_speed", old_eff.speed * old_eff.charges)
-		
+
 		old_eff.dur = new_eff.dur
 		return old_eff
 	end,
@@ -1639,7 +1864,7 @@ newEffect{
 	desc = "Time Dilation",
 	long_desc = function(self, eff) return ("增 加 攻 击 、 施 法 和 精 神 速 度 %d%%。"):format(eff.speed * 100 * eff.charges) end,
 	type = "magical",
-	display_desc = function(self, eff) return eff.charges.." 时 间 膨 胀" end,
+	display_desc = function(self, eff) return eff.charges.." Time Dilation" end,
 	charges = function(self, eff) return eff.charges end,
 	subtype = { speed=true, temporal=true },
 	status = "beneficial",
@@ -1649,15 +1874,15 @@ newEffect{
 		self:removeTemporaryValue("combat_physspeed", old_eff.physid)
 		self:removeTemporaryValue("combat_spellspeed", old_eff.spellid)
 		self:removeTemporaryValue("combat_mindspeed", old_eff.mindid)
-		
+
 		-- add a charge
 		old_eff.charges = math.min(old_eff.charges + 1, new_eff.max_charges)
-		
-		-- and apply the current values	
+
+		-- and apply the current values
 		old_eff.physid = self:addTemporaryValue("combat_physspeed", old_eff.speed * old_eff.charges)
 		old_eff.spellid = self:addTemporaryValue("combat_spellspeed", old_eff.speed * old_eff.charges)
 		old_eff.mindid = self:addTemporaryValue("combat_mindspeed", old_eff.speed * old_eff.charges)
-		
+
 		old_eff.dur = new_eff.dur
 		return old_eff
 	end,
@@ -1805,10 +2030,10 @@ newEffect{
 		self:removeTemporaryValue("combat_physresist", old_eff.physid)
 		self:removeTemporaryValue("combat_spellresist", old_eff.spellid)
 		self:removeTemporaryValue("combat_mentalresist", old_eff.mentalid)
-		
+
 		-- add some spin
 		old_eff.spin = math.min(old_eff.spin + 1, new_eff.max_spin)
-	
+
 		-- and apply the current values
 		old_eff.defid = self:addTemporaryValue("combat_def", old_eff.save_bonus * old_eff.spin)
 		old_eff.physid = self:addTemporaryValue("combat_physresist", old_eff.save_bonus * old_eff.spin)
@@ -1816,6 +2041,7 @@ newEffect{
 		old_eff.mentalid = self:addTemporaryValue("combat_mentalresist", old_eff.save_bonus * old_eff.spin)
 
 		old_eff.dur = new_eff.dur
+
 		return old_eff
 	end,
 	activate = function(self, eff)
@@ -1824,7 +2050,7 @@ newEffect{
 		eff.physid = self:addTemporaryValue("combat_physresist", eff.save_bonus * eff.spin)
 		eff.spellid = self:addTemporaryValue("combat_spellresist", eff.save_bonus * eff.spin)
 		eff.mentalid = self:addTemporaryValue("combat_mentalresist", eff.save_bonus * eff.spin)
-		
+
 		if core.shader.allow("adv") then
 			eff.particle1, eff.particle2 = self:addParticles3D("volumetric", {kind="conic_cylinder", radius=1.4, base_rotation=180, growSpeed=0.004, img="squares_x3_01"})
 		else
@@ -1882,7 +2108,7 @@ newEffect{
 		eff.tmpid = self:addTemporaryValue("inc_stats", {[Stats.STAT_CON] = -eff.con})
 	end,
 	deactivate = function(self, eff)
-		self:removeTemporaryValue("inc_stats", eff.tmpid)
+		self:removeTemporaryValue("inc_stats", eff.tmpid) eff.tmpid = nil
 	end,
 }
 
@@ -1907,7 +2133,7 @@ newEffect{
 		eff.tmpid = self:addTemporaryValue("inc_stats", {[Stats.STAT_DEX] = -eff.dex})
 	end,
 	deactivate = function(self, eff)
-		self:removeTemporaryValue("inc_stats", eff.tmpid)
+		self:removeTemporaryValue("inc_stats", eff.tmpid) eff.tmpid = nil
 	end,
 }
 
@@ -1932,9 +2158,80 @@ newEffect{
 		eff.tmpid = self:addTemporaryValue("inc_stats", {[Stats.STAT_STR] = -eff.str})
 	end,
 	deactivate = function(self, eff)
-		self:removeTemporaryValue("inc_stats", eff.tmpid)
+		self:removeTemporaryValue("inc_stats", eff.tmpid) eff.tmpid = nil
 	end,
 }
+
+-- Endless Woes prodigy effects
+newEffect{
+	name = "WOEFUL_DISEASE", image = "talents/weakness_disease.png",
+	desc = "Woeful Disease",
+	long_desc = function(self, eff) return ("The target is infected by a disease, reducing its strength, constitution, dexterity by %d and doing %0.2f blight damage per turn."):
+		format(eff.str, eff.con, eff.dex, eff.dam) end,
+	type = "magical",
+	subtype = {disease=true, blight=true},
+	status = "detrimental",
+	parameters = {str = 1, con = 1, dex = 1, dam = 0},
+	on_gain = function(self, err) return "#Target# is afflicted by a woeful disease!" end,
+	on_lose = function(self, err) return "#Target# is free from the woeful disease." end,
+	-- Damage each turn
+	on_timeout = function(self, eff)
+		if self:attr("purify_disease") then self:heal(eff.dam, eff.src)
+		else if eff.dam > 0 then DamageType:get(DamageType.BLIGHT).projector(eff.src, self.x, self.y, DamageType.BLIGHT, eff.dam, {from_disease=true})
+		end end
+	end,
+	activate = function(self, eff)
+		self:effectTemporaryValue(eff, "inc_stats", {
+			[Stats.STAT_STR] = math.floor(eff.str),
+			[Stats.STAT_CON] = math.floor(eff.con),
+			[Stats.STAT_DEX] = math.floor(eff.dex),
+		})
+	end,
+	deactivate = function(self, eff)
+	end,
+}
+
+newEffect{
+	name = "WOEFUL_DARKNESS", image = "effects/bane_blinded.png",
+	desc = "Woeful Darkness",
+	long_desc = function(self, eff) return ("The target is weakened and lost, all damage it does is reduced by %d%%."):format(eff.reduce) end,
+	type = "magical",
+	subtype = { darkness=true,},
+	status = "detrimental",
+	parameters = {power=10, reduce=5},
+	on_gain = function(self, err) return "#Target# is weakened by the darkness!", "+Woeful Darkness" end,
+	on_lose = function(self, err) return "#Target# looks more determined.", "-Woeful Darkness" end,
+	on_timeout = function(self, eff)
+
+	end,
+	activate = function(self, eff)
+		eff.tmpid = self:addTemporaryValue("numbed", eff.reduce)
+	end,
+	deactivate = function(self, eff)
+		self:removeTemporaryValue("numbed", eff.tmpid)
+	end,
+}
+
+newEffect{
+	name = "WOEFUL_CORROSION", image = "talents/acidic_skin.png",
+	desc = "Woeful Corrosion",
+	long_desc = function(self, eff) return ("The target has been splashed with acid, taking %0.2f acid damage per turn."):format(eff.dam) end,
+	type = "magical",
+	subtype = { acid=true,},
+	status = "detrimental",
+	parameters = {dam = 0},
+	on_gain = function(self, err) return "#Target# is covered in acid!" end,
+	on_lose = function(self, err) return "#Target# is free from the acid." end,
+	-- Damage each turn
+	on_timeout = function(self, eff)
+		DamageType:get(DamageType.ACID).projector(eff.src, self.x, self.y, DamageType.ACID, eff.dam)
+	end,
+	activate = function(self, eff)
+	end,
+	deactivate = function(self, eff)
+	end,
+}
+
 
 newEffect{
 	name = "EPIDEMIC", image = "talents/epidemic.png",
@@ -1958,9 +2255,9 @@ newEffect{
 		eff.immid = self:addTemporaryValue("disease_immune", -eff.resist / 100)
 	end,
 	deactivate = function(self, eff)
-		self:removeTemporaryValue("diseases_spread_on_blight", eff.tmpid)
-		self:removeTemporaryValue("healing_factor", eff.healid)
-		self:removeTemporaryValue("disease_immune", eff.immid)
+		self:removeTemporaryValue("diseases_spread_on_blight", eff.tmpid) eff.tmpid = nil
+		self:removeTemporaryValue("healing_factor", eff.healid) eff.healid = nil
+		self:removeTemporaryValue("disease_immune", eff.immid) eff.immid = nil
 	end,
 }
 
@@ -2004,9 +2301,18 @@ newEffect{
 		end
 
 		-- burst and spawn a worm mass
+		local t = eff.src:getTalentFromId(eff.src.T_WORM_ROT)
 		if eff.rot_timer == 0 then
 			DamageType:get(DamageType.BLIGHT).projector(eff.src, self.x, self.y, DamageType.BLIGHT, eff.burst, {from_disease=true})
-			local t = eff.src:getTalentFromId(eff.src.T_WORM_ROT)
+			t.spawn_carrion_worm(eff.src, self, t)
+			game.logSeen(self, "#LIGHT_RED#A carrion worm mass bursts out of %s!", self.name:capitalize())
+			self:removeEffect(self.EFF_WORM_ROT)
+		end
+	end,
+	deactivate = function(self, eff)
+		local t = eff.src:getTalentFromId(eff.src.T_WORM_ROT)
+		if rng.percent(t.getChance(eff.src,t)) then
+			DamageType:get(DamageType.BLIGHT).projector(eff.src, self.x, self.y, DamageType.BLIGHT, eff.burst, {from_disease=true})
 			t.spawn_carrion_worm(eff.src, self, t)
 			game.logSeen(self, "#LIGHT_RED#A carrion worm mass bursts out of %s!", self.name:capitalize())
 			self:removeEffect(self.EFF_WORM_ROT)
@@ -2020,7 +2326,7 @@ newEffect{
 	long_desc = function(self, eff)
 		local ghoulify = ""
 		if eff.make_ghoul > 0 then ghoulify = "  如 果 目 标 在 效 果 持 续 期 间 死 亡， 则 会 重 生 为 食 尸 鬼。" end
-		return ("目 标 感 染 疾 病， 降 低 力 量 值 %d ， 敏 捷 值 %d ， 体 质 值 %d ， 并 造 成 每 回 合 %0.2f 枯 萎 伤 害。%s"):format(eff.str, eff.dex, eff.con, eff.dam, ghoulify)
+		return ("目 标 感 染 疾 病， 每 回 合 造 成 %0.2f 点 枯 萎 伤 害。 %s"):format(eff.dam, ghoulify)
 	end,
 	type = "magical",
 	subtype = {disease=true, blight=true},
@@ -2034,12 +2340,9 @@ newEffect{
 		else DamageType:get(DamageType.BLIGHT).projector(eff.src, self.x, self.y, DamageType.BLIGHT, eff.dam, {from_disease=true})
 		end
 	end,
-	-- Lost of CON
 	activate = function(self, eff)
-		eff.tmpid = self:addTemporaryValue("inc_stats", {[Stats.STAT_STR] = -eff.str, [Stats.STAT_DEX] = -eff.dex, [Stats.STAT_CON] = -eff.con})
 	end,
 	deactivate = function(self, eff)
-		self:removeTemporaryValue("inc_stats", eff.tmpid)
 	end,
 }
 
@@ -2057,6 +2360,30 @@ newEffect{
 	end,
 	deactivate = function(self, eff)
 		self:removeTemporaryValue("bloodcasting", eff.tmpid)
+	end,
+}
+
+newEffect{
+	name = "BLOOD_GRASP", image = "talents/blood_grasp.png",
+	desc = "Sanguine Infusion",
+	long_desc = function(self, eff) return ("最 大 生 命 值 提 升 %d 。"):format(eff.life) end,
+	type = "magical",
+	subtype = {corruption=true},
+	status = "beneficial",
+	parameters = {life = 0},
+	on_merge = function(self, old_eff, new_eff)
+		self:removeTemporaryValue("max_life", old_eff.tmpid)
+
+		old_eff.life = math.max(old_eff.life, new_eff.life)
+		old_eff.tmpid = self:addTemporaryValue("max_life", old_eff.life)
+		old_eff.dur = new_eff.dur
+		return old_eff
+	end,
+	activate = function(self, eff)
+		eff.tmpid = self:addTemporaryValue("max_life", eff.life)
+	end,
+	deactivate = function(self, eff)
+		self:removeTemporaryValue("max_life", eff.tmpid)
 	end,
 }
 
@@ -2117,8 +2444,8 @@ newEffect{
 newEffect{
 	name = "SPELLSURGE", image = "talents/gather_the_threads.png",
 	desc = "Spellsurge",
-	long_desc = function(self, eff) return ("目 标 的 法 术 强 度 提 升 %d 。"):
-	format(eff.cur_power or eff.power) end,
+	long_desc = function(self, eff) return ("目 标 的 法 术 强 度 提 升 %d 。"):format(eff.cur_power or eff.power) end,
+	charges = function(self, eff) return math.floor(eff.cur_power or eff.power) end,
 	type = "magical",
 	subtype = { arcane=true },
 	status = "beneficial",
@@ -2147,24 +2474,27 @@ newEffect{
 newEffect{
 	name = "OUT_OF_PHASE", image = "talents/phase_door.png",
 	desc = "Out of Phase",
-	long_desc = function(self, eff) return ("目 标 脱 离 了 相 位 现 实， 增 加 %d 闪 避， %d%% 所 有 抵 抗 以 及 %d%% 所 有 负 面 状 态 的 持 续 时 间"):
-	format(eff.defense or 0, eff.resists or 0, eff.effect_reduction or 0) end,
+	long_desc = function(self, eff) return ("目 标 脱 离 了 现 实 相 位， 增 加 %d 闪 避， %d%% 所 有 抵 抗 以 及 %d%% 所 有 负 面 状 态 的 持 续 时 间。\n最 高 效 果 为 40%%。"):format(eff.defense or 0, eff.resists or 0, eff.effect_reduction or 0) end,
 	type = "magical",
 	subtype = { teleport=true },
 	status = "beneficial",
-	parameters = { power=10 },
+	parameters = { defense=0, resists=0, effect_reduction=0 },
 	on_gain = function(self, err) return "#Target# is out of phase.", "+Phased" end,
 	on_lose = function(self, err) return "#Target# is no longer out of phase.", "-Phased" end,
 	activate = function(self, eff)
+		eff.defense = math.min(40, eff.defense + (self:attr("defense_on_teleport") or 0))
+		eff.resists = math.min(40, eff.resists + (self:attr("resist_all_on_teleport") or 0))
+		eff.effect_reduction = math.min(40, eff.effect_reduction + (self:attr("effect_reduction_on_teleport") or 0))
+
 		eff.defid = self:addTemporaryValue("combat_def", eff.defense)
 		eff.resid= self:addTemporaryValue("resists", {all=eff.resists})
 		eff.durid = self:addTemporaryValue("reduce_detrimental_status_effects_time", eff.effect_reduction)
 		eff.particle = self:addParticles(Particles.new("phantasm_shield", 1))
 	end,
 	on_merge = function(self, old_eff, new_eff)
-		old_eff.defense = math.min(50, math.max(old_eff.defense, new_eff.defense)) or 0
+		old_eff.defense = math.min(40, math.max(old_eff.defense, new_eff.defense)) or 0
 		old_eff.resists = math.min(40, math.max(old_eff.resists, new_eff.resists)) or 0
-		old_eff.effect_reduction = math.min(60, math.max(old_eff.effect_reduction, new_eff.effect_reduction)) or 0
+		old_eff.effect_reduction = math.min(40, math.max(old_eff.effect_reduction, new_eff.effect_reduction)) or 0
 
 		self:removeTemporaryValue("combat_def", old_eff.defid)
 		self:removeTemporaryValue("resists", old_eff.resid)
@@ -2227,12 +2557,12 @@ newEffect{
 newEffect{
 	name = "ARCANE_VORTEX", image = "talents/arcane_vortex.png",
 	desc = "Arcane Vortex",
-	long_desc = function(self, eff) return ("一 个 奥 术 漩 涡 跟 随 着 目 标。 每 回 合 一 个 随 机 的 法 术 射 线 从 它 身 上 释 放 出 来， 对 附 近 视 野 内 的 目 标 造 成 %0.2f 奥 术 伤 害。 如 果 视 野 内 没 有 任 何 其 他 目 标， 则 该 回 合 会 对 初 始 目 标 附 加 150％ 奥 术 伤 害。"):format(eff.dam) end,
+	long_desc = function(self, eff) return ("一 个 奥 术 漩 涡 跟 随 着 目 标。 每 回 合 一 发 奥 术 射 线 从 它 身 上 释 放 出 来， 随 机 对 附 近 视 野 内 的 目 标 造 成 %0.2f 奥 术 伤 害。 如 果 视 野 内 没 有 任 何 其 他 目 标， 则 该 回 合 会 对 初 始 目 标 附 加 额 外 的 50％ 奥 术 伤 害。 如 果 目 标 死 亡 ， 残 余 伤 害 引 发 半 径 为 2 的 奥 术 爆 炸 。"):format(eff.dam) end,
 	type = "magical",
 	subtype = { arcane=true },
 	status = "detrimental",
 	parameters = { dam=10 },
-	on_gain = function(self, err) return "#Target# is focused by an arcane vortex!", "+Arcane Vortex" end,
+	on_gain = function(self, err) return "#Target# is focused by an arcane vortex!.", "+Arcane Vortex" end,
 	on_lose = function(self, err) return "#Target# is free from the arcane vortex.", "-Arcane Vortex" end,
 	on_timeout = function(self, eff)
 		if not self.x then return end
@@ -2278,6 +2608,8 @@ newEffect{
 	subtype = { arcane=true },
 	status = "beneficial",
 	parameters = { dam=10 },
+	on_gain = function(self, err) return "#Target# begins channeling arcane through a breach in reality!", "+Aether Breach" end,
+	on_lose = function(self, err) return "The aetheric breach around #Target# seals itself.", "-Aether Breach" end,
 	on_timeout = function(self, eff)
 		if game.zone.short_name.."-"..game.level.level ~= eff.level then return end
 
@@ -2308,11 +2640,13 @@ newEffect{
 	status = "beneficial",
 	parameters = { },
 	activate = function(self, eff)
+		local inc_mana = self:getMaxMana() * 0.33
 		self:effectTemporaryValue(eff, "inc_damage", {[DamageType.ARCANE]=25})
-		self:effectTemporaryValue(eff, "max_mana", self:getMaxMana() * 0.33)
-		self:effectTemporaryValue(eff, "use_only_arcane", (self:isTalentActive(self.T_PURE_AETHER) and self:getTalentLevel(self.T_PURE_AETHER) >= 5) and 2 or 1)
-		self:effectTemporaryValue(eff, "arcane_cooldown_divide", 3)
+		self:effectTemporaryValue(eff, "resists_pen", {[DamageType.ARCANE]=25})
 
+		self:effectTemporaryValue(eff, "max_mana", inc_mana)
+		self:effectTemporaryValue(eff, "arcane_cooldown_divide", 3)
+		self:incMana(inc_mana)
 		if not self.shader then
 			eff.set_shader = true
 			self.shader = "shadow_simulacrum"
@@ -2327,47 +2661,7 @@ newEffect{
 			self:removeAllMOs()
 			game.level.map:updateMap(self.x, self.y)
 		end
-	end,
-}
-
-newEffect{
-	name = "ELEMENTAL_SURGE_ARCANE", image = "talents/elemental_surge.png",
-	desc = "Elemental Surge: Arcane",
-	long_desc = function(self, eff) return ("施 法 速 度 提 升 20%") end,
-	type = "magical",
-	subtype = { arcane=true },
-	status = "beneficial",
-	parameters = { },
-	activate = function(self, eff)
-		self:effectTemporaryValue(eff, "combat_spellspeed", 0.2)
-	end,
-}
-
-newEffect{
-	name = "ELEMENTAL_SURGE_COLD", image = "talents/elemental_surge.png",
-	desc = "Elemental Surge: Cold",
-	long_desc = function(self, eff) return ("寒 冰 皮 肤 ： 减 少 30%% 物 理 伤 害 ， 增 加 %d 护 甲 ， 受 到 近 战 攻 击 时 造 成 %d 点 冰 冻 伤 害。"):format(eff.armor, eff.dam) end,
-	type = "magical",
-	subtype = { arcane=true },
-	status = "beneficial",
-	parameters = {physresist=30, armor=0, dam=100 },
-	activate = function(self, eff)
-		self:effectTemporaryValue(eff, "resists", {[DamageType.PHYSICAL]=eff.physresist})
-		self:effectTemporaryValue(eff, "combat_armor", eff.armor)
-		self:effectTemporaryValue(eff, "on_melee_hit", {[DamageType.ICE]=eff.dam})
-	end,
-}
-
-newEffect{
-	name = "ELEMENTAL_SURGE_LIGHTNING", image = "talents/elemental_surge.png",
-	desc = "Elemental Surge: Lightning",
-	long_desc = function(self, eff) return ("被 击 中 时 在 所 在 地 附 近 闪 现， 躲 避 攻 击。") end,
-	type = "magical",
-	subtype = { arcane=true },
-	status = "beneficial",
-	parameters = { },
-	activate = function(self, eff)
-		self:effectTemporaryValue(eff, "phase_shift", 1)
+		self.mana = math.min(self.mana, self.max_mana)
 	end,
 }
 
@@ -2383,8 +2677,8 @@ newEffect{
 	subtype = { poison=true, arcane=true },
 	status = "detrimental",
 	parameters = {power=10, unresistable=true},
-	on_gain = function(self, err) return "#Target# is poisoned!", "+Vulnerability Poison" end,
-	on_lose = function(self, err) return "#Target# is no longer poisoned.", "-Vulnerability Poison" end,
+	on_gain = function(self, err) return "#Target# is magically poisoned!", "+Vulnerability Poison" end,
+	on_lose = function(self, err) return "#Target# is no longer magically poisoned.", "-Vulnerability Poison" end,
 	-- Damage each turn
 	on_timeout = function(self, eff)
 		if self:attr("purify_poison") then self:heal(eff.power, eff.src)
@@ -2429,12 +2723,13 @@ newEffect{
 				if not target:attr("ignore_irresistible_sun") then
 					local ox, oy = target.x, target.y
 					target:pull(self.x, self.y, 1)
-					if target.x ~= ox or target.y ~= oy then 
-						game.logSeen(target, "%s is pulled in!", target.name:capitalize()) 
+					if target.x ~= ox or target.y ~= oy then
+						game.logSeen(target, "%s is pulled in!", target.name:capitalize())
 					end
 
 					if self:reactionToward(target) < 0 then
 						local dam = eff.dam * (1 + (5 - core.fov.distance(self.x, self.y, target.x, target.y)) / 8)
+						target:setEffect(target.EFF_WEIGHT_OF_THE_SUN, 2, {reduce = 30})  -- Quickly wears off when outside of AoE
 						DamageType:get(DamageType.FIRE).projector(self, target.x, target.y, DamageType.FIRE, dam/3)
 						DamageType:get(DamageType.LIGHT).projector(self, target.x, target.y, DamageType.LIGHT, dam/3)
 						DamageType:get(DamageType.PHYSICAL).projector(self, target.x, target.y, DamageType.PHYSICAL, dam/3)
@@ -2442,6 +2737,21 @@ newEffect{
 				end
 			end
 		end)
+	end,
+}
+
+newEffect{
+	name = "WEIGHT_OF_THE_SUN", image = "talents/irresistible_sun.png",
+	desc = "Weight of the Sun",
+	long_desc = function(self, eff) return ("The target is struggling against immense gravity, all damage it does is reduced by %d%%."):format(eff.reduce) end,
+	type = "magical",
+	subtype = { sun=true,},
+	status = "detrimental",
+	parameters = {reduce=5},
+	on_gain = function(self, err) return "#Target# can barely stand!", "+Weight of the Sun" end,
+	on_lose = function(self, err) return "#Target# can move freely once more.", "-Weight of the Sun" end,
+	activate = function(self, eff)
+		self:effectTemporaryValue(eff, "numbed", eff.reduce)
 	end,
 }
 
@@ -2505,7 +2815,7 @@ newEffect{
 newEffect{
 	name = "CORRUPT_LOSGOROTH_FORM", image = "shockbolt/npc/elemental_void_losgoroth_corrupted.png",
 	desc = "Corrupted Losgoroth Form",
-	long_desc = function(self, eff) return ("目 标 呈 现 出 堕 落 的 罗 斯 戈 洛 斯 形 态。"):format() end,
+	long_desc = function(self, eff) return ("目 标 呈 现 出 堕 落 的 罗 斯 戈 洛 斯 形 态。 获得毒素、疾病、流血和混乱免疫。不需要呼吸，将所造成的的一半伤害转化为枯萎吸血伤害。"):format() end,
 	type = "magical",
 	subtype = { blight=true, arcane=true },
 	status = "beneficial",
@@ -2626,7 +2936,7 @@ newEffect{
 		game.level.map:updateMap(self.x, self.y)
 	end,
 	deactivate = function(self, eff)
-		if self.hotkey and self.isHotkeyBound then
+		if self.hotkey and self.isHotkeyBound and self:knowTalent(self.T_SHIV_LORD) then
 			local pos = self:isHotkeyBound("talent", self.T_ICE_STORM)
 			if pos then
 				self.hotkey[pos] = {"talent", self.T_SHIV_LORD}
@@ -2682,13 +2992,13 @@ newEffect{
 newEffect{
 	name = "BORN_INTO_MAGIC", image = "talents/born_into_magic.png",
 	desc = "Born into Magic",
-	long_desc = function(self, eff) return ("%s 伤 害 增 加 15%%."):format(DamageType:get(eff.damtype).name:capitalize()) end,
+	long_desc = function(self, eff) return ("%s 伤 害 增 加 20%%."):format(DamageType:get(eff.damtype).name:capitalize()) end,
 	type = "magical",
 	subtype = { race=true },
 	status = "beneficial",
 	parameters = { eff=DamageType.ARCANE },
 	activate = function(self, eff)
-		self:effectTemporaryValue(eff, "inc_damage", {[eff.damtype]=15})
+		self:effectTemporaryValue(eff, "inc_damage", {[eff.damtype]=20})
 	end,
 	deactivate = function(self, eff)
 	end,
@@ -2780,19 +3090,6 @@ newEffect{
 }
 
 newEffect{
-	name = "PATH_OF_THE_SUN", image = "talents/path_of_the_sun.png",
-	desc = "Path of the Sun",
-	long_desc = function(self, eff) return ("目 标 能 在 阳 光 大 道 上 行 走 而 不 消 耗 时 间。"):format() end,
-	type = "magical",
-	subtype = { sun=true, },
-	status = "beneficial",
-	parameters = {},
-	activate = function(self, eff)
-		self:effectTemporaryValue(eff, "walk_sun_path", 1)
-	end
-}
-
-newEffect{
 	name = "SUNCLOAK", image = "talents/suncloak.png",
 	desc = "Suncloak",
 	long_desc = function(self, eff) return (" 目 标 被 太 阳 之 力 保 护 ， 增 加 %d%% 施 法 速 度 ,减 少 %d%% 法 术 冷 却 时 间 ， 同 时 一 次 伤 害 最 多 带 走 你 %d%% 最 大 生 命 。"):
@@ -2817,7 +3114,7 @@ newEffect{
 newEffect{
 	name = "MARK_OF_LIGHT", image = "talents/mark_of_light.png",
 	desc = "Mark of Light",
-	long_desc = function(self, eff) return ("目 标 被 光 之 印 记 标 记 ， 任 何 对 它 近 战 攻 击 的 生 物 受 到 %d%% 伤 害 的 治 疗。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("目 标 被 光 之 印 记 标 记 ，标记方对 它 进行近 战 攻 击 将获得相当于 %d%% 伤 害 的 治 疗。"):format(eff.power) end,
 	type = "magical",
 	subtype = { light=true, },
 	status = "detrimental",
@@ -2910,7 +3207,7 @@ newEffect{
 newEffect{
 	name = "LIGHT_BURST",
 	desc = "Light Burst ", image = "talents/light_burst.png",
-	long_desc = function(self, eff) return ("当 使 用 灼 烧 时 被 激 发。"):format() end,
+	long_desc = function(self, eff) return ("当 使 用 灼热之矛 时 被 激 发。"):format() end,
 	type = "magical",
 	subtype = { sun=true },
 	status = "beneficial",
@@ -2921,8 +3218,8 @@ newEffect{
 
 newEffect{
 	name = "LIGHT_BURST_SPEED",
-	desc = "Light Burst Speed ", image = "effects/light_burst_speed.png",
-	long_desc = function(self, eff) return ("当 使 用 灼 烧 时 被 激 发, 增 加 %d%% 移 动 速 度。"):format(eff.charges * 10) end,
+	desc = "Light Burst Speed", image = "effects/light_burst_speed.png",
+	long_desc = function(self, eff) return ("当 使 用 灼热之矛 时 被 激 发, 增 加 %d%% 移 动 速 度。"):format(eff.charges * 10) end,
 	type = "magical",
 	subtype = { sun=true },
 	status = "beneficial",
@@ -2963,10 +3260,9 @@ newEffect{
 		if raw_value > 0 and not eff.projecting then -- avoid feedback; it's bad to lose out on dmg but it's worse to break the game
 			eff.projecting = true
 			local dam = raw_value * eff.power / 100
-			local psrc = eff.src or src or self
-			psrc.__project_source = eff
-			DamageType:get(DamageType.BLIGHT).projector(psrc, self.x, self.y, DamageType.BLIGHT, dam)
-			psrc.__project_source = nil
+			eff.src.__project_source = eff
+			DamageType:get(DamageType.BLIGHT).projector(eff.src, self.x, self.y, DamageType.BLIGHT, dam)
+			eff.src.__project_source = nil
 			eff.projecting = false
 		end
 		return {value=0}
@@ -3083,7 +3379,7 @@ newEffect{
 newEffect{
 	name = "BREACH", image = "talents/breach.png",
 	desc = "Breach",
-	long_desc = function(self, eff) return ("目 标 的 防 御 被 削 弱 了，减 少 50%% 护 甲 硬 度 ， 震 慑 定 身 致 盲 混 乱 免 疫 。"):format() end,
+	long_desc = function(self, eff) return ("目 标 的 防 御 被 削 弱 了，减 少 50%% 护 甲 硬 度 ， 震 慑 、定 身、 致 盲、 混 乱 免 疫 。"):format() end,
 	type = "magical",
 	subtype = { temporal=true },
 	status = "detrimental",
@@ -3126,8 +3422,8 @@ newEffect{
 		for i = 1, #eff.targets do
 			local target = eff.targets[i]
 			if target ~= self and not target.dead then
-				game:delayedLogMessage(eff.src, target, "braided", "#CRIMSON##Source# 通过编织在一起的生命线伤害了#Target#")
-				game:delayedLogDamage(eff.src, target, braid_damage, ("#PINK#%d 生命线#LAST#"):format(braid_damage), false)
+				game:delayedLogMessage(eff.src, target, "braided", "#CRIMSON##Source# damages #Target# through the Braid!")
+				game:delayedLogDamage(eff.src, target, braid_damage, ("#PINK#%d braided #LAST#"):format(braid_damage), false)
 				target:takeHit(braid_damage, eff.src)
 			end
 		end
@@ -3183,13 +3479,13 @@ newEffect{
 		-- Displace Damage?
 		local t = eff.talent
 		if dam > 0 and src ~= self and not state.no_reflect then
-		
+
 			-- Spin Fate?
 			if self.turn_procs and self:knowTalent(self.T_SPIN_FATE) and not self.turn_procs.spin_webs then
 				self.turn_procs.spin_webs = true
 				self:callTalent(self.T_SPIN_FATE, "doSpin")
 			end
-		
+
 			-- find available targets
 			local tgts = {}
 			local grids = core.fov.circle_grids(self.x, self.y, 10, true)
@@ -3208,10 +3504,10 @@ newEffect{
 				DamageType.defaultProjector(self, a.x, a.y, type, displace, state)
 				state.no_reflect = nil
 				dam = dam - displace
-				game:delayedLogDamage(src, self, 0, ("%s(%d 命运之网)#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", displace), false)
+				game:delayedLogDamage(src, self, 0, ("%s(%d webs of fate)#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", displace), false)
 			end
 		end
-		
+
 		return {dam=dam}
 	end,
 	activate = function(self, eff)
@@ -3234,7 +3530,7 @@ newEffect{
 		if spin then
 			chance = chance * (1 + spin.spin/3)
 		end
-		return ("有 %d%% 几 率 延 长 受 到 你 的 伤 害 的 目 标  的 负 面 状 态 持 续 时 间 1回 合。"):format(chance) 
+		return ("有 %d%% 几 率 延 长 受 到 你 的 伤 害 的 目 标 的 负 面 状 态 持 续 时 间 1 回 合。"):format(chance) 
 	end,
 	type = "magical",
 	subtype = { focus=true },
@@ -3244,14 +3540,14 @@ newEffect{
 	on_lose = function(self, err) return nil, "-Seal Fate" end,
 	callbackOnDealDamage = function(self, eff, dam, target)
 		if dam <=0 then return end
-		
+
 		-- Spin Fate?
 		if self.turn_procs and self:knowTalent(self.T_SPIN_FATE) and not self.turn_procs.spin_seal then
 			self.turn_procs.spin_seal = true
 			self:callTalent(self.T_SPIN_FATE, "doSpin")
 		end
-	
-	
+
+
 		if self.turn_procs and target.tmp then
 			if self.turn_procs.seal_fate and self.turn_procs.seal_fate >= eff.procs then return end
 			local chance = eff.chance
@@ -3259,7 +3555,7 @@ newEffect{
 			if spin then
 				chance = chance * (1 + spin.spin/3)
 			end
-			
+
 			if rng.percent(chance) then
 				-- Grab a random effect
 				local eff_ids = target:effectsFilter({status="detrimental", ignore_crosstier=true}, 1)
@@ -3267,10 +3563,10 @@ newEffect{
 					local eff = target:hasEffect(eff_id)
 					eff.dur = eff.dur +1
 				end
-			
+
 				self.turn_procs.seal_fate = (self.turn_procs.seal_fate or 0) + 1
 			end
-			
+
 		end
 	end,
 	activate = function(self, eff)
@@ -3381,13 +3677,13 @@ newEffect{
 	end,
 	callbackOnHit = function(self, eff, cb, src)
 		if cb.value <= 0 then return cb.value end
-		
+
 		-- Kill it!!
 		if not self.dead and not self:isTalentActive(self.T_REALITY_SMEARING) and self:canBe("instakill") and self.life > 0 and self.life < self.max_life * 0.2 then
 			game.logSeen(self, "%s has been removed from the timeline!", self.name:capitalize())
 			self:die(src)
 		end
-		
+
 		return cb.value
 	end,
 	on_timeout = function(self, eff)
@@ -3448,14 +3744,14 @@ newEffect{
 		if self.turn_procs.ogric_wrath then return end
 
 		self.turn_procs.ogric_wrath = true
-		self:setEffect(self.EFF_OGRE_FURY, 1, {})
+		self:setEffect(self.EFF_OGRE_FURY, 7, {})
 	end,
 	callbackOnTalentPost = function(self, eff, t)
 		if not t.is_inscription then return end
 		if self.turn_procs.ogric_wrath then return end
 
 		self.turn_procs.ogric_wrath = true
-		self:setEffect(self.EFF_OGRE_FURY, 1, {})
+		self:setEffect(self.EFF_OGRE_FURY, 7, {})
 	end,
 	activate = function(self, eff)
 		self:effectTemporaryValue(eff, "stun_immune", 0.2)
@@ -3592,7 +3888,7 @@ newEffect{
 newEffect{
 	name = "WARDEN_S_FOCUS", image = "talents/warden_s_focus.png",
 	desc = "Warden's Focus",
-	long_desc = function(self, eff) 
+	long_desc = function(self, eff)
 		return ("集 中 于 %s, 对 其 增 加 %d%% 暴 击 伤 害 与 %d%% 暴 击 率 。"):format(eff.target.name, eff.power, eff.power)
 	end,
 	type = "magical",
@@ -3607,7 +3903,7 @@ newEffect{
 			-- Reduce damage
 			local reduction = dam * eff.power/100
 			dam = dam -  reduction
-			game:delayedLogDamage(src, self, 0, ("%s(%d 集中)#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", reduction), false)
+			game:delayedLogDamage(src, self, 0, ("%s(%d focus)#LAST#"):format(DamageType:get(type).text_color or "#aaaaaa#", reduction), false)
 		end
 		return {dam=dam}
 	end,
@@ -3616,7 +3912,7 @@ newEffect{
 			self:removeEffect(self.EFF_WARDEN_S_FOCUS)
 		end
 	end,
-	activate = function(self, eff)	
+	activate = function(self, eff)
 	end,
 	deactivate = function(self, eff)
 	end,
@@ -3626,7 +3922,7 @@ newEffect{
 	name = "FATEWEAVER", image = "talents/fateweaver.png",
 	desc = "Fateweaver",
 	long_desc = function(self, eff) return ("目 标 的 命 中 和 强 度 增 加 %d。"):format(eff.power_bonus * eff.spin) end,
-	display_desc = function(self, eff) return eff.spin.." 命运编织" end,
+	display_desc = function(self, eff) return eff.spin.." Fateweaver" end,
 	charges = function(self, eff) return eff.spin end,
 	type = "magical",
 	subtype = { temporal=true },
@@ -3640,10 +3936,10 @@ newEffect{
 		self:removeTemporaryValue("combat_dam", old_eff.physid)
 		self:removeTemporaryValue("combat_spellpower", old_eff.spellid)
 		self:removeTemporaryValue("combat_mindpower", old_eff.mentalid)
-		
+
 		-- add some spin
 		old_eff.spin = math.min(old_eff.spin + 1, new_eff.max_spin)
-	
+
 		-- and apply the current values
 		old_eff.atkid = self:addTemporaryValue("combat_atk", old_eff.power_bonus * old_eff.spin)
 		old_eff.physid = self:addTemporaryValue("combat_dam", old_eff.power_bonus * old_eff.spin)
@@ -3651,7 +3947,7 @@ newEffect{
 		old_eff.mentalid = self:addTemporaryValue("combat_mindpower", old_eff.power_bonus * old_eff.spin)
 
 		old_eff.dur = new_eff.dur
-		
+
 		return old_eff
 	end,
 	activate = function(self, eff)
@@ -3692,7 +3988,7 @@ newEffect{
 newEffect{
 	name = "BEN_TETHER", image = "talents/spatial_tether.png",
 	desc = "Spatial Tether",
-	long_desc = function(self, eff) 
+	long_desc = function(self, eff)
 		local chance = eff.chance * core.fov.distance(self.x, self.y, eff.x, eff.y)
 		return ("目 标 被 标 记 于 某 地， 有 %d%% 几 率 被 传 送 回 去，并 造 成 %0.2f 物 理 和 %0.2f 时 空 翘 曲 爆 炸 伤 害。"):format(chance, eff.dam/2, eff.dam/2)
 	end,
@@ -3711,7 +4007,7 @@ newEffect{
 newEffect{
 	name = "DET_TETHER", image = "talents/spatial_tether.png",
 	desc = "Spatial Tether",
-	long_desc = function(self, eff) 
+	long_desc = function(self, eff)
 		local chance = eff.chance * core.fov.distance(self.x, self.y, eff.x, eff.y)
 		return ("目 标 被 标 记 于 某 地， 有 %d%% 几 率 被 传 送 回 去，并 造 成 %0.2f 物 理 和 %0.2f时 空 翘 曲 爆 炸 伤 害。"):format(chance, eff.dam/2, eff.dam/2)
 	end,
@@ -3735,8 +4031,8 @@ newEffect{
 	subtype = { poison=true, blight=true }, no_ct_effect = true,
 	status = "detrimental",
 	parameters = { power=10 },
-	on_gain = function(self, err) return "#Target# is poisoned!", "+Blight Poison" end,
-	on_lose = function(self, err) return "#Target# stops being poisoned.", "-Blight Poison" end,
+	on_gain = function(self, err) return "#Target# is poisoned with blight!", "+Blight Poison" end,
+	on_lose = function(self, err) return "#Target# is free from the blighted poison.", "-Blight Poison" end,
 	on_merge = function(self, old_eff, new_eff)
 		-- Merge the poison
 		local olddam = old_eff.power * old_eff.dur
@@ -3762,8 +4058,8 @@ newEffect{
 	subtype = { poison=true, blight=true }, no_ct_effect = true,
 	status = "detrimental",
 	parameters = {power=10, heal_factor=30},
-	on_gain = function(self, err) return "#Target# is poisoned!", "+Insidious Blight" end,
-	on_lose = function(self, err) return "#Target# is no longer poisoned.", "-Insidious Blight" end,
+	on_gain = function(self, err) return "#Target# is poisoned with insidious blight!!", "+Insidious Blight" end,
+	on_lose = function(self, err) return "#Target# is free from the insidious blight.", "-Insidious Blight" end,
 	activate = function(self, eff)
 		eff.healid = self:addTemporaryValue("healing_factor", -eff.heal_factor / 100)
 	end,
@@ -3790,8 +4086,8 @@ newEffect{
 	subtype = { poison=true, blight=true }, no_ct_effect = true,
 	status = "detrimental",
 	parameters = {power=10, fail=5},
-	on_gain = function(self, err) return "#Target# is poisoned!", "+Crippling Blight" end,
-	on_lose = function(self, err) return "#Target# is no longer poisoned.", "-Crippling Blight" end,
+	on_gain = function(self, err) return "#Target# is poisoned with crippling blight!", "+Crippling Blight" end,
+	on_lose = function(self, err) return "#Target# is free from the crippling blight.", "-Crippling Blight" end,
 	-- Damage each turn
 	on_timeout = function(self, eff)
 		if self:attr("purify_poison") then self:heal(eff.power, eff.src)
@@ -3819,8 +4115,8 @@ newEffect{
 	subtype = { poison=true, blight=true }, no_ct_effect = true,
 	status = "detrimental",
 	parameters = {power=10, reduce=5},
-	on_gain = function(self, err) return "#Target# is poisoned!", "+Numbing Blight" end,
-	on_lose = function(self, err) return "#Target# is no longer poisoned.", "-Numbing Blight" end,
+	on_gain = function(self, err) return "#Target# is poisoned numbing blight!", "+Numbing Blight" end,
+	on_lose = function(self, err) return "#Target# is free from the numbing blight.", "-Numbing Blight" end,
 	-- Damage each turn
 	on_timeout = function(self, eff)
 		if self:attr("purify_poison") then self:heal(eff.power, eff.src)
@@ -3860,7 +4156,7 @@ newEffect{
 		if core.shader.active(4) then
 			self:removeParticles(eff.particle)
 			eff.particle = self:addParticles(Particles.new("shader_shield", 1, {size_factor=1.3, img="runicshield_stonewarden"}, {type="runicshield", shieldIntensity=0.2, oscillationSpeed=4, ellipsoidalFactor=1.3, time_factor=5000, auraColor={0x61/255, 0xff/255, 0x6a/255, 1}}))
-		end		
+		end
 	end,
 	damage_feedback = function(self, eff, src, value)
 		if eff.particle and eff.particle._shader and eff.particle._shader.shad and src and src.x and src.y then
@@ -4003,6 +4299,195 @@ newEffect{
 	activate = function(self, eff)
 		self:effectTemporaryValue(eff, "esp", {[eff.type.."/"..eff.subtype]=1})
 		self:effectTemporaryValue(eff, "esp_range", 5)
+	end,
+	deactivate = function(self, eff)
+	end,
+}
+
+
+newEffect{
+	name = "PACIFICATION_HEX", image = "talents/pacification_hex.png",
+	desc = "Pacification Hex",
+	long_desc = function(self, eff) return ("The target is hexed, granting it %d%% chance each turn to be dazed for 3 turns."):format(eff.chance) end,
+	type = "magical",
+	subtype = { hex=true, dominate=true },
+	status = "detrimental",
+	parameters = {chance=10, power=10},
+	on_gain = function(self, err) return "#Target# is hexed!", "+Pacification Hex" end,
+	on_lose = function(self, err) return "#Target# is free from the hex.", "-Pacification Hex" end,
+	-- Damage each turn
+	on_timeout = function(self, eff)
+		if not self:hasEffect(self.EFF_DAZED) and rng.percent(eff.chance) and self:canBe("stun") then
+			self:setEffect(self.EFF_DAZED, 3, {})
+			if not self:checkHit(eff.power, self:combatSpellResist(), 0, 95, 15) then eff.dur = 0 end
+		end
+	end,
+	activate = function(self, eff)
+		if self:canBe("stun") then
+			self:setEffect(self.EFF_DAZED, 3, {})
+		end
+		if core.shader.active() then
+			local h1x, h1y = self:attachementSpot("head", true) if h1x then eff.particle = self:addParticles(Particles.new("circle", 1, {shader=true, oversize=0.5, a=225, appear=8, speed=0, img="pacification_hex_debuff_aura", base_rot=0, radius=0, x=h1x, y=h1y})) end
+		end
+	end,
+	deactivate = function(self, eff)
+		if eff.particle then self:removeParticles(eff.particle) end
+	end,
+}
+
+newEffect{
+	name = "BURNING_HEX", image = "talents/burning_hex.png",
+	desc = "Burning Hex",
+	long_desc = function(self, eff) return ("The target is hexed.  Each time it uses an ability it takes %0.2f fire damage, and talent cooldowns are increased by %s plus 1 turn."):
+		format(eff.dam, eff.power and ("%d%%"):format((eff.power-1)*100) or "")
+	end,
+	charges = function(self, eff) return (tostring(math.floor((eff.power-1)*100)).."%") end,
+	type = "magical",
+	subtype = { hex=true, fire=true },
+	status = "detrimental",
+	-- _M:getTalentCooldown(t) in mod.class.Actor.lua references this table to compute cooldowns
+	parameters = {dam=10, power = 1},
+	on_gain = function(self, err) return "#Target# is hexed!", "+Burning Hex" end,
+	on_lose = function(self, err) return "#Target# is free from the hex.", "-Burning Hex" end,
+}
+
+newEffect{
+	name = "EMPATHIC_HEX", image = "talents/empathic_hex.png",
+	desc = "Empathic Hex",
+	long_desc = function(self, eff) return ("The target is hexed, creating an empathic bond with its victims. It takes %d%% feedback damage from all damage done."):format(eff.power) end,
+	charges = function(self, eff) return (tostring(math.floor(eff.power)).."%") end,	
+	type = "magical",
+	subtype = { hex=true, dominate=true },
+	status = "detrimental",
+	parameters = { power=10 },
+	on_gain = function(self, err) return "#Target# is hexed.", "+Empathic Hex" end,
+	on_lose = function(self, err) return "#Target# is free from the hex.", "-Empathic hex" end,
+	activate = function(self, eff)
+		eff.tmpid = self:addTemporaryValue("martyrdom", eff.power)
+		if core.shader.active() then
+			local h1x, h1y = self:attachementSpot("head", true) if h1x then eff.particle = self:addParticles(Particles.new("circle", 1, {toback=true, shader=true, oversize=0.5, a=225, appear=8, speed=0, img="empathic_hex_debuff_aura", base_rot=0, radius=0, x=h1x, y=h1y})) end
+		end
+	end,
+	deactivate = function(self, eff)
+		if eff.particle then self:removeParticles(eff.particle) end
+		self:removeTemporaryValue("martyrdom", eff.tmpid)
+	end,
+}
+
+newEffect{
+	name = "DOMINATION_HEX", image = "talents/domination_hex.png",
+	desc = "Domination Hex",
+	long_desc = function(self, eff) return ("The target is hexed, temporarily changing its faction to %s."):format(engine.Faction.factions[eff.faction].name) end,
+	type = "magical",
+	subtype = { hex=true, dominate=true },
+	status = "detrimental",
+	parameters = {},
+	on_gain = function(self, err) return "#Target# is hexed.", "+Domination Hex" end,
+	on_lose = function(self, err) return "#Target# is free from the hex.", "-Domination hex" end,
+	activate = function(self, eff)
+		self:setTarget() -- clear ai target
+		eff.olf_faction = self.faction
+		self.faction = eff.src.faction
+		if core.shader.active() then
+			local h1x, h1y = self:attachementSpot("head", true) if h1x then eff.particle = self:addParticles(Particles.new("circle", 1, {shader=true, oversize=1, a=225, appear=8, speed=0, img="domination_hex_debuff_aura", base_rot=0, radius=0, x=h1x, y=h1y})) end
+		end
+	end,
+	deactivate = function(self, eff)
+		if eff.particle then self:removeParticles(eff.particle) end
+		self.faction = eff.olf_faction
+	end,
+}
+
+newEffect{
+	name = "SHADOWGUARD_IMMUNITY", image = "talents/shadowguard.png",
+	desc = "Shadowguard Immunity",
+	long_desc = function(self, eff) return "The target is immune to all detrimental effects." end,
+	type = "other",
+	subtype = { shadow=true },
+	status = "beneficial",
+	on_gain = function(self, err) return "#Target#'s fades into the shadows.", "+Shadowguard" end,
+	on_lose = function(self, err) return "#Target#'s can be afflicted again.", "-Shadowguard" end,
+	parameters = { },
+	activate = function(self, eff)
+		self:effectTemporaryValue(eff, "negative_status_effect_immune", 1)
+	end,
+}
+
+newEffect{
+	name = "SHADOWGUARD_BUFF", image = "talents/shadowguard.png",
+	desc = "Shadowguard",
+	long_desc = function(self, eff) return ("The target is enveloped in shadows gaining %d spellpower and defense."):format(eff.spellpower) end,
+	type = "magical",
+	subtype = { shadow=true },
+	status = "beneficial",
+	--on_gain = function(self, err) return "#Target#'s fades into the shadows.", "+Shadowguard" end,
+	on_lose = function(self, err) return "#Target#'s fully exits the shadows.", "-Shadowguard" end,
+	parameters = { spellpower=0},
+	activate = function(self, eff)
+		self:effectTemporaryValue(eff, "combat_spellpower", eff.spellpower)
+		self:effectTemporaryValue(eff, "combat_def", eff.spellpower)
+	end,
+}
+
+newEffect{
+	name = "RETCHED", image = "talents/retch.png",
+	desc = "Retched",
+	long_desc = function(self, eff) return ("The target is walking in its own retch, negating the natural ghoul's speed penalty."):format() end,
+	type = "magical",
+	subtype = { undead=true, speed=true },
+	status = "beneficial",
+	on_gain = function(self, err) return "#Target# speeds up in the retch.", "+Retched" end,
+	on_lose = function(self, err) return "#Target# speeds down outside of the retch.", "-Retched" end,
+	parameters = { spellpower=0},
+	activate = function(self, eff)
+		self:effectTemporaryValue(eff, "global_speed_add", 0.2)
+	end,
+}
+
+newEffect{
+	name = "SHADOW_CUT", image = "",
+	desc = "Shadow Cut",
+	long_desc = function(self, eff) return ("Huge shadow cut that bleeds, doing %0.2f darkness damage per turn. Anytime you hit it you get healed for %d."):format(eff.dam/5, eff.heal) end,
+	type = "magical",
+	subtype = { wound=true, cut=true, bleed=true, darkness=true },
+	status = "detrimental",
+	parameters = { dam=1, heal=1 },
+	on_gain = function(self, err) return "#Target# starts to bleed darkness.", "+Shadow Cut" end,
+	on_lose = function(self, err) return "#Target# stops bleeding darkness.", "-Shadow Cut" end,
+	callbackOnMeleeHit = function(self, eff, src, dam)
+		if not dam or dam <= 0 or src ~= eff.src then return end
+
+		src:heal(eff.heal)
+		if core.shader.active(4) then
+			src:addParticles(Particles.new("shader_shield_temp", 1, {toback=true , size_factor=1.5, y=-0.3, img="healdark", life=25}, {type="healing", time_factor=6000, beamsCount=15, noup=2.0, beamColor1={0xcb/255, 0xcb/255, 0xcb/255, 1}, beamColor2={0x35/255, 0x35/255, 0x35/255, 1}}))
+			src:addParticles(Particles.new("shader_shield_temp", 1, {toback=false, size_factor=1.5, y=-0.3, img="healdark", life=25}, {type="healing", time_factor=6000, beamsCount=15, noup=1.0, beamColor1={0xcb/255, 0xcb/255, 0xcb/255, 1}, beamColor2={0x35/255, 0x35/255, 0x35/255, 1}}))
+		end
+		game:playSoundNear(src, "talents/heal")
+	end,
+	activate = function(self, eff)
+		if eff.src and eff.src:knowTalent(self.T_BLOODY_BUTCHER) then
+			local t = eff.src:getTalentFromId(eff.src.T_BLOODY_BUTCHER)
+			local resist = math.min(t.getResist(eff.src, t), math.max(0, self:combatGetResist(DamageType.PHYSICAL)))
+			self:effectTemporaryValue(eff, "resists", {[DamageType.PHYSICAL] = -resist})
+		end
+	end,
+	on_timeout = function(self, eff)
+		DamageType:get(DamageType.DARKNESS).projector(eff.src or self, self.x, self.y, DamageType.DARKNESS, eff.dam)
+	end,
+}
+
+newEffect{
+	name = "GLYPH_OF_MOONLIGHT", image = "trap/trap_glyph_fatigue_01_64.png",
+	desc = "Draining Moonlight",
+	long_desc = function(self, eff) return ("The target has been drained by a glyph, all damage it does is reduced by %d%%."):format(eff.reduce) end,
+	type = "magical",
+	subtype = { darkness=true,},
+	status = "detrimental",
+	parameters = {reduce=5},
+	on_gain = function(self, err) return "#Target# is weakened by the glyph of moonlight!", "+Draining Moonlight" end,
+	on_lose = function(self, err) return "#Target# looks shakes off the effect of the glyph of moonlight.", "-Draining Moonlight" end,
+	activate = function(self, eff)
+		self:effectTemporaryValue(eff, "numbed", eff.reduce)
 	end,
 	deactivate = function(self, eff)
 	end,

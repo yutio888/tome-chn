@@ -15,7 +15,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		return ([[在 你 的 周 围 制 造 一 个 能 吸 收 %d 点 伤 害 的 骨 盾。 持 续 10 回 合。 
 		受 敏 捷 影 响， 护 盾 的 最 大 吸 收 值 有 额 外 加 成。]]):
-		format(t.getShield(self, t))
+		format(t.getShield(self, t) * (100 + (self:attr("shield_factor") or 0)) / 100)
 	end,
 }
 

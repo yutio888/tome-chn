@@ -36,14 +36,14 @@ registerTalentTranslation{
 	id = "T_TRUE_GRIT",
 	name = "刚毅",
 	info = function(self, t)
-		local drain = t.getStaminaDrain(self, t)
+		local drain = t.drain_stamina(self, t)
 		local resistC = t.resistCoeff(self, t)
 		return ([[采 取 一 个 防 守 姿 态 并 抵 抗 敌 人 的 猛 攻.
 		当 你 受 伤 后 ， 你 获 得 相 当 于 %d%% 损 失 生 命 值 百 分 比 的 全 体 伤 害 抗 性。
 		例 如：当你 损 失 70%% 生 命 时 获 得 %d%% 抗 性。
-		同 时，你 的 全 体 伤 害 抗 性 上 限 相 比 于 100%% 差 距 将 减 少 %0.1f%% 。
-		该 技 能 消 耗 体 力 迅 速，体 力 值 基 础 消 耗 %d ，每 回 合 增 加 0.3 。
-		效 果 在 每 回 合 开 始 时 刷 新。]]):
+		同 时，你 的 全 体 伤 害 抗 性 上 限 相 比 于 100%% 的差 距 将 减 少 %0.1f%% 。
+		该 技 能 消 耗 体 力 迅 速，体 力 值 基 础 消 耗 %0.1f ，每 回 合 增 加 0.3 。
+		抗性效果 在 每 回 合 开 始 时 刷 新。]]):
 		format(resistC, resistC*0.7, t.getCapApproach(self, t)*100, drain)
 	end,
 }

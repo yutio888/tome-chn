@@ -1,5 +1,5 @@
 -- TE4 - T-Engine 4
--- Copyright (C) 2009 - 2016 Nicolas Casalini
+-- Copyright (C) 2009 - 2019 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -80,11 +80,11 @@ function _M:generateList(actions)
 			local menu = require("engine.dialogs.AudioOptions").new()
 			game:registerDialog(menu)
 		end },
-		highscores = { "查看积分榜", function()
-			game:unregisterDialog(self)
-			local menu = require("engine.dialogs.ViewHighScores").new()
-			game:registerDialog(menu)
-		end },
+		-- highscores = { "查看积分榜", function()
+		-- 	game:unregisterDialog(self)
+		-- 	local menu = require("engine.dialogs.ViewHighScores").new()
+		-- 	game:registerDialog(menu)
+		-- end },
 		steam = { "Steam", function()
 			game:unregisterDialog(self)
 			local menu = require("engine.dialogs.SteamOptions").new()
@@ -100,12 +100,12 @@ function _M:generateList(actions)
 				end end, nil, nil, true)
 			else
 				Dialog:yesnoLongPopup("Developer Mode", [[开启开发者模式?
-开发者模式是一种特殊的模式，用于Debug和制作Addon。
-开启它会令加载的存档失效。
+开发者模式是一种特殊的模式，用于调试和制作插件。
+开启它会令加载的存档#CRIMSON#失效#LAST#。
 开启后获得以下快捷键：
-——CTRL+L:开启Lua调查窗口
+——CTRL+L:开启Lua控制台，让你可以检查和修改所有游戏对象，并输入任意Lua指令。
 ——CTRL+A:打开快捷菜单（生成NPC，转移地点……）
-——CTRL+鼠标左键：传送至指定地点
+——CTRL+鼠标左键：传送至指定地点。
 ]], 500, function(ret) if not ret then
 					config.settings.cheat = true
 					game:saveSettings("cheat", "cheat = true\n")

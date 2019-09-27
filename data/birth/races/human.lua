@@ -17,12 +17,12 @@ registerBirthDescriptorTranslation{
 	desc = {
 		"    自 厄 流 纪 起， 高 等 人 类 就 是 人 类 种 族 的 一 支 特 殊 分 支， 他 们 的 身 体 里 潜 藏 着 魔 力。 ",
 		"    为 了 保 持 血 统 的 纯 正， 他 们 一 般 不 和 普 通 人 类 通 婚。 ",
-		"    他 们 天 生 掌 握 #GOLD# 纯 血 之 礼 #WHITE#， 允 许 他 们 在 短 暂 的 时 间 内 治 疗 伤 口。 ",
+		"    他 们 天 生 掌 握 #GOLD# 高等人类之怒 #WHITE#， 允 许 他 们 在 短 时 间 内 提 高 伤 害 和 抵 抗。 ",
 		"#GOLD# 属 性 修 正： ",
 		"#LIGHT_BLUE# * +1 力 量， +1 敏 捷， +0 体 质 ",
 		"#LIGHT_BLUE# * +1 魔 法， +1 意 志， +0 灵 巧 ",
 		"#GOLD# 每 等 级 增 加 生 命 值： #LIGHT_BLUE# 11",
-		"#GOLD# 经 验 惩 罚： #LIGHT_BLUE# 15%",
+		"#GOLD# 经 验 惩 罚： #LIGHT_BLUE# 0%",
 	},
 }
 

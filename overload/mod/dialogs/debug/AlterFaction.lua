@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2016 Nicolas Casalini
+-- Copyright (C) 2009 - 2019 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ module(..., package.seeall, class.inherit(Dialog))
 
 function _M:init()
 	self:generateList()
-	Dialog.init(self, "切换阵营友好度", 1, 1)
+	Dialog.init(self, "调试 —— 切换阵营友好度", 1, 1)
 
 	local list = List.new{width=400, height=500, list=self.list, fct=function(item) self:use(item) end}
 
@@ -46,7 +46,13 @@ function _M:init()
 			if v.name:sub(1, 1):lower() == c:lower() then list:select(i) return end
 		end
 	end}
-	self.key:addBinds{ EXIT = function() game:unregisterDialog(self) end, }
+	self.key:addBinds{ EXIT = function() game:unregisterDialog(self) end,
+		LUA_CONSOLE = function()
+			if config.settings.cheat then
+				local DebugConsole = require "engine.DebugConsole"
+				game:registerDialog(DebugConsole.new())
+			end
+		end,}
 end
 
 function _M:on_register()

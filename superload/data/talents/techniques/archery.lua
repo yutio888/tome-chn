@@ -68,12 +68,10 @@ registerTalentTranslation{
 	name = "爆头",
 	info = function (self,t)
 		local dam = t.getDamage(self,t)*100
-		local apr = t.getApr(self,t)
 		return ([[瞄 准 目 标 头 部 发 射 穿 透 性 弹 药，造 成 %d%% 武 器 伤 害。
-此 次 攻 击 额 外 获 得 %d 护 甲 穿 透 和 100 命 中，且 能 穿 透 目 标 以 外 单 位。
-只 能 对 被 标 记 的 单 位 使 用，使 用 将 消 耗 掉 标 记。 
-护 甲 穿 透 受 敏 捷 加 成 。]]):
-		format(dam, apr)
+此 次 攻 击 额 外 获 得 100 命 中，且 能 穿 透 目 标 以 外 单 位。
+只 能 对 被 标 记 的 单 位 使 用，使 用 将 消 耗 掉 标 记。 ]]):
+		format(dam)
 	end,
 }
 registerTalentTranslation{

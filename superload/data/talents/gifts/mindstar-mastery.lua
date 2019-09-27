@@ -9,9 +9,9 @@ registerTalentTranslation{
 		return ([[将 你 的 精 神 能 量 灌 入 你 所 装 备 的 灵 晶 中， 使 其 生 成 心 灵 利 刃。 
 		 灵 晶 所 产 生 的 心 灵 利 刃 会 进 行 %0.2f 伤 害 修 正 加 成（ 从 属 性 中 获 得 的 伤 害 值）， 增 加 %0.2f 护 甲 穿 透。
 		 心 灵 利 刃 将 使 灵 晶 附 加 的 精 神 强 度、 意 志 和 灵 巧 变 为 %0.2f 倍。  
-		 同 时 ，还 会 增 加 %d 点 物 理 强 度 与 %d%% 武 器 伤 害。]]):
-		format(t.getStatmult(self, t), t.getAPRmult(self, t), t.getPowermult(self, t), damage, 100 * inc) 
-	end,
+		 同 时 ，还 会在使用灵晶时增加 %d%% 武器伤害与 30 点物理强度。]]):
+		 format(t.getStatmult(self, t), t.getAPRmult(self, t), t.getPowermult(self, t), 100 * inc) --I5
+		end,
 }
 
 registerTalentTranslation{

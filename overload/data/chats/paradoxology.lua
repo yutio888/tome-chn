@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2016 Nicolas Casalini
+-- Copyright (C) 2009 - 2019 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -22,6 +22,7 @@ newChat{ id="welcome",
 不！你不能！不能去那儿！你……我……你不许去那儿！
 这是不允许的！我必须阻止它！请不要这样！
 我必须杀死我自己来保护自己！
+#LIGHT_GREEN#*在你来得及做出反应之前，你…我…你自己消失在半空中的裂缝里*#WHITE#
 ]],
 	answers = {
 		{"我X！"},

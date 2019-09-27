@@ -5,10 +5,9 @@ registerTalentTranslation{
 	name = "影之格斗",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
-		local manacost = t.getManaCost(self, t)
-		return ([[在 你 的 武 器 上 注 入 一 股 黑 暗 的 能 量， 每 次 攻 击 会 造 成 %.2f 暗 影 伤 害 并 消 耗 %.2f 点 法 力。 
+		return ([[在 你 的 武 器 上 注 入 一 股 黑 暗 的 能 量， 每 次 攻 击 会 造 成 %.2f 暗 影 伤 害。
 		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成。]]):
-		format(damDesc(self, DamageType.DARKNESS, damage), manacost)
+		format(damDesc(self, DamageType.DARKNESS, damage))
 	end,
 }
 
@@ -17,8 +16,9 @@ registerTalentTranslation{
 	name = "影之狡诈",
 	info = function(self, t)
 		local spellpower = t.getSpellpower(self, t)
-		return ([[你 的 充 分 准 备 提 高 了 你 的 魔 法 运 用 能 力。 增 加 相 当 于 你 %d%% 灵 巧 的 法 术 强 度。]]):
-		format(spellpower)
+		local bonus = self:getCun()*spellpower/100
+		return ([[你 的 充 分 准 备 提 高 了 你 的 魔 法 运 用 能 力。 增 加 相 当 于 你 %d%% 灵 巧 的 法 术 强 度。目前的法术强度加成： %d]]):
+		format(spellpower, bonus)
 	end,
 }
 

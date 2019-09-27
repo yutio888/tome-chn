@@ -130,7 +130,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local duration = t.getDuration(self, t)
-		return ([[抓 住 一 个 目 标 并 将 其 拉 至 身 边， 并 抓 取 %d 回 合。 
+		return ([[抓 住 一 个 目 标 并 将 其 拉 至 身 边， 并 抓 取 %d 回 合。 需要呼吸的非亡灵类生物还会被窒息。
 		 同 时 每 回 合 造 成 %0.2f 史 莱 姆 伤 害。 
 		 受 精 神 强 度 影 响， 伤 害 有 额 外 加 成。]]):
 		format(duration, damDesc(self, DamageType.SLIME, damage))

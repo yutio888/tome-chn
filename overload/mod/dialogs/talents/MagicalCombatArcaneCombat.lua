@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2016 Nicolas Casalini
+-- Copyright (C) 2009 - 2019 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -41,7 +41,7 @@ function _M:init(actor)
 
 	local vsep = Separator.new{dir="horizontal", size=self.ih - 10}
 	self.c_tut = Textzone.new{width=math.floor(self.iw / 2 - vsep.w / 2), height=1, auto_height=true, no_color_bleed=true, text=[[
-Äã¿ÉÒÔÑ¡ÔñÒ»Ïî·¨ÊõÔÚ½üÕ½¹¥»÷ÖÐ×Ô¶¯´¥·¢£¬»òÕßÑ¡Ôñ"Ëæ»ú·¨Êõ"¡£
+ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½Ò»ï¿½î·¨ï¿½ï¿½ï¿½Ú½ï¿½Õ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"ï¿½ï¿½
 ]]}
 	self.c_desc = TextzoneList.new{width=math.floor(self.iw / 2 - vsep.w / 2), height=self.ih - self.c_tut.h - 20, scrollbar=true, no_color_bleed=true}
 
@@ -135,7 +135,7 @@ function _M:generateList()
 	table.sort(talents, function(a,b) return a.cname < b.cname end)
 	
 	talents[#talents+1] = {
-		name = "Ëæ»ú·¨Êõ",
+		name = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½",
 		use_random = true,
 		desc = "Each time Arcane Combat is triggered, a random allowed spell will be used."
 	}
@@ -147,7 +147,7 @@ function _M:generateList()
 	end
 
 	list = {
-		{ char='', name=('#{bold}#Ñ¡ÔñÒ»Ïî·¨Êõ#{normal}#'):toTString(), status='', hotkey='', desc="All known spells that can be used with Arcane Combat.", color=function() return colors.simple(colors.LIGHT_GREEN) end, nodes=talents, shown=true },
+		{ char='', name=('#{bold}#Ñ¡ï¿½ï¿½Ò»ï¿½î·¨ï¿½ï¿½#{normal}#'):toTString(), status='', hotkey='', desc="All known spells that can be used with Arcane Combat.", color=function() return colors.simple(colors.LIGHT_GREEN) end, nodes=talents, shown=true },
 		chars = chars,
 	}
 	self.list = list

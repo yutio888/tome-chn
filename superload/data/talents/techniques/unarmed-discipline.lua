@@ -46,11 +46,10 @@ registerTalentTranslation{
 		local mult = t.getMult(self,t)
 		local finaldam = damage+(damage*(((mult/100)+1)^2))+(damage*(((mult/100)+1)^3))+(damage*(((mult/100)+1)^4))
 		local radius = self:getTalentRadius(t)
-		local life = t.getLifePercent(self,t)
 		return ([[使 用 你 深 刻 的 解 剖 学 知 识 ， 击 中 敌 人 的 穴 道 造 成 %d%% 武 器 伤 害, 无 视 防 御 和 闪 避.
-		这 次 攻 击 在 敌 人 身 上 造 成 可 怕 的 内 伤 ， 在 四 回 合 内 造 成 100%% 原 始 伤 害 的 物 理 伤 害 ,  每 回 合 增 加 %d%% (4 回 合 后, 总 共 造 成 %d%% 伤 害).
-		如 果 目 标 死 在 该 效 果 下, 他 们 身 体 会 爆 炸 并 让 半 径 %d 内 的 敌 人 受 到 等 于 他 们 最 大 生 命 值 %d%% (除 以 阶 级) 的 物 理 伤 害 并 给 你 4 点 连 击 点.]])
-		:format(damage, mult, finaldam, radius, life)
+		这 次 攻 击 在 敌 人 身 上 造 成 可 怕 的 内 伤 ， 在 四 回 合 内 造 成 相当于攻击伤害的 100%% 的物 理 伤 害 ,  每 回 合 增 加 %d%% (4 回 合 后, 总 共 造 成 %d%% 伤 害).
+		如 果 目 标 死 在 该 效 果 下, 他 们 身 体 会 爆 炸 ，并 让 半 径 %d 内 的 敌 人 受 到 等 于 他 们 当前回合的点穴伤害的物 理 伤 害， 并 给 你 4 点 连 击 点.]])
+		:format(damage, mult, finaldam, radius)
 	end,
 }
 

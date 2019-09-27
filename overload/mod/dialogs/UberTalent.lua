@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2016 Nicolas Casalini
+-- Copyright (C) 2009 - 2019 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -75,7 +75,7 @@ function _M:generateList()
 	local cols = {}
 	local list = {}
 	for tid, t in pairs(self.actor.talents_def) do
-		if t.uber then
+		if t.uber and not t.not_listed then
 			cols[t.type[1]] = cols[t.type[1]] or {}
 			local c = cols[t.type[1]]
 			c[#c+1] = t

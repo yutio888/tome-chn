@@ -7,8 +7,8 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local inc = t.getPercentInc(self, t)
 		local reloads = t.ammo_mastery_reload(self, t)
-		return ([[提 高 %d 物 理 强 度。 同 时 增 加 %d%% 弓 箭 伤 害。 
-		同 时 ， 增 加 % d 装 填 效 果。]]):format(damage, inc * 100, reloads)
+		return ([[当使用弓时，增 加 %d%% 弓 箭 伤 害， 提 高30 物 理 强 度。
+		同 时 ， 增 加 %d 装 填 效 果。]]):format(inc * 100, reloads)
 	end,
 }
 

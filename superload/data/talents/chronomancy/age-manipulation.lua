@@ -6,7 +6,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local damagestat = t.getDamageStat(self, t)
-		return ([[制 造 一 束 时 空 能 量 波 造 成 %0.2f 时 空 伤 害 并 降 低 目 标 %d 点 最 高 的 三 个 属 性， 持 续 3 回 合。 
+		return ([[制 造 一 束 时 空 能 量 波 造 成 %0.2f 时 空 伤 害 并 降 低 目 标 三项最高属性值 %d 点 ， 持 续 3 回 合。 
 		受 法 术 强 度 影 响， 伤 害 按 比 例 加 成。]]):format(damDesc(self, DamageType.TEMPORAL, damage), damagestat)
 	end,
 }

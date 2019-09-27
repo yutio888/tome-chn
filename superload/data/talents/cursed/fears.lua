@@ -4,12 +4,23 @@ registerTalentTranslation{
 	id = "T_INSTILL_FEAR",
 	name = "恐惧灌输",
 	info = function(self, t)
-		return ([[将 恐 惧 注 入 你 的 目 标， 在 %d 回 合 内 触 发 一 种 恐 惧 效 果。 同 时 有 25%% 概 率 将 恐 惧 注 入 %d 码 范 围 内 的 所 有 敌 人。 
-		 目 标 将 与 你 的 精 神 强 度 进 行 豁 免 鉴 定， 并 且 可 以 被 多 种 恐 惧 效 果 影 响。 
-		 你 习 得 2 种 新 的 恐 惧 效 果： 妄 想 症 使 目 标 有 %d%% 概 率 以 物 理 攻 击 附 近 一 个 友 善 或 非 友 善 目 标， 被 击 中 者 也 会 被 传 染 妄 想 症。 绝 望 效 果 使 目 标 对 所 有 伤 害 抵 抗 减 少 %d%% 。 
-		 受 精 神 强 度 影 响， 恐 惧 效 果 有 额 外 加 成。]]):format(t.getDuration(self, t), self:getTalentRadius(t),
+		local damInstil = t.getDamage(self, t) / 2
+		local damTerri = t.getTerrifiedDamage(self, t) / 2
+		local damHaunt = t.getHauntedDamage(self, t) / 2
+		return ([[将恐惧注入目标范围内 %d 半径内的敌人中，造成 %0.2f 精神和 %0.2f 暗影伤害，并随机造成4种可能的恐惧效果之一，持续 %d 回合。
+		目标可以与你的精神强度对抗，以抵抗恐惧效果。
+		恐惧效果受精神强度加成。
+		
+		可能的恐惧效果如下所示：
+		#ORANGE#妄想症:#LAST# 目标有 %d%% 几率物理攻击附近的生物，不管它是敌对还是友方生物。如果击中了目标，目标也会感染妄想症。
+		#ORANGE#绝望:#LAST# 精神伤害抵抗，精神豁免，护甲值和闪避各降低 %d 。
+		#ORANGE#惊惧:#LAST# 每回合受到 %0.2f 精神和 %0.2f 暗影伤害，技能冷却时间增加 %d%% 。
+		#ORANGE#恶灵缠身:#LAST# 目标每有一个负面精神效果，则每回合受到 %0.2f 精神和 %0.2f 暗影伤害。]]):format(self:getTalentRadius(t), damDesc(self, DamageType.MIND, damInstil), damDesc(self, DamageType.DARKNESS, damInstil), t.getDuration(self, t),
 		t.getParanoidAttackChance(self, t),
-		-t.getDespairResistAllChange(self, t))
+		-t.getDespairStatChange(self, t),
+		damDesc(self, DamageType.MIND, damTerri), damDesc(self, DamageType.DARKNESS, damTerri), t.getTerrifiedPower(self, t),
+		damDesc(self, DamageType.MIND, damHaunt), damDesc(self, DamageType.DARKNESS, damHaunt)
+	)
 	end,
 }
 
@@ -21,11 +32,10 @@ registerTalentTranslation{
 		local range = self:getTalentRange(t)
 		local turnsUntilTrigger = t.getTurnsUntilTrigger(self, t)
 		local duration = tInstillFear.getDuration(self, tInstillFear)
-		return ([[ 加 深 你 周 围 所 有 人 的 恐 惧 。 被 你 的 恐 惧 效 果 影 响 的 敌 人、 和 你 距 离 不 超 过 %d 且 在 你 视 野 内 不 少 于 %d 回 合 的 敌 人 ， 将 会 得 到 一 种 新 的 恐 惧 效 果 ， 持 续 %d 回 合。 目 标 的 精 神 豁 免 抵 抗 你 的 精 神 强 度 后 可 能 会 抵 抗 该 效 果， 且 每 个 已 有 的 恐 惧 效 果 会 减 少 10%% 新 的 恐 惧 效 果 产 生 概 率。
-		 你 习 得 2 种 新 的 恐 惧 效 果： 惊 恐 效 果 使 其 技 能 或 攻 击 失 败 %d%% 。 痛 苦 效 果 使 其 所 有 豁 免 值 降 低 %d 。 
-		 受 精 神 强 度 影 响， 恐 惧 效 果 有 额 外 加 成。]]):format(range, turnsUntilTrigger, duration,
-		t.getTerrifiedActionFailureChance(self, t),
-		-t.getDistressedSaveChange(self, t))
+		local damage = t.getDamage(self, t)
+		return ([[加深你周围敌人的恐惧。所有被你灌注恐惧的目标若待在你视野内%d的范围内%d个不连续的回合，则会受到 %0.2f 精神和 %0.2f 暗影伤害，并获得一个新的恐惧效果，持续%d回合。
+		这一效果无视恐惧免疫，但可以被豁免。]]):
+			format(range, turnsUntilTrigger, damDesc(self, DamageType.MIND, t.getDamage(self, t) / 2), damDesc(self, DamageType.DARKNESS, t.getDamage(self, t) / 2 ), duration)
 	end,
 }
 
@@ -33,10 +43,8 @@ registerTalentTranslation{
 	id = "T_TYRANT",
 	name = "精神专制",
 	info = function(self, t)
-		return ([[提 高 对 恐 惧 的 目 标 的 精 神 专 制， 对 那 些 试 图 摆 脱 你 恐 惧 效 果 的 目 标 你 的 精 神 强 度 增 加 %d ， 你 习 得 2 种 新 的 恐 惧 效 果： 纠 缠 效 果 使 得 每 一 种 恐 惧 效 果 产 生 %d 精 神 伤 害， 痛 苦 折 磨 效 果 产 生 %d 个 幻 觉 攻 击 目 标， 产 生 %d 精 神 伤 害 直 至 幻 觉 消 失。 
-		 受 精 神 强 度 影 响， 恐 惧 效 果 有 额 外 加 成。]]):format(t.getMindpowerChange(self, t),
-		t.getHauntedDamage(self, t),
-		t.getTormentedCount(self, t), t.getTormentedDamage(self, t))
+		return ([[提高对被你恐惧的目标的精神专制。当一个敌人获得了一个新的恐惧效果，你有 %d%% 的几率增加这一效果和另一个随机的已有恐惧效果的持续时间 %d 回合，最多8回合。
+		此外，每当你恐惧一个目标，你获得 %d 精神强度和物理强度，持续5回合，最多叠加 %d 层]]):format(t. getExtendChance(self, t), t.getExtendFear(self, t), t.getTyrantPower(self, t), t.getMaxStacks(self, t))
 	end,
 }
 

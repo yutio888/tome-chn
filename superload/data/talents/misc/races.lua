@@ -2,10 +2,11 @@ local _M = loadPrevious(...)
 
 registerTalentTranslation{
 	id = "T_HIGHER_HEAL",
-	name = "高贵血统",
+	name = "高等人类之怒",
 	info = function(self, t)
-		return ([[召 唤 高 贵 血 统 来 使 你 的 身 体 以 %d 点 每 回 合 的 速 率 恢 复，治 疗 系 数 增 加 %d%% ， 持 续 10 回 合。 
-		 受 意 志 影 响， 生 命 恢 复 量 有 额 外 增 益。]]):format(5 + self:getWil() * 0.5, t.getHealMod(self, t))
+		return ([[召唤高等人类的力量，增加所有伤害 %d%%， 减少受到的所有伤害 %d%%，持续5回合。
+		增益效果受魔法值加成。]]):
+		format(t.getPower(self, t), t.getPower(self, t))
 	end,
 }
 
@@ -27,7 +28,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local netpower = t.power(self, t)
 		return ([[高 等 人 类 们 最 初 是 在 厄 流 纪 前 由 红 衣 主 神 们 创 造 的。 他 们 天 生 具 有 魔 法 天 赋。 
-		 提 高 +%d 点 法 术 豁 免 和 %d%% 奥 术 抵 抗。
+		 提 高 %d 点 法 术 豁 免 和 %d%% 奥 术 抵 抗。
 		 每 次 释 放 伤 害 法 术 时 ， 5 回 合 内 该 伤 害 类 型 获 得 20%% 伤 害 加 成 。 （ 该 效 果 有 冷 却 时 间。）]]):
 		format(t.getSave(self, t), netpower)
 	end,
@@ -48,7 +49,7 @@ registerTalentTranslation{
 	id = "T_SHALOREN_SPEED",
 	name = "不朽的恩赐",
 	info = function(self, t)
-		return ([[召 唤 不 朽 的 恩 赐 之 力 来 增 加 你 %d%% 的 基 础 速 度， 持 续 5 回 合。 
+		return ([[召 唤 不 朽 的 恩 赐 之 力 来 增 加 你 %d%% 的整体速 度， 持 续 5 回 合。 
 		 受 敏 捷 和 魔 法 中 较 高 一 项 影 响 ， 速 度 会 有 额 外 的 提 升。]]):
 		format(t.getSpeed(self, t) * 100)
 	end,
@@ -86,21 +87,20 @@ registerTalentTranslation{
 
 registerTalentTranslation{
 	id = "T_THALOREN_WRATH",
-	name = "森林之怒",
+	name = "森林的恩赐",
 	info = function(self, t)
-		return ([[召 唤 远 古 森 林 之 力， 提 高 %d%% 所 有 伤 害 并 减 少 %d%% 所 承 受 伤 害 5 回 合。 
-		 受 意 志 影 响 , 此 效 果 有 额 外 加 成。]]):
-		format(t.getPower(self, t), t.getPower(self, t))
+		return ([[召唤自然的力量，每回合恢复%d生命值，治疗系数增加%d%%，持续10回合。
+		生命恢复量受意志值加成。]]):format(5 + self:getWil() * 0.5, t.getHealMod(self, t))
 	end,
 }
 
 registerTalentTranslation{
 	id = "T_UNSHACKLED",
-	name = "潜能爆发",
+	name = "亲近自然",
 	info = function(self, t)
-		return ([[自 然 精 灵 一 度 自 由 的 生 活 在 他 们 热 爱 的 森 林， 从 不 关 心 外 界 的 事 物。 
-		 提 高 物 理 和 精 神 豁 免 +%d 点。]]):
-		format(t.getSave(self, t))
+		return ([[自然精灵对自然元素有亲和力，这让它们在受到伤害时可以获得一定的治疗。
+		获得 %d%% 自然和酸性伤害亲和。]]):
+		format(t.getAffinity(self, t))
 	end,
 }
 
@@ -108,7 +108,7 @@ registerTalentTranslation{
 	id = "T_GUARDIAN_OF_THE_WOOD",
 	name = "森林守护",
 	info = function(self, t)
-		return ([[你 是 森 林 的 一 部 分， 它 保 护 你 免 受 侵 蚀。 
+		return ([[自然精灵 是 森 林 的 一 部 分， 森林 保 护 他们 免 受 侵 蚀。 
 		 提 高 %d%% 疾 病 抵 抗、 %0.1f%% 枯 萎 抵 抗 和 %0.1f%% 所 有 抵 抗。]]):
 		format(t.getDiseaseImmune(self, t)*100, t.getBResist(self, t), t.getAllResist(self, t))
 	end,
@@ -118,10 +118,12 @@ registerTalentTranslation{
 	id = "T_NATURE_S_PRIDE",
 	name = "自然的骄傲",
 	info = function(self, t)
-		return ([[自 然 与 你 同 在， 你 可 以 时 刻 感 受 到 森 林 的 召 唤。 
+		local base_stats = self:combatScale(self:getWil() * self:getTalentLevel(t), 25, 0, 125, 500, 0.75)
+		return ([[自 然 与 自然精灵 同 在， 你他们可 以 时 刻 感 受 到 森 林 的 召 唤。 
 		 召 唤 2 个 精 英 树 人， 持 续 8 回 合。 
-		 树 人 的 所 有 抵 抗 取 决 于 你 的 枯 萎 抵 抗， 并 且 可 以 震 慑、 击 退 和 嘲 讽 敌 人。 
-		 受 意 志 影 响， 它 们 的 力 量 会 有 额 外 加 成。]]):format()
+		 树 人 的 所 有 抵 抗 取 决 于 你 的 枯 萎 抵 抗， 并 且 可 以 震 慑、 击 退 并 嘲 讽你的 敌 人。 
+		你的意志值(%d)将会被加到它们的所有非魔法主要属性值上，他们的技能等级受到你自然的骄傲技能等级的加成。
+		你的伤害加成，伤害穿透和其他许多属性会被继承。]]):format(self:getWil())
 	end,
 }
 
@@ -165,7 +167,7 @@ registerTalentTranslation{
 		local range = t.getRange(self, t)
 		return ([[虽 然 矮 人 的 起 源 对 其 他 种 族 来 说 始 终 是 不 解 之 谜， 但 是 很 显 然 他 们 的 起 源 与 石 头 密 不 可 分。 
 		 你 可 以 指 定 任 何 一 堵 墙 并 立 刻 穿 过 它， 出 现 在 另 一 侧。 
-		 移 动 距 离 最 大 %d 码（ 受 体 质 和 分 类 天 赋 等 级 影 响 有 额 外 加 成）]]):
+		 穿墙 距 离 最 大 %d 码（ 受 体 质 和 分 类 天 赋 等 级 影 响 有 额 外 加 成）]]):
 		format(range)
 	end,
 }
@@ -188,7 +190,7 @@ registerTalentTranslation{
 		local threshold = t.getThreshold(self, t)
 		local evasion = t.getEvasionChance(self, t)
 		local duration = t.getDuration(self, t)
-		return ([[你 强 大 的 人 品 在 关 键 时 刻 总 能 保 你 一 命。 
+		return ([[半身人 强 大 的 人 品 在 关 键 时 刻 总 能 保 他们 一 命。 
 		每 当 一 次 攻 击 对 你 造 成 %d%% 生 命 值 或 更 多 伤 害 时，你 可 以 获 得 额 外 %d%% 闪 避 率 和 %d 点 闪 避（ 基 于 幸 运 和 其 他 闪 避 相 关 数 值 ）， 持 续 %d 回 合 。]]):
 		format(threshold * 100, evasion, t.getDefense(self), duration)
 	end,
@@ -200,7 +202,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		return ([[半 身 人 曾 是 一 个 有 组 织 纪 律 的 种 族， 敌 人 越 多 他 们 越 团 结。 
 		 如 果 有 2 个 或 多 个 敌 人 在 你 的 视 野 里， 每 个 敌 人 都 会 使 你 的 所 有 强 度 和 豁 免 提 高 %0.1f 。（ 最 多 5 个 敌 人）]]):
-		format(self:getTalentLevel(t) * 1.5)
+		 format(self:getTalentLevel(t) * 2)
 	end,
 }
 
@@ -221,7 +223,7 @@ registerTalentTranslation{
 	name = "兽族之怒",
 	info = function(self, t)
 		return ([[激 活 你 对 杀 戮 和 破 坏 的 渴 望 ， 尤 其 是 当 你 孤 军 奋 战 之 时 。
-		 你 增 加 所 有 伤 害 10 %% + %0.1f%% × 你 视 野 内 敌 人 的 数 量 （ 最 大 5 层 ， %0.1f%% ） ， 持 续 3 回 合 。
+		 你 视野中每有一个敌人，增 加 所 有 伤 害 10 %% + %0.1f%%（ 最多5个敌人 ， %0.1f%% ） ， 持 续 3 回 合 。
 		 受 体 质 影 响， 增 益 有 额 外 加 成。]]):
 		format(t.getPower(self, t), 10 + t.getPower(self, t) * 5)
 	end,
@@ -265,10 +267,10 @@ registerTalentTranslation{
 	id = "T_YEEK_WILL",
 	name = "主导意志",
 	info = function(self, t)
-		return ([[粉 碎 目 标 的 意 志， 使 你 可 以 完 全 控 制 它 的 行 动 %s 回 合。 
+		return ([[粉 碎 目 标 的 意 志， 使 你 可 以 完 全 控 制 它 的 行 动 %s 回 合。（受你的意志值加成） 
 		 当 技 能 结 束 时， 你 的 意 志 会 脱 离 而 目 标 会 因 大 脑 崩 溃 而 死 亡。 
-		 此 技 能 无 法 用 于 稀 有 怪, bosses 或 不 死 族。 
-		 受 你 的 意 志 影 响， 持 续 时 间 有 额 外 加 成。]]):format(t.getduration(self))
+		 稀有等级即以上的目标必须要在其最大生命值的80%%以下才能被控制，在持续时间内不会受到伤害，并且在3回合后不会死亡,而会脱离控制。
+		这一效果无法被豁免，但需要通过即死免疫。]]):format(t.getduration(self))
 	end,
 }
 
@@ -276,7 +278,7 @@ registerTalentTranslation{
 	id = "T_UNITY",
 	name = "强化思维",
 	info = function(self, t)
-		return ([[你 的 思 维 和 精 神 网 络 变 的 更 加 协 调 并 且 增 强 对 负 面 效 果 的 抵 抗。 
+		return ([[你 的 思 维 和 维网 变 的 更 加 协 调 并 且 增 强 对 负 面 效 果 的 抵 抗。 
 		 增 加 %d%% 混 乱 和 沉 默 抵 抗 并 增 加 你 +%d 点 精 神 豁 免。]]):
 		format(100*t.getImmune(self, t), t.getSave(self, t))
 	end,
@@ -286,8 +288,9 @@ registerTalentTranslation{
 	id = "T_QUICKENED",
 	name = "迅捷",
 	info = function(self, t)
-		return ([[基 于 “ 精 神 网 络 ”， 夺 心 魔 新 陈 代 谢 很 快， 思 维 很 快 并 且 献 祭 也 很 快。 
-		 增 加 %0.1f%% 整 体 速 度。]]):format(100*t.speedup(self, t))
+		return ([[基 于 “ 维网 ”， 夺 心 魔 新 陈 代 谢 很 快， 思 维 很 快 并 且 献 祭 也 很 快。 
+		你的整 体 速 度增加 %0.1f%% 。
+		当你的生命值降低到30%%以下时，你获得1.5个回合。该效果最多每%d个回合触发一次。]]):format(100*t.speedup(self, t), self:getTalentCooldown(t))
 	end,
 }
 
@@ -295,8 +298,11 @@ registerTalentTranslation{
 	id = "T_WAYIST",
 	name = "快速支援",
 	info = function(self, t)
-		return ([[通 过 夺 心 魔 的 精 神 网 络， 迅 速 召 集 帮 手。 
-		 在 你 周 围 召 唤 3 个 夺 心 魔 精 英 ，持 续 6 回 合。]])
+		local base_stats = self:combatScale(self:getWil() * self:getTalentLevel(t), 25, 0, 125, 500, 0.75)
+		return ([[通 过 夺 心 魔 的 维网， 迅 速 召 集 帮 手。 
+		 在 你 周 围 召 唤 3 个 夺 心 魔 精 英 ，持 续 6 回 合。
+		 他们的所有主要属性会被设置为%d(基于你的意志值和技能等级）
+		你的伤害加成，伤害穿透和许多其他属性都会被继承。]]):format(base_stats)
 	end,
 }
 

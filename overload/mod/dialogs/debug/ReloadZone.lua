@@ -1,5 +1,5 @@
 -- ToME - Tales of Maj'Eyal
--- Copyright (C) 2009 - 2016 Nicolas Casalini
+-- Copyright (C) 2009 - 2019 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -17,25 +17,28 @@
 -- Nicolas Casalini "DarkGod"
 -- darkgod@te4.org
 
--- Player sexes
-newBirthDescriptor{
-	type = "sex",
-	name = "Female",
-	desc =
-	{
-		" 你 是 一 位 女 性 角 色。 ",
-		" 除 了 外 貌 性 别 在 实 际 游 戏 中 没 有 任 何 分 别。 ",
-	},
-	copy = { female=true, },
-}
+require "engine.class"
+require "engine.ui.Dialog"
+local Zone = require "engine.Zone"
+local Savefile = require "engine.Savefile"
 
-newBirthDescriptor{
-	type = "sex",
-	name = "Male",
-	desc =
-	{
-		" 你 是 一 位 男 性 角 色。 ",
-		" 除 了 外 貌 性 别 在 实 际 游 戏 中 没 有 任 何 分 别。 ",
-	},
-	copy = { male=true, },
-}
+module(..., package.seeall, class.make)
+
+function _M:run()
+	local zname, llevel = game.zone.short_name, game.level.level
+	local zid = Savefile:nameLoadZone(zname)
+	local lid = Savefile:nameLoadLevel(zname, llevel)
+
+	-- Delete the files to force a regen by the Zone class
+	local save = Savefile.new(game.save_name)
+	fs.delete(save.save_dir..zid)
+	fs.delete(save.save_dir..lid)
+
+	-- Delete from memory cache
+	Zone:removeLastPersistZone(zname)
+
+	-- Now fake entering
+	game.zone = nil
+	game.level = nil
+	game:changeLevelReal(llevel, zname, {})
+end

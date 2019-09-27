@@ -7,9 +7,7 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local shieldflat = t.getShieldFlat(self, t)
 		return ([[使 你 的 武 器 充 满 太 阳 能 量， 每 击 造 成 %0.2f 光 系 伤 害。 
-		 如 果 你 同 时 打 开 了 临 时 伤 害 护 盾 ，近 战 攻 击 会 增 加 护 盾 %d 强 度 。
-		 充 能 后 的 护 盾 持 续 时 间 若 不 足 2 回 合 ，会 被 延 长 至 2 回 合。
-		 如 果 同 一 层 护 盾 被 延 长 了 20 次 ， 将 会 变 得 不 稳 定 而 破 碎。
+		 如 果 你 同 时 打 开 了 临 时 伤 害 护 盾 ，每 回 合 一 次 ， 你 的 近 战 攻 击 命 中 可 以 增 加 护 盾 %d 强 度 。
 		 受 法 术 强 度 影 响， 伤 害 和 护 盾 加 成 有 额 外 加 成。]]):
 		format(damDesc(self, DamageType.LIGHT, damage), shieldflat)
 	end,
@@ -36,7 +34,8 @@ registerTalentTranslation{
 		local damagepct = t.getLifeDamage(self, t)
 		local damage = t.getDamage(self, t)
 		return ([[你 使 用 武 器 攻 击 时 ， 造 成 相 当 于 %d%% 你 已 损 失 的 生 命 值 的 火 焰 伤 害 , 至 多 %d 点,当 前 %d 点 
-		然 后 令 目 标 进 入 殉 难 状 态，受 到 %d%% 自 己 造 成 的 伤 害 ，持 续 4 回 合。]]):
+		然 后 令 目 标 进 入 殉 难 状 态，受 到 %d%% 自 己 造 成 的 伤 害 ，持 续 4 回 合。
+		每 回 合 最 多 触 发 一 次 额 外 伤 害 。]]):
 		format(damagepct*100, t.getMaxDamage(self, t, 10, 400), damage, martyr)
 	end,
 }

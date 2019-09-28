@@ -37,15 +37,15 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local duration = t.getDuration(self, t)
+		local ghoul_duration = t.getGhoulDuration(self, t)
 		local disease_damage = t.getDiseaseDamage(self, t)
-		local stat_damage = t.getStatDamage(self, t)
 		return ([[撕 咬 你 的 目 标 造 成 %d%% 伤 害。 
 		如 果 你 的 攻 击 命 中， 目 标 会 感 染 食 尸 鬼 腐 烂 疫 病 持 续 %d 回 合。 
 		食 尸 鬼 腐 烂 疫 病 每 回 合 造 成 %0.2f 枯 萎 伤 害。 
 		目 标 被 杀 死 时 会 变 成 你 的可以完全控制的 食 尸 鬼 傀 儡。 
 		食尸鬼傀儡可以使用侵蚀、定向跳跃、震慑、腐烂疫病。他们部分技能等级受该技能等级影响。
 		受 体 质 影 响， 枯 萎 伤 害按 比 例 加 成。 ]]):
-		format(100 * damage, duration, damDesc(self, DamageType.BLIGHT, disease_damage), stat_damage, stat_damage, stat_damage)
+		format(100 * damage, duration, damDesc(self, DamageType.BLIGHT, disease_damage), ghoul_duration)
 	end,
 }
 

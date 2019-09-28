@@ -50,7 +50,6 @@ registerTalentTranslation{
 	info = function(self, t)
 		local targetcount = t.getTargetCount(self, t)
 		local damage = t.getDamage(self, t)
-		local manadrain = t.getManaDrain(self, t)
 		return ([[当 此 技 能 激 活 时， 在 6 码 半 径 范 围 内 召 唤 一 阵 强 烈 的 闪 电 风 暴 跟 随 你。 
 		 每 回 合 闪 电 风 暴 会 随 机 伤 害 %d 个 敌 方 单 位， 对 1 码 半 径 范 围 造 成 1 ～ %0.2f 伤 害（平均%0.2f）。 
 		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成。]]):

@@ -541,7 +541,6 @@ end
 
 --- Gets the full name of the object
 function _M:getName(t)
-	
 	t = t or {}
 	local qty = self:getNumber()
 	local name = self.name
@@ -1153,7 +1152,7 @@ end
 
 --- Gets the full textual desc of the object without the name and requirements
 function _M:getTextualDesc(compare_with, use_actor)
-use_actor = use_actor or game.player
+	use_actor = use_actor or game.player
 	compare_with = compare_with or {}
 	local desc = tstring{}
 
@@ -2308,6 +2307,7 @@ function _M:getDesc(name_param, compare_with, never_compare, use_actor)
 		desc:merge(oname)
 		desc:add(".", {"color","LAST"}, true)
 	end
+
 	if could_compare and not never_compare then desc:add(true, {"font","italic"}, {"color","GOLD"}, "按<ctrl>来对比装备", {"color","LAST"}, {"font","normal"}) end
 
 	--return desc
@@ -2493,9 +2493,7 @@ function _M:on_prepickup(who, idx)
 		return true
 	end
 	if who.player and self.force_lore_artifact then
---		local oCHN = objects:getObjects(self.name,self.unique,self.desc,self.subtype,self.short_name)
---		game.party:additionalLore(self.unique, objects:getObjectsChnName(self:getName()), "artifacts", oCHN.desc)
-			game.party:additionalLore(self.unique, self:getName{no_add_name=true, do_color=false, no_count=true}, "artifacts", self.desc)
+		game.party:additionalLore(self.unique, self:getName(), "artifacts", self.desc)
 		game.party:learnLore(self.unique)
 	end
 end
@@ -2514,8 +2512,6 @@ function _M:on_identify()
 			game.party:learnLore(self.on_id_lore, false, false, true)
 		end
 		if self.unique and self.desc and not self.no_unique_lore then
---			local oCHN = objects:getObjects(self.name,self.unique,self.desc,self.subtype,self.short_name)
---			game.party:additionalLore(self.unique, objects:getObjectsChnName(self:getName{no_add_name=true, do_color=false, no_count=true}), "artifacts", oCHN.desc)
 			game.party:additionalLore(self.unique, self:getName{no_add_name=true, do_color=false, no_count=true}, "artifacts", self.desc)
 			game.party:learnLore(self.unique, false, false, true)
 		end

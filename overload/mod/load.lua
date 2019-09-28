@@ -21,15 +21,10 @@
 --dofile("/mod/map_config.lua")
 
 --------------------------------载入汉化文件
-
 require "data-chn123.stat_name"
-require "data-chn123.talent_name"
 require "data-chn123.talent_type_name"
 require "data-chn123.talent_type_description"
 require "data-chn123.zone_name"
-require "data-chn123.objects.object_use"
-require "data-chn123.objects.object_desc"
-require "data-chn123.objects.object_detail.objects"
 require "data-chn123.linesplit"
 require "data-chn123.tooltips.grids"
 require "data-chn123.tooltips.traps"
@@ -229,6 +224,12 @@ PartyIngredients:loadDefinition("/data/ingredients.lua")
 
 -- Damage types
 DamageType:loadDefinition("/data/damage_types.lua")
+
+--推迟汉化翻译读取
+require "data-chn123.objects.object_use"
+require "data-chn123.objects.object_desc"
+require "data-chn123.objects.object_detail.objects"
+--
 
 -- Talents
 ActorTalents:loadDefinition("/data/talents.lua")

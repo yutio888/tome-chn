@@ -421,8 +421,8 @@ function _M:generateListUi()
 	end,}
 
 	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"Always display the combat properties of gloves even if you don't know unarmed attack talents.#WHITE#"}
-	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#Always show glove combat properties#WHITE##{normal}#", status=function(item)
-		return tostring(config.settings.tome.display_glove_stats and "enabled" or "disabled")
+	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#强制显示手套战斗数据#WHITE##{normal}#", status=function(item)
+		return tostring(config.settings.tome.display_glove_stats and "开启" or "关闭")
 	end, fct=function(item)
 		config.settings.tome.display_glove_stats = not config.settings.tome.display_glove_stats
 		game:saveSettings("tome.display_glove_stats", ("tome.display_glove_stats = %s\n"):format(tostring(config.settings.tome.display_glove_stats)))
@@ -430,8 +430,8 @@ function _M:generateListUi()
 	end,}
 
 	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"Always display combat properties of shields even if you don't know shield attack talents.#WHITE#"}
-	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#Always show shield combat properties#WHITE##{normal}#", status=function(item)
-		return tostring(config.settings.tome.display_shield_stats and "enabled" or "disabled")
+	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#强制显示盾牌战斗数据#WHITE##{normal}#", status=function(item)
+		return tostring(config.settings.tome.display_shield_stats and "开启" or "关闭")
 	end, fct=function(item)
 		config.settings.tome.display_shield_stats = not config.settings.tome.display_shield_stats
 		game:saveSettings("tome.display_shield_stats", ("tome.display_shield_stats = %s\n"):format(tostring(config.settings.tome.display_shield_stats)))
@@ -478,7 +478,7 @@ function _M:generateListGameplay()
 	local i = 0
 
 	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"定义屏幕边缘到人物的距离。设置得足够高的话，人物会保持正中央。#WHITE#"}
-	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#Scroll distance#WHITE##{normal}#", status=function(item)
+	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#滚动距离#WHITE##{normal}#", status=function(item)
 		return tostring(config.settings.tome.scroll_dist)
 	end, fct=function(item)
 		game:registerDialog(GetQuantity.new("距离", "从1到30", config.settings.tome.scroll_dist, 30, function(qty)

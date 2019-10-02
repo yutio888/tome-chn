@@ -20,6 +20,9 @@ function _M:newDamageType(t)
 		end
 	end
     
+	tdesc = getSpecialCombatDesc(t.type)
+	if tdesc then t.tdesc = tdesc end
+	
 	self.dam_def[t.type] = t
 	self[t.type] = t.type
 	--table.insert(self.dam_def, t)

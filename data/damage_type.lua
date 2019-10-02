@@ -4,6 +4,8 @@ function getDamageTypeCHN(type)
 	return damageTypeCHN[type] or type
 end
 
+
+
 function itemDamagedesc(data)
 	if data:find("random insanity") then return data:gsub("chance to cause","几率"):gsub("random insanity","随机疯狂")
 	elseif data:find("random gloom") then return data:gsub("chance to cause","几率"):gsub("random gloom","黑暗光环")
@@ -154,3 +156,196 @@ damageTypeCHN["item blight disease"] = "疾病"
 damageTypeCHN["item manaburn arcane"] = "法力燃烧"
 damageTypeCHN["item nature slow"] = "减速"
 
+function getSpecialCombatDesc(type)
+	if not type then return end
+	if damageSpecialDesc[type] then return damageSpecialDesc[type] end
+	return nil
+end
+
+
+damageSpecialDesc = {}
+damageSpecialDesc["ITEM_DARKNESS_NUMBING"] = function(dam, oldDam, src)
+		parens = ""
+		dam = dam or 0
+		if oldDam then
+			diff = dam - oldDam
+			if diff > 0 then
+				parens = (" (#LIGHT_GREEN#+%d%%#LAST#)"):format(diff)
+			elseif diff < 0 then
+				parens = (" (#RED#%d%%#LAST#)"):format(diff)
+			end
+		end
+		local val = src and math.floor(src:combatStatScale(src:combatMindpower(), 5, 40)) or 0
+		return ("* #LIGHT_GREEN#%d%%#LAST# 几率减少 #YELLOW#%d%%#LAST#伤害 %s  ")
+			:format(dam, val, parens)
+	end
+
+damageSpecialDesc["ITEM_MIND_EXPOSE"] = function(dam, oldDam, src)
+		parens = ""
+		dam = dam or 0
+		if oldDam then
+			diff = dam - oldDam
+			if diff > 0 then
+				parens = (" (#LIGHT_GREEN#+%d%%#LAST#)"):format(diff)
+			elseif diff < 0 then
+				parens = (" (#RED#%d%%#LAST#)"):format(diff)
+			end
+		end
+		local val = src and math.floor(src:combatStatScale(src:combatMindpower(), 5, 50)) or 0
+		return ("* #LIGHT_GREEN#%d%%#LAST# 几率减少 #YELLOW#%d#LAST#%s 闪避和豁免")
+			:format(dam, val, parens)
+	end
+
+damageSpecialDesc["ITEM_TEMPORAL_ENERGIZE"] = function(dam, oldDam, src)
+		parens = ""
+		dam = dam or 0
+		if oldDam then
+			diff = dam - oldDam
+			if diff > 0 then
+				parens = (" (#LIGHT_GREEN#+%d%%#LAST#)"):format(diff)
+			elseif diff < 0 then
+				parens = (" (#RED#%d%%#LAST#)"):format(diff)
+			end
+		end
+		return ("* #LIGHT_GREEN#%d%%#LAST# 几率获得 10%% 回合 (3次上限/回合) %s")
+			:format(dam, parens)
+	end
+	
+damageSpecialDesc["ITEM_ACID_CORRODE"] = function(dam, oldDam, src)
+		parens = ""
+		dam = dam or 0
+		if oldDam then
+			diff = dam - oldDam
+			if diff > 0 then
+				parens = (" (#LIGHT_GREEN#+%d%%#LAST#)"):format(diff)
+			elseif diff < 0 then
+				parens = (" (#RED#%d%%#LAST#)"):format(diff)
+			end
+		end
+		local val = src and src:combatStatScale(src:combatSpellpower(), 15, 50) or 0
+		return ("* #LIGHT_GREEN#%d%%#LAST#几率减少 #VIOLET#%d%%#LAST#护甲%s ")
+			:format(dam, val, parens)
+	end
+	
+damageSpecialDesc["ITEM_BLIGHT_DISEASE"] = function(dam, oldDam, src)
+		parens = ""
+		dam = dam or 0
+		if oldDam then
+			diff = dam - oldDam
+			if diff > 0 then
+				parens = (" (#LIGHT_GREEN#+%d%%#LAST#)"):format(diff)
+			elseif diff < 0 then
+				parens = (" (#RED#%d%%#LAST#)"):format(diff)
+			end
+		end
+		local val = src and math.floor(src:combatStatScale(src:combatSpellpower(), 1, 40))
+		return ("* #LIGHT_GREEN#%d%%#LAST#几率减少力量、 体质 和敏捷各 #VIOLET#%d#LAST# 点 %s ")
+			:format(dam, val, parens )
+	end
+
+damageSpecialDesc["ITEM_ANTIMAGIC_MANABURN"] = function(dam, oldDam)
+		parens = ""
+		dam = dam or 0
+		if oldDam then
+			diff = dam - oldDam
+			if diff > 0 then
+				parens = (" (#LIGHT_GREEN#+%d#LAST#)"):format(diff)
+			elseif diff < 0 then
+				parens = (" (#RED#%d#LAST#)"):format(diff)
+			end
+		end
+		return ("* #DARK_ORCHID#%d 法力燃烧 #LAST# %s")
+			:format(dam or 0, parens)
+	end
+	
+damageSpecialDesc["ITEM_NATURE_SLOW"] = function(dam, oldDam, src)
+		parens = ""
+		dam = dam or 0
+		if oldDam then
+			diff = dam - oldDam
+			if diff > 0 then
+				parens = (" (#LIGHT_GREEN#+%d%%#LAST#)"):format(diff)
+			elseif diff < 0 then
+				parens = (" (#RED#%d%%#LAST#)"):format(diff)
+			end
+		end
+		local val = src and math.floor(src:combatStatScale(src:combatMindpower(), 30, 80) ) or 0
+		return ("* #LIGHT_GREEN#%d%%#LAST#几率减速 #YELLOW#%d%%#LAST#%s")
+			:format(dam or 0, val, parens)
+	end
+
+damageSpecialDesc["ITEM_ANTIMAGIC_SCOURING"] = function(dam, oldDam)
+		parens = ""
+		dam = dam or 0
+		if oldDam then
+			diff = dam - oldDam
+			if diff > 0 then
+				parens = (" (#LIGHT_GREEN#+%d%%#LAST#)"):format(diff)
+			elseif diff < 0 then
+				parens = (" (#RED#%d%%#LAST#)"):format(diff)
+			end
+		end
+		return ("* #LIGHT_GREEN#%d%%#LAST# 几率 #ORCHID#减少有效强度#LAST# %d%%%s ")
+			:format(dam, 20, parens)
+	end
+	
+damageSpecialDesc["ITEM_LIGHTNING_DAZE"] = 
+	function(dam, oldDam)
+		parens = ""
+		dam = dam or 0
+		if oldDam then
+			diff = dam - oldDam
+			if diff > 0 then
+				parens = (" (#LIGHT_GREEN#+%d%%#LAST#)"):format(diff)
+			elseif diff < 0 then
+				parens = (" (#RED#%d%%#LAST#)"):format(diff)
+			end
+		end
+		return ("* #LIGHT_GREEN#%d%%#LAST# 几率在回合结束时 #ROYAL_BLUE#眩晕#LAST# %s")
+			:format(dam, parens)
+	end
+	
+damageSpecialDesc["ITEM_LIGHT_BLIND"] = function(dam, oldDam)
+		parens = ""
+		dam = dam or 0
+		if oldDam then
+			diff = dam - oldDam
+			if diff > 0 then
+				parens = (" (#LIGHT_GREEN#+%d%%#LAST#)"):format(diff)
+			elseif diff < 0 then
+				parens = (" (#RED#%d%%#LAST#)"):format(diff)
+			end
+		end
+		return ("* #LIGHT_GREEN#%d%%#LAST# 几率#YELLOW#致盲#LAST#%s")
+			:format(dam, parens)
+	end
+	
+damageSpecialDesc["ITEM_MIND_GLOOM"] = function(dam, oldDam)
+		parens = ""
+		dam = dam or 0
+		if oldDam then
+			diff = dam - oldDam
+			if diff > 0 then
+				parens = (" (#LIGHT_GREEN#+%d%%#LAST#)"):format(diff)
+			elseif diff < 0 then
+				parens = (" (#RED#%d%%#LAST#)"):format(diff)
+			end
+		end
+		return ("* #LIGHT_GREEN#%d%%#LAST# 几率触发 #YELLOW#黑暗光环#LAST#%s")
+			:format(dam, parens)
+	end
+
+damageSpecialDesc["PESTILENT_BLIGHT"] = function(dam, oldDam)
+		parens = ""
+		dam = dam or 0
+		if oldDam then
+			diff = dam - oldDam
+			if diff > 0 then
+				parens = (" (#LIGHT_GREEN#+%d%%#LAST#)"):format(diff)
+			elseif diff < 0 then
+				parens = (" (#RED#%d%%#LAST#)"):format(diff)
+			end
+		end
+		return ("* #LIGHT_GREEN#%d%%#LAST# 几率触发 #GREEN#随机枯萎#LAST#%s")
+			:format(dam, parens)
+	end

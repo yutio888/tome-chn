@@ -135,7 +135,7 @@ function _M:trigger(x, y, who)
 		local str =self.message
 		-- str = str:gsub("@target@", tname)
 		-- str = str:gsub("@Target@", tname:capitalize())
-		game.logSeen(who, "%s", str)
+		game.logSeen(who, str, tname)
 	end
 	local known, del = false, false
 	if self.summoner then self.summoner.__project_source = self end -- intermediate projector source

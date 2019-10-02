@@ -3,6 +3,7 @@ local _M = loadPrevious(...)
 registerTalentTranslation{
 	id = "T_MEDITATION",
 	name = "冥想",
+	message = function(self, t) return self.sustain_talents[t.id] and "@Source@ 中断了 @hisher@ #GREEN#冥想#LAST#." or "@Source@ 开始 #GREEN#冥想#LAST# 自然." end,
 	info = function(self, t)
 		local boost = 1 + (self.enhance_meditate or 0)
 

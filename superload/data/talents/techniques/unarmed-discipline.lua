@@ -3,6 +3,7 @@ local _M = loadPrevious(...)
 registerTalentTranslation{
 	id = "T_PUSH_KICK",
 	name = "强力踢",
+	message = "@Source@ 使出强力干扰踢击.",
 	info = function(self, t)
 		local damage = t.getDamage(self, t) *100
 		return ([[每 有 一 个 连 击 点， 对 目 标 造 成 %d%% 武 器 伤 害，并 解 除 目 标 一 项 物 理 持 续 技 能。 
@@ -27,6 +28,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_BREATH_CONTROL",
 	name = "空手格挡",
+	message = "@Source@ 准备格挡攻击.",
 	info = function(self, t)
 		local block = t.getBlock(self, t)
 		local maxblock = block*5
@@ -41,6 +43,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_TOUCH_OF_DEATH",
 	name = "点穴术",
+	message = "@Source@ 击中了目标致命穴道。",
 	info = function (self,t)
 		local damage = t.getDamage(self, t) * 100
 		local mult = t.getMult(self,t)

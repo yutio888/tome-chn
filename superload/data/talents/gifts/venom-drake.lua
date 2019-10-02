@@ -3,6 +3,7 @@ local _M = loadPrevious(...)
 registerTalentTranslation{
 	id = "T_ACIDIC_SPRAY",
 	name = "酸雾喷射",
+	message = "@Source@ 喷出酸液！",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		return ([[向 你 的 敌 人 喷 出 一 团 酸 雾。 
@@ -44,6 +45,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_CORROSIVE_BREATH",
 	name = "腐蚀吐息",
+	message = "@Source@ 呼出酸液！",
 	info = function(self, t)
 		return ([[向 前 方 %d 码 范 围 施 放 一 个 锥 形 酸 雾 吐 息， 范 围 内 所 有 目 标 受 到 %0.2f 酸 性 伤 害。
 		敌 人 还 会 被 缴 械 3 回 合。 

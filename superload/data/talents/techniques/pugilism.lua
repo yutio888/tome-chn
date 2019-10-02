@@ -15,6 +15,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_DOUBLE_STRIKE",
 	name = "双重打击",
+	message = "@Source@ 打出两记快拳.",
 	info = function(self, t)
 		local damage = t.getDamage(self, t) * 100
 		return ([[对 目 标 进 行 2 次 快 速 打 击， 每 次 打 击 造 成 %d%% 伤 害 并 使 你 的 姿 态 切 换 为 攻 击 姿 态， 如 果 你 已 经 在 攻 击 姿 态 且 此 技 能 已 就 绪， 那 么 此 技 能 会 自 动 取 代 你 的 普 通 攻 击 ( 并 触 发 冷 却 )。 
@@ -26,6 +27,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_SPINNING_BACKHAND",
 	name = "旋风打击",
+	message = "@Source@ 使出旋风拳法",
 	info = function(self, t)
 		local damage = t.getDamage(self, t) * 100
 		local charge =t.chargeBonus(self, t, t.range(self, t)-1)*100
@@ -40,6 +42,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_AXE_KICK",
 	name = "斧踢",
+	message = "@Source@ 抬起腿使出毁灭斧踢",
 	info = function(self, t)
 		local damage = t.getDamage(self, t) * 100
 		return ([[ 施 展 一 次 毁 灭 性 的 的 踢 技 ，造 成 %d%% 伤 害 。
@@ -51,6 +54,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_FLURRY_OF_FISTS",
 	name = "流星拳",
+	message = "@Source@ 打出流水般的快拳.",
 	info = function(self, t)
 		local damage = t.getDamage(self, t) * 100
 		return ([[对 目 标 造 成 3 次 快 速 打 击， 每 击 造 成 %d%% 伤 害。 

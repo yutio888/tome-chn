@@ -14,6 +14,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_SKIRMISHER_CUNNING_ROLL",
 	name = "翻滚",
+	message = function(self, t) return "@Source@ 滚向更有利的位置!" end,
 	info = function(self, t)
 		return ([[从 敌 人 的 侧 面、上 空 或 者 胯 下 移 动 到 技 能 范 围 内 的 指 定 位 置。
 		这 个 伎 俩 可 以 惊 吓 你 的 敌 人 让 你 获 得 更 有 利 的 战 术 位 置， 增 加 你 的 暴 击 几 率 %d%% 1 回 合。]]):format(t.combat_physcrit(self, t))

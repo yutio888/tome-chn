@@ -115,6 +115,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_DROLEM_POISON_BREATH",
 	name = "毒性吐息",
+	message = "@Source@ 呼出毒液!",
 	info = function(self, t)
 		return ([[ 对 你 的 敌 人 喷 吐 毒 雾 ， 在 几 个 回 合 内 造 成 %d 点 伤 害 。 受 魔 法 影 响 ， 伤 害 有 额 外 加 成 。 ]]):format(damDesc(self, DamageType.NATURE, self:combatTalentStatDamage(t, "mag", 30, 460)))
 	end,

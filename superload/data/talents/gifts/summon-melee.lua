@@ -18,6 +18,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_WAR_HOUND",
 	name = "契约：战争猎犬",
+	message = "@Source@ 召唤出战争猎犬",
 	info = function(self, t)
 		local incStats = t.incStats(self, t, true)
 		return ([[召 唤 一只 战 争 猎 犬 来 攻 击 敌 人， 持 续 %d 回 合。 
@@ -32,6 +33,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_JELLY",
 	name = "契约：果冻怪",
+	message = "@Source@ 召唤出果冻怪",
 	info = function(self, t)
 		local incStats = t.incStats(self, t, true)
 		return ([[召 唤 一只 果 冻 怪 来 攻 击 敌 人， 持 续 %d 回 合。 
@@ -47,6 +49,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_MINOTAUR",
 	name = "契约：米诺陶",
+	message = "@Source@ 召唤出米诺陶",
 	info = function(self, t)
 		local incStats = t.incStats(self, t, true)
 		return ([[召 唤 一只 米 诺 陶 来 攻 击 敌 人， 持 续 %d 回 合。 米 诺 陶 不 会 呆 很 长 时 间， 但 是 它 们 会 造 成 极 大 伤 害。 
@@ -60,6 +63,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_STONE_GOLEM",
 	name = "契约：岩石傀儡",
+	message = "@Source@ 召唤出岩石傀儡",
 	info = function(self, t)
 		local incStats = t.incStats(self, t,true)
 		return ([[召 唤 一只 岩 石 傀 儡 来 攻 击 敌 人， 持 续 %d 回 合。 岩 石 傀 儡 是 可 怕 的 敌 人 并 且 不 可 阻 挡。 

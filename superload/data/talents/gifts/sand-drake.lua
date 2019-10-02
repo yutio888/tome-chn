@@ -31,6 +31,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_QUAKE",
 	name = "地震",
+	message = "@Source@ 震动大地!",
 	info = function(self, t)
 		local radius = self:getTalentRadius(t)
 		local dam = t.getDamage(self, t)
@@ -55,6 +56,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_SAND_BREATH",
 	name = "沙瀑吐息",
+	message = "@Source@ 呼出沙尘!",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local duration = t.getDuration(self, t)

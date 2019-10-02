@@ -5765,18 +5765,18 @@ function _M:logTalentMessage(ab)
 			end
 			game.logSeen(self, color.."#{bold}#%s#{normal}##LAST#", self:useTalentMessage(ab))
 		elseif ab.mode == "sustained" then
-			game.logSeen(self, "%s %s #{bold}##ORANGE#%s#LAST#.", self.name:capitalize(), self:isTalentActive(ab.id) and "deactivates" or "activates", ab.name)
+			game.logSeen(self, "%s %s #{bold}##ORANGE#%s#LAST#.", logCHN:getName(self.name), self:isTalentActive(ab.id) and "取消了" or "激活了", ab.name)
 		elseif ab.is_spell then
 			if ab.is_inscription then color = "#GREEN#"
 			else color = "#PURPLE#"
 			end
-			game.logSeen(self, "%s casts #{bold}#"..color.."%s.#{normal}##LAST#", self.name:capitalize(), ab.name)
+			game.logSeen(self, "%s 释放了 #{bold}#"..color.."%s.#{normal}##LAST#", logCHN:getName(self.name), ab.name)
 		else
 			if ab.is_mind then color = "#YELLOW#"
 			elseif ab.is_melee then color = "#RED#"
 			elseif ab.is_inscription then color = "#GREEN#"
 			end
-			game.logSeen(self, "%s uses #{bold}#"..color.."%s.#{normal}##LAST#", self.name:capitalize(), ab.name)
+			game.logSeen(self, "%s 使用了 #{bold}#"..color.."%s.#{normal}##LAST#", logCHN:getName(self.name), ab.name)
 		end
 	end
 end

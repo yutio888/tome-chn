@@ -280,6 +280,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_GRAVITIC_TRAP",
 	name = "引力陷阱",
+	message = "@Source@ 放置了一个扭曲的设施。",
 	info = function(self, t)
 		return ([[ 放 置 一 个 引 力 陷 阱 ，周 围 一 格 有 敌 人 经 过 时 触 发， 将 附 近 5 码 范 围 内 的 敌 人 拉 向 它（成 功 率 受 命 中 或 法 强 影 响 ）。
 		 每 回 合 陷 阱 对 所 有 目 标 造 成 %0.2f 时 空 伤 害（基 于 魔 法）。

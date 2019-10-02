@@ -11,6 +11,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_CRAWL_POISON",
 	name = "毒爪",
+	message = "@Source@ 用毒液覆盖 @target@ 。",
 	info = function(self, t)
 		return ([[爪 击 你 的 目 标 造 成 %d%% 毒 素 伤 害 并 使 目 标 中 毒。]]):
 		format(100*t.getMult(self, t))
@@ -20,6 +21,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_CRAWL_ACID",
 	name = "酸爪",
+	message = "@Source@ 用酸液覆盖 @target@ 。",
 	info = function(self, t)
 		return ([[爪 击 你 的 目 标 并 附 带 酸 性 效 果。]])
 	end,
@@ -28,6 +30,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_SPORE_BLIND",
 	name = "致盲孢子",
+	message = "@Source@ 向 @target@ 喷射致盲孢子 。",
 	info = function(self, t)
 		return ([[向 目 标 喷 射 孢 子，使 目 标 致 盲 %d 回 合。]]):
 		format(t.getDuration(self, t))
@@ -37,6 +40,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_SPORE_POISON",
 	name = "毒性喷射",
+	message = "@Source@ 向 @target@ 喷射毒性孢子 。",
 	info = function(self, t)
 		return ([[向 目 标 喷 射 毒 性 孢 子， 造 成 %d%% 伤 害 并 使 其 中 毒。]]):
 		format(100 * t.getMult(self, t))
@@ -85,6 +89,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_BITE_POISON",
 	name = "毒性撕咬",
+	message = "@Source@ 向 @target@ 注入毒液 。",
 	info = function(self, t)
 		return ([[撕 咬 目 标， 造 成 %d%% 徒 手 伤 害 并 使 其 中 毒。]]):format(100 * t.getMult(self, t))
 	end,
@@ -101,6 +106,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_ROTTING_DISEASE",
 	name = "腐烂疫病",
+	message = "@Source@ 向@target@传播疾病。",
 	info = function(self, t)
 		return ([[打 击 目 标 造 成 %d%% 伤 害， 如 果 攻 击 命 中 可 使 目 标 感 染 疾 病， 造 成 每 回 合 %0.2f 枯 萎 伤 害 持 续 %d 回 合 并 降 低 其 体 质。]]):
 		format(100 * self:combatTalentWeaponDamage(t, 0.5, 1),damDesc(self, DamageType.BLIGHT,t.getDamage(self, t)),t.getDuration(self, t))
@@ -110,6 +116,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_DECREPITUDE_DISEASE",
 	name = "衰老疫病",
+	message = "@Source@ 向@target@传播疾病。",
 	info = function(self, t)
 		return ([[打 击 目 标 造 成 %d%% 伤 害， 如 果 攻 击 命 中 可 使 目 标 感 染 疾 病， 造 成 每 回 合 %0.2f 枯 萎 伤 害 持 续 %d 回 合 并 降 低 其 敏 捷。]]):
 		format(100 * self:combatTalentWeaponDamage(t, 0.5, 1),damDesc(self, DamageType.BLIGHT,t.getDamage(self, t)),t.getDuration(self, t))
@@ -119,6 +126,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_WEAKNESS_DISEASE",
 	name = "衰弱疫病",
+	message = "@Source@ 向@target@传播疾病。",
 	info = function(self, t)
 		return ([[打 击 目 标 造 成 %d%% 伤 害， 如 果 攻 击 命 中 可 使 目 标 感 染 疾 病， 造 成 每 回 合 %0.2f 枯 萎 伤 害 持 续 %d 回 合 并 降 低 其 力 量。]]):
 		format(100 * self:combatTalentWeaponDamage(t, 0.5, 1),damDesc(self, DamageType.BLIGHT,t.getDamage(self, t)),t.getDuration(self, t))
@@ -228,6 +236,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_BLINDING_INK",
 	name = "致盲墨汁",
+	message = "@Source@ 喷射墨水！",
 	info = function(self, t)
 		local duration = t.getDuration(self, t)
 		return ([[向 目 标 喷 射 黑 色 墨 汁， 致 盲 %d 锥 形 范 围 内 目 标 %d 回 合， 致 盲 几 率 受 物 理 强 度 影 响。]]):format(t.radius(self, t), duration)
@@ -314,6 +323,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_HOWL",
 	name = "嚎叫",
+	message = "@Source@ 嚎叫",
 	info = function(self, t)
 		return ([[呼 唤 同 伴 回 援（ 范 围 %d 码）。]]):
 		format(self:getTalentRadius(t))
@@ -323,6 +333,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_SHRIEK",
 	name = "尖啸",
+	message = "@Source@ 尖啸",
 	info = function(self, t)
 		return ([[呼 唤 同 伴（ 范 围 %d 码）。]]):
 		format(self:getTalentRadius(t))
@@ -377,15 +388,18 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_EXPLODE",
 	name = "爆炸",
+	message = "@Source@ 爆炸! @target@ 被耀眼光芒笼罩。",
 	info = function(self, t)
 		return ([[使 目 标 爆 炸 并 放 出 耀 眼 光 芒 造 成 %d 伤 害。]]):
 		format(damDesc(self, DamageType.LIGHT, t.getDamage(self, t)))
 	end,
 }
 
+
 registerTalentTranslation{
 	id = "T_ELEMENTAL_BOLT",
 	name = "元素弹",
+	message = "@Source@ 释放元素弹!",
 	info = function(self, t)
 		return ([[发 射 一 枚 随 机 元 素 属 性 的 魔 法 飞 弹 缓 慢 飞 行 攻 击 目 标 造 成 %d 伤 害， 受 魔 法 影 响， 伤 害 有 额 外 加 成。]]):
 		format(t.getDamage(self, t))
@@ -395,6 +409,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_VOLCANO",
 	name = "火山爆发",
+	message = "火山爆发!",
 	info = function(self, t)
 		local dam = t.getDamage(self, t)
 		return ([[召 唤 一 个 小 型 火 山 持 续 %d 回 合。 每 回 合 它 会 朝 你 的 目 标 喷 射 %d 熔 岩， 造 成 %0.2f 火 焰 伤 害 和 %0.2f 物 理 伤 害。 
@@ -530,6 +545,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_CALL_LIGHTNING",
 	name = "召唤闪电",
+	message = "@Source@ 朝@target@发射闪电!",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		return ([[召 唤 一 股 强 烈 的 闪 电 束 造 成 %0.2f 至 %0.2f 伤 害。 
@@ -586,12 +602,13 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_BODY_SHOT",
 	name = "崩拳",
+	message = "@Source@施展崩拳",
 	info = function(self, t)
 		local damage = t.getDamage(self, t) * 100
 		local drain = self:getTalentLevel(t) * 2
 		local daze = t.getDuration(self, t, 0)
 		local dazemax = t.getDuration(self, t, 5)
-		return ([[A对 目 标 的 身 体 发 出 强 烈 的 一 击， 造 成 %d%% 伤 害， 每 点 连 击 点 消 耗 %d 目 标 体 力 并 眩 晕 目 标 %d 到 %d 回 合（ 由 你 的 连 击 点 数 决 定）。 
+		return ([[对 目 标 的 身 体 发 出 强 烈 的 一 击， 造 成 %d%% 伤 害， 每 点 连 击 点 消 耗 %d 目 标 体 力 并 眩 晕 目 标 %d 到 %d 回 合（ 由 你 的 连 击 点 数 决 定）。 
 		受 物 理 强 度 影 响， 眩 晕 概 率 有 额 外 加 成。 
 		使 用 此 技 能 会 消 耗 当 前 所 有 连 击 点。]])
 		:format(damage, drain, daze, dazemax)

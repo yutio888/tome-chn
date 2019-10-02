@@ -38,6 +38,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_ICE_BREATH",
 	name = "冰息术",
+	message = "@Source@ 呼出冰块!",
 	info = function(self, t)
 		return ([[向 前 方 %d 码 范 围 施 放 一 个 锥 形 冰 冻 吐 息， 范 围 内 所 有 目 标 受 到 %0.2f 寒 冷 伤 害，并被冻结3回合。
 		受 力 量 影 响， 伤 害 有 额 外 加 成。 技 能 暴 击 率 基 于 精 神 暴 击 值 计 算 ， 冻 结 几 率 受 精 神 强 度 影 响 。 

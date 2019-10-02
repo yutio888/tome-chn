@@ -3,6 +3,7 @@ local _M = loadPrevious(...)
 registerTalentTranslation{
 	id = "T_RITCH_FLAMESPITTER_BOLT",
 	name = "火焰喷射",
+	message = "@Source@ 喷出火焰!",
 	info = function(self, t)
 		return ([[吐 出 一 枚 火 球 造 成 %0.2f 火 焰 伤 害。 
 		 受 精 神 强 度 影 响， 伤 害 有 额 外 加 成。]]):format(damDesc(self, DamageType.FIRE, self:combatTalentMindDamage(t, 8, 120)))
@@ -11,6 +12,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_WILD_RITCH_FLAMESPITTER_BOLT",
 	name = "火焰喷射",
+	message = "@Source@ 喷出火焰!",
 	info = function(self, t)
 		return ([[吐 出 一 枚 火 球 造 成 %0.2f 火 焰 伤 害。 
 		 受 精 神 强 度 影 响， 伤 害 有 额 外 加 成。]]):format(damDesc(self, DamageType.FIRE, self:combatTalentMindDamage(t, 8, 120)))
@@ -30,6 +32,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_ACID_BREATH",
 	name = "酸液吐息",
+	message = "@Source@ 喷出酸液!",
 	info = function(self, t)
 		return ([[向 单体目标 喷 射 酸 液 造 成 %0.2f 伤 害。 
 		 受 意 志 影 响， 伤 害 有 额 外 加 成。]]):format(damDesc(self, DamageType.ACID, self:combatTalentStatDamage(t, "wil", 30, 430)))
@@ -39,6 +42,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_ACID_SPIT_HYDRA",
 	name = "酸液喷吐",
+	message = "@Source@ 呼出酸液!",
 	info = function(self, t)
 		return ([[向 敌人 喷 射 酸 液 造 成 %0.2f 伤 害。 
 		 受 意 志 影 响， 伤 害 有 额 外 加 成。]]):format(damDesc(self, DamageType.ACID, self:combatTalentStatDamage(t, "wil", 30, 430)))
@@ -49,6 +53,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_LIGHTNING_BREATH_HYDRA",
 	name = "闪电吐息",
+	message = "@Source@ 呼出闪电!",
 	info = function(self, t)
 		return ([[向敌人喷 出 闪 电 吐 息 造 成 %d 到 %d 伤 害。 
 		 受 意 志 影 响， 伤 害 有 额 外 加 成。]]):
@@ -62,6 +67,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_LIGHTNING_SPIT_HYDRA",
 	name = "闪电喷吐",
+	message = "@Source@ 喷出闪电!",
 	info = function(self, t)
 		return ([[向单体敌人喷吐闪电 造 成 %d 到 %d 伤 害。 
 		 受 意 志 影 响， 伤 害 有 额 外 加 成。]]):
@@ -76,6 +82,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_POISON_BREATH",
 	name = "毒性吐息",
+	message = "@Source@ 呼出毒液!",
 	info = function(self, t)
 		return ([[向敌人施 放 剧 毒 吐 息 至 你 的 目 标 造 成 %d 伤 害， 持 续 数 回 合。 
 		 受 意 志 影 响， 伤 害 有 额 外 加 成。]]):format(damDesc(self, DamageType.NATURE, self:combatTalentStatDamage(t, "wil", 30, 460)))
@@ -85,6 +92,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_POISON_SPIT_HYDRA",
 	name = "毒性喷吐",
+	message = "@Source@ 喷出毒液!",
 	info = function(self, t)
 		return ([[向单体敌人施 放 剧 毒 喷吐 至 你 的 目 标 造 成 %d 伤 害， 持 续 数 回 合。 
 		 受 意 志 影 响， 伤 害 有 额 外 加 成。]]):format(damDesc(self, DamageType.NATURE, self:combatTalentStatDamage(t, "wil", 30, 460)))
@@ -118,6 +126,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_RITCH_FLAMESPITTER",
 	name = "契约：火焰里奇",
+	message = "@Source@ 召唤出火焰里奇!",
 	info = function(self, t)
 		local incStats = t.incStats(self, t, true)
 		return ([[召 唤 一只 火焰里 奇 来 燃 烧 敌 人， 持 续 %d 回 合。 火焰里 奇很脆弱， 但 是 它 们 可 以 远 远 地 燃 烧 敌 人。 
@@ -131,6 +140,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_HYDRA",
 	name = "契约：三头蛇",
+	message = "@Source@ 召唤出三头蛇!",
 	info = function(self, t)
 		local incStats = t.incStats(self, t, true)
 		return ([[召 唤 一只 三 头 蛇 来 摧 毁 敌 人， 持 续 %d 回 合。 
@@ -145,6 +155,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_RIMEBARK",
 	name = "契约：雾凇",
+	message = "@Source@ 召唤出雾凇",
 	info = function(self, t)
 		local incStats = t.incStats(self, t, true)
 		return ([[召 唤 1 棵 雾 凇 来 来 骚 扰 敌 人， 持 续 %d 回 合。 
@@ -159,6 +170,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_FIRE_DRAKE",
 	name = "契约：火龙",
+	message = "@Source@ 召唤出火龙",
 	info = function(self, t)
 		local incStats = t.incStats(self, t, true)
 		return ([[召 唤 一只 火 龙 来 摧 毁 敌 人， 持 续 %d 回 合。 

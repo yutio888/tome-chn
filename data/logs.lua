@@ -60,3 +60,19 @@ dofile("data-chn123/logs/engine.lua")
 dofile("data-chn123/logs/traps.lua")
 dofile("data-chn123/logs/dlc.lua")
 dofile("data-chn123/logs/other.lua")
+
+messageCHN = {}
+messageCHNTable = {}
+function messageCHN:newMessage(l)
+	if not l then return end
+	if not l.message then return end
+	if not l.fct then return end
+	messageCHNTable[l.message] = l
+end
+function messageCHN:trans(str)
+	 if not str then return end
+	 if messageCHNTable[str] then return messageCHNTable[str].fct end
+	 return str
+end
+	 
+dofile("data-chn123/messages/traps.lua")

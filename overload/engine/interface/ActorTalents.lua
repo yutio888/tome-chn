@@ -350,29 +350,15 @@ function _M:useTalentMessage(ab)
 	local str = util.getval(ab.message, self, ab)
 	local _, _, target = self:getTarget()
 	local tname = "unknown"
-	if target then tname = target.name end
-	local sname = "unknown"
-	if str:find("@Source@") then
-		sname = npcCHN:getName(self.name)
-		str = str:gsub("@Source@","%%s")
-	end
-	if str:find("@source@") then
-		sname = npcCHN:getName(self.name)
-		str = str:gsub("@source@","%%s")
-	end
-	if str:find("@target@") then
-		tname = npcCHN:getName(tname)
-		str = str:gsub("@target@","%%s")
-	end
-	if str:find("@Target@") then
-		tname = npcCHN:getName(tname)
-		str = str:gsub("@Target@","%%s")
-	end
-	if str:find("@hisher@") then
-		tname = npcCHN:getName(tname)
-		str = str:gsub("@hisher@","%%s")
-	end
-	return str,sname,tname
+	if target then tname = npcCHN:getName(target.name) end
+	local sname = npcCHN:getName(self.name)
+	str = messageCHN:trans(str)
+	str = str:gsub("@Source@",sname)
+	str = str:gsub("@source@",sname)
+	str = str:gsub("@target@",tname)
+	str = str:gsub("@Target@",tname)
+	str = str:gsub("@hisher@",string.his_her(self))
+	return str
 end
 --- Display the talent use message in the game log
 -- Redefine as needed

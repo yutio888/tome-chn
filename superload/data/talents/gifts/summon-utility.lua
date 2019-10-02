@@ -27,6 +27,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_TURTLE",
 	name = "契约：乌龟",
+	message = "@Source@ 召唤出乌龟",
 	info = function(self, t)
 		local incStats = t.incStats(self, t, true)
 		return ([[召 唤 一只 乌 龟 来 吸 引 敌 人 攻 击， 持 续 %d 回 合。 
@@ -42,6 +43,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_SPIDER",
 	name = "契约：蜘蛛",
+	message = "@Source@ 召唤出蜘蛛",
 	info = function(self, t)
 		local incStats = t.incStats(self, t,true)
 		return ([[召 唤 一只 蜘 蛛 来 扰 乱 敌 人， 持 续 %d 回 合。 

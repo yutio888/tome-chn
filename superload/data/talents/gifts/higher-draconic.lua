@@ -18,6 +18,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_VENOMOUS_BREATH",
 	name = "剧毒吐息",
+	message = "@Source@ 呼出剧毒!",
 	info = function(self, t)
 		local effect = t.getEffect(self, t)
 		return ([[你 向 %d 码 锥 形 半 径 范 围 的 敌 人 释 放 剧 毒 吐 息。 在 攻 击 范 围 内 的 敌 人， 每 回 合 会 受 到 %0.2f 自 然 伤 害， 持 续 6 回 合。 

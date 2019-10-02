@@ -50,6 +50,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_LIGHTNING_BREATH",
 	name = "闪电吐息",
+	message = "@Source@ 呼出闪电!",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		return ([[你 在 前 方 %d 码 锥 形 范 围 内 喷 出 闪 电。 

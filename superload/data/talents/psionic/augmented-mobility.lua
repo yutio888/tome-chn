@@ -40,6 +40,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_TELEKINETIC_LEAP",
 	name = "灵能跳跃",
+	message = "@Source@ 施展了灵能跳跃!",
 	info = function(self, t)
 		local range = self:getTalentRange(t)
 		return ([[使 用 灵 能 ，精 准 地 跳 向 %d 码 外 的 地 点。]]):

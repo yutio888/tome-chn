@@ -3,6 +3,7 @@ local _M = loadPrevious(...)
 registerTalentTranslation{
 	id = "T_FRENZIED_BITE",
 	name = "狂乱撕咬",
+	message = "@Source@ 在狂乱中撕咬了 @Target@!",
 	info = function(self, t)
 		local damage = t.getDamage(self, t) * 100
 		local bleed = t.getBleedDamage(self, t) * 100
@@ -15,6 +16,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_FRENZIED_LEAP",
 	name = "狂乱跳跃",
+	message = "@Source@ 在狂乱中跳跃!",
 	info = function(self, t)
 		return ([[跳 向 范 围 内 目 标。 只 有 在 狂 乱 状 态 下 可 以 使 用。]])
 	end,
@@ -23,6 +25,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_GNASHING_TEETH",
 	name = "咬牙切齿",
+	message = "@Source@ 用尖牙利齿咬向 @Target@ !",
 	info = function(self, t)
 		local damage = t.getDamage(self, t) * 100
 		local bleed = t.getBleedDamage(self, t) * 100
@@ -50,6 +53,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_ECHOES_FROM_THE_VOID",
 	name = "虚空回音",
+	message = "@Source@ 向 @Target@ 展示了虚空的混乱。",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		return ([[ 释 放 虚 空 的 混 乱， 使 目 标 每 回 合 强 制 进 行 精 神 豁 免 鉴 定， 持 续 6 回 合， 未 通 过 豁 免 则 在 原 伤 害 基 础 上 造 成 %0.2f 精 神 伤 害（ 由 精 神 和 自 然 伤 害 基 础 伤 害 决 定）。]]):
@@ -60,6 +64,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_VOID_SHARDS",
 	name = "虚空碎片",
+	message = "@Source@ 召唤出虚空碎片。",
 	info = function(self, t)
 		local number = self:getTalentLevelRaw(t)
 		local damage = t.getDamage(self, t)
@@ -178,6 +183,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_BLOOD_SUCKERS",
 	name = "吸血者",
+	message = "@Source@ 尝试吸取血液!",
 	info = function(self, t)
 		local Pdam, Fdam = self:damDesc(DamageType.PHYSICAL, self.level/2), self:damDesc(DamageType.ACID, self.level/2)
 		return ([[抓 住 目 标 ，吸 取 他 们 的 血 液 ， 每 回 合 造 成 %0.2f 物 理 和 %0.2f 酸 性 伤 害 。

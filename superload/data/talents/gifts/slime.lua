@@ -14,6 +14,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_POISONOUS_SPORES",
 	name = "毒性孢子",
+	message = "@Source@ 朝 @target@ 喷出毒性孢子。",
 	info = function(self, t)
 		return ([[向 %d 码 半 径 范 围 释 放 毒 性 孢 子， 使 范 围 内 的 敌 方 单 位 感 染 随 机 类 型 的 毒 素， 造 成 %0.1f 自 然 伤 害， 持 续 10 回 合。
 		这 个 攻 击 能 够 暴 击 ， 造 成 额 外 %d%% 暴 击 伤 害。
@@ -24,6 +25,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_ACIDIC_SKIN",
 	name = "酸性皮肤",
+	message = "@Source@ 的皮肤开始滴落酸液。",
 	info = function(self, t)
 		return ([[你 的 皮 肤 浸 泡 着 酸 液， 对 所 有 攻 击 你 的 目 标 造 成 %0.1f 酸 性 缴 械 伤 害。
 		 受 精 神 强 度 影 响 ， 伤 害 有 额 外 加 成 。 ]]):format(damDesc(self, DamageType.ACID, t.getDamage(self, t)))

@@ -15,6 +15,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_BELLOWING_ROAR",
 	name = "怒意咆哮",
+	message = "@Source@ 开始咆哮!",
 	info = function(self, t)
 		local radius = self:getTalentRadius(t)
 		local power = 20 + 6 * self:getTalentLevel(t)
@@ -42,6 +43,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_FIRE_BREATH",
 	name = "火焰吐息",
+	message = "@Source@ 呼出火焰!",
 	info = function(self, t)
 		return ([[你 在 前 方 %d 码 锥 形 范 围 内 喷 出 火 焰。 此 范 围 内 的 目 标 会 在 3 回 合 内 受 到 %0.2f 火 焰 伤 害。
 		受 力 量 影 响， 伤 害 有 额 外 加 成， 暴 击 几 率 基 于 你 的 精 神 暴 击 率。 

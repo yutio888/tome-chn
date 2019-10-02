@@ -3,6 +3,7 @@ local _M = loadPrevious(...)
 registerTalentTranslation{
 	id = "T_UPPERCUT",
 	name = "上钩拳",
+	message = "@Source@ 施展了终结的上勾拳。",
 	info = function(self, t)
 		local damage = t.getDamage(self, t) * 100
 		local stun = t.getDuration(self, t, 0)
@@ -17,6 +18,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_CONCUSSIVE_PUNCH",
 	name = "金刚碎",
+	message = "@Source@ 施展了金刚碎。",
 	info = function(self, t)
 		local damage = t.getDamage(self, t) * 100
 		local area = t.getAreaDamage(self, t) * 0.25
@@ -42,6 +44,7 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_HAYMAKER",
 	name = "收割之刃",
+	message = "@Source@ 开始了狂野的收割!",
 	info = function(self, t)
 		local damage = t.getDamage(self, t) * 100
 		local maxDamage = damage * 2

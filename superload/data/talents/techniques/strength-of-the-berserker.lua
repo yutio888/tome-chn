@@ -3,6 +3,7 @@ local _M = loadPrevious(...)
 registerTalentTranslation{
 	id = "T_WARSHOUT_BERSERKER",
 	name = "战争怒吼",
+	message = "@Source@ 使出战争怒吼",
 	info = function(self, t)
 		return ([[在 你 的 正 前 方 大 吼 形 成 %d 码 半 径 的 扇 形 战 争 怒 吼。 任 何 在 其 中 的 目 标 会 被 混 乱 %d 回 合。]]):
 		format(self:getTalentRadius(t), t.getDuration(self, t))

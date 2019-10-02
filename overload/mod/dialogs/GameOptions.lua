@@ -420,7 +420,7 @@ function _M:generateListUi()
 		self.c_list:drawItem(item)
 	end,}
 
-	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"Always display the combat properties of gloves even if you don't know unarmed attack talents.#WHITE#"}
+	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"永远显示手套的战斗数据#WHITE#"}
 	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#强制显示手套战斗数据#WHITE##{normal}#", status=function(item)
 		return tostring(config.settings.tome.display_glove_stats and "开启" or "关闭")
 	end, fct=function(item)
@@ -429,7 +429,7 @@ function _M:generateListUi()
 		self.c_list:drawItem(item)
 	end,}
 
-	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"Always display combat properties of shields even if you don't know shield attack talents.#WHITE#"}
+	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"永远显示盾牌的战斗数据#WHITE#"}
 	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#强制显示盾牌战斗数据#WHITE##{normal}#", status=function(item)
 		return tostring(config.settings.tome.display_shield_stats and "开启" or "关闭")
 	end, fct=function(item)
@@ -456,8 +456,8 @@ function _M:generateListUi()
 		self.c_list:drawItem(item)
 	end,}
 
-	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"Sharpen Visuals, set to 0 to disable.#WHITE#"}
-	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#Sharpen Visuals#WHITE##{normal}#", status=function(item)
+	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"锐化视觉，设为0关闭#WHITE#"}
+	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#锐化视觉#WHITE##{normal}#", status=function(item)
 		return tostring((config.settings.tome.sharpen_display or 0))
 	end, fct=function(item)
 		game:registerDialog(GetQuantitySlider.new("Enter Sharpen Power", "From 0(disable) to 10", math.floor(config.settings.tome.sharpen_display), 0, 10, 1, function(qty)

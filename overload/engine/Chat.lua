@@ -104,7 +104,10 @@ function _M:invoke(id)
 	if self.npc.onChat then self.npc:onChat() end
 	if self.player.onChat then self.player:onChat() end
 
-	local d = engine.dialogs.Chat.new(self, id or self.default_id, self.force_dialog_width or 500)
+	local hd = {"Chat:invoke", id = id or self.default_id }
+	self:triggerHook(hd)
+
+	local d = engine.dialogs.Chat.new(self, hd.id, self.force_dialog_width or 500)
 	game:registerDialog(d)
 	return d
 end

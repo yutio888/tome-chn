@@ -5,14 +5,14 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local duration = t.getDuration(self, t)
-		return ([[在1码范围内的地板上散布腐蚀性的粘液，持续%d回合，对上面所有的敌对生物造成%d自然伤害。]]):format(duration, damDesc(self, DamageType.NATURE, damage))
+		return ([[在 1 码 范 围 内 的 地 板 上 散 布 腐 蚀 性 的 粘 液 ， 持 续 %d 回 合， 对 上 面 所 有 的 敌 对 生 物 造 成 %d 自 然 伤 害。]]):format(duration, damDesc(self, DamageType.NATURE, damage))
 	end,
 }
 registerTalentTranslation{
 	id = "T_JELLY_MITOTIC_SPLIT",
 	name = "有丝分裂",
 	info = function(self, t)
-		return ([[当受到最大生命值 %d%% 的攻击的时候，有%d%%的几率分裂。]]):format(t.getDamage(self, t), t.getChance(self, t))
+		return ([[当 受 到 最 大 生 命 值 %d%% 的 攻 击 的 时 候， 有 %d%% 的 几 率 分 裂。]]):format(t.getDamage(self, t), t.getChance(self, t))
 	end,
 }
 registerTalentTranslation{

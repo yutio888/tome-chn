@@ -31,8 +31,8 @@ registerTalentTranslation{
 	id = "T_WYRMIC_GUILE",
 	name = "龙之狡诈",
 	info = function(self, t)
-		return ([[你熟练掌握了巨龙的本性。 
-		你的力量和意志值增加%d。
+		return ([[你 熟 练 掌 握 了 巨 龙 的 本 性。 
+		你 的 力 量 和 意 志 增 加 %d 。
 		你 获 得 %d%% 击 退 抵 抗 和 %d%% 致 盲、 震 慑 抵 抗。]]):format(t.getStat(self, t), 100*t.resistKnockback(self, t), 100*t.resistBlindStun(self, t))
 	end,
 }
@@ -41,10 +41,10 @@ registerTalentTranslation{
 	id = "T_CHROMATIC_FURY",
 	name = "天龙之怒",
 	info = function(self, t)
-		return ([[你获得了世界中数不清的龙的力量传承，你对物理、火焰、寒冷、酸性、自然、枯萎和暗影属性伤害的抵抗力和适应力增强了。
-		你对这些属性的 %0.1f%% ，使用这些属性的时候伤害提升 %0.1f%% ，获得 %0.1f%% 伤害穿透。
+		return ([[你 获 得 了 世 界 中 数 不 清 的 龙 的 力 量 传 承 ，你 对 物 理 、火 焰 、寒 冷 、酸 性 、自 然 、枯 萎 和 暗 影 属 性 伤 害 的 抵 抗 力 和 适 应 力 增 强 了 。
+		 你 对 这 些 属 性 的  %0.1f%%  ，使 用 这 些 属 性 的 时 候 伤 害 提 升  %0.1f%%  ，获 得  %0.1f%%  伤 害 穿 透 。
 
-		学习这一技能还会给你的吐息技能伤害增加意志值加成。若你的这两项属性相等，则这相当于加成值翻倍。]]) 
+		 学 习 这 一 技 能 还 会 给 你 的 吐 息 技 能 伤 害 增 加 意 志 值 加 成 。若 你 的 这 两 项 属 性 相 等 ，则 这 相 当 于 加 成 值 翻 倍 。]]) 
 		:format(t.getResists(self, t), t.getDamageIncrease(self, t), t.getResistPen(self, t))
 	end,
 }

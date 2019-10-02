@@ -14,8 +14,8 @@ registerTalentTranslation{
 	id = "T_SHADOWS_EMPATHY",
 	name = "阴影链接",
 	info = function(self, t)
-		return ([[你与你的阴影链接，你和你的阴影之间的界限渐渐模糊。
-		你失去%d%%光系伤害抗性，获得%d%%暗影伤害抗性和伤害吸收。你的队伍里每有一个暗影，就获得%0.2f%%所有伤害抗性。]]):
+		return ([[你 与 你 的 阴 影 链 接 ， 你 和 你 的 阴 影 之 间 的 界 限 渐 渐 模 糊。
+		你 失 去 %d%% 光 系 伤 害 抗 性 ， 获 得 %d%% 暗 影 伤 害 抗 性 和 伤 害 吸 收。 你 的 队 伍 里 每 有 一 个 阴 影 ， 就 获 得 %0.2f%% 所 有 伤 害 抗 性。]]):
 		format(t.getLightResist(self, t), t.getDarkResist(self, t), t.getAllResScale(self, t))
 	end,
 }

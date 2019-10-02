@@ -37,7 +37,7 @@ registerTalentTranslation{
 		return ([[你 闪 电 般 的 出 现 在 %d 码 范 围 内 的 敌 人 身 边， 造 成 %d%% （ 0 仇 恨） ～ %d%% （ 100+ 仇 恨） 的 伤 害。 
 		 你 闪 电 般 的 突 袭 使 敌 人 没 有 提 防， 增 加 %d 点 额 外 闪 避， 持 续 1 回 合。 
 		 受 力 量 影 响， 闪 避 值 有 额 外 加 成。
-		 如果你装备盾牌的话，这一技能也可以使用你的盾牌攻击。]]):format(self:getTalentRange(t), multiplier * 30, multiplier * 100, defenseChange)
+		 如 果 你 装 备 盾 牌 的 话 ， 这 一 技 能 也 可 以 使 用 你 的 盾 牌 攻 击。]]):format(self:getTalentRange(t), multiplier * 30, multiplier * 100, defenseChange)
 	end,
 }
 
@@ -49,7 +49,8 @@ registerTalentTranslation{
 		return ([[在 猛 烈 的 攻 击 面 前， 你 选 择 直 面 威 胁 而 不 是 躲 藏。 
 		 当 技 能 激 活 时， 你 有 %d%% 概 率 抵 挡 一 次 近 程 攻 击。 不 顾 一 切 的 防 御 会 带 给 你 厄 运（ -3 幸 运）。 
 		 分 裂 攻 击， 杀 意 涌 动 和 无 所 畏 惧 不 能 同 时 开 启， 并 且 激 活 其 中 一 个 也 会 使 另 外 两 个 进 入 冷 却。 
-		抵挡概率受力量值加成。装备盾牌时，抵挡概率增加20%%]]):format(chance)
+		 抵 挡 概 率 受 力 量 加 成 。
+		 装 备 盾 牌 时 ，抵 挡 概 率 增 加 20%% ]]):format(chance)
 	end,
 }
 

@@ -12,7 +12,8 @@ registerTalentTranslation{
 		每 次 你从敌对目标那里受 到 一 种 非 物 理、 非 精 神 时， 你 能 增 加 %d%% 对 该 类 型 伤 害 的 抵 抗， 持 续 7 回 合。 
 		在 技 能 等 级 3 时 ， 你 可 以 获 得 对 3 种 类 型 的 抵 抗 ， 每 增 加 一 种 类 型 时 都 会 刷 新 持 续 时 间 。
 		此 外  ， 每 当 你 被 非 物 理 ， 非 精 神 伤 害 击 中 时 ，你会降低 %0.2f 失衡值并增加等量体力值。
-		技能效果受精神或物理强度的最高者加成，抗性加成效果可以精神暴击。]]):
+		技 能 效 果 受 精 神 或 物 理 强 度 较 高 者 加 成。
+		抗 性 加 成 效 果 可 以 触 发 精 神 暴 击。]]):
 		format(	resist, regen )
 	end,
 }
@@ -23,11 +24,11 @@ registerTalentTranslation{
 	info = function(self, t)
 		local rad = self:getTalentRadius(t)
 		return ([[发 出 一 次 音 波 冲 击， 沉 默 周 围 目 标 %d 回 合， 有 效 范 围 %d 码。 
-		在%d回合内，受影响的区域还会对里面的所有生物造成%0.2f点法力燃烧伤害。
+		在 %d 回 合 内，受 影 响 的 区 域 里 的 所 有 生 物 受 到 %0.2f 法 力 燃 烧 伤 害。
 		每 沉 默 一 个 目 标 ， 你 回 复 %d 失 衡 值 ， 至 多 5 次。
 		受 精 神 或 物 理 强 度 较 高 者 影 响， 沉 默 几 率 有 额 外 加 成。
 		
-		学会这个技能，也会让你的自然伤害加成和伤害穿透属性，对所有法力燃烧伤害生效，不管这一伤害的来源是什么。]]):
+		学 会 这 个 技 能 ， 也 会 让 你 的 自 然 伤 害 加 成 和 伤 害 穿 透 属 性 ， 对 所 有 法 力 燃 烧 伤 害 生 效 ， 不 管 这 一 伤 害 的 来 源 是 什 么。]]):
 		format(t.getduration(self,t), rad, t.getFloorDuration(self,t), t.getDamage(self, t), t.getEquiRegen(self, t))
 	end,
 }
@@ -65,7 +66,7 @@ registerTalentTranslation{
 	id = "T_ANTIMAGIC_ADEPT",
 	name = "反魔专家",
 	info = function(self, t)
-		return ([[你的奥术对撞技能还会从目标身上移除4个持续魔法技能。]]):
+		return ([[你 的 奥 术 对 撞 技 能 还 会 从 目 标 身 上 移 除 4 个 持 续 魔 法 技 能。]]):
 		format()
 	end,
 }

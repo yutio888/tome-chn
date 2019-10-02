@@ -9,7 +9,7 @@ registerTalentTranslation{
 		return ([[你 用 前 额 猛 击 敌 人 头 部（ 或 者 任 意 你 能 找 到 的 有 效 位 置）， 造 成 %0.2f 物 理 伤 害。 如 果 
 		此 次 攻 击 命 中， 则 目 标 会 混 乱( %d%% 强 度) %d 回 合。 
 		受 头 盔 品 质、 力 量 和 物 理 伤 害 影 响， 伤 害 有 额 外 加 成。 
-		混乱强度受敏捷加成，几率受命中加成。]]):
+		混 乱 强 度 受 敏 捷 加 成 ， 几 率 受 命 中 加 成。]]):
 		format(dam, t.getConfusion(self, t), duration)
 	end,
 }

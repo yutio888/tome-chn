@@ -33,7 +33,7 @@ registerTalentTranslation{
 		local radius = self:getTalentRadius(t)
 		return ([[你 穿 越 梦 境， 出 现 在 某 个 目 标 地 点 附 近。
 		 如 果 目 标 为 处 于 睡 眠 状 态 的 生 物， 你 将 会 出 现 在 离 目 标 最 近 的 地 方。
-		 否则，你会出现在目标位置的%d码范围内。]]):format(radius)
+		 否 则 ， 你 会 出 现 在 目 标 位 置 的 %d 码 范 围 内。]]):format(radius)
 	end,
 }
 

@@ -1205,3 +1205,49 @@ timeEffectCHN:newEffect{
 	type = "物理",
 	subtype = "自然/抵抗",
 }
+
+
+timeEffectCHN:newEffect{
+	id = "SWIFT_SHOT", 
+	enName = "Swift Shot",
+	chName = "快速射击",
+	desc = function(self, eff) return ("攻 击 速 度 增 加 %d%%"):format(eff.speed) end,
+	type ="物理",
+	subtype = "策略",
+}
+
+timeEffectCHN:newEffect{ 
+	id = "CROOKED", 
+	enName = "Crooked",
+	chName = "扭曲",
+	desc = function(self, eff) return ("目 标 变 得 越 来 越 原 始 ，命 中 和 强 度 减 少 %d"):format(eff.power*eff.stacks) end,
+	type ="物理",
+	subtype = "",
+}
+
+timeEffectCHN:newEffect{
+	id = "ELDORAL", 
+	enName = "Eldoral",
+	chName = "艾德瑞尔",
+	desc = function(self, eff) return ("投 石 索 不 消 耗 弹 药 "):format() end,
+	type ="物理",
+	subtype = "",
+}
+
+timeEffectCHN:newEffect{
+	id = "SILENT_STEALTH", 
+	enName = "Stealthed",
+	chName = "潜行",
+	desc = function(self, eff) return ("获 得 %d 潜 行 强 度"):format(eff.power) end,
+	type ="物理",
+	subtype = "",
+}
+
+timeEffectCHN:newEffect{
+	id = "FORGONE_VISION", 
+	enName = "Blinded",
+	chName = "致盲",
+	desc = function(self, eff) return "目 标 被 致 盲 ， 什 么 都 看 不 见。" end,
+	type = "其他",
+	subtype = "",
+}

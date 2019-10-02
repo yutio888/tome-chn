@@ -7,7 +7,7 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local inc = t.getPercentInc(self, t)
 		local reloads = t.ammo_mastery_reload(self, t)
-		return ([[使用投石索时提高%d%%武器伤害，获得30物理强度。
+		return ([[使 用 投 石 索 时 提 高 %d%% 武 器 伤 害，获 得 30 物 理 强 度。
 		同 时 增 加 %d 装 填 效 果 。]]):format(inc * 100, reloads)
 	end,
 }

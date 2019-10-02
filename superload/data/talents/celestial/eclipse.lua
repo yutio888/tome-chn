@@ -32,7 +32,7 @@ registerTalentTranslation{
 		return ([[每 当 你 的 法 术 打 出 暴 击 时， 你 会 对 %d 码 内 %d 个 目 标 发 射 一 颗 光 球 或 暗 影 球， 造 成 %0.2f 光 系 或 %0.2f 暗 影 伤 害。 
 		 每 个 球 都 会 消 耗 2 点 正 能 量 或 负 能 量， 当 你 的 正 能 量 或 负 能 量 低 于 2 时 不 会 触 发。 
 		 受 法 术 强 度 影 响， 伤 害 按 比 例 加 成。
-		 这 一 法 术 不 能 暴 击 。]]):
+		 该 法 术 造 成 的 伤 害 不 能 暴 击 。]]):
 		format(self:getTalentRange(t), targetcount, damDesc(self, DamageType.LIGHT, lightdamage), damDesc(self, DamageType.DARKNESS, darknessdamage))
 	end,
 }

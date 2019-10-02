@@ -45,8 +45,8 @@ registerTalentTranslation{
 		local statinc = t.getStatIncrease(self, t)
 		local absorb = t.getShield(self, t) * (100 + (self:attr("shield_factor") or 0)) / 100
 		return ([[你 专 注 于 你 的 内 心， 增 加 你 %d 点力量，敏捷，魔法和灵巧。
-		在你受到伤害前，你会产生一个吸收 %d 伤害的护盾，该效果最多每%d回合触发一次。
-		属性值增长和护盾强度受法术强度加成。]]):
+		在 你 受 到 伤 害 前 ，你 会 产 生 一 个 吸 收  %d  伤 害 的 护 盾 ，该 效 果 最 多 每 %d 回 合 触 发 一 次 。
+		 属 性 值 增 长 和 护 盾 强 度 受 法 术 强 度 加 成 。]]):
 		format(statinc, absorb, self:getTalentCooldown(t) )
 	end,
 }

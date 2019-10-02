@@ -35,7 +35,7 @@ registerTalentTranslation{
     id = "T_DARK_SURPRISE",
     name = "黑暗连击",
 	info = function(self, t)
-		return ([[腐化目标， 2 回合内降低其 100%% 的疾病免疫，并去除其 2 个自然持续效果。然后用你的两把武器打击敌人，造成 %d%% 伤害，]]):
+		return ([[腐 化 目 标 ， 2  回 合 内 降 低 其  100%%  的 疾 病 免 疫 ，并 去 除 其  2  个 自 然 持 续 效 果 。然 后 用 你 的 两 把 武 器 打 击 敌 人 ，造 成  %d%%  伤 害 。]]):
 			format(100 * t.getDamage(self, t))
 	end,
 }

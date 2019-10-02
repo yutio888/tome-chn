@@ -65,7 +65,7 @@ registerTalentTranslation{
 		每 当 你 近 战 攻 击 暴 击 时， 你 会 释 放 一 个 半 径 为 %d 码 的 奥 术 属 性 的 魔 法 球， 造 成 %0.2f 的 伤 害。 
 		受 法 术 强 度 影 响， 增 益 按 比 例 加 成。
 		当 双 持 或 持 有 盾 牌 时，只有50%%的几率触发。
-		技能等级5时，魔法球的半径变成2。]]):
+		技 能 等 级 5 时 ， 魔 法 球 的 半 径 变 成 2。]]):
 		format(t.getSPMult(self, t)*100, self:getMag() * t.getSPMult(self, t), self:getTalentRadius(t), damDesc(self, DamageType.ARCANE, t.getDamage(self, t)) )
 	end,
 }

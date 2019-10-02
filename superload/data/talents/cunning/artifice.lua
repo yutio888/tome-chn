@@ -178,7 +178,7 @@ registerTalentTranslation{
 	format(damDesc(self, DamageType.PHYSICAL, dam), power, slot)
 	end,
 	short_info = function(self, t, slot_talent)
-		return ([[发射毒镖，造成 %0.2f 物理伤害，沉睡4回合。10回合 冷却时间。]]):format(t.getDamage(self, slot_talent))
+		return ([[发 射 毒 镖，造 成 %0.2f 物 理 伤 害， 沉 睡 4 回 合。10 回 合 冷 却 时 间。]]):format(t.getDamage(self, slot_talent))
 	end,
 }
 registerTalentTranslation{

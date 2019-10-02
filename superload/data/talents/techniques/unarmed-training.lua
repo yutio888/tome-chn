@@ -17,7 +17,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local inc = t.getPercentInc(self, t)
-		return ([[增 加 %d%% 所 有 徒 手 伤 害，提高30物理强度（ 包 括 抓 取 / 徒 手 技）。 
+		return ([[增 加 %d%% 所 有 徒 手 伤 害，提 高 30 物 理 强 度（ 包 括 抓 取 / 徒 手 技）。 
 		注 意： 徒 手 战 斗 时 格 斗 家 随 等 级 每 级 增 加 0.5 物 理 强 度。（ 当 前 提 高 %0.1f 物 理 强 度） 你 的 攻 击 速 度 提 高 20%% 。]]):
 		format(100*inc, self.level * 0.5)
 	end,

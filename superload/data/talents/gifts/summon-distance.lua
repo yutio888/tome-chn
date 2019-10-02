@@ -108,9 +108,9 @@ registerTalentTranslation{
 	id = "T_WINTER_S_GRASP",
 	name = "严冬抓握",
 	info = function(self, t)
-		return ([[将目标抓取到自己的身边，用寒霜覆盖它，使其移动速度减少50%%，持续%d回合。
-		寒冰还会对其造成%0.2f寒冷伤害。
-		伤害和减速几率受精神强度加成。]]):
+		return ([[将 目 标 抓 取 到 自 己 的 身 边 ，用 寒 霜 覆 盖 它 ，使 其 移 动 速 度 减 少 50%% ，持 续 %d 回 合 。
+		 寒 冰 还 会 对 其 造 成 %0.2f 寒 冷 伤 害 。
+		 伤 害 和 减 速 几 率 受 精 神 强 度 加 成 。]]):
 		format(t.getDuration(self, t), damDesc(self, DamageType.COLD, self:combatTalentMindDamage(t, 5, 140)))
 	end,
 }
@@ -122,7 +122,7 @@ registerTalentTranslation{
 		local incStats = t.incStats(self, t, true)
 		return ([[召 唤 一只 火焰里 奇 来 燃 烧 敌 人， 持 续 %d 回 合。 火焰里 奇很脆弱， 但 是 它 们 可 以 远 远 地 燃 烧 敌 人。 
 		 它 拥 有 %d 点 意 志， %d 点 灵 巧 和 %d 点 体 质。 
-		 你 的 召 唤 物 继 承 你 部 分 属 性： 增 加 百 分 比 伤 害、抗性穿透、 震 慑 / 定 身 / 混 乱 / 致 盲 抵 抗 和 护 甲 穿 透。 
+		 你 的 召 唤 物 继 承 你 部 分 属 性： 增 加 百 分 比 伤 害、抗 性 穿 透、 震 慑 / 定 身 / 混 乱 / 致 盲 抵 抗 和 护 甲 穿 透。 
 		 受 精 神 强 度 影 响， 火焰里 奇 的 意 志 和 灵 巧 有 额 外 加 成。]])
 		:format(t.summonTime(self, t), incStats.wil, incStats.cun, incStats.con)
 	end,

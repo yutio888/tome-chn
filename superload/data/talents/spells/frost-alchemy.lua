@@ -43,7 +43,7 @@ registerTalentTranslation{
 		local resist = t.getResistance(self, t)
 		local crit = t.critResist(self, t)
 		return ([[ 将 你 的 身 体 转 化 为 纯 净 的 寒 冰 体 ， 你 受 到 的 寒 冰 伤 害 的 %d%% 会 治 疗 你 ， 同 时 你 的 物 理 抗 性 增 加 %d%% 。
-		你有%d%%的几率摆脱暴击伤害（物理，精神，法术）。
+		你 有 %d%% 几 率 摆 脱 暴 击 伤 害 （物理，精神，法术）。
  		受 法 术 强 度 影 响 ， 效 果 有 额 外 加 成 。]]):
 		format(t.getAffinity(self, t), resist, crit)
 	end,

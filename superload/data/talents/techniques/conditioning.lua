@@ -39,7 +39,7 @@ registerTalentTranslation{
 		local radius = t.getRadius(self, t)
 		local penalty = t.getPenalty(self, t)
 		return ([[敌 人 因 你 的存在而恐 惧。 
-		半径 %d 码范围内的敌人的物理强度，精神强度和法术强度会降低 %d 。
+		半径 %d 码 范 围 内 的 敌 人 的 物 理 强 度 ， 精 神 强 度 和 法 术 强 度 会 降 低 %d 。
 		受 物 理 强 度 影 响， 威 胁 效 果 有 加 成。 ]]):
 		format(radius, penalty)
 	end,

@@ -4195,15 +4195,15 @@ newEffect{
 	long_desc = function(self, eff)
 		local xs = ""
 		if eff.arcaneDam and eff.arcanePen then
-			xs = xs..(", +%d%% Arcane damage and +%d%% Arcane damage penetration,"):format(eff.arcaneDam, eff.arcanePen)
+			xs = xs..(", +%d%% 奥术伤害加成 和+%d%% 奥术伤害抗性穿透 "):format(eff.arcaneDam, eff.arcanePen)
 		end
 		if eff.natureDam and eff.naturePen then
-			xs = (", +%d%% Nature damage and +%d%% Nature damage penetration"):format(eff.natureDam, eff.naturePen)..xs
+			xs = (", +%d%% 自然伤害加成 和 +%d%% 自然抗性穿透 "):format(eff.natureDam, eff.naturePen)..xs
 		end
 		if eff.immune then
-			xs = (", %d%% bleeding, poison, disease, and stun immunity"):format(eff.immune*100)..xs
+			xs = ("以及 %d%% 震慑、流血、毒素 和 疾病免疫 "):format(eff.immune*100)..xs
 		end
-		return ("The target has turned into a huge deeprock elemental.  It gains 2 size categories%s and +%d%% Physical damage and +%d%% Physical damage penetration.%s"):format(xs, eff.dam, eff.pen, eff.useResist and "  In addition, it uses its physical resistance against all damage." or "")
+		return ("目标 化作 巨大 的 深岩元素 形态。 体型 + 2 ， 并获得 +%d%% 物理伤害加成 和 +%d%% 物理伤害抗性穿透 %s"):format(xs, eff.dam, eff.pen, eff.useResist and "  In addition, it uses its physical resistance against all damage." or "")
 	end,
 	type = "magical",
 	subtype = { earth=true, elemental=true },
@@ -4273,7 +4273,7 @@ newEffect{
 newEffect{
 	name = "BATHE_IN_LIGHT", image = "talents/bathe_in_light.png",
 	desc = "Bathe in Light",
-	long_desc = function(self, eff) return ("Fire and Light damage increased by %d%%."):format(eff.power)
+	long_desc = function(self, eff) return ("火焰 和光系 伤害增加 %d%%."):format(eff.power)
 	end,
 	type = "magical",
 	subtype = { celestial=true, light=true },
@@ -4291,7 +4291,7 @@ newEffect{
 newEffect{
 	name = "OVERSEER_OF_NATIONS", image = "talents/overseer_of_nations.png",
 	desc = "Overseer of Nations",
-	long_desc = function(self, eff) return ("Detects creatures of type %s/%s in radius 15."):format(eff.type, eff.subtype) end,
+	long_desc = function(self, eff) return ("在15格范围内感知以下种族： %s/%s "):format(eff.type, eff.subtype) end,
 	type = "magical",
 	subtype = { higher=true },
 	status = "beneficial",
@@ -4308,7 +4308,7 @@ newEffect{
 newEffect{
 	name = "PACIFICATION_HEX", image = "talents/pacification_hex.png",
 	desc = "Pacification Hex",
-	long_desc = function(self, eff) return ("The target is hexed, granting it %d%% chance each turn to be dazed for 3 turns."):format(eff.chance) end,
+	long_desc = function(self, eff) return ("目 标 受 邪 术 影 响， 每 回 合 有 %d%% 概 率 眩 晕 3 回 合。"):format(eff.chance) end,
 	type = "magical",
 	subtype = { hex=true, dominate=true },
 	status = "detrimental",
@@ -4338,7 +4338,7 @@ newEffect{
 newEffect{
 	name = "BURNING_HEX", image = "talents/burning_hex.png",
 	desc = "Burning Hex",
-	long_desc = function(self, eff) return ("The target is hexed.  Each time it uses an ability it takes %0.2f fire damage, and talent cooldowns are increased by %s plus 1 turn."):
+	long_desc = function(self, eff) return ("目 标 受 邪 术 影 响， 每 次 施 放 技 能 都 会 受 到 %0.2f 火 焰 伤 害, 技 能 冷 却 延 长 %s 再 延 长 1 回 合 。"):
 		format(eff.dam, eff.power and ("%d%%"):format((eff.power-1)*100) or "")
 	end,
 	charges = function(self, eff) return (tostring(math.floor((eff.power-1)*100)).."%") end,
@@ -4354,7 +4354,7 @@ newEffect{
 newEffect{
 	name = "EMPATHIC_HEX", image = "talents/empathic_hex.png",
 	desc = "Empathic Hex",
-	long_desc = function(self, eff) return ("The target is hexed, creating an empathic bond with its victims. It takes %d%% feedback damage from all damage done."):format(eff.power) end,
+	long_desc = function(self, eff) return ("目 标 受 邪 术 影 响， 使 其 造 成 的 伤 害 发 生 偏 转， 所 有 其 造 成 的 伤 害 有 %d%% 会 反 弹 给 自 己。"):format(eff.power) end,
 	charges = function(self, eff) return (tostring(math.floor(eff.power)).."%") end,	
 	type = "magical",
 	subtype = { hex=true, dominate=true },
@@ -4377,7 +4377,7 @@ newEffect{
 newEffect{
 	name = "DOMINATION_HEX", image = "talents/domination_hex.png",
 	desc = "Domination Hex",
-	long_desc = function(self, eff) return ("The target is hexed, temporarily changing its faction to %s."):format(engine.Faction.factions[eff.faction].name) end,
+	long_desc = function(self, eff) return ("目 标 受 邪 术 影 响， 暂 时 改 变 阵 营 至 %s 。"):format(engine.Faction.factions[eff.faction].name) end,
 	type = "magical",
 	subtype = { hex=true, dominate=true },
 	status = "detrimental",
@@ -4401,7 +4401,7 @@ newEffect{
 newEffect{
 	name = "SHADOWGUARD_IMMUNITY", image = "talents/shadowguard.png",
 	desc = "Shadowguard Immunity",
-	long_desc = function(self, eff) return "The target is immune to all detrimental effects." end,
+	long_desc = function(self, eff) return "目 标 对 所 有 负 面 状 态 免 疫。" end,
 	type = "other",
 	subtype = { shadow=true },
 	status = "beneficial",
@@ -4416,7 +4416,7 @@ newEffect{
 newEffect{
 	name = "SHADOWGUARD_BUFF", image = "talents/shadowguard.png",
 	desc = "Shadowguard",
-	long_desc = function(self, eff) return ("The target is enveloped in shadows gaining %d spellpower and defense."):format(eff.spellpower) end,
+	long_desc = function(self, eff) return ("目 标 进 入 自 身 的 阴 影 ， 获 得 %d 法 术 强 度 和 闪 避。"):format(eff.spellpower) end,
 	type = "magical",
 	subtype = { shadow=true },
 	status = "beneficial",
@@ -4432,7 +4432,7 @@ newEffect{
 newEffect{
 	name = "RETCHED", image = "talents/retch.png",
 	desc = "Retched",
-	long_desc = function(self, eff) return ("The target is walking in its own retch, negating the natural ghoul's speed penalty."):format() end,
+	long_desc = function(self, eff) return (" 目 标 站 在 自 己 的 亡 灵 唾 液 上 ， 暂 时 取 消 了 食 尸 鬼 种 族 的 速 度 惩 罚 。"):format() end,
 	type = "magical",
 	subtype = { undead=true, speed=true },
 	status = "beneficial",
@@ -4447,7 +4447,7 @@ newEffect{
 newEffect{
 	name = "SHADOW_CUT", image = "",
 	desc = "Shadow Cut",
-	long_desc = function(self, eff) return ("Huge shadow cut that bleeds, doing %0.2f darkness damage per turn. Anytime you hit it you get healed for %d."):format(eff.dam/5, eff.heal) end,
+	long_desc = function(self, eff) return ("正 在 流 血 的 巨 大 的 暗 影 伤 口 ， 每 回 合 造 成 %0.2f 暗 影 伤 害 。 每 次 你 击 中 目 标 将 受 到 %d 点 治 疗 。"):format(eff.dam/5, eff.heal) end,
 	type = "magical",
 	subtype = { wound=true, cut=true, bleed=true, darkness=true },
 	status = "detrimental",
@@ -4479,7 +4479,7 @@ newEffect{
 newEffect{
 	name = "GLYPH_OF_MOONLIGHT", image = "trap/trap_glyph_fatigue_01_64.png",
 	desc = "Draining Moonlight",
-	long_desc = function(self, eff) return ("The target has been drained by a glyph, all damage it does is reduced by %d%%."):format(eff.reduce) end,
+	long_desc = function(self, eff) return ("目 标 被 圣 印 汲 取能 量 ， 造 成 的 所 有 伤 害 降 低 %d%%"):format(eff.reduce) end,
 	type = "magical",
 	subtype = { darkness=true,},
 	status = "detrimental",

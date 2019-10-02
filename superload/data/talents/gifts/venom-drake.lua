@@ -46,7 +46,7 @@ registerTalentTranslation{
 	name = "腐蚀吐息",
 	info = function(self, t)
 		return ([[向 前 方 %d 码 范 围 施 放 一 个 锥 形 酸 雾 吐 息， 范 围 内 所 有 目 标 受 到 %0.2f 酸 性 伤 害。
-		敌人还会被 缴 械 3 回 合。 
+		敌 人 还 会 被 缴 械 3 回 合。 
 		受 力 量 影 响， 伤 害 有 额 外 加 成。技 能 暴 击 率 基 于 精 神 暴 击 值 计 算。缴械强度基于你的精神强度。
 		每 一 点 毒 龙 系 技 能 同 时 也 能 增 加 你 的 酸 性 抵 抗 1%% 。]]):format(self:getTalentRadius(t), damDesc(self, DamageType.ACID, t.getDamage(self, t)))
 	end,

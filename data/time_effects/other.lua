@@ -1,3 +1,88 @@
+
+timeEffectCHN:newEffect{
+	id = "ETHEREAL_FORM", 
+	enName = "Ethereal Form",
+	chName = "虚幻形态",
+	desc = function(self, eff) return ("虚 幻 形 态 的 效 果 减 少 %d%%"):format(eff.stacks * 5) end,
+	type = "其他",
+	subtype = "",
+}
+
+timeEffectCHN:newEffect{
+	id = "ELEMENTAL_SURGE_ARCANE", 
+	enName = "Elemental Surge: Arcane",
+	chName = "元素涌动： 奥术",
+	desc = function(self, eff) return ("法 术 和 精 神 速 度 增 加 30%%") end,
+	type = "其他",
+	subtype = "元素",
+}
+
+timeEffectCHN:newEffect{
+	id = "ELEMENTAL_SURGE_PHYSICAL", 
+	enName = "Elemental Surge: Physical",
+	chName = "元素涌动： 物理",
+	desc = function(self, eff) return ("对 物 理 负 面 状 态 免 疫") end,
+	type = "其他",
+	subtype = "元素",
+}
+
+timeEffectCHN:newEffect{
+	id = "ELEMENTAL_SURGE_NATURE", 
+	enName = "Elemental Surge: Nature",
+	chName = "元素涌动：自然",
+	desc = function(self, eff) return ("对 魔 法 负 面 状 态 免 疫") end,
+	type = "其他",
+	subtype = "元素",
+}
+
+timeEffectCHN:newEffect{
+	id = "ELEMENTAL_SURGE_FIRE", 
+	enName = "Elemental Surge: Fire",
+	chName = "元素涌动： 火焰",
+	desc = function(self, eff) return ("全 部 伤 害 增 加 %d%%"):format(eff.damage) end,
+	type = "其他",
+	subtype = "元素",
+}
+
+timeEffectCHN:newEffect{
+	id = "ELEMENTAL_SURGE_COLD", 
+	enName = "Elemental Surge: Cold",
+	chName = "元素涌动： 寒冷",
+	desc = function(self, eff) return ("护 甲 增 加 %d, 获 得 %d 冰 系 近 战 反 伤"):format(eff.armor, eff.dam) end,
+	type = "其他",
+	subtype = "元素",
+}
+
+timeEffectCHN:newEffect{
+	id = "ELEMENTAL_SURGE_LIGHTNING", 
+	enName = "Elemental Surge: Lightning",
+	chName = "元素涌动： 闪电",
+	desc = function(self, eff) return ("移 动 速 度 增 加 %d%%"):format(eff.move) end,
+	type = "其他",
+	subtype = "元素",
+}
+
+timeEffectCHN:newEffect{
+	id = "ELEMENTAL_SURGE_LIGHT", 
+	enName = "Elemental Surge: Light",
+	chName = "元素涌动： 光明",
+	desc = function(self, eff) return ("技 能 冷 却 减 少 %d%%"):format(eff.cooldown) end,
+	type = "其他",
+	subtype = "元素",
+}
+
+timeEffectCHN:newEffect{
+	id = "SURGING_CIRCLES", 
+	enName = "Circle Surge",
+	chName = "法阵潮涌",
+	desc = function(self, eff) return [[法 阵 散 发 着 潮 涌 的 残 存 能 量。
+		暗 影 之 阵 ： 获 得 +1 负 能 量 。
+		圣 洁 之 阵 ： 获 得 +1 正 能 量 。
+		守 护 之 阵 ： 获 得 +0.5 正 能 量 和 负 能 量 。]] end,
+	type = "其他",
+	subtype = "",
+}
+
 timeEffectCHN:newEffect{
 	id = "FLASH_SHIELD",
 	enName = "Protected by the sun",
@@ -12,6 +97,51 @@ timeEffectCHN:newEffect{
 	chName = "吸能一击",
 	type = "其他",
 	subtype = "太阳",
+}
+
+timeEffectCHN:newEffect{
+	id = "ITEM_CHARM_PIERCING", 
+	enName = "Charm:  Piercing",
+	chName = "附魔：穿透",
+	desc =  function(self, eff) return ("抗性穿透增加 %d%%."):format(eff.penetration) end,
+	type = "其他",
+	subtype = "",
+}
+
+timeEffectCHN:newEffect{
+	id = "ITEM_CHARM_POWERFUL", 
+	enName = "Charm:  Damage",
+	chName = "附魔：伤害",
+	desc =  function(self, eff) return ("伤害增加 %d%%."):format(eff.damage) end,
+	type = "其他",
+	subtype = "",
+}
+
+timeEffectCHN:newEffect{
+	id = "ITEM_CHARM_SAVIOR", 
+	enName = "Charm:  Saves",
+	chName = "附魔：豁免",
+	desc =  function(self, eff) return ("豁免增加 by %d."):format(eff.save) end,
+	type = "其他",
+	subtype = "",
+}
+
+timeEffectCHN:newEffect{
+	id = "ITEM_CHARM_EVASIVE", 
+	enName = "Charm:  Evasion",
+	chName = "附魔：闪避",
+	desc =  function(self, eff) return ("%d%% 几率闪避武器攻击"):format(eff.chance) end,
+	type = "其他",
+	subtype = "",
+}
+
+timeEffectCHN:newEffect{
+	id = "ITEM_CHARM_INNERVATING", 
+	enName = "Charm:  Innervating",
+	chName = "附魔：激励",
+	desc =  function(self, eff) return ("疲劳减少%d%%"):format(eff.fatigue) end,
+	type = "其他",
+	subtype = "",
 }
 
 timeEffectCHN:newEffect{
@@ -53,6 +183,15 @@ timeEffectCHN:newEffect{
 	chName = "印记饱和",
 	type = "其他",
 	subtype = "印记",
+}
+
+timeEffectCHN:newEffect{
+	id = "PATH_OF_THE_SUN",
+	enName = "Path of the sun",
+	chName = "阳光大道",
+	desc = function(self, eff) return ("目 标 在 阳 光 大 道 上 行 走 不 消 耗 时 间。"):format() end,
+	type = "其他",
+	subtype = "太阳",
 }
 
 timeEffectCHN:newEffect{
@@ -291,14 +430,6 @@ timeEffectCHN:newEffect{
 	chName = "时空牢笼",
 	type = "其他",
 	subtype = "时间/空间",
-}
-
-timeEffectCHN:newEffect{
-	id = "HEIGHTEN_FEAR",
-	enName = "Heighten Fear",
-	chName = "恐惧加深",
-	type = "其他",
-	subtype = "恐惧",
 }
 
 timeEffectCHN:newEffect{
@@ -723,3 +854,85 @@ timeEffectCHN:newEffect{
 	type = "其他",
 	subtype = "光环",
 }
+
+
+timeEffectCHN:newEffect{
+	id ="DEMI_GODMODE",
+	enName ="Demigod Mode", 
+	desc =function(self, eff) return ("DEMI-GODMODE: Target has 10000 additional life and regenerates 2000 life per turn.  It deals +500%% damage, and has full ESP."):format() end,
+	type = "其他",
+	subtype = "作弊",
+}
+
+timeEffectCHN:newEffect{
+	id ="GODMODE",
+	enName ="God Mode", 
+	desc =function(self, eff) return ("GODMODE: Target is invulnerable to damage, immune to bad status effects, deals +10000%% damage (100%% penetration), does not need to breathe, and has full ESP."):format() end,
+	type = "其他",
+	subtype = "作弊",
+}
+
+timeEffectCHN:newEffect{
+	id ="SLIPPERY_GROUND", 
+	enName ="Slippery Ground",
+	chName ="地面光滑",
+	desc =function(self, eff) return ("很 难 保 持 平 衡 ， 每 次 使 用 技 能 有 %d%% 几 率 失 败 。"):format(eff.fail) end,
+	type = "其他",
+	subtype = "自然",
+}
+
+timeEffectCHN:newEffect{
+	id ="FROZEN_GROUND", 
+	enName ="Frozen Ground",
+	chName = "地面冻结",
+	desc =function(self, eff) return ("目 标 获 得 20%% 寒 冷 伤 害 加 成。"):format(eff.fail) end,
+	type = "其他",
+	subtype = { nature=true },
+	status = "beneficial",
+	parameters = {},
+	on_gain = function(self, err) return "#Target# is energized by the cold!", "+Frozen Ground" end,
+	on_lose = function(self, err) return "#Target# regains balance.", "-Frozen Ground" end,
+	activate = function(self, eff)
+		self:effectTemporaryValue(eff, "inc_damage", {[engine.DamageType.COLD] = 20})
+	end,
+	deactivate = function(self, eff)
+	end,
+}
+
+timeEffectCHN:newEffect{
+	id ="RECALL", 
+	enName ="Recalling",
+	chName = "召回",
+	desc = function(self, eff) return "目 标 等 待 被 召 回 至 世 界 地 图。" end,
+	type = "魔法",
+	subtype = "未知力量",
+}
+
+timeEffectCHN:newEffect{
+	id ="STEALTH_SKEPTICAL", 
+	enName ="Skeptical",
+	chName = "怀疑",
+	desc =function(self, eff) return "目 标 不 相 信 同 伴 在 黑 暗 中 看 到 了 任 何 东 西。" end,
+	type = "其他",
+	subtype = "",
+}
+
+timeEffectCHN:newEffect{
+	id ="UNLIT_HEART", 
+	enName ="Empowered by the shadows",
+	chName = "黑暗强化",
+	desc =function(self, eff) return (" 全体伤害增加 %d%% ， 全体伤害抗性增加 %d%% "):format(eff.dam, eff.res) end,
+	type = "其他",
+	subtype = "黑暗",
+}
+
+timeEffectCHN:newEffect{
+	id ="INTIMIDATED",
+	enName ="Intimidated",
+	chName = "胆怯",
+	desc =function(self, eff) return ("目 标 士 气 低 落 ， 物 理 、 法 术 和 精 神 强 度 减 少 %d"):format(eff.power) end,
+	charges = function(self, eff) return math.round(eff.power) end,	
+	type = "其他",
+	subtype = "",
+}
+

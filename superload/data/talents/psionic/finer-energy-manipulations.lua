@@ -20,7 +20,7 @@ registerTalentTranslation{
 		local arm = t.armorBoost(self, t)
 		local fat = t.fatigueBoost(self, t)
 		return ([[操 纵 力 量 从 分 子 层 面 重 组 、平 衡 、磨 砺你的装备。
-		你装备的每一件武器都会提升 %d 的命中和伤害。灵 晶 不 能 被 调 整 ，因 为 他 们 已 经 是 完 美 的 自 然 形 态 。
+		你 装 备 的 每 一 件 武 器 都 会 提 升 %d 的命中和伤害。灵 晶 不 能 被 调 整 ，因 为 他 们 已 经 是 完 美 的 自 然 形 态 。
 		你 每 件 身 上 的 护 甲 和 盾 牌 增 加 你 %d 护 甲 ，同 时 减 少 %d 疲 劳 。
 		该 技 能 效 果 受 精 神 强 度 影 响。]]):
 		format(weapon_boost, arm, fat)

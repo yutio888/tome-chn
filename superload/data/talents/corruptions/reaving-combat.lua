@@ -15,9 +15,9 @@ registerTalentTranslation{
 	name = "嗜血杀戮",
 	info = function(self, t)
 		local SPbonus = t.getSpellpower(self, t)
-		return ([[每当你使用近战武器击中一个目标，你进入嗜血状态，增加你的法术强度 %0.1f 。
-		这一效果最多叠加 10 层，共获得 %d 法术强度。
-		嗜血状态持续 3 回合。]]):
+		return ([[每 当 你 使 用 近 战 武 器 击 中 一 个 目 标 ，你 进 入 嗜 血 状 态 ，增 加 你 的 法 术 强 度  %0.1f  。
+		 这 一 效 果 最 多 叠 加  10  层 ，共 获 得  %d  法 术 强 度 。
+		 嗜 血 状 态 持 续  3  回 合 。]]):
 		format(SPbonus, SPbonus*10)
 	end,
 }

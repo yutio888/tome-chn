@@ -1,11 +1,4 @@
 timeEffectCHN:newEffect{
-	id = "ITEM_NUMBING_DARKNESS",
-	enName = "Numbing Darkness",
-	chName = "黑暗麻痹",
-	type = "魔法",
-	subtype = "黑暗",
-}
-timeEffectCHN:newEffect{
 	id = "ITEM_BLIGHT_ILLNESS",
 	enName = "Illness",
 	chName = "疾病",
@@ -787,13 +780,7 @@ timeEffectCHN:newEffect{
 	type = "魔法",
 	subtype = "太阳",
 }
-timeEffectCHN:newEffect{
-	id = "PATH_OF_THE_SUN",
-	enName = "Path of the sun",
-	chName = "阳光大道",
-	type = "魔法",
-	subtype = "太阳",
-}
+
 timeEffectCHN:newEffect{
 	id = "SUNCLOAK",
 	enName = "Suncloak",
@@ -1056,4 +1043,108 @@ timeEffectCHN:newEffect{
 	chName = "痳痹枯萎毒药",
 	type = "枯萎",
 	subtype = "枯萎/毒素",
+}
+
+
+timeEffectCHN:newEffect{
+	id = "BATHE_IN_LIGHT",
+	enName = "Bathe in Light",
+	chName = "光之沐浴",
+	desc = function(self, eff) return ("火焰 和光系 伤害增加 %d%%."):format(eff.power)
+	end,
+	type = "魔法",
+	subtype = "天空/光系",
+
+}
+
+timeEffectCHN:newEffect{
+	id = "OVERSEER_OF_NATIONS",
+	enName = "Overseer of Nations",
+	chName = "远见卓识",
+	desc = function(self, eff) return ("在15格范围内感知以下种族： %s/%s "):format(eff.type, eff.subtype) end,
+	type = "魔法",
+	subtype = "高等人类",
+}
+
+
+timeEffectCHN:newEffect{
+	id = "PACIFICATION_HEX",
+	enName = "Pacification Hex",
+	chName = "宁神邪术",
+	desc = function(self, eff) return ("目 标 受 邪 术 影 响， 每 回 合 有 %d%% 概 率 眩 晕 3 回 合。"):format(eff.chance) end,
+	type = "魔法",
+	subtype =  "邪术/支配",
+}
+
+timeEffectCHN:newEffect{
+	id = "BURNING_HEX",
+	enName = "Burning Hex",
+	chName = "燃烧邪术",
+	desc = function(self, eff) return ("目 标 受 邪 术 影 响， 每 次 施 放 技 能 都 会 受 到 %0.2f 火 焰 伤 害, 技 能 冷 却 延 长 %s 再 延 长 1 回 合 。"):
+		format(eff.dam, eff.power and ("%d%%"):format((eff.power-1)*100) or "")
+	end,
+	type = "魔法",
+	subtype = "邪术/火焰",
+}
+
+timeEffectCHN:newEffect{
+	id = "EMPATHIC_HEX",
+	enName = "Empathic Hex",
+	chName = "转移邪术",
+	desc = function(self, eff) return ("目 标 受 邪 术 影 响， 使 其 造 成 的 伤 害 发 生 偏 转， 所 有 其 造 成 的 伤 害 有 %d%% 会 反 弹 给 自 己。"):format(eff.power) end,
+	type = "魔法",
+	subtype = "邪术/支配",
+}
+
+timeEffectCHN:newEffect{
+	id = "DOMINATION_HEX", 
+	enName = "Domination Hex",
+	chName = "支配邪术",
+	desc = function(self, eff) return ("目 标 受 邪 术 影 响， 暂 时 改 变 阵 营 至 %s 。"):format(engine.Faction.factions[eff.faction].id) end,
+	type = "魔法",
+	subtype = "邪术/支配",
+}
+
+timeEffectCHN:newEffect{
+	id = "SHADOWGUARD_IMMUNITY",
+	enName = "Shadowguard Immunity",
+	chName = "暗影守护免疫",
+	desc = function(self, eff) return "目 标 对 所 有 负 面 状 态 免 疫。" end,
+	type = "other",
+	subtype = "暗影",
+}
+
+timeEffectCHN:newEffect{
+	id = "SHADOWGUARD_BUFF", 
+	enName = "Shadowguard",
+	chName = "暗影守护",
+	desc = function(self, eff) return ("目 标 进 入 自 身 的 阴 影 ， 获 得 %d 法 术 强 度 和 闪 避。"):format(eff.spellpower) end,
+	type = "魔法",
+	subtype = "暗影",
+}
+
+timeEffectCHN:newEffect{
+	id = "RETCHED", 
+	enName = "Retched",
+	chName = "亡灵唾液",
+	desc = function(self, eff) return (" 目 标 站 在 自 己 的 亡 灵 唾 液 上 ， 暂 时 取 消 了 食 尸 鬼 种 族 的 速 度 惩 罚 。"):format() end,
+	type = "魔法",
+	subtype = "亡灵/速度",
+}
+
+timeEffectCHN:newEffect{
+	id = "SHADOW_CUT", image = "",
+	enName = "Shadow Cut",
+	chName = "暗影伤口",
+	desc = function(self, eff) return ("正 在 流 血 的 巨 大 的 暗 影 伤 口 ， 每 回 合 造 成 %0.2f 暗 影 伤 害 。 每 次 你 击 中 目 标 将 受 到 %d 点 治 疗 。"):format(eff.dam/5, eff.heal) end,
+	type = "魔法",
+	subtype = "伤口/切割/流血/暗影",
+}
+
+timeEffectCHN:newEffect{
+	id = "GLYPH_OF_MOONLIGHT", 
+	enName = "Draining Moonlight",
+	desc = function(self, eff) return ("目 标 被 圣 印 汲 取能 量 ， 造 成 的 所 有 伤 害 降 低 %d%%"):format(eff.reduce) end,
+	type = "魔法",
+	subtype = "暗影",
 }

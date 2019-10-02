@@ -17,8 +17,8 @@ registerTalentTranslation{
 	name = "闪避",
 	info = function (self,t)
 		local chance, def = t.getChanceDef(self,t)
-		return ([[你 的 战斗 技巧和反射神经让你能 迅速 躲闪 攻击 ，获得 %d%% 几率 躲闪 近战与 远程 攻击，闪避增加 %d ，持续 %d 回合。
-		躲闪几率 和 闪避加成 受 敏捷加成。]]):
+		return ([[你 的 战 斗 技 巧 和 反 射 神 经 让 你 能 迅 速 躲 闪 攻 击 ，获 得 %d%% 几 率 躲 闪 近 战 与 远 程 攻 击 ，闪 避 增 加 %d ，持 续 %d 回 合 。
+		 躲 闪 几 率 和 闪 避 加 成 受 敏 捷 加 成 。]]):
 		format(chance, def,t.getDur(self,t))
 	end,
 }
@@ -27,8 +27,8 @@ registerTalentTranslation{
 	id = "T_TUMBLE",
 	name = "翻筋斗",
 	info = function (self,t)
-		return ([[你 迅速地移动至 范围内 可见的 位置，跃过 路径上 所有敌人。
-		该技能 在 身着 重甲时不能使用 ， 使用后 你会进入 疲劳状态， 增加移动系 技能 消耗 %d%% （可以叠加）， %d 回合后 解除。]]):format(t.getExhaustion(self, t), t.getDuration(self, t))
+		return ([[你 迅 速 地 移 动 至 范 围 内 可 见 的 位 置 ，跃 过 路 径 上 所 有 敌 人 。
+		 该 技 能 在 身 着 重 甲 时 不 能 使 用 ，使 用 后 你 会 进 入 疲 劳 状 态 ，增 加 移 动 系 技 能 消 耗 %d%% （可 以 叠 加 ），%d 回 合 后 解 除 。]]):format(t.getExhaustion(self,t),t.getDuration(self,t))
 	end,
 }
 
@@ -39,11 +39,11 @@ registerTalentTranslation{
 		local stam = t.getStamina(self, t)
 		local trigger = t.getLifeTrigger(self, t)
 		local reduce = t.getReduction(self, t, true)*100
-		return ([[经过 训练后， 你 脚步轻快，神经敏锐。
-		技能开启时 ，你会 对 任何 将超过你 %d%% 最大生命值 的  伤害做出 反应。
-		消耗 %0.1f 体力， 你将减少 %d%% 伤害。
-		身着重甲 时无法使用。
-		伤害减免受 闪避 加成。]])
+		return ([[经 过 训 练 后 ，你 脚 步 轻 快 ，神 经 敏 锐 。
+		 技 能 开 启 时 ，你 会 对 任 何 将 超 过 你 %d%% 最 大 生 命 值 的 伤 害 做 出 反 应 。
+		 消 耗 %0.1f 体 力 ，你 将 减 少 %d%% 伤 害 。
+		 身 着 重 甲 时 无 法 使 用 。
+		 伤 害 减 免 受 闪 避 加 成 。]])
 		:format(trigger, stam, reduce)
 	end,
 }

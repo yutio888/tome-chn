@@ -48,7 +48,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		return ([[你 懂 得 如 何 融 入 阴 影， 当 你 站 在 黑 暗 地 形 上 时 将 增 加 %d 点 护 甲、 50％ 护 甲 硬度 和 20%% 闪 避。
 		同 时， 你 造 成 的 暗 影 伤 害 会 使 你 当 前 所 在 区 域 和 目 标 区 域 陷 入 黑 暗。  
-		被动增加%d的潜行强度。
+		被 动 增 加 %d 潜 行 强 度。
 		 受 体 质 影 响, 护 甲 加 值 有 额 外 加 成。]])
 		 :format(t.ArmourBonus(self,t), t.getStealth(self, t))
 	end,

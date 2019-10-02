@@ -38,17 +38,15 @@ registerTalentTranslation{
 			end
 			str = "(冷却)".."\n"..table.concat(cooldowns, "\n")
 		end
-		return ([[你 被 灾 厄 光 环 笼 罩，存储你造成的元素伤害。
-		当你积累的元素伤害达到%d时，你会向一个随机的敌人发射一次强力的爆炸，在半径%d范围内造成%d的该类型伤害，并对敌人附加以下的附加效果：
-
-		#GREEN#酸性:#LAST#  每回合受到 %d 酸性伤害，持续5回合。
-		#DARK_GREEN#枯萎:#LAST#  每回合受到 %d 枯萎伤害， 力量、体质和敏捷减少 %d，持续5回合
-		#GREY#黑暗:#LAST#  造成的所有伤害减少 %d%% ，持续5回合。
-		#LIGHT_STEEL_BLUE#时空:#LAST#  整体速度降低 %d%%，持续5回合。
-		#YELLOW#精神:#LAST#  混乱 (强度 %d%%) ，持续5回合。
-
-		同种效果最多每12回合触发一次。这不是普通的技能冷却。
-		伤害和效果强度随你的灵巧值增加，伤害阈值随你的等级增加，施加附加效果的强度由你的精神强度和法术强度的最高值决定。
+		return ([[你 被 灾 厄 光 环 笼 罩，存 储 你 造 成 的 元 素 伤 害 。
+		当 你 积 累 的 元 素 伤 害 达 到 %d 时 ，你 会 向 一 个 随 机 的 敌 人 发 射 一 次 强 力 的 爆 炸 ，在 半 径 %d 范 围 内 造 成 %d 的 该 类 型 伤 害 ，并 对 敌 人 附 加 以 下 的 附 加 效 果 ：
+		#GREEN#酸 性 :#LAST#   每 回 合 受 到  %d  酸 性 伤 害 ，持 续 5 回 合 。
+		#DARK_GREEN#枯 萎 :#LAST#   每 回 合 受 到  %d  枯 萎 伤 害 ，  力 量 、体 质 和 敏 捷 减 少  %d ，持 续 5 回 合	
+		#GREY#黑 暗 :#LAST#   造 成 的 所 有 伤 害 减 少  %d%%  ，持 续 5 回 合 。
+		#LIGHT_STEEL_BLUE#时 空 :#LAST#   整 体 速 度 降 低  %d%%，持 续 5 回 合 。	
+		#YELLOW#精 神 :#LAST#   混 乱  (强 度  %d%% )  ，持 续 5 回 合 。
+		同 种 效 果 最 多 每 12 回 合 触 发 一 次 。这 不 是 普 通 的 技 能 冷 却 。 
+		伤 害 和 效 果 强 度 随 你 的 灵 巧 值 增 加 ，伤 害 阈 值 随 你 的 等 级 增 加 ，施 加 附 加 效 果 的 强 度 由 你 的 精 神 强 度 和 法 术 强 度 的 最 高 值 决 定 。
 		%s]])
 		:format(t.getThreshold(self, t), t.getDamage(self, t), self:getTalentRadius(t), t.getAcid(self, t), blight_dam, blight_disease, t.getDarkness(self, t), t.getTemporal(self, t), t.getMind(self, t), str)
 	end,
@@ -81,19 +79,19 @@ registerTalentTranslation{
 			end
 		str = "(冷却)".."\n"..table.concat(cooldowns, "\n")
 		end
-		return ([[你被元素光环笼罩，存储你造成的元素伤害。
-		当你积累的元素伤害达到%d时，你会向一个随机的敌人发射一次强力的爆炸，在半径%d范围内造成%d的该类型伤害，并对你自己附加以下的附加效果：
+		return ([[你 被 元 素 光 环 笼 罩 ，存 储 你 造 成 的 元 素 伤 害 。
+		 当 你 积 累 的 元 素 伤 害 达 到 %d 时 ，你 会 向 一 个 随 机 的 敌 人 发 射 一 次 强 力 的 爆 炸 ，在 半 径 %d 范 围 内 造 成 %d 的 该 类 型 伤 害 ，并 对 你 自 己 附 加 以 下 的 附 加 效 果 ：
 
-		物理:		清除1个物理负面特效并给予2回合物理负面特效豁免。
-		#PURPLE#奥术:#LAST#		增加你的精神和施法速度30%%，持续3回合。
-		#LIGHT_RED#火焰:#LAST#		增加你所造成的所有伤害%d%%，持续3回合。
-		#1133F3#寒冷:#LAST#		将你的皮肤变成冰，增加护甲%d，对攻击者造成%d冰冻伤害，持续3回合
-		#ROYAL_BLUE#闪电:#LAST#	你的移动速度提升%d%%，持续2回合。
-		#YELLOW#光系:#LAST#		技能冷却时间减少20%%，持续3回合。
-		#LIGHT_GREEN#自然:#LAST#		清除1个魔法负面特效并给予2回合魔法负面特效豁免。
+		 物 理 :		清 除 1 个 物 理 负 面 特 效 并 给 予 2 回 合 物 理 负 面 特 效 豁 免 。
+		#PURPLE#奥 术 :#LAST#		 增 加 你 的 精 神 和 施 法 速 度 30%%，持 续 3 回 合 。
+		#LIGHT_RED#火 焰 :#LAST#		 增 加 你 所 造 成 的 所 有 伤 害 %d%%，持 续 3 回 合 。
+		#1133F3#寒 冷 :#LAST#		 将 你 的 皮 肤 变 成 冰 ，增 加 护 甲 %d ，对 攻 击 者 造 成 %d 冰 冻 伤 害 ，持 续 3 回 合 
+		#ROYAL_BLUE#闪 电 :#LAST#	 你 的 移 动 速 度 提 升 %d%%，持 续 2 回 合 。
+		#YELLOW#光 系 :#LAST#		 技 能 冷 却 时 间 减 少 20%%，持 续 3 回 合 。
+		#LIGHT_GREEN#自 然 :#LAST#		 清 除 1 个 魔 法 负 面 特 效 并 给 予 2 回 合 魔 法 负 面 特 效 豁 免 。
 
-		同种效果最多每10回合触发一次。这不是普通的技能冷却。
-		伤害和效果强度随你的灵巧值增加，伤害阈值随你的等级增加。
+		 同 种 效 果 最 多 每 10 回 合 触 发 一 次 。这 不 是 普 通 的 技 能 冷 却 。
+		 伤 害 和 效 果 强 度 随 你 的 灵 巧 值 增 加 ，伤 害 阈 值 随 你 的 等 级 增 加 。
 		%s]])
 		:format(t.getThreshold(self, t), t.getDamage(self, t), self:getTalentRadius(t), t.getFire(self, t), cold.armor, cold.dam, t.getLightning(self, t), str)
 	end,
@@ -191,7 +189,7 @@ registerTalentTranslation{
 	id = "T_ADEPT",
 	name = "熟能生巧",
 	info = function(self, t)
-		return ([[你的技能树系数增加0.3。请注意，许多技能不会从这一增长中受益。]])
+		return ([[你 的 技 能 树 系 数 增 加 0.3 。 请 注 意 ， 许 多 技 能 不 会 从 这 一 增 长 中 受 益。]])
 		:format()
 	end,
 }

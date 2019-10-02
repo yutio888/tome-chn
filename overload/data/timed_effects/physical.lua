@@ -441,7 +441,7 @@ newEffect{
 newEffect{
 	name = "BURNING_SHOCK", image = "talents/flameshock.png",
 	desc = "Burning Shock",
-	long_desc = function(self, eff) return ("目 标 起 火 ， 每 回 合 受 到 %0.2f 火 焰 伤 害， 降 低 造 成 伤 害 70%%， 随 机 4 个 技 能 进 入 CD 并 降 低 移 动 速 度 50％。 受 火 焰 震 慑 影 响， 技 能 停 止 冷 却。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("目 标 起 火 ， 每 回 合 受 到 %0.2f 火 焰 伤 害， 造 成 的 伤 害 降 低 50%%， 随 机 4 个 技 能 进 入 CD 并 降 低 移 动 速 度 50%%。 受 火 焰 震 慑 影 响， 技 能 冷 却 速 度 减 半。"):format(eff.power) end,
 	charges = function(self, eff) return (math.floor(eff.power)) end,
 	type = "physical",
 	subtype = { fire=true, stun=true },

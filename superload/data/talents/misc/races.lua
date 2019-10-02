@@ -89,8 +89,8 @@ registerTalentTranslation{
 	id = "T_THALOREN_WRATH",
 	name = "森林的恩赐",
 	info = function(self, t)
-		return ([[召唤自然的力量，每回合恢复%d生命值，治疗系数增加%d%%，持续10回合。
-		生命恢复量受意志值加成。]]):format(5 + self:getWil() * 0.5, t.getHealMod(self, t))
+		return ([[召 唤 自 然 的 力 量 ，每 回 合 恢 复 %d 生 命 值 ，治 疗 系 数 增 加 %d%%，持 续 10 回 合 。
+		 生 命 恢 复 量 受 意 志 值 加 成 。]]):format(5 + self:getWil() * 0.5, t.getHealMod(self, t))
 	end,
 }
 
@@ -98,8 +98,8 @@ registerTalentTranslation{
 	id = "T_UNSHACKLED",
 	name = "亲近自然",
 	info = function(self, t)
-		return ([[自然精灵对自然元素有亲和力，这让它们在受到伤害时可以获得一定的治疗。
-		获得 %d%% 自然和酸性伤害亲和。]]):
+		return ([[自 然 精 灵 对 自 然 元 素 有 亲 和 力 ，这 让 它 们 在 受 到 伤 害 时 可 以 获 得 一 定 的 治 疗 。
+		 获 得  %d%%  自 然 和 酸 性 伤 害 吸 收 。]]):
 		format(t.getAffinity(self, t))
 	end,
 }
@@ -108,7 +108,7 @@ registerTalentTranslation{
 	id = "T_GUARDIAN_OF_THE_WOOD",
 	name = "森林守护",
 	info = function(self, t)
-		return ([[自然精灵 是 森 林 的 一 部 分， 森林 保 护 他们 免 受 侵 蚀。 
+		return ([[自 然 精 灵 是 森 林 的 一 部 分， 森 林 保 护 他们 免 受 侵 蚀。 
 		 提 高 %d%% 疾 病 抵 抗、 %0.1f%% 枯 萎 抵 抗 和 %0.1f%% 所 有 抵 抗。]]):
 		format(t.getDiseaseImmune(self, t)*100, t.getBResist(self, t), t.getAllResist(self, t))
 	end,
@@ -122,8 +122,8 @@ registerTalentTranslation{
 		return ([[自 然 与 自然精灵 同 在， 你他们可 以 时 刻 感 受 到 森 林 的 召 唤。 
 		 召 唤 2 个 精 英 树 人， 持 续 8 回 合。 
 		 树 人 的 所 有 抵 抗 取 决 于 你 的 枯 萎 抵 抗， 并 且 可 以 震 慑、 击 退 并 嘲 讽你的 敌 人。 
-		你的意志值(%d)将会被加到它们的所有非魔法主要属性值上，他们的技能等级受到你自然的骄傲技能等级的加成。
-		你的伤害加成，伤害穿透和其他许多属性会被继承。]]):format(self:getWil())
+		你 的 意 志 值 (%d)将 会 被 加 到 它 们 的 所 有 非 魔 法 主 要 属 性 值 上 ，他 们 的 技 能 等 级 受 到 你 自 然 的 骄 傲 技 能 等 级 的 加 成 。
+		 你 的 伤 害 加 成 ，伤 害 穿 透 和 其 他 许 多 属 性 会 被 继 承 。]]):format(self:getWil())
 	end,
 }
 
@@ -190,7 +190,7 @@ registerTalentTranslation{
 		local threshold = t.getThreshold(self, t)
 		local evasion = t.getEvasionChance(self, t)
 		local duration = t.getDuration(self, t)
-		return ([[半身人 强 大 的 人 品 在 关 键 时 刻 总 能 保 他们 一 命。 
+		return ([[半 身 人 强 大 的 人 品 在 关 键 时 刻 总 能 保 他们 一 命。 
 		每 当 一 次 攻 击 对 你 造 成 %d%% 生 命 值 或 更 多 伤 害 时，你 可 以 获 得 额 外 %d%% 闪 避 率 和 %d 点 闪 避（ 基 于 幸 运 和 其 他 闪 避 相 关 数 值 ）， 持 续 %d 回 合 。]]):
 		format(threshold * 100, evasion, t.getDefense(self), duration)
 	end,
@@ -223,7 +223,7 @@ registerTalentTranslation{
 	name = "兽族之怒",
 	info = function(self, t)
 		return ([[激 活 你 对 杀 戮 和 破 坏 的 渴 望 ， 尤 其 是 当 你 孤 军 奋 战 之 时 。
-		 你 视野中每有一个敌人，增 加 所 有 伤 害 10 %% + %0.1f%%（ 最多5个敌人 ， %0.1f%% ） ， 持 续 3 回 合 。
+		 你 视 野 中 每 有 一 个 敌 人 ，增 加 所 有 伤 害 10 %% + %0.1f%%（ 最多5个敌人 ， %0.1f%% ） ， 持 续 3 回 合 。
 		 受 体 质 影 响， 增 益 有 额 外 加 成。]]):
 		format(t.getPower(self, t), 10 + t.getPower(self, t) * 5)
 	end,
@@ -269,8 +269,8 @@ registerTalentTranslation{
 	info = function(self, t)
 		return ([[粉 碎 目 标 的 意 志， 使 你 可 以 完 全 控 制 它 的 行 动 %s 回 合。（受你的意志值加成） 
 		 当 技 能 结 束 时， 你 的 意 志 会 脱 离 而 目 标 会 因 大 脑 崩 溃 而 死 亡。 
-		 稀有等级即以上的目标必须要在其最大生命值的80%%以下才能被控制，在持续时间内不会受到伤害，并且在3回合后不会死亡,而会脱离控制。
-		这一效果无法被豁免，但需要通过即死免疫。]]):format(t.getduration(self))
+		 稀 有 等 级 即 以 上 的 目 标 必 须 要 在 其 最 大 生 命 值 的 80%%以 下 才 能 被 控 制 ，在 持 续 时 间 内 不 会 受 到 伤 害 ，并 且 在 3 回 合 后 不 会 死 亡 ,而 会 脱 离 控 制 。
+		 这 一 效 果 无 法 被 豁 免 ，但 需 要 通 过 即 死 免 疫 。]]):format(t.getduration(self))
 	end,
 }
 
@@ -289,8 +289,8 @@ registerTalentTranslation{
 	name = "迅捷",
 	info = function(self, t)
 		return ([[基 于 “ 维网 ”， 夺 心 魔 新 陈 代 谢 很 快， 思 维 很 快 并 且 献 祭 也 很 快。 
-		你的整 体 速 度增加 %0.1f%% 。
-		当你的生命值降低到30%%以下时，你获得1.5个回合。该效果最多每%d个回合触发一次。]]):format(100*t.speedup(self, t), self:getTalentCooldown(t))
+		你 的 整 体 速 度增加 %0.1f%% 。
+		当 你 的 生 命 值 降 低 到 30%% 以 下 时 ，你 获 得 1.5 个 回 合 。 该 效 果 每 %d 回 合 最 多 触 发 一 次。]]):format(100*t.speedup(self, t), self:getTalentCooldown(t))
 	end,
 }
 
@@ -301,8 +301,8 @@ registerTalentTranslation{
 		local base_stats = self:combatScale(self:getWil() * self:getTalentLevel(t), 25, 0, 125, 500, 0.75)
 		return ([[通 过 夺 心 魔 的 维网， 迅 速 召 集 帮 手。 
 		 在 你 周 围 召 唤 3 个 夺 心 魔 精 英 ，持 续 6 回 合。
-		 他们的所有主要属性会被设置为%d(基于你的意志值和技能等级）
-		你的伤害加成，伤害穿透和许多其他属性都会被继承。]]):format(base_stats)
+		 他 们 的 所 有 主 要 属 性 会 被 设 置 为 %d (基 于 你 的 意 志 值 和 技 能 等 级 ）
+		 你 的 伤 害 加 成 ，伤 害 穿 透 和 许 多 其 他 属 性 都 会 被 继 承 。]]):format(base_stats)
 	end,
 }
 

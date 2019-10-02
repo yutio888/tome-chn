@@ -60,7 +60,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local inc = t.getPercentInc(self, t)
-		return ([[使用 剑、 斧、 狼 牙 棒 时，增 加 %d%%伤 害，增加30物理强度 。]]):
+		return ([[使 用 剑、 斧、 狼 牙 棒 时，增 加 %d%% 伤 害，增 加 30 物 理 强 度 。]]):
 		format(100*inc)
 	end,
 }
@@ -71,7 +71,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local inc = t.getPercentInc(self, t)
-		return ([[使用 匕首 时，增 加 %d%%伤 害，增加30物理强度 。]]):
+		return ([[使 用 匕 首 时，增 加 %d%% 伤 害，增 加 30 物 理 强 度 。]]):
 		format(100*inc)
 	end,
 }
@@ -82,7 +82,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local inc = t.getPercentInc(self, t)
-		return ([[使用 特殊武器 时，增 加 %d%%伤 害，增加30物理强度 。]]):
+		return ([[使 用 特 殊 武 器 时，增 加 %d%% 伤 害，增 加 30 物 理 强 度 。]]):
 		format(damage, 100*inc)
 	end,
 }

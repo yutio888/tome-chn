@@ -27,7 +27,7 @@ registerTalentTranslation{
 		return ([[向 你 周 围 的 空 地 上 呕 吐， 治 疗 任 何 在 这 空 地 上 的 不 死 族 并 伤 害 敌 方 单 位。 
 		持 续 %d 回 合 并 造 成 %d 点 枯 萎 伤 害 或 治 疗 %d 点 生 命 值。
 		呕 吐 范 围 内 的 生 物 有 %d%% 概 率 失 去 一 项 物 理 效 果 。不 死 族 解 除 负 面 效 果 ， 其 他 生 物 失 去 正 面 效 果。
-		当你站在你的呕吐范围内时，你不会受到种族特性-20%%整体速度的影响。]]):format(t.getduration(self, t), damDesc(self, DamageType.BLIGHT, dam), dam * 1.5, t.getPurgeChance(self, t))
+		当 你 站 在 你 的 呕 吐 范 围 内 时 ，暂 时 取 消 种 族 特 性 中 的 -20%% 整 体 速 度 效 果。]]):format(t.getduration(self, t), damDesc(self, DamageType.BLIGHT, dam), dam * 1.5, t.getPurgeChance(self, t))
 	end,
 }
 
@@ -43,8 +43,9 @@ registerTalentTranslation{
 		如 果 你 的 攻 击 命 中， 目 标 会 感 染 食 尸 鬼 腐 烂 疫 病 持 续 %d 回 合。 
 		食 尸 鬼 腐 烂 疫 病 每 回 合 造 成 %0.2f 枯 萎 伤 害。 
 		目 标 被 杀 死 时 会 变 成 你 的可以完全控制的 食 尸 鬼 傀 儡。 
-		食尸鬼傀儡可以使用侵蚀、定向跳跃、震慑、腐烂疫病。他们部分技能等级受该技能等级影响。
-		受 体 质 影 响， 枯 萎 伤 害按 比 例 加 成。 ]]):
+		食 尸 鬼 傀 儡 可 以 使 用 侵 蚀 、 定 向 跳 跃 、 震 慑 、 腐 烂 疫 病 。
+		他 们 部 分 技 能 等 级 受 该 技 能 等 级 影 响。
+		受 体 质 影 响， 枯 萎 伤 害 按 比 例 加 成。 ]]):
 		format(100 * damage, duration, damDesc(self, DamageType.BLIGHT, disease_damage), ghoul_duration)
 	end,
 }

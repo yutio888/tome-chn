@@ -13,9 +13,9 @@ registerTalentTranslation{
 	id = "T_BONE_GRAB",
 	name = "白骨之握",
 	info = function(self, t)
-		return ([[抓住目标将其传送到你的身边，或将身边的目标丢到最多6格之外。从地上冒出一根骨刺，将其定在那里，持续 %d 回合。
-		骨刺同时也会造成 %0.2f 物理伤害。
-		伤害受法术强度加成。]]):
+		return ([[抓 住 目 标 将 其 传 送 到 你 的 身 边 ，或 将 身 边 的 目 标 丢 到 最 多 6 格 之 外 。从 地 上 冒 出 一 根 骨 刺 ，将 其 定 在 那 里 ，持 续  %d  回 合 。
+		 骨 刺 同 时 也 会 造 成  %0.2f  物 理 伤 害 。
+		 伤 害 受 法 术 强 度 加 成 。]]):
 		format(t.getDuration(self, t), damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t)))
 	end,
 }
@@ -24,8 +24,8 @@ registerTalentTranslation{
 	id = "T_BONE_SPIKE",
 	name = "白骨尖刺",
 	info = function(self, t)
-		return ([[每当你使用一个非瞬发的技能，你朝周围所有具有 3 个或以上魔法负面效果的敌人射出骨矛，对一条直线上的敌人造成 %d 伤害。
-		伤害受法术强度加成。]]):format(damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t)) )
+		return ([[每 当 你 使 用 一 个 非 瞬 发 的 技 能 ，你 朝 周 围 所 有 具 有  3  个 或 以 上 魔 法 负 面 效 果 的 敌 人 射 出 骨 矛 ，对 一 条 直 线 上 的 敌 人 造 成  %d  伤 害 。
+		 伤 害 受 法 术 强 度 加 成 。]]):format(damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t)) )
 	end,
 }
 
@@ -33,10 +33,10 @@ registerTalentTranslation{
 	id = "T_BONE_SHIELD",
 	name = "白骨护盾",
 	info = function(self, t)
-		return ([[制造一圈白骨护盾围绕你。每个护盾能完全吸收一次攻击伤害。
-		启动时制造 %d 个骨盾。
-		如果你的骨盾数量不满，每 %d 个回合将会自动补充一层骨盾。
-		这一技能只会在攻击伤害超过 %d 时触发，阈值受法术强度加成。]]):
+		return ([[制 造 一 圈 白 骨 护 盾 围 绕 你 。每 个 护 盾 能 完 全 吸 收 一 次 攻 击 伤 害 。
+		 启 动 时 制 造  %d  个 骨 盾 。
+		 如 果 你 的 骨 盾 数 量 不 满 ，每  %d  个 回 合 将 会 自 动 补 充 一 层 骨 盾 。
+		 这 一 技 能 只 会 在 攻 击 伤 害 超 过  %d  时 触 发 ，阈 值 受 法 术 强 度 加 成 。]]):
 		format(t.getNb(self, t), t.getRegen(self, t), t.getThreshold(self, t))
 	end,
 }

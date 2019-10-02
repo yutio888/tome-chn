@@ -18,11 +18,11 @@ registerTalentTranslation{
 	info = function(self, t)
 		local dam = t.getDamage(self, t)/2
 		return ([[在 施 展 伤 害 类 魔 法 或 精 神 攻 击 时， 你 会 释 放 意 念， 召 唤 一 颗 陨 石 砸 向 附 近 敌 人。 
-		陨石在2码半径内造成%0.2f 火焰和%0.2f 物理伤害，震慑敌人3回合。
-		周围3码半径内将会被冲击转换成岩浆，每回合造成%0.2f 火焰伤害，持续8回合。这会改变地形。
-		你和你的盟友不会受到陨石的伤害。
+		陨 石 在 2 码 半 径 内 造 成 %0.2f  火 焰 和 %0.2f  物 理 伤 害 ，震 慑 敌 人 3 回 合 。
+		 周 围 3 码 半 径 的 地 形 将 会 被 冲 击 转 换 成 岩 浆 ，每 回 合 造 成 %0.2f  火 焰 伤 害 ，持 续 8 回 合 。
+		 你 和 你 的 盟 友 不 会 受 到 陨 石 的 伤 害 。
 
-		另外，你的火焰伤害加成和穿透将被设置成你最高的伤害加成和穿透，这对你造成的所有火焰伤害都有效。
+		 另 外 ，你 的 火 焰 伤 害 加 成 和 穿 透 将 被 设 置 成 你 最 高 的 伤 害 加 成 和 穿 透 ，这 对 你 造 成 的 所 有 火 焰 伤 害 都 有 效 。
 		受 精 神 强 度 或 法 术 强 度 影 响， 伤 害 按 比 例 加 成。  ]])
 		:format(damDesc(self, DamageType.FIRE, dam), damDesc(self, DamageType.PHYSICAL, dam), damDesc(self, DamageType.FIRE, t.getLava(self, t)))
 	end,
@@ -65,7 +65,7 @@ registerTalentTranslation{
 	name = "坚定意志",
 	info = function(self, t)
 		return ([[你 的 意 志 如 此 坚 定， 可 以 忽 视 对 你 造 成 的 精 神 效 果。 
-	 	这一技能最多每5回合触发一次。]])
+	 	这 一 技 能 每 5 回 合 最 多 触 发 一 次。]])
 		:format()
 	end,
 }

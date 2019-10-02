@@ -47,7 +47,7 @@ registerTalentTranslation{
 		return ([[释 放 奥 术 能 量 充 满 当 前 保 护 你 的 魔 法 护 盾， 进 一 步 强 化 它。
 		 它 会 影 响 最 多 %d 种 护 盾 效 果。 
 		 伤 害 护 盾， 时 间 护 盾， 转 移 护 盾：提 高 %d%% 最 大 伤 害 吸 收 值。 
-		 干 扰 护 盾：获得吸收的伤害的%d%%+50点魔法值（%d）
+		 干 扰 护 盾：获 得 吸 收 的 伤 害 的 %d%% + 50点 魔 法 值 （ %d ）
 		 受 法 术 强 度 影 响， 充 能 强 度 有 额 外 加 成。]]):
 		format(t.getNumEffects(self, t), shield, t.getDisruption(self, t), disruption + 50)
 	end,

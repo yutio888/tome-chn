@@ -74,13 +74,12 @@ registerInscriptionTranslation{
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
 		local what = table.concatNice(table.keys(data.what), ", ", " 或者 ")
-		return ([[激活这个纹身，将会把你受到%d%%的所有伤害转化为治疗（在伤害减免之前计算），每回合减少一个随机负面效果的持续时间%d回合，持续%d回合]]):
+		return ([[激 活 这 个 纹 身 ，将 会 把 你 受 到 %d%%的 所 有 伤 害 转 化 为 治 疗 （在 伤 害 减 免 之 前 计 算 ），每 回 合 减 少 一 个 随 机 负 面 效 果 的 持 续 时 间 %d 回 合 ，持 续 %d 回 合 ]]):
 			format(data.power+data.inc_stat*10, data.reduce + data.inc_stat, data.dur)
 	end,
-	short_info = function(self, t)
+		short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		local what = table.concat(table.keys(data.what), ", ")
-		return ([[伤害吸收 %d%%; 减伤 %d; 持续 %d; 冷却 %d]]):format(data.power + data.inc_stat,change_infusion_eff(what))
+		return ([[伤 害 吸 收 %d%%; 减 少 %d; 持 续 %d; 冷 却 %d]]):format(data.power + data.inc_stat*10, data.reduce + data.inc_stat, data.dur, data.cooldown )
 	end,
 }
 
@@ -96,7 +95,7 @@ registerInscriptionTranslation{
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[%d%% 加速 ; %d 冷却 ]]):format(data.speed + data.inc_stat, data.cooldown)
+		return ([[%d%% 加 速 ; %d 冷 却 ]]):format(data.speed + data.inc_stat, data.cooldown)
 	end,
 }
 
@@ -110,12 +109,12 @@ registerInscriptionTranslation{
 		local bonus2 = math.floor(data.dur * bonus)
 		return ([[激 活 这 个 纹 身 可 以让你忍受致死的伤害，持续%d回合。
 		当 应用 纹 身 激 活 时， 你 的 生 命 值 只 有 在 降 低 到 -%d 生 命 时 才 会 死 亡。
-		你每失去1%%生命值，持续时间和生命值下限就会增加1%%。（目前 %d 生命值， %d 持续时间）
+		你 每 失 去 1%% 生 命 值 ， 持 续 时 间 和 生 命 值 下 限 就 会 增 加 1%% 。（目 前 %d 生 命 值， %d 持 续 时 间）
 		效 果 结 束 时， 如 果 你 的 生 命 值 在 0 以 下 ， 会 变 为 1 点。 ]]):format(data.dur, data.die_at + data.inc_stat * 30, bonus1, bonus2)
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[-%d时死亡; 持续 %d; 冷却 %d]]):format(data.die_at + data.inc_stat * 30, data.dur, data.cooldown)
+		return ([[-%d 死 亡 底 线; 持 续 %d; 冷 却 %d]]):format(data.die_at + data.inc_stat * 30, data.dur, data.cooldown)
 	end,
 }
 
@@ -190,8 +189,8 @@ registerInscriptionTranslation{
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
 		return ([[激 活 这 个 符 文 ， 形 成 一 股 锥 形 寒 风 ， 造 成 %0.2f 寒 冷 伤 害。
-			寒 风 会 浸湿敌人，减 半 敌 人 的  震 慑 抗 性  ， 并 试 图 冻 结 他 们 %d 回合。
-			这一效果可以被抵抗，但不能被豁免]]):
+			寒 风 会 浸 湿 敌 人 ，减 半 敌 人 的  震 慑 抗 性  ， 并 试 图 冻 结 他 们 %d 回合。
+			效 果 可 以 被 抵 抗 ， 但 不 能 被 豁 免]]):
 			format(damDesc(self, DamageType.COLD, data.power + data.inc_stat), data.dur)
 	end,
 	short_info = function(self, t)
@@ -206,8 +205,8 @@ registerInscriptionTranslation{
 	info = function(self, t)
 		  local data = self:getInscriptionData(t.short_name)		  
 		  return ([[发 射 锥 形 酸 性 冲 击 波 造 成 %0.2f 酸 性 伤 害。
-		 酸 性 冲 击 波 会 缴械目标 %d 回 合。
-		 这一效果可以被抵抗，但不能被豁免]]):
+		 酸 性 冲 击 波 会 缴 械 目 标 %d 回 合。
+		 效 果 可 以 被 抵 抗 ， 但 不 能 被 豁 免 ]]):
 		 format(damDesc(self, DamageType.ACID, data.power + data.inc_stat), data.dur or 3)
 	end,
 	short_info = function(self, t)
@@ -252,7 +251,7 @@ registerInscriptionTranslation{
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
 		local power = data.power + data.inc_stat * 3
-		return ([[激活符文，传送到视野内 %d 格内的指定位置。之后，你会脱离相位 %d 回合。在这种状态下，所有新的负面效果的持续时间减少 %d%%，你的闪避增加%d，你的全体伤害抗性增加%d%%。]]):
+		return ([[激 活 符 文 ，传 送 到 视 野 内 %d 格 内 的 指 定 位 置 。之 后 ，你 会 脱 离 相 位 %d 回 合 。在 这 种 状 态 下 ，所 有 新 的 负 面 效 果 的 持 续 时 间 减 少 %d%%，你 的 闪 避 增 加 %d ，你 的 全 体 伤 害 抗 性 增 加 %d%%。]]):
 			format(data.range + data.inc_stat, t.getDur(self, t), power, power, power)
 	end,
 	short_info = function(self, t)
@@ -267,8 +266,8 @@ registerInscriptionTranslation{
 	display_name = "符文：虚幻",
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[启动符文，使你变得虚幻，持续 %d 回合。
-		在虚幻状态下，你造成的伤害减少 %d%%，你获得%d%% 全体伤害抗性，你的移动速度提升%d%%，你获得隐形(强度 %d)。]]):
+		return ([[启 动 符 文 ，使 你 变 得 虚 幻 ，持 续  %d  回 合 。
+		 在 虚 幻 状 态 下 ，你 造 成 的 伤 害 减 少 %d%%，你 获 得 %d%% 全 体 伤 害 抗 性 ，你 的 移 动 速 度 提 升 %d%% ，你 获 得 隐 形 (强 度  %d)。]]):
 			format(t.getDur(self, t),t.getReduction(self, t) * 100, t.getResistance(self, t), t.getMove(self, t), t.getPower(self, t))
 	end,
 	short_info = function(self, t)
@@ -281,8 +280,8 @@ registerInscriptionTranslation{
 	display_name = "符文：风暴护盾",
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[启动这个符文，在你的身边召唤一团保护性的风暴，持续%d回合。
-			当符文生效时，风暴可以抵挡大于%d的任何伤害最多%d次。]])
+		return ([[启 动 这 个 符 文 ，在 你 的 身 边 召 唤 一 团 保 护 性 的 风 暴 ，持 续 %d 回 合 。
+			 当 符 文 生 效 时 ，风 暴 可 以 抵 挡 大 于 %d 的 任 何 伤 害 最 多 %d 次 。]])
 				:format(t.getDur(self, t), t.getThreshold(self, t), t.getBlocks(self, t) )
 	end,
 	short_info = function(self, t)
@@ -301,7 +300,7 @@ registerInscriptionTranslation{
 			str = str .. ", " .. v .. " " .. k:lower()
 		end
 		str = string.sub(str, 2)
-		return ([[激活符文展开一个护盾，在 %d 回合内，抵挡以下类型的伤害:%s]]) -- color me
+		return ([[激 活 符 文 展 开 一 个 护 盾，在 %d 回 合 内，抵 挡 以 下 类 型 的 伤 害 : %s]]) -- color me
 				:format(t.getDur(self, t), str)
 	end,
 	short_info = function(self, t)
@@ -315,9 +314,9 @@ registerInscriptionTranslation{
 	name = "Rune: Mirror Image",
 	display_name = "符文：镜像",
 	info = function(self, t)
-		return ([[激活符文，最多召唤你的3个镜像，镜像会嘲讽周围的敌人。
-			在半径10范围内每有一个敌人才能召唤一个镜像，第一个镜像会被召唤在最近的敌人旁边。
-			镜像继承你的生命值、抗性、护甲、闪避和护甲硬度。]])
+		return ([[激 活 符 文 ，最 多 召 唤 你 的 3 个 镜 像 ，镜 像 会 嘲 讽 周 围 的 敌 人 。
+			 在 半 径 10 范 围 内 每 有 一 个 敌 人 才 能 召 唤 一 个 镜 像 ，第 一 个 镜 像 会 被 召 唤 在 最 近 的 敌 人 旁 边 。
+			 镜 像 继 承 你 的 生 命 值 、抗 性 、护 甲 、闪 避 和 护 甲 硬 度 。]])
 				:format(t.getInheritance(self, t)*100 )
 	end,
 	short_info = function(self, t)
@@ -329,9 +328,9 @@ registerInscriptionTranslation{
 	name = "Rune: Shatter Afflictions",
 	display_name = "符文: 粉碎痛苦",
 	info = function(self, t)
-		return ([[激活符文，立刻清除你身上的负面效果。
-			清除所有CT效果，以及物理、精神和魔法负面效果各1个。
-			每清除一个负面效果，你都会获得一个抵挡%d伤害的护盾，持续3回合。]]):format(t.getShield(self, t) * (100 + (self:attr("shield_factor") or 0)) / 100)
+		return ([[激 活 符 文 ，立 刻 清 除 你 身 上 的 负 面 效 果 。
+			 清 除 所 有 CT 效 果 ，以 及 物 理 、精 神 和 魔 法 负 面 效 果 各 1 个 。
+			 每 清 除 一 个 负 面 效 果 ，你 都 会 获 得 一 个 抵 挡 %d 伤 害 的 护 盾 ，持 续 3 回 合 。]]):format(t.getShield(self, t) * (100 + (self:attr("shield_factor") or 0)) / 100)
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
@@ -344,7 +343,7 @@ registerInscriptionTranslation{
 	display_name = "符文: 耗散",
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[激活这个符文，从敌人身上移除4个正面魔法持续效果，或从自己身上移除所有魔法负面效果。]]):
+		return ([[激 活 这 个 符 文 ，从 敌 人 身 上 移 除 4 个 正 面 魔 法 持 续 效 果 ，或 从 自 己 身 上 移 除 所 有 魔 法 负 面 效 果 。]]):
 		format()
 	end,
 	short_info = function(self, t)
@@ -374,9 +373,9 @@ registerInscriptionTranslation{
 	display_name = "堕落印记: 清除",
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[激活这个堕落印记，清除你身上的物理痛苦，持续%d回合。
-		每一回合，这个印记将会尝试从你的身上解除一个物理负面效果。
-		如果它解除了一个负面效果，它的持续时间会增加1回合。]])
+		return ([[激 活 这 个 堕 落 印 记 ，清 除 你 身 上 的 物 理 效 果 ，持 续 %d 回 合 。
+		 每 一 回 合 ，这 个 印 记 将 会 尝 试 从 你 的 身 上 解 除 一 个 物 理 负 面 效 果 。
+		 如 果 它 解 除 了 一 个 负 面 效 果 ，它 的 持 续 时 间 会 增 加 1 回 合 。]])
 				:format(t.getDur(self, t) )
 	end,
 	short_info = function(self, t)

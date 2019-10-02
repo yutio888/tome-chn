@@ -43,47 +43,47 @@ end
 -- Alot of this code is unused, telos is the only sentient staff in the game right now
 local function intro(o)
 	local sentient_responses = {
-		default = [[Greetings. How can I help you?]],
-		aggressive = [[Hurry up and make with the foe-blasting.]],
-		fawning = [[O wise wielder, instruct me that I may better serve you.]],
-		penitent = [[Make amends, magic-user, for the harm ye have wrought is beyond compare.]],
-		telos = [[You really could have chosen a better home for me, you know. I was reasonably happy in my old crystal. This stick smells like armpit.]],
-		telos_full = [[Tremble before the might of Telos!]],
+		default = [[你好，我能帮你什么忙么？]],
+		aggressive = [[快点，我们要去把敌人打爆。]],
+		fawning = [[智慧的长者，请指示我让我更好的为您服务。]],
+		penitent = [[赎罪吧，法师们，你们带来了罄竹难书的危害。]],
+		telos = [[要知道，你可以给我找个更好的环境。现在嘛，我还是留在我原来的旧水晶里吧，这根法杖有一股狐臭的味道。]],
+		telos_full = [[在泰勒斯的强大力量下颤抖吧！]],
 	}
 	cur_chat:triggerHook{"CommandStaff:SentientOptions", o=o, mode="intro", list=sentient_responses}
 	if o.no_command then
-		return [[It is not yet your place to command such a staff as this. To do so invites obliteration.]]
+		return [[在这根法杖上没有合适的位置镶嵌此物品。这样做会带来破坏。]]
 	end
 	if o.combat.sentient then
 		return sentient_responses[o.combat.sentient] or sentient_responses["default"]
 	else
-		return [[Call on which aspect of the staff?]]
+		return [[召唤哪种法杖的元素力量？]]
 	end
 end
 
 local function how_speak(o)
-	if not o.combat.sentient then return [[error!]] end
+	if not o.combat.sentient then return [[错误!]] end
 	local sentient_responses = {
-		default = [[Oh, I was once a mighty Eldritch Channeler. Mighty and absentminded, as it turns out. Had a bit of a mishap with an Inverted Kugala's Soul-infusion technique. Long story short, my soul is now stuck in this stick, and the soul I was working with... well, I don't rightly know where he got to. But I hope we never meet him.]],
-		aggressive = [[Argh! Bollocksed up a tricky bit of soul magic and the fool that I was supposed to be imprisoning for all eternity flitted away. My body, like all the targets of my spells, intended or otherwise, got reduced to elementary particles. Fortunately, I had this soul-cage of a staff all prepped and ready for a stray soul, so I'm not completely gone. But enough chit-chat. Let's fry somebody.]],
-		fawning = [[My old master-- who, though a powerful enchanter, did not compare to you and your glory-- saw fit to imprison me in this fine staff to aid him in his work. Alas, he is long gone, but I despair not, for I have found a mighty new master.]],
-		penitent = [[I am a portion of the very spirit of the world that was ripped free during the Spellblaze. I speak that I might enlighten those who bear me.]],
-		telos = [[What's the good of immortality if you can't even speak? No archmage worth his salt is going to concoct some immoral life-after-death scheme without including some sort of capacity for making his opinions known. And, by the way, your energy manipulation techniques are on the same level as those of my average pair of shoes. Best study up if you don't want to die forgotten and incompetent.]],
-		telos_full = [[What's the good of immortality if you can't even speak? No archmage worth his salt is going to concoct some immoral life-after-death scheme without including some sort of capacity for making his opinions known. And, by the way, your energy manipulation techniques are on the same level as those of my average pair of shoes. Best study up if you don't want to die forgotten and incompetent.]],
+		default = [[哦，我曾经是一个强大埃尔德里奇主宰者。事实证明，那时的我，强大而又不可一世。某次事故扭曲了古加拉的灵魂镶嵌技术。长话短说吧，我的灵魂被困在了这根棍子里——和我曾经研究的灵魂一起……好吧，我也不知道它从何处而来。但是我希望我们能和它永别。]],
+		aggressive = [[哈！拜某次实验事故和那个被永久囚禁的傻X灵魂所赐，我的身体，像所有其他被法术轰击过的物体一样，有意或无意，灰飞烟灭了。幸运的是，我还有这根可以容纳灵魂的法杖容器，所以我没有完全湮灭。好了，不多说了，让我们去打爆敌人吧！]],
+		fawning = [[我的旧主人——虽然他的法术很强大，但却比不上你和你的荣耀——他认为，把我囚禁在这根法杖里可以为他更好的服务。唉，虽然他已经不复存在了，但我并不感到绝望，因为我找到了一个强大的新主人。]],
+		penitent = [[我是在魔法大爆炸期间被撕裂灵魂的一部分。我可以灌输给你所需的知识，只要你肯留下我。]],
+		telos = [[如果不能说话，那这样的永生还有何意义？凡是想要达到永生不死的大法师，没有一个留下一种方法让自己的伟大知识永久流传。而且，顺便说一句，你的能量操纵水平只配给我提鞋，给我仔细的听着，如果你不想因为遗漏我说的话而死的不明不白。]],
+		telos_full = [[如果不能说话，那这样的永生还有何意义？凡是想要达到永生不死的大法师，没有一个留下一种方法让自己的伟大知识永久流传。而且，顺便说一句，你的能量操纵水平只配给我提鞋，给我仔细的听着，如果你不想因为遗漏我说的话而死的不明不白。]],
 	}
 	class:triggerHook{"CommandStaff:SentientOptions", o=o, mode="how_speak", list=sentient_responses}
 	return sentient_responses[o.combat.sentient] or sentient_responses["default"]
 end
 
 local function which_aspect(o)
-	if not o.combat.sentient then return [[error!]] end
+	if not o.combat.sentient then return [[错误!]] end
 	local sentient_responses = {
-		default = [[Of course. Which aspect?]],
-		aggressive = [[I highly recommend the mage aspect and the fire element. You're not going to find anything better for turning a piece of meat into a cloud of vapor.]],
-		fawning = [[I live to serve-- though my use of the word 'live' is perhaps loose here.]],
-		penitent = [[Choose wisely. Powers beyond your comprehension will tolerate only so much interference in their carefully-laid natural order.]],
-		telos = [[Back in my day, we didn't need to go changing our staves around willy-nilly. We picked an element and stuck with it, by the gods.]],
-		telos_full = [[Back in my day, we didn't need to go changing our staves around willy-nilly. We picked an element and stuck with it, by the gods.]],
+		default = [[当然。哪一种？]],
+		aggressive = [[我强烈推荐术士类火焰元素。你不会找到比这更好的能让一块肉变成蒸汽的方法了。]],
+		fawning = [[我毕生为你效劳——虽然“毕生”在这里对于我而言并不是那么准确。]],
+		penitent = [[明智地进行选择。只有那些仔细维护自然秩序的人才会被那些超越你们理解的力量所容忍。]],
+		telos = [[在我的时代，我们并不需要用棍子挥来挥去来施法。我们只需要抓取一种元素，就可以任意的使用它——像上帝一样。]],
+		telos_full = [[在我的时代，我们并不需要用棍子挥来挥去来施法。我们只需要抓取一种元素，就可以任意的使用它——像上帝一样。]],
 	}
 	class:triggerHook{"CommandStaff:SentientOptions", o=o, mode="which_aspect", list=sentient_responses}
 	return sentient_responses[o.combat.sentient] or sentient_responses["default"]
@@ -91,10 +91,10 @@ end
 
 --unused for now:
 local function alter_combat(o)
-	if not o.combat.sentient then return [[error!]] end
+	if not o.combat.sentient then return [[错误!]] end
 	local sentient_responses = {
-		default = [[Certainly. You should be impressed, by the way, that I can do such a thing. Most lesser practitioners of my art would have difficulties with this. What shall I change?]],
-		aggressive = [[Fine, as long as it leads to blasting something soon. What do you want me to change?]],
+		default = [[当然。顺带一提，我可以做的事情会让你印象深刻。大多数较弱者实践我的艺术时会感觉有困难。我要不要改变一下？]],
+		aggressive = [[很好，只要它能快速的引爆某物。你要我换成什么？]],
 	}
 	class:triggerHook{"CommandStaff:SentientOptions", o=o, mode="alter_combat", list=sentient_responses}
 	return sentient_responses[o.combat.sentient] or sentient_responses["default"]
@@ -145,21 +145,21 @@ for _, flavor in ipairs(flavor_list) do
 		local name = ("[%s]"):format(DamageType:get(dtype).name:capitalize())
 		answers[i] = {name, action = function() set_element(dtype, flavor, game.player) end}
 	end
-	answers[#answers + 1] = {"Choose different aspect", jump = aspect_chat_id}
-	answers[#answers + 1] = {"Never mind."}
-	newChat{id="element_"..flavor, text = "Call forth which element?", answers = answers}
+	answers[#answers + 1] = {"选择其他领域", jump = aspect_chat_id}
+	answers[#answers + 1] = {"别介意."}
+	newChat{id="element_"..flavor, text = "召唤哪种元素?", answers = answers}
 
-	local flavor_name = flavor:gsub("staff", ""):capitalize()
+	local flavor_name = flavor:gsub("staff", ""):gsub("mage","法术"):gsub("star","众星"):gsub("vile","邪恶"):gsub("power","力量"):gsub("harmony","和谐"):gsub("bone","骨系")
 	aspect_answers[#aspect_answers + 1] = {("[%s]"):format(flavor_name), jump = "element_"..flavor}
 end
 
-aspect_answers[#aspect_answers + 1] = {"Never mind."}
+aspect_answers[#aspect_answers + 1] = {"别介意."}
 
 if is_sentient() then
 	local answers = {
-		{"How is it that you speak?", cond = function() return is_sentient() and not o.no_command end, jump="how_speak"},
-		{"I'd like you to bring forth a different aspect.", cond = function() return is_sentient() and not o.no_command end, jump="which_aspect"},
-		{"I'd like to alter your basic properties.", cond = function() return is_sentient() and not o.no_command end, 
+		{"你怎么会说话？", cond = function() return is_sentient() and not o.no_command end, jump="how_speak"},
+		{"我希望切换到其他领域。", cond = function() return is_sentient() and not o.no_command end, jump="which_aspect"},
+		{"我希望改变你的基础属性。", cond = function() return is_sentient() and not o.no_command end, 
 			action = function()
 				coroutine.resume(co, true)
 				local SentientWeapon = require "mod.dialogs.SentientWeapon"
@@ -170,7 +170,7 @@ if is_sentient() then
 	}
 
 	cur_chat:triggerHook{"CommandStaff:SentientChat", o=o, answers=answers}
-	answers[#answers+1] = {"Never mind."}
+	answers[#answers+1] = {"别介意."}
 
 	newChat{ id="welcome",
 		text = intro(o),

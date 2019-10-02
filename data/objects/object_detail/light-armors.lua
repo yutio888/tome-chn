@@ -12,7 +12,7 @@ objects:addObjects({
 	sName = "cured",
 	egos = "light-armor",
 	enName = "cured leather armour",
-	chName = "精制皮甲",
+	chName = "鞣制皮甲",
 	chDesc = "一套用皮革制成的皮甲。",
 })
 
@@ -21,7 +21,7 @@ objects:addObjects({
 	sName = "hardened",
 	egos = "light-armor",
 	enName = "hardened leather armour",
-	chName = "硬皮甲",
+	chName = "硬化皮甲",
 	chDesc = "一套用皮革制成的皮甲。",
 })
 

@@ -3,7 +3,7 @@ objects:addObjects({
 	sName = "rough",
 	egos = "sling",
 	enName = "rough leather sling",
-	chName = "粗制投石索",
+	chName = "粗皮投石索",
 	chDesc = "投石索用来向敌人投掷石头或金属块。",
 })
 
@@ -12,7 +12,7 @@ objects:addObjects({
 	sName = "cured",
 	egos = "sling",
 	enName = "cured leather sling",
-	chName = "精制投石索",
+	chName = "鞣皮投石索",
 	chDesc = "投石索用来向敌人投掷石头或金属块。",
 })
 
@@ -30,7 +30,7 @@ objects:addObjects({
 	sName = "reinforced",
 	egos = "sling",
 	enName = "reinforced leather sling",
-	chName = "强化投石索",
+	chName = "强化皮投石索",
 	chDesc = "投石索用来向敌人投掷石头或金属块。",
 })
 

@@ -599,19 +599,21 @@ function _M:getShortName(t)
 	
 	local qty = self:getNumber()
 	local identified = t.force_id or self:isIdentified()
-	local name = self.short_name or "object"
+	local name = itemShortCHN[self.short_name] or self.short_name or "object"
 
 	if not identified then
 		local _, c = self:getDisplayColor(true)
 		if self.unique then
-			name = self:getUnidentifiedName()..", "..c.."special#LAST#"
+			name = self:getUnidentifiedName()..", "..c.."特殊#LAST#"
 		elseif self.egoed then
-			name = name..", "..c.."ego#LAST#"
+			name = name..", "..c.."词缀#LAST#"
 		end
 	elseif self.keywords and next(self.keywords) then
 		local k = table.keys(self.keywords)
 		table.sort(k)
-		name = name..", "..table.concat(k, ', ')
+		local k2 = {}
+		for i, e in ipairs(k) do k2[i] = keyCHN[e] or e end
+		name = name..", "..table.concat(k2, ', ')
 	end
 
 	if not t.do_color then

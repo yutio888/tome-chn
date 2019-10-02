@@ -116,9 +116,7 @@ function _M:drawItemShortName(o, x, y)
 	if self.last_o == o then
 		t = self.last_t
 	else
-		--汉化
-		local name = o:getName({do_color=true, no_image=true, no_add_name=true})
-		--local name = (o.getShortName or o.getName)(o, {do_color=true, no_image=true, no_add_name=true}):toString()
+		local name = (o.getShortName or o.getName)(o, {do_color=true, no_image=true, no_add_name=true}):toString()
 		t, nlines, width = self.font:draw(name, self.font:size(name), 255, 255, 255, false, true)
 		t.nlines, t.width = nlines, width
 	end

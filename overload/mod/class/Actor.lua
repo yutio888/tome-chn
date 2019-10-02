@@ -1990,7 +1990,7 @@ function _M:tooltip(x, y, seen_by)
 	-- Short names of wielded weapons/ammo
 	if self:getInven("MAINHAND") then
 		for i, o in ipairs(self:getInven("MAINHAND")) do
-			local tst = ("#LIGHT_BLUE#Main:#LAST#"..o:getShortName({force_id=true, do_color=true, no_add_name=true})):toTString()
+			local tst = ("#LIGHT_BLUE#主手:#LAST#"..o:getShortName({force_id=true, do_color=true, no_add_name=true})):toTString()
 			tst = tst:splitLines(game.tooltip.max-1, game.tooltip.font, 2)
 			tst = tst:extractLines(true)[1]
 			tst:add(" ("..math.floor(self:combatDamage(o.combat))..")")
@@ -2000,7 +2000,7 @@ function _M:tooltip(x, y, seen_by)
 	end
 	if self:getInven("OFFHAND") then
 		for i, o in ipairs(self:getInven("OFFHAND")) do
-			local tst = ("#LIGHT_BLUE#Off :#LAST#"..o:getShortName({force_id=true, do_color=true, no_add_name=true})):toTString()
+			local tst = ("#LIGHT_BLUE#副手:#LAST#"..o:getShortName({force_id=true, do_color=true, no_add_name=true})):toTString()
 			tst = tst:splitLines(game.tooltip.max-1, game.tooltip.font, 2)
 			tst = tst:extractLines(true)[1]
 			tst:add(" ("..math.floor(self:combatDamage(o.combat))..")")
@@ -2010,7 +2010,7 @@ function _M:tooltip(x, y, seen_by)
 	end
 	if self:getInven("PSIONIC_FOCUS") and self:attr("psi_focus_combat") then
 		for i, o in ipairs(self:getInven("PSIONIC_FOCUS")) do
-			local tst = ("#LIGHT_BLUE#Psi :#LAST#"..o:getShortName({force_id=true, do_color=true, no_add_name=true})):toTString()
+			local tst = ("#LIGHT_BLUE#念力:#LAST#"..o:getShortName({force_id=true, do_color=true, no_add_name=true})):toTString()
 			tst = tst:splitLines(game.tooltip.max-1, game.tooltip.font, 2)
 			tst = tst:extractLines(true)[1]
 			tst:add(" ("..math.floor(self:combatDamage(o.combat))..")")
@@ -2020,7 +2020,7 @@ function _M:tooltip(x, y, seen_by)
 	end
 	if self:getInven("QUIVER") then
 		for i, o in ipairs(self:getInven("QUIVER")) do
-			local tst = ("#LIGHT_BLUE#Ammo:#LAST#"..o:getShortName({force_id=true, do_color=true, no_add_name=true})):toTString()
+			local tst = ("#LIGHT_BLUE#弹药:#LAST#"..o:getShortName({force_id=true, do_color=true, no_add_name=true})):toTString()
 			tst = tst:splitLines(game.tooltip.max-1, game.tooltip.font, 2)
 			tst = tst:extractLines(true)[1]
 			tst:add(" ("..math.floor(self:combatDamage(o.combat))..")")
@@ -2047,7 +2047,11 @@ function _M:tooltip(x, y, seen_by)
 		end
 	end
 	if config.settings.cheat and self.descriptor and self.descriptor.classes then
-		ts:add("Classes:", table.concat(self.descriptor.classes or {}, ","), true)
+		local classes = {}
+		for i, v in ipairs(self.descriptor.classes) do
+			classes[i] = s_stat_name[v] or v
+		end
+		ts:add("职业:", table.concat(classes or {}, ","), true)
 	end
 
 	if self.custom_tooltip then

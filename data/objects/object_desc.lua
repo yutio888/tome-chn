@@ -288,9 +288,8 @@ objDesc["Damage Shield penetration (this weapon only): "] = "护盾穿透（仅�
 objDesc["Lifesteal (this weapon only): "] = "生命偷取（仅限此武器）: " 
 objDesc["Multiple attacks: "] = "多次攻击："
 objDesc["Multiple attacks procs power reduction: "] = "多次攻击强度衰减："
-objDesc["Burst (radius 1) on hit: "] = "击中时溅射伤害（1格半径）："
-objDesc["Burst (radius 2) on hit: "] = "击中时溅射伤害（2格半径）："
-objDesc["Burst (radius 2) on crit: "] = "暴击时溅射伤害（2格半径）："
+objDesc["Damage (radius 1) on hit: "] = "击中时溅射伤害（1格半径）："
+objDesc["Damage (radius 2) on crit: "] = "暴击时溅射伤害（2格半径）："
 objDesc[" all"] = "全体"
 objDesc[" Str"] = "力量"
 objDesc[" Mag"] = "魔法"
@@ -519,6 +518,9 @@ special_t["deal a melee attack against all other enemies in a circle around you"
 special_t["deal bonus physical damage equal to your armor"] = "造成等于护甲值的伤害"
 special_t["smash the target with your shield crippling them"] = "盾击目标并致残"
 special_t["reduce the cooldown of your ward talent by 1"] = "减少你的守护技能1回合冷却时间"
+special_t["Learn an unarmed attack talent or enable 'Always show glove combat' to see combat stats."] = "学习空手攻击技能，或者 开启 '强制 显示 手套 战斗 数据' 选项 来 查看 战斗 数据"
+special_t["Learn shield attack talent or enable 'Always show shield combat' to see combat stats."] = "学习盾牌攻击技能，或者 开启 '强制 显示 盾牌 战斗 数据' 选项 来 查看 战斗 数据"
+
 --装备鼠标提示汉化替换
 function getObjectDescCHN(desc)
 	if not desc then return end

@@ -45,19 +45,19 @@ registerAchievementTranslation{
 registerAchievementTranslation{
 	name = "I did not want that!", id = "ORCS_NEKTOSH_SELF", category = "Embers of Rage",
 	chnName = "非我本意",
-	desc = [[令独角者纳克托沙误杀己方。]],
+	desc = [[令独角者纳克托什误杀己方。]],
 }
 
 registerAchievementTranslation{
 	name = "We weren't kidding!", id = "ORCS_DIE_NEKTOSH", category = "Embers of Rage",
 	chnName = "认真点，这不是个玩笑！",
-	desc = [[在没有被定身、震慑、沉睡、眩晕或混乱的情况下， 被独角者纳克托沙的光束杀死。]],
+	desc = [[在没有被定身、震慑、沉睡、眩晕或混乱的情况下， 被独角者纳克托什的光束杀死。]],
 }
 
 registerAchievementTranslation{
 	name = "Make Him Squirm", id = "ORCS_WIN_NEKTOSH", category = "Embers of Rage",
 	chnName = "榨干他",
-	desc = [[让纳克托沙用尽能量，然后离开区域并无视他，直到胜利为止。  The other Whitehooves will catch on any second now...]],
+	desc = [[让纳克托什用尽能量，然后离开区域并无视他，直到胜利为止。  The other Whitehooves will catch on any second now...]],
 }
 
 registerAchievementTranslation{

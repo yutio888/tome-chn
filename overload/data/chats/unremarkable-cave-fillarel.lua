@@ -35,9 +35,9 @@ newChat{ id="what",
 
 newChat{ id="sunwall",
 	text = [[是的，我也注意到了你不是这里的人，晨曦之门，这座兽人领地中仅存的自由基地，将是你的唯一希望，当你离开洞穴，往东南方走就可以到达那里。
-告诉高阶太阳骑士艾伦你碰到我的事，我会留下口信让他们给你放行。]],
+告诉高阶太阳骑士艾琳你碰到我的事，我会留下口信让他们给你放行。]],
 	answers = {
-		{"谢谢你，我会找艾伦谈谈的。", action=function(npc, player) game.player:setQuestStatus("strange-new-world", engine.Quest.COMPLETED, "helped-fillarel") end},
+		{"谢谢你，我会找艾琳谈谈的。", action=function(npc, player) game.player:setQuestStatus("strange-new-world", engine.Quest.COMPLETED, "helped-fillarel") end},
 	}
 }
 

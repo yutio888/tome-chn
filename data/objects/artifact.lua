@@ -3525,7 +3525,7 @@ registerArtifactTranslation{
 }
 registerArtifactTranslation{
 	originName = "Visage of Nektosh",
-	display_name = "纳克托沙的视野",
+	display_name = "纳克托什的视野",
 	unided_name = "带角头盔",
 	desc = [[实话是说，你觉得他的角看上去有点蠢。]],
 }
@@ -3539,7 +3539,7 @@ registerArtifactTranslation{
 	}
 registerArtifactTranslation{
 	originName = "The Cage",
-	display_name = "牢笼",
+	display_name = "精神牢笼",
 	unided_name = "厚皮帽",
 	desc = "任何事物都无法再碰触你。",
 	special_desc = function(self) 

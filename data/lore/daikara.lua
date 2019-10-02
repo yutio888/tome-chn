@@ -50,7 +50,7 @@ registerLoreTranslation{
 }
 
 registerLoreTranslation{
-	id = "daikara-dragonsfire-trap",
+	id = "daikara-freezing-trap",
 	name = "冰冻陷阱",
 	lore = [[#{bold}#探险队队长，战士瑞丽#{normal}#
 那些龙知道我们在这里。希安自己一个人跑了，我必须承担最坏的情况。逃跑已经来不及了，只剩下一个选择了，苏达罗斯特曾经跟我们说过这个小东西可以保证可以杀掉……该死，可惜他根本没留下说明书，我根本不知道该怎么用这玩意儿，而我可不想在今天遇到的这么多麻烦中间再加上“被冻僵”一项。

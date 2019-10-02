@@ -27,14 +27,14 @@ newChat{ id="welcome",
 }
 
 newChat{ id="next1",
-	text = [[我找到了...艾伦让我去寻找的那个令人憎恶的东西。兽人育种棚...比你能想象的还要邪恶一万倍...他们把它隐藏在远离他们的营地的地方,远离他们所有人的视线。他们的母亲、孩子，全在那里！
+	text = [[我找到了...艾琳让我去寻找的那个令人憎恶的东西。兽人育种棚...比你能想象的还要邪恶一万倍...他们把它隐藏在远离他们的营地的地方,远离他们所有人的视线。他们的母亲、孩子，全在那里！
 #LIGHT_GREEN#*她掏出一张地图，努力地递到你手中。*#WHITE#
 
 这将是最后的解决方案，让战争终结...永远终结。我们必须马上行动，在那里的防御被增强之前...
 
 #LIGHT_GREEN#*她努力地盯着你，用她所有的力气来祈求。*#WHITE#]],
 	answers = {
-		{"我一个人做不到...我会告诉艾伦，让她来决定。", action=function(npc, player)
+		{"我一个人做不到...我会告诉艾琳，让她来决定。", action=function(npc, player)
 			player:grantQuest("orc-breeding-pits")
 			player:setQuestStatus("orc-breeding-pits", engine.Quest.COMPLETED, "wuss-out")
 		end},

@@ -191,7 +191,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "Aeryn explained where the orcs were spotted.",
 	fct = function()
-		return "艾伦告诉你哪里发现了兽人的踪迹。"
+		return "艾琳告诉你哪里发现了兽人的踪迹。"
 	end,
 }
 

@@ -99,7 +99,7 @@ newChat{ id="explain3",
 end
 
 newChat{ id="aeryn",
-	text = [[#LIGHT_GREEN#*空气在你身边回旋，突然高阶太阳骑士艾伦出现了！*#WHITE#
+	text = [[#LIGHT_GREEN#*空气在你身边回旋，突然高阶太阳骑士艾琳出现了！*#WHITE#
 你不是一个人在战斗！我们一起来阻止他们，战斗至最后一刻！]],
 	answers = {
 		{"很高兴你能协助我，女士！我们来打败这些巫师！"},

@@ -71,7 +71,7 @@ end
 
 newChat{ id="welcome",
 	text = [[#LIGHT_GREEN#*深红圣武士看上去极其疲惫，濒临死亡。你感觉戒指在和他共鸣，突然你意识到你能吸收他的力量来强化戒指。*#WHITE#
-来杀了我吧@playername@! 我的生活被摧毁，我的朋友被杀死，我的爱人艾琳也死了。都被你无情而残忍的双手杀死了！干掉我吧，让我就这样 #{italic}#休息#{normal}#吧.]],
+来杀了我吧@playername@! 我的一切都毁了，我的朋友被你们杀了，我的爱人艾琳也死了。都被你无情而残忍的双手杀死了！干掉我吧，让我就这样 #{italic}#安息#{normal}#吧.]],
 	answers = {
 		{"#LIGHT_GREEN#[杀死他来强化戒指]#WHITE# 如你所愿!", action=destroy, jump="destroy"},
 		{"#LIGHT_GREEN#[将他绑定到戒指上]#WHITE# 不，你活着对我更有用!", action=bind, jump="bind"},
@@ -79,7 +79,7 @@ newChat{ id="welcome",
 }
 
 newChat{ id="destroy",
-	text = [[#LIGHT_GREEN#*在你周围的邪恶能量凝聚到戒指中，吸收了约翰的剩余力量。
+	text = [[#LIGHT_GREEN#*你周围的邪恶能量凝聚到戒指中，吸收了约翰的剩余力量。
 戒指变得更加强大了。*#WHITE#
 艾琳... 我的爱人...]],
 	answers = {

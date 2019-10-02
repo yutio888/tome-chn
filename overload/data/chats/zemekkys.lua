@@ -43,7 +43,7 @@ newChat{ id="welcome",
 	text = [[#LIGHT_GREEN#*门上开了一个小洞，一副野蛮的眼睛凝视着你。*#WHITE#
 你想干什么， @playerdescriptor.race@?]],
 	answers = {
-		{"圣骑士艾伦跟我说你能帮助我，我想去马基·埃亚尔。", jump="help", cond=function(npc, player) return game.state:isAdvanced() and not player:hasQuest("west-portal") end},
+		{"太阳骑士艾琳跟我说你能帮助我，我想去马基·埃亚尔。", jump="help", cond=function(npc, player) return game.state:isAdvanced() and not player:hasQuest("west-portal") end},
 		{"我找到了血符祭剑，不过还没找到共鸣宝石。", jump="athame", cond=function(npc, player) return player:hasQuest("west-portal") and player:hasQuest("west-portal"):isCompleted("athame") and not player:hasQuest("west-portal"):isCompleted("gem") end},
 		{"我找到了共鸣宝石。", jump="complete", cond=function(npc, player) return player:hasQuest("west-portal") and player:hasQuest("west-portal"):isCompleted("gem") end},
 		{"抱歉，我得走了！"},
@@ -70,7 +70,7 @@ newChat{ id="offer",
 }
 newChat{ id="offer2",
 	text = [[#LIGHT_GREEN#*他瞪大了眼睛*#WHITE#
-艾伦的臭脚丫！真是那个水晶球！在这之后我们可以让你回家，如果……我们也可以给你在熔岩深渊中给你安个家。]],
+艾琳的臭脚丫！真是那个水晶球！在这之后我们可以让你回家，如果……我们也可以给你在熔岩深渊中给你安个家。]],
 	answers = {
 		{"我能进来了么？", jump="offer3"},
 	}

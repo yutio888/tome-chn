@@ -286,7 +286,6 @@ registerBirthDescriptorTranslation{
 	type = "subrace",
 	name = "Drem",
 	display_name = "德瑞姆",
-	locked = function() return profile.mod.allow_build.race_drem end,
 	locked_desc = [[无 面 ， 但 不 无 心]],
 	desc = {
 		"德 瑞 姆 是 生 存 于 地 底 深 处 异 变 种， 直 到 最 近 才 发 现 具 有 思 维 能 力 的 个 体。 他 们 仍 生 存 于 地 底 ， 认 为 他 们 不 会 被 地 上 种 族 欢 迎 。",

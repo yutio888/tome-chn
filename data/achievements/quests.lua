@@ -85,7 +85,7 @@ registerAchievementTranslation{
 registerAchievementTranslation{
 	name = "The High Lady's destiny", id = "WIN_AERYN",
 	chnName = "至高女士的命运",
-	desc = [[以艾伦的牺牲来阻止虚空传送门，通关ToME。]],
+	desc = [[以艾琳的牺牲来阻止虚空传送门，通关ToME。]],
 }
 registerAchievementTranslation{
 	name = "The Sun Still Shines", id = "WIN_AERYN_SURVIVE",

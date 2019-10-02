@@ -176,7 +176,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "You find a note containing the location of the Orc Prides on Aeryn's body.",
 	fct = function()
-		return "你在艾伦的尸体上找到了一张纸条，上面写着兽人部落的位置。"
+		return "你在艾琳的尸体上找到了一张纸条，上面写着兽人部落的位置。"
 	end,
 }
 

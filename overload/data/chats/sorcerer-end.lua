@@ -67,14 +67,14 @@ newChat{ id="yeek-unsure",
 			player:setQuestStatus("high-peak", engine.Quest.COMPLETED, "yeek")
 			player:hasQuest("high-peak"):win("yeek-sacrifice")
 		end},
-		{"#LIGHT_GREEN#[在最后关头你用意志抵抗了维网几秒钟，向艾伦传递了信息。]#WHITE# 艾伦女士，快杀了我！#{bold}#现在！#{normal}#",
+		{"#LIGHT_GREEN#[在最后关头你用意志抵抗了维网几秒钟，向艾琳传递了信息。]#WHITE# 艾琳女士，快杀了我！#{bold}#现在！#{normal}#",
 			cond=function(npc, player) return not void_portal_open(nil, player) and aeryn_alive(npc, player) and player:getWil() >= 55 end, jump="yeek-stab"
 		},
 	}
 }
 
 newChat{ id="yeek-stab",
-	text = [[#LIGHT_GREEN#*通过你的精神力量，艾伦明白了维网的计划。*#WHITE#
+	text = [[#LIGHT_GREEN#*通过你的精神力量，艾琳明白了维网的计划。*#WHITE#
 你是一位伟大的盟友和罕见的伙伴。我发誓，整个世界都会铭记你的牺牲。
 #LIGHT_GREEN#*一边说，她一边用剑刺入你的身体，终结了维网的计划。*#WHITE#
 ]],
@@ -103,7 +103,7 @@ newChat{ id="welcome",
 但是虚空传送门仍然打开着，在造物主穿过之前必须得关闭，否则一切努力都白费了！
 你搜索魔法师的尸体找到了一本笔记，上面写道：想要关闭传送门，只有牺牲一个生命才行。]],
 	answers = {
-		{"艾伦，很抱歉我们之中得有一个人牺牲才能维持这个世界的存在。#LIGHT_GREEN#[为了这个世界牺牲艾伦]", jump="aeryn-sacrifice", cond=aeryn_alive},
+		{"艾琳，很抱歉我们之中得有一个人牺牲才能维持这个世界的存在。#LIGHT_GREEN#[为了这个世界牺牲艾琳]", jump="aeryn-sacrifice", cond=aeryn_alive},
 		{"我会关闭它。#LIGHT_GREEN#[为了这个世界牺牲你自己。]", action=function(npc, player)
 			player.no_resurrect = true
 			player:die(player, {special_death_msg="sacrificing "..string.his_her_self(player).." for the sake of the world"})
@@ -132,7 +132,7 @@ newChat{ id="welcome",
 你赢得了这个游戏！
 马基·埃亚尔和远东大陆从法师会的黑暗计划和他们的神手中获救了。]],
 	answers = {
-		{"艾伦，你还好么？", jump="aeryn-ok", cond=aeryn_alive},
+		{"艾琳，你还好么？", jump="aeryn-ok", cond=aeryn_alive},
 		{"[离开]", action=function(npc, player) player:hasQuest("high-peak"):win("full") end},
 	}
 }

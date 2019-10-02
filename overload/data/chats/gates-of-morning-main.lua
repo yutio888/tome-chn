@@ -20,7 +20,7 @@
 newChat{ id="welcome",
 	text = [[我能帮你什么忙么？]],
 	answers = {
-		{"艾伦女士，我终于回家了！[告诉她你的故事。]", jump="return", cond=function(npc, player) return player:hasQuest("start-sunwall") and player:isQuestStatus("start-sunwall", engine.Quest.COMPLETED, "slazish") and not player:isQuestStatus("start-sunwall", engine.Quest.COMPLETED, "return") end, action=function(npc, player) player:setQuestStatus("start-sunwall", engine.Quest.COMPLETED, "return") end},
+		{"艾琳女士，我终于回家了！[告诉她你的故事。]", jump="return", cond=function(npc, player) return player:hasQuest("start-sunwall") and player:isQuestStatus("start-sunwall", engine.Quest.COMPLETED, "slazish") and not player:isQuestStatus("start-sunwall", engine.Quest.COMPLETED, "return") end, action=function(npc, player) player:setQuestStatus("start-sunwall", engine.Quest.COMPLETED, "return") end},
 		{"告诉我更多有关晨曦之门的事。", jump="explain-gates", cond=function(npc, player) return player.faction ~= "sunwall" end},
 		{"在我来这里之前，我在马基·埃亚尔遇到了太阳堡垒的成员。你知道这件事么？", jump="sunwall_west", cond=function(npc, player) return game.state.found_sunwall_west and not npc.been_asked_sunwall_west end, action=function(npc, player) npc.been_asked_sunwall_west = true end},
 		{"我在搜集法杖的线索，我需要你的帮助。", jump="clues", cond=function(npc, player) return game.state:isAdvanced() and not player:hasQuest("orc-pride") end},
@@ -159,7 +159,7 @@ newChat{ id="orc-breeding-pits",
 				local ro = game.zone:makeEntity(game.level, "object", {ignore_material_restriction=true, type="gem", special=function(o) return o.material_level and o.material_level >= 5 end}, nil, true)
 				if ro then
 					ro:identify(true)
-					game.logPlayer(player, "艾伦交给你: %s", ro:getName{do_color=true})
+					game.logPlayer(player, "艾琳交给你: %s", ro:getName{do_color=true})
 					game.zone:addEntity(game.level, ro, "object")
 					player:addObject(player:getInven("INVEN"), ro)
 				end

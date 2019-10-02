@@ -110,8 +110,8 @@ registerInscriptionTranslation{
 		local bonus2 = math.floor(data.dur * bonus)
 		return ([[激 活 这 个 纹 身 可 以让你忍受致死的伤害，持续%d回合。
 		当 应用 纹 身 激 活 时， 你 的 生 命 值 只 有 在 降 低 到 -%d 生 命 时 才 会 死 亡。
-		你每失去1%生命值，持续时间和生命值下限就会增加1%%。（目前 %d 生命值， %d 持续时间）
-		效 果 结 束 时， 如 果 你 的 生 命 值 在 0 以 下 ， 会 变 为 1 点。 ]]):formatformat(data.dur, data.die_at + data.inc_stat * 30, bonus1, bonus2)
+		你每失去1%%生命值，持续时间和生命值下限就会增加1%%。（目前 %d 生命值， %d 持续时间）
+		效 果 结 束 时， 如 果 你 的 生 命 值 在 0 以 下 ， 会 变 为 1 点。 ]]):format(data.dur, data.die_at + data.inc_stat * 30, bonus1, bonus2)
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)

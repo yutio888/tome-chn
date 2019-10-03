@@ -88,8 +88,9 @@ function _M:onPartyDeath(src, death_note)
 		if not death_note.special_death_msg then
 			msg = "玩家%s 等级 %d %s %s %s 而死，杀死他（她）的是 %s%s%s ，死在第 %s 层， %s。"
 			short_msg = "%s(%d %s %s)  %s 而死，被 %s%s 杀死于 %s %s."
-			local srcname = src.name
-			local killermsg = (src.killer_message and " "..("，" .. killer_msg_chn[src.killer_message] or src.killer_message) or ""):gsub("#sex#", game.player.female and "她" or "他")
+			local srcname = src.unique and src.name or src.name:a_an()
+			local killermsg = (src.killer_message and " "..("，" .. killer_msg_chn[src.killer_message] or src.killer_message) or "")
+			:gsub("#sex#", game.player.female and "她" or "他")
 			if src.name == game.player.name then
 				srcname = game.player.female and "她自己" or "他自己"
 				killermsg = rng.table{

@@ -131,6 +131,7 @@ killer_msg_chn["and revived as a mindless horror"] = "并作为一只无思想�
 killer_msg_chn["and hung on a wall-spike"] = "并被挂在墙上的长钉上"
 killer_msg_chn["and flushed out to sea"] = "并被扔进海里"
 killer_msg_chn["and brought back to Vargh for experimentations"] = "并被带去瓦尔弗成为实验对象"
+killer_msg_chn["and brought back to Vargh for experimentation"] = "并被带去瓦尔弗成为实验对象"
 killer_msg_chn["and was turned into icicles"] = "并被冻成冰柱"
 killer_msg_chn["and was feasted upon by wolves"] = "并被群狼分食"
 killer_msg_chn["and mind-probed"] = "并被读心"

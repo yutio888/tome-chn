@@ -150,14 +150,14 @@ registerEgoTranslation{
 }
 registerEgoTranslation{
 	file = "mindstars",
-	name = "of disruption",
+	name = " of disruption",
 	["combat.special_on_hit.desc"] = function(self, who, special)
 				return ("使目标有 10%% 几率施法失败，并且每回合有 10%% 几率取消一项魔法持续技能, 可叠加至 50%%"):format()
 			end,
 }
 registerEgoTranslation{
 	file = "ranged",
-	name = "of disruption",
+	name = " of disruption",
 	["combat.special_on_crit.desc"] = "沉默目标",
 }
 
@@ -268,7 +268,7 @@ registerEgoTranslation{
 }
 registerEgoTranslation{
 	file = "weapon",
-	name = "of disruption",
+	name = " of disruption",
 	["combat.special_on_hit.desc"] = function(self, who, special)
 				return ("使目标有 10%% 几率施法失败，并且每回合有 10%% 几率取消一项魔法持续技能, 可叠加至 50%%"):format()
 			end,

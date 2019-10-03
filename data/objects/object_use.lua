@@ -22,7 +22,7 @@ objUse["summon Limmir the jeweler at the center of the lake of the moon"] = "在
 objUse["teleport you anywhere on the level, randomly"] = "将你传送至当前地图的随机 位置"
 objUse["create a temporary shield that absorbs damage"] = "吸收护盾"
 objUse["blink to a nearby random location(rad %d)"] = "随 机 传 送 到 附 近 位 置 (半径 %d)"
-objUse["channel mana (increasing mana regen by 500% for ten turns)"] = "法力回复（提升法力回复500% 持续10回合）"
+objUse["channel mana (increasing mana regen by 2000% for ten turns)"] = "法力回复（提升法力回复2000% 持续10回合）"
 objUse["detect the presence of creatures around you"] = "查看生物"
 objUse["light the area"] = "照亮区域"
 objUse["teleport randomly"] = "随机传送"
@@ -42,7 +42,7 @@ objUse["project damage in a circle from the staff"] = "从法杖中发射一圈�
 objUse["unleash an elemental blastwave, dealing %0.2f - %0.2f %s damage in a radius %d around the user"] = "从法杖中发射一圈破坏能量, 造成 %0.2f 到 %0.2f %s伤害，伤 害 半 径 %d"
 objUse["channel mana (increasing mana regeneration by 500%% for ten turns)"] = "法力灌注（在10回合内增加500％法力回复）"
 objUse["project damage in a cone from the staff"] = "从法杖中发射一片锥形破坏 能量"
-objUse["conjure elemental energy in a radius %d cone, dealing %0.2f - %0.2f %s damage"] = "从 法 杖 中 发  射一  片 %d 码 的 锥 形 破 坏 能 量 ， 造 成 %0.2f 到 %0.2f %s 伤害。"
+objUse["conjure elemental energy in a radius %d cone, dealing %0.2f to %0.2f %s damage"] = "从 法 杖 中 发  射一  片 %d 码 的 锥 形 破 坏 能 量 ， 造 成 %0.2f 到 %0.2f %s 伤害。"
 objUse["release a wave of psionic power"] = "释放一波超能力量"
 objUse["generate a personal shield"] = "产生一个单体护盾"
 objUse["regenerate %d life over 5 turns"] = "在5回合内回复 %d 生命值"
@@ -93,21 +93,18 @@ objUse["boost movement speed by 300% for up to 5 turns (or until you perform a n
 objUse["shoot a bolt of spydric poison out to range %d, dealing %0.2f nature damage (based on Magic) over %d turns while rendering the target unable to move"] = "发射蜘蛛毒素, 对%d码内的敌人造成%0.2f点自然伤害(基于魔法), 并使其在%d回合内无法移动"
 objUse["raise one or two undead rats to fight beside you"] = "召唤1-2个亡灵鼠为你作战"
 --护符技能
---wands powers
-objUse["reveal the area around you dispelling darkness and detecting the presence of nearby creatures (rad %d)"] = "照 明 并 侦 查 你 附 近 的 生 物（半 径 范 围  %d）"
-objUse["disarm traps (%d disarm power, Magic) along a range %d line"] = "拆 除 陷 阱 （强 度 %d， 基 于 魔法），范围%d"
-objUse["creates a wall of flames lasting for 4 turns (dam %d overall)"] = "制 造 一 堵 持 续 4 回 合 的 火 墙（ 共计 %d点 伤 害 ）"
-objUse["fire a bolt of a random element (dam %d-%d)"] = "发射随机元素弹，伤害（%d-%d）"
---torques powers
-objUse["teleport randomly (rad %d)"] = "随机传送（半径范围 %d）"
-objUse["setup a psionic shield, reducing all physical, nature, temporal and acid damage by %d for 7 turns"] = "制造一个灵能护盾，减少 %d 所有物理、自然、时空和酸性伤害，持续7回合"
-objUse["setup a psionic shield, reducing all fire, cold, light, and arcane damage by %d for 7 turns"] = "制造一个灵能护盾，减少 %d 所有火系、冰冷、光系和奥术伤害，持续7回合"
-objUse["setup a psionic shield, reducing all lightning, blight, mind, and darkness damage by %d for 7 turns"] = "制造一个灵能护盾，减少 %d 所有闪电、枯萎、精神和暗影伤害，持续7回合"
-objUse["absorb and nullify at most %d detrimental mental status effects in the next 10 turns"] = "在接下来的10回合内，吸收并 消除大部分 %d 负面精神效果"
-objUse["fire a blast of psionic energies in a range %d beam (dam %d-%d)"] = "释放一束长度%d的灵能光束（伤害 %d-%d）"
---totems powers
-objUse["remove up to %d poisons or diseases from a target within range %d (Willpower)"] = "移 除 目 标 身 上 %d 种 毒 素 和 疾 病 ， 距 离 限 制 %d（基 于 意 志 ）"
-objUse["heal a target within range %d (Willpower) for %d"] = "治疗%d码（基于意志）内目标 %d 点生命值"
+
+objUse["setup a psionic shield, reducing all damage taken %d for 5 turns"] = "制造超能护盾，5回合内受到的伤害减少%d"
+objUse["remove 1 confusion or silence effect and prevent the application of %d detrimental mental effects for 5 turns"] = "除去一个沉默或混乱效果，并在接下来的5回合内防止至多 %d 项精神负面状态"
+--objUse["project a gust of wind in a cone knocking enemies back %d spaces and dealing %d damage"]= "制造一阵狂风，击退锥形范围内的敌人至多%d格并造成%d伤害"
+--objUse["blast the opponent's mind dealing %d mind damage and silencing them for 4 turns"] = "冲击敌人精神，造成 %d 精神伤害并沉默4回合"
+--objUse["heals yourself and all friendly characters within 10 spaces for %d"] ="治疗你和周围10格内所有友方生物 %d 生命值"
+--objUse["instantly sting an enemy dealing %d nature damage over 7 turns and reducing their healing by 50%%%%"] ="立即叮咬敌人，在7回合造成 %d 自然伤害，并降低50%%%%治疗系数"
+--objUse["harden the skin for 7 turns increasing armour by %d and armour hardiness by %d%%%%"] = "在7回合内硬化皮肤，护甲增加 %d 护甲硬度增加 %d%%%%"
+--objUse["reveal the area around you, dispelling darkness (radius %d, power %d based on Magic), and detect the presence of nearby creatures for 10 turns"] = "揭示周围区域，驱散黑暗（范围%d，强度%d基于魔法）,并在10回合内侦察周围生物"
+--objUse["create a radius %d storm for %d turns. Each turn, creatures within take %d lightning damage and will be dazed for 1 turn (%d total damage)"] = "制造一场半径%d的风暴，持续 %d 回合。 每回合将对卷入其中的生物造成 %d 闪电伤害，并眩晕1回合。（总伤害%d）"
+--objUse["fire a magical bolt dealing %d %s damage"] = "发射魔法箭，造成%d %s伤害"
+--objUse["create a shield absorbing up to %d damage on yourself and all friendly characters within 10 spaces for %d turns"] ="你和10格内所有友方生物获得一层能吸收 %d 伤害的护盾，持续 %d 回合"
 
 
 --药水技能

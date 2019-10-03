@@ -20,7 +20,7 @@ objects:addObjects({
 	subtype = "torque",
 	sName = "d.steel",
 	egos = "torques",
-	enName = "dwarven-steel torque",
+	enName = "dwarven%-steel torque",
 	chName = "矮人钢项圈",
 	chDesc = "项圈是由强大的精神能量制造而成，用来储存灵能。",
 })

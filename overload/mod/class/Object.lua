@@ -2152,58 +2152,42 @@ function _M:getUseDesc(use_actor)
 			local t_name = self.talent_cooldown == "T_GLOBAL_CD" and "所有护符" or "技能 "..use_actor:getTalentDisplayName(use_actor:getTalentFromId(self.talent_cooldown)):gsub("Medical Injector","药物注射器")
 			local use_name = desc:format(self:getCharmPower(use_actor))
 			
-			use_name = use_name:gsub("fire a blast of psionic energies in a range ","释放一束长度"):gsub("beam","射线")
-			:gsub("disarm traps","解除陷阱")
-			:gsub(" disarm power, Magic","强度，基于魔法")
-			:gsub("along a range","在一条长度")
-			:gsub("line","的直线上")
-			:gsub("remove up to ","除去至多"):gsub("poisons or diseases from a target within range ","个 毒 素 和 疾 病 ， 距 离 限 制"):gsub("Willpower","基于意志")
-			:gsub("heal a target within range ","治疗距离"):gsub("(Willpower)","(基于意志)")
-			:gsub("project a bolt from the staff (to range ","发射元素球，距离")
-			:gsub("unleash an elemental blastwave, dealing","释放元素冲击波，造成"):gsub("damage in a radius","伤害，半径"):gsub("around the user","")
-			:gsub("conjure elemental energy in a radius","发射锥形元素能量，半径"):gsub("cone, dealing","造成")
-				:gsub("remove ","除去")
-			:gsub(" physical effects and grants a frost aura","物理效果并制造 冰 霜 领 域 ， 获 得"):gsub("cold, darkness and nature affinity","寒冷 、暗影 和自然伤害吸收")
-			:gsub(" magical effects and grants a fiery aura","魔法效果并制造 火 焰 领 域 ， 获 得"):gsub("fire, light and lightning affinity","火焰 、光明 和闪电伤害吸收")
- 			:gsub(" mental effects and grants a water aura","精神效果并制造 水 之 领 域 ， 获 得"):gsub("blight, mind and acid affinity","枯萎 、精神 和酸性伤害吸收")
-			if use_name:find("harden the skin for") then
-				use_name = use_name:gsub("harden the skin for 7 turns increasing armour by","硬化皮肤7回合，并增加")
-		    	:gsub("and armour hardiness by","护甲值和护甲硬度")
-		    elseif use_name:find("gaining psi and hate equal to") then
-				use_name = use_name:gsub("inflict","造成"):gsub("mind damage","精神伤害"):gsub("gaining psi and hate equal to","获得所造成伤害值"):gsub("of the damage done", "的超能力值和仇恨值")
-			elseif use_name:find("reveal the area around you, dispelling darkness") then
-				use_name = use_name:gsub("reveal the area around you, dispelling darkness %(radius", "展露你周围的地形，驱除黑暗（半径"):gsub("power", "强度"):gsub("based on Magic%), and detect the presence of nearby creatures for 3 turns", "基于魔法），并检测周围生物的行踪三回合。")
-			elseif use_name:find("creates a wall of flames lasting 4 turns") then
-				use_name = use_name:gsub("creates a wall of flames lasting 4 turns %(dealing ", "制造持续4回合的火墙（共造成"):gsub("fire damage overall%)", "点火焰伤害）")
-			elseif use_name:find("fire a bolt of a random element with") then
-				use_name = use_name:gsub("fire a bolt of a random element with %(base%) damage", "射出一束随机元素，基础伤害"):gsub("to", "到")
-			elseif use_name:find("project a melee attack out to range") then
-				use_name = use_name:gsub("project a melee attack out to range", "在")
-				:gsub(", dealing", "码范围内投射一次近战攻击，造成"):gsub("%(mind%) weapon damage", "（精神）武器伤害")
-			elseif use_name:find("bonus disarm power, based on Magic") then
-				use_name = use_name:gsub("disarm traps", "拆除陷阱")
-				:gsub("bonus disarm power, based on Magic", "点额外拆除强度，基于魔法"):gsub("along a range", "范围为长度为"):gsub("line", "的直线")
-			elseif use_name:find("let you fight up to") then
-				use_name = use_name:gsub("let you fight up to","令你生命为")
-				:gsub("life and reduces all damage by ","仍能生存，同时全体伤害抗性增加")
-				:gsub("for","持续")
-				:gsub("turns","回合")
-				:gsub("takes no time to activate","使用不消耗时间")
+			if use_name:find("setup a psionic shield, reducing all damage taken") then
+				use_name = use_name:gsub("setup a psionic shield, reducing all damage taken","制造超能护盾，减少全部伤害"):gsub("for 5 turns","点，持续5回合")
+			elseif use_name:find("remove 1 confusion or silence effect and prevent the application of ") then
+				use_name = use_name:gsub("remove 1 confusion or silence effect and prevent the application of ","除去一个沉默或混乱效果，并在接下来的5回合内防止至多"):gsub(" detrimental mental effects for 5 turns"," 项精神负面状态")
+			elseif use_name:find("project a gust of wind in a cone knocking enemies back") then
+				use_name = use_name:gsub("project a gust of wind in a cone knocking enemies back","制造一阵狂风，击退锥形范围内的敌人至多"):gsub("spaces and dealing","格并造成"):gsub("damage","伤害")
+			elseif use_name:find("blast the opponent's mind dealing") then 
+				use_name = use_name:gsub("blast the opponent's mind dealing","冲击敌人精神，造成"):gsub("mind damage and silencing them for 4 turns","精神伤害并沉默4回合")
+			elseif use_name:find("heals yourself and all friendly characters within 10 spaces for ") then
+				use_name = use_name:gsub("heals yourself and all friendly characters within 10 spaces for ","治疗你和周围10格内所有友方生物").."生命值"
+			elseif use_name:find("instantly sting an enemy dealing ") then
+				use_name = use_name:gsub("instantly sting an enemy dealing","立即叮咬敌人，在7回合造成"):gsub("nature damage over 7 turns and reducing their healing by 50%%","自然伤害，并降低50%%治疗系数")
+			elseif use_name:find("harden the skin for 7 turns increasing armour by") then
+				use_name = use_name:gsub("harden the skin for 7 turns increasing armour by","在7回合内硬化皮肤，护甲增加"):gsub("and armour hardiness by","护甲硬度增加")
+			elseif use_name:find("summon a resilient tentacle up to") then
+				use_name = use_name:gsub("summon a resilient tentacle up to ","在至多"):gsub("spaces away for","格范围内召唤一只持续"):gsub("turns.  Each turn the tentacle will strike a random enemy in range 3 dealing physical damage and attempting to pin them","回合的强韧触手。 每回合触手会攻击3格内的随机敌人， 造成物理伤害， 并尝试定身")
+				:gsub("Tentacle Stats","触手数据"):gsub("Life","生命"):gsub("Base Damage","基础伤害"):gsub("All Resist","全体伤害抗性"):gsub("Armor","护甲")
+			elseif use_name:find("reveal the area around you, dispelling darkness ")	then
+				use_name = use_name:gsub("reveal the area around you, dispelling darkness ","揭示周围区域，驱散黑暗"):gsub("radius","半径"):gsub(", power ","， 强度"):gsub("based on Magic","基于魔法"):gsub(", and detect the presence of nearby creatures for 10 turns","， 并在10回合内侦察周围生物 ")
+			elseif use_name:find("lightning damage and will be dazed for 1 turn") then
+				use_name = use_name:gsub("create a radius ","制造一场半径"):gsub("storm for","的风暴，持续"):gsub("turns. Each turn, creatures within take ","回合。 每回合将对卷入其中的生物造成"):gsub("lightning damage and will be dazed for 1 turn ","闪电伤害，并眩晕1回合 "):gsub("total damage","总伤害")
+			elseif use_name:find("fire a magical bolt dealing") then
+				use_name = use_name:gsub("fire a magical bolt dealing ","发射魔法箭，造成"):gsub("damage","伤害")
+				:gsub("fire","火焰"):gsub("cold","寒冷"):gsub("lightning","闪电"):gsub("acid","酸性")
+			elseif use_name:find("damage on yourself and all friendly characters within 10 spaces for") then
+				use_name = use_name:gsub("create a shield absorbing up to ","你和10格内所有友方生物获得一层能吸收"):gsub("damage on yourself and all friendly characters within 10 spaces for ","伤害的护盾，持续"):gsub("turns","回合")
+				
+			elseif use_name:find("increasing mana regeneration by ") then
+				use_name = use_name:gsub("channel mana","传导法力"):gsub("increasing mana regeneration by ","5回合内法力恢复速度增加"):gsub("for 5 turns","")
+			elseif use_name:find("conjure elemental energy in a radius") then
+				use_name = use_name:gsub("conjure elemental energy in a radius ","在半径"):gsub(" cone, dealing ","的锥形范围内调动元素能量，造成"):gsub("to","到"):gsub("damage","伤害"):gsub("ARCANE","奥术")
+			elseif use_name:find("gaining psi and hate equal to 10") then
+				use_name = use_name:gsub("inflict","造成"):gsub("mind damage","精神伤害"):gsub("range","范围"):gsub("gaining psi and hate equal to","获取等于"):gsub(" of the damage done","伤害值的超能力值和仇恨值")
 			end
-			use_name = use_name:gsub("damage","伤害"):gsub("dealing","造成"):gsub("for",""):gsub("dam","伤害"):gsub(" to ","到")
-			use_name = use_name:gsub("create a temporary shield that absorbs ","制造一层临时护盾，至多能吸收")
-			ret = tstring{{"color","YELLOW"}, ("可以用来施放【 %s 】\n\n。激活使%s进入%d回合冷却。"):format(desc:format(self:getCharmPower(use_actor)), t_name, usepower(self.use_power.power)), {"color","LAST"}}
---[[			local use_name_type = type(self.use_power.name)
-			local use_name = util.getval(objUse[self.use_power.name] or self.use_power.name, self):format(self:getCharmPower())
-			if use_name_type == "function" then
-				 use_name = use_name:gsub("fire a bolt of a random element","发射一束随机元素")
-						    :gsub("fire a beam of lightning","释放一束闪电")
-						    :gsub("fire a blast of psionic energies in a range ","释放一束长度"):gsub("beam","射线"):gsub("dam","伤害")
-						    :gsub("harden the skin for 7 turns increasing armour by","硬化皮肤7回合，并增加")
-						    :gsub("and armour hardiness by","护甲值和护甲硬度")
-			end
-			use_name = use_name:gsub("create a temporary shield that absorbs ","制造一层临时护盾，至多能吸收"):gsub("damage","伤害")
-			ret = tstring{{"color","YELLOW"}, ("可以用来施放【 %s 】，使其他所有护符进入 %d 回合冷却。"):format(use_name, self.use_power.power), {"color","LAST"}}]]
+			
+			ret = tstring{{"color","YELLOW"}, ("可以用来施放【 %s 】\n\n激活使%s进入%d回合冷却。"):format(use_name , t_name, usepower(self.use_power.power)), {"color","LAST"}}
 		else
 			ret = tstring{{"color","YELLOW"}, ("可以用来施放【 %s 】\n\n 激活消耗 %d 能量（共 %d/%d ）。"):format(desc, usepower(self.use_power.power), self.power, self.max_power), {"color","LAST"}}
 		end
@@ -2225,21 +2209,30 @@ function _M:getUseDesc(use_actor)
 	if self.charm_on_use then
 		ret:add(true, "当使用时:", true)
 		for fct, d in pairs(self.charm_on_use) do
-			if energy_type == "mana" then charm_on_use = charm_on_use:gsub("mana","法力")
-			elseif energy_type == "vim" then charm_on_use = charm_on_use:gsub("vim","活力")
-			elseif energy_type == "positive energy" then charm_on_use = charm_on_use:gsub("positive energy","正能量")
-			elseif energy_type == "negative energy" then charm_on_use = charm_on_use:gsub("negative energy","负能量")
-			elseif energy_type == "psi" then charm_on_use = charm_on_use:gsub("psi","意念力")
-			elseif energy_type == "hate" then charm_on_use = charm_on_use:gsub("hate","仇恨值")
-			elseif energy_type == "equilibrium" then charm_on_use = charm_on_use:gsub("equilibrium","自然失衡值")
-			elseif energy_type == "stamina" then charm_on_use = charm_on_use:gsub("stamina","体力值")
+			local charm_on_use = d[2](self, use_actor)
+			if charm_on_use:find("talent cooldowns by 2") then
+				charm_on_use = charm_on_use:gsub("reduce","减少"):gsub("talent cooldowns by 2","项技能2回合冷却时间")
+			elseif charm_on_use:find("increase the duration of") then
+			charm_on_use = charm_on_use:gsub("increase the duration of","延长"):gsub("beneficial effects by","项正面状态").."回合持续时间"
+			elseif charm_on_use:find("chance to evade weapon attacks for 2 turns") then
+			charm_on_use = charm_on_use:gsub("gain a ",""):gsub("chance to evade weapon attacks for 2 turns","几率闪避武器攻击，持续2回合")
+			elseif charm_on_use:find("heal for ") then
+			charm_on_use = charm_on_use:gsub("heal for ","治疗")
+			elseif charm_on_use:find("total effects of type disease, wound, or poison") then
+			charm_on_use = charm_on_use:gsub("cleanse ","解除至多"):gsub("total effects of type disease, wound, or poison","项疾病、伤口或毒素效果")
+			elseif charm_on_use:find("increase all damage penetration by ") then
+			charm_on_use = charm_on_use:gsub("increase all damage penetration by","在2回合内增加"):gsub("for 2 turns","全体伤害抗性穿透")
+			elseif charm_on_use:find("increase all damage by ") then
+			charm_on_use = charm_on_use:gsub("increase all damage by ","在2回合内获得"):gsub("for 2 turns","全体伤害加成")
+			elseif charm_on_use:find("reduce fatigue by ") then
+			charm_on_use = charm_on_use:gsub("reduce fatigue by ","在2回合内减少"):gsub("for 2 turns","疲劳")
 			end
 			-- Clean up the description if our chance to proc is 100%
 			local percent = d[1]
 			if percent < 100 then
-				ret:add({"color","ORCHID"}, "* ", tostring(d[1]), "% chance to ", d[2](self, use_actor), ".", true, {"color","LAST"})
+				ret:add({"color","ORCHID"}, "* ", tostring(d[1]), "% 几率 ", charm_on_use, ".", true, {"color","LAST"})
 			else
-				ret:add({"color","ORCHID"}, "* ", d[2](self, use_actor):capitalize(), ".", true, {"color","LAST"})
+				ret:add({"color","ORCHID"}, "* ", charm_on_use, ".", true, {"color","LAST"})
 			end
 		end
 	end

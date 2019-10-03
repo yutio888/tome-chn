@@ -145,6 +145,9 @@ damageTypeCHN["physical repulsion"] = "物理排斥"
 damageTypeCHN["slowing ice"] = "冰系减速"
 damageTypeCHN["stunning fire"] = "火焰震慑"
 damageTypeCHN["phase pulse"] = "相位脉动"
+damageTypeCHN["frozen earth"] = "冻结大地"
+damageTypeCHN["#YELLOW#Lite Light#LAST# Burst (radius 1)"] = "#YELLOW#光照#LAST#爆发（范围 1）"
+
 
 damageTypeCHN["item mind gloom"] = "黑暗光环"
 damageTypeCHN["item darkness numbing"] = "黑暗麻木"
@@ -155,6 +158,7 @@ damageTypeCHN["item lightning daze"] = "眩晕"
 damageTypeCHN["item blight disease"] = "疾病"
 damageTypeCHN["item manaburn arcane"] = "法力燃烧"
 damageTypeCHN["item nature slow"] = "减速"
+
 
 function getSpecialCombatDesc(type)
 	if not type then return end

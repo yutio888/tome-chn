@@ -21,6 +21,20 @@ logCHN:newLog{
 		return ("%s 的精神被操控。"):format(a)
 	end,
 }
+logCHN:newLog{
+	log = "#Target#'s mind is dominated.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 的精神被操控。"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target# is free from the domination.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 的精神不再被操控。"):format(a)
+	end,
+}
 
 logCHN:newLog{
 	log = "%s's mind recovers from the domination.",

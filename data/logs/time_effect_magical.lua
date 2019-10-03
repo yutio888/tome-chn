@@ -5,6 +5,27 @@ logCHN:newLog{
 		return ("%s被黑暗削弱！"):format(a)
 	end,
 }
+logCHN:newLog{
+	log = "#Target# looks more determined.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s看起来更加坚定了。"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target# is afflicted by a woeful disease!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s被恐怖的疾病感染！"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target# is free from the woeful disease.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s摆脱了恐怖疾病"):format(a)
+	end,
+}
 
 logCHN:newLog{
 	log = "#Target# regains their energy.",
@@ -142,6 +163,66 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
+	log = "#Target# becomes ethereal.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 变得虚幻。"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# is no longer ethereal.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 变得不再虚幻。"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# summons a storm to protect him!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 召唤出风暴来保护自己！"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target#'s storm dissipates.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 的风暴消失了。"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target# summons a prismatic shield to protect him!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 召唤出多彩护盾来保护自己！"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target#'s prismatic shield fades.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 的多彩护盾消失了。"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# is being purged of his physical ailments!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 正在净化自身物理疾病！"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target#'s is no longer being purged.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 不再被净化"):format(a)
+	end,
+}
+
+logCHN:newLog{
 	log = "#Target#'s eyes tingle.",
 	fct = function(a)
 		a = npcCHN:getName(a)
@@ -182,18 +263,18 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
-	log = "#Target# is overloaded with power.",
+	log = "#Target# looks healthier as he deals damage.",
 	fct = function(a)
 		a = npcCHN:getName(a)
-		return ("%s 的力量被超载。"):format(a)
+		return ("%s 造成伤害后看上去更健康了。"):format(a)
 	end,
 }
 
 logCHN:newLog{
-	log = "#Target# seems less dangerous.",
+	log = "#Target# stops leeching life.",
 	fct = function(a)
 		a = npcCHN:getName(a)
-		return ("%s 的力量恢复了正常。"):format(a)
+		return ("%s 不再吸取生命。"):format(a)
 	end,
 }
 
@@ -273,6 +354,22 @@ logCHN:newLog{
 	fct = function(a)
 		a = npcCHN:getName(a)
 		return ("%s 不再受诅咒。"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# is completely vulnerable to disease!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 对疾病毫无抵抗力！"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# no longer vulnerable to disease.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 恢复了对疾病的抵抗力！"):format(a)
 	end,
 }
 
@@ -1198,5 +1295,62 @@ logCHN:newLog{
 	fct = function(a)
 		a = npcCHN:getName(a)
 		return ("%s 不再波动。"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# can barely stand!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 难以站立！"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target# can move freely once more.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 可以自由移动了。"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target# speeds up in the retch.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 站在唾液中恢复了速度。"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target# speeds down outside of the retch.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 站在唾液外，速度降低了。"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target# starts to bleed darkness.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 流出黑暗的血液。"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target# stops to bleed darkness.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 不再流出黑暗的血液。"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target# looks shakes off the effect of the glyph of moonlight.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 摆脱了月光圣印的效果。"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "#Target# is weakened by the glyph of moonlight!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 被月光圣印削弱！"):format(a)
 	end,
 }

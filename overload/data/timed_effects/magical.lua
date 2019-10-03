@@ -397,7 +397,7 @@ newEffect{
 newEffect{
 	name = "PURGING", image = "talents/willful_tormenter.png", -- re-used icon
 	desc = "PURGING",
-	long_desc = function(self, eff) return ("目 标 每 回 合 清 除 一 项 物 理 疾 病 。"):
+	long_desc = function(self, eff) return ("目 标 每 回 合 清 除 一 项 物 理 负 面 状 态 。"):
 		format() end,
 	type = "magical",
 	subtype = { arcane=true, },

@@ -2185,6 +2185,15 @@ function _M:getUseDesc(use_actor)
 				use_name = use_name:gsub("conjure elemental energy in a radius ","在半径"):gsub(" cone, dealing ","的锥形范围内调动元素能量，造成"):gsub("to","到"):gsub("damage","伤害"):gsub("ARCANE","奥术")
 			elseif use_name:find("gaining psi and hate equal to 10") then
 				use_name = use_name:gsub("inflict","造成"):gsub("mind damage","精神伤害"):gsub("range","范围"):gsub("gaining psi and hate equal to","获取等于"):gsub(" of the damage done","伤害值的超能力值和仇恨值")
+			elseif use_name:find("let you fight up to") then
+				use_name = use_name:gsub("let you fight up to","令你生命为")
+				:gsub("life and reduces all damage by ","仍能生存，同时全体伤害抗性增加")
+				:gsub("for","持续")
+				:gsub("turns","回合")
+				:gsub("takes no time to activate","使用不消耗时间")
+			else use_name = use_name:gsub(" physical effects and grants a frost aura","物理效果并制造 冰 霜 领 域 ， 获 得"):gsub("cold, darkness and nature affinity","寒冷 、暗影 和自然伤害吸收")
+			:gsub(" magical effects and grants a fiery aura","魔法效果并制造 火 焰 领 域 ， 获 得"):gsub("fire, light and lightning affinity","火焰 、光明 和闪电伤害吸收")
+ 			:gsub(" mental effects and grants a water aura","精神效果并制造 水 之 领 域 ， 获 得"):gsub("blight, mind and acid affinity","枯萎 、精神 和酸性伤害吸收")
 			end
 			
 			ret = tstring{{"color","YELLOW"}, ("可以用来施放【 %s 】\n\n激活使%s进入%d回合冷却。"):format(use_name , t_name, usepower(self.use_power.power)), {"color","LAST"}}

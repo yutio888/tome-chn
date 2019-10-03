@@ -1556,10 +1556,10 @@ logCHN:newLog{
 }
 			
 logCHN:newLog{
-	log = "#Source# hits #Target# for %s (%0.0f total damage)%s.",
+	log = "#Source# hits #Target# for %s (#RED##{bold}#%0.0f#LAST##{normal}# total damage)%s.",
 	fct = function(a,b,c)
 		c = c:gsub("healing","治疗")
-		return ("#Source# 击中 #Target# 造成 %s (%0.0f 合计伤害)%s."):format(a,b,c)
+		return ("#Source# 击中 #Target# 造成 %s (#RED##{bold}#%0.0f#LAST##{normal}# 合计伤害)%s."):format(a,b,c)
 	end,
 }
 logCHN:newLog{

@@ -17,7 +17,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local dam = t.getDamage(self, t)
 		local radius = self:getTalentRadius(t)
-		return ([[引 起 一 片 暗 影 爆 炸， 在 半 径%d 的区 域 内 造 成 %0.2f光系和%0.2f 暗 影 伤 害。 
+		return ([[引 起 一 片 暗 影 爆 炸， 在 半 径%d 的区 域 内 造 成 %0.2f 光 系 和 %0.2f 暗 影 伤 害。 
 		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成。]]):
 		 format(radius, damDesc(self, DamageType.LIGHT, dam),damDesc(self, DamageType.DARKNESS, dam))
 		end,

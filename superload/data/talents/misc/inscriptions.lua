@@ -73,11 +73,10 @@ registerInscriptionTranslation{
 	display_name = "纹身：原初",
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		local what = table.concatNice(table.keys(data.what), ", ", " 或者 ")
-		return ([[激 活 这 个 纹 身 ，将 会 把 你 受 到 %d%%的 所 有 伤 害 转 化 为 治 疗 （在 伤 害 减 免 之 前 计 算 ），每 回 合 减 少 一 个 随 机 负 面 效 果 的 持 续 时 间 %d 回 合 ，持 续 %d 回 合 ]]):
+		return ([[激 活 这 个 纹 身 ，你 受 到 的 伤 害 将 部 分 转 化 为 治 疗 （在 伤 害 减 免 之 前 计 算 ）， 转 化 比 例 为 %d%% 。 此 外 ， 每 回 合 减 少 一 个 随 机 负 面 效 果 的 持 续 时 间 %d 回 合 ，持 续 %d 回 合 ]]):
 			format(data.power+data.inc_stat*10, data.reduce + data.inc_stat, data.dur)
 	end,
-		short_info = function(self, t)
+	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
 		return ([[伤 害 吸 收 %d%%; 减 少 %d; 持 续 %d; 冷 却 %d]]):format(data.power + data.inc_stat*10, data.reduce + data.inc_stat, data.dur, data.cooldown )
 	end,

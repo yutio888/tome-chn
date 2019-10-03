@@ -32,7 +32,7 @@ registerTalentTranslation{
 		local radius = self:getTalentRadius(t)
 		return ([[一 股 汹 涌 的 光 暗 狂 潮 围 绕 着 你， 在 你 周 围 %d 码 半 径 内 造 成 %0.2f 光 系 和 %0.2f 暗 影 范 围 伤 害。 
 		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成。]]):
-		 format(damDesc(self, DamageType.LIGHT, dam),damDesc(self, DamageType.DARKNESS, dam), radius)
+		 format(radius, damDesc(self, DamageType.LIGHT, dam),damDesc(self, DamageType.DARKNESS, dam))
 	end,
 }
 

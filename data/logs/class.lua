@@ -451,13 +451,19 @@ logCHN:newLog{
 
 
 logCHN:newLog{
-	log = "#ORANGE#%s shrugs off the effect '%s'!",
-	fct = function(a,b)
+	log = "#ORANGE#%s shrugs off %s '%s'!",
+	fct = function(a,b,c)
 		a = npcCHN:getName(a)
-		return ("#ORANGE#%s 豁免了“ %s ”效果！"):format(a,effName[b] or b)
+		return ("#ORANGE#%s 豁免了 %s “ %s ”效果！"):format(a,b:gsub("the effect",""):gsub("'s","的"), effName[c] or c)
 	end,
 }
-
+logCHN:newLog{
+	log = "#LIGHT_UMBER#%s resists %s '%s'!",
+	fct = function(a,b,c)
+		a = npcCHN:getName(a)
+		return ("#LIGHT_UMBER#%s 抵抗了 %s “ %s ”效果！"):format(a,b:gsub("the effect",""):gsub("'s","的"), effName[c] or c)
+	end,
+}
 logCHN:newLog{
 	log = "%s reflects the spell!",
 	fct = function(a)

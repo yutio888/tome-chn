@@ -1280,6 +1280,7 @@ timeEffectCHN:newEffect{
 timeEffectCHN:newEffect{
 	id = "GLYPH_OF_MOONLIGHT", 
 	enName = "Draining Moonlight",
+	chName = "吸能月光",
 	desc = function(self, eff) return ("目 标 被 圣 印 汲 取能 量 ， 造 成 的 所 有 伤 害 降 低 %d%%"):format(eff.reduce) end,
 	type = "魔法",
 	subtype = "暗影",

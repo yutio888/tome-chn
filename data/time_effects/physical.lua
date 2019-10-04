@@ -230,11 +230,39 @@ timeEffectCHN:newEffect{
 }
 
 timeEffectCHN:newEffect{
+	id = "HIGHBORN_WRATH",
+	enName = "Wrath of the Highborn",
+	chName = "无尽愤怒",
+	type = "物理",
+	subtype = "自然",
+}
+
+timeEffectCHN:newEffect{
 	id = "SHELL_SHIELD",
 	enName = "Shell Shield",
 	chName = "甲壳护盾",
 	type = "物理",
 	subtype = "自然",
+}
+
+timeEffectCHN:newEffect{
+	id = "SERPENTINE_NATURE",
+	enName = "Serpentine Nature",
+	chName = "蛇似自然",
+	desc = function(self, eff) 
+		return ("目 标 展 现 出 多 头 蛇 的 特 性，获 得 %d%% 闪 电、 酸 性 和 自 然 伤 害 吸 收 ，每 回 合 回 复 %d 生 命。"):format(eff.power, eff.regen)
+	end,
+	type = "物理",
+	subtype = "自然",
+	
+}
+timeEffectCHN:newEffect{
+	id = "EXPOSE_WEAKNESS",
+	enName = "Expose Weakness",
+	chName = "暴露弱点",
+	desc = function(self, eff) return ("目 标 集 中 精 力 穿 透 防 御 ， 护 甲 穿 透 增 加 %d 点 ， 命 中 增 加 %d 点， 全 体 伤 害 抗 性 穿 透 增 加 %d%%。"):format(eff.apr, eff.accuracy, eff.penetration) end,
+	type = "物理",
+	subtype = "",
 }
 
 timeEffectCHN:newEffect{

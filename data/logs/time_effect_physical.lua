@@ -476,7 +476,7 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
-	log = "The smoke around #target# dissipate.",
+	log = "The smoke around #target# dissipates.",
 	fct = function(a)
 		a = npcCHN:getName(a)
 		return ("%s周围的浓烟消失了。"):format(a)
@@ -628,6 +628,22 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
+	log = "#Target# is focusing on penetrating defenses.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s正集中精力突破防御。"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# is no longer focused on penetrating defenses.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s不再集中精力突破防御。"):format(a)
+	end,
+}
+
+logCHN:newLog{
 	log = "#Target# is moving defensively!",
 	fct = function(a)
 		a = npcCHN:getName(a)
@@ -674,6 +690,25 @@ logCHN:newLog{
 		return ("%s停止了复原。"):format(a)
 	end,
 }
+
+logCHN:newLog{
+	log = "A bear trap snaps onto #Target#!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("捕熊陷阱抓住了%s"):format(a)
+	end,
+}
+
+logCHN:newLog{
+	log = "#Target# is freed from a bear trap.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s从捕熊陷阱中解脱"):format(a)
+	end,
+}
+
+
+
 
 logCHN:newLog{
 	log = "#Target# is grabbed by a stone vine.",

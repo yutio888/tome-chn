@@ -71,6 +71,7 @@ flytextCHN = {
      NatureReplenishment="自然充能",
      StunLengthened="震慑延长",
      EternelWarrior="永远的战士",
+	 ExposeWeakness="暴露弱点",
 --mental
      Silenced="沉默",
      Confused="混乱",

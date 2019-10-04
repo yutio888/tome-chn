@@ -2823,11 +2823,19 @@ registerArtifactTranslation{
 }
 
 registerArtifactTranslation{
-	originName = "Taint of Purge",
+	originName = "Taint of Purging",
 	display_name = "堕落印记：清除",
 	unided_name = "",
 	desc = "",
 }
+
+registerArtifactTranslation{
+	originName = "Rune of Dissipation",
+	display_name = "消散符文",
+	unided_name = "",
+	desc = "",
+}
+
 
 registerArtifactTranslation{
 	originName = "Infusion of Wild Growth",

@@ -2160,8 +2160,8 @@ npcDescCHN["orc spirit"] = "一位穿着板甲的兽人，他手持着一柄擎�
 npcNameCHN["void shard"] = "虚空碎片"
 npcDescCHN["void shard"] = "它看起来就像是无尽虚空中的一个缝隙。"
 
-npcNameCHN["Vilespawn"] = "业障"
-npcDescCHN["Vilespawn"] = "这团史莱姆样的恶魔，诞生于卡帕萨斯之中，它张开了大嘴，试图吞噬你。"
+npcNameCHN["Vilespawn"] = "邪恶子嗣"
+npcDescCHN["Vilespawn"] = "这团腐烂的粘液从卡帕萨斯之喷出，它张开了大嘴，试图吞噬你。"
 
 npcNameCHN["walking corpse"] = "行尸"
 npcDescCHN["walking corpse"] = "这具尸体是刚复活的，看起来它正在学习怎么走路。"

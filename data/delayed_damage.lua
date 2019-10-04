@@ -12,6 +12,7 @@ function delayed_damage_trans(desc)
 	     :gsub("resilience","坚韧"):gsub("to stone","石头"):gsub("redirected","转移")
 	     :gsub("turned into osmosis","渗透")
 	     :gsub("to entropy","熵"):gsub("treason","背叛"):gsub("quantum shifted","量子转移")
+		 :gsub("to psi","超能力值")
 
 	return desc
 end

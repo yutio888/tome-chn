@@ -1660,12 +1660,12 @@ logCHN:newLog{
 
 
 logCHN:newLog{
-	log = "#YELLOW##Source# converts some damage to Psi!",
-	fct = function() return "#YELLOW##Source# 将伤害转移至超能力值!" end,
+	log = "#ORANGE##Source# converts some damage to Psi!",
+	fct = function() return "#ORANGE##Source# 将伤害转移至超能力值!" end,
 	}
 logCHN:newLog{
 	log = "#aaaaaa##Source# converts some damage to Psi!",
-	fct = function() return "#YELLOW##Source# 将伤害转移至超能力值!" end,
+	fct = function() return "#ORANGE##Source# 将伤害转移至超能力值!" end,
 	}
 	
 logCHN:newLog{

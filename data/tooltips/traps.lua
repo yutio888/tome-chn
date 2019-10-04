@@ -132,6 +132,7 @@ function getTooltipTrapCHN(desc)
 	if not desc then return end
 
 	for i = 1,#desc do
+		
 		if type(desc[i]) == "string" then 
             desc[i] = trapCHN:getName(desc[i])
 		end

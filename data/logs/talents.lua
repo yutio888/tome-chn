@@ -1075,7 +1075,7 @@ logCHN:newLog{
 	log = "#CADET_BLUE#Your %s has expired.",
 	fct = function(a)
 		if a== "trap" then return "#CADET_BLUE#你的陷阱消失了"
-		else return ("#CADET_BLUE#你的%s消失了"):format(a)
+		else return ("#CADET_BLUE#你的%s消失了"):format(logCHN:getName(a))
 		end
 	end,
 }

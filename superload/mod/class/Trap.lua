@@ -61,4 +61,36 @@ function _M:tooltip()
 	end
 end
 
+function _M:canTrigger(x, y, who, no_random)
+	if self.faction and who.reactionToward and who:reactionToward(self) >= 0 then return self.beneficial_trap end
+
+	local avoid
+	if who:attr("avoid_traps") then
+		avoid = "无视了"
+	elseif self.pressure_trap and (who:attr("levitation") or who:attr("avoid_pressure_traps")) then
+		avoid = "轻松无视了"
+	elseif not no_random and who.trap_avoidance and rng.percent(who.trap_avoidance) then
+		avoid = "小心避开了"
+	elseif not self.beneficial_trap and rng.percent(self.trigger_fail) then
+		avoid = "不知怎么就避开了"
+	elseif who:attr("walk_sun_path") and game.level then
+		for i, e in ipairs(game.level.map.effects) do if e.damtype == DamageType.SUN_PATH and e.grids[x] and e.grids[x][y] then	avoid = "闪避了" break end
+		end
+	end
+	
+	if avoid then
+		if self.x == who.x and self.y == who.y and game.level.map.seens(x, y) then
+			local known_player = self:knownBy(game.player)
+			if who.player then
+				if known_player then game.log("#CADET_BLUE#你 %s 一个陷阱 (%s).", avoid, logCHN:getName(self:getName())) end
+			else
+				game.logSeen(who, "#CADET_BLUE#%s %ss %s.", logCHN:getName(who.name), avoid, known_player and ("一个陷阱 (%s)"):format(logCHN:getName(self:getName())) or "地板上的某物")
+			end
+		end
+		return false
+	end
+
+	return true
+end
+
 return _M

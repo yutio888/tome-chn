@@ -1,5 +1,6 @@
 local _M = loadPrevious(...)
-
+local Faction = require "engine.Faction"
+local DamageType = require "engine.DamageType"
 --- Returns a tooltip for the trap
 -- requires the trap be known to player, full info only if identified
 function _M:tooltip()

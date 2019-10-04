@@ -296,7 +296,7 @@ registerInscriptionTranslation{
 		local data = self:getInscriptionData(t.short_name)
 		local str = ""
 		for k,v in pairs(data.wards) do
-			str = str .. ", " .. v .. " " .. k:lower()
+			str = str .. ", " .. v .. " " .. k:lower():gsub("fire","火焰"):gsub("cold","寒冷"):gsub("lightning","闪电"):gsub("blight","枯萎"):gsub("light","光系"):gsub("arcane","暗影"):gsub("physical","物理"):gsub("temporal","时空"):gsub("mind","精神"):gsub("nature","自然"):gsub("acid","酸性")
 		end
 		str = string.sub(str, 2)
 		return ([[激 活 符 文 展 开 一 个 护 盾，在 %d 回 合 内，抵 挡 以 下 类 型 的 伤 害 : %s]]) -- color me
@@ -305,7 +305,7 @@ registerInscriptionTranslation{
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
 		local str = table.concat(table.keys(data.wards), ", ")
-		return ([[%d 回合; %s]]):format(t.getDur(self, t), str:lower() )
+		return ([[%d 回合; %s]]):format(t.getDur(self, t), str:lower():gsub("fire","火焰"):gsub("cold","寒冷"):gsub("lightning","闪电"):gsub("blight","枯萎"):gsub("light","光系"):gsub("arcane","暗影"):gsub("physical","物理"):gsub("temporal","时空"):gsub("mind","精神"):gsub("nature","自然"):gsub("acid","酸性") )
 	end,
 }
 

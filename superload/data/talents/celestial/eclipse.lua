@@ -39,7 +39,7 @@ registerTalentTranslation{
 
 registerTalentTranslation{
 	id = "T_DARKEST_LIGHT",
-	name = "无尽黑暗",
+	name = "至暗之光",
 	info = function(self, t)
 		local radius = self:getTalentRadius(t)
 		local dotDam = t.getDotDamage(self, t)

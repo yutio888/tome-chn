@@ -221,6 +221,15 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
+	log = "#Target# is moving at extreme speed!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 走得飞快！"):format(a)
+	end,
+}
+
+
+logCHN:newLog{
 	log = "#Target# slows down.",
 	fct = function(a)
 		a = npcCHN:getName(a)

@@ -956,7 +956,7 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
-	log = "#Target# threads time as a shell!.",
+	log = "#Target# threads time as a shell!",
 	fct = function(a)
 		a = npcCHN:getName(a)
 		return ("%s扭曲了时间。"):format(a)

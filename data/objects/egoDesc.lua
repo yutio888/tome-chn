@@ -55,7 +55,7 @@ registerEgoTranslation{
 registerEgoTranslation{
 	file = "ammo",
 	name = " of crippling",
-	["combat.special_on_crit.desc"] = "Cripple the target reducing mind, spell, and combat action speeds by 30%",
+	["combat.special_on_crit.desc"] = "致残目标， 降低30% 精神、施法 和攻击速度",
 }
 
 registerEgoTranslation{
@@ -218,7 +218,7 @@ registerEgoTranslation{
 registerEgoTranslation{
 	file = "weapon",
 	name = " of crippling",
-	["combat.special_on_crit.desc"] = "Cripple the target reducing mind, spell, and combat action speeds by 30%",
+	["combat.special_on_crit.desc"] = "致残目标， 降低30% 精神、施法 和攻击速度",
 }
 registerEgoTranslation{
 	file = "weapon",

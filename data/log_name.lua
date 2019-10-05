@@ -1,10 +1,10 @@
 function logCHN:getName(name)
-	name = npcCHN:getName(name)
+	name = npcCHN:getNameOld(name)
 	if name:find(" from ") then
 		local f,e=name:find(" from ")
 		local teffect=name:sub(1,f-1)
 		local tname = name:sub(e + 1,string.len(name))
-		tname = npcCHN:getName(tname)
+		tname = npcCHN:getNameOld(tname)
 		tname = trapCHN:getName(tname)
 		teffect = timeEffectCHN:getName(teffect)
 		name = tname  .."的" .. teffect .."效果"
@@ -12,7 +12,7 @@ function logCHN:getName(name)
 		local f,e=name:find("'s ")
 		local tname=name:sub(1,f-1)
 		local ename=name:sub(e+1,string.len(name))
-		tname = npcCHN:getName(tname)
+		tname = npcCHN:getNameOld(tname)
 		ename = projectileCHN:getName(ename)
 		ename = trapCHN:getName(ename)
 		name = tname.."的"..ename

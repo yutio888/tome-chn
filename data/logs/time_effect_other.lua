@@ -385,12 +385,13 @@ logCHN:newLog{
 	end,
 }
 logCHN:newLog{
-	log = "#Target# is suffocating!",
+	log = "#Target# is suffocating.",
 	fct = function(a)
 		a = npcCHN:getName(a)
-		return ("%s进入窒息状态！"):format(a)
+		return ("%s进入窒息状态。"):format(a)
 	end,
 }
+
 
 logCHN:newLog{
 	log = "#Target# can breathe again",
@@ -399,6 +400,15 @@ logCHN:newLog{
 		return ("%s能够呼吸了"):format(a)
 	end,
 }
+
+logCHN:newLog{
+	log = "#Target# retunes the fabric of spacetime.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s重新恢复时空和谐。"):format(a)
+	end,
+}
+
 
 logCHN:newLog{
 	log = "#Target# fades!",

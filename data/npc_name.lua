@@ -4,6 +4,11 @@ npcDescCHN = {}
 npcCHN = {}
 
 function npcCHN:getName(name)
+	return logCHN:getName(name)
+end
+
+
+function npcCHN:getNameOld(name)
 	if not name then return nil end
 	if name:find("'s temporal clone") then name =npcCHN:getName(name:gsub("'s temporal clone","")).."的时空复制体"	
 	elseif name:find("'s Inner Demon") then name = npcCHN:getName(name:gsub("'s Inner Demon","")).."的心魔"	

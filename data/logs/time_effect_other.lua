@@ -521,3 +521,12 @@ logCHN:newLog{
 	log  = "#LIGHT_RED#%s explodes into a shower of gore!",
 	fct  = function(a) return("#LIGHT_RED#%s爆炸了！"):format(npcCHN:getName(a)) end,
 }
+
+logCHN:newLog{
+	log = "#Target# is mortally wounded!",
+	fct  = function(a) return("%s受到致命伤！"):format(npcCHN:getName(a)) end,
+}
+logCHN:newLog{
+	log = "#Target# overcomes the touch of death.",
+	fct  = function(a) return("%s摆脱了点穴。"):format(npcCHN:getName(a)) end,
+}

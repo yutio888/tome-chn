@@ -857,6 +857,83 @@ timeEffectCHN:newEffect{
 
 
 timeEffectCHN:newEffect{
+	id = "ZONE_AURA_CHALLENGE",
+	enName = "Challenge",
+	chName = "挑战",
+	desc = function(self, eff) if not eff.id_challenge_quest or not self:hasQuest(eff.id_challenge_quest) then return "???" else return self:hasQuest(eff.id_challenge_quest).name end end,
+	type = "其他",
+	subtype = "光环",
+}
+
+timeEffectCHN:newEffect{
+	id = "THROWING_KNIVES",
+	enName = "Throwing Knives",
+	chName = "飞刀投掷",
+	desc = function(self, eff) return ("当前准备的飞刀数： %d \n\n%s"):format(eff.stacks, self:callTalent(self.T_THROWING_KNIVES, "knivesInfo")) end,
+	type = "其他",
+	subtype = "策略",
+}
+
+--while strictly speaking these fit better as physical effects, the ability for a mob to layer 3 different physical debuffs on a player with one swing and block off clearing stuns via wild infusions is not good. bad enough that they can bleed/poison
+
+timeEffectCHN:newEffect{
+	id = "SCOUNDREL",
+	enName = "Scoundrel's Strategies",
+	chName = "街霸战术",
+	desc = function(self, eff) return ("目 标 身 上 的 伤 口 使 其 分 心， 暴 击 伤 害 系 数 降 低 %d%% 。"):
+		format( eff.power ) end,
+	type = "其他",
+	subtype = "策略",
+}
+
+timeEffectCHN:newEffect{
+	id = "FUMBLE",
+	enName = "Fumble",
+	chName = "笨拙",
+	desc = function(self, eff) return ("目 标 身 上 的 伤 口 令 人 分 心， 使 用 技 能 时 有 %d%% 几 率 失 败 并 受 到 %d 物 理 伤 害 。"):
+		format( eff.power*eff.stacks, eff.dam ) end,
+	type = "其他",
+	subtype = "策略",
+}
+
+timeEffectCHN:newEffect{
+	id = "TOUCH_OF_DEATH",
+	enName = "Touch of Death",
+	chName = "点穴",
+	desc = function(self, eff) return ("目 标 每 回 合 受 到 %0.2f 物 理 伤 害。在 这 个 状 态 下 死 亡 时 ， 会 发 生 爆 炸 ！"):format(eff.dam) end,
+	type = "其他", --extending this would be very bad
+	subtype = "",
+}
+
+timeEffectCHN:newEffect{
+	id = "MARKED",
+	enName = "Marked",
+	chName = "标记",
+	desc = function(self, eff) return ("目 标 被 标 记 了 ， 某 些 攻 击 会 更 加 有 效。"):format() end,
+	type = "其他",
+	subtype = "策略",
+}
+
+timeEffectCHN:newEffect{
+	id = "FLARE",
+	enName = "Flare", 
+	chName = "照明弹",
+	desc = function(self, eff) return ("目 标 被 照 明 弹 照 亮， 潜 行 和 隐 身 强 度 减 少 %d, 闪 避 减 少 %d 并 失 去 不 可 见 状 态 带 来 的 闪 避 加 成。"):format(eff.power, eff.power) end,
+	type = "其他",
+	subtype = "太阳",
+}
+
+timeEffectCHN:newEffect{
+	id = "PIN_DOWN",
+	enName = "Pinned Down",
+	chName = "击倒",
+	desc = function(self, eff) return ("下 一 次 稳 固 射 击 或 者 射 击 必 定 暴 击 并 触 发 标 记 。"):format() end,
+	type = "其他",
+	subtype = "策略",
+}
+
+
+timeEffectCHN:newEffect{
 	id ="DEMI_GODMODE",
 	enName ="Demigod Mode", 
 	desc =function(self, eff) return ("DEMI-GODMODE: Target has 10000 additional life and regenerates 2000 life per turn.  It deals +500%% damage, and has full ESP."):format() end,

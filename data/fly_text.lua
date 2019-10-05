@@ -215,6 +215,8 @@ flytextCHN = {
      Cauterize="灼烧",
      Suffocating="窒息",
      SpacetimeTuning="时空调谐",
+	 Marked="标记",
+	 TouchofDeath="点穴",
 --floor
 	 IcyFloor="冰面",
 	 FontofLife="生命之泉",

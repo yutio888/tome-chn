@@ -1557,6 +1557,16 @@ logCHN:newLog{
 		return "你没能设置腐蚀之种。"
 	end,
 }
+--gift/cold-drake
+logCHN:newLog{
+	log = "%s resists the freeze!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s抵抗了冻结！"):format(a)
+	end,
+}
+
+
 --gift/gift
 logCHN:newLog{
 	log = "#PINK#You can manage a maximum of %d summons at any time. You need %d Cunning to increase your limit.",
@@ -1651,6 +1661,13 @@ logCHN:newLog{
 	fct = function(a)
 		a = npcCHN:getName(a)
 		return ("%s抵抗了龙卷风！"):format(a)
+	end,
+}
+logCHN:newLog{
+	log = "%s resists the stun!",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s抵抗了震慑！"):format(a)
 	end,
 }
 

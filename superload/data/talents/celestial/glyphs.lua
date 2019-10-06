@@ -49,7 +49,7 @@ registerTalentTranslation{
 	name = "暮光之印",
 	info = function(self, t)
 		local dam = t.getDamage(self, t)
-		return ([[你 将 暮 光 能 量 注 入 圣 印 之 中， 使 其 立 刻 造 成  %d 光 系 或 %d 暗 影 伤 害 并 消 逝。
+		return ([[你 放 置 一 枚 临 时 的 暮 光 之 印 ， 立 刻 造 成 %d 光 系 或 者 %d 暗 影 伤 害 并 随 之 消 散 。 伤 害 类 型 在 光 系 和 暗 影 之 间 轮 流 切 换 。
 		你 可 以 连 续 使 用  %d  次 该 技 能 而 不 会 使 该 技 能 进 入 冷 却 ， 但 每 次 使 用 都 会 增 加 其 最 终 冷 却 时 间 2 回 合 。 当 触 发 次 数 达 到 上 限 ，或 你 在 1 回 合 内 没 有 使 用 这 个 技 能 时， 这 个 技 能 将 会 立 刻 进 入 冷 却。]]):format(damDesc(self, DamageType.LIGHT, dam), damDesc(self, DamageType.DARKNESS, dam), t.getConsecutiveTurns(self, t))
 	end,
 }

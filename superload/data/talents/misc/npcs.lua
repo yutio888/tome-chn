@@ -786,8 +786,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local chance = t.getChance(self, t)
 		local duration = t.getDuration(self, t)
-		local mindpowerChange = gloomTalentsMindpower(self)
-		return ([[在 黑 暗 光 环 里 的 每 一 个 目 标 每 回 合 必 须 与 你 的 精 神 强 度 进 行 豁 免 鉴 定， 未 通 过 鉴 定 则 有 %0.1f%% 概 率 受 到 黑 暗 痛 苦 持 续 %d 回 合， 你 对 受 黑 暗 痛 苦 折 磨 的 目 标 进 行 的 首 次 近 战 攻 击 必 定 暴 击。 ]]):format(chance, duration, mindpowerChange)
+		return ([[在 黑 暗 光 环 里 的 每 一 个 目 标 每 回 合 必 须 与 你 的 精 神 强 度 进 行 豁 免 鉴 定， 未 通 过 鉴 定 则 有 %0.1f%% 概 率 受 到 黑 暗 痛 苦 持 续 %d 回 合， 你 对 受 黑 暗 痛 苦 折 磨 的 目 标 进 行 的 首 次 近 战 攻 击 必 定 暴 击。 ]]):format(chance, duration)
 	end,
 }
 

@@ -1,3 +1,4 @@
+local DamageType = require "engine.DamageType"
 timeEffectCHN:newEffect{
 	id = "ITEM_BLIGHT_ILLNESS",
 	enName = "Illness",

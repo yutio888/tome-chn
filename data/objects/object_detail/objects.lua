@@ -156,7 +156,7 @@ function objects:getObjects(name,desc,subtype,short_name,is_ided,rare,unique)
 					if subtype == "shot" and prefix then prefix = prefix:gsub("pouch of ","") 
 					elseif subtype == "arrow" and prefix then prefix = prefix:gsub("quiver of ","") end 
 					local suffix = o.name:match(enName.."([^()]+)")
-					print("TAG:ObjectCHN","name:", o.name,"enName:", enName ,"prefix:", prefix, "suffix:", suffix)
+					-- print("TAG:ObjectCHN","name:", o.name,"enName:", enName ,"prefix:", prefix, "suffix:", suffix)
 					--[[if subtype == "torque" then
 						if name:find("portation") then suffix = " of psychoportation"
 						elseif name:find("kinetic") then suffix = " of kinetic psionic shield"

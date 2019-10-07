@@ -178,7 +178,7 @@ registerInscriptionTranslation{
 		local power = 100+5*self:getMag()
 		if data.power and data.inc_stat then power = data.power + data.inc_stat end
 
-		return ([[吸 收 并 反 弹 %d 持续 %d ; 冷却 %d]]):format(power, 5)
+		return ([[吸 收 并 反 弹 %d 持续 %d ; 冷却 %d]]):format(power, data.dur or 5, data.cd)
 	end,
 }
 

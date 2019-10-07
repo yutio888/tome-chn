@@ -260,8 +260,7 @@ ActorStats:defineStat("Constitution",	"con", 10, 1, 100, [[体质属性影响你
 体质可以提高你的最大生命值和物理豁免。]])
 -- Luck is hidden and starts at half max value (50) which is considered the standard
 ActorStats:defineStat("Luck",		"lck", 50, 1, 100, [[幸运属性影响你的角色在参与未知事件的幸运
-度。它可以增加你的暴击率，以及你进入随机
-Vault的几率……]])
+度。它可以增加你的暴击率，以及增加引发某些随机事件的几率。]])
 
 -- Actor leveling, player is restricted to 50 but npcs can go higher
 ActorLevel:defineMaxLevel(nil)

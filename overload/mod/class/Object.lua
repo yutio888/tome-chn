@@ -2072,7 +2072,7 @@ function _M:getTextualDesc(compare_with, use_actor)
 		end
 	end
 	for tid, data in pairs(talents) do
-		desc:add(talents[tid][3] and {"color","GREEN"} or {"color","WHITE"}, ("技能命中后释放： %s （%d%% 几率 等级 %d）。"):format(self:getTalentFromId(tid).name, talents[tid][1], talents[tid][2]), {"color","LAST"}, true)
+		desc:add(talents[tid][3] and {"color","GREEN"} or {"color","WHITE"}, ("技能（法术）命中后释放： %s （%d%% 几率 等级 %d）。"):format(self:getTalentFromId(tid).name, talents[tid][1], talents[tid][2]), {"color","LAST"}, true)
 	end
 
 	local talents = {}

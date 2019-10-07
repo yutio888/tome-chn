@@ -48,7 +48,7 @@ registerTalentTranslation{
 		同 种 效 果 最 多 每 12 回 合 触 发 一 次 。这 不 是 普 通 的 技 能 冷 却 。 
 		伤 害 和 效 果 强 度 随 你 的 灵 巧 值 增 加 ，伤 害 阈 值 随 你 的 等 级 增 加 ，施 加 附 加 效 果 的 强 度 由 你 的 精 神 强 度 和 法 术 强 度 的 最 高 值 决 定 。
 		%s]])
-		:format(t.getThreshold(self, t), t.getDamage(self, t), self:getTalentRadius(t), t.getAcid(self, t), blight_dam, blight_disease, t.getDarkness(self, t), t.getTemporal(self, t), t.getMind(self, t), str)
+		:format(t.getThreshold(self, t), self:getTalentRadius(t), t.getDamage(self, t), t.getAcid(self, t), blight_dam, blight_disease, t.getDarkness(self, t), t.getTemporal(self, t), t.getMind(self, t), str)
 	end,
 }
 
@@ -93,7 +93,7 @@ registerTalentTranslation{
 		 同 种 效 果 最 多 每 10 回 合 触 发 一 次 。这 不 是 普 通 的 技 能 冷 却 。
 		 伤 害 和 效 果 强 度 随 你 的 灵 巧 值 增 加 ，伤 害 阈 值 随 你 的 等 级 增 加 。
 		%s]])
-		:format(t.getThreshold(self, t), t.getDamage(self, t), self:getTalentRadius(t), t.getFire(self, t), cold.armor, cold.dam, t.getLightning(self, t), str)
+		:format(t.getThreshold(self, t), self:getTalentRadius(t),t.getDamage(self, t),  t.getFire(self, t), cold.armor, cold.dam, t.getLightning(self, t), str)
 	end,
 }
 

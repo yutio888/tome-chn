@@ -43,7 +43,7 @@ registerTalentTranslation{
 		local radius = self:hasEffect(self.EFF_AETHER_AVATAR) and 10 or 3
 		return ([[你 的 身 边 充 满 奥 术 力 量 ，阻 止 你 受 到 的 伤 害 ，并 将 其 改 为 扣 减 法 力 值 。
 		 你 受 到 的 伤 害 的  25%%  将 会 被 改 为 扣 减 法 力 值 ，每 点 伤 害 扣 减  %0.2f  点 法 力 值 。伤 害 护 盾 会 降 低 这 一 消 耗 。
-		 当 你 解 除 干 扰 护 盾 时 ，你 会 获 得  100  点 法 力 值 ，并 在 你 周 围 产 生 半 径 为  %d  的 致 命 的 奥 数 风 暴 ，持 续  10  回 合 ，每 回 合 造 成  10%%  的 吸 收 的 总 伤 害 ，共 造 成  %d  点 伤 害 。
+		 当 你 解 除 干 扰 护 盾 时 ，你 会 获 得  100  点 法 力 值 ，并 在 你 周 围 产 生 半 径 为  %d  的 致 命 的 奥 术 风 暴 ，持 续  10  回 合 ，每 回 合 造 成  10%%  的 吸 收 的 总 伤 害 ，共 造 成  %d  点 伤 害 。
 		 当 你 的 法 力 值 不 足  10%%  时 ，你 会 自 动 解 除 这 一 技 能 。
 		 伤 害 到 魔 法 的 比 例 受 你 的 法 术 强 度 加 成 。]]):
 		format(t.getManaRatio(self, t), radius, damDesc(self, DamageType.ARCANE, t.getMaxDamage(self, t)))

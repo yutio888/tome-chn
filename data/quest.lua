@@ -258,8 +258,10 @@ description = function(desc)
 	desc = string.gsub(desc,"As you approached Derth you saw a huge dark cloud over the small town."," 当 你 接 近 德 斯 村 时 你 看 到 一 个 巨 大 的 黑 色 乌 云 笼 罩 在 小 镇 上 方。 ")
 	desc = string.gsub(desc,"When you entered you were greeted by an army of air elementals slaughtering the population."," 当 你 进 入 村 庄 时， 你 看 到 的 景 象： 一 群 空 气 元 素 正 在 屠 杀 村 民。 ")
 	desc = string.gsub(desc,"You have dispatched the elementals but the cloud lingers still. You must find a powerful ally to remove it. There are rumours of a secret town in the mountains, to the southwest. You could also check out the Ziguranth group that is supposed to fight magic."," 你 已 经 驱 散 了 元 素 生 物， 但 是 天 上 乌 云 并 未 就 此 散 去。 \n 西 南 方 的 山 脉 之 中 有 一 个 传 说 中 的 小 镇， 你 也 能 顺 便 调 查 一 下 伊 格 兰 斯 这 个 反 魔 法 军 团。 ")
-	desc = string.gsub(desc,"You have learned the real threat comes from a rogue Archmage, a Tempest named Urkis. The mages of Angolwen are ready to teleport you there."," 你 得 知 真 正 的 威 胁 来 自 于 一 个 堕 落 元 素 法 师， 名 字 叫 乌 尔 切 斯， 精 通 风 暴 法 术， 安 格 利 文 的 法 师 已 经 准 备 好 把 你 传 送 到 那 里 去 了。 ")
+	desc = string.gsub(desc,"You have learned the real threat comes from a rogue Archmage, a Tempest named Urkis. The mages of Angolwen are ready to teleport you there."," 你 得 知 真 正 的 威 胁 来 自 于 一 个 堕 落 元 素 法 师， 名 字 叫 厄 奇 斯， 精 通 风 暴 法 术， 安 格 利 文 的 法 师 已 经 准 备 好 把 你 传 送 到 那 里 去 了。 ")
 	desc = string.gsub(desc,"You have learned the real threat comes from a rogue Archmage, a Tempest. You have been shown a secret entrance to his stronghold."," 你 得 知 真 正 的 威 胁 来 自 于 一 个 堕 落 元 素 法 师， 你 已 经 找 到 前 往 他 要 塞 的 秘 密 通 道。 ")
+	desc = desc:gsub("You have slain Urkis.  Return to Angolwen or Zigur for a reward.", "你干 掉 了 厄 奇 斯 。 现 在 返 回 安 格 列 文 或 者 伊 格 领 取 奖 励 吧 。")
+	des = desc:gsub("Urkis has been dealt with. Permanently.", "厄 奇 斯 被 永 远 解 决 掉 了 。")
 	return desc
 end}
 

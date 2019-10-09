@@ -133,8 +133,8 @@ newEffect{
 	subtype = { earth=true, stone=true, stun = true},
 	status = "detrimental",
 	parameters = {},
-	on_gain = function(self, err) return "#Target# turns to stone!", "+Stoned" end,
-	on_lose = function(self, err) return "#Target# is not stoned anymore.", "-Stoned" end,
+	on_gain = function(self, err) return "#Target# turns to #GREY#STONE#LAST#!", "+Stoned" end,
+	on_lose = function(self, err) return "#Target# is no longer a #GREY#statue#LAST#.", "-Stoned" end,
 	activate = function(self, eff)
 		eff.tmpid = self:addTemporaryValue("stoned", 1)
 		eff.poison = self:addTemporaryValue("poison_immune", 1)

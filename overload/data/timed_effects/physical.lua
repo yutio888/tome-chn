@@ -4163,7 +4163,7 @@ newEffect{
 newEffect{
 	name = "SWIFT_SHOT", image = "talents/skirmisher_swift_shot.png",
 	desc = "Swift Shot",
-	long_desc = function(self, eff) return ("Increases attack speed by %d%%."):format(eff.speed) end,
+	long_desc = function(self, eff) return ("Increases attack speed by %d%%."):format(eff.speed * 100) end,
 	type = "physical",
 	subtype = { tactic=true },
 	status = "beneficial",

@@ -354,7 +354,7 @@ timeEffectCHN:newEffect{
 	id = "SOLAR_INFUSION",
 	enName = "Solar Infusion",
 	chName = "日光充能",
-	desc = function(self, eff) return ("目 标 的 光 系、 暗 影 和 火 焰 伤 害 抗 性 增 加 %d%%。"):format(eff.resist) end,
+	desc = function(self, eff) return ("目标的光系、暗影和火焰伤害抗性增加 %d%%。"):format(eff.resist) end,
 	type = "魔法",
 	subtype = "",
 }
@@ -371,7 +371,7 @@ timeEffectCHN:newEffect{
 	enName = "Divine Glyphs",
 	chName = "神圣印记",
 	desc = function(self, eff)
-		return ("圣印最近被触发过， 提供 %d%% 光系 和 暗影 伤害吸收 与抗性。"):format(math.min(eff.maxStacks, eff.glyphstacks or 1)*5)
+		return ("圣印最近被触发过，提供 %d%% 光系和暗影伤害吸收与抗性。"):format(math.min(eff.maxStacks, eff.glyphstacks or 1)*5)
 	end,
 	type = "魔法",
 	subtype = "光系/暗影",
@@ -382,7 +382,7 @@ timeEffectCHN:newEffect{
 	enName = "Fatiguing Starlight",
 	chName = "疲倦星光",
 	long_desc = function(self, eff)
-		return ("被 疲 倦 的 星 光 感 染， 每 回 合 受 到 %d 暗影 伤害， 并且每次行动时 一个正处于冷却状态 的 技能 冷却时间 延长 一回合"):format(eff.src.summoner:damDesc(DamageType.DARKNESS, eff.dam))
+		return ("被疲倦的星光感染，每回合受到 %d 暗影伤害，并且每次行动时一个正处于冷却状态的技能冷却时间延长一回合"):format(eff.src.summoner:damDesc(DamageType.DARKNESS, eff.dam))
 	end,
 	type = "魔法",
 	subtype = "暗影",
@@ -404,7 +404,7 @@ timeEffectCHN:newEffect{
 	enName = "Shrouded in Darklight",
 	chName = "光暗环绕",
 	desc = function(self, eff)
-		return ("目标造成的 %d%% 伤害将被平分 然后转为 光系和暗影伤害。每回合受到 %d 光系 和 %d 暗影伤害 。"):format(eff.conversion * 100, eff.src:damDesc(DamageType.LIGHT, eff.dotDam), eff.src:damDesc(DamageType.DARKNESS, eff.dotDam))
+		return ("目标造成的 %d%% 伤害将被平分然后转为光系和暗影伤害。每回合受到 %d 光系和 %d 暗影伤害。"):format(eff.conversion * 100, eff.src:damDesc(DamageType.LIGHT, eff.dotDam), eff.src:damDesc(DamageType.DARKNESS, eff.dotDam))
 	end,
 	type = "魔法",
 	subtype = "光系/暗影",
@@ -629,7 +629,7 @@ timeEffectCHN:newEffect{
 	id = "WOEFUL_DISEASE",
 	enName = "Woeful Disease",
 	chName = "恐怖疫病",
-	desc = function(self, eff) return ("目标被疾病感染， 力量、 体质 和敏捷 减少 %d， 每回合受到 %0.2f 枯萎伤害。"):
+	desc = function(self, eff) return ("目标被疾病感染，力量、体质和敏捷减少 %d，每回合受到 %0.2f 枯萎伤害。"):
 		format(eff.str, eff.con, eff.dex, eff.dam) end,
 	type = "魔法",
 	subtype = "疾病/枯萎",
@@ -639,7 +639,7 @@ timeEffectCHN:newEffect{
 	id = "WOEFUL_DARKNESS", 
 	enName = "Woeful Darkness",
 	chName = "恐怖黑暗",
-	long_desc = function(self, eff) return ("目 标 迷 失 而 虚 弱， 造 成 的 所 有 伤 害 减 少 %d%% 。"):format(eff.reduce) end,
+	long_desc = function(self, eff) return ("目标迷失而虚弱，造成的所有伤害减少 %d%% 。"):format(eff.reduce) end,
 	type = "魔法",
 	subtype = "暗影",
 }
@@ -648,7 +648,7 @@ timeEffectCHN:newEffect{
 	id = "WOEFUL_CORROSION", 
 	enName = "Woeful Corrosion",
 	chName = "恐怖酸蚀",
-	desc = function(self, eff) return ("目 标 被 酸 液 溅 射， 每 回 合 受 到 %0.2f 酸性 伤害。"):format(eff.dam) end,
+	desc = function(self, eff) return ("目标被酸液溅射，每回合受到 %0.2f 酸性伤害。"):format(eff.dam) end,
 	type = "魔法",
 	subtype = "酸性",
 }
@@ -832,7 +832,7 @@ timeEffectCHN:newEffect{
 	id = "WEIGHT_OF_THE_SUN",
 	enName = "Weight of the Sun",
 	chName = "太阳引力",
-	long_desc = function(self, eff) return ("目标 正在 抵抗 强大 的重力， 造成 的 所有 伤害 减少 %d%%。"):format(eff.reduce) end,
+	long_desc = function(self, eff) return ("目标正在抵抗强大的重力，造成的所有伤害减少 %d%%。"):format(eff.reduce) end,
 	type = "魔法",
 	subtype = "太阳",
 }
@@ -1187,7 +1187,7 @@ timeEffectCHN:newEffect{
 	id = "BATHE_IN_LIGHT",
 	enName = "Bathe in Light",
 	chName = "光之沐浴",
-	desc = function(self, eff) return ("火焰 和光系 伤害增加 %d%%."):format(eff.power)
+	desc = function(self, eff) return ("火焰和光系伤害增加 %d%%."):format(eff.power)
 	end,
 	type = "魔法",
 	subtype = "天空/光系",
@@ -1208,7 +1208,7 @@ timeEffectCHN:newEffect{
 	id = "PACIFICATION_HEX",
 	enName = "Pacification Hex",
 	chName = "宁神邪术",
-	desc = function(self, eff) return ("目 标 受 邪 术 影 响， 每 回 合 有 %d%% 概 率 眩 晕 3 回 合。"):format(eff.chance) end,
+	desc = function(self, eff) return ("目标受邪术影响，每回合有 %d%% 概率眩晕 3 回合。"):format(eff.chance) end,
 	type = "魔法",
 	subtype =  "邪术/支配",
 }
@@ -1217,7 +1217,7 @@ timeEffectCHN:newEffect{
 	id = "BURNING_HEX",
 	enName = "Burning Hex",
 	chName = "燃烧邪术",
-	desc = function(self, eff) return ("目 标 受 邪 术 影 响， 每 次 施 放 技 能 都 会 受 到 %0.2f 火 焰 伤 害, 技 能 冷 却 延 长 %s 再 延 长 1 回 合 。"):
+	desc = function(self, eff) return ("目标受邪术影响，每次施放技能都会受到 %0.2f 火焰伤害, 技能冷却延长 %s 再延长 1 回合。"):
 		format(eff.dam, eff.power and ("%d%%"):format((eff.power-1)*100) or "")
 	end,
 	type = "魔法",
@@ -1228,7 +1228,7 @@ timeEffectCHN:newEffect{
 	id = "EMPATHIC_HEX",
 	enName = "Empathic Hex",
 	chName = "转移邪术",
-	desc = function(self, eff) return ("目 标 受 邪 术 影 响， 使 其 造 成 的 伤 害 发 生 偏 转， 所 有 其 造 成 的 伤 害 有 %d%% 会 反 弹 给 自 己。"):format(eff.power) end,
+	desc = function(self, eff) return ("目标受邪术影响，使其造成的伤害发生偏转，所有其造成的伤害有 %d%% 会反弹给自己。"):format(eff.power) end,
 	type = "魔法",
 	subtype = "邪术/支配",
 }
@@ -1237,7 +1237,7 @@ timeEffectCHN:newEffect{
 	id = "DOMINATION_HEX", 
 	enName = "Domination Hex",
 	chName = "支配邪术",
-	desc = function(self, eff) return ("目 标 受 邪 术 影 响， 暂 时 改 变 阵 营 至 %s 。"):format(engine.Faction.factions[eff.faction].id) end,
+	desc = function(self, eff) return ("目标受邪术影响，暂时改变阵营至 %s 。"):format(engine.Faction.factions[eff.faction].id) end,
 	type = "魔法",
 	subtype = "邪术/支配",
 }
@@ -1246,7 +1246,7 @@ timeEffectCHN:newEffect{
 	id = "SHADOWGUARD_IMMUNITY",
 	enName = "Shadowguard Immunity",
 	chName = "暗影守护免疫",
-	desc = function(self, eff) return "目 标 对 所 有 负 面 状 态 免 疫。" end,
+	desc = function(self, eff) return "目标对所有负面状态免疫。" end,
 	type = "other",
 	subtype = "暗影",
 }
@@ -1255,7 +1255,7 @@ timeEffectCHN:newEffect{
 	id = "SHADOWGUARD_BUFF", 
 	enName = "Shadowguard",
 	chName = "暗影守护",
-	desc = function(self, eff) return ("目 标 进 入 自 身 的 阴 影 ， 获 得 %d 法 术 强 度 和 闪 避。"):format(eff.spellpower) end,
+	desc = function(self, eff) return ("目标进入自身的阴影，获得 %d 法术强度和闪避。"):format(eff.spellpower) end,
 	type = "魔法",
 	subtype = "暗影",
 }
@@ -1264,7 +1264,7 @@ timeEffectCHN:newEffect{
 	id = "RETCHED", 
 	enName = "Retched",
 	chName = "亡灵唾液",
-	desc = function(self, eff) return (" 目 标 站 在 自 己 的 亡 灵 唾 液 上 ， 暂 时 取 消 了 食 尸 鬼 种 族 的 速 度 惩 罚 。"):format() end,
+	desc = function(self, eff) return (" 目标站在自己的亡灵唾液上，暂时取消了食尸鬼种族的速度惩罚。"):format() end,
 	type = "魔法",
 	subtype = "亡灵/速度",
 }
@@ -1273,7 +1273,7 @@ timeEffectCHN:newEffect{
 	id = "SHADOW_CUT", 
 	enName = "Shadow Cut",
 	chName = "暗影伤口",
-	desc = function(self, eff) return ("正 在 流 血 的 巨 大 的 暗 影 伤 口 ， 每 回 合 造 成 %0.2f 暗 影 伤 害 。 每 次 你 击 中 目 标 将 受 到 %d 点 治 疗 。"):format(eff.dam/5, eff.heal) end,
+	desc = function(self, eff) return ("正在流血的巨大的暗影伤口，每回合造成 %0.2f 暗影伤害。每次你击中目标将受到 %d 点治疗。"):format(eff.dam/5, eff.heal) end,
 	type = "魔法",
 	subtype = "伤口/切割/流血/暗影",
 }
@@ -1282,7 +1282,7 @@ timeEffectCHN:newEffect{
 	id = "GLYPH_OF_MOONLIGHT", 
 	enName = "Draining Moonlight",
 	chName = "吸能月光",
-	desc = function(self, eff) return ("目 标 被 圣 印 汲 取能 量 ， 造 成 的 所 有 伤 害 降 低 %d%%"):format(eff.reduce) end,
+	desc = function(self, eff) return ("目标被圣印汲取能量，造成的所有伤害降低 %d%%"):format(eff.reduce) end,
 	type = "魔法",
 	subtype = "暗影",
 }

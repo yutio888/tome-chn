@@ -250,7 +250,7 @@ timeEffectCHN:newEffect{
 	enName = "Serpentine Nature",
 	chName = "蛇似自然",
 	desc = function(self, eff) 
-		return ("目 标 展 现 出 多 头 蛇 的 特 性，获 得 %d%% 闪 电、 酸 性 和 自 然 伤 害 吸 收 ，每 回 合 回 复 %d 生 命。"):format(eff.power, eff.regen)
+		return ("目标展现出多头蛇的特性，获得 %d%% 闪电、酸性和自然伤害吸收，每回合回复 %d 生命。"):format(eff.power, eff.regen)
 	end,
 	type = "物理",
 	subtype = "自然",
@@ -260,7 +260,7 @@ timeEffectCHN:newEffect{
 	id = "EXPOSE_WEAKNESS",
 	enName = "Expose Weakness",
 	chName = "暴露弱点",
-	desc = function(self, eff) return ("目 标 集 中 精 力 穿 透 防 御 ， 护 甲 穿 透 增 加 %d 点 ， 命 中 增 加 %d 点， 全 体 伤 害 抗 性 穿 透 增 加 %d%%。"):format(eff.apr, eff.accuracy, eff.penetration) end,
+	desc = function(self, eff) return ("目标集中精力穿透防御，护甲穿透增加 %d 点，命中增加 %d 点，全体伤害抗性穿透增加 %d%%。"):format(eff.apr, eff.accuracy, eff.penetration) end,
 	type = "物理",
 	subtype = "",
 }
@@ -692,7 +692,7 @@ timeEffectCHN:newEffect{
 	enName = "Parrying",
 	chName = "抵挡攻击",
 	desc = function(self, eff)
-		return ("抵挡近战%s攻击 :有 %d%% 几率减轻 %d 伤害， 一回合最多触发 %0.1f 次。 被减轻的攻击不能暴击。"):format(eff.parry_ranged and " 和远程" or "", math.floor(self:callEffect(self.EFF_PARRY, "deflectchance")), eff.dam, math.max(eff.deflects, 1))
+		return ("抵挡近战%s攻击 :有 %d%% 几率减轻 %d 伤害，一回合最多触发 %0.1f 次。被减轻的攻击不能暴击。"):format(eff.parry_ranged and " 和远程" or "", math.floor(self:callEffect(self.EFF_PARRY, "deflectchance")), eff.dam, math.max(eff.deflects, 1))
 	end,
 	type = "物理",
 	subtype = "策略",
@@ -973,8 +973,8 @@ timeEffectCHN:newEffect{
 	enName = "Garrote",
 	chName = "绞杀",
 	desc = function (self, eff)
-		local silence = eff.silence > 0 and eff.silenceid and ("  同 时 被 沉 默 %d 回合 "):format(eff.silence) or ""
-		return ("目 标 被 %s 绞 首 , 不 能 移 动 ， 每 回 合 受 到 一 次 %d%% 伤 害 徒 手 攻 击。%s"):format(eff.src and eff.src.name or "something", eff.power*100, silence) 
+		local silence = eff.silence > 0 and eff.silenceid and ("  同时被沉默 %d 回合 "):format(eff.silence) or ""
+		return ("目标被 %s 绞首 , 不能移动，每回合受到一次 %d%% 伤害徒手攻击。%s"):format(eff.src and eff.src.name or "something", eff.power*100, silence) 
 	 end,
 	type = "物理",
 	subtype = "grapple/ pin",
@@ -983,7 +983,7 @@ timeEffectCHN:newEffect{
 	id = "MARKED_FOR_DEATH",
 	enName = "Marked for Death",
 	chName = "死亡标记",
-	desc = function (self, eff) return ("目 标 承 受 额 外 %d%% 伤害。效 果 结 束 时 ，目 标 将 受 到 %0.1f 物 理 伤 害(已 追 加 标 记 期 间 受 到 总 伤 害 的 %d%%)."):format(eff.power, eff.dam, eff.perc*100)  end,
+	desc = function (self, eff) return ("目标承受额外 %d%% 伤害。效果结束时，目标将受到 %0.1f 物理伤害(已追加标记期间受到总伤害的 %d%%)."):format(eff.power, eff.dam, eff.perc*100)  end,
 	type = "物理",
 	subtype = "",
 }
@@ -992,12 +992,12 @@ timeEffectCHN:newEffect{
 	enName = "Deadly Poison",
 	chName = "致命毒素",
 	desc = function (self, eff)
-		local insidious = eff.insidious > 0 and (" 治 疗 系 数 下 降 %d%%."):format(eff.insidious) or ""
+		local insidious = eff.insidious > 0 and (" 治疗系数下降 %d%%."):format(eff.insidious) or ""
 		local numbing = eff.numbing > 0 and (" 伤害系数下降 %d%%."):format(eff.numbing) or ""
-		local crippling = eff.crippling > 0 and (" %d%% 几 率 使 用 技 能 失 败 。"):format(eff.crippling) or ""
-		local volatile = eff.volatile > 0 and (" 毒 素 对 周 围 敌 人 也 造 成 伤 害。"):format() or ""
-		local leeching = eff.leeching > 0 and (" 效 果 来 源 受 到 等 于 %d%% 伤 害 的 治 疗。"):format(eff.leeching) or ""
-		return ("目标中毒，每回合受到 %0.2f 自然伤害 。%s%s%s%s%s"):format(eff.power, insidious, numbing, crippling, volatile, leeching) 
+		local crippling = eff.crippling > 0 and (" %d%% 几率使用技能失败。"):format(eff.crippling) or ""
+		local volatile = eff.volatile > 0 and (" 毒素对周围敌人也造成伤害。"):format() or ""
+		local leeching = eff.leeching > 0 and (" 效果来源受到等于 %d%% 伤害的治疗。"):format(eff.leeching) or ""
+		return ("目标中毒，每回合受到 %0.2f 自然伤害。%s%s%s%s%s"):format(eff.power, insidious, numbing, crippling, volatile, leeching) 
 	 end,
 	type = "物理",
 	subtype = "毒素/自然",
@@ -1006,7 +1006,7 @@ timeEffectCHN:newEffect{
 	id = "RAZORWIRE",
 	enName = "Razorwire",
 	chName = "刀片切割",
-	desc = function (self, eff) return ("目 标 的 装 备 被 刀 片 切 割 ，命 中 减 少 %d, 护 甲 减 少 %d, 闪 避 减 少 %d."):format(eff.power, eff.power, eff.power)  end,
+	desc = function (self, eff) return ("目标的装备被刀片切割，命中减少 %d, 护甲减少 %d, 闪避减少 %d."):format(eff.power, eff.power, eff.power)  end,
 	type = "物理",
 	subtype = "物理",
 }
@@ -1014,7 +1014,7 @@ timeEffectCHN:newEffect{
 	id = "DIRTY_FIGHTING",
 	enName = "Dirty Fighting",
 	chName = "卑劣攻击",
-	desc = function (self, eff) return ("目 标 在 痛 苦 中 挣 扎 ， 震 慑 、 定 身 、 目 盲 、 混 乱 免 疫 减 半 ， 物 理 豁 免 减 少 %d."):format(eff.power)  end,
+	desc = function (self, eff) return ("目标在痛苦中挣扎，震慑、定身、目盲、混乱免疫减半，物理豁免减少 %d."):format(eff.power)  end,
 	type = "物理",
 	subtype = "伤口",
 }
@@ -1022,7 +1022,7 @@ timeEffectCHN:newEffect{
 	id = "SOOTHING_DARKNESS",
 	enName = "Soothing Darkness",
 	chName = "黑暗亲和",
-	desc = function (self, eff) return ("目 标 沐 浴 黑 暗 ，增 加 %0.1f 生 命 回 复，%0.1f体力恢复."):format(eff.life, eff.stamina)  end,
+	desc = function (self, eff) return ("目标沐浴黑暗，增加 %0.1f 生命回复，%0.1f体力恢复."):format(eff.life, eff.stamina)  end,
 	type = "物理",
 	subtype = "黑暗/治疗",
 }
@@ -1030,7 +1030,7 @@ timeEffectCHN:newEffect{
 	id = "SHADOW_DANCE",
 	enName = "Shadow Dance",
 	chName = "暗影之舞",
-	desc = function (self, eff) return ("目 标 能 在 潜 行 状 态 下 采 取 行 动 。"):format()  end,
+	desc = function (self, eff) return ("目标能在潜行状态下采取行动。"):format()  end,
 	type = "物理",
 	subtype = "策略/黑暗",
 }
@@ -1038,7 +1038,7 @@ timeEffectCHN:newEffect{
 	id = "SEDATED",
 	enName = "Sedated",
 	chName = "沉睡",
-	desc = function (self, eff) return ("目 标 进 入 沉 睡 状 态 ，不 能 行 动 。每 受 到 %d 伤 害 ， 持 续 时 间 减 少 1 回 合 。"):format(eff.power)  end,
+	desc = function (self, eff) return ("目标进入沉睡状态，不能行动。每受到 %d 伤害，持续时间减少 1 回合。"):format(eff.power)  end,
 	type = "物理",
 	subtype = "睡眠/毒素",
 }
@@ -1046,7 +1046,7 @@ timeEffectCHN:newEffect{
 	id = "ROGUE_S_BREW",
 	enName = "Rogue's Brew",
 	chName = "盗贼佳酿",
-	desc = function (self, eff) return ("目 标 直 到 生 命 降 为  -%d 前 不 会 死去 。"):format(eff.power)  end,
+	desc = function (self, eff) return ("目标直到生命降为  -%d 前不会死去。"):format(eff.power)  end,
 	type = "物理",
 	subtype = "自然",
 }
@@ -1056,10 +1056,10 @@ timeEffectCHN:newEffect{
 	chName = "捕熊陷阱",
 	desc = function (self, eff)
 		local desc = {}
-		if eff.pinid then desc[#desc+1] = "定 身" end
-		if eff.slowid then desc[#desc+1] = ("减 速 (%d%%)"):format(eff.power*100) end
-		if eff.dam > 0 then desc[#desc+1] = ("每 回 合 受 到 %0.2f 物 理 伤 害"):format(eff.dam) end
-		return "被 捕熊陷阱 抓获: "..table.concat(desc, ", ")
+		if eff.pinid then desc[#desc+1] = "定身" end
+		if eff.slowid then desc[#desc+1] = ("减速 (%d%%)"):format(eff.power*100) end
+		if eff.dam > 0 then desc[#desc+1] = ("每回合受到 %0.2f 物理伤害"):format(eff.dam) end
+		return "被捕熊陷阱抓获: "..table.concat(desc, ", ")
 	 end,
 	type = "物理",
 	subtype = "减速/定身/伤口/切割/流血",
@@ -1068,7 +1068,7 @@ timeEffectCHN:newEffect{
 	id = "EXHAUSTION",
 	enName = "Exhaustion",
 	chName = "疲劳",
-	desc = function (self, eff) return ("目 标 最 近 施 展 了 强 力 的 敏 捷 技 艺 ， 非 常 疲 劳 。 移 动 系 技 能 消 耗 增 加 %d%%。"):format(eff.fatigue)  end,
+	desc = function (self, eff) return ("目标最近施展了强力的敏捷技艺，非常疲劳。移动系技能消耗增加 %d%%。"):format(eff.fatigue)  end,
 	type = "其他",
 }
 timeEffectCHN:newEffect{
@@ -1086,7 +1086,7 @@ timeEffectCHN:newEffect{
 	id = "GHOULISH_LEAP",
 	enName = "Ghoulish Leap",
 	chName = "定向跳跃加速",
-	desc = function (self, eff) return ("目 标 的 整 体 速 度 增 加 %d%% 。"):format(eff.speed * 100)  end,
+	desc = function (self, eff) return ("目标的整体速度增加 %d%% 。"):format(eff.speed * 100)  end,
 	type = "物理",
 	subtype = "速度",
 }
@@ -1094,7 +1094,7 @@ timeEffectCHN:newEffect{
 	id = "FEINT",
 	enName = "Feint",
 	chName = "佯攻",
-	desc = function (self, eff) return ("目 标 每 回 合 获 得 一 次 额 外 的 用 匕 首 抵 挡 攻 击 的 机 会  ，抵 挡 失 败 率 下 降 %d%%."):format(eff.parry_efficiency*100)  end,
+	desc = function (self, eff) return ("目标每回合获得一次额外的用匕首抵挡攻击的机会  ，抵挡失败率下降 %d%%."):format(eff.parry_efficiency*100)  end,
 	type = "物理",
 	subtype = "策略",
 }
@@ -1102,7 +1102,7 @@ timeEffectCHN:newEffect{
 	id = "MANA_CLASH",
 	enName = "Mana Clash",
 	chName = "法力对撞",
-	desc = function (self, eff) return ("你 造成 的 所有伤 害 也 会 触 发 一 次 %d%% 伤 害 的 法 力 对 撞。"):format(eff.power * 100)  end,
+	desc = function (self, eff) return ("你造成的所有伤害也会触发一次 %d%% 伤害的法力对撞。"):format(eff.power * 100)  end,
 	type = "物理",
 	subtype = "反魔",
 }
@@ -1118,7 +1118,7 @@ timeEffectCHN:newEffect{
 	id = "TRUESHOT",
 	enName = "Trueshot",
 	chName = "专注射击",
-	desc = function (self, eff) return ("攻击速度增加 %d%%， 弹药无限，攻击时 标记概率增加100%% 。"):format(eff.power*100)  end,
+	desc = function (self, eff) return ("攻击速度增加 %d%%，弹药无限，攻击时标记概率增加100%% 。"):format(eff.power*100)  end,
 	type = "物理",
 	subtype = "策略",
 }
@@ -1126,7 +1126,7 @@ timeEffectCHN:newEffect{
 	id = "ESCAPE",
 	enName = "Escape",
 	chName = "逃脱",
-	desc = function (self, eff) return ("集中精力移动闪避，减少受到的伤害 %d%%, 体力回复增加 %0.1f， 移动速度 增加 %d%%。 使用 攻击技能 会终止该效果。 "):format(eff.power, eff.stamina, eff.speed)  end,
+	desc = function (self, eff) return ("集中精力移动闪避，减少受到的伤害 %d%%, 体力回复增加 %0.1f，移动速度增加 %d%%。使用攻击技能会终止该效果。 "):format(eff.power, eff.stamina, eff.speed)  end,
 	type = "物理",
 	subtype = "策略/速度",
 }
@@ -1134,7 +1134,7 @@ timeEffectCHN:newEffect{
 	id = "SENTINEL",
 	enName = "Sentinel",
 	chName = "哨兵",
-	desc = function (self, eff) return ("目标被警戒， 下一次使用技能 将 被打断，并触发 被反击。"):format()  end,
+	desc = function (self, eff) return ("目标被警戒，下一次使用技能将被打断，并触发被反击。"):format()  end,
 	type = "物理",
 	subtype = "策略",
 }
@@ -1142,7 +1142,7 @@ timeEffectCHN:newEffect{
 	id = "RAPID_MOVEMENT",
 	enName = "Rapid Movement",
 	chName = "高速移动",
-	desc = function (self, eff) return ("增加 移动速度 %d%%."):format(eff.power*100)  end,
+	desc = function (self, eff) return ("增加移动速度 %d%%."):format(eff.power*100)  end,
 	type = "物理",
 	subtype = "策略",
 }
@@ -1150,7 +1150,7 @@ timeEffectCHN:newEffect{
 	id = "STICKY_PITCH",
 	enName = "Sticky Pitch",
 	chName = "粘稠沥青",
-	desc = function (self, eff) return ("目标 整体速度 减少 %d%%，火焰抗性 减少 %d%%."):format(eff.slow, eff.resist)  end,
+	desc = function (self, eff) return ("目标整体速度减少 %d%%，火焰抗性减少 %d%%."):format(eff.slow, eff.resist)  end,
 	type = "物理",
 	subtype = "减速",
 }
@@ -1158,7 +1158,7 @@ timeEffectCHN:newEffect{
 	id = "PUNCTURED_ARMOUR",
 	enName = "Punctured Armour",
 	chName = "护甲削弱",
-	desc = function (self, eff) return ("目标 的 护甲 被削弱了， 受到的 所有伤害 增加 %d%%."):format(eff.power)  end,
+	desc = function (self, eff) return ("目标的护甲被削弱了，受到的所有伤害增加 %d%%."):format(eff.power)  end,
 	type = "物理",
 	subtype = "分离",
 }
@@ -1166,7 +1166,7 @@ timeEffectCHN:newEffect{
 	id = "LEECHING_POISON",
 	enName = "Leeching Poison",
 	chName = "水蛭毒素",
-	desc = function (self, eff) return ("目标中毒 ，每回合 受到 %0.2f 自然伤害， 并为施毒者提供 等量治疗。"):format(eff.power)  end,
+	desc = function (self, eff) return ("目标中毒，每回合受到 %0.2f 自然伤害，并为施毒者提供等量治疗。"):format(eff.power)  end,
 	type = "物理",
 	subtype = "毒素/自然",
 }
@@ -1174,7 +1174,7 @@ timeEffectCHN:newEffect{
 	id = "MAIM",
 	enName = "Maim",
 	chName = "伤残",
-	desc = function (self, eff) return ("目标身受重伤 , 每回合受到 %0.2f 物理伤害， 造成 的 伤害  减少%d%%."):format(eff.power, eff.reduce)  end,
+	desc = function (self, eff) return ("目标身受重伤 , 每回合受到 %0.2f 物理伤害，造成的伤害  减少%d%%."):format(eff.power, eff.reduce)  end,
 	type = "物理",
 	subtype = "切割",
 }
@@ -1182,7 +1182,7 @@ timeEffectCHN:newEffect{
 	id = "SNIPE",
 	enName = "Snipe",
 	chName = "狙击",
-	desc = function (self, eff) return ("目标 正 为一发致命 狙击 做 准备。"):format()  end,
+	desc = function (self, eff) return ("目标正为一发致命狙击做准备。"):format()  end,
 	type = "物理",
 	subtype = "策略",
 }
@@ -1190,7 +1190,7 @@ timeEffectCHN:newEffect{
 	id = "CONCEALMENT",
 	enName = "Concealment",
 	chName = "隐匿",
-	desc = function (self, eff) return ("目标处于 隐匿状态，增加 攻击范围 和 视野 %d格，有%d%% 几率 闪避 攻击."):format(eff.sight, eff.power*eff.charges)  end,
+	desc = function (self, eff) return ("目标处于隐匿状态，增加攻击范围和视野 %d格，有%d%% 几率闪避攻击."):format(eff.sight, eff.power*eff.charges)  end,
 	type = "物理",
 	subtype = "策略",
 }
@@ -1198,7 +1198,7 @@ timeEffectCHN:newEffect{
 	id = "SHADOW_SMOKE",
 	enName = "Shadow Smoke",
 	chName = "影之烟雾",
-	desc = function (self, eff) return ("目标被 烟雾包围，处于混乱 状态， 视野减少 %d."):format(eff.sight)  end,
+	desc = function (self, eff) return ("目标被烟雾包围，处于混乱状态，视野减少 %d."):format(eff.sight)  end,
 	type = "物理",
 	subtype = "感知",
 }
@@ -1206,7 +1206,7 @@ timeEffectCHN:newEffect{
 	id = "SHADOWSTRIKE",
 	enName = "Shadowstrike",
 	chName = "影袭",
-	desc = function (self, eff) return ("目标 的 暴击系数增加 %d%%。"):format(eff.power)  end,
+	desc = function (self, eff) return ("目标的暴击系数增加 %d%%。"):format(eff.power)  end,
 	type = "物理",
 	subtype = "黑暗",
 }
@@ -1228,7 +1228,7 @@ timeEffectCHN:newEffect{
 	desc = function (self, eff)
 		local dt = DamageType[eff.type] and DamageType:get(eff.type)
 		local type_desc = dt and ((dt.text_color or "#aaaaaa#")..dt.name:capitalize().."#LAST# ") or ""
-		return ("%s 抗性 上升 %d%%."):format(type_desc, eff.power)
+		return ("%s 抗性上升 %d%%."):format(type_desc, eff.power)
 	 end,
 	type = "物理",
 	subtype = "自然/抵抗",
@@ -1239,7 +1239,7 @@ timeEffectCHN:newEffect{
 	id = "SWIFT_SHOT", 
 	enName = "Swift Shot",
 	chName = "快速射击",
-	desc = function(self, eff) return ("攻 击 速 度 增 加 %d%%"):format(eff.speed) end,
+	desc = function(self, eff) return ("攻击速度增加 %d%%"):format(eff.speed) end,
 	type ="物理",
 	subtype = "策略",
 }
@@ -1248,7 +1248,7 @@ timeEffectCHN:newEffect{
 	id = "CROOKED", 
 	enName = "Crooked",
 	chName = "扭曲",
-	desc = function(self, eff) return ("目 标 变 得 越 来 越 原 始 ，命 中 和 强 度 减 少 %d"):format(eff.power*eff.stacks) end,
+	desc = function(self, eff) return ("目标变得越来越原始，命中和强度减少 %d"):format(eff.power*eff.stacks) end,
 	type ="物理",
 	subtype = "",
 }
@@ -1257,7 +1257,7 @@ timeEffectCHN:newEffect{
 	id = "ELDORAL", 
 	enName = "Eldoral",
 	chName = "艾德瑞尔",
-	desc = function(self, eff) return ("投 石 索 不 消 耗 弹 药 "):format() end,
+	desc = function(self, eff) return ("投石索不消耗弹药 "):format() end,
 	type ="物理",
 	subtype = "",
 }
@@ -1266,7 +1266,7 @@ timeEffectCHN:newEffect{
 	id = "SILENT_STEALTH", 
 	enName = "Stealthed",
 	chName = "潜行",
-	desc = function(self, eff) return ("获 得 %d 潜 行 强 度"):format(eff.power) end,
+	desc = function(self, eff) return ("获得 %d 潜行强度"):format(eff.power) end,
 	type ="物理",
 	subtype = "",
 }
@@ -1275,7 +1275,7 @@ timeEffectCHN:newEffect{
 	id = "FORGONE_VISION", 
 	enName = "Blinded",
 	chName = "致盲",
-	desc = function(self, eff) return "目 标 被 致 盲 ， 什 么 都 看 不 见。" end,
+	desc = function(self, eff) return "目标被致盲，什么都看不见。" end,
 	type = "其他",
 	subtype = "",
 }

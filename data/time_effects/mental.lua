@@ -2,7 +2,7 @@ timeEffectCHN:newEffect{
 	id = "ITEM_EXPOSED",
 	enName = "Exposed",
 	chName = "暴露",
-	desc = function(self, eff) return (" 精 神 和 身 体 暴 露 于 攻 击 和 效 果 中，闪 避 和 豁 免 减 少 %d"):format(eff.reduce) end,
+	desc = function(self, eff) return (" 精神和身体暴露于攻击和效果中，闪避和豁免减少 %d"):format(eff.reduce) end,
 	charges = function(self, eff) return (tostring(math.floor(eff.reduce))) end,
 	type = "精神",
 	subtype = "",
@@ -12,7 +12,7 @@ timeEffectCHN:newEffect{
 	name = "ITEM_NUMBING_DARKNESS", image = "effects/bane_blinded.png",
 	desc = "Numbing Darkness",
 	chName = "黑暗麻痹",
-	long_desc = function(self, eff) return ("目 标 失 去 希 望， 造 成 的 伤 害 减 少 %d%%"):format(eff.reduce) end,
+	long_desc = function(self, eff) return ("目标失去希望，造成的伤害减少 %d%%"):format(eff.reduce) end,
 	type = "精神",
 	subtype = "黑暗",
 }
@@ -37,7 +37,7 @@ timeEffectCHN:newEffect{
 	id = "SUMMON_CONTROL",
 	enName = "Pheromones",
 	chName = "费洛蒙",
-	desc = function(self, eff) return ("目 标 被 标 记 ， 周 围 %d 格 内 的 召 唤 物 会 以 其 为 目 标。"):format(eff.range) end,
+	desc = function(self, eff) return ("目标被标记，周围 %d 格内的召唤物会以其为目标。"):format(eff.range) end,
 	type = "精神",
 	subtype = "专注",
 }
@@ -62,7 +62,7 @@ timeEffectCHN:newEffect{
 	id = "DOMINANT_WILL_BOSS", 
 	enName = "Mental Domination",
 	chName = "精神控制",
-	desc = function(self, eff) return ("目 标 的 精 神 被 支 配，暂 时 处 于 %s 阵 营 并 免 疫 所 有 伤 害。"):format(eff.src.name:capitalize()) end,
+	desc = function(self, eff) return ("目标的精神被支配，暂时处于 %s 阵营并免疫所有伤害。"):format(eff.src.name:capitalize()) end,
 	type = "精神",
 	subtype = "支配",
 }
@@ -240,7 +240,7 @@ timeEffectCHN:newEffect{
 	id = "HEIGHTEN_FEAR", image = "talents/heighten_fear.png",
 	enName = "Heighten Fear",
 	chName = "恐惧加深",
-	desc = function(self, eff) return ("目 标 处 于 恐 惧 加 深 的 状 态 中。 如 果 继 续 在 恐 惧 源 头 (%s) 的 %d 范 围 内（以 及 其 视 野 内） 停 留 %d 回 合， 将 会 被 灌 输 新 的 恐 惧。"):
+	desc = function(self, eff) return ("目标处于恐惧加深的状态中。如果继续在恐惧源头 (%s) 的 %d 范围内（以及其视野内）停留 %d 回合，将会被灌输新的恐惧。"):
 	format(eff.src.name, eff.range, eff.turns_left) end,
 	type = "其他",
 	subtype = "",
@@ -250,7 +250,7 @@ timeEffectCHN:newEffect{
 	id = "Tyrant",
 	enName = "Tyrant",
 	chName = "精神专制",
-	long_desc = function(self, eff) return (" 每 次 施 加 恐 惧，获 得 2 点 物 理 和 精 神 强 度，当前获得： %d"): format(eff.tyrantPower * eff.stacks) end,
+	long_desc = function(self, eff) return (" 每次施加恐惧，获得 2 点物理和精神强度，当前获得： %d"): format(eff.tyrantPower * eff.stacks) end,
 	type = "精神",
 	subtype = "",
 }

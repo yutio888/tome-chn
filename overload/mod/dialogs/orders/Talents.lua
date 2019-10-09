@@ -35,9 +35,9 @@ function _M:init(actor, def)
 	local vsep = Separator.new{dir="horizontal", size=self.ih - 10}
 	local halfwidth = math.floor((self.iw - vsep.w)/2)
 	self.c_tut = Textzone.new{width=halfwidth, height=1, auto_height=true, no_color_bleed=true, text=([[
-%s 正 在 仔 细 地 听 着 你 ， 向 你 询 问 该 怎 么 使 用 它 的 技 能 。
-你 可 以 修 改 他 的 技 能 使 用 策 略 中 每 个 技 能 的 权 重 ， 增 加 或 减 少 某 些 技 能 使 用 的 概 率 。 这 些 权 重 是 乘 法 性 的 （ 权 重 为 零 表 示 这 个 技 能 永 远 不 会 被 使 用 ） 和 相 关 性 的 （ 把 所 有 技 能 的 权 重 调 整 为 二 和 全 部 调 整 为 一 没 有 区 别 ） 
-在 马 基 · 埃 亚 尔 消 息 传 播 得 很 快 。 如 果 %s 是 一 个 召 唤 生 物 ， 所 有 同 类 的 召 唤 生 物 都 会 记 住 你 的 设 置 。 
+%s 正在仔细地听着你，向你询问该怎么使用它的技能。
+你可以修改他的技能使用策略中每个技能的权重，增加或减少某些技能使用的概率。这些权重是乘法性的（权重为零表示这个技能永远不会被使用）和相关性的（把所有技能的权重调整为二和全部调整为一没有区别） 
+在马基 · 埃亚尔消息传播得很快。如果 %s 是一个召唤生物，所有同类的召唤生物都会记住你的设置。 
 ]]):format(npcCHN:getName(actor.name), npcCHN:getName(actor.name) )}
 	self.c_desc = TextzoneList.new{width=halfwidth, height=self.ih, no_color_bleed=true}
 

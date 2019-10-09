@@ -17,8 +17,8 @@
 -- Nicolas Casalini "DarkGod"
 -- darkgod@te4.org
 
-return "新 的 种 族 皮 肤 : #LIGHT_GREEN# 恶 魔 之 角",
-[[ 你 用 盾 上 的 恶 魔 之 角 杀 死 了 敌 人 。 太 酷 了 ！
+return "新的种族皮肤 : #LIGHT_GREEN# 恶魔之角",
+[[ 你用盾上的恶魔之角杀死了敌人。太酷了！
 
-你 现 在 可 以 创 建 头 上 长 着 恶 魔 之 角 的 角 色 。
+你现在可以创建头上长着恶魔之角的角色。
 ]]

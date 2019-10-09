@@ -616,36 +616,36 @@ local _points_left = [[
 职业技能点剩余： #00FF00#%d#LAST#
 通用技能点剩余： #00FF00#%d#LAST#]]
 
-local desc_stats = ([[属 性 点 可 以 提 高 你 的 基 础 属 性。 
-人 物 等 级 每 升 一 级 可 以 获 得 3 点 自 由 分 配。 
+local desc_stats = ([[属性点可以提高你的基础属性。 
+人物等级每升一级可以获得 3 点自由分配。 
 
-每 项 属 性 基 础 值 上 限 为 60 点。 加 点 不 能 超 过 这 个 上 限， 另 外 属 性 上 限 也 受 你 的 人 物 等 级 限 制。]]):toTString()
+每项属性基础值上限为 60 点。加点不能超过这个上限，另外属性上限也受你的人物等级限制。]]):toTString()
 
-local desc_class = ([[职 业 技 能 点 可 以 让 你 学 习 新 的 或 者 提 升 已 学 习 的 职 业 技 能。 职 业 技 能 是 你 所 选 择 职 业 的 核 心 技 能， 不 能 从 训 练 师 处 学 到。 
+local desc_class = ([[职业技能点可以让你学习新的或者提升已学习的职业技能。职业技能是你所选择职业的核心技能，不能从训练师处学到。 
 
-人 物 等 级 每 升 一 级 可 以 获 得 1 点 职 业 技 能 点。 此 外 每 5 级 可 以 额 外 获 得 1 点 职 业 技 能 点。
+人物等级每升一级可以获得 1 点职业技能点。此外每 5 级可以额外获得 1 点职业技能点。
 ]]):toTString()
 
-local desc_generic = ([[通 用 技 能 点 可 以 让 你 学 习 新 的 或 者 提 升 已 学 习 的 通 用 技 能。 
-通 用 技 能 可 以 是 你 选 择 职 业 或 种 族 自 身 拥 有， 或 者 在 你 的 冒 险 生 涯 中 习 得。 
+local desc_generic = ([[通用技能点可以让你学习新的或者提升已学习的通用技能。 
+通用技能可以是你选择职业或种族自身拥有，或者在你的冒险生涯中习得。 
 
-通 常 人 物 等 级 每 升 一 级 可 以 获 得 1 点 通 用 技 能 点。 
-不 过 每 5 级 时 不 能 获 得。
+通常人物等级每升一级可以获得 1 点通用技能点。 
+不过每 5 级时不能获得。
 ]]):toTString()
 
-local desc_types = ([[技 能 树 解 锁 点 有 以 下 作 用： 
-- 解 锁 职 业 或 通 用 技 能 树 
-- 提 升 一 个 技 能 树 所 有 技 能 等 级， 每 点 提 升 0.2
-- 解 锁 新 的 纹 身 槽（ 最 多 5 个， 你 使 用 纹 身、 符 文 等 时 会 自 动 消 耗 点 数 解 锁） 
+local desc_types = ([[技能树解锁点有以下作用： 
+- 解锁职业或通用技能树 
+- 提升一个技能树所有技能等级，每点提升 0.2
+- 解锁新的纹身槽（最多 5 个，你使用纹身、符文等时会自动消耗点数解锁） 
 
-你 会 在 人 物 等 级 达 到 10、 20 和 36 级 时 各 获 得 1 个 点 数。 
-某 些 种 族 和 物 品 可 以 获 得 额 外 的 点 数。]]):toTString()
+你会在人物等级达到 10、 20 和 36 级时各获得 1 个点数。 
+某些种族和物品可以获得额外的点数。]]):toTString()
 
-local desc_prodigies = ([[觉 醒 技 是 角 色 足 够 强 大 时 才 能 获 得 的 特 殊 技 能。 
-所 有 觉 醒 技 能 必 须 在 人 物 某 项 核 心 属 性 达 到 50 点 并 满 足 所 需 的 特 殊 要 求 后 才 能 习 得。 
-你 可 以 在 人 物 等 级 达 到 30 级 和 42 级 时 各 获 得 一 个 觉 醒 技 能 点。]]):toTString()
+local desc_prodigies = ([[觉醒技是角色足够强大时才能获得的特殊技能。 
+所有觉醒技能必须在人物某项核心属性达到 50 点并满足所需的特殊要求后才能习得。 
+你可以在人物等级达到 30 级和 42 级时各获得一个觉醒技能点。]]):toTString()
 
-local desc_inscriptions = ([[你 可 以 消 耗 1 个 技 能 树 解 锁 点 来 解 锁 一 个 新 的 纹 身 槽（ 最 多 5 个）。]]):toTString()
+local desc_inscriptions = ([[你可以消耗 1 个技能树解锁点来解锁一个新的纹身槽（最多 5 个）。]]):toTString()
 
 function _M:createDisplay()
 	self.b_prodigies = Button.new{text="觉醒技", fct=function()
@@ -938,14 +938,14 @@ function _M:getTalentDesc(item)
 
 	if item.type then
 		text:add({"color",0x00,0xFF,0xFF}, "技能树", true)
-		text:add({"color",0x00,0xFF,0xFF}, "一 个 技 能 树 包 括 一 些 你 可 以 学 习 的 技 能。 你 分 别 在 等 级 达 到 10、 20、 36 级 时 可 以 获 得 一 个 技 能 分 类 点 数， 你 也 能 在 游 戏 中 找 到 技 能 训 练 师 来 学 习 更 多 技 能。 每 一 点 技 能 分 类 点 数 可 以 解 锁 一 个 未 知 的 技 能 树 或 者 强 化 一 个 已 知 的 技 能 树。", true, true, {"color", "WHITE"})
+		text:add({"color",0x00,0xFF,0xFF}, "一个技能树包括一些你可以学习的技能。你分别在等级达到 10、 20、 36 级时可以获得一个技能分类点数，你也能在游戏中找到技能训练师来学习更多技能。每一点技能分类点数可以解锁一个未知的技能树或者强化一个已知的技能树。", true, true, {"color", "WHITE"})
 
 		if self.actor.talents_types_def[item.type].generic then
 			text:add({"color",0x00,0xFF,0xFF}, "通用技能树", true)
-			text:add({"color",0x00,0xFF,0xFF}, "一 个 通 用 技 能 树 可 以 为 你 的 角 色 增 加 一 些 实 用 的 技 能。 这 些 技 能 所 有 人 都 可 以 学 习（ 只 要 你 受 到 过 相 应 的 训 练 或 者 能 找 到 对 应 的 训 练 师）。 你 每 升 1 级 可 以 获 得 一 个 通 用 技 能 点 数（ 每 第 5 级 时 除 外）， 你 可 以 找 到 不 同 的 训 练 师 学 习 更 多 通 用 技 能。", true, true, {"color", "WHITE"})
+			text:add({"color",0x00,0xFF,0xFF}, "一个通用技能树可以为你的角色增加一些实用的技能。这些技能所有人都可以学习（只要你受到过相应的训练或者能找到对应的训练师）。你每升 1 级可以获得一个通用技能点数（每第 5 级时除外），你可以找到不同的训练师学习更多通用技能。", true, true, {"color", "WHITE"})
 		else
 			text:add({"color",0x00,0xFF,0xFF}, "职业技能树", true)
-			text:add({"color",0x00,0xFF,0xFF}, "职 业 技 能 树 可 以 让 你 学 习 到 与 你 选 择 的 职 业 相 关 的 一 些 战 斗、 施 法 和 强 化 角 色 的 技 能。 每 升 1 级 可 以 获 得 1 点 职 业 技 能 点 数， 每 升 第 5 级 时 获 得 2 点 职 业 技 能 点 数， 你 也 可 以 找 到 训 练 师 来 学 习 更 多 的 职 业 技 能。", true, true, {"color", "WHITE"})
+			text:add({"color",0x00,0xFF,0xFF}, "职业技能树可以让你学习到与你选择的职业相关的一些战斗、施法和强化角色的技能。每升 1 级可以获得 1 点职业技能点数，每升第 5 级时获得 2 点职业技能点数，你也可以找到训练师来学习更多的职业技能。", true, true, {"color", "WHITE"})
 		end
 
 		text:add(self.actor:getTalentTypeFrom(item.type).description)
@@ -956,12 +956,12 @@ function _M:getTalentDesc(item)
 		local unlearnable, could_unlearn = self:isUnlearnable(t, true)
 		if unlearnable then
 			local max = tostring(self.actor:lastLearntTalentsMax(t.generic and "generic" or "class"))
-			text:add({"color","LIGHT_BLUE"}, "你 刚 在 此 技 能 上 加 点， 你 还 可 以 遗 忘 它。 ", true, "你 总 是 可 以 移 除 最 近 的 ", max, t.generic and " 点 通 用 " or " 点 职 业", "  技 能 点 ", {"color","LAST"}, true, true)
+			text:add({"color","LIGHT_BLUE"}, "你刚在此技能上加点，你还可以遗忘它。 ", true, "你总是可以移除最近的 ", max, t.generic and " 点通用 " or " 点职业", "  技能点 ", {"color","LAST"}, true, true)
 		elseif t.no_unlearn_last then
-			text:add({"color","YELLOW"}, "本 技 能 会 永 久 性 的 影 响 这 个 游 戏 世 界， 所 以 学 习 之 后 无 法 移 除。", {"color","LAST"}, true, true)
+			text:add({"color","YELLOW"}, "本技能会永久性的影响这个游戏世界，所以学习之后无法移除。", {"color","LAST"}, true, true)
 		elseif could_unlearn then
 			local max = tostring(self.actor:lastLearntTalentsMax(t.generic and "generic" or "class"))
-			text:add({"color","LIGHT_BLUE"}, "你 刚 在 此 技 能 上 加 点， 你 还 可 以 在  #{bold}# 城 市 #{normal}# 这 样 安 全 的 地 方 遗 忘 它 。", true, "The last ", max, t.generic and " generic" or " class", " talents you learnt are always unlearnable.", {"color","LAST"}, true, true)
+			text:add({"color","LIGHT_BLUE"}, "你刚在此技能上加点，你还可以在  #{bold}# 城市 #{normal}# 这样安全的地方遗忘它。", true, "The last ", max, t.generic and " generic" or " class", " talents you learnt are always unlearnable.", {"color","LAST"}, true, true)
 		end
 
 		local traw = self.actor:getTalentLevelRaw(t.id)

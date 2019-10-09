@@ -631,7 +631,7 @@ registerArtifactTranslation{
 	display_name = "火龙之盾",
 	unided_name = "龙盾",
 	desc = "这个巨大的盾牌使用了很多生活在塔·埃亚尔失落之地的火龙的鳞片打造而成。",
-	["on_block.desc"] = "30% 几率对6格内的攻击者 发射具有震慑效果 的火焰吐息",
+	["on_block.desc"] = "30% 几率对6格内的攻击者发射具有震慑效果的火焰吐息",
 
 }
 
@@ -999,14 +999,14 @@ registerArtifactTranslation{
 	display_name = "乌尔斯拉克的大腿",
 	unided_name = "染的稀奇古怪的骨头",
 	desc = "强大的棱晶龙乌尔斯拉克被截断的腿骨，这根奇怪的棍子仍然流动着乌尔斯拉克的天性。",
-	set_desc = {ureslak = "当乌尔斯拉克更多遗物聚集在一起时 ，会发生什么呢？",},
+	set_desc = {ureslak = "当乌尔斯拉克更多遗物聚集在一起时，会发生什么呢？",},
 }
 registerArtifactTranslation{
 	originName = "Ureslak's Molted Scales",
 	display_name = "乌尔斯拉克之皮",
 	unided_name = "多彩鳞甲",
 	desc = "这件长袍用某些大型爬行动物的鳞片制成。它看上去可以反射出彩虹的每种颜色。",
-	set_desc = {ureslak = "当乌尔斯拉克更多遗物聚集在一起时 ，会发生什么呢？",},
+	set_desc = {ureslak = "当乌尔斯拉克更多遗物聚集在一起时，会发生什么呢？",},
 	["use_power.name"] = function(self, who)
 			local resists={"火焰", "寒冷", "闪电", "自然", "黑暗"}
 			if self.set_complete then table.insert(resists, "奥术") end
@@ -1492,7 +1492,7 @@ registerArtifactTranslation{
 	display_name = "黄蜂尾钉",
 	unided_name = "镶着尖刺的箭矢",
 	desc = "箭矢的尖端滴落着剧毒。",
-	["combat.special_on_hit.desc"] = "使目标中毒， 每回合造成20伤害， 使用技能有20%几率失败， 持续6回合。",
+	["combat.special_on_hit.desc"] = "使目标中毒，每回合造成20伤害，使用技能有20%几率失败，持续6回合。",
 	
 }
 
@@ -2126,7 +2126,7 @@ registerArtifactTranslation{
 	display_name = "黑暗之网",
 	unided_name = "一堆卷须",
 	desc = "盾牌由许多黑色的触须交织而成。当你触摸它时，你可以感受它非常明显的反应，它缠绕住你的手臂并将其包裹在一团黑色而温暖的物质中。",
-	["on_block.desc"] = "每回合一次， 将15格内一名攻击者拉到身边， 定身并使其窒息。",
+	["on_block.desc"] = "每回合一次，将15格内一名攻击者拉到身边，定身并使其窒息。",
 }
 
 registerArtifactTranslation{
@@ -3113,7 +3113,7 @@ registerArtifactTranslation{
 			local dam = self.use_power.damage(self, who)
 			local dur = dam.dur
 			local damage = who:damDesc(engine.DamageType.NATURE, dam.dam)
-			return ("发 出 射 程 %d 的 毒 箭 ， 造 成 %d 自 然 伤 害 并 施 加 致 残 毒 素 ，目 标 有 %d%% 几 率 使 用 技 能 失 败，每 回 合 受 到 %d 额 外 自 然 伤 害 ， 持 续 %d 回 合 。  （ 伤 害 基 于 灵 巧 ） "):format(self.use_power.range, damage/dur, dam.fail, damage, dur)
+			return ("发出射程 %d 的毒箭，造成 %d 自然伤害并施加致残毒素，目标有 %d%% 几率使用技能失败，每回合受到 %d 额外自然伤害，持续 %d 回合。  （伤害基于灵巧） "):format(self.use_power.range, damage/dur, dam.fail, damage, dur)
 		end,
 }
 registerArtifactTranslation{
@@ -3161,7 +3161,7 @@ registerArtifactTranslation{
 	unided_name="闪光蒸汽枪",
 	desc="这并不能算是一把枪，因为它只是一把枪的概念。当你丢掉它时你就记住它了。",
 	["use_power.name"] = function(self, who) 
-		return ("扔 出 枪 令 其 爆 炸 ， 造 成 %d 精 神 伤 害 ( 基于 灵 巧 和 意 志 ），并 附 加 沉 睡 效 果 。 同 时 你 被 视 为 缴 械 3 回 合 。")
+		return ("扔出枪令其爆炸，造成 %d 精神伤害 ( 基于灵巧和意志），并附加沉睡效果。同时你被视为缴械 3 回合。")
 		:format(self.use_power.dam(self, who)) end,
 }
 

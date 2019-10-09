@@ -3,7 +3,7 @@ registerBirthDescriptorTranslation{
 	name = "Tutorial Adventurer",
 	display_name = " 新手冒险者 ",
 	desc = {
-		" 冒 险 家 们 有 一 套 通 用 的 理 论 可 以 传 授 给 菜 鸟 们。 ",
+		" 冒险家们有一套通用的理论可以传授给菜鸟们。 ",
 	},
 }
 
@@ -12,6 +12,6 @@ registerBirthDescriptorTranslation{
 	name = "Tutorial Adventurer",
 	display_name = " 新手冒险者 ",
 	desc = {
-		" 冒 险 家 们 有 一 套 通 用 的 理 论 可 以 传 授 给 菜 鸟 们。 ",
+		" 冒险家们有一套通用的理论可以传授给菜鸟们。 ",
 	},
 }

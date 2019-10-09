@@ -29,7 +29,7 @@ local Combat = require "mod.class.interface.Combat"
 newEffect{
 	name = "ETHEREAL_FORM", image = "talents/displace_damage.png",
 	desc = "Ethereal Form",
-	long_desc = function(self, eff) return ("虚 幻 形 态 加 成 减 少 %d%% 。"):format(eff.stacks * 5) end,
+	long_desc = function(self, eff) return ("虚幻形态加成减少 %d%% 。"):format(eff.stacks * 5) end,
 	type = "other",
 	subtype = { },
 	status = "detrimental",
@@ -62,7 +62,7 @@ newEffect{
 newEffect{
 	name = "ELEMENTAL_SURGE_ARCANE", image = "talents/elemental_surge.png",
 	desc = "Elemental Surge: Arcane",
-	long_desc = function(self, eff) return ("法 术 和 精 神 速 度 增 加 30% 。") end,
+	long_desc = function(self, eff) return ("法术和精神速度增加 30% 。") end,
 	type = "other",
 	subtype = {elemental = true },
 	status = "beneficial",
@@ -168,7 +168,7 @@ newEffect{
 newEffect{
 	name = "FLASH_SHIELD", image = "talents/flash_of_the_blade.png",
 	desc = "Protected by the Sun",
-	long_desc = function(self, eff) return "阳 光 保 护 着 目 标 ，免 疫 所 有 伤 害。" end,
+	long_desc = function(self, eff) return "阳光保护着目标，免疫所有伤害。" end,
 	type = "other",
 	subtype = {},
 	status = "beneficial",
@@ -186,7 +186,7 @@ newEffect{
 newEffect{
 	name = "ABSORPTION_STRIKE", image = "talents/absorption_strike.png",
 	desc = "Absorption Strike",
-	long_desc = function(self, eff) return ("目 标 的 光 明 被 吸 收 了 ， 减 少 光 系 抗 性 %d%% 和 伤 害 %d%%。"):format(eff.power, eff.numb) end,
+	long_desc = function(self, eff) return ("目标的光明被吸收了，减少光系抗性 %d%% 和伤害 %d%%。"):format(eff.power, eff.numb) end,
 	type = "other",
 	subtype = { sun=true, },
 	status = "detrimental",
@@ -280,7 +280,7 @@ newEffect{
 newEffect{
 	name = "TREE_OF_LIFE", image = "shockbolt/object/artifact/tree_of_life.png",
 	desc = "You have taken root!",
-	long_desc = function(self, eff) return "你 扎 根 了 ， 增 加 生 命 ， 护 甲 和 硬 度 ， 但 不 能 移 动 。" end,
+	long_desc = function(self, eff) return "你扎根了，增加生命，护甲和硬度，但不能移动。" end,
 	type = "other",
 	subtype = { nature=true },
 	--status = "detrimental",
@@ -314,7 +314,7 @@ newEffect{
 newEffect{
 	name = "INFUSION_COOLDOWN", image = "effects/infusion_cooldown.png",
 	desc = "Infusion Saturation",
-	long_desc = function(self, eff) return ("你 使 用 纹 身 的 次 数 越 多， 纹 身 冷 却 时 间 越 长 (+%d 冷 却 时 间 )。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("你使用纹身的次数越多，纹身冷却时间越长 (+%d 冷却时间 )。"):format(eff.power) end,
 	charges = function(self, eff) return eff.power end,
 	type = "other",
 	subtype = { infusion=true },
@@ -331,7 +331,7 @@ newEffect{
 newEffect{
 	name = "RUNE_COOLDOWN", image = "effects/rune_cooldown.png",
 	desc = "Runic Saturation",
-	long_desc = function(self, eff) return ("你 使 用 符 文 的 次 数 越 多， 符 文 冷 却 时 间 越 长 (+%d 冷 却 时 间 )。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("你使用符文的次数越多，符文冷却时间越长 (+%d 冷却时间 )。"):format(eff.power) end,
 	charges = function(self, eff) return eff.power end,
 	type = "other",
 	subtype = { rune=true },
@@ -348,7 +348,7 @@ newEffect{
 newEffect{
 	name = "TAINT_COOLDOWN", image = "effects/tainted_cooldown.png",
 	desc = "Tainted",
-	long_desc = function(self, eff) return ("你 使 用 堕 落 印 记 的 次 数 越 多， 堕 落 印 记 的 冷 却 时 间 越 长 (+%d 冷 却 时 间 )。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("你使用堕落印记的次数越多，堕落印记的冷却时间越长 (+%d 冷却时间 )。"):format(eff.power) end,
 	type = "other",
 	subtype = { taint=true },
 	status = "detrimental",
@@ -377,7 +377,7 @@ newEffect{
 newEffect{
 	name = "TIME_PRISON", image = "talents/time_prison.png",
 	desc = "Time Prison",
-	long_desc = function(self, eff) return "目 标 被 移 出 时 间 线， 不 能 行 动 也 不 能 受 到 伤 害， 该 生 物 的 时 间 停 止。" end,
+	long_desc = function(self, eff) return "目标被移出时间线，不能行动也不能受到伤害，该生物的时间停止。" end,
 	type = "other",
 	subtype = { time=true },
 	status = "detrimental",
@@ -412,7 +412,7 @@ newEffect{
 newEffect{
 	name = "TIME_SHIELD", image = "talents/time_shield.png",
 	desc = "Time Shield",
-	long_desc = function(self, eff) return ("目 标 被 一 层 扭 曲 时 空 的 护 盾 所 包 围， 吸 收 %d/%d 伤 害 并 将 伤 害 向 后 推 移。 当 激 活 时， 所 有 新 获 得 的 状 态 持 续 时 间 都 会 减 少 %d%%。"):format(self.time_shield_absorb, eff.power, eff.time_reducer) end,
+	long_desc = function(self, eff) return ("目标被一层扭曲时空的护盾所包围，吸收 %d/%d 伤害并将伤害向后推移。当激活时，所有新获得的状态持续时间都会减少 %d%%。"):format(self.time_shield_absorb, eff.power, eff.time_reducer) end,
 	type = "other",
 	subtype = { time=true, shield=true },
 	status = "beneficial",
@@ -469,7 +469,7 @@ newEffect{
 newEffect{
 	name = "TIME_DOT",
 	desc = "Temporal Restoration Field",
-	long_desc = function(self, eff) return ("时 间 的 扭 曲 制 造 了 一 个 能 量 场， 每 回 合 治 疗 目 标 %d 点."):format(eff.power) end,
+	long_desc = function(self, eff) return ("时间的扭曲制造了一个能量场，每回合治疗目标 %d 点."):format(eff.power) end,
 	type = "other",
 	subtype = { time=true },
 	status = "beneficial",
@@ -490,7 +490,7 @@ newEffect{
 newEffect{
 	name = "GOLEM_OFS",
 	desc = "Golem out of sight",
-	long_desc = function(self, eff) return "傀 儡 在 炼 金 术 视 线 以 外， 你 将 失 去 对 它 的 控 制！" end,
+	long_desc = function(self, eff) return "傀儡在炼金术视线以外，你将失去对它的控制！" end,
 	type = "other",
 	subtype = { miscellaneous=true },
 	status = "detrimental",
@@ -517,7 +517,7 @@ newEffect{
 newEffect{
 	name = "AMBUSCADE_OFS", image = "talents/ambuscade.png",
 	desc = "Shadow out of sight",
-	long_desc = function(self, eff) return "阴 影 在 视 线 以 外， 你 将 失 去 对 它 的 控 制！" end,
+	long_desc = function(self, eff) return "阴影在视线以外，你将失去对它的控制！" end,
 	type = "other",
 	subtype = { miscellaneous=true },
 	status = "detrimental",
@@ -544,7 +544,7 @@ newEffect{
 newEffect{
 	name = "HUSK_OFS", image = "talents/animus_purge.png",
 	desc = "Husk out of sight",
-	long_desc = function(self, eff) return "傀 儡 在 视 线 以 外， 你 将 失 去 对 它 的 控 制！" end,
+	long_desc = function(self, eff) return "傀儡在视线以外，你将失去对它的控制！" end,
 	type = "other",
 	subtype = { miscellaneous=true },
 	status = "detrimental",
@@ -572,7 +572,7 @@ newEffect{
 newEffect{
 	name = "CONTINUUM_DESTABILIZATION",
 	desc = "Continuum Destabilization",
-	long_desc = function(self, eff) return ("目 标 受 时 空 操 纵 的 影 响， 提 升 抵 抗 (+%d)。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("目标受时空操纵的影响，提升抵抗 (+%d)。"):format(eff.power) end,
 	type = "other",
 	subtype = { time=true },
 	status = "beneficial",
@@ -602,7 +602,7 @@ newEffect{
 newEffect{
 	name = "SUMMON_DESTABILIZATION",
 	desc = "Summoning Destabilization",
-	long_desc = function(self, eff) return ("目 标 召 唤 的 生 物 越 多， 施 放 召 唤 技 能 所 需 时 间 越 长 (+%d turns)。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("目标召唤的生物越多，施放召唤技能所需时间越长 (+%d turns)。"):format(eff.power) end,
 	type = "other", -- Type "other" so that nothing can dispel it
 	subtype = { miscellaneous=true },
 	status = "detrimental",
@@ -628,7 +628,7 @@ newEffect{
 newEffect{
 	name = "DAMAGE_SMEARING", image = "talents/damage_smearing.png",
 	desc = "Damage Smearing",
-	long_desc = function(self, eff) return ("过 去 受 到 的 伤 害 被 转 化 为 每 回 合 %0.2f 时 空 伤 害 。"):format(eff.dam) end,
+	long_desc = function(self, eff) return ("过去受到的伤害被转化为每回合 %0.2f 时空伤害。"):format(eff.dam) end,
 	type = "other",
 	subtype = { time=true },
 	status = "detrimental",
@@ -652,7 +652,7 @@ newEffect{
 newEffect{
 	name = "SEE_THREADS", image = "talents/see_the_threads.png",
 	desc = "See the Threads",
-	long_desc = function(self, eff) return ("你 可 以 从 三 条 时 间 线 中 选 择 一 条 进 入。 ( 当 前 时 间 线 : %d)。"):format(eff.thread) end,
+	long_desc = function(self, eff) return ("你可以从三条时间线中选择一条进入。 ( 当前时间线 : %d)。"):format(eff.thread) end,
 	type = "other",
 	subtype = { time=true },
 	status = "beneficial",
@@ -716,7 +716,7 @@ newEffect{
 newEffect{
 	name = "IMMINENT_PARADOX_CLONE",
 	desc = "Imminent Paradox Clone",
-	long_desc = function(self, eff) return "效 果 结 束 时， 你 将 被 传 送 回 过 去。" end,
+	long_desc = function(self, eff) return "效果结束时，你将被传送回过去。" end,
 	type = "other",
 	subtype = { time=true },
 	status = "detrimental",
@@ -768,7 +768,7 @@ newEffect{
 newEffect{
 	name = "PARADOX_CLONE", image = "talents/paradox_clone.png",
 	desc = "Paradox Clone",
-	long_desc = function(self, eff) return "你 被 传 送 回 过 去。" end,
+	long_desc = function(self, eff) return "你被传送回过去。" end,
 	type = "other",
 	subtype = { time=true },
 	status = "detrimental",
@@ -793,7 +793,7 @@ newEffect{
 newEffect{
 	name = "MILITANT_MIND", image = "talents/militant_mind.png",
 	desc = "Militant Mind",
-	long_desc = function(self, eff) return ("提 高 你 %d 点 物 理 强 度、 物 理 豁 免、 法 术 强 度、 法 术 豁 免、 精 神 强 度 和 精 神 豁 免。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("提高你 %d 点物理强度、物理豁免、法术强度、法术豁免、精神强度和精神豁免。"):format(eff.power) end,
 	type = "other",
 	subtype = { miscellaneous=true },
 	status = "beneficial",
@@ -819,7 +819,7 @@ newEffect{
 newEffect{
 	name = "SEVER_LIFELINE", image = "talents/sever_lifeline.png",
 	desc = "Sever Lifeline",
-	long_desc = function(self, eff) return ("目 标 的 生 命 线 被 切 断， 效 果 结 束 时 对 目 标 造 成 %0.2f 时 空 伤 害。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("目标的生命线被切断，效果结束时对目标造成 %0.2f 时空伤害。"):format(eff.power) end,
 	type = "other",
 	subtype = { time=true },
 	status = "detrimental",
@@ -836,7 +836,7 @@ newEffect{
 newEffect{
 	name = "FADE_FROM_TIME", image = "talents/fade_from_time.png",
 	desc = "Fade From Time",
-	long_desc = function(self, eff) return ("目 标 暂 时 被 从 时 间 线 中 移 除， 造 成 的 伤 害 减 少 %d%% ， 减 少 受 到 伤 害 %d%% ， 并 减 少 %d%% 回 合 所 有 不 良 效 果 持 续 时 间。"):
+	long_desc = function(self, eff) return ("目标暂时被从时间线中移除，造成的伤害减少 %d%% ，减少受到伤害 %d%% ，并减少 %d%% 回合所有不良效果持续时间。"):
 	format(math.min(20,eff.dur * 2 + 2), eff.cur_power or eff.power, eff.cur_dur or eff.durred) end,
 	type = "other",
 	subtype = { time=true },
@@ -877,7 +877,7 @@ newEffect{
 newEffect{
 	name = "SHADOW_VEIL", image = "talents/shadow_veil.png",
 	desc = "Shadow Veil",
-	long_desc = function(self, eff) return ("你 融 入 暗 影 并 被 其 支 配， 当 你 笼 罩 在 阴 影 里 时 你 对 所 有 状 态 免 疫， 并 减 少 %d%% 所 受 伤 害， 每 回 合 你 可 以 闪 到 1 个 附 近 的 敌 人 身 边 (半 径 %d)， 对 其 造 成 %d%% 暗 影 武 器 伤 害。 当 此 技 能 激 活 时 除 非 死 亡 否 则 无 法 被 打 断， 且 你 无 法 控 制 你 的 角 色。"):format(eff.res, eff.range, eff.dam * 100) end,
+	long_desc = function(self, eff) return ("你融入暗影并被其支配，当你笼罩在阴影里时你对所有状态免疫，并减少 %d%% 所受伤害，每回合你可以闪到 1 个附近的敌人身边 (半径 %d)，对其造成 %d%% 暗影武器伤害。当此技能激活时除非死亡否则无法被打断，且你无法控制你的角色。"):format(eff.res, eff.range, eff.dam * 100) end,
 	type = "other",
 	subtype = { darkness=true },
 	status = "beneficial",
@@ -927,7 +927,7 @@ newEffect{
 	name = "ZERO_GRAVITY", image = "effects/zero_gravity.png",
 	desc = "Zero Gravity",
 	no_stop_enter_worlmap = true,
-	long_desc = function(self, eff) return ("这 里 没 有 重 力， 你 漂 浮 在 空 中。 移 动 速 度 下 降 三 倍， 所 有 近 战 攻 击 或 射 击 有 一 定 几 率 击 退 目 标。 负 重 上 限 大 幅 增 加。") end,
+	long_desc = function(self, eff) return ("这里没有重力，你漂浮在空中。移动速度下降三倍，所有近战攻击或射击有一定几率击退目标。负重上限大幅增加。") end,
 	decrease = 0, no_remove = true,
 	type = "other",
 	subtype = { spacetime=true },
@@ -976,12 +976,12 @@ newEffect{
 	display_desc = function(self, eff) return ([[Curse of Corpses (power %0.1f)]]):format(eff.level) end,
 	long_desc = function(self, eff)
 		local def, level, bonusLevel = self.tempeffect_def[self.EFF_CURSE_OF_CORPSES], eff.level, math.min(eff.unlockLevel, eff.level)
-		return ([[一 个 死 亡 的 光 环 笼 罩 着 你.
-#CRIMSON# 惩 罚 : #WHITE# 死 亡 恐 惧： %+d%% 对 亡 灵 的 伤 害 抵 抗。 
-#CRIMSON# 强 度 1+: %s 死 亡 力 量： %+d%% 对 亡 灵 的 伤 害 加 成。 
-#CRIMSON# 强 度 2+: %s%+d 幸 运 , %+d 力 量 , %+d 魔 法 
-#CRIMSON# 强 度 3+: %s 活 死 人 之 躯: 亡 灵 唾 液 能 治 愈 你 。 当 你 的 生 命 值 降 低 到 %d%% 以 下 时 ， 你 会 释 放 一 次 %d 等 级 的 亡 灵 唾 液 ， 冷 却 时 间 为 %d 回 合 。
-#CRIMSON# 强 度 4+: %s 死 缓： 你 杀 死 的 人 形 生 物 有 %d%% 几 率 变 成 食 尸 鬼 并 替 你 作 战 持 续 6 回 合。]]):format(
+		return ([[一个死亡的光环笼罩着你.
+#CRIMSON# 惩罚 : #WHITE# 死亡恐惧： %+d%% 对亡灵的伤害抵抗。 
+#CRIMSON# 强度 1+: %s 死亡力量： %+d%% 对亡灵的伤害加成。 
+#CRIMSON# 强度 2+: %s%+d 幸运 , %+d 力量 , %+d 魔法 
+#CRIMSON# 强度 3+: %s 活死人之躯: 亡灵唾液能治愈你。当你的生命值降低到 %d%% 以下时，你会释放一次 %d 等级的亡灵唾液，冷却时间为 %d 回合。
+#CRIMSON# 强度 4+: %s 死缓：你杀死的人形生物有 %d%% 几率变成食尸鬼并替你作战持续 6 回合。]]):format(
 		def.getResistsUndead(eff, level),
 		bonusLevel >= 1 and "#WHITE#" or "#GREY#", def.getIncDamageUndead(math.max(level, 1)),
 		bonusLevel >= 2 and "#WHITE#" or "#GREY#", def.getLckChange(eff, math.max(level, 2)), def.getStrChange(math.max(level, 2)), def.getMagChange(math.max(level, 2)),
@@ -1141,12 +1141,12 @@ newEffect{
 	display_desc = function(self, eff) return ([[Curse of Madness (power %0.1f)]]):format(eff.level) end,
 	long_desc = function(self, eff)
 		local def, level, bonusLevel = self.tempeffect_def[self.EFF_CURSE_OF_MADNESS], eff.level, math.min(eff.unlockLevel, eff.level)
-		return ([[你 觉 得 你 对 现 实 失 去 控 制。
-#CRIMSON# 惩 罚 : #WHITE# 扰 乱 心 智： %+d%% 精 神 抵 抗 , %+d%% 混 乱 免 疫 
-#CRIMSON# 强 度 1+: %s 解 除 束 缚： %+d%% 暴 击 伤 害， %+d%% 副 手 武 器 伤 害。 
-#CRIMSON# 强 度 2+: %s%+d 幸 运， %+d 敏 捷 
-#CRIMSON# 强 度 3+: %s 阴 谋: 你 的 疯 狂 是 会 传 染 的 。 每 次 你 对 敌 人 造 成 暴 击 伤 害 时 ， 都 有 %d%% 的 几 率 将 你 当 前 的 负 面 精 神 效 果 传 播 给 他 们 。
-#CRIMSON# 强 度 4+: %s 狂 热: 每 回 合 一 次 ， 当 一 次 攻 击 超 过 你 生 命 的 %0.1f%% 时 ， 你 所 有 技 能 的 剩 余 冷 却 时 间 减 少 1 。]]):format(
+		return ([[你觉得你对现实失去控制。
+#CRIMSON# 惩罚 : #WHITE# 扰乱心智： %+d%% 精神抵抗 , %+d%% 混乱免疫 
+#CRIMSON# 强度 1+: %s 解除束缚： %+d%% 暴击伤害， %+d%% 副手武器伤害。 
+#CRIMSON# 强度 2+: %s%+d 幸运， %+d 敏捷 
+#CRIMSON# 强度 3+: %s 阴谋: 你的疯狂是会传染的。每次你对敌人造成暴击伤害时，都有 %d%% 的几率将你当前的负面精神效果传播给他们。
+#CRIMSON# 强度 4+: %s 狂热: 每回合一次，当一次攻击超过你生命的 %0.1f%% 时，你所有技能的剩余冷却时间减少 1 。]]):format(
 		def.getMindResistChange(eff, level), def.getConfusionImmuneChange(eff, level) * 100,
 		bonusLevel >= 1 and "#WHITE#" or "#GREY#", def.getCombatCriticalPowerChange(math.max(level, 1)), def.getOffHandMultChange(math.max(level, 1)),
 		bonusLevel >= 2 and "#WHITE#" or "#GREY#", def.getLckChange(eff, math.max(level, 2)), def.getDexChange(math.max(level, 2)),
@@ -1347,12 +1347,12 @@ newEffect{
 	display_desc = function(self, eff) return ([[Curse of Shrouds (power %0.1f)]]):format(eff.level) end,
 	long_desc = function(self, eff)
 		local def, level, bonusLevel = self.tempeffect_def[self.EFF_CURSE_OF_SHROUDS], eff.level, math.min(eff.unlockLevel, eff.level)
-		return ([[一 道 黑 暗 屏 障 降 临 在 你 的 面 前。
-#CRIMSON# 惩 罚 : #WHITE# 虚 弱 屏 障： 小 概 率 被 包 裹 在 虚 弱 屏 障 内 ( 降 低 所 造 成 伤 害 %d%%) 持 续 4 回 合。 
-#CRIMSON# 强 度 1+: %s 暗 夜 行 者： %+d 暗 影 抵 抗， %+d%% 最 大 暗 影 抵 抗， %+d 看 破 隐 形 强 度 
-#CRIMSON# 强 度 2+: %s%+d 幸 运， %+d 体 质 
-#CRIMSON# 强 度 3+: %s 穿 越 屏 障： 你 的 身 形 在 移 动 时 消 失， 移 动 后 1 回 合 减 少 %d%% 所 受 伤 害。 
-#CRIMSON# 强 度 4+: %s 死 亡 屏 障： 每 一 次 杀 死 目 标 可 以 让 你 笼 罩 在 一 个 屏 障 内， 减 少 %d%% 所 受 伤 害 持 续 3 回 合。]]):format(
+		return ([[一道黑暗屏障降临在你的面前。
+#CRIMSON# 惩罚 : #WHITE# 虚弱屏障：小概率被包裹在虚弱屏障内 ( 降低所造成伤害 %d%%) 持续 4 回合。 
+#CRIMSON# 强度 1+: %s 暗夜行者： %+d 暗影抵抗， %+d%% 最大暗影抵抗， %+d 看破隐形强度 
+#CRIMSON# 强度 2+: %s%+d 幸运， %+d 体质 
+#CRIMSON# 强度 3+: %s 穿越屏障：你的身形在移动时消失，移动后 1 回合减少 %d%% 所受伤害。 
+#CRIMSON# 强度 4+: %s 死亡屏障：每一次杀死目标可以让你笼罩在一个屏障内，减少 %d%% 所受伤害持续 3 回合。]]):format(
 		-def.getShroudIncDamageChange(eff, level),
 		bonusLevel >= 1 and "#WHITE#" or "#GREY#", def.getResistsDarknessChange(math.max(level, 1)), def.getResistsCapDarknessChange(math.max(level, 1)), def.getSeeInvisible(math.max(level, 1)),
 		bonusLevel >= 2 and "#WHITE#" or "#GREY#", def.getLckChange(eff, math.max(level, 2)), def.getConChange(math.max(level, 2)),
@@ -1420,7 +1420,7 @@ newEffect{
 newEffect{
 	name = "SHROUD_OF_WEAKNESS",
 	desc = "Shroud of Weakness",
-	long_desc = function(self, eff) return ("目 标 笼 罩 在 一 个 虚 弱 屏 障 内。 ( 减 少 造 成 伤 害 %d%%)。"):format(-eff.power) end,
+	long_desc = function(self, eff) return ("目标笼罩在一个虚弱屏障内。 ( 减少造成伤害 %d%%)。"):format(-eff.power) end,
 	type = "other",
 	subtype = { time=true },
 	status = "detrimental",
@@ -1438,7 +1438,7 @@ newEffect{
 newEffect{
 	name = "SHROUD_OF_PASSING",
 	desc = "Shroud of Passing",
-	long_desc = function(self, eff) return ("笼 罩 在 一 个 屏 障 内 使 目 标 身 形 逐 渐 消 失 (+%d%% 全 抗 )。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("笼罩在一个屏障内使目标身形逐渐消失 (+%d%% 全抗 )。"):format(eff.power) end,
 	type = "other",
 	subtype = { time=true },
 	status = "beneficial",
@@ -1455,7 +1455,7 @@ newEffect{
 newEffect{
 	name = "SHROUD_OF_DEATH",
 	desc = "Shroud of Death",
-	long_desc = function(self, eff) return ("笼 罩 在 一 个 屏 障 内 使 目 标 身 形 逐 渐 消 失 (+%d%% 全 抗 )。 "):format(eff.power) end,
+	long_desc = function(self, eff) return ("笼罩在一个屏障内使目标身形逐渐消失 (+%d%% 全抗 )。 "):format(eff.power) end,
 	type = "other",
 	subtype = { time=true },
 	status = "beneficial",
@@ -1506,12 +1506,12 @@ newEffect{
 	long_desc = function(self, eff)
 		local def, level, bonusLevel = self.tempeffect_def[self.EFF_CURSE_OF_NIGHTMARES], eff.level, math.min(eff.unlockLevel, eff.level)
 
-		return ([[你 的 脑 海 中 充 斥 恐 怖 景 象。
-#CRIMSON# 惩 罚 : #WHITE# 扰 乱 幻 象： 当 鉴 定 时， 你 的 精 神 豁 免 有 20％ 概 率 减 少 %d%% 
-#CRIMSON# 强 度 1+: %s 从 现 实 消 失： %+d 物 理 抵 抗， %+d 物 理 抵 抗 上 限 
-#CRIMSON# 强 度 2+: %s%+d 幸 运， %+d 意 志 
-#CRIMSON# 强 度 3+: %s 折 磨 : 当 敌 人 试 图 对 你 造 成 负 面 效 果 时 ， 你 的 折 磨 光 环 会 对 10 范 围 内 的 一 个 随 机 敌 人 进 行 报 复 ， 造 成 %d 精 神 和 %d 黑 暗 伤 害 。
-#CRIMSON# 强 度 4+: %s 噩 梦: 每 次 受 到 目 标 攻 击 有 概 率 (当 前 %d%%) 触 发 一 个 范 围 为 %d 码 的 噩 梦（ 有 减 速 效 果、 憎 恨 私 语 和 召 唤 梦 魇） 持 续 8 回 合。  触 发 几 率  在 每 次 你 受 到 打 击 时 提 高，同 时 随 时 间 下 降。]]):format(
+		return ([[你的脑海中充斥恐怖景象。
+#CRIMSON# 惩罚 : #WHITE# 扰乱幻象：当鉴定时，你的精神豁免有 20％概率减少 %d%% 
+#CRIMSON# 强度 1+: %s 从现实消失： %+d 物理抵抗， %+d 物理抵抗上限 
+#CRIMSON# 强度 2+: %s%+d 幸运， %+d 意志 
+#CRIMSON# 强度 3+: %s 折磨 : 当敌人试图对你造成负面效果时，你的折磨光环会对 10 范围内的一个随机敌人进行报复，造成 %d 精神和 %d 黑暗伤害。
+#CRIMSON# 强度 4+: %s 噩梦: 每次受到目标攻击有概率 (当前 %d%%) 触发一个范围为 %d 码的噩梦（有减速效果、憎恨私语和召唤梦魇）持续 8 回合。  触发几率  在每次你受到打击时提高，同时随时间下降。]]):format(
 		def.getVisionsReduction(eff, level),
 		bonusLevel >= 1 and "#WHITE#" or "#GREY#", def.getResistsPhysicalChange(math.max(level, 1)), def.getResistsCapPhysicalChange(math.max(level, 1)),
 		bonusLevel >= 2 and "#WHITE#" or "#GREY#", def.getLckChange(eff, math.max(level, 2)), def.getWilChange(math.max(level, 2)),
@@ -1720,12 +1720,12 @@ newEffect{
 	long_desc = function(self, eff)
 		local def, level, bonusLevel = self.tempeffect_def[self.EFF_CURSE_OF_MISFORTUNE], eff.level, math.min(eff.unlockLevel, eff.level)
 
-		return ([[重 伤 和 毁 灭 追 随 着 你。
-#CRIMSON# 惩 罚 : #WHITE# 霉 运： 在 你 的 旅 途 中 找 到 的 金 币 减 少。 
-#CRIMSON# 强 度 1+: %s 失 败 的 努 力: 围 绕 你 的 努 力 都 会 失 败  (+%d%% 检 测 陷 阱 的 几 率 )。
-#CRIMSON# 强 度 2+: %s%+d 幸 运， %+d 灵 巧 
-#CRIMSON# 强 度 3+: %s 错 失 良 机: 机 会 转 瞬 即 逝 ， 你 身 边 的 人 会 错 失 良 机 (+%d%% 闪 避 攻 击 概 率)。
-#CRIMSON# 强 度 4+: %s 厄 运 终 结: 如 果 提 高 后 的 伤 害 足 够 杀 死 对 手 的 话， 你 将 可 以 提 高 %d%% 的 伤 害]]):format(
+		return ([[重伤和毁灭追随着你。
+#CRIMSON# 惩罚 : #WHITE# 霉运：在你的旅途中找到的金币减少。 
+#CRIMSON# 强度 1+: %s 失败的努力: 围绕你的努力都会失败  (+%d%% 检测陷阱的几率 )。
+#CRIMSON# 强度 2+: %s%+d 幸运， %+d 灵巧 
+#CRIMSON# 强度 3+: %s 错失良机: 机会转瞬即逝，你身边的人会错失良机 (+%d%% 闪避攻击概率)。
+#CRIMSON# 强度 4+: %s 厄运终结: 如果提高后的伤害足够杀死对手的话，你将可以提高 %d%% 的伤害]]):format(
 		bonusLevel >= 1 and "#WHITE#" or "#GREY#", def.getMissplacedEndeavours(math.max(level, 1)),
 		bonusLevel >= 2 and "#WHITE#" or "#GREY#", def.getLckChange(eff, math.max(level, 2)), def.getCunChange(math.max(level, 2)),
 		bonusLevel >= 3 and "#WHITE#" or "#GREY#", def.getMissedOpportunities(math.max(level, 3)),
@@ -1788,7 +1788,7 @@ newEffect{
 newEffect{
 	name = "PROB_TRAVEL_UNSTABLE", image = "talents/probability_travel.png",
 	desc = "Unstable Probabilites",
-	long_desc = function(self, eff) return "目 标 最 近 通 过 使 用 时 空 旅 行 穿 越 了 墙 壁。" end,
+	long_desc = function(self, eff) return "目标最近通过使用时空旅行穿越了墙壁。" end,
 	type = "other",
 	subtype = { time=true, space=true },
 	status = "detrimental",
@@ -1812,12 +1812,12 @@ newEffect{
 	cancel_on_level_change = true,
 	parameters = {},
 	long_desc = function(self, eff)
-		local desc = "目 标 的 诅 咒 之 体 对 其 所 承 受 的 苦 难 做 出 了 回 应。"
+		local desc = "目标的诅咒之体对其所承受的苦难做出了回应。"
 		if (eff.incDamageChange or 0) > 0 then
-			desc = desc..(" 目 标 造 成 的 所 有 伤 害 增 加 %d%%。"):format(eff.incDamageChange)
+			desc = desc..(" 目标造成的所有伤害增加 %d%%。"):format(eff.incDamageChange)
 		end
 		if (eff.statChange or 0) > 0 then
-			desc = desc..(" 力 量 和 意 志 增 加 %d 。 每 回 合 有 %d%% 免 疫 疾 病 和 毒 素 效 果。"):format(eff.statChange, eff.neutralizeChance)
+			desc = desc..(" 力量和意志增加 %d 。每回合有 %d%% 免疫疾病和毒素效果。"):format(eff.statChange, eff.neutralizeChance)
 		end
 		return desc
 	end,
@@ -1903,7 +1903,7 @@ newEffect{
 newEffect{
 	name = "FADED", image = "talents/shadow_fade.png",
 	desc = "Faded",
-	long_desc = function(self, eff) return "目 标 逐 渐 隐 匿 无 形， 并 且 不 再 受 到 伤 害。" end,
+	long_desc = function(self, eff) return "目标逐渐隐匿无形，并且不再受到伤害。" end,
 	type = "other",
 	subtype = { },
 	status = "beneficial",
@@ -1927,7 +1927,7 @@ newEffect{
 newEffect{
 	name = "HIGHBORN_S_BLOOM", image = "talents/highborn_s_bloom.png",
 	desc = "Highborn's Bloom",
-	long_desc = function(self, eff) return "目 标 使 用 技 能 时 不 再 消 耗 能 量。" end,
+	long_desc = function(self, eff) return "目标使用技能时不再消耗能量。" end,
 	type = "other",
 	subtype = { arcane=true },
 	status = "beneficial",
@@ -1943,7 +1943,7 @@ newEffect{
 newEffect{
 	name = "VICTORY_RUSH_ZIGUR", image = "talents/arcane_destruction.png",
 	desc = "Victory Rush",
-	long_desc = function(self, eff) return "胜 利 的 激 励 使 目 标 刀 枪 不 入。" end,
+	long_desc = function(self, eff) return "胜利的激励使目标刀枪不入。" end,
 	type = "other",
 	subtype = { arcane=true },
 	status = "beneficial",
@@ -1959,7 +1959,7 @@ newEffect{
 newEffect{
 	name = "SOLIPSISM", image = "talents/solipsism.png",
 	desc = "Solipsism",
-	long_desc = function(self, eff) return ("目 标 进 入 唯 我 状 态 并 且 被 自 己 的 思 维 所 干 扰 (-%d%% 整 体 速 度 )。"):format(eff.power * 100) end,
+	long_desc = function(self, eff) return ("目标进入唯我状态并且被自己的思维所干扰 (-%d%% 整体速度 )。"):format(eff.power * 100) end,
 	type = "other",
 	subtype = { psionic=true },
 	status = "detrimental",
@@ -1977,7 +1977,7 @@ newEffect{
 newEffect{
 	name = "CLARITY", image = "talents/clarity.png",
 	desc = "Clarity",
-	long_desc = function(self, eff) return ("目 标 对 这 个 世 界 有 着 更 加 清 晰 的 认 识 (+%d%% 整 体 速 度 )。"):format(eff.power * 100) end,
+	long_desc = function(self, eff) return ("目标对这个世界有着更加清晰的认识 (+%d%% 整体速度 )。"):format(eff.power * 100) end,
 	type = "other",
 	subtype = { psionic=true },
 	status = "beneficial",
@@ -1995,7 +1995,7 @@ newEffect{
 newEffect{
 	name = "DREAMSCAPE", image = "talents/dreamscape.png",
 	desc = "Dreamscape",
-	long_desc = function(self, eff) return ("目 标 进 入 了 %s 的 梦 境， 并 且 增 加 %d%% 所 有 伤 害。"):format(eff.target.name, eff.power) end,
+	long_desc = function(self, eff) return ("目标进入了 %s 的梦境，并且增加 %d%% 所有伤害。"):format(eff.target.name, eff.power) end,
 	type = "other",
 	subtype = { psionic=true },
 	status = "beneficial",
@@ -2206,7 +2206,7 @@ newEffect{
 newEffect{
 	name = "REVISIONIST_HISTORY", image = "talents/revisionist_history.png",
 	desc = "Revisionist History",
-	long_desc = function(self, eff) return " 该 效 果 持 续 时 你 可 以 改 变 现 实 历 史 使 其 不 会 发 生。" end,
+	long_desc = function(self, eff) return " 该效果持续时你可以改变现实历史使其不会发生。" end,
 	type = "other",
 	subtype = { time=true },
 	status = "beneficial",
@@ -2260,7 +2260,7 @@ newEffect{
 	name = "ZONE_AURA_FIRE",
 	desc = "Oil mist",
 	no_stop_enter_worlmap = true,
-	long_desc = function(self, eff) return ("范 围 效 果： +10% 火 焰 伤 害， -10% 火 焰 抗 性， -10% 护 甲 值， -2 可 视 范 围。") end,
+	long_desc = function(self, eff) return ("范围效果： +10% 火焰伤害， -10% 火焰抗性， -10% 护甲值， -2 可视范围。") end,
 	decrease = 0, no_remove = true,
 	type = "other",
 	subtype = { aura=true },
@@ -2281,7 +2281,7 @@ newEffect{
 	name = "ZONE_AURA_COLD",
 	desc = "Grave chill",
 	no_stop_enter_worlmap = true,
-	long_desc = function(self, eff) return ("范 围 效 果： +10% 寒 冰 伤 害， -10% 寒 冰 抗 性， -10% 物 理 豁 免， -20% 混 乱 抗 性。") end,
+	long_desc = function(self, eff) return ("范围效果： +10% 寒冰伤害， -10% 寒冰抗性， -10% 物理豁免， -20% 混乱抗性。") end,
 	decrease = 0, no_remove = true,
 	type = "other",
 	subtype = { aura=true },
@@ -2302,7 +2302,7 @@ newEffect{
 	name = "ZONE_AURA_LIGHTNING",
 	desc = "Static discharge",
 	no_stop_enter_worlmap = true,
-	long_desc = function(self, eff) return ("范 围 效 果： +10% 闪 电 伤 害， -10% 闪 电 抗 性， -10% 物 理 强 度， -20% 震 慑 抗 性。") end,
+	long_desc = function(self, eff) return ("范围效果： +10% 闪电伤害， -10% 闪电抗性， -10% 物理强度， -20% 震慑抗性。") end,
 	decrease = 0, no_remove = true,
 	type = "other",
 	subtype = { aura=true },
@@ -2323,7 +2323,7 @@ newEffect{
 	name = "ZONE_AURA_ACID",
 	desc = "Noxious fumes",
 	no_stop_enter_worlmap = true,
-	long_desc = function(self, eff) return ("范 围 效 果： +10% 酸 性 伤 害， -10% 酸 性 抗 性， -10% 闪 避， -20% 缴 械 抗 性。") end,
+	long_desc = function(self, eff) return ("范围效果： +10% 酸性伤害， -10% 酸性抗性， -10% 闪避， -20% 缴械抗性。") end,
 	decrease = 0, no_remove = true,
 	type = "other",
 	subtype = { aura=true },
@@ -2344,7 +2344,7 @@ newEffect{
 	name = "ZONE_AURA_DARKNESS",
 	desc = "Echoes of the void",
 	no_stop_enter_worlmap = true,
-	long_desc = function(self, eff) return ("范 围 效 果： +10% 暗 影 伤 害， -10% 暗 影 抗 性， -10% 精 神 豁 免， -20% 恐 惧 抗 性。") end,
+	long_desc = function(self, eff) return ("范围效果： +10% 暗影伤害， -10% 暗影抗性， -10% 精神豁免， -20% 恐惧抗性。") end,
 	decrease = 0, no_remove = true,
 	type = "other",
 	subtype = { aura=true },
@@ -2365,7 +2365,7 @@ newEffect{
 	name = "ZONE_AURA_MIND",
 	desc = "Eerie silence",
 	no_stop_enter_worlmap = true,
-	long_desc = function(self, eff) return ("范 围 效 果： +10% 精 神 伤 害， -10% 精 神 抗 性， -10% 法 术 强 度， -20% 沉 默 抗 性。") end,
+	long_desc = function(self, eff) return ("范围效果： +10% 精神伤害， -10% 精神抗性， -10% 法术强度， -20% 沉默抗性。") end,
 	decrease = 0, no_remove = true,
 	type = "other",
 	subtype = { aura=true },
@@ -2386,7 +2386,7 @@ newEffect{
 	name = "ZONE_AURA_LIGHT",
 	desc = "Aura of light",
 	no_stop_enter_worlmap = true,
-	long_desc = function(self, eff) return ("范 围 效 果： +10% 光 系 伤 害， -10% 光 系 抗 性， -10% 命 中， -20% 致 盲 抗 性。") end,
+	long_desc = function(self, eff) return ("范围效果： +10% 光系伤害， -10% 光系抗性， -10% 命中， -20% 致盲抗性。") end,
 	decrease = 0, no_remove = true,
 	type = "other",
 	subtype = { aura=true },
@@ -2407,7 +2407,7 @@ newEffect{
 	name = "ZONE_AURA_ARCANE",
 	desc = "Aether residue",
 	no_stop_enter_worlmap = true,
-	long_desc = function(self, eff) return ("范 围 效 果： +10% 奥 术 伤 害， -10% 奥 术 抗 性， -10% 护 甲 强 度， -20% 石 化 抗 性。") end,
+	long_desc = function(self, eff) return ("范围效果： +10% 奥术伤害， -10% 奥术抗性， -10% 护甲强度， -20% 石化抗性。") end,
 	decrease = 0, no_remove = true,
 	type = "other",
 	subtype = { aura=true },
@@ -2428,7 +2428,7 @@ newEffect{
 	name = "ZONE_AURA_TEMPORAL",
 	desc = "Impossible geometries",
 	no_stop_enter_worlmap = true,
-	long_desc = function(self, eff) return ("范 围 效 果： +10% 时 空 伤 害， -10% 时 空 抗 性， -10% 法 术 豁 免， -20% 定 身 抗 性。") end,
+	long_desc = function(self, eff) return ("范围效果： +10% 时空伤害， -10% 时空抗性， -10% 法术豁免， -20% 定身抗性。") end,
 	decrease = 0, no_remove = true,
 	type = "other",
 	subtype = { aura=true },
@@ -2449,7 +2449,7 @@ newEffect{
 	name = "ZONE_AURA_PHYSICAL",
 	desc = "Uncontrolled anger",
 	no_stop_enter_worlmap = true,
-	long_desc = function(self, eff) return ("范 围 效 果： +10% 物 理 伤 害 , -10% 物 理 抵 抗 , -10% 精 神 强 度 , -20% 击 退 免 疫。") end,
+	long_desc = function(self, eff) return ("范围效果： +10% 物理伤害 , -10% 物理抵抗 , -10% 精神强度 , -20% 击退免疫。") end,
 	decrease = 0, no_remove = true,
 	type = "other",
 	subtype = { aura=true },
@@ -2470,7 +2470,7 @@ newEffect{
 	name = "ZONE_AURA_BLIGHT",
 	desc = "Miasma",
 	no_stop_enter_worlmap = true,
-	long_desc = function(self, eff) return ("范 围 效 果： +10% 枯 萎 伤 害， -10% 枯 萎 抗 性， -20% 治 疗 加 成， -20% 疾 病 抗 性。 ") end,
+	long_desc = function(self, eff) return ("范围效果： +10% 枯萎伤害， -10% 枯萎抗性， -20% 治疗加成， -20% 疾病抗性。 ") end,
 	decrease = 0, no_remove = true,
 	type = "other",
 	subtype = { aura=true },
@@ -2491,7 +2491,7 @@ newEffect{
 	name = "ZONE_AURA_NATURE",
 	desc = "Slimy floor",
 	no_stop_enter_worlmap = true,
-	long_desc = function(self, eff) return ("范 围 效 果： +10% 自 然 伤 害， -10% 自 然 抗 性， -10% 远 程 闪 避， -20% 毒 素 抗 性。") end,
+	long_desc = function(self, eff) return ("范围效果： +10% 自然伤害， -10% 自然抗性， -10% 远程闪避， -20% 毒素抗性。") end,
 	decrease = 0, no_remove = true,
 	type = "other",
 	subtype = { aura=true },
@@ -2538,7 +2538,7 @@ newEffect{
 newEffect{
 	name = "CAUTERIZE", image = "talents/cauterize.png",
 	desc = "Cauterize",
-	long_desc = function(self, eff) return ("你 的 躯 体 开 始 灼 烧， 每 回 合 受 到 %0.2f 伤 害。"):format(eff.dam) end,
+	long_desc = function(self, eff) return ("你的躯体开始灼烧，每回合受到 %0.2f 伤害。"):format(eff.dam) end,
 	type = "other",
 	subtype = { fire=true },
 	status = "detrimental",
@@ -2575,7 +2575,7 @@ newEffect{
 newEffect{
 	name = "EIDOLON_PROTECT", image = "shockbolt/npc/unknown_unknown_the_eidolon.png",
 	desc = "Protected by the Eidolon",
-	long_desc = function(self, eff) return "目 标 受 到 艾 德 隆 保 护， 没 有 生 物 可 以 伤 害 它（ 自 残 除 外……） " end,
+	long_desc = function(self, eff) return "目标受到艾德隆保护，没有生物可以伤害它（自残除外……） " end,
 	zone_wide_effect = true,
 	decrease = 0, no_remove = true,
 	type = "other",
@@ -2593,7 +2593,7 @@ newEffect{
 newEffect{
 	name = "CLOAK_OF_DECEPTION", image = "shockbolt/object/artifact/black_cloak.png",
 	desc = "Cloak of Deception",
-	long_desc = function(self, eff) return "目 标 受 到 欺 诈 斗 篷 的 效 果 影 响， 使 它 看 上 去 像 活 着 一 样。" end,
+	long_desc = function(self, eff) return "目标受到欺诈斗篷的效果影响，使它看上去像活着一样。" end,
 	decrease = 0, no_remove = true,
 	type = "other",
 	subtype = { undead=true },
@@ -2620,7 +2620,7 @@ newEffect{
 newEffect{
 	name = "SUFFOCATING",
 	desc = "Suffocating",
-	long_desc = function(self, eff) return ("你 正 在 窒 息 ! 每 回 合 按 比 例 损 失 生 命 ， 且 越 来 越 多 （ 现 在 %d%% ）"):format(eff.dam) end,
+	long_desc = function(self, eff) return ("你正在窒息 ! 每回合按比例损失生命，且越来越多（现在 %d%% ）"):format(eff.dam) end,
 	type = "other",
 	subtype = { suffocating=true },
 	status = "detrimental",
@@ -2648,7 +2648,7 @@ newEffect{
 	desc = "Antimagic Disruption",
 	long_desc = function(self, eff)
 		local chance = self:attr("spell_failure") or 0
-		return ("你 的 奥 术 力 量 被 反 魔 法 装 备 干 扰 。 奥 术 技 能 有 %d%% 几 率 失 败， 奥 术 持 续 技 能 每 回 合 有 %0.1f%% 几 率 自 动 解 除 。"):format(chance, chance/10)
+		return ("你的奥术力量被反魔法装备干扰。奥术技能有 %d%% 几率失败，奥术持续技能每回合有 %0.1f%% 几率自动解除。"):format(chance, chance/10)
 	end,
 	type = "other",
 	subtype = { antimagic=true },
@@ -2666,7 +2666,7 @@ newEffect{
 newEffect{
 	name = "SWIFT_HANDS_CD", image = "talents/swift_hands.png",
 	desc = "Swift Hands",
-	long_desc = function(self, eff) return "这 回 合 你 切 换 了 物 品 ， 没 有 消 耗 时 间 ." end,
+	long_desc = function(self, eff) return "这回合你切换了物品，没有消耗时间 ." end,
 	type = "other",
 	subtype = { prodigy=true },
 	status = "neutral",
@@ -2679,7 +2679,7 @@ newEffect{
 newEffect{
 	name = "HUNTER_PLAYER", image = "talents/hunted_player.png",
 	desc = "Hunter!",
-	long_desc = function(self, eff) return "知 道 你 在 哪 里!" end,
+	long_desc = function(self, eff) return "知道你在哪里!" end,
 	type = "other",
 	subtype = { madness=true },
 	status = "beneficial",
@@ -2694,7 +2694,7 @@ newEffect{
 newEffect{
 	name = "THROUGH_THE_CROWD", image = "talents/through_the_crowd.png",
 	desc = "Through The Crowd",
-	long_desc = function(self, eff) return ("增 加 物 理 、 法 术 、 精 神 豁 免 %d 点,增 加 整 体 速 度 %d%% 。"):format(eff.power * 10, util.bound(eff.power, 0, 5) * 3) end,
+	long_desc = function(self, eff) return ("增加物理、法术、精神豁免 %d 点,增加整体速度 %d%% 。"):format(eff.power * 10, util.bound(eff.power, 0, 5) * 3) end,
 	type = "other",
 	subtype = { miscellaneous=true },
 	status = "beneficial",
@@ -2716,7 +2716,7 @@ newEffect{
 newEffect{
 	name = "RELOAD_DISARMED", image = "talents/disarm.png",
 	desc = "Reloading",
-	long_desc = function(self, eff) return "目 标 装 填 弹 药 中。" end,
+	long_desc = function(self, eff) return "目标装填弹药中。" end,
 	type = "other",
 	subtype = { disarm=true },
 	status = "detrimental",
@@ -2736,7 +2736,7 @@ newEffect{
 newEffect{
 	name = "SPACETIME_TUNING", image = "talents/spacetime_tuning.png",
 	desc = "Spacetime Tuning",
-	long_desc = function(self, eff) return ("调 整 紊 乱 值 ， 每 回 合 调 整 %+d 点。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("调整紊乱值，每回合调整 %+d 点。"):format(eff.power) end,
 	type = "other",
 	subtype = { time=true },
 	status = "beneficial",
@@ -2761,7 +2761,7 @@ newEffect{
 	name = "TIME_STOP", image = "talents/time_stop.png",
 	desc = "Time Stop",
 	long_desc = function(self, eff)
-		return ("目 标 停 止 了 时 间 ， 期 间 造 成 的 伤 害 减 少 %d%%。"):format(eff.power)
+		return ("目标停止了时间，期间造成的伤害减少 %d%%。"):format(eff.power)
 	end,
 	charges = function(self, eff)
 		local charges = math.floor(self.energy.value/1000) - 1
@@ -2800,7 +2800,7 @@ newEffect{
 newEffect{
 	name = "TEMPORAL_REPRIEVE", image = "talents/temporal_reprieve.png",
 	desc = "Temporal Reprieve",
-	long_desc = function(self, eff) return ("目 标 被 传 送 至 安 全 位 置。"):format() end,
+	long_desc = function(self, eff) return ("目标被传送至安全位置。"):format() end,
 	type = "other",
 	subtype = { time=true },
 	status = "beneficial",
@@ -2875,7 +2875,7 @@ newEffect{
 newEffect{
 	name = "TEMPORAL_FUGUE", image = "talents/temporal_fugue.png",
 	desc = "Temporal Fugue",
-	long_desc = function(self, eff) return "目 标 将 伤 害 和 复 制 体 共 享。" end,
+	long_desc = function(self, eff) return "目标将伤害和复制体共享。" end,
 	type = "other",
 	subtype = { time=true },
 	status = "beneficial",
@@ -2954,7 +2954,7 @@ newEffect{
 newEffect{
 	name = "DRACONIC_WILL", image = "talents/draconic_will.png",
 	desc = "Draconic Will",
-	long_desc = function(self, eff) return "目 标 免 疫 负 面效 果." end,
+	long_desc = function(self, eff) return "目标免疫负面效果." end,
 	type = "other",
 	subtype = { nature=true },
 	status = "beneficial",
@@ -2969,7 +2969,7 @@ newEffect{
 newEffect{
 	name = "REALITY_SMEARING", image = "talents/reality_smearing.png",
 	desc = "Reality Smearing",
-	long_desc = function(self, eff) return ("过 去 受 到 的 伤 害 被 转 化 为 每 回 合 %0.2f 点 紊 乱。"):format(eff.paradox) end,
+	long_desc = function(self, eff) return ("过去受到的伤害被转化为每回合 %0.2f 点紊乱。"):format(eff.paradox) end,
 	type = "other",
 	subtype = { time=true },
 	status = "detrimental",
@@ -3052,7 +3052,7 @@ newEffect{
 newEffect{
 	name = "UNSTOPPABLE", image = "talents/unstoppable.png",
 	desc = "Unstoppable",
-	long_desc = function(self, eff) return ("目 标 无 可 阻 挡 ！ 拒 绝 死 亡 ， 效 果 结 束 时 回 复 %d 生 命(每 杀 一 个 怪 回 复 %d%% 最 大 生 命 )。"):format(eff.kills * eff.hp_per_kill * self.max_life / 100, eff.hp_per_kill) end,
+	long_desc = function(self, eff) return ("目标无可阻挡！拒绝死亡，效果结束时回复 %d 生命(每杀一个怪回复 %d%% 最大生命 )。"):format(eff.kills * eff.hp_per_kill * self.max_life / 100, eff.hp_per_kill) end,
 	type = "other",
 	subtype = { frenzy=true },
 	status = "beneficial",
@@ -3074,7 +3074,7 @@ newEffect{
 newEffect{
 	name = "2H_PENALTY", image = "talents/unstoppable.png",
 	desc = "Hit Penalty",
-	long_desc = function(self, eff) return ("目 标 单 手 使 用 双 手 武 器 ， 物 理 、 法 术 、 精 神 强 度 下 降 %d%% ( 受 体 型 影 响 )；同 时 副 手附  加伤 害 减 少 50%%。"):format(20 - math.min(self.size_category - 4, 4) * 5) end,
+	long_desc = function(self, eff) return ("目标单手使用双手武器，物理、法术、精神强度下降 %d%% ( 受体型影响 )；同时副手附  加伤害减少 50%%。"):format(20 - math.min(self.size_category - 4, 4) * 5) end,
 	type = "other", decrease = 0, no_remove = true,
 	subtype = { combat=true, penalty=true },
 	status = "detrimental",
@@ -3091,7 +3091,7 @@ newEffect{
 	long_desc = function(self, eff)
 		local t = self:getTalentFromId(eff.talent)
 		return
-		([[当 前 异 常： %s
+		([[当前异常： %s
 
 		%s]]):format(t.name or "none", t.info(self, t) or "none")
 	end,
@@ -3127,7 +3127,7 @@ newEffect{
 newEffect{
 	name = "WARDEN_S_TARGET", image = "talents/warden_s_focus.png",
 	desc = "Warden's Focus Target",
-	long_desc = function(self, eff) return ("%s 被 选 为 目 标."):format(eff.src.name) end,
+	long_desc = function(self, eff) return ("%s 被选为目标."):format(eff.src.name) end,
 	type = "other",
 	subtype = { tactic=true },
 	status = "detrimental",
@@ -3158,7 +3158,7 @@ newEffect{
 	desc = "Death in a Dream",
 	type = "other", subtype={mind=true},
 	status = "detrimental",
-	long_desc = function(self, eff) return ("目 标 吸 入 有 毒 的 催 眠 气 体 ， 每 回 合 损 失 %d 生 命 。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("目标吸入有毒的催眠气体，每回合损失 %d 生命。"):format(eff.power) end,
 	on_timeout = function(self, eff)
 		local dead, val = self:takeHit(eff.power, self, {special_death_msg="killed in a dream"})
 		game:delayedLogDamage(eff, self, val, ("%s%d %s#LAST#"):format(DamageType:get(DamageType.MIND).text_color or "#aaaaaa#", math.ceil(val), "dream"), false)
@@ -3169,7 +3169,7 @@ newEffect{
 	name = "ZONE_AURA_GORBAT",
 	desc = "Natural Aura",
 	no_stop_enter_worlmap = true,
-	long_desc = function(self, eff) return ("地 图 效 果 : +20 精 神 强 度 , +2 生 命 恢 复 , -1 失 衡 值 / 回 合, -20% 抗 性 穿 透。") end,
+	long_desc = function(self, eff) return ("地图效果 : +20 精神强度 , +2 生命恢复 , -1 失衡值 / 回合, -20% 抗性穿透。") end,
 	decrease = 0, no_remove = true,
 	type = "other",
 	subtype = { aura=true },
@@ -3190,7 +3190,7 @@ newEffect{
 	name = "ZONE_AURA_VOR",
 	desc = "Sorcerous Aura",
 	no_stop_enter_worlmap = true,
-	long_desc = function(self, eff) return ("地 图 效 果 : +20 魔 法 , +2 法 力 回 复 , -20 命 中, -20 潜 行 强 度 。") end,
+	long_desc = function(self, eff) return ("地图效果 : +20 魔法 , +2 法力回复 , -20 命中, -20 潜行强度。") end,
 	decrease = 0, no_remove = true,
 	type = "other",
 	subtype = { aura=true },
@@ -3211,7 +3211,7 @@ newEffect{
 	name = "ZONE_AURA_GRUSHNAK",
 	desc = "Disciplined Aura",
 	no_stop_enter_worlmap = true,
-	long_desc = function(self, eff) return ("地 图 效 果 : +20 闪 避, +20 全 豁 免 , -20 法 术 强 度 。") end,
+	long_desc = function(self, eff) return ("地图效果 : +20 闪避, +20 全豁免 , -20 法术强度。") end,
 	decrease = 0, no_remove = true,
 	type = "other",
 	subtype = { aura=true },
@@ -3233,7 +3233,7 @@ newEffect{
 	name = "ZONE_AURA_RAKSHOR",
 	desc = "Sinister Aura",
 	no_stop_enter_worlmap = true,
-	long_desc = function(self, eff) return ("地 图 效 果 : +10% 暴 击 几 率 , +20% 暴 击 伤 害 , -20% 自 然 枯 萎 抗 性 。") end,
+	long_desc = function(self, eff) return ("地图效果 : +10% 暴击几率 , +20% 暴击伤害 , -20% 自然枯萎抗性。") end,
 	decrease = 0, no_remove = true,
 	type = "other",
 	subtype = { aura=true },
@@ -3255,7 +3255,7 @@ newEffect{
 	name = "ZONE_AURA_UNDERWATER",
 	desc = "Underwater Zone",
 	no_stop_enter_worlmap = true,
-	long_desc = function(self, eff) return ("地 图 效 果 :  空 气 值 随 时 间 损 失 ， 空 气 用 光 后 将 损 失 生 命 。 寻 找 气 泡 来 回 复 空 气 值。 水 同 时 令 震 慑 免 疫 和 火 焰 伤 害 下 降 10% ，同 时 增 加 10% 寒 冷 伤 害 。") end,
+	long_desc = function(self, eff) return ("地图效果 :  空气值随时间损失，空气用光后将损失生命。寻找气泡来回复空气值。水同时令震慑免疫和火焰伤害下降 10% ，同时增加 10% 寒冷伤害。") end,
 	decrease = 0, no_remove = true,
 	type = "other",
 	subtype = { aura=true },
@@ -3274,7 +3274,7 @@ newEffect{
 	name = "ZONE_AURA_FEARSCAPE",
 	desc = "Fearscape Zone",
 	no_stop_enter_worlmap = true,
-	long_desc = function(self, eff) return ("地 图 效 果 :  恐 惧 空 间 的 火 焰 将 增 加 10% 火 焰 和 枯 萎 伤 害 ，同 时 减 少 20% 击 退 抗 性。") end,
+	long_desc = function(self, eff) return ("地图效果 :  恐惧空间的火焰将增加 10% 火焰和枯萎伤害，同时减少 20% 击退抗性。") end,
 	decrease = 0, no_remove = true,
 	type = "other",
 	subtype = { aura=true },
@@ -3293,7 +3293,7 @@ newEffect{
 	name = "ZONE_AURA_OUT_OF_TIME",
 	desc = "Out of Time Zone",
 	no_stop_enter_worlmap = true,
-	long_desc = function(self, eff) return ("地 图 效 果 : 你 似 乎 处 于 通 常 时 空 之 外 。 +10% 物 理 抗 性 ， -10% 时 空 抗 性  , -20% 传 送 免 疫 .") end,
+	long_desc = function(self, eff) return ("地图效果 : 你似乎处于通常时空之外。 +10% 物理抗性， -10% 时空抗性  , -20% 传送免疫 .") end,
 	decrease = 0, no_remove = true,
 	type = "other",
 	subtype = { aura=true },
@@ -3312,7 +3312,7 @@ newEffect{
 	name = "ZONE_AURA_SPELLBLAZE",
 	desc = "Spellblaze Aura",
 	no_stop_enter_worlmap = true,
-	long_desc = function(self, eff) return ("地 图 效 果 : 魔 法 大 爆 炸 的 火 焰 仍 在 燃 烧 ， -10% 火 焰 、 枯 萎 、 奥 术 抗 性 , +10% 寒 冷 抗 性 。 警 告 ：强 大 的 魔 法 能 量 可 能 干 扰 传 送 法 术 ！ ") end,
+	long_desc = function(self, eff) return ("地图效果 : 魔法大爆炸的火焰仍在燃烧， -10% 火焰、枯萎、奥术抗性 , +10% 寒冷抗性。警告：强大的魔法能量可能干扰传送法术！ ") end,
 	decrease = 0, no_remove = true,
 	type = "other",
 	subtype = { aura=true },
@@ -3330,7 +3330,7 @@ newEffect{
 	name = "ZONE_AURA_CALDERA",
 	desc = "Heady Scent",
 	no_stop_enter_worlmap = true,
-	long_desc = function(self, eff) return ("地 图 效 果 :  强 烈 的 气 味 充 满 了 空 气 ， 让 你 感 觉 困 倦 。  倒 计 时 结 束 时 ， 你 将 进 入 梦 境 。-10% 精 神 抗 性 ，-20% 睡 眠 免 疫 ， +10% 自 然 伤 害 .") end,
+	long_desc = function(self, eff) return ("地图效果 :  强烈的气味充满了空气，让你感觉困倦。  倒计时结束时，你将进入梦境。-10% 精神抗性，-20% 睡眠免疫， +10% 自然伤害 .") end,
 	decrease = 0, no_remove = true,
 	type = "other",
 	subtype = { aura=true },
@@ -3350,7 +3350,7 @@ newEffect{
 	name = "ZONE_AURA_THUNDERSTORM",
 	desc = "Thunderstorm",
 	no_stop_enter_worlmap = true,
-	long_desc = function(self, eff) return ("地 图 效 果 :  强 大 的 雷 暴 在 你 头 顶 轰 鸣。 +10% 闪 电 伤 害 ， -10% 震 慑 免 疫 。") end,
+	long_desc = function(self, eff) return ("地图效果 :  强大的雷暴在你头顶轰鸣。 +10% 闪电伤害， -10% 震慑免疫。") end,
 	decrease = 0, no_remove = true,
 	type = "other",
 	subtype = { aura=true },
@@ -3369,7 +3369,7 @@ newEffect{
 	name = "ZONE_AURA_ABASHED",
 	desc = "Abashed Expanse",
 	no_stop_enter_worlmap = true,
-	long_desc = function(self, eff) return ("地 图 效 果 : 你 的 相 位 之 门 法 术 在 这 里 极 其 容 易 施 展 ， 不 论 等 级 如 何 ，都 能 指 定 位 置 。") end,
+	long_desc = function(self, eff) return ("地图效果 : 你的相位之门法术在这里极其容易施展，不论等级如何，都能指定位置。") end,
 	decrease = 0, no_remove = true,
 	type = "other",
 	subtype = { aura=true },
@@ -3586,7 +3586,7 @@ newEffect{
 newEffect{
 	name = "DEMI_GODMODE",
 	desc = "Demigod Mode", --image = "",
-	long_desc = function(self, eff) return ("半 神 模 式 : 目 标 获 得 10000 额 外 生 命 ， 每 回 合 回 复 2000 点 生 命 值 。 造 成 +500%% 伤 害 ， 超 能 力 值 全 满 。"):format() end,
+	long_desc = function(self, eff) return ("半神模式 : 目标获得 10000 额外生命，每回合回复 2000 点生命值。造成 +500%% 伤害，超能力值全满。"):format() end,
 	type = "other",
 	subtype = { cheat=true },
 	status = "beneficial",
@@ -3617,7 +3617,7 @@ newEffect{
 newEffect{
 	name = "GODMODE",
 	desc = "God Mode", --image = "",
-	long_desc = function(self, eff) return ("天 神 模 式 ： 目 标 不 会 受 到 伤 害 ， 不 会 受 到 负 面 状 态 的 影 响 ， 造 成 +10000%% 伤 害 (100%% 抗 性 穿 透 ) ， 不 需 要 呼 吸 ， 超 能 力 值 全 满 。"):format() end,
+	long_desc = function(self, eff) return ("天神模式：目标不会受到伤害，不会受到负面状态的影响，造成 +10000%% 伤害 (100%% 抗性穿透 ) ，不需要呼吸，超能力值全满。"):format() end,
 	type = "other",
 	subtype = { cheat=true },
 	status = "beneficial",
@@ -3645,7 +3645,7 @@ newEffect{
 newEffect{
 	name = "SLIPPERY_GROUND", image = "talents/freeze.png",
 	desc = "Slippery Ground",
-	long_desc = function(self, eff) return ("目 标 很 难 保 持 平 衡 。 每 次 它 尝 试 使 用 一 个 技 能 ， 都 有 %d%% 的 失 败 几 率 。"):format(eff.fail) end,
+	long_desc = function(self, eff) return ("目标很难保持平衡。每次它尝试使用一个技能，都有 %d%% 的失败几率。"):format(eff.fail) end,
 	type = "other",
 	subtype = { nature=true },
 	status = "detrimental",
@@ -3663,7 +3663,7 @@ newEffect{
 newEffect{
 	name = "FROZEN_GROUND", image = "talents/freeze.png",
 	desc = "Frozen Ground",
-	long_desc = function(self, eff) return ("目 标 穿 着 踏 雪 时 受 到 寒 冷 的 激 励 ， 增 加 20% 的 寒 冷 伤 害 。"):format(eff.fail) end,
+	long_desc = function(self, eff) return ("目标穿着踏雪时受到寒冷的激励，增加 20% 的寒冷伤害。"):format(eff.fail) end,
 	type = "other",
 	subtype = { nature=true },
 	status = "beneficial",
@@ -3680,7 +3680,7 @@ newEffect{
 newEffect{
 	name = "RECALL", image = "effects/recall.png",
 	desc = "Recalling",
-	long_desc = function(self, eff) return "目 标 等 待 被 召 回 至 世 界 地 图。" end,
+	long_desc = function(self, eff) return "目标等待被召回至世界地图。" end,
 	type = "magical",
 	subtype = { unknown=true },
 	status = "beneficial",

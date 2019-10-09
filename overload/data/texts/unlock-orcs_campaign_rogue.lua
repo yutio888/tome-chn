@@ -17,8 +17,8 @@
 -- Nicolas Casalini "DarkGod"
 -- darkgod@te4.org
 
-return "新 的 游 戏 选 项: #LIGHT_GREEN#盗 贼 系",
-[[你 已 经 解 放 了 拘 留 营 的 兽 人 。
+return "新的游戏选项: #LIGHT_GREEN#盗贼系",
+[[你已经解放了拘留营的兽人。
 
-你 可 以 在 兽 人 战 役 中 使 用 在#LIGHT_GREEN# 原 版 战 役 #WHITE#中 解 锁 的 任 何 盗 贼 系 职 业 。
+你可以在兽人战役中使用在#LIGHT_GREEN# 原版战役 #WHITE#中解锁的任何盗贼系职业。
 ]]

@@ -18,7 +18,7 @@ yesnoPopDlg["Tutorial Lobby Portal"] = function()
 end
 
 yesnoPopDlg["Temporal Rift"] = function()
-	return "时空裂隙","你确定要进去么？没人知道这会把你带到哪里， 你也无法知道你是否还能设法返回。"
+	return "时空裂隙","你确定要进去么？没人知道这会把你带到哪里，你也无法知道你是否还能设法返回。"
 end
 
 yesnoPopDlg["Atamathon"] = function(str)
@@ -27,7 +27,7 @@ yesnoPopDlg["Atamathon"] = function(str)
 	if objCHN[key] then
 		o = o:gsub(objCHN[key].enName,objCHN[key].chName)
 	end
-	str = o .." 的外形看上去似乎可以安装到阿塔玛森的空眼窝内， 但也许这样做并不明智。"
+	str = o .." 的外形看上去似乎可以安装到阿塔玛森的空眼窝内，但也许这样做并不明智。"
 	return "阿塔玛森",str
 end
 
@@ -103,7 +103,7 @@ yesnoPopDlg["Greater Ego"] = function()
 end
 
 yesnoPopDlg["Overwrite character?"] = function()
-	return "覆盖角色？","已经有一个叫这个名字的角色了， 你想覆盖这个角色吗？", "否", "是"
+	return "覆盖角色？","已经有一个叫这个名字的角色了，你想覆盖这个角色吗？", "否", "是"
 end
 
 yesnoPopDlg["Target yourself?"] = function()
@@ -251,7 +251,7 @@ yesnoPopDlg["S.M.A.C.K"] = function()
 end
 
 yesnoPopDlg["Challenge: #PURPLE#Mirror Match"] = function(desc)
-	return "挑战： #PURPLE#镜像对战", "挑 战 你 的 镜 像 克 隆 并 取 得 胜 利 ！", "拒绝", "接受"
+	return "挑战： #PURPLE#镜像对战", "挑战你的镜像克隆并取得胜利！", "拒绝", "接受"
 end
 
 yesnoPopDlg["Challenge: #PURPLE#Near Sighted"] = function(desc)
@@ -259,13 +259,13 @@ yesnoPopDlg["Challenge: #PURPLE#Near Sighted"] = function(desc)
 end
 
 yesnoPopDlg["Challenge: #PURPLE#Multiplicity"] = function(desc)
-	desc = desc:gsub("All foes %(including bosses%) gain the ability to multiply up to 3 times.  You must survive for at least", "所 有 敌 人 （ 包 括 Boss ） 都 获 得 了 复 制 最 多 3 次 的 能 力 。 在 离 开 本 层 前 你 至 少 要 存 活")
-	desc = desc:gsub("turns before exiting.", "个 回 合 。")
+	desc = desc:gsub("All foes %(including bosses%) gain the ability to multiply up to 3 times.  You must survive for at least", "所有敌人（包括 Boss ）都获得了复制最多 3 次的能力。在离开本层前你至少要存活")
+	desc = desc:gsub("turns before exiting.", "个回合。")
 	return "挑战： #PURPLE#复制", desc, "拒绝", "接受"
 end
 
 yesnoPopDlg["Challenge: #PURPLE#Headhunter"] = function(desc)
-	desc = desc:gsub("Kill", "在 本 层 杀 死 任 何 精 英 或 以 上 怪 物 之 前 ， 先 要 杀 死 ")
-	desc = desc:gsub("spawns of Urh'Rok on the level before killing any other elite %(or higher rank%) creatures, for an uncommon reward.", " 个 乌 鲁 克 的 子 嗣， 获 得 稀 有 奖 励 。")
+	desc = desc:gsub("Kill", "在本层杀死任何精英或以上怪物之前，先要杀死 ")
+	desc = desc:gsub("spawns of Urh'Rok on the level before killing any other elite %(or higher rank%) creatures, for an uncommon reward.", " 个乌鲁克的子嗣，获得稀有奖励。")
 	return "挑战： #PURPLE#猎头者", desc, "拒绝", "接受"
 end

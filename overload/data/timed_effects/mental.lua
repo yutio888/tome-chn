@@ -73,7 +73,7 @@ newEffect{
 newEffect{
 	name = "SILENCED", image = "effects/silenced.png",
 	desc = "Silenced",
-	long_desc = function(self, eff) return "目 标 被 沉 默， 无 法 施 法 和 使 用 语 言 类 技 能。" end,
+	long_desc = function(self, eff) return "目标被沉默，无法施法和使用语言类技能。" end,
 	type = "mental",
 	subtype = { silence=true },
 	status = "detrimental",
@@ -91,7 +91,7 @@ newEffect{
 newEffect{
 	name = "SUMMON_CONTROL", image = "talents/summon_control.png", --Backwards compatibility
 	desc = "Pheromones",
-	long_desc = function(self, eff) return ("目 标 被 半 径 %d 内 所 有 召 唤 物 集 火 。"):format(eff.range) end,
+	long_desc = function(self, eff) return ("目标被半径 %d 内所有召唤物集火。"):format(eff.range) end,
 	type = "mental",
 	subtype = { focus=true },
 	status = "detrimental",
@@ -126,7 +126,7 @@ newEffect{
 newEffect{
 	name = "CONFUSED", image = "effects/confused.png",
 	desc = "Confused",
-	long_desc = function(self, eff) return ("目 标 陷 入 混 乱， 随 机 行 动（ %d%% 概 率） 不 能 完 成 复 杂 的 动 作。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("目标陷入混乱，随机行动（ %d%% 概率）不能完成复杂的动作。"):format(eff.power) end,
 	charges = function(self, eff) return (tostring(math.floor(eff.power)).."%") end,
 	type = "mental",
 	subtype = { confusion=true },
@@ -148,7 +148,7 @@ newEffect{
 newEffect{
 	name = "DOMINANT_WILL", image = "talents/yeek_will.png",
 	desc = "Mental Domination",
-	long_desc = function(self, eff) return ("目 标 的 心 智 被 扰 乱， 身 体 被 %s 所 奴 役。"):format(eff.src.name:capitalize()) end,
+	long_desc = function(self, eff) return ("目标的心智被扰乱，身体被 %s 所奴役。"):format(eff.src.name:capitalize()) end,
 	type = "mental",
 	subtype = { dominate=true },
 	status = "detrimental",
@@ -244,7 +244,7 @@ newEffect{
 newEffect{
 	name = "BATTLE_SHOUT", image = "talents/battle_shout.png",
 	desc = "Battle Shout",
-	long_desc = function(self, eff) return ("增 加 %d%% 生 命 值 和 体 力 值 上 限。 当 效 果 结 束 后 ， 增 加 的 生 命 和 体 力 会 消 失。 "):format(eff.power) end,
+	long_desc = function(self, eff) return ("增加 %d%% 生命值和体力值上限。当效果结束后，增加的生命和体力会消失。 "):format(eff.power) end,
 	type = "mental",
 	subtype = { morale=true },
 	status = "beneficial",
@@ -269,7 +269,7 @@ newEffect{
 newEffect{
 	name = "BATTLE_CRY", image = "talents/battle_cry.png",
 	desc = "Battle Cry",
-	long_desc = function(self, eff) return ("目 标 的 防 御 意 识 被 战 斗 怒 吼 所 扰 乱， 降 低 %d 闪 避 值。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("目标的防御意识被战斗怒吼所扰乱，降低 %d 闪避值。"):format(eff.power) end,
 	type = "mental",
 	subtype = { morale=true },
 	status = "detrimental",
@@ -286,7 +286,7 @@ newEffect{
 newEffect{
 	name = "WILLFUL_COMBAT", image = "talents/willful_combat.png",
 	desc = "Willful Combat",
-	long_desc = function(self, eff) return ("目 标 投 入 所 有 战 斗 意 志， 提 升 %d 物 理 强 度。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("目标投入所有战斗意志，提升 %d 物理强度。"):format(eff.power) end,
 	type = "mental",
 	subtype = { focus=true },
 	status = "beneficial",
@@ -304,7 +304,7 @@ newEffect{
 newEffect{
 	name = "GLOOM_WEAKNESS", image = "effects/gloom_weakness.png",
 	desc = "Gloom Weakness",
-	long_desc = function(self, eff) return ("黑 暗 降 低 目 标 造 成 的 伤 害 %d%% 。"):format(-eff.incDamageChange) end,
+	long_desc = function(self, eff) return ("黑暗降低目标造成的伤害 %d%% 。"):format(-eff.incDamageChange) end,
 	type = "mental",
 	subtype = { gloom=true },
 	status = "detrimental",
@@ -324,7 +324,7 @@ newEffect{
 newEffect{
 	name = "GLOOM_SLOW", image = "effects/gloom_slow.png",
 	desc = "Slowed by the gloom",
-	long_desc = function(self, eff) return ("降 低 目 标 整 体 速 度 %d%% 。"):format(eff.power * 100) end,
+	long_desc = function(self, eff) return ("降低目标整体速度 %d%% 。"):format(eff.power * 100) end,
 	type = "mental",
 	subtype = { gloom=true, slow=true },
 	status = "detrimental",
@@ -344,7 +344,7 @@ newEffect{
 newEffect{
 	name = "GLOOM_STUNNED", image = "effects/gloom_stunned.png",
 	desc = "Stunned by the gloom",
-	long_desc = function(self, eff) return ("目 标 被 黑 暗 光 环 震 慑， 伤 害 降 低 50 ％，随 机 4 个 技 能 进 入 CD， 移 动 速 度 降 低 50％。 在 震 慑 时 技 能 冷 却 速 度 变 慢 一 倍 。"):format() end,
+	long_desc = function(self, eff) return ("目标被黑暗光环震慑，伤害降低 50 ％，随机 4 个技能进入 CD，移动速度降低 50％。在震慑时技能冷却速度变慢一倍。"):format() end,
 	type = "mental",
 	subtype = { gloom=true, stun=true },
 	status = "detrimental",
@@ -378,7 +378,7 @@ newEffect{
 newEffect{
 	name = "GLOOM_CONFUSED", image = "effects/gloom_confused.png",
 	desc = "Confused by the gloom",
-	long_desc = function(self, eff) return ("目 标 因 黑 暗 光 环 陷 入 混 乱， 使 其 随 机 行 动（ %d%% 概 率） 且 不 能 完 成 复 杂 动 作。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("目标因黑暗光环陷入混乱，使其随机行动（ %d%% 概率）且不能完成复杂动作。"):format(eff.power) end,
 	type = "mental",
 	charges = function(self, eff) return (tostring(eff.power).."%") end,
 	subtype = { gloom=true, confusion=true },
@@ -402,7 +402,7 @@ newEffect{
 newEffect{
 	name = "DISMAYED", image = "talents/dismay.png",
 	desc = "Dismayed",
-	long_desc = function(self, eff) return ("目 标 惊 慌 失 措， 下 一 次 对 该 目 标 的 近 战 攻 击 会 造 成 暴 击。") end,
+	long_desc = function(self, eff) return ("目标惊慌失措，下一次对该目标的近战攻击会造成暴击。") end,
 	type = "mental",
 	subtype = { gloom=true, confusion=true },
 	status = "detrimental",
@@ -426,10 +426,10 @@ newEffect{
 	long_desc = function(self, eff)
 		local t = self:getTalentFromId(self.T_STALK)
 		local effStalked = eff.target:hasEffect(eff.target.EFF_STALKED)
-		local desc = ([[追 踪 %s ， 等 级 %d: +%d 命 中， +%d%% 近 战 伤 害， +%0.2f 仇 恨 / 回 合 攻 击 回 复。]]):format(
+		local desc = ([[追踪 %s ，等级 %d: +%d 命中， +%d%% 近战伤害， +%0.2f 仇恨 / 回合攻击回复。]]):format(
 			eff.target.name, eff.bonus, t.getAttackChange(self, t, eff.bonus), t.getStalkedDamageMultiplier(self, t, eff.bonus) * 100 - 100, t.getHitHateChange(self, t, eff.bonus))
 		if effStalked and effStalked.damageChange and effStalked.damageChange > 0 then
-			desc = desc..("猎 捕 伤 害 加 成： %d%% 。"):format(effStalked.damageChange)
+			desc = desc..("猎捕伤害加成： %d%% 。"):format(effStalked.damageChange)
 		end
 		return desc
 	end,
@@ -457,10 +457,10 @@ newEffect{
 		local effStalker = eff.src:hasEffect(eff.src.EFF_STALKER)
 		if not effStalker then return "被追踪。" end
 		local t = self:getTalentFromId(eff.src.T_STALK)
-		local desc = ([[目 标 被 %s 追 踪。 追 踪 等 级 %d: +%d 命 中， +%d%% 近 战 伤 害， +%0.2f 仇 恨 / 回 合 攻 击 回 复。]]):format(
+		local desc = ([[目标被 %s 追踪。追踪等级 %d: +%d 命中， +%d%% 近战伤害， +%0.2f 仇恨 / 回合攻击回复。]]):format(
 			eff.src.name, effStalker.bonus, t.getAttackChange(eff.src, t, effStalker.bonus), t.getStalkedDamageMultiplier(eff.src, t, effStalker.bonus) * 100 - 100, t.getHitHateChange(eff.src, t, effStalker.bonus))
 		if eff.damageChange and eff.damageChange > 0 then
-			desc = desc..(" 猎 捕 伤 害 加 成： %d%% 。"):format(eff.damageChange)
+			desc = desc..(" 猎捕伤害加成： %d%% 。"):format(eff.damageChange)
 		end
 		return desc
 	end,
@@ -505,9 +505,9 @@ newEffect{
 	name = "BECKONED", image = "talents/beckon.png",
 	desc = "Beckoned",
 	long_desc = function(self, eff)
-		local message = ("目 标 被 %s 诱 惑 并 响 应 其 呼 唤， 每 回 合 有 %d%% 概 率 向 召 唤 者 移 动。"):format(eff.src.name, eff.chance)
+		local message = ("目标被 %s 诱惑并响应其呼唤，每回合有 %d%% 概率向召唤者移动。"):format(eff.src.name, eff.chance)
 		if eff.spellpowerChangeId and eff.mindpowerChangeId then
-			message = message..(" (法 术 强 度： %d ， 精 神 强 度： %d "):format(eff.spellpowerChange, eff.mindpowerChange)
+			message = message..(" (法术强度： %d ，精神强度： %d "):format(eff.spellpowerChange, eff.mindpowerChange)
 		end
 		return message
 	end,
@@ -619,7 +619,7 @@ newEffect{
 newEffect{
 	name = "OVERWHELMED", image = "talents/frenzy.png",
 	desc = "Overwhelmed",
-	long_desc = function(self, eff) return ("目 标 被 强 力 的 攻 击 所 压 制， 减 少 %d 攻 击。"):format( -eff.attackChange) end,
+	long_desc = function(self, eff) return ("目标被强力的攻击所压制，减少 %d 攻击。"):format( -eff.attackChange) end,
 	type = "mental",
 	subtype = { fear=true },
 	status = "detrimental",
@@ -639,7 +639,7 @@ newEffect{
 newEffect{
 	name = "HARASSED", image = "talents/harass_prey.png",
 	desc = "Harassed",
-	long_desc = function(self, eff) return ("目 标 被 追 踪 至 疲 倦， 伤 害 减 低 %d%% 。"):format( -eff.damageChange ) end,
+	long_desc = function(self, eff) return ("目标被追踪至疲倦，伤害减低 %d%% 。"):format( -eff.damageChange ) end,
 	type = "mental",
 	subtype = { fear=true },
 	status = "detrimental",
@@ -659,7 +659,7 @@ newEffect{
 newEffect{
 	name = "DOMINATED", image = "talents/dominate.png",
 	desc = "Dominated",
-	long_desc = function(self, eff) return (" 目 标 被 支 配 。 不 能 移 动 并 减 少 %d 护 甲 和 %d 闪 避 。 %s 对 目 标 的 攻 击 增 加 %d%% 抗 性 穿 透。 "):format(-eff.armorChange, -eff.defenseChange, eff.src.name:capitalize(), eff.resistPenetration) end,
+	long_desc = function(self, eff) return (" 目标被支配。不能移动并减少 %d 护甲和 %d 闪避。 %s 对目标的攻击增加 %d%% 抗性穿透。 "):format(-eff.armorChange, -eff.defenseChange, eff.src.name:capitalize(), eff.resistPenetration) end,
 	type = "mental",
 	subtype = { dominate=true },
 	status = "detrimental",
@@ -685,7 +685,7 @@ newEffect{
 newEffect{
 	name = "FEED", image = "talents/feed.png",
 	desc = "Feeding",
-	long_desc = function(self, eff) return ("%s 正 在 吞 食 %s 。"):format(npcCHN:getName(self.name), npcCHN:getName(eff.target.name)) end,
+	long_desc = function(self, eff) return ("%s 正在吞食 %s 。"):format(npcCHN:getName(self.name), npcCHN:getName(eff.target.name)) end,
 	type = "mental",
 	subtype = { psychic_drain=true },
 	status = "beneficial",
@@ -782,7 +782,7 @@ newEffect{
 newEffect{
 	name = "FED_UPON", image = "effects/fed_upon.png",
 	desc = "Fed Upon",
-	long_desc = function(self, eff) return ("%s 被 %s 吞 食。"):format(self.name:capitalize(), eff.src.name) end,
+	long_desc = function(self, eff) return ("%s 被 %s 吞食。"):format(self.name:capitalize(), eff.src.name) end,
 	type = "mental",
 	subtype = { psychic_drain=true },
 	status = "detrimental",
@@ -841,7 +841,7 @@ newEffect{
 newEffect{
 	name = "AGONY", image = "talents/agony.png",
 	desc = "Agony",
-	long_desc = function(self, eff) return ("%s 陷 入 挣 扎， 遭 受 %d 至 %d 伤 害 持 续 %d 回 合。"):format(self.name:capitalize(), eff.damage / eff.duration, eff.damage, eff.duration) end,
+	long_desc = function(self, eff) return ("%s 陷入挣扎，遭受 %d 至 %d 伤害持续 %d 回合。"):format(self.name:capitalize(), eff.damage / eff.duration, eff.damage, eff.duration) end,
 	type = "mental",
 	subtype = { pain=true, psionic=true },
 	status = "detrimental",
@@ -877,7 +877,7 @@ newEffect{
 newEffect{
 	name = "HATEFUL_WHISPER", image = "talents/hateful_whisper.png",
 	desc = "Hateful Whisper",
-	long_desc = function(self, eff) return ("%s 听 到 了 憎 恨 私 语。"):format(self.name:capitalize()) end,
+	long_desc = function(self, eff) return ("%s 听到了憎恨私语。"):format(self.name:capitalize()) end,
 	type = "mental",
 	subtype = { madness=true, psionic=true },
 	status = "detrimental",
@@ -963,7 +963,7 @@ newEffect{
 newEffect{
 	name = "MADNESS_SLOW", image = "effects/madness_slowed.png",
 	desc = "Slowed by madness",
-	long_desc = function(self, eff) return ("目 标 因 疯 狂 降 低 整 体 速 度 %d%% ， 同 时 降 低 精 神 抵 抗 %d%% 。"):format(eff.power * 100, -eff.mindResistChange) end,
+	long_desc = function(self, eff) return ("目标因疯狂降低整体速度 %d%% ，同时降低精神抵抗 %d%% 。"):format(eff.power * 100, -eff.mindResistChange) end,
 	type = "mental",
 	subtype = { madness=true, slow=true },
 	status = "detrimental",
@@ -985,7 +985,7 @@ newEffect{
 newEffect{
 	name = "MADNESS_STUNNED", image = "effects/madness_stunned.png",
 	desc = "Stunned by madness",
-	long_desc = function(self, eff) return ("目 标 被 疯 狂 震 慑， 伤 害 降 低 50 ％，随 机 4 个 技 能 进 入 CD， 移 动 速 度 降 低 50％。 在 震 慑 时 技 能 冷 却 速 度 变 慢 一 倍 。"):format(eff.mindResistChange) end,
+	long_desc = function(self, eff) return ("目标被疯狂震慑，伤害降低 50 ％，随机 4 个技能进入 CD，移动速度降低 50％。在震慑时技能冷却速度变慢一倍。"):format(eff.mindResistChange) end,
 	type = "mental",
 	subtype = { madness=true, stun=true },
 	status = "detrimental",
@@ -1024,7 +1024,7 @@ newEffect{
 newEffect{
 	name = "MADNESS_CONFUSED", image = "effects/madness_confused.png",
 	desc = "Confused by madness",
-	long_desc = function(self, eff) return ("疯 狂 使 目 标 混 乱， 降 低 目 标 %d%% 精 神 抵 抗， 使 目 标 随 机 行 动（ %d%% 概 率）。"):format(eff.mindResistChange, eff.power) end,
+	long_desc = function(self, eff) return ("疯狂使目标混乱，降低目标 %d%% 精神抵抗，使目标随机行动（ %d%% 概率）。"):format(eff.mindResistChange, eff.power) end,
 	type = "mental",
 	subtype = { madness=true, confusion=true, power=50 },
 	status = "detrimental",
@@ -1049,7 +1049,7 @@ newEffect{
 newEffect{
 	name = "MALIGNED", image = "talents/getsture_of_malice.png",
 	desc = "Maligned",
-	long_desc = function(self, eff) return ("目 标 被 恶 性 感 染， 所 有 抵 抗 降 低 %d%% 。"):format(-eff.resistAllChange) end,
+	long_desc = function(self, eff) return ("目标被恶性感染，所有抵抗降低 %d%% 。"):format(-eff.resistAllChange) end,
 	type = "mental",
 	subtype = { curse=true },
 	status = "detrimental",
@@ -1152,7 +1152,7 @@ newEffect{
 newEffect{
 	name = "PARANOID", image = "effects/paranoid.png",
 	desc = "Paranoid",
-	long_desc = function(self, eff) return ("目 标 被 妄 想 纠 缠， 有 %d%% 概 率 以 物 理 攻 击 附 近 任 一 目 标， 不 分 敌 我， 被 攻 击 者 也 可 能 陷 入 妄 想。"):format(eff.attackChance) end,
+	long_desc = function(self, eff) return ("目标被妄想纠缠，有 %d%% 概率以物理攻击附近任一目标，不分敌我，被攻击者也可能陷入妄想。"):format(eff.attackChance) end,
 	type = "mental",
 	subtype = { fear=true },
 	status = "detrimental",
@@ -1213,7 +1213,7 @@ newEffect{
 newEffect{
 	name = "DISPAIR", image = "effects/despair.png",
 	desc = "Despair",
-	long_desc = function(self, eff) return ("目 标 陷 入 绝 望， 护 甲， 闪 避 ， 精 神 豁 免 和 精 神 抵 抗 降 低 %d%% 。"):format(-eff.statChange) end,
+	long_desc = function(self, eff) return ("目标陷入绝望，护甲，闪避，精神豁免和精神抵抗降低 %d%% 。"):format(-eff.statChange) end,
 	type = "mental",
 	subtype = { fear=true },
 	status = "detrimental",
@@ -1243,7 +1243,7 @@ newEffect{
 newEffect{
 	name = "TERRIFIED", image = "effects/terrified.png",
 	desc = "Terrified",
-	long_desc = function(self, eff) return ("目 标 陷 入 惊 恐 ， 每 回 合 受 到 %d 点 精 神 和 黑 暗 伤 害 ， 所 有 冷 却 时 间 增 加 %d%% 。"):format(eff.damage, eff.cooldownPower * 100) end,
+	long_desc = function(self, eff) return ("目标陷入惊恐，每回合受到 %d 点精神和黑暗伤害，所有冷却时间增加 %d%% 。"):format(eff.damage, eff.cooldownPower * 100) end,
 	type = "mental",
 	subtype = { fear=true },
 	status = "detrimental",
@@ -1271,7 +1271,7 @@ newEffect{
 newEffect{
 	name = "DISTRESSED", image = "effects/distressed.png",
 	desc = "Distressed",
-	long_desc = function(self, eff) return ("目 标 陷 入 痛 苦， 降 低 所 有 豁 免 %d 。"):format(-eff.saveChange) end,
+	long_desc = function(self, eff) return ("目标陷入痛苦，降低所有豁免 %d 。"):format(-eff.saveChange) end,
 	type = "mental",
 	subtype = { fear=true },
 	status = "detrimental",
@@ -1299,7 +1299,7 @@ newEffect{
 newEffect{
 	name = "HAUNTED", image = "effects/haunted.png",
 	desc = "Haunted",
-	long_desc = function(self, eff) return ("目 标 被 死 亡 的 恐 惧 纠 缠， 所 有 精 神 负 面 效 果 每 回 合 造 成 %d 精 神 和 黑 暗 伤 害 。"):format(eff.damage) end, --perhaps add total.
+	long_desc = function(self, eff) return ("目标被死亡的恐惧纠缠，所有精神负面效果每回合造成 %d 精神和黑暗伤害。"):format(eff.damage) end, --perhaps add total.
 	type = "mental",
 	subtype = { fear=true },
 	status = "detrimental",
@@ -1340,7 +1340,7 @@ newEffect{
 newEffect{
 	name = "TORMENTED", image = "effects/tormented.png",
 	desc = "Tormented",
-	long_desc = function(self, eff) return ("目 标 的 精 神 受 到 折 磨， 产 生 %d 幽 灵 攻 击 目 标， 每 一 个 幽 灵 造 成 %d 精 神 伤 害 直 至 其 消 失。"):format(eff.count, eff.damage) end,
+	long_desc = function(self, eff) return ("目标的精神受到折磨，产生 %d 幽灵攻击目标，每一个幽灵造成 %d 精神伤害直至其消失。"):format(eff.count, eff.damage) end,
 	type = "mental",
 	subtype = { fear=true },
 	status = "detrimental",
@@ -1429,7 +1429,7 @@ newEffect{
 newEffect{
 	name = "PANICKED", image = "talents/panic.png",
 	desc = "Panicked",
-	long_desc = function(self, eff) return ("目 标 对 %s 感 到 恐 慌， 使 其 有 %d%% 概 率 因 为 害 怕 而 逃 跑。"):format(eff.src.name, eff.chance) end,
+	long_desc = function(self, eff) return ("目标对 %s 感到恐慌，使其有 %d%% 概率因为害怕而逃跑。"):format(eff.src.name, eff.chance) end,
 	type = "mental",
 	subtype = { fear=true },
 	status = "detrimental",
@@ -1504,7 +1504,7 @@ newEffect{
 newEffect{
 	name = "QUICKNESS", image = "effects/quickness.png",
 	desc = "Quick",
-	long_desc = function(self, eff) return ("增 加 %d%% 整 体 速 度。"):format(eff.power * 100) end,
+	long_desc = function(self, eff) return ("增加 %d%% 整体速度。"):format(eff.power * 100) end,
 	type = "mental",
 	subtype = { telekinesis=true, speed=true },
 	status = "beneficial",
@@ -1536,8 +1536,8 @@ newEffect{
 	desc = "Spiked Kinetic Shield",
 	long_desc = function(self, eff)
 		local tl = self:getTalentLevel(self.T_ABSORPTION_MASTERY)
-		local xs = (tl>=3 and "、 自然" or "")..(tl>=6 and "、 时空" or "")
-		return ("目 标 施 放 一 个 念 力 护 盾 吸 收 %d/%d 物 理 %s 或 酸 性 伤 害。"):format(self.kinspike_shield_absorb, eff.power, xs)
+		local xs = (tl>=3 and "、自然" or "")..(tl>=6 and "、时空" or "")
+		return ("目标施放一个念力护盾吸收 %d/%d 物理 %s 或酸性伤害。"):format(self.kinspike_shield_absorb, eff.power, xs)
 	end,
 	type = "mental",
 	subtype = { telekinesis=true, shield=true },
@@ -1567,7 +1567,7 @@ newEffect{
 	long_desc = function(self, eff)
 		local tl = self:getTalentLevel(self.T_ABSORPTION_MASTERY)
 		local xs = (tl>=3 and "、光系" or "")..(tl>=6 and "、奥术" or "")
-		return ("目 标 施 放 一 个 热 能 护 盾 吸 收 %d/%d 热 能 %s 或寒冷 伤 害。"):format(self.thermspike_shield_absorb, eff.power, xs)
+		return ("目标施放一个热能护盾吸收 %d/%d 热能 %s 或寒冷伤害。"):format(self.thermspike_shield_absorb, eff.power, xs)
 	end,
 	type = "mental",
 	subtype = { telekinesis=true, shield=true },
@@ -1597,7 +1597,7 @@ newEffect{
 	long_desc = function(self, eff)
 		local tl = self:getTalentLevel(self.T_ABSORPTION_MASTERY)
 		local xs = (tl>=3 and "、暗影" or "")..(tl>=6 and "、精神" or "")
-	return ("目 标 施 放 一 个 充 电 护 盾 吸 收 %d/%d 闪 电 %s 或 枯 萎 伤 害。"):format(self.chargespike_shield_absorb, eff.power, xs)
+	return ("目标施放一个充电护盾吸收 %d/%d 闪电 %s 或枯萎伤害。"):format(self.chargespike_shield_absorb, eff.power, xs)
 	end,
 	type = "mental",
 	subtype = { telekinesis=true, shield=true },
@@ -1625,7 +1625,7 @@ newEffect{
 newEffect{
 	name = "CONTROL", image = "talents/perfect_control.png",
 	desc = "Perfect control",
-	long_desc = function(self, eff) return ("分 别 目 标 提 高 目 标 %d 攻 击 强 度 和 %d%% 暴 击 率。"):format(eff.power, 0.5*eff.power) end,
+	long_desc = function(self, eff) return ("分别目标提高目标 %d 攻击强度和 %d%% 暴击率。"):format(eff.power, 0.5*eff.power) end,
 	type = "mental",
 	subtype = { telekinesis=true, focus=true },
 	status = "beneficial",
@@ -1643,7 +1643,7 @@ newEffect{
 newEffect{
 	name = "PSI_REGEN", image = "talents/matter_is_energy.png",
 	desc = "Matter is energy",
-	long_desc = function(self, eff) return ("宝 石 缓 慢 转 化， 每 回 合 产 生 %0.2f 超 能 力 值 。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("宝石缓慢转化，每回合产生 %0.2f 超能力值。"):format(eff.power) end,
 	type = "mental",
 	subtype = { psychic_drain=true },
 	status = "beneficial",
@@ -1661,7 +1661,7 @@ newEffect{
 newEffect{
 	name = "MASTERFUL_TELEKINETIC_ARCHERY", image = "talents/masterful_telekinetic_archery.png",
 	desc = "Telekinetic Archery",
-	long_desc = function(self, eff) return ("你 的 念 动 弓 箭 每 回 合 会 向 最 近 目 标 自 动 射 击。") end,
+	long_desc = function(self, eff) return ("你的念动弓箭每回合会向最近目标自动射击。") end,
 	type = "mental",
 	subtype = { telekinesis=true },
 	status = "beneficial",
@@ -1673,7 +1673,7 @@ newEffect{
 newEffect{
 	name = "WEAKENED_MIND", image = "talents/taint__telepathy.png",
 	desc = "Receptive Mind",
-	long_desc = function(self, eff) return ("降 低 精 神 豁 免 %d 并 增 加 精 神 强 度 %d."):format(eff.save, eff.power) end,
+	long_desc = function(self, eff) return ("降低精神豁免 %d 并增加精神强度 %d."):format(eff.save, eff.power) end,
 	type = "mental",
 	subtype = { morale=true },
 	status = "detrimental",
@@ -1691,7 +1691,7 @@ newEffect{
 newEffect{
 	name = "VOID_ECHOES", image = "talents/echoes_from_the_void.png",
 	desc = "Void Echoes",
-	long_desc = function(self, eff) return ("目 标 收 到 虚 空 的 回 声， 每 回 合 进 行 精 神 豁 免 检 定， 失 败 则 在 造 成 原 伤 害 的 同 时 附 加 %0.2f 精 神 伤 害。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("目标收到虚空的回声，每回合进行精神豁免检定，失败则在造成原伤害的同时附加 %0.2f 精神伤害。"):format(eff.power) end,
 	type = "mental",
 	subtype = { madness=true, psionic=true },
 	status = "detrimental",
@@ -1713,7 +1713,7 @@ newEffect{
 newEffect{
 	name = "WAKING_NIGHTMARE", image = "talents/waking_nightmare.png",
 	desc = "Waking Nightmare",
-	long_desc = function(self, eff) return ("目 标 陷 入 清 醒 状 态 的 噩 梦 之 中， 每 回 合 造 成 %0.2f 暗 影 伤 害， 并 有 %d%% 概 率 受 到 一 个 随 机 不 良 效 果。"):format(eff.dam, eff.chance) end,
+	long_desc = function(self, eff) return ("目标陷入清醒状态的噩梦之中，每回合造成 %0.2f 暗影伤害，并有 %d%% 概率受到一个随机不良效果。"):format(eff.dam, eff.chance) end,
 	type = "mental",
 	subtype = { nightmare=true, darkness=true },
 	status = "detrimental",
@@ -1748,7 +1748,7 @@ newEffect{
 newEffect{
 	name = "INNER_DEMONS", image = "talents/inner_demons.png",
 	desc = "Inner Demons",
-	long_desc = function(self, eff) return ("目 标 内 心 深 处 的 恶 魔 被 召 唤， 每 回 合 有 %d%% 概 率 出 现， 如 果 施 法 者 被 杀 死 或 者 法 术 豁 免 则 该 效 果 会 提 前 结 束。"):format(eff.chance) end,
+	long_desc = function(self, eff) return ("目标内心深处的恶魔被召唤，每回合有 %d%% 概率出现，如果施法者被杀死或者法术豁免则该效果会提前结束。"):format(eff.chance) end,
 	type = "mental",
 	subtype = { nightmare=true },
 	status = "detrimental",
@@ -1775,7 +1775,7 @@ newEffect{
 newEffect{
 	name = "DOMINATE_ENTHRALL", image = "talents/yeek_will.png",
 	desc = "Enthralled",
-	long_desc = function(self, eff) return ("目 标 被 迷 惑， 暂 时 改 变 了 其 阵 营。 ") end,-- to %s.")--:format(engine.Faction.factions[eff.faction].name) end,
+	long_desc = function(self, eff) return ("目标被迷惑，暂时改变了其阵营。 ") end,-- to %s.")--:format(engine.Faction.factions[eff.faction].name) end,
 	type = "mental",
 	subtype = { dominate=true },
 	status = "detrimental",
@@ -1794,7 +1794,7 @@ newEffect{
 newEffect{
 	name = "HALFLING_LUCK", image = "talents/halfling_luck.png",
 	desc = "Halflings's Luck",
-	long_desc = function(self, eff) return ("目 标 的 好 运 和 机 智 提 高 %d%%  暴 击 率 和 %d 豁 免。"):format(eff.crit, eff.save) end,
+	long_desc = function(self, eff) return ("目标的好运和机智提高 %d%%  暴击率和 %d 豁免。"):format(eff.crit, eff.save) end,
 	type = "mental",
 	subtype = { focus=true },
 	status = "beneficial",
@@ -1812,7 +1812,7 @@ newEffect{
 newEffect{
 	name = "ATTACK", image = "talents/perfect_strike.png",
 	desc = "Attack",
-	long_desc = function(self, eff) return ("目 标 的 攻 击 命 中 提 高 %d 。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("目标的攻击命中提高 %d 。"):format(eff.power) end,
 	type = "mental",
 	subtype = { focus=true },
 	status = "beneficial",
@@ -1833,7 +1833,7 @@ newEffect{
 newEffect{
 	name = "DEADLY_STRIKES", image = "talents/deadly_strikes.png",
 	desc = "Deadly Strikes",
-	long_desc = function(self, eff) return ("目 标 护 甲 穿 透 提 高 %d 。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("目标护甲穿透提高 %d 。"):format(eff.power) end,
 	type = "mental",
 	subtype = { focus=true },
 	status = "beneficial",
@@ -1851,7 +1851,7 @@ newEffect{
 newEffect{
 	name = "FRENZY", image = "effects/frenzy.png",
 	desc = "Frenzy",
-	long_desc = function(self, eff) return ("提 升 整 体 速 度 %d%% 并 提 高 物 理 暴 击 率 %d%% 。 \n 另 外 目 标 会 持 续 攻 击 直 到 其 攻 击 点 数 达 到 -%d%% 。"):format(eff.power * 100, eff.crit, eff.dieat * 100) end,
+	long_desc = function(self, eff) return ("提升整体速度 %d%% 并提高物理暴击率 %d%% 。 \n 另外目标会持续攻击直到其攻击点数达到 -%d%% 。"):format(eff.power * 100, eff.crit, eff.dieat * 100) end,
 	type = "mental",
 	subtype = { frenzy=true, speed=true },
 	status = "beneficial",
@@ -1888,7 +1888,7 @@ newEffect{
 newEffect{
 	name = "BLOODBATH", image = "talents/bloodbath.png",
 	desc = "Bloodbath",
-	long_desc = function(self, eff) return ("目 标 被 战 斗 激 励 提 升 生 命 上 限 %d%% 、 提 升 生 命 回 复 %0.2f 、 提 升 体 力 回 复 %0.2f 。"):format(eff.hp, eff.cur_regen or eff.regen, eff.cur_regen/5 or eff.regen/5) end,
+	long_desc = function(self, eff) return ("目标被战斗激励提升生命上限 %d%% 、提升生命回复 %0.2f 、提升体力回复 %0.2f 。"):format(eff.hp, eff.cur_regen or eff.regen, eff.cur_regen/5 or eff.regen/5) end,
 	type = "mental",
 	subtype = { frenzy=true, heal=true, regeneration=true, },
 	status = "beneficial",
@@ -1942,7 +1942,7 @@ newEffect{
 newEffect{
 	name = "BLOODRAGE", image = "talents/bloodrage.png",
 	desc = "Bloodrage",
-	long_desc = function(self, eff) return ("由 于 紧 张 的 战 斗， 目 标 力 量 属 性 增 加 %d 。"):format(eff.cur_inc) end,
+	long_desc = function(self, eff) return ("由于紧张的战斗，目标力量属性增加 %d 。"):format(eff.cur_inc) end,
 	type = "mental",
 	subtype = { frenzy=true },
 	status = "beneficial",
@@ -1967,7 +1967,7 @@ newEffect{
 newEffect{
 	name = "INCREASED_LIFE", image = "effects/increased_life.png",
 	desc = "Increased Life",
-	long_desc = function(self, eff) return ("目 标 生 命 上 限 增 加 %d 。"):format(eff.life) end,
+	long_desc = function(self, eff) return ("目标生命上限增加 %d 。"):format(eff.life) end,
 	type = "mental",
 	subtype = { frenzy=true, heal=true },
 	status = "beneficial",
@@ -2001,8 +2001,8 @@ newEffect{
 			dam = dam*math.max(0,deflects)
 			deflects = 1
 		end
-		if self:isTalentActive(self.T_GESTURE_OF_PAIN) then xs = ("，并 有 %d%% 几 率 让 对 方 处 于 被 反 击 状 态 " ):format(self:callTalent(self.T_GESTURE_OF_GUARDING,"getCounterAttackChance")) end
-		return ("防 御 近 战 伤 害 ： 减 少 %d 点 伤 害 ， 剩 余 次 数 %0.1f%s."):format(dam, deflects, xs)
+		if self:isTalentActive(self.T_GESTURE_OF_PAIN) then xs = ("，并有 %d%% 几率让对方处于被反击状态 " ):format(self:callTalent(self.T_GESTURE_OF_GUARDING,"getCounterAttackChance")) end
+		return ("防御近战伤害：减少 %d 点伤害，剩余次数 %0.1f%s."):format(dam, deflects, xs)
 	end,
 	charges = function(self, eff) return "#LIGHT_GREEN#"..math.ceil(eff.deflects) end,
 	type = "mental",
@@ -2024,12 +2024,12 @@ newEffect{
 	name = "RAMPAGE", image = "talents/rampage.png",
 	desc = "Rampaging",
 	long_desc = function(self, eff)
-		local desc = ("目 标 进 入 暴 走 状 态！ (+%d%% 移 动 速 度， +%d%% 攻 击 速 度 ， +%d%% 精 神 速 度"):format(eff.movementSpeedChange * 100, eff.combatPhysSpeedChange * 100, eff.combatMindSpeedChange * 100)
+		local desc = ("目标进入暴走状态！ (+%d%% 移动速度， +%d%% 攻击速度， +%d%% 精神速度"):format(eff.movementSpeedChange * 100, eff.combatPhysSpeedChange * 100, eff.combatMindSpeedChange * 100)
 		if eff.physicalDamageChange > 0 then
-			desc = desc..(", +%d%% 物 理 伤 害， +%d 物 理 豁 免， +%d 精 神 豁 免"):format(eff.physicalDamageChange, eff.combatPhysResistChange, eff.combatMentalResistChange)
+			desc = desc..(", +%d%% 物理伤害， +%d 物理豁免， +%d 精神豁免"):format(eff.physicalDamageChange, eff.combatPhysResistChange, eff.combatMentalResistChange)
 		end
 		if eff.damageShieldMax > 0 then
-			desc = desc..(", %d/%d 本 回 合 无 视 伤 害"):format(math.max(0, eff.damageShieldMax - eff.damageShield), eff.damageShieldMax)
+			desc = desc..(", %d/%d 本回合无视伤害"):format(math.max(0, eff.damageShieldMax - eff.damageShield), eff.damageShieldMax)
 		end
 		desc = desc..")"
 		return desc
@@ -2106,9 +2106,9 @@ newEffect{
 	no_remove = true,
 	cancel_on_level_change = true,
 	long_desc = function(self, eff)
-		local desc = ([[目 标 正 在 猎 捕 以 下 类 型 生 物： %s / %s 附 带 %d%% 效 果。 击 杀： %d / %d ， 伤 害： %+d%% / %+d%% ]]):format(eff.type, eff.subtype, (eff.effectiveness * 100) or 0, eff.typeKills, eff.subtypeKills, (eff.typeDamageChange * 100) or 0, (eff.subtypeDamageChange * 100) or 0)
+		local desc = ([[目标正在猎捕以下类型生物： %s / %s 附带 %d%% 效果。击杀： %d / %d ，伤害： %+d%% / %+d%% ]]):format(eff.type, eff.subtype, (eff.effectiveness * 100) or 0, eff.typeKills, eff.subtypeKills, (eff.typeDamageChange * 100) or 0, (eff.subtypeDamageChange * 100) or 0)
 		if eff.subtypeAttackChange or 0 > 0 then
-			desc = desc..([[， 命 中： %+d / %+d ， 震 慑： -- / %0.1f%% ， 运 筹 帷 幄： %0.1f%% / %0.1f%%]]):format(eff.typeAttackChange or 0, eff.subtypeAttackChange or 0, eff.subtypeStunChance or 0, eff.typeOutmaneuverChance or 0, eff.subtypeOutmaneuverChance or 0)
+			desc = desc..([[，命中： %+d / %+d ，震慑： -- / %0.1f%% ，运筹帷幄： %0.1f%% / %0.1f%%]]):format(eff.typeAttackChange or 0, eff.subtypeAttackChange or 0, eff.subtypeStunChance or 0, eff.typeOutmaneuverChance or 0, eff.subtypeOutmaneuverChance or 0)
 		end
 		return desc
 	end,
@@ -2185,7 +2185,7 @@ newEffect{
 	name = "OUTMANEUVERED", image = "talents/outmaneuver.png",
 	desc = "Outmaneuvered",
 	long_desc = function(self, eff)
-		local desc = ("目 标 受 到 运 筹 帷 幄 效 果， (%d%% 物 理 抗 性，"):format(eff.physicalResistChange)
+		local desc = ("目标受到运筹帷幄效果， (%d%% 物理抗性，"):format(eff.physicalResistChange)
 		local first = true
 		for id, value in pairs(eff.incStats) do
 			if not first then desc = desc..", " end
@@ -2247,9 +2247,9 @@ newEffect{
 	name = "MIMIC", image = "talents/mimic.png",
 	desc = "Mimic",
 	long_desc = function(self, eff)
-		if not eff.incStatsId then return "目 标 无 相 转 生 前 一 个 杀 死 的 生 物（ 无 增 益）" end
+		if not eff.incStatsId then return "目标无相转生前一个杀死的生物（无增益）" end
 
-		local desc = "目 标 无 相 转 生 前 一 个 杀 死 的 生 物("
+		local desc = "目标无相转生前一个杀死的生物("
 		local first = true
 		for id, value in pairs(eff.incStats) do
 			if not first then desc = desc..", " end
@@ -2342,7 +2342,7 @@ newEffect{
 newEffect{
 	name = "ORC_FURY", image = "talents/orc_fury.png",
 	desc = "Orcish Fury",
-	long_desc = function(self, eff) return ("目 标 进 入 具 有 破 坏 力 的 愤 怒 状 态， 提 升 %d%% 伤 害。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("目标进入具有破坏力的愤怒状态，提升 %d%% 伤害。"):format(eff.power) end,
 	type = "mental",
 	subtype = { frenzy=true },
 	status = "beneficial",
@@ -2360,7 +2360,7 @@ newEffect{
 newEffect{
 	name = "ORC_TRIUMPH", image = "talents/skirmisher.png",
 	desc = "Orcish Triumph",
-	long_desc = function(self, eff) return ("你 的 胜 利 增 加 了 你 %d%%  全 体 伤 害 抗 性 。"):format(eff.resists) end,
+	long_desc = function(self, eff) return ("你的胜利增加了你 %d%%  全体伤害抗性。"):format(eff.resists) end,
 	type = "mental",
 	subtype = { frenzy=true },
 	status = "beneficial",
@@ -2378,7 +2378,7 @@ newEffect{
 newEffect{
 	name = "BRAINLOCKED",
 	desc = "Brainlocked",
-	long_desc = function(self, eff) return ("随 机 使 一 个 技 能 无 法 使 用。 该 状 态 下 所 有 技 能 冷 却 速 度 减 半 。"):format() end,
+	long_desc = function(self, eff) return ("随机使一个技能无法使用。该状态下所有技能冷却速度减半。"):format() end,
 	type = "mental",
 	subtype = { ["cross tier"]=true },
 	status = "detrimental",
@@ -2406,7 +2406,7 @@ newEffect{
 newEffect{
 	name = "FRANTIC_SUMMONING", image = "talents/frantic_summoning.png",
 	desc = "Frantic Summoning",
-	long_desc = function(self, eff) return ("降 低 召 唤 耗 时 %d%% 。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("降低召唤耗时 %d%% 。"):format(eff.power) end,
 	type = "mental",
 	subtype = { summon=true },
 	status = "beneficial",
@@ -2440,7 +2440,7 @@ newEffect{
 newEffect{
 	name = "WILD_SUMMON", image = "talents/wild_summon.png",
 	desc = "Wild Summon",
-	long_desc = function(self, eff) return ("%d%% 概 率 提 升 召 唤 能 力。"):format(eff.chance) end,
+	long_desc = function(self, eff) return ("%d%% 概率提升召唤能力。"):format(eff.chance) end,
 	type = "mental",
 	subtype = { summon=true },
 	status = "beneficial",
@@ -2462,7 +2462,7 @@ newEffect{
 newEffect{
 	name = "LOBOTOMIZED", image = "talents/psychic_lobotomy.png",
 	desc = "Lobotomized (confused)",
-	long_desc = function(self, eff) return ("目 标 的 精 神 判 断 力 严 重 受 损， 每 回 合 (%d%% 概 率) 随 机 动 作 并 降 低 灵 巧 %d 。"):format(eff.confuse, eff.power/2) end,
+	long_desc = function(self, eff) return ("目标的精神判断力严重受损，每回合 (%d%% 概率) 随机动作并降低灵巧 %d 。"):format(eff.confuse, eff.power/2) end,
 	type = "mental",
 	subtype = { confusion=true },
 	status = "detrimental",
@@ -2490,7 +2490,7 @@ newEffect{
 	name = "PSIONIC_SHIELD", image = "talents/kinetic_shield.png",
 	desc = "Psionic Shield",
 	--display_desc = function(self, eff) return eff.kind:capitalize().." Psionic Shield" end,
-	long_desc = function(self, eff) return ("减 少 受 到 的 %s 伤 害 %d 。"):format(eff.what, eff.power) end,
+	long_desc = function(self, eff) return ("减少受到的 %s 伤害 %d 。"):format(eff.what, eff.power) end,
 	type = "mental",
 	subtype = { psionic=true, shield=true },
 	status = "beneficial",
@@ -2537,7 +2537,7 @@ newEffect{
 newEffect{
 	name = "CLEAR_MIND", image = "talents/mental_shielding.png",
 	desc = "Clear Mind",
-	long_desc = function(self, eff) return ("使 接 下 来 的 %d 种 负 面 精 神效果无 效。"):format(self.clear_mind_immune) end,
+	long_desc = function(self, eff) return ("使接下来的 %d 种负面精神效果无效。"):format(self.clear_mind_immune) end,
 	type = "mental",
 	subtype = { psionic=true, },
 	status = "beneficial",
@@ -2555,7 +2555,7 @@ newEffect{
 newEffect{
 	name = "RESONANCE_FIELD", image = "talents/resonance_field.png",
 	desc = "Resonance Field",
-	long_desc = function(self, eff) return ("目 标 被 超 能 领 域 包 围， 吸 收 50%% 所 有 伤 害（ 最 多 %d/%d ）。"):format(self.resonance_field_absorb, eff.power) end,
+	long_desc = function(self, eff) return ("目标被超能领域包围，吸收 50%% 所有伤害（最多 %d/%d ）。"):format(self.resonance_field_absorb, eff.power) end,
 	type = "mental",
 	subtype = { psionic=true, shield=true },
 	status = "beneficial",
@@ -2590,7 +2590,7 @@ newEffect{
 newEffect{
 	name = "MIND_LINK_TARGET", image = "talents/mind_link.png",
 	desc = "Mind Link",
-	long_desc = function(self, eff) return ("目 标 遭 到 精 神 入 侵， 提 升 它 受 到 %s 的 精 神 伤 害 %d%% 。"):format(eff.src.name:capitalize(), eff.power) end,
+	long_desc = function(self, eff) return ("目标遭到精神入侵，提升它受到 %s 的精神伤害 %d%% 。"):format(eff.src.name:capitalize(), eff.power) end,
 	type = "mental",
 	subtype = { psionic=true },
 	status = "detrimental",
@@ -2610,7 +2610,7 @@ newEffect{
 newEffect{
 	name = "FEEDBACK_LOOP", image = "talents/feedback_loop.png",
 	desc = "Feedback Loop",
-	long_desc = function(self, eff) return "目 标 吸 收 反 馈。" end,
+	long_desc = function(self, eff) return "目标吸收反馈。" end,
 	type = "mental",
 	subtype = { psionic=true },
 	status = "beneficial",
@@ -2628,7 +2628,7 @@ newEffect{
 newEffect{
 	name = "FOCUSED_WRATH", image = "talents/focused_wrath.png",
 	desc = "Focused Wrath",
-	long_desc = function(self, eff) return ("目 标 的 潜 意 识 集 中 在 %s 。"):format(eff.target.name:capitalize()) end,
+	long_desc = function(self, eff) return ("目标的潜意识集中在 %s 。"):format(eff.target.name:capitalize()) end,
 	type = "mental",
 	subtype = { psionic=true },
 	status = "beneficial",
@@ -2645,7 +2645,7 @@ newEffect{
 newEffect{
 	name = "SLEEP", image = "talents/sleep.png",
 	desc = "Sleep",
-	long_desc = function(self, eff) return ("目 标 陷 入 沉 睡 无 法 动 作， 每 受 到 %d 伤 害 缩 短 1 回 合 持 续 时 间。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("目标陷入沉睡无法动作，每受到 %d 伤害缩短 1 回合持续时间。"):format(eff.power) end,
 	type = "mental",
 	subtype = { sleep=true },
 	status = "detrimental",
@@ -2699,7 +2699,7 @@ newEffect{
 newEffect{
 	name = "SLUMBER", image = "talents/slumber.png",
 	desc = "Slumber",
-	long_desc = function(self, eff) return ("目 标 陷 入 沉 睡 无 法 动 作， 每 受 到 %d 伤 害 缩 短 1 回 合 持 续 时 间。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("目标陷入沉睡无法动作，每受到 %d 伤害缩短 1 回合持续时间。"):format(eff.power) end,
 	type = "mental",
 	subtype = { sleep=true },
 	status = "detrimental",
@@ -2749,7 +2749,7 @@ newEffect{
 newEffect{
 	name = "NIGHTMARE", image = "talents/nightmare.png",
 	desc = "Nightmare",
-	long_desc = function(self, eff) return ("目 标 陷 入 噩 梦， 每 回 合 遭 受 %0.2f 精 神 伤 害 并 无 法 活 动。 每 受 到 %d 伤 害 缩 短 1 回 合 持 续 时 间。"):format(eff.dam, eff.power) end,
+	long_desc = function(self, eff) return ("目标陷入噩梦，每回合遭受 %0.2f 精神伤害并无法活动。每受到 %d 伤害缩短 1 回合持续时间。"):format(eff.dam, eff.power) end,
 	type = "mental",
 	subtype = { nightmare=true, sleep=true },
 	status = "detrimental",
@@ -2808,7 +2808,7 @@ newEffect{
 newEffect{
 	name = "RESTLESS_NIGHT", image = "talents/restless_night.png",
 	desc = "Restless Night",
-	long_desc = function(self, eff) return ("不 安 的 睡 眠 造 成 虚 弱， 每 回 合 造 成 %0.2f 精 神 伤 害。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("不安的睡眠造成虚弱，每回合造成 %0.2f 精神伤害。"):format(eff.power) end,
 	type = "mental",
 	subtype = { psionic=true},
 	status = "detrimental",
@@ -2832,7 +2832,7 @@ newEffect{
 newEffect{
 	name = "INSOMNIA", image = "effects/insomnia.png",
 	desc = "Insomnia",
-	long_desc = function(self, eff) return ("目 标 清 醒 并 获 得 %d%% 沉 睡 效 果 抵 抗。 "):format(eff.cur_power) end,
+	long_desc = function(self, eff) return ("目标清醒并获得 %d%% 沉睡效果抵抗。 "):format(eff.cur_power) end,
 	type = "mental",
 	subtype = { psionic=true },
 	status = "beneficial",
@@ -2872,7 +2872,7 @@ newEffect{
 newEffect{
 	name = "SUNDER_MIND", image = "talents/sunder_mind.png",
 	desc = "Sundered Mind",
-	long_desc = function(self, eff) return ("目 标 的 精 神 能 力 被 削 弱， 精 神 豁 免 降 低 %d 。"):format(eff.cur_power or eff.power) end,
+	long_desc = function(self, eff) return ("目标的精神能力被削弱，精神豁免降低 %d 。"):format(eff.cur_power or eff.power) end,
 	type = "mental",
 	subtype = { psionic=true },
 	status = "detrimental",
@@ -2899,7 +2899,7 @@ newEffect{
 newEffect{
 	name = "BROKEN_DREAM", image = "effects/broken_dream.png",
 	desc = "Broken Dream",
-	long_desc = function(self, eff) return ("目 标 的 梦 境 被 破 坏， 降 低 精 神 豁 免 %d 并 降 低 施 法 成 功 率 %d%% 。"):format(eff.power, eff.fail) end,
+	long_desc = function(self, eff) return ("目标的梦境被破坏，降低精神豁免 %d 并降低施法成功率 %d%% 。"):format(eff.power, eff.fail) end,
 	type = "mental",
 	subtype = { psionic=true, morale=true },
 	status = "detrimental",
@@ -2933,7 +2933,7 @@ newEffect{
 		local function tchelper(first, rest)
 		  return first:upper()..rest:lower()
 		end
-		return ("吸 收 %d 下 一 次 可 格 挡 的 伤 害， 当 前 格 挡 %s 。"):format(eff.power, e_string:gsub("(%a)([%w_']*)", tchelper))
+		return ("吸收 %d 下一次可格挡的伤害，当前格挡 %s 。"):format(eff.power, e_string:gsub("(%a)([%w_']*)", tchelper))
 	end,
 	type = "mental",
 	subtype = { psionic=true },
@@ -2964,7 +2964,7 @@ newEffect{
 newEffect{
 	name = "HIDDEN_RESOURCES", image = "talents/hidden_resources.png",
 	desc = "Hidden Resources",
-	long_desc = function(self, eff) return "目 标 不 消 耗 任 何 能 量。" end,
+	long_desc = function(self, eff) return "目标不消耗任何能量。" end,
 	type = "mental",
 	subtype = { willpower=true },
 	status = "beneficial",
@@ -2979,7 +2979,7 @@ newEffect{
 newEffect{
 	name = "SPELL_FEEDBACK", image = "talents/spell_feedback.png",
 	desc = "Spell Feedback",
-	long_desc = function(self, eff) return ("目 标 有 %d%% 几 率 施 法 失 败。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("目标有 %d%% 几率施法失败。"):format(eff.power) end,
 	type = "mental",
 	subtype = { nature=true },
 	status = "detrimental",
@@ -2994,7 +2994,7 @@ newEffect{
 newEffect{
 	name = "MIND_PARASITE", image = "talents/mind_parasite.png",
 	desc = "Mind Parasite",
-	long_desc = function(self, eff) return ("目 标 被 精 神 寄 生 虫 感 染 ， 每 次 使 用 技 能 时 有 %d%% 几 率 让 %d 个 随 机 技 能 进 入 %d 回 合 的 冷 却."):format(eff.chance, eff.nb, eff.turns) end,
+	long_desc = function(self, eff) return ("目标被精神寄生虫感染，每次使用技能时有 %d%% 几率让 %d 个随机技能进入 %d 回合的冷却."):format(eff.chance, eff.nb, eff.turns) end,
 	type = "mental",
 	subtype = { nature=true, mind=true },
 	status = "detrimental",
@@ -3011,7 +3011,7 @@ newEffect{
 newEffect{
 	name = "MINDLASH", image = "talents/mindlash.png",
 	desc = "Mindlash",
-	long_desc = function(self, eff) return ("重 复 使 用 精 神 鞭 笞 十 分 消 耗 能 量 ， 会 增 加 每 次 的 超 能 力 值 消 耗 （ 现 在 %d%%）"):format(eff.power * 100) end,
+	long_desc = function(self, eff) return ("重复使用精神鞭笞十分消耗能量，会增加每次的超能力值消耗（现在 %d%%）"):format(eff.power * 100) end,
 	type = "mental",
 	subtype = { mind=true },
 	status = "detrimental",
@@ -3028,7 +3028,7 @@ newEffect{
 newEffect{
 	name = "SHADOW_EMPATHY", image = "talents/shadow_empathy.png",
 	desc = "Shadow Empathy",
-	long_desc = function(self, eff) return ("%d%% 的 总 伤 害 被 转 移 至 随 机 某 个 阴 影。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("%d%% 的总伤害被转移至随机某个阴影。"):format(eff.power) end,
 	type = "mental",
 	subtype = { mind=true, shield=true },
 	status = "beneficial",
@@ -3045,7 +3045,7 @@ newEffect{
 newEffect{
 	name = "SHADOW_DECOY", image = "talents/shadow_decoy.png",
 	desc = "Shadow Decoy",
-	long_desc = function(self, eff) return ("随 机 的 一 个 阴 影 将 吸 收 一 次 你 受 到 的 致 命 伤 害 ,   并 给 你 带 来 一 个 %d 的 临 时 盾."):format(eff.power) end,
+	long_desc = function(self, eff) return ("随机的一个阴影将吸收一次你受到的致命伤害 ,   并给你带来一个 %d 的临时盾."):format(eff.power) end,
 	type = "mental",
 	subtype = { mind=true, shield=true },
 	status = "beneficial",
@@ -3067,7 +3067,7 @@ newEffect{
 	name = "CRYSTAL_BUFF", image = "talents/stone_touch.png",
 	desc = "Crystal Resonance",
 	--Might consider adding the gem properties to this tooltip
-	long_desc = function(self, eff) return ("宝 石 的 能 量 与 你 产 生 共 振。") end,
+	long_desc = function(self, eff) return ("宝石的能量与你产生共振。") end,
 	type = "mental",
 	subtype = { psionic=true },
 	status = "beneficial",
@@ -3087,7 +3087,7 @@ newEffect{
 newEffect{
 	name = "WEAPON_WARDING", image = "talents/warding_weapon.png",
 	desc = "Weapon Warding",
-	long_desc = function(self, eff) return ("目 标 正 使 用 念 力 武 器 进 行 防 御 ， 能 格 挡 下 一 次 近 战 攻 击 并 自 动 反 击。")end,
+	long_desc = function(self, eff) return ("目标正使用念力武器进行防御，能格挡下一次近战攻击并自动反击。")end,
 	type = "mental",
 	subtype = { tactic=true },
 	status = "beneficial",
@@ -3123,7 +3123,7 @@ newEffect{
 newEffect{
 	name = "THOUGHTSENSE", image = "talents/thought_sense.png",
 	desc = "Thought Sense",
-	long_desc = function(self, eff) return ("探 测 周 围 的 思 维 ， 揭 示 半 径 %d 以 内 的 怪 物 位 置 ， 并 增 加 你 的 闪 避 %d 点 。"):format(eff.range, eff.def) end,
+	long_desc = function(self, eff) return ("探测周围的思维，揭示半径 %d 以内的怪物位置，并增加你的闪避 %d 点。"):format(eff.range, eff.def) end,
 	type = "mental",
 	subtype = { tactic=true },
 	status = "beneficial",
@@ -3147,7 +3147,7 @@ newEffect{
 newEffect{
 	name = "STATIC_CHARGE", image = "talents/static_net.png",
 	desc = "Static Charge",
-	long_desc = function(self, eff) return ("你 使 用 了 静 电 充 能 ， 下 一 次 近 战 攻 击 将 造  成 额 外 %d 点 闪 电 伤 害 。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("你使用了静电充能，下一次近战攻击将造  成额外 %d 点闪电伤害。"):format(eff.power) end,
 	type = "mental",
 	subtype = { lightning=true },
 	status = "beneficial",
@@ -3174,7 +3174,7 @@ newEffect{
 newEffect{
 	name = "HEART_STARTED", image = "talents/heartstart.png",
 	desc = "Heart Started",
-	long_desc = function(self, eff) return ("一 股 超 能 力 正 维 持 你 的 心 脏 跳 动 ， 令 你 能 在 %+d 生 命 下 存 活。"):format(-eff.power) end,
+	long_desc = function(self, eff) return ("一股超能力正维持你的心脏跳动，令你能在 %+d 生命下存活。"):format(-eff.power) end,
 	type = "mental",
 	subtype = { lightning=true },
 	status = "beneficial",
@@ -3189,7 +3189,7 @@ newEffect{
 newEffect{
 	name = "TRANSCENDENT_TELEKINESIS", image = "talents/transcendent_telekinesis.png",
 	desc = "Transcendent Telekinesis",
-	long_desc = function(self, eff) return ("你 的 动 能 操 控 能 力 超 越 了 极 限，增 加 %d 物 理 伤 害 与 %d%% 物 理 抗 性 穿 透 ， 同 时 你 的 动 能 效 果 得 到 强 化。"):format(eff.power, eff.penetration) end,
+	long_desc = function(self, eff) return ("你的动能操控能力超越了极限，增加 %d 物理伤害与 %d%% 物理抗性穿透，同时你的动能效果得到强化。"):format(eff.power, eff.penetration) end,
 	type = "mental",
 	subtype = { physical=true },
 	status = "beneficial",
@@ -3209,7 +3209,7 @@ newEffect{
 newEffect{
 	name = "TRANSCENDENT_PYROKINESIS", image = "talents/transcendent_pyrokinesis.png",
 	desc = "Transcendent Pyrokinesis",
-	long_desc = function(self, eff) return ("你 的 热 能 操 控 能 力 超 越 了 极 限，增 加 %d%% 火 焰 /寒 冷 伤 害 与 %d%% 火 焰 / 寒 冷 抗 性 穿 透 ， 同 时 你 的 热 能 效 果 得 到 强 化。"):format(eff.power, eff.penetration) end,
+	long_desc = function(self, eff) return ("你的热能操控能力超越了极限，增加 %d%% 火焰 /寒冷伤害与 %d%% 火焰 / 寒冷抗性穿透，同时你的热能效果得到强化。"):format(eff.power, eff.penetration) end,
 	type = "mental",
 	subtype = { fire=true, cold=true },
 	status = "beneficial",
@@ -3229,7 +3229,7 @@ newEffect{
 newEffect{
 	name = "TRANSCENDENT_ELECTROKINESIS", image = "talents/transcendent_electrokinesis.png",
 	desc = "Transcendent Electrokinesis",
-	long_desc = function(self, eff) return ("你 的 电 能 操 控 能 力 超 越 了 极 限，增 加 %d%% 闪 电 伤 害 与 %d%% 闪 电 抗 性 穿 透 ， 同 时 你 的 电 能 效 果 得 到 强 化。"):format(eff.power, eff.penetration) end,
+	long_desc = function(self, eff) return ("你的电能操控能力超越了极限，增加 %d%% 闪电伤害与 %d%% 闪电抗性穿透，同时你的电能效果得到强化。"):format(eff.power, eff.penetration) end,
 	type = "mental",
 	subtype = { lightning=true },
 	status = "beneficial",
@@ -3249,7 +3249,7 @@ newEffect{
 newEffect{
 	name = "PSI_DAMAGE_SHIELD", image = "talents/barrier.png",
 	desc = "Psionic Damage Shield",
-	long_desc = function(self, eff) return ("目 标 被 超 能 力 护 盾 保 护 ， 吸 收 %d/%d 伤 害 直 至 破 碎。"):format(self.damage_shield_absorb, eff.power) end,
+	long_desc = function(self, eff) return ("目标被超能力护盾保护，吸收 %d/%d 伤害直至破碎。"):format(self.damage_shield_absorb, eff.power) end,
 	type = "mental",
 	subtype = { psionic=true, shield=true },
 	status = "beneficial",
@@ -3291,8 +3291,8 @@ newEffect{
 	image="talents/unseen_force.png",
 	long_desc = function(self, eff)
 		local hits = (eff.extrahit > 0 and "从 "..eff.hits.." 到 "..(eff.hits + 1)) or ""..eff.hits
-		return ("一 股 无 形 的 力 量 撞 击 着 这 个 生 物 周 围 5 码 内 的 %s 个 目 标 "..
-		"每 回 合 造 成 %d 伤 害 并 击 退 %d 码 。"):format(hits, eff.damage, eff.knockback) end,
+		return ("一股无形的力量撞击着这个生物周围 5 码内的 %s 个目标 "..
+		"每回合造成 %d 伤害并击退 %d 码。"):format(hits, eff.damage, eff.knockback) end,
 	type = "mental",
 	subtype = {psionic=true},
 	status = "beneficial",
@@ -3334,7 +3334,7 @@ newEffect{
 newEffect{
 	name = "PSIONIC_MAELSTROM", image = "talents/psionic_maelstrom.png",
 	desc = "Psionic Maelstrom",
-	long_desc = function(self, eff) return ("这 个 生 物 站 在 强 大 的 灵 能 风 暴 中 心 。"):format() end,
+	long_desc = function(self, eff) return ("这个生物站在强大的灵能风暴中心。"):format() end,
 	type = "mental",
 	subtype = { psionic=true },
 	status = "beneficial",
@@ -3384,7 +3384,7 @@ newEffect{
 newEffect{
 	name = "CAUGHT_LIGHTNING", image = "talents/transcendent_electrokinesis.png",
 	desc = "Caught Lightning",
-	long_desc = function(self, eff) return ("闪 电 捕 捉 器 捕 获 了 能 量 ，增 加 %d%% 闪 电 伤 害 与 %d 全 属 性 。"):format((eff.dur+1)*5, eff.dur+1) end,
+	long_desc = function(self, eff) return ("闪电捕捉器捕获了能量，增加 %d%% 闪电伤害与 %d 全属性。"):format((eff.dur+1)*5, eff.dur+1) end,
 	type = "mental",
 	subtype = { lightning=true },
 	status = "beneficial",

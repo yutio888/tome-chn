@@ -3,8 +3,8 @@ registerBirthDescriptorTranslation{
 	name = "Adventurer",
 	display_name = "冒险家",
 	desc = {
-		"    冒 险 家 可 以 学 习 很 多 技 能， 他 们 可 以 学 习 任 何 碰 巧 发 现 的 技 能。 ",
-		"#{bold}# 这 是 通 关 后 获 得 的 奖 励 职 业， 显 然 它 绝 对 是 不 平 衡 的。 #{normal}#",
+		"    冒险家可以学习很多技能，他们可以学习任何碰巧发现的技能。 ",
+		"#{bold}# 这是通关后获得的奖励职业，显然它绝对是不平衡的。 #{normal}#",
 	},
 }
 registerBirthDescriptorTranslation{
@@ -12,12 +12,12 @@ registerBirthDescriptorTranslation{
 	name = "Adventurer",
 	display_name = "冒险家",
 	desc = {
-		" 冒 险 家 可 以 学 习 很 多 技 能， 他 们 可 以 学 习 任 何 碰 巧 发 现 的 技 能。 ",
-		"#{bold}# 这 是 通 关 后 获 得 的 奖 励 职 业， 显 然 它 是 绝 不 平 衡 的。 #{normal}#",
-		" 他 们 的 职 业 倾 向 决 定 了 他 们 的 主 属 性。 ",
-		"#GOLD# 属 性 修 正： ",
-		"#LIGHT_BLUE# * +2 力 量 , +2 敏 捷 , +2 体 质 ",
-		"#LIGHT_BLUE# * +2 魔 法 , +2 意 志 , +2 灵 巧 ",
-		"#GOLD# 每 等 级 生 命 加 值： #LIGHT_BLUE# +0",
+		" 冒险家可以学习很多技能，他们可以学习任何碰巧发现的技能。 ",
+		"#{bold}# 这是通关后获得的奖励职业，显然它是绝不平衡的。 #{normal}#",
+		" 他们的职业倾向决定了他们的主属性。 ",
+		"#GOLD# 属性修正： ",
+		"#LIGHT_BLUE# * +2 力量 , +2 敏捷 , +2 体质 ",
+		"#LIGHT_BLUE# * +2 魔法 , +2 意志 , +2 灵巧 ",
+		"#GOLD# 每等级生命加值： #LIGHT_BLUE# +0",
 	},
 }

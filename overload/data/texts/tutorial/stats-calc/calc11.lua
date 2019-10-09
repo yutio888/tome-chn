@@ -18,5 +18,5 @@
 -- darkgod@te4.org
 
 return [[
-进入倒数第二层 #GOLD#地下城冒险 启蒙版#WHITE# 学习不良法术 #GOLD#持续性效果#WHITE#。
+进入倒数第二层 #GOLD#地下城冒险启蒙版#WHITE# 学习不良法术 #GOLD#持续性效果#WHITE#。
 ]]

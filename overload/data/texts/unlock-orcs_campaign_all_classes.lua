@@ -17,7 +17,7 @@
 -- Nicolas Casalini "DarkGod"
 -- darkgod@te4.org
 
-return "新 的 游 戏 选 项: #LIGHT_GREEN#所 有 职 业",
-[[你 已 经 第 三 次 解 放 了 拘 留 营 的 兽 人 。
+return "新的游戏选项: #LIGHT_GREEN#所有职业",
+[[你已经第三次解放了拘留营的兽人。
 
-你 可 以 在 兽 人 战 役 中 使 用 任 何 在#LIGHT_GREEN# 原 版 战 役 #WHITE#中 解 锁 的 职 业 。]]
+你可以在兽人战役中使用任何在#LIGHT_GREEN# 原版战役 #WHITE#中解锁的职业。]]

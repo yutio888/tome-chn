@@ -18,7 +18,7 @@
 -- darkgod@te4.org
 
 return [[
-这一次如何？ 你的 #LIGHT_GREEN#精神豁免#WHITE# 是 #00FF80#层级3#WHITE# ，+6 #LIGHT_GREEN#精神豁免#WHITE# 的装备仅仅提高这个属性2点而已。
+这一次如何？你的 #LIGHT_GREEN#精神豁免#WHITE# 是 #00FF80#层级3#WHITE# ，+6 #LIGHT_GREEN#精神豁免#WHITE# 的装备仅仅提高这个属性2点而已。
 
 你能解释一下怎么回事么？
 ]]

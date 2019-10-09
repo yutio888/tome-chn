@@ -18,7 +18,7 @@
 -- darkgod@te4.org
 
 return [[
-#LIGHT_GREEN# 欢 迎 来 到 ToME 4#LAST#
+#LIGHT_GREEN# 欢迎来到 ToME 4#LAST#
 
-#GOLD# 地 下 城 冒 险 启 蒙 版 #WHITE# 将 要 开 始 咯！ 
+#GOLD# 地下城冒险启蒙版 #WHITE# 将要开始咯！ 
 ]]

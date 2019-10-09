@@ -6,10 +6,10 @@ registerTalentTranslation{
 	info = function(self, t)
 		local block = t.chance(self, t)
 		local armor = t.getHardiness(self, t)
-		return ([[允 许 你 装 备 盾 牌， 使 用 灵 巧 作 为 属 性 需 求。
-		当 你 受 到 近 战 攻 击，你 有 %d%% 的 几 率 用 盾 牌 使 这 次 攻 击 偏 斜， 并 完 全 躲 避 它。
-		另 外， 若 你 没 有 装 备 重 甲 ， 你 获 得 %d 护 甲 值 和 %d%% 护 甲 硬 度。
-		受 到 灵 巧 影 响， 偏 斜 几 率 有 加 成。]])
+		return ([[允许你装备盾牌，使用灵巧作为属性需求。
+		当你受到近战攻击，你有 %d%% 的几率用盾牌使这次攻击偏斜，并完全躲避它。
+		另外，若你没有装备重甲，你获得 %d 护甲值和 %d%% 护甲硬度。
+		受到灵巧影响，偏斜几率有加成。]])
 		:format(block, armour, hardiness)
 	end,
 }
@@ -21,8 +21,8 @@ registerTalentTranslation{
 		local shieldMult = t.getShieldMult(self, t) * 100
 		local tiles = t.getDist(self, t)
 		local slingMult = t.getSlingMult(self, t) * 100
-		return ([[用 盾 牌 重 击 近 战 范 围 内 的 一 名 敌 人 （ 当 技 能 等 级 在 5 级 或 更 高 时 重 击 2 次 ）， 造 成 %d%% 伤 害 并 击 退 %d 格。 紧 接 着 用 投 石 索 发 动 一 次 致 命 的 攻 击， 造 成 %d%% 伤 害。 
-		盾 牌 攻 击 使 用 敏 捷 取 代 力 量 来 计 算 盾 牌 伤 害 加 成。]])
+		return ([[用盾牌重击近战范围内的一名敌人（当技能等级在 5 级或更高时重击 2 次），造成 %d%% 伤害并击退 %d 格。紧接着用投石索发动一次致命的攻击，造成 %d%% 伤害。 
+		盾牌攻击使用敏捷取代力量来计算盾牌伤害加成。]])
 		:format(shieldMult, tiles, slingMult)
 	end,
 }
@@ -33,8 +33,8 @@ registerTalentTranslation{
 	info = function(self, t)
 		local chance = t.getChance(self, t)
 		local range = t.getRange(self, t)
-		return ([[当 你 被 抛 射 物 攻 击 时， 不 论 是 否 为 物 理 类 型， 你 有 %d%% 的 几 率 使 其 偏 斜 最 多 %d 格。
-		技 能 等 级 5 时 ， 你 的 击 退 射 击 必 定 暴 击。]])
+		return ([[当你被抛射物攻击时，不论是否为物理类型，你有 %d%% 的几率使其偏斜最多 %d 格。
+		技能等级 5 时，你的击退射击必定暴击。]])
 			:format(chance, range)
 	end,
 }
@@ -46,7 +46,7 @@ registerTalentTranslation{
 		local mult = t.getMult(self, t) * 100
 		local blocks = t.getBlocks(self, t)
 		
-		return ([[每 当 你 的 格 挡 专 家 或 者 格 挡 大 师 技 能 挡 住 攻 击 时， 你 立 刻 使 用 投 石 索 发 动 一 次 伤 害 %d%% 的 反 击。 每 回 合 最 多 只 能 发 动 %d 次 反 击。
+		return ([[每当你的格挡专家或者格挡大师技能挡住攻击时，你立刻使用投石索发动一次伤害 %d%% 的反击。每回合最多只能发动 %d 次反击。
 			]])
 			:format(mult, blocks)
 	end,

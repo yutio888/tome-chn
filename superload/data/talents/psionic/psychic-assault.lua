@@ -5,8 +5,8 @@ registerTalentTranslation{
 	name = "心灵光束",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
-		return ([[向 前 方 发 出 一 道 心 灵 光 束， 摧 毁 范 围 内 所 有 目 标 的 神 经 系 统， 造 成 %0.2f 精 神 伤 害。 
-		 受 精 神 强 度 影 响， 伤 害 有 额 外 加 成。]]):format(damDesc(self, DamageType.MIND, damage))
+		return ([[向前方发出一道心灵光束，摧毁范围内所有目标的神经系统，造成 %0.2f 精神伤害。 
+		 受精神强度影响，伤害有额外加成。]]):format(damDesc(self, DamageType.MIND, damage))
 	end,
 }
 
@@ -18,8 +18,8 @@ registerTalentTranslation{
 		local cunning_damage = t.getPower(self, t)/2
 		local power = t.getConfuse(self, t)
 		local duration = t.getDuration(self, t)
-		return ([[造 成 %0.2f 精 神 伤 害， 并 摧 毁 目 标 的 高 级 精 神 系 统， 降 低 %d 灵 巧 并 混 乱 目 标（ %d%% 强 度）， 持 续 %d 回 合。 
-		 受 精 神 强 度 影 响， 伤 害、 灵 巧 降 幅 和 混 乱 强 度 按 比 例 加 成。]]):
+		return ([[造成 %0.2f 精神伤害，并摧毁目标的高级精神系统，降低 %d 灵巧并混乱目标（ %d%% 强度），持续 %d 回合。 
+		 受精神强度影响，伤害、灵巧降幅和混乱强度按比例加成。]]):
 		format(damDesc(self, DamageType.MIND, (damage)), cunning_damage, power, duration)
 	end,
 }
@@ -30,8 +30,8 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local radius = self:getTalentRadius(t)
-		return ([[在 %d 码 半 径 范 围 内 释 放 一 波 心 灵 爆 震， 造 成 %0.2f 精 神 伤 害。 此 技 能 可 以 对 目 标 附 加 锁 脑 效 果。 
-		 受 精 神 强 度 影 响， 伤 害 有 额 外 加 成。]]):format(radius, damDesc(self, DamageType.MIND, damage))
+		return ([[在 %d 码半径范围内释放一波心灵爆震，造成 %0.2f 精神伤害。此技能可以对目标附加锁脑效果。 
+		 受精神强度影响，伤害有额外加成。]]):format(radius, damDesc(self, DamageType.MIND, damage))
 	end,
 }
 
@@ -41,10 +41,10 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local power = t.getDamage(self, t) / 10
-		return ([[摧 毁 目 标 的 思 维， 造 成 %0.2f 精 神 伤 害 并 且 减 少 %d 目 标 的 精 神 豁 免， 持 续 4 回 合。 
-		 此 技 能 必 中 且 精 神 豁 免 削 减 效 果 可 叠 加。 
-		 若 目 标 处 于 锁 脑 状 态， 则 会 产 生 双 倍 的 伤 害 和 豁 免 削 减。 
-		 受 精 神 强 度 影 响， 伤 害 和 豁 免 削 减 按 比 例 加 成。]]):
+		return ([[摧毁目标的思维，造成 %0.2f 精神伤害并且减少 %d 目标的精神豁免，持续 4 回合。 
+		 此技能必中且精神豁免削减效果可叠加。 
+		 若目标处于锁脑状态，则会产生双倍的伤害和豁免削减。 
+		 受精神强度影响，伤害和豁免削减按比例加成。]]):
 		format(damDesc(self, DamageType.MIND, (damage)), power)
 	end,
 }

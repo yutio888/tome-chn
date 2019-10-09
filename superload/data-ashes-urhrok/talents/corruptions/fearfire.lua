@@ -5,12 +5,12 @@ registerTalentTranslation{
 	name = "炼狱之门",
 	info = function(self, t)
 	local damage = t.getDamage(self, t)
-	return ([[开 启 通 往 恶 魔 空 间 的 炼 狱 之 门 ， 踏 入 并 传 送 到 附 近 位 置 。 
-	当 你 踏 出 炼 狱 之 门 时 ， 炼 狱 之 火 随 之 喷 发 ，造 成 %0.2f 恶 魔 之 火 伤 害 ，伤 害 %d 码 内 所 有 生 物。地 上 的 余 烬 会 造 成 持 续 4 回 合 的 额 外 %0.2f 恶 魔 之 火 伤 害。
+	return ([[开启通往恶魔空间的炼狱之门，踏入并传送到附近位置。 
+	当你踏出炼狱之门时，炼狱之火随之喷发，造成 %0.2f 恶魔之火伤害，伤害 %d 码内所有生物。地上的余烬会造成持续 4 回合的额外 %0.2f 恶魔之火伤害。
 
-	穿 越 空 间 增 强 了 你 的 直 觉 ， 让 你 能 够 在 3 回 合 内 觉 察 到 %d 码 内 的 所 有 敌 对 生 物 。 
+	穿越空间增强了你的直觉，让你能够在 3 回合内觉察到 %d 码内的所有敌对生物。 
  
-	伤 害 受 法 术 强 度 加 成 ， 范 围 随 技 能 等 级 增 大。]]):
+	伤害受法术强度加成，范围随技能等级增大。]]):
 	format(damage, self:getTalentRadius(t),damage, t.getVision(self, t))
 	end,
 }
@@ -20,10 +20,10 @@ registerTalentTranslation{
 	id = "T_CAUTERIZE_SPIRIT",
 	name = "灵魂焚净",
 	info = function(self, t)
-	return ([[移 除 所 有 负 面 状 态 ， 但 每 移 除 一 个 状 态 ， 会 在 7 回 合 内 灼 烧 自 身 ，受 到 合 计 %d%% 最 大 生 命 值 的 伤 害。
-	伤 害 无 视 一 切 抗 性 、防 御 效 果 和 伤 害 吸 收。
+	return ([[移除所有负面状态，但每移除一个状态，会在 7 回合内灼烧自身，受到合计 %d%% 最大生命值的伤害。
+	伤害无视一切抗性、防御效果和伤害吸收。
 	
-此 技 能 瞬 发 。]]):format(t.getBurnDamage(self, t)*100)
+此技能瞬发。]]):format(t.getBurnDamage(self, t)*100)
 	end,
 }
 
@@ -33,11 +33,11 @@ registerTalentTranslation{
 	name = "地狱吐息",
 	info = function(self, t)
 	local radius = self:getTalentRadius(t)
-	return ([[在 %d 码 的 锥 形 范 围 内 ，喷 出 持 续 4 回 合 的 暗 黑 火 焰。
-	范 围 内 所 有 的 非 恶 魔 生 物 受 到 %0.2f 火 焰 伤 害 ， 同 时 火 焰 会 造 成 每 回 合 %0.2f 的 灼 烧 伤 害。
-	恶 魔 受 到 等 量 的 治 疗 。
+	return ([[在 %d 码的锥形范围内，喷出持续 4 回合的暗黑火焰。
+	范围内所有的非恶魔生物受到 %0.2f 火焰伤害，同时火焰会造成每回合 %0.2f 的灼烧伤害。
+	恶魔受到等量的治疗。
  
-	伤 害 受 力 量 加 成 ， 该 技 能 使 用 魔 法 暴 击 率。]]):
+	伤害受力量加成，该技能使用魔法暴击率。]]):
 	format(radius, self:combatTalentStatDamage(t, "str", 30, 350), self:combatTalentStatDamage(t, "str", 30, 70))
 	end,
 }
@@ -49,8 +49,8 @@ registerTalentTranslation{
 	info = function(self, t)
 	local damage = t.getDamage(self, t)
 	local radius = self:getTalentRadius(t)
-	return ([[你 的 身 体 成 为 恶 魔 空 间 与 现 实 的 纽 带 ，将 %d 码 的 锥 形 范 围 内 的 敌 人 抓 过 来 ，同 时 每 回 合 造 成 %0.2f 点 火 焰 伤 害。
-伤 害 受 法 术 强 度 加 成。]]):format(radius, damage)
+	return ([[你的身体成为恶魔空间与现实的纽带，将 %d 码的锥形范围内的敌人抓过来，同时每回合造成 %0.2f 点火焰伤害。
+伤害受法术强度加成。]]):format(radius, damage)
 	end,
 }
 

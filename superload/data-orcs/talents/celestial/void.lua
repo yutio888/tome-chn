@@ -6,7 +6,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = damDesc(self, DamageType.DARKNESS, t.getDamage(self, t))
 		local radius = self:getTalentRadius(t)
-		return ([[射 出 一 个 带 有 宇 宙 能 量 的 矛. 如 果 击 中 敌 人 将 造 成 %0.2f 伤 害, 否 则 它 在 到 达 最 大 射 程 时 爆 炸 并 造 成 一 个 范 围 %d 的 锥 形 伤 害, 能 被 敌 人 阻 挡, 造 成 %0.2f 至 %0.2f 伤 害 取 决 于 有 多 少 个 敌 人 阻 挡.]]):
+		return ([[射出一个带有宇宙能量的矛. 如果击中敌人将造成 %0.2f 伤害, 否则它在到达最大射程时爆炸并造成一个范围 %d 的锥形伤害, 能被敌人阻挡, 造成 %0.2f 至 %0.2f 伤害取决于有多少个敌人阻挡.]]):
 		format(damage * 2.5, radius, damage, damage * 2.5)
 	end,}
 
@@ -14,7 +14,7 @@ registerTalentTranslation{
 	id = "T_CRESCENT_WAVE",
 	name = "新月波动",
 	info = function(self, t)
-		return ([[向 顺 时 针 方 向 发 射 一 个 抛 射 物. 如 果 击 中 敌 人 将 造 成 %0.2f  伤 害 并 定 身 1 回 合. 如 果 另 一 个 抛 射 物 在  %d 回 合 里 击 中 他 们, 他 们 将 只 收 到 一 半 的 伤 害 并 再 次 定 身.]])
+		return ([[向顺时针方向发射一个抛射物. 如果击中敌人将造成 %0.2f  伤害并定身 1 回合. 如果另一个抛射物在  %d 回合里击中他们, 他们将只收到一半的伤害并再次定身.]])
 	end,}
 
 registerTalentTranslation{
@@ -26,10 +26,10 @@ registerTalentTranslation{
 		local slow_per = t.getSlowPer(self, t)
 		local slow_max = t.getSlowMax(self, t)
 		local echo_factor = t.getDarkEcho(self, t)
-		return ([[目 标 会 受 到 你 所 有 光 暗 伤 害 的 回 响, 持 续 %d 回合. 
+		return ([[目标会受到你所有光暗伤害的回响, 持续 %d 回合. 
 
-每 点 光  伤 害 减 速 敌 人 %0.2f%% 持 续 %d 回 合, 在 %d 伤 害 时 达 到 最 大 值, 为 %d%% .
-暗 系 伤 害 创 造 一 个 持 续 %d 回 合 的 地 块, 每 回 合 造 成 伤 害 的 %d%%. 当 有 另 一 个 微 光 回 响 激 活 或 目 标 持 续 承 受 此 伤 害 时, 将 刷 新 持 续 时 间, 剩 余 伤 害 和 新 承 受 的 伤 害 将 平 分 至 新 持 续 时 间 内.
+每点光  伤害减速敌人 %0.2f%% 持续 %d 回合, 在 %d 伤害时达到最大值, 为 %d%% .
+暗系伤害创造一个持续 %d 回合的地块, 每回合造成伤害的 %d%%. 当有另一个微光回响激活或目标持续承受此伤害时, 将刷新持续时间, 剩余伤害和新承受的伤害将平分至新持续时间内.
 ]])
 		:format(duration, slow_per * 100, echo_dur, slow_max * 100, slow_max/slow_per, echo_dur, 100 * echo_factor)
 	end,}
@@ -41,7 +41,7 @@ registerTalentTranslation{
 		local duration = t.getDuration(self, t)
 		local radius = self:getTalentRadius(t)
 		
-		return ([[在 %d 范 围 内 召 唤 一 片 星 界 领 域 . %d 回 合 内, 这 个 区 域 存 在 于 正 常 时 间 之 外, 且 重 力 为 零. 除 了 零 重 力 之 外, 抛 射 物 和 生 物 的 活 动 比 平 时 慢 3 倍. 法 术 和 攻 击 不 能 逃 脱 范 围, 直 到 效 果 结 束.]]):
+		return ([[在 %d 范围内召唤一片星界领域 . %d 回合内, 这个区域存在于正常时间之外, 且重力为零. 除了零重力之外, 抛射物和生物的活动比平时慢 3 倍. 法术和攻击不能逃脱范围, 直到效果结束.]]):
 		format(radius, duration)
 	end,}
 	

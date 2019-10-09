@@ -4,8 +4,8 @@ registerTalentTranslation{
 	id = "T_MERGE",
 	name = "融合",
 	info = function(self, t)
-		return ([[指 定 附 近 的 一 个 阴 影，命 令 它 和 附 近 的 一 个 敌 人 融 合，降 低 其 伤 害 %d%% ， 持 续 5 回 合。
-杀 死 阴 影 释 放 了 你 的 憎 恨 ，回 复 8 点 仇 恨 值 。]]):
+		return ([[指定附近的一个阴影，命令它和附近的一个敌人融合，降低其伤害 %d%% ，持续 5 回合。
+杀死阴影释放了你的憎恨，回复 8 点仇恨值。]]):
 		format(t.getReduction(self, t))
 	end,
 }
@@ -14,9 +14,9 @@ registerTalentTranslation{
 	id = "T_STONE",
 	name = "石化",
 	info = function(self, t)
-		return ([[指 定 附 近 的 一 个 阴 影 ，令 其 攻 击 附 近 的 一 个 敌 人 ， 造 成 %0.1f 物 理 伤 害 。
-你 的 阴 影 将 把 那 个 敌 人 设 为 目 标 ，而 敌 人 也 会 攻 击 那 个 阴 影。
-伤 害 受 精 神 强 度 加 成。]]):
+		return ([[指定附近的一个阴影，令其攻击附近的一个敌人，造成 %0.1f 物理伤害。
+你的阴影将把那个敌人设为目标，而敌人也会攻击那个阴影。
+伤害受精神强度加成。]]):
 		format(damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t)))
 	end,
 }
@@ -25,9 +25,9 @@ registerTalentTranslation{
 	id	= "T_SHADOW_S_PATH",
 	name = "阴影之路",
 	info = function(self, t)
-		return ([[命 令 所 有 视 野 内 阴 影 传 送 至 目 标 处，对 所 有 经 过 的 敌 人 造 成 %0.1f 物 理 伤 害。
-阴 影 能 穿 过 墙 壁 来 到 达 目 的 地。
-伤 害 受 精 神 强 度 加 成。]]):
+		return ([[命令所有视野内阴影传送至目标处，对所有经过的敌人造成 %0.1f 物理伤害。
+阴影能穿过墙壁来到达目的地。
+伤害受精神强度加成。]]):
 		format(damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t)))
 	end,
 }
@@ -36,10 +36,10 @@ registerTalentTranslation{
 	id = "T_CURSED_BOLT",
 	name = "诅咒之球",
 	info = function(self, t)
-		return ([[和 视 野 内 的 阴 影 共 享 仇 恨 ， 获 得 临 时 控 制。
-每 个 阴 影 将 发 射 纯 粹 的 仇 恨 之 球 ， 对 附 近 的 一 个 敌 人 造 成 %0.1f 精 神 伤 害 。
-一 旦 发 射 了 一 个 仇 恨 之 球 ， 该 技 能 不 能 取 消。
-伤 害 受 精 神 强 度 加 成。]]):
+		return ([[和视野内的阴影共享仇恨，获得临时控制。
+每个阴影将发射纯粹的仇恨之球，对附近的一个敌人造成 %0.1f 精神伤害。
+一旦发射了一个仇恨之球，该技能不能取消。
+伤害受精神强度加成。]]):
 		format(damDesc(self, DamageType.MIND, t.getDamage(self, t)))
 	end,
 }

@@ -3,13 +3,13 @@ local _M = loadPrevious(...)
 registerTalentTranslation{
 	id = "T_INFECTIOUS_BITE",
 	name = "传染性啃咬",
-	message = "@Source@ 将 瘟 疫 病 毒 注 入 @target@.",
+	message = "@Source@ 将瘟疫病毒注入 @target@.",
 	info = function(self, t)
 		local damage = t.getDamage(self, t) * 100
 		local poison = t.getPoisonDamage(self, t)
-		return ([[啃 咬 目 标，造 成 %d%% 武 器 伤 害。  
-		如 果 攻 击 击 中 目 标 你 会 注 入 瘟 疫 病 毒,  造 成 %0.2f 枯 萎 伤 害 并 在 4 回 合 内 造 成 %0.2f 枯 萎 伤 害。
-		伤 害 受 法术 强 度 加 成。]])
+		return ([[啃咬目标，造成 %d%% 武器伤害。  
+		如果攻击击中目标你会注入瘟疫病毒,  造成 %0.2f 枯萎伤害并在 4 回合内造成 %0.2f 枯萎伤害。
+		伤害受法术强度加成。]])
 		:format(damage, damDesc(self, DamageType.BLIGHT, poison/4), damDesc(self, DamageType.BLIGHT, poison) )
 	end,
 }
@@ -22,10 +22,10 @@ registerTalentTranslation{
 	local affinity = t.getAffinity(self,t)
 	local dam = t.getDamage(self,t)
 	local reduction = t.getDamageReduction(self,t)*100
-		return ([[你 的 身 体 已 经 腐 败 ,增 加 %d%% 枯 萎 和 酸 性 抗 性 , %d%% 枯 萎 伤 害 吸 收。
-		每 次 生 命 值 损 失 大 于 15%% 时,伤 害 将 减 少 %d%% ，同 时 在 相 邻 的 格 子 生 成 蠕 虫, 攻 击 你 的 敌 人 5 回合 。
-		你 同 时 只 能 拥 有 5 只 蠕 虫 。 。
-		蠕 虫 死 亡 时 将 爆 炸 ， 产 生 半 径 2 的 枯 萎 毒 池 ， 持 续 5 回 合 ，造 成 %0.2f 枯 萎 伤 害 并 治 疗 你 33%% 伤 害 量 。]]):
+		return ([[你的身体已经腐败 ,增加 %d%% 枯萎和酸性抗性 , %d%% 枯萎伤害吸收。
+		每次生命值损失大于 15%% 时,伤害将减少 %d%% ，同时在相邻的格子生成蠕虫, 攻击你的敌人 5 回合。
+		你同时只能拥有 5 只蠕虫。。
+		蠕虫死亡时将爆炸，产生半径 2 的枯萎毒池，持续 5 回合，造成 %0.2f 枯萎伤害并治疗你 33%% 伤害量。]]):
 		format(resist, affinity, reduction, damDesc(self, DamageType.BLIGHT, dam), dam)
 	end,
 }
@@ -38,8 +38,8 @@ registerTalentTranslation{
 		local heal = t.getHeal(self, t) 
 		local vim = t.getVim(self, t)
 
-		return ([[你 解 体 为 蠕 虫 ， 并 在 目 标 处 合 并。（误 差 %d ）
-如 果 对 蠕 虫 团 使 用 ， 你 和 它 合 体  ， 治 疗 %d 生 命 值 , 回 复 %d 活 力 。]]):
+		return ([[你解体为蠕虫，并在目标处合并。（误差 %d ）
+如果对蠕虫团使用，你和它合体  ，治疗 %d 生命值 , 回复 %d 活力。]]):
 format (radius, heal, vim)
 	end,
 }
@@ -50,10 +50,10 @@ registerTalentTranslation{
 	info = function(self, t)
 	local chance = t.getChance(self,t)
 	local duration = t.getDuration(self,t)
-		return ([[每 次 造 成 枯 萎 伤 害 ，有 %d%% 几 率 令 目 标 腐 烂 ， 沉 默 、致 盲 、 缴 械 或 者 定 身 %d 回 合。 该 效 果 有 冷 却 时 间。
-技 能 等 级 4 时 ， 该 效 果 对 半 径 1 内 所 有 目 标 有 效 。
-同 时 ， 你 的 蠕 虫 在 近 战 攻 击 中 有 %d%% 几 率 附 加 沉 默 、 致 盲 、 缴 械 或 定 身 效 果 ， 持 续 2 回 合 。
-负 面 状 态 施 加 成 功 率 受 法 术 强 度 影 响。]]):
+		return ([[每次造成枯萎伤害，有 %d%% 几率令目标腐烂，沉默、致盲、缴械或者定身 %d 回合。该效果有冷却时间。
+技能等级 4 时，该效果对半径 1 内所有目标有效。
+同时，你的蠕虫在近战攻击中有 %d%% 几率附加沉默、致盲、缴械或定身效果，持续 2 回合。
+负面状态施加成功率受法术强度影响。]]):
 		format(chance, duration, chance/2)
 	end,
 }
@@ -65,10 +65,10 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local burst = t.getBurstDamage(self, t)
 		local chance = t.getChance(self,t)
-		return ([[使 目 标 感 染 腐 肉 寄 生 幼 虫 持 续 5 回 合。 每 回 合 会 移 除 目 标 一 个 物 理 增 益 效 果 并 造 成 %0.2f 酸 系 和 %0.2f 枯 萎 伤 害。 
-		如 果 5 回 合 后 未 被 清 除 则 幼 虫 会 孵 化 造 成 %0.2f 枯 萎 伤 害， 移 除 这 个 效 果 但 是 会 在 目 标 处 成 长 为 一 条 成 熟 的 腐 肉 虫。
+		return ([[使目标感染腐肉寄生幼虫持续 5 回合。每回合会移除目标一个物理增益效果并造成 %0.2f 酸系和 %0.2f 枯萎伤害。 
+		如果 5 回合后未被清除则幼虫会孵化造成 %0.2f 枯萎伤害，移除这个效果但是会在目标处成长为一条成熟的腐肉虫。
 		即使这个疾病被移除了，腐肉虫仍然有%d%%的几率腐化。
-		伤 害 受 法 术 强 度 加 成。]]):
+		伤害受法术强度加成。]]):
 		format(damDesc(self, DamageType.ACID, (damage/2)), damDesc(self, DamageType.BLIGHT, (damage/2)), damDesc(self, DamageType.BLIGHT, (burst)), chance)
 	end,
 }

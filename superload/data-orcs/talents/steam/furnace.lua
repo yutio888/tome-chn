@@ -6,8 +6,8 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damageinc = t.getFireDamageIncrease(self, t)
 		local ressistpen = t.getResistPenalty(self, t)
-		return ([[你 往 蒸 汽 制 造 机 中 安 装 一个 便 携 式 熔 炉 。
-		熔 炉 激 活 时 ， 你 的 物 理 和 火 焰 伤 害 增 加 %d%% ， 物 理 和 火 焰 抗 性 穿 透 增 加 %d%% 。
+		return ([[你往蒸汽制造机中安装一个便携式熔炉。
+		熔炉激活时，你的物理和火焰伤害增加 %d%% ，物理和火焰抗性穿透增加 %d%% 。
 		#{italic}#用蒸汽烧尽一切！#{normal}#
 		]]):
 		format(damageinc, damageinc, ressistpen, ressistpen)
@@ -20,10 +20,10 @@ registerTalentTranslation{
 		local reduction = 1
 		local mp = self:hasEffect(self.EFF_FURNACE_MOLTEN_POINT)
 		if mp then reduction = 0.75 ^ mp.stacks end
-		return ([[你 的 护 甲 温 度 极 高 ， 能 驱 散 部 分 能 量 攻 击 。
-		所 有 非 物 理 、 非 精 神 伤 害 降 低 %d 点 （ 当 前 %d ） 。
-		每 回 合 该 效 果 触 发 时 ， 你 获 得 1 点 融 化 点 数 （ 最 多 1 0 点 ） ， 减 少 25%% 减 伤 效 率 。
-		奔 跑 和 休 息 将 取 消 融 化 点 数 。
+		return ([[你的护甲温度极高，能驱散部分能量攻击。
+		所有非物理、非精神伤害降低 %d 点（当前 %d ）。
+		每回合该效果触发时，你获得 1 点融化点数（最多 1 0 点），减少 25%% 减伤效率。
+		奔跑和休息将取消融化点数。
 		#{italic}#火热的液态金属，乐趣无穷！#{normal}#
 		]]):format(t.getResist(self, t), t.getResist(self, t) * reduction)
 	end,}
@@ -36,8 +36,8 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local mp = self:hasEffect(self.EFF_FURNACE_MOLTEN_POINT)
 		local stacks = mp and mp.stacks or 0
-		return ([[打 开 熔 炉 通 风 孔，制 造 锥 形 热 风 ， 在 1 0 点 融 化 点 数 时 造 成 最 多 %0.2f 火 焰 伤 害 （ 当 前 %0.2f 点 ）。
-		消 耗 所 有 融 化 点 数 。
+		return ([[打开熔炉通风孔，制造锥形热风，在 1 0 点融化点数时造成最多 %0.2f 火焰伤害（当前 %0.2f 点）。
+		消耗所有融化点数。
 		#{italic}#让火焰净化一切！#{normal}#
 		]]):
 		format(damDesc(self, DamageType.FIRE, damage), damDesc(self, DamageType.FIRE, damage) * stacks / 10)
@@ -47,10 +47,10 @@ registerTalentTranslation{
 	id = "T_MELTING_POINT",
 	name = "熔点",
 	info = function(self, t)
-		return ([[当 你 达 到 1 0 点 融 化 点 数 时 ， 你 的 护 甲 过 热 ， 温 度 极 高 ， 以 至 于 %d 个 负 面 物 理 状 态 被 高 温 驱 散 。
-		同 时 ， 一 种 特 殊 的 药 物 注 射 器 将 注 射 一 种 火 焰 免 疫 药 剂 ， 令 你 免 疫 烧 伤 效 果 。
-		该 效 果 触 发 时 ， 消 耗 所 有 融 化 点 数 ， 并 自 动 触 发 一 次 通 风 孔 效 果 ， 目 标 为 最 后 一 次 提 供 融 化 点 数 的 生 物 。 
-		该 效 果 将 消 耗 1 5 点 蒸 汽 。 蒸 汽 不 足 时 不 能 触 发 。
+		return ([[当你达到 1 0 点融化点数时，你的护甲过热，温度极高，以至于 %d 个负面物理状态被高温驱散。
+		同时，一种特殊的药物注射器将注射一种火焰免疫药剂，令你免疫烧伤效果。
+		该效果触发时，消耗所有融化点数，并自动触发一次通风孔效果，目标为最后一次提供融化点数的生物。 
+		该效果将消耗 1 5 点蒸汽。蒸汽不足时不能触发。
 		#{italic}#只是肉体在燃烧!#{normal}#
 		]]):
 		format(t.getNb(self, t))

@@ -4,7 +4,7 @@ registerTalentTranslation{
 	id = "T_DEATH_DANCE",
 	name = "死亡之舞",
 	info = function(self, t)
-		return ([[原 地 旋 转， 伸 展 你 的 武 器， 伤 害 你 周 围 所 有 的 目 标， 造 成 %d%% 武 器 伤 害。]]):format(100 * self:combatTalentWeaponDamage(t, 1.4, 2.1))
+		return ([[原地旋转，伸展你的武器，伤害你周围所有的目标，造成 %d%% 武器伤害。]]):format(100 * self:combatTalentWeaponDamage(t, 1.4, 2.1))
 	end,
 }
 
@@ -12,10 +12,10 @@ registerTalentTranslation{
 	id = "T_BERSERKER",
 	name = "狂暴",
 	info = function(self, t)
-		return ([[进 入 狂 暴 的 战 斗 状 态， 以 减 少 10 点 闪 避 和 10 点 护 甲 的 代 价 增 加 %d 点 命 中 和 %d 点 物 理 强 度。 
-		开 启 狂 暴 时 你 无 人 能 挡， 增 加 %d%% 震 慑 和 定 身 抵 抗。 
-		受 敏 捷 影 响， 命 中 有 额 外 加 成； 
-		受 力 量 影 响， 物 理 强 度 有 额 外 加 成。]]):
+		return ([[进入狂暴的战斗状态，以减少 10 点闪避和 10 点护甲的代价增加 %d 点命中和 %d 点物理强度。 
+		开启狂暴时你无人能挡，增加 %d%% 震慑和定身抵抗。 
+		受敏捷影响，命中有额外加成； 
+		受力量影响，物理强度有额外加成。]]):
 		format( t.getAtk(self, t), t.getDam(self, t), t.getImmune(self, t)*100)
 	end,
 }
@@ -25,7 +25,7 @@ registerTalentTranslation{
 	name = "战争怒吼",
 	message = "@Source@使用了战争怒吼",
 	info = function(self, t)
-		return ([[在 你 的 正 前 方 大 吼 形 成 %d 码 半 径 的 扇 形 战 争 怒 吼。 任 何 在 其 中 的 目 标 会 被 混 乱（强度%d) %d 回 合。]]):
+		return ([[在你的正前方大吼形成 %d 码半径的扇形战争怒吼。任何在其中的目标会被混乱（强度%d) %d 回合。]]):
 		format(self:getTalentRadius(t),t.getConfusion(self, t), t.getDuration(self, t))
 	end,
 }
@@ -34,10 +34,10 @@ registerTalentTranslation{
 	id = "T_DEATH_BLOW",
 	name = "致命打击",
 	info = function(self, t)
-		return ([[试 图 施 展 一 次 致 命 打 击， 造 成 %d%% 武 器 伤 害， 本 次 攻 击 自 动 变 成 暴 击。 
-		如 果 打 击 后 目 标 生 命 值 低 于 20%% 则 有 可 能 直 接 杀 死。 
-		在 等 级 4 时 会 消 耗 剩 余 的 耐 力 值 的 一 半 并 增 加 100%% 所 消 耗 耐 力 值 的 伤 害。 
-		受 物 理 强 度 影 响， 目 标 即 死 的 概 率 有 额 外 加 成。]]):format(100 * self:combatTalentWeaponDamage(t, 0.8, 1.3))
+		return ([[试图施展一次致命打击，造成 %d%% 武器伤害，本次攻击自动变成暴击。 
+		如果打击后目标生命值低于 20%% 则有可能直接杀死。 
+		在等级 4 时会消耗剩余的耐力值的一半并增加 100%% 所消耗耐力值的伤害。 
+		受物理强度影响，目标即死的概率有额外加成。]]):format(100 * self:combatTalentWeaponDamage(t, 0.8, 1.3))
 	end,
 }
 
@@ -45,8 +45,8 @@ registerTalentTranslation{
 	id = "T_STUNNING_BLOW",
 	name = "震慑打击",
 	info = function(self, t)
-		return ([[用 你 的 武 器 攻 击 目 标 并 造 成 %d%% 伤 害。 如 果 此 次 攻 击 命 中， 则 目 标 会 震 慑 %d 回 合。 
-		受 物 理 强 度 影 响， 震 慑 概 率 有 额 外 加 成。]])
+		return ([[用你的武器攻击目标并造成 %d%% 伤害。如果此次攻击命中，则目标会震慑 %d 回合。 
+		受物理强度影响，震慑概率有额外加成。]])
 		:format(100 * self:combatTalentWeaponDamage(t, 1, 1.5), t.getDuration(self, t))
 	end,
 }
@@ -55,9 +55,9 @@ registerTalentTranslation{
 	id = "T_SUNDER_ARMOUR",
 	name = "破甲",
 	info = function(self, t)
-		return ([[用 你 的 武 器 攻 击 目 标 并 造 成 %d%% 伤 害。 如 果 此 次 攻 击 命 中， 则 目 标 护 甲 和 豁 免 会 减 少 %d 持 续 %d 回 合。 
-		同 时， 如 果 目 标 被 临 时 伤 害 护 盾 保 护 ， 有 %d%% 几 率 使 之 破 碎。
-		受 物 理 强 度 影 响， 护 甲 减 值 有 额 外 增 加。 ]])
+		return ([[用你的武器攻击目标并造成 %d%% 伤害。如果此次攻击命中，则目标护甲和豁免会减少 %d 持续 %d 回合。 
+		同时，如果目标被临时伤害护盾保护，有 %d%% 几率使之破碎。
+		受物理强度影响，护甲减值有额外增加。 ]])
 		:format(100 * self:combatTalentWeaponDamage(t, 1, 1.5),t.getArmorReduc(self, t), t.getDuration(self, t), t.getShatter(self, t))
 	end,
 }
@@ -66,8 +66,8 @@ registerTalentTranslation{
 	id = "T_SUNDER_ARMS",
 	name = "破刃",
 	info = function(self, t)
-		return ([[用 你 的 武 器 攻 击 目 标 并 造 成 %d%% 伤 害。 如 果 此 次 攻 击 命 中， 则 目 标 命 中 会 减 少 %d 持 续 %d 回 合。 
-		受 物 理 强 度 影 响， 命 中 减 值 有 额 外 加 成。 ]])
+		return ([[用你的武器攻击目标并造成 %d%% 伤害。如果此次攻击命中，则目标命中会减少 %d 持续 %d 回合。 
+		受物理强度影响，命中减值有额外加成。 ]])
 		:format(
 			100 * self:combatTalentWeaponDamage(t, 1, 1.5), 3 * self:getTalentLevel(t), t.getDuration(self, t))
 	end,
@@ -77,8 +77,8 @@ registerTalentTranslation{
 	id = "T_BLOOD_FRENZY",
 	name = "血之狂暴",
 	info = function(self, t)
-		return ([[进 入 血 之 狂 暴 状 态， 快 速 消 耗 体 力（ -4 体 力 / 回 合）。 每 次 你 在 血 之 狂 暴 状 态 下 杀 死 一 个 敌 人， 你 可 以 获 得 %d 物 理 强 度 增 益。 
-		每 回 合 增 益 减 2 。]]):
+		return ([[进入血之狂暴状态，快速消耗体力（ -4 体力 / 回合）。每次你在血之狂暴状态下杀死一个敌人，你可以获得 %d 物理强度增益。 
+		每回合增益减 2 。]]):
 		format(t.bonuspower(self,t))
 	end,
 }

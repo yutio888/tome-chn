@@ -13,20 +13,20 @@ registerTalentTranslation{
 	name = "引爆",
 	info = function(self, t)
 		local radius = self:getTalentRadius(t)
-		return ([[献 祭 一 只 召 唤 兽 ，使 它 在 %d 码 范 围 内 爆 炸 。
-		-火 焰 里 奇 ：形 成 一 个 火 球 ，造 成 %d 伤 害 ，并 火 焰 震 慑 敌 人 。
-		-三 头 蛇 ：范 围 内 所 有 友 方 单 位 获 得 %d%% 闪 电 、酸 液 和 自 然 伤 害 吸 收 ，并 获 得 每 回 合 %d 生 命 回 复 ，持 续 7 回 合 。
-		-雾 凇 ：形 成 一 个 冰 球 ，造 成 %d 伤 害 ，可 能 冰 冻 敌 人 。
-		-火 龙 ：形 成 一 片 火 焰 ，每 回 合 造 成 %d 伤 害 。
-		-战 争 猎 犬 ：形 成 锋 利 的 球 ，让 周 围 的 生 物 在 6 回 合 内 受 到 %0.1f 点 流 血 伤 害 。
-		-果 冻 怪 ：形 成 一 片 能 减 速 的 淤 泥 ，造 成 %d 自 然 伤 害 ，并 使 敌 人 减 速 %0.1f%% 。
-		-米 诺 陶 斯 ：眩 晕 敌 人 5 回 合 （强 度 %d%% ）
-		-岩 石 傀 儡 ：使 周 围 的 友 方 单 位 获 得 %d 护 甲 值 和 %d%%护 甲 强 度 ，持 续 5 回 合 。
-		-乌 龟 ：给 所 有 友 方 单 位 提 供 一 个 甲 壳 护 盾 ，所 有 抗 性 提 升 %d%% ，持 续 5 回 合 。
-		-蜘 蛛 ：将 所 有 敌 人 击 退 %d 格 。
-		 此 外 ，随 机 的 某 个 召 唤 技 能 会 冷 却 完 毕 。
-		 引 爆 产 生 的 负 面 效 果 不 会 影 响 到 你 或 你 的 召 唤 兽 。
-		 效 果 受 精 神 强 度 加 成 ，可 以 暴 击 。]]):format(radius, t.explodeSecondary(self,t), t.hydraAffinity(self,t), t.hydraRegen(self,t), t.explodeSecondary(self,t), t.explodeFire(self,t), t.explodeBleed(self,t) / 6, t.explodeSecondary(self,t), t.jellySlow(self,t) * 100, t.minotaurConfuse(self,t), t.golemArmour(self,t), t.golemHardiness(self,t), t.shellShielding(self,t), t.spiderKnockback(self,t)) 
+		return ([[献祭一只召唤兽，使它在 %d 码范围内爆炸。
+		-火焰里奇：形成一个火球，造成 %d 伤害，并火焰震慑敌人。
+		-三头蛇：范围内所有友方单位获得 %d%% 闪电、酸液和自然伤害吸收，并获得每回合 %d 生命回复，持续 7 回合。
+		-雾凇：形成一个冰球，造成 %d 伤害，可能冰冻敌人。
+		-火龙：形成一片火焰，每回合造成 %d 伤害。
+		-战争猎犬：形成锋利的球，让周围的生物在 6 回合内受到 %0.1f 点流血伤害。
+		-果冻怪：形成一片能减速的淤泥，造成 %d 自然伤害，并使敌人减速 %0.1f%% 。
+		-米诺陶斯：眩晕敌人 5 回合（强度 %d%% ）
+		-岩石傀儡：使周围的友方单位获得 %d 护甲值和 %d%%护甲强度，持续 5 回合。
+		-乌龟：给所有友方单位提供一个甲壳护盾，所有抗性提升 %d%% ，持续 5 回合。
+		-蜘蛛：将所有敌人击退 %d 格。
+		 此外，随机的某个召唤技能会冷却完毕。
+		 引爆产生的负面效果不会影响到你或你的召唤兽。
+		 效果受精神强度加成，可以暴击。]]):format(radius, t.explodeSecondary(self,t), t.hydraAffinity(self,t), t.hydraRegen(self,t), t.explodeSecondary(self,t), t.explodeFire(self,t), t.explodeBleed(self,t) / 6, t.explodeSecondary(self,t), t.jellySlow(self,t) * 100, t.minotaurConfuse(self,t), t.golemArmour(self,t), t.golemHardiness(self,t), t.shellShielding(self,t), t.spiderKnockback(self,t)) 
 	end,
 }
 
@@ -34,7 +34,7 @@ registerTalentTranslation{
 	id = "T_RESILIENCE",
 	name = "体质强化",
 	info = function(self, t)
-		return ([[提 升 你 所 有 召 唤 物 的 生 命 值 %0.1f%% ，并 延 长 所 有 召 唤 物 的 存 活 时 间 %d 回 合 。]]):format(100*t.incLife(self, t), t.incDur(self,t))
+		return ([[提升你所有召唤物的生命值 %0.1f%% ，并延长所有召唤物的存活时间 %d 回合。]]):format(100*t.incLife(self, t), t.incDur(self,t))
 	end,
 }
 
@@ -42,7 +42,7 @@ registerTalentTranslation{
 	id = "T_PHASE_SUMMON",
 	name = "次元召唤",
 	info = function(self, t)
-		return ([[与 一只 召 唤 兽 调 换 位 置。 这 会 干 扰 你 的 敌 人， 使 你 和 该 召 唤 兽 获 得 50%% 闪 避 状 态， 持 续 %d 回 合。]]):format(t.getDuration(self, t))
+		return ([[与一只召唤兽调换位置。这会干扰你的敌人，使你和该召唤兽获得 50%% 闪避状态，持续 %d 回合。]]):format(t.getDuration(self, t))
 	end,
 }
 

@@ -4,16 +4,16 @@ registerTalentTranslation{
 	id = "T_TRANSCENDENT_TELEKINESIS",
 	name = "卓越动能",
 	info = function(self, t)
-		return ([[在 %d 回 合 中 你 的 动 能 突 破 极 限， 增 加 你 的 物 理 伤 害 %d%% ， 物 理 抗 性 穿 透 %d%% 。
-		额 外 效 果：
-		重 置 动 能 护 盾， 动 能 吸 取， 动 能 光 环 和 心 灵 鞭 笞 的 冷 却 时 间。
-		根 据 情 况， 动 能 光 环 获 得 其 中 一 种 强 化： 动 能 光 环 的 半 径 增 加 为 2 格。 你 的 所 有 武 器 获 得 动 能 光 环 的 伤 害 加 成。
-		你 的 动 能 护 盾 获 得 100%% 的 吸 收 效 率， 并 可 以 吸 收 两 倍 伤 害。
-		心 灵 鞭 笞 附 带 震 慑 效 果。
-		动 能 吸 取 会 使 敌 人 进 入 睡 眠。
-		动 能 打 击 会 对 相 邻 的 两 个 敌 人 进 行 攻 击。
-		受 精 神 强 度 影 响， 伤 害 和 抗 性 穿 透 有 额 外 加 成。
-		同 一 时 间 只 有 一 个 卓 越 技 能 产 生 效 果。]]):format(t.getDuration(self, t), t.getPower(self, t), t.getPenetration(self, t))
+		return ([[在 %d 回合中你的动能突破极限，增加你的物理伤害 %d%% ，物理抗性穿透 %d%% 。
+		额外效果：
+		重置动能护盾，动能吸取，动能光环和心灵鞭笞的冷却时间。
+		根据情况，动能光环获得其中一种强化：动能光环的半径增加为 2 格。你的所有武器获得动能光环的伤害加成。
+		你的动能护盾获得 100%% 的吸收效率，并可以吸收两倍伤害。
+		心灵鞭笞附带震慑效果。
+		动能吸取会使敌人进入睡眠。
+		动能打击会对相邻的两个敌人进行攻击。
+		受精神强度影响，伤害和抗性穿透有额外加成。
+		同一时间只有一个卓越技能产生效果。]]):format(t.getDuration(self, t), t.getPower(self, t), t.getPenetration(self, t))
 	end,
 }
 
@@ -25,13 +25,13 @@ registerTalentTranslation{
 		local range = self:getTalentRange(t)
 		local dam = damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t))
 		return ([[
-		使 用 你 的 念 动 力 增 强 你 的 力 量， 使 你 能 够 举 起 一 个 相 邻 的 敌 人 或 者 你 自 己 并 投 掷 到 半 径 %d 范 围 的 任 意 位 置。 
-		敌 人 落 地 时 受 到 %0.1f 物 理 伤 害， 并 被 震 慑 %d 回 合。 落 点 周 边 半 径 2 格 内 的 所 有 其 他 单 位 受 到 %0.1f 物 理 伤 害 并 被 从 你 身 边 被 退。
-		这 个 技 能 无 视 被 投 掷 目 标 %d%% 的 击 退 抵 抗， 如 果 目 标 抵 抗 击 退， 只 受 到 一 半 伤 害。
+		使用你的念动力增强你的力量，使你能够举起一个相邻的敌人或者你自己并投掷到半径 %d 范围的任意位置。 
+		敌人落地时受到 %0.1f 物理伤害，并被震慑 %d 回合。落点周边半径 2 格内的所有其他单位受到 %0.1f 物理伤害并被从你身边被退。
+		这个技能无视被投掷目标 %d%% 的击退抵抗，如果目标抵抗击退，只受到一半伤害。
 		
-		对 你 自 己 使 用 时 ， 击 退 线 路 上 所 有 目 标 并 造 成  %0.1f 物 理 伤 害 。
-		同 时 能 破 坏 至 多 %d 面 墙 壁。
-		受 精 神 强 度 影 响， 伤 害 和 投 掷 距 离 有 额 外 加 成。 ]]):
+		对你自己使用时，击退线路上所有目标并造成  %0.1f 物理伤害。
+		同时能破坏至多 %d 面墙壁。
+		受精神强度影响，伤害和投掷距离有额外加成。 ]]):
 		format(range, dam, math.floor(range/2), dam/2, t.getKBResistPen(self, t), dam, math.floor(range/2))
 	end,
 }
@@ -41,10 +41,10 @@ registerTalentTranslation{
 	name = "弹道偏移",
 	info = function(self, t)
 		local chance, spread = t.getEvasion(self, t)
-		return ([[你 学 会 分 配 一 部 分 注 意 力， 用 精 神 力 击 落、 抓 取 或 偏 斜 飞 来 的 发 射 物。 
-		所 有 以 你 为 目 标 的 发 射 物 有 %d%% 的 几 率 落 在 半 径 %d 格 范 围 内 的 其 他 地 点。
-		如 果 你 愿 意， 你 可 以 使 用 精 神 力 来 抓 住 半 径 10 格 内 的 所 有 发 射 物， 并 投 回 以 你 为 中 心 半 径 %d 格 内 的 任 意 地 点， 这 么 做 会 打 断 你 的 集 中 力， 并 使 这 个 持 续 技 能 进入 冷 却。
-		要 想 这 样 做 ， 取 消 该 持 续 技 即 可。]]):
+		return ([[你学会分配一部分注意力，用精神力击落、抓取或偏斜飞来的发射物。 
+		所有以你为目标的发射物有 %d%% 的几率落在半径 %d 格范围内的其他地点。
+		如果你愿意，你可以使用精神力来抓住半径 10 格内的所有发射物，并投回以你为中心半径 %d 格内的任意地点，这么做会打断你的集中力，并使这个持续技能进入冷却。
+		要想这样做，取消该持续技即可。]]):
 		format(chance, spread, self:getTalentRange(t))
 	end,
 }
@@ -55,8 +55,8 @@ registerTalentTranslation{
 	info = function(self, t)
 		local dur = t.getDuration(self, t)
 		local dam = t.getDamage(self, t)
-		return ([[用 粉 碎 骨 头 的 力 量 紧 紧 锁 住 目 标 ， 定 身 并 减 速 目 标 50%% ， 持 续  %d 回 合 ， 每 回 合 造 成 %0.1f 物 理 伤 害。
-		受 精 神 强 度 影 响， 持 续 时 间 和 伤 害 有 额 外 加 成。]]):format(dur, damDesc(self, DamageType.PHYSICAL, dam))
+		return ([[用粉碎骨头的力量紧紧锁住目标，定身并减速目标 50%% ，持续  %d 回合，每回合造成 %0.1f 物理伤害。
+		受精神强度影响，持续时间和伤害有额外加成。]]):format(dur, damDesc(self, DamageType.PHYSICAL, dam))
 	end,
 }
 

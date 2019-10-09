@@ -9,9 +9,9 @@ registerTalentTranslation{
 			count = count + 1
 		end
 		local damage = t.getDamage(self, t)
-		return ([[释 放 出 %d 个 岩 石 飞 弹 射 向 任 意 射 程 内 的 目 标。 每 个 飞 弹 造 成 %0.2f 物 理 伤 害 和 每 回 合 %0.2f 流 血 伤 害， 持 续 5 回 合。 
-		 在 等 级 5 时， 你 可 以 额 外 释 放 一 个 飞 弹。 
-		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成。]]):format(count,damDesc(self, DamageType.PHYSICAL, damage/2), damDesc(self, DamageType.PHYSICAL, damage/12))
+		return ([[释放出 %d 个岩石飞弹射向任意射程内的目标。每个飞弹造成 %0.2f 物理伤害和每回合 %0.2f 流血伤害，持续 5 回合。 
+		 在等级 5 时，你可以额外释放一个飞弹。 
+		 受法术强度影响，伤害有额外加成。]]):format(count,damDesc(self, DamageType.PHYSICAL, damage/2), damDesc(self, DamageType.PHYSICAL, damage/12))
 	end,
 }
 
@@ -24,12 +24,12 @@ registerTalentTranslation{
 		local acidres = t.getAcidRes(self, t)
 		local cooldownred = t.getCooldownReduction(self, t)
 		local stunres = t.getStunRes(self, t)
-		return ([[你 将 自 己 扎 根 于 土 壤 并 使 你 的 肉 体 融 入 石 头。 
-		 当 此 技 能 被 激 活 时 你 不 能 移 动 并 且 任 何 移 动 会 打 断 此 技 能 效 果。 
-		 当 此 技 能 激 活 时， 受 你 的 石 化 形 态 和 土 壤 相 关 影 响， 会 产 生 以 下 效 果： 
-		* 减 少 岩 石 飞 弹、 粉 碎 钻 击、 地 震 和 山 崩 地 裂 冷 却 时 间 回 合 数： %d%%
-		* 获 得 %d%% 火 焰 抵 抗， %d%% 闪 电 抵 抗， %d%% 酸 性 抵 抗 和 %d%% 震 慑 抵 抗。 
-		 受 法 术 强 度 影 响， 抵 抗 按 比 例 加 成。]])
+		return ([[你将自己扎根于土壤并使你的肉体融入石头。 
+		 当此技能被激活时你不能移动并且任何移动会打断此技能效果。 
+		 当此技能激活时，受你的石化形态和土壤相关影响，会产生以下效果： 
+		* 减少岩石飞弹、粉碎钻击、地震和山崩地裂冷却时间回合数： %d%%
+		* 获得 %d%% 火焰抵抗， %d%% 闪电抵抗， %d%% 酸性抵抗和 %d%% 震慑抵抗。 
+		 受法术强度影响，抵抗按比例加成。]])
 		:format(cooldownred, fireres, lightningres, acidres, stunres*100)
 	end,
 }
@@ -41,8 +41,8 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local radius = self:getTalentRadius(t)
 		local duration = t.getDuration(self, t)
-		return ([[引 起 一 波 强 烈 的 地 震， 每 回 合 造 成 %0.2f 物 理 伤 害（ %d 码 半 径 范 围）， 持 续 %d 回 合。 有 概 率 震 慑 此 技 能 所 影 响 到 的 怪 物。 
-		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成。]]):
+		return ([[引起一波强烈的地震，每回合造成 %0.2f 物理伤害（ %d 码半径范围），持续 %d 回合。有概率震慑此技能所影响到的怪物。 
+		 受法术强度影响，伤害有额外加成。]]):
 		format(damDesc(self, DamageType.PHYSICAL, damage), radius, duration)
 	end,
 }
@@ -54,8 +54,8 @@ registerTalentTranslation{
 		local damageinc = t.getPhysicalDamageIncrease(self, t)
 		local ressistpen = t.getResistPenalty(self, t)
 		local saves = t.getSaves(self, t)
-		return ([[你 专 注 于 维 持 水 晶 力 场， 增 加 你 %0.1f%% 所 有 物 理 伤 害 并 忽 略 目 标 %d%% 的 物 理 伤 害 抵 抗。 
-		 同 时 增 加 你 %d 点 物 理 和 魔 法 豁 免。]])
+		return ([[你专注于维持水晶力场，增加你 %0.1f%% 所有物理伤害并忽略目标 %d%% 的物理伤害抵抗。 
+		 同时增加你 %d 点物理和魔法豁免。]])
 		:format(damageinc, ressistpen, saves)
 	end,
 }

@@ -10,10 +10,10 @@ registerTalentTranslation{
 		local hateDesc = ""
 		if self:knowTalent(self.T_HATE_POOL) then
 			local hateBonus = t.getHateBonus(self, t)
-			hateDesc = ("无 论 当 前 仇 恨 回 复 值 为 多 少， 每 击 杀 一 个 被 标 记 的 亚 类 生 物 给 予 你 额 外 的 +%d 仇 恨 值 回 复。"):format(hateBonus)
+			hateDesc = ("无论当前仇恨回复值为多少，每击杀一个被标记的亚类生物给予你额外的 +%d 仇恨值回复。"):format(hateBonus)
 		end
-		return ([[标 记 某 个 敌 人 作 为 你 的 捕 猎 目 标， 使 攻 击 该 类 及 该 亚 类 的 生 物 时 获 得 额 外 加 成， 加 成 量 受 你 杀 死 该 标 记 类 生 物 获 得 的 经 验 值 加 成（ +0.25 主 类， +1 亚 类）， 当 你 增 加 %0.1f 经 验 值 时， 获 得 100%% 效 果 加 成。 攻 击 标 记 目 标 类 生 物 将 造 成 +%d%% 伤 害， 攻 击 标 记 目 标 亚 类 生 物 将 造 成 +%d%% 伤 害。 
-		 每 增 加 一 个 技 能 点 减 少 达 到 100%% 效 果 加 成 的 经 验 需 求。 
+		return ([[标记某个敌人作为你的捕猎目标，使攻击该类及该亚类的生物时获得额外加成，加成量受你杀死该标记类生物获得的经验值加成（ +0.25 主类， +1 亚类），当你增加 %0.1f 经验值时，获得 100%% 效果加成。攻击标记目标类生物将造成 +%d%% 伤害，攻击标记目标亚类生物将造成 +%d%% 伤害。 
+		 每增加一个技能点减少达到 100%% 效果加成的经验需求。 
 		%s]]):format(maxKillExperience, typeDamageChange * 100, subtypeDamageChange * 100, hateDesc)
 	end,
 }
@@ -25,9 +25,9 @@ registerTalentTranslation{
 		local subtypeAttackChange = t.getSubtypeAttackChange(self, t)
 		local typeAttackChange = t.getTypeAttackChange(self, t)
 		local subtypeStunChance = t.getSubtypeStunChance(self, t)
-		return ([[你 对 捕 猎 目 标 的 了 解 使 你 的 攻 击 提 高 额 外 精 度， 对 标 记 类 目 标 获 得 +%d 命 中， 对 标 记 亚 类 目 标 获 得 +%d 命 中。 
-		 每 次 近 战 攻 击 对 标 记 亚 类 生 物 有 %0.1f%% 概 率 震 慑 目 标 3 回 合。 
-		 每 增 加 一 个 技 能 点 减 少 达 到 100%% 效 果 加 成 的 经 验 需 求。]]):format(typeAttackChange, subtypeAttackChange, subtypeStunChance)
+		return ([[你对捕猎目标的了解使你的攻击提高额外精度，对标记类目标获得 +%d 命中，对标记亚类目标获得 +%d 命中。 
+		 每次近战攻击对标记亚类生物有 %0.1f%% 概率震慑目标 3 回合。 
+		 每增加一个技能点减少达到 100%% 效果加成的经验需求。]]):format(typeAttackChange, subtypeAttackChange, subtypeStunChance)
 	end,
 }
 
@@ -40,8 +40,8 @@ registerTalentTranslation{
 		local physicalResistChange = t.getPhysicalResistChange(self, t)
 		local statReduction = t.getStatReduction(self, t)
 		local duration = t.getDuration(self, t)
-		return ([[你 的 每 次 近 战 攻 击 有 一 定 概 率 触 发 运 筹 帷 幄， 降 低 目 标 的 物 理 抵 抗 %d%% 同 时 降 低 他 们 最 高 的 三 项 属 性 %d ， 对 标 记 类 生 物 有 %0.1f%% 概 率 触 发， 对 标 记 亚 类 生 物 有 %0.1f%% 概 率 触 发， 持 续 %d 回 合， 该 效 果 可 叠 加。 
-		 每 增 加 一 个 技 能 点 减 少 达 到 100%% 效 果 加 成 的 经 验 需 求。]]):format(-physicalResistChange, statReduction, typeChance, subtypeChance, duration)
+		return ([[你的每次近战攻击有一定概率触发运筹帷幄，降低目标的物理抵抗 %d%% 同时降低他们最高的三项属性 %d ，对标记类生物有 %0.1f%% 概率触发，对标记亚类生物有 %0.1f%% 概率触发，持续 %d 回合，该效果可叠加。 
+		 每增加一个技能点减少达到 100%% 效果加成的经验需求。]]):format(-physicalResistChange, statReduction, typeChance, subtypeChance, duration)
 	end,
 }
 
@@ -50,8 +50,8 @@ registerTalentTranslation{
 	name = "无相转生",
 	info = function(self, t)
 		local maxIncrease = t.getMaxIncrease(self, t)
-		return ([[你 学 习 汲 取 目 标 的 力 量， 杀 死 该 亚 类 生 物 可 以 提 升 你 的 属 性 值 以 接 近 该 生 物 的 能 力（ 最 多 %d 总 属 性 点 数， 由 你 的 当 前 效 能 决 定）， 效 果 持 续 时 间 并 不 确 定， 且 只 有 最 近 杀 死 的 敌 人 获 得 的 效 果 有 效。 
-		 每 增 加 一 个 技 能 点 减 少 达 到 100%% 效 果 加 成 的 经 验 需 求。]]):format(maxIncrease)
+		return ([[你学习汲取目标的力量，杀死该亚类生物可以提升你的属性值以接近该生物的能力（最多 %d 总属性点数，由你的当前效能决定），效果持续时间并不确定，且只有最近杀死的敌人获得的效果有效。 
+		 每增加一个技能点减少达到 100%% 效果加成的经验需求。]]):format(maxIncrease)
 	end,
 }
 

@@ -6,9 +6,9 @@ registerTalentTranslation{
 	info = function(self, t)
 		local power = t.getPower(self, t) * 100
 		local talent = self:isTalentActive(t.id) and self:getTalentFromId(self:isTalentActive(t.id).talent).name or "None"
-		return ([[强 化 指 定 的 时 空 系 法 术 ，施 放 指 定 技 能 时 法 术 强 度 增 加  %d%%  。
-		 每 个 技 能 只 能 附 加 一 种 时 空 增 效 系 效 果 。		 
-		 当 前 强 化 法 术 ： %s ]]):
+		return ([[强化指定的时空系法术，施放指定技能时法术强度增加  %d%%  。
+		 每个技能只能附加一种时空增效系效果。		 
+		 当前强化法术： %s ]]):
 		format(power, talent)
 	end,
 }
@@ -19,9 +19,9 @@ registerTalentTranslation{
 	info = function(self, t)
 		local power = t.getPower(self, t) * 100
 		local talent = self:isTalentActive(t.id) and self:getTalentFromId(self:isTalentActive(t.id).talent).name or "None"
-		return ([[强 化 指 定 的 时 空 系 法 术 ，延 展 指 定 法 术 的 持 续 时 间  %d%%  。
-		 每 个 技 能 只 能 附 加 一 种 时 空 增 效 系 效 果 。				 
-		 当 前 强 化 法 术 ： %s ]]):
+		return ([[强化指定的时空系法术，延展指定法术的持续时间  %d%%  。
+		 每个技能只能附加一种时空增效系效果。				 
+		 当前强化法术： %s ]]):
 		format(power, talent)
 	end,
 }
@@ -32,9 +32,9 @@ registerTalentTranslation{
 	info = function(self, t)
 		local power = t.getPower(self, t) * 100
 		local talent = self:isTalentActive(t.id) and self:getTalentFromId(self:isTalentActive(t.id).talent).name or "None"
-		return ([[强 化 指 定 的 时 空 系 法 术 ， 减 少 指 定 法 术 的 冷 却 时 间 %d%% 。
-		每 个 技 能 只 能 附 加 一 种 时 空 增 效 系 效 果。	
-		当 前 强 化 法 术： %s]]):
+		return ([[强化指定的时空系法术，减少指定法术的冷却时间 %d%% 。
+		每个技能只能附加一种时空增效系效果。	
+		当前强化法术： %s]]):
 		format(power, talent)
 	end,
 }
@@ -45,10 +45,10 @@ registerTalentTranslation{
 	info = function(self, t)
 		local power = t.getPower(self, t) * 100
 		local talent = self:isTalentActive(t.id) and self:getTalentFromId(self:isTalentActive(t.id).talent).name or "None"
-		return ([[强 化 指 定 的 时 空 系 法 术 ，减 少 施 放 指 定 法 术 需 要 的 时 间 %d%% 。
-		 每 个 技 能 只 能 附 加 一 种 时 空 增 效 系 效 。
+		return ([[强化指定的时空系法术，减少施放指定法术需要的时间 %d%% 。
+		 每个技能只能附加一种时空增效系效。
 		 
-		 当 前 强 化 法 术 ： %s  ]]):
+		 当前强化法术： %s  ]]):
 		format(power, talent)
 	end,
 }

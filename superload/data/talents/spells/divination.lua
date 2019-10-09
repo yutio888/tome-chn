@@ -6,13 +6,13 @@ registerTalentTranslation{
 	info = function(self, t)
 		local radius = t.getRadius(self, t)
 		local duration = t.getDuration(self, t)
-		return ([[召 唤 1 个 奥 术 之 眼 放 置 于 指 定 地 点， 持 续 %d 回 合。 
-		 此 眼 睛 不 会 被 其 他 生 物 看 见 或 攻 击， 它 提 供 魔 法 视 觉， 可 看 到 它 周 围 %d 码 范 围 的 怪 物。 
-		 它 不 需 要 灯 光 去 提 供 能 量， 且 它 的 视 线 无 法 穿 墙。 
-		 召 唤 奥 术 之 眼 不 消 耗 回 合。 
-		 同 时 只 能 存 在 1 个 奥 术 之 眼。 
-		 在 等 级 4 时， 可 以 在 怪 物 身 上 放 置 奥 术 之 眼， 持 续 时 间 直 到 技 能 结 束 或 怪 物 死 亡。 
-		 在 等 级 5 时， 它 可 以 在 怪 物 身 上 放 置 一 个 魔 法 标 记 并 无 视 隐 形 和 潜 行 效 果。]]):
+		return ([[召唤 1 个奥术之眼放置于指定地点，持续 %d 回合。 
+		 此眼睛不会被其他生物看见或攻击，它提供魔法视觉，可看到它周围 %d 码范围的怪物。 
+		 它不需要灯光去提供能量，且它的视线无法穿墙。 
+		 召唤奥术之眼不消耗回合。 
+		 同时只能存在 1 个奥术之眼。 
+		 在等级 4 时，可以在怪物身上放置奥术之眼，持续时间直到技能结束或怪物死亡。 
+		 在等级 5 时，它可以在怪物身上放置一个魔法标记并无视隐形和潜行效果。]]):
 		format(duration, radius)
 	end,
 }
@@ -24,11 +24,11 @@ registerTalentTranslation{
 		local seeinvisible = t.getSeeInvisible(self, t)
 		local seestealth = t.getSeeStealth(self, t)
 		local criticalchance = t.getCriticalChance(self, t)
-		return ([[你 集 中 精 神， 通 过 直 觉 获 取 未 来 的 信 息。 
-		 增 加 侦 测 隐 形 等 级 +%d
-		 增 加 侦 测 潜 行 等 级 +%d
-		 增 加 法 术 暴 击 几 率 +%d%%
-		 受 法 术 强 度 影 响， 此 效 果 有 额 外 加 成。]]):
+		return ([[你集中精神，通过直觉获取未来的信息。 
+		 增加侦测隐形等级 +%d
+		 增加侦测潜行等级 +%d
+		 增加法术暴击几率 +%d%%
+		 受法术强度影响，此效果有额外加成。]]):
 		format(seeinvisible, seestealth, criticalchance)
 	end,
 }
@@ -38,7 +38,7 @@ registerTalentTranslation{
 	name = "探测",
 	info = function(self, t)
 		local radius = t.getRadius(self, t)
-		return ([[通 过 意 念 探 测 周 围 地 形， 有 效 范 围： %d  码。]]):
+		return ([[通过意念探测周围地形，有效范围： %d  码。]]):
 		format(radius)
 	end,
 }
@@ -48,10 +48,10 @@ registerTalentTranslation{
 	name = "预感",
 	info = function(self, t)
 		local resist = t.getResist(self, t)
-		return ([[你 的 眼 前 会 闪 烁 未 来 的 景 象， 让 你 能 够 预 知 对 你 的 攻 击。 
-		 如 果 攻 击 是 元 素 类 或 魔 法 类 的， 那 么 你 会 创 造 一 个 临 时 性 的 护 盾 来 减 少 %d%% 所 有 此 类 攻 击 伤 害， 持 续 5 回 合。 
-		 此 效 果 每 隔 5 回 合 只 能 触 发 一 次， 且 在 承 受 伤 害 前 被 激 活。 
-		 受 法 术 强 度 影 响， 效 果 有 额 外 加 成。]]):format(resist)
+		return ([[你的眼前会闪烁未来的景象，让你能够预知对你的攻击。 
+		 如果攻击是元素类或魔法类的，那么你会创造一个临时性的护盾来减少 %d%% 所有此类攻击伤害，持续 5 回合。 
+		 此效果每隔 5 回合只能触发一次，且在承受伤害前被激活。 
+		 受法术强度影响，效果有额外加成。]]):format(resist)
 	end,
 }
 

@@ -4,9 +4,9 @@ registerTalentTranslation{
 	id = "T_SHOOT_DOWN",
 	name = "击落",
 	info = function (self,t)
-		return ([[你 的 反 射 像 闪 电 一 样 快, 如 果 你 发 现 一 个 抛 射 物 (箭 矢, 弹 丸, 法 术, ...) 你 可 以 不消 耗 时 间 立 刻 射 击 之 。
-		最 多 可 同 时 击 落 %d 个 抛 射 物。
-		此 外, 射 向 你 的 抛 射 物 飞 行 速 度 下 降 %d%% ，你 的 抛 射 物 不 再 击 中 你 自 己。]]):
+		return ([[你的反射像闪电一样快, 如果你发现一个抛射物 (箭矢, 弹丸, 法术, ...) 你可以不消耗时间立刻射击之。
+		最多可同时击落 %d 个抛射物。
+		此外, 射向你的抛射物飞行速度下降 %d%% ，你的抛射物不再击中你自己。]]):
 		format(t.getNb(self, t), t.getSlow(self,t))
 	end,
 }
@@ -16,8 +16,8 @@ registerTalentTranslation{
 	info = function (self,t)
 		local chance = t.getChance(self,t)
 		local dam = t.getDamage(self,t)*100
-		return ([[激 活 这 个 技 能 将 你 的 反 应 提 升 到 令 人 难 以 置 信 的 水 平. 每 当 你 被 近 身 攻 击, 你 有 %d%% 几 率 射 出 一 箭 拦 截 攻 击, 躲 闪 攻 击 并 造 成 %d%% 伤 害.
-		该技 能 每 回 合 触 发 最 多 一 次.]])
+		return ([[激活这个技能将你的反应提升到令人难以置信的水平. 每当你被近身攻击, 你有 %d%% 几率射出一箭拦截攻击, 躲闪攻击并造成 %d%% 伤害.
+		该技能每回合触发最多一次.]])
 		:format(chance, dam)
 	end,
 }
@@ -27,8 +27,8 @@ registerTalentTranslation{
 	info = function (self,t)
 		local nb = t.getTalentCount(self,t)
 		local cd = t.getCooldown(self,t)
-		return ([[你 在 接 下 来 的 5 回 合 内 密 切 关 注 目 标. 当 其 使 用 非 瞬 发 技 能 时, 你 立 刻 做 出 反 应, 射 出 一 箭 造 成 25%% 伤 害 打 断 技 能 并 使 其 进 入 冷 却.
-该 攻 击 为 瞬 间 击 中, 必 中, 并 使 其 它 %d 个 技 能 进 入 冷 却 %d 回 合.]]):
+		return ([[你在接下来的 5 回合内密切关注目标. 当其使用非瞬发技能时, 你立刻做出反应, 射出一箭造成 25%% 伤害打断技能并使其进入冷却.
+该攻击为瞬间击中, 必中, 并使其它 %d 个技能进入冷却 %d 回合.]]):
 		format(nb, cd)
 	end,
 }
@@ -39,8 +39,8 @@ registerTalentTranslation{
 		local power = t.getDamageReduction(self,t)
 		local sta = t.getStamina(self,t)
 		local speed = t.getSpeed(self,t)
-		return ([[你 专 注 逃 跑 4 回 合. 处 于 此 状 态 时 增 加 %d%% 所 有 伤 害 抗 性, %0.1f 体 力 恢 复, 免 疫 震 慑, 定 身, 眩 晕 和 减 速 效 果 并 增 加 %d%% 移 动 速 度. 
-除 移 动 外 的 任 何 行 动 将 终 止 该 效 果。]]):
+		return ([[你专注逃跑 4 回合. 处于此状态时增加 %d%% 所有伤害抗性, %0.1f 体力恢复, 免疫震慑, 定身, 眩晕和减速效果并增加 %d%% 移动速度. 
+除移动外的任何行动将终止该效果。]]):
 		format(power, sta, speed)
 	end,
 }

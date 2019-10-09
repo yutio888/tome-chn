@@ -5,10 +5,10 @@ registerTalentTranslation{
 	name = "魔法箭",
 	info = function(self, t)
 		local damagemod = t.getDamageMod(self, t)
-		return ([[引 导 冰 冷 的 法 力 穿 过 你 的 法 杖， 发 射 出 1 道 能 造 成 %d%% 法 杖 伤 害 的 魔 法 箭。 
-		 这 道 魔 法 可 以 安 全 的 穿 过 己 方 队 友， 只 会 对 敌 方 目 标 造 成 伤 害。 
-		 此 攻 击 能 100%% 命 中 并 无 视 目 标 护 甲。
-		 法 杖 的 伤 害 系 数 会 增 加 0.2 。]]):
+		return ([[引导冰冷的法力穿过你的法杖，发射出 1 道能造成 %d%% 法杖伤害的魔法箭。 
+		 这道魔法可以安全的穿过己方队友，只会对敌方目标造成伤害。 
+		 此攻击能 100%% 命中并无视目标护甲。
+		 法杖的伤害系数会增加 0.2 。]]):
 		format(damagemod * 100)
 	end,
 }
@@ -19,7 +19,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local inc = t.getPercentInc(self, t)
-		return ([[使 用 法 杖 时，增 加 %d%% 法 杖 伤 害 ，同 时 增 加 30 物 理 强 度。]]):
+		return ([[使用法杖时，增加 %d%% 法杖伤害，同时增加 30 物理强度。]]):
 		format(100 * inc)
 	end,
 }
@@ -29,7 +29,7 @@ registerTalentTranslation{
 	name = "闪避姿态",
 	info = function(self, t)
 		local defense = t.getDefense(self, t)
-		return ([[采 取 闪 避 姿 态， 增 加 你 %d 点 闪 避 和 护 甲 值。]]):
+		return ([[采取闪避姿态，增加你 %d 点闪避和护甲值。]]):
 		format(defense)
 	end,
 }
@@ -40,9 +40,9 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local dazedur = t.getDazeDuration(self, t)
-		return ([[挥 动 法 杖 对 目 标 造 成 %d%% 近 程 伤 害 并 震 慑 目 标 %d 回 合。 
-		 受 法 术 强 度 影 响， 震 慑 概 率 有 额 外 加 成。 
-		 在 等 级 5 时， 此 攻 击 必 中。]]):
+		return ([[挥动法杖对目标造成 %d%% 近程伤害并震慑目标 %d 回合。 
+		 受法术强度影响，震慑概率有额外加成。 
+		 在等级 5 时，此攻击必中。]]):
 		format(100 * damage, dazedur)
 	end,
 }

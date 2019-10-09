@@ -6,8 +6,8 @@ registerTalentTranslation{
 	info = function(self, t)
 		local range = self:getTalentRange(t)
 		local duration = t.getDuration(self, t)
-		return ([[你 预 知 未 来 ，感 知 半 径  %d  以 内 的 生 物 和 陷 阱 ，持 续  %d  回 合 。
-		 如 果 你 学 会 了 深 谋 远 虑 ，那 么 在 你 激 活 这 个 技 能 的 时 候 ，你 可 以 获 得 额 外 的 闪 避 和 暴 击 减 免 （数 值 等 于 深 谋 远 虑 的 奖 励 ）。]]):format(range, duration)
+		return ([[你预知未来，感知半径  %d  以内的生物和陷阱，持续  %d  回合。
+		 如果你学会了深谋远虑，那么在你激活这个技能的时候，你可以获得额外的闪避和暴击减免（数值等于深谋远虑的奖励）。]]):format(range, duration)
 	end,
 }
 
@@ -17,9 +17,9 @@ registerTalentTranslation{
 	info = function(self, t)
 		local defense = t.getDefense(self, t)
 		local crits = t.getCritDefense(self, t)
-		return ([[获 得  %d  闪 避   和  %d%%  暴 击 减 免 。
-		 如 果 你 激 活 了 预 知 未 来 或 者 命 运 歧 路 ，那 么 这 些 技 能 也 会 拥 有 同 样 的 加 成 ，使 你 获 得 额 外 的 闪 避 和 暴 击 减 免 。		 
-		 受 魔 法 影 响 ，增 益 效 果 有 额 外 加 成 。]]):
+		return ([[获得  %d  闪避   和  %d%%  暴击减免。
+		 如果你激活了预知未来或者命运歧路，那么这些技能也会拥有同样的加成，使你获得额外的闪避和暴击减免。		 
+		 受魔法影响，增益效果有额外加成。]]):
 		format(defense, crits)
 	end,
 }
@@ -31,10 +31,10 @@ registerTalentTranslation{
 		local trigger = t.getTrigger(self, t) * 100
 		local cooldown = self:getTalentCooldown(t)
 		local talent = self:isTalentActive(t.id) and self:getTalentFromId(self:isTalentActive(t.id).talent).name or "None"
-		return ([[选 择 一 个 只 会 影 响 你 并 且 不 需 要 选 中 目 标 的 非 固 定 CD 主 动 法 术 。当 你 受 到 伤 害 并 使 生 命 值 降 低 到  %d%%  以 下 时 ，自 动 释 放 这 个 技 能 。
-		 即 使 选 择 的 技 能 处 于 冷 却 状 态 也 可 以 释 放   ，并 且 不 消 耗 回 合 或 资 源 ，技 能 等 级 为 该 技 能 和 指 定 技 能 当 中 较 低 的 一 方 。		 这 个 效 果 每  %d  回 合 只 能 触 发 一 次 ，并 且 在 伤 害 结 算 之 后 生 效 。
+		return ([[选择一个只会影响你并且不需要选中目标的非固定 CD 主动法术。当你受到伤害并使生命值降低到  %d%%  以下时，自动释放这个技能。
+		 即使选择的技能处于冷却状态也可以释放   ，并且不消耗回合或资源，技能等级为该技能和指定技能当中较低的一方。		 这个效果每  %d  回合只能触发一次，并且在伤害结算之后生效。
 
-		 当 前 选 择 技 能 ： %s ]]):
+		 当前选择技能： %s ]]):
 		format(trigger, cooldown, talent)
 	end,
 }
@@ -44,11 +44,11 @@ registerTalentTranslation{
 	name = "命运螺旋",
 	info = function(self, t)
 		local duration = t.getDuration(self, t)
-		return ([[你 窥 视 三 种 可 能 的 未 来 ，允 许 你 分 别 进 行 探 索  %d  回 合 。当 效 果 结 束 ，你 选 择 三 者 之 一 成 为 你 的 现 在 。
-		 如 果 你 学 会 了 深 谋 远 虑 ，当 你 使 用 命 运 螺 旋 时 ，将 获 得 额 外 的 闪 避 和 暴 击 减 免 （数 值 等 于 深 谋 远 虑 的 奖 励 ）。
-		 这 个 法 术 会 使 时 间 线 分 裂 。当 此 技 能 激 活 的 时 候 ，使 用 其 他 分 裂 时 间 线 的 技 能 将 会 失 败 。
-		 如 果 你 在 任 何 一 条 时 间 线 上 死 亡 ，你 将 使 时 间 线 回 到 你 使 用 技 能 的 地 方 ，并 且 技 能 效 果 结 束 。
-		 这 个 技 能 每 个 楼 层 只 能 使 用 一 次 。]])
+		return ([[你窥视三种可能的未来，允许你分别进行探索  %d  回合。当效果结束，你选择三者之一成为你的现在。
+		 如果你学会了深谋远虑，当你使用命运螺旋时，将获得额外的闪避和暴击减免（数值等于深谋远虑的奖励）。
+		 这个法术会使时间线分裂。当此技能激活的时候，使用其他分裂时间线的技能将会失败。
+		 如果你在任何一条时间线上死亡，你将使时间线回到你使用技能的地方，并且技能效果结束。
+		 这个技能每个楼层只能使用一次。]])
 		:format(duration)
 	end,
 }

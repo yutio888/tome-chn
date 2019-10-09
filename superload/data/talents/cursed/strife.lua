@@ -8,8 +8,8 @@ registerTalentTranslation{
 		local armorChange = t.getArmorChange(self, t)
 		local defenseChange = t.getDefenseChange(self, t)
 		local resistPenetration = t.getResistPenetration(self, t)
-		return ([[将 注 意 力 转 移 到 附 近 目 标 并 用 你 强 大 的 气 场 压 制 它。 如 果 目 标 未 能 通 过 精 神 强 度 豁 免 鉴 定， 目 标 %d 回 合 内 将 无 法 移 动 并 受 到 更 多 伤 害。 目 标 降 低 %d 点 护 甲 值、 %d 点 闪 避， 并 且 你 对 目 标 的 攻 击 会 增 加 %d%% 抵 抗 穿 透。 如 如 果 目 标 与 你 相 邻 , 那 么 此 技 能 会 附 加 一 次 近 战 攻 击。 
-		 受 意 志 影 响， 效 果 有 额 外 加 成。]]):format(duration, -armorChange, -defenseChange, resistPenetration)
+		return ([[将注意力转移到附近目标并用你强大的气场压制它。如果目标未能通过精神强度豁免鉴定，目标 %d 回合内将无法移动并受到更多伤害。目标降低 %d 点护甲值、 %d 点闪避，并且你对目标的攻击会增加 %d%% 抵抗穿透。如如果目标与你相邻 , 那么此技能会附加一次近战攻击。 
+		 受意志影响，效果有额外加成。]]):format(duration, -armorChange, -defenseChange, resistPenetration)
 	end,
 }
 
@@ -19,11 +19,11 @@ registerTalentTranslation{
 	info = function(self, t)
 		local range = self:getTalentRange(t)
 		local sense = t.sensePower(self, t)
-		return ([[你 的 第 7 感 能 让 你 能 在 狩 猎 中 发 现 下 个 牺 牲 品。 
-		 你 能 感 觉 到 %0.1f 码 半 径 范 围 内 的 敌 人。 
-		 在 10 码 半 径 范 围 内 你 总 能 看 见 被 追 踪 的 目 标。
-		 同 时 增 加 你 的 侦 测 潜 行 等 级 %d ， 侦 测 隐 形 等 级 %d 。
-		 受 意 志 影 响， 侦 测 强 度 有 额 外 加 成。 ]]):
+		return ([[你的第 7 感能让你能在狩猎中发现下个牺牲品。 
+		 你能感觉到 %0.1f 码半径范围内的敌人。 
+		 在 10 码半径范围内你总能看见被追踪的目标。
+		 同时增加你的侦测潜行等级 %d ，侦测隐形等级 %d 。
+		 受意志影响，侦测强度有额外加成。 ]]):
 		format(range, sense, sense)
 	end,
 }
@@ -34,10 +34,10 @@ registerTalentTranslation{
 	info = function(self, t)
 		local multiplier = self:combatTalentWeaponDamage(t, 0.7, 1.9)
 		local defenseChange = t.getDefenseChange(self, t)
-		return ([[你 闪 电 般 的 出 现 在 %d 码 范 围 内 的 敌 人 身 边， 造 成 %d%% （ 0 仇 恨） ～ %d%% （ 100+ 仇 恨） 的 伤 害。 
-		 你 闪 电 般 的 突 袭 使 敌 人 没 有 提 防， 增 加 %d 点 额 外 闪 避， 持 续 1 回 合。 
-		 受 力 量 影 响， 闪 避 值 有 额 外 加 成。
-		 如 果 你 装 备 盾 牌 的 话 ， 这 一 技 能 也 可 以 使 用 你 的 盾 牌 攻 击。]]):format(self:getTalentRange(t), multiplier * 30, multiplier * 100, defenseChange)
+		return ([[你闪电般的出现在 %d 码范围内的敌人身边，造成 %d%% （ 0 仇恨）～ %d%% （ 100+ 仇恨）的伤害。 
+		 你闪电般的突袭使敌人没有提防，增加 %d 点额外闪避，持续 1 回合。 
+		 受力量影响，闪避值有额外加成。
+		 如果你装备盾牌的话，这一技能也可以使用你的盾牌攻击。]]):format(self:getTalentRange(t), multiplier * 30, multiplier * 100, defenseChange)
 	end,
 }
 
@@ -46,11 +46,11 @@ registerTalentTranslation{
 	name = "无所畏惧",
 	info = function(self, t)
 		local chance = t.getChance(self, t)
-		return ([[在 猛 烈 的 攻 击 面 前， 你 选 择 直 面 威 胁 而 不 是 躲 藏。 
-		 当 技 能 激 活 时， 你 有 %d%% 概 率 抵 挡 一 次 近 程 攻 击。 不 顾 一 切 的 防 御 会 带 给 你 厄 运（ -3 幸 运）。 
-		 分 裂 攻 击， 杀 意 涌 动 和 无 所 畏 惧 不 能 同 时 开 启， 并 且 激 活 其 中 一 个 也 会 使 另 外 两 个 进 入 冷 却。 
-		 抵 挡 概 率 受 力 量 加 成 。
-		 装 备 盾 牌 时 ，抵 挡 概 率 增 加 20%% ]]):format(chance)
+		return ([[在猛烈的攻击面前，你选择直面威胁而不是躲藏。 
+		 当技能激活时，你有 %d%% 概率抵挡一次近程攻击。不顾一切的防御会带给你厄运（ -3 幸运）。 
+		 分裂攻击，杀意涌动和无所畏惧不能同时开启，并且激活其中一个也会使另外两个进入冷却。 
+		 抵挡概率受力量加成。
+		 装备盾牌时，抵挡概率增加 20%% ]]):format(chance)
 	end,
 }
 

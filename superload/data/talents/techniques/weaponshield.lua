@@ -4,9 +4,9 @@ registerTalentTranslation{
 	id = "T_SHIELD_PUMMEL",
 	name = "盾牌连击",
 	info = function(self, t)
-		return ([[连 续 使 用 2 次 盾 牌 攻 击 敌 人 并 分 别 造 成 %d%% 和 %d%% 盾 牌 伤 害。
-		如 果 此 技 能 连 续 命 中 目 标 2 次 则 目 标 会 被 震 慑 %d 回 合。
-		受 命 中 和 力 量 影 响， 震 慑 几 率 有 额 外 加 成。]])
+		return ([[连续使用 2 次盾牌攻击敌人并分别造成 %d%% 和 %d%% 盾牌伤害。
+		如果此技能连续命中目标 2 次则目标会被震慑 %d 回合。
+		受命中和力量影响，震慑几率有额外加成。]])
 		:format(100 * self:combatTalentWeaponDamage(t, 1, 1.7, self:getTalentLevel(self.T_SHIELD_EXPERTISE)),
 		100 * self:combatTalentWeaponDamage(t, 1.2, 2.1, self:getTalentLevel(self.T_SHIELD_EXPERTISE)),
 		t.getStunDuration(self, t))
@@ -18,12 +18,12 @@ registerTalentTranslation{
 	name = "还击",
 	info = function(self, t)
 		local inc = t.getDurInc(self, t)
-		return ([[通 过 以 下 方 法 提 高 你 的 反 击 能 力：
-		当 出 现 不 完 全 格 挡 时 也 可 以 进 行 反 击。
-		增 加 攻 击 者 反 击DEBUFF的 持 续 时 间 %d 。
-		你 对 可 反 击 目 标 的 反 击 次 数 增 加 %d 次。
-		增 加 %d%% 反 击 暴 击 率。
-		受 敏 捷 影 响， 此 暴 击 率 按 比 例 加 成。]]):format(inc, inc, t.getCritInc(self, t))
+		return ([[通过以下方法提高你的反击能力：
+		当出现不完全格挡时也可以进行反击。
+		增加攻击者反击DEBUFF的持续时间 %d 。
+		你对可反击目标的反击次数增加 %d 次。
+		增加 %d%% 反击暴击率。
+		受敏捷影响，此暴击率按比例加成。]]):format(inc, inc, t.getCritInc(self, t))
 	end,
 }
 
@@ -32,8 +32,8 @@ registerTalentTranslation{
 	name = "拍击",
 	info = function(self, t)
 		local damage = t.getShieldDamage(self, t)*100
-		return ([[用 盾 牌 拍 击 目 标 3 次， 造 成 %d%% 武 器 伤 害 ， 然 后 迅 速 进 入 格 挡 状 态。
-		该 格 挡 不 占 用 盾 牌 的 格 挡 技 能 CD。]])
+		return ([[用盾牌拍击目标 3 次，造成 %d%% 武器伤害，然后迅速进入格挡状态。
+		该格挡不占用盾牌的格挡技能 CD。]])
 		:format(damage)
 	end,
 }
@@ -42,7 +42,7 @@ registerTalentTranslation{
 	id = "T_ASSAULT",
 	name = "强袭",
 	info = function(self, t)
-		return ([[用 你 的 盾 牌 攻 击 目 标 并 造 成 %d%% 伤 害， 如 果 此 次 攻 击 命 中， 那 么 你 将 会 发 动 2 次 武 器 暴 击， 每 击 分 别 造 成 %d%% 基 础 伤 害。]]):
+		return ([[用你的盾牌攻击目标并造成 %d%% 伤害，如果此次攻击命中，那么你将会发动 2 次武器暴击，每击分别造成 %d%% 基础伤害。]]):
 		format(100 * self:combatTalentWeaponDamage(t, 0.8, 1.3, self:getTalentLevel(self.T_SHIELD_EXPERTISE)), 100 * self:combatTalentWeaponDamage(t, 0.8, 1.3))
 	end,
 }
@@ -51,10 +51,10 @@ registerTalentTranslation{
 	id = "T_SHIELD_WALL",
 	name = "盾墙",
 	info = function (self,t)
-		return ([[进 入 一 个 保 护 性 的 战 斗 姿 态 ，让 你 在 使 用 盾 牌 的 同 时 更 熟 练 地 保 护 自 己 。
-		 提 升 护 甲 值 %d ，格 挡 值 %d ，减 少 格 挡 冷 却 2 回 合 。
-		 提 升 眩 晕 和 击 退 抗 性 %d%% 。
-		 护 甲 和 格 挡 值 加 成 受 你 的 敏 捷 和 力 量 值 影 响 。]]):
+		return ([[进入一个保护性的战斗姿态，让你在使用盾牌的同时更熟练地保护自己。
+		 提升护甲值 %d ，格挡值 %d ，减少格挡冷却 2 回合。
+		 提升眩晕和击退抗性 %d%% 。
+		 护甲和格挡值加成受你的敏捷和力量值影响。]]):
 		format(t.getArmor(self, t), t.getBlock(self, t), 100*t.stunKBresist(self, t))
 	end,
 
@@ -64,11 +64,11 @@ registerTalentTranslation{
 	id = "T_REPULSION",
 	name = "盾牌猛击",
 	info = function(self, t)
-		return ([[用 盾 牌 猛 击 周 围  所 有 敌 人，造 成 %d%% 盾 牌 伤 害 并 击 退 %d 格。
-		此 外 所 有 怪 物 被 击 退 时 也 会 被 眩 晕 %d 回 合。 
-		该 技 能 命 中 时 将 刷 新 冲 锋 的 冷 却。
-		击 退 距 离 受 技 能 等 级 加 成。
-		眩 晕 时 间 受 力 量 加 成。]]):format(t.getShieldDamage(self, t)*100, t.getDist(self, t), t.getDuration(self, t))
+		return ([[用盾牌猛击周围  所有敌人，造成 %d%% 盾牌伤害并击退 %d 格。
+		此外所有怪物被击退时也会被眩晕 %d 回合。 
+		该技能命中时将刷新冲锋的冷却。
+		击退距离受技能等级加成。
+		眩晕时间受力量加成。]]):format(t.getShieldDamage(self, t)*100, t.getDist(self, t), t.getDuration(self, t))
 	end,
 }
 
@@ -76,7 +76,7 @@ registerTalentTranslation{
 	id = "T_SHIELD_EXPERTISE",
 	name = "盾牌专精",
 	info = function(self, t)
-		return ([[当 你 用 盾 牌 攻 击 时 提 高 你 的 伤 害， 并 提 高 法 术 豁 免（ +%d ） 和 物 理 豁 免（ +%d ）。]]):format(t.getSpell(self, t), t.getPhysical(self, t))
+		return ([[当你用盾牌攻击时提高你的伤害，并提高法术豁免（ +%d ）和物理豁免（ +%d ）。]]):format(t.getSpell(self, t), t.getPhysical(self, t))
 	end,
 }
 
@@ -90,10 +90,10 @@ registerTalentTranslation{
 		else
 			hp = t.lifebonus(self,t)
 		end
-		return ([[在 走 投 无 路 的 局 面 下， 你 鼓 舞 自 己， 提 高 %d 点 闪 避 与 护 甲 ，提 高 %d 点 当 前 及 最 大 生 命 值 ， 但 是 这 会 使 你 无 法 移 动。 
-		你 的 坚 守 让 你 集 中 精 力 于 对 手 的 每 一 次 进 攻， 让 你 能 承 受 原 本 致 命 的 伤 害。 你 只 有 在 生 命 值 下 降 到 -%d 时 才 会 死 亡。
-		受 敏 捷 影 响 ， 闪 避 和 护 甲 有 额 外 加 成 。
-		受 体 质 和 最 大 生 命 值 影 响， 生 命 值 增 益 有 额 外 加 成。]]):
+		return ([[在走投无路的局面下，你鼓舞自己，提高 %d 点闪避与护甲，提高 %d 点当前及最大生命值，但是这会使你无法移动。 
+		你的坚守让你集中精力于对手的每一次进攻，让你能承受原本致命的伤害。你只有在生命值下降到 -%d 时才会死亡。
+		受敏捷影响，闪避和护甲有额外加成。
+		受体质和最大生命值影响，生命值增益有额外加成。]]):
 		format(t.getDefense(self, t), hp, hp)
 	end,
 }

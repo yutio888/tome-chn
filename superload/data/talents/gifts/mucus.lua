@@ -7,14 +7,14 @@ registerTalentTranslation{
 		local dur = t.getDur(self, t)
 		local dam = t.getDamage(self, t)
 		local equi = t.getEqui(self, t)
-		return ([[你 开 始 在 你 经 过 或 站 立 的 地 方 滴 落 粘 液， 持 续 %d 回 合。 
-		 粘 液 每 回 合 自 动 放 置 ， 持 续 %d 回 合 。
-		 在 等 级 4 时， 粘 液 会 扩 展 到 1 码 半 径 范 围。 
-		 粘 液 会 使 所 有 经 过 的 敌 人 中 毒， 每 回 合 造 成 %0.1f 自 然 伤 害， 持 续 5 回 合（ 可 叠 加）。 
-		 站 在 自 己 的 粘 液 上 时 ， 你 每 回 合 回 复 %0.1f 失 衡 值 。
-		 每 个 经 过 粘 液 的 友 方 单 位， 每 回 合 将 和 你 一 起 回 复 1 点 失 衡 值。  
-		 受 精 神 强 度 影 响， 伤 害 和 失 衡 值 回 复 有 额 外 加 成。 
-		 在 同 样 的 位 置 站 在 更 多 的 粘 液 上 会 强 化 粘 液 效 果 ， 增 加 1 回 合 持 续 时 间 。]]):
+		return ([[你开始在你经过或站立的地方滴落粘液，持续 %d 回合。 
+		 粘液每回合自动放置，持续 %d 回合。
+		 在等级 4 时，粘液会扩展到 1 码半径范围。 
+		 粘液会使所有经过的敌人中毒，每回合造成 %0.1f 自然伤害，持续 5 回合（可叠加）。 
+		 站在自己的粘液上时，你每回合回复 %0.1f 失衡值。
+		 每个经过粘液的友方单位，每回合将和你一起回复 1 点失衡值。  
+		 受精神强度影响，伤害和失衡值回复有额外加成。 
+		 在同样的位置站在更多的粘液上会强化粘液效果，增加 1 回合持续时间。]]):
 		format(dur, dur, damDesc(self, DamageType.NATURE, dam), equi)
 	end,
 }
@@ -24,9 +24,9 @@ registerTalentTranslation{
 	name = "酸液飞溅",
 	info = function(self, t)
 		local dam = t.getDamage(self, t)
-		return ([[你 召 唤 大 自 然 的 力 量， 将 %d 码 半 径 范 围 内 的 地 面 转 化 为 酸 性 淤 泥 区， 对 所 有 目 标 造 成 %0.1f 酸 性 伤 害 并 在 区 域 内 制 造 粘 液。 
-		 同 时 如 果 你 有 任 何 粘 液 软 泥 怪 存 在， 则 会 向 视 线 内 的 某 个 被 淤 泥 击 中 的 随 机 目 标 释 放 史 莱 姆 喷 吐（ 较 低 强 度）。 
-		 受 精 神 强 度 影 响， 伤 害 有 额 外 加 成。]]):
+		return ([[你召唤大自然的力量，将 %d 码半径范围内的地面转化为酸性淤泥区，对所有目标造成 %0.1f 酸性伤害并在区域内制造粘液。 
+		 同时如果你有任何粘液软泥怪存在，则会向视线内的某个被淤泥击中的随机目标释放史莱姆喷吐（较低强度）。 
+		 受精神强度影响，伤害有额外加成。]]):
 		format(self:getTalentRadius(t), damDesc(self, DamageType.ACID, dam))
 	end,
 }
@@ -35,8 +35,8 @@ registerTalentTranslation{
 	id = "T_MUCUS_OOZE_SPIT",
 	name = "粘液喷吐",
 	info = function(self, t)
-		return ([[喷 射 一 道 射 线 造 成 %0.2f 史 莱 姆 伤 害。 
-		 受 精 神 强 度 影 响， 伤 害 有 额 外 加 成。]]):format(damDesc(self, DamageType.SLIME, self:combatTalentMindDamage(t, 8, 80)))
+		return ([[喷射一道射线造成 %0.2f 史莱姆伤害。 
+		 受精神强度影响，伤害有额外加成。]]):format(damDesc(self, DamageType.SLIME, self:combatTalentMindDamage(t, 8, 80)))
 	end,
 }
 
@@ -44,11 +44,11 @@ registerTalentTranslation{
 	id = "T_LIVING_MUCUS",
 	name = "粘液伙伴",
 	info = function(self, t)
-		return ([[你 的 粘 液 有 了 自 己 的 感 知。 每 回 合 有 %d%% 几 率， 随 机 一 个 滴 有 你 的 粘 液 的 码 子 会 产 生 一 只 粘 液 软 泥 怪。 
-		 粘 液 软 泥 怪 会 存 在 %d 回 合 ，会 向 任 何 附 近 的 敌 人 释 放 史 莱 姆 喷 吐。 
-		 同 时 场 上 可 存 在 %d 只 粘 液 软 泥 怪。 ( 基 于 你 的 灵 巧 值 )
-		 每 当 你 造 成 一 次 精 神 暴 击， 你 的 所 有 粘 液 软 泥 怪 的 存 在 时 间 会 延 长 2 回 合。 
-		 受 精 神 强 度 影 响， 效 果 有 额 外 加 成。]]):
+		return ([[你的粘液有了自己的感知。每回合有 %d%% 几率，随机一个滴有你的粘液的码子会产生一只粘液软泥怪。 
+		 粘液软泥怪会存在 %d 回合，会向任何附近的敌人释放史莱姆喷吐。 
+		 同时场上可存在 %d 只粘液软泥怪。 ( 基于你的灵巧值 )
+		 每当你造成一次精神暴击，你的所有粘液软泥怪的存在时间会延长 2 回合。 
+		 受精神强度影响，效果有额外加成。]]):
 		format(t.getChance(self, t), t.getSummonTime(self, t), t.getMax(self, t))
 	end,
 }
@@ -59,9 +59,9 @@ registerTalentTranslation{
 	info = function(self, t)
 		local nb = t.getNb(self, t)
 		local energy = t.getEnergy(self, t)
-		return ([[你 暂 时 性 的 和 粘 液 融 为 一 体， 净 化 你 身 上 %d 物 理 或 魔 法 负 面 效 果。 
-		 然 后， 你 可 以 闪 现 到 视 野 内 任 何 有 粘 液 覆 盖 的 区 域。
-		 此 技 能 使 用 速 度 很 快，只 消 耗 一 般 技 能 使 用 时 间 的 %d%% ，但 只 有 当 你 站 在 粘 液 区 时 才 能 使 用。]]):
+		return ([[你暂时性的和粘液融为一体，净化你身上 %d 物理或魔法负面效果。 
+		 然后，你可以闪现到视野内任何有粘液覆盖的区域。
+		 此技能使用速度很快，只消耗一般技能使用时间的 %d%% ，但只有当你站在粘液区时才能使用。]]):
 		format(nb, (energy) * 100)
 	end,
 }

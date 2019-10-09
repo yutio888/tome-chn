@@ -1,39 +1,39 @@
 ﻿local _M = loadPrevious(...)
 registerTalentTranslation{
 	id = "T_SADIST",
-	name = "虐 待 狂",
+	name = "虐待狂",
 	info = function (self,t)
-		return ([[你 从 视 野 内 所 有 敌 人 的 痛 苦 中 得 到 养 分 。每 一 个 生 命 值 低 于 80%% 的 敌 人 将 让 你 获 得 一 层 虐 待 狂 效 果 ，每 层 增 加 你 的 原 始 精 神 强 度 %d.
+		return ([[你从视野内所有敌人的痛苦中得到养分。每一个生命值低于 80%% 的敌人将让你获得一层虐待狂效果，每层增加你的原始精神强度 %d.
 		]]):
 		format(t.getPower(self, t))
 	end,
 }
 registerTalentTranslation{
 	id = "T_CHANNEL_PAIN",
-	name = "痛 苦 连 接",
+	name = "痛苦连接",
 	info = function (self,t)
-		return ([[当 你 至 少 有 一 层 虐 待 狂 效 果 时 ，每 当 你 受 到 伤 害 你 使 用 虐 待 狂 效 果 减 免 伤 害 ，最 终 受 到 的 伤 害 为 受 到 伤 害 除 以 虐 待 狂 效 果 层 数。
-		计 算 时 层 数 + 1 ，每 层 效 果 消 耗 %d 灵 能 值 。
-		每 次 生 效 时 ，视 野 内 随 机 一 个 生 命 值 低 于 80%% 的 敌 人 ，会 受 到 伤 害 反 弹 ，伤 害 为 所 吸 收 伤 害 的 %d%% 的 精 神 伤 害。
-		该 效 果 每 回 合 一 次 ，且 只 会 在 伤 害 超 过 你 10%% 最 大 生 命 值 时 才 触 发 。]]):
+		return ([[当你至少有一层虐待狂效果时，每当你受到伤害你使用虐待狂效果减免伤害，最终受到的伤害为受到伤害除以虐待狂效果层数。
+		计算时层数 + 1 ，每层效果消耗 %d 灵能值。
+		每次生效时，视野内随机一个生命值低于 80%% 的敌人，会受到伤害反弹，伤害为所吸收伤害的 %d%% 的精神伤害。
+		该效果每回合一次，且只会在伤害超过你 10%% 最大生命值时才触发。]]):
 		format(t.getPsi(self, t), t.getBacklash(self, t))
 	end,
 }
 registerTalentTranslation{
 	id = "T_RADIATE_AGONY",
-	name = "痛 苦 辐 射",
+	name = "痛苦辐射",
 	info = function (self,t)
-		return ([[当 你 至 少 有 一 层 虐 待 狂 效 果 时 ，你 可 以 分 享 你 的 痛 苦 给 半 径 %d 所 有 可 见 的 生 命 值 少 于 80%% 的 敌 人 。
-		持 续 5 回 合 ，他 们 的 头 脑 将 如 此 专 注 于 自 己 的 痛 苦 ，对 你 的 伤 害 减 少 %d%%]]):
+		return ([[当你至少有一层虐待狂效果时，你可以分享你的痛苦给半径 %d 所有可见的生命值少于 80%% 的敌人。
+		持续 5 回合，他们的头脑将如此专注于自己的痛苦，对你的伤害减少 %d%%]]):
 		format(self:getTalentRadius(t), t.getProtection(self, t))
 	end,
 }
 registerTalentTranslation{
 	id = "T_TORTURE_MIND",
-	name = "精 神 拷 打",
+	name = "精神拷打",
 	info = function (self,t)
-		return ([[当 你 至 少 有 一 层 虐 待 狂 效 果 时 ，你 可 以 精 神 鞭 打 一 个 目 标 ，发 送 恐 怖 的 图 像 到 目 标 的 脑 海 中 。
-		在 %d 回 合 内， 目 标 随 机 %d 个 技 能 将 无 法 使 用 。]]):
+		return ([[当你至少有一层虐待狂效果时，你可以精神鞭打一个目标，发送恐怖的图像到目标的脑海中。
+		在 %d 回合内，目标随机 %d 个技能将无法使用。]]):
 		format(t.getDur(self, t), t.getNb(self, t))
 	end,
 }

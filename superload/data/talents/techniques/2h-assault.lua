@@ -15,7 +15,7 @@ registerTalentTranslation{
 	name = "无畏跳斩",
 	info = function(self, t)
 		local damage = t.getDamage(self, t) * 100
-		return ([[向 前 跳 一步 ， 用这股力量对周围的目标 造 成 %d%% 武 器 伤 害。]])
+		return ([[向前跳一步，用这股力量对周围的目标造成 %d%% 武器伤害。]])
 		:format(damage)
 	end,
 }
@@ -24,8 +24,8 @@ registerTalentTranslation{
 	id = "T_DEATH_DANCE_ASSAULT",
 	name = "死亡之舞",
 	info = function(self, t)
-		return ([[原 地 旋 转， 伸 展 你 的 武 器， 伤 害 你 周 围半径%d范围内的所 有目 标， 造 成 %d%% 武 器 伤 害。
-		等 级 3 时 ， 所 有 伤 害 会 引 发 额 外 %d%% 流 血 伤 害，持 续 5 回 合 。]]):format(self:getTalentRadius(t), 100 * self:combatTalentWeaponDamage(t, 1.4, 2.1), t.getBleed(self, t) * 100)
+		return ([[原地旋转，伸展你的武器，伤害你周围半径%d范围内的所有目标，造成 %d%% 武器伤害。
+		等级 3 时，所有伤害会引发额外 %d%% 流血伤害，持续 5 回合。]]):format(self:getTalentRadius(t), 100 * self:combatTalentWeaponDamage(t, 1.4, 2.1), t.getBleed(self, t) * 100)
 	end,
 }
 
@@ -33,8 +33,8 @@ registerTalentTranslation{
 	id = "T_EXECUTION",
 	name = "致命斩杀",
 	info = function(self, t)
-		return ([[试 图 斩 杀 目 标 。 目 标 每 损 失 1 ％ 生 命 ， 你 造 成 额 外 %0.2f％ 武 器 伤 害。（剩 余 30 ％ 生 命 时 造 成 %0.2f％ 武 器 伤 害 ）
-		该 攻 击 必 定 暴 击 。
+		return ([[试图斩杀目标。目标每损失 1 ％生命，你造成额外 %0.2f％武器伤害。（剩余 30 ％生命时造成 %0.2f％武器伤害）
+		该攻击必定暴击。
 		如果这一攻击杀死了敌人，你的两个技能的冷却时间减少两个回合，致命斩杀技能的冷却时间归零。]]):
 		format(t.getPower(self, t), 100 + t.getPower(self, t) * 70)
 	end,

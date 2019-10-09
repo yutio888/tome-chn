@@ -4,7 +4,7 @@ registerTalentTranslation{
 	id = "T_HIGHER_HEAL",
 	name = "高等人类之怒",
 	info = function(self, t)
-		return ([[召唤高等人类的力量，增加所有伤害 %d%%， 减少受到的所有伤害 %d%%，持续5回合。
+		return ([[召唤高等人类的力量，增加所有伤害 %d%%，减少受到的所有伤害 %d%%，持续5回合。
 		增益效果受魔法值加成。]]):
 		format(t.getPower(self, t), t.getPower(self, t))
 	end,
@@ -14,10 +14,10 @@ registerTalentTranslation{
 	id = "T_OVERSEER_OF_NATIONS",
 	name = "远见卓识",
 	info = function(self, t)
-		return ([[虽 然 高 贵 血 统 并 不 意 味 着 统 治 他 人（ 当 然 也 没 有 特 别 的 意 愿 去 那 样 做）， 但 是 他 们 经 常 承 担 更 高 的 义 务。 
-		 他 们 的 本 能 使 得 他 们 比 别 人 有 更 强 的 直 觉。 
-		 增 加 %d%% 目 盲 免 疫 , 提 高 %d 点 最 大 视 野 范 围 并 提 高 %d 光 照、 夜 视 及 感 应 范 围。
-		 技 能 等 级 5 时，每 次 你 命 中 目 标 ， 你 将 获 得 15 格 范 围 内 同 类 型 生 物 感 知 能 力 ， 持 续 5 回 合 。]]):
+		return ([[虽然高贵血统并不意味着统治他人（当然也没有特别的意愿去那样做），但是他们经常承担更高的义务。 
+		 他们的本能使得他们比别人有更强的直觉。 
+		 增加 %d%% 目盲免疫 , 提高 %d 点最大视野范围并提高 %d 光照、夜视及感应范围。
+		 技能等级 5 时，每次你命中目标，你将获得 15 格范围内同类型生物感知能力，持续 5 回合。]]):
 		format(t.getImmune(self, t) * 100, t.getSight(self, t), t.getESight(self, t))
 	end,
 }
@@ -27,9 +27,9 @@ registerTalentTranslation{
 	name = "魔法亲和",
 	info = function(self, t)
 		local netpower = t.power(self, t)
-		return ([[高 等 人 类 们 最 初 是 在 厄 流 纪 前 由 红 衣 主 神 们 创 造 的。 他 们 天 生 具 有 魔 法 天 赋。 
-		 提 高 %d 点 法 术 豁 免 和 %d%% 奥 术 抵 抗。
-		 每 次 释 放 伤 害 法 术 时 ， 5 回 合 内 该 伤 害 类 型 获 得 20%% 伤 害 加 成 。 （ 该 效 果 有 冷 却 时 间。）]]):
+		return ([[高等人类们最初是在厄流纪前由红衣主神们创造的。他们天生具有魔法天赋。 
+		 提高 %d 点法术豁免和 %d%% 奥术抵抗。
+		 每次释放伤害法术时， 5 回合内该伤害类型获得 20%% 伤害加成。（该效果有冷却时间。）]]):
 		format(t.getSave(self, t), netpower)
 	end,
 }
@@ -39,9 +39,9 @@ registerTalentTranslation{
 	name = "生命绽放",
 	info = function(self, t)
 		local duration = t.getDuration(self, t)
-		return ([[激 活 你 的 内 在 潜 力， 以 提 高 你 的 能 力。 
-		 在 接 下 来 %d 回 合 中 可 无 消 耗 使 用 技 能。 
-		 你 的 能 量 值 仍 需 要 满 足 使 用 这 些 技 能 的 最 低 能 量 需 求， 且 技 能 仍 有 几 率 会 失 败。]]):format(duration)
+		return ([[激活你的内在潜力，以提高你的能力。 
+		 在接下来 %d 回合中可无消耗使用技能。 
+		 你的能量值仍需要满足使用这些技能的最低能量需求，且技能仍有几率会失败。]]):format(duration)
 	end,
 }
 
@@ -49,8 +49,8 @@ registerTalentTranslation{
 	id = "T_SHALOREN_SPEED",
 	name = "不朽的恩赐",
 	info = function(self, t)
-		return ([[召 唤 不 朽 的 恩 赐 之 力 来 增 加 你 %d%% 的整体速 度， 持 续 5 回 合。 
-		 受 敏 捷 和 魔 法 中 较 高 一 项 影 响 ， 速 度 会 有 额 外 的 提 升。]]):
+		return ([[召唤不朽的恩赐之力来增加你 %d%% 的整体速度，持续 5 回合。 
+		 受敏捷和魔法中较高一项影响，速度会有额外的提升。]]):
 		format(t.getSpeed(self, t) * 100)
 	end,
 }
@@ -59,8 +59,8 @@ registerTalentTranslation{
 	id = "T_MAGIC_OF_THE_ETERNALS",
 	name = "不朽的魔法",
 	info = function(self, t)
-		return ([[因 为 永 恒 精 灵 的 自 然 魔 法， 现 实 发 生 了 轻 微 的 扭 曲。 
-		 提 高 %d%% 的 暴 击 概 率 和 %d%% 暴 击 伤 害。]]):
+		return ([[因为永恒精灵的自然魔法，现实发生了轻微的扭曲。 
+		 提高 %d%% 的暴击概率和 %d%% 暴击伤害。]]):
 		format(t.critChance(self, t), t.critPower(self, t))
 	end,
 }
@@ -69,8 +69,8 @@ registerTalentTranslation{
 	id = "T_SECRETS_OF_THE_ETERNALS",
 	name = "不朽的秘密",
 	info = function(self, t)
-		return ([[作 为 埃 亚 尔 仅 存 的 古 老 种 族， 永 恒 精 灵 在 漫 长 的 岁 月 里 学 习 到 如 何 用 他 们 与 生 俱 来 的 精 神 魔 法 保 护 自 己。 
-		%d%% 的 概 率 使 自 身 进 入 隐 形 状 态（ %d 点 隐 形 等 级）， 当 承 受 至 少 10%% 总 生 命 值 的 伤 害 时 触 发， 持 续 5 回 合。]]):
+		return ([[作为埃亚尔仅存的古老种族，永恒精灵在漫长的岁月里学习到如何用他们与生俱来的精神魔法保护自己。 
+		%d%% 的概率使自身进入隐形状态（ %d 点隐形等级），当承受至少 10%% 总生命值的伤害时触发，持续 5 回合。]]):
 		format(t.getChance(self, t), t.getInvis(self, t))
 	end,
 }
@@ -79,8 +79,8 @@ registerTalentTranslation{
 	id = "T_TIMELESS",
 	name = "超越永恒",
 	info = function(self, t)
-		return ([[世 界 在 不 断 的 变 老， 而 你 似 乎 永 恒 不 变。 对 于 你 来 说， 时 间 是 不 同 寻 常 的。 
-		 减 少 %d 回 合 负 面 状 态 的 持 续 时 间 ， 减 少 技 能 %d 回 合 冷 却 时 间 直 至 冷 却 并 增 加 %d 回 合 增 益 状 态 的 持 续 时 间（ 至 多 延 长 为 剩 余 时 间 的 两 倍）。]]):
+		return ([[世界在不断的变老，而你似乎永恒不变。对于你来说，时间是不同寻常的。 
+		 减少 %d 回合负面状态的持续时间，减少技能 %d 回合冷却时间直至冷却并增加 %d 回合增益状态的持续时间（至多延长为剩余时间的两倍）。]]):
 		format(t.getEffectBad(self, t), t.getEffectGood(self, t), t.getEffectGood(self, t))
 	end,
 }
@@ -89,8 +89,8 @@ registerTalentTranslation{
 	id = "T_THALOREN_WRATH",
 	name = "森林的恩赐",
 	info = function(self, t)
-		return ([[召 唤 自 然 的 力 量 ，每 回 合 恢 复 %d 生 命 值 ，治 疗 系 数 增 加 %d%%，持 续 10 回 合 。
-		 生 命 恢 复 量 受 意 志 值 加 成 。]]):format(5 + self:getWil() * 0.5, t.getHealMod(self, t))
+		return ([[召唤自然的力量，每回合恢复 %d 生命值，治疗系数增加 %d%%，持续 10 回合。
+		 生命恢复量受意志值加成。]]):format(5 + self:getWil() * 0.5, t.getHealMod(self, t))
 	end,
 }
 
@@ -98,8 +98,8 @@ registerTalentTranslation{
 	id = "T_UNSHACKLED",
 	name = "亲近自然",
 	info = function(self, t)
-		return ([[自 然 精 灵 对 自 然 元 素 有 亲 和 力 ，这 让 它 们 在 受 到 伤 害 时 可 以 获 得 一 定 的 治 疗 。
-		 获 得  %d%%  自 然 和 酸 性 伤 害 吸 收 。]]):
+		return ([[自然精灵对自然元素有亲和力，这让它们在受到伤害时可以获得一定的治疗。
+		 获得  %d%%  自然和酸性伤害吸收。]]):
 		format(t.getAffinity(self, t))
 	end,
 }
@@ -108,8 +108,8 @@ registerTalentTranslation{
 	id = "T_GUARDIAN_OF_THE_WOOD",
 	name = "森林守护",
 	info = function(self, t)
-		return ([[自 然 精 灵 是 森 林 的 一 部 分， 森 林 保 护 他们 免 受 侵 蚀。 
-		 提 高 %d%% 疾 病 抵 抗、 %0.1f%% 枯 萎 抵 抗 和 %0.1f%% 所 有 抵 抗。]]):
+		return ([[自然精灵是森林的一部分，森林保护他们免受侵蚀。 
+		 提高 %d%% 疾病抵抗、 %0.1f%% 枯萎抵抗和 %0.1f%% 所有抵抗。]]):
 		format(t.getDiseaseImmune(self, t)*100, t.getBResist(self, t), t.getAllResist(self, t))
 	end,
 }
@@ -119,11 +119,11 @@ registerTalentTranslation{
 	name = "自然的骄傲",
 	info = function(self, t)
 		local base_stats = self:combatScale(self:getWil() * self:getTalentLevel(t), 25, 0, 125, 500, 0.75)
-		return ([[自 然 与 自然精灵 同 在， 你他们可 以 时 刻 感 受 到 森 林 的 召 唤。 
-		 召 唤 2 个 精 英 树 人， 持 续 8 回 合。 
-		 树 人 的 所 有 抵 抗 取 决 于 你 的 枯 萎 抵 抗， 并 且 可 以 震 慑、 击 退 并 嘲 讽你的 敌 人。 
-		你 的 意 志 值 (%d)将 会 被 加 到 它 们 的 所 有 非 魔 法 主 要 属 性 值 上 ，他 们 的 技 能 等 级 受 到 你 自 然 的 骄 傲 技 能 等 级 的 加 成 。
-		 你 的 伤 害 加 成 ，伤 害 穿 透 和 其 他 许 多 属 性 会 被 继 承 。]]):format(self:getWil())
+		return ([[自然与自然精灵同在，你他们可以时刻感受到森林的召唤。 
+		 召唤 2 个精英树人，持续 8 回合。 
+		 树人的所有抵抗取决于你的枯萎抵抗，并且可以震慑、击退并嘲讽你的敌人。 
+		你的意志值 (%d)将会被加到它们的所有非魔法主要属性值上，他们的技能等级受到你自然的骄傲技能等级的加成。
+		 你的伤害加成，伤害穿透和其他许多属性会被继承。]]):format(self:getWil())
 	end,
 }
 
@@ -132,8 +132,8 @@ registerTalentTranslation{
 	name = "钢筋铁骨",
 	info = function(self, t)
 		local params = t.getParams(self, t)
-		return ([[召 唤 矮 人 一 族 的 传 奇 血 统 来 增 加 你 +%d 点 护 甲 值， +%d%% 护 甲 硬 度， +%d 点 法 术 豁 免 和 +%d 物 理 豁 免， 持 续 8 回 合。 
-		 受 你 的 体 质 影 响， 此 效 果 有 额 外 加 成。]]):
+		return ([[召唤矮人一族的传奇血统来增加你 +%d 点护甲值， +%d%% 护甲硬度， +%d 点法术豁免和 +%d 物理豁免，持续 8 回合。 
+		 受你的体质影响，此效果有额外加成。]]):
 		format(params.armor, params.armor_hardiness, params.physical, params.spell)
 	end,
 }
@@ -142,9 +142,9 @@ registerTalentTranslation{
 	id = "T_STONESKIN",
 	name = "石化皮肤",
 	info = function(self, t)
-		return ([[矮 人 皮 肤 是 一 种 复 杂 的 结 构， 它 可 以 在 受 到 打 击 后 自 动 硬 化。 
-		当 被 击 打 时 有 15%% 的 概 率 增 加 %d 点 护 甲 值， 持 续 5 回 合， 同 时 无 视 触 发 该 效 果 的 攻 击。
-		该 效 果 无 冷 却 时 间 ， 可 重 复 触 发 。]]):
+		return ([[矮人皮肤是一种复杂的结构，它可以在受到打击后自动硬化。 
+		当被击打时有 15%% 的概率增加 %d 点护甲值，持续 5 回合，同时无视触发该效果的攻击。
+		该效果无冷却时间，可重复触发。]]):
 		format(t.armor(self, t))
 	end,
 }
@@ -153,9 +153,9 @@ registerTalentTranslation{
 	id = "T_POWER_IS_MONEY",
 	name = "金钱就是力量",
 	info = function(self, t)
-		return ([[金 钱 是 矮 人 王 国 的 心 脏， 它 控 制 了 所 有 其 他 决 策。 
-		 基 于 你 的 金 币 持 有 量， 增 加 物 理、 精 神 和 法 术 抵 抗。 
-		+1 豁 免 值 每 %d 单 位 金 币， 最 大 +%d (当 前 +%d )。]]):
+		return ([[金钱是矮人王国的心脏，它控制了所有其他决策。 
+		 基于你的金币持有量，增加物理、精神和法术抵抗。 
+		+1 豁免值每 %d 单位金币，最大 +%d (当前 +%d )。]]):
 		format(t.getGold(self, t), t.getMaxSaves(self, t), t.getSaves(self, t))
 	end,
 }
@@ -165,9 +165,9 @@ registerTalentTranslation{
 	name = "穿墙术",
 	info = function(self, t)
 		local range = t.getRange(self, t)
-		return ([[虽 然 矮 人 的 起 源 对 其 他 种 族 来 说 始 终 是 不 解 之 谜， 但 是 很 显 然 他 们 的 起 源 与 石 头 密 不 可 分。 
-		 你 可 以 指 定 任 何 一 堵 墙 并 立 刻 穿 过 它， 出 现 在 另 一 侧。 
-		 穿墙 距 离 最 大 %d 码（ 受 体 质 和 分 类 天 赋 等 级 影 响 有 额 外 加 成）]]):
+		return ([[虽然矮人的起源对其他种族来说始终是不解之谜，但是很显然他们的起源与石头密不可分。 
+		 你可以指定任何一堵墙并立刻穿过它，出现在另一侧。 
+		 穿墙距离最大 %d 码（受体质和分类天赋等级影响有额外加成）]]):
 		format(range)
 	end,
 }
@@ -177,8 +177,8 @@ registerTalentTranslation{
 	name = "小不点的幸运",
 	info = function(self, t)
 		local params = t.getParams(self, t)
-		return ([[召 唤 小 不 点 的 幸 运 和 机 智 来 提 高 你 %d%%  暴 击 率 和 %d  豁 免 5 回 合。 
-		 受 灵 巧 影 响， 此 效 果 有 额 外 增 益。]]):
+		return ([[召唤小不点的幸运和机智来提高你 %d%%  暴击率和 %d  豁免 5 回合。 
+		 受灵巧影响，此效果有额外增益。]]):
 		format(params.crit, params.save)
 	end,
 }
@@ -190,8 +190,8 @@ registerTalentTranslation{
 		local threshold = t.getThreshold(self, t)
 		local evasion = t.getEvasionChance(self, t)
 		local duration = t.getDuration(self, t)
-		return ([[半 身 人 强 大 的 人 品 在 关 键 时 刻 总 能 保 他们 一 命。 
-		每 当 一 次 攻 击 对 你 造 成 %d%% 生 命 值 或 更 多 伤 害 时，你 可 以 获 得 额 外 %d%% 闪 避 率 和 %d 点 闪 避（ 基 于 幸 运 和 其 他 闪 避 相 关 数 值 ）， 持 续 %d 回 合 。]]):
+		return ([[半身人强大的人品在关键时刻总能保他们一命。 
+		每当一次攻击对你造成 %d%% 生命值或更多伤害时，你可以获得额外 %d%% 闪避率和 %d 点闪避（基于幸运和其他闪避相关数值），持续 %d 回合。]]):
 		format(threshold * 100, evasion, t.getDefense(self), duration)
 	end,
 }
@@ -200,8 +200,8 @@ registerTalentTranslation{
 	id = "T_MILITANT_MIND",
 	name = "英勇",
 	info = function(self, t)
-		return ([[半 身 人 曾 是 一 个 有 组 织 纪 律 的 种 族， 敌 人 越 多 他 们 越 团 结。 
-		 如 果 有 2 个 或 多 个 敌 人 在 你 的 视 野 里， 每 个 敌 人 都 会 使 你 的 所 有 强 度 和 豁 免 提 高 %0.1f 。（ 最 多 5 个 敌 人）]]):
+		return ([[半身人曾是一个有组织纪律的种族，敌人越多他们越团结。 
+		 如果有 2 个或多个敌人在你的视野里，每个敌人都会使你的所有强度和豁免提高 %0.1f 。（最多 5 个敌人）]]):
 		 format(self:getTalentLevel(t) * 2)
 	end,
 }
@@ -212,9 +212,9 @@ registerTalentTranslation{
 	info = function(self, t)
 		local duration = t.getDuration(self, t)
 		local count = t.getRemoveCount(self, t)
-		return ([[半 身 人 以 骁 勇 善 战 闻 名 于 世， 他 们 曾 经 在 战 场 上 对 抗 其 他 种 族 上 千 年。 
-		 立 刻 移 除 2 种 震 慑、 眩 晕 和 定 身 状 态， 并 使 你 对 震 慑、 眩 晕 和 定 身 免 疫 %d 回 合。 
-		 使 用 此 技 能 不 消 耗 回 合。]]):format(duration, count)
+		return ([[半身人以骁勇善战闻名于世，他们曾经在战场上对抗其他种族上千年。 
+		 立刻移除 2 种震慑、眩晕和定身状态，并使你对震慑、眩晕和定身免疫 %d 回合。 
+		 使用此技能不消耗回合。]]):format(duration, count)
 	end,
 }
 
@@ -222,9 +222,9 @@ registerTalentTranslation{
 	id = "T_ORC_FURY",
 	name = "兽族之怒",
 	info = function(self, t)
-		return ([[激 活 你 对 杀 戮 和 破 坏 的 渴 望 ， 尤 其 是 当 你 孤 军 奋 战 之 时 。
-		 你 视 野 中 每 有 一 个 敌 人 ，增 加 所 有 伤 害 10 %% + %0.1f%%（ 最多5个敌人 ， %0.1f%% ） ， 持 续 3 回 合 。
-		 受 体 质 影 响， 增 益 有 额 外 加 成。]]):
+		return ([[激活你对杀戮和破坏的渴望，尤其是当你孤军奋战之时。
+		 你视野中每有一个敌人，增加所有伤害 10 %% + %0.1f%%（最多5个敌人， %0.1f%% ），持续 3 回合。
+		 受体质影响，增益有额外加成。]]):
 		format(t.getPower(self, t), 10 + t.getPower(self, t) * 5)
 	end,
 }
@@ -233,9 +233,9 @@ registerTalentTranslation{
 	id = "T_HOLD_THE_GROUND",
 	name = "兽族忍耐",
 	info = function(self, t)
-		return ([[其 他 种 族 对 兽 族 的 猎 杀 持 续 了 上 千 年， 不 管 是 否 正 义。 他 们 已 经 学 会 忍 受 那 些 会 摧 毁 弱 小 种 族 的 灾 难。 
-		当 你 的 生 命 值 降 低 到 50%% 以 下 ， 你 强 大 的 意 志 移 除 你 身 上 最 多 %d 个 精 神 状 态 （ 基 于 技 能 等 级 和 意 志 ） 。 该 效 果 每 12 回 合 最 多 触 发 一 次 。
-		额 外 增 加 %d 物 理 和 精 神 豁 免。]]):
+		return ([[其他种族对兽族的猎杀持续了上千年，不管是否正义。他们已经学会忍受那些会摧毁弱小种族的灾难。 
+		当你的生命值降低到 50%% 以下，你强大的意志移除你身上最多 %d 个精神状态（基于技能等级和意志）。该效果每 12 回合最多触发一次。
+		额外增加 %d 物理和精神豁免。]]):
 		format(t.getDebuff(self, t), t.getSaves(self, t))
 	end,
 }
@@ -244,10 +244,10 @@ registerTalentTranslation{
 	id = "T_SKIRMISHER",
 	name = "杀戮者",
 	info = function(self, t)
-		return ([[兽 人 们 经 历 了 许 多 次 战 争， 并 获 胜 了 许 多 次。 
-		你 陶 醉 于 杀 戮 你 的 敌 人 ， 每 次 杀 死 敌 人 你 将 获 得 %d%% 的 伤 害 抗 性 ， 持 续 2 回 合 。
-		增 加 的 抗 性 基 于 你 的 技 能 等 级 和 意 志 。
-		被 动 增 加 %d%% 所 有 伤 害 穿 透。]]):
+		return ([[兽人们经历了许多次战争，并获胜了许多次。 
+		你陶醉于杀戮你的敌人，每次杀死敌人你将获得 %d%% 的伤害抗性，持续 2 回合。
+		增加的抗性基于你的技能等级和意志。
+		被动增加 %d%% 所有伤害穿透。]]):
 		format(t.getResist(self, t), t.getPen(self, t))
 	end,
 }
@@ -256,9 +256,9 @@ registerTalentTranslation{
 	id = "T_PRIDE_OF_THE_ORCS",
 	name = "兽族荣耀",
 	info = function(self, t)
-		return ([[呼 唤 兽 族 荣 耀 来 和 敌 人 拼 搏 。 
-		 移 除 %d 个 负 面 状 态 并 治 疗 %d 生 命 值 。
-		 受 意 志 影 响， 治 疗 量 有 额 外 加 成。]]):
+		return ([[呼唤兽族荣耀来和敌人拼搏。 
+		 移除 %d 个负面状态并治疗 %d 生命值。
+		 受意志影响，治疗量有额外加成。]]):
 		format(t.remcount(self,t), t.heal(self, t))
 	end,
 }
@@ -267,10 +267,10 @@ registerTalentTranslation{
 	id = "T_YEEK_WILL",
 	name = "主导意志",
 	info = function(self, t)
-		return ([[粉 碎 目 标 的 意 志， 使 你 可 以 完 全 控 制 它 的 行 动 %s 回 合。（受你的意志值加成） 
-		 当 技 能 结 束 时， 你 的 意 志 会 脱 离 而 目 标 会 因 大 脑 崩 溃 而 死 亡。 
-		 稀 有 等 级 即 以 上 的 目 标 必 须 要 在 其 最 大 生 命 值 的 80%%以 下 才 能 被 控 制 ，在 持 续 时 间 内 不 会 受 到 伤 害 ，并 且 在 3 回 合 后 不 会 死 亡 ,而 会 脱 离 控 制 。
-		 这 一 效 果 无 法 被 豁 免 ，但 需 要 通 过 即 死 免 疫 。]]):format(t.getduration(self))
+		return ([[粉碎目标的意志，使你可以完全控制它的行动 %s 回合。（受你的意志值加成） 
+		 当技能结束时，你的意志会脱离而目标会因大脑崩溃而死亡。 
+		 稀有等级即以上的目标必须要在其最大生命值的 80%%以下才能被控制，在持续时间内不会受到伤害，并且在 3 回合后不会死亡 ,而会脱离控制。
+		 这一效果无法被豁免，但需要通过即死免疫。]]):format(t.getduration(self))
 	end,
 }
 
@@ -278,8 +278,8 @@ registerTalentTranslation{
 	id = "T_UNITY",
 	name = "强化思维",
 	info = function(self, t)
-		return ([[你 的 思 维 和 维网 变 的 更 加 协 调 并 且 增 强 对 负 面 效 果 的 抵 抗。 
-		 增 加 %d%% 混 乱 和 沉 默 抵 抗 并 增 加 你 +%d 点 精 神 豁 免。]]):
+		return ([[你的思维和维网变的更加协调并且增强对负面效果的抵抗。 
+		 增加 %d%% 混乱和沉默抵抗并增加你 +%d 点精神豁免。]]):
 		format(100*t.getImmune(self, t), t.getSave(self, t))
 	end,
 }
@@ -288,9 +288,9 @@ registerTalentTranslation{
 	id = "T_QUICKENED",
 	name = "迅捷",
 	info = function(self, t)
-		return ([[基 于 “ 维网 ”， 夺 心 魔 新 陈 代 谢 很 快， 思 维 很 快 并 且 献 祭 也 很 快。 
-		你 的 整 体 速 度增加 %0.1f%% 。
-		当 你 的 生 命 值 降 低 到 30%% 以 下 时 ，你 获 得 1.5 个 回 合 。 该 效 果 每 %d 回 合 最 多 触 发 一 次。]]):format(100*t.speedup(self, t), self:getTalentCooldown(t))
+		return ([[基于“维网”，夺心魔新陈代谢很快，思维很快并且献祭也很快。 
+		你的整体速度增加 %0.1f%% 。
+		当你的生命值降低到 30%% 以下时，你获得 1.5 个回合。该效果每 %d 回合最多触发一次。]]):format(100*t.speedup(self, t), self:getTalentCooldown(t))
 	end,
 }
 
@@ -299,10 +299,10 @@ registerTalentTranslation{
 	name = "快速支援",
 	info = function(self, t)
 		local base_stats = self:combatScale(self:getWil() * self:getTalentLevel(t), 25, 0, 125, 500, 0.75)
-		return ([[通 过 夺 心 魔 的 维网， 迅 速 召 集 帮 手。 
-		 在 你 周 围 召 唤 3 个 夺 心 魔 精 英 ，持 续 6 回 合。
-		 他 们 的 所 有 主 要 属 性 会 被 设 置 为 %d (基 于 你 的 意 志 值 和 技 能 等 级 ）
-		 你 的 伤 害 加 成 ，伤 害 穿 透 和 许 多 其 他 属 性 都 会 被 继 承 。]]):format(base_stats)
+		return ([[通过夺心魔的维网，迅速召集帮手。 
+		 在你周围召唤 3 个夺心魔精英，持续 6 回合。
+		 他们的所有主要属性会被设置为 %d (基于你的意志值和技能等级）
+		 你的伤害加成，伤害穿透和许多其他属性都会被继承。]]):format(base_stats)
 	end,
 }
 
@@ -310,7 +310,7 @@ registerTalentTranslation{
 	id = "T_YEEK_ID",
 	name = "维网的力量",
 	info = function(self, t)
-		return ([[你 将 精 神 与 维 网 链 接 ， 能 暂 时 获 得 你 们 一 族 所 有 的 知 识 ， 让 你 能 鉴 定 所 有 物 品。]])
+		return ([[你将精神与维网链接，能暂时获得你们一族所有的知识，让你能鉴定所有物品。]])
 	end,
 }
 
@@ -318,11 +318,11 @@ registerTalentTranslation{
 	id = "T_OGRE_WRATH",
 	name = "食人魔之怒",
 	info = function(self, t)
-		return ([[你 进 入 愤 怒 状 态 %d 回 合 ，获 得 20%% 震 慑 和 定 身 免 疫 ，全 体 伤 害 增 加 10%% 。
-		 同 时 ，每 当 你 使 用 符 文 或 纹 身 、攻 击 未 命 中 或 伤 害 被 护 盾 等 效 果 削 减 时 ，你 获 得 一 层 食 人 魔 之 怒 效 果 ，持 续 7 回 合 ，效 果 可 叠 加 至 最 多 5 层 。
-		 每 层 提 供 20%% 暴 击 伤 害 和 5%% 暴 击 率 。
-		 每 次 暴 击 时 减 少 一 层 食 人 魔 之 怒 效 果 。
-		 持 续 时 间 受 力 量 加 成 。]]):format(t.getduration(self))
+		return ([[你进入愤怒状态 %d 回合，获得 20%% 震慑和定身免疫，全体伤害增加 10%% 。
+		 同时，每当你使用符文或纹身、攻击未命中或伤害被护盾等效果削减时，你获得一层食人魔之怒效果，持续 7 回合，效果可叠加至最多 5 层。
+		 每层提供 20%% 暴击伤害和 5%% 暴击率。
+		 每次暴击时减少一层食人魔之怒效果。
+		 持续时间受力量加成。]]):format(t.getduration(self))
 	end,
 }
 
@@ -331,10 +331,10 @@ registerTalentTranslation{
 	id = "T_GRISLY_CONSTITUTION",
 	name = "强大体魄",
 	info = function(self, t)
-		return ([[食 人 魔 的 身 体 对 法 术 和 符 文 亲 和 力 很 强 。
-		 增 加 %d 法 术 豁 免 ，增 加 纹 身 和 符 文 的 属 性 加 成 效 果 %d%% 。
-		 技 能 等 级 5 时 ，你 的 身 体 变 得 如 此 强 壮 ，能 在 主 手 持 有 双 手 武 器 的 同 时 ，副 手 持 有 其 他 副 手 武 器 。
-		 这 样 做 的 话 ，你 的 命中、物 理、 法 术、 精 神 强 度 会 下 降 20%% ，体 型 超 过 'Big'时 ，每 增 加 一 体 型 ，惩 罚 减 少 5%% 。同 时 你 的 武 器 附 加 伤 害 减 少 50%% 。]]):
+		return ([[食人魔的身体对法术和符文亲和力很强。
+		 增加 %d 法术豁免，增加纹身和符文的属性加成效果 %d%% 。
+		 技能等级 5 时，你的身体变得如此强壮，能在主手持有双手武器的同时，副手持有其他副手武器。
+		 这样做的话，你的命中、物理、法术、精神强度会下降 20%% ，体型超过 'Big'时，每增加一体型，惩罚减少 5%% 。同时你的武器附加伤害减少 50%% 。]]):
 		format(t.getSave(self, t), t.getMult(self, t) * 100)
 	end,
 }
@@ -343,8 +343,8 @@ registerTalentTranslation{
 	id = "T_SCAR_SCRIPTED_FLESH",
 	name = "血肉伤痕",
 	info = function(self, t)
-		return ([[每 次 暴 击 时 有 %d%% 几 率 减 少 随 机 一 个 纹 身 或 符 文 1 回 合 冷 却 时 间 ，或 减 少 符 文 紊 乱 或 纹 身 紊 乱 1 回 合 持 续 时 间 。
-		 该 效 果 每 回 合 最 多 触 发 一 次 。]]):
+		return ([[每次暴击时有 %d%% 几率减少随机一个纹身或符文 1 回合冷却时间，或减少符文紊乱或纹身紊乱 1 回合持续时间。
+		 该效果每回合最多触发一次。]]):
 		format(t.getChance(self, t))
 	end,
 }
@@ -353,9 +353,9 @@ registerTalentTranslation{
 	id = "T_WRIT_LARGE",
 	name = "符文亲和",
 	info = function(self, t)
-		return ([[立 刻 解 除 纹 身 紊 乱 和 符 文 紊 乱 。
-		 接 下 来 %d 回 合 内 ，你 的 纹 身 和 符 文 冷 却 速 度 加 倍 。
-		 技 能 等 级 5 时 ，你 能 解 锁 一 个 新 的 纹 身 位  。]]):
+		return ([[立刻解除纹身紊乱和符文紊乱。
+		 接下来 %d 回合内，你的纹身和符文冷却速度加倍。
+		 技能等级 5 时，你能解锁一个新的纹身位  。]]):
 		format(t.getDuration(self, t))
 	end,
 }

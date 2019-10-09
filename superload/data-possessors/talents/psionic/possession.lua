@@ -2,10 +2,10 @@ local _M = loadPrevious(...)
 for i = 1, 8 do
 registerTalentTranslation{
 	id = "T_POSSESSION_TALENT_"..i,
-	name = "所 有 物 技 能"..i,
+	name = "所有物技能"..i,
 	info = function (self,t)
-			return ([[附 身 时 ，该 技 能 会 被 替 换 成 身 体 的 其 中 一 个 技 能 。
-			该 技 能 的 唯 一 用 法 是 放 在 热 键 栏 上 。]]):
+			return ([[附身时，该技能会被替换成身体的其中一个技能。
+			该技能的唯一用法是放在热键栏上。]]):
 			format()
 		end,
 	}
@@ -28,7 +28,7 @@ end
 
 registerTalentTranslation{
 	id = "T_DESTROY_BODY",
-	name = "摧 毁 身 体",
+	name = "摧毁身体",
 	on_pre_use = function(self, t, silent) if #self.bodies_storage == 0 then if not silent then game.logPlayer(self, "You have no stored bodies to delete.") end return false end return true end,
 	action = function(self, t)
 		package.loaded['mod.dialogs.AssumeForm'] = nil
@@ -36,32 +36,32 @@ registerTalentTranslation{
 		return true
 	end,
 	info = function(self, t)
-		return ([[从 你 的 灵 能 仓 库 中 丢 弃 身 体 。
-		拥 有 的 身 体 :
+		return ([[从你的灵能仓库中丢弃身体。
+		拥有的身体 :
 		%s]]):
 		format(bodies_desc(self))
 	end,
 }
 registerTalentTranslation{
 	id = "T_ASSUME_FORM",
-	name = "附 身",
+	name = "附身",
 	info = function (self,t)
-		return ([[选 择 一 个 身 体 ，附 身 。
-		以 这 种 方 式 使 用 的 身 体 可 能 不 会 被 任 何 方 式 治 愈 。
-		你 可 以 随 时 通 过 再 次 使 用 这 个 技 能 来 选 择 退 出 身 体 ，将 其 恢 复 原 状 ，包 括 任 何 物 理 效 果 。精 神 , 魔 法 和 “ 其 他 ” 效 果 仍 然 对 你 有 效 。
-		当 生 命 为 0 时 被 迫 离 开 身 体 ，冲 击 对 你 最 大 血 量 造 成 %d%% 的 损 失 并 减 少 50%% 移 动 速 度 和 60%% 伤 害 持 续 6 回 合 。
-		技 能 冷 却 仅 在 恢 复 正 常 形 式 时 开 始 冷 却 。
-		附 身 时 仍 会 获 得 经 验 ，但 不 会 被 应 用 ，直 到 你 离 开 身 体 。
-		附 身 时 你 无 法 更 换 装 备 。
-		冷 却 时 间 随 主 宰 技 能 等 级 提 高 。
-		拥 有 的 身 体 :
+		return ([[选择一个身体，附身。
+		以这种方式使用的身体可能不会被任何方式治愈。
+		你可以随时通过再次使用这个技能来选择退出身体，将其恢复原状，包括任何物理效果。精神 , 魔法和“其他”效果仍然对你有效。
+		当生命为 0 时被迫离开身体，冲击对你最大血量造成 %d%% 的损失并减少 50%% 移动速度和 60%% 伤害持续 6 回合。
+		技能冷却仅在恢复正常形式时开始冷却。
+		附身时仍会获得经验，但不会被应用，直到你离开身体。
+		附身时你无法更换装备。
+		冷却时间随主宰技能等级提高。
+		拥有的身体 :
 		%s]]):
 		format(self:callTalent(self.T_POSSESS, "getShock"), bodies_desc(self))
 	end,
 }
 registerTalentTranslation{
 	id = "T_POSSESS",
-	name = "主 宰",
+	name = "主宰",
 	info = function (self,t)
 		local fake = {rank=2}
 		local rt0, rc0 = self.TextRank(fake)
@@ -72,18 +72,18 @@ registerTalentTranslation{
 		rc3 = rc3:gsub("elite","精英")
 		rc5 = rc5:gsub("unique","史诗")
 		rc7 = rc7:gsub("boss","Boss")
-		return ([[你 对 目 标 投 掷 一 个 持 续 %d 回 合 的 灵 能 网 。每 回 合 造 成 %0.2f 精 神 伤 害 。
-		如 果 目 标 在 持 续 时 间 内 死 亡 ， 你 会 获 得 它 的 身 体 并 放 入 你 的 灵 能 仓 库 中 。
-		在 任 何 时 候 ，你 可 以 使 用 附 身 技 能 暂 时 脱 离 你 的 身 体 进 入 新 的 身 体 ，继 承 其 优 势 和 弱 点 。
-		灵 能 仓 库 有 位 置 时 才 能 使 用 该 技 能 。
+		return ([[你对目标投掷一个持续 %d 回合的灵能网。每回合造成 %0.2f 精神伤害。
+		如果目标在持续时间内死亡，你会获得它的身体并放入你的灵能仓库中。
+		在任何时候，你可以使用附身技能暂时脱离你的身体进入新的身体，继承其优势和弱点。
+		灵能仓库有位置时才能使用该技能。
 
-		你 可 以 偷 取 以 下 阶 级 生 物 的 身 体 %s%s#LAST# 或 者 更 低。
-		等 级 3 时 最 多 可 偷 取 %s%s#LAST#.
-		等 级 5 时 最 多 可 偷 取 %s%s#LAST#.
-		等 级 7 时 最 多 可 偷 取 %s%s#LAST#.
+		你可以偷取以下阶级生物的身体 %s%s#LAST# 或者更低。
+		等级 3 时最多可偷取 %s%s#LAST#.
+		等级 5 时最多可偷取 %s%s#LAST#.
+		等级 7 时最多可偷取 %s%s#LAST#.
 
-		你 可 能 只 会 偷 走 以 下 类 型 的 生 物 的 尸 体 : #LIGHT_BLUE#%s#LAST#
-		当 你 尝 试 拥 有 不 同 类 型 的 生 物 时 ，你 可 以 永 久 学 习 此 类 型 ，你 还 可 以 执 行 %d 次 。]]):
+		你可能只会偷走以下类型的生物的尸体 : #LIGHT_BLUE#%s#LAST#
+		当你尝试拥有不同类型的生物时，你可以永久学习此类型，你还可以执行 %d 次。]]):
 		format(
 			t.getDur(self, t), damDesc(self, DamageType.MIND, t.getDamage(self, t)),
 			rc0, rt0, rc3, rt3, rc5, rt5, rc7, rt7,
@@ -93,32 +93,32 @@ registerTalentTranslation{
 }
 registerTalentTranslation{
 	id = "T_SELF_PERSISTENCE",
-	name = "自 我 坚 持",
+	name = "自我坚持",
 	info = function (self,t)
-		return ([[当 你 附 身 时 ，你 还 可 以 保 留 自 己 身 体 的 属 性 %d%% 。 (闪 避, 暴 击, 强 度, 豁 免, ...)]]):
+		return ([[当你附身时，你还可以保留自己身体的属性 %d%% 。 (闪避, 暴击, 强度, 豁免, ...)]]):
 		format(100 - t.getPossessScale(self, t))
 	end,
 }
 registerTalentTranslation{
 	id = "T_IMPROVED_FORM",
-	name = "身 体 改 进",
+	name = "身体改进",
 	info = function (self,t)
-		return ([[当 你 附 身 时 ，你 获 得 身 体 %d%% 的 数 值 (闪 避, 暴 击, 强 度, 豁 免, ...)。
-		此 外 ，从 身 体 获 得 的 技 能 等 级 最 高 为 %0.1f.]]):
+		return ([[当你附身时，你获得身体 %d%% 的数值 (闪避, 暴击, 强度, 豁免, ...)。
+		此外，从身体获得的技能等级最高为 %0.1f.]]):
 		format(t.getPossessScale(self, t), t.getMaxTalentsLevel(self, t))
 	end,
 }
 registerTalentTranslation{
 	id = "T_FULL_CONTROL",
-	name = "完 全 控 制",
+	name = "完全控制",
 	info = function (self,t)
-		return ([[附 身 时 ，可 更 好 的 控 制 身 体 :
-		- 在 等 级 1 时 ，可 额 外 获 得 一 个 技 能 位
-		- 在 等 级 2 时 ，可 额 外 获 得 一 个 技 能 位
-		- 在 等 级 3 时 ，可 获 得 抗 性 和 固 定 减 伤
-		- 在 等 级 4 时 ，可 额 外 获 得 一 个 技 能 位
-		- 在 等 级 5 时 ，可 获 得 得 所 有 速 度 （只 有 当 他 们 优 于 你 时）
-		- 在 等 级 6 以 上 时 ，可 额 外 获 得 一 个 技 能 位
+		return ([[附身时，可更好的控制身体 :
+		- 在等级 1 时，可额外获得一个技能位
+		- 在等级 2 时，可额外获得一个技能位
+		- 在等级 3 时，可获得抗性和固定减伤
+		- 在等级 4 时，可额外获得一个技能位
+		- 在等级 5 时，可获得得所有速度（只有当他们优于你时）
+		- 在等级 6 以上时，可额外获得一个技能位
 		]]):
 		format(t.getNbTalents(self, t))
 	end,

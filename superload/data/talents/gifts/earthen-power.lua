@@ -7,9 +7,9 @@ registerTalentTranslation{
 		local m, mm, e, em = t.getValues(self, t)
 		local damage = t.getDamage(self, t)
 		local inc = t.getPercentInc(self, t)
-		return ([[每 回 合 第 一 次 承 受 伤 害 时 ， 你 将 %d%% 的 伤 害 转 化 为 法 力 ( 至 多 %0.2f 点 ) ， %d%% 的 伤 害 转 化 为 失 衡 值 ( 至 多 回 复 %0.2f )。
-		增 加 物 理 强 度 %d , 增 加 盾 牌 伤 害 %d%% , 并 让 你 能 够 双 持 盾 牌 。
-		同 时 ， 你 的 近 战 攻 击 附 带 一 次 盾 牌 攻 击 。]]):format(100 * m, mm, 100 * e, em, damage, inc*100)
+		return ([[每回合第一次承受伤害时，你将 %d%% 的伤害转化为法力 ( 至多 %0.2f 点 ) ， %d%% 的伤害转化为失衡值 ( 至多回复 %0.2f )。
+		增加物理强度 %d , 增加盾牌伤害 %d%% , 并让你能够双持盾牌。
+		同时，你的近战攻击附带一次盾牌攻击。]]):format(100 * m, mm, 100 * e, em, damage, inc*100)
 	end,
 }
 
@@ -17,8 +17,8 @@ registerTalentTranslation{
 	id = "T_STONE_FORTRESS",
 	name = "岩石壁垒",
 	info = function(self, t)
-		return ([[当 你 使 用 钢 筋 铁 骨 时 ， 你 的 皮 肤 会 变 得 非 常 坚 硬 ， 甚 至 能 吸 收 非 物 理 攻 击。
-		所 有 非 物 理 伤 害 减 免 %d%% 护 甲 值 （ 无 视 护 甲 硬 度 ）。]]):
+		return ([[当你使用钢筋铁骨时，你的皮肤会变得非常坚硬，甚至能吸收非物理攻击。
+		所有非物理伤害减免 %d%% 护甲值（无视护甲硬度）。]]):
 		format(t.getPercent(self, t))
 	end,
 }
@@ -27,9 +27,9 @@ registerTalentTranslation{
 	id = "T_SHARDS",
 	name = "岩石碎片",
 	info = function(self, t)
-		return ([[尖 锐 的 岩 石 碎 片 从 盾 牌 生 长 出 来。
-		每 次 你 承 受 近 战 攻 击 时 ， 你 能 利 用 这 些 碎 片 反 击 攻 击 者 ， 造 成 %d%% 自 然 伤 害 。
-		每 回 合 只 能 反 击 一 次 。]]):
+		return ([[尖锐的岩石碎片从盾牌生长出来。
+		每次你承受近战攻击时，你能利用这些碎片反击攻击者，造成 %d%% 自然伤害。
+		每回合只能反击一次。]]):
 		format(self:combatTalentWeaponDamage(t, 0.4, 1) * 100)
 	end,
 }
@@ -40,11 +40,11 @@ registerTalentTranslation{
 	info = function(self, t)
 		local power = t.getPower(self, t)
 		local radius = self:getTalentRadius(t)
-		return ([[制 造 一 层 持 续 7 回 合 的 岩 石 护 盾 ， 吸 收 至 多 %d 点 伤 害。
-		你 的 失 衡 值 将 会 上 升 两 倍 伤 害 吸 收 量。 
-		护 盾 破 碎 时 ， 所 有 超 过 最 小 值 的 失 衡 值 将 被 转 化 为 法 力 ， 同 时 释 放 奥 术 能 量 风 暴 , 造 成 等 同 于 转 化 失 衡 值 的 奥 术 伤 害 （ 至 多 %d 点 ） ， 伤 害 半 径 %d 。
-		同 时 ， 你 休 息 时 获 得 每 回 合 %0.2f 回 魔 速 度。
-		护 盾 值 受 法 术 强 度 加 成 。]]):format(power, t.maxDamage(self, t), radius, t.manaRegen(self, t))
+		return ([[制造一层持续 7 回合的岩石护盾，吸收至多 %d 点伤害。
+		你的失衡值将会上升两倍伤害吸收量。 
+		护盾破碎时，所有超过最小值的失衡值将被转化为法力，同时释放奥术能量风暴 , 造成等同于转化失衡值的奥术伤害（至多 %d 点），伤害半径 %d 。
+		同时，你休息时获得每回合 %0.2f 回魔速度。
+		护盾值受法术强度加成。]]):format(power, t.maxDamage(self, t), radius, t.manaRegen(self, t))
 	end,
 }
 

@@ -4,7 +4,7 @@ registerTalentTranslation{
 	id = "T_BLOOD_RED_MOON",
 	name = "血月唤醒",
 	info = function(self, t)
-		return ([[增 加 你 %d%% 法 术 暴 击 率。]]):
+		return ([[增加你 %d%% 法术暴击率。]]):
 		format(t.getCrit(self, t))
 	end,
 }
@@ -16,8 +16,8 @@ registerTalentTranslation{
 		local duration = t.getDuration(self, t)
 		local penetration = t.getResistancePenetration(self, t)
 		local cooldownreduction = t.getCooldownReduction(self, t)
-		return ([[增 加 %d%% 光 系 和 暗 影 系 抵 抗 穿 透， 持 续 %d 回 合。 同 时， 减 少 你 所 有 天 空 系 技 能 冷 却 时 间 %d 回 合 至 冷 却。 
-		 受 灵 巧 影 响， 抵 抗 穿 透 有 额 外 加 成。]]):
+		return ([[增加 %d%% 光系和暗影系抵抗穿透，持续 %d 回合。同时，减少你所有天空系技能冷却时间 %d 回合至冷却。 
+		 受灵巧影响，抵抗穿透有额外加成。]]):
 		format(penetration, duration, cooldownreduction)
 	end,
 }
@@ -29,10 +29,10 @@ registerTalentTranslation{
 		local targetcount = t.getTargetCount(self, t)
 		local lightdamage = t.getLightDamage(self, t)
 		local darknessdamage = t.getDarknessDamage(self, t)
-		return ([[每 当 你 的 法 术 打 出 暴 击 时， 你 会 对 %d 码 内 %d 个 目 标 发 射 一 颗 光 球 或 暗 影 球， 造 成 %0.2f 光 系 或 %0.2f 暗 影 伤 害。 
-		 每 个 球 都 会 消 耗 2 点 正 能 量 或 负 能 量， 当 你 的 正 能 量 或 负 能 量 低 于 2 时 不 会 触 发。 
-		 受 法 术 强 度 影 响， 伤 害 按 比 例 加 成。
-		 该 法 术 造 成 的 伤 害 不 能 暴 击 。]]):
+		return ([[每当你的法术打出暴击时，你会对 %d 码内 %d 个目标发射一颗光球或暗影球，造成 %0.2f 光系或 %0.2f 暗影伤害。 
+		 每个球都会消耗 2 点正能量或负能量，当你的正能量或负能量低于 2 时不会触发。 
+		 受法术强度影响，伤害按比例加成。
+		 该法术造成的伤害不能暴击。]]):
 		format(self:getTalentRange(t), targetcount, damDesc(self, DamageType.LIGHT, lightdamage), damDesc(self, DamageType.DARKNESS, darknessdamage))
 	end,
 }
@@ -45,7 +45,7 @@ registerTalentTranslation{
 		local dotDam = t.getDotDamage(self, t)
 		local conversion = t.getConversion(self, t)
 		local duration = t.getDuration(self, t)
-		return ([[用 无 尽 黑 暗 包 围 半 径 %d 范 围 内 的 所 有 敌 人 ， 每 回 合 对 其 造 成 %0.2f 光 系 和 %0.2f 暗 影 伤 害 ， 并 将 它 们 所 造 成 的 伤 害 的 %d%% 转 化 为 光 系 和 暗 影 伤 害 ， 持 续 %d 回 合 。]]):format(radius, damDesc(self, DamageType.LIGHT, dotDam), damDesc(self, DamageType.DARKNESS, dotDam), conversion*100, duration)
+		return ([[用无尽黑暗包围半径 %d 范围内的所有敌人，每回合对其造成 %0.2f 光系和 %0.2f 暗影伤害，并将它们所造成的伤害的 %d%% 转化为光系和暗影伤害，持续 %d 回合。]]):format(radius, damDesc(self, DamageType.LIGHT, dotDam), damDesc(self, DamageType.DARKNESS, dotDam), conversion*100, duration)
 	end,
 }
 

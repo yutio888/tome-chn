@@ -12,7 +12,7 @@ registerTalentTranslation{
 	name = "紧急药物处理",
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[该 药 物 注 射 器 注 射 药 物 效 率 为 %d%% ，冷 却 时 间 修 正 为 %d%% 。]])
+		return ([[该药物注射器注射药物效率为 %d%% ，冷却时间修正为 %d%% 。]])
 		:format(data.power + data.inc_stat, data.cooldown_mod)
 	end,}
 
@@ -21,7 +21,7 @@ registerTalentTranslation{
 	name = "生命支持系统",
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[生 命 支 持 系 统 允 许 使 用 药 物 效 率 为 %d%% ，冷 却 时 间 修 正 为 %d%% 。]])
+		return ([[生命支持系统允许使用药物效率为 %d%% ，冷却时间修正为 %d%% 。]])
 		:format(data.power + data.inc_stat, data.cooldown_mod)
 	end,}
 
@@ -36,7 +36,7 @@ registerTalentTranslation{
 	id = "T_TINKER_WEAPON_AUTOMATON_1H",
 	name = "武装机器人：单手模式",
 	info = function(self, t)
-		return ([[部 署 一 个 装 备 单 手 武 器 的 武 装 机 器 人 。武 装 机 器 人 将 自 动 选 择 武 器 ,武 器 不 会 掉 落 。选 中 时 ,武 装 机 器 人 将 自 动 匹 配 技 能 等 级 ,你 的 状 态 和 其 他 数 据 都 会 被 描 述 。	  
+		return ([[部署一个装备单手武器的武装机器人。武装机器人将自动选择武器 ,武器不会掉落。选中时 ,武装机器人将自动匹配技能等级 ,你的状态和其他数据都会被描述。	  
 		]]):format()
 	end,}
 
@@ -44,7 +44,7 @@ registerTalentTranslation{
 	id = "T_TINKER_HAND_CANNON",
 	name = "手炮",
 	info = function(self, t)
-		return ([[向 在 %d  码 范 围 内 的 一 个 敌 人 开 火 造 成 %d%% 的 武 器 伤 害 。如 果 手 炮 是 由 沃 瑞 坦 钢 制 作 的 ，你 能 多 一 次 额 外 的 射 击 。射 击 是 远 程 攻 击 将 会 触 发 弹 药 特 效 。
+		return ([[向在 %d  码范围内的一个敌人开火造成 %d%% 的武器伤害。如果手炮是由沃瑞坦钢制作的，你能多一次额外的射击。射击是远程攻击将会触发弹药特效。
 ]]):
 		format(self:getTalentRange(t), t.getDamage(self, t)*100)
 	end,}
@@ -53,9 +53,9 @@ registerTalentTranslation{
 	id = "T_TINKER_FATAL_ATTRACTOR",
 	name = "致命诱饵",
 	info = function(self, t)
-		return ([[快 速 创 建 一 个 灵 能 增 强 金 属 诱 饵 ，引 诱 敌 人 反 弹 %d%%  攻 击 者 的 伤 害 。
-诱 饵 有 %d 生 命 值 ，持 续 5 回 合 。
-伤 害 、生 命 值 、抗 性 和 护 甲 值 取 决 于 你 的 蒸 汽 强 度 。
+		return ([[快速创建一个灵能增强金属诱饵，引诱敌人反弹 %d%%  攻击者的伤害。
+诱饵有 %d 生命值，持续 5 回合。
+伤害、生命值、抗性和护甲值取决于你的蒸汽强度。
 ]]):
 		format(t.getReflection(self, t), t.getHP(self, t))
 	end,}
@@ -64,10 +64,10 @@ registerTalentTranslation{
 	id = "T_TINKER_ROCKET_BOOTS",
 	name = "火箭靴", 
 	info = function(self, t)
-		return ([[激 活 火 箭 靴 ，从 你 的 靴 子 上 发 射 巨 大 的 火 焰 ，增 加 你 的 移 动 速 度 %d%%。
-每 次 移 动 都 会 留 下 一 道 火 焰 持 续 4 回 合 的 伤 害 为  %0.2f  的 火 焰 。
-做 任 何 其 他 行 动 都 会 打 断 效 果 。
-#{italic}#烧 毁 他 们 !#{normal}#]]):
+		return ([[激活火箭靴，从你的靴子上发射巨大的火焰，增加你的移动速度 %d%%。
+每次移动都会留下一道火焰持续 4 回合的伤害为  %0.2f  的火焰。
+做任何其他行动都会打断效果。
+#{italic}#烧毁他们 !#{normal}#]]):
 		format(100 * (0.5 + self:getTalentLevel(t) / 2), damDesc(self, DamageType.FIRE, t.getDam(self, t)))
 	end,}
 
@@ -75,9 +75,9 @@ registerTalentTranslation{
 	id = "T_TINKER_IRON_GRIP",
 	name = "铁腕", 
 	info = function(self, t)
-		return ([[激 活 活 塞 碾 压 你 的 目 标 在 %d  回 合 内 造 成  %d%%  的 徒 手 伤 害 .
-同 时 目 标 被 定 身 而 且 他 的 护 甲 和 闪 避 减 少  %d  。
-#{italic}#压 碎 他 们 的 骨 头 !#{normal}#]]):
+		return ([[激活活塞碾压你的目标在 %d  回合内造成  %d%%  的徒手伤害 .
+同时目标被定身而且他的护甲和闪避减少  %d  。
+#{italic}#压碎他们的骨头 !#{normal}#]]):
 		format(t.getDur(self, t), self:combatTalentWeaponDamage(t, 1.2, 2.1) * 100, t.getReduc(self, t))
 	end,}
 
@@ -85,7 +85,7 @@ registerTalentTranslation{
 	id = "T_TINKER_SPRING_GRAPPLE",
 	name = "弹簧飞爪",
 	info = function(self, t)
-		return ([[抓 住 目 标 把 目 标 向 你 拉 拢 ，造 成 %d%%  的 徒 手 伤 害 ，如 果 命 中 ，目 标 定 身  %d  回 合 。
+		return ([[抓住目标把目标向你拉拢，造成 %d%%  的徒手伤害，如果命中，目标定身  %d  回合。
 ]]):
 		format(self:combatTalentWeaponDamage(t, 0.8, 1.8) * 100, t.getDur(self, t))
 	end,}
@@ -94,12 +94,12 @@ registerTalentTranslation{
 	id = "T_TINKER_TOXIC_CANNISTER_LAUNCHER",
 	name = "毒罐发射装置", 
 	info = function(self, t)
-		return ([[发 射 一 个 充 满 有 毒 气 体 的 罐 子 。
-每 2 回 合 在 此 周 围 发 出 一 个 半 径 为 3 码 的 毒 雾 。
-毒 雾 在 5 回 合 内 造 成 %0.2f 的 自 然 伤 害 。
-发 生 器 有 %d  点 生 命 值 持 续 8 回 合 。当 它 被 摧 毁 或 持 续 时 间 结 束 会 发 出 最 后 一 片 毒 雾 。
-伤 害 ，生 命 值 ，抗 性 和 护 甲 值 取 决 于 你 的 蒸 汽 强 度 。
-从 创 造 者 处 继 承 伤 害 和 穿 透 。]]):
+		return ([[发射一个充满有毒气体的罐子。
+每 2 回合在此周围发出一个半径为 3 码的毒雾。
+毒雾在 5 回合内造成 %0.2f 的自然伤害。
+发生器有 %d  点生命值持续 8 回合。当它被摧毁或持续时间结束会发出最后一片毒雾。
+伤害，生命值，抗性和护甲值取决于你的蒸汽强度。
+从创造者处继承伤害和穿透。]]):
 		format(damDesc(self, DamageType.NATURE, t.getDam(self, t)), t.getHP(self, t))
 	end,}
 
@@ -107,11 +107,11 @@ registerTalentTranslation{
 	id = "T_TINKER_POWERED_ARMOUR",
 	name = "蒸汽动力装甲",
 	info = function(self, t)
-		return ([[激 活 盔 甲 的 主 动 防 御 系 统 。
-　 　 你 的 盔 甲 被 电 流 的 覆 盖 。他 会 减 弱 的 对 你 的 物 理 攻 击 。
-     除 了 精 神 伤 害 所 有 伤 害 直 接 减 少  %d  点 。
-     盔 甲 有 时 会 漏 电 ，每 回 合 有  50%%  的 几 率 电 击 周 围 1 码 范 围 内 的 目 标 ，造 成  %0.2f  到  %0.2f  点 闪 电 伤 害 。
-    效 果 随 蒸 汽 强 度 增 加 。]]):
+		return ([[激活盔甲的主动防御系统。
+　　你的盔甲被电流的覆盖。他会减弱的对你的物理攻击。
+     除了精神伤害所有伤害直接减少  %d  点。
+     盔甲有时会漏电，每回合有  50%%  的几率电击周围 1 码范围内的目标，造成  %0.2f  到  %0.2f  点闪电伤害。
+    效果随蒸汽强度增加。]]):
 		format(t.getRes(self, t), t.getDam(self, t) / 3, t.getDam(self, t))
 	end,}
 
@@ -119,16 +119,16 @@ registerTalentTranslation{
 	id = "T_TINKER_VIRAL_NEEDLEGUN",
 	name = "病毒针枪",
 	info = function(self, t)
-		return ([[你 射 出 一 片 枯 萎 的 针 ，打 击  %d  码 锥 形 范 围 内 的 目 标 ，造 成 %0.2f  的 物 理 伤 害 。
-每 个 命 中 目 标 都 有 %d%%  几 率 感 染 一 种 随 机 疾 病 ，造 成 %0.2f  枯 萎 伤 害 同 时 降 低 体 质 ，力 量 或 敏 捷 %d 点 持 续 20 回 合 。
-		伤 害 和 疾 病 效 果 随 蒸 汽 强 度 增 加 ]]):format(self:getTalentRadius(t), damDesc(self, DamageType.PHYSICAL, t.damage(self, t)), t.diseaseChance(self, t), damDesc(self, DamageType.BLIGHT, t.diseaseDamage(self, t)), t.diseaseStat(self, t))
+		return ([[你射出一片枯萎的针，打击  %d  码锥形范围内的目标，造成 %0.2f  的物理伤害。
+每个命中目标都有 %d%%  几率感染一种随机疾病，造成 %0.2f  枯萎伤害同时降低体质，力量或敏捷 %d 点持续 20 回合。
+		伤害和疾病效果随蒸汽强度增加 ]]):format(self:getTalentRadius(t), damDesc(self, DamageType.PHYSICAL, t.damage(self, t)), t.diseaseChance(self, t), damDesc(self, DamageType.BLIGHT, t.diseaseDamage(self, t)), t.diseaseStat(self, t))
 	end,}
 
 registerTalentTranslation{
 	id = "T_TINKER_SAND_SHREDDER",
 	name = "砂土粉碎",
 	info = function(self, t)
-		return ([[你 分 解 砂 土 墙 。嘣 ~~~]])
+		return ([[你分解砂土墙。嘣 ~~~]])
 	end,}
 
 registerTalentTranslation{
@@ -137,8 +137,8 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local radius = self:getTalentRadius(t)
-		return ([[喷 出 一 片 锥 形 半 径 为  %d  的 火 焰 
-　 　 伤 害 随 蒸 汽 强 度 增 加 。]]):
+		return ([[喷出一片锥形半径为  %d  的火焰 
+　　伤害随蒸汽强度增加。]]):
 		format(radius, damDesc(self, DamageType.FIRE, damage))
 	end,}
 
@@ -148,8 +148,8 @@ registerTalentTranslation{
 	info = function(self, t)
 		local heal = t.getHeal(self, t)
 		local radius = self:getTalentRadius(t)
-		return ([[释 放 一 片 锥 形 半 径  %d  码 的 修 理 器 ,修 复 机 械 生 物 (蒸 汽 蜘 蛛 ) %d  生 命 值 。
-　 　 治 疗 量 随 蒸 汽 强 度 增 加 。]]):
+		return ([[释放一片锥形半径  %d  码的修理器 ,修复机械生物 (蒸汽蜘蛛 ) %d  生命值。
+　　治疗量随蒸汽强度增加。]]):
 		format(radius, heal)
 --		format(radius, damDesc(self, DamageType.FIRE, damage))
 	end,}
@@ -159,8 +159,8 @@ registerTalentTranslation{
 	name = "奥术干扰波 ",
 	info = function(self, t)
 		local rad = self:getTalentRadius(t)
-		return ([[制 造 一 场 奥 术 干 扰 波 ，沉 默  %d  码 范 围 内 受 影 响 的 目 标 %d 回 合 ，包 括 使 用 者 。
-沉 默 几 率 随 蒸 汽 强 度 增 加 。]]):
+		return ([[制造一场奥术干扰波，沉默  %d  码范围内受影响的目标 %d 回合，包括使用者。
+沉默几率随蒸汽强度增加。]]):
 		format(rad,t.getduration(self,t))
 	end,}
 
@@ -168,9 +168,9 @@ registerTalentTranslation{
 	id = "T_TINKER_YEEK_WILL",
 	name = "精神碾压",
 	info = function(self, t)
-		return ([[粉 碎 你 的 受 害 者 的 内 心 ,给 你 完 全 控 制 其 行 为 6 回 合 。
-　 　 当 效 果 结 束 时 ,你 抽 出 了 自 己 的 思 维 ，受 害 者 的 身 体 会 崩 溃 , 死 亡。
-　 　 稀 有 怪 、boss 、亡 灵 不 受 控 制 。
+		return ([[粉碎你的受害者的内心 ,给你完全控制其行为 6 回合。
+　　当效果结束时 ,你抽出了自己的思维，受害者的身体会崩溃 , 死亡。
+　　稀有怪、boss 、亡灵不受控制。
 		]]):format()
 	end,}
 
@@ -178,37 +178,37 @@ registerTalentTranslation{
 	id = "T_TINKER_SHOCKING_TOUCH",
 	name = "电击之触",
 	info = function(self, t)
-		return ([[接 触 生 物 释 放 电 流 ,造 成 %0.2f 闪 电 伤 害 。
-如 果 这 个 插 件 材 质 大 于 1 级 ,电 弧 可 以 传 递 到 2 码 范 围 内 的 另 一 个 目 标 。
-触 电 的 敌 人 数 目 不 会 大 于 插 件 材 质 等 级 。
-伤 害 随 蒸 汽 强 度 增 加 。]]):format(damDesc(self, DamageType.LIGHTNING, t.getDamage(self, t)))
+		return ([[接触生物释放电流 ,造成 %0.2f 闪电伤害。
+如果这个插件材质大于 1 级 ,电弧可以传递到 2 码范围内的另一个目标。
+触电的敌人数目不会大于插件材质等级。
+伤害随蒸汽强度增加。]]):format(damDesc(self, DamageType.LIGHTNING, t.getDamage(self, t)))
 	end,}
 
 registerTalentTranslation{
 	id = "T_TINKER_FLASH_POWDER",
 	name = "闪光粉",
 	info = function(self, t)
-		return ([[扔 一 把 尘 土 ,迅 速 氧 化 ,释 放 出 眩 目 的 光 芒 。
-　 　致 盲 锥 形 半 径 %d 码 内 的 生 物 %d  回 合 。
-     致 盲 强 度 随 蒸 汽 强 度 增 加 。]]):format(self:getTalentRadius(t), t.duration(self, t))
+		return ([[扔一把尘土 ,迅速氧化 ,释放出眩目的光芒。
+　　致盲锥形半径 %d 码内的生物 %d  回合。
+     致盲强度随蒸汽强度增加。]]):format(self:getTalentRadius(t), t.duration(self, t))
 	end,}
 
 registerTalentTranslation{
 	id = "T_TINKER_ITCHING_POWDER",
 	name = "痒痒粉",
 	info = function(self, t)
-		return ([[释 放 一 把 痒 痒 粉 。
-　 　锥 形 半 径 %d 码 内 的 生 物 %d 回 合 内 很 痒 ,导 致 它 们 释 放 技 能 %d%% 几 率 失 败 。
-     致 痒 强 度 随 蒸 汽 强 度 增 加 。]]):format(self:getTalentRadius(t), t.duration(self, t), t.failChance(self, t))
+		return ([[释放一把痒痒粉。
+　　锥形半径 %d 码内的生物 %d 回合内很痒 ,导致它们释放技能 %d%% 几率失败。
+     致痒强度随蒸汽强度增加。]]):format(self:getTalentRadius(t), t.duration(self, t), t.failChance(self, t))
 	end,}
 
 registerTalentTranslation{
 	id = "T_TINKER_THUNDER_GRENADE",
 	name = "闪电榴弹",
 	info = function(self, t)
-		return ([[向 你 的 敌 人 投 掷 手 榴 弹 ,造 成  %0.2f  物 理 伤 害 ，半 径 %d  码 。
-　 　 目 标 也 会 震 慑  %d  回 合 。
-　 　 震 慑 强 度 随 蒸 汽 强 度 增 加 。]]):format(t.getDamage(self, t), self:getTalentRadius(t), t.duration(self, t))
+		return ([[向你的敌人投掷手榴弹 ,造成  %0.2f  物理伤害，半径 %d  码。
+　　目标也会震慑  %d  回合。
+　　震慑强度随蒸汽强度增加。]]):format(t.getDamage(self, t), self:getTalentRadius(t), t.duration(self, t))
 	end,}
 
 registerTalentTranslation{
@@ -216,8 +216,8 @@ registerTalentTranslation{
 	name = "发射链锯",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
-		return ([[你 激 活 隐 藏 的 弹 簧 来 弹 射 一 个 你 的 敌 人 。任 何 生 物 被 抓 后 造 成  %0.2f  物 理 伤 害 和 5 回 合 内 一 半 的 流 血 伤 害 。
-伤 害 随 蒸 汽 强 度 增 加 。]]):format(damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t)))
+		return ([[你激活隐藏的弹簧来弹射一个你的敌人。任何生物被抓后造成  %0.2f  物理伤害和 5 回合内一半的流血伤害。
+伤害随蒸汽强度增加。]]):format(damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t)))
 	end,}
 
 registerTalentTranslation{
@@ -225,8 +225,8 @@ registerTalentTranslation{
 	name = "闪电球",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
-		return ([[释 放 一 个 闪 电 球 ，造 成  %0.2f  闪 电 伤 害 。
-伤 害 随 蒸 汽 强 度 增 加 。]]):
+		return ([[释放一个闪电球，造成  %0.2f  闪电伤害。
+伤害随蒸汽强度增加。]]):
 		format(damDesc(self, DamageType.LIGHTNING, damage))
 	end,}
 
@@ -234,10 +234,10 @@ registerTalentTranslation{
 	id = "T_TINKER_VOLTAIC_SENTRY",
 	name = "伏特守卫",
 	info = function(self, t)
-		return ([[在 某 个 位 置 处 放 置 一 个 带 电 的 哨 兵 装 置 。
-每 一 个 回 合 ，它 会 向 附 近 的 敌 人 发 射 一 个 闪 电 球 。
-闪 电 球 造 成  %0.2f  闪 电 伤 害 。
-哨 兵 有 %d  的 生 命 ，持 续 10 回 合 。]]):
+		return ([[在某个位置处放置一个带电的哨兵装置。
+每一个回合，它会向附近的敌人发射一个闪电球。
+闪电球造成  %0.2f  闪电伤害。
+哨兵有 %d  的生命，持续 10 回合。]]):
 		format(damDesc(self, DamageType.LIGHTNING, t.getDam(self, t)), t.getHP(self, t))
 	end,}
 
@@ -245,9 +245,9 @@ registerTalentTranslation{
 	id = "T_TINKER_EXPLOSIVE_SHELL",
 	name = "爆炸弹",
 	info = function(self, t)
-		return ([[你 使 用 蒸 汽 枪 在 射 程 内 制 造 一 场 特 殊 的 爆 炸 。
-　 　 当 每 一 个 弹 片 击 中 它 的 目 标 ,造 成 正 常 蒸 汽 枪 伤 害 和 半 径 %d 码 内 的 爆 炸 ，造 成 %0.2f 的 物 理 伤 害 ,
-　 　 这 个 技 能 不 使 用 弹 药 。]])
+		return ([[你使用蒸汽枪在射程内制造一场特殊的爆炸。
+　　当每一个弹片击中它的目标 ,造成正常蒸汽枪伤害和半径 %d 码内的爆炸，造成 %0.2f 的物理伤害 ,
+　　这个技能不使用弹药。]])
 		:format(self:getTalentRadius(t), damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t)))
 	end,}
 
@@ -255,9 +255,9 @@ registerTalentTranslation{
 	id = "T_TINKER_FLARE_SHELL",
 	name = "闪光弹",
 	info = function(self, t)
-		return ([[你 使 用 蒸 汽 枪 在 射 程 内 制 造 一 场 特 殊 的 爆 炸 。
-　 　 当 每 一 个 弹 片 击 中 它 的 目 标 ,造 成 正 常 蒸 汽 枪 伤 害 和 半 径 %d 码 内 的 爆 炸 ，致 盲 %d  回 合 。
-　 　 这 个 技 能 不 使 用 弹 药 。]])
+		return ([[你使用蒸汽枪在射程内制造一场特殊的爆炸。
+　　当每一个弹片击中它的目标 ,造成正常蒸汽枪伤害和半径 %d 码内的爆炸，致盲 %d  回合。
+　　这个技能不使用弹药。]])
 		:format(self:getTalentRadius(t), t.duration(self, t))
 	end,
 	}
@@ -266,10 +266,10 @@ registerTalentTranslation{
 	id = "T_TINKER_INCENDIARY_SHELL",
 	name = "燃烧弹",
 	info = function(self, t)
-		return ([[你 使 用 蒸 汽 枪 在 射 程 内 制 造 一 场 特 殊 的 爆 炸 。
-　 　 当 每 一 个 弹 片 击 中 它 的 目 标 ,造 成 正 常 蒸 汽 枪 伤 害 和 半 径 2 码 内 的 燃 烧 ，伤 害 %d 。
-     这 燃 烧 不 持 久 ,马 上 燃 烧 半 径 为 1 码 ，造 成  %0.2f 火 焰 伤 害 。
-　 　 这 个 技 能 不 使 用 弹 药 。]])
+		return ([[你使用蒸汽枪在射程内制造一场特殊的爆炸。
+　　当每一个弹片击中它的目标 ,造成正常蒸汽枪伤害和半径 2 码内的燃烧，伤害 %d 。
+     这燃烧不持久 ,马上燃烧半径为 1 码，造成  %0.2f 火焰伤害。
+　　这个技能不使用弹药。]])
 		:format(math.floor(self:getTalentLevel(t)), damDesc(self, DamageType.FIRE, t.getDamage(self, t)))
 	end,}
 
@@ -277,9 +277,9 @@ registerTalentTranslation{
 	id = "T_TINKER_SOLID_SHELL",
 	name = "固实弹",
 	info = function(self, t)
-		return ([[你 使 用 蒸 汽 枪 发 射 特 殊 固 体 打 击 目 标 造 成 %d%%  武 器 伤 害 。
-　 　 击 退 目 标 %d 码 。
-     这 个 技 能 不 使 用 弹 药 ]])
+		return ([[你使用蒸汽枪发射特殊固体打击目标造成 %d%%  武器伤害。
+　　击退目标 %d 码。
+     这个技能不使用弹药 ]])
 		:format(100*t.getMultiple(self, t), t.knockback(self, t))
 	end,}
 
@@ -287,9 +287,9 @@ registerTalentTranslation{
 	id = "T_TINKER_IMPALER_SHELL",
 	name = "穿刺弹", 
 	info = function(self, t)
-		return ([[你 使 用 蒸 汽 枪 发 射 特 殊 弹 药 打 击 目 标 造 成 %d%%  武 器 伤 害 。
-击 退 目 标 2 码 并 定 身  %d  回 合 。
-     这 个 技 能 不 使 用 弹 药 ]])
+		return ([[你使用蒸汽枪发射特殊弹药打击目标造成 %d%%  武器伤害。
+击退目标 2 码并定身  %d  回合。
+     这个技能不使用弹药 ]])
 		:format(100*t.getMultiple(self, t), t.duration(self, t))
 	end,}
 
@@ -297,9 +297,9 @@ registerTalentTranslation{
 	id = "T_TINKER_SAW_SHELL",
 	name = "链锯弹",
 	info = function(self, t)
-		return ([[你 使 用 蒸 汽 枪 发 射 特 殊 弹 药 打 击 目 标 造 成 %d%%  武 器 伤 害 。
-链 锯 会 切 割 目 标 ，在 5 回 合 内 造 成 %d%%  武 器 伤 害 
-这 个 技 能 不 使 用 弹 药 ]])
+		return ([[你使用蒸汽枪发射特殊弹药打击目标造成 %d%%  武器伤害。
+链锯会切割目标，在 5 回合内造成 %d%%  武器伤害 
+这个技能不使用弹药 ]])
 		:format(100*t.getMultiple(self, t), 50*t.getMultiple(self, t))
 	end,}
 
@@ -307,10 +307,10 @@ registerTalentTranslation{
 	id = "T_TINKER_HOOK_SHELL",
 	name = "钩链弹",
 	info = function(self, t)
-		return ([[你 使 用 蒸 汽 枪 发 射 特 殊 弹 药 打 击 目 标 或 某 处 
-如 果 你 的 目 标 是 一 个 生 物 ，他 们 被 拉 向 你 %d 码 
-如 果 你 的 目 标 是 一 个 空 地 ，你 会 被 拉 向 空 地 %d 码 
-这 个 技 能 不 使 用 弹 药 ]])
+		return ([[你使用蒸汽枪发射特殊弹药打击目标或某处 
+如果你的目标是一个生物，他们被拉向你 %d 码 
+如果你的目标是一个空地，你会被拉向空地 %d 码 
+这个技能不使用弹药 ]])
 		:format(t.distance(self, t), t.distance(self, t))
 	end,}
 
@@ -318,10 +318,10 @@ registerTalentTranslation{
 	id = "T_TINKER_MAGNETIC_SHELL",
 	name = "磁性弹",
 	info = function(self, t)
-		return ([[你 使 用 蒸 汽 枪 发 射 特 殊 弹 药 打 击 目 标 造 成 正 常 武 器 伤 害 。
-目 标 将 磁 化  %d  回 合 。这 降 低 了 他 们 的 闪 避 和 疲 劳 %d  。
-这 个 技 能 不 使 用 弹 药 
-技 能 效 果 随 蒸 汽 强 度 增 加 。]])
+		return ([[你使用蒸汽枪发射特殊弹药打击目标造成正常武器伤害。
+目标将磁化  %d  回合。这降低了他们的闪避和疲劳 %d  。
+这个技能不使用弹药 
+技能效果随蒸汽强度增加。]])
 		:format(t.duration(self, t), t.getPower(self, t))
 	end,}
 
@@ -329,11 +329,11 @@ registerTalentTranslation{
 	id = "T_TINKER_VOLTAIC_SHELL",
 	name = "伏特弹",
 	info = function(self, t)
-		return ([[你 使 用 蒸 汽 枪 发 射 特 殊 弹 药 打 击 目 标 造 成 100%% 闪 电 武 器 伤 害 。
-这 将 释 放 强 大 的 电 流 ，打 击 周 围 %d 的 敌 人 。
-每 个 闪 电 球 造 成 %0.2f 的 闪 电 伤 害 
-这 个 技 能 不 使 用 弹 药 
-闪 电 球 伤 害 随 蒸 汽 强 度 增 加 。]])
+		return ([[你使用蒸汽枪发射特殊弹药打击目标造成 100%% 闪电武器伤害。
+这将释放强大的电流，打击周围 %d 的敌人。
+每个闪电球造成 %0.2f 的闪电伤害 
+这个技能不使用弹药 
+闪电球伤害随蒸汽强度增加。]])
 		:format(math.floor(self:getTalentLevel(t)), damDesc(self, DamageType.LIGHTNING, t.getDamage(self, t)))
 	end,}
 
@@ -341,10 +341,10 @@ registerTalentTranslation{
 	id = "T_TINKER_ANTIMAGIC_SHELL",
 	name = "反魔弹",
 	info = function(self, t)
-		return ([[你 使 用 蒸 汽 枪 发 射 特 殊 弹 药 打 击 目 标 造 成 100%% 武 器 伤 害 。
-造 成 %0.2f 奥 术 燃 烧 。
-这 个 技 能 不 使 用 弹 药 。
-奥 术 燃 烧 伤 害 取 决 于 蒸 汽 强 度 。]])
+		return ([[你使用蒸汽枪发射特殊弹药打击目标造成 100%% 武器伤害。
+造成 %0.2f 奥术燃烧。
+这个技能不使用弹药。
+奥术燃烧伤害取决于蒸汽强度。]])
 		:format(damDesc(self, DamageType.ARCANE, t.getDamage(self, t)))
 	end,}
 
@@ -352,12 +352,12 @@ registerTalentTranslation{
 	id = "T_TINKER_BOTANICAL_SHELL",
 	name = "植物弹",
 	info = function(self, t)
-		return ([[你 使 用 蒸 汽 枪 发 射 特 殊 弹 药 打 击 目 标 造 成 100%% 自 然 武 器 伤 害 。
-将 释 放 孢 子 生 长 成 半 径 %d 的 苔 藓 %d 回 合 。
-每 回 合 苔 藓 造 成  %0.2f  自 然 伤 害 对 半 径 内 的 每 一 个 敌 人 。
-这 种 苔 藓 有 吸 血 特 性 ，  伤 害 的 %d%%  治 愈 使 用 者 。  
-这 个 技 能 不 使 用 弹 药 
-苔 藓 伤 害 随 蒸 汽 强 度 增 加 。]])
+		return ([[你使用蒸汽枪发射特殊弹药打击目标造成 100%% 自然武器伤害。
+将释放孢子生长成半径 %d 的苔藓 %d 回合。
+每回合苔藓造成  %0.2f  自然伤害对半径内的每一个敌人。
+这种苔藓有吸血特性，  伤害的 %d%%  治愈使用者。  
+这个技能不使用弹药 
+苔藓伤害随蒸汽强度增加。]])
 		:format(self:getTalentRadius(t), t.getDuration(self, t), damDesc(self, DamageType.NATURE, t.getDamage(self, t)), t.getHeal(self, t))
 	end,}
 
@@ -365,10 +365,10 @@ registerTalentTranslation{
 	id = "T_TINKER_CORROSIVE_SHELL",
 	name = "腐蚀弹",
 	info = function(self, t)
-		return ([[你 使 用 蒸 汽 枪 发 射 特 殊 弹 药 打 击 目 标 造 成 %d%% 酸 性 武 器 伤 害 。
-释 放 的 酸 也 会 腐 蚀 的 目 标 ，降 低 其 命 中 ，闪 避 和 护 甲 %d  。
-这 个 技 能 不 使 用 弹 药 。
-腐 蚀 强 度 随 蒸 汽 强 度 增 加 。]])
+		return ([[你使用蒸汽枪发射特殊弹药打击目标造成 %d%% 酸性武器伤害。
+释放的酸也会腐蚀的目标，降低其命中，闪避和护甲 %d  。
+这个技能不使用弹药。
+腐蚀强度随蒸汽强度增加。]])
 		:format(100*t.getMultiple(self, t), t.getPower(self, t))
 	end,}
 
@@ -376,10 +376,10 @@ registerTalentTranslation{
 	id = "T_TINKER_TOXIC_SHELL",
 	name = "毒气弹",
 	info = function(self, t)
-		return ([[你 使 用 蒸 汽 枪 发 射 特 殊 弹 药 打 击 目 标 造 成 100%% 枯 萎 武 器 伤 害 。
-向 目 标 释 放 重 金 属 ，造 成 每 回 合  %0.2f  枯 萎 伤 害 ，并 且 降 低 整 体 速 度 %d%%  %d  回 合 .
-这 个 技 能 不 使 用 弹 药 。
-枯 萎 伤 害 随 蒸 汽 强 度 增 加 。]])
+		return ([[你使用蒸汽枪发射特殊弹药打击目标造成 100%% 枯萎武器伤害。
+向目标释放重金属，造成每回合  %0.2f  枯萎伤害，并且降低整体速度 %d%%  %d  回合 .
+这个技能不使用弹药。
+枯萎伤害随蒸汽强度增加。]])
 		:format(damDesc(self, DamageType.BLIGHT, t.getPower(self, t)), t.getPower(self, t)-10, t.duration(self, t))
 	end,}
 
@@ -389,12 +389,12 @@ registerTalentTranslation{
 	info = function(self, t)
 		local dur = t.getDuration(self, t)
 		local dam = t.getDamage(self, t)
-		return ([[在 %d 回 合 内 ，你 在 行 走 或 站 立 时 放 置 苔 藓 
-     每 回 合 自 动 放 置 苔 藓 ，持 续 %d 回 合 。
-　 　 每 个 苔 藓 对 站 在 它 上 面 的 每 一 个 敌 人 造 成 %0.2f 自 然 伤 害 。
-　 　 这 个 苔 藓 很 厚 ,导 致 粘 住 所 有 踩 过 它 的 敌 人 。
-　 　 降 低 移 动 速 度 %d%%  并 且 有 %d%% 机 会 被 定 身 4 回 合 。
-     伤 害 随 蒸 汽 强 度 增 加 。]]):
+		return ([[在 %d 回合内，你在行走或站立时放置苔藓 
+     每回合自动放置苔藓，持续 %d 回合。
+　　每个苔藓对站在它上面的每一个敌人造成 %0.2f 自然伤害。
+　　这个苔藓很厚 ,导致粘住所有踩过它的敌人。
+　　降低移动速度 %d%%  并且有 %d%% 机会被定身 4 回合。
+     伤害随蒸汽强度增加。]]):
 		format(dur*2, dur, damDesc(self, DamageType.NATURE, dam), t.getSlow(self, t), t.getPin(self, t))
 	end,}
 

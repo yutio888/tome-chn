@@ -4,16 +4,16 @@ registerTalentTranslation{
 	id = "T_MITOSIS",
 	name = "有丝分裂",
 	info = function(self, t)
-		local xs = self:knowTalent(self.T_REABSORB) and ([[同 时， 当 这 个 技 能 开 启 时 ， 每 回 合 回 复 %0.1f 点 失 衡 值 。
+		local xs = self:knowTalent(self.T_REABSORB) and ([[同时，当这个技能开启时，每回合回复 %0.1f 点失衡值。
 		]]):format(self:callTalent(self.T_REABSORB, "equiRegen")) or ""
-		return ([[你 的 身 体 构 造 变 的 像 软 泥 怪 一 样。 
-		 当 你 受 到 攻 击 时， 你 有 几 率 分 裂 出 一 个 浮 肿 软 泥 怪， 其 生 命 值 为 你 所 承 受 的 伤 害 值 的 两 倍（ 最 大 %d ）。 
-		 分 裂 几 率 为 你 损 失 生 命 百 分 比 的 %0.2f 倍。
-		 你 所 承 受 的 所 有 伤 害 会 在 你 和 浮 肿 软 泥 怪 间 均 摊。 
-		 你 同 时 最 多 只 能 拥 有 %d 只 浮 肿 软 泥 怪（ 基 于 你 的 灵 巧 值 和 技 能 等 级 ）。
-		 浮 肿 软 泥 怪 对 非 均 摊 的伤 害 的 抗 性 很 高（ 50%% 对 全 部 伤 害 的 抗 性 ）,同 时 生 命 回 复 快。
-		 受 精 神 强 度 影 响， 最 大 生 命 值 有 额 外 加 成。 
-		 受 灵 巧 影 响， 几 率 有 额 外 加 成。]]):
+		return ([[你的身体构造变的像软泥怪一样。 
+		 当你受到攻击时，你有几率分裂出一个浮肿软泥怪，其生命值为你所承受的伤害值的两倍（最大 %d ）。 
+		 分裂几率为你损失生命百分比的 %0.2f 倍。
+		 你所承受的所有伤害会在你和浮肿软泥怪间均摊。 
+		 你同时最多只能拥有 %d 只浮肿软泥怪（基于你的灵巧值和技能等级）。
+		 浮肿软泥怪对非均摊的伤害的抗性很高（ 50%% 对全部伤害的抗性）,同时生命回复快。
+		 受精神强度影响，最大生命值有额外加成。 
+		 受灵巧影响，几率有额外加成。]]):
 		format(t.getMaxHP(self, t), t.getChance(self, t)*3/100, t.getMax(self, t), t.getSummonTime(self, t), t.getOozeResist(self, t))
 	end,
 }
@@ -22,10 +22,10 @@ registerTalentTranslation{
 	id = "T_REABSORB",
 	name = "强化吸收",
 	info = function(self, t)
-		return ([[ 你 随 机 吸 收 一 个 紧 靠 你 的 浮 肿 软 泥 怪， 获 得 40%% 对 全 部 伤 害 的 抗 性， 持 续 %d 个 回 合。 
-		 同 时 你 会 释 放 一 股 反 魔 能 量， 在 %d 半 径 内 造 成 %0.2f 点 法 力 燃 烧 伤 害。 
-		 如 果 有 丝 分 裂 技 能 开 启 ， 每 回 合 你 将 回 复 %0.1f 点 失 衡 值 。
-		 受 精 神 强 度 影 响， 伤 害 、 持 续 时 间 和 失 衡 值 回 复 有 额 外 加 成。 ]]):
+		return ([[ 你随机吸收一个紧靠你的浮肿软泥怪，获得 40%% 对全部伤害的抗性，持续 %d 个回合。 
+		 同时你会释放一股反魔能量，在 %d 半径内造成 %0.2f 点法力燃烧伤害。 
+		 如果有丝分裂技能开启，每回合你将回复 %0.1f 点失衡值。
+		 受精神强度影响，伤害、持续时间和失衡值回复有额外加成。 ]]):
 		format(t.getDuration(self, t), 3,damDesc(self, DamageType.ARCANE, t.getDam(self, t)),	 t.equiRegen(self, t))
 	end,
 }
@@ -34,9 +34,9 @@ registerTalentTranslation{
 	id = "T_CALL_OF_THE_OOZE",
 	name = "软泥召唤",
 	info = function(self, t)
-		return ([[立 刻 召 集 所 有 的 浮 肿 软 泥 怪 来 战 斗， 如 果 现 有 浮 肿 软 泥 怪 数 目 比 最 大 值 小， 最 多 可 以 制 造 %d 个 浮 肿 软 泥 怪， 每 一 个 的 生 命 值 为 %d （ 有 丝 分 裂 技 能 允 许 的 生 命 最 大 值 的 %d%% ） 。 
-		 每 一 个 浮 肿 软 泥 怪 将 被 传 送 到 其 视 野 内 的 敌 人 附 近，并 吸 引 其 注 意 力 。 
-		 利 用 这 一 形 势， 你 将 对 浮 肿 软 泥 怪 面 对 的 敌 人 各 造 成 一 次 近 战 酸 性 伤 害， 数 值 为 武 器 伤 害 的 %d%% 。 ]]):
+		return ([[立刻召集所有的浮肿软泥怪来战斗，如果现有浮肿软泥怪数目比最大值小，最多可以制造 %d 个浮肿软泥怪，每一个的生命值为 %d （有丝分裂技能允许的生命最大值的 %d%% ）。 
+		 每一个浮肿软泥怪将被传送到其视野内的敌人附近，并吸引其注意力。 
+		 利用这一形势，你将对浮肿软泥怪面对的敌人各造成一次近战酸性伤害，数值为武器伤害的 %d%% 。 ]]):
 		format(t.getMax(self, t), t.getLife(self, t), t.getModHP(self, t)*100, t.getWepDamage(self, t) * 100)
 	end,
 }
@@ -45,9 +45,9 @@ registerTalentTranslation{
 	id = "T_INDISCERNIBLE_ANATOMY",
 	name = "奇异骨骼",
 	info = function(self, t)
-		return ([[ 你 身 体 里 的 内 脏 全 都 融 化 在 一 起， 隐 藏 了 你 的 要 害 部 位。 
-		你 有 %d%% 几 率 摆 脱 任 何（物 理，精 神，法 术）暴 击。
-		你 将 额 外 获 得 %d%% 的 疾 病、 毒 素、 切 割 和 目 盲 免 疫。 ]]):
+		return ([[ 你身体里的内脏全都融化在一起，隐藏了你的要害部位。 
+		你有 %d%% 几率摆脱任何（物理，精神，法术）暴击。
+		你将额外获得 %d%% 的疾病、毒素、切割和目盲免疫。 ]]):
 		format(t.critResist(self, t), 100*t.immunities(self, t))
 	end,
 }

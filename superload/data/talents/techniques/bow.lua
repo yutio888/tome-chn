@@ -7,8 +7,8 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local inc = t.getPercentInc(self, t)
 		local reloads = t.ammo_mastery_reload(self, t)
-		return ([[当 使 用 弓 时 ，增 加 %d%% 弓 箭 伤 害， 提 高 30 物 理 强 度。
-		同 时 ， 增 加 %d 装 填 效 果。]]):format(inc * 100, reloads)
+		return ([[当使用弓时，增加 %d%% 弓箭伤害，提高 30 物理强度。
+		同时，增加 %d 装填效果。]]):format(inc * 100, reloads)
 	end,
 }
 
@@ -16,7 +16,7 @@ registerTalentTranslation{
 	id = "T_PIERCING_ARROW",
 	name = "穿透箭",
 	info = function(self, t)
-		return ([[你 射 出 一 支 能 穿 透 任 何 东 西 的 箭， 可 以 穿 透 多 个 目 标 并 对 目 标 造 成 %d%% 无 视 护 甲 的 穿 透 伤 害。]]):format(100 * self:combatTalentWeaponDamage(t, 1, 1.5))
+		return ([[你射出一支能穿透任何东西的箭，可以穿透多个目标并对目标造成 %d%% 无视护甲的穿透伤害。]]):format(100 * self:combatTalentWeaponDamage(t, 1, 1.5))
 	end,
 }
 
@@ -24,8 +24,8 @@ registerTalentTranslation{
 	id = "T_DUAL_ARROWS",
 	name = "双重射击",
 	info = function(self, t)
-		return ([[你 向 目 标 同 时 射 出 2 支 箭， 对 目 标 及 其 周 围 的 一 个 敌 人 造 成 %d%% 伤 害。 
-		此 技 能 不 消 耗 体 力 值。 ]]):format(100 * self:combatTalentWeaponDamage(t, 1.2, 1.9))
+		return ([[你向目标同时射出 2 支箭，对目标及其周围的一个敌人造成 %d%% 伤害。 
+		此技能不消耗体力值。 ]]):format(100 * self:combatTalentWeaponDamage(t, 1.2, 1.9))
 	end,
 }
 
@@ -33,7 +33,7 @@ registerTalentTranslation{
 	id = "T_VOLLEY_OF_ARROWS",
 	name = "箭雨",
 	info = function(self, t)
-		return ([[你 向 %d 码 半 径 区 域 内 射 出 多 支 箭， 每 只 箭 造 成 %d%% 伤 害。 ]])
+		return ([[你向 %d 码半径区域内射出多支箭，每只箭造成 %d%% 伤害。 ]])
 		:format(self:getTalentRadius(t), 100 * self:combatTalentWeaponDamage(t, 0.6, 1.3))
 	end,
 }

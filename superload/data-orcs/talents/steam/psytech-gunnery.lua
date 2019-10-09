@@ -6,18 +6,18 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local inc = t.getPercentInc(self, t)
-		return ([[当 使 用 蒸 汽 枪 时 ， 增 加 物 理 强 度 %d 和 武 器 伤 害 %d%% 。
-		当 你 的 子 弹 击 中 目 标 时 ， 你 利 用 动 能 将 副 手 的 灵 晶 射 出 ， 造 成 %d%% 武 器 伤 害 （ 必 定 命 中 ），
-		当 开 启 心 灵 利 刃 时 ， 灵 晶 无 法 被 射 出 。
-		能 主 动 使 用 ， 造 成 %d%% 精 神 武 器 伤 害 。]]):format(damage, inc * 100, t.mindstarMult(self, t) * 100, t.getShootDamage(self, t) * 100)
+		return ([[当使用蒸汽枪时，增加物理强度 %d 和武器伤害 %d%% 。
+		当你的子弹击中目标时，你利用动能将副手的灵晶射出，造成 %d%% 武器伤害（必定命中），
+		当开启心灵利刃时，灵晶无法被射出。
+		能主动使用，造成 %d%% 精神武器伤害。]]):format(damage, inc * 100, t.mindstarMult(self, t) * 100, t.getShootDamage(self, t) * 100)
 	end,}
 
 registerTalentTranslation{
 	id = "T_BOILING_SHOT",
 	name = "沸腾射击",
 	info = function(self, t)
-		return ([[使 用 灵 能 加 热 子 弹 ， 造 成 %d%% 武 器 伤 害 。
-		子 弹 命 中 处 于 湿 润 状 态 的 目 标 时 将 气 化 ， 除 去 湿 润 状 态 ， 在 半 径 4 范 围 内 造 成 %0.2f 火 焰 伤 害 。
+		return ([[使用灵能加热子弹，造成 %d%% 武器伤害。
+		子弹命中处于湿润状态的目标时将气化，除去湿润状态，在半径 4 范围内造成 %0.2f 火焰伤害。
 		]]):format(100 * t.getDam(self, t), damDesc(self, DamageType.FIRE, t.getSplash(self, t)))
 	end,}
 
@@ -25,8 +25,8 @@ registerTalentTranslation{
 	id = "T_BLUNT_SHOT",
 	name = "迟钝射击",
 	info = function(self, t)
-		return ([[发 射 相 对 低 能 量 的 子 弹 ， 造 成 %d%% 武 器 伤 害 。
-		子 弹 命 中 时 将 产 生 4 码 锥 形 冲 击 波 ， 震 慑 范 围 内 所 有 生 物 %d 回 合 。]])
+		return ([[发射相对低能量的子弹，造成 %d%% 武器伤害。
+		子弹命中时将产生 4 码锥形冲击波，震慑范围内所有生物 %d 回合。]])
 		:format(100 * t.getDam(self, t), t.getDur(self, t))
 	end,}
 
@@ -34,8 +34,8 @@ registerTalentTranslation{
 	id = "T_VACUUM_SHOT",
 	name = "真空射击",
 	info = function(self, t)
-		return ([[将 灵 能 蒸 汽 装 置 安 装 在 子 弹 上 ， 造 成 %d%% 武 器 伤 害 。
-		子 弹 命 中 时 ， 将 抽 取 周 围 空 气 ，吸 引 半 径 %d 范 围 内 所 有 生 物 。]])
+		return ([[将灵能蒸汽装置安装在子弹上，造成 %d%% 武器伤害。
+		子弹命中时，将抽取周围空气，吸引半径 %d 范围内所有生物。]])
 		:format(100 * t.getDam(self, t), self:getTalentRadius(t))
 	end,}
 return _M

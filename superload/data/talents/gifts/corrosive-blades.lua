@@ -5,8 +5,8 @@ registerTalentTranslation{
 	name = "酸性射线",
 	info = function(self, t)
 		local dam = t.getDamage(self, t)
-		return ([[ 在 你 的 心 灵 利 刃 里 充 填 酸 性 能 量， 延 展 攻 击 范 围, 形 成 一 道 射 线， 造 成 %0.1f 点 酸 性 缴 械 伤 害。 
-		 受 精 神 强 度 影 响， 伤 害 有 额 外 加 成。]]):
+		return ([[ 在你的心灵利刃里充填酸性能量，延展攻击范围, 形成一道射线，造成 %0.1f 点酸性缴械伤害。 
+		 受精神强度影响，伤害有额外加成。]]):
 		format(damDesc(self, DamageType.ACID, dam))
 	end,
 }
@@ -15,10 +15,10 @@ registerTalentTranslation{
 	id = "T_CORROSIVE_NATURE",
 	name = "自然腐蚀",
 	info = function(self, t)
-		return ([[ 你 的 酸 性 抗 性 增 加 %d%% 。
-		 当 你 造 成 自 然 伤 害 时 ， 你 的 酸 性 伤 害 增 加 %0.1f%% ， 持 续 %d 回 合。
-		 伤 害 加 成 能 够 积 累 到 最 多 4 倍 （ 1 回 合 至 多 触 发 1 次 ） ， 最 大 值 %0.1f%% 。
-		 受 精 神 强 度 影 响 ， 抗 性 和 伤 害 加 成 有 额 外 加 成 。]]):
+		return ([[ 你的酸性抗性增加 %d%% 。
+		 当你造成自然伤害时，你的酸性伤害增加 %0.1f%% ，持续 %d 回合。
+		 伤害加成能够积累到最多 4 倍（ 1 回合至多触发 1 次），最大值 %0.1f%% 。
+		 受精神强度影响，抗性和伤害加成有额外加成。]]):
 		format(t.getResist(self, t), t.getAcidDamage(self, t, 1), t.getDuration(self, t), t.getAcidDamage(self, t, 5))
 	end,
 }
@@ -29,11 +29,11 @@ registerTalentTranslation{
 	info = function(self, t)
 		local dam = t.getDamage(self, t)
 		local nb = t.getNb(self, t)
-		return ([[ 你 集 中 精 神 于 某 块 半 径 2 的 区 域， 制 造 出 %d 个 腐 蚀 之 种。 
-		 第 一 个 种 子 会 产 生 于 中 心 处 ， 其 他 的 会 随 机 出 现。
-         每 个 种 子 持 续 %d 回 合，
-		 当 一 个 生 物 走 过 腐 蚀 之 种 时， 会 在 半 径 1 的 区 域 内 引 发 一 场 爆 炸， 击 退 对 方 并 造 成 %0.1f 点 酸 性 伤 害。 
-		 受 精 神 强 度 影 响， 伤 害 有 额 外 加 成]]):
+		return ([[ 你集中精神于某块半径 2 的区域，制造出 %d 个腐蚀之种。 
+		 第一个种子会产生于中心处，其他的会随机出现。
+         每个种子持续 %d 回合，
+		 当一个生物走过腐蚀之种时，会在半径 1 的区域内引发一场爆炸，击退对方并造成 %0.1f 点酸性伤害。 
+		 受精神强度影响，伤害有额外加成]]):
 		format(nb, t.getDuration(self, t), damDesc(self, DamageType.ACID, dam))
 	end,
 }
@@ -44,8 +44,8 @@ registerTalentTranslation{
 	info = function(self, t)
 		local ressistpen = t.getResistPenalty(self, t)
 		local regen = t.getRegen(self, t)
-		return ([[ 你 的 周 围 充 满 了 自 然 力 量， 忽 略 目 标 %d%% 的 酸 性 伤 害 抵 抗。 
-		 同 时 酸 性 能 量 会 治 疗 你 的 浮 肿 软 泥 怪， 增 加 他 们 每 回 合 %0.1f 的 生 命 回 复。]])
+		return ([[ 你的周围充满了自然力量，忽略目标 %d%% 的酸性伤害抵抗。 
+		 同时酸性能量会治疗你的浮肿软泥怪，增加他们每回合 %0.1f 的生命回复。]])
 		:format(ressistpen, regen)
 	end,
 }

@@ -89,10 +89,10 @@ registerTalentTranslation{
 		local weapon_atk = knives.atk
 		local weapon_apr = knives.apr
 		local weapon_crit = knives.physcrit
-		return ([[装 备 腰 带 用 来 装 填 %d 把 飞 刀, 允 许 你 进 行 远 程 攻 击. 每 回 合 休 息 的 时 候 自 动 装 填 %d 把 飞 刀, 移 动 时 只 有 一 半 效 果.
-		飞 刀 的 基 础 强 度 、 命 中 、 护 甲 穿 透 、 暴 击 几 率 随 技 能 等 级 提 升, 伤 害 根 据 匕 首 掌 握 提 升.
-		投 掷 飞 刀 被 认 为 是 近 战 攻 击 命 中 目 标.
-		投 掷 飞 刀 效 果 统 计:
+		return ([[装备腰带用来装填 %d 把飞刀, 允许你进行远程攻击. 每回合休息的时候自动装填 %d 把飞刀, 移动时只有一半效果.
+		飞刀的基础强度、命中、护甲穿透、暴击几率随技能等级提升, 伤害根据匕首掌握提升.
+		投掷飞刀被认为是近战攻击命中目标.
+		投掷飞刀效果统计:
 
 %s]]):format(nb, reload, t.knivesInfo(self, t))
 	end,
@@ -101,8 +101,8 @@ registerTalentTranslation{
 	id = "T_FAN_OF_KNIVES",
 	name = "刀扇",
 	info = function (self,t)
-		return ([[额 外 存 储 %d 把 飞 刀,可 以 一 次 性 扔 出 ，每 把 飞 刀 对 %d 格 锥 形 范 围 内 的 敌 人 造 成 %d%% 伤 害 .
-		如 果 飞 刀 数 量 多 于 敌 人, 每 个 目 标 最 多 被 同 时 击 中 5 次. 飞 刀 无 法 穿 透 生 物.]]):
+		return ([[额外存储 %d 把飞刀,可以一次性扔出，每把飞刀对 %d 格锥形范围内的敌人造成 %d%% 伤害 .
+		如果飞刀数量多于敌人, 每个目标最多被同时击中 5 次. 飞刀无法穿透生物.]]):
 		format(t.getNb(self,t), self:getTalentRadius(t), t.getDamage(self, t)*100)
 	end,
 }
@@ -113,8 +113,8 @@ registerTalentTranslation{
 		local crit = t.getCrit(self,t)
 		local power = t.getCritPower(self,t)
 		local chance = t.getChance(self,t)
-		return ([[精 准 地 投 掷 飞 刀, 增 加 %d%% 暴 击 几 率、 %d%% 暴 击 伤 害. 
-此 外, 飞 刀 暴 击 时 还 有 %d%% 几 率 缴 械 沉 默 或 者 定 身 敌 人 持 续 2 回 合.]])
+		return ([[精准地投掷飞刀, 增加 %d%% 暴击几率、 %d%% 暴击伤害. 
+此外, 飞刀暴击时还有 %d%% 几率缴械沉默或者定身敌人持续 2 回合.]])
 		:format(crit, power, chance)
 	end,
 }
@@ -124,8 +124,8 @@ registerTalentTranslation{
 	info = function (self,t)
 		local speed = t.getSpeed(self, t)*100
 		local chance = t.getChance(self, t)
-		return ([[你 可 以 闪 电 般 地 投 掷 你 的 飞 刀. 增 加 %d%% 攻 击 速 度, 近 战 攻 击 时 有 %d%% 几 率 投 掷 一 把 飞 刀 随 机 对 7 格 范 围 内 的 一 名 敌 人 造 成 100%% 伤 害. 
-		每 回 合 仅 触 发 1 次, 不 会 被 投 掷 飞 刀 触 发.]]):
+		return ([[你可以闪电般地投掷你的飞刀. 增加 %d%% 攻击速度, 近战攻击时有 %d%% 几率投掷一把飞刀随机对 7 格范围内的一名敌人造成 100%% 伤害. 
+		每回合仅触发 1 次, 不会被投掷飞刀触发.]]):
 		format(speed, chance)
 	end,
 }
@@ -136,10 +136,10 @@ registerTalentTranslation{
 		local t = self:getTalentFromId(self.T_VENOMOUS_STRIKE)
 		local dam = 100 * t.getDamage(self,t)
 		local desc = t.effectsDescription(self, t)
-		return ([[投 掷 一 把 剧 毒 飞 刀, 造 成 %d%% 自 然 伤 害 并 根 据 你 当 前 生 效 的 毒 药 造 成 中 毒 效 果 （和 毒 素 爆 发 相 同）:
+		return ([[投掷一把剧毒飞刀, 造成 %d%% 自然伤害并根据你当前生效的毒药造成中毒效果（和毒素爆发相同）:
 		
 		%s
-		使 用 这 技 能 将 使 毒 素 爆 发 进 入 冷 却.]]):
+		使用这技能将使毒素爆发进入冷却.]]):
 		format(dam, desc)
 	end,
 }

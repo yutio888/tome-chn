@@ -4,7 +4,7 @@ registerTalentTranslation{
 	id = "T_TAUNT",
 	name = "嘲讽",
 	info = function(self, t)
-		return ([[强 制 %d 码 范 围 内 的 所 有 敌 对 目 标 攻 击 你。]]):format(self:getTalentRadius(t))
+		return ([[强制 %d 码范围内的所有敌对目标攻击你。]]):format(self:getTalentRadius(t))
 	end,
 }
 
@@ -12,7 +12,7 @@ registerTalentTranslation{
 	id = "T_SHELL_SHIELD",
 	name = "甲壳护盾",
 	info = function(self, t)
-		return ([[隐 藏 在 你 的 甲 壳 下， 增 加 %d%% 全 体 伤 害 抗 性 ， 持 续 %d 回 合。]]):format(t.resistPower(self, t), t.getDuration(self, t))
+		return ([[隐藏在你的甲壳下，增加 %d%% 全体伤害抗性，持续 %d 回合。]]):format(t.resistPower(self, t), t.getDuration(self, t))
 	end,
 }
 
@@ -20,7 +20,7 @@ registerTalentTranslation{
 	id = "T_SPIDER_WEB",
 	name = "蜘蛛之网",
 	info = function(self, t)
-		return ([[朝 你 的 目 标 投 掷 一 个 网， 若 目 标 被 击 中 则 被 困 在 原 地 %d 回 合。]]):format(t.getDuration(self, t))
+		return ([[朝你的目标投掷一个网，若目标被击中则被困在原地 %d 回合。]]):format(t.getDuration(self, t))
 	end,
 }
 
@@ -30,12 +30,12 @@ registerTalentTranslation{
 	message = "@Source@ 召唤出乌龟",
 	info = function(self, t)
 		local incStats = t.incStats(self, t, true)
-		return ([[召 唤 一只 乌 龟 来 吸 引 敌 人 攻 击， 持 续 %d 回 合。 
-		 乌 龟 具 有 很 强 的 生 命 力， 并 不 能 造 成 很 多 伤 害。 
-		 然 而， 它 们 会 周 期 性 的 嘲 讽 敌 人 并 用 龟 壳 保 护 自 己。
-		 它 拥 有 %d 点 体 质， %d 点 敏 捷 和 18 点 意 志。 
-		 你 的 召 唤 物 继 承 你 部 分 属 性： 增 加 百 分 比 伤 害、 震 慑 / 定 身 / 混 乱 / 致 盲 抵 抗 和 护 甲 穿 透。 
-		 受 精 神 强 度 影 响， 乌 龟 的 体 质 有 额 外 加 成。]])
+		return ([[召唤一只乌龟来吸引敌人攻击，持续 %d 回合。 
+		 乌龟具有很强的生命力，并不能造成很多伤害。 
+		 然而，它们会周期性的嘲讽敌人并用龟壳保护自己。
+		 它拥有 %d 点体质， %d 点敏捷和 18 点意志。 
+		 你的召唤物继承你部分属性：增加百分比伤害、震慑 / 定身 / 混乱 / 致盲抵抗和护甲穿透。 
+		 受精神强度影响，乌龟的体质有额外加成。]])
 		:format(t.summonTime(self, t), incStats.con, incStats.dex)
 	end,
 }
@@ -46,11 +46,11 @@ registerTalentTranslation{
 	message = "@Source@ 召唤出蜘蛛",
 	info = function(self, t)
 		local incStats = t.incStats(self, t,true)
-		return ([[召 唤 一只 蜘 蛛 来 扰 乱 敌 人， 持 续 %d 回 合。 
-		 蜘 蛛 可 以 使 敌 人 中 毒 并 向 目 标 撒 网， 将 目 标 固 定 在 地 上。 
-		 它 拥 有 %d 点 敏 捷， %d 点 力 量， 18 点 意 志 和 %d 点 体 质。 
-		 你 的 召 唤 物 继 承 你 部 分 属 性： 增 加 百 分 比 伤 害、 震 慑 / 定 身 / 混 乱 / 致 盲 抵 抗 和 护 甲 穿 透。 
-		 受 精 神 强 度 影 响， 蜘 蛛 的 敏 捷 有 额 外 加 成。]])
+		return ([[召唤一只蜘蛛来扰乱敌人，持续 %d 回合。 
+		 蜘蛛可以使敌人中毒并向目标撒网，将目标固定在地上。 
+		 它拥有 %d 点敏捷， %d 点力量， 18 点意志和 %d 点体质。 
+		 你的召唤物继承你部分属性：增加百分比伤害、震慑 / 定身 / 混乱 / 致盲抵抗和护甲穿透。 
+		 受精神强度影响，蜘蛛的敏捷有额外加成。]])
 		:format(t.summonTime(self, t), incStats.dex, incStats.str, incStats.con)
 	end,
 }
@@ -60,9 +60,9 @@ registerTalentTranslation{
 	name = "疯狂召唤",
 	info = function(self, t)
 		local reduc = t.getReduc(self, t)
-		return ([[你 专 注 于 自 然， 使 你 的 自然召 唤 速 度 提 升（ %d%% 的 正 常 召 唤 时 间）， 并 且 即 使 在 高 自 然 失 衡 值 下 也 不 会 失 败， 持 续 %d 回 合。 
-		 当 此 技 能 激 活 时， 某 个 随 机 的 召 唤 天 赋 会 冷 却。 
-		 每 次 你 进 行 召 唤， 疯 狂 召 唤 的 效 果 会 减 少 1 回 合。]]):
+		return ([[你专注于自然，使你的自然召唤速度提升（ %d%% 的正常召唤时间），并且即使在高自然失衡值下也不会失败，持续 %d 回合。 
+		 当此技能激活时，某个随机的召唤天赋会冷却。 
+		 每次你进行召唤，疯狂召唤的效果会减少 1 回合。]]):
 		format(100 - reduc, t.getDuration(self, t))
 	end,
 }
@@ -71,7 +71,7 @@ registerTalentTranslation{
 	id = "T_SUMMON_CONTROL",
 	name = "信息素",
 	info = function(self, t)
-		return ([[用 信 息 素 标 记 一 个 生 物 ，向 它 周 围 %d 码 范 围 内 的 所 有 召 唤 兽 发 出 信 号 ，将 攻 击 目 标 转 移 到 被 标 记 的 生 物 身 上 ，持 续 %d 回 合 。]]):format(t.getRad(self,t), t.getDur(self,t))
+		return ([[用信息素标记一个生物，向它周围 %d 码范围内的所有召唤兽发出信号，将攻击目标转移到被标记的生物身上，持续 %d 回合。]]):format(t.getRad(self,t), t.getDur(self,t))
 	end,
 }
 

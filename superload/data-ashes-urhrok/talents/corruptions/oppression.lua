@@ -4,11 +4,11 @@ registerTalentTranslation{
 	id = "T_HORRIFYING_BLOWS",
 	name = "恐惧打击",
 	info = function(self, t)
-	return ([[你 的 攻 击 能 够 惊 吓 目 标 ， 降 低 目 标 %d%% 的 伤 害 。 
-	此 效 果 可 以 叠 加 %d 次 ， 每 次 攻 击 会 刷 新 持 续 时 间 。 但 是 当 目 标 与 你 距 离 超 过 %d 码 ， 恐 惧 效 果 会 迅 速 消 退。
-	技 能 3 级 时 ， 每 次 叠 加 会 同 时 减 少 目 标 %0.2f%% 的 速 度。
-	技 能 5 级 时 ， 可 以 影 响 到 %d 码 内 的 所 有 敌 对 生 物。
-	此 技 能 无 视 豁 免 和 免 疫 。]])
+	return ([[你的攻击能够惊吓目标，降低目标 %d%% 的伤害。 
+	此效果可以叠加 %d 次，每次攻击会刷新持续时间。但是当目标与你距离超过 %d 码，恐惧效果会迅速消退。
+	技能 3 级时，每次叠加会同时减少目标 %0.2f%% 的速度。
+	技能 5 级时，可以影响到 %d 码内的所有敌对生物。
+	此技能无视豁免和免疫。]])
 	:format(t.getDamageReduction(self,t),t.getMaxStacks(self,t),t.getLeashRange(self, t),t.getSlowPower(self,t)*100,self:getTalentRadius(t))
 	end,
 }
@@ -18,7 +18,7 @@ registerTalentTranslation{
 	id = "T_MASS_HYSTERIA",
 	name = "恐惧之潮",
 	info = function(self, t)
-	return ([[增 强 目 标 的 恐 惧 ， 目 标 身 上 每 有 一 次 恐 惧 叠 加 ，效 果 增 强 %d%% ， 持 续 时 间 增 大 到 %d 回 合 。 增 强 后 的 恐 惧 效 果 影 响 %d 码 内 所 有 敌 对 生 物。]]):format(t.getPowerBonus(self, t), t.getDurationBonus(self, t), self:getTalentRadius(t))
+	return ([[增强目标的恐惧，目标身上每有一次恐惧叠加，效果增强 %d%% ，持续时间增大到 %d 回合。增强后的恐惧效果影响 %d 码内所有敌对生物。]]):format(t.getPowerBonus(self, t), t.getDurationBonus(self, t), self:getTalentRadius(t))
 	end,
 }
 
@@ -27,8 +27,8 @@ registerTalentTranslation{
 	id = "T_FEARFEAST",
 	name = "恐惧盛宴",
 	info = function(self, t)
-	return ([[汲 取 %d 码 内 敌 对 生 物 身 上 的 恐 惧 ， 每 汲 取 一 层 恐 惧 ， 恢 复 %d 生 命 并 获 得 %0.1f%% 额 外 回 合。
-	至 多 能 获 得 %0.1f 个 额 外 回 合。]])
+	return ([[汲取 %d 码内敌对生物身上的恐惧，每汲取一层恐惧，恢复 %d 生命并获得 %0.1f%% 额外回合。
+	至多能获得 %0.1f 个额外回合。]])
 	:format(self:getTalentRadius(t), t.getHeal(self, t), t.getEnergyDrain(self, t)*0.1, t.getEnergyCap(self, t) / 1000)
 	end,
 }
@@ -38,8 +38,8 @@ registerTalentTranslation{
 	id = "T_HOPE_WANES",
 	name = "绝望碾压",
 	info = function(self, t)
-	return ([[击 溃 已 叠 加 至 少 %d 层 恐 惧 目 标 的 精 神 ，清 除 所 有 恐 惧 效 果 ， 使 目 标 %d 回 合 无 法 行 动 。
-	此 技 能 无 视 豁 免 和 免 疫。]]):format(t.getStackReq(self, t), t.getDuration(self, t))
+	return ([[击溃已叠加至少 %d 层恐惧目标的精神，清除所有恐惧效果，使目标 %d 回合无法行动。
+	此技能无视豁免和免疫。]]):format(t.getStackReq(self, t), t.getDuration(self, t))
 	end,
 }
 

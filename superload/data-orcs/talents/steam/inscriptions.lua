@@ -9,7 +9,7 @@ registerInscriptionTranslation = function(t)
 			local ret = t.extra_data.old_info(self, t)
 			local data = self:getInscriptionData(t.short_name)
 			if data.use_stat and data.use_stat_mod then
-				ret = ret..("\n受 你 的 %s 影 响， 此 效 果 按 比 例 加 成。 "):format(s_stat_name[self.stats_def[data.use_stat].name] or self.stats_def[data.use_stat].name)
+				ret = ret..("\n受你的 %s 影响，此效果按比例加成。 "):format(s_stat_name[self.stats_def[data.use_stat].name] or self.stats_def[data.use_stat].name)
 			end
 			return ret
 		end
@@ -17,7 +17,7 @@ registerInscriptionTranslation = function(t)
 	end
 end
 function change_infusion_eff(str)
-	str = str:gsub("mental"," 精 神 "):gsub("magical"," 魔 法 "):gsub("physical"," 物 理 ")
+	str = str:gsub("mental"," 精神 "):gsub("magical"," 魔法 "):gsub("physical"," 物理 ")
 	return str
 end
 registerInscriptionTranslation{
@@ -25,8 +25,8 @@ registerInscriptionTranslation{
 	display_name = "植入物: 蒸汽制造机",
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[蒸 汽 制 造 机 每 回 合 制 造 %0.1f 点 蒸 汽 。
-		能 直 接 使 用 ，立 即 制 造 %d 蒸 汽。]]):format(data.power + data.inc_stat, (data.power + data.inc_stat) * 5)
+		return ([[蒸汽制造机每回合制造 %0.1f 点蒸汽。
+		能直接使用，立即制造 %d 蒸汽。]]):format(data.power + data.inc_stat, (data.power + data.inc_stat) * 5)
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
@@ -39,7 +39,7 @@ registerInscriptionTranslation{
 	display_name = "植入物: 药物注射器",
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[该 药 物 注 射 器 注 射 药 物 效 率 为 %d%%，冷 却 时 间 修 正 为 %d%%。]])
+		return ([[该药物注射器注射药物效率为 %d%%，冷却时间修正为 %d%%。]])
 		:format(data.power + data.inc_stat, data.cooldown_mod)
 	end,
 	short_info = function(self, t)

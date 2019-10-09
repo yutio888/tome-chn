@@ -6,8 +6,8 @@ registerTalentTranslation{
 	info = function (self,t)
 		dam = t.getDamage(self,t)*100
 		perc = t.getPercent(self,t)*100
-		return ([[尝 试 终 结 一 名 受 伤 的 敌 人， 用 双 持 武 器 攻 击 对 方 ， 造 成 %d%% 武 器 伤 害 ，如果对方的生命值在30%%以下，伤害还会增加50%%。 20%% 生 命 以 下 的 目 标 将用物理豁免对抗你的命中，若未通过则会被立刻秒杀。
-		如 果 该 技 能 杀 死 敌 人 ， 且 你 学 会 了 潜 行 技 能 ， 你 将 进 入 潜 行 状 态 。]]):
+		return ([[尝试终结一名受伤的敌人，用双持武器攻击对方，造成 %d%% 武器伤害，如果对方的生命值在30%%以下，伤害还会增加50%%。 20%% 生命以下的目标将用物理豁免对抗你的命中，若未通过则会被立刻秒杀。
+		如果该技能杀死敌人，且你学会了潜行技能，你将进入潜行状态。]]):
 		format(dam, perc)
 	end,
 }
@@ -17,9 +17,9 @@ registerTalentTranslation{
 	info = function (self,t)
 		local radius = self:getTalentRadius(t)
 		local duration = t.getDuration(self,t)
-		return ([[每 次 你 脱 离 潜 行 状 态 ，你 戏 剧 般 的 显 形 令 周 围 的 敌 人 闻 风 丧 胆。 
-		%d 范 围 内 看 到 你 脱 离 潜 行 状 态 的 敌 人 将 陷 入 恐 惧 ，随 机 触 发 震 慑 、 减 速(40%%)、 或 者 混 乱 (50%%) 状 态， 持 续 %d 回 合 。
-		恐 惧 几 率 受 命 中 加 成 。]])
+		return ([[每次你脱离潜行状态，你戏剧般的显形令周围的敌人闻风丧胆。 
+		%d 范围内看到你脱离潜行状态的敌人将陷入恐惧，随机触发震慑、减速(40%%)、或者混乱 (50%%) 状态，持续 %d 回合。
+		恐惧几率受命中加成。]])
 		:format(radius, duration)
 	end,
 }
@@ -30,9 +30,9 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)*100
 		local dur = t.getDuration(self,t)
 		local sdur = math.ceil(t.getDuration(self,t)/2)
-		return ([[每 次 在 潜 行 状 态 下 发 起 进 攻 时 ，你 尝 试 绞 杀 目 标。目 标 将 被 勒 住 %d 回 合， 沉 默 %d 回 合。 被 勒 住 的 目 标 不 能 移 动， 每 回 合 受 到 一 次 %d%% 伤 害 的 徒 手 攻 击 。  
-		勒 住 的 几 率 受 命 中 加 成 ，你 必 须 待 在 目 标 身 边 以 保 持 该 状 态 。
-		该 技 能 有 冷 却 时 间。]])
+		return ([[每次在潜行状态下发起进攻时，你尝试绞杀目标。目标将被勒住 %d 回合，沉默 %d 回合。被勒住的目标不能移动，每回合受到一次 %d%% 伤害的徒手攻击。  
+		勒住的几率受命中加成，你必须待在目标身边以保持该状态。
+		该技能有冷却时间。]])
 		:format(dur, sdur, damage)
 	end,
 }
@@ -43,10 +43,10 @@ registerTalentTranslation{
 		power = t.getPower(self,t)
 		perc = t.getPercent(self,t)
 		dam = t.getDamage(self,t)
-		return ([[你 为 目 标 打 上 死 亡 标 记，持 续 4 回 合 , 使 其 受 到 的 伤 害 增 加 %d%% 。该 效 果 结 束 时，额 外 造 成  %0.2f 追 加 等 于 标 记 期 间 受 到 的 伤 害 的 %d%% 的 物 理 伤 害。
-		目 标 在 标 记 期 间 死 亡 时 ， 该 技 能 立 刻 冷 却 完 成 ， 同 时 返 还 消 耗 。
-		使 用 该 技 能 不 消 耗 潜 行 。
-		伤 害 受 敏 捷 加 成。]]):
+		return ([[你为目标打上死亡标记，持续 4 回合 , 使其受到的伤害增加 %d%% 。该效果结束时，额外造成  %0.2f 追加等于标记期间受到的伤害的 %d%% 的物理伤害。
+		目标在标记期间死亡时，该技能立刻冷却完成，同时返还消耗。
+		使用该技能不消耗潜行。
+		伤害受敏捷加成。]]):
 		format(power, damDesc(self, DamageType.PHYSICAL, dam), perc)
 	end,
 }

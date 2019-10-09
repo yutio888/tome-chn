@@ -4,10 +4,10 @@ registerTalentTranslation{
 	id = "T_EMERGENCY_STEAM_PURGE",
 	name = "紧急蒸汽净化",
 	info = function(self, t)
-		return ([[你 打 开 所 有 蒸 汽 阀， 释 放 半 径 %d 的 蒸 汽 冲 击 波 ， 造 成 %0.2f 火 焰 伤 害 。
-		若 你 有 至 少 50 点 蒸 汽 ， 气 体 的 温 度 将 变 得 极 高 ， 能 烧 伤 感 知 器 官 ， 令 受 影 响 的 生 物 目 盲 %d 回 合 。 
-		效 果 受 当 前 蒸 汽 值 加 成 。 1 点 蒸 汽 值 时 ， 强 度 仅 为 1 0 0 点 蒸 汽 值 的 15%% 。
-		当 前 强 度 系 数 %d%% 。]])
+		return ([[你打开所有蒸汽阀，释放半径 %d 的蒸汽冲击波，造成 %0.2f 火焰伤害。
+		若你有至少 50 点蒸汽，气体的温度将变得极高，能烧伤感知器官，令受影响的生物目盲 %d 回合。 
+		效果受当前蒸汽值加成。 1 点蒸汽值时，强度仅为 1 0 0 点蒸汽值的 15%% 。
+		当前强度系数 %d%% 。]])
 		:format(self:getTalentRadius(t), damDesc(self, DamageType.FIRE, t.getDamage(self, t)), t.getDur(self, t), t.getFactor(self, t) * 100)
 	end,}
 
@@ -15,8 +15,8 @@ registerTalentTranslation{
 	id = "T_INNOVATION",
 	name = "创新",
 	info = function(self, t)
-		return ([[你 对 物 理 学 的 了 解 令 你 能 以 全 新 的 方 式 改 进 装 备 。
-		增 加 大 师 制 作 或 者 蒸 汽 科 技 的 装备 提 供 的 属 性 、 豁 免 、 护 甲 和 闪 避 %d%% 。]])
+		return ([[你对物理学的了解令你能以全新的方式改进装备。
+		增加大师制作或者蒸汽科技的装备提供的属性、豁免、护甲和闪避 %d%% 。]])
 		:format(t.getFactor(self, t))
 	end,}
 
@@ -24,8 +24,8 @@ registerTalentTranslation{
 	id = "T_SUPERCHARGE_TINKERS",
 	name = "插件超频",
 	info = function(self, t)
-		return ([[消 耗 大 量 蒸 汽 ， 令 所 有 配 件 和 蒸 汽 技 能 超 频 工 作 %d 回 合 。
-		超 频 期 间 ， 你 获 得 %d 蒸 汽 强 度 和 %d 蒸 汽 技 能 暴 击 率 。 ]])
+		return ([[消耗大量蒸汽，令所有配件和蒸汽技能超频工作 %d 回合。
+		超频期间，你获得 %d 蒸汽强度和 %d 蒸汽技能暴击率。 ]])
 		:format(t.getDur(self, t), t.getBoost(self, t))
 	end,}
 
@@ -33,8 +33,8 @@ registerTalentTranslation{
 	id = "T_LAST_ENGINEER_STANDING",
 	name = "背水一战",
 	info = function(self, t)
-		return ([[成 为 大 师 意 味 着 你 经 历 了 更 多 危 险 ， 你 的 计 算 力 也 超 越 凡 人 。
-		增 加 %d 灵 巧 ， %d 物 理 豁 免 ， %d%% 自 身 伤 害 抗 性， %d%% 几 率 避 免 暴 击 。]])
+		return ([[成为大师意味着你经历了更多危险，你的计算力也超越凡人。
+		增加 %d 灵巧， %d 物理豁免， %d%% 自身伤害抗性， %d%% 几率避免暴击。]])
 		:format(self:getTalentLevel(t) * 2, t.physSave(self, t), t.selfResist(self, t), t.critResist(self, t))
 	end,}
 return _M

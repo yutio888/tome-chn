@@ -5,8 +5,8 @@ registerTalentTranslation{
 	name = "闪电术",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
-		return ([[用 魔 法 召 唤 一 次 强 力 的 闪 电 造 成 %0.2f ～ %0.2f 伤 害（平 均 %0.2f ）。 
-		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成。]]):
+		return ([[用魔法召唤一次强力的闪电造成 %0.2f ～ %0.2f 伤害（平均 %0.2f ）。 
+		 受法术强度影响，伤害有额外加成。]]):
 		format(damDesc(self, DamageType.LIGHTNING, damage / 3),
 		damDesc(self, DamageType.LIGHTNING, damage),
 		damDesc(self, DamageType.LIGHTNING, (damage + damage / 3) / 2))
@@ -19,9 +19,9 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local targets = t.getTargetCount(self, t)
-		return ([[召 唤 一 次 叉 状 闪 电 造 成 %0.2f ～ %0.2f 伤 害（平 均 %0.2f ） 并 连 锁 到 另 外 一 个 目 标。 
-		 它 最 多 可 以 连 锁 10 码 范 围 内 %d 个 目 标 并 且 不 会 对 同 一 目 标 伤 害 2 次， 同 样 它 不 会 伤 害 到 施 法 者。 
-		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成。]]):
+		return ([[召唤一次叉状闪电造成 %0.2f ～ %0.2f 伤害（平均 %0.2f ）并连锁到另外一个目标。 
+		 它最多可以连锁 10 码范围内 %d 个目标并且不会对同一目标伤害 2 次，同样它不会伤害到施法者。 
+		 受法术强度影响，伤害有额外加成。]]):
 		 format(damDesc(self, DamageType.LIGHTNING, damage / 3),
 			damDesc(self, DamageType.LIGHTNING, damage),
 			damDesc(self, DamageType.LIGHTNING, (damage + damage / 3) / 2),
@@ -37,9 +37,9 @@ registerTalentTranslation{
 		local rangedef = t.getRangedDefence(self, t)
 		local stun = t.getStunImmune(self, t)
 		local pin = t.getPinImmune(self, t)
-		return ([[一 股 温 柔 的 风 围 绕 着 施 法 者， 增 加 %d 点 负 重 能 力 ， 增 加 %d 点 对 抛 射 物 的 闪 避， 获 得 %d%% 定 身 免 疫 和 %d%% 震 慑 免 疫。 
-		 在 等 级 4 时， 它 会 使 你 轻 微 的 漂 浮 在 空 中， 可 忽 略 部 分 陷 阱。 
-		 在 等 级 5 时， 同 时 还 会 提 升 你 %d%% 的 移 动 速 度 并 且 移 除 %d 点 负 重。]]):
+		return ([[一股温柔的风围绕着施法者，增加 %d 点负重能力，增加 %d 点对抛射物的闪避，获得 %d%% 定身免疫和 %d%% 震慑免疫。 
+		 在等级 4 时，它会使你轻微的漂浮在空中，可忽略部分陷阱。 
+		 在等级 5 时，同时还会提升你 %d%% 的移动速度并且移除 %d 点负重。]]):
 		format(encumberance, rangedef, pin*100, stun*100, t.getSpeed(self, t) * 100, t.getFatigue(self, t))
 	end,
 }
@@ -50,9 +50,9 @@ registerTalentTranslation{
 	info = function(self, t)
 		local targetcount = t.getTargetCount(self, t)
 		local damage = t.getDamage(self, t)
-		return ([[当 此 技 能 激 活 时， 在 6 码 半 径 范 围 内 召 唤 一 阵 强 烈 的 闪 电 风 暴 跟 随 你。 
-		 每 回 合 闪 电 风 暴 会 随 机 伤 害 %d 个 敌 方 单 位， 对 1 码 半 径 范 围 造 成 1 ～ %0.2f 伤 害（平 均 %0.2f ）。 
-		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成。]]):
+		return ([[当此技能激活时，在 6 码半径范围内召唤一阵强烈的闪电风暴跟随你。 
+		 每回合闪电风暴会随机伤害 %d 个敌方单位，对 1 码半径范围造成 1 ～ %0.2f 伤害（平均 %0.2f ）。 
+		 受法术强度影响，伤害有额外加成。]]):
 		 format(targetcount, damDesc(self, DamageType.LIGHTNING, damage), damDesc(self, DamageType.LIGHTNING, damage / 2))
 	end,
 }

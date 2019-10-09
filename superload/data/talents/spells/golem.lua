@@ -5,8 +5,8 @@ registerTalentTranslation{
 	name = "击退",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
-		return ([[你 的 傀 儡 冲 向 目 标， 将 其 击 退 并 造 成 %d%% 伤 害。 
-		 受 技 能 等 级 影 响， 击 退 几 率 有 额 外 加 成。]]):format(100 * damage)
+		return ([[你的傀儡冲向目标，将其击退并造成 %d%% 伤害。 
+		 受技能等级影响，击退几率有额外加成。]]):format(100 * damage)
 	end,
 }
 
@@ -14,7 +14,7 @@ registerTalentTranslation{
 	id = "T_GOLEM_TAUNT",
 	name = "嘲讽",
 	info = function(self, t)
-		return ([[你 的 傀 儡 嘲 讽 %d 码 半 径 范 围 的 敌 人， 强 制 他 们 攻 击 傀 儡。]]):format(self:getTalentRadius(t)) 
+		return ([[你的傀儡嘲讽 %d 码半径范围的敌人，强制他们攻击傀儡。]]):format(self:getTalentRadius(t)) 
 	end,
 }
 
@@ -24,8 +24,8 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local duration = t.getPinDuration(self, t)
-		return ([[你 的 傀 儡 冲 向 目 标， 将 其 推 倒 在 地 持 续 %d 回 合， 造 成 %d%% 伤 害。 
-		 受 技 能 等 级 影 响， 定 身 几 率 有 加 成。]]):
+		return ([[你的傀儡冲向目标，将其推倒在地持续 %d 回合，造成 %d%% 伤害。 
+		 受技能等级影响，定身几率有加成。]]):
 		format(duration, 100 * damage)
 	end,
 }
@@ -36,8 +36,8 @@ registerTalentTranslation{
 	info = function(self, t)
 		local duration = t.getDazeDuration(self, t)
 		local damage = t.getGolemDamage(self, t)
-		return ([[你 的 傀 儡 冲 向 目 标， 践 踏 周 围 2 码 范 围， 眩 晕 所 有 目 标 %d 回 合 并 造 成 %d%% 伤 害。 
-		 受 技 能 等 级 影 响， 眩 晕 几 率 有 额 外 加 成。]]):
+		return ([[你的傀儡冲向目标，践踏周围 2 码范围，眩晕所有目标 %d 回合并造成 %d%% 伤害。 
+		 受技能等级影响，眩晕几率有额外加成。]]):
 		format(duration, 100 * damage)
 	end,
 }
@@ -47,8 +47,8 @@ registerTalentTranslation{
 	name = "眼睛光束",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
-		return ([[从 你 的 眼 睛 中 发 射 一 束 光 束， 造 成 %0.2f 火 焰 伤 害， %0.2f 冰 冷 伤 害 或 %0.2f 闪 电 伤 害。 
-		 受 傀 儡 的 法 术 强 度 影 响， 伤 害 有 额 外 加 成。]]):
+		return ([[从你的眼睛中发射一束光束，造成 %0.2f 火焰伤害， %0.2f 冰冷伤害或 %0.2f 闪电伤害。 
+		 受傀儡的法术强度影响，伤害有额外加成。]]):
 		format(damDesc(self, DamageType.FIRE, damage), damDesc(self, DamageType.COLD, damage), damDesc(self, DamageType.LIGHTNING, damage))
 	end,
 }
@@ -57,10 +57,10 @@ registerTalentTranslation{
 	id = "T_GOLEM_REFLECTIVE_SKIN",
 	name = "反射皮肤",
 	info = function(self, t)
-		return ([[你 的 傀 儡 皮 肤 闪 烁 着 艾 尔 德 里 奇 能 量。 
-		 所 有 对 其 造 成 的 伤 害 有 %d%% 被 反 射 给 攻 击 者。 
-		 傀 儡 仍 然 受 到 全 部 伤 害。 
-		 受 傀 儡 的 法 术 强 度 影 响， 伤 害 反 射 值 有 额 外 加 成。]]):
+		return ([[你的傀儡皮肤闪烁着艾尔德里奇能量。 
+		 所有对其造成的伤害有 %d%% 被反射给攻击者。 
+		 傀儡仍然受到全部伤害。 
+		 受傀儡的法术强度影响，伤害反射值有额外加成。]]):
 		format(t.getReflect(self, t))
 	end,
 }
@@ -71,7 +71,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local rad = self:getTalentRadius(t)
 		local dam = t.getDamage(self, t)
-		return ([[你 的 傀 儡 将 %d 码 范 围 内 的 敌 人 牵 引 至 身 边， 并 造 成 %0.2f 奥 术 伤 害。]]):
+		return ([[你的傀儡将 %d 码范围内的敌人牵引至身边，并造成 %0.2f 奥术伤害。]]):
 		format(rad, dam)
 	end,
 }
@@ -80,11 +80,11 @@ registerTalentTranslation{
 	id = "T_GOLEM_MOLTEN_SKIN",
 	name = "熔岩皮肤",
 	info = function(self, t)
-		return ([[使 傀 儡 的 皮 肤 变 成 灼 热 岩 浆， 发 出 的 热 量 可 以 将 3 码 范 围 内 的 敌 人 点 燃， 在 3 回 合 内 每 回 合 造 成 %0.2f 灼 烧 伤 害 持 续 %d 回 合。 
-		 灼 烧 可 叠 加， 他 们 在 火 焰 之 中 持 续 时 间 越 长 受 到 伤 害 越 高。 
-		 此 外 傀 儡 获 得 %d%% 火 焰 抵 抗。 
-		 熔 岩 皮 肤 不 能 影 响 傀 儡 的 主 人。 
-		 受 法 术 强 度 影 响， 伤 害 和 抵 抗 有 额 外 加 成。]]):format(damDesc(self, DamageType.FIRE, self:combatTalentSpellDamage(t, 12, 120)), 5 + self:getTalentLevel(t), 30 + self:combatTalentSpellDamage(t, 12, 60))
+		return ([[使傀儡的皮肤变成灼热岩浆，发出的热量可以将 3 码范围内的敌人点燃，在 3 回合内每回合造成 %0.2f 灼烧伤害持续 %d 回合。 
+		 灼烧可叠加，他们在火焰之中持续时间越长受到伤害越高。 
+		 此外傀儡获得 %d%% 火焰抵抗。 
+		 熔岩皮肤不能影响傀儡的主人。 
+		 受法术强度影响，伤害和抵抗有额外加成。]]):format(damDesc(self, DamageType.FIRE, self:combatTalentSpellDamage(t, 12, 120)), 5 + self:getTalentLevel(t), 30 + self:combatTalentSpellDamage(t, 12, 60))
 	end,
 }
 
@@ -93,8 +93,8 @@ registerTalentTranslation{
 	name = "自爆",
 	info = function(self, t)
 		local rad = self:getTalentRadius(t)
-		return ([[傀 儡 引 爆 自 己， 摧 毁 傀 儡 并 产 生 一 个 火 焰 爆 炸， %d 码 有 效 范 围 内 造 成 %0.2f 火 焰 伤 害。 
-		 这 个 技 能 只 有 傀 儡 的 主 人 死 亡 时 能 够 使 用。]]):format(rad, damDesc(self, DamageType.FIRE, 50 + 10 * self.level))
+		return ([[傀儡引爆自己，摧毁傀儡并产生一个火焰爆炸， %d 码有效范围内造成 %0.2f 火焰伤害。 
+		 这个技能只有傀儡的主人死亡时能够使用。]]):format(rad, damDesc(self, DamageType.FIRE, 50 + 10 * self.level))
 	end,
 }
 
@@ -106,8 +106,8 @@ registerTalentTranslation{
 		local armor = t.getArmor(self, t)
 		local critreduce = t.getCriticalChanceReduction(self, t)
 		local dir = self:getTalentLevelRaw(t) >= 3 and "In" or "De"
-		return ([[傀 儡 学 会 重 新 组 装 重 甲 和 板 甲， 以 便 更 加 适 用 于 傀 儡。 
-		 当 装 备 重 甲 或 板 甲 时， %s 增 加 护 甲 强 度 %d 点 , 护 甲 韧 性 %d%% ， 并 且 减 少 %d%% 暴 击 伤 害。]]):
+		return ([[傀儡学会重新组装重甲和板甲，以便更加适用于傀儡。 
+		 当装备重甲或板甲时， %s 增加护甲强度 %d 点 , 护甲韧性 %d%% ，并且减少 %d%% 暴击伤害。]]):
 		format(dir, armor, hardiness, critreduce)
 	end,
 }
@@ -117,7 +117,7 @@ registerTalentTranslation{
 	name = "毒性吐息",
 	message = "@Source@ 呼出毒液!",
 	info = function(self, t)
-		return ([[ 对 你 的 敌 人 喷 吐 毒 雾 ， 在 几 个 回 合 内 造 成 %d 点 伤 害 。 受 魔 法 影 响 ， 伤 害 有 额 外 加 成 。 ]]):format(damDesc(self, DamageType.NATURE, self:combatTalentStatDamage(t, "mag", 30, 460)))
+		return ([[ 对你的敌人喷吐毒雾，在几个回合内造成 %d 点伤害。受魔法影响，伤害有额外加成。 ]]):format(damDesc(self, DamageType.NATURE, self:combatTalentStatDamage(t, "mag", 30, 460)))
 	end,
 }
 

@@ -8,9 +8,9 @@ registerTalentTranslation{
 		local inc = t.getPercentInc(self, t)
 		local reload = t.getReload(self,t)
 		local chance = t.getChance(self,t)
-		return ([[使 用 弓 和 投 石 索 时 %d%% 武 器 伤 害， 30物理强度 和 %d 填 弹 速 度。
-		射 击 技 能 有 %d%% 几 率 标 记 目 标。
-		标 记 持 续 5 回 合，令 你 能 感 知 到 目 标 ，同 时 让 他 们 面 对 爆 头 、 齐 射 和 精 巧 射 击 更 脆 弱 。]]):
+		return ([[使用弓和投石索时 %d%% 武器伤害， 30物理强度和 %d 填弹速度。
+		射击技能有 %d%% 几率标记目标。
+		标记持续 5 回合，令你能感知到目标，同时让他们面对爆头、齐射和精巧射击更脆弱。]]):
 format(inc * 100, reload, chance)
 	end,
 }
@@ -20,8 +20,8 @@ registerTalentTranslation{
 	info = function (self,t)
 		local bleed = t.getBleed(self,t)*100
 		local sta = t.getStamina(self,t)
-		return ([[你 趁 敌 人 尚 未 防 备 （90%% 血 量 以 上 ）施 展 攻 击，射 击、稳 固 射 击 和 爆 头 使 敌 人 流 血 5 回 合 造 成 额 外 %d%% 伤 害， 标 记 概 率 增 加 50%%。
-此 外 ， 你 的 射 击、稳 固 射 击 和 爆 头 回 复 %0.1f 体 力。]])
+		return ([[你趁敌人尚未防备（90%% 血量以上）施展攻击，射击、稳固射击和爆头使敌人流血 5 回合造成额外 %d%% 伤害，标记概率增加 50%%。
+此外，你的射击、稳固射击和爆头回复 %0.1f 体力。]])
 		:format(bleed, sta)
 	end,
 }
@@ -33,8 +33,8 @@ registerTalentTranslation{
 		local rad = self:getTalentRadius(t)
 		local dur = t.getDuration(self,t)
 		local def = t.getDefensePenalty(self,t)
-		return ([[发 射 闪 光 弹，致 盲 敌 人 %d 回 合, 标 记 他 们 2 回 合 并 照 亮 %d 格 范 围 %d 回 合。 范 围 内 的 敌 人 降 低 %d 闪 避 和 潜 行 强 度，不 能 从 隐 匿 技 能 得 到 任 何 加 成。
-		状 态 效 果 几 率 受 命 中 加 成 ，闪 避 削 减 受 敏 捷 加 成 。]])
+		return ([[发射闪光弹，致盲敌人 %d 回合, 标记他们 2 回合并照亮 %d 格范围 %d 回合。范围内的敌人降低 %d 闪避和潜行强度，不能从隐匿技能得到任何加成。
+		状态效果几率受命中加成，闪避削减受敏捷加成。]])
 		:format(blind, rad, dur, def)
 	end,
 }
@@ -45,7 +45,7 @@ registerTalentTranslation{
 		local dur = t.getDuration(self,t)
 		local speed = t.getSpeed(self,t)*100
 		local mark = t.getMarkChance(self,t)
-		return ([[进 入 专 注 状 态 %d 回 合 ，远 程 攻 击 速 度 增 加 %d%% ，射 击 不 消 耗 弹 药 ，标 记 概 率增加 %d%%。]]):
+		return ([[进入专注状态 %d 回合，远程攻击速度增加 %d%% ，射击不消耗弹药，标记概率增加 %d%%。]]):
 		format(dur, speed, mark)
 	end,
 }

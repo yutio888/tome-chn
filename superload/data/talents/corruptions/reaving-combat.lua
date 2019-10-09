@@ -4,8 +4,8 @@ registerTalentTranslation{
 	id = "T_CORRUPTED_STRENGTH",
 	name = "堕落力量",
 	info = function(self, t)
-		return ([[允 许 你 双 持 单 手 武 器 并 使 副 手 武 器 伤 害 增 加 至 %d%% 。 
-		 同 时 每 释 放 1 个 法 术（ 消 耗 1 回 合） 会 给 予 近 战 范 围 内 的 1 个 随 机 目 标 一 次 附 加 攻 击， 造 成 %d%% 枯 萎 伤 害。]]):
+		return ([[允许你双持单手武器并使副手武器伤害增加至 %d%% 。 
+		 同时每释放 1 个法术（消耗 1 回合）会给予近战范围内的 1 个随机目标一次附加攻击，造成 %d%% 枯萎伤害。]]):
 		 format(100*t.getoffmult(self,t), 100 * self:combatTalentWeaponDamage(t, 0.2, 0.7))
 		end,
 }
@@ -15,9 +15,9 @@ registerTalentTranslation{
 	name = "嗜血杀戮",
 	info = function(self, t)
 		local SPbonus = t.getSpellpower(self, t)
-		return ([[每 当 你 使 用 近 战 武 器 击 中 一 个 目 标 ，你 进 入 嗜 血 状 态 ，增 加 你 的 法 术 强 度  %0.1f  。
-		 这 一 效 果 最 多 叠 加  10  层 ，共 获 得  %d  法 术 强 度 。
-		 嗜 血 状 态 持 续  3  回 合 。]]):
+		return ([[每当你使用近战武器击中一个目标，你进入嗜血状态，增加你的法术强度  %0.1f  。
+		 这一效果最多叠加  10  层，共获得  %d  法术强度。
+		 嗜血状态持续  3  回合。]]):
 		format(SPbonus, SPbonus*10)
 	end,
 }
@@ -26,7 +26,7 @@ registerTalentTranslation{
 	id = "T_CARRIER",
 	name = "携带者",
 	info = function(self, t)
-		return ([[你 增 加 %d%% 疾 病 抵 抗 并 有 %d%% 概 率 在 近 战 时 散 播 你 目 标 身 上 现 有 的 疾 病。]]):
+		return ([[你增加 %d%% 疾病抵抗并有 %d%% 概率在近战时散播你目标身上现有的疾病。]]):
 		format(t.getDiseaseImmune(self, t)*100, t.getDiseaseSpread(self, t))
 	end,
 }
@@ -35,11 +35,11 @@ registerTalentTranslation{
 	id = "T_ACID_BLOOD",
 	name = "酸性血液",
 	info = function(self, t)
-		return ([[你 的 血 液 变 成 酸 性 混 合 物。 当 你 受 伤 害 时， 攻 击 者 会 受 到 酸 性 溅 射。 
-		 每 回 合 溅 射 会 造 成 %0.2f 酸 性 伤 害， 持 续 5 回 合。 
-		 同 时 减 少 攻 击 者 %d 点 命 中。 
-		 在 等 级 3 时， 酸 性 溅 射 会 减 少 目 标 %d 点 护 甲 持 续 5 回 合。 
-		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成。]]):
+		return ([[你的血液变成酸性混合物。当你受伤害时，攻击者会受到酸性溅射。 
+		 每回合溅射会造成 %0.2f 酸性伤害，持续 5 回合。 
+		 同时减少攻击者 %d 点命中。 
+		 在等级 3 时，酸性溅射会减少目标 %d 点护甲持续 5 回合。 
+		 受法术强度影响，伤害有额外加成。]]):
 		format(damDesc(self, DamageType.ACID, self:combatTalentSpellDamage(t, 5, 30)), self:combatTalentSpellDamage(t, 15, 35), self:combatTalentSpellDamage(t, 15, 40))
 	end,
 }

@@ -7,9 +7,9 @@ registerTalentTranslation{
 		local radius = self:getTalentRadius(t)
 		local turn = t.getBlindPower(self, t)
 		local dam = t.getDamage(self, t)
-		return ([[制 造 一 个 发 光 的 球 体， 照 亮 %d 码 半 径 范 围 区 域。 
-		 在 等 级 3 时， 它 同 时 可 以 致 盲 看 到 它 的 人（ 施 法 者 除 外） %d 回 合。 
-		 在 等 级 4 时， 它 会 造 成 %0.2f 点 光 系 伤 害。]]):
+		return ([[制造一个发光的球体，照亮 %d 码半径范围区域。 
+		 在等级 3 时，它同时可以致盲看到它的人（施法者除外） %d 回合。 
+		 在等级 4 时，它会造成 %0.2f 点光系伤害。]]):
 		format(radius, turn, damDesc(self, DamageType.LIGHT, dam))
 	end,
 }
@@ -19,8 +19,8 @@ registerTalentTranslation{
 	name = "模糊视觉",
 	info = function(self, t)
 		local defence = t.getDefense(self, t)
-		return ([[施 法 者 的 形 象 变 的 模 糊 不 清， 增 加 %d 点 闪 避。 
-		 受 法 术 强 度 影 响， 闪 避 有 额 外 加 成。]]):
+		return ([[施法者的形象变的模糊不清，增加 %d 点闪避。 
+		 受法术强度影响，闪避有额外加成。]]):
 		format(defence)
 	end,
 }
@@ -30,8 +30,8 @@ registerTalentTranslation{
 	name = "幻象护盾",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
-		return ([[施 法 者 被 幻 象 护 盾 所 包 围， 有10%%几率闪避武器攻击。 若 你 受 到 近 战 打 击， 此 护 盾 会 对 攻 击 者 造 成 %d 点 光 系 伤 害。 
-		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成。]]):
+		return ([[施法者被幻象护盾所包围，有10%%几率闪避武器攻击。若你受到近战打击，此护盾会对攻击者造成 %d 点光系伤害。 
+		 受法术强度影响，伤害有额外加成。]]):
 		format(damDesc(self, DamageType.LIGHT, damage))
 	end,
 }
@@ -41,11 +41,11 @@ registerTalentTranslation{
 	name = "隐形",
 	info = function(self, t)
 		local invisi = t.getInvisibilityPower(self, t)
-		return ([[施 法 者 从 视 线 中 淡 出， 额 外 增 加 %d 点 隐 形 强 度。 
-		 注 意： 你 必 须 取 下 装 备 中 的 灯 具， 否 则 你 仍 然 会 被 轻 易 发 现。 
-		 由 于 你 变 的 不 可 见， 你 脱 离 了 相 位 现 实。 你 的 所 有 攻 击 降 低 70%% 伤 害。 
-		 当 此 技 能 激 活 时， 它 会 持 续 消 耗 你 的 法 力（ 2 法 力 / 回 合）。 
-		 受 法 术 强 度 影 响， 隐 形 强 度 有 额 外 加 成。]]):
+		return ([[施法者从视线中淡出，额外增加 %d 点隐形强度。 
+		 注意：你必须取下装备中的灯具，否则你仍然会被轻易发现。 
+		 由于你变的不可见，你脱离了相位现实。你的所有攻击降低 70%% 伤害。 
+		 当此技能激活时，它会持续消耗你的法力（ 2 法力 / 回合）。 
+		 受法术强度影响，隐形强度有额外加成。]]):
 		format(invisi)
 	end,
 }

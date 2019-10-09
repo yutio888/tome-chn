@@ -4,10 +4,10 @@ registerTalentTranslation{
 	id = "T_ICE_CLAW",
 	name = "冰爪",
 	info = function(self, t)
-		return ([[你 召 唤 强 大 的 冰 龙 之 爪，在 半 径 %d 范 围 内 造 成 %d%% 寒 冰 武 器 伤 害，有 一 定 几 率 冻 结 目 标。
-		同 时 ， 该 技 能 每 等 级 增 加 物 理 豁 免 2 点。 
-		每 一 点 冰 龙 系 技 能 同 时 也 能 增 加 你 的 寒 冷 抵 抗 1%% 。
-		如 果 你 装 备 了 盾 牌 ，这 一 技 能 也 会 用 你 的 盾 牌 攻 击 。]]):format(self:getTalentRadius(t),100 * t.damagemult(self, t))
+		return ([[你召唤强大的冰龙之爪，在半径 %d 范围内造成 %d%% 寒冰武器伤害，有一定几率冻结目标。
+		同时，该技能每等级增加物理豁免 2 点。 
+		每一点冰龙系技能同时也能增加你的寒冷抵抗 1%% 。
+		如果你装备了盾牌，这一技能也会用你的盾牌攻击。]]):format(self:getTalentRadius(t),100 * t.damagemult(self, t))
 	end,
 }
 
@@ -16,10 +16,10 @@ registerTalentTranslation{
 	name = "冰肤术",
 	info = function(self, t)
 		local life = t.getLifePct(self, t)
-		return ([[你 的 皮 肤 上 覆 盖 了 寒 冰 ， 血 肉 更 加 坚 硬。 增 加 %d%% 最 大 生 命 与 %d 护 甲 值。
-		同 时 ， 你 对 近 战 命 中 你 的 目 标 造 成 %0.2f 寒 冷 伤 害 。
-		每 一 点 冰 龙 系 技 能 同 时 也 能 增 加 你 的 寒 冷 抵 抗 1%% 。
-		生 命 加 成 受 技 能 等 级 影 响，护 甲 和 伤 害 受 精 神 强 度 加 成。]]):format(life * 100, t.getArmor(self, t), damDesc(self, DamageType.COLD, t.getDamageOnMeleeHit(self, t)))
+		return ([[你的皮肤上覆盖了寒冰，血肉更加坚硬。增加 %d%% 最大生命与 %d 护甲值。
+		同时，你对近战命中你的目标造成 %0.2f 寒冷伤害。
+		每一点冰龙系技能同时也能增加你的寒冷抵抗 1%% 。
+		生命加成受技能等级影响，护甲和伤害受精神强度加成。]]):format(life * 100, t.getArmor(self, t), damDesc(self, DamageType.COLD, t.getDamageOnMeleeHit(self, t)))
 	end,
 }
 
@@ -29,9 +29,9 @@ registerTalentTranslation{
 	info = function(self, t)
 		local icerad = t.getIceRadius(self, t)
 		local icedam = t.getIceDamage(self, t)
-		return ([[召 唤 一 条 长 度 %d 的 冰 墙 ， 持 续 %d 回 合 。冰 墙 是 透 明 的 ， 但 能 阻 挡 抛 射 物 和 敌 人 。
-		冰 墙 会 释 放 极 度 寒 气， 每 格 墙 壁 对 半 径 %d 内 的 敌 人 造 成 %0.2f 伤 害 ， 并 有 25%% 几 率 冻 结 。 寒 气 不 会 伤 害 释 放 者 及 其 召 唤 物 。
-		每 一 点 冰 龙 系 技 能 同 时 也 能 增 加 你 的 寒 冷 抵 抗 1%% 。]]):format(3 + math.floor(self:getTalentLevel(t) / 2) * 2, t.getDuration(self, t), damDesc(self, DamageType.COLD, icedam),  icerad)
+		return ([[召唤一条长度 %d 的冰墙，持续 %d 回合。冰墙是透明的，但能阻挡抛射物和敌人。
+		冰墙会释放极度寒气，每格墙壁对半径 %d 内的敌人造成 %0.2f 伤害，并有 25%% 几率冻结。寒气不会伤害释放者及其召唤物。
+		每一点冰龙系技能同时也能增加你的寒冷抵抗 1%% 。]]):format(3 + math.floor(self:getTalentLevel(t) / 2) * 2, t.getDuration(self, t), damDesc(self, DamageType.COLD, icedam),  icerad)
 	end,
 }
 
@@ -40,9 +40,9 @@ registerTalentTranslation{
 	name = "冰息术",
 	message = "@Source@ 呼出冰块!",
 	info = function(self, t)
-		return ([[向 前 方 %d 码 范 围 施 放 一 个 锥 形 冰 冻 吐 息， 范 围 内 所 有 目 标 受 到 %0.2f 寒 冷 伤 害，并被冻结3回合。
-		受 力 量 影 响， 伤 害 有 额 外 加 成。 技 能 暴 击 率 基 于 精 神 暴 击 值 计 算 ， 冻 结 几 率 受 精 神 强 度 影 响 。 
-		每 一 点 冰 龙 系 技 能 同 时 也 能 增 加 你 的 寒 冷 抵 抗 1%% 。]]):format(self:getTalentRadius(t), damDesc(self, DamageType.COLD, t.getDamage(self, t)))
+		return ([[向前方 %d 码范围施放一个锥形冰冻吐息，范围内所有目标受到 %0.2f 寒冷伤害，并被冻结3回合。
+		受力量影响，伤害有额外加成。技能暴击率基于精神暴击值计算，冻结几率受精神强度影响。 
+		每一点冰龙系技能同时也能增加你的寒冷抵抗 1%% 。]]):format(self:getTalentRadius(t), damDesc(self, DamageType.COLD, t.getDamage(self, t)))
 	end,
 }
 

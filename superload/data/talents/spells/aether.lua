@@ -5,10 +5,10 @@ registerTalentTranslation{
 	name = "以太螺旋",
 	info = function(self, t)
 		local dam = t.getDamage(self, t)
-		return ([[你 凝 聚 以 太 能 量， 释 放 出 一 个 以 太 螺 旋， 对 周 围 目 标 造 成 %0.2f 奥 术 伤 害 并 且 有 25 ％ 几 率 沉 默 目 标。 
-		 以 太 螺 旋 每 回 合 也 会 对 中 心 点 造 成 10 ％ 的 伤 害（ 但 是 不 会 沉 默 目 标）。 
-		 螺 旋 会 以 难 以 置 信 的 速 度 旋 转。（ 1600 ％ 基 础 速 度），对每个单位最多一个回合击中3次。 
-		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成。]]):
+		return ([[你凝聚以太能量，释放出一个以太螺旋，对周围目标造成 %0.2f 奥术伤害并且有 25 ％几率沉默目标。 
+		 以太螺旋每回合也会对中心点造成 10 ％的伤害（但是不会沉默目标）。 
+		 螺旋会以难以置信的速度旋转。（ 1600 ％基础速度），对每个单位最多一个回合击中3次。 
+		 受法术强度影响，伤害有额外加成。]]):
 		format(damDesc(self, DamageType.ARCANE, dam))
 	end,
 }
@@ -18,9 +18,9 @@ registerTalentTranslation{
 	name = "以太裂隙",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
-		return ([[撕 裂 位 面， 暂 时 产 生 通 往 以 太 空 间 的 裂 隙， 在 目 标 区 域 造 成 %d 个 随 机 魔 法 爆 炸。 
-		 每 个 爆 炸 在 2 码 范 围 内 造 成 %0.2f 奥 术 伤 害， 并 且 每 回 合 只 能 触 发 一 次 爆 炸。 
-		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成。]]):
+		return ([[撕裂位面，暂时产生通往以太空间的裂隙，在目标区域造成 %d 个随机魔法爆炸。 
+		 每个爆炸在 2 码范围内造成 %0.2f 奥术伤害，并且每回合只能触发一次爆炸。 
+		 受法术强度影响，伤害有额外加成。]]):
 		format(t.getNb(self, t), damDesc(self, DamageType.ARCANE, damage))
 	end,
 }
@@ -29,8 +29,8 @@ registerTalentTranslation{
 	id = "T_AETHER_AVATAR",
 	name = "以太之体",
 	info = function(self, t)
-		return ([[你 的 身 体 与 以 太 能 量 相 融， 持 续 %d 回 合。 
-		 当 此 技 能 激 活 时 ，你 每 回 合 第 一 次 使 用 非 持 续 ，非 奥 术 或 以 太 系 技 能 都 会 失 去 50 点 法 力 值 。你 的 奥 术 系 和 以 太 系 技 能 冷 却 时 间 除 以 3 ，你 的 奥 术 伤 害 加 成 和 抗 性 穿 透 增 加 25%%，你 的 干 扰 护 盾 的 半 径 增 加 到 10 ，你 的 最 大 法 力 值 增 加 33%%。]]):
+		return ([[你的身体与以太能量相融，持续 %d 回合。 
+		 当此技能激活时，你每回合第一次使用非持续，非奥术或以太系技能都会失去 50 点法力值。你的奥术系和以太系技能冷却时间除以 3 ，你的奥术伤害加成和抗性穿透增加 25%%，你的干扰护盾的半径增加到 10 ，你的最大法力值增加 33%%。]]):
 		format(t.getNb(self, t))
 	end,
 }
@@ -41,8 +41,8 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damageinc = t.getDamageIncrease(self, t)
 		local ressistpen = t.getResistPenalty(self, t)
-		return ([[纯 净 的 以 太 能 量 环 绕 着 你， 增 加 %0.1f%% 奥 术 伤 害 并 且 无 视 目 标 %d%% 奥 术 抵 抗。 
-		 在 等 级 4 时， 允 许 你 在 以 太 之 体 的 形 态 下 使 用 防 护 系 技 能而不受任何惩罚。]])
+		return ([[纯净的以太能量环绕着你，增加 %0.1f%% 奥术伤害并且无视目标 %d%% 奥术抵抗。 
+		 在等级 4 时，允许你在以太之体的形态下使用防护系技能而不受任何惩罚。]])
 		:format(damageinc, ressistpen)
 	end,
 }

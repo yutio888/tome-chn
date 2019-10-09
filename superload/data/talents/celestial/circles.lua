@@ -7,9 +7,9 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local duration = t.getDuration(self, t)
 		local radius = self:getTalentRadius(t)
-		return ([[在 你 的 脚 下 创 造 一 个 %d 码 半 径 范 围 的 阵 法， 它 会 提 高 你 %d 近 身 闪 避 和 所 有 豁 免 ， 并 对 周 围 目 标 造 成 %0.2f 暗 影 伤 害。 
-		 阵 法 持 续 %d 回 合。 
-		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成。  ]]):
+		return ([[在你的脚下创造一个 %d 码半径范围的阵法，它会提高你 %d 近身闪避和所有豁免，并对周围目标造成 %0.2f 暗影伤害。 
+		 阵法持续 %d 回合。 
+		 受法术强度影响，伤害有额外加成。  ]]):
 		format(radius, damage, (damDesc (self, DamageType.DARKNESS, damage)), duration)
 	end,
 }
@@ -21,8 +21,8 @@ registerTalentTranslation{
 		local duration = t.getDuration(self, t)
 		local radius = self:getTalentRadius(t)
 		local damage = t.getDamage(self, t)
-		return ([[在 你 的 脚 下 制 造 一 个 %d 码 半 径 范 围 的 法 阵， 当 你 在 法 阵 内， 它 会 使 你 免 疫 沉 默 效 果 ， 沉 默 进 入 此 范 围 内 的 敌 人 ， 并 对 其 造 成  %d 光 系 伤 害 。
-		 阵 法 持 续 %d 回 合。]]):
+		return ([[在你的脚下制造一个 %d 码半径范围的法阵，当你在法阵内，它会使你免疫沉默效果，沉默进入此范围内的敌人，并对其造成  %d 光系伤害。
+		 阵法持续 %d 回合。]]):
 		format(radius, damDesc(self, DamageType.LIGHT, damage), duration)
 	end,
 }
@@ -34,10 +34,10 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local duration = t.getDuration(self, t)
 		local radius = self:getTalentRadius(t)
-		return ([[在 你 的 脚 下 制 造 一 个 %d 码 半 径 范 围 的 法 阵， 它 会 减 慢 %d%% 抛 射 物 速 度 并 将 除 你 外 的 其 他 生 物 推 出 去。 
-		 同 时， 每 回 合 对 目 标 造 成 %0.2f 光 系 伤 害 和 %0.2f 暗 影 伤 害。 
-		 法 阵 持 续 %d 回 合。 
-		 受 法 术 强 度 影 响， 效 果 有 额 外 加 成。]]):
+		return ([[在你的脚下制造一个 %d 码半径范围的法阵，它会减慢 %d%% 抛射物速度并将除你外的其他生物推出去。 
+		 同时，每回合对目标造成 %0.2f 光系伤害和 %0.2f 暗影伤害。 
+		 法阵持续 %d 回合。 
+		 受法术强度影响，效果有额外加成。]]):
 		format(radius, damage*5, (damDesc (self, DamageType.LIGHT, damage)), (damDesc (self, DamageType.DARKNESS, damage)), duration)
 	end,
 }
@@ -46,11 +46,11 @@ registerTalentTranslation{
 	id = "T_CELESTIAL_SURGE",
 	name = "天体潮涌",
 	info = function(self, t)
-		return ([[从 你 的 法 阵 中 召 唤 天 体 能 量 的 潮 涌 。 任 何 站 在 你 的 法 阵 中 的 敌 人 将 会 被 减 速 %d%% ， 并 受 到 %d 光 系 和 %d 黑 暗 伤 害 。
-		能 量 潮 涌 的 残 余 力 量 将 会 从 你 的 法 阵 中 发 出 。 在 %d 回 合 内 ， 你 每 站 在 一 个 法 阵 中 ， 都 会 获 得 额 外 的 天 体 能 量 恢 复。
-		暗 影 之 阵 ： 获 得 +1 负 能 量 。
-		圣 洁 之 阵 ： 获 得 +1 正 能 量 。
-		守 护 之 阵 ： 获 得 +0.5 正 能 量 和 负 能 量 。]]):format(t.getSlow(self, t), damDesc(self, DamageType.LIGHT, t.getDamage(self, t)), damDesc(self, DamageType.DARKNESS, t.getDamage(self, t)), t.getDuration(self, t))
+		return ([[从你的法阵中召唤天体能量的潮涌。任何站在你的法阵中的敌人将会被减速 %d%% ，并受到 %d 光系和 %d 黑暗伤害。
+		能量潮涌的残余力量将会从你的法阵中发出。在 %d 回合内，你每站在一个法阵中，都会获得额外的天体能量恢复。
+		暗影之阵：获得 +1 负能量。
+		圣洁之阵：获得 +1 正能量。
+		守护之阵：获得 +0.5 正能量和负能量。]]):format(t.getSlow(self, t), damDesc(self, DamageType.LIGHT, t.getDamage(self, t)), damDesc(self, DamageType.DARKNESS, t.getDamage(self, t)), t.getDuration(self, t))
 	end,
 }
 

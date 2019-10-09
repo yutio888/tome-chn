@@ -4,8 +4,8 @@ registerTalentTranslation{
 	name = "敏捷防御",
 	info = function (self,t)
 		local chance = t.getChance(self, t)
-		return ([[你 学 会 了 在 战 斗 中 灵 敏 使 用 投 石 索 和 盾 牌 的 技 巧 。 允 许 你 装 备 盾 牌 ， 用  敏 捷 代 替 力 量 需 求 。
-当 你 装 备 盾 牌 ， 且 格 挡 技 能 未 进 入 冷 却 时，有 %d%% 几 率 抵 挡 攻 击 ， 减 免 50%% 格 挡 值 的 伤 害 。]])
+		return ([[你学会了在战斗中灵敏使用投石索和盾牌的技巧。允许你装备盾牌，用  敏捷代替力量需求。
+当你装备盾牌，且格挡技能未进入冷却时，有 %d%% 几率抵挡攻击，减免 50%% 格挡值的伤害。]])
 			:format(chance)
 	end,
 }
@@ -15,9 +15,9 @@ registerTalentTranslation{
 	info = function (self,t)
 		local dam = t.getDamage(self, t) * 100
 		local range = t.getDist(self, t)
-		return ([[用盾 牌 踩 在 临 近 目 标 上 ， 造 成 %d%% 伤 害 并 眩 晕 2 回 合 ，  之 后 将 其 做 为 跳 板 跃 向 %d 格 内 的 空 地 。
-盾 袭 将 使 用 敏 捷 代 替 力 量 决 定 盾 牌 伤 害 。
-技 能 等 级 5 时， 你 将 在 落 地 后 立 刻 进 入 格 挡 状 态。]])
+		return ([[用盾牌踩在临近目标上，造成 %d%% 伤害并眩晕 2 回合，  之后将其做为跳板跃向 %d 格内的空地。
+盾袭将使用敏捷代替力量决定盾牌伤害。
+技能等级 5 时，你将在落地后立刻进入格挡状态。]])
 		:format(dam, range)
 	end,
 }
@@ -25,10 +25,10 @@ registerTalentTranslation{
 	id = "T_BULL_SHOT",
 	name = "冲锋射击",
 	info = function (self,t)
-		return ([[你 冲 向 敌 人 ， 同 时 准 备 射 击 。当 你 接 近 敌 人 时 ， 立 刻 射 击 ， 释 放 强 大 的 威 力。
-		射 击 造 成 %d%% 武 器 伤 害 并 击 退 目 标 %d 格.
-		每 次 你 移 动 时 ， 该 技 能 的 冷 却 时 间 减 少 1 回 合 。
-		该 技 能 需 要 投 石 索。]]):
+		return ([[你冲向敌人，同时准备射击。当你接近敌人时，立刻射击，释放强大的威力。
+		射击造成 %d%% 武器伤害并击退目标 %d 格.
+		每次你移动时，该技能的冷却时间减少 1 回合。
+		该技能需要投石索。]]):
 		format(t.getDamage(self,t)*100, t.getDist(self, t))
 	end,
 }
@@ -39,9 +39,9 @@ registerTalentTranslation{
 		local atk = t.getAttackSpeed(self,t)*100
 		local move = t.getMovementSpeed(self,t)*100
 		local turn = t.getTurn(self,t)
-		return ([[进 入 流 畅 而 灵 活 的 射 击 姿 势 ， 更 适 用 于 近 战 。 你 的 远 程 攻 击 速 度 增 加 %d%% ， 每 次 射 击 令 你 在 两 回 合 内 移 动 速 度 增 加 %d%%  。
-命 中 敌 人 的 远 程 攻 击 将 给 你 带 来 %d%% 额 外 回 合，该 效 果 对 三 格 以 内 的 目 标 有 100%% 效 果 ， 每 增 加 1 格 距 离 ， 效 果 降 低 20%% ( 8 格 降 为 0 %% )。该 效 果 每 回 合 只 能 生 效 一 次 。
-该 技 能 需 要 投 石 索。]]):
+		return ([[进入流畅而灵活的射击姿势，更适用于近战。你的远程攻击速度增加 %d%% ，每次射击令你在两回合内移动速度增加 %d%%  。
+命中敌人的远程攻击将给你带来 %d%% 额外回合，该效果对三格以内的目标有 100%% 效果，每增加 1 格距离，效果降低 20%% ( 8 格降为 0 %% )。该效果每回合只能生效一次。
+该技能需要投石索。]]):
 		format(atk, move, turn)
 	end,
 }

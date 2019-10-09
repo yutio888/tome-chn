@@ -6,8 +6,8 @@ registerTalentTranslation{
 	info = function(self, t)
 		local heal = t.getHeal(self, t)
 		local cure = t.numCure(self, t)
-		return ([[用 你 的 精 神 力 量  重 组 并 调 整 你 的 身 体 ， 移 除 最 多 %d 负 面 物 理 状 态  并 治 愈 %d 生 命。
-		受 精 神 强 度 影 响，治 疗 量 有 额 外 加 成。]]):
+		return ([[用你的精神力量  重组并调整你的身体，移除最多 %d 负面物理状态  并治愈 %d 生命。
+		受精神强度影响，治疗量有额外加成。]]):
 		format(cure, heal)
 	end,
 }
@@ -19,10 +19,10 @@ registerTalentTranslation{
 		local weapon_boost = t.damBoost(self, t)
 		local arm = t.armorBoost(self, t)
 		local fat = t.fatigueBoost(self, t)
-		return ([[操 纵 力 量 从 分 子 层 面 重 组 、平 衡 、磨 砺你的装备。
-		你 装 备 的 每 一 件 武 器 都 会 提 升 %d 的命中和伤害。灵 晶 不 能 被 调 整 ，因 为 他 们 已 经 是 完 美 的 自 然 形 态 。
-		你 每 件 身 上 的 护 甲 和 盾 牌 增 加 你 %d 护 甲 ，同 时 减 少 %d 疲 劳 。
-		该 技 能 效 果 受 精 神 强 度 影 响。]]):
+		return ([[操纵力量从分子层面重组、平衡、磨砺你的装备。
+		你装备的每一件武器都会提升 %d 的命中和伤害。灵晶不能被调整，因为他们已经是完美的自然形态。
+		你每件身上的护甲和盾牌增加你 %d 护甲，同时减少 %d 疲劳。
+		该技能效果受精神强度影响。]]):
 		format(weapon_boost, arm, fat)
 	end,
 }
@@ -32,9 +32,9 @@ registerTalentTranslation{
 	name = "宝石能量",
 	info = function(self, t)
 		local amt = t.energy_per_turn(self, t)
-		return ([[任 何 优 秀 的 心 灵 杀 手 都 知 道 ，物 质 就 是 能 量 。遗 憾 的 是 ，大 多 数 物 质 由 于 分 子 成 分 的 复 杂 性 无 法 转 换 。然 而 ，宝 石 有 序 的 晶 体 结 构 使 得 部 分 物 质 转 化 为 能 量 成 为 可 能 。
-		这 个 技 能 消 耗 一 个 宝 石 ，在 5~13 回 合 内 ，每 回 合 获 得 %d 超能力值 ，持 续 回 合 取 决 于 所 用 的 宝 石 品 质 。
-		在 持 续 时 间 内 同 时 获 得 一 个 共 振 领 域 提 供 宝 石 的 效 果 ]]):
+		return ([[任何优秀的心灵杀手都知道，物质就是能量。遗憾的是，大多数物质由于分子成分的复杂性无法转换。然而，宝石有序的晶体结构使得部分物质转化为能量成为可能。
+		这个技能消耗一个宝石，在 5~13 回合内，每回合获得 %d 超能力值，持续回合取决于所用的宝石品质。
+		在持续时间内同时获得一个共振领域提供宝石的效果 ]]):
 		format(amt)
 	end,
 }
@@ -44,10 +44,10 @@ registerTalentTranslation{
 	name = "共振聚焦",
 	info = function(self, t)
 		local inc = t.bonus(self,t)
-		return ([[通 过 小 心 的 同 步 你 的 精 神 和 灵 能 聚 焦 的 共 振 频 率 ，强 化 灵 能 聚 焦 的 效 果 
-		对 于 武 器 ，提 升 你 的 意 志 和 灵 巧 来 代 替 力 量 和 敏 捷 的 百 分 比 ，从 60%%  到  %d%%.
-		对 于 灵 晶 ，提 升 %d%% 将 敌 人 抓 取 过 来 的几 率 .
-		对 于 宝 石 ，提 升 %d 额 外 全 属 性。]]):
+		return ([[通过小心的同步你的精神和灵能聚焦的共振频率，强化灵能聚焦的效果 
+		对于武器，提升你的意志和灵巧来代替力量和敏捷的百分比，从 60%%  到  %d%%.
+		对于灵晶，提升 %d%% 将敌人抓取过来的几率 .
+		对于宝石，提升 %d 额外全属性。]]):
 		format(60+inc, inc, math.ceil(inc/5))
 	end,
 }

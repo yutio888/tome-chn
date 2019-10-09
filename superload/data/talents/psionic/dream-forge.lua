@@ -6,11 +6,11 @@ registerTalentTranslation{
 	info = function(self, t)
 		local power = t.getPower(self, t)
 		local dur = t.getDuration(self, t)
-		return ([[当 你 将 要 承 受 一 次 超 过 15 ％ 最 大 生 命 值 的 攻 击 时， 你 会 锻 造 一 个 熔 炉 屏 障 来 保 护 自 己， 减 少 %0.2f 点 所 有 该 类 型 攻 击 伤 害 于 下 %d 回 合。 
-		 熔 炉 屏 障 能 够 同 时 格 挡 多 种 类 型 的 伤 害， 但 是 每 一 种 已 拥 有 的 格 挡 类 型 会 使 伤 害 临 界 点 上 升 15 ％。
-		 如 果 你 完 全 格 挡 了 某 一 攻 击 者 的 伤 害， 则 此 攻 击 者 受 到 持 续 1 回 合 的 反 击 DEBUFF（ 200 ％ 普 通 近 身 或 远 程 伤 害）。 
-		 在 等 级 5 时， 格 挡 效 果 将 持 续 2 回 合。 
-		 受 精 神 强 度 影 响， 格 挡 值 按 比 例 加 成。]]):format(power, dur)
+		return ([[当你将要承受一次超过 15 ％最大生命值的攻击时，你会锻造一个熔炉屏障来保护自己，减少 %0.2f 点所有该类型攻击伤害于下 %d 回合。 
+		 熔炉屏障能够同时格挡多种类型的伤害，但是每一种已拥有的格挡类型会使伤害临界点上升 15 ％。
+		 如果你完全格挡了某一攻击者的伤害，则此攻击者受到持续 1 回合的反击 DEBUFF（ 200 ％普通近身或远程伤害）。 
+		 在等级 5 时，格挡效果将持续 2 回合。 
+		 受精神强度影响，格挡值按比例加成。]]):format(power, dur)
 	end,
 }
 
@@ -22,9 +22,9 @@ registerTalentTranslation{
 		local radius = self:getTalentRadius(t)
 		local duration = t.getDuration(self, t)
 		local forge_damage = t.getForgeDamage(self, t)/2
-		return ([[将 梦 之 熔 炉 的 风 箱 打 开， 朝 向 你 的 四 周， 对 锥 形 范 围 内 敌 人 造 成 %0.2f 精 神 伤 害， %0.2f 燃 烧 伤 害 并 造 成 击 退 效 果。 锥 型 范 围 的 半 径 为 %d 码 。
-		 空 旷 的 地 面 有 50 ％ 几 率 转 化 为 持 续 %d 回 合 的 熔 炉 外 壁。 熔 炉 外 壁 阻 挡 移 动， 并 对 周 围 敌 人 造 成 %0.2f 的 精 神 伤 害 和 %0.2f 的 火 焰 伤 害。 
-		 受 精 神 强 度 影 响， 伤 害 和 击 退 几 率 按 比 例 加 成。]]):
+		return ([[将梦之熔炉的风箱打开，朝向你的四周，对锥形范围内敌人造成 %0.2f 精神伤害， %0.2f 燃烧伤害并造成击退效果。锥型范围的半径为 %d 码。
+		 空旷的地面有 50 ％几率转化为持续 %d 回合的熔炉外壁。熔炉外壁阻挡移动，并对周围敌人造成 %0.2f 的精神伤害和 %0.2f 的火焰伤害。 
+		 受精神强度影响，伤害和击退几率按比例加成。]]):
 		format(damDesc(self, DamageType.MIND, blast_damage), damDesc(self, DamageType.FIRE, blast_damage), radius, duration, damDesc(self, DamageType.MIND, forge_damage), damDesc(self, DamageType.FIRE, forge_damage))
 	end,
 }
@@ -36,8 +36,8 @@ registerTalentTranslation{
 		local armor = t.getArmor(self, t)
 		local defense = t.getDefense(self, t)
 		local psi = t.getPsiRegen(self, t)
-		return([[你 的 熔 炉 屏 障 技 能 现 在 可 以 增 加 你 %d 点 护 甲， %d 点 闪 避， 并 且 当 你 被 近 战 或 远 程 攻 击 击 中 时 给 予 你 %0.2f 超 能 力 值。 
-		 受 精 神 强 度 影 响， 增 益 按 比 例 加 成。]]):format(armor, defense, psi)
+		return([[你的熔炉屏障技能现在可以增加你 %d 点护甲， %d 点闪避，并且当你被近战或远程攻击击中时给予你 %0.2f 超能力值。 
+		 受精神强度影响，增益按比例加成。]]):format(armor, defense, psi)
 	end,
 }
 
@@ -51,13 +51,13 @@ registerTalentTranslation{
 		local duration = t.getDuration(self, t)
 		local chance = t.getChance(self, t)
 		local fail = t.getFailChance(self,t)
-		return ([[你 将 脑 海 里 锻 造 的 冲 击 波 向 四 周 释 放。 
-		 每 回 合 当 你 保 持 静 止， 你 将 会 锤 击 梦 之 熔 炉， 对 周 围 敌 人 造 成 精 神 和 燃 烧 伤 害。 
-		 此 效 果 将 递 增 5 个 回 合， 直 至 %d 码 最 大 范 围， %0.2f 最 大 精 神 伤 害 和 %0.2f 最 大 燃 烧 伤 害。 
-		 此 刻， 你 将 会 打 破 那 些 听 到 熔 炉 声 的 敌 人 梦 境， 减 少 它 们 %d 精 神 豁 免， 并 且 由 于 敲 击 熔 炉 的 
-		 巨 大 回 声， 它 们 将 获 得 一 个 %d%% 的 法 术 失 败 率， 持 续 %d 回 合。 
-		 梦 境 破 碎 有 %d%% 几 率 对 你 的 敌 人 产 生 锁 脑 效 果。 
-		 受 精 神 强 度 影 响， 伤 害 和 梦 境 打 破 效 果 按 比 例 加 成。]]):
+		return ([[你将脑海里锻造的冲击波向四周释放。 
+		 每回合当你保持静止，你将会锤击梦之熔炉，对周围敌人造成精神和燃烧伤害。 
+		 此效果将递增 5 个回合，直至 %d 码最大范围， %0.2f 最大精神伤害和 %0.2f 最大燃烧伤害。 
+		 此刻，你将会打破那些听到熔炉声的敌人梦境，减少它们 %d 精神豁免，并且由于敲击熔炉的 
+		 巨大回声，它们将获得一个 %d%% 的法术失败率，持续 %d 回合。 
+		 梦境破碎有 %d%% 几率对你的敌人产生锁脑效果。 
+		 受精神强度影响，伤害和梦境打破效果按比例加成。]]):
 		format(radius, damDesc(self, DamageType.MIND, damage), damDesc(self, DamageType.FIRE, damage), power, fail, duration, chance)
 	end,
 }

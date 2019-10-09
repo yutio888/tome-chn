@@ -4,9 +4,9 @@ registerTalentTranslation{
 	id = "T_RUSH",
 	name = "冲锋",
 	info = function(self, t)
-		return ([[快速冲向敌人，并造成 120% 基 础 武 器 伤 害。 
-		如 果 此 次 攻 击 命 中， 那 么 目 标 会 被 眩 晕 3 回 合。 
-		你 必 须 从 至 少 2 码 以 外 开 始 冲 锋。]])
+		return ([[快速冲向敌人，并造成 120% 基础武器伤害。 
+		如果此次攻击命中，那么目标会被眩晕 3 回合。 
+		你必须从至少 2 码以外开始冲锋。]])
 	end,
 }
 
@@ -14,8 +14,8 @@ registerTalentTranslation{
 	id = "T_PRECISE_STRIKES",
 	name = "精准打击",
 	info = function(self, t)
-		return ([[你 集 中 精 神 攻 击， 减 少 你 %d%% 攻 击 速 度 并 增 加 你 %d 点 命 中 和 %d%% 暴 击 率。 
-		受 敏 捷 影 响， 此 效 果 有 额 外 加 成。]]):
+		return ([[你集中精神攻击，减少你 %d%% 攻击速度并增加你 %d 点命中和 %d%% 暴击率。 
+		受敏捷影响，此效果有额外加成。]]):
 		format(10, t.getAtk(self, t), t.getCrit(self, t))
 	end,
 }
@@ -24,7 +24,7 @@ registerTalentTranslation{
 	id = "T_PERFECT_STRIKE",
 	name = "完美打击",
 	info = function(self, t)
-		return ([[你 已 经 学 会 专 注 你 的 攻 击 来 命 中 目 标， 增 加 %d 命 中 并 使 你 在 攻 击 你 看 不 见 的 目 标 时 不 再 受 到 额 外 惩 罚， 持 续 %d 回 合。]]):format(t.getAtk(self, t), t.getDuration(self, t))
+		return ([[你已经学会专注你的攻击来命中目标，增加 %d 命中并使你在攻击你看不见的目标时不再受到额外惩罚，持续 %d 回合。]]):format(t.getAtk(self, t), t.getDuration(self, t))
 	end,
 }
 
@@ -32,7 +32,7 @@ registerTalentTranslation{
 	id = "T_BLINDING_SPEED",
 	name = "急速",
 	info = function(self, t)
-		return ([[通 过 严 格 的 训 练 你 已 经 学 会 在 短 时 间 内 爆 发 你 的 速 度， 提 高 你 %d%% 速 度 5 回 合。]]):format(100*t.getSpeed(self, t))
+		return ([[通过严格的训练你已经学会在短时间内爆发你的速度，提高你 %d%% 速度 5 回合。]]):format(100*t.getSpeed(self, t))
 	end,
 }
 
@@ -40,7 +40,7 @@ registerTalentTranslation{
 	id = "T_QUICK_RECOVERY",
 	name = "快速恢复",
 	info = function(self, t)
-		return ([[你 专 注 于 战 斗， 使 得 你 可 以 更 快 的 回 复 体 力（ +%0.1f 体 力 / 回 合）。]]):format(t.getStamRecover(self, t))
+		return ([[你专注于战斗，使得你可以更快的回复体力（ +%0.1f 体力 / 回合）。]]):format(t.getStamRecover(self, t))
 	end,
 }
 
@@ -48,7 +48,7 @@ registerTalentTranslation{
 	id = "T_FAST_METABOLISM",
 	name = "快速代谢",
 	info = function(self, t)
-		return ([[你 专 注 于 战 斗， 使 你 可 以 更 快 的 回 复 生 命 值（ +%0.1f 生 命 值 / 回 合）。]]):format(t.getRegen(self, t))
+		return ([[你专注于战斗，使你可以更快的回复生命值（ +%0.1f 生命值 / 回合）。]]):format(t.getRegen(self, t))
 	end,
 }
 
@@ -56,7 +56,7 @@ registerTalentTranslation{
 	id = "T_SPELL_SHIELD",
 	name = "法术抵抗",
 	info = function(self, t)
-		return ([[严 格 的 训 练 使 得 你 对 某 些 法 术 效 果 具 有 更 高 的 抗 性（ +%d 法 术 豁 免）。]]):format(self:getTalentLevel(t) * 9)
+		return ([[严格的训练使得你对某些法术效果具有更高的抗性（ +%d 法术豁免）。]]):format(self:getTalentLevel(t) * 9)
 	end,
 }
 
@@ -64,7 +64,7 @@ registerTalentTranslation{
 	id = "T_UNENDING_FRENZY",
 	name = "无尽怒火",
 	info = function(self, t)
-		return ([[你 陶 醉 在 敌 人 的 死 亡 中， 每 杀 死 一 个 敌 人 回 复 %d 体 力 值。]]):format(t.getStamRecover(self, t))
+		return ([[你陶醉在敌人的死亡中，每杀死一个敌人回复 %d 体力值。]]):format(t.getStamRecover(self, t))
 	end,
 }
 

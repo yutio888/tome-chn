@@ -4,14 +4,14 @@ registerTalentTranslation{
 	id = "T_SWALLOW",
 	name = "吞噬",
 	info = function(self, t)
-		return ([[对 目 标 造 成 %d%% 自 然 武 器 伤 害。 
-		 如 果 这 个 攻 击 将 目 标 的 生 命 值 降 低 到 其 最 大 生 命 值 的 一 定 比 例 以 下 （基 于 技 能 等 级 和 两 者 体 型 大 小 ）或 杀 死 了 它 ，你 会 吞 噬 它 ，立 刻 将 其 杀 死 ，并 根 据 其 等 级 恢 复 生 命 值 和 失 衡 值 。
-		 对 方 会 与 你 的 物 理 强 度 进 行 豁 免 对 抗 ，以 防 被 吞 噬 。
-		同 时 ， 这 个 技 能 还 能 被 动 提 升 你 的 物 理 和 精 神 暴 击 率 %d%% 。
-		每 点 土 龙 系 的 天 赋 可 以 使 你 增 加 物 理 抵 抗 0.5%% 。
-		如 果 你 装 备 了 盾 牌 ， 这 一 技 能 也 会 用 你 的 盾 牌 攻 击 。
+		return ([[对目标造成 %d%% 自然武器伤害。 
+		 如果这个攻击将目标的生命值降低到其最大生命值的一定比例以下（基于技能等级和两者体型大小）或杀死了它，你会吞噬它，立刻将其杀死，并根据其等级恢复生命值和失衡值。
+		 对方会与你的物理强度进行豁免对抗，以防被吞噬。
+		同时，这个技能还能被动提升你的物理和精神暴击率 %d%% 。
+		每点土龙系的天赋可以使你增加物理抵抗 0.5%% 。
+		如果你装备了盾牌，这一技能也会用你的盾牌攻击。
 
-		基 于 你 目 前 的 体 型 ， 吞 噬 的 生 命 值 上 限 如 下 所 示：
+		基于你目前的体型，吞噬的生命值上限如下所示：
 		微小:  %d%%
 		矮小:  %d%%
 		中等:  %d%%
@@ -35,10 +35,10 @@ registerTalentTranslation{
 	info = function(self, t)
 		local radius = self:getTalentRadius(t)
 		local dam = t.getDamage(self, t)
-		return ([[你 猛 踩 大 地， 在 %d 码 范 围 内 造 成 地 震。 
-		 在 地 震 范 围 内 的 怪 物 会 受 到 %d%% 武 器 伤 害 并 被 击 退 3 码。 
-		 在 地 震 范 围 内 的 地 形 也 会 受 到 影 响。 
-		 每 点 土 龙 系 的 天 赋 可 以 使 你 增 加 物 理 抵 抗 0.5%% 。]]):format(radius, dam*100)
+		return ([[你猛踩大地，在 %d 码范围内造成地震。 
+		 在地震范围内的怪物会受到 %d%% 武器伤害并被击退 3 码。 
+		 在地震范围内的地形也会受到影响。 
+		 每点土龙系的天赋可以使你增加物理抵抗 0.5%% 。]]):format(radius, dam*100)
 	end,
 }
 
@@ -46,10 +46,10 @@ registerTalentTranslation{
 	id = "T_BURROW",
 	name = "土遁",
 	info = function(self, t)
-		return ([[允 许 你 钻 进 墙 里， 持 续 %d 回 合。
-		 你 强 大 的 挖 掘 能 力 让 你 能 挖 掘 敌 人 的 防 御 弱 点； 处 于 该 状 态 下 时 你 获 得 %d 护 甲 穿 透 和 %d%% 物 理 抗 性 穿 透 。
-         在 技 能 等 级 5 时 ， 这 个 技 能 变 成 瞬 发 。 冷 却 时 间 随 技 能 等 级 升 高 而 降 低 。
-		 每 点 土 龙 系 的 天 赋 可 以 使 你 增 加 物 理 抵 抗 0.5%% 。]]):format(t.getDuration(self, t), t.getPenetration(self, t), t.getPenetration(self, t) / 2)
+		return ([[允许你钻进墙里，持续 %d 回合。
+		 你强大的挖掘能力让你能挖掘敌人的防御弱点；处于该状态下时你获得 %d 护甲穿透和 %d%% 物理抗性穿透。
+         在技能等级 5 时，这个技能变成瞬发。冷却时间随技能等级升高而降低。
+		 每点土龙系的天赋可以使你增加物理抵抗 0.5%% 。]]):format(t.getDuration(self, t), t.getPenetration(self, t), t.getPenetration(self, t) / 2)
 	end,
 }
 
@@ -60,9 +60,9 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local duration = t.getDuration(self, t)
-		return ([[你 在 前 方 %d 码 锥 形 范 围 内 喷 出 流 沙。 此 范 围 内 的 目 标 会 受 到 %0.2f 物 理 伤 害 并 被 致 盲 %d 回 合。 
-		 受 力 量 影 响， 伤 害 有 额 外 加 成。 技 能 暴 击 率 基 于 精 神 暴 击 值 计 算，致盲几率基于你的精神强度。
-		 每 点 土 龙 系 的 天 赋 可 以 使 你 增 加 物 理 抵 抗 0.5%% 。]]):format(self:getTalentRadius(t), damDesc(self, DamageType.PHYSICAL, damage), duration)
+		return ([[你在前方 %d 码锥形范围内喷出流沙。此范围内的目标会受到 %0.2f 物理伤害并被致盲 %d 回合。 
+		 受力量影响，伤害有额外加成。技能暴击率基于精神暴击值计算，致盲几率基于你的精神强度。
+		 每点土龙系的天赋可以使你增加物理抵抗 0.5%% 。]]):format(self:getTalentRadius(t), damDesc(self, DamageType.PHYSICAL, damage), duration)
 	end,
 }
 

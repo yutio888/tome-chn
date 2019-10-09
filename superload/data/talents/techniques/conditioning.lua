@@ -8,9 +8,9 @@ registerTalentTranslation{
 		local baseheal = t.getHealValues(self, t)
 		local duration = t.getDuration(self, t)
 		local totalheal = baseheal
-		return ([[你 受 中 毒、 疾 病 和 创 伤 的 影 响 较 小， 减 少 %d%% 此 类 效 果 的 持 续 时 间。 
-		此 外 在 生 命值 低 于 50%% 时 ，你的生命回复将会增加 %0.1f ，持 续 %d 回 合 ，共回复 %d 生命值， 但 每 隔 %d 回 合 才 能 触 发 一 次。
-		受 体 质 影 响， 生 命 回 复 有 额 外 加 成。]]):
+		return ([[你受中毒、疾病和创伤的影响较小，减少 %d%% 此类效果的持续时间。 
+		此外在生命值低于 50%% 时，你的生命回复将会增加 %0.1f ，持续 %d 回合，共回复 %d 生命值，但每隔 %d 回合才能触发一次。
+		受体质影响，生命回复有额外加成。]]):
 		format(wounds, baseheal, duration, baseheal*duration, self:getTalentCooldown(t))
 	end,
 }
@@ -20,14 +20,14 @@ registerTalentTranslation{
 	name = "顽强意志",
 	info = function(self, t)
 		local chance = t.getChance(self, t)
-		return ([[你 学 会 从 负 面 状 态 中 快 速 恢 复。 
-		每 回 合 你 有 %d%% 几 率 从 震 慑 效 果 中 恢 复。 
-		在 等 级 2 时， 也 可 以 从 致 盲 效 果 中 恢 复。 
-		在 等 级 3 时， 也 可 以 从 混 乱 效 果 中 恢 复。 
-		在 等 级 4 时， 也 可 以 从 定 身 效 果 中 恢 复。 
-		在 等 级 5 时， 也 可 以 从 减 速 或 流 血 效 果 中 恢 复。 
-		每 回 合 你 只 能 摆 脱 1 种 状 态。 
-		受 体 质 影 响， 恢 复 概 率 按 比 例 加 成。]]):
+		return ([[你学会从负面状态中快速恢复。 
+		每回合你有 %d%% 几率从震慑效果中恢复。 
+		在等级 2 时，也可以从致盲效果中恢复。 
+		在等级 3 时，也可以从混乱效果中恢复。 
+		在等级 4 时，也可以从定身效果中恢复。 
+		在等级 5 时，也可以从减速或流血效果中恢复。 
+		每回合你只能摆脱 1 种状态。 
+		受体质影响，恢复概率按比例加成。]]):
 		format(chance)
 	end,
 }
@@ -38,9 +38,9 @@ registerTalentTranslation{
 	info = function(self, t)
 		local radius = t.getRadius(self, t)
 		local penalty = t.getPenalty(self, t)
-		return ([[敌 人 因 你 的存在而恐 惧。 
-		半径 %d 码 范 围 内 的 敌 人 的 物 理 强 度 ， 精 神 强 度 和 法 术 强 度 会 降 低 %d 。
-		受 物 理 强 度 影 响， 威 胁 效 果 有 加 成。 ]]):
+		return ([[敌人因你的存在而恐惧。 
+		半径 %d 码范围内的敌人的物理强度，精神强度和法术强度会降低 %d 。
+		受物理强度影响，威胁效果有加成。 ]]):
 		format(radius, penalty)
 	end,
 }
@@ -51,10 +51,10 @@ registerTalentTranslation{
 	info = function(self, t)
 		local attack_power = t.getAttackPower(self, t)
 		local duration = t.getDuration(self, t)
-		return ([[你 激 活 肾 上 腺 素 来 增 加 %d 物 理 强 度 持 续 %d 回 合。 
-		此 技 能 激 活 时， 你 可 以 不 知 疲 倦 地 战 斗， 若 体 力 为 0 ， 可 继 续 使 用 消 耗 类 技 能， 代 价 为 消 耗 生 命。 
-		受 体 质 影 响， 物 理 强 度 有 额 外 加 成。 
-		使 用 本 技 能 不 会 消 耗 额 外 回 合。]]):
+		return ([[你激活肾上腺素来增加 %d 物理强度持续 %d 回合。 
+		此技能激活时，你可以不知疲倦地战斗，若体力为 0 ，可继续使用消耗类技能，代价为消耗生命。 
+		受体质影响，物理强度有额外加成。 
+		使用本技能不会消耗额外回合。]]):
 		format(attack_power, duration)
 	end,
 }

@@ -5,8 +5,8 @@ registerTalentTranslation{
 	name = "战争践踏",
 	["require.special.desc"] = "曾使用武器或徒手造成超过50000点伤害",
 	info = function(self, t)
-		return ([[你 跃 向 目 标 地 点， 对 1 码 半 径 范 围 内 的 所 有 敌 人 造 成 200％ 的 武 器 伤 害， 并 眩 晕 目 标 3 回 合。  
-		落 地 后 ，你 解 除 自 身 眩 晕 、定 身 和 震 慑 效 果。
+		return ([[你跃向目标地点，对 1 码半径范围内的所有敌人造成 200％的武器伤害，并眩晕目标 3 回合。  
+		落地后，你解除自身眩晕、定身和震慑效果。
 		]])
 		:format()
 	end,
@@ -17,9 +17,9 @@ registerTalentTranslation{
 	name = "化作星星吧！！",
 	["require.special.desc"] = "体型至少为巨大（使用也要满足此条件）",
 	info = function(self, t)
-		return ([[对 敌 人 进 行 一 次 猛 击， 造 成 350％ 的 武 器 伤 害 并 击 退 目 标 5 码，路 径 上 的 敌 人 都 会 被 击 中。
-		所 有 受 影 响 的 目 标 都 会 被 震 慑 3 回 合。
-		体 型 超 过  “Big” 时， 每 增 加 一 级 ， 额 外 增 加 80%% 武 器 伤 害。 ]])
+		return ([[对敌人进行一次猛击，造成 350％的武器伤害并击退目标 5 码，路径上的敌人都会被击中。
+		所有受影响的目标都会被震慑 3 回合。
+		体型超过  “Big”时，每增加一级，额外增加 80%% 武器伤害。 ]])
 		:format()
 	end,
 }
@@ -27,10 +27,10 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_MASSIVE_BLOW",
 	name = "巨人之锤",
-	["require.special.desc"] = "曾 挖 掉 至 少 30 块 石 头 / 树 木 / 等 等， 并 且 使 用 双 手 武 器 造 成 超 过 50000 点 伤 害",
+	["require.special.desc"] = "曾挖掉至少 30 块石头 / 树木 / 等等，并且使用双手武器造成超过 50000 点伤害",
 	info = function(self, t)
-		return ([[对 敌 人 进 行 一 次 猛 击， 造 成 150％ 的 武 器 伤 害 并 击 退 目 标 4 码。（无 视 击 退 免 疫 和 物 理 豁 免） 
-		如 果 敌 人 在 击 退 时 撞 上 墙 壁， 墙 壁 会 被 撞 毁 且 对 敌 人 造 成 额 外 的 350％ 武 器 伤 害 ，并 附 加 被 反 击 特 效。  ]])
+		return ([[对敌人进行一次猛击，造成 150％的武器伤害并击退目标 4 码。（无视击退免疫和物理豁免） 
+		如果敌人在击退时撞上墙壁，墙壁会被撞毁且对敌人造成额外的 350％武器伤害，并附加被反击特效。  ]])
 		:format()
 	end,
 }
@@ -40,9 +40,9 @@ registerTalentTranslation{
 	name = "无尽冲锋",
 	["require.special.desc"] = "习得冲锋技能",
 	info = function(self, t)
-		return ([[当 你 使 用 冲 锋 时， 冲 锋 目 标 会 被 标 记。 在 接 下 来 两 轮 之 内 杀 掉 冲 锋 对 象， 则 冲 锋 技 能 会 冷 却 完 毕。 
-		每 当 此 技 能 触 发 时， 你 获 得 1 个 增 加 20％ 伤 害 的 增 益 效 果， 最 大 叠 加 至 100％。
-		冲 锋 现 在 只 消 耗 2 点 体 力 。]])
+		return ([[当你使用冲锋时，冲锋目标会被标记。在接下来两轮之内杀掉冲锋对象，则冲锋技能会冷却完毕。 
+		每当此技能触发时，你获得 1 个增加 20％伤害的增益效果，最大叠加至 100％。
+		冲锋现在只消耗 2 点体力。]])
 		:format()
 	end,
 }
@@ -53,9 +53,9 @@ registerTalentTranslation{
 	["require.special.desc"] = "曾造成50000点以上的光系或者火系伤害",
 	info = function(self, t)
 		local dam = (35 + self:getStr() * 1.3) / 3
-		return ([[你 获 得 8 回 合 的 星 之 引 力， 将 周 围 5 码 范 围 内 的 所 有 生 物 向 你 拉 扯， 并 对 所 有 敌 人 造 成 %0.2f 火 焰、 %0.2f 光 系 和 %0.2f 物 理 伤 害。他们所造成的伤害减少30%%。 
-		最 靠 近 你 的 敌 人 受 到 额 外 的 150％ 伤 害。 
-		受 力 量 影 响， 伤 害 值 有 额 外 加 成。  ]])
+		return ([[你获得 8 回合的星之引力，将周围 5 码范围内的所有生物向你拉扯，并对所有敌人造成 %0.2f 火焰、 %0.2f 光系和 %0.2f 物理伤害。他们所造成的伤害减少30%%。 
+		最靠近你的敌人受到额外的 150％伤害。 
+		受力量影响，伤害值有额外加成。  ]])
 		:format(damDesc(self, DamageType.FIRE, dam), damDesc(self, DamageType.LIGHT, dam), damDesc(self, DamageType.PHYSICAL, dam))
 	end,
 }
@@ -65,9 +65,9 @@ registerTalentTranslation{
 	name = "我能举起世界！",
 	["require.special.desc"] = "能够使用板甲",
 	info = function(self, t)
-		return ([[你 是 如 此 强 壮， 永 不 疲 倦。 
-		疲 劳 值 永 久 为 0 且 负 重 上 限 增 加 500 点。
-		你 增 加 50 点 力 量 并 且 体 型 +1 。
+		return ([[你是如此强壮，永不疲倦。 
+		疲劳值永久为 0 且负重上限增加 500 点。
+		你增加 50 点力量并且体型 +1 。
 		 ]])
 		:format()
 	end,
@@ -79,9 +79,9 @@ registerTalentTranslation{
 	["require.special.desc"] = "站在萨拉苏尔一方并且杀死厄库尔维斯克",
 	info = function(self, t)
 		local level = t.bonusLevel(self,t)
-		return ([[你 站 在 萨 拉 苏 尔 一 方 并 帮 助 他 解 决 了 厄 库 尔 维 斯 克。 你 现 在 可 以 轻 松 的 在 水 下 呼 吸。 
-	         同 时， 你 能 轻 易 学 会 如 何 使 用 三 叉 戟 和 其 他 异 形 武 器（ 获 得 %d 级 异 形 武 器 掌 握）， 并 且 可 以 像 娜 迦 一 样 喷 吐 毒 素（ 等 级 %d ） 。 技 能 等 级 随 人 物 等 级 增 长。   
-		 此 外， 若 萨 拉 苏 尔 仍 然 存 活， 他 还 会 送 你 一 份 大 礼 …]])
+		return ([[你站在萨拉苏尔一方并帮助他解决了厄库尔维斯克。你现在可以轻松的在水下呼吸。 
+	         同时，你能轻易学会如何使用三叉戟和其他异形武器（获得 %d 级异形武器掌握），并且可以像娜迦一样喷吐毒素（等级 %d ）。技能等级随人物等级增长。   
+		 此外，若萨拉苏尔仍然存活，他还会送你一份大礼…]])
 		:format(level, level)
 	end,
 }
@@ -90,9 +90,9 @@ registerTalentTranslation{
 	id = "T_SUPERPOWER",
 	name = "超级力量",
 	info = function(self, t)
-		return ([[强 壮 的 身 体 才 能 承 载 强 大 的 灵 魂。 而 强 大 的 灵 魂 却 可 以 创 造 一 个 强 壮 的 身 体。 
-		获 得 相 当 于 你 60％ 力 量 值 的 精 神 强 度 增 益。 
-		此 外， 你 的 所 有 武 器 都 会 有 额 外 的 40％ 意 志 修 正 加 成。  ]])
+		return ([[强壮的身体才能承载强大的灵魂。而强大的灵魂却可以创造一个强壮的身体。 
+		获得相当于你 60％力量值的精神强度增益。 
+		此外，你的所有武器都会有额外的 40％意志修正加成。  ]])
 		:format()
 	end,
 }

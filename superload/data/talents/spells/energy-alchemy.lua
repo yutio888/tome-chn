@@ -5,8 +5,8 @@ registerTalentTranslation{
 	name = "闪电充能",
 	info = function(self, t)
 		local daminc = t.getIncrease(self, t)
-		return ([[ 将 闪 电 能 量 填 充 至 炼 金 炸 弹 ， 能 眩 晕 敌 人 。
-		 你 造 成 的 闪 电 伤 害 增 加 %d%% 。]]):
+		return ([[ 将闪电能量填充至炼金炸弹，能眩晕敌人。
+		 你造成的闪电伤害增加 %d%% 。]]):
 		format(daminc)
 	end,
 }
@@ -15,8 +15,8 @@ registerTalentTranslation{
 	id = "T_DYNAMIC_RECHARGE",
 	name = "动态充能",
 	info = function(self, t)
-		return ([[ 当 闪 电 充 能 开 启 时 ， 你 的 炸 弹 会 给 傀 儡 充 能 。
-		 你 的 傀 儡 的 所 有 冷 却 中 技 能 有 %d%% 概 率 减 少 %d 回 合 冷 却 时 间。]]):
+		return ([[ 当闪电充能开启时，你的炸弹会给傀儡充能。
+		 你的傀儡的所有冷却中技能有 %d%% 概率减少 %d 回合冷却时间。]]):
 		format(t.getChance(self, t), t.getNb(self, t))
 	end,
 }
@@ -26,9 +26,9 @@ registerTalentTranslation{
 	name = "闪电霹雳",
 	info = function(self, t)
 		local radius = self:getTalentRadius(t)
-		return ([[ 粉 碎 一 颗 炼 金 宝 石 ， 制 造 一 次 闪 电 霹 雳 ， 在 半 径 %d 的 锥 形 区 域 内 造 成 %0.2f 点 物 理 伤 害 和 %0.2f 点 闪 电 伤 害。
-		 范 围 内 的 生 物 将 会 被 击 退 并 被 缴 械 %d 回 合 。
-		 受 法 术 强 度 影 响 ， 伤 害 和 持 续 时 间 有 额 外 加 成。]]):format(radius, damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t)), damDesc(self, DamageType.LIGHTNING, t.getDamage(self, t)), t.getDuration(self, t))
+		return ([[ 粉碎一颗炼金宝石，制造一次闪电霹雳，在半径 %d 的锥形区域内造成 %0.2f 点物理伤害和 %0.2f 点闪电伤害。
+		 范围内的生物将会被击退并被缴械 %d 回合。
+		 受法术强度影响，伤害和持续时间有额外加成。]]):format(radius, damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t)), damDesc(self, DamageType.LIGHTNING, t.getDamage(self, t)), t.getDuration(self, t))
 	end,
 }
 
@@ -40,10 +40,10 @@ registerTalentTranslation{
 		local dam = t.getDamage(self, t)
 		local turn = t.getTurn(self, t)
 		local range = self:getTalentRange(t)
-		return ([[ 将 闪 电 能 量 填 充 到 身 体 中 ， 增 加 %d%% 移 动 速 度 。
-		 每 回 合 半 径 %d 内 的 一 个 生 物 将 会 被 闪 电 击 中 ， 造 成 %0.2f 点 闪 电 伤 害 。
-		 每 次 你 的 回 合 开 始 时 ， 如 果 自 从 上 个 回 合 结 束 你 受 到 超 过 20%% 最 大 生 命 值 的 伤 害， 你 将 获 得 %d%% 个 额 外 回 合 。
-		 受 法 术 强 度 影 响 ， 伤 害 有 额 外 加 成 。]]):
+		return ([[ 将闪电能量填充到身体中，增加 %d%% 移动速度。
+		 每回合半径 %d 内的一个生物将会被闪电击中，造成 %0.2f 点闪电伤害。
+		 每次你的回合开始时，如果自从上个回合结束你受到超过 20%% 最大生命值的伤害，你将获得 %d%% 个额外回合。
+		 受法术强度影响，伤害有额外加成。]]):
 		format(speed, range, damDesc(self, DamageType.LIGHTNING, t.getDamage(self, t)), turn)
 	end,
 }

@@ -5,8 +5,8 @@ registerTalentTranslation{
 	name = "龙族意志",
 	["require.special.desc"] = "熟悉龙之世界",
 	info = function(self, t)
-		return ([[你 的 身 体 如 巨 龙 般 强 韧， 可 以 轻 易 抵 抗 负 面 效 果。 
-		在 5 回 合 内 对 负 面 效 果 免 疫。]])
+		return ([[你的身体如巨龙般强韧，可以轻易抵抗负面效果。 
+		在 5 回合内对负面效果免疫。]])
 		:format()
 	end,
 }
@@ -17,13 +17,13 @@ registerTalentTranslation{
 	["require.special.desc"] = "曾亲眼目睹过陨石坠落",
 	info = function(self, t)
 		local dam = t.getDamage(self, t)/2
-		return ([[在 施 展 伤 害 类 魔 法 或 精 神 攻 击 时， 你 会 释 放 意 念， 召 唤 一 颗 陨 石 砸 向 附 近 敌 人。 
-		陨 石 在 2 码 半 径 内 造 成 %0.2f  火 焰 和 %0.2f  物 理 伤 害 ，震 慑 敌 人 3 回 合 。
-		 周 围 3 码 半 径 的 地 形 将 会 被 冲 击 转 换 成 岩 浆 ，每 回 合 造 成 %0.2f  火 焰 伤 害 ，持 续 8 回 合 。
-		 你 和 你 的 盟 友 不 会 受 到 陨 石 的 伤 害 。
+		return ([[在施展伤害类魔法或精神攻击时，你会释放意念，召唤一颗陨石砸向附近敌人。 
+		陨石在 2 码半径内造成 %0.2f  火焰和 %0.2f  物理伤害，震慑敌人 3 回合。
+		 周围 3 码半径的地形将会被冲击转换成岩浆，每回合造成 %0.2f  火焰伤害，持续 8 回合。
+		 你和你的盟友不会受到陨石的伤害。
 
-		 另 外 ，你 的 火 焰 伤 害 加 成 和 穿 透 将 被 设 置 成 你 最 高 的 伤 害 加 成 和 穿 透 ，这 对 你 造 成 的 所 有 火 焰 伤 害 都 有 效 。
-		受 精 神 强 度 或 法 术 强 度 影 响， 伤 害 按 比 例 加 成。  ]])
+		 另外，你的火焰伤害加成和穿透将被设置成你最高的伤害加成和穿透，这对你造成的所有火焰伤害都有效。
+		受精神强度或法术强度影响，伤害按比例加成。  ]])
 		:format(damDesc(self, DamageType.FIRE, dam), damDesc(self, DamageType.PHYSICAL, dam), damDesc(self, DamageType.FIRE, t.getLava(self, t)))
 	end,
 }
@@ -33,7 +33,7 @@ registerTalentTranslation{
 	name = "加库尔的复仇",
 	["require.special.desc"] = "装备加库尔的两件宝物并且了解加库尔的一生",
 	info = function(self, t)
-		return ([[加 库 尔 之 魂 与 你 同 在， 你 现 在 能 对 建 筑 类 造 成 1000％ 额 外 伤 害， 对 人 形 生 物 和 巨 人 造 成 20％ 额 外 伤 害。  ]])
+		return ([[加库尔之魂与你同在，你现在能对建筑类造成 1000％额外伤害，对人形生物和巨人造成 20％额外伤害。  ]])
 		:format()
 	end,
 }
@@ -41,10 +41,10 @@ registerTalentTranslation{
 registerTalentTranslation{
 	id = "T_HIDDEN_RESOURCES",
 	name = "潜能爆发",
-	["require.special.desc"] = "曾 获 得 千 钧 一 发 成 就（ 在 低 于 1HP 情 况 下 杀 死 1 个 敌 人）",
+	["require.special.desc"] = "曾获得千钧一发成就（在低于 1HP 情况下杀死 1 个敌人）",
 	info = function(self, t)
-		return ([[在 严 峻 的 形 势 面 前， 你 集 中 意 念 进 入 心 如 止 水 的 状 态。 
-		在 5 回 合 内， 所 有 技 能 不 消 耗 任 何 能 量。  ]])
+		return ([[在严峻的形势面前，你集中意念进入心如止水的状态。 
+		在 5 回合内，所有技能不消耗任何能量。  ]])
 		:format()
 	end,
 }
@@ -55,7 +55,7 @@ registerTalentTranslation{
 	name = "幸运日",
 	["require.special.desc"] = "拥有大运气。（至少有+5luck属性）",
 	info = function(self, t)
-		return ([[每 天 都 是 幸 运 日。 幸 运 永 久 +40，有 10%% 几 率 闪 避 所 有 攻 击。  ]])
+		return ([[每天都是幸运日。幸运永久 +40，有 10%% 几率闪避所有攻击。  ]])
 		:format()
 	end,
 }
@@ -64,8 +64,8 @@ registerTalentTranslation{
 	id = "T_UNBREAKABLE_WILL",
 	name = "坚定意志",
 	info = function(self, t)
-		return ([[你 的 意 志 如 此 坚 定， 可 以 忽 视 对 你 造 成 的 精 神 效 果。 
-	 	这 一 技 能 每 5 回 合 最 多 触 发 一 次。]])
+		return ([[你的意志如此坚定，可以忽视对你造成的精神效果。 
+	 	这一技能每 5 回合最多触发一次。]])
 		:format()
 	end,
 }
@@ -75,10 +75,10 @@ registerTalentTranslation{
 	name = "法术反馈",
 	["require.special.desc"] = "习得反魔技能",
 	info = function(self, t)
-		return ([[你 的 意 志 是 对 抗 邪 恶 魔 法 师 的 盾 牌。 
-		每 当 你 受 到 魔 法 伤 害， 你 会 惩 罚 施 法 者， 使 其 受 到 %0.2f 的 精 神 伤 害。 
-		同 时， 它 们 在 对 你 使 用 的 技 能 进 入 冷 却 的 回 合 中， 会 受 到 35％ 法 术 失 败 率 惩 罚。
-		注 意 ： 该 技 能 有 冷 却 时 间。 ]])
+		return ([[你的意志是对抗邪恶魔法师的盾牌。 
+		每当你受到魔法伤害，你会惩罚施法者，使其受到 %0.2f 的精神伤害。 
+		同时，它们在对你使用的技能进入冷却的回合中，会受到 35％法术失败率惩罚。
+		注意：该技能有冷却时间。 ]])
 		:format(damDesc(self, DamageType.MIND, 20 + self:getWil() * 2))
 	end,
 }
@@ -88,9 +88,9 @@ registerTalentTranslation{
 	name = "灵魂之怒",
 	["require.special.desc"] = "曾造成50000点精神伤害",
 	info = function(self, t)
-		return ([[用 钢 铁 般 的 意 志 驱 使 整 个 身 体。 
-		当 此 技 能 激 活 时， 你 33%% 的 伤 害 会 转 化 为 精 神 伤 害。 
-		此 外， 你 获 得 30％ 精 神 抵 抗 穿 透 并 增 加 10％ 精 神 伤 害。 ]]):
+		return ([[用钢铁般的意志驱使整个身体。 
+		当此技能激活时，你 33%% 的伤害会转化为精神伤害。 
+		此外，你获得 30％精神抵抗穿透并增加 10％精神伤害。 ]]):
 		format()
 	end,
 }

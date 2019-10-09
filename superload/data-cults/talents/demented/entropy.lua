@@ -4,9 +4,9 @@ registerTalentTranslation{
 	name = "熵能天赋",
 	info = function(self, t)
 		local power = t.getPower(self,t)
-		return ([[你 作 为 非 自 然 的 存 在 被 现 实 抗 拒 。 你 受 到 的 直 接 治 疗 的 25%% 将 以 熵 能 反 冲 的 形 式 伤 害 自 身 ， 无 视 抗 性 和 护 盾 ， 但 不 会 致 死。
-		你 可 以 主 动 开 启 该 技 能 ，将 你 身 上 的 熵 转 移 给 附 近 的 一 名 敌 人， 除 去 所 有 熵 能 反 冲 并 对 其 造 成 持 续 4 回 合 的 黑 暗 和 时 空 伤 害， 伤 害 值 等 于 你 自 身 熵 能 的 %d%%。
-		伤 害 受 法 术 强 度 加 成 。]]):
+		return ([[你作为非自然的存在被现实抗拒。你受到的直接治疗的 25%% 将以熵能反冲的形式伤害自身，无视抗性和护盾，但不会致死。
+		你可以主动开启该技能，将你身上的熵转移给附近的一名敌人，除去所有熵能反冲并对其造成持续 4 回合的黑暗和时空伤害，伤害值等于你自身熵能的 %d%%。
+		伤害受法术强度加成。]]):
 		format(power)
 	end,
 }
@@ -16,9 +16,9 @@ registerTalentTranslation{
 	name = "熵能逆转",
 	info = function(self, t)
 
-		return ([[你 对 熵 的 知 识 让 你 可 以 对 抗 物 理 定 律， 增 强 你 对 熵 能 的 承 受 力 。
-		你 从 熵 能 反 冲 中 受 到 的 伤 害 减 少 %d%%。
-		你 可 以 主 动 开 启 该 技 能 ， 瞬 间 减 少 当 前 的 熵 。]]):
+		return ([[你对熵的知识让你可以对抗物理定律，增强你对熵能的承受力。
+		你从熵能反冲中受到的伤害减少 %d%%。
+		你可以主动开启该技能，瞬间减少当前的熵。]]):
 		format(t.getReduction(self, t))
 	end,
 }
@@ -38,8 +38,8 @@ registerTalentTranslation{
 			if eff then edam = (eff.power * eff.dur) * t.getEntropyBonus(self,t) end
 			entropy = edam
 		end
-		return ([[每 次 释 放 熵 能 天 赋 ， 会 在 目 标 处 产 生 一 个 持 续 %d 回 合 的 一 格 小 型 黑 洞， 每 回 合 半 径 增 加 1 直 到 %d 。 
-		所 有 范 围 内 的 生 物 每 回 合 将 被 拉 向 黑 洞 中 心 并 受 到 %0.2f 时 空 伤 害 以 及 你 当 前 熵 的 %d%% 的 伤 害。]]):
+		return ([[每次释放熵能天赋，会在目标处产生一个持续 %d 回合的一格小型黑洞，每回合半径增加 1 直到 %d 。 
+		所有范围内的生物每回合将被拉向黑洞中心并受到 %0.2f 时空伤害以及你当前熵的 %d%% 的伤害。]]):
 		format(dur, rad, damDesc(self, DamageType.DARKNESS, dam), damDesc(self, DamageType.TEMPORAL, dam), bonus, entropy)
 	end,
 }
@@ -51,8 +51,8 @@ registerTalentTranslation{
 		local power = t.getDamageIncrease(self,t)
 		local pen = t.getResistPenalty(self,t)
 		local dam = t.getDamage(self,t)
-		return ([[ 你 用 危 险 的 熵 能 大 幅 强 化 你 的 法 术 ，增 加 %d%% 黑 暗 和 时 空 伤 害 与 %d%% 抗 性 穿 透。
-			作 为 代 价， 每 个 非 瞬 间 法 术 会 带 来 %0.2f 熵 能 反 冲 。]]):
+		return ([[ 你用危险的熵能大幅强化你的法术，增加 %d%% 黑暗和时空伤害与 %d%% 抗性穿透。
+			作为代价，每个非瞬间法术会带来 %0.2f 熵能反冲。]]):
 		format(power, pen, dam)
 	end,
 }

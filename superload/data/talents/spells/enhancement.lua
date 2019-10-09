@@ -17,9 +17,9 @@ registerTalentTranslation{
 	info = function(self, t)
 		local firedamage = t.getFireDamage(self, t)
 		local firedamageinc = t.getFireDamageIncrease(self, t)
-		return ([[你 的 双 手 笼 罩 在 火 焰 中， 每 次 近 战 攻 击 会 造 成 %0.2f 火 焰 伤 害 并 提 高 所 有 火 焰 伤 害 %d%% 。 
-		 每 次 攻 击 同 时 也 会 回 复 %0.2f 体 力 值。 
-		 受 法 术 强 度 影 响， 效 果 有 额 外 加 成。]]):
+		return ([[你的双手笼罩在火焰中，每次近战攻击会造成 %0.2f 火焰伤害并提高所有火焰伤害 %d%% 。 
+		 每次攻击同时也会回复 %0.2f 体力值。 
+		 受法术强度影响，效果有额外加成。]]):
 		format(damDesc(self, DamageType.FIRE, firedamage), firedamageinc, self:getTalentLevel(t) / 3)
 	end,
 }
@@ -31,9 +31,9 @@ registerTalentTranslation{
 	info = function(self, t)
 		local icedamage = t.getIceDamage(self, t)
 		local icedamageinc = t.getIceDamageIncrease(self, t)
-		return ([[你 的 双 手 笼 罩 在 雷 电 中， 每 次 近 战 攻 击 会 造 成 %d 闪 电 伤 害（ 25%% 几 率 眩 晕 敌 人）， 并 提 高 %d%% 所 有 闪 电 系 伤 害。 
-		 每 次 攻 击 同 时 也 会 回 复 %0.2f 法 力 值。 
-		 受 法 术 强 度 影 响， 效 果 有 额 外 加 成。]]):
+		return ([[你的双手笼罩在雷电中，每次近战攻击会造成 %d 闪电伤害（ 25%% 几率眩晕敌人），并提高 %d%% 所有闪电系伤害。 
+		 每次攻击同时也会回复 %0.2f 法力值。 
+		 受法术强度影响，效果有额外加成。]]):
 		format(damDesc(self, DamageType.LIGHTNING, icedamage), icedamageinc, self:getTalentLevel(t) / 3)
 	end,
 }
@@ -44,9 +44,9 @@ registerTalentTranslation{
 	info = function(self, t)
 		local statinc = t.getStatIncrease(self, t)
 		local absorb = t.getShield(self, t) * (100 + (self:attr("shield_factor") or 0)) / 100
-		return ([[你 专 注 于 你 的 内 心， 增 加 你 %d 点力量，敏捷，魔法和灵巧。
-		在 你 受 到 伤 害 前 ，你 会 产 生 一 个 吸 收  %d  伤 害 的 护 盾 ，该 效 果 最 多 每 %d 回 合 触 发 一 次 。
-		 属 性 值 增 长 和 护 盾 强 度 受 法 术 强 度 加 成 。]]):
+		return ([[你专注于你的内心，增加你 %d 点力量，敏捷，魔法和灵巧。
+		在你受到伤害前，你会产生一个吸收  %d  伤害的护盾，该效果最多每 %d 回合触发一次。
+		 属性值增长和护盾强度受法术强度加成。]]):
 		format(statinc, absorb, self:getTalentCooldown(t) )
 	end,
 }

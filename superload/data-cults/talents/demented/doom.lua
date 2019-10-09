@@ -8,10 +8,10 @@ registerTalentTranslation{
 		local rdam = t.getRuinDamage(self,t)
 		local tchance = t.getTreasonChance(self,t)
 		--local tdam = t.getTreasonDamage(self,t)
-		return ([[对 目 标 释 放 熵 能 力 量 ，你 预 言 了 它 无 可 避 免 的 末 日 。 随 着 技 能 等 级 提 升 ， 你 能 解 锁 更 多 预 言 。 同 一 目 标 不 能 同 时 处 于 两 种 预 言 下 。		
-技能等级 1： 疯 狂 预 言。 增 加 %d%% 技 能 冷 却 时 间。
-技能等级 3： 毁 灭 预 言。 当 生 命 值 滑 落 至 最 大 生 命 的 75%%，50%% 或 25%% 下 时 ，造 成 %d 伤 害 。
-技能等级 5： 背 叛 预 言。 每 回 合 有 %d%% 几 率 攻 击 友 方 单 位 或 自 身。]]):
+		return ([[对目标释放熵能力量，你预言了它无可避免的末日。随着技能等级提升，你能解锁更多预言。同一目标不能同时处于两种预言下。		
+技能等级 1：疯狂预言。增加 %d%% 技能冷却时间。
+技能等级 3：毁灭预言。当生命值滑落至最大生命的 75%%，50%% 或 25%% 下时，造成 %d 伤害。
+技能等级 5：背叛预言。每回合有 %d%% 几率攻击友方单位或自身。]]):
 		format(mcd, rdam, tchance)
 	end,
 }
@@ -22,7 +22,7 @@ registerTalentTranslation{
 	name = "疯狂预言",
 	info = function(self, t)
 		local cd = t.getCooldown(self,t)*100
-		return ([[对 目 标 施 加 疯 狂 预 言， 增 加 %d%% 技 能 冷 却 时 间， 持 续 6 回 合。 ]]):format(cd)
+		return ([[对目标施加疯狂预言，增加 %d%% 技能冷却时间，持续 6 回合。 ]]):format(cd)
 	end,
 }
 
@@ -31,9 +31,9 @@ registerTalentTranslation{
 	name = "毁灭预言",
 	info = function(self, t)
 		local dam = t.getDamage(self,t)
-		return ([[对 目 标 施 加 毁 灭 预 言，  持 续 6 回 合。
-		当 生 命 值 滑 落 至 最 大 生 命 的 75%%，50%% 或 25%% 下 时 ，造 成 %d 暗 影 伤 害 。
-		伤 害 受 法 术 强 度 加 成 。]]):format(dam)
+		return ([[对目标施加毁灭预言，  持续 6 回合。
+		当生命值滑落至最大生命的 75%%，50%% 或 25%% 下时，造成 %d 暗影伤害。
+		伤害受法术强度加成。]]):format(dam)
 	end,
 }
 
@@ -42,7 +42,7 @@ registerTalentTranslation{
 	name = "背叛预言",
 	info = function(self, t)
 		local chance = t.getChance(self,t)
-		return ([[对 目 标 施 加 背 叛 预 言，  持 续 6 回 合。每 回 合 有 %d%% 几 率 攻 击 友 方 单 位 或 自 身。]]):format(chance)
+		return ([[对目标施加背叛预言，  持续 6 回合。每回合有 %d%% 几率攻击友方单位或自身。]]):format(chance)
 	end,
 }
 
@@ -52,10 +52,10 @@ registerTalentTranslation{
 	info = function(self, t)
 		local rad = self:getTalentRadius(t)
 		local talent = self:isTalentActive(t.id) and self:getTalentFromId(self:isTalentActive(t.id).talent).name or "None"		
-		return ([[你 隆 重 地 宣 读 某 种 预 言， 令 其 在 周 围 %d 格 内 传 播 。
-		同 一 种 预 言 只 能 以 一 种 方 式 进 行 强 化，隆 重 演 说， 双 重 诅 咒 或 者 天 启 。
+		return ([[你隆重地宣读某种预言，令其在周围 %d 格内传播。
+		同一种预言只能以一种方式进行强化，隆重演说，双重诅咒或者天启。
 		
-		当 前 预 言 : %s]]):
+		当前预言 : %s]]):
 		format(rad, talent)
 	end,
 }
@@ -65,9 +65,9 @@ registerTalentTranslation{
 	name = "双重诅咒",
 	info = function(self, t)
 		local talent = self:isTalentActive(t.id) and self:getTalentFromId(self:isTalentActive(t.id).talent).name or "None"		
-		return ([[对 你 的 听 众 施 加 双 重 诅 咒。 每 当 你 施 加 其 他 预 言 时 ， 你 选 择 的 预 言 将 同 时 施 加 给 主 要 目 标 (技 能 等 级 %d)。 
-		同 一 种 预 言 只 能 以 一 种 方 式 进 行 强 化，隆 重 演 说， 双 重 诅 咒 或 者 天 启 。
-		当 前 预 言 : %s]]):
+		return ([[对你的听众施加双重诅咒。每当你施加其他预言时，你选择的预言将同时施加给主要目标 (技能等级 %d)。 
+		同一种预言只能以一种方式进行强化，隆重演说，双重诅咒或者天启。
+		当前预言 : %s]]):
 		format(self:getTalentLevel(t), talent)
 	end,
 }
@@ -80,13 +80,13 @@ registerTalentTranslation{
 		local ruin = t.getRuin(self,t)
 		local treason = t.getTreason(self,t)
 		local talent = self:isTalentActive(t.id) and self:getTalentFromId(self:isTalentActive(t.id).talent).name or "None"
-		return ([[当 你 宣 读 预 言 时 ， 来 自 虚 空 的 回 响 将 指 引 你 带 来 敌 人 的 末 日 。 你 选 择 的 预 言 将 提 供 1 0 回 合 的 加 成。
-		疯 狂 预 言 ： 每 次 目 标 使 用 技 能 时 ，你 的 一 个 技 能 的 冷 却 时 间 将 减 少 %d 。
-		毁 灭 预 言 ： 每 次 目 标 受 到 伤 害 时， 你 回 复 %d%% 伤 害 值。
-		背 叛 预 言 :  你 受 到 的 %d%% 伤 害 将 转 移 至 周 围 随 机 目 标。
+		return ([[当你宣读预言时，来自虚空的回响将指引你带来敌人的末日。你选择的预言将提供 1 0 回合的加成。
+		疯狂预言：每次目标使用技能时，你的一个技能的冷却时间将减少 %d 。
+		毁灭预言：每次目标受到伤害时，你回复 %d%% 伤害值。
+		背叛预言 :  你受到的 %d%% 伤害将转移至周围随机目标。
 		
-		同 一 种 预 言 只 能 以 一 种 方 式 进 行 强 化，隆 重 演 说， 双 重 诅 咒 或 者 天 启 。
-		当 前 预 言 : %s]]):
+		同一种预言只能以一种方式进行强化，隆重演说，双重诅咒或者天启。
+		当前预言 : %s]]):
 		format(madness, ruin, treason, talent)
 	end,
 }

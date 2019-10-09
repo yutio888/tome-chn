@@ -7,8 +7,8 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local duration = t.getDuration(self, t)
 		local power = t.getPower(self,t)
-		return ([[你 攻 击 目 标 的 敏 感 部 位，造 成 %d%% 武器 伤 害。如 果 攻 击 命 中， 目 标 身 受 重 创，物 理 豁 免 减 少 %d ，震 慑 、 致 盲 、 混 乱 、 定 身 免 疫 降 低 为 原 来 的 50%% ，持 续 %d 回合。
-该 效 果 无 视 豁 免。]]):
+		return ([[你攻击目标的敏感部位，造成 %d%% 武器伤害。如果攻击命中，目标身受重创，物理豁免减少 %d ，震慑、致盲、混乱、定身免疫降低为原来的 50%% ，持续 %d 回合。
+该效果无视豁免。]]):
 		format(100 * damage, power, duration)
 	end,
 }
@@ -19,10 +19,10 @@ registerTalentTranslation{
 	info = function(self, t)
 		local dam = t.getDamageBoost(self, t)
 		local chance = t.getDisableChance(self,t)
-		return ([[你 机 智 地 利 用 敌 人 的 伤 残，每 项 伤 残 效 果 增 加 %d%%伤 害 ，最 多 %d%%。
-伤 残 效 果 包 括 ：震 慑 、致 盲 、眩 晕 、定 身 、缴 械 、致 残 和 沉 默 。
-此 外 ，每 项 伤 残 效 果 使 你 的 近 战 攻 击 有 %d%%几 率 （最 多 叠 加 至 %d%%）附 加 额 外 效 果 （不 会 重 复 ）：缴 械 、致 残 （25%%强 度 ）或 者 定 身 2 回 合 。
-附 加 效 果 成 功 率 受 命 中 加 成 。 ]]):
+		return ([[你机智地利用敌人的伤残，每项伤残效果增加 %d%%伤害，最多 %d%%。
+伤残效果包括：震慑、致盲、眩晕、定身、缴械、致残和沉默。
+此外，每项伤残效果使你的近战攻击有 %d%%几率（最多叠加至 %d%%）附加额外效果（不会重复）：缴械、致残（25%%强度）或者定身 2 回合。
+附加效果成功率受命中加成。 ]]):
 		format(dam, dam*3, chance, chance*3)
 	end,
 }
@@ -34,8 +34,8 @@ registerTalentTranslation{
 		local accuracy = t.getAcc(self,t)
 		local speed = t.getSlow(self,t)
 		local duration = t.getDuration(self, t)
-		return ([[撒 出 致 盲 粉 ，致 盲 前 方 %d 格 锥 形 范 围 内 的 敌 人 。受 影 响 的 敌 人 命 中 减 少  %d  ，移 动 速 度 减 少  %d%%  ，持 续  %d  回 合 。
-		 效 果 成 功 率 受 命 中 加 成 。]]):format(self:getTalentRadius(t), accuracy, speed, duration)
+		return ([[撒出致盲粉，致盲前方 %d 格锥形范围内的敌人。受影响的敌人命中减少  %d  ，移动速度减少  %d%%  ，持续  %d  回合。
+		 效果成功率受命中加成。]]):format(self:getTalentRadius(t), accuracy, speed, duration)
 	end,
 }
 
@@ -46,7 +46,7 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local dur = t.getDuration(self, t)
 		local nb = t.getDebuffs(self, t)
-		return ([[攻 击 敌 人 造 成  %d%%  武 器 伤 害 ，并 延 长 对 方 身 上 至 多  %d  项 负 面 效 果 持 续 时 间  %d  回 合 。每 延 长 一 项 负 面 效 果 ，相 应 减 少 一 项 正 面 效 果 持 续 时 间 。]]):
+		return ([[攻击敌人造成  %d%%  武器伤害，并延长对方身上至多  %d  项负面效果持续时间  %d  回合。每延长一项负面效果，相应减少一项正面效果持续时间。]]):
 		format(100 * damage, nb, dur)
 	end,
 }

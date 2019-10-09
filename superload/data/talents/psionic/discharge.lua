@@ -7,10 +7,10 @@ registerTalentTranslation{
 		local targets = t.getTargetCount(self, t)
 		local damage = t.getDamage(self, t)
 		local charge_ratio = t.getOverchargeRatio(self, t)
-		return ([[用 你 的 潜 意 识 渗 透 周 围 的 环 境。 当 此 技 能 激 活 时， 每 回 合 你 会 射 出 %d 个 超 能 力 值 球 造 成 %0.2f 精 神 伤 害（ 每 个 敌 方 单 位 只 承 受 一 次 超 能 力 值 球 攻 击）。 每 个 超 能 力 值 球 消 耗 5 点 反 馈 值。 
-		 当 获 得 的 反 馈 值 超 出 最 大 值 时， 你 会 产 生 额 外 的 超 能 力 值 球（ 每 超 出 %d 反 馈 值 产 生 1 个 超 能 力 值 球）， 但 是 每 回 合 产 生 的 额 外 超 能 力 值 球 数 量 不 会 超 过 %d 。 
-		 此 技 能 运 用 了 灵 能 通 道， 所 以 当 你 移 动 时 会 中 断 此 技 能。 
-		 受 精 神 强 度 影 响， 伤 害 按 比 例 加 成。]]):format(targets, damDesc(self, DamageType.MIND, damage), charge_ratio, targets)
+		return ([[用你的潜意识渗透周围的环境。当此技能激活时，每回合你会射出 %d 个超能力值球造成 %0.2f 精神伤害（每个敌方单位只承受一次超能力值球攻击）。每个超能力值球消耗 5 点反馈值。 
+		 当获得的反馈值超出最大值时，你会产生额外的超能力值球（每超出 %d 反馈值产生 1 个超能力值球），但是每回合产生的额外超能力值球数量不会超过 %d 。 
+		 此技能运用了灵能通道，所以当你移动时会中断此技能。 
+		 受精神强度影响，伤害按比例加成。]]):format(targets, damDesc(self, DamageType.MIND, damage), charge_ratio, targets)
 	end,
 }
 
@@ -19,9 +19,9 @@ registerTalentTranslation{
 	name = "反馈逆转",
 	info = function(self, t)
 		local duration = t.getDuration(self, t, true)
-		return ([[激 活 以 逆 转 你 的 反 馈 值 衰 减， 持 续 %d 回 合。 此 技 能 激 活 时 可 产 生 暴 击 效 果， 效 果 为 增 加 技 能 持 续 时 间。 
-		 你 必 须 在 反 馈 值 非 空 的 时 候 才 能 使 用 此 技 能（ 否 则 没 有 衰 减）。 
-		 受 精 神 强 度 影 响， 反 馈 值 的 最 大 增 加 值 按 比 例 加 成。]]):format(duration)
+		return ([[激活以逆转你的反馈值衰减，持续 %d 回合。此技能激活时可产生暴击效果，效果为增加技能持续时间。 
+		 你必须在反馈值非空的时候才能使用此技能（否则没有衰减）。 
+		 受精神强度影响，反馈值的最大增加值按比例加成。]]):format(duration)
 	end,
 }
 
@@ -31,10 +31,10 @@ registerTalentTranslation{
 	info = function(self, t)
 		local range = self:getTalentRange(t)
 		local damage = t.getDamage(self, t)
-		return ([[你 的 潜 意 识 会 报 复 那 些 伤 害 你 的 人。 
-		 当 攻 击 者 在 %d 码 范 围 内 时， 你 会 对 目 标 造 成 伤 害， 伤 害 值 为 因 承 受 此 攻 击 而 获 得 的 反 馈 数 值 （但 不 超 过 %0.2f ）。
-		 此 效 果 每 回 合 对 同 一 生 物 最 多 只 能 触 发 1 次。
-		 受 精 神 强 度 影 响， 伤 害 按 比 例 加 成。]]):format(range, damDesc(self, DamageType.MIND, damage))
+		return ([[你的潜意识会报复那些伤害你的人。 
+		 当攻击者在 %d 码范围内时，你会对目标造成伤害，伤害值为因承受此攻击而获得的反馈数值（但不超过 %0.2f ）。
+		 此效果每回合对同一生物最多只能触发 1 次。
+		 受精神强度影响，伤害按比例加成。]]):format(range, damDesc(self, DamageType.MIND, damage))
 	end,
 }
 
@@ -44,9 +44,9 @@ registerTalentTranslation{
 	info = function(self, t)
 		local duration = t.getDuration(self, t)
 		local crit_bonus = t.getCritBonus(self, t)
-		return ([[将 注 意 力 集 中 于 单 体 目 标， 将 所 有 攻 击 性 灵 能 脉 冲 系 技 能 射 向 目 标， 持 续 %d 回 合。 当 此 技 能 激 活 时， 所 有 灵 能 脉 冲 系 技 能 增 加 %d%% 暴 击 伤 害。 
-		 如 果 目 标 死 亡， 则 该 技 能 提 前 中 断。 
-		 受 精 神 强 度 影 响， 暴 击 增 益 效 果 按 比 例 加 成。]]):format(duration, crit_bonus)
+		return ([[将注意力集中于单体目标，将所有攻击性灵能脉冲系技能射向目标，持续 %d 回合。当此技能激活时，所有灵能脉冲系技能增加 %d%% 暴击伤害。 
+		 如果目标死亡，则该技能提前中断。 
+		 受精神强度影响，暴击增益效果按比例加成。]]):format(duration, crit_bonus)
 	end,
 }
 

@@ -6,7 +6,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local restore = t.getNegative(self, t)
-		return ([[向 目 标 方 向 射 出 一 道 宇 宙 能 量. 直 到 碰 到 墙 或 者 到 达 地 图 边 缘, 对 敌 人 造 成 %0.2f 的 暗 影 伤 害 并 回 复 %d 负 能 量. 负 能 量 回 复 量 最 大 为 %d, 每 击 中 一 个 敌 人 将 少 回 复 25%% 的 负 能 量, 被 击 中 的 敌 人 将 注 意 到 你.]]):
+		return ([[向目标方向射出一道宇宙能量. 直到碰到墙或者到达地图边缘, 对敌人造成 %0.2f 的暗影伤害并回复 %d 负能量. 负能量回复量最大为 %d, 每击中一个敌人将少回复 25%% 的负能量, 被击中的敌人将注意到你.]]):
 		format(damDesc(self, DamageType.DARKNESS, damage), restore, restore * 4)
 	end,}
 
@@ -14,9 +14,9 @@ registerTalentTranslation{
 	id = "T_ASTRAL_PATH",
 	name = "星光大道",
 	info = function(self, t)
-		return ([[在 %d 码 内 发 射 一 个 负 能 量 球.
-		当 负 能 量 球 到 达 目 的 地 时, 会 将 你 传 送 到 其 位 置.
-		其 飞 行 速 度 (%d%%) 将 随 着 你 的 移 动 速 度 增 加.]]):format(t.range(self, t), t.proj_speed(self, t)*100)
+		return ([[在 %d 码内发射一个负能量球.
+		当负能量球到达目的地时, 会将你传送到其位置.
+		其飞行速度 (%d%%) 将随着你的移动速度增加.]]):format(t.range(self, t), t.proj_speed(self, t)*100)
 	end,}
 
 registerTalentTranslation{
@@ -24,8 +24,8 @@ registerTalentTranslation{
 	name = "银河脉冲",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
-		return ([[在 8 码 内 发 出 一 个 缓 慢 移 动 的 螺 旋 宇 宙 能 量.
-		当 它 移 动 时, 会 把 相 邻 的 目 标 拉 向 它, 造 成 %0.2f 暗 影 伤 害 并 每 击 中 一 次 回 复 1 点 负 能 量.]]):
+		return ([[在 8 码内发出一个缓慢移动的螺旋宇宙能量.
+		当它移动时, 会把相邻的目标拉向它, 造成 %0.2f 暗影伤害并每击中一次回复 1 点负能量.]]):
 		format(damDesc(self, DamageType.DARKNESS, damage))
 	end,}
 
@@ -36,9 +36,9 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local radius = self:getTalentRadius(t)
 		local pin = t.getPinDuration(self, t)
-		return ([[释 放 你 所 有 的 负 能 量 在 %d 码 范 围 内 造 成 (范 围 %d) 的 大 规 模 暗 能 量 爆 发.
-		造 成 %0.2f 的 暗 影 伤 害 并 定 身 被 击 中 的 敌 人 %d 回合.
-		伤 害 及 定 身 机 率 随 法 术 强 度 增 加, 伤 害、 范 围、和 定 身 持 续 时 间 全 部 随 着 负 能 量 和 技 能 等 级 增 加.]]):
+		return ([[释放你所有的负能量在 %d 码范围内造成 (范围 %d) 的大规模暗能量爆发.
+		造成 %0.2f 的暗影伤害并定身被击中的敌人 %d 回合.
+		伤害及定身机率随法术强度增加, 伤害、范围、和定身持续时间全部随着负能量和技能等级增加.]]):
 		format(radius, self:getTalentRange(t), damDesc(self, DamageType.DARKNESS, damage), pin)
 	end,}
 return _M

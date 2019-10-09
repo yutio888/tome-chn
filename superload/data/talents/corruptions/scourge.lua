@@ -14,8 +14,8 @@ registerTalentTranslation{
     name = "毁伤",
 	info = function(self, t)
 		local dam = damDesc(self, DamageType.BLIGHT, t.getDamage(self, t))
-		return ([[专 注 于 你 带 来 的 瘟 疫， 每 次 近 战 攻 击 会 造 成 %0.2f 枯 萎 伤 害（ 同 时 每 击 恢 复 你 %0.2f 生 命 值）。 
-		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成。]]):
+		return ([[专注于你带来的瘟疫，每次近战攻击会造成 %0.2f 枯萎伤害（同时每击恢复你 %0.2f 生命值）。 
+		 受法术强度影响，伤害有额外加成。]]):
 		format(dam, dam * 0.4)
 	end,
 }
@@ -24,9 +24,9 @@ registerTalentTranslation{
     id = "T_ACID_STRIKE",
     name = "酸性打击",
 	info = function(self, t)
-		return ([[用 每 把 武 器 打 击 目 标， 每 次 攻 击 造 成 %d%% 酸 性 武 器 伤 害。 
-		 如 果 有 至 少 一 次 攻 击 命 中 目 标， 则 会 产 生 酸 系 溅 射， 对 %d 范围内的所有敌 人 造 成 %0.2f 酸 性 伤 害。 
-		 受 法 术 强 度 影 响， 溅 射 伤 害 有 额 外 加 成。]]):
+		return ([[用每把武器打击目标，每次攻击造成 %d%% 酸性武器伤害。 
+		 如果有至少一次攻击命中目标，则会产生酸系溅射，对 %d 范围内的所有敌人造成 %0.2f 酸性伤害。 
+		 受法术强度影响，溅射伤害有额外加成。]]):
 		 format(100 * t.getDamage(self, t), self:getTalentRadius(t), damDesc(self, DamageType.ACID, t.getSplash(self, t)))
 		end,
 }
@@ -35,7 +35,7 @@ registerTalentTranslation{
     id = "T_DARK_SURPRISE",
     name = "黑暗连击",
 	info = function(self, t)
-		return ([[腐 化 目 标 ， 2  回 合 内 降 低 其  100%%  的 疾 病 免 疫 ，并 去 除 其  2  个 自 然 持 续 效 果 。然 后 用 你 的 两 把 武 器 打 击 敌 人 ，造 成  %d%%  伤 害 。]]):
+		return ([[腐化目标， 2  回合内降低其  100%%  的疾病免疫，并去除其  2  个自然持续效果。然后用你的两把武器打击敌人，造成  %d%%  伤害。]]):
 			format(100 * t.getDamage(self, t))
 	end,
 }

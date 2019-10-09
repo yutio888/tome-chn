@@ -5,8 +5,8 @@ registerTalentTranslation{
 	name = "奥术重组",
 	info = function(self, t)
 		local heal = t.getHeal(self, t)
-		return ([[使 你 的 身 体 充 满 奥 术 能 量， 将 其 重 组 为 原 始 状 态， 治 疗 %d 点 生 命 值。 
-		 受 法 术 强 度 影 响， 治 疗 量 有 额 外 加 成。]]):
+		return ([[使你的身体充满奥术能量，将其重组为原始状态，治疗 %d 点生命值。 
+		 受法术强度影响，治疗量有额外加成。]]):
 		format(heal)
 	end,
 }
@@ -17,10 +17,10 @@ registerTalentTranslation{
 	info = function(self, t)
 		local shield = t.getShield(self, t)
 		local dur = t.getDur(self, t)
-		return ([[使 你 的 周 身 围 绕 着 强 烈 的 奥 术 能 量。 
-		 你 的 每 个 伤 害 护 盾、 时 间 护 盾、 转 移 护 盾、 干 扰 护 盾 的 强 度 上 升 %d%% 。 
-		 在 等 级 5 时， 它 会 增 加 1 回 合 所 有 护 盾 的 持 续 时 间。 
-		 受 法 术 强 度 影 响， 护 盾 强 度 有 额 外 加 成。]]):
+		return ([[使你的周身围绕着强烈的奥术能量。 
+		 你的每个伤害护盾、时间护盾、转移护盾、干扰护盾的强度上升 %d%% 。 
+		 在等级 5 时，它会增加 1 回合所有护盾的持续时间。 
+		 受法术强度影响，护盾强度有额外加成。]]):
 		format(shield, dur)
 	end,
 }
@@ -30,10 +30,10 @@ registerTalentTranslation{
 	name = "奥术护盾",
 	info = function(self, t)
 		local shield = t.getShield(self, t)
-		return ([[使 你 的 周 身 围 绕 着 保 护 性 的 奥 术 能 量。 
-		 每 当 你 获 得 一 个 直 接 治 疗 时（ 非 持 续 恢 复 效 果） 你 会 自 动 获 得 一 个 护 盾， 护 盾 强 度 为 治 疗 量 的 %d%% ， 持 续 3 回 合。 
-		 如 果 新 护 盾 的 量 和 持 续 时 间 比 当 前 护 盾 大 或 相 等，将 会 取 代 之。
-		 受 法 术 强 度 影 响， 护 盾 强 度 有 额 外 加 成。]]):
+		return ([[使你的周身围绕着保护性的奥术能量。 
+		 每当你获得一个直接治疗时（非持续恢复效果）你会自动获得一个护盾，护盾强度为治疗量的 %d%% ，持续 3 回合。 
+		 如果新护盾的量和持续时间比当前护盾大或相等，将会取代之。
+		 受法术强度影响，护盾强度有额外加成。]]):
 		format(shield)
 	end,
 }
@@ -44,11 +44,11 @@ registerTalentTranslation{
 	info = function(self, t)
 		local shield = t.getShield(self, t)
 		local disruption = (self.disruption_shield_absorb or 0) * t.getDisruption(self, t) / 100
-		return ([[释 放 奥 术 能 量 充 满 当 前 保 护 你 的 魔 法 护 盾， 进 一 步 强 化 它。
-		 它 会 影 响 最 多 %d 种 护 盾 效 果。 
-		 伤 害 护 盾， 时 间 护 盾， 转 移 护 盾：提 高 %d%% 最 大 伤 害 吸 收 值。 
-		 干 扰 护 盾：获 得 吸 收 的 伤 害 的 %d%% + 50点 魔 法 值 （ %d ）
-		 受 法 术 强 度 影 响， 充 能 强 度 有 额 外 加 成。]]):
+		return ([[释放奥术能量充满当前保护你的魔法护盾，进一步强化它。
+		 它会影响最多 %d 种护盾效果。 
+		 伤害护盾，时间护盾，转移护盾：提高 %d%% 最大伤害吸收值。 
+		 干扰护盾：获得吸收的伤害的 %d%% + 50点魔法值（ %d ）
+		 受法术强度影响，充能强度有额外加成。]]):
 		format(t.getNumEffects(self, t), shield, t.getDisruption(self, t), disruption + 50)
 	end,
 }

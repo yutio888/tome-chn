@@ -5,9 +5,9 @@ registerTalentTranslation{
 	name = "石化皮肤",
 	info = function(self, t)
 		local armor = t.getArmor(self, t)
-		return ([[施 法 者 的 皮 肤 变 的 和 岩 石 一 样 坚 硬， 提 高 %d 点 护 甲。 
-		 每 次 你 被 近 战 攻 击 击 中， 你 有 %d%% 几 率 减 少 一 个 土 系 或 石 系 法 术 2 回 合 冷 却（一 回 合 最 多 一 次）。
-		 受 法 术 强 度 影 响， 护 甲 有 额 外 加 成。]]):
+		return ([[施法者的皮肤变的和岩石一样坚硬，提高 %d 点护甲。 
+		 每次你被近战攻击击中，你有 %d%% 几率减少一个土系或石系法术 2 回合冷却（一回合最多一次）。
+		 受法术强度影响，护甲有额外加成。]]):
 		format(armor, t.getCDChance(self, t))
 	end,
 }
@@ -18,9 +18,9 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local nb = t.getDigs(self, t)
-		return ([[ 射 出 一 道 能 击 碎 岩 石 的 强 有 力 的 射 线， 挖 掘 路 径 上 至 多 %d 块 墙 壁。 
-	 	 射 线 同 时 对 路 径 上 的 所 有 生 物 造 成 %0.2f 点 物 理 伤 害。 
-		 受 法 术 强 度 影 响，伤 害 有 额 外 加 成。 ]]):
+		return ([[ 射出一道能击碎岩石的强有力的射线，挖掘路径上至多 %d 块墙壁。 
+	 	 射线同时对路径上的所有生物造成 %0.2f 点物理伤害。 
+		 受法术强度影响，伤害有额外加成。 ]]):
 		format(nb, damDesc(self, DamageType.PHYSICAL, damage))
 	end,
 }
@@ -31,9 +31,9 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local radius = self:getTalentRadius(t)
-		return ([[召 唤 一 次 山 崩 对 敌 人 造 成 %0.2f 点 物 理 伤 害（ %d 码 锥 形 范 围）。 
-		 范 围 内 的 任 何 敌 人 都 将 被 击 退。 
-		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成。]]):
+		return ([[召唤一次山崩对敌人造成 %0.2f 点物理伤害（ %d 码锥形范围）。 
+		 范围内的任何敌人都将被击退。 
+		 受法术强度影响，伤害有额外加成。]]):
 		format(damDesc(self, DamageType.PHYSICAL, damage), self:getTalentRadius(t))
 	end,
 }
@@ -44,10 +44,10 @@ registerTalentTranslation{
 	info = function(self, t)
 		local duration = t.getDuration(self, t)
 		local damage = t.getDamage(self, t)
-		return ([[召 唤 岩 石 堡 垒 环 绕 着 你， 持 续 %d 回 合。 
-		 在 等 级 4 时， 它 可 以 环 绕 其 他 目 标。
-		 范 围 内 的 任 何 敌 对 生 物 将 受 到 %0.2f 点 物 理 伤 害。 
-		 受 法 术 强 度 影 响， 持 续 时 间 和 伤 害 有 额 外 加 成。]]):
+		return ([[召唤岩石堡垒环绕着你，持续 %d 回合。 
+		 在等级 4 时，它可以环绕其他目标。
+		 范围内的任何敌对生物将受到 %0.2f 点物理伤害。 
+		 受法术强度影响，持续时间和伤害有额外加成。]]):
 		format(duration, damDesc(self, DamageType.PHYSICAL, damage))
 	end,
 }

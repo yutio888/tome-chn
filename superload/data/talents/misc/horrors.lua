@@ -8,8 +8,8 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t) * 100
 		local bleed = t.getBleedDamage(self, t) * 100
 		local heal_penalty = t.getHealingPenalty(self, t)
-		return ([[撕 咬 目 标 造 成 %d%% 武 器 伤 害。 减 少 目 标 治 疗 效 果 %d%% 并 造 成 %d%% 武 器 伤 害 的 流 血 伤 害 持 续 5 回 合。 
-		 只 有 在 狂 乱 状 态 下 可 以 使 用。]]):format(damage, heal_penalty, bleed)
+		return ([[撕咬目标造成 %d%% 武器伤害。减少目标治疗效果 %d%% 并造成 %d%% 武器伤害的流血伤害持续 5 回合。 
+		 只有在狂乱状态下可以使用。]]):format(damage, heal_penalty, bleed)
 	end,
 }
 
@@ -18,7 +18,7 @@ registerTalentTranslation{
 	name = "狂乱跳跃",
 	message = "@Source@ 在狂乱中跳跃!",
 	info = function(self, t)
-		return ([[跳 向 范 围 内 目 标。 只 有 在 狂 乱 状 态 下 可 以 使 用。]])
+		return ([[跳向范围内目标。只有在狂乱状态下可以使用。]])
 	end,
 }
 
@@ -30,9 +30,9 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t) * 100
 		local bleed = t.getBleedDamage(self, t) * 100
 		local power = t.getPower(self, t) *100
-		return ([[ 咬 伤 目 标 ， 造 成 %d%% 武 器 伤 害 ， 可 能 让 目 标 进 入 流 血 状 态 ， 在 五 回 合 内 造 成 %d%% 武 器 伤 害 。 
-		 如 果 目 标 进 入 流 血 状 态 ， 吞 噬 者 会 进 入 狂 热 状 态 %d 回 合 （ 也 会 让 周 围 的 其 他 吞 噬 者 进 入 狂 热 状 态 ） 。
-		 狂 热 状 态 会 增 加 整 体 速 度 %d%% , 物 理 暴 击 率 %d%% , 同 时 降 至 -%d%% 生 命 时 才 会 死 去 。]]):
+		return ([[ 咬伤目标，造成 %d%% 武器伤害，可能让目标进入流血状态，在五回合内造成 %d%% 武器伤害。 
+		 如果目标进入流血状态，吞噬者会进入狂热状态 %d 回合（也会让周围的其他吞噬者进入狂热状态）。
+		 狂热状态会增加整体速度 %d%% , 物理暴击率 %d%% , 同时降至 -%d%% 生命时才会死去。]]):
 		format(damage, bleed, t.getDuration(self, t), power, power, power)
 	end,
 }
@@ -45,7 +45,7 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local light_reduction = t.getLiteReduction(self, t)
 		local darkness_resistance = t.getDarknessPower(self, t)
-		return ([[制 造 一 个 3 码 范 围 的 黑 暗 深 渊 持 续 %d 回 合。 深 渊 会 造 成 每 回 合 %0.2f 黑 暗 伤 害 并 降 低 %d 光 照 范 围， 同 时 使 其 中 生 物 的 暗 影 抵 抗 减 少 %d%% 。]]):
+		return ([[制造一个 3 码范围的黑暗深渊持续 %d 回合。深渊会造成每回合 %0.2f 黑暗伤害并降低 %d 光照范围，同时使其中生物的暗影抵抗减少 %d%% 。]]):
 		format(duration, damDesc(self, DamageType.DARKNESS, (damage)), light_reduction, darkness_resistance)
 	end,
 }
@@ -56,7 +56,7 @@ registerTalentTranslation{
 	message = "@Source@ 向 @Target@ 展示了虚空的混乱。",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
-		return ([[ 释 放 虚 空 的 混 乱， 使 目 标 每 回 合 强 制 进 行 精 神 豁 免 鉴 定， 持 续 6 回 合， 未 通 过 豁 免 则 在 原 伤 害 基 础 上 造 成 %0.2f 精 神 伤 害（ 由 精 神 和 自 然 伤 害 基 础 伤 害 决 定）。]]):
+		return ([[ 释放虚空的混乱，使目标每回合强制进行精神豁免鉴定，持续 6 回合，未通过豁免则在原伤害基础上造成 %0.2f 精神伤害（由精神和自然伤害基础伤害决定）。]]):
 		format(damDesc(self, DamageType.MIND, (damage)))
 	end,
 }
@@ -69,7 +69,7 @@ registerTalentTranslation{
 		local number = self:getTalentLevelRaw(t)
 		local damage = t.getDamage(self, t)
 		local explosion = t.getExplosion(self, t)
-		return ([[召 唤 %d 个 虚 空 碎 片。 碎 片 会 进 入 不 稳 定 状 态， 造 成 每 回 合 %0.2f 时 空 伤 害 持 续 5 回 合。 它 们 在 不 稳 定 状 态 下 死 亡 会 发 生 爆 炸 造 成 4 码 范 围 %0.2f 时 空 和 %0.2f 物 理 伤 害。]]):
+		return ([[召唤 %d 个虚空碎片。碎片会进入不稳定状态，造成每回合 %0.2f 时空伤害持续 5 回合。它们在不稳定状态下死亡会发生爆炸造成 4 码范围 %0.2f 时空和 %0.2f 物理伤害。]]):
 		format(number, damDesc(self, DamageType.TEMPORAL, (damage)), damDesc(self, DamageType.TEMPORAL, (explosion/2)), damDesc(self, DamageType.PHYSICAL, (explosion/2)))
 	end,
 }
@@ -81,8 +81,8 @@ registerTalentTranslation{
 --		local duration = t.getDuration(self, t)
 --		local damage = t.getDamage(self, t)
 --		local burst = t.getBurstDamage(self, t)
---		return ([[使 目 标 感 染 腐 肉 寄 生 幼 虫 持 续 %d 回 合。 每 回 合 会 移 除 目 标 一 个 物 理 增 益 效 果 并 造 成 %0.2f 酸 系 和 %0.2f 枯 萎 伤 害。 
---		 如 果 5 回 合 后 未 被 清 除 则 幼 虫 会 孵 化 造 成 %0.2f 酸 系 伤 害， 移 除 这 个 效 果 但 是 会 在 目 标 处 成 长 为 一 条 成 熟 的 腐 肉 虫。]]):
+--		return ([[使目标感染腐肉寄生幼虫持续 %d 回合。每回合会移除目标一个物理增益效果并造成 %0.2f 酸系和 %0.2f 枯萎伤害。 
+--		 如果 5 回合后未被清除则幼虫会孵化造成 %0.2f 酸系伤害，移除这个效果但是会在目标处成长为一条成熟的腐肉虫。]]):
 --		format(duration, damDesc(self, DamageType.ACID, (damage/2)), damDesc(self, DamageType.BLIGHT, (damage/2)), damDesc(self, DamageType.ACID, (burst)))
 --	end,
 --}
@@ -93,8 +93,8 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local duration = t.getDuration(self, t)
-		return ([[ 召 唤 旋 转 剑 刃 风 暴 将 敌 人 切 成 碎 片 ， 对 进 入 风 暴 的 敌 人 造 成 %d 点 物 理 伤 害 并 令 其 流 血 %d 回 合 。 
-		 受 精 神 强 度 影 响 ， 伤 害 和 流 血 持 续 时 间 有 额 外 加 成 。 ]]):format(damDesc(self, DamageType.PHYSICAL, damage), duration)
+		return ([[ 召唤旋转剑刃风暴将敌人切成碎片，对进入风暴的敌人造成 %d 点物理伤害并令其流血 %d 回合。 
+		 受精神强度影响，伤害和流血持续时间有额外加成。 ]]):format(damDesc(self, DamageType.PHYSICAL, damage), duration)
 	end,
 }
 
@@ -102,8 +102,8 @@ registerTalentTranslation{
 	id = "T_PSIONIC_PULL",
 	name = "念力牵引",
 	info = function(self, t)
-		return ([[将 5 码 范 围 内 的 目 标 拉 向 你 并 造 成 %d 物 理 伤 害。 
-		 受 精 神 强 度 影 响， 伤 害 有 额 外 加 成。]]):format(damDesc(self, DamageType.PHYSICAL, self:combatTalentMindDamage(t, 20, 120)))
+		return ([[将 5 码范围内的目标拉向你并造成 %d 物理伤害。 
+		 受精神强度影响，伤害有额外加成。]]):format(damDesc(self, DamageType.PHYSICAL, self:combatTalentMindDamage(t, 20, 120)))
 	end,
 }
 
@@ -111,8 +111,8 @@ registerTalentTranslation{
 	id = "T_RAZOR_KNIFE",
 	name = "刀锋之刃",
 	info = function(self, t)
-		return ([[对 一 条 直 线 目 标 发 射 一 把 锋 利 的 刀 刃 造 成 %0.2f 物 理 伤 害。 
-		 受 精 神 强 度 影 响， 伤 害 有 额 外 加 成。]]):format(damDesc(self, DamageType.PHYSICAL, self:combatTalentMindDamage(t, 20, 200)))
+		return ([[对一条直线目标发射一把锋利的刀刃造成 %0.2f 物理伤害。 
+		 受精神强度影响，伤害有额外加成。]]):format(damDesc(self, DamageType.PHYSICAL, self:combatTalentMindDamage(t, 20, 200)))
 	end,
 }
 
@@ -123,8 +123,8 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local duration = t.getDuration(self, t)
 		local radius = self:getTalentRadius(t)
-		return ([[在 1 码 范 围 内 形 成 一 个 史 莱 姆 墙， 每 隔 2 回 合 范 围 会 扩 大， 直 至 %d 码， 造 成 %0.2f 史 莱 姆 伤 害 持 续 %d 回 合。 
-		 受 精 神 强 度 影 响， 伤 害 及 持 续 时 间 有 额 外 加 成。]]):
+		return ([[在 1 码范围内形成一个史莱姆墙，每隔 2 回合范围会扩大，直至 %d 码，造成 %0.2f 史莱姆伤害持续 %d 回合。 
+		 受精神强度影响，伤害及持续时间有额外加成。]]):
 		format(radius, damDesc(self, DamageType.NATURE, damage), duration)
 	end,
 }
@@ -135,9 +135,9 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local duration = t.getDuration(self, t)
-		return ([[抓 住 一 个 目 标 并 将 其 拉 至 身 边， 并 抓 取 %d 回 合。 需要呼吸的非亡灵类生物还会被窒息。
-		 同 时 每 回 合 造 成 %0.2f 史 莱 姆 伤 害。 
-		 受 精 神 强 度 影 响， 伤 害 有 额 外 加 成。]]):
+		return ([[抓住一个目标并将其拉至身边，并抓取 %d 回合。需要呼吸的非亡灵类生物还会被窒息。
+		 同时每回合造成 %0.2f 史莱姆伤害。 
+		 受精神强度影响，伤害有额外加成。]]):
 		format(duration, damDesc(self, DamageType.SLIME, damage))
 	end,
 }
@@ -146,8 +146,8 @@ registerTalentTranslation{
 	id = "T_OOZE_SPIT",
 	name = "凝胶喷射",
 	info = function(self, t)
-		return ([[向 目 标 喷 射 毒 液 造 成 %0.2f 自 然 伤 害 并 降 低 其 30%% 移 动 速 度 持 续 3 回 合。 
-		 受 敏 捷 影 响， 伤 害 有 额 外 加 成。]]):format(damDesc(self, DamageType.NATURE, self:combatTalentStatDamage(t, "dex", 30, 290)))
+		return ([[向目标喷射毒液造成 %0.2f 自然伤害并降低其 30%% 移动速度持续 3 回合。 
+		 受敏捷影响，伤害有额外加成。]]):format(damDesc(self, DamageType.NATURE, self:combatTalentStatDamage(t, "dex", 30, 290)))
 	end,
 }
 
@@ -157,7 +157,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local range = self:getTalentRange(t)
 		local radius = self:getTalentRadius(t)
-		return ([[变 成 史 莱 姆 遁 入 地 下， 并 在 %d 至 %d 范 围 内 重 新 出 现。]]):format(range, radius)
+		return ([[变成史莱姆遁入地下，并在 %d 至 %d 范围内重新出现。]]):format(range, radius)
 	end,
 }
 
@@ -165,7 +165,7 @@ registerTalentTranslation{
 	id = "T_ANIMATE_BLADE",
 	name = "虚空利刃",
 	info = function(self, t)
-		return ([[划 破 空 间， 从 异 次 元 召 唤 出 一 把 虚 空 利 刃， 持 续 10 回 合。]])
+		return ([[划破空间，从异次元召唤出一把虚空利刃，持续 10 回合。]])
 	end,
 }
 
@@ -175,8 +175,8 @@ registerTalentTranslation{
 	name = "浸湿",
 	info = function(self, t)
 		local radius = self:getTalentRadius(t)
-		return ([[在 你 身 边 %d 范 围 内 制 造 水 流 ， 令 所 有 生 物 湿 润。
-		效 果 受 法 术 强 度 加 成。]]):format(radius)
+		return ([[在你身边 %d 范围内制造水流，令所有生物湿润。
+		效果受法术强度加成。]]):format(radius)
 	end,
 }
 
@@ -186,9 +186,9 @@ registerTalentTranslation{
 	message = "@Source@ 尝试吸取血液!",
 	info = function(self, t)
 		local Pdam, Fdam = self:damDesc(DamageType.PHYSICAL, self.level/2), self:damDesc(DamageType.ACID, self.level/2)
-		return ([[抓 住 目 标 ，吸 取 他 们 的 血 液 ， 每 回 合 造 成 %0.2f 物 理 和 %0.2f 酸 性 伤 害 。
-		5 回 合 后 脱 落 并 繁 殖。
-		伤 害 随 等 级 上 升 。
+		return ([[抓住目标，吸取他们的血液，每回合造成 %0.2f 物理和 %0.2f 酸性伤害。
+		5 回合后脱落并繁殖。
+		伤害随等级上升。
 		]]):format(Pdam, Fdam)
 	end,
 }

@@ -4,9 +4,9 @@ registerTalentTranslation{
 	id = "T_UNDEAD_EXPLOSION",
 	name = "亡灵爆炸",
 	info = function(self, t)
-		return ([[亡 灵 随 从 只 是 工 具。 你 可 以 残 忍 地 引 爆 它 们。 
-		 使 目 标 单 位 爆 炸 并 造 成 枯 萎 伤 害， 伤 害 为 它 最 大 生 命 值 的 %d%% ,半 径 为 %d 。 
-		 注 意！ 别 站 在 爆 炸 范 围 内！( 除 非 你 学 会 了 黑 暗 共 享， 这 样 你 有 %d%% 几 率 无 视 伤 害。)]]):
+		return ([[亡灵随从只是工具。你可以残忍地引爆它们。 
+		 使目标单位爆炸并造成枯萎伤害，伤害为它最大生命值的 %d%% ,半径为 %d 。 
+		 注意！别站在爆炸范围内！( 除非你学会了黑暗共享，这样你有 %d%% 几率无视伤害。)]]):
 		format(t.getDamage(self, t),t.radius(self,t), self:getTalentLevelRaw(self.T_DARK_EMPATHY) * 20)
 	end,
 }
@@ -15,13 +15,13 @@ registerTalentTranslation{
 	id = "T_ASSEMBLE",
 	name = "亡灵组合",
 	info = function(self, t)
-		return ([[将 3 个 单 位 组 合 成 1 个 骨 巨 人。 
-		 在 等 级 1 时 它 可 以 制 造 1 个 骨 巨 人。 
-		 在 等 级 3 时 它 可 以 制 造 1 个 重 型 骨 巨 人。 
-		 在 等 级 5 时 它 可 以 制 造 1 个 不 朽 骨 巨 人。 
-		 在 等 级 6 时 它 可 以 有 20%% 几 率 制 造 1 个 符 文 骨 巨 人。 
-		 在 同 一 时 间 只 能 激 活 %s 。]]):
-		format(necroEssenceDead(self, true) and "2 个 骨 巨 人" or "1 个 骨 巨 人")
+		return ([[将 3 个单位组合成 1 个骨巨人。 
+		 在等级 1 时它可以制造 1 个骨巨人。 
+		 在等级 3 时它可以制造 1 个重型骨巨人。 
+		 在等级 5 时它可以制造 1 个不朽骨巨人。 
+		 在等级 6 时它可以有 20%% 几率制造 1 个符文骨巨人。 
+		 在同一时间只能激活 %s 。]]):
+		format(necroEssenceDead(self, true) and "2 个骨巨人" or "1 个骨巨人")
 	end,
 }
 
@@ -29,8 +29,8 @@ registerTalentTranslation{
 	id = "T_SACRIFICE",
 	name = "献祭骨盾",
 	info = function(self, t)
-		return ([[牺 牲 1 个 骨 巨 人。 使 用 它 的 骨 头， 你 可 以 制 造 一 个 临 时 的 骨 盾， 格 挡 超 过 你 总 生 命 值 的 %d%% 的 任 何 伤 害。 
-		 此 效 果 持 续 %d 回 合。]]):
+		return ([[牺牲 1 个骨巨人。使用它的骨头，你可以制造一个临时的骨盾，格挡超过你总生命值的 %d%% 的任何伤害。 
+		 此效果持续 %d 回合。]]):
 		format(t.getPower(self, t), t.getTurns(self, t))
 	end,
 }
@@ -39,13 +39,13 @@ registerTalentTranslation{
 	id = "T_MINION_MASTERY",
 	name = "亡灵精通",
 	info = function(self, t)
-		return ([[你 召 唤 的 每 个 亡 灵 单 位 有 概 率 进 阶:%s]]):
+		return ([[你召唤的每个亡灵单位有概率进阶:%s]]):
 		format(self:callTalent(self.T_CREATE_MINIONS,"MinionChancesDesc")
-		:gsub("Degenerated skeleton warrior","堕 落 骷 髅 战 士"):gsub("Skeleton warrior","骷 髅 战 士"):gsub("Armoured skeleton warrior","装 甲 骷 髅 战 士")
-		:gsub("Skeleton archer","骷 髅 弓 箭 手"):gsub("Skeleton master archer","精 英 骷 髅 弓 箭 手"):gsub("Skeleton mage","骷 髅 法 师")
-		:gsub("Ghoul","食 尸 鬼"):gsub("Ghast","妖 鬼"):gsub("king","王")
-		:gsub("Vampire","吸 血 鬼"):gsub("Master vampire","精 英 吸 血 鬼"):gsub("Grave wight","坟 墓 尸 妖")
-		:gsub("Barrow wight","古 墓 尸 妖"):gsub("Dread","梦靥"):gsub("Lich","巫妖")
+		:gsub("Degenerated skeleton warrior","堕落骷髅战士"):gsub("Skeleton warrior","骷髅战士"):gsub("Armoured skeleton warrior","装甲骷髅战士")
+		:gsub("Skeleton archer","骷髅弓箭手"):gsub("Skeleton master archer","精英骷髅弓箭手"):gsub("Skeleton mage","骷髅法师")
+		:gsub("Ghoul","食尸鬼"):gsub("Ghast","妖鬼"):gsub("king","王")
+		:gsub("Vampire","吸血鬼"):gsub("Master vampire","精英吸血鬼"):gsub("Grave wight","坟墓尸妖")
+		:gsub("Barrow wight","古墓尸妖"):gsub("Dread","梦靥"):gsub("Lich","巫妖")
 		)
 	end,
 }

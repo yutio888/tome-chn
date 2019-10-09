@@ -8,8 +8,8 @@ registerTalentTranslation{
 		local decaySpeed = t.getDecaySpeed(self, t)
 		local newDecay = decaySpeed*0.1
 		local netHeal = newDecay*heal
-		return ([[ 你 的 反 馈 值 衰 减 的 %0.1f%% 会 治 疗 你 ， 同 时 衰 减 速 率 下 降 %d%% （ 每 回 合 最 多 %0.1f%% ） 。 总 而 言 之， 每 回 合 你 将 受 到 治 疗 量 等 于 你 的 反 馈 池 %0.2f%% 的 治 疗。 
-		受 精 神 强 度 影 响， 治 疗 效 果 按 比 例 加 成。]]):format(heal, decaySpeed*100, newDecay*100, netHeal*100)
+		return ([[ 你的反馈值衰减的 %0.1f%% 会治疗你，同时衰减速率下降 %d%% （每回合最多 %0.1f%% ）。总而言之，每回合你将受到治疗量等于你的反馈池 %0.2f%% 的治疗。 
+		受精神强度影响，治疗效果按比例加成。]]):format(heal, decaySpeed*100, newDecay*100, netHeal*100)
 	end,
 }
 
@@ -18,9 +18,9 @@ registerTalentTranslation{
 	name = "共鸣领域",
 	info = function(self, t)
 		local shield_power = t.getShieldPower(self, t)
-		return ([[激 活 此 技 能 可 产 生 一 个 吸 收 50 ％ 伤 害 的 共 鸣 领 域（ 最 大 吸 收 值 %d ）。 此 领 域 不 会 干 扰 反 馈 值 的 增 长。 
-		 受 精 神 强 度 影 响， 最 大 吸 收 值 有 额 外 加 成。 
-		 此 技 能 最 多 维 持 10 回 合。]]):format(shield_power)
+		return ([[激活此技能可产生一个吸收 50 ％伤害的共鸣领域（最大吸收值 %d ）。此领域不会干扰反馈值的增长。 
+		 受精神强度影响，最大吸收值有额外加成。 
+		 此技能最多维持 10 回合。]]):format(shield_power)
 	end,
 }
 
@@ -31,8 +31,8 @@ registerTalentTranslation{
 		local max_feedback = t.getMaxFeedback(self, t)
 		local gain = t.getFeedbackGain(self, t)
 		local feedbackratio = self:callTalent(self.T_FEEDBACK_POOL, "getFeedbackRatio")
-		return ([[增 加 %d 最 大 反 馈 值， 同 时 反 馈 值 的 基 础 获 得 比 率 增 加 %0.1f%%( 相 比 于 你 受 到 伤 害 的 %0.1f%% ) 。 
-		 受 精 神 强 度 影 响， 反 馈 值 增 加 率 按 比 例 加 成。]]):format(max_feedback, gain*100, feedbackratio*100)
+		return ([[增加 %d 最大反馈值，同时反馈值的基础获得比率增加 %0.1f%%( 相比于你受到伤害的 %0.1f%% ) 。 
+		 受精神强度影响，反馈值增加率按比例加成。]]):format(max_feedback, gain*100, feedbackratio*100)
 	end,
 }
 
@@ -41,8 +41,8 @@ registerTalentTranslation{
 	name = "反馈充能",
 	info = function(self, t)
 		local data = t.getData(self, t)
-		return ([[使 用 反 馈 值 来 补 充 自 己。 治 疗 %d 生 命 值 并 回 复 %d 点 耐 力， %d 点 法 力， %d 点 失 衡 值， %d 点 活 力， %d 点 正 负 超 能 力 值， %d 点 超 能 力 值 及 %d 点 仇 恨 值。 
-		 受 精 神 强 度 影 响， 增 益 效 果 有 额 外 加 成。]]):format(data.heal, data.stamina, data.mana, -data.equilibrium, data.vim, data.positive, data.psi, data.hate)
+		return ([[使用反馈值来补充自己。治疗 %d 生命值并回复 %d 点耐力， %d 点法力， %d 点失衡值， %d 点活力， %d 点正负超能力值， %d 点超能力值及 %d 点仇恨值。 
+		 受精神强度影响，增益效果有额外加成。]]):format(data.heal, data.stamina, data.mana, -data.equilibrium, data.vim, data.positive, data.psi, data.hate)
 	end,
 }
 

@@ -5,7 +5,7 @@ registerTalentTranslation{
 	name = "奥术能量",
 	info = function(self, t)
 		local resist = self.sustain_talents[t.id] and self.sustain_talents[t.id].display_resist or t.getArcaneResist(self, t)
-		return ([[你 对 魔 法 的 理 解 使 你 进 入 精 神 集 中 状 态， 增 加 %d 点 法 术 强 度 和 %d%% 奥 术 抗 性 。]]):
+		return ([[你对魔法的理解使你进入精神集中状态，增加 %d 点法术强度和 %d%% 奥术抗性。]]):
 		format(t.getSpellpowerIncrease(self, t), resist)
 	end,
 }
@@ -15,9 +15,9 @@ registerTalentTranslation{
 	name = "奥术射线",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
-		return ([[制 造 出 一 个 强 大 的 奥 术 之 球 对 目 标 造 成 %0.2f 奥 术 伤 害。 
-		 在 等 级 3 时， 它 会 有 穿 透 效 果。 
-		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成。]]):
+		return ([[制造出一个强大的奥术之球对目标造成 %0.2f 奥术伤害。 
+		 在等级 3 时，它会有穿透效果。 
+		 受法术强度影响，伤害有额外加成。]]):
 		format(damDesc(self, DamageType.ARCANE, damage))
 	end,
 }
@@ -27,11 +27,11 @@ registerTalentTranslation{
 	name = "奥术漩涡",
 	info = function(self, t)
 		local dam = t.getDamage(self, t)
-		return ([[在 目 标 身 上 放 置 一 个 持 续 6 回 合 的 奥 术 漩 涡。 
-		 每 回 合， 奥 术 漩 涡 会 随 机 寻 找 视 野 内 的 另 一 个 敌 人， 并 且 释 放 一 次 奥 术 射 线， 对 一 条 线 上 的 所 有 敌 人 造 成 %0.2f 奥 术 伤 害。 
-		 若 没 有 发 现 其 他 敌 人， 则 目 标 会 承 受 150 ％ 额 外 奥 术 伤 害。 
-		 若 目 标 死 亡， 则 奥 术 漩 涡 爆 炸 并 释 放 所 有 的 剩 余 奥 术 伤 害， 在 2 码 半 径 范 围 内 形 成 奥 术 爆 炸。 
-		 受 法 术 强 度 影 响， 伤 害 有 额 外 加 成。]]):
+		return ([[在目标身上放置一个持续 6 回合的奥术漩涡。 
+		 每回合，奥术漩涡会随机寻找视野内的另一个敌人，并且释放一次奥术射线，对一条线上的所有敌人造成 %0.2f 奥术伤害。 
+		 若没有发现其他敌人，则目标会承受 150 ％额外奥术伤害。 
+		 若目标死亡，则奥术漩涡爆炸并释放所有的剩余奥术伤害，在 2 码半径范围内形成奥术爆炸。 
+		 受法术强度影响，伤害有额外加成。]]):
 		format(damDesc(self, DamageType.ARCANE, dam))
 	end,
 }
@@ -41,11 +41,11 @@ registerTalentTranslation{
 	name = "干扰护盾",
 	info = function(self, t)
 		local radius = self:hasEffect(self.EFF_AETHER_AVATAR) and 10 or 3
-		return ([[你 的 身 边 充 满 奥 术 力 量 ，阻 止 你 受 到 的 伤 害 ，并 将 其 改 为 扣 减 法 力 值 。
-		 你 受 到 的 伤 害 的  25%%  将 会 被 改 为 扣 减 法 力 值 ，每 点 伤 害 扣 减  %0.2f  点 法 力 值 。伤 害 护 盾 会 降 低 这 一 消 耗 。
-		 当 你 解 除 干 扰 护 盾 时 ，你 会 获 得  100  点 法 力 值 ，并 在 你 周 围 产 生 半 径 为  %d  的 致 命 的 奥 术 风 暴 ，持 续  10  回 合 ，每 回 合 造 成  10%%  的 吸 收 的 总 伤 害 ，共 造 成  %d  点 伤 害 。
-		 当 你 的 法 力 值 不 足  10%%  时 ，你 会 自 动 解 除 这 一 技 能 。
-		 伤 害 到 魔 法 的 比 例 受 你 的 法 术 强 度 加 成 。]]):
+		return ([[你的身边充满奥术力量，阻止你受到的伤害，并将其改为扣减法力值。
+		 你受到的伤害的  25%%  将会被改为扣减法力值，每点伤害扣减  %0.2f  点法力值。伤害护盾会降低这一消耗。
+		 当你解除干扰护盾时，你会获得  100  点法力值，并在你周围产生半径为  %d  的致命的奥术风暴，持续  10  回合，每回合造成  10%%  的吸收的总伤害，共造成  %d  点伤害。
+		 当你的法力值不足  10%%  时，你会自动解除这一技能。
+		 伤害到魔法的比例受你的法术强度加成。]]):
 		format(t.getManaRatio(self, t), radius, damDesc(self, DamageType.ARCANE, t.getMaxDamage(self, t)))
 	end,
 }

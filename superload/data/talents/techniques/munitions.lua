@@ -3,12 +3,12 @@ registerTalentTranslation{
 	id = "T_EXOTIC_MUNITIONS",
 	name = "异种弹药",
 	info = function (self,t)
-		return ([[你 学 会 了 制 造 和 装 备 专 门 的 弹 药:
-燃 烧 弹- 命 中 后 ，对 目 标 附 近 的 敌 人 造 成 %d%% 火 焰 武 器 伤 害 ，范 围 最 大 为 %d ， 每 回 合 最 多 一 次。
-剧 毒 弹- 命 中 后 ，对 目 标 造 成 %0.2f 自 然 伤 害 并 感 染 麻 木 毒 素 , 在 5 回 合 内 造 成 %0.2f 自 然 伤 害 并 削 弱 其 %d%% 的 伤 害。
-穿 甲 弹- 命 中 后 ， 使 目 标 的 护 甲 和 豁 免 减 少 %d ，持 续 3 回合, 你 的 物 理 穿 透 增 加 %d%%。
-同 时 只 能 装 备 一 种 弹 药。
-毒 素 伤 害 、 护 甲 和 豁 免 削 减 受 物 理 强 度 加 成。]]):
+		return ([[你学会了制造和装备专门的弹药:
+燃烧弹- 命中后，对目标附近的敌人造成 %d%% 火焰武器伤害，范围最大为 %d ，每回合最多一次。
+剧毒弹- 命中后，对目标造成 %0.2f 自然伤害并感染麻木毒素 , 在 5 回合内造成 %0.2f 自然伤害并削弱其 %d%% 的伤害。
+穿甲弹- 命中后，使目标的护甲和豁免减少 %d ，持续 3 回合, 你的物理穿透增加 %d%%。
+同时只能装备一种弹药。
+毒素伤害、护甲和豁免削减受物理强度加成。]]):
 		format(t.getIncendiaryDamage(self, t)*100, t.getIncendiaryRadius(self,t), damDesc(self, DamageType.NATURE, t.getPoisonDamage(self, t)/5), damDesc(self, DamageType.NATURE, t.getPoisonDamage(self, t)), t.getNumb(self, t), t.getArmorSaveReduction(self, t), t.getResistPenalty(self,t))
 	end,
 }
@@ -18,9 +18,9 @@ registerTalentTranslation{
 	info = function (self,t)
 		local damage = t.getIncendiaryDamage(self, t)*100
 		local radius = self:getTalentRadius(t)
-		return ([[装 填 燃 烧 弹, 对 目 标 附 近 的 敌 人 造 成 %d%% 火 焰 武 器 伤 害 ，范 围 最 大 为 %d 。
-		该 技 能 每 回 合 最 多 触 发 一 次.
-		伤 害 受 物 理 强 度 加 成。]]):format(damage, radius)
+		return ([[装填燃烧弹, 对目标附近的敌人造成 %d%% 火焰武器伤害，范围最大为 %d 。
+		该技能每回合最多触发一次.
+		伤害受物理强度加成。]]):format(damage, radius)
 	end,
 }
 registerTalentTranslation{
@@ -29,8 +29,8 @@ registerTalentTranslation{
 	info = function (self,t)
 		local damage = t.getPoisonDamage(self, t)
 		local numb = t.getNumb(self,t)
-		return ([[装 填 毒 弹, 对 目 标 造 成 %0.2f 自 然 伤 害 并 感 染 麻 木 毒 素 , 在 5 回 合 内 造 成 %0.2f 自 然 伤 害 并 削 弱 其 %d%% 的 伤 害。
-		伤 害 随 物 理 强 度 增 加.]]):format(damDesc(self, DamageType.NATURE, damage/5), damDesc(self, DamageType.NATURE, damage), numb)
+		return ([[装填毒弹, 对目标造成 %0.2f 自然伤害并感染麻木毒素 , 在 5 回合内造成 %0.2f 自然伤害并削弱其 %d%% 的伤害。
+		伤害随物理强度增加.]]):format(damDesc(self, DamageType.NATURE, damage/5), damDesc(self, DamageType.NATURE, damage), numb)
 	end,
 }
 registerTalentTranslation{
@@ -39,8 +39,8 @@ registerTalentTranslation{
 	info = function (self,t)
 		local reduce = t.getArmorSaveReduction(self, t)
 		local resist = t.getResistPenalty(self,t)
-		return ([[装 填 穿 甲 弹, 使 目 标 的 护 甲 和 豁 免 减 少 %d 持 续 3 回合, 你 的 物 理 穿 透 增 加 %d%%。
-		护 甲 和 豁 免 削 减 随 物 理 强 度 增 加.]]):format(reduce, resist)
+		return ([[装填穿甲弹, 使目标的护甲和豁免减少 %d 持续 3 回合, 你的物理穿透增加 %d%%。
+		护甲和豁免削减随物理强度增加.]]):format(reduce, resist)
 	end,
 }
 registerTalentTranslation{
@@ -55,11 +55,11 @@ registerTalentTranslation{
 		local poison = t.getPoisonDamage(self,t)
 		local fail = t.getPoisonFailure(self,t)
 		local nb = t.getRemoveCount(self,t)
-		return ([[根 据 当 前 装 填 的 弹 药 进 行 一 次 特 殊 的 射 击
-燃 烧 弹- %d%% 火 焰 武 器 伤 害，伤 害 半 径 %d 。 用 粘 稠 的 沥 青 包 裹 敌 人 %d 回合, 减 少 %d%% 整 体 速 度 并 增 加 其 受 到 的 火 焰 伤 害 %d%% 。
-剧 毒 弹- %d%% 自 然 武 器 伤 害。爆 炸 会 形 成 半 径 %d 的 致 残 毒 气 云 ，持 续 %d 回 合, 每 回 合 造 成 %0.2f 自 然 伤 害 并 使 目 标 使 用 技 能 有 %d%% 几 率 失 败。
-穿 甲 弹- %d%% 物 理 武 器 伤 害，伤 害 半 径 %d ，并 移 除 有 益 的 物 理 效 果 或 持 续 技 能。
-毒 素 伤 害 受 物 理 强 度 加 成, 状 态 触 发 几 率 受 命 中 加 成。]]):
+		return ([[根据当前装填的弹药进行一次特殊的射击
+燃烧弹- %d%% 火焰武器伤害，伤害半径 %d 。用粘稠的沥青包裹敌人 %d 回合, 减少 %d%% 整体速度并增加其受到的火焰伤害 %d%% 。
+剧毒弹- %d%% 自然武器伤害。爆炸会形成半径 %d 的致残毒气云，持续 %d 回合, 每回合造成 %0.2f 自然伤害并使目标使用技能有 %d%% 几率失败。
+穿甲弹- %d%% 物理武器伤害，伤害半径 %d ，并移除有益的物理效果或持续技能。
+毒素伤害受物理强度加成, 状态触发几率受命中加成。]]):
 		format(dam, radius, dur, slow, fire, dam, radius, dur, damDesc(self, DamageType.NATURE, poison), fail,  dam,radius, nb)
 	end,
 }
@@ -70,12 +70,12 @@ registerTalentTranslation{
 		local fire = t.getFireDamage(self,t)
 		local poison = t.getPoisonDamage(self,t)
 		local resist = t.getResistPenalty(self,t)
-		return ([[你 制 造 出 强 化 版 弹 药, 获 得 额 外 效 果：
-燃 烧 弹- 爆 炸 范 围 增 加 1, 点 燃 地 面 每 回 合 额 外 造 成 %0.2f 火 焰 伤 害 持 续 3 回 合.
-剧 毒 弹- 感 染 水 蛭 毒 素, 3 回 合 内 造 成 %0.2f 毒 素 伤 害 , 毒 素 造 成 的 100%% 伤 害 会 治 疗 你.
-穿 甲 弹- 击 穿 目 标 护 甲, 目 标 受 到 的 所 有 伤 害 增 加 %d%% 持 续 3 回 合.
-你 的 强 化 版 弹 药 有 限, 所 以 技 能 有 冷 却 时 间.
-伤 害 受 物 理 强 度 加 成, 状 态 触 发 几 率 受 命 中 加 成。]]):
+		return ([[你制造出强化版弹药, 获得额外效果：
+燃烧弹- 爆炸范围增加 1, 点燃地面每回合额外造成 %0.2f 火焰伤害持续 3 回合.
+剧毒弹- 感染水蛭毒素, 3 回合内造成 %0.2f 毒素伤害 , 毒素造成的 100%% 伤害会治疗你.
+穿甲弹- 击穿目标护甲, 目标受到的所有伤害增加 %d%% 持续 3 回合.
+你的强化版弹药有限, 所以技能有冷却时间.
+伤害受物理强度加成, 状态触发几率受命中加成。]]):
 		format(damDesc(self, DamageType.FIRE, fire), damDesc(self, DamageType.NATURE, poison), resist)
 	end,
 }
@@ -89,11 +89,11 @@ registerTalentTranslation{
 		local numb = t.getNumb(self,t)
 		local armor = t.getArmorSaveReduction(self,t)
 		local resist = t.getResistPenalty(self,t)
-		return ([[混 合 你 的 弹 药, 造 成 更 强 力 的 效 果:
-燃 烧 弹- 受 到 爆 炸 袭 击 的 目 标 护 甲 和 豁 免 减 少 %d 持 续 3 回 合, 你 的 物 理 和 火 焰 穿 透 增 加 %d%%.
-剧 毒 弹- 造 成 %d%% 自 然 武 器 伤 害，伤 害 半 径 %d , 并 施 加 麻 木 毒 素 效 果. 每 回 合 最 多 生 效 一 次.
-穿 甲 弹- 造 成 %0.2f 物 理 伤 害 并 使 目 标 流 血, 5 回 合 内 造 成 %0.2f 物 理 伤 害 并 减 少 他 们 造 成 的 伤 害 %d%%.
-物 理 伤 害 、 护 甲 和 豁 免 削 减 受 物 理 强 度 加 成。]]):
+		return ([[混合你的弹药, 造成更强力的效果:
+燃烧弹- 受到爆炸袭击的目标护甲和豁免减少 %d 持续 3 回合, 你的物理和火焰穿透增加 %d%%.
+剧毒弹- 造成 %d%% 自然武器伤害，伤害半径 %d , 并施加麻木毒素效果. 每回合最多生效一次.
+穿甲弹- 造成 %0.2f 物理伤害并使目标流血, 5 回合内造成 %0.2f 物理伤害并减少他们造成的伤害 %d%%.
+物理伤害、护甲和豁免削减受物理强度加成。]]):
 		format(armor, resist, poison, radius, bleed/5, bleed, numb)
 	end,
 }

@@ -4,10 +4,10 @@ registerTalentTranslation{
 	name = "石化凝视",
 	info = function(self, t)
 		local duration = t.getDuration(self, t)
-		return ([[凝 视 你 的 敌 人 并 把 他 石 化 %d 回 合。
-		被 石 化 的 生 物 不 能 行 动， 回 血， 并 且 非 常 脆 弱。
-		如 果 被 石 化 的 生 物 一 次 性 受 到 了 超 过 总 生 命 值 30%% 的 伤 害， 那 么 他 会 破 碎 并 死 去。
-		被 石 化 的 生 物 对 火 焰 和 闪 电 有 着 很 高 的 抗 性， 并 对 物 理 攻 击 有 着 一 定 的 抗 性。]]):
+		return ([[凝视你的敌人并把他石化 %d 回合。
+		被石化的生物不能行动，回血，并且非常脆弱。
+		如果被石化的生物一次性受到了超过总生命值 30%% 的伤害，那么他会破碎并死去。
+		被石化的生物对火焰和闪电有着很高的抗性，并对物理攻击有着一定的抗性。]]):
 		format(duration)
 	end,}
 
@@ -15,8 +15,8 @@ registerTalentTranslation{
 	id = "T_GNASHING_MAW",
 	name = "撕咬",
 	info = function(self, t)
-		return ([[用 你 的 武 器 攻 击 目 标， 造 成 %d%% 伤 害。 如 果 攻 击 命 中 了， 目 标 的 命 中 会 被 降 低 %d， 持 续 %d 回 合。
-		命 中 降 低 会 随 着 你 的 物 理 强 度 增 长。]])
+		return ([[用你的武器攻击目标，造成 %d%% 伤害。如果攻击命中了，目标的命中会被降低 %d，持续 %d 回合。
+		命中降低会随着你的物理强度增长。]])
 		:format(
 			100 * self:combatTalentWeaponDamage(t, 1, 1.5), 3 * self:getTalentLevel(t), t.getDuration(self, t))
 	end,}
@@ -26,9 +26,9 @@ registerTalentTranslation{
 	id = "T_SANDRUSH",
 	name = "潜沙突袭",
 	info = function(self, t)
-		return ([[潜 入 沙 中 向 距 离 你 %d 码 的 目 标 发 起 突 袭 攻 击。
-		在 你 的 跃 出 点 会 出 现 最 多 9 个 持 续 %d 回 合 （基 于 你 的 力 量） 的 沙 坑。
-		你 必 须 突 袭 至 少 2 码。]]):format(t.range(self, t), t.duration(self, t))
+		return ([[潜入沙中向距离你 %d 码的目标发起突袭攻击。
+		在你的跃出点会出现最多 9 个持续 %d 回合（基于你的力量）的沙坑。
+		你必须突袭至少 2 码。]]):format(t.range(self, t), t.duration(self, t))
 	end,}
 
 registerTalentTranslation{
@@ -38,9 +38,9 @@ registerTalentTranslation{
 		local dam = t.getDamage(self, t)
 		local nb = t.getNb(self, t)
 		local Pdam, Fdam = self:damDesc(DamageType.PHYSICAL, dam/2), self:damDesc(DamageType.FIRE, dam/2)
-		return ([[用 你 的 产 卵 器 蜇 目 标 一 下， 将 %d 个 幼 虫 注 入 目 标 体 内 以 完 成 他 们 的 孵 化 流 程。
-		在 一 个 5 回 合 的 发 育 周 期 内， 幼 虫 们 会 以 受 害 者 的 血 肉 为 食， 每 回 合 造 成 %0.2f 到 %0.2f 的 物 理 伤 害 （随 着 他 们 的 成 长 增 多）。
-		在 发 育 期 结 束 后， 幼 虫 会 从 寄 主 体 内 钻 出， 每 个 幼 虫 造 成 %0.2f 物 理 和 %0.2f 火 焰 伤 害。
+		return ([[用你的产卵器蜇目标一下，将 %d 个幼虫注入目标体内以完成他们的孵化流程。
+		在一个 5 回合的发育周期内，幼虫们会以受害者的血肉为食，每回合造成 %0.2f 到 %0.2f 的物理伤害（随着他们的成长增多）。
+		在发育期结束后，幼虫会从寄主体内钻出，每个幼虫造成 %0.2f 物理和 %0.2f 火焰伤害。
 		]]):format(nb, nb*Pdam*2*.05, nb*Pdam*2*.25, Pdam, Fdam)
 	end,}
 
@@ -48,14 +48,14 @@ registerTalentTranslation{
 	id  = "T_AMAKTHEL_SLUMBER",
 	name = "沉睡中...",
 	info = function(self, t)
-		return ([[死 神 正 在 沉 睡。 起 码 现 在 是。]])
+		return ([[死神正在沉睡。起码现在是。]])
 	end,}
 
 registerTalentTranslation{
 	id = "T_AMAKTHEL_TENTACLE_SPAWN",
 	name = "衍生触手", 
 	info = function(self, t)
-		return ([[死 神 想 要 逗 逗 你……]])
+		return ([[死神想要逗逗你……]])
 	end,}
 
 registerTalentTranslation{
@@ -64,7 +64,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local duration = t.getDuration(self, t)
 		local radius = self:getTalentRadius(t)
-		return ([[创 造 一 片 诅 咒 之 地 （半 径 %d 码） %d 回 合。 任 何 陷 入 其 中 的 敌 人 都 会 被 诅 咒， 任 何 他 们 新 得 到 的 负 面 状 态 的 持 续 时 间 都 会 翻 倍。
+		return ([[创造一片诅咒之地（半径 %d 码） %d 回合。任何陷入其中的敌人都会被诅咒，任何他们新得到的负面状态的持续时间都会翻倍。
 		]]):
 		format(radius, duration)
 	end,}
@@ -75,7 +75,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local duration = t.getDuration(self, t)
 		local radius = self:getTalentRadius(t)
-		return ([[创 造 一 片 半 径 %d 码 的 时 间 错 乱 之 地 %d 回 合。 任 何 站 在 其 中 的 敌 人 受 到 的 伤 害 都 会 治 疗 攻 击 者 200%% 伤 害 数 额 的 生 命。
+		return ([[创造一片半径 %d 码的时间错乱之地 %d 回合。任何站在其中的敌人受到的伤害都会治疗攻击者 200%% 伤害数额的生命。
 		]]):
 		format(radius, duration)
 	end,}
@@ -86,7 +86,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local duration = t.getDuration(self, t)
-		return ([[召 唤 由 旋 转 的 锯 刃 组 成 的 风 暴 来 撕 裂 你 的 敌 人， 对 每 个 接 近 者 造 成 %d 物 理 伤 害 并 使 其 流 血， 持 续 %d 回 合。
+		return ([[召唤由旋转的锯刃组成的风暴来撕裂你的敌人，对每个接近者造成 %d 物理伤害并使其流血，持续 %d 回合。
 ]]):format(damDesc(self, DamageType.PHYSICAL, damage), duration)
 	end,}
 
@@ -94,18 +94,18 @@ registerTalentTranslation{
 	id = "T_RAZOR_SAW",
 	name = "剃刀飞锯",
 	info = function(self, t)
-		return ([[发 射 一 个 动 能 十 足 的 锯 刃， 对 一 条 线 内 的 所 有 目 标 造 成 %0.2f 物 理 伤 害。
-		伤 害 会 随 着 你 的 精 神 强 度 增 长。]]):format(damDesc(self, DamageType.PHYSICAL, self:combatTalentMindDamage(t, 60, 300)))
+		return ([[发射一个动能十足的锯刃，对一条线内的所有目标造成 %0.2f 物理伤害。
+		伤害会随着你的精神强度增长。]]):format(damDesc(self, DamageType.PHYSICAL, self:combatTalentMindDamage(t, 60, 300)))
 	end,}
 
 registerTalentTranslation{
 	id = "T_ROCKET_DASH",
 	name = "火箭突进",
 	info = function(self, t)
-		return ([[使 用 火 箭 向 前 突 进。
-		如 果 目 标 地 点 已 被 占 据， 那 么 你 对 那 里 的 目 标 进 行 一 次 近 战 攻 击。
-		攻 击 会 造 成 130% 武 器 伤 害。
-		你 必 须 至 少 突 进 2 码。]])
+		return ([[使用火箭向前突进。
+		如果目标地点已被占据，那么你对那里的目标进行一次近战攻击。
+		攻击会造成 130% 武器伤害。
+		你必须至少突进 2 码。]])
 	end,}
 
 -- Solely used to track the achievement

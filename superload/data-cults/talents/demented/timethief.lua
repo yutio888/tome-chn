@@ -6,9 +6,9 @@ registerTalentTranslation{
 	info = function(self, t)
 		local dur = t.getDuration(self, t)
 		local speed = t.getSpeed(self, t)
-		return ([[扭 曲 周 围 时 空 ， 周 围 7 码 内 敌 人 移 动 速 度 降 低 50%% ， 持 续 %d 回 合 。
-		你 使 用 偷 取 的 速 度 强 化 自 身 ， 使 自 己 获 得 一 回 合 神 速 状 态 ， 移 动 速 度 提 高 %d%%， 每 减 速 一 个 敌 人 ， 额 外 提 高 %d%%， 最 大 个 数 4 个 。
-		移 动 外 的 任 何 行 动 将 终 止 加 速 效 果。]]):
+		return ([[扭曲周围时空，周围 7 码内敌人移动速度降低 50%% ，持续 %d 回合。
+		你使用偷取的速度强化自身，使自己获得一回合神速状态，移动速度提高 %d%%，每减速一个敌人，额外提高 %d%%，最大个数 4 个。
+		移动外的任何行动将终止加速效果。]]):
 		format(dur, speed, speed/8)
 	end,
 }
@@ -19,7 +19,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local nb = t.getNb(self,t)
 		local dur = t.getDuration(self,t)
-		return ([[释 放 熵 浪 潮 ，清 除 自 己 的 灾 祸 ， 同 时 吸 取 他 人 的 能 量 。 10 码 内 所 有 敌 人 的 %d 项 有 益 效 果 持 续 时 间 缩 短 %d 回 合 。 自 身 同 等 数 量 的 有 害 效 果 持 续 时 间 缩 短 同 等 回 合 。]]):
+		return ([[释放熵浪潮，清除自己的灾祸，同时吸取他人的能量。 10 码内所有敌人的 %d 项有益效果持续时间缩短 %d 回合。自身同等数量的有害效果持续时间缩短同等回合。]]):
 		format(nb, dur)
 	end,
 }
@@ -30,9 +30,9 @@ registerTalentTranslation{
 	info = function(self, t)
 		local rad = self:getTalentRadius(t)
 		local dur = t.getDuration(self,t)
-		return ([[你 和 %d 码 内 所 有 敌 人 在 时 间 中 凝 固 %d 回 合 ， 无 法 行 动 但 也 无 法 被 伤 害。
-		自 身 的 有 害 效 果 持 续 时 间 和 技 能 CD 会 正 常 扣 减 ， 有 益 效 果 持 续 时 间 不 变。
-		敌 人 的 有 害 效 果 持 续 时 间 和 技 能 CD 不 会 扣 减 ， 有 益 效 果 持 续 时 间 正 常 扣 减。]]):format(rad, dur)
+		return ([[你和 %d 码内所有敌人在时间中凝固 %d 回合，无法行动但也无法被伤害。
+		自身的有害效果持续时间和技能 CD 会正常扣减，有益效果持续时间不变。
+		敌人的有害效果持续时间和技能 CD 不会扣减，有益效果持续时间正常扣减。]]):format(rad, dur)
 	end,
 }
 
@@ -45,8 +45,8 @@ registerTalentTranslation{
 		local res = 80 - power
 		local dam = 40 + power
 		local life = 20 + power
-		return ([[将 目 标 敌 人 从 正 常 时 间 流 部 分 移 除 ， 持 续 %d 回 合 ， 隔 绝 他 们 与 现 实 世 界 交 互 的 能 力 。 移 除 期 间 敌 人 受 到 的 伤 害 降 低 %d%% ， 造 成 的 伤 害 也 降 低 %d%% 。
-		技 能 启 动 时 ， 你 从 受 损 的 时 间 线 中 召 唤 敌 人 的 时 空 克 隆 体 协 助 你 战 斗 ， 持 续 时 间 与 敌 人 移 除 时 间 相 同 ， 克 隆 体 生 命 值 降 低 %d%% ， 造 成 伤 害 降 低 %d%% ， 其 他 能 力 与 本 体 相 同。]]):
+		return ([[将目标敌人从正常时间流部分移除，持续 %d 回合，隔绝他们与现实世界交互的能力。移除期间敌人受到的伤害降低 %d%% ，造成的伤害也降低 %d%% 。
+		技能启动时，你从受损的时间线中召唤敌人的时空克隆体协助你战斗，持续时间与敌人移除时间相同，克隆体生命值降低 %d%% ，造成伤害降低 %d%% ，其他能力与本体相同。]]):
 		format(dur, res, dam, life, dam)
 	end,
 }

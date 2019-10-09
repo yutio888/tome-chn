@@ -4,8 +4,8 @@ registerTalentTranslation{
 	id = "T_SLIP_AWAY",
 	name = "身如游鱼",
 	info = function(self, t)
-		return ([[用 小 型 喷 射 引 擎 强 化 你 的 机 动 性 ， 可 以 穿 过 直 线 上 连 续 的 %d 个 敌 人 。
-	穿 越 后 ， 会 急 速 前 进 %d 码 。 ]])
+		return ([[用小型喷射引擎强化你的机动性，可以穿过直线上连续的 %d 个敌人。
+	穿越后，会急速前进 %d 码。 ]])
 		:format(t.getRange(self, t), t.getAway(self, t))
 	end,}
 
@@ -16,9 +16,9 @@ registerTalentTranslation{
 		local p = self:isTalentActive(t.id)
 		local cur = 0
 		if p then cur = math.min(p.nb_foes, t.getMax(self, t)) * 20 end
-		return ([[被 猎 杀 的 危 险 令 你 激 动 不 已 。
-		半 径 %d 内 每 有 一 个 敌 人 ，你 获 得 20%% 移 动 速 度 （ 最 多 %d%% ） 。
-		当 前 加 成 ： %d%%。]])
+		return ([[被猎杀的危险令你激动不已。
+		半径 %d 内每有一个敌人，你获得 20%% 移动速度（最多 %d%% ）。
+		当前加成： %d%%。]])
 		:format(self:getTalentRadius(t), t.getMax(self, t) * 20, cur)
 	end,}
 
@@ -26,10 +26,10 @@ registerTalentTranslation{
 	id = "T_AWESOME_TOSS",
 	name = "致命翻转",
 	info = function(self, t)
-		return ([[在 惊 人 的 灵 巧 和 科 技 力 量 下， 你 将 你 的 蒸 汽 枪 翻 转 指 向 天 空 ， 持 续 旋 转 3 回 合 。
-		每 回 合 ，蒸 汽 枪 将 随 机 射 击 2 次 ， 造 成 %d%% 武 器 伤 害 。
-		效 果 持 续 期 间 ， 你 视 为 被 缴 械 ， 不 能 攻 击 。
-		这 场 表 演 如 此 引 人 注 目 ，你 的 敌 人 都 被 吸 引 ， 使 你 的 伤 害 抗 性 增 加 %d%%。]])
+		return ([[在惊人的灵巧和科技力量下，你将你的蒸汽枪翻转指向天空，持续旋转 3 回合。
+		每回合，蒸汽枪将随机射击 2 次，造成 %d%% 武器伤害。
+		效果持续期间，你视为被缴械，不能攻击。
+		这场表演如此引人注目，你的敌人都被吸引，使你的伤害抗性增加 %d%%。]])
 		:format(100 * t.getMultiple(self, t), t.getResist(self, t))
 	end,}
 
@@ -37,9 +37,9 @@ registerTalentTranslation{
 	id = "T_DAZZLING_JUMP",
 	name = "炫目大跳",
 	info = function(self, t)
-		return ([[当 你 的 敌 人 被 致 命 翻 转 吸 引 时 ， 你 启 动 强 力 的 蒸 汽 引 擎 ， 跳 向 空 中 ， 将 目 标 踢 走 %d 码。 
-		这 次 攻 击 冲 击 力 非 常 大 ，半 径 3 以 内 所 有 生 物 将 被 减 速 %d%% ， 持 续 4 回 合 。
-		反 冲 力 也 让 你 后 退 %d 码 。]])
+		return ([[当你的敌人被致命翻转吸引时，你启动强力的蒸汽引擎，跳向空中，将目标踢走 %d 码。 
+		这次攻击冲击力非常大，半径 3 以内所有生物将被减速 %d%% ，持续 4 回合。
+		反冲力也让你后退 %d 码。]])
 		:format(t.getRange(self, t), t.getSlow(self, t), t.getAway(self, t))
 	end,}
 return _M

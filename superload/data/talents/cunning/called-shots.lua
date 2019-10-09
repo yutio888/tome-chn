@@ -20,9 +20,9 @@ registerTalentTranslation{
 	id = "T_SKIRMISHER_KNEECAPPER",
 	name = "膝盖杀手",
 	info = function(self, t)
-		return ([[射 击 敌 人 的 膝 盖 （ 或 者 任 何 活 动 肢 体 上 的 重 要 部 位）， 造 成 %d%% 武 器 伤 害， 并 将 敌 人 击 倒 （ 定 身 %d 回 合） 并 在 之 后 降 低 其 移 动 速 度 %d%% %d 回合 。
-		这 个 射 击 将 会 穿 过 你 和 目 标 间 的 其 他 敌 人。
-		受 灵 巧 影 响， 减 速 效 果 有 额 外 加 成。]])
+		return ([[射击敌人的膝盖（或者任何活动肢体上的重要部位），造成 %d%% 武器伤害，并将敌人击倒（定身 %d 回合）并在之后降低其移动速度 %d%% %d 回合。
+		这个射击将会穿过你和目标间的其他敌人。
+		受灵巧影响，减速效果有额外加成。]])
 		:format(t.damage_multiplier(self, t) * 100,
 				t.pin_duration(self, t),
 				t.slow_power(self, t) * 100,
@@ -35,10 +35,10 @@ registerTalentTranslation{
 	name = "致命狙击",
 	info = function(self, t)
 		local range = self:getTalentRange(t)
-		return ([[对 敌 人 进 行 一 次 特 殊 的 射 击。
-		这 个 技 能 专 注 于 精 准 的 远 程 狙 击， 造 成 %d%% 的 基 础 远 程 伤 害 以 及 受 距 离 加 成 的 额 外 伤 害。
-		在 零 距 离， 伤 害 加 成 （ 惩 罚） 为 %d%% ， 在 最 大 射 程 （ %d 格）， 伤 害 加 成 为 %d%% 。
-		这 个 射 击 将 会 穿 过 你 和 目 标 间 的 其 他 敌 人。]])
+		return ([[对敌人进行一次特殊的射击。
+		这个技能专注于精准的远程狙击，造成 %d%% 的基础远程伤害以及受距离加成的额外伤害。
+		在零距离，伤害加成（惩罚）为 %d%% ，在最大射程（ %d 格），伤害加成为 %d%% 。
+		这个射击将会穿过你和目标间的其他敌人。]])
 		:format(t.damage_multiplier(self, t) * 100, t.getDistanceBonus(self, t, 1)*100, range, t.getDistanceBonus(self, t, range)*100)
 
 	end,
@@ -48,10 +48,10 @@ registerTalentTranslation{
 	id = "T_SKIRMISHER_NOGGIN_KNOCKER",
 	name = "爆头连射",
 	info = function(self, t)
-		return ([[对 敌 人 的 脆 弱 部 位 （ 通 常 是 头 部） 迅 速 地 连 射 三 次。
-		每 次 射 击 造 成 %d%% 远 程 伤 害 并 试 图 震 慑 目 标 或 增 加 震 慑 的 持 续 时 间 1 回 合。
-		这 些 射 击 将 会 穿 过 你 和 目 标 间 的 其 他 敌 人。
-		受 命 中 影 响， 晕 眩 几 率 增 加。]])
+		return ([[对敌人的脆弱部位（通常是头部）迅速地连射三次。
+		每次射击造成 %d%% 远程伤害并试图震慑目标或增加震慑的持续时间 1 回合。
+		这些射击将会穿过你和目标间的其他敌人。
+		受命中影响，晕眩几率增加。]])
 		:format(t.damage_multiplier(self, t) * 100)
 	end,
 }
@@ -61,9 +61,9 @@ registerTalentTranslation{
 	name = "投石大师",
 	info = function(self, t)
 		local bonuses = sniper_bonuses(self, true)
-		return ([[你 对 射 击 的 掌 握 程 度 无 与 伦 比。 你 的 精 准 射 击 系 技 能 获 得 %d%% 额 外 暴 击 几 率 和 %d%% 额 外 暴 击 伤 害。 
-		在 第 3 级 时， 所 有 精 准 射 击 系 技 能 冷 却 时 间 降 低 两 回 合。
-		在 第 5 级 时， 你 的 精 准 射 击 技 能 获 得 %d%% 物 理 抗 性 穿 透]])
+		return ([[你对射击的掌握程度无与伦比。你的精准射击系技能获得 %d%% 额外暴击几率和 %d%% 额外暴击伤害。 
+		在第 3 级时，所有精准射击系技能冷却时间降低两回合。
+		在第 5 级时，你的精准射击技能获得 %d%% 物理抗性穿透]])
 		:format(bonuses.crit_chance,
 			bonuses.crit_power * 100,
 			bonuses.resists_pen[DamageType.PHYSICAL])

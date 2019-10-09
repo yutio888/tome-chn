@@ -6,7 +6,7 @@ registerTalentTranslation{
 	message = "@Source@ 引发了时空重排",
 	info = function(self, t)
 		local radius = self:getTalentRadius(t)
-		return ([[将 半 径 %d 范 围 内 最 多 五 个 单 位 传 送 到 十 格 外 。]]):format(radius)
+		return ([[将半径 %d 范围内最多五个单位传送到十格外。]]):format(radius)
 	end,
 }
 
@@ -17,7 +17,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local range = self:getTalentRange(t)
 		local radius = self:getTalentRadius(t)
-		return ([[将 半 径 %d 范 围 内 最 多 五 个 单 位 传 送 到 %d 格 外 。]]):format(radius, range)
+		return ([[将半径 %d 范围内最多五个单位传送到 %d 格外。]]):format(radius, range)
 	end,
 }
 
@@ -35,8 +35,8 @@ registerTalentTranslation{
 	name = "异常：相位护盾",
 	message = "@Source@ 将伤害转移至周围目标。",
 	info = function(self, t)
-		return ([[施 法 者 所 承 受 的 伤 害 有 50%% 的 概 率 转 移 给 指 定 连 接 的 目 标。 
-		一 旦 吸 收 伤 害 达 到 上 限（ %d ）， 持 续 时 间 到 了 或 目 标 死 亡， 护 盾 会 破 碎 掉。 ]]):format(getAnomalyDamage(self, t)*2)
+		return ([[施法者所承受的伤害有 50%% 的概率转移给指定连接的目标。 
+		一旦吸收伤害达到上限（ %d ），持续时间到了或目标死亡，护盾会破碎掉。 ]]):format(getAnomalyDamage(self, t)*2)
 	end,
 }
 
@@ -45,7 +45,7 @@ registerTalentTranslation{
 	name = "异常：虫洞",
 	message = "@Source@折叠了两点的空间。",
 	info = function(self, t)
-		return ([[建 立 一 个 连 接 附 近 的 随 机 格 子 和 十 格 外 的 随 机 格 子 的 虫 洞 。]]):format()
+		return ([[建立一个连接附近的随机格子和十格外的随机格子的虫洞。]]):format()
 	end,
 }
 
@@ -54,7 +54,7 @@ registerTalentTranslation{
 	name = "异常：相位移动",
 	message = "@Source@ 让几名目标进入相位空间。",
 	info = function(self, t)
-		return ([[将 半 径 %d 范 围 内 最 多 五 个 单 位 可 以 穿 墙 移 动 %d 格]]):
+		return ([[将半径 %d 范围内最多五个单位可以穿墙移动 %d 格]]):
 		format(getAnomalyDuration(self, t)*2, getAnomalyDuration(self, t))
 	end,
 }
@@ -64,7 +64,7 @@ registerTalentTranslation{
 	name = "异常：闪烁",
 	message = "@Source@ 让几名目标随机闪烁。",
 	info = function(self, t)
-		return ([[让 半 径 %d 范 围 内 最 多 五 个 单 位 每 回 合 在 %d 格 内 传 送 。]]):
+		return ([[让半径 %d 范围内最多五个单位每回合在 %d 格内传送。]]):
 		format(self:getTalentRadius(t), getAnomalyDuration(self, t))
 	end,
 }
@@ -74,7 +74,7 @@ registerTalentTranslation{
 	name = "异常：召唤村民",
 	message = "一些无辜的村民被传送至战斗中。",
 	info = function(self, t)
-		return ([[将 无 辜 的 村 民 拖 入 战 斗 。]])
+		return ([[将无辜的村民拖入战斗。]])
 	end,
 }
 
@@ -84,7 +84,7 @@ registerTalentTranslation{
 	name = "异常：减速",
 	message = "@Source@ 制造出缓慢的时空气泡",
 	info = function(self, t)
-		return ([[让 半 径 %d 范 围 内 最 多 五 个 单 位 减 速 %d%% 。]]):
+		return ([[让半径 %d 范围内最多五个单位减速 %d%% 。]]):
 		format(self:getTalentRadius(t), t.getSlow(self, t)*100)
 	end,
 }
@@ -94,7 +94,7 @@ registerTalentTranslation{
 	name = "异常：加速",
 	message = "@Source@ 制造出迅速的时空气泡",
 	info = function(self, t)
-		return ([[让 半 径 %d 范 围 内 最 多 五 个 单 位 增 加 整 体 速 度 %d%% 。]]):
+		return ([[让半径 %d 范围内最多五个单位增加整体速度 %d%% 。]]):
 		format(self:getTalentRadius(t), t.getHaste(self, t)*100)
 	end,
 }
@@ -104,7 +104,7 @@ registerTalentTranslation{
 	name = "异常：停止",
 	message = "@Source@ 制造出停滞的时空气泡",
 	info = function(self, t)
-		return ([[震 慑 半 径 %d 范 围 内 最 多 五 个 单 位 。]]):
+		return ([[震慑半径 %d 范围内最多五个单位。]]):
 		format(self:getTalentRadius(t))
 	end,
 }
@@ -114,7 +114,7 @@ registerTalentTranslation{
 	name = "异常：时空气泡",
 	message = "@Source@ 将几名目标移出时间",
 	info = function(self, t)
-		return ([[将 半 径 %d  范 围 内 最 多 五 个 单 位 从 时 光 的 流 动 中 移 出 。]]):
+		return ([[将半径 %d  范围内最多五个单位从时光的流动中移出。]]):
 		format(self:getTalentRadius(t))
 	end,
 }
@@ -124,7 +124,7 @@ registerTalentTranslation{
 	name = "异常：时间盾",
 	message = "@Source@ 在几名目标周围制造了时间护盾",
 	info = function(self, t)
-		return ([[将 半 径 %d  范 围 内 最 多 五 个 单 位 覆 盖 时 光 之 盾 。]]):
+		return ([[将半径 %d  范围内最多五个单位覆盖时光之盾。]]):
 		format(self:getTalentRadius(t))
 	end,
 }
@@ -134,7 +134,7 @@ registerTalentTranslation{
 	name = "异常：鼓舞",
 	message = "@Source@ 鼓舞了几名目标",
 	info = function(self, t)
-		return ([[鼓 舞 半 径 %d  范 围 内 最 多 五 个 单 位。]]):
+		return ([[鼓舞半径 %d  范围内最多五个单位。]]):
 		format(self:getTalentRadius(t))
 	end,
 }
@@ -144,7 +144,7 @@ registerTalentTranslation{
 	name = "异常：克隆",
 	message = "@Source@ 克隆了周围生物",
 	info = function(self, t)
-		return ([[克 隆 范 围 内 一 个 随 机 单 位 。]]):format()
+		return ([[克隆范围内一个随机单位。]]):format()
 	end,
 }
 
@@ -155,7 +155,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local duration = self:combatScale(getParadoxSpellpower(self, t), 4, 10, 12, 100, 0.75)/2
 		local damage = self:combatScale(getParadoxSpellpower(self, t), 10, 10, 50, 100, 0.75)
-		return ([[召 唤 一 场 时 空 风 暴 %d ~ %d 回 合 ， 每 回 合 造 成 %0.2f ~ %0.2f 时 空 伤 害 。]])
+		return ([[召唤一场时空风暴 %d ~ %d 回合，每回合造成 %0.2f ~ %0.2f 时空伤害。]])
 		:format(duration/2, duration, damDesc(self, DamageType.TEMPORAL, damage/3),  damDesc(self, DamageType.TEMPORAL, damage))
 	end,
 }
@@ -166,7 +166,7 @@ registerTalentTranslation{
 	name = "异常：重力牵引",
 	message = "@Source@ 增加了附近重力",
 	info = function(self, t)
-		return ([[增 加 周 围 的 重 力 ， 吸 引 半 径 %d 范 围 内 的 目 标 。]]):format(self:getTalentRadius(t))
+		return ([[增加周围的重力，吸引半径 %d 范围内的目标。]]):format(self:getTalentRadius(t))
 	end,
 }
 
@@ -175,7 +175,7 @@ registerTalentTranslation{
 	name = "异常：挖掘",
 	message = "@Source@ 将周围的地形化为尘土",
 	info = function(self, t)
-		return ([[挖 掘 半 径 %d 范 围 内 的 所 有 地 形 。]]):format(self:getTalentRadius(t))
+		return ([[挖掘半径 %d 范围内的所有地形。]]):format(self:getTalentRadius(t))
 	end,
 }
 
@@ -184,7 +184,7 @@ registerTalentTranslation{
 	name = "异常：埋葬",
 	message = "@Source@ 制造出石墙",
 	info = function(self, t)
-		return ([[将 一 个 单 位 用 岩 石 墙 环 绕 。]]):format()
+		return ([[将一个单位用岩石墙环绕。]]):format()
 	end,
 }
 
@@ -193,7 +193,7 @@ registerTalentTranslation{
 	name = "异常：熵",
 	message = "@Source@ 增加了周围的熵",
 	info = function(self, t)
-		return ([[让 半 径 %d 范 围 内 最 多 五 个 单 位 的 三 到 六 个 技 能 进 入 冷 却 %d 回 合 。]]):
+		return ([[让半径 %d 范围内最多五个单位的三到六个技能进入冷却 %d 回合。]]):
 		format(getAnomalyRadius(self, t), getAnomalyDuration(self, t))
 	end,
 }
@@ -203,7 +203,7 @@ registerTalentTranslation{
 	name = "异常：重力井",
 	message = "@Source@ 增加了周围的重力",
 	info = function(self, t)
-		return ([[在 半 径 %d 范 围 内 制 造 重 力 井 ， 定 身 最 多 五 个 单 位 。]]):format(self:getTalentRadius(t))
+		return ([[在半径 %d 范围内制造重力井，定身最多五个单位。]]):format(self:getTalentRadius(t))
 	end,
 }
 
@@ -212,7 +212,7 @@ registerTalentTranslation{
 	name = "异常：地震",
 	message = "@Source@ 制造了地震",
 	info = function(self, t)
-		return ([[在 半 径 %d 范 围 内 制 造 地 震 。]]):
+		return ([[在半径 %d 范围内制造地震。]]):
 		format(getAnomalyRadius(self, t))
 	end,
 }
@@ -222,7 +222,7 @@ registerTalentTranslation{
 	name = "异常：不完美设计",
 	message = "@Source@ 降低了几名目标的抵抗",
 	info = function(self, t)
-		return ([[将 半 径 %d 范 围 内 最 多 五 个 单 位 的 抗 性 降 低 %d%% 。]]):format(self:getTalentRadius(t), getAnomalyEffectPower(self, t))
+		return ([[将半径 %d 范围内最多五个单位的抗性降低 %d%% 。]]):format(self:getTalentRadius(t), getAnomalyEffectPower(self, t))
 	end,
 }
 
@@ -231,7 +231,7 @@ registerTalentTranslation{
 	name = "异常：尘土风暴",
 	message = "@Source@ 制造了尘土风暴",
 	info = function(self, t)
-		return ([[召 唤 三 到 六 个 尘 土 风 暴 。]]):format()
+		return ([[召唤三到六个尘土风暴。]]):format()
 	end,
 }
 
@@ -242,7 +242,7 @@ registerTalentTranslation{
 	name = "异常：燃烧之炎",
 	message = "@Source@ 触发了大火",
 	info = function(self, t)
-		return ([[召 唤 三 到 六 个 燃 烧 之 炎 。]]):format()
+		return ([[召唤三到六个燃烧之炎。]]):format()
 	end,
 }
 
@@ -251,7 +251,7 @@ registerTalentTranslation{
 	name = "异常：石化",
 	message = "@Source@ 石化了几名目标",
 	info = function(self, t)
-		return ([[将 半 径 %d 范 围 内 最 多 五 个 单 位 变 成 石 头 %d 回 合 。]]):
+		return ([[将半径 %d 范围内最多五个单位变成石头 %d 回合。]]):
 		format(getAnomalyRadius(self, t), getAnomalyDuration(self, t))
 	end,
 }
@@ -261,7 +261,7 @@ registerTalentTranslation{
 	name = "异常：召唤",
 	message = "@Source@ 将几名目标传送过来",
 	info = function(self, t)
-		return ([[将 三 到 六 个 单 位 召 唤 到 施 法 者 身 边 。]]):
+		return ([[将三到六个单位召唤到施法者身边。]]):
 		format()
 	end,
 }
@@ -271,7 +271,7 @@ registerTalentTranslation{
 	name = "异常：神佑",
 	message = "命运的天平倾斜了。",
 	info = function(self, t)
-		return ([[显 著 强 化 和 加 速 目 标 %d 回 合。]]):format(getAnomalyDuration(self, t))
+		return ([[显著强化和加速目标 %d 回合。]]):format(getAnomalyDuration(self, t))
 	end,
 }
 
@@ -280,7 +280,7 @@ registerTalentTranslation{
 	name = "异常：邪恶双生子",
 	message = "@Source@ 的邪恶双胞胎从另一条时空线赶来",
 	info = function(self, t)
-		return ([[复 制 施 法 者 。]]):format(getAnomalyDuration(self, t))
+		return ([[复制施法者。]]):format(getAnomalyDuration(self, t))
 	end,
 }
 
@@ -289,7 +289,7 @@ registerTalentTranslation{
 	name = "异常：时间线紊乱",
 	message = "@Source@ 让两条时间线交汇",
 	info = function(self, t)
-		return ([[复 制 半 径 十 格 范 围 内 所 有 生 物 。]]):format(getAnomalyDuration(self, t))
+		return ([[复制半径十格范围内所有生物。]]):format(getAnomalyDuration(self, t))
 	end,
 }
 
@@ -298,7 +298,7 @@ registerTalentTranslation{
 	name = "异常：范围挖掘",
 	message = "@Source@ 挖开了一大块区域",
 	info = function(self, t)
-		return ([[在 三 到 六 个 半 径 %d 范 围 的 圆 里 摧 毁 所 有 地 形 。]]):format(self:getTalentRadius(t))
+		return ([[在三到六个半径 %d 范围的圆里摧毁所有地形。]]):format(self:getTalentRadius(t))
 	end,
 }
 
@@ -307,7 +307,7 @@ registerTalentTranslation{
 	name = "异常：毁灭之球",
 	message = "@Source@ 制造了毁灭之球",
 	info = function(self, t)
-		return ([[召 唤 一 个 毁 灭 之 球 。]]):format()
+		return ([[召唤一个毁灭之球。]]):format()
 	end,
 }
 
@@ -316,7 +316,7 @@ registerTalentTranslation{
 	name = "异常：龙卷风",
 	message = "@Source@ 制造了龙卷风",
 	info = function(self, t)
-		return ([[召 唤 三 到 六 道 飓 风]]):format()
+		return ([[召唤三到六道飓风]]):format()
 	end,
 }
 
@@ -325,7 +325,7 @@ registerTalentTranslation{
 	name = "异常：陨石",
 	message = "@Source@ 从天空召唤一颗陨石",
 	info = function(self, t)
-		return ([[召 唤 一 颗 陨 石 从 天 空 坠 落 。]]):
+		return ([[召唤一颗陨石从天空坠落。]]):
 		format()
 	end,
 }
@@ -335,7 +335,7 @@ registerTalentTranslation{
 	name = "异常：空间撕裂",
 	message = "@Source@ 撕裂了时空",
 	info = function(self, t)
-		return ([[在 时 空 的 构 造 上 撕 开 一 个 洞 。]]):
+		return ([[在时空的构造上撕开一个洞。]]):
 		format()
 	end,
 }
@@ -345,7 +345,7 @@ registerTalentTranslation{
 	name = "异常：召唤时间元素",
 	message = "@Source@ 吸引了一些时空元素",
 	info = function(self, t)
-		return ([[召 唤 时 间 元 素。]]):
+		return ([[召唤时间元素。]]):
 		format()
 	end,
 }

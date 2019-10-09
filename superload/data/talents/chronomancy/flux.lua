@@ -5,10 +5,10 @@ registerTalentTranslation{
 	name = "引导异常",
 	info = function(self, t)
 		local reduction = t.getReduction(self, t)
-		return ([[引 发 一 次 异 常 ， 减 少 你 的 紊 乱 值 %d 。 这 个 技 能 不 会 引 发 重 大 异 常。
-		引 导 异 常 不 会 被 扭 曲 命 运 延 后 ， 也 不 会 触 发 被 延 后 的 异 变 。 
-		然 而 ， 当 学 会 扭 曲 命 运 后 ， 你 可 以 选 中 引 导 异 变 作 为 目 标。
-		受 法 术 强 度 影 响 ， 紊 乱 值 减 少 效 果 有 额 外 加 成。]]):format(reduction)
+		return ([[引发一次异常，减少你的紊乱值 %d 。这个技能不会引发重大异常。
+		引导异常不会被扭曲命运延后，也不会触发被延后的异变。 
+		然而，当学会扭曲命运后，你可以选中引导异变作为目标。
+		受法术强度影响，紊乱值减少效果有额外加成。]]):format(reduction)
 	end,
 }
 
@@ -18,8 +18,8 @@ registerTalentTranslation{
 	info = function(self, t)
 		local ratio = t.getPercent(self, t)
 		local duration = t.getDuration(self, t)
-		return ([[当 激 活 这 个 技 能 时 ， 你 受 到 伤 害 的 30%% 被 转 化 为 %0.2f 的 紊 乱 值。
-		这 些 紊 乱 伤 害 会 被 分 散 到 三 个 回 合 中。]]):
+		return ([[当激活这个技能时，你受到伤害的 30%% 被转化为 %0.2f 的紊乱值。
+		这些紊乱伤害会被分散到三个回合中。]]):
 		format(ratio, duration)
 	end,
 }
@@ -31,10 +31,10 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local duration = t.getDuration(self, t)
 		local radius = self:getTalentRadius(t)
-		return ([[对 范 围 内 所 有 单 位 造 成 %0.2f 时 空 伤 害 ， 这 些 伤 害 会 被 分 散 到  %d 回 合 中 。 技 能 半 径 为 %d 格。
-		 带 有 弥 散 现 实 效 果 的 单 位 不 会 受 到 伤 害 ， 并 在 四 回 合 中 回 复 %d 生 命 值。
-		 如 果 目 标 的 生 命 值 被 减 低 到  20%% 以下，湮 灭 洪 流 将 会 立 刻 杀 死 目 标。
-		 受 到 法 术 强 度 影 响 ， 伤 害 有 额 外 加 成。]]):format(damage, duration, radius, damage *0.4)
+		return ([[对范围内所有单位造成 %0.2f 时空伤害，这些伤害会被分散到  %d 回合中。技能半径为 %d 格。
+		 带有弥散现实效果的单位不会受到伤害，并在四回合中回复 %d 生命值。
+		 如果目标的生命值被减低到  20%% 以下，湮灭洪流将会立刻杀死目标。
+		 受到法术强度影响，伤害有额外加成。]]):format(damage, duration, radius, damage *0.4)
 	end,
 }
 
@@ -52,10 +52,10 @@ registerTalentTranslation{
 			t_name = talent.name
 			t_info = talent.info(self, talent)
 		end
-		return ([[当 扭 曲 命 运 没 有 进 入 冷 却 时 ，微 小 异 变 将 会 被 延 后  %d  回 合 ，允 许 你 正 常 地 使 用 法 术 。   你 可 以 使 用 扭 曲 命 运 技 能 来 选 择 指 定 的 区 域 来 触 发 被 延 后 的 异 变 。		 如 果 在 第 一 个 异 变 被 延 后 的 回 合 中 引 发 了 第 二 个 异 变 ，那 么 第 一 个 异 变 将 会 立 刻 触 发 ，并 且 打 断 你 当 前 的 回 合 或 行 动 。
-		 当 触 发 被 延 后 的 异 变 时 ，可 以 立 即 减 少 紊 乱 值 。
+		return ([[当扭曲命运没有进入冷却时，微小异变将会被延后  %d  回合，允许你正常地使用法术。   你可以使用扭曲命运技能来选择指定的区域来触发被延后的异变。		 如果在第一个异变被延后的回合中引发了第二个异变，那么第一个异变将会立刻触发，并且打断你当前的回合或行动。
+		 当触发被延后的异变时，可以立即减少紊乱值。
 				 
-		 当 前 异 变 ： %s 
+		 当前异变： %s 
 		 
 		%s ]]):
 		format(duration, t_name, t_info)

@@ -6,9 +6,9 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local shieldflat = t.getShieldFlat(self, t)
-		return ([[使 你 的 武 器 充 满 太 阳 能 量， 每 击 造 成 %0.2f 光 系 伤 害。 
-		 如 果 你 同 时 打 开 了 临 时 伤 害 护 盾 ，每 回 合 一 次 ， 你 的 近 战 攻 击 命 中 可 以 增 加 护 盾 %d 强 度 。
-		 受 法 术 强 度 影 响， 伤 害 和 护 盾 加 成 有 额 外 加 成。]]):
+		return ([[使你的武器充满太阳能量，每击造成 %0.2f 光系伤害。 
+		 如果你同时打开了临时伤害护盾，每回合一次，你的近战攻击命中可以增加护盾 %d 强度。
+		 受法术强度影响，伤害和护盾加成有额外加成。]]):
 		format(damDesc(self, DamageType.LIGHT, damage), shieldflat)
 	end,
 }
@@ -18,10 +18,10 @@ registerTalentTranslation{
 	name = "光明冲击",
 	info = function(self, t)
 		local range = self:getTalentRange(t)
-		return ([[你 用 光 明 力 量 释 放 一 次 近 程 打 击， 造 成 %d%% 武 器 伤 害。 
-		如 果 目 标 在 近 战 范 围 以 外 ， 有 一 定 几 率 进 行 二 次 打 击 ，造 成 %d%% 武 器 伤 害。
-		二 次 打 击 几 率 随 距 离 增 加 ， 距 离 2 时 为 %0.1f%% ， 距 离 最 大（ %d ）时 几 率 为 %0.1f%% 。
-		受 力 量 影 响， 攻 击 距 离 有 额 外 加 成。]]):
+		return ([[你用光明力量释放一次近程打击，造成 %d%% 武器伤害。 
+		如果目标在近战范围以外，有一定几率进行二次打击，造成 %d%% 武器伤害。
+		二次打击几率随距离增加，距离 2 时为 %0.1f%% ，距离最大（ %d ）时几率为 %0.1f%% 。
+		受力量影响，攻击距离有额外加成。]]):
 		format(t.getDamage(self, t)*100, t.getDamage(self, t, true)*100, t.SecondStrikeChance(self, t, 2), range,t.SecondStrikeChance(self, t, range))
 	end,
 }
@@ -33,9 +33,9 @@ registerTalentTranslation{
 		local martyr = t.getMartyrDamage(self, t)
 		local damagepct = t.getLifeDamage(self, t)
 		local damage = t.getDamage(self, t)
-		return ([[你 使 用 武 器 攻 击 时 ， 造 成 相 当 于 %d%% 你 已 损 失 的 生 命 值 的 火 焰 伤 害 , 至 多 %d 点,当 前 %d 点 
-		然 后 令 目 标 进 入 殉 难 状 态，受 到 %d%% 自 己 造 成 的 伤 害 ，持 续 4 回 合。
-		每 回 合 最 多 触 发 一 次 额 外 伤 害 。]]):
+		return ([[你使用武器攻击时，造成相当于 %d%% 你已损失的生命值的火焰伤害 , 至多 %d 点,当前 %d 点 
+		然后令目标进入殉难状态，受到 %d%% 自己造成的伤害，持续 4 回合。
+		每回合最多触发一次额外伤害。]]):
 		format(damagepct*100, t.getMaxDamage(self, t, 10, 400), damage, martyr)
 	end,
 }
@@ -44,7 +44,7 @@ registerTalentTranslation{
 	id = "T_SECOND_LIFE",
 	name = "第二生命",
 	info = function(self, t)
-		return ([[任 何 使 你 生 命 值 降 到 1 点 以 下 的 攻 击 都 会 激 活 第 二 生 命， 自 动 中 断 此 技 能 并 将 你 的 生 命 值 恢 复 到 1 点,然 后 受 到 %d 点 治 疗。]]):
+		return ([[任何使你生命值降到 1 点以下的攻击都会激活第二生命，自动中断此技能并将你的生命值恢复到 1 点,然后受到 %d 点治疗。]]):
 		format(t.getLife(self, t))
 	end,
 }

@@ -6,9 +6,9 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local radius = self:getTalentRadius(t)
-		return ([[发 射 一 道 射 线 ，令 物 质 归 于 尘 土 ，造 成 %0.2f 时 空 与 %0.2f 物 理 伤 害 。
-		 也 可 以 以 自 己 为 目 标 ，制 造 一 个 围 绕 自 己 %d 码 的 领 域 ，在 3 回 合 内 造 成 伤 害 。
-		 伤 害 受 法 术 强 度 加 成 。]]):
+		return ([[发射一道射线，令物质归于尘土，造成 %0.2f 时空与 %0.2f 物理伤害。
+		 也可以以自己为目标，制造一个围绕自己 %d 码的领域，在 3 回合内造成伤害。
+		 伤害受法术强度加成。]]):
 		format(damDesc(self, DamageType.TEMPORAL, damage / 2), damDesc(self, DamageType.PHYSICAL, damage / 2), radius)
 	end,
 }
@@ -19,9 +19,9 @@ registerTalentTranslation{
 	info = function(self, t)
 		local armor = t.getArmor(self, t)
 		local immune = t.getImmunity(self, t) * 100
-		return ([[你 的 血 肉 被 改 变， 对 伤 害 的 抗 性 提 高 。
-		增 加 %d 护 甲， %d%% 震 慑 与 割 伤 免 疫。
-		护 甲 加 成 受 魔 法 加 成 。]]):
+		return ([[你的血肉被改变，对伤害的抗性提高。
+		增加 %d 护甲， %d%% 震慑与割伤免疫。
+		护甲加成受魔法加成。]]):
 		format(armor, immune)
 	end,
 }
@@ -34,8 +34,8 @@ registerTalentTranslation{
 		local duration = t.getDuration(self, t)
 		local damage = t.getDamage(self, t)
 		local radius = self:getTalentRadius(t)
-		return ([[制 造 一 层 坚 实 的 物 质 墙 ，长 度 为 %d ，持 续 %d 回 合。
-		当 墙 壁 被 挖 掘 时 ， 会 产 生 半 径 %d 的 爆 炸，范 围 内 敌 人 会 进 入 流 血 状 态， 6 回 合 内 受 到 %0.2f 物 理 伤 害 。]])
+		return ([[制造一层坚实的物质墙，长度为 %d ，持续 %d 回合。
+		当墙壁被挖掘时，会产生半径 %d 的爆炸，范围内敌人会进入流血状态， 6 回合内受到 %0.2f 物理伤害。]])
 		:format(length, duration, radius, damDesc(self, DamageType.PHYSICAL, damage))
 	end,
 }
@@ -46,9 +46,9 @@ registerTalentTranslation{
 	info = function(self, t)
 		local digs = t.getDigs(self, t)
 		local chance = t.getChance(self, t)
-		return ([[你 造 成 物 理 和 时 空 伤 害 时， 有 %d%% 几 率 除 去 一 项 物 理 或 魔 法 增 益 效 果。
-		每 个 生 物 每 回 合 只 能 被 除 去 一 项 效 果。
-		同 时 ， 你 的 土 归 土 技 能 能 挖 至 多 %d 格 内 的 墙 壁 。]]):
+		return ([[你造成物理和时空伤害时，有 %d%% 几率除去一项物理或魔法增益效果。
+		每个生物每回合只能被除去一项效果。
+		同时，你的土归土技能能挖至多 %d 格内的墙壁。]]):
 		format(chance, digs)
 	end,
 }

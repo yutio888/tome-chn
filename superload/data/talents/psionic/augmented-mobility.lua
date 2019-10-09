@@ -4,9 +4,9 @@ registerTalentTranslation{
 	id = "T_SKATE",
 	name = "极速滑行",
 	info = function(self, t)
-		return ([[用 念 力 使 自 己 漂 浮 。
-		这 使 你 能 在 战 斗 中 快 速 滑 行 ，增 加 你 的 移 动 速 度 %d%% 。
-		它 同 样 使 你 更 容 易 被 推 开 (-%d%%  击 退 抗 性 )。]]): 
+		return ([[用念力使自己漂浮。
+		这使你能在战斗中快速滑行，增加你的移动速度 %d%% 。
+		它同样使你更容易被推开 (-%d%%  击退抗性 )。]]): 
 		format(t.getSpeed(self, t)*100, t.getKBVulnerable(self, t)*100) 
 	end,
 }
@@ -18,9 +18,9 @@ registerTalentTranslation{
 		local inc = t.speed(self, t)
 		local percentinc = 100 * inc
 		local boost = t.getBoost(self, t)
-		return ([[用 灵 能 围 绕 你 的 躯 体 ，通 过 思 想 直 接 高 效 控 制 身 体 ，而 不 是 通 过 神 经 和 肌 肉 。
-		增 加 %d 命 中 、 %0.1f%% 暴 击 率 和 %d%% 攻 击 速 度， 持 续  %d  回 合。 
-		受 精 神 强 度 影 响， 持 续 时 间 有 额 外 加 成。]]):
+		return ([[用灵能围绕你的躯体，通过思想直接高效控制身体，而不是通过神经和肌肉。
+		增加 %d 命中、 %0.1f%% 暴击率和 %d%% 攻击速度，持续  %d  回合。 
+		受精神强度影响，持续时间有额外加成。]]):
 		format(boost, 0.5*boost, percentinc, t.getDuration(self, t))
 	end,
 }
@@ -30,9 +30,9 @@ registerTalentTranslation{
 	name = "心灵钩爪",
 	info = function(self, t)
 		local range = self:getTalentRange(t)
-		return ([[用 灵 能 将 远 处 的 敌 人 抓 过 来。
-		至 多 对 半 径 %d 的 敌 人 有 效 。
-		范 围 和 冷 却 时 间 受 技 能 等 级 影 响 。]]):
+		return ([[用灵能将远处的敌人抓过来。
+		至多对半径 %d 的敌人有效。
+		范围和冷却时间受技能等级影响。]]):
 		format(range)
 	end,
 }
@@ -43,7 +43,7 @@ registerTalentTranslation{
 	message = "@Source@ 施展了灵能跳跃!",
 	info = function(self, t)
 		local range = self:getTalentRange(t)
-		return ([[使 用 灵 能 ，精 准 地 跳 向 %d 码 外 的 地 点。]]):
+		return ([[使用灵能，精准地跳向 %d 码外的地点。]]):
 		format(range)
 	end,
 }

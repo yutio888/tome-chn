@@ -7,10 +7,10 @@ registerTalentTranslation{
 		local dur = t.getDuration(self,t)
 		local damage = t.getDamage(self,t)/2
 		local nb = t.getNb(self,t)
-		return ([[你 强 大 的 熵 之 力 撕 裂 了 时 空 ，将 这 个 世 界 与 虚 空 相 连 。
-当 施 放 疯 狂 系 法 术 时 ，你 有 30%%几 率 在 相 邻 的 空 地 里 打 开 一 个 虚 空 裂 口 ，持 续 %d 回 合 。  它 每 回 合 将 会 对 范 围 7 内 的 一 个 随 机 敌 人 释 放 虚 空 轰 击 ，造 成 %0.2f 点 暗 影 伤 害 和 %0.2f 点 时 空 伤 害 。
+		return ([[你强大的熵之力撕裂了时空，将这个世界与虚空相连。
+当施放疯狂系法术时，你有 30%%几率在相邻的空地里打开一个虚空裂口，持续 %d 回合。  它每回合将会对范围 7 内的一个随机敌人释放虚空轰击，造成 %0.2f 点暗影伤害和 %0.2f 点时空伤害。
 
-你 可 以 主 动 激 活 这 个 天 赋 来 强 制 使 得 时 空 不 稳 定 ，在 你 周 围 创 造 %d 个 虚 空 裂 口 。]]):
+你可以主动激活这个天赋来强制使得时空不稳定，在你周围创造 %d 个虚空裂口。]]):
 		format(dur, damDesc(self, DamageType.DARKNESS, damage), damDesc(self, DamageType.TEMPORAL, damage), nb)
 	end,
 }
@@ -21,8 +21,8 @@ registerTalentTranslation{
 	info = function(self, t)
 		local range = self:getTalentRange(t)
 		local power = t.getPower(self,t)
-		return ([[你 短 暂 地 在 时 空 中 打 开 一 个 通 道 ,  传 送 到 范 围 %d 内 的 一 个 虚 空 裂 口 。这 将 摧 毁 那 个 虚 空 裂 口 ，使 你 获 得 一 个 护 盾 ，吸 收 %d 点 伤 害 ，持 续 4 回 合 。
-		 护 盾 吸 收 的 伤 害 随 法 术 强 度 提 高 而 提 高 。]]):
+		return ([[你短暂地在时空中打开一个通道 ,  传送到范围 %d 内的一个虚空裂口。这将摧毁那个虚空裂口，使你获得一个护盾，吸收 %d 点伤害，持续 4 回合。
+		 护盾吸收的伤害随法术强度提高而提高。]]):
 		format(range, power)
 	end
 }
@@ -35,11 +35,11 @@ registerTalentTranslation{
 		local ndam = t.getNetherDamage(self,t)
 		local tdam = t.getTemporalDamage(self,t)
 		local dur = t.getDimensionalDuration(self,t)
-		return ([[向 你 的 裂 口 注 入 能 量 ，你 将 有 %d%%概 率 让 每 一 个 裂 口 进 化 成 为 更 强 大 的 形 态 。
-#PURPLE#深 渊 裂 隙 :#LAST#  向 半 径 10 内 随 机 敌 人 发 射 光 束 ，造 成  %0.2f  点 暗 影 伤 害 。
-#PURPLE#时 空 漩 涡 :#LAST#  每 回 合 对 半 径 4 内 的 敌 人 造 成 %0.2f 点 时 空 伤 害 ，并 且 减 少 他 们 30%% 的 全 局 速 度 .
-#PURPLE#维 度 之 门 :#LAST#  每 回 合 有 50%% 概 率 召 唤 一 个 虚 空 造 物 ，持 续 %d 回 合 ,  是 一 个 能 传 送 的 高 速 物 理 输 出 
-你 的 虚 空 造 物 属 性 随 你 的 等 级 和 魔 法 属 性 提 高 而 提 高 。]])
+		return ([[向你的裂口注入能量，你将有 %d%%概率让每一个裂口进化成为更强大的形态。
+#PURPLE#深渊裂隙 :#LAST#  向半径 10 内随机敌人发射光束，造成  %0.2f  点暗影伤害。
+#PURPLE#时空漩涡 :#LAST#  每回合对半径 4 内的敌人造成 %0.2f 点时空伤害，并且减少他们 30%% 的全局速度 .
+#PURPLE#维度之门 :#LAST#  每回合有 50%% 概率召唤一个虚空造物，持续 %d 回合 ,  是一个能传送的高速物理输出 
+你的虚空造物属性随你的等级和魔法属性提高而提高。]])
 		:format(chance, damDesc(self, DamageType.DARKNESS, ndam), damDesc(self, DamageType.TEMPORAL, tdam), dur)
 	end
 }
@@ -49,7 +49,7 @@ registerTalentTranslation{
 	name = "维度迅击",
 	info = function(self, t)
 		local range = self:getTalentRange(t)
-		return ([[传 送 到 范 围 10 内 的 一 个 敌 人 处 ，并 用 你 的 尖 牙 攻 击 它 ，造 成 %d%% 武 器 伤 害 。]]):format(t.getDamage(self, t)*100)
+		return ([[传送到范围 10 内的一个敌人处，并用你的尖牙攻击它，造成 %d%% 武器伤害。]]):format(t.getDamage(self, t)*100)
 	end,
 }
 
@@ -58,11 +58,11 @@ registerTalentTranslation{
 	name = "零点能量",	
 	info = function(self, t)
 		local power = t.getPower(self,t)
-		return ([[你 从 虚 空 深 处 汲 取 能 量 ，每 当 你 激 活 实 境 撕 裂 时 ，你 可 以 强 化 任 何 已 存 在 的 裂 口 。
-#GREY#虚 空 裂 口 :#LAST#  造 成  %d%%  点 额 外 伤 害 ，  并 且 投 射 物 在 半 径 1 范 围 内 爆 炸 。
-#PURPLE#深 渊 裂 隙 :#LAST#  造 成  %d%%  点 额 外 伤 害 ，并 且 连 锁 至 3 个 额 外 目 标 。
-#PURPLE#时 空 漩 涡 :#LAST#  造 成  %d%%  点 额 外 伤 害 ，  增 加 1 效 果 半 径 ,  并 且 减 速 效 果 提 高 至  50%%.
-#PURPLE#维 度 之 门 :#LAST#  虚 空 造 物 将 会 变 得 狂 暴 ,  增 加 他 们  %d%%的 全 局 速 度 。]])
+		return ([[你从虚空深处汲取能量，每当你激活实境撕裂时，你可以强化任何已存在的裂口。
+#GREY#虚空裂口 :#LAST#  造成  %d%%  点额外伤害，  并且投射物在半径 1 范围内爆炸。
+#PURPLE#深渊裂隙 :#LAST#  造成  %d%%  点额外伤害，并且连锁至 3 个额外目标。
+#PURPLE#时空漩涡 :#LAST#  造成  %d%%  点额外伤害，  增加 1 效果半径 ,  并且减速效果提高至  50%%.
+#PURPLE#维度之门 :#LAST#  虚空造物将会变得狂暴 ,  增加他们  %d%%的全局速度。]])
 		:format(power, power, power, power)
 	end,
 }

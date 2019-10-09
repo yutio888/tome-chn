@@ -58,7 +58,7 @@ function _M:init(actor)
 
 	local vsep = Separator.new{dir="horizontal", size=self.ih - 10}
 	self.c_tut = Textzone.new{width=math.floor(self.iw / 2 - vsep.w / 2), height=1, auto_height=true, no_color_bleed=true, text=[[
-你 可 以 选 择 一 个 时 空 系 法 术 来 施 展 “ 法 术 延 展 ” ， 延 长 这 个 技 能 的 持 续 时 间 。
+你可以选择一个时空系法术来施展“法术延展”，延长这个技能的持续时间。
 ]]}
 	self.c_desc = TextzoneList.new{width=math.floor(self.iw / 2 - vsep.w / 2), height=self.ih - self.c_tut.h - 20, scrollbar=true, no_color_bleed=true}
 

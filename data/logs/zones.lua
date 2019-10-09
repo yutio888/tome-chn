@@ -1,7 +1,7 @@
 logCHN:newLog{
 	log = "As your shade dies, the magical veil protecting the stairs out vanishes.",
 	fct = function(...)
-		return "随着你的阴影的死去， 阻挡出去楼梯的魔法护罩消失了。"
+		return "随着你的阴影的死去，阻挡出去楼梯的魔法护罩消失了。"
 	end,
 }
 
@@ -16,7 +16,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#VIOLET#The wormhole absorbs energies and stabilizes. You can now use it to travel.",
 	fct = function()
-		return "#VIOLET#虫洞吸收了能量变得稳定， 现在你可以使用它来传送了。"
+		return "#VIOLET#虫洞吸收了能量变得稳定，现在你可以使用它来传送了。"
 	end,
 }
 logCHN:newLog{
@@ -36,20 +36,20 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#ANTIQUE_WHITE#The Crown of Eternal Night seems to react with the Bindings, you feel tremendous dark power.",
 	fct = function()
-		return "#ANTIQUE_WHITE#永夜王冠似乎与永夜绷带有某种联系， 你感受到了强大的黑暗力量。"
+		return "#ANTIQUE_WHITE#永夜王冠似乎与永夜绷带有某种联系，你感受到了强大的黑暗力量。"
 	end,
 }
 
 logCHN:newLog{
 	log = "Prox staggers for a moment. A note seems to drop at his feet.",
 	fct = function()
-		return "普洛克斯蹒跚了几步， 一张纸条似乎掉在了他脚下。"
+		return "普洛克斯蹒跚了几步，一张纸条似乎掉在了他脚下。"
 	end,
 }
 logCHN:newLog{
 	log = "Shax staggers for a moment. A note seems to drop at his feet.",
 	fct = function()
-		return "夏克斯蹒跚了几步， 一张纸条似乎掉在了他脚下。"
+		return "夏克斯蹒跚了几步，一张纸条似乎掉在了他脚下。"
 	end,
 }
 logCHN:newLog{
@@ -63,7 +63,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#VIOLET#Your rod of recall shakes, a portal appears beneath you.",
 	fct = function()
-		return "#VIOLET#你的召唤之杖开始震动， 你的脚下出现了一道传送门。"
+		return "#VIOLET#你的召唤之杖开始震动，你的脚下出现了一道传送门。"
 	end,
 }
 
@@ -102,7 +102,7 @@ logCHN:newLog{
 	fct = function(a,b,c)
 		a = npcCHN:getName(a)
 		local name = objects:getObjectsChnName(c)
-		return ("%s将%s %s拼在一起 。"):format(a,b,name)
+		return ("%s将%s %s拼在一起。"):format(a,b,name)
 	end,
 }
 
@@ -133,7 +133,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#ANTIQUE_WHITE#You notice a hole that could fit the gem key you found earlier, inserting it reveals the passage to the next level.",
 	fct = function()
-		return "#ANTIQUE_WHITE#你注意到有一个小孔和你之前找到的宝石钥匙形状很相似， 你插入了钥匙，出现了通往下一层的入口。"
+		return "#ANTIQUE_WHITE#你注意到有一个小孔和你之前找到的宝石钥匙形状很相似，你插入了钥匙，出现了通往下一层的入口。"
 	end,
 }
 
@@ -287,13 +287,13 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#00FF00#You gain an affinity for nature. You can now learn new Harmony talents (press p).",
 	fct = function()
-		return "#00FF00#你获得了与自然的紧密联系， 现在你可以学习新的元素和谐技能（按下p）"
+		return "#00FF00#你获得了与自然的紧密联系，现在你可以学习新的元素和谐技能（按下p）"
 	end,
 }
 logCHN:newLog{
 	log = "#00FF00#You gain an affinity for blight. You can now learn new Vile Life talents (press p).",
 	fct = function()
-		return "#00FF00#你获得了与枯萎的紧密联系， 现在你可以学习新的邪恶生命技能（按下p）"
+		return "#00FF00#你获得了与枯萎的紧密联系，现在你可以学习新的邪恶生命技能（按下p）"
 	end,
 }
 logCHN:newLog{
@@ -364,7 +364,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#VIOLET#You have learned the talent Shove.",
 	fct = function()
-		return "#VIOLET#你学会了技能 推挤。"
+		return "#VIOLET#你学会了技能推挤。"
 	end,
 }
 
@@ -378,70 +378,70 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#VIOLET#You have learned the talent Mana Gale.",
 	fct = function()
-		return "#VIOLET#你学会了技能 法力风暴"
+		return "#VIOLET#你学会了技能法力风暴"
 	end,
 }
 
 logCHN:newLog{
 	log = "#VIOLET#You have learned the talent Telekinetic Punt.",
 	fct = function()
-		return "#VIOLET#你学会了技能 念力冲撞"
+		return "#VIOLET#你学会了技能念力冲撞"
 	end,
 }
 
 logCHN:newLog{
 	log = "#VIOLET#You have learned the talent Blink.",
 	fct = function()
-		return "#VIOLET#你学会了技能 闪现"
+		return "#VIOLET#你学会了技能闪现"
 	end,
 }
 
 logCHN:newLog{
 	log = "#VIOLET#You have learned the talent Fear.",
 	fct = function()
-		return "#VIOLET#你学会了技能 恐惧术"
+		return "#VIOLET#你学会了技能恐惧术"
 	end,
 }
 
 logCHN:newLog{
 	log = "#VIOLET#You have learned the talent Bleed.",
 	fct = function()
-		return "#VIOLET#你学会了技能 流血"
+		return "#VIOLET#你学会了技能流血"
 	end,
 }
 
 logCHN:newLog{
 	log = "#VIOLET#You have learned the talent Confusion.",
 	fct = function()
-		return "#VIOLET#你学会了技能 混乱"
+		return "#VIOLET#你学会了技能混乱"
 	end,
 }
 
 logCHN:newLog{
 	log = "#VIOLET#You must achieve Enlightenment before you can pass. Seek ye to the west to discover the ancient art of Shoving Stuff.",
 	fct = function()
-		return "#VIOLET#你必须完成 地下城启蒙 成就才能通过。 往西部寻找古代宝物： 冲击法杖。"
+		return "#VIOLET#你必须完成地下城启蒙成就才能通过。往西部寻找古代宝物：冲击法杖。"
 	end,
 }
 
 logCHN:newLog{
 	log = "#AQUAMARINE#You arrive deep under water, at the sea floor, as you look upwards you only see a glimpse of light coming through.",
 	fct = function()
-		return "#AQUAMARINE#你深入了水下， 在海床上， 当你抬头看时 你看到有光亮一闪而过。"
+		return "#AQUAMARINE#你深入了水下，在海床上，当你抬头看时你看到有光亮一闪而过。"
 	end,
 }
 
 logCHN:newLog{
 	log = "#AQUAMARINE#You should be crushed by the pressure, but strangely you feel no discomfort.",
 	fct = function()
-		return "#AQUAMARINE#你应该被压力所压扁， 不过奇怪的是 你没有感到任何不适。"
+		return "#AQUAMARINE#你应该被压力所压扁，不过奇怪的是你没有感到任何不适。"
 	end,
 }
 
 logCHN:newLog{
 	log = "#AQUAMARINE#All around you there is only water as far as you can see, except to your left, a giant coral structure. This is probably the temple of Creation.",
 	fct = function()
-		return "#AQUAMARINE#在你四周除了水你看到的还是水， 除了在你的左边，你看到一个巨大的珊瑚礁建筑，有可能这就是造物者神庙。"
+		return "#AQUAMARINE#在你四周除了水你看到的还是水，除了在你的左边，你看到一个巨大的珊瑚礁建筑，有可能这就是造物者神庙。"
 	end,
 }
 
@@ -449,7 +449,7 @@ logCHN:newLog{
 	log = "The Eidolon Plane seems to not physicaly exists in the same way the normal world does, you can not seem to drop anything here. %s comes back into your backpack.",
 	fct = function(a)
 		local name = objects:getObjectsChnName(a)
-		return ("艾德隆位面似乎并不像现实世界一样真实存在， 你在这里似乎不能丢弃任何东西， %s 又回到了你的手中。"):format(name)
+		return ("艾德隆位面似乎并不像现实世界一样真实存在，你在这里似乎不能丢弃任何东西， %s 又回到了你的手中。"):format(name)
 	end,
 }
 
@@ -513,7 +513,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#LIGHT_RED#As you insert the gem the golem starts to shake. All its systems and magics are reactivating.",
 	fct = function()
-		return "#LIGHT_RED#当你插入宝石傀儡开始震动。 它的系统和魔法被重新激活了。"
+		return "#LIGHT_RED#当你插入宝石傀儡开始震动。它的系统和魔法被重新激活了。"
 	end,
 }
 
@@ -583,21 +583,21 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#LIGHT_RED#As the Weirdling beast falls it shrieks one last time and the door behind it shatters and explodes, revealing the room behind it. The stair up vanishes!",
 	fct = function()
-		return "#LIGHT_RED#随着维德林兽的倒下，它发出了最后一身尖叫。它身后的门被炸开， 里面出现了一个房间，楼梯消失了！"
+		return "#LIGHT_RED#随着维德林兽的倒下，它发出了最后一身尖叫。它身后的门被炸开，里面出现了一个房间，楼梯消失了！"
 	end,
 }
 
 logCHN:newLog{
 	log = "#VIOLET#You enter the swirling portal and in the blink of an eye you set foot in a strangely familiar zone, right next to a farportal...",
 	fct = function()
-		return "#VIOLET#你进入了传送漩涡，一眨眼功夫你发现你到了一个熟悉的地方， 在另一个远古传送门旁边..."
+		return "#VIOLET#你进入了传送漩涡，一眨眼功夫你发现你到了一个熟悉的地方，在另一个远古传送门旁边..."
 	end,
 }
 
 logCHN:newLog{
 	log = "#VIOLET#You enter the swirling portal and in the blink of an eye you set foot in an unfamiliar zone, with no trace of the portal...",
 	fct = function()
-		return "#VIOLET#你进入了传送漩涡，一眨眼功夫你发现你到了一个陌生的地方， 传送门不见了..."
+		return "#VIOLET#你进入了传送漩涡，一眨眼功夫你发现你到了一个陌生的地方，传送门不见了..."
 	end,
 }
 

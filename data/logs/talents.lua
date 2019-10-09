@@ -1570,7 +1570,7 @@ logCHN:newLog{
 --gift/gift
 logCHN:newLog{
 	log = "#PINK#You can manage a maximum of %d summons at any time. You need %d Cunning to increase your limit.",
-	fct = "#PINK#你能同时拥有最多 %d 名召唤物。 你需要 %d 灵巧来提升上限。"
+	fct = "#PINK#你能同时拥有最多 %d 名召唤物。你需要 %d 灵巧来提升上限。"
 }
 
 --gift/eyals-fury
@@ -1689,7 +1689,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#PINK#You can not summon any more; you have too many summons already (%d). You can increase the limit with higher Cunning(+1 for every 10).",
 	fct = function(...)
-		return ("#PINK#你不能再召唤更多生物； 你已经召唤了太多了（%d）。 你可以提高灵巧点数来提高召唤上限（每10点增加一个上限）。"):format(...)
+		return ("#PINK#你不能再召唤更多生物；你已经召唤了太多了（%d）。你可以提高灵巧点数来提高召唤上限（每10点增加一个上限）。"):format(...)
 	end,
 }
 
@@ -2209,14 +2209,14 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "You need to ready 2 alchemist gems in your quiver to heal your golem.",
 	fct = function()
-		return "你至少在你的弹药栏内装备2枚炼金宝石， 才能够修理你的傀儡。"
+		return "你至少在你的弹药栏内装备2枚炼金宝石，才能够修理你的傀儡。"
 	end,
 }
 
 logCHN:newLog{
 	log = "You need to ready 15 alchemist gems in your quiver to heal your golem.",
 	fct = function()
-		return "你至少在你的弹药栏内装备15枚炼金宝石， 才能够修理你的傀儡。"
+		return "你至少在你的弹药栏内装备15枚炼金宝石，才能够修理你的傀儡。"
 	end,
 }
 
@@ -3210,7 +3210,7 @@ logCHN:newLog{
 }
 logCHN:newLog{
 	log = "#PURPLE#Your mastery over inscriptions is unmatched! One more inscriptions slot available to buy.",
-	fct = "#PURPLE#你对纹身的掌握无人能及！ 你可以消耗一个大系点进一步解锁一个纹身位",
+	fct = "#PURPLE#你对纹身的掌握无人能及！你可以消耗一个大系点进一步解锁一个纹身位",
 }
 --misc/inscription
 

@@ -1156,9 +1156,9 @@ function _M:handleEffect(player, eff_id, e, p, x, y, hs, bx, by, is_first, scale
 		--local name = e.desc
 		local name
 		local save_chn = {}
-		save_chn["Mental save"] = "精 神 豁 免"
-		save_chn["Physical save"] = "物 理 豁 免"
-		save_chn["Spell save"] = "魔 法 豁 免"
+		save_chn["Mental save"] = "精神豁免"
+		save_chn["Physical save"] = "物理豁免"
+		save_chn["Spell save"] = "魔法豁免"
 		if effCHN[e.name] then
 			name = effCHN[e.name].chName
 		else name = e.desc

@@ -51,11 +51,11 @@ newEntity{
 		who.energy.value = game.energy_to_act
 		game.paused = true
 		who:runStop()
-		engine.ui.Dialog:yesnoLongPopup("遭遇", "你 脚 下 的 大 地 在 颤 动 ， 一 只 巨 大 的 蠕 虫 突 然 出 现 ， 将 你 吞 了 进 去 ! \n 你 可 以 尝 试 使 用 回 归 之 杖 来 逃 离 ， 或 者 接 受 你 的 命 运 。 ", 500, function(ret)
+		engine.ui.Dialog:yesnoLongPopup("遭遇", "你脚下的大地在颤动，一只巨大的蠕虫突然出现，将你吞了进去 ! \n 你可以尝试使用回归之杖来逃离，或者接受你的命运。 ", 500, function(ret)
 			if ret then
 				game:changeLevel(1, "cults+godfeaster")
 			else
-				game.log("你 勉 强 开 启 了 回 归 之 杖。 当 你 落 在 虫 子 嘴 里 时， 魔 杖 充 能 完 毕， 你 重 新 出 现 在 地 面 其 他 位 置, 逃 离 了 怪 物。")
+				game.log("你勉强开启了回归之杖。当你落在虫子嘴里时，魔杖充能完毕，你重新出现在地面其他位置, 逃离了怪物。")
 			end
 		end, "接受命运", "使用魔棒", true)
 		game.party:learnLore("cults-godfeaster-popup")

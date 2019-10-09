@@ -126,7 +126,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "The contact with the Wayist mind has improved your mental shields. (+15 mental save, +10%% confusion resistance)",
 	fct = function()
-		return "与夺心魔的接触提高了你的精神防御。 （+15精神豁免，+10%混乱抵抗）"
+		return "与夺心魔的接触提高了你的精神防御。（+15精神豁免，+10%混乱抵抗）"
 	end,
 }
 

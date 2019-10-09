@@ -1,6 +1,6 @@
 function tinkers_list_for_craft_chn(self, t)
 	local l = {}
-	l[#l+1] = "你 需 要 该 技 能 来 制 造 下 列 插 件 （你 仍 需 要 相 应 的 配 方 ）："
+	l[#l+1] = "你需要该技能来制造下列插件（你仍需要相应的配方）："
 	for tid, tinker in pairs(game.party.__tinkers_ings) do if tinker.random_schematic and not tinker.unique and tinker.talents and tinker.talents[t.id] then
 		local known = ""
 		if game.party:knowTinker(tinker.id) then known = " #LIGHT_BLUE#(已学会)#LAST#" end

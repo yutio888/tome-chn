@@ -106,7 +106,7 @@ logCHN:newLog{
 		if d == "not enough stat" then d = "属性点不足"
 		elseif d == "not enough levels" then d = "等级不足"
 		elseif d == "missing dependency" then d = "附属条件未达到"
-		elseif d == "cannot use currently due to an other worn object" then c = "由于其他已装备物品， 暂时无法使用"
+		elseif d == "cannot use currently due to an other worn object" then c = "由于其他已装备物品，暂时无法使用"
 		end
 		return ("%s 无法%s装备： %s （ %s ）"):format(a,ns,name,c)
 	end,

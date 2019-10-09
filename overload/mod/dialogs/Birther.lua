@@ -788,7 +788,7 @@ function _M:getLock(d)
 end
 
 function _M:generateCampaigns()
-	local locktext = "\n\n#GOLD#本选项被锁定,完成特定的任务或条 件可以永久解锁这个战役,种族,职业."
+	local locktext = "\n\n#GOLD#本选项被锁定,完成特定的任务或条件可以永久解锁这个战役,种族,职业."
 	local list = {}
 
 	for i, d in ipairs(self.birth_descriptor_def.world) do
@@ -815,7 +815,7 @@ function _M:generateCampaigns()
 end
 
 function _M:generateDifficulties()
-	local locktext = "\n\n#GOLD# 本 选 项 被 锁 定 , 完 成 特 定 的 任 务 或 条 件 可 以 永 久 解 锁 这 个 战 役 , 种 族 , 职 业 ."
+	local locktext = "\n\n#GOLD# 本选项被锁定 , 完成特定的任务或条件可以永久解锁这个战役 , 种族 , 职业 ."
 	local list = {}
 
 	local oldsel = nil
@@ -852,7 +852,7 @@ function _M:generateDifficulties()
 end
 
 function _M:generatePermadeaths()
-	local locktext = "\n\n#GOLD#本选项被锁定,完成特定的任务或条 件可以永久解锁这个战役,种族,职业."
+	local locktext = "\n\n#GOLD#本选项被锁定,完成特定的任务或条件可以永久解锁这个战役,种族,职业."
 	local list = {}
 
 	local oldsel = nil
@@ -890,7 +890,7 @@ function _M:generatePermadeaths()
 end
 
 function _M:generateRaces()
-	local locktext = "\n\n#GOLD#本 选 项 被 锁 定 , 完 成 特 定 的 任 务 或 条 件 可 以 永 久 解 锁 这 个 战 役 , 种 族 , 职 业 . "
+	local locktext = "\n\n#GOLD#本选项被锁定 , 完成特定的任务或条件可以永久解锁这个战役 , 种族 , 职业 . "
 
 	local oldtree = {}
 	for i, t in ipairs(self.all_races or {}) do oldtree[t.id] = t.shown end
@@ -967,7 +967,7 @@ function _M:generateRaces()
 end
 
 function _M:generateClasses()
-	local locktext = "\n\n#GOLD#本 选 项 被 锁 定 , 完 成 特 定 的 任 务 或 条 件可 以 永 久 解 锁 这 个 战 役 , 种 族 ,  职 业 ."
+	local locktext = "\n\n#GOLD#本选项被锁定 , 完成特定的任务或条件可以永久解锁这个战役 , 种族 ,  职业 ."
 
 	local oldtree = {}
 	for i, t in ipairs(self.all_classes or {}) do oldtree[t.id] = t.shown end

@@ -243,7 +243,7 @@ damageSpecialDesc["ITEM_BLIGHT_DISEASE"] = function(dam, oldDam, src)
 			end
 		end
 		local val = src and math.floor(src:combatStatScale(src:combatSpellpower(), 1, 40))
-		return ("* #LIGHT_GREEN#%d%%#LAST#几率减少力量、 体质 和敏捷各 #VIOLET#%d#LAST# 点 %s ")
+		return ("* #LIGHT_GREEN#%d%%#LAST#几率减少力量、体质和敏捷各 #VIOLET#%d#LAST# 点 %s ")
 			:format(dam, val, parens )
 	end
 

@@ -37,15 +37,15 @@ function _M:tooltip()
 				if self.name then
 					if self.name == "glyph of twilight" then 
 						desc = function(self)
-							return ([[产 生 爆 炸 ， 击 退 敌 人 1 格 并 造 成 %d 光 系 和 %d 暗 影 伤 害。]]):format(engine.interface.ActorTalents.damDesc(self, engine.DamageType.LIGHT, self.dam/2), engine.interface.ActorTalents.damDesc(self, engine.DamageType.DARKNESS, self.dam/2))
+							return ([[产生爆炸，击退敌人 1 格并造成 %d 光系和 %d 暗影伤害。]]):format(engine.interface.ActorTalents.damDesc(self, engine.DamageType.LIGHT, self.dam/2), engine.interface.ActorTalents.damDesc(self, engine.DamageType.DARKNESS, self.dam/2))
 						end
 					elseif self.name == "glyph of sunlight" then 
 						desc = function(self)
-							return ([[造 成 %d 光 系 伤 害，并 治 疗 使 用 者 %d 生 命]]):format(engine.interface.ActorTalents.damDesc(self, engine.DamageType.LIGHT, self.dam), self.heal)
+							return ([[造成 %d 光系伤害，并治疗使用者 %d 生命]]):format(engine.interface.ActorTalents.damDesc(self, engine.DamageType.LIGHT, self.dam), self.heal)
 						end
 					elseif self.name == "glyph of moonlight" then
 						desc =  function(self)
-							return ([[造 成 %d 暗 影 伤 害 并 吸 取 敌 方 能 量， 降 低 其 造 成 的 伤 害 %d%%， 效 果 持 续 %d 回 合。]]):format(engine.interface.ActorTalents.damDesc(self, engine.DamageType.DARKNESS, self.dam), self.numb, self.numbDur)
+							return ([[造成 %d 暗影伤害并吸取敌方能量，降低其造成的伤害 %d%%，效果持续 %d 回合。]]):format(engine.interface.ActorTalents.damDesc(self, engine.DamageType.DARKNESS, self.dam), self.numb, self.numbDur)
 						end
 					end
 				end

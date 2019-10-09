@@ -7,7 +7,7 @@ registerAchievementTranslation{
 registerAchievementTranslation{
 	name = "Bookception!",
 	chnName = "书中之书！",
-	desc = [[在禁忌之书《知识与恐怖》中， 找到禁忌之书的奖励。]],
+	desc = [[在禁忌之书《知识与恐怖》中，找到禁忌之书的奖励。]],
 }
 
 registerAchievementTranslation{
@@ -26,7 +26,7 @@ registerAchievementTranslation{
 registerAchievementTranslation{
 	name = "The True Coward",
 	chnName = "真正的懦夫",
-	desc = [[在不拯救克罗什库尔、德斯镇、商人、米琳达 和艾琳的情况下获得胜利。]],
+	desc = [[在不拯救克罗什库尔、德斯镇、商人、米琳达和艾琳的情况下获得胜利。]],
 }
 
 
@@ -45,7 +45,7 @@ registerAchievementTranslation{
 registerAchievementTranslation{
 	name = "Not Really Yourself",
 	chnName = "并非自我",
-	desc = [[让寄生恐魔占据身体， 日渐强大。]],
+	desc = [[让寄生恐魔占据身体，日渐强大。]],
 }
 
 registerAchievementTranslation{
@@ -57,13 +57,13 @@ registerAchievementTranslation{
 registerAchievementTranslation{
 	name = "Dethroned",
 	chnName = "废黜",
-	desc = [[在不让玻璃傀儡使用王座治疗的情况下， 打败它]],
+	desc = [[在不让玻璃傀儡使用王座治疗的情况下，打败它]],
 }
 
 registerAchievementTranslation{
 	name = "A View From The Gallery",
 	chnName = "画廊一瞥",
-	desc = [[短暂地作为一名半身人 活在夏图尔的时代。]],
+	desc = [[短暂地作为一名半身人活在夏图尔的时代。]],
 }
 
 registerAchievementTranslation{

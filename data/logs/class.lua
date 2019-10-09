@@ -383,7 +383,7 @@ logCHN:newLog{
 	log = "%s's %s is interrupted by the shot.",
 	fct = function(a,b)
 		a = npcCHN:getName(a)
-		return ("%s的%s被射击打断 。"):format(a,b)
+		return ("%s的%s被射击打断。"):format(a,b)
 	end,
 }
 logCHN:newLog{
@@ -490,14 +490,14 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "Something in the floor clicks ominously, and suddenly the world spins around you!",
 	fct = function()
-		return "什么东西在地上发出了不祥的咔嗒声， 突然， 你周围的世界开始旋转！"
+		return "什么东西在地上发出了不祥的咔嗒声，突然，你周围的世界开始旋转！"
 	end,
 }
 
 logCHN:newLog{
 	log = "Something in the floor clicks ominously, and the crypt rearranges itself around you!",
 	fct = function()
-		return "什么东西在地上发出了不祥的咔嗒声， 地窖自己进行了重新组合！"
+		return "什么东西在地上发出了不祥的咔嗒声，地窖自己进行了重新组合！"
 	end,
 }
 
@@ -511,7 +511,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "Something underfoot clicks ominously, and the crypt rearranges itself around you!",
 	fct = function()
-		return "你脚下什么东西发出了不祥的咔嗒声， 地窖自己进行了重新组合！"
+		return "你脚下什么东西发出了不祥的咔嗒声，地窖自己进行了重新组合！"
 	end,
 }
 
@@ -789,7 +789,7 @@ logCHN:newLog{
 	log = "#LIGHT_GREEN#Quest '%s' status updated! #WHITE#(Press 'j' to see the quest log)",
 	fct = function(a)
 		a = questCHN:getquestname(a)
-		return ("#LIGHT_GREEN#任务 “ %s ”状态已经更新！ #WHITE#（按下“j”查看任务日志）"):format(a)
+		return ("#LIGHT_GREEN#任务“ %s ”状态已经更新！ #WHITE#（按下“j”查看任务日志）"):format(a)
 	end,
 }
 
@@ -798,7 +798,7 @@ logCHN:newLog{
 	fct = function(a)
 		a = questCHN:getquestname(a)
 		if a:find("Escort") then a= "护送" end
-		return ("#LIGHT_GREEN#任务 “ %s ”完成！ #WHITE#（按下“j”查看任务日志）"):format(a)
+		return ("#LIGHT_GREEN#任务“ %s ”完成！ #WHITE#（按下“j”查看任务日志）"):format(a)
 	end,
 }
 
@@ -807,7 +807,7 @@ logCHN:newLog{
 	fct = function(a)
 		a = questCHN:getquestname(a)
 		if a:find("Escort") then a= "护送" end
-		return ("#LIGHT_GREEN#任务 “ %s ”完成！ #WHITE#（按下“j”查看任务日志）"):format(a)
+		return ("#LIGHT_GREEN#任务“ %s ”完成！ #WHITE#（按下“j”查看任务日志）"):format(a)
 	end,
 }
 
@@ -816,7 +816,7 @@ logCHN:newLog{
 	fct = function(a)
 		a = questCHN:getquestname(a)
 		if a:find("Escort") then a= "护送" end
-		return ("#LIGHT_RED#任务 “ %s ”失败！ #WHITE#（按下“j”查看任务日志）"):format(a)
+		return ("#LIGHT_RED#任务“ %s ”失败！ #WHITE#（按下“j”查看任务日志）"):format(a)
 	end,
 }
 
@@ -1537,10 +1537,10 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#TEAL#%s",
 	fct = function(a)
-	    a = a:gsub("You feel a thrill of terror and your heart begins to pound in your chest. You feel terribly threatened upon entering this area.", "你因恐惧而感到不安，你觉得你的心跳开始加速， 你感到进入这个区域对你有极大的威胁。")
+	    a = a:gsub("You feel a thrill of terror and your heart begins to pound in your chest. You feel terribly threatened upon entering this area.", "你因恐惧而感到不安，你觉得你的心跳开始加速，你感到进入这个区域对你有极大的威胁。")
 	      	:gsub("You feel mildly anxious, and walk with caution.","你感到稍微有点不安，开始小心前行。")
 		:gsub("You feel very confident walking into this place.","你充满自信地进入了这个区域。")
-		:gsub("You stride into this area without a second thought, while stifling a yawn. You feel your time might be better spent elsewhere.","你大步流星地走进这片区域，打了个哈欠，你感到待在这里可能是浪费时间， 最好到别的地方去看看。")
+		:gsub("You stride into this area without a second thought, while stifling a yawn. You feel your time might be better spent elsewhere.","你大步流星地走进这片区域，打了个哈欠，你感到待在这里可能是浪费时间，最好到别的地方去看看。")
 	    return a
 	end,		
 }

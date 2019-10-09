@@ -31,7 +31,7 @@ module(..., package.seeall, class.inherit(Dialog))
 function _M:init(actor)
 	self.actor = actor
 	self.ui = "deathbox"
-	Dialog.init(self, "你 已 经 #LIGHT_RED#死 亡#LAST#!", 500, 600)
+	Dialog.init(self, "你已经 #LIGHT_RED#死亡#LAST#!", 500, 600)
 
 	actor:saveUUID()
 
@@ -39,9 +39,9 @@ function _M:init(actor)
 	if self.dont_show then return end
 	if not config.settings.cheat then game:saveGame() end
 
-	local text = [[你 已 经 #LIGHT_RED# 死 亡 #LAST#!
-在 ToME 里 死 亡 是 永 久 的， 但 是 如 果 你 有 某 种 复 活 的 方 法 它 会 在 菜 单 上 显 示 出 来...
-你 可 以 将 你 的 角 色 数 据 存 起 来 留 作 纪 念， 或 者 你 可 以 退 出 并 再 次 尝 试 野 外 生 存！
+	local text = [[你已经 #LIGHT_RED# 死亡 #LAST#!
+在 ToME 里死亡是永久的，但是如果你有某种复活的方法它会在菜单上显示出来...
+你可以将你的角色数据存起来留作纪念，或者你可以退出并再次尝试野外生存！
 ]]
 
 	if #game.party.on_death_show_achieved > 0 then

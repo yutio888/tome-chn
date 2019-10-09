@@ -71,7 +71,7 @@ logCHN:newLog{
 }
 logCHN:newLog{
 	log = "#LIGHT_BLUE#You resurrect! CHEATER!",
-	fct = "#LIGHT_BLUE#你复活了！ 作弊者！",
+	fct = "#LIGHT_BLUE#你复活了！作弊者！",
 }
 logCHN:newLog{
 	log = "#YELLOW#Your bones magically knit back together. You are once more able to dish out pain to your foes!",

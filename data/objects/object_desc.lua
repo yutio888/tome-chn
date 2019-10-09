@@ -396,7 +396,7 @@ objDesc["This psionic mindstar hates not to be wrathful."] = "这个灵晶需要
 objDesc["This psionic mindstar is wrathful to the hated."] = "这个灵晶需要足够的仇恨"
 objDesc["No medical injector available, values are indicative only."] = "没有可用的药物注射器，数值仅供参考。"
 objDesc["Deals high light damage and increases critical multiplier."] = "造成大量光明伤害，增加暴击系数。"
-objDesc["On landing any melee attack, release a fiery shockwave, dealing fire and physical damage each equal to your steampower in a cone from the target of radius 3."] = "近战攻击将释放冲击波， 半径3的锥形范围内目标受到 等于蒸汽强度的物理火焰伤害。"
+objDesc["On landing any melee attack, release a fiery shockwave, dealing fire and physical damage each equal to your steampower in a cone from the target of radius 3."] = "近战攻击将释放冲击波，半径3的锥形范围内目标受到等于蒸汽强度的物理火焰伤害。"
 objDesc["Strikes can trigger a thunderclap that damages and repel foes."] = "攻击能触发雷电，伤害并击退敌人。"
 objDesc["Deals fire damage and ignites the ground."] = "造成火焰伤害，点燃大地。"
 objDesc["On critical strikes generates a 3 tiles lightning beam."] = "暴击制造范围3的闪电射线。"
@@ -406,7 +406,7 @@ objDesc["Infects targets with a stat reducing disease."] = "传染属性削减�
 objDesc["Deals cold damage and slows."] = "造成寒冷伤害并减速"
 objDesc["Deals acid damage that also reduces armour."] = "造成酸性伤害并降低护甲"
 objDesc["Knocks you back when fired."] = "开火时击退自己。"
-objDesc["On falling below 20% of your max life, releases a cloud of smoke, confusing nearby enemies and giving you stealth and a chance to avoid incoming damage for 5 turns."]="当生命值少于20%时， 释放烟雾潜行， 混乱周围生物， 并有一定几率免疫伤害，持续5回合。"
+objDesc["On falling below 20% of your max life, releases a cloud of smoke, confusing nearby enemies and giving you stealth and a chance to avoid incoming damage for 5 turns."]="当生命值少于20%时，释放烟雾潜行，混乱周围生物，并有一定几率免疫伤害，持续5回合。"
 objDesc["The more steam the better!"] = "蒸汽越多越好！"
 special_t = {}
 	special_t["deal cold damage equal to 100 + the higher of your steam or spellpower, and attempt to freeze the target (20% chance)."] = "造成100+蒸汽强度或法术强度较高项的寒冷伤害，并有20%几率冻结目标"
@@ -519,8 +519,8 @@ special_t["deal a melee attack against all other enemies in a circle around you"
 special_t["deal bonus physical damage equal to your armor"] = "造成等于护甲值的伤害"
 special_t["smash the target with your shield crippling them"] = "盾击目标并致残"
 special_t["reduce the cooldown of your ward talent by 1"] = "减少你的守护技能1回合冷却时间"
-special_t["Learn an unarmed attack talent or enable 'Always show glove combat' to see combat stats."] = "学习空手攻击技能，或者 开启 '强制 显示 手套 战斗 数据' 选项 来 查看 战斗 数据"
-special_t["Learn shield attack talent or enable 'Always show shield combat' to see combat stats."] = "学习盾牌攻击技能，或者 开启 '强制 显示 盾牌 战斗 数据' 选项 来 查看 战斗 数据"
+special_t["Learn an unarmed attack talent or enable 'Always show glove combat' to see combat stats."] = "学习空手攻击技能，或者开启 '强制显示手套战斗数据' 选项来查看战斗数据"
+special_t["Learn shield attack talent or enable 'Always show shield combat' to see combat stats."] = "学习盾牌攻击技能，或者开启 '强制显示盾牌战斗数据' 选项来查看战斗数据"
 
 --装备鼠标提示汉化替换
 function getObjectDescCHN(desc)
@@ -675,7 +675,7 @@ function getObjectDescCHN(desc)
 				elseif desc[i]:find("If anomaly triggers, halve paradox.") then
 					desc[i]=desc[i]:gsub("increase paradox by a drastic amount with a chance to do an anomaly","大幅增加紊乱，有机率触发异常。"):gsub("chance","几率"):gsub("If anomaly triggers, halve paradox.","若触发异常，紊乱减半。")
 				elseif desc[i]:find("wounds the target for 7 turns: ") then
-					desc[i]=desc[i]:gsub("wounds the target for 7 turns:","对目标造成持续7回合的 伤口:"):gsub("bleeding,","流血伤害"):gsub(" reduced healing","治疗系数下降")
+					desc[i]=desc[i]:gsub("wounds the target for 7 turns:","对目标造成持续7回合的伤口:"):gsub("bleeding,","流血伤害"):gsub(" reduced healing","治疗系数下降")
 				elseif desc[i]:find("Projects up to") then
 					desc[i]=desc[i]:gsub("Projects up to","投射最多"):gsub("attacks dealing","次攻击，造成"):gsub("weapon damage to random targets in range 7","武器伤害，随机攻击7格内敌人"):gsub("cannot hit the initial target"," 不会再击中初始目标")
 				else--if desc[i]:find("Special effect on block:") then

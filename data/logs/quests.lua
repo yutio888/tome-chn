@@ -31,7 +31,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#LIGHT_BLUE#Killing your own future self does feel weird, but you know that you can avoid this future. Just do not time travel.",
 	fct = function()
-		return "#LIGHT_BLUE#杀死未来的自己貌似有点怪异， 不过你知道你可以避免这样的未来， 穿越时空吧。"
+		return "#LIGHT_BLUE#杀死未来的自己貌似有点怪异，不过你知道你可以避免这样的未来，穿越时空吧。"
 	end,
 }
 
@@ -66,21 +66,21 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "A stairway out appears at your feet. The Lord says: 'And remember, you are MINE. I will call you.'",
 	fct = function()
-		return "一道出去的楼梯在你的脚下出现了。 强盗头子说：“记住，你是我的，我会召唤你。”"
+		return "一道出去的楼梯在你的脚下出现了。强盗头子说：“记住，你是我的，我会召唤你。”"
 	end,
 }
 
 logCHN:newLog{
 	log = "#LIGHT_BLUE#The merchant thanks you for saving his life. He gives you 8 gold and asks you to meet him again in Last Hope.",
 	fct = function()
-		return "#LIGHT_BLUE#商人感谢你救了他的命。 他给了你8金币， 邀请你在最后的希望见他。"
+		return "#LIGHT_BLUE#商人感谢你救了他的命。他给了你8金币，邀请你在最后的希望见他。"
 	end,
 }
 
 logCHN:newLog{
 	log = "You should head to the tunnel to Maj'Eyal and explore the world. For the Way.",
 	fct = function()
-		return "你应该通过通道到达马基埃亚尔，探索这个世界。 为了维网。"
+		return "你应该通过通道到达马基埃亚尔，探索这个世界。为了维网。"
 	end,
 }
 
@@ -99,14 +99,14 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#VIOLET#This tome seems to be about the power of gems. Maybe you should bring it to the jeweler in the Gates of Morning.",
 	fct = function()
-		return "#VIOLET#这本册子似乎描述了关于宝石的力量。 也许应该带给晨曦之门的珠宝匠看看。"
+		return "#VIOLET#这本册子似乎描述了关于宝石的力量。也许应该带给晨曦之门的珠宝匠看看。"
 	end,
 }
 
 logCHN:newLog{
 	log = "Limmir points to the entrance to a cave on your map. This is supposed to be the way to the valley.",
 	fct = function()
-		return "利米尔在你的地图上指出了山洞的入口。 这是一条通往山谷的路。"
+		return "利米尔在你的地图上指出了山洞的入口。这是一条通往山谷的路。"
 	end,
 }
 
@@ -135,7 +135,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#LIGHT_RED#As the apprentice touches the staff he begins to scream, flames bursting out of his mouth. Life seems to be drained away from him, and in an instant he collapses in a lifeless husk.",
 	fct = function()
-		return "#LIGHT_RED#当学徒触摸这根法杖， 他开始尖叫，火焰从他的嘴里喷射了出来。 他的生命似乎被从他的体内吸取了出来。 瞬间他只剩下一具毫无生机的空壳。"
+		return "#LIGHT_RED#当学徒触摸这根法杖，他开始尖叫，火焰从他的嘴里喷射了出来。他的生命似乎被从他的体内吸取了出来。瞬间他只剩下一具毫无生机的空壳。"
 	end,
 }
 
@@ -163,14 +163,14 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#VIOLET#A portal activates in the distance. You hear the orcs shout, 'The Sorcerers have departed! Follow them!'",
 	fct = function()
-		return "#VIOLET#远处一个传送门被激活，你听到兽人们吼道： “恶魔法师已经离开！跟上他们！”"
+		return "#VIOLET#远处一个传送门被激活，你听到兽人们吼道：“恶魔法师已经离开！跟上他们！”"
 	end,
 }
 
 logCHN:newLog{
 	log = "#VIOLET#The Sorcerers flee through a portal. As you prepare to follow them, a huge faeros appears to block the way.",
 	fct = function()
-		return "#VIOLET#恶魔法师从传送门逃跑了，当你准备跟随他们时， 一个巨大的法罗挡住了去路。"
+		return "#VIOLET#恶魔法师从传送门逃跑了，当你准备跟随他们时，一个巨大的法罗挡住了去路。"
 	end,
 }
 
@@ -247,7 +247,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#LIGHT_RED#Fallen Sun Paladin Aeryn: '%s YOU BROUGHT ONLY DESTRUCTION TO THE SUNWALL! YOU WILL PAY!'",
 	fct = function(...)
-		return ("#LIGHT_RED#堕落太阳骑士艾琳：“%s 你只给太阳堡垒带来了毁灭！ 你会为此付出代价！”"):format(...)
+		return ("#LIGHT_RED#堕落太阳骑士艾琳：“%s 你只给太阳堡垒带来了毁灭！你会为此付出代价！”"):format(...)
 	end,
 }
 
@@ -261,7 +261,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "The elder points to Reknor on your map, to the north on the western side of the Iron Throne.",
 	fct = function()
-		return "长老在你的地图上指出了瑞库纳的位置， 在钢铁王座西部边境的北部。"
+		return "长老在你的地图上指出了瑞库纳的位置，在钢铁王座西部边境的北部。"
 	end,
 }
 
@@ -289,7 +289,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#VIOLET#You wake up after a few hours, surprised to be alive, but the staff is gone!",
 	fct = function()
-		return "#VIOLET#几小时后你醒来， 很惊讶你还活着， 但是法杖不见了！"
+		return "#VIOLET#几小时后你醒来，很惊讶你还活着，但是法杖不见了！"
 	end,
 }
 
@@ -317,7 +317,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "A portal appears right under you, and Rashim rushes through.",
 	fct = function()
-		return "一道传送门在你的脚下出现， 拉希姆冲了过去。"
+		return "一道传送门在你的脚下出现，拉希姆冲了过去。"
 	end,
 }
 
@@ -353,7 +353,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#LIGHT_GREEN#As you touch the orb your will fills the slave's body. You take full control of his actions!",
 	fct = function()
-		return "#LIGHT_GREEN#当你触摸水晶球时你的意志进入了奴隶的体内， 你可以完全控制它的行动！"
+		return "#LIGHT_GREEN#当你触摸水晶球时你的意志进入了奴隶的体内，你可以完全控制它的行动！"
 	end,
 }
 
@@ -374,7 +374,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "This rift in time has been created by the paradox. You dare not enter it; it could make things worse. Another Warden will have to fix your mess.",
 	fct = function()
-		return "这个时间裂隙是时空紊乱造成的。 你不敢进入， 事情可能会变得更糟， 另外一个守卫将不得不前去修复混乱。"
+		return "这个时间裂隙是时空紊乱造成的。你不敢进入，事情可能会变得更糟，另外一个守卫将不得不前去修复混乱。"
 	end,
 }
 

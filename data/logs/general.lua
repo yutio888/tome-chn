@@ -299,21 +299,21 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#LIGHT_RED#As you enter you notice the trap door has no visible handle on the inside. You are stuck here!",
 	fct = function()
-		return "#LIGHT_RED#当你进入了地道你发现活门没有出去的开关， 你被关在这里了！"
+		return "#LIGHT_RED#当你进入了地道你发现活门没有出去的开关，你被关在这里了！"
 	end,
 }
 
 logCHN:newLog{
 	log = "#LIGHT_RED#As you enter you notice the door has no visible handle on the inside. You are stuck here!",
 	fct = function()
-		return "#LIGHT_RED#当你进入了地道你发现活门没有出去的开关， 你被关在这里了！"
+		return "#LIGHT_RED#当你进入了地道你发现活门没有出去的开关，你被关在这里了！"
 	end,
 }
 
 logCHN:newLog{
 	log = "#LIGHT_RED#You carefully open the door and enter the underground crypt...",
 	fct = function()
-		return "#LIGHT_RED#你打开了活门， 小心翼翼地进入了地窖..."
+		return "#LIGHT_RED#你打开了活门，小心翼翼地进入了地窖..."
 	end,
 }
 
@@ -497,7 +497,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "This power seems too much to wield, you fear it might absorb YOU.",
 	fct = function()
-		return "这件装备的力量太强大了， 你害怕它会把你吸收进去， 无法装备它。"
+		return "这件装备的力量太强大了，你害怕它会把你吸收进去，无法装备它。"
 	end,
 }
 
@@ -603,7 +603,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#VIOLET#The world twists sickeningly around you and you find yourself someplace unexpected! It felt nothing like your previous uses of the Orb of Many Ways. Tannen must have switched the Orb out for a fake!",
 	fct = function()
-		return "#VIOLET#你周围的世界发生了扭曲，之后你发现你自己出现在了意料之外的地方。 这和之前你使用多元水晶球时的情形完全不同，泰恩肯定用假水晶球掉了包！"
+		return "#VIOLET#你周围的世界发生了扭曲，之后你发现你自己出现在了意料之外的地方。这和之前你使用多元水晶球时的情形完全不同，泰恩肯定用假水晶球掉了包！"
 	end,
 }
 
@@ -1007,7 +1007,7 @@ logCHN:newLog{
 logCHN:newLog{
 	log = "#AQUAMARINE#As #Source# falls you notice that #Target# seems to shudder in pain!",
 	fct = function()
-		return "#AQUAMARINE#当 #Source# 倒下时， 你注意到 #Target# 似乎在痛苦中挣扎！"
+		return "#AQUAMARINE#当 #Source# 倒下时，你注意到 #Target# 似乎在痛苦中挣扎！"
 	end,
 }
 
@@ -1059,7 +1059,7 @@ logCHN:newLog{
 
 logCHN:newLog{
 	log = "#LIGHT_BLUE#As you don the %s, you gain understanding of the might of your race.",
-	fct = function(a) return ("#LIGHT_BLUE当你拥有%s时， 你理解了你种族的力量"):format(a) end,
+	fct = function(a) return ("#LIGHT_BLUE当你拥有%s时，你理解了你种族的力量"):format(a) end,
 }
 
 logCHN:newLog{
@@ -1267,7 +1267,7 @@ logCHN:newLog{
 
 logCHN:newLog{
 	log = "#DARK_GREEN#You understand this bow-and its connection to nature-in a way few can.",
-	fct = "#DARK_GREEN#你理解了这把弓—— 以及它和自然的联系—— 这是很多人无法理解的。",
+	fct = "#DARK_GREEN#你理解了这把弓——以及它和自然的联系——这是很多人无法理解的。",
 }
 
 logCHN:newLog{

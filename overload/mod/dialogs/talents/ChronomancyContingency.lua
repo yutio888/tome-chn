@@ -44,7 +44,7 @@ function _M:init(actor)
 
 	local vsep = Separator.new{dir="horizontal", size=self.ih - 10}
 	self.c_tut = Textzone.new{width=math.floor(self.iw / 2 - vsep.w / 2), height=1, auto_height=true, no_color_bleed=true, text=[[
-你 可 以 选 择 一 个 技 能 释 放 意 外 术 。 当 你 受 到 伤 害 并 使 生 命 值 降 低 到 一 定 百 分 比 以 下 时 ，这 个 技 能 会 被 自 动 释 放 。
+你可以选择一个技能释放意外术。当你受到伤害并使生命值降低到一定百分比以下时，这个技能会被自动释放。
 ]]}
 	self.c_desc = TextzoneList.new{width=math.floor(self.iw / 2 - vsep.w / 2), height=self.ih - self.c_tut.h - 20, scrollbar=true, no_color_bleed=true}
 

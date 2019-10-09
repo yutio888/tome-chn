@@ -27,27 +27,27 @@ local function set_bias(which)
 end
 
 newChat{ id="welcome",
-	text = [[你 喜 欢 哪 种 异 常？]],
+	text = [[你喜欢哪种异常？]],
 	answers = {
-		{"物 理",
+		{"物理",
 			action = function()
 				game.level.map:particleEmitter(game.player.x, game.player.y, 1, "temporal_teleport")
 			return set_bias({type = "physical", chance=chance}) 
 			end,
 		},
-		{"翘 曲", 
+		{"翘曲", 
 			action = function() 
 				game.level.map:particleEmitter(game.player.x, game.player.y, 1, "temporal_teleport")
 			return set_bias({type = "Warp", chance=chance})
 			end,
 		},
-		{"时 空",
+		{"时空",
 			action = function()
 				game.level.map:particleEmitter(game.player.x, game.player.y, 1, "temporal_teleport")
 			return set_bias({type = "temporal", chance=chance})
 			end,
 		},
-		{"没 事，别介意。"},
+		{"没事，别介意。"},
 	}
 }
 

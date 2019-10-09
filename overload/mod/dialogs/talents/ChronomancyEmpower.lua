@@ -58,7 +58,7 @@ function _M:init(actor)
 
 	local vsep = Separator.new{dir="horizontal", size=self.ih - 10}
 	self.c_tut = Textzone.new{width=math.floor(self.iw / 2 - vsep.w / 2), height=1, auto_height=true, no_color_bleed=true, text=[[
-你 可 以 选 择 一 个 时 空 系 法 术 来 施 展 “ 能 量 增 幅 ” ， 增 加 释 放 这 个 技 能 时 的 法 术 强 度 。
+你可以选择一个时空系法术来施展“能量增幅”，增加释放这个技能时的法术强度。
 ]]}
 	self.c_desc = TextzoneList.new{width=math.floor(self.iw / 2 - vsep.w / 2), height=self.ih - self.c_tut.h - 20, scrollbar=true, no_color_bleed=true}
 

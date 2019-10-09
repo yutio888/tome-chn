@@ -34,6 +34,7 @@ registerTalentTranslation{
 		local rad = t.getRadius(self, t)
 		return ([[召 唤 一个 龙 卷 风，它会向着目标极为缓慢地移动，并在目标移动时跟随目标，最多移动20次。
 		 每当它移动时，半径2范围内的所有敌人会受 到 %0.2f 闪 电 伤 害，并被击退2格。
+		 当它碰到目标的时候，会在%d码范围内引发爆炸，击退目标，并造成 %0.2f 闪电和 %0.2f 物理伤害。
 		 受 精 神 强 度 影 响， 伤 害 有 额 外 加 成。 
 		 每 点 雷 龙 系 的 天 赋 可 以 使 你 增 加 闪 电 抵 抗 1%% 。]]):format(
 			damDesc(self, DamageType.LIGHTNING, t.getMoveDamage(self, t)),

@@ -2300,7 +2300,7 @@ function _M:getDesc(name_param, compare_with, never_compare, use_actor)
 
 	if self:isIdentified() then
 		desc:add(true, true, {"color", "ANTIQUE_WHITE"})
-		desc:merge(cutChrCHN(objects:getObjects(self.name,self.desc,self.subtype,self.short_name,self:isIdentified()).desc,19):toTString())
+		desc:merge(objects:getObjects(self.name,self.desc,self.subtype,self.short_name,self:isIdentified()).desc:toTString())
 		desc:add(true)
 		desc:add({"color", "WHITE"})
 	end

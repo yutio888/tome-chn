@@ -78,6 +78,6 @@ end
 
 function _M:select(item)
 	if item then
-		self.c_desc:switchItem(item, ("#GOLD#分类：#AQUAMARINE# %s\n#GOLD#材料：#0080FF# %s\n#GOLD#数量：#0080FF# %s\n#GOLD#描述：#ANTIQUE_WHITE# %s"):format(item.cat, item.name:toString(), item.nb, cutChrCHN(item.desc,30)))
+		self.c_desc:switchItem(item, ("#GOLD#分类：#AQUAMARINE# %s\n#GOLD#材料：#0080FF# %s\n#GOLD#数量：#0080FF# %s\n#GOLD#描述：#ANTIQUE_WHITE# %s"):format(item.cat, item.name:toString(), item.nb, item.desc))
 	end
 end

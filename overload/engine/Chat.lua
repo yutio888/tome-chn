@@ -129,6 +129,6 @@ end
 function _M:replace(text)
 	text = text:gsub("@playername@", self.player.name):gsub("@npcname@", self.npc.name)
 	text = text:gsub("@playerdescriptor.(.-)@", function(what) local q = self.player.descriptor["fake_"..what] or self.player.descriptor[what] q = s_stat_name[q] or q return q end)
-	return cutChrCHN(text,25)
-	--return text
+	--return cutChrCHN(text,25)
+	return text
 end

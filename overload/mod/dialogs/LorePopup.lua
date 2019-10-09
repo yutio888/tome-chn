@@ -38,7 +38,7 @@ function _M:init(l, w, force_height)
 	r.rewrite()
 	local text = util.getval(l.lore).."\n"
 	r.recover()
-	if (l.chn_translated) then text = cutChrCHN(text, 40) end
+	-- if (l.chn_translated) then text = cutChrCHN(text, 40) end
 
 	if text:find("Athrall") then text = "‘为了主人的荣耀’ ——阿夏尔" end
 	self.font = core.display.newFont("/data-chn123/font/lorefont.ttf", 16)

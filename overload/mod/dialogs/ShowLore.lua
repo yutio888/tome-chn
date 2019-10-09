@@ -71,7 +71,7 @@ function _M:generateList()
 		r.rewrite()
 		list[#list+1] = { name=l.name, desc=util.getval(l.lore), cat=loreCat[l.category] or l.category, order=l.order, image=l.image }
 		r.recover()
-		if l.chn_translated then list[#list].desc = cutChrCHN(list[#list].desc, 25) end
+		if l.chn_translated then list[#list].desc = list[#list].desc end
 		i = i + 1
 	end
 	-- Add known artifacts

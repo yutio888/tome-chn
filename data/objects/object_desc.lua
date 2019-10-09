@@ -710,7 +710,7 @@ function getObjectDescCHN(desc)
 					:gsub("lite","灯具"):gsub("neck","项链"):gsub("tool","工具"):gsub("quiver","弹药")
 					:gsub("armor","护甲"):gsub("weapon","武器"):gsub("shield","盾牌"):gsub("staff","法杖")
 			if desc[i]:find("When attach to") then desc[i] = "当附着时：" end
-			desc[i] = cutChrCHN(desc[i], 20)
+			--desc[i] = cutChrCHN(desc[i], 20)
 		end
         end
 	return desc

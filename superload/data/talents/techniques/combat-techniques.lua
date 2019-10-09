@@ -4,7 +4,7 @@ registerTalentTranslation{
 	id = "T_RUSH",
 	name = "冲锋",
 	info = function(self, t)
-		return ([[快 速 冲 向 你 的 目 标， 如 果 目 标 被 撞 到， 那 么 你 将 获 得 一 次 无 消 耗 的 攻 击， 伤 害 为 120% 基 础 武 器 伤 害。 
+		return ([[快速冲向敌人，并造成 120% 基 础 武 器 伤 害。 
 		如 果 此 次 攻 击 命 中， 那 么 目 标 会 被 眩 晕 3 回 合。 
 		你 必 须 从 至 少 2 码 以 外 开 始 冲 锋。]])
 	end,

@@ -1405,7 +1405,7 @@ newEffect{
 		eff.src = self
 	end,
 	deactivate = function(self, eff)
-		self:removeTemporaryValue("additional_melee_chance", eff.extra_blow_chance) -- backwards compatibility
+		--self:removeTemporaryValue("additional_melee_chance", eff.extra_blow_chance) -- backwards compatibility
 	end,
 }
 
@@ -1798,9 +1798,11 @@ newEffect{
 	parameters = { pct = 1 },
 	callbackPriorities={callbackOnHeal = -5},
 	callbackOnHeal = function(self, eff, value, src, raw_value)
-		if raw_value > 0 and eff.src then
+		if raw_value > 0 and eff.src and not eff.src.__healing_nexus_running then
 			game:delayedLogMessage(eff.src, self, "healing_nexus"..(eff.src.uid or ""), "#YELLOW_GREEN##Source# steals healing from #Target#!")
+			eff.src.__healing_nexus_running = true
 			eff.src:heal(raw_value*eff.pct, src) -- use raw healing value to avoid compounding healing_factor
+			eff.src.__healing_nexus_running = nil
 			return {value = 0}
 		end
 	end,

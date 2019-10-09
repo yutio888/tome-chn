@@ -39,7 +39,15 @@ newChat{ id="welcome",
 	answers = {
 		{"一个法师学徒在荒郊野外干什么？", jump="quest", cond=function(npc, player) return not player:hasQuest("mage-apprentice") end},
 		{"我发现了这件充满奥术能量的神器，看上去很强大，应该够了吧？",
-			jump="unique",
+			jump=function(npc, player)
+				if player:hasQuest("mage-apprentice"):isCompleted() then
+					-- An item was selected, continue.
+					return "unique"
+				else
+					-- No item was selected, stay on the current dialog.
+					return "welcome"
+				end
+			end,
 			cond=function(npc, player) return player:hasQuest("mage-apprentice") and player:hasQuest("mage-apprentice"):can_offer_unique(player) end,
 			action=function(npc, player, dialog) player:hasQuest("mage-apprentice"):collect_staff_unique(npc, player, dialog) end
 		},

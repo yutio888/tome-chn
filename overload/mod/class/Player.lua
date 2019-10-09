@@ -634,19 +634,6 @@ function _M:playerFOV()
 	end
 
 	if not self:attr("blind") then
-		-- Handle dark vision; same as infravision, but also sees past creeping dark
-		-- this is treated as a sense, but is filtered by custom LOS code
-		if self:knowTalent(self.T_DARK_VISION) then
-			local t = self:getTalentFromId(self.T_DARK_VISION)
-			local range = self:getTalentRange(t)
-			self:computeFOV(range, "block_sense", function(x, y)
-				local actor = game.level.map(x, y, game.level.map.ACTOR)
-				if actor and self:hasLOS(x, y) then
-					game.level.map.seens(x, y, 0.6)
-				end
-			end, true, true, true)
-		end
-
 		-- Handle infravision/heightened_senses which allow to see outside of lite radius but with LOS
 		-- Note: Overseer of Nations bonus already factored into attributes
 		if self:attr("infravision") or self:attr("heightened_senses") then
@@ -701,26 +688,10 @@ function _M:lineFOV(tx, ty, extra_block, block, sx, sy)
 	local act = game.level.map(x, y, Map.ACTOR)
 	local sees_target = game.level.map.seens(tx, ty)
 
-	local darkVisionRange
-	if self:knowTalent(self.T_DARK_VISION) then
-		local t = self:getTalentFromId(self.T_DARK_VISION)
-		darkVisionRange = self:getTalentRange(t)
-	end
-	local inCreepingDark = false
-
 	extra_block = type(extra_block) == "function" and extra_block
 		or type(extra_block) == "string" and function(_, x, y) return game.level.map:checkAllEntities(x, y, extra_block) end
 
 	block = block or function(_, x, y)
-		if darkVisionRange then
-			if game.level.map:checkAllEntities(x, y, "creepingDark") then
-				inCreepingDark = true
-			end
-			if inCreepingDark and core.fov.distance(sx, sy, x, y) > darkVisionRange then
-				return true
-			end
-		end
-
 		if sees_target then
 			return game.level.map:checkAllEntities(x, y, "block_sight") or
 				game.level.map:checkEntity(x, y, engine.Map.TERRAIN, "block_move") and not game.level.map:checkEntity(x, y, engine.Map.TERRAIN, "pass_projectile") or

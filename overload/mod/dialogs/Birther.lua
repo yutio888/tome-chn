@@ -51,6 +51,7 @@ _M.cosmetic_options_config = {
 	tatoos = "single",
 	horns = "single",
 	special = "multiple",
+	golem = "single",
 }
 
 function _M:setSubclassIcon(t)

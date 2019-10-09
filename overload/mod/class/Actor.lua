@@ -2407,11 +2407,13 @@ function _M:onTakeHit(value, src, death_note)
 			self.damage_shield_absorb = 0
 		end
 		game:delayedLogDamage(src, self, 0, ("#SLATE#(%d absorbed)#LAST#"):format(adjusted_value), false)
-		if reflection and reflect_damage and reflection > 0 and reflect_damage > 0 and src.y and src.x and not src.dead then
+		if reflection and reflect_damage and reflection > 0 and reflect_damage > 0 and src.y and src.x and not src.dead and not self.__damage_shield_reflect_running then
 			local a = game.level.map(src.x, src.y, Map.ACTOR)
 			if a and self:reactionToward(a) < 0 then
 				local reflected = reflect_damage * reflection
+				self.__damage_shield_reflect_running = true
 				a:takeHit(reflected, self)
+				self.__damage_shield_reflect_running = nil
 				game:delayedLogDamage(self, src, reflected, ("#SLATE#%d reflected#LAST#"):format(reflected), false)
 				game:delayedLogMessage(self, src, "reflection" ,"#CRIMSON##Source# reflects damage back to #Target#!#LAST#")
 			end
@@ -3799,7 +3801,7 @@ function _M:levelup()
 		if self.level == 30 or self.level == 42 then
 			self.unused_prodigies = self.unused_prodigies + 1
 			if self.player and not config.settings.cheat and not self.silent_levelup then
-				Dialog:simpleLongPopup("Prodigy!", "You have achieved #LIGHT_GREEN#level 30#WHITE# and gained a #LIGHT_GREEN#prodigy point#LAST#!\n\nProdigies are powerful talents with unique requirements that cannot be unlearned.", 400)
+				Dialog:simpleLongPopup("Prodigy!", ("You have achieved #LIGHT_GREEN#level %d#WHITE# and gained a #LIGHT_GREEN#prodigy point#LAST#!\n\nProdigies are powerful talents with unique requirements that cannot be unlearned."):format(self.level), 400)
 			end
 		end
 		if self.level == 50 then
@@ -4885,7 +4887,7 @@ function _M:getTalentTypeMastery(tt, only_base)
 	local mastery = oldGetTalentTypeMastery(self, tt)
 	if only_base then return mastery end
 	local def = self:getTalentTypeFrom(tt)
-	local bonus1 = self.talents_mastery_bonus and self.talents_mastery_bonus[def.category] or 0
+	local bonus1 = def and self.talents_mastery_bonus and self.talents_mastery_bonus[def.category] or 0
 	local bonus2 = self.talents_mastery_bonus and self.talents_mastery_bonus.all or 0
 	return mastery + bonus1 + bonus2
 end
@@ -7083,48 +7085,17 @@ function _M:hasLOS(x, y, what, range, source_x, source_y)
 	if range and core.fov.distance(source_x, source_y, x, y) <= range then range = nil end
 	local lx, ly, is_corner_blocked
 	local last_x, last_y = source_x, source_y
-	if what == "block_sight" then
-		local darkVisionRange
-		if self:knowTalent(self.T_DARK_VISION) then
-			local t = self:getTalentFromId(self.T_DARK_VISION)
-			darkVisionRange = self:getTalentRange(t)
+	local l = core.fov.line(source_x, source_y, x, y, what)
+	lx, ly, is_corner_blocked = l:step()
+	while lx and ly and not is_corner_blocked do
+		-- Check for the range
+		if range and core.fov.distance(source_x, source_y, lx, ly) > range then
+			break
 		end
+		last_x, last_y = lx, ly
+		if game.level.map:checkAllEntities(lx, ly, what) then break end
 
-		local l = core.fov.line(source_x, source_y, x, y, "block_sight")
-		local inCreepingDark = false
 		lx, ly, is_corner_blocked = l:step()
-		while lx and ly and not is_corner_blocked do
-			-- Check for the range
-			if range and core.fov.distance(source_x, source_y, lx, ly) > range then
-				break
-			end
-			last_x, last_y = lx, ly
-			if game.level.map:checkAllEntities(lx, ly, "block_sight") then
-				if darkVisionRange and game.level.map:checkAllEntities(lx, ly, "creepingDark") then
-					inCreepingDark = true
-				else
-					break
-				end
-			end
-			if inCreepingDark and darkVisionRange and core.fov.distance(source_x, source_y, lx, ly) > darkVisionRange then
-				break
-			end
-
-			lx, ly, is_corner_blocked = l:step()
-		end
-	else
-		local l = core.fov.line(source_x, source_y, x, y, what)
-		lx, ly, is_corner_blocked = l:step()
-		while lx and ly and not is_corner_blocked do
-			-- Check for the range
-			if range and core.fov.distance(source_x, source_y, lx, ly) > range then
-				break
-			end
-			last_x, last_y = lx, ly
-			if game.level.map:checkAllEntities(lx, ly, what) then break end
-
-			lx, ly, is_corner_blocked = l:step()
-		end
 	end
 
 	if last_x == x and last_y == y then return true, last_x, last_y end
@@ -7225,17 +7196,21 @@ function _M:on_set_temporary_effect(eff_id, e, p)
 		p.maximum = p.dur
 		p.minimum = p.min_dur or 0 --Default minimum duration is 0. Can specify something else by putting min_dur=foo in p when calling setEffect()
 		local save = self[p.apply_save or save_for_effects[e.type]](self)
-		local saved, savechance = self:checkHitOld(save, p.apply_power) -- get save and save chance
+		local saved, savechance = self:checkHit(save, p.apply_power, 0, 95) -- get save and save chance
+
+--[[
 		-- failed save tuning parameters: increase mean_fact to increase avg duration, std_dev for more randomness
 		local mean_fact, std_dev = 1.1, 50
 		local mean_pct = (100-savechance)*mean_fact -- mean % duration on a failed save
 		local percentage = util.bound(rng.normalFloat(mean_pct, std_dev)/100, 0, 2) -- fraction duration
-		
+]]
+		local percentage = 1 - ((save - p.apply_power)/20)
+
 		local desired = p.maximum * percentage
 		local fraction = desired % 1
 		desired = math.floor(desired) + (rng.percent(100*fraction) and 1 or 0)
 		local duration = math.min(p.maximum, desired)
-		print(("[on_set_temporary_effect] %s Save %d vs Power %d (%d%% save: %s) :: dur mult: %0.3f(%d%%) :: dur %s ==> %d"):format(self.name, save, p.apply_power, savechance, saved, percentage, mean_pct, p.dur, duration))
+		-- print(("[on_set_temporary_effect] %s Save %d vs Power %d (%d%% save: %s) :: dur mult: %0.3f(%d%%) :: dur %s ==> %d"):format(self.name, save, p.apply_power, savechance, saved, percentage, mean_pct, p.dur, duration))
 		p.dur = util.bound(duration, p.minimum or 0, p.maximum)
 		p.amount_decreased = p.maximum - p.dur
 		local save_type = nil
@@ -7357,7 +7332,11 @@ end
 --- Called when we are the target of a projection
 function _M:on_project_acquire(tx, ty, who, t, x, y, damtype, dam, particles, is_projectile, mods)
 	if is_projectile and self:attr("projectile_evasion") and rng.percent(self.projectile_evasion) then
-		local spread = self.projectile_evasion_spread or 1
+		if self:knowTalent(self.T_SKIRMISHER_COUNTER_SHOT) then
+			local tal = self:getTalentFromId(self.T_SKIRMISHER_COUNTER_SHOT)
+			tal.doCounter(self, tal, who)
+		end
+      		local spread = self.projectile_evasion_spread or 1
 		mods.x = x + rng.range(-spread, spread)
 		mods.y = y + rng.range(-spread, spread)
 
@@ -7934,7 +7913,7 @@ function _M:projectDoAct(typ, tg, damtype, dam, particles, px, py, tmp)
 			((type(typ.selffire) == "number" and rng.percent(typ.selffire)) 
 			or 
 			(type(typ.selffire) ~= "number" and typ.selffire))
-			and (act == game.player and typ.player_selffire)  -- Disable friendlyfire for player projectiles unless explicitly overriden
+			and (act == game.player and (typ.player_selffire or act.allow_player_selffire))  -- Disable friendlyfire for player projectiles unless explicitly overriden
 			)
 			then
 		elseif act and self.reactionToward and (self:reactionToward(act) >= 0) and not ((type(typ.friendlyfire) == "number" and rng.percent(typ.friendlyfire)) or (type(typ.friendlyfire) ~= "number" and typ.friendlyfire)) then

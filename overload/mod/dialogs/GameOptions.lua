@@ -460,7 +460,7 @@ function _M:generateListUi()
 	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#锐化视觉#WHITE##{normal}#", status=function(item)
 		return tostring((config.settings.tome.sharpen_display or 0))
 	end, fct=function(item)
-		game:registerDialog(GetQuantitySlider.new("Enter Sharpen Power", "From 0(disable) to 10", math.floor(config.settings.tome.sharpen_display), 0, 10, 1, function(qty)
+		game:registerDialog(GetQuantitySlider.new("Enter Sharpen Power", "From 0(disable) to 10", math.floor(config.settings.tome.sharpen_display or 0), 0, 10, 1, function(qty)
 			qty = util.bound(qty, 0, 10)
 			game:saveSettings("tome.sharpen_display", ("tome.sharpen_display = %f\n"):format(qty))
 			config.settings.tome.sharpen_display = qty

@@ -212,6 +212,7 @@ local hd = {"Quest:escort:reward", reward_types=reward_types}
 if require("engine.class"):triggerHook(hd) then reward_types = hd.reward_types end
 
 local reward = reward_types[npc.reward_type]
+if not reward then reward = reward_types.warrior end
 local quest = game.player:hasQuest(npc.quest_id)
 if quest.to_zigur and reward.antimagic then reward = reward.antimagic reward.is_antimagic = true end
 

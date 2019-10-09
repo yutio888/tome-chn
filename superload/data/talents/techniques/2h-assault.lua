@@ -4,8 +4,8 @@ registerTalentTranslation{
 	id = "T_STUNNING_BLOW_ASSAULT",
 	name = "震慑打击",
 	info = function(self, t)
-		return ([[用 你 的 双 持 武 器 攻 击 目 标 两 次 并 造 成 %d%% 伤 害。 每 次 攻 击 都 会试 图 震 慑 目 标 %d 回 合。 
-		受 物 理 强 度 影 响， 震 慑 概 率 有 加 成。]])
+		return ([[用你的双持武器攻击目标两次并造成 %d%% 伤害。每次攻击都会试图震慑目标 %d 回合。 
+		受物理强度影响，震慑概率有加成。]])
 		:format(100 * self:combatTalentWeaponDamage(t, 0.5, 0.7), t.getDuration(self, t))
 	end,
 }

@@ -2,7 +2,7 @@ local class = require "engine.class"
 
 dofile("data-chn123/objects/change.lua")
 
--- core.display.breakTextAllCharacter(true)
+core.display.breakTextAllCharacter(true)
 
 
 local function talentstrans()

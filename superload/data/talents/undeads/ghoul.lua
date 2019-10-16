@@ -44,7 +44,6 @@ registerTalentTranslation{
 		食尸鬼腐烂疫病每回合造成 %0.2f 枯萎伤害。 
 		目标被杀死时会变成你的可以完全控制的食尸鬼傀儡。 
 		食尸鬼傀儡可以使用侵蚀、定向跳跃、震慑、腐烂疫病。
-		他们部分技能等级受该技能等级影响。
 		受体质影响，枯萎伤害按比例加成。 ]]):
 		format(100 * damage, duration, damDesc(self, DamageType.BLIGHT, disease_damage), ghoul_duration)
 	end,

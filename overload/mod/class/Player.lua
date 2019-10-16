@@ -1445,13 +1445,16 @@ end
 -- This doesnt call the base interface onWear, it copies the code because we need some tricky stuff
 function _M:onWear(o, slot, bypass_set)
 	mod.class.Actor.onWear(self, o, slot, bypass_set)
-	self:cooldownWornObject(o)
-	if self.hotkey and o:canUseObject() and config.settings.tome.auto_hotkey_object and not o.no_auto_hotkey then
-		local position
-		local name = o:getName{no_count=true, force_id=true, no_add_name=true}
 
-		if not self:isHotkeyBound("inventory", name) then
-			self:addNewHotkey("inventory", name)
+	if not self:attr("on_wear_simple_reload") then
+		self:cooldownWornObject(o)
+		if self.hotkey and o:canUseObject() and config.settings.tome.auto_hotkey_object and not o.no_auto_hotkey then
+			local position
+			local name = o:getName{no_count=true, force_id=true, no_add_name=true}
+
+			if not self:isHotkeyBound("inventory", name) then
+				self:addNewHotkey("inventory", name)
+			end
 		end
 	end
 

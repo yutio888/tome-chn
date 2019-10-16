@@ -605,7 +605,9 @@ function _M:drawDialog(kind, actor_to_compare)
 		w = 0
 		s:drawStringBlended(self.font, "性别："..((player.descriptor and player.descriptor.sex) or (player.female and "女性" or "男性")), w, h, 0, 200, 255, true) h = h + self.font_h
 		s:drawStringBlended(self.font, "种族："..((player.descriptor and player.descriptor.subrace) or player.type:capitalize()), w, h, 0, 200, 255, true) h = h + self.font_h
-		s:drawStringBlended(self.font, "职业："..((player.descriptor and player.descriptor.subclass) or player.subtype:capitalize()), w, h, 0, 200, 255, true) h = h + self.font_h
+		local class_evo = ""
+		if player.descriptor and player.descriptor.class_evolution then class_evo = " ("..player.descriptor.class_evolution..")" end
+		s:drawStringBlended(self.font, (player.descriptor and "职业: " or "类型: ")..((player.descriptor and player.descriptor.subclass) or player.subtype:capitalize())..class_evo, w, h, 0, 200, 255, true)
 
 		if player:attr("forbid_arcane") then
 			local follow = (player.faction == "zigur" or player:attr("zigur_follower")) and "伊格追随者" or "反魔志愿者"

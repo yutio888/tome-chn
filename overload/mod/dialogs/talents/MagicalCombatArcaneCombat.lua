@@ -73,7 +73,6 @@ function _M:init(actor)
 			end
 		end,
 	}
-	engine.interface.PlayerHotkeys:bindAllHotkeys(self.key, function(i) self:defineHotkey(i) end)
 	self.key:addBinds{
 		EXIT = function() game:unregisterDialog(self) end,
 	}

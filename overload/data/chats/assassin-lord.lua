@@ -39,6 +39,11 @@ local function evil(npc, player)
 	game.log("As you depart the assassin lord says: 'And do not forget, I own you now.'")
 end
 
+local function do_attack(npc, player)
+	engine.Faction:setFactionReaction(player.faction, npc.faction, -100, true)
+	if npc.on_takehit then npc:on_takehit() end
+end
+
 newChat{ id="welcome",
 	text = [[#LIGHT_GREEN#*在你面前站着一个穿着黑衣服的凶恶男人。*#WHITE#
 啊，一个入侵者……我该怎么处置你呢？你为什么杀我的人？]],
@@ -52,7 +57,7 @@ newChat{ id="welcome",
 newChat{ id="hostile",
 	text = [[哦，恐怕你哪儿都不能去，给我杀了他！]],
 	answers = {
-		{"[攻击]", action=function(npc, player) engine.Faction:setFactionReaction(player.faction, npc.faction, -100, true) end},
+		{"[攻击]", action=do_attack},
 		{"等一下！也许我们有什么其他的解决办法。你看上去像一个通情达理的人。", jump="offer"},
 	}
 }
@@ -60,14 +65,14 @@ newChat{ id="hostile",
 newChat{ id="what",
 	text = [[哦，你以为在你攻击我之前我会告诉你我的计划吗？抓住这个入侵者！]],
 	answers = {
-		{"[攻击]", action=function(npc, player) engine.Faction:setFactionReaction(player.faction, npc.faction, -100, true) end},
+		{"[攻击]", action=do_attack},
 		{"等一下！也许我们有什么其他的解决办法。你看上去像一个通情达理的人。", jump="offer"},
 	}
 }
 newChat{ id="greed",
 	text = [[恐怕今天你不太走运，那个商人是我们的了……还有你也是！抓住这个入侵者！！]],
 	answers = {
-		{"[攻击]", action=function(npc, player) engine.Faction:setFactionReaction(player.faction, npc.faction, -100, true) end},
+		{"[攻击]", action=do_attack},
 		{"等一下！也许我们有什么其他的解决办法。你看上去像一个通情达理的人。", jump="offer"},
 	}
 }
@@ -79,7 +84,7 @@ newChat{ id="offer",
 	answers = {
 		{"好吧，至少比死在这里好。", action=evil},
 		{"有钱赚？我加入！", action=evil},
-		{"放走那个商人，让我们离开这里，要不然你就去死吧！", action=function(npc, player) engine.Faction:setFactionReaction(player.faction, npc.faction, -100, true) end},
+		{"放走那个商人，让我们离开这里，要不然你就去死吧！", action=do_attack},
 	}
 }
 

@@ -173,10 +173,6 @@ registerEgoTranslation{
 registerEgoTranslation{
 	file = "shield",
 	name = "windwalling ",
-	["on_block.desc"] = function(self, who, special)
-			local dam = special.shield_windwall(who)
-			return ("制造10格范围的爆炸，造成 #YELLOW#%d#LAST# 物理伤害， 并摧毁范围内 所有抛射物"):format(dam)
-		end,
 }
 
 registerEgoTranslation{

@@ -189,6 +189,7 @@ function _M:useTalent(id, who, force_level, ignore_cd, force_target, silent, no_
 			game.logPlayer(who, "%s is still on cooldown for %d turns.", ab.name:capitalize(), self.talents_cd[ab.id])
 			return false
 		end
+		if ignore_cd == "ignore_check_only" then ignore_cd = nil end
 		co = coroutine.create(function() -- coroutine to run sustainable talent code
 			if cancel then
 				success = false
@@ -509,6 +510,19 @@ function _M:numberKnownTalent(type, exclude_id, limit_type)
 	return nb
 end
 
+--- Returns how many levels talents of this type the actor knows
+-- @param type the talent type to count
+-- @param exclude_id if not nil the count will ignore this talent id
+-- @param limit_type if not nil the count will ignore talents with talent category level equal or higher that this
+function _M:numberKnownTalentLevels(type, exclude_id, limit_type)
+	local nb = 0
+	for id, lvl in pairs(self.talents) do
+		local t = _M.talents_def[id]
+		if t.type[1] == type and (not exclude_id or exclude_id ~= id) and (not limit_type or not t.type[2] or t.type[2] < limit_type) then nb = nb + lvl end
+	end
+	return nb
+end
+
 --- Actor learns a talent
 -- @param t_id the id of the talent to learn
 -- @param force if true do not check canLearnTalent
@@ -738,6 +752,11 @@ function _M:canLearnTalent(t, offset, ignore_special)
 				end
 			end
 		end
+		if req.birth_descriptors then
+			for _, d in ipairs(req.birth_descriptors) do
+				if not self.descriptor or self.descriptor[d[1]] ~= d[2] then return nil, ("is not %s"):format(d[2]) end
+			end
+		end
 	end
 
 	if not self:knowTalentType(t.type[1]) and not t.type_no_req then return nil, "unknown talent type" end
@@ -758,7 +777,7 @@ end
 function _M:getTalentReqDesc(t_id, levmod)
 	local t = _M.talents_def[t_id]
 	local req = t.require
-	if not req then return "" end
+	if not req then return tstring{}, nil end
 	if type(req) == "function" then req = req(self, t) end
 
 	local tlev = self:getTalentLevelRaw(t_id) + (levmod or 0)
@@ -808,8 +827,14 @@ function _M:getTalentReqDesc(t_id, levmod)
 			end
 		end
 	end
+	if req.birth_descriptors then
+		for _, d in ipairs(req.birth_descriptors) do
+			local c = self.descriptor and self.descriptor[d[1]] == d[2] and {"color", 0x00,0xff,0x00} or {"color", 0xff,0x00,0x00}
+			str:add(c, ("- Is %s"):format(d[2]), true)
+		end
+	end
 
-	return str
+	return str, req
 end
 
 --- Return the full description of a talent

@@ -19,7 +19,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		return ([[凝聚周围的水冻结目标 %d 回合并对其造成 %0.2f 伤害。 
-		 如果目标为友好生物，冷却时间减半。
+		 如果目标为友好生物，冷却时间减少 33%% 。
 		 受法术强度影响，伤害有额外加成。]]):format(t.getDuration(self, t), damDesc(self, DamageType.COLD, damage))
 	end,
 }
@@ -45,10 +45,15 @@ registerTalentTranslation{
 	info = function(self, t)
 		local power = t.getPower(self, t)
 		local dur = t.getDuration(self, t)
-		return ([[你吸收周围的寒冰围绕你，将自己转变为纯粹的冰元素——西码罗斯，持续 %d 回合。 
+		
+		local t_is = self:getTalentFromId(self.T_ICE_STORM)
+		local icestorm = self:getTalentFullDescription(t_is, self:getTalentLevelRaw(t))
+		return ([[你吸收周围的寒冰围绕你，将自己转变为纯粹的冰元素——西弗格罗斯，持续 %d 回合。 
 		 转化成元素后，你不需要呼吸并获得等级 %d 的冰雪风暴，所有冰冷伤害可对你产生治疗，治疗量基于伤害值的 %d%% 。 
-		 受法术强度影响，效果有额外加成。]]):
-		format(dur, self:getTalentLevelRaw(t), power * 100, power * 100 / 2, 50 + power * 100)
+		受法术强度影响，效果有额外加成。
+		#AQUAMARINE#冰雪风暴:#LAST#
+		%s]]):
+		format(dur, self:getTalentLevelRaw(t), power * 100, power * 100 / 2, 50 + power * 100, tostring(icestorm or ""))
 	end,
 }
 

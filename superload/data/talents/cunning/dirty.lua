@@ -7,7 +7,7 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local duration = t.getDuration(self, t)
 		local power = t.getPower(self,t)
-		return ([[你攻击目标的敏感部位，造成 %d%% 武器伤害。如果攻击命中，目标身受重创，物理豁免减少 %d ，震慑、致盲、混乱、定身免疫降低为原来的 50%% ，持续 %d 回合。
+		return ([[你攻击目标的敏感部位，造成 %d%% 徒手伤害。如果攻击命中，目标身受重创，物理豁免减少 %d ，震慑、致盲、混乱、定身免疫降低为原来的 50%% ，持续 %d 回合。
 该效果无视豁免。]]):
 		format(100 * damage, power, duration)
 	end,

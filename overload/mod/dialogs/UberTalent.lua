@@ -76,16 +76,27 @@ function _M:generateList()
 	local list = {}
 	for tid, t in pairs(self.actor.talents_def) do
 		if t.uber and not t.not_listed then
-			cols[t.type[1]] = cols[t.type[1]] or {}
-			local c = cols[t.type[1]]
-			c[#c+1] = t
+			if 
+			    (not t.is_class_evolution or (self.actor.descriptor and self.actor.descriptor.subclass == t.is_class_evolution)) and
+			    (not t.requires_unlock or profile.mod.allow_build[t.requires_unlock])
+			    then
+				cols[t.type[1]] = cols[t.type[1]] or {}
+				local c = cols[t.type[1]]
+				c[#c+1] = t
+			end
 		end
 	end
 	max = math.max(#cols["uber/strength"], #cols["uber/dexterity"], #cols["uber/constitution"], #cols["uber/magic"], #cols["uber/willpower"], #cols["uber/cunning"])
 
 	for _, s in ipairs{"uber/strength", "uber/dexterity", "uber/constitution", "uber/magic", "uber/willpower", "uber/cunning"} do
 		local n = {}
-		table.sort(cols[s], function(a,b) return a.name < b.name end)
+		table.sort(cols[s], function(a,b)
+			if a.is_class_evolution ~= b.is_class_evolution then
+				return b.is_class_evolution and true or false
+			else
+				return a.name < b.name
+			end
+		end)
 
 		for i = 1, max do
 			if not cols[s][i] then

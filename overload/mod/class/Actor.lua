@@ -1702,6 +1702,7 @@ function _M:reactionToward(target, no_reflection)
 	while rtarget.summoner do rtarget = rtarget.summoner end
 
 	-- Neverending hatred
+	if target.attr and target:attr("hated_by_summoner") and target.summoner == rsrc then return -100 end
 	if rtarget.attr and rtarget:attr("hated_by_everybody") and rtarget ~= rsrc then return -100 end
 	if rsrc.attr and rsrc:attr("hates_everybody") and rtarget ~= rsrc then return -100 end
 	if rsrc.attr and rtarget.attr and rsrc:attr("hates_arcane") and rtarget:attr("has_arcane_knowledge") and not rtarget:attr("forbid_arcane") then return -100 end
@@ -1928,7 +1929,7 @@ function _M:tooltip(x, y, seen_by)
 		ts:add({"color", 0, 255, 128}, ("Iceblock: %d"):format(eff.hp), {"color", "WHITE"}, true)
 	end
 	if game.player:knowTalent(self.T_VIM_POOL) then
-		ts:add({"color", 0, 255, 128}, ("%sVim Value: %d#LAST#"):format(self.resources_def.vim.color, (game.player:getWil() * 0.3 + 1) * self.rank), {"color", "WHITE"}, true)
+		ts:add({"color", 0, 255, 128}, ("%sVim Value: %d#LAST#"):format(self.resources_def.vim.color, (game.player:getWil() * 0.5 + 1) * self.rank), {"color", "WHITE"}, true)
 	end
 
 	--ts:add(("Stats: %d / %d / %d / %d / %d / %d"):format(self:getStr(), self:getDex(), self:getCon(), self:getMag(), self:getWil(), self:getCun()), true)
@@ -2684,12 +2685,6 @@ function _M:onTakeHit(value, src, death_note)
 		t.do_vitality_recovery(self, t)
 	end
 
-	-- Daunting Presence?
-	if value > (self.max_life / 20) and self:isTalentActive(self.T_DAUNTING_PRESENCE) then
-		local t = self:getTalentFromId(self.T_DAUNTING_PRESENCE)
-		t.do_daunting_presence(self, t)
-	end
-
 	-- Shield of Light
 	tal = self:isTalentActive(self.T_SHIELD_OF_LIGHT)
 	if tal then
@@ -3266,7 +3261,7 @@ function _M:die(src, death_note)
 	-- Increase vim
 	if src and src.knowTalent and src:knowTalent(src.T_VIM_POOL) and src:reactionToward(self) <= 0 then
 		game:onTickEnd(function() -- Do it on tick end to make sure Vim is spent by the talent code before being gained, otherwise it feels weird when you expect to spend life
-			src:incVim((src:getWil() * 0.3 + 1) * self.rank)
+			src:incVim((src:getWil() * 0.5 + 1) * self.rank)
 		end)
 	end
 	if src and src.attr and src:attr("vim_on_death") and not self:attr("undead") then src:incVim(src:attr("vim_on_death")) end
@@ -5068,9 +5063,11 @@ end
 -- @param t_id the id of the talent to learn
 -- @return true if the talent was unlearnt, nil and an error message otherwise
 function _M:unlearnTalent(t_id, nb, no_unsustain, extra)
+	local oldnb = self.talents[t_id] or 0
 	if not engine.interface.ActorTalents.unlearnTalent(self, t_id, nb) then return false end
 
-	nb = nb or 1
+	-- Recompute based on how many actaully got removed
+	nb = math.max(0, oldnb - (self.talents[t_id] or 0))
 
 	local t = _M.talents_def[t_id]
 
@@ -6327,7 +6324,7 @@ end
 -- Remove an effect or sustain.
 function _M:removeModifier(id)
 	if 'T_' == id:sub(1, 2) then
-		self:forceUseTalent(id, {ignore_energy=true})
+		self:forceUseTalent(id, {ignore_energy=true, ignore_cd="ignore_check_only", no_talent_fail=true})
 	elseif 'EFF_' == id:sub(1, 4) then
 		self:removeEffect(id)
 	end
@@ -6520,21 +6517,19 @@ function _M:getTalentFullDescription(t, addlevel, config, fake_mastery)
 				end
 			end
 		end
-		local is_a = {}
-
-		if t.is_spell then is_a[#is_a+1] = "法术" end
-		if t.is_mind then is_a[#is_a+1] = "精神力量" end
-		if t.is_nature then is_a[#is_a+1] = "自然之赐" end
-		if t.is_antimagic then is_a[#is_a+1] = "反魔法力量" end
-		if t.is_summon then is_a[#is_a+1] = "召唤力量" end
-		if t.is_steam then is_a[#is_a+1] = "蒸汽力量" end
-		if #is_a > 0 then
-			d:add({"color",0x6f,0xff,0x83}, "这是：", {"color",0xFF,0xFF,0xFF}, table.concatNice(is_a, ", ", " 和 "), true)
-		end
 	else
 		if not config.ignore_ressources then
 			if self:getTalentCooldown(t) then d:add({"color",0x6f,0xff,0x83}, ("%s冷却时间: "):format(t.fixed_cooldown and "固定 " or ""), {"color",0xFF,0xFF,0xFF}, ""..self:getTalentCooldown(t), true) end
 		end
+	end
+	
+	local is_a = {}
+	for is, desc in pairs(engine.interface.ActorTalents.is_a_type) do
+		ddesc = desc:gsub("a spell", "一种法术"):gsub("a mind power", "一种精神力量"):gsub("a nature gift", "一种自然之赐"):gsub("an antimagic ability", "一种反魔法力量"):gsub(" a summon power", "一种召唤能力"):gsub("a steamtech power", "一种蒸汽力量")
+		if t[is] then is_a[#is_a+1] = ddesc end
+	end
+	if #is_a > 0 then
+		d:add({"color",0x6f,0xff,0x83}, "这是: ", {"color",0xFF,0xFF,0xFF}, table.concatNice(is_a, ", ", " 和 "), true)
 	end
 
 	if t.mode == 'sustained' then

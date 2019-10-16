@@ -3772,3 +3772,159 @@ newEffect{
 		self:removeTemporaryValue("combat_mindpower", eff.mindid)
 	end,
 }
+
+newEffect{
+	name = "FEED", image = "talents/feed.png",
+	desc = "Feeding",
+	long_desc = function(self, eff) return ("%s is feeding from %s."):format(self.name:capitalize(), eff.target.name) end,
+	type = "other",
+	subtype = { psychic_drain=true },
+	status = "beneficial",
+	parameters = { },
+	activate = function(self, eff, ed)
+		eff.src = self
+
+		-- hate
+		if eff.hateGain and eff.hateGain > 0 then
+			eff.hateGainId = self:addTemporaryValue("hate_regen", eff.hateGain)
+		end
+
+		-- health
+		if eff.constitutionGain and eff.constitutionGain > 0 then
+			eff.constitutionGainId = self:addTemporaryValue("inc_stats", { [Stats.STAT_CON] = eff.constitutionGain })
+		end
+		if eff.lifeRegenGain and eff.lifeRegenGain > 0 then
+			eff.lifeRegenGainId = self:addTemporaryValue("life_regen", eff.lifeRegenGain / 2)
+		end
+
+		-- power
+		if eff.damageGain and eff.damageGain > 0 then
+			eff.damageGainId = self:addTemporaryValue("inc_damage", {all=eff.damageGain})
+		end
+
+		-- strengths
+		if eff.resistGain and eff.resistGain > 0 then
+			local gainList = {}
+			for id, resist in pairs(eff.target.resists) do
+				if resist > 0 and id ~= "all" then
+					gainList[id] = eff.resistGain * 0.01 * resist
+				end
+			end
+
+			eff.resistGainId = self:addTemporaryValue("resists", gainList)
+		end
+
+		eff.target:setEffect(eff.target.EFF_FED_UPON, eff.dur, { src = eff.src, target = eff.target, constitutionLoss = -eff.constitutionGain, lifeRegenLoss = -eff.lifeRegenGain, damageLoss = -eff.damageGain, resistLoss = -eff.resistGain })
+
+		ed.updateFeed(self, eff)
+	end,
+	deactivate = function(self, eff)
+		-- hate
+		if eff.hateGainId then self:removeTemporaryValue("hate_regen", eff.hateGainId) end
+
+		-- health
+		if eff.constitutionGainId then self:removeTemporaryValue("inc_stats", eff.constitutionGainId) end
+		if eff.lifeRegenGainId then self:removeTemporaryValue("life_regen", eff.lifeRegenGainId) end
+
+		-- power
+		if eff.damageGainId then self:removeTemporaryValue("inc_damage", eff.damageGainId) end
+
+		-- strengths
+		if eff.resistGainId then self:removeTemporaryValue("resists", eff.resistGainId) end
+
+		if eff.particles then
+			-- remove old particle emitter
+			game.level.map:removeParticleEmitter(eff.particles)
+			eff.particles = nil
+		end
+
+		eff.target:removeEffect(eff.target.EFF_FED_UPON, false, true)
+	end,
+	updateFeed = function(self, eff)
+		local source = eff.src
+		local target = eff.target
+
+		if source.dead or target.dead or not game.level:hasEntity(source) or not game.level:hasEntity(target) or not source:hasLOS(target.x, target.y) or core.fov.distance(self.x, self.y, target.x, target.y) > (eff.range or 10) then
+			source:removeEffect(source.EFF_FEED)
+			if eff.particles then
+				game.level.map:removeParticleEmitter(eff.particles)
+				eff.particles = nil
+			end
+			return
+		end
+
+		-- update particles position
+		if not eff.particles or eff.particles.x ~= source.x or eff.particles.y ~= source.y or eff.particles.tx ~= target.x or eff.particles.ty ~= target.y then
+			if eff.particles then
+				game.level.map:removeParticleEmitter(eff.particles)
+			end
+			-- add updated particle emitter
+			local dx, dy = target.x - source.x, target.y - source.y
+			eff.particles = Particles.new("feed_hate", math.max(math.abs(dx), math.abs(dy)), { tx=dx, ty=dy })
+			eff.particles.x = source.x
+			eff.particles.y = source.y
+			eff.particles.tx = target.x
+			eff.particles.ty = target.y
+			game.level.map:addParticleEmitter(eff.particles)
+		end
+	end
+}
+
+newEffect{
+	name = "FED_UPON", image = "effects/fed_upon.png",
+	desc = "Fed Upon",
+	long_desc = function(self, eff) return ("%s is fed upon by %s."):format(self.name:capitalize(), eff.src.name) end,
+	type = "other",
+	subtype = { psychic_drain=true },
+	status = "detrimental",
+	remove_on_clone = true,
+	no_remove = true,
+	parameters = { },
+	activate = function(self, eff)
+		-- health
+		if eff.constitutionLoss and eff.constitutionLoss < 0 then
+			eff.constitutionLossId = self:addTemporaryValue("inc_stats", { [Stats.STAT_CON] = eff.constitutionLoss })
+		end
+		if eff.lifeRegenLoss and eff.lifeRegenLoss < 0 then
+			eff.lifeRegenLossId = self:addTemporaryValue("life_regen", eff.lifeRegenLoss)
+		end
+
+		-- power
+		if eff.damageLoss and eff.damageLoss < 0 then
+			eff.damageLossId = self:addTemporaryValue("inc_damage", {all=eff.damageLoss})
+		end
+
+		-- strengths
+		if eff.resistLoss and eff.resistLoss < 0 then
+			local lossList = {}
+			for id, resist in pairs(self.resists) do
+				if resist > 0 and id ~= "all" then
+					lossList[id] = eff.resistLoss * 0.01 * resist
+				end
+			end
+
+			eff.resistLossId = self:addTemporaryValue("resists", lossList)
+		end
+	end,
+	deactivate = function(self, eff)
+		-- health
+		if eff.constitutionLossId then self:removeTemporaryValue("inc_stats", eff.constitutionLossId) end
+		if eff.lifeRegenLossId then self:removeTemporaryValue("life_regen", eff.lifeRegenLossId) end
+
+		-- power
+		if eff.damageLossId then self:removeTemporaryValue("inc_damage", eff.damageLossId) end
+
+		-- strengths
+		if eff.resistLossId then self:removeTemporaryValue("resists", eff.resistLossId) end
+
+		if eff.target == self and eff.src:hasEffect(eff.src.EFF_FEED) then
+			eff.src:removeEffect(eff.src.EFF_FEED)
+		end
+	end,
+	on_timeout = function(self, eff)
+		-- no_remove prevents targets from dispelling feeding, make sure this gets removed if something goes wrong
+		if eff.dur <= 0 or eff.src.dead then
+			self:removeEffect(eff.src.EFF_FED_UPON, false, true)
+		end
+	end,
+}

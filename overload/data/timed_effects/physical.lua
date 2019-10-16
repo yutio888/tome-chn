@@ -2298,7 +2298,7 @@ newEffect{ -- Note: This effect is cancelled by EFF_DISARMED
 newEffect{
 	name = "BLOCKING", image = "talents/block.png",
 	desc = "Blocking",
-	long_desc = function(self, eff) return ("对所有攻击抵挡 %d 伤害。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("减少受到的所有伤害 %d 点。"):format(eff.power) end,
 	type = "physical",
 	subtype = { tactic=true },
 	status = "beneficial",

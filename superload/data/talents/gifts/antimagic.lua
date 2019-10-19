@@ -20,7 +20,7 @@ registerTalentTranslation{
 
 registerTalentTranslation{
 	id = "T_AURA_OF_SILENCE",
-	name = "沉默光环",
+	name = "反魔领域",
 	info = function(self, t)
 		local rad = self:getTalentRadius(t)
 		return ([[发出一次音波冲击，沉默周围目标 %d 回合，有效范围 %d 码。 

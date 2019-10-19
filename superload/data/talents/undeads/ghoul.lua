@@ -33,7 +33,7 @@ registerTalentTranslation{
 
 registerTalentTranslation{
 	id = "T_GNAW",
-	name = "侵蚀",
+	name = "食尸鬼侵蚀",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local duration = t.getDuration(self, t)

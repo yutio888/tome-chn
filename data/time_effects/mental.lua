@@ -164,6 +164,14 @@ timeEffectCHN:newEffect{
 }
 
 timeEffectCHN:newEffect{
+	id = "CURSED_MIASMA",
+	enName = "Cursed Miasma",
+	chName = "诅咒瘴气",
+	type = "精神",
+	subtype = "恐惧",
+}
+
+timeEffectCHN:newEffect{
 	id = "HARASSED",
 	enName = "Harassed",
 	chName = "疲倦",

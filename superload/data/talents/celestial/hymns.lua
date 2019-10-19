@@ -103,9 +103,9 @@ registerTalentTranslation{
 	id = "T_HYMN_NOCTURNALIST",
 	name = "暗夜流光",
 	info = function (self,t)
-		return ([[咏唱圣诗歌颂月亮的热情达到了顶峰。每回合回复 %0.2f 负能量。
+		return ([[咏唱圣诗歌颂月亮的热情达到了顶峰。
 		你的圣诗自动产生阴影射线攻击周围 5 格内至多 %d 个敌人，造成 1 到  %0.2f 伤害，同时有 20%% 几率触发  致盲效果。
 		这项效果每产生一发射线并击中至少一个目标将抽取 %0.1f 负能量，能量过低时无法产生射线。
-		效果受法术强度加成。]]):format(t.getBonusRegen(self, t), t.getTargetCount(self, t), damDesc(self, DamageType.DARKNESS, t.getDamage(self, t)), t.getNegativeDrain(self, t))
+		效果受法术强度加成。]]):format(t.getTargetCount(self, t), damDesc(self, DamageType.DARKNESS, t.getDamage(self, t)), t.getNegativeDrain(self, t))
 	end,
 }

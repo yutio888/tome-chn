@@ -108,8 +108,8 @@ registerTalentTranslation{
 	name = "辉耀绽放",
 	info = function (self,t)
 		return ([[咏唱赞歌歌颂太阳的热情达到了顶峰。
-		  你的赞歌现在让你的火焰与光明伤害增加 %d%% ,同时令你每回合回复 %0.2f 正能量。
-		  效果受法术强度加成。]]):format(t.getLightDamageIncrease(self, t), t.getBonusRegen(self, t))
+		  你的赞歌现在让你的火焰与光系伤害增加 %d%% 。当你被武器攻击击中的时候，你恢复 %0.1f 点正能量。该效果最多每回合触发 %d 次。
+		  效果受法术强度加成。]]):format(t.getLightDamageIncrease(self, t), t.getPos(self, t), t.getTurnLimit(self, t))
 	end,
 }
 return _M

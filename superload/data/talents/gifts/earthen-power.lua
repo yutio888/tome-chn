@@ -43,6 +43,7 @@ registerTalentTranslation{
 		return ([[制造一层持续 7 回合的岩石护盾，吸收至多 %d 点伤害。
 		你的失衡值将会上升两倍伤害吸收量。 
 		护盾破碎时，所有超过最小值的失衡值将被转化为法力，同时释放奥术能量风暴 , 造成等同于转化失衡值的奥术伤害（至多 %d 点），伤害半径 %d 。
+		你的格挡技能的冷却时间也会被重置。
 		同时，你休息时获得每回合 %0.2f 回魔速度。
 		护盾值受法术强度加成。]]):format(power, t.maxDamage(self, t), radius, t.manaRegen(self, t))
 	end,

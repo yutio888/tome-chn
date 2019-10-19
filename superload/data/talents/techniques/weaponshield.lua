@@ -19,7 +19,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local inc = t.getDurInc(self, t)
 		return ([[通过以下方法提高你的反击能力：
-		当出现不完全格挡时也可以进行反击。
+		当你不完全格挡时，也可以进行反击。
 		增加攻击者反击DEBUFF的持续时间 %d 。
 		你对可反击目标的反击次数增加 %d 次。
 		增加 %d%% 反击暴击率。

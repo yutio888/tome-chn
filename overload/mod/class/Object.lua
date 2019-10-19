@@ -52,7 +52,7 @@ _M.requirement_flags_names = {
 
 function _M:getRequirementDesc(who)
 	local base_getRequirementDesc = engine.Object.getRequirementDesc
-	
+
 	local oldreq
 	self.require, oldreq = who:updateObjectRequirements(self)
 	local ret = base_getRequirementDesc(self, who)
@@ -171,7 +171,7 @@ function _M:canUseObject(who)
 	if not engine.interface.ObjectActivable.canUseObject(self, who) then
 		return false, "This object has no usable power."
 	end
-	
+
 	if who then
 		if who.no_inventory_access then
 			return false, "你现在不能使用物品!"
@@ -210,10 +210,10 @@ function _M:useObject(who, ...)
 
 	if self.use_power then
 		if (self.talent_cooldown and not who:isTalentCoolingDown(self.talent_cooldown)) or (not self.talent_cooldown and self.power >= usepower(self.use_power.power)) then
-		
+
 			local ret = self.use_power.use(self, who, ...) or {}
 			local no_power = not ret.used or ret.no_power
-			if not no_power then 
+			if not no_power then
 				if self.talent_cooldown then
 					who.talents_cd[self.talent_cooldown] = usepower(self.use_power.power)
 					local t = who:getTalentFromId(self.talent_cooldown)
@@ -235,14 +235,14 @@ function _M:useObject(who, ...)
 		return self.use_simple.use(self, who, ...) or {}
 	elseif self.use_talent then
 		if (self.talent_cooldown and not who:isTalentCoolingDown(self.talent_cooldown)) or (not self.talent_cooldown and (not self.use_talent.power or self.power >= usepower(self.use_talent.power))) then
-		
+
 			local id = self.use_talent.id
 			local ab = self:getTalentFromId(id)
 			local old_level = who.talents[id]; who.talents[id] = self.use_talent.level
 			local ret = ab.action(who, ab)
 			who.talents[id] = old_level
 
-			if ret then 
+			if ret then
 				if self.talent_cooldown then
 					who.talents_cd[self.talent_cooldown] = usepower(self.use_talent.power)
 					local t = who:getTalentFromId(self.talent_cooldown)
@@ -288,9 +288,9 @@ function _M:use(who, typ, inven, item)
 	inven = who:getInven(inven)
 	local types = {}
 	local useable, msg = self:canUseObject(who)
-	
+
 	if useable then
-		types[#types+1] = "use" 
+		types[#types+1] = "use"
 	else
 		game.logPlayer(who, msg)
 		return
@@ -425,7 +425,7 @@ function _M:descAttribute(attr)
 		local stat, i = next(self.wielder.resists)
 		return (i and i > 0 and "+"..i or tostring(i)).."%"
 	elseif attr == "REGEN" then
-		local i = self.wielder.mana_regen or self.wielder.stamina_regen or self.wielder.life_regen or self.wielder.hate_regen or self.wielder.positive_regen_ref_mod or self.wielder.negative_regen_ref_mod
+		local i = self.wielder.mana_regen or self.wielder.stamina_regen or self.wielder.life_regen or self.wielder.hate_regen or self.wielder.positive_regen or self.wielder.negative_regen
 		return ("%s%0.2f/回合"):format(i > 0 and "+" or "-", math.abs(i))
 	elseif attr == "COMBAT" then
 		local c = self.combat
@@ -596,7 +596,7 @@ function _M:getShortName(t)
 
 	t = t or {}
 	t.no_add_name = true
-	
+
 	local qty = self:getNumber()
 	local identified = t.force_id or self:isIdentified()
 	local name = itemShortCHN[self.short_name] or self.short_name or "object"
@@ -1082,7 +1082,7 @@ function _M:descCombat(use_actor, combat, compare_with, field, add_table, is_fak
 	compare_fields(combat, compare_with, field, "phasing", "%+d%%", "Damage Shield penetration (this weapon only): ", 1, false, false, add_table)
 
 	compare_fields(combat, compare_with, field, "lifesteal", "%+d%%", "Lifesteal (this weapon only): ", 1, false, false, add_table)
-	
+
 	local attack_recurse_procs_reduce_compare = function(orig, compare_with)
 		orig = 100 - 100 / orig
 		if compare_with then return ("%+d%%"):format(-(orig - (100 - 100 / compare_with)))
@@ -1751,8 +1751,8 @@ function _M:getTextualDesc(compare_with, use_actor)
 		compare_fields(w, compare_with, field, "psi_regen", "%+.2f", "Psi each turn: ")
 		compare_fields(w, compare_with, field, "equilibrium_regen", "%+.2f", "Equilibrium each turn: ", nil, true, true)
 		compare_fields(w, compare_with, field, "vim_regen", "%+.2f", "Vim each turn: ")
-		compare_fields(w, compare_with, field, "positive_regen_ref_mod", "%+.2f", "P.Energy each turn: ")
-		compare_fields(w, compare_with, field, "negative_regen_ref_mod", "%+.2f", "N.Energy each turn: ")
+		compare_fields(w, compare_with, field, "positive_regen", "%+.2f", "P.Energy each turn: ")
+		compare_fields(w, compare_with, field, "negative_regen", "%+.2f", "N.Energy each turn: ")
 
 		compare_fields(w, compare_with, field, "stamina_regen_when_hit", "%+.2f", "Stamina when hit: ")
 		compare_fields(w, compare_with, field, "mana_regen_when_hit", "%+.2f", "Mana when hit: ")

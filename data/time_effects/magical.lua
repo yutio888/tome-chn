@@ -153,7 +153,7 @@ timeEffectCHN:newEffect{
 timeEffectCHN:newEffect{
 	id = "LIFE_TAP",
 	enName = "Life Tap",
-	chName = "生命发掘",
+	chName = "生命源泉",
 	type = "魔法",
 	subtype = "枯萎",
 }
@@ -371,7 +371,7 @@ timeEffectCHN:newEffect{
 	enName = "Divine Glyphs",
 	chName = "神圣印记",
 	desc = function(self, eff)
-		return ("圣印最近被触发过，提供 %d%% 光系和暗影伤害吸收与抗性。"):format(math.min(eff.maxStacks, eff.glyphstacks or 1)*5)
+		return ("圣印最近被触发过，提供 %d%% 光系和暗影伤害吸收与抗性。"):format(eff.power)
 	end,
 	type = "魔法",
 	subtype = "光系/暗影",

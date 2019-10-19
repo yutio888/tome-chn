@@ -5,10 +5,9 @@ registerTalentTranslation{
 	name = "灼热之矛",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
-		local damageonspot = t.getDamageOnSpot(self, t)
-		return ([[你祈祷太阳之力形成 1 个灼热的长矛造成 %d 点伤害并在地上留下一个光斑，每回合对其中的目标造成 %d 光系伤害，持续 4 回合。 
-		 受法术强度影响，伤害有额外加成。]]):
-		format(damDesc(self, DamageType.LIGHT, damage), damDesc(self, DamageType.LIGHT, damageonspot))
+		return ([[你祈祷太阳之力形成一束灼热的长矛，对目标造成 %d 点伤害，并在地上半径为 1 的范围内留下灼热光斑，每回合对其中的敌人造成 %d 光系伤害，持续 4 回合。 
+		受法术强度影响，伤害有额外加成。]]):
+		format(damDesc(self, DamageType.LIGHT, damage), damDesc(self, DamageType.LIGHT, damage/2))
 	end,
 }
 
@@ -46,8 +45,7 @@ registerTalentTranslation{
 	id = "T_SUNBURST",
 	name = "日炎爆发",
 	info = function(self, t)
-		return ([[射出一团猛烈的日光，你的光系伤害加成将会增加你暗影伤害加成的 %d%% ，持续 %d 回合，并对半径 %d 内最多 %d 个敌人造成 %0.2f 点光系伤害。]]):
-			format(t.getPower(self, t)*100, t.getDuration(self, t), self:getTalentRadius(t), t.getTargetCount(self, t), damDesc(self, DamageType.LIGHT, t.getDamage(self, t)))
+		return ([[对半径 %d 范围内最多 %d 个敌人射出一团太阳光线，对所有击中的目标造成 %d 伤害，并使你的光系伤害加成增加相当于你暗影伤害加成 %d%% 的值，持续 %d 回合。]]):format( self:getTalentRadius(t), t.getTargetCount(self, t), damDesc(self, DamageType.LIGHT, t.getDamage(self, t)), t.getPower(self, t)*100, t.getDuration(self, t))
 	end,
 }
 

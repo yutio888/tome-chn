@@ -5,10 +5,8 @@ registerTalentTranslation{
 	name = "黄昏",
 	info = function(self, t)
 		return ([[你处于黑暗和光明之间，能够将 15 点正能量转化为 %d 负能量。 
-		 此外，这也会影响正负能量的固有值，数值为它们最大值的 %d%% 。 
-		 每回合正负能量值会缓慢的上升 / 下降，而不是归 0 。 
-		 受灵巧影响，效果有额外加成。]]):
-		format(t.getNegativeGain(self, t), t.getRestValue(self, t))
+		受灵巧影响，效果有额外加成。]]):
+		format(t.getNegativeGain(self, t))
 	end,
 }
 

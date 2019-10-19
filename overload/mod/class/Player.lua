@@ -615,6 +615,17 @@ function _M:playerFOV()
 		end
 	end
 
+	--Handle Mark Prey Vision
+	if self:knowTalent(self.T_MARK_PREY) then
+		local t = self:getTalentFromId(self.T_MARK_PREY)
+		for i = 1, t.getCount(self, t) do
+			if self.mark_prey and self.mark_prey[game.level.id] and self.mark_prey[game.level.id][i] then
+				game.level.map.seens(self.mark_prey[game.level.id][i].x, self.mark_prey[game.level.id][i].y, 0.6)
+			end
+		end
+	end
+
+
 	if self:knowTalent(self.T_SHADOW_SENSES) then
 		local t = self:getTalentFromId(self.T_SHADOW_SENSES)
 		local range = self:getTalentRange(t)

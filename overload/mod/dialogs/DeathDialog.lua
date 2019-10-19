@@ -159,6 +159,8 @@ function _M:resurrectBasic(actor)
 
 	actor.changed = true
 	game.paused = true
+
+	self.actor:checkTwoHandedPenalty()
 end
 
 --- Send the party to the Eidolon Plane
@@ -188,6 +190,8 @@ function _M:eidolonPlane()
 		game.log("#LIGHT_RED#在死亡的边缘，你被拉入了另一个位面。")
 		game.player:updateMainShader()
 		if not config.settings.cheat then game:saveGame() end
+
+		self.actor:checkTwoHandedPenalty()
 	end)
 	return true
 end

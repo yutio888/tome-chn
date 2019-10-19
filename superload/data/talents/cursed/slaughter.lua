@@ -17,11 +17,11 @@ registerTalentTranslation{
 	id = "T_FRENZY",
 	name = "狂乱之袭",
 	info = function(self, t)
-		local attackChange = t.getAttackChange(self, t)
+		local defenseChange = t.getDefenseChange(self, t)
 		return ([[对附近目标进行 4 次攻击每个目标造成 %d%% （ 0 仇恨值）至 %d%% （ 100+ 仇恨值）。附近被追踪的目标会被优先攻击。 
-		 等级 3 时你的猛烈攻击会同时降低目标 %d 的命中，持续 3 回合。 
-		 伤害加成和命中减值受力量值加成。
-		 如果你装备了盾牌，这一技能也会用你的盾牌攻击。]]):format(t.getDamageMultiplier(self, t, 0) * 100, t.getDamageMultiplier(self, t, 100) * 100, -attackChange)
+		等级 3 时你的猛烈攻击会同时降低目标 %d 的闪避，持续 4 回合。 
+		伤害加成和闪避减值受力量值加成。
+		如果你装备了盾牌，这一技能也会用你的盾牌攻击。]]):format(t.getDamageMultiplier(self, t, 0) * 100, t.getDamageMultiplier(self, t, 100) * 100, -defenseChange)
 	end,
 }
 

@@ -1,5 +1,5 @@
 -- TE4 - T-Engine 4
--- Copyright (C) 2009 - 2016 Nicolas Casalini
+-- Copyright (C) 2009 - 2019 Nicolas Casalini
 --
 -- This program is free software: you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -26,6 +26,7 @@ local Particles = require "engine.Particles"
 -- @classmod engine.ui.Dialog
 module(..., package.seeall, class.inherit(Base))
 
+--- Requests a simple waiter dialog
 function _M:simpleWaiter(title, text, width, count, max)
 	if simpleWaiterDlg and simpleWaiterDlg[title] then
 		title,text = simpleWaiterDlg[title](text)
@@ -91,7 +92,7 @@ function _M:simpleWaiterTip(title, text, tip, width, count, max)
 end
 
 --- Requests a simple, press any key, dialog
-function _M:listPopup(title, text, list, w, h, fct)
+function _M:listPopup(title, text, list, w, h, fct, select_fct)
 	if title== "Blighted Path" then 
 		title = "枯萎之路" 
 		text = "选择一项用途："
@@ -114,7 +115,7 @@ function _M:listPopup(title, text, list, w, h, fct)
 	end
 	local d = new(title, 1, 1)
 	local desc = require("engine.ui.Textzone").new{width=w, auto_height=true, text=text, scrollbar=true}
-	local l = require("engine.ui.List").new{width=w, height=h-16 - desc.h, list=list, fct=function() d.key:triggerVirtual("ACCEPT") end}
+	local l = require("engine.ui.List").new{width=w, height=h-16 - desc.h, list=list, fct=function() d.key:triggerVirtual("ACCEPT") end, select=function(item) if select_fct then select_fct(item) end end}
 	d:loadUI{
 		{left = 3, top = 3, ui=desc},
 		{left = 3, top = 3 + desc.h + 3, ui=require("engine.ui.Separator").new{dir="vertical", size=w - 12}},
@@ -138,9 +139,7 @@ function _M:simplePopup(title, text, fct, no_leave, any_leave)
 	if simplePopDlg and simplePopDlg[title] then
 		title,text = simplePopDlg[title](text)
 	end
-	local chn_w = utf8:new(text)
-	local w = chn_w:len()*16
-	local _, h = self.font:size(text)
+	local w, h = self.font:size(text)
 	local d = new(title, 1, 1)
 	d:loadUI{{left = 3, top = 3, ui=require("engine.ui.Textzone").new{width=w+10, height=h+5, text=text}}}
 	if not no_leave then
@@ -160,7 +159,6 @@ function _M:simpleLongPopup(title, text, w, fct, no_leave, force_height)
 	if simpleLongDlg and simpleLongDlg[title] then
 		title,text = simpleLongDlg[title](text)
 	end
-	local list = text:splitLines(w - 10, self.font)
 	local _, th = self.font:size(title)
 	local d = new(title, 1, 1)
 	local max_h = force_height and force_height * game.h or 9999
@@ -267,8 +265,7 @@ function _M:yesnocancelPopup(title, text, fct, yes_text, no_text, cancel_text, n
 	if yesnocancelPopDlg and yesnocancelPopDlg[title] then
 		title,text = yesnocancelPopDlg[title](text)
 	end
-	--local w, h = self.font:size(text)
-	local w, h = 200, 50
+	local w, h = self.font:size(text)
 	local d = new(title, 1, 1)
 
 --	d.key:addBind("EXIT", function() game:unregisterDialog(d) fct(false) end)
@@ -320,8 +317,10 @@ end
 -- @param w, h = width and height of the dialog (in pixels, optional: dialog sized to its elements by default)
 -- @param no_leave set true to force a selection
 -- @param escape = the default choice (number) to select if escape is pressed
-function _M:multiButtonPopup(title, text, button_list, w, h, choice_fct, no_leave, escape)
+-- @param default = the default choice (number) to select (highlight) when the dialog opens, default 1
+function _M:multiButtonPopup(title, text, button_list, w, h, choice_fct, no_leave, escape, default)
 	escape = escape or 1
+	default = default or 1
 	-- compute display limits
 	local max_w, max_h = w or game.w*.75, h or game.h*.75
 
@@ -333,7 +332,10 @@ function _M:multiButtonPopup(title, text, button_list, w, h, choice_fct, no_leav
 	
 	local d = new(title, w or 1, h or 1)
 --print(("[multiButtonPopup] initialized: (w:%s,h:%s), (maxw:%s,maxh:%s) "):format(w, h, max_w, max_h))
-	if not no_leave then d.key:addBind("EXIT", function() game:unregisterDialog(d) game:unregisterDialog(d) choice_fct(button_list[escape]) end) end
+	if not no_leave then d.key:addBind("EXIT", function() game:unregisterDialog(d)
+			if choice_fct then choice_fct(button_list[escape]) end
+		end)
+	end
 
 	local num_buttons = math.min(#button_list, 50)
 	local buttons, buttons_width, button_height = {}, 0, 0
@@ -375,7 +377,7 @@ function _M:multiButtonPopup(title, text, button_list, w, h, choice_fct, no_leav
 	local width = w or math.min(max_w, math.max(text_width + 20, max_buttons_width + 20))
 	local height = h or math.min(max_h, text_height + 10 + nrow*button_height)
 	local uis = {
-		{left = (width - text_width)/2, top = 3, ui=require("engine.ui.Textzone").new{width=text_width, height=text_height, text=text}}
+		{left = (width - text_width)/2, top = 3, ui=require("engine.ui.Textzone").new{width=text_width, height=text_height, text=text, can_focus=false}}
 	}
 	-- actually place the buttons in the dialog
 	top = math.max(text_height, text_height + (height - text_height - nrow*button_height - 5)/2)
@@ -389,7 +391,10 @@ function _M:multiButtonPopup(title, text, button_list, w, h, choice_fct, no_leav
 		end
 	end
 	d:loadUI(uis)
-	if uis[escape + 1] then d:setFocus(uis[escape + 1]) end
+	-- set default focus if possible
+	if uis[default + 1] then d:setFocus(uis[default + 1])
+	elseif uis[escape + 1] then d:setFocus(uis[escape + 1])
+	end
 	d:setupUI(not w, not h)
 	game:registerDialog(d)
 	return d
@@ -418,10 +423,23 @@ function _M:webPopup(url)
 	return d
 end
 
+function _M:forceNextDialogUI(ui)
+	_M.force_ui_inside = ui
+	_M.force_ui_inside_once = true
+end
 
 title_shadow = true
 
 function _M:init(title, w, h, x, y, alpha, font, showup, skin)
+	if self.force_ui_inside then
+		self._lastui = self.ui
+		Base:changeDefault(self.force_ui_inside)
+		if _M.force_ui_inside_once then
+			_M.force_ui_inside_once = nil
+			_M.force_ui_inside = nil
+		end
+	end
+
 	self.title = title
 	self.alpha = self.alpha or 255
 	if showup ~= nil then
@@ -476,9 +494,11 @@ function _M:init(title, w, h, x, y, alpha, font, showup, skin)
 		self.frame.title_y = conf.title_bar.y
 		self.frame.title_w = conf.title_bar.w
 		self.frame.title_h = conf.title_bar.h
+		if not conf.title_bar.no_gfx then
 		self.frame.b7 = self.frame.b7:gsub("dialogframe", "title_dialogframe")
 		self.frame.b8 = self.frame.b8:gsub("dialogframe", "title_dialogframe")
 		self.frame.b9 = self.frame.b9:gsub("dialogframe", "title_dialogframe")
+		end
 	end
 
 	self.uis = {}
@@ -570,6 +590,10 @@ function _M:generate()
 		_RIGHT = function() self:moveFocus(1) end,
 	}
 	self.key:addBind("SCREENSHOT", function() if type(game) == "table" and game.key then game.key:triggerVirtual("SCREENSHOT") end end)
+	if self._lastui then
+		Base:changeDefault(self._lastui)
+		self._lastui = nil
+	end
 end
 
 function _M:updateTitle(title)

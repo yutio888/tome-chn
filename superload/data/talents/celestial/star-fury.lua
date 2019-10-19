@@ -16,11 +16,10 @@ registerTalentTranslation{
 	name = "阴影爆炸",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
-		local damageonspot = t.getDamageOnSpot(self, t)
 		local duration = t.getDuration(self, t)
 		return ([[引起一片暗影爆炸，对目标造成 %0.2f 点暗影伤害，并在 3 码半径范围的区域内每回合造成 %0.2f 暗影伤害，持续 %d 回合。 
-		 受法术强度影响，伤害有额外加成。]]):
-		format(damDesc(self, DamageType.DARKNESS, damage),damDesc(self, DamageType.DARKNESS, damageonspot),duration)
+		受法术强度影响，伤害有额外加成。]]):
+		format(damDesc(self, DamageType.DARKNESS, damage),damDesc(self, DamageType.DARKNESS, damage/2),duration)
 	end,
 }
 

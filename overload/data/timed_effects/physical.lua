@@ -2344,7 +2344,7 @@ newEffect{
 		end
 		if eff.properties.ref and src.life then DamageType.defaultProjector(src, src.x, src.y, type, blocked, tmp, true) end
 		local full = false
-		if (self:knowTalent(self.T_RIPOSTE) or amt == 0) and not eff.did_counterstrike and src.life then
+		if (self:attr("allow_incomplete_blocks") or amt == 0) and not eff.did_counterstrike and src.life then
 			full = true
 			if not self:knowTalent(self.T_ETERNAL_GUARD) then eff.did_counterstrike = true end
 			src:setEffect(src.EFF_COUNTERSTRIKE, 2, {power=eff.power, no_ct_effect=true, src=self, crit_inc=crit_inc, nb=nb})

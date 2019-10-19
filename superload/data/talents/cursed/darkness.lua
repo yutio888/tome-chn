@@ -24,8 +24,8 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local darkCount = t.getDarkCount(self, t)
 		local damageIncrease = getDamageIncrease(self)
-		return ([[一股黑暗之雾在目标点范围内 %d 个方向蔓延半径 %d 码。黑暗之雾造成 %d 点伤害，阻挡未掌握黑暗视觉或其他魔法视觉能力目标的视线。 
-		 受精神强度影响，伤害有额外加成。你对任何进入黑暗之雾的人造成 +%d%% 点伤害。]]):format(darkCount, radius, damage, damageIncrease)
+		return ([[一股黑暗之雾蔓延在目标点和目标点附近 %d 码范围内最多 %d 格。黑暗之雾造成 %d 点伤害，阻挡未掌握黑暗视觉或其他魔法视觉能力目标的视线。 
+		受精神强度影响，伤害有额外加成。你对任何进入黑暗之雾的人造成 +%d%% 点伤害。]]):format(radius, darkCount, damage, damageIncrease)
 	end,
 }
 

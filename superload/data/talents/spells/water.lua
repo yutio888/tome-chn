@@ -49,7 +49,7 @@ registerTalentTranslation{
 		local t_is = self:getTalentFromId(self.T_ICE_STORM)
 		local icestorm = self:getTalentFullDescription(t_is, self:getTalentLevelRaw(t))
 		return ([[你吸收周围的寒冰围绕你，将自己转变为纯粹的冰元素——西弗格罗斯，持续 %d 回合。 
-		 转化成元素后，你不需要呼吸并获得等级 %d 的冰雪风暴，所有冰冷伤害可对你产生治疗，治疗量基于伤害值的 %d%% 。 
+		转化成元素后，你不需要呼吸并获得等级 %d 的冰雪风暴，获得 %d%% 震慑和流血抵抗， %d%% 寒冷伤害抗性。所有寒冷伤害可对你产生治疗，治疗量基于伤害值的 %d%% 。 
 		受法术强度影响，效果有额外加成。
 		#AQUAMARINE#冰雪风暴:#LAST#
 		%s]]):

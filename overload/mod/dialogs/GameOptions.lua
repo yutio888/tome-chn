@@ -201,15 +201,6 @@ function _M:generateListUi()
 		end)
 	end,}
 
-	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"选择空格是否显示。\n隐藏后英文间不会显示空格，但显示后中文间可能会有多余的空格。\n你必须重启游戏才能看到效果。#WHITE#"}
-	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#空格显示#WHITE##{normal}#", status=function(item)
-		return tostring(config.settings.tome.show_spaces and "显示" or "隐藏")
-	end, fct=function(item)
-		config.settings.tome.show_spaces = not config.settings.tome.show_spaces
-		game:saveSettings("tome.show_spaces", ("tome.show_spaces = %s\n"):format(tostring(config.settings.tome.show_spaces)))
-		self.c_list:drawItem(item)
-	end,}
-
 	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"选择字体大小。\n你必须重启游戏才能看到效果。"}
 	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#字体大小#WHITE##{normal}#", status=function(item)
 		return tostring(config.settings.tome.fonts.size):capitalize()

@@ -240,3 +240,10 @@ defineAction{
 	group = "action",
 	name = "切换自动技能使用",
 }
+
+defineAction{
+	default = { },
+	type = "TOGGLE_AUTOACCEPT_TARGET",
+	group = "action",
+	name = "切换自动接受目标选项。",
+}

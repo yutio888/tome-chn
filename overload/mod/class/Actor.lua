@@ -75,6 +75,16 @@ _M._no_save_fields.resting = true
 -- No need to save __project_source either, it's a turn by turn thing
 _M._no_save_fields.__project_source = true
 
+-- Dont save the the AI caches
+_M._no_save_fields._tact_wt_cache = true
+_M._no_save_fields._turn_ai_tactical = true
+_M._no_save_fields.aiOHash = true
+_M._no_save_fields.aiDHash = true
+_M._no_save_fields.OHash = true
+_M._no_save_fields.OHashProps = true
+_M._no_save_fields.DHash = true
+_M._no_save_fields.DHashProps = true
+
 -- alt_node fields (controls fields copied with cloneActor by default)
 _M.clone_nodes = table.merge({running_fov=false, running_prev=false,
 	-- spawning/death fields:
@@ -649,6 +659,7 @@ function _M:act()
 	end
 
 	self.turn_procs = {}
+	self._turn_ai_tactical = nil
 	if temp then self.turn_procs.multi = temp end
 
 	-- Break some sustains if certain resources are too low
@@ -2922,7 +2933,13 @@ end
 function _M:cloneActor(post_copy, alt_nodes)
 	local a, post_copy = engine.Actor.cloneActor(self, post_copy, alt_nodes)
 	a.immune_possession = 1
+	a:fireTalentCheck("callbackOnCloned", "actor", self, post_copy, alt_nodes)
 	return a, post_copy
+end
+function _M:cloneFull(post_copy)
+	local a = engine.Actor.cloneFull(self, post_copy)
+	a:fireTalentCheck("callbackOnCloned", "full", self, post_copy)
+	return a
 end
 
 --- Remove certain effects when cloned
@@ -3102,6 +3119,8 @@ function _M:die(src, death_note)
 						self:removeObject(inven, i, true)
 						game.level.map:addObject(dropx, dropy, o)
 						if game.level.map.attrs(dropx, dropy, "obj_seen") then game.level.map.attrs(dropx, dropy, "obj_seen", false) end
+
+						if o.tinker then self:doTakeoffTinker(o, o.tinker, true) end
 					else
 						o:removed()
 					end
@@ -5829,6 +5848,7 @@ local sustainCallbackCheck = {
 	callbackOnPartyAdd = "talents_on_party_add",
 	callbackOnPartyRemove = "talents_on_party_remove",
 	callbackOnTargeted = "talents_on_targeted",
+	callbackOnCloned = "talents_on_cloned",
 }
 _M.sustainCallbackCheck = sustainCallbackCheck
 
@@ -7722,6 +7742,7 @@ function _M:doTakeoffTinker(base_o, oldo, only_remove)
 
 	local _, base_inven
 	local mustwear = base_o.wielded
+	print("!!!!!!!!!!!!!!!!!!!!!!!!!!", mustwear)
 	if mustwear then
 		_, _, base_inven = self:findInAllInventoriesByObject(base_o)
 		self:onTakeoff(base_o, base_inven, true)

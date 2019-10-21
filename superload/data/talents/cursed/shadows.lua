@@ -30,10 +30,11 @@ registerTalentTranslation{
 	name = "暗影闪电",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
-		return ([[用闪电打击目标造成 %0.2f 到 %0.2f 伤害。 
+		return ([[用闪电打击目标造成 %0.2f 到 %0.2f 伤害 (平均 %0.2f 伤害)。
 		 受魔法影响，伤害有额外加成。]]):
-		format(damDesc(self, DamageType.LIGHTNING, damage / 3),
-		damDesc(self, DamageType.LIGHTNING, damage))
+		 format(damDesc(self, DamageType.LIGHTNING, damage / 3),
+		 damDesc(self, DamageType.LIGHTNING, damage),
+		 damDesc(self, DamageType.LIGHTNING, (damage + damage / 3) / 2))
 	end,
 }
 

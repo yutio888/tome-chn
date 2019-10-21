@@ -160,7 +160,7 @@ function _M:resurrectBasic(actor)
 	actor.changed = true
 	game.paused = true
 
-	self.actor:checkTwoHandedPenalty()
+	actor:checkTwoHandedPenalty()
 end
 
 --- Send the party to the Eidolon Plane

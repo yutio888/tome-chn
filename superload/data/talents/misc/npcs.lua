@@ -548,10 +548,11 @@ registerTalentTranslation{
 	message = "@Source@ 朝@target@发射闪电!",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
-		return ([[召唤一股强烈的闪电束造成 %0.2f 至 %0.2f 伤害。 
-		 受精神强度影响，伤害有额外加成。]]):
+		return ([[召唤一股强烈的闪电束造成 %0.2f 至 %0.2f 伤害（平均 %0.2f ）。 
+		受精神强度影响，伤害有额外加成。]]):
 		format(damDesc(self, DamageType.LIGHTNING, damage / 3),
-		damDesc(self, DamageType.LIGHTNING, damage))
+		damDesc(self, DamageType.LIGHTNING, damage),
+		damDesc(self, DamageType.LIGHTNING, (damage + damage / 3) / 2))
 	end,
 }
 

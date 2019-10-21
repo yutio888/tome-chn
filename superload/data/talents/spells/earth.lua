@@ -18,10 +18,11 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local nb = t.getDigs(self, t)
-		return ([[ 射出一道能击碎岩石的强有力的射线，挖掘路径上至多 %d 块墙壁。 
-	 	 射线同时对路径上的所有生物造成 %0.2f 点物理伤害。 
-		 受法术强度影响，伤害有额外加成。 ]]):
-		format(nb, damDesc(self, DamageType.PHYSICAL, damage))
+		return ([[射出一道能击碎岩石的强有力的射线，在其路径上击碎 %d 码距离内的所有墙壁。
+		射线会继续前进直到 %d 码距离处，对路径上的所有生物造成 %0.2f 点物理伤害。 
+		如果有墙壁被击碎，你在 6 回合内获得 %d%% 物理伤害加成。
+		受法术强度影响，伤害有额外加成。 ]]):
+		format(nb, self:getTalentRange(t), damDesc(self, DamageType.PHYSICAL, damage), t.getBonus(self, t))
 	end,
 }
 

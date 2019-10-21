@@ -1546,33 +1546,38 @@ newEffect{
 
 	--Harrow
 	callbackOnTemporaryEffect = function(self, eff, eff_id, e, p)
-		local def, level, bonusLevel = self.tempeffect_def[self.EFF_CURSE_OF_NIGHTMARES], eff.level, math.min(eff.unlockLevel, eff.level)
-		if math.min(eff.unlockLevel, eff.level) >= 3 then
-			--if e.status == "detrimental" and not e.subtype["cross tier"] and p.src and p.src._is_actor and not p.src.dead then
-				--local e = self.tempeffect_def[eff_id]
-			if e.status ~= "detrimental" or e.type == "other" or e.subtype["cross tier"] then return end
-			local harrowDam = def.getHarrowDam(self, level)
-			if p.src and p.src._is_actor then
-				DamageType:get(DamageType.MIND).projector(self, p.src.x, p.src.y, DamageType.MIND, dam)
-				DamageType:get(DamageType.MIND).projector(self, p.src.x, p.src.y, DamageType.DARKNESS, dam)
-				--game.logSeen(self, "#F53CBE#%s harrows '%s'!", self.name:capitalize(), p.src.name)
-				game.logSeen(self, "#F53CBE#%s harrows %s!", self.name:capitalize(), target.name)
-			else
-				local tgts = {}
-				self:project({type="ball", radius=10}, self.x, self.y, function(px, py)
-					local act = game.level.map(px, py, Map.ACTOR)
-					if not act or self:reactionToward(act) >= 0 then return end
-					tgts[#tgts+1] = act
-				end)
-				if #tgts > 0 then
-					local target = rng.table(tgts)
-					DamageType:get(DamageType.MIND).projector(self, target.x, target.y, DamageType.MIND, harrowDam)
-					DamageType:get(DamageType.MIND).projector(self, target.x, target.y, DamageType.DARKNESS, harrowDam)
-					--self:logCombat(target, "#F53CBE##Source# harrows #Target#!", self.name:capitalize(), target.name)
+		if self.__curse_nightmare_recurse then return end
+		self.__curse_nightmare_recurse = true
+		(function()
+			local def, level, bonusLevel = self.tempeffect_def[self.EFF_CURSE_OF_NIGHTMARES], eff.level, math.min(eff.unlockLevel, eff.level)
+			if math.min(eff.unlockLevel, eff.level) >= 3 then
+				--if e.status == "detrimental" and not e.subtype["cross tier"] and p.src and p.src._is_actor and not p.src.dead then
+					--local e = self.tempeffect_def[eff_id]
+				if e.status ~= "detrimental" or e.type == "other" or e.subtype["cross tier"] then return end
+				local harrowDam = def.getHarrowDam(self, level)
+				if p.src and p.src._is_actor then
+					DamageType:get(DamageType.MIND).projector(self, p.src.x, p.src.y, DamageType.MIND, dam)
+					DamageType:get(DamageType.MIND).projector(self, p.src.x, p.src.y, DamageType.DARKNESS, dam)
+					--game.logSeen(self, "#F53CBE#%s harrows '%s'!", self.name:capitalize(), p.src.name)
 					game.logSeen(self, "#F53CBE#%s harrows %s!", self.name:capitalize(), target.name)
+				else
+					local tgts = {}
+					self:project({type="ball", radius=10}, self.x, self.y, function(px, py)
+						local act = game.level.map(px, py, Map.ACTOR)
+						if not act or self:reactionToward(act) >= 0 then return end
+						tgts[#tgts+1] = act
+					end)
+					if #tgts > 0 then
+						local target = rng.table(tgts)
+						DamageType:get(DamageType.MIND).projector(self, target.x, target.y, DamageType.MIND, harrowDam)
+						DamageType:get(DamageType.MIND).projector(self, target.x, target.y, DamageType.DARKNESS, harrowDam)
+						--self:logCombat(target, "#F53CBE##Source# harrows #Target#!", self.name:capitalize(), target.name)
+						game.logSeen(self, "#F53CBE#%s harrows %s!", self.name:capitalize(), target.name)
+					end
 				end
 			end
-		end
+		end)()
+		self.__curse_nightmare_recurse = nil
 	end,
 	on_merge = function(self, old_eff, new_eff) return old_eff end,
 	--[[doSuffocate = function(self, eff, target)
@@ -1647,7 +1652,7 @@ newEffect{
 					DamageType.NIGHTMARE, 1,
 					radius,
 					5, nil,
-					engine.MapEffect.new{alpha=100, color_br=134, color_bg=60, color_bb=134, effect_shader="shader_images/darkness_effect.png"},
+					engine.MapEffect.new{alpha=93, color_br=134, color_bg=60, color_bb=134, effect_shader="shader_images/darkness_effect.png"},
 					function(e, update_shape_only) if not update_shape_only then
 						-- attempt one summon per turn
 						if not e.src:canBe("summon") then return end

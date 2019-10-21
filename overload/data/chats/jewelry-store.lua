@@ -17,43 +17,85 @@
 -- Nicolas Casalini "DarkGod"
 -- darkgod@te4.org
 
-local imbue_ring = function(npc, player)
-	player:showInventory("镶嵌哪个戒指？", player:getInven("INVEN"), function(o) return o.type == "jewelry" and o.subtype == "ring" and not o.egoed and not o.unique and not o.rare end, function(ring, ring_item)
-		player:showInventory("使用哪颗宝石？", player:getInven("INVEN"), function(gem) return gem.type == "gem" and (gem.material_level or 99) <= ring.material_level and gem.imbue_powers end, function(gem, gem_item)
-			local price = 10 + gem.material_level * 5 + ring.material_level * 7
-			if price > player.money then require("engine.ui.Dialog"):simplePopup("金币不足", "这将花费 "..price.."金币，你需要更多金币。") return end
+local imbueEgo = function(gem, ring)
+	if not gem then return end
+	if not ring then return end
+	local Entity = require("engine.Entity")
+	local ego = Entity.new{
+		fake_ego = true,
+		name = "imbued_"..gem.name,
+		keywords = {[gem.name] = true},
+		wielder = table.clone(gem.imbue_powers, true),
+		been_imbued = true,
+		egoed = true,
+	}
+	if gem.talent_on_spell then ego.talent_on_spell = table.clone(gem.talent_on_spell, true) end  -- Its really weird that this table structure is different for one property
+	game.zone:applyEgo(ring, ego, "object", true)
+end
 
-			require("engine.ui.Dialog"):yesnoPopup("镶嵌花费", "这将花费你 "..price.." 金币，你接受吗？", function(ret) if ret then
+local imbue_ring = function(npc, player)
+	player:showInventory("镶嵌哪个戒指？", player:getInven("INVEN"), function(o) return o.type == "jewelry" and o.subtype == "ring" and o.material_level end, function(ring, ring_item)
+		player:showInventory("使用哪颗宝石？", player:getInven("INVEN"), function(gem) return gem.type == "gem" and gem.imbue_powers and gem.material_level end, function(gem, gem_item)
+			local lev = (ring.material_level + gem.material_level) / 2 * 10 + 10  -- Average the material level then add a bonus so we guarantee greater ego level range
+			local new_ring
+			local r = rng.range(0, 99)
+			if r < 20 then
+				local ring = game.zone:makeEntity(game.level, "object", 
+					{base_list="mod.class.Object:/data/general/objects/jewelry.lua", type="jewelry", subtype="ring",
+					ignore_material_restriction=true, ego_filter={keep_egos=true, ego_chance=-1000},
+					special=function(e) return e.material_level == ring.material_level end}
+					, lev, true)
+				new_ring = game.state:generateRandart{base=ring, lev=lev}
+			else
+				new_ring = game.zone:makeEntity(game.level, "object",
+					{base_list="mod.class.Object:/data/general/objects/jewelry.lua", type="jewelry", subtype="ring",
+					ignore_material_restriction=true, tome = {greater=9, double_greater=1}, egos = 2,
+					special=function(e) return e.material_level == ring.material_level end}
+					, lev, true)
+			end
+			if not new_ring then
+				game.logPlayer(player, "%s failed to craft with %s and %s!", npc.name:capitalize(), ring:getName{do_colour=true, no_count=true}, gem:getName{do_colour=true, no_count=true})
+				return false
+			end
+			
+			local price = 300 * (ring.material_level + gem.material_level) / 2
+			if price > player.money then require("engine.ui.Dialog"):simplePopup("Not enough money", "This costs "..price.." gold, you need more gold.") return end
+
+			require("engine.ui.Dialog"):yesnoPopup("Imbue cost", "This will cost you "..price.." gold, do you accept?", function(ret) if ret then
+				imbueEgo(gem, new_ring)
 				player:incMoney(-price)
 				player:removeObject(player:getInven("INVEN"), gem_item)
-				ring.wielder = ring.wielder or {}
-				table.mergeAdd(ring.wielder, gem.imbue_powers, true)
-				if gem.talent_on_spell then
-					ring.talent_on_spell = ring.talent_on_spell or {}
-					table.append(ring.talent_on_spell, gem.talent_on_spell)
-				end
-				ring.name = gem.name .. " ring"
-				ring.been_imbued = true
-				ring.egoed = true
-				game.logPlayer(player, "%s creates: %s", npc.name:capitalize(), ring:getName{do_colour=true, no_count=true})
+
+				new_ring.name = (ring.short_name or ring.name or "weird").." "..gem.name .. " ring"
+				new_ring:identify(true)
+				game.zone:addEntity(game.level, new_ring, "object")
+				player:addObject(player:getInven("INVEN"), new_ring)
+
+				game.logPlayer(player, "%s creates: %s", npc.name:capitalize(), new_ring:getName{do_colour=true, no_count=true})
 			end end)
 		end)
 	end)
 end
 
 local artifact_imbue_amulet = function(npc, player)
-	player:showInventory("镶嵌哪个项链？", player:getInven("INVEN"), function(o) return o.type == "jewelry" and o.subtype == "amulet" and not o.egoed and not o.unique and not o.rare end, function(amulet, amulet_item)
+	player:showInventory("镶嵌哪个项链？", player:getInven("INVEN"), function(o) return o.type == "jewelry" and o.subtype == "amulet" and o.material_level end, function(amulet, amulet_item)
 		player:showInventory("使用哪颗做第一个宝石？", player:getInven("INVEN"), function(gem1) return gem1.type == "gem" and (gem1.material_level or 99) <= amulet.material_level and gem1.imbue_powers end, function(gem1, gem1_item)
 			player:showInventory("使用哪颗做第二个宝石？", player:getInven("INVEN"), function(gem2) return gem2.type == "gem" and (gem2.material_level or 99) <= amulet.material_level and gem1.name ~= gem2.name and gem2.imbue_powers end, function(gem2, gem2_item)
-				local price = 390
-				if price > player.money then require("engine.ui.Dialog"):simplePopup("金币不足", "利米尔的镶嵌需要更多金币。") return end
+				local price = 1000
+				if price > player.money then require("engine.ui.Dialog"):simplePopup("Not enough money", "Limmir needs more gold for the magical plating.") return end
 
-				require("engine.ui.Dialog"):yesnoPopup("镶嵌花费", "这将花费你 "..price.." 金币，你接受吗？", function(ret) if ret then
+				require("engine.ui.Dialog"):yesnoPopup("Imbue cost", "You need to use "..price.." gold for the plating, do you accept?", function(ret) if ret then
 					player:incMoney(-price)
 					local gem3, tries = nil, 10
 					while gem3 == nil and tries > 0 do gem3 = game.zone:makeEntity(game.level, "object", {type="gem"}, nil, true) tries = tries - 1 end
 					if not gem3 then gem3 = rng.percent(50) and gem1 or gem2 end
 					print("镶嵌第三颗宝石", gem3.name)
+				
+				local new_amulet = game.zone:makeEntity(game.level, "object",
+					{base_list="mod.class.Object:/data/general/objects/jewelry.lua", type="jewelry", subtype="amulet",
+					ignore_material_restriction=true, ego_filter={keep_egos=true, ego_chance=-1000},
+					special=function(e) return e.material_level == amulet.material_level end}
+					, player.level, true)
 
 					if gem1_item > gem2_item then
 						player:removeObject(player:getInven("INVEN"), gem1_item)
@@ -62,26 +104,17 @@ local artifact_imbue_amulet = function(npc, player)
 						player:removeObject(player:getInven("INVEN"), gem2_item)
 						player:removeObject(player:getInven("INVEN"), gem1_item)
 					end
-					amulet.wielder = amulet.wielder or {}
-					table.mergeAdd(amulet.wielder, gem1.imbue_powers, true)
-					table.mergeAdd(amulet.wielder, gem2.imbue_powers, true)
-					table.mergeAdd(amulet.wielder, gem3.imbue_powers, true)
-					if gem1.talent_on_spell then
-						amulet.talent_on_spell = amulet.talent_on_spell or {}
-						table.append(amulet.talent_on_spell, gem1.talent_on_spell)
-					end
-					if gem2.talent_on_spell then
-						amulet.talent_on_spell = amulet.talent_on_spell or {}
-						table.append(amulet.talent_on_spell, gem2.talent_on_spell)
-					end
-					if gem3.talent_on_spell then
-						amulet.talent_on_spell = amulet.talent_on_spell or {}
-						table.append(amulet.talent_on_spell, gem3.talent_on_spell)
-					end
-					amulet.name = "利米尔的月之项链"
-					amulet.been_imbued = true
-					amulet.unique = util.uuid()
-					game.logPlayer(player, "%s creates: %s", npc.name:capitalize(), amulet:getName{do_colour=true, no_count=true})
+
+					imbueEgo(gem1, new_amulet)  -- Should keywords not be applied here since the item is unique?
+					imbueEgo(gem2, new_amulet)
+					imbueEgo(gem3, new_amulet)
+
+					new_amulet.name = "Limmir's Amulet of the Moon"
+					new_amulet.unique = util.uuid()
+					new_amulet:identify(true)
+					game.zone:addEntity(game.level, new_amulet, "object")
+					player:addObject(player:getInven("INVEN"), new_amulet)
+					game.logPlayer(player, "%s creates: %s", npc.name:capitalize(), new_amulet:getName{do_colour=true, no_count=true})
 				end end)
 			end)
 		end)

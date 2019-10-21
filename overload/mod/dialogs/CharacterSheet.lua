@@ -977,7 +977,7 @@ function _M:drawDialog(kind, actor_to_compare)
 				"%3d", "%+.0f", 1, false, false, dam)
 			self:mouseTooltip(self.TOOLTIP_COMBAT_DAMAGE, s:drawColorStringBlended(self.font, ("伤害       : #00ff00#%s"):format(text), w, h, 255, 255, 255, true))
 			if combat.block then -- or combatc and combatc.block then
-				text = compare_fields(player, actor_to_compare, function(actor, ...) return actor == actor_to_compare and combatc.block or combat.block end, "%3d", "%+.0f", 1, false, false, dam)
+				text = compare_fields(player, actor_to_compare, function(actor, ...) return actor == actor_to_compare and ((combatc.block or 0) + (actor:attr("block_bonus") or 0)) or ((combat.block or 0) + (actor:attr("block_bonus") or 0)) end, "%3d", "%+.0f", 1, false, false, dam)
 				self:mouseTooltip(self.TOOLTIP_COMBAT_BLOCK, s:drawColorStringBlended(self.font, ("格挡 : #00ff00#%s"):format(text), self.w*.14, h, 255, 255, 255, true))-- h = h + self.font_h
 			end
 			h = h + self.font_h

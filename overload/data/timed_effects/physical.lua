@@ -2346,17 +2346,21 @@ newEffect{
 		local full = false
 		if (self:attr("allow_incomplete_blocks") or amt == 0) and not eff.did_counterstrike and src.life then
 			full = true
-			if not self:knowTalent(self.T_ETERNAL_GUARD) then eff.did_counterstrike = true end
-			src:setEffect(src.EFF_COUNTERSTRIKE, 2, {power=eff.power, no_ct_effect=true, src=self, crit_inc=crit_inc, nb=nb})
-			if eff.properties.sb then
-				if src:canBe("disarm") then
-					src:setEffect(src.EFF_DISARMED, 3, {apply_power=self:combatPhysicalpower()})
-				else
-					game.logSeen(src, "%s resists the disarming attempt!", src.name:capitalize())
+			if not self.__counterstrike_recurse then
+				self.__counterstrike_recurse = true
+				if not self:knowTalent(self.T_ETERNAL_GUARD) then eff.did_counterstrike = true end
+				src:setEffect(src.EFF_COUNTERSTRIKE, 2, {power=eff.power, no_ct_effect=true, src=self, crit_inc=crit_inc, nb=nb})
+				if eff.properties.sb then
+					if src:canBe("disarm") then
+						src:setEffect(src.EFF_DISARMED, 3, {apply_power=self:combatPhysicalpower()})
+					else
+						game.logSeen(src, "%s resists the disarming attempt!", src.name:capitalize())
+					end
 				end
-			end
-			if eff.properties.on_cs then
-				eff.properties.on_cs(self, eff, dam, type, src)
+				if eff.properties.on_cs then
+					eff.properties.on_cs(self, eff, dam, type, src)
+				end
+				self.__counterstrike_recurse = nil
 			end
 		end
 		eff.did_block = true
@@ -3419,7 +3423,14 @@ newEffect{
 newEffect{
 	name = "SOOTHING_DARKNESS", image = "talents/soothing_darkness.png",
 	desc = "Soothing Darkness",
-	long_desc = function(self, eff) return ("The target is wreathed in shadows, increasing life regeneration by %0.1f, stamina regeneration by %0.1f, and all damage resistance by %d%%."):format(eff.life, eff.stamina, eff.shadowguard) end,
+	long_desc = function(self, eff)
+		local desc = ("The target is wreathed in shadows, increasing life regeneration by %0.1f"):format(eff.life)
+		if eff.shadowguard > 0 then
+			desc = desc..(", stamina regeneration by %0.1f and all damage resistance by %d%%."):format(eff.stamina, eff.shadowguard)
+		else
+			desc = desc..(" and stamina regeneration by %0.1f."):format(eff.stamina) end
+		return desc
+	end,
 	type = "physical",
 	subtype = { darkness=true, healing=true, regeneration=true },
 	status = "beneficial",

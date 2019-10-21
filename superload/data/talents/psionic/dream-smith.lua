@@ -5,23 +5,13 @@ registerTalentTranslation{
 	name = "梦之巨锤",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
-		local weapon_damage = useDreamHammer(self).dam
-		local weapon_range = useDreamHammer(self).dam * useDreamHammer(self).damrange
-		local weapon_atk = useDreamHammer(self).atk
-		local weapon_apr = useDreamHammer(self).apr
-		local weapon_crit = useDreamHammer(self).physcrit
+		local weapon_stats = Object:descCombat(self, {combat=useDreamHammer(self)}, {}, "combat")
 		return ([[在梦境熔炉中将武器锻造成一柄巨锤砸向附近某个目标，造成 %d%% 武器伤害。如果攻击命中，它会使梦境锻造系的某个随机技能冷却完毕。 
-		 在等级 5 时，此技能会使 2 个随机技能冷却完毕。 
-		 受精神强度影响，武器的基础攻击力、命中、护甲穿透和暴击率按比例加成。 
+		在等级 5 时，此技能会使 2 个随机技能冷却完毕。 
+		受精神强度影响，武器的基础攻击力、命中、护甲穿透和暴击率按比例加成。 
 
-		 当前梦之巨锤属性： 
-		 攻击力 : %0.2f - %0.2f
-		 加成属性 : 120 ％意志 
-		 伤害类型 : 物理 
-		 此武器的命中率基于意志计算。 
-		 命中加成 : +%d
-		 护甲穿透 : +%d
-		 物理暴击率 : +%d]]):format(damage * 100, weapon_damage, weapon_range, weapon_atk, weapon_apr, weapon_crit)
+		当前梦之巨锤属性：
+		%s]]):format(damage * 100, tostring(weapon_stats))
 	end,
 }
 

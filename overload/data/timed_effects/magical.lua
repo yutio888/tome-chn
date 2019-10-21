@@ -1383,8 +1383,8 @@ newEffect{
 		eff.res = self:addTemporaryValue(eff, "resists", {[DamageType.LIGHT]=eff.power, [DamageType.DARKNESS]=eff.power})
 	end,
 	on_merge = function(self, old_eff, new_eff)
-		removeTemporaryValue("damage_affinity", old_eff.aff)
-		removeTemporaryValue("resists", old_eff.res)
+		self:removeTemporaryValue("damage_affinity", old_eff.aff)
+		self:removeTemporaryValue("resists", old_eff.res)
 		old_eff.glyphstacks = (old_eff.glyphstacks or 0) + 1
 		old_eff.power = math.min(old_eff.maxStacks, old_eff.glyphstacks or 1)*5
 		old_eff.aff = self:addTemporaryValue(eff, "damage_affinity", {[DamageType.LIGHT]=old_eff.power, [DamageType.DARKNESS]=old_eff.power})
@@ -4497,5 +4497,20 @@ newEffect{
 		self:effectTemporaryValue(eff, "numbed", eff.reduce)
 	end,
 	deactivate = function(self, eff)
+	end,
+}
+
+newEffect{
+	name = "AUGER_OF_DESTRUCTION", image = "talents/dig.png",
+	desc = "Auger of Destruction",
+	long_desc = function(self, eff) return ("Physical damage increased by %d%%."):format(eff.power) end,
+	type = "magical",
+	subtype = { physical=true,},
+	status = "beneficial",
+	parameters = {power=10},
+	on_gain = function(self, err) return nil, true end,
+	on_lose = function(self, err) return nil, true end,
+	activate = function(self, eff)
+		self:effectTemporaryValue(eff, "inc_damage", {[DamageType.PHYSICAL] = eff.power})
 	end,
 }

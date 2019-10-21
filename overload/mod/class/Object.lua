@@ -2164,8 +2164,8 @@ function _M:getUseDesc(use_actor)
 				use_name = use_name:gsub("blast the opponent's mind dealing","冲击敌人精神，造成"):gsub("mind damage and silencing them for 4 turns","精神伤害并沉默4回合")
 			elseif use_name:find("heals yourself and all friendly characters within 10 spaces for ") then
 				use_name = use_name:gsub("heals yourself and all friendly characters within 10 spaces for ","治疗你和周围10格内所有友方生物").."生命值"
-			elseif use_name:find("instantly sting an enemy dealing ") then
-				use_name = use_name:gsub("instantly sting an enemy dealing","立即叮咬敌人，在7回合造成"):gsub("nature damage over 7 turns and reducing their healing by 50%%","自然伤害，并降低50%%治疗系数")
+			elseif use_name:find("sting an enemy dealing ") then
+				use_name = use_name:gsub("sting an enemy dealing","叮咬敌人，在7回合造成"):gsub("nature damage over 7 turns and reducing their healing by 50%%","自然伤害，并降低50%%治疗系数")
 			elseif use_name:find("harden the skin for 7 turns increasing armour by") then
 				use_name = use_name:gsub("harden the skin for 7 turns increasing armour by","在7回合内硬化皮肤，护甲增加"):gsub("and armour hardiness by","护甲硬度增加")
 			elseif use_name:find("summon a resilient tentacle up to") then

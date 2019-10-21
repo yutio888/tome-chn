@@ -1,6 +1,19 @@
 local _M = loadPrevious(...)
 
 registerTalentTranslation{
+	id = "T_ICE_SHARDS",
+	name = "寒冰箭",
+	info = function(self, t)
+		local damage = t.getDamage(self, t)
+		return ([[向指定地点的目标射出寒冰箭。每根寒冰箭 %s 并造成 %0.2f 冰系伤害，对目标附近单位同样造成伤害。 
+		此法术不会伤害施法者。 
+		如果目标处于湿润状态，伤害增加 30%% ，同时冰冻率上升至 50%% 。
+		受法术强度影响，伤害有额外加成。]]):
+		format(necroEssenceDead(self, true) and " 影响路径上所有敌人 " or "缓慢移动", damDesc(self, DamageType.COLD, damage))
+	end,
+}
+
+registerTalentTranslation{
 	id = "T_GLACIAL_VAPOUR",
 	name = "寒霜冰雾",
 	info = function(self, t)
@@ -10,17 +23,6 @@ registerTalentTranslation{
 		 处于湿润状态的生物承受额外 30%% 伤害，并有 15%% 几率被冻结。
 		 受法术强度影响，伤害有额外加成。]]):
 		format(damDesc(self, DamageType.COLD, damage), duration)
-	end,
-}
-
-registerTalentTranslation{
-	id = "T_FREEZE",
-	name = "冻结",
-	info = function(self, t)
-		local damage = t.getDamage(self, t)
-		return ([[凝聚周围的水冻结目标 %d 回合并对其造成 %0.2f 伤害。 
-		 如果目标为友好生物，冷却时间减少 33%% 。
-		 受法术强度影响，伤害有额外加成。]]):format(t.getDuration(self, t), damDesc(self, DamageType.COLD, damage))
 	end,
 }
 

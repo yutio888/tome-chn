@@ -426,7 +426,7 @@ newEffect{
 	long_desc = function(self, eff)
 		local t = self:getTalentFromId(self.T_STALK)
 		local effStalked = eff.target:hasEffect(eff.target.EFF_STALKED)
-		local desc = ([[追踪 %s ，等级 %d: +%d 命中， +%d%% 近战伤害， +%0.2f 仇恨 / 回合攻击回复。]]):format(
+		local desc = ([[追踪 %s. 等级 %d: +%d 命中, +%d%% 近战伤害, 攻击目标时 +%0.2f 仇恨/回合]]):format(
 			eff.target.name, eff.bonus, t.getAttackChange(self, t, eff.bonus), t.getStalkedDamageMultiplier(self, t, eff.bonus) * 100 - 100, t.getHitHateChange(self, t, eff.bonus))
 		if effStalked and effStalked.damageChange and effStalked.damageChange > 0 then
 			desc = desc..("猎捕伤害加成： %d%% 。"):format(effStalked.damageChange)
@@ -457,7 +457,7 @@ newEffect{
 		local effStalker = eff.src:hasEffect(eff.src.EFF_STALKER)
 		if not effStalker then return "被追踪。" end
 		local t = self:getTalentFromId(eff.src.T_STALK)
-		local desc = ([[目标被 %s 追踪。追踪等级 %d: +%d 命中， +%d%% 近战伤害， +%0.2f 仇恨 / 回合攻击回复。]]):format(
+		local desc = ([[目标被 %s 追踪。追踪等级 %d: +%d 命中， +%d%% 近战伤害，击中目标时 +%0.2f 仇恨/回合。]]):format(
 			eff.src.name, effStalker.bonus, t.getAttackChange(eff.src, t, effStalker.bonus), t.getStalkedDamageMultiplier(eff.src, t, effStalker.bonus) * 100 - 100, t.getHitHateChange(eff.src, t, effStalker.bonus))
 		if eff.damageChange and eff.damageChange > 0 then
 			desc = desc..(" 猎捕伤害加成： %d%% 。"):format(eff.damageChange)

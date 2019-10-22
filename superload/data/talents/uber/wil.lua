@@ -19,10 +19,10 @@ registerTalentTranslation{
 		local dam = t.getDamage(self, t)/2
 		return ([[在施展伤害类魔法或精神攻击时，你会释放意念，召唤一颗陨石砸向附近敌人。 
 		陨石在 2 码半径内造成 %0.2f  火焰和 %0.2f  物理伤害，震慑敌人 3 回合。
-		 周围 3 码半径的地形将会被冲击转换成岩浆，每回合造成 %0.2f  火焰伤害，持续 8 回合。
-		 你和你的盟友不会受到陨石的伤害。
+		周围 3 码半径的地形将会被冲击转换成岩浆，每回合造成 %0.2f  火焰伤害，持续 8 回合。
+		你和你的盟友不会受到陨石的伤害。
 
-		 另外，你的火焰伤害加成和穿透将被设置成你最高的伤害加成和穿透，这对你造成的所有火焰伤害都有效。
+		另外，你的火焰伤害加成和穿透将被设置成你最高的伤害加成和穿透，这对你造成的所有火焰伤害都有效。
 		受精神强度或法术强度影响，伤害按比例加成。  ]])
 		:format(damDesc(self, DamageType.FIRE, dam), damDesc(self, DamageType.PHYSICAL, dam), damDesc(self, DamageType.FIRE, t.getLava(self, t)))
 	end,
@@ -78,7 +78,7 @@ registerTalentTranslation{
 		return ([[你的意志是对抗邪恶魔法师的盾牌。 
 		每当你受到魔法伤害，你会惩罚施法者，使其受到 %0.2f 的精神伤害。 
 		同时，它们在对你使用的技能进入冷却的回合中，会受到 35％法术失败率惩罚。
-		注意：该技能有冷却时间。 ]])
+		注意：该技能有冷却时间。]])
 		:format(damDesc(self, DamageType.MIND, 20 + self:getWil() * 2))
 	end,
 }
@@ -90,7 +90,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		return ([[用钢铁般的意志驱使整个身体。 
 		当此技能激活时，你 33%% 的伤害会转化为精神伤害。 
-		此外，你获得 30％精神抵抗穿透并增加 10％精神伤害。 ]]):
+		此外，你获得 30％精神抵抗穿透并增加 10％精神伤害。]]):
 		format()
 	end,
 }

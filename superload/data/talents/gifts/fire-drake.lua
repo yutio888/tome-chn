@@ -20,9 +20,9 @@ registerTalentTranslation{
 		local radius = self:getTalentRadius(t)
 		local power = 20 + 6 * self:getTalentLevel(t)
 		return ([[你发出一声咆哮使 %d 码半径范围内的敌人陷入彻底的混乱（强度 %d%%），持续 3 回合。 
-		 如此强烈的咆哮使你的敌人受到 %0.2f 物理伤害。 
-		 受力量影响，伤害有额外加成。 
-		 每点火龙系的技能可以使你增加火焰抵抗 1%% 。]]):format(radius, power, self:combatTalentStatDamage(t, "str", 30, 380))
+		如此强烈的咆哮使你的敌人受到 %0.2f 物理伤害。 
+		受力量影响，伤害有额外加成。 
+		每点火龙系的技能可以使你增加火焰抵抗 1%% 。]]):format(radius, power, self:combatTalentStatDamage(t, "str", 30, 380))
 	end,
 }
 
@@ -34,9 +34,9 @@ registerTalentTranslation{
 		local radius = self:getTalentRadius(t)
 		local duration = t.getDuration(self, t)
 		return ([[你喷出一片火焰，范围内的目标每回合会受到 %0.2f 火焰伤害（影响半径 %d ），持续 %d 回合。 
-		 火焰会无视使用者，并吸收 10%% 伤害治疗自身。
-		 伤害受精神强度加成。技能可暴击。 
-		 每点火龙系的技能可以使你增加火焰抵抗 1%% 。]]):format(damDesc(self, DamageType.FIRE, dam), radius, duration)
+		火焰会无视使用者，并吸收 10%% 伤害治疗自身。
+		伤害受精神强度加成。技能可暴击。 
+		每点火龙系的技能可以使你增加火焰抵抗 1%% 。]]):format(damDesc(self, DamageType.FIRE, dam), radius, duration)
 	end,
 }
 

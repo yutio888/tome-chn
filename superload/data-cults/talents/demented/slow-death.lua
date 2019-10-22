@@ -29,7 +29,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		return ([[你的肚子内产生小型触手，对消化中的目标造成更多折磨。
 		每次你暴击时，触手将进一步折磨目标，为你提供更多能量，持续 3 回合。
-		该效果为你的攻击提供 20%% 几率吸血，将 %d%% 伤害转化为治疗。 ]]):
+		该效果为你的攻击提供 20%% 几率吸血，将 %d%% 伤害转化为治疗。]]):
 		format(t.getLeechValue(self, t))
 	end,
 }

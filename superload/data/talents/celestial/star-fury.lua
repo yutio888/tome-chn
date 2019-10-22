@@ -6,7 +6,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		return ([[召唤月光的力量形成阴影射线，对目标造成 %0.2f 伤害。 
-		 受法术强度影响，伤害有额外加成。]]):
+		受法术强度影响，伤害有额外加成。]]):
 		format(damDesc(self, DamageType.DARKNESS, damage))
 	end,
 }
@@ -30,8 +30,8 @@ registerTalentTranslation{
 		local dam = t.getDamage(self, t)
 		local radius = self:getTalentRadius(t)
 		return ([[一股汹涌的光暗狂潮围绕着你，在你周围 %d 码半径内造成 %0.2f 光系和 %0.2f 暗影范围伤害。 
-		 受法术强度影响，伤害有额外加成。]]):
-		 format(radius, damDesc(self, DamageType.LIGHT, dam),damDesc(self, DamageType.DARKNESS, dam))
+		受法术强度影响，伤害有额外加成。]]):
+		format(radius, damDesc(self, DamageType.LIGHT, dam),damDesc(self, DamageType.DARKNESS, dam))
 	end,
 }
 
@@ -42,7 +42,7 @@ registerTalentTranslation{
 		local radius = self:getTalentRadius(t)
 		local damage = t.getDamage(self, t)
 		return ([[你摇落星辰，震慑 %d 码半径范围内所有目标 4 回合，并造成 %0.2f 暗影伤害。 
-		 受法术强度影响，伤害有额外加成。]]):
+		受法术强度影响，伤害有额外加成。]]):
 		format(radius, damDesc(self, DamageType.DARKNESS, damage))
 	end,
 }

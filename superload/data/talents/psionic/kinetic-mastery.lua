@@ -31,7 +31,7 @@ registerTalentTranslation{
 		
 		对你自己使用时，击退线路上所有目标并造成  %0.1f 物理伤害。
 		同时能破坏至多 %d 面墙壁。
-		受精神强度影响，伤害和投掷距离有额外加成。 ]]):
+		受精神强度影响，伤害和投掷距离有额外加成。]]):
 		format(range, dam, math.floor(range/2), dam/2, t.getKBResistPen(self, t), dam, math.floor(range/2))
 	end,
 }

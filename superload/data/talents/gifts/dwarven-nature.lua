@@ -10,8 +10,8 @@ registerTalentTranslation{
 		end
 		local damage = t.getDamage(self, t)
 		return ([[释放出 %d 个岩石飞弹射向任意射程内的目标。每个飞弹造成 %0.2f 物理伤害和每回合 %0.2f 流血伤害，持续 5 回合。 
-		 在等级 5 时，你可以额外释放一个飞弹。 
-		 受法术强度影响，伤害有额外加成]]):format(count,damage/2, damage/12)
+		在等级 5 时，你可以额外释放一个飞弹。 
+		受法术强度影响，伤害有额外加成]]):format(count,damage/2, damage/12)
 	end,
 }
 

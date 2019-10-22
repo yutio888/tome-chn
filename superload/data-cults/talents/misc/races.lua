@@ -99,7 +99,7 @@ registerTalentTranslation{
 	name = "燃烧痛苦",
 	info = function(self, t)
 		return ([[你的身体习惯于痛苦。每次你受到超过 20%% 最大生命的伤害时，你的一个纹身将立刻冷却完毕。
-		该效果冷却时间为 %d 回合。 ]]):
+		该效果冷却时间为 %d 回合。]]):
 		format(self:getTalentCooldown(t))
 	end,
 }
@@ -142,7 +142,7 @@ registerTalentTranslation{
 	name = "堕落影响",
 	info = function(self, t)
 		return ([[ 寄生在你身体里的堕落力量渗出了你的身体，给予你强化。
-		增加 %d%% 枯萎、黑暗、时空和  酸性伤害抗性，同时减少 %d%% 自然和光系伤害抗性。 ]]):format(t.getResist(self, t), t.getResist(self, t) / 3)
+		增加 %d%% 枯萎、黑暗、时空和  酸性伤害抗性，同时减少 %d%% 自然和光系伤害抗性。]]):format(t.getResist(self, t), t.getResist(self, t) / 3)
 	end,
 }
 

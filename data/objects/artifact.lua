@@ -39,7 +39,7 @@ registerArtifactTranslation{
 	end,
 	["combat.special_on_hit.desc"] = function(self, who, special) 
 		local dam = who:damDesc(engine.DamageType.COLD, special:damage(self, who))
-		return ("制造不断扩张的寒冰风暴（从半径 %d 到半径 %d），每回合造成 %.2f 寒冷伤害（基于力量）并减速  20%%。接下来的近战攻击将重置  风暴位置并延长持续时间。 "):format(special.radius, special.max_radius, dam)
+		return ("制造不断扩张的寒冰风暴（从半径 %d 到半径 %d），每回合造成 %.2f 寒冷伤害（基于力量）并减速  20%%。接下来的近战攻击将重置  风暴位置并延长持续时间。"):format(special.radius, special.max_radius, dam)
 	end,
 	["use_power.name"] = "强化冰风暴的冰雪，冻结成冰墙，持  续 10 回合。",
 }

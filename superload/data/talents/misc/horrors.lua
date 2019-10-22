@@ -9,7 +9,7 @@ registerTalentTranslation{
 		local bleed = t.getBleedDamage(self, t) * 100
 		local heal_penalty = t.getHealingPenalty(self, t)
 		return ([[撕咬目标造成 %d%% 武器伤害。减少目标治疗效果 %d%% 并造成 %d%% 武器伤害的流血伤害持续 5 回合。 
-		 只有在狂乱状态下可以使用。]]):format(damage, heal_penalty, bleed)
+		只有在狂乱状态下可以使用。]]):format(damage, heal_penalty, bleed)
 	end,
 }
 
@@ -31,8 +31,8 @@ registerTalentTranslation{
 		local bleed = t.getBleedDamage(self, t) * 100
 		local power = t.getPower(self, t) *100
 		return ([[ 咬伤目标，造成 %d%% 武器伤害，可能让目标进入流血状态，在五回合内造成 %d%% 武器伤害。 
-		 如果目标进入流血状态，吞噬者会进入狂热状态 %d 回合（也会让周围的其他吞噬者进入狂热状态）。
-		 狂热状态会增加整体速度 %d%% , 物理暴击率 %d%% , 同时降至 -%d%% 生命时才会死去。]]):
+		如果目标进入流血状态，吞噬者会进入狂热状态 %d 回合（也会让周围的其他吞噬者进入狂热状态）。
+		狂热状态会增加整体速度 %d%% , 物理暴击率 %d%% , 同时降至 -%d%% 生命时才会死去。]]):
 		format(damage, bleed, t.getDuration(self, t), power, power, power)
 	end,
 }
@@ -82,7 +82,7 @@ registerTalentTranslation{
 --		local damage = t.getDamage(self, t)
 --		local burst = t.getBurstDamage(self, t)
 --		return ([[使目标感染腐肉寄生幼虫持续 %d 回合。每回合会移除目标一个物理增益效果并造成 %0.2f 酸系和 %0.2f 枯萎伤害。 
---		 如果 5 回合后未被清除则幼虫会孵化造成 %0.2f 酸系伤害，移除这个效果但是会在目标处成长为一条成熟的腐肉虫。]]):
+--		如果 5 回合后未被清除则幼虫会孵化造成 %0.2f 酸系伤害，移除这个效果但是会在目标处成长为一条成熟的腐肉虫。]]):
 --		format(duration, damDesc(self, DamageType.ACID, (damage/2)), damDesc(self, DamageType.BLIGHT, (damage/2)), damDesc(self, DamageType.ACID, (burst)))
 --	end,
 --}
@@ -94,7 +94,7 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local duration = t.getDuration(self, t)
 		return ([[ 召唤旋转剑刃风暴将敌人切成碎片，对进入风暴的敌人造成 %d 点物理伤害并令其流血 %d 回合。 
-		 受精神强度影响，伤害和流血持续时间有额外加成。 ]]):format(damDesc(self, DamageType.PHYSICAL, damage), duration)
+		受精神强度影响，伤害和流血持续时间有额外加成。]]):format(damDesc(self, DamageType.PHYSICAL, damage), duration)
 	end,
 }
 
@@ -103,7 +103,7 @@ registerTalentTranslation{
 	name = "念力牵引",
 	info = function(self, t)
 		return ([[将 5 码范围内的目标拉向你并造成 %d 物理伤害。 
-		 受精神强度影响，伤害有额外加成。]]):format(damDesc(self, DamageType.PHYSICAL, self:combatTalentMindDamage(t, 20, 120)))
+		受精神强度影响，伤害有额外加成。]]):format(damDesc(self, DamageType.PHYSICAL, self:combatTalentMindDamage(t, 20, 120)))
 	end,
 }
 
@@ -112,7 +112,7 @@ registerTalentTranslation{
 	name = "刀锋之刃",
 	info = function(self, t)
 		return ([[对一条直线目标发射一把锋利的刀刃造成 %0.2f 物理伤害。 
-		 受精神强度影响，伤害有额外加成。]]):format(damDesc(self, DamageType.PHYSICAL, self:combatTalentMindDamage(t, 20, 200)))
+		受精神强度影响，伤害有额外加成。]]):format(damDesc(self, DamageType.PHYSICAL, self:combatTalentMindDamage(t, 20, 200)))
 	end,
 }
 
@@ -124,7 +124,7 @@ registerTalentTranslation{
 		local duration = t.getDuration(self, t)
 		local radius = self:getTalentRadius(t)
 		return ([[在 1 码范围内形成一个史莱姆墙，每隔 2 回合范围会扩大，直至 %d 码，造成 %0.2f 史莱姆伤害持续 %d 回合。 
-		 受精神强度影响，伤害及持续时间有额外加成。]]):
+		受精神强度影响，伤害及持续时间有额外加成。]]):
 		format(radius, damDesc(self, DamageType.NATURE, damage), duration)
 	end,
 }
@@ -136,8 +136,8 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local duration = t.getDuration(self, t)
 		return ([[抓住一个目标并将其拉至身边，并抓取 %d 回合。需要呼吸的非亡灵类生物还会被窒息。
-		 同时每回合造成 %0.2f 史莱姆伤害。 
-		 受精神强度影响，伤害有额外加成。]]):
+		同时每回合造成 %0.2f 史莱姆伤害。 
+		受精神强度影响，伤害有额外加成。]]):
 		format(duration, damDesc(self, DamageType.SLIME, damage))
 	end,
 }
@@ -147,7 +147,7 @@ registerTalentTranslation{
 	name = "凝胶喷射",
 	info = function(self, t)
 		return ([[向目标喷射毒液造成 %0.2f 自然伤害并降低其 30%% 移动速度持续 3 回合。 
-		 受敏捷影响，伤害有额外加成。]]):format(damDesc(self, DamageType.NATURE, self:combatTalentStatDamage(t, "dex", 30, 290)))
+		受敏捷影响，伤害有额外加成。]]):format(damDesc(self, DamageType.NATURE, self:combatTalentStatDamage(t, "dex", 30, 290)))
 	end,
 }
 

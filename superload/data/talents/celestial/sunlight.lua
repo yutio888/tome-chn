@@ -36,7 +36,7 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		return ([[汲取太阳之力向目标射出一束太阳真火，射向最远的敌人，对这条直线上的所有敌人造成 %0.2f 火焰伤害。 
 		这一技能将会每隔一个回合自动额外触发一次，共额外触发 2 次。
-		 受法术强度影响，伤害有额外加成。]]):
+		受法术强度影响，伤害有额外加成。]]):
 		format(damDesc(self, DamageType.FIRE, damage))
 	end,
 }

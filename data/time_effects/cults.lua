@@ -52,7 +52,7 @@ timeEffectCHN:newEffect{
 		id = "CARRION_FEET",
 		enName = "Carrion Feet",
 		chName = "蠕动之足",
-		desc = function(self, eff) return ("被恶心的蠕虫抓住，造成的伤害减少 %d%%。 "):format(eff.power) end,
+		desc = function(self, eff) return ("被恶心的蠕虫抓住，造成的伤害减少 %d%%。"):format(eff.power) end,
 		type = "魔法",
 		subtype = " slime/ corrupted ",
 }
@@ -189,7 +189,7 @@ timeEffectCHN:newEffect{
 		id = "VOIDBURN",
 		enName = "Voidburn",
 		chName = "虚空灼烧",
-		desc = function(self, eff) return ("目标被虚空折磨，每回合造成 %0.2f 暗影和 %0.2f 时空伤害。 "):format(math.floor(eff.power/2), math.floor(eff.power/2)) end,
+		desc = function(self, eff) return ("目标被虚空折磨，每回合造成 %0.2f 暗影和 %0.2f 时空伤害。"):format(math.floor(eff.power/2), math.floor(eff.power/2)) end,
 		type = "魔法",
 		subtype = " temporal/ darkness ",
 }

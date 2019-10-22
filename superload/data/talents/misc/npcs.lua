@@ -52,7 +52,7 @@ registerTalentTranslation{
 	name = "震慑",
 	info = function(self, t)
 		return ([[攻击目标造成 %d%% 伤害。如果攻击命中则可震慑目标 %d 回合。 
-		 受物理强度影响，震慑几率有额外加成。]]):
+		受物理强度影响，震慑几率有额外加成。]]):
 		format(100 * self:combatTalentWeaponDamage(t, 0.5, 1), t.getDuration(self, t))
 	end,
 }
@@ -62,7 +62,7 @@ registerTalentTranslation{
 	name = "缴械",
 	info = function(self, t)
 		return ([[攻击目标造成 %d%% 伤害，并试图缴械目标 %d 回合。 
-		 受物理强度影响，缴械几率有额外加成。]]):
+		受物理强度影响，缴械几率有额外加成。]]):
 		format(100 * self:combatTalentWeaponDamage(t, 0.5, 1), t.getDuration(self, t))
 	end,
 }
@@ -72,7 +72,7 @@ registerTalentTranslation{
 	name = "压迫",
 	info = function(self, t)
 		return ([[攻击目标造成 %d%% 伤害，如果攻击命中则可令目标进入压迫状态 %d 回合。 
-		 受物理强度影响，压迫强度有额外加成]]):
+		受物理强度影响，压迫强度有额外加成]]):
 		format(100 * self:combatTalentWeaponDamage(t, 0.5, 1), t.getDuration(self, t))
 	end,
 }
@@ -82,7 +82,7 @@ registerTalentTranslation{
 	name = "击退",
 	info = function(self, t)
 		return ([[使用武器打击目标造成 %d%% 伤害，如果攻击命中则可击退目标至多 4 格。 
-		 受物理强度影响，击退几率有额外加成。]]):format(100 * self:combatTalentWeaponDamage(t, 1.5, 2))
+		受物理强度影响，击退几率有额外加成。]]):format(100 * self:combatTalentWeaponDamage(t, 1.5, 2))
 	end,
 }
 
@@ -146,7 +146,7 @@ registerTalentTranslation{
 	name = "水弹",
 	info = function(self, t)
 		return ([[浓缩周围的水份形成水弹攻击目标造成 %0.1f 冰冻伤害。
-		 受法术强度影响，伤害有额外加成。]]):
+		受法术强度影响，伤害有额外加成。]]):
 		format(damDesc(self, DamageType.COLD,t.getDamage(self, t)))
 	end,
 }
@@ -190,7 +190,7 @@ registerTalentTranslation{
 	name = "水之喷射",
 	info = function(self, t)
 		return ([[浓缩周围的水份喷射目标造成 %0.1f 冰冻伤害并震慑目标 4 回合。 
-		 受法术强度影响，伤害有额外加成。]]):
+		受法术强度影响，伤害有额外加成。]]):
 		format(damDesc(self, DamageType.COLD,t.getDamage(self, t)))
 	end,
 }
@@ -200,7 +200,7 @@ registerTalentTranslation{
 	name = "虚空爆炸",
 	info = function(self, t)
 		return ([[施放虚空能量形成爆炸气旋向目标缓慢移动，对途径目标造成 %0.2f 奥术伤害。 
-		 受法术强度影响，伤害有额外加成。]]):format(damDesc(self, DamageType.ARCANE, self:combatTalentSpellDamage(t, 15, 240)))
+		受法术强度影响，伤害有额外加成。]]):format(damDesc(self, DamageType.ARCANE, self:combatTalentSpellDamage(t, 15, 240)))
 	end,
 }
 
@@ -220,7 +220,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local regen = t.getRegeneration(self, t)
 		return ([[召唤自然的力量治愈你的身体，每回合回复 %d 生命值持续 10 回合。 
-		 受法术强度影响，治疗量有额外加成。]]):
+		受法术强度影响，治疗量有额外加成。]]):
 		format(regen)
 	end,
 }
@@ -248,7 +248,7 @@ registerTalentTranslation{
 	name = "毒性喷吐",
 	info = function(self, t)
 		return ([[向目标喷射毒液造成共计 %0.2f 毒素伤害，持续 6 回合。 
-		 受力量或敏捷（取较高值）影响，伤害有额外加成。]]):
+		受力量或敏捷（取较高值）影响，伤害有额外加成。]]):
 		format(damDesc(self, DamageType.POISON, t.getDamage(self,t)))
 	end,
 }
@@ -268,7 +268,7 @@ registerTalentTranslation{
 	name = "枯萎喷吐",
 	info = function(self, t)
 		return ([[喷吐目标造成 %0.2f 枯萎伤害。 
-		 受魔法影响，伤害有额外加成。]]):format(t.getDamage(self,t))
+		受魔法影响，伤害有额外加成。]]):format(t.getDamage(self,t))
 	end,
 }
 
@@ -277,7 +277,7 @@ registerTalentTranslation{
 	name = "冲锋抓击",
 	info = function(self, t)
 		return ([[快速向目标冲锋，并使用爪子将目标定身 5 回合。 
-		 至少距离目标 2 码以外才能施放。]])
+		至少距离目标 2 码以外才能施放。]])
 	end,
 }
 
@@ -286,7 +286,7 @@ registerTalentTranslation{
 	name = "投掷白骨",
 	info = function(self, t)
 		return ([[向目标投掷白骨造成 %0.2f 物理流血伤害，最远距离 %d 。
-		 受力量影响，伤害有额外加成。]]):
+		受力量影响，伤害有额外加成。]]):
 		format(damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t)), self:getTalentRadius(t))
 	end,
 }
@@ -306,7 +306,7 @@ registerTalentTranslation{
 	name = "黑暗",
 	info = function(self, t)
 		return ([[制造黑暗，阻挡所有光线（强度 %d 范围 %d 码），并能使你传送一小段距离。 
-		 受敏捷影响，伤害有额外加成。]]):
+		受敏捷影响，伤害有额外加成。]]):
 		format(t.darkPower(self, t), self:getTalentRadius(t))
 	end,
 }
@@ -316,7 +316,7 @@ registerTalentTranslation{
 	name = "投掷巨石",
 	info = function(self, t)
 		return ([[向目标投掷一块巨大的石头，造成 %0.2f 伤害并将其击退 %d 码,投掷半径 %d 。 
-		 受力量影响，伤害有额外加成。]]):format(damDesc(self, DamageType.PHYSICAL, t.getDam(self, t)), t.getDist(self, t), self:getTalentRadius(t))
+		受力量影响，伤害有额外加成。]]):format(damDesc(self, DamageType.PHYSICAL, t.getDam(self, t)), t.getDist(self, t), self:getTalentRadius(t))
 	end,
 }
 
@@ -363,7 +363,7 @@ registerTalentTranslation{
 	name = "念力爆炸",
 	info = function(self, t)
 		return ([[施放念力攻击击退目标至多 3 格并造成 %0.2f 物理伤害。 
-		 受精神强度影响，伤害有额外加成。]]):format(self:damDesc(engine.DamageType.PHYSICAL, t.getDamage(self, t)))
+		受精神强度影响，伤害有额外加成。]]):format(self:damDesc(engine.DamageType.PHYSICAL, t.getDamage(self, t)))
 	end,
 }
 
@@ -372,7 +372,7 @@ registerTalentTranslation{
 	name = "枯萎区域",
 	info = function(self, t)
 		return ([[蒸腾目标区域（ 4 码范围）造成每回合 %0.2f 枯萎伤害持续 %d 回合。 
-		 受法术强度影响，伤害有额外加成。]]):
+		受法术强度影响，伤害有额外加成。]]):
 		format(damDesc(self, engine.DamageType.BLIGHT, self:combatTalentSpellDamage(t, 5, 65)), t.getDuration(self, t))
 	end,
 }
@@ -413,7 +413,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local dam = t.getDamage(self, t)
 		return ([[召唤一个小型火山持续 %d 回合。每回合它会朝你的目标喷射 %d 熔岩，造成 %0.2f 火焰伤害和 %0.2f 物理伤害。 
-		 受法术强度影响，伤害有额外加成。]]):
+		受法术强度影响，伤害有额外加成。]]):
 		format(t.getDuration(self, t), t.nbProj(self, t), damDesc(self, DamageType.FIRE, dam/2), damDesc(self, DamageType.PHYSICAL, dam/2))
 	end,
 }
@@ -469,7 +469,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		return ([[制造一个石拳造成 %0.2f 物理伤害并击退目标 3 格。 
-		 受法术强度影响，伤害有额外加成。]]):format(damDesc(self, DamageType.PHYSICAL, damage))
+		受法术强度影响，伤害有额外加成。]]):format(damDesc(self, DamageType.PHYSICAL, damage))
 	end,
 }
 
@@ -480,7 +480,7 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local duration = t.getDuration(self, t)
 		return ([[在 3 码半径范围内升起一片腐蚀性的酸雾，造成 %0.2f 毒系伤害，持续 %d 回合。 
-		 受法术强度影响，伤害有额外加成。]]):
+		受法术强度影响，伤害有额外加成。]]):
 		format(damDesc(self, DamageType.ACID, damage), duration)
 	end,
 }
@@ -491,7 +491,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local restoration = t.getManaRestoration(self, t)
 		return ([[将自己包围在法力的河水中，每回合回复 %d 点法力值，持续 10 回合。 
-		 受法术强度影响，法力回复有额外加成。]]):
+		受法术强度影响，法力回复有额外加成。]]):
 		format(restoration)
 	end,
 }
@@ -502,7 +502,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local radius = self:getTalentRadius(t)
 		return ([[对 %d 码范围吐出黑暗之火。所有非恶魔生物受到 %0.2f 火焰伤害，并在接下来继续造成每回合 %0.2f 的持续火焰伤害。恶魔则会治疗同等数值的生命值。 
-		 受力量影响，伤害有额外加成。]]):
+		受力量影响，伤害有额外加成。]]):
 		format(radius, damDesc(self, DamageType.FIRE, self:combatTalentStatDamage(t, "str", 30, 350)), damDesc(self, DamageType.FIRE, self:combatTalentStatDamage(t, "str", 30, 70)))
 	end,
 }
@@ -514,7 +514,7 @@ registerTalentTranslation{
 		local icedamage = t.getIceDamage(self, t)
 		local icedamageinc = t.getIceDamageIncrease(self, t)
 		return ([[将你的双手笼罩在寒冰之中每次近战攻击造成 %0.2f 冰冷伤害，并提高 %d%% 冰冷伤害。 
-		 受法术强度影响，效果有额外加成。]]):
+		受法术强度影响，效果有额外加成。]]):
 		format(damDesc(self, DamageType.COLD, icedamage), icedamageinc, self:getTalentLevel(t) / 3)
 	end,
 }
@@ -525,8 +525,8 @@ registerTalentTranslation{
 	info = function(self, t)
 		local dam = t.getDamage(self, t)/2
 		return ([[使用奥术力量召唤 %d 个陨石，冲击地面对 2 码范围内造成 %0.2f 火焰和 %0.2f 物理伤害。 
-		 被击中的地面同时形成熔岩持续 8 回合。 
-		 受法术强度影响，效果有额外加成。]]):
+		被击中的地面同时形成熔岩持续 8 回合。 
+		受法术强度影响，效果有额外加成。]]):
 		format(t.getNb(self, t), damDesc(self, DamageType.FIRE, dam), damDesc(self, DamageType.PHYSICAL, dam))
 	end,
 }
@@ -537,7 +537,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local heal = t.getHeal(self, t)
 		return ([[使身体吸收自然能量，治疗 %d 生命值。 
-		 受精神强度影响，治疗量有额外加成。]]):
+		受精神强度影响，治疗量有额外加成。]]):
 		format(heal)
 	end,
 }
@@ -654,7 +654,7 @@ registerTalentTranslation{
 		return ([[抓取目标并给予其 %0.2f 物理伤害。 
 		如果目标已被抓取，则目标会被致残，减少 %d 伤害和 30%% 整体速度持续 %d 回合。 
 		抓取效果受你已有的抓取技能影响。 
-		受物理强度影响，伤害按比例加成。 ]])
+		受物理强度影响，伤害按比例加成。]])
 		:format(damDesc(self, DamageType.PHYSICAL, (damage)), maim, duration)
 	end,
 }
@@ -686,7 +686,7 @@ registerTalentTranslation{
 		local boost = t.getBoost(self, t)
 		local dur = t.getDuration(self, t)
 		return ([[用灵能围绕你的身体，通过思想高效控制身体，允许你不使用肌肉和神经操纵身体。 
-		 增加 %d 点命中和 %0.2f%% 暴击概率，持续 %d 回合。]]):
+		增加 %d 点命中和 %0.2f%% 暴击概率，持续 %d 回合。]]):
 		format(boost, 0.5*boost, dur)
 	end,
 }
@@ -742,7 +742,7 @@ registerTalentTranslation{
 	name = "白骨新星",
 	info = function(self, t)
 		return ([[向所有方向射出骨矛，对 %d 码范围内所有敌人造成 %0.2f 物理伤害,同时在 5 回合内造成 %0.2f 流血伤害。  
-		 受法术强度影响，伤害有额外加成。]]):format(self:getTalentRadius(t), damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t)), damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t)/2))
+		受法术强度影响，伤害有额外加成。]]):format(self:getTalentRadius(t), damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t)), damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t)/2))
 	end,
 }
 
@@ -752,7 +752,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local duration = t.getDuration(self, t)
 		return ([[你向目标甩出 1 道影之绳索，将目标拉向你并沉默它 %d 回合，同时眩晕目标 2 回合。 
-		 受命中影响，技能命中率有额外加成。]]):
+		受命中影响，技能命中率有额外加成。]]):
 		format(duration)
 	end,
 }
@@ -762,9 +762,9 @@ registerTalentTranslation{
 	name = "影分身",
 	info = function(self, t)
 		return ([[你在 %d 回合内完全控制你的影子。 
-		 你的影子继承了你的天赋和属性，拥有你 %d%% 的生命值并造成等同于你 %d%% 的伤害， -30%% 所有抵抗， -100%% 光属性抵抗并增加 100%% 暗影抵抗。 
-		 你的影子处于永久潜行状态（ %d 潜行强度）并且它所造成的所有近战伤害均会转化为暗影伤害。 
-		 如果你提前解除控制或者它离开你的视野时间过长，你的影分身会自动消失。]]):
+		你的影子继承了你的天赋和属性，拥有你 %d%% 的生命值并造成等同于你 %d%% 的伤害， -30%% 所有抵抗， -100%% 光属性抵抗并增加 100%% 暗影抵抗。 
+		你的影子处于永久潜行状态（ %d 潜行强度）并且它所造成的所有近战伤害均会转化为暗影伤害。 
+		如果你提前解除控制或者它离开你的视野时间过长，你的影分身会自动消失。]]):
 		format(t.getDuration(self, t), t.getHealth(self, t) * 100, t.getDam(self, t) * 100, t.getStealthPower(self, t))
 	end,
 }
@@ -775,7 +775,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local duration = t.getDuration(self, t)
 		return ([[使你的武器立刻转化为暗影之缚形态，夺取目标武器，缴械目标 %d 回合。 
-		 受命中影响，技能命中率有额外加成。]]):
+		受命中影响，技能命中率有额外加成。]]):
 		format(duration)
 	end,
 }
@@ -787,7 +787,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local chance = t.getChance(self, t)
 		local duration = t.getDuration(self, t)
-		return ([[在黑暗光环里的每一个目标每回合必须与你的精神强度进行豁免鉴定，未通过鉴定则有 %0.1f%% 概率受到黑暗痛苦持续 %d 回合，你对受黑暗痛苦折磨的目标进行的首次近战攻击必定暴击。 ]]):format(chance, duration)
+		return ([[在黑暗光环里的每一个目标每回合必须与你的精神强度进行豁免鉴定，未通过鉴定则有 %0.1f%% 概率受到黑暗痛苦持续 %d 回合，你对受黑暗痛苦折磨的目标进行的首次近战攻击必定暴击。]]):format(chance, duration)
 	end,
 }
 
@@ -798,7 +798,7 @@ registerTalentTranslation{
 		local power = t.getPower(self, t)
 		local duration = t.getDur(self, t)
 		return ([[ 你连接到你的阴影，持续 %d 回合，将你受到的伤害的 %d%% 转移至随机某个阴影上。
-		 受精神强度影响，效果有额外加成。 ]]):
+		受精神强度影响，效果有额外加成。]]):
 		format(duration, power)
 	end,
 }
@@ -812,8 +812,8 @@ registerTalentTranslation{
 		local duration = t.getDuration(self, t)
 		local radius = self:getTalentRadius(t)
 		return ([[在你的脚下制造一个 %d 码半径的法阵，它会照亮范围区域，每回合增加 %d 正能量并造成 %0.2f 光系伤害和 %0.2f 火焰伤害。 
-		 阵法持续 %d 回合。 
-		 受法术强度影响，伤害有额外加成。]]):
+		阵法持续 %d 回合。 
+		受法术强度影响，伤害有额外加成。]]):
 		format(radius, 1 + (damage / 4), (damDesc (self, DamageType.LIGHT, damage)), (damDesc (self, DamageType.FIRE, damage)), duration)
 	end,
 }

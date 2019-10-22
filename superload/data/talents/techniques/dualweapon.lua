@@ -51,7 +51,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		return ([[用副手武器造成 %d%% 伤害。 
 		如果攻击命中，目标将会被震慑 %d 回合并且你会使用主武器对目标造成 %d%% 伤害。 
-		受命中影响，震慑概率有额外加成。 ]])
+		受命中影响，震慑概率有额外加成。]])
 		:format(100 * self:combatTalentWeaponDamage(t, 0.7, 1.5), t.getStunDuration(self, t), 100 * self:combatTalentWeaponDamage(t, 0.7, 1.5))
 	end,
 }
@@ -78,7 +78,7 @@ registerTalentTranslation{
 	name = "拔刀斩",
 	info = function(self, t)
 		return ([[对你正前方锥形范围的敌人造成 %d%% 武器伤害并使目标进入流血状态，每回合造成 %d 点伤害，持续 %d 回合。
-		 受主手武器伤害和敏捷影响，流血伤害有额外加成。 ]]):
+		受主手武器伤害和敏捷影响，流血伤害有额外加成。]]):
 		format(100 * self:combatTalentWeaponDamage(t, 1, 1.7), damDesc(self, DamageType.PHYSICAL, t.cutPower(self, t)), t.cutdur(self, t))
 	end,
 }

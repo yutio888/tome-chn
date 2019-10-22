@@ -22,7 +22,7 @@ registerTalentTranslation{
 		return ([[你机智地利用敌人的伤残，每项伤残效果增加 %d%%伤害，最多 %d%%。
 伤残效果包括：震慑、致盲、眩晕、定身、缴械、致残和沉默。
 此外，每项伤残效果使你的近战攻击有 %d%%几率（最多叠加至 %d%%）附加额外效果（不会重复）：缴械、致残（25%%强度）或者定身 2 回合。
-附加效果成功率受命中加成。 ]]):
+附加效果成功率受命中加成。]]):
 		format(dam, dam*3, chance, chance*3)
 	end,
 }
@@ -35,7 +35,7 @@ registerTalentTranslation{
 		local speed = t.getSlow(self,t)
 		local duration = t.getDuration(self, t)
 		return ([[撒出致盲粉，致盲前方 %d 格锥形范围内的敌人。受影响的敌人命中减少  %d  ，移动速度减少  %d%%  ，持续  %d  回合。
-		 效果成功率受命中加成。]]):format(self:getTalentRadius(t), accuracy, speed, duration)
+		效果成功率受命中加成。]]):format(self:getTalentRadius(t), accuracy, speed, duration)
 	end,
 }
 

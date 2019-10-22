@@ -35,7 +35,7 @@ registerTalentTranslation{
 	id = "T_MULTISHOT",
 	name = "多重射击",
 	info = function(self, t)
-		return ([[你向目标射出平均 %0.1f 子弹，每发子弹造成 %d%% 伤害。 ]]):format(t.getShots(self, t, true), 100 * self:combatTalentWeaponDamage(t, 0.3, 0.7))
+		return ([[你向目标射出平均 %0.1f 子弹，每发子弹造成 %d%% 伤害。]]):format(t.getShots(self, t, true), 100 * self:combatTalentWeaponDamage(t, 0.3, 0.7))
 	end,
 }
 

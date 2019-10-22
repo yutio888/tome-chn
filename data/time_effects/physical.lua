@@ -1126,7 +1126,7 @@ timeEffectCHN:newEffect{
 	id = "ESCAPE",
 	enName = "Escape",
 	chName = "逃脱",
-	desc = function (self, eff) return ("集中精力移动闪避，减少受到的伤害 %d%%, 体力回复增加 %0.1f，移动速度增加 %d%%。使用攻击技能会终止该效果。 "):format(eff.power, eff.stamina, eff.speed)  end,
+	desc = function (self, eff) return ("集中精力移动闪避，减少受到的伤害 %d%%, 体力回复增加 %0.1f，移动速度增加 %d%%。使用攻击技能会终止该效果。"):format(eff.power, eff.stamina, eff.speed)  end,
 	type = "物理",
 	subtype = "策略/速度",
 }

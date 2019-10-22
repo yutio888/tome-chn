@@ -955,7 +955,7 @@ function _M:getTalentDesc(item)
 		local unlearnable, could_unlearn = self:isUnlearnable(t, true)
 		if unlearnable then
 			local max = tostring(self.actor:lastLearntTalentsMax(t.generic and "generic" or "class"))
-			text:add({"color","LIGHT_BLUE"}, "你刚在此技能上加点，你还可以遗忘它。 ", true, "你总是可以移除最近的 ", max, t.generic and " 点通用 " or " 点职业", "  技能点 ", {"color","LAST"}, true, true)
+			text:add({"color","LIGHT_BLUE"}, "你刚在此技能上加点，你还可以遗忘它。", true, "你总是可以移除最近的 ", max, t.generic and " 点通用 " or " 点职业", "  技能点 ", {"color","LAST"}, true, true)
 		elseif t.no_unlearn_last then
 			text:add({"color","YELLOW"}, "本技能会永久性的影响这个游戏世界，所以学习之后无法移除。", {"color","LAST"}, true, true)
 		elseif could_unlearn then

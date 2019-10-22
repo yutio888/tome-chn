@@ -25,7 +25,7 @@ registerTalentTranslation{
 	name = "双重射击",
 	info = function(self, t)
 		return ([[你向目标同时射出 2 支箭，对目标及其周围的一个敌人造成 %d%% 伤害。 
-		此技能不消耗体力值。 ]]):format(100 * self:combatTalentWeaponDamage(t, 1.2, 1.9))
+		此技能不消耗体力值。]]):format(100 * self:combatTalentWeaponDamage(t, 1.2, 1.9))
 	end,
 }
 
@@ -33,7 +33,7 @@ registerTalentTranslation{
 	id = "T_VOLLEY_OF_ARROWS",
 	name = "箭雨",
 	info = function(self, t)
-		return ([[你向 %d 码半径区域内射出多支箭，每只箭造成 %d%% 伤害。 ]])
+		return ([[你向 %d 码半径区域内射出多支箭，每只箭造成 %d%% 伤害。]])
 		:format(self:getTalentRadius(t), 100 * self:combatTalentWeaponDamage(t, 0.6, 1.3))
 	end,
 }

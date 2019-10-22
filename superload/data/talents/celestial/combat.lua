@@ -7,8 +7,8 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local shieldflat = t.getShieldFlat(self, t)
 		return ([[使你的武器充满太阳能量，每击造成 %0.2f 光系伤害。 
-		 如果你同时打开了临时伤害护盾，每回合一次，你的近战攻击命中可以增加护盾 %d 强度。
-		 受法术强度影响，伤害和护盾加成有额外加成。]]):
+		如果你同时打开了临时伤害护盾，每回合一次，你的近战攻击命中可以增加护盾 %d 强度。
+		受法术强度影响，伤害和护盾加成有额外加成。]]):
 		format(damDesc(self, DamageType.LIGHT, damage), shieldflat)
 	end,
 }

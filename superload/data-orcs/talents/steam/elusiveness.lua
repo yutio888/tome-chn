@@ -5,7 +5,7 @@ registerTalentTranslation{
 	name = "身如游鱼",
 	info = function(self, t)
 		return ([[用小型喷射引擎强化你的机动性，可以穿过直线上连续的 %d 个敌人。
-	穿越后，会急速前进 %d 码。 ]])
+	穿越后，会急速前进 %d 码。]])
 		:format(t.getRange(self, t), t.getAway(self, t))
 	end,}
 

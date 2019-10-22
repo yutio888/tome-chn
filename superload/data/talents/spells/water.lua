@@ -20,8 +20,8 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local duration = t.getDuration(self, t)
 		return ([[在 3 码半径范围内升起一片寒冷的冰雾，每回合造成 %0.2f 冰冷伤害，持续 %d 回合。 
-		 处于湿润状态的生物承受额外 30%% 伤害，并有 15%% 几率被冻结。
-		 受法术强度影响，伤害有额外加成。]]):
+		处于湿润状态的生物承受额外 30%% 伤害，并有 15%% 几率被冻结。
+		受法术强度影响，伤害有额外加成。]]):
 		format(damDesc(self, DamageType.COLD, damage), duration)
 	end,
 }
@@ -34,9 +34,9 @@ registerTalentTranslation{
 		local duration = t.getDuration(self, t)
 		local radius = self:getTalentRadius(t)
 		return ([[以施法者为中心，在 1 码半径范围内生成一股巨浪，每回合增加 1 码半径范围，最大 %d 码。 
-		 对目标造成 %0.2f 冰冷伤害和 %0.2f 物理伤害，同时击退目标，持续 %d 回合。 
-		 所有受影响的生物进入湿润状态，震慑抗性减半。
-		 受法术强度影响，伤害和持续时间有额外加成。]]):
+		对目标造成 %0.2f 冰冷伤害和 %0.2f 物理伤害，同时击退目标，持续 %d 回合。 
+		所有受影响的生物进入湿润状态，震慑抗性减半。
+		受法术强度影响，伤害和持续时间有额外加成。]]):
 		format(radius, damDesc(self, DamageType.COLD, damage/2), damDesc(self, DamageType.PHYSICAL, damage/2), duration)
 	end,
 }
@@ -66,9 +66,9 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local duration = t.getDuration(self, t)
 		return ([[召唤一股激烈的暴风雪围绕着施法者，在 3 码范围内每回合对目标造成 %0.2f 冰冷伤害，持续 %d 回合。 
-		 它有 25%% 概率冰冻受影响目标。 
-		 如果目标处于湿润状态，伤害增加 30%% ，同时冻结率上升至 50%% 。
-		 受法术强度影响，伤害和持续时间有额外加成。]]):format(damDesc(self, DamageType.COLD, damage), duration)
+		它有 25%% 概率冰冻受影响目标。 
+		如果目标处于湿润状态，伤害增加 30%% ，同时冻结率上升至 50%% 。
+		受法术强度影响，伤害和持续时间有额外加成。]]):format(damDesc(self, DamageType.COLD, damage), duration)
 	end,
 }
 

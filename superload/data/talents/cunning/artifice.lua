@@ -102,7 +102,7 @@ registerTalentTranslation{
 		:format(damage, bleed)
 	end,
 	short_info = function(self, t)
-		return ([[你的隐匿刀锋会触发流血效果，同时强化暗杀技能，自动攻击两次造成 %d%% 徒手伤害，无视护甲与抗性。 ]]):format(t.getDamage(self, t)*100)
+		return ([[你的隐匿刀锋会触发流血效果，同时强化暗杀技能，自动攻击两次造成 %d%% 徒手伤害，无视护甲与抗性。]]):format(t.getDamage(self, t)*100)
 	end,
 }
 registerTalentTranslation{

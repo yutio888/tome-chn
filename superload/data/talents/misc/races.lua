@@ -15,9 +15,9 @@ registerTalentTranslation{
 	name = "远见卓识",
 	info = function(self, t)
 		return ([[虽然高贵血统并不意味着统治他人（当然也没有特别的意愿去那样做），但是他们经常承担更高的义务。 
-		 他们的本能使得他们比别人有更强的直觉。 
-		 增加 %d%% 目盲免疫 , 提高 %d 点最大视野范围并提高 %d 光照、夜视及感应范围。
-		 技能等级 5 时，每次你命中目标，你将获得 15 格范围内同类型生物感知能力，持续 5 回合。]]):
+		他们的本能使得他们比别人有更强的直觉。 
+		增加 %d%% 目盲免疫 , 提高 %d 点最大视野范围并提高 %d 光照、夜视及感应范围。
+		技能等级 5 时，每次你命中目标，你将获得 15 格范围内同类型生物感知能力，持续 5 回合。]]):
 		format(t.getImmune(self, t) * 100, t.getSight(self, t), t.getESight(self, t))
 	end,
 }
@@ -28,8 +28,8 @@ registerTalentTranslation{
 	info = function(self, t)
 		local netpower = t.power(self, t)
 		return ([[高等人类们最初是在厄流纪前由红衣主神们创造的。他们天生具有魔法天赋。 
-		 提高 %d 点法术豁免和 %d%% 奥术抵抗。
-		 每次释放伤害法术时， 5 回合内该伤害类型获得 20%% 伤害加成。（该效果有冷却时间。）]]):
+		提高 %d 点法术豁免和 %d%% 奥术抵抗。
+		每次释放伤害法术时， 5 回合内该伤害类型获得 20%% 伤害加成。（该效果有冷却时间。）]]):
 		format(t.getSave(self, t), netpower)
 	end,
 }
@@ -40,8 +40,8 @@ registerTalentTranslation{
 	info = function(self, t)
 		local duration = t.getDuration(self, t)
 		return ([[激活你的内在潜力，以提高你的能力。 
-		 在接下来 %d 回合中可无消耗使用技能。 
-		 你的能量值仍需要满足使用这些技能的最低能量需求，且技能仍有几率会失败。]]):format(duration)
+		在接下来 %d 回合中可无消耗使用技能。 
+		你的能量值仍需要满足使用这些技能的最低能量需求，且技能仍有几率会失败。]]):format(duration)
 	end,
 }
 
@@ -50,7 +50,7 @@ registerTalentTranslation{
 	name = "不朽的恩赐",
 	info = function(self, t)
 		return ([[召唤不朽的恩赐之力来增加你 %d%% 的整体速度，持续 5 回合。 
-		 受敏捷和魔法中较高一项影响，速度会有额外的提升。]]):
+		受敏捷和魔法中较高一项影响，速度会有额外的提升。]]):
 		format(t.getSpeed(self, t) * 100)
 	end,
 }
@@ -60,7 +60,7 @@ registerTalentTranslation{
 	name = "不朽的魔法",
 	info = function(self, t)
 		return ([[因为永恒精灵的自然魔法，现实发生了轻微的扭曲。 
-		 提高 %d%% 的暴击概率和 %d%% 暴击伤害。]]):
+		提高 %d%% 的暴击概率和 %d%% 暴击伤害。]]):
 		format(t.critChance(self, t), t.critPower(self, t))
 	end,
 }
@@ -80,7 +80,7 @@ registerTalentTranslation{
 	name = "超越永恒",
 	info = function(self, t)
 		return ([[世界在不断的变老，而你似乎永恒不变。对于你来说，时间是不同寻常的。 
-		 减少 %d 回合负面状态的持续时间，减少技能 %d 回合冷却时间直至冷却并增加 %d 回合增益状态的持续时间（至多延长为剩余时间的两倍）。]]):
+		减少 %d 回合负面状态的持续时间，减少技能 %d 回合冷却时间直至冷却并增加 %d 回合增益状态的持续时间（至多延长为剩余时间的两倍）。]]):
 		format(t.getEffectBad(self, t), t.getEffectGood(self, t), t.getEffectGood(self, t))
 	end,
 }
@@ -90,7 +90,7 @@ registerTalentTranslation{
 	name = "森林的恩赐",
 	info = function(self, t)
 		return ([[召唤自然的力量，每回合恢复 %d 生命值，治疗系数增加 %d%%，持续 10 回合。
-		 生命恢复量受意志值加成。]]):format(5 + self:getWil() * 0.5, t.getHealMod(self, t))
+		生命恢复量受意志值加成。]]):format(5 + self:getWil() * 0.5, t.getHealMod(self, t))
 	end,
 }
 
@@ -99,7 +99,7 @@ registerTalentTranslation{
 	name = "亲近自然",
 	info = function(self, t)
 		return ([[自然精灵对自然元素有亲和力，这让它们在受到伤害时可以获得一定的治疗。
-		 获得  %d%%  自然和酸性伤害吸收。]]):
+		获得  %d%%  自然和酸性伤害吸收。]]):
 		format(t.getAffinity(self, t))
 	end,
 }
@@ -109,7 +109,7 @@ registerTalentTranslation{
 	name = "森林守护",
 	info = function(self, t)
 		return ([[自然精灵是森林的一部分，森林保护他们免受侵蚀。 
-		 提高 %d%% 疾病抵抗、 %0.1f%% 枯萎抵抗和 %0.1f%% 所有抵抗。]]):
+		提高 %d%% 疾病抵抗、 %0.1f%% 枯萎抵抗和 %0.1f%% 所有抵抗。]]):
 		format(t.getDiseaseImmune(self, t)*100, t.getBResist(self, t), t.getAllResist(self, t))
 	end,
 }
@@ -120,10 +120,10 @@ registerTalentTranslation{
 	info = function(self, t)
 		local base_stats = self:combatScale(self:getWil() * self:getTalentLevel(t), 25, 0, 125, 500, 0.75)
 		return ([[自然与自然精灵同在，你他们可以时刻感受到森林的召唤。 
-		 召唤 2 个精英树人，持续 8 回合。 
-		 树人的所有抵抗取决于你的枯萎抵抗，并且可以震慑、击退并嘲讽你的敌人。 
+		召唤 2 个精英树人，持续 8 回合。 
+		树人的所有抵抗取决于你的枯萎抵抗，并且可以震慑、击退并嘲讽你的敌人。 
 		你的意志值 (%d)将会被加到它们的所有非魔法主要属性值上，他们的技能等级受到你自然的骄傲技能等级的加成。
-		 你的伤害加成，伤害穿透和其他许多属性会被继承。]]):format(self:getWil())
+		你的伤害加成，伤害穿透和其他许多属性会被继承。]]):format(self:getWil())
 	end,
 }
 
@@ -133,7 +133,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local params = t.getParams(self, t)
 		return ([[召唤矮人一族的传奇血统来增加你 +%d 点护甲值， +%d%% 护甲硬度， +%d 点法术豁免和 +%d 物理豁免，持续 8 回合。 
-		 受你的体质影响，此效果有额外加成。]]):
+		受你的体质影响，此效果有额外加成。]]):
 		format(params.armor, params.armor_hardiness, params.physical, params.spell)
 	end,
 }
@@ -154,7 +154,7 @@ registerTalentTranslation{
 	name = "金钱就是力量",
 	info = function(self, t)
 		return ([[金钱是矮人王国的心脏，它控制了所有其他决策。 
-		 基于你的金币持有量，增加物理、精神和法术抵抗。 
+		基于你的金币持有量，增加物理、精神和法术抵抗。 
 		+1 豁免值每 %d 单位金币，最大 +%d (当前 +%d )。]]):
 		format(t.getGold(self, t), t.getMaxSaves(self, t), t.getSaves(self, t))
 	end,
@@ -166,8 +166,8 @@ registerTalentTranslation{
 	info = function(self, t)
 		local range = t.getRange(self, t)
 		return ([[虽然矮人的起源对其他种族来说始终是不解之谜，但是很显然他们的起源与石头密不可分。 
-		 你可以指定任何一堵墙并立刻穿过它，出现在另一侧。 
-		 穿墙距离最大 %d 码（受体质和分类天赋等级影响有额外加成）]]):
+		你可以指定任何一堵墙并立刻穿过它，出现在另一侧。 
+		穿墙距离最大 %d 码（受体质和分类天赋等级影响有额外加成）]]):
 		format(range)
 	end,
 }
@@ -178,7 +178,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local params = t.getParams(self, t)
 		return ([[召唤小不点的幸运和机智来提高你 %d%%  暴击率和 %d  豁免 5 回合。 
-		 受灵巧影响，此效果有额外增益。]]):
+		受灵巧影响，此效果有额外增益。]]):
 		format(params.crit, params.save)
 	end,
 }
@@ -201,8 +201,8 @@ registerTalentTranslation{
 	name = "英勇",
 	info = function(self, t)
 		return ([[半身人曾是一个有组织纪律的种族，敌人越多他们越团结。 
-		 如果有 2 个或多个敌人在你的视野里，每个敌人都会使你的所有强度和豁免提高 %0.1f 。（最多 5 个敌人）]]):
-		 format(self:getTalentLevel(t) * 2)
+		如果有 2 个或多个敌人在你的视野里，每个敌人都会使你的所有强度和豁免提高 %0.1f 。（最多 5 个敌人）]]):
+		format(self:getTalentLevel(t) * 2)
 	end,
 }
 
@@ -213,8 +213,8 @@ registerTalentTranslation{
 		local duration = t.getDuration(self, t)
 		local count = t.getRemoveCount(self, t)
 		return ([[半身人以骁勇善战闻名于世，他们曾经在战场上对抗其他种族上千年。 
-		 立刻移除 2 种震慑、眩晕和定身状态，并使你对震慑、眩晕和定身免疫 %d 回合。 
-		 使用此技能不消耗回合。]]):format(duration, count)
+		立刻移除 2 种震慑、眩晕和定身状态，并使你对震慑、眩晕和定身免疫 %d 回合。 
+		使用此技能不消耗回合。]]):format(duration, count)
 	end,
 }
 
@@ -223,8 +223,8 @@ registerTalentTranslation{
 	name = "兽族之怒",
 	info = function(self, t)
 		return ([[激活你对杀戮和破坏的渴望，尤其是当你孤军奋战之时。
-		 你视野中每有一个敌人，增加所有伤害 10 %% + %0.1f%%（最多5个敌人， %0.1f%% ），持续 3 回合。
-		 受体质影响，增益有额外加成。]]):
+		你视野中每有一个敌人，增加所有伤害 10 %% + %0.1f%%（最多5个敌人， %0.1f%% ），持续 3 回合。
+		受体质影响，增益有额外加成。]]):
 		format(t.getPower(self, t), 10 + t.getPower(self, t) * 5)
 	end,
 }
@@ -257,8 +257,8 @@ registerTalentTranslation{
 	name = "兽族荣耀",
 	info = function(self, t)
 		return ([[呼唤兽族荣耀来和敌人拼搏。 
-		 移除 %d 个负面状态并治疗 %d 生命值。
-		 受意志影响，治疗量有额外加成。]]):
+		移除 %d 个负面状态并治疗 %d 生命值。
+		受意志影响，治疗量有额外加成。]]):
 		format(t.remcount(self,t), t.heal(self, t))
 	end,
 }
@@ -268,9 +268,9 @@ registerTalentTranslation{
 	name = "主导意志",
 	info = function(self, t)
 		return ([[粉碎目标的意志，使你可以完全控制它的行动 %s 回合。（受你的意志值加成） 
-		 当技能结束时，你的意志会脱离而目标会因大脑崩溃而死亡。 
-		 稀有等级即以上的目标必须要在其最大生命值的 80%%以下才能被控制，在持续时间内不会受到伤害，并且在 3 回合后不会死亡 ,而会脱离控制。
-		 这一效果无法被豁免，但需要通过即死免疫。]]):format(t.getduration(self))
+		当技能结束时，你的意志会脱离而目标会因大脑崩溃而死亡。 
+		稀有等级即以上的目标必须要在其最大生命值的 80%%以下才能被控制，在持续时间内不会受到伤害，并且在 3 回合后不会死亡 ,而会脱离控制。
+		这一效果无法被豁免，但需要通过即死免疫。]]):format(t.getduration(self))
 	end,
 }
 
@@ -279,7 +279,7 @@ registerTalentTranslation{
 	name = "强化思维",
 	info = function(self, t)
 		return ([[你的思维和维网变的更加协调并且增强对负面效果的抵抗。 
-		 增加 %d%% 混乱和沉默抵抗并增加你 +%d 点精神豁免。]]):
+		增加 %d%% 混乱和沉默抵抗并增加你 +%d 点精神豁免。]]):
 		format(100*t.getImmune(self, t), t.getSave(self, t))
 	end,
 }
@@ -300,9 +300,9 @@ registerTalentTranslation{
 	info = function(self, t)
 		local base_stats = self:combatScale(self:getWil() * self:getTalentLevel(t), 25, 0, 125, 500, 0.75)
 		return ([[通过夺心魔的维网，迅速召集帮手。 
-		 在你周围召唤 3 个夺心魔精英，持续 6 回合。
-		 他们的所有主要属性会被设置为 %d (基于你的意志值和技能等级）
-		 你的伤害加成，伤害穿透和许多其他属性都会被继承。]]):format(base_stats)
+		在你周围召唤 3 个夺心魔精英，持续 6 回合。
+		他们的所有主要属性会被设置为 %d (基于你的意志值和技能等级）
+		你的伤害加成，伤害穿透和许多其他属性都会被继承。]]):format(base_stats)
 	end,
 }
 
@@ -319,10 +319,10 @@ registerTalentTranslation{
 	name = "食人魔之怒",
 	info = function(self, t)
 		return ([[你进入愤怒状态 %d 回合，获得 20%% 震慑和定身免疫，全体伤害增加 10%% 。
-		 同时，每当你使用符文或纹身、攻击未命中或伤害被护盾等效果削减时，你获得一层食人魔之怒效果，持续 7 回合，效果可叠加至最多 5 层。
-		 每层提供 20%% 暴击伤害和 5%% 暴击率。
-		 每次暴击时减少一层食人魔之怒效果。
-		 持续时间受力量加成。]]):format(t.getduration(self))
+		同时，每当你使用符文或纹身、攻击未命中或伤害被护盾等效果削减时，你获得一层食人魔之怒效果，持续 7 回合，效果可叠加至最多 5 层。
+		每层提供 20%% 暴击伤害和 5%% 暴击率。
+		每次暴击时减少一层食人魔之怒效果。
+		持续时间受力量加成。]]):format(t.getduration(self))
 	end,
 }
 
@@ -332,9 +332,9 @@ registerTalentTranslation{
 	name = "强大体魄",
 	info = function(self, t)
 		return ([[食人魔的身体对法术和符文亲和力很强。
-		 增加 %d 法术豁免，增加纹身和符文的属性加成效果 %d%% 。
-		 技能等级 5 时，你的身体变得如此强壮，能在主手持有双手武器的同时，副手持有其他副手武器。
-		 这样做的话，你的命中、物理、法术、精神强度会下降 20%% ，体型超过 'Big'时，每增加一体型，惩罚减少 5%% 。同时你的武器附加伤害减少 50%% 。]]):
+		增加 %d 法术豁免，增加纹身和符文的属性加成效果 %d%% 。
+		技能等级 5 时，你的身体变得如此强壮，能在主手持有双手武器的同时，副手持有其他副手武器。
+		这样做的话，你的命中、物理、法术、精神强度会下降 20%% ，体型超过 'Big'时，每增加一体型，惩罚减少 5%% 。同时你的武器附加伤害减少 50%% 。]]):
 		format(t.getSave(self, t), t.getMult(self, t) * 100)
 	end,
 }
@@ -344,7 +344,7 @@ registerTalentTranslation{
 	name = "血肉伤痕",
 	info = function(self, t)
 		return ([[每次暴击时有 %d%% 几率减少随机一个纹身或符文 1 回合冷却时间，或减少符文紊乱或纹身紊乱 1 回合持续时间。
-		 该效果每回合最多触发一次。]]):
+		该效果每回合最多触发一次。]]):
 		format(t.getChance(self, t))
 	end,
 }
@@ -354,8 +354,8 @@ registerTalentTranslation{
 	name = "符文亲和",
 	info = function(self, t)
 		return ([[立刻解除纹身紊乱和符文紊乱。
-		 接下来 %d 回合内，你的纹身和符文冷却速度加倍。
-		 技能等级 5 时，你能解锁一个新的纹身位  。]]):
+		接下来 %d 回合内，你的纹身和符文冷却速度加倍。
+		技能等级 5 时，你能解锁一个新的纹身位  。]]):
 		format(t.getDuration(self, t))
 	end,
 }

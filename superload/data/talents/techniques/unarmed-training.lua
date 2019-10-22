@@ -6,7 +6,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		return ([[当你徒手或仅装备手套和臂铠时提高 %d 物理强度。 
-		受技能等级影响，效果有额外加成。 ]]):
+		受技能等级影响，效果有额外加成。]]):
 		format(damage)
 	end,
 }
@@ -47,7 +47,7 @@ registerTalentTranslation{
 	name = "闪避神经",
 	info = function(self, t)
 		return ([[你对生理的了解让你能在新的领域运用你的闪避神经。 
-		 攻击姿态的减伤效果增强 %d%% ，对你的暴击伤害的暴击系数下降 %d%% 。]]):
+		攻击姿态的减伤效果增强 %d%% ，对你的暴击伤害的暴击系数下降 %d%% 。]]):
 		format(t.getFlatReduction(self,t), t.critResist(self,t) )
 	end,
 }

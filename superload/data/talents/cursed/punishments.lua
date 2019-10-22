@@ -21,9 +21,9 @@ registerTalentTranslation{
 		local jumpChance = t.getJumpChance(self, t)
 		local hateGain = t.getHateGain(self, t)
 		return ([[你向周围的敌人发出充满憎恨的私语。第 1 个听到的敌人会受到 %d 点精神伤害并提供你 %d 仇恨值。在最初的 %d 回合里私语会从目标身上传播到 %0.1f 码半径范围新的敌人身上。 
-		 每个目标在每回合有 %d%% 几率将私语传播向另一个目标。 
+		每个目标在每回合有 %d%% 几率将私语传播向另一个目标。 
 		25%% 概率附加思维封锁效果。 
-		 受精神强度影响，伤害有额外加成。]]):format(damDesc(self, DamageType.MIND, damage), hateGain, jumpCount, jumpRange, jumpChance)
+		受精神强度影响，伤害有额外加成。]]):format(damDesc(self, DamageType.MIND, damage), hateGain, jumpCount, jumpRange, jumpChance)
 	end,
 }
 
@@ -36,7 +36,7 @@ registerTalentTranslation{
 		local minDamage = maxDamage / duration
 		return ([[对你的目标释放极大的痛苦。痛苦会在 %d 回合内逐渐增加。第一回合会造成 %d 点伤害并在最后 1 回合增加至 %d 点伤害（总计 %d ）。 
 		25%% 概率附加思维封锁效果。 
-		 受精神强度影响，伤害有额外加成。]]):format(duration, damDesc(self, DamageType.MIND, minDamage), damDesc(self, DamageType.MIND, maxDamage), maxDamage * (duration + 1) / 2)
+		受精神强度影响，伤害有额外加成。]]):format(duration, damDesc(self, DamageType.MIND, minDamage), damDesc(self, DamageType.MIND, maxDamage), maxDamage * (duration + 1) / 2)
 	end,
 }
 

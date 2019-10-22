@@ -22,7 +22,7 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local attack_bonus = t.getAttack(self, t)
 		return ([[将你的梦之巨锤扔向远处，对沿途所有敌方单位造成 %d%% 武器伤害。在到达目标点后，梦之巨锤会自动返回，再次对沿途目标造成伤害。 
-		 学习此技能会增加梦之巨锤 %d 点命中。]]):format(damage * 100, attack_bonus)
+		学习此技能会增加梦之巨锤 %d 点命中。]]):format(damage * 100, attack_bonus)
 	end,
 }
 
@@ -35,8 +35,8 @@ registerTalentTranslation{
 		local percent = t.getPercentInc(self, t)
 		local stun = t.getStun(self, t)		
 		return ([[用你的梦之巨锤碾碎敌人，造成 %d%% 武器伤害。如果攻击命中，则目标会被震慑 %d 回合。 
-		 受精神强度影响，震慑几率有额外加成。 
-		 学习此技能会增加 %d 点你使用梦之巨锤时的物理强度，同时使梦之巨锤造成的所有伤害提升 %d%% 。]]):format(damage * 100, stun, power, percent * 100)
+		受精神强度影响，震慑几率有额外加成。 
+		学习此技能会增加 %d 点你使用梦之巨锤时的物理强度，同时使梦之巨锤造成的所有伤害提升 %d%% 。]]):format(damage * 100, stun, power, percent * 100)
 	end,
 }
 
@@ -48,8 +48,8 @@ registerTalentTranslation{
 		local radius = self:getTalentRadius(t)
 		local project = t.getProject(self, t) /2
 		return ([[用梦之巨锤对近身目标挥出强力的一击，造成 %d%% 武器伤害。如果攻击命中，挥击所产生的回音会伤害 %d 码范围内的所有目标。 
-		 学习此技能会使你的梦之巨锤附加 %0.2f 精神伤害和 %0.2f 燃烧伤害。 
-		 受精神强度影响，梦之巨锤附加的精神伤害和燃烧伤害按比例加成。]]):format(damage * 100, radius, damDesc(self, DamageType.MIND, project), damDesc(self, DamageType.FIRE, project))
+		学习此技能会使你的梦之巨锤附加 %0.2f 精神伤害和 %0.2f 燃烧伤害。 
+		受精神强度影响，梦之巨锤附加的精神伤害和燃烧伤害按比例加成。]]):format(damage * 100, radius, damDesc(self, DamageType.MIND, project), damDesc(self, DamageType.FIRE, project))
 	end,
 }
 

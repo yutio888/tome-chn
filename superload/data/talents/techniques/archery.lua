@@ -70,7 +70,7 @@ registerTalentTranslation{
 		local dam = t.getDamage(self,t)*100
 		return ([[瞄准目标头部发射穿透性弹药，造成 %d%% 武器伤害。
 此次攻击额外获得 100 命中，且能穿透目标以外单位。
-只能对被标记的单位使用，使用将消耗掉标记。 ]]):
+只能对被标记的单位使用，使用将消耗掉标记。]]):
 		format(dam)
 	end,
 }

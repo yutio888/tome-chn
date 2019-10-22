@@ -6,7 +6,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		return ([[一次强力的前踢使你的目标被击退 %d 码。 
 		如果有另外一个怪物挡在路上，它也会被推开。 
-		受敏捷或物理强度（取较大值）影响，击退概率有额外加成。 ]])
+		受敏捷或物理强度（取较大值）影响，击退概率有额外加成。]])
 		:format(t.getDist(self, t))
 	end,
 }

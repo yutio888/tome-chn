@@ -25,7 +25,7 @@ registerTalentTranslation{
 	name = "插件超频",
 	info = function(self, t)
 		return ([[消耗大量蒸汽，令所有配件和蒸汽技能超频工作 %d 回合。
-		超频期间，你获得 %d 蒸汽强度和 %d 蒸汽技能暴击率。 ]])
+		超频期间，你获得 %d 蒸汽强度和 %d 蒸汽技能暴击率。]])
 		:format(t.getDur(self, t), t.getBoost(self, t))
 	end,}
 

@@ -7,7 +7,7 @@ registerTalentTranslation{
 		return ([[你强力的攻击引发敌人深深的恐惧。 
 		任何你对目标造成的超过其 %d%% 总生命值的近身打击会使目标陷入深深的恐惧中，眩晕目标 5 回合。 
 		你的暴击率同时增加 %d%% 。 
-		受物理强度影响，眩晕概率有额外加成。 ]]):
+		受物理强度影响，眩晕概率有额外加成。]]):
 		format(t.threshold(self, t), self:getTalentLevelRaw(t) * 2.8)
 	end,
 }

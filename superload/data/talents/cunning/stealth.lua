@@ -37,8 +37,8 @@ registerTalentTranslation{
 	name = "黑暗亲和",
 	info = function(self, t)
 		return ([[你对黑暗和阴影有特殊的亲和力。
-		 站在黑暗地格中，激活潜行的最小范围限制降低 %d 。
-		 当潜行时，你增加 %0.1f 的生命回复速度（基于灵巧），同时你也增加 %0.1f 的体力回复速度。该回复效果在退出潜行后仍能保持 %d 回合，并且生命回复速度是正常的五倍。]]):
+		站在黑暗地格中，激活潜行的最小范围限制降低 %d 。
+		当潜行时，你增加 %0.1f 的生命回复速度（基于灵巧），同时你也增加 %0.1f 的体力回复速度。该回复效果在退出潜行后仍能保持 %d 回合，并且生命回复速度是正常的五倍。]]):
 		format(t.getRadius(self, t, true), t.getLife(self,t), t.getStamina(self,t), t.getDuration(self, t))
 	end,
 }

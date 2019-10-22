@@ -36,8 +36,8 @@ registerTalentTranslation{
 	name = "蝴蝶踢",
 	info = function(self, t)
 		return ([[你旋转着飞踢过去，对半径 1 内的敌人造成 %d%% 武器伤害。
-		 每一点连击点增加 1 点攻击范围和 10%% 伤害。
-		 使用该技能需要至少一点连击点。]]):format(t.getDamage(self, t)*100)	
+		每一点连击点增加 1 点攻击范围和 10%% 伤害。
+		使用该技能需要至少一点连击点。]]):format(t.getDamage(self, t)*100)	
 	end,
 }
 

@@ -244,7 +244,7 @@ newEffect{
 newEffect{
 	name = "BATTLE_SHOUT", image = "talents/battle_shout.png",
 	desc = "Battle Shout",
-	long_desc = function(self, eff) return ("增加 %d%% 生命值和体力值上限。当效果结束后，增加的生命和体力会消失。 "):format(eff.power) end,
+	long_desc = function(self, eff) return ("增加 %d%% 生命值和体力值上限。当效果结束后，增加的生命和体力会消失。"):format(eff.power) end,
 	type = "mental",
 	subtype = { morale=true },
 	status = "beneficial",
@@ -684,7 +684,7 @@ newEffect{
 newEffect{
 	name = "DOMINATED", image = "talents/dominate.png",
 	desc = "Dominated",
-	long_desc = function(self, eff) return (" 目标被支配。不能移动并减少 %d 护甲和 %d 闪避。 %s 对目标的攻击增加 %d%% 抗性穿透。 "):format(-eff.armorChange, -eff.defenseChange, eff.src.name:capitalize(), eff.resistPenetration) end,
+	long_desc = function(self, eff) return (" 目标被支配。不能移动并减少 %d 护甲和 %d 闪避。 %s 对目标的攻击增加 %d%% 抗性穿透。"):format(-eff.armorChange, -eff.defenseChange, eff.src.name:capitalize(), eff.resistPenetration) end,
 	type = "mental",
 	subtype = { dominate=true },
 	status = "detrimental",
@@ -1644,7 +1644,7 @@ newEffect{
 newEffect{
 	name = "DOMINATE_ENTHRALL", image = "talents/yeek_will.png",
 	desc = "Enthralled",
-	long_desc = function(self, eff) return ("目标被迷惑，暂时改变了其阵营。 ") end,-- to %s.")--:format(engine.Faction.factions[eff.faction].name) end,
+	long_desc = function(self, eff) return ("目标被迷惑，暂时改变了其阵营。") end,-- to %s.")--:format(engine.Faction.factions[eff.faction].name) end,
 	type = "mental",
 	subtype = { dominate=true },
 	status = "detrimental",
@@ -2460,7 +2460,7 @@ newEffect{
 newEffect{
 	name = "INSOMNIA", image = "effects/insomnia.png",
 	desc = "Insomnia",
-	long_desc = function(self, eff) return ("目标清醒并获得 %d%% 沉睡效果抵抗。 "):format(eff.cur_power) end,
+	long_desc = function(self, eff) return ("目标清醒并获得 %d%% 沉睡效果抵抗。"):format(eff.cur_power) end,
 	type = "mental",
 	subtype = { psionic=true },
 	status = "beneficial",

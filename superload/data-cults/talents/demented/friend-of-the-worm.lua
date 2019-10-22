@@ -41,7 +41,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		return ([[ 你和蠕虫合体建立强大的精神链接。
 		只要你和它的距离不超过 3 格，你们均获得持续 5 回合的 %d%% 全体抗性。
-		该技能每增加两级原始等级，你的蠕虫合体获得一个纹身位（当前： %d ）。 ]])
+		该技能每增加两级原始等级，你的蠕虫合体获得一个纹身位（当前： %d ）。]])
 		:format(t.getResist(self, t), t.getInscriptions(self, t))
 	end,
 }

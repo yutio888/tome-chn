@@ -43,7 +43,7 @@ registerTalentTranslation{
 	id = "T_GOLEM_RESILIENCE",
 	name = "坚韧傀儡",
 	info = function(self, t)
-		if not self.alchemy_golem then return " 提高傀儡护甲熟练度和伤害抵抗和治疗系数。 " end
+		if not self.alchemy_golem then return " 提高傀儡护甲熟练度和伤害抵抗和治疗系数。" end
 		local rawlev = self:getTalentLevelRaw(t)
 		local oldh, olda = self.alchemy_golem.talents[Talents.T_THICK_SKIN], self.alchemy_golem.talents[Talents.T_GOLEM_ARMOUR]
 		self.alchemy_golem.talents[Talents.T_THICK_SKIN], self.alchemy_golem.talents[Talents.T_GOLEM_ARMOUR] = rawlev, 1 + rawlev
@@ -55,8 +55,8 @@ registerTalentTranslation{
 		self.alchemy_golem.talents[Talents.T_THICK_SKIN], self.alchemy_golem.talents[Talents.T_GOLEM_ARMOUR] = oldh, olda
 
 		return ([[提高傀儡护甲熟练度和伤害抵抗。 
-		 增加 %d%% 所有伤害抵抗；增加 %d 点护甲和 %d%% 护甲韧性；当装备 1 件锁甲或板甲时，减少 %d%% 被暴击率；增加 %d%% 治疗效果。 
-		 傀儡可以使用所有类型的护甲，包括板甲。]]):
+		增加 %d%% 所有伤害抵抗；增加 %d 点护甲和 %d%% 护甲韧性；当装备 1 件锁甲或板甲时，减少 %d%% 被暴击率；增加 %d%% 治疗效果。 
+		傀儡可以使用所有类型的护甲，包括板甲。]]):
 		format(res, heavyarmor, hardiness, crit, t.getHealingFactor(self, t)*100)
 	end,
 }
@@ -76,7 +76,7 @@ registerTalentTranslation{
 	name = "傀儡传送",
 	info = function(self, t)
 		return ([[使用此技能后，你和傀儡将会交换位置。 
-		 你的敌人会被混乱，那些之前攻击你的敌人将有 %d%% 概率转而攻击傀儡。]]):
+		你的敌人会被混乱，那些之前攻击你的敌人将有 %d%% 概率转而攻击傀儡。]]):
 		format(math.min(100, self:getTalentLevelRaw(t) * 15 + 25))
 	end,
 }

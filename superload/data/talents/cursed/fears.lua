@@ -44,7 +44,7 @@ registerTalentTranslation{
 	name = "精神专制",
 	info = function(self, t)
 		return ([[提高对被你恐惧的目标的精神专制。当一个敌人获得了一个新的恐惧效果，你有 %d%%  的几率增加这一效果和另一个随机的已有恐惧效果的持续时间 %d 回合，最多 8 回合。
-		 此外，每当你恐惧一个目标，你获得 %d 精神强度和物理强度，持续 5 回合，最多叠加 %d 层]]):format(t. getExtendChance(self, t), t.getExtendFear(self, t), t.getTyrantPower(self, t), t.getMaxStacks(self, t))
+		此外，每当你恐惧一个目标，你获得 %d 精神强度和物理强度，持续 5 回合，最多叠加 %d 层]]):format(t. getExtendChance(self, t), t.getExtendFear(self, t), t.getTyrantPower(self, t), t.getMaxStacks(self, t))
 	end,
 }
 

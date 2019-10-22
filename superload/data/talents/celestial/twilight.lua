@@ -25,8 +25,8 @@ registerTalentTranslation{
 		local jumpgate_teleport = self:getTalentFromId(self.T_JUMPGATE_TELEPORT)
 		local range = jumpgate_teleport.getRange(self, jumpgate_teleport)
 		return ([[在你的位置制造 1 个阴影跃迁之门，当你激活这个技能时你可以使用跃迁之门：传送技能将你传送至此（跃迁之门必须在你 %d 码范围以内）。 
-		 注意：当此技能激活且楼梯位于跃迁之门下方时，楼梯将不可使用。你必须取消此技能方可使用楼梯离开该区域。 
-		 在等级 4 时，你可以制造 2 个跃迁之门。]]):format(range)
+		注意：当此技能激活且楼梯位于跃迁之门下方时，楼梯将不可使用。你必须取消此技能方可使用楼梯离开该区域。 
+		在等级 4 时，你可以制造 2 个跃迁之门。]]):format(range)
  	end,
 }
 

@@ -7,7 +7,7 @@ registerTalentTranslation{
 		local attack = t.getAttack(self, t)
 		local damage = t.getDamage(self, t)
 		return ([[增加你 %d 命中。你攻击系技能 ( 拳术、终结技 ) 伤害增加 %d%% , 同时减少 %d 受到的伤害。
-		受敏捷影响，伤害按比例加成。受力量影响，伤害减免有额外加成。 ]]):
+		受敏捷影响，伤害按比例加成。受力量影响，伤害减免有额外加成。]]):
 		format(attack, damage, t.getFlatReduction(self, t))
 	end,
 }
@@ -34,7 +34,7 @@ registerTalentTranslation{
 		return ([[对你面前的敌人使用一次旋风打击，造成 %d%% 伤害。 
 		如果你离目标较远，旋转时你会自动前行，根据移动距离增加至多 %d%% 伤害。 
 		此次攻击会移除任何你正在维持的抓取效果并增加 1 点连击点。 
-		在等级 4 或更高时，你每次连击均会获得 1 点连击点。 ]])
+		在等级 4 或更高时，你每次连击均会获得 1 点连击点。]])
 		:format(damage, charge)
 	end,
 }
@@ -46,7 +46,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t) * 100
 		return ([[ 施展一次毁灭性的的踢技，造成 %d%% 伤害。
-		 如果攻击命中，对方的大脑受到伤害，不能使用技能，持续 %d 回合，同时你获得 2 连击点。 ]])
+		如果攻击命中，对方的大脑受到伤害，不能使用技能，持续 %d 回合，同时你获得 2 连击点。]])
 		:format(damage, t.getDuration(self, t))
 	end,
 }

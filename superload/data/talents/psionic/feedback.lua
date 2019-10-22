@@ -19,8 +19,8 @@ registerTalentTranslation{
 	info = function(self, t)
 		local shield_power = t.getShieldPower(self, t)
 		return ([[激活此技能可产生一个吸收 50 ％伤害的共鸣领域（最大吸收值 %d ）。此领域不会干扰反馈值的增长。 
-		 受精神强度影响，最大吸收值有额外加成。 
-		 此技能最多维持 10 回合。]]):format(shield_power)
+		受精神强度影响，最大吸收值有额外加成。 
+		此技能最多维持 10 回合。]]):format(shield_power)
 	end,
 }
 
@@ -32,7 +32,7 @@ registerTalentTranslation{
 		local gain = t.getFeedbackGain(self, t)
 		local feedbackratio = self:callTalent(self.T_FEEDBACK_POOL, "getFeedbackRatio")
 		return ([[增加 %d 最大反馈值，同时反馈值的基础获得比率增加 %0.1f%%( 相比于你受到伤害的 %0.1f%% ) 。 
-		 受精神强度影响，反馈值增加率按比例加成。]]):format(max_feedback, gain*100, feedbackratio*100)
+		受精神强度影响，反馈值增加率按比例加成。]]):format(max_feedback, gain*100, feedbackratio*100)
 	end,
 }
 
@@ -42,7 +42,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local data = t.getData(self, t)
 		return ([[使用反馈值来补充自己。治疗 %d 生命值并回复 %d 点耐力， %d 点法力， %d 点失衡值， %d 点活力， %d 点正负超能力值， %d 点超能力值及 %d 点仇恨值。 
-		 受精神强度影响，增益效果有额外加成。]]):format(data.heal, data.stamina, data.mana, -data.equilibrium, data.vim, data.positive, data.psi, data.hate)
+		受精神强度影响，增益效果有额外加成。]]):format(data.heal, data.stamina, data.mana, -data.equilibrium, data.vim, data.positive, data.psi, data.hate)
 	end,
 }
 

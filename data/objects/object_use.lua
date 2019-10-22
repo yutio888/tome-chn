@@ -87,7 +87,7 @@ objUse["deal darkness damage equal to your spellpower to a target, and, if it ki
 
 objUse["release a radius %d blast of frozen vapors that deal %0.2f cold damage (based on Magic) each turn for %d turns"] = "在半径 %d 范围内释放寒冰气息，  每回合造成 %0.2f 点寒冷伤害  （基于魔法），  持续 %d回合。"
 objUse["attempt to destroy all magic effects and sustains on creatures in a radius %d cone (unnatural creaters are additionally dealt %0.2f arcane damage and stunned)"]="试图摧毁 %d 码锥形范围内所有魔法效果，并对非自然生物造成 %0.2f 奥术伤害并震慑。"
-objUse["inflict %0.2f mind damage (range 10), gaining psi and hate equal to 1/10 of the damage done"] = "在距离 1 0 的范围内造成 %0.2f 精神伤害，回复 10%% 伤害值的超能力值和仇恨值。 "
+objUse["inflict %0.2f mind damage (range 10), gaining psi and hate equal to 1/10 of the damage done"] = "在距离 1 0 的范围内造成 %0.2f 精神伤害，回复 10%% 伤害值的超能力值和仇恨值。"
 objUse["strike all targets in a line (for 100%% weapon damage as mind) out to range 4"] = "打击一条长度为4码的直线上的所有目标，\n造成相当于100%%武器伤害的精神伤害。"
 objUse["boost movement speed by 300% for up to 5 turns (or until you perform a non-movement action)"] = "增加移动速度300%五回合。（任何非移动行动会打断这个效果）"
 objUse["shoot a bolt of spydric poison out to range %d, dealing %0.2f nature damage (based on Magic) over %d turns while rendering the target unable to move"] = "发射蜘蛛毒素, 对%d码内的敌人造成%0.2f点自然伤害(基于魔法), 并使其在%d回合内无法移动"

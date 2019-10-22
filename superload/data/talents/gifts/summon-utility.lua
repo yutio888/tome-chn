@@ -31,11 +31,11 @@ registerTalentTranslation{
 	info = function(self, t)
 		local incStats = t.incStats(self, t, true)
 		return ([[召唤一只乌龟来吸引敌人攻击，持续 %d 回合。 
-		 乌龟具有很强的生命力，并不能造成很多伤害。 
-		 然而，它们会周期性的嘲讽敌人并用龟壳保护自己。
-		 它拥有 %d 点体质， %d 点敏捷和 18 点意志。 
-		 你的召唤物继承你部分属性：增加百分比伤害、震慑 / 定身 / 混乱 / 致盲抵抗和护甲穿透。 
-		 受精神强度影响，乌龟的体质有额外加成。]])
+		乌龟具有很强的生命力，并不能造成很多伤害。 
+		然而，它们会周期性的嘲讽敌人并用龟壳保护自己。
+		它拥有 %d 点体质， %d 点敏捷和 18 点意志。 
+		你的召唤物继承你部分属性：增加百分比伤害、震慑 / 定身 / 混乱 / 致盲抵抗和护甲穿透。 
+		受精神强度影响，乌龟的体质有额外加成。]])
 		:format(t.summonTime(self, t), incStats.con, incStats.dex)
 	end,
 }
@@ -47,10 +47,10 @@ registerTalentTranslation{
 	info = function(self, t)
 		local incStats = t.incStats(self, t,true)
 		return ([[召唤一只蜘蛛来扰乱敌人，持续 %d 回合。 
-		 蜘蛛可以使敌人中毒并向目标撒网，将目标固定在地上。 
-		 它拥有 %d 点敏捷， %d 点力量， 18 点意志和 %d 点体质。 
-		 你的召唤物继承你部分属性：增加百分比伤害、震慑 / 定身 / 混乱 / 致盲抵抗和护甲穿透。 
-		 受精神强度影响，蜘蛛的敏捷有额外加成。]])
+		蜘蛛可以使敌人中毒并向目标撒网，将目标固定在地上。 
+		它拥有 %d 点敏捷， %d 点力量， 18 点意志和 %d 点体质。 
+		你的召唤物继承你部分属性：增加百分比伤害、震慑 / 定身 / 混乱 / 致盲抵抗和护甲穿透。 
+		受精神强度影响，蜘蛛的敏捷有额外加成。]])
 		:format(t.summonTime(self, t), incStats.dex, incStats.str, incStats.con)
 	end,
 }
@@ -61,8 +61,8 @@ registerTalentTranslation{
 	info = function(self, t)
 		local reduc = t.getReduc(self, t)
 		return ([[你专注于自然，使你的自然召唤速度提升（ %d%% 的正常召唤时间），并且即使在高自然失衡值下也不会失败，持续 %d 回合。 
-		 当此技能激活时，某个随机的召唤天赋会冷却。 
-		 每次你进行召唤，疯狂召唤的效果会减少 1 回合。]]):
+		当此技能激活时，某个随机的召唤天赋会冷却。 
+		每次你进行召唤，疯狂召唤的效果会减少 1 回合。]]):
 		format(100 - reduc, t.getDuration(self, t))
 	end,
 }

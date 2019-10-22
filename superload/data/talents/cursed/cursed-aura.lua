@@ -27,8 +27,8 @@ registerTalentTranslation{
 		local level = math.min(4, self:getTalentLevelRaw(t))
 		local xs = t.curseBonusLevel(self,t)
 		return ([[你的诅咒带来黑暗的礼物。解锁所有诅咒第 %d 层效果，并允许你在诅咒达到该等级时获得此效果。 
-		 在等级 5 时，因诅咒带来的幸运惩罚降到 1 。
-		 等级 5 以上时增加诅咒效果（当前增加 %0.1f ）]]):
+		在等级 5 时，因诅咒带来的幸运惩罚降到 1 。
+		等级 5 以上时增加诅咒效果（当前增加 %0.1f ）]]):
 		format(level, xs)
 	end,
 }
@@ -42,7 +42,7 @@ registerTalentTranslation{
 		local incDamage = t.getIncDamage(self, t)
 
 		return ([[诅咒你周围 %d 码半径范围的大地，持续 %d 回合。 
-		 任何站在大地上的目标将会被虚弱，减少它们 %d%% 的伤害。]]):format(range, duration, incDamage)
+		任何站在大地上的目标将会被虚弱，减少它们 %d%% 的伤害。]]):format(range, duration, incDamage)
 	end,
 }
 
@@ -61,11 +61,11 @@ registerTalentTranslation{
 		local attackSpeed = t.getAttackSpeed(self, t)*100
 
 		return ([[将部分活性诅咒能量灌输到你背包里的 1 把武器上，使其悬浮在空中。这个类似于诅咒护卫的武器会自动攻击附近的敌人，持续 %d 回合。 
-		  攻击速度： %d%% 。
-		  当你第一次选择武器后，只要武器仍旧在背包里，就会被记住。使用“选择诅咒护卫”技能来切换武器。
-		  技能等级 3 时，你能将具有高级词缀的武器化为守卫。
-		  技能等级 5 时，你能将神器化为守卫。
-		  ]]):format(duration, attackSpeed)
+		攻击速度： %d%% 。
+		当你第一次选择武器后，只要武器仍旧在背包里，就会被记住。使用“选择诅咒护卫”技能来切换武器。
+		技能等级 3 时，你能将具有高级词缀的武器化为守卫。
+		技能等级 5 时，你能将神器化为守卫。
+		]]):format(duration, attackSpeed)
 	end,
 }
 

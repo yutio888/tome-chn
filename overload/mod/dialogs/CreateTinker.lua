@@ -157,7 +157,7 @@ function _M:getDescription(tdef, ml)
 	ml = ml < 1 and 1 or ml
 	local str = tstring{}
 	local desc = tdef.desc
-	desc = cutChrCHN(desc, 25)
+	--desc = cutChrCHN(desc, 25)
 	str:merge(desc:toTString())
 	str:add(true)
 	if tdef.talents then

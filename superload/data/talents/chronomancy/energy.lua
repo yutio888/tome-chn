@@ -6,7 +6,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local decomp = t.getDecomposition(self, t)
 		return ([[分解一部分受到的伤害。减少  30%%  伤害 ,  最多减少  %d 。
-		 受法术强度影响，减少伤害的最大值有额外加成。]]):format(decomp)
+		受法术强度影响，减少伤害的最大值有额外加成。]]):format(decomp)
 	end,
 }
 
@@ -17,7 +17,7 @@ registerTalentTranslation{
 		local talentcount = t.getTalentCount(self, t)
 		local cooldown = t.getCooldown(self, t)
 		return ([[你吸收目标的能量并化为己用，最多使  %d  个随机技能进入  %d  回合冷却。
-		 每使一个技能进入冷却，你可以减少你处于冷却中的技能的冷却时间  %d  回合。]]):
+		每使一个技能进入冷却，你可以减少你处于冷却中的技能的冷却时间  %d  回合。]]):
 		format(talentcount, cooldown, cooldown)
 	end,
 }

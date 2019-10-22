@@ -37,9 +37,9 @@ registerTalentTranslation{
 		local movementSpeedChange = t.getMovementSpeedChange(self, t)
 		local damageIncrease = getDamageIncrease(self)
 		return ([[你的眼睛穿过黑暗并发现隐藏在黑暗里的敌人。 
-		 你的视线同样可以穿过黑暗之雾看到 %d 的半径范围。同时黑暗之雾极大的提高你的步伐。 
+		你的视线同样可以穿过黑暗之雾看到 %d 的半径范围。同时黑暗之雾极大的提高你的步伐。 
 		（在黑暗之雾中增加你 +%d%% 移动速度） 
-		 你对任何进入黑暗之雾的人造成 +%d%% 点伤害。]]):format(range, movementSpeedChange * 100, damageIncrease)
+		你对任何进入黑暗之雾的人造成 +%d%% 点伤害。]]):format(range, movementSpeedChange * 100, damageIncrease)
 	end,
 }
 
@@ -50,8 +50,8 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local damageIncrease = getDamageIncrease(self)
 		return ([[向敌人发射一股灼热的黑暗能量，造成 %d 点伤害。黑暗能量有 25%% 概率致盲目标 3 回合并使它们丢失当前目标。 
-		 受精神强度影响，伤害有额外加成。 
-		 你对任何进入黑暗之雾的人造成 +%d%% 点伤害。]]):format(damDesc(self, DamageType.DARKNESS, damage), damageIncrease)
+		受精神强度影响，伤害有额外加成。 
+		你对任何进入黑暗之雾的人造成 +%d%% 点伤害。]]):format(damDesc(self, DamageType.DARKNESS, damage), damageIncrease)
 	end,
 }
 
@@ -63,8 +63,8 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local damageIncrease = getDamageIncrease(self)
 		return ([[伸出黑暗触手攻击你的敌人并使它们在黑暗里定身 %d 回合。当黑暗触手移动时，黑暗之雾会跟随蔓延。 
-		 每回合黑暗会造成 %d 点伤害。 
-		 受精神强度影响，伤害有额外加成。你对任何进入黑暗之雾的人造成 +%d%% 点伤害。]]):format(pinDuration, damage, damageIncrease)
+		每回合黑暗会造成 %d 点伤害。 
+		受精神强度影响，伤害有额外加成。你对任何进入黑暗之雾的人造成 +%d%% 点伤害。]]):format(pinDuration, damage, damageIncrease)
 	end,
 }
 

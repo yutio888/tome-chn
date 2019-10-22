@@ -2250,7 +2250,7 @@ newEffect{ -- Note: This effect is cancelled by EFF_DISARMED
 		return util.bound(adj*(eff.deflects >=1 and eff.chance or eff.chance*math.mod(eff.deflects, 1)), 0, 100)
 	end,
 	long_desc = function(self, eff)
-		return ("阻挡近战%s 攻击：面对近战攻击时有 %d%% 几率阻挡至多 %d 伤害， ( 剩余次数 %0.1f )。被阻挡的攻击不会暴击。 "):format(eff.parry_ranged and " 和远程 " or "", math.floor(self:callEffect(self.EFF_PARRY, "deflectchance")), eff.dam, math.max(eff.deflects, 1))
+		return ("阻挡近战%s 攻击：面对近战攻击时有 %d%% 几率阻挡至多 %d 伤害， ( 剩余次数 %0.1f )。被阻挡的攻击不会暴击。"):format(eff.parry_ranged and " 和远程 " or "", math.floor(self:callEffect(self.EFF_PARRY, "deflectchance")), eff.dam, math.max(eff.deflects, 1))
 	end,
 	charges = function(self, eff) return math.ceil(eff.deflects) end,
 	type = "physical",
@@ -2574,7 +2574,7 @@ newEffect{
 newEffect{
 	name = "DISTORTION", image = "talents/maelstrom.png",
 	desc = "Distortion",
-	long_desc = function(self, eff) return (" 目标最近承受了扭曲伤害，对扭曲效果更敏感，同时物理抗性下降 %d%%。 "):format(eff.power) end,
+	long_desc = function(self, eff) return (" 目标最近承受了扭曲伤害，对扭曲效果更敏感，同时物理抗性下降 %d%%。"):format(eff.power) end,
 	type = "physical",
 	subtype = { distortion=true },
 	status = "detrimental",

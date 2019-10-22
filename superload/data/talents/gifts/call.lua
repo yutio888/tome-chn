@@ -12,10 +12,10 @@ registerTalentTranslation{
 		local heal = (5 + self:combatTalentMindDamage(t, 12, 30)) * boost
 		local rest = 0.5 * self:getTalentLevelRaw(t)
 		return ([[你进入冥想，与大自然进行沟通。 
-		 冥想时每回合你能回复 %0.2f 失衡值，你的精神豁免提高 %d ，你的治疗效果提高 %d%% 。 
-		 冥想时你无法集中精力攻击，你和你的召唤物造成的伤害减少 50 ％。 
-		 另外，你在休息时（即使未开启冥想）会自动进入冥想状态，使你每回合能回复 %d 点失衡值。 
-		 受精神强度影响，激活时效果有额外加成。]]):
+		冥想时每回合你能回复 %0.2f 失衡值，你的精神豁免提高 %d ，你的治疗效果提高 %d%% 。 
+		冥想时你无法集中精力攻击，你和你的召唤物造成的伤害减少 50 ％。 
+		另外，你在休息时（即使未开启冥想）会自动进入冥想状态，使你每回合能回复 %d 点失衡值。 
+		受精神强度影响，激活时效果有额外加成。]]):
 		format(pt, save, heal, rest)
 	end,
 }
@@ -25,7 +25,7 @@ registerTalentTranslation{
 	name = "自然之触",
 	info = function(self, t)
 		return ([[对你自己或某个目标注入大自然的能量，治疗 %d 点生命值（对不死族无效）。 
-		 受精神强度影响，治疗量有额外加成。]]):
+		受精神强度影响，治疗量有额外加成。]]):
 		format(t.getHeal(self, t))
 	end,
 }
@@ -37,7 +37,7 @@ registerTalentTranslation{
 		local radius = self:getTalentRadius(t)
 		local radius_esp = t.radius_esp(self, t)
 		return ([[利用你与大自然的联系，你可以查看自身周围 %d 码半径范围的区域。 
-		 同时，当你处于冥想状态时，你还可以查看自身周围 %d 码半径范围中怪物的位置。]]):
+		同时，当你处于冥想状态时，你还可以查看自身周围 %d 码半径范围中怪物的位置。]]):
 		format(radius, radius_esp)
 	end,
 }

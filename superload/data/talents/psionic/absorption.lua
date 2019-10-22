@@ -66,7 +66,7 @@ registerTalentTranslation{
 		local drain = t.getDrain(self, t)
 		return ([[用力场环绕自己，减少受到的所有伤害 %d%%
 		维持这样的护盾代价非常昂贵，开启的第一回合会消耗你 5%%的超能力值，之后每维持一回合就会多消耗 5%%的超能力值。例如，第二回合会消耗 10%%的超能力值。
-		 目前的超能力值消耗：每回合 %0.1f 超能力值 ]]):
+		目前的超能力值消耗：每回合 %0.1f 超能力值 ]]):
 		format(t.getResist(self,t), drain)
 	end,
 }

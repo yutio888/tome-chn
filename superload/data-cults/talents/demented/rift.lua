@@ -22,7 +22,7 @@ registerTalentTranslation{
 		local range = self:getTalentRange(t)
 		local power = t.getPower(self,t)
 		return ([[你短暂地在时空中打开一个通道 ,  传送到范围 %d 内的一个虚空裂口。这将摧毁那个虚空裂口，使你获得一个护盾，吸收 %d 点伤害，持续 4 回合。
-		 护盾吸收的伤害随法术强度提高而提高。]]):
+		护盾吸收的伤害随法术强度提高而提高。]]):
 		format(range, power)
 	end
 }

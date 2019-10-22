@@ -36,7 +36,7 @@ registerTalentTranslation{
 	message = "@Source@ 将伤害转移至周围目标。",
 	info = function(self, t)
 		return ([[施法者所承受的伤害有 50%% 的概率转移给指定连接的目标。 
-		一旦吸收伤害达到上限（ %d ），持续时间到了或目标死亡，护盾会破碎掉。 ]]):format(getAnomalyDamage(self, t)*2)
+		一旦吸收伤害达到上限（ %d ），持续时间到了或目标死亡，护盾会破碎掉。]]):format(getAnomalyDamage(self, t)*2)
 	end,
 }
 

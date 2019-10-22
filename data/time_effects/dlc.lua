@@ -126,7 +126,7 @@ timeEffectCHN:newEffect{
 	id = "SURGE_OF_POWER",
 	enName = "Surge of Power",
 	chName = "力量之潮",
-	desc = function(self, eff) return ("目标直到 -%d 生命才会死去。 "):format(eff.power) end,
+	desc = function(self, eff) return ("目标直到 -%d 生命才会死去。"):format(eff.power) end,
 	type = "物理",
 	subtype = "堕落",
 }
@@ -282,7 +282,7 @@ timeEffectCHN:newEffect{
 	id = "FIRE_HAVEN",
 	enName = "Fire Haven",
 	chName = "火焰庇护",
-	desc = "目标被火焰围绕，获得 40%% 火焰伤害吸收，但减少 15%% 枯萎抗性。 ",
+	desc = "目标被火焰围绕，获得 40%% 火焰伤害吸收，但减少 15%% 枯萎抗性。",
 	type = "其他",
 	subtype = "地面",
 
@@ -473,7 +473,7 @@ timeEffectCHN:newEffect{
 	id = "CLOAK",
 	enName = "Cloak",
 	chName = "潜行披风",
-	desc = function(self, eff) return ("目标被暗影披风包裹，获得潜行能力。 ") end,
+	desc = function(self, eff) return ("目标被暗影披风包裹，获得潜行能力。") end,
 	type = "物理",
 	subtype ="蒸汽科技",
 }
@@ -578,7 +578,7 @@ timeEffectCHN:newEffect{
 	id = "TECH_OVERLOAD",
 	enName = "Tech Overload",
 	chName = "系统过载",
-	desc = function(self, eff) return ("蒸汽容量翻倍，蒸汽回复速度下降。 "):format() end,
+	desc = function(self, eff) return ("蒸汽容量翻倍，蒸汽回复速度下降。"):format() end,
 	type = "物理",
 	subtype ="蒸汽科技",
 }
@@ -650,7 +650,7 @@ timeEffectCHN:newEffect{
 	id = "MOLTEN_IRON_BLOOD",
 	enName = "Molten Iron Blood",
 	chName = "液态钢铁",
-	desc = function(self, eff) return ("全体伤害抗性增加 %d%% ，新负面状态持续时间下降 %d%%， %0.2f 火焰反击伤害。 "):format(eff.resists, eff.reduction, eff.dam) end,
+	desc = function(self, eff) return ("全体伤害抗性增加 %d%% ，新负面状态持续时间下降 %d%%， %0.2f 火焰反击伤害。"):format(eff.resists, eff.reduction, eff.dam) end,
 	type = "物理",
 	subtype ="蒸汽科技/超能/火焰/抗性",
 }
@@ -722,7 +722,7 @@ timeEffectCHN:newEffect{
 	id = "HEART_CUT",
 	enName = "Heartrended",
 	chName = "心脏切割",
-	desc = function(self, eff) return ("恶毒的伤口在流血，每回合造成 %0.2f 物理伤害。 "):format(eff.power) end,
+	desc = function(self, eff) return ("恶毒的伤口在流血，每回合造成 %0.2f 物理伤害。"):format(eff.power) end,
 	type = "物理",
 	subtype ="伤口/切割/流血",
 }

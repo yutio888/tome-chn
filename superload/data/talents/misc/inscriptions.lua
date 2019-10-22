@@ -10,7 +10,7 @@ registerInscriptionTranslation = function(t)
 			local ret = t.extra_data.old_info(self, t)
 			local data = self:getInscriptionData(t.short_name)
 			if data.use_stat and data.use_stat_mod then
-				ret = ret..("\n受你的 %s 影响，此效果按比例加成。 "):format(s_stat_name[self.stats_def[data.use_stat].name] or self.stats_def[data.use_stat].name)
+				ret = ret..("\n受你的 %s 影响，此效果按比例加成。"):format(s_stat_name[self.stats_def[data.use_stat].name] or self.stats_def[data.use_stat].name)
 			end
 			return ret
 		end
@@ -30,7 +30,7 @@ registerInscriptionTranslation{
 	display_name = "纹身：回复",
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[激活纹身治疗你自己 %d 生命值，持续 %d 回合。 ]]):format(data.heal + data.inc_stat, data.dur)
+		return ([[激活纹身治疗你自己 %d 生命值，持续 %d 回合。]]):format(data.heal + data.inc_stat, data.dur)
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
@@ -90,7 +90,7 @@ registerInscriptionTranslation{
 		return ([[激活这个纹身可以在 1 个游戏回合内提升移动速度 %d%% 。
 		同时免疫眩晕、震慑和定身效果。
 		除移动以外其他动作会取消这个效果。 
-		 注意：由于你的速度非常快，游戏回合会相对很慢。 ]]):format(data.speed + data.inc_stat)
+		注意：由于你的速度非常快，游戏回合会相对很慢。]]):format(data.speed + data.inc_stat)
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
@@ -109,7 +109,7 @@ registerInscriptionTranslation{
 		return ([[激活这个纹身可以让你忍受致死的伤害，持续%d回合。
 		当应用纹身激活时，你的生命值只有在降低到 -%d 生命时才会死亡。
 		你每失去 1%% 生命值，持续时间和生命值下限就会增加 1%% 。（目前 %d 生命值， %d 持续时间）
-		效果结束时，如果你的生命值在 0 以下，会变为 1 点。 ]]):format(data.dur, data.die_at + data.inc_stat * 30, bonus1, bonus2)
+		效果结束时，如果你的生命值在 0 以下，会变为 1 点。]]):format(data.dur, data.die_at + data.inc_stat * 30, bonus1, bonus2)
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
@@ -125,7 +125,7 @@ registerInscriptionTranslation{
 		local data = self:getInscriptionData(t.short_name)
 		local damage = t.getDamage(self, t)
 		return ([[从土地中召唤坚硬的藤蔓，缠绕 %d 码范围内所有生物，持续 %d 回合。将其定身并造成每回合 %0.2f 物理和 %0.2f 自然伤害。 
-		 藤蔓也会生长在你的身边，增加 %d 护甲和 %d%% 护甲硬度。]]):
+		藤蔓也会生长在你的身边，增加 %d 护甲和 %d%% 护甲硬度。]]):
 		format(self:getTalentRadius(t), data.dur, damDesc(self, DamageType.PHYSICAL, damage)/3, damDesc(self, DamageType.NATURE, 2*damage)/3, data.armor or 50, data.hard or 30)
 	end,
 	short_info = function(self, t)
@@ -142,7 +142,7 @@ registerInscriptionTranslation{
 	display_name = "符文：传送",
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[激活这个符文随机传送 %d 码范围内位置，至少传送 15 码以外。 ]]):format(data.range + data.inc_stat)
+		return ([[激活这个符文随机传送 %d 码范围内位置，至少传送 15 码以外。]]):format(data.range + data.inc_stat)
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
@@ -155,7 +155,7 @@ registerInscriptionTranslation{
 	display_name = "符文：护盾",
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[激活这个符文产生一个防护护盾，吸收最多 %d 伤害持续 %d 回合。 ]]):format((data.power + data.inc_stat) * (100 + (self:attr("shield_factor") or 0)) / 100, data.dur)
+		return ([[激活这个符文产生一个防护护盾，吸收最多 %d 伤害持续 %d 回合。]]):format((data.power + data.inc_stat) * (100 + (self:attr("shield_factor") or 0)) / 100, data.dur)
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
@@ -170,7 +170,7 @@ registerInscriptionTranslation{
 		local data = self:getInscriptionData(t.short_name)
 		local power = 100+5*self:getMag()
 		if data.power and data.inc_stat then power = data.power + data.inc_stat end
-		return ([[激活这个符文产生一个防御护盾，吸收并反弹最多 %d 伤害值，持续 %d 回合。效果与魔法成比例增长。 ]])
+		return ([[激活这个符文产生一个防御护盾，吸收并反弹最多 %d 伤害值，持续 %d 回合。效果与魔法成比例增长。]])
 		:format(power, 5)
 	end,
 	short_info = function(self, t)
@@ -202,11 +202,11 @@ registerInscriptionTranslation{
 	name = "Rune: Acid Wave",
 	display_name = "符文：酸性冲击波",
 	info = function(self, t)
-		  local data = self:getInscriptionData(t.short_name)		  
-		  return ([[发射锥形酸性冲击波造成 %0.2f 酸性伤害。
-		 酸性冲击波会缴械目标 %d 回合。
-		 效果可以被抵抗，但不能被豁免 ]]):
-		 format(damDesc(self, DamageType.ACID, data.power + data.inc_stat), data.dur or 3)
+		local data = self:getInscriptionData(t.short_name)		
+		return ([[发射锥形酸性冲击波造成 %0.2f 酸性伤害。
+		酸性冲击波会缴械目标 %d 回合。
+		效果可以被抵抗，但不能被豁免 ]]):
+		format(damDesc(self, DamageType.ACID, data.power + data.inc_stat), data.dur or 3)
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
@@ -221,7 +221,7 @@ registerInscriptionTranslation{
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
 		return ([[激活这个符文对你自己释放法力回复，增加 %d%% 回复量持续 %d 回合，并立即回复 %d 法力值。 
-			同时，在你休息时增加每回合 0.5 的魔力回复。 ]]):format(data.mana + data.inc_stat, data.dur, (data.mana + data.inc_stat) / 20)
+			同时，在你休息时增加每回合 0.5 的魔力回复。]]):format(data.mana + data.inc_stat, data.dur, (data.mana + data.inc_stat) / 20)
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
@@ -236,8 +236,8 @@ registerInscriptionTranslation{
 		local damage = t.getDamage(self, t)
 		local duration = t.getDuration(self, t)
 		return ([[造成 %0.2f 时空伤害。如果你的目标存活，则它会被传送 %d 回合至未来。 
-		 它也能降低你 60 紊乱值 ( 如果你拥有该能量 )。 
-		 注意，若与其他时空效果相混合则可能产生无法预料的后果。 ]]):format(damDesc(self, DamageType.TEMPORAL, damage), duration)
+		它也能降低你 60 紊乱值 ( 如果你拥有该能量 )。 
+		注意，若与其他时空效果相混合则可能产生无法预料的后果。]]):format(damDesc(self, DamageType.TEMPORAL, damage), duration)
 	end,
 	short_info = function(self, t)
 		return ("%0.2f 时空伤害，从时间中移除 %d 回合 "):format(t.getDamage(self, t), t.getDuration(self, t))
@@ -266,7 +266,7 @@ registerInscriptionTranslation{
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
 		return ([[启动符文，使你变得虚幻，持续  %d  回合。
-		 在虚幻状态下，你造成的伤害减少 %d%%，你获得 %d%% 全体伤害抗性，你的移动速度提升 %d%% ，你获得隐形 (强度  %d)。]]):
+		在虚幻状态下，你造成的伤害减少 %d%%，你获得 %d%% 全体伤害抗性，你的移动速度提升 %d%% ，你获得隐形 (强度  %d)。]]):
 			format(t.getDur(self, t),t.getReduction(self, t) * 100, t.getResistance(self, t), t.getMove(self, t), t.getPower(self, t))
 	end,
 	short_info = function(self, t)
@@ -280,7 +280,7 @@ registerInscriptionTranslation{
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
 		return ([[启动这个符文，在你的身边召唤一团保护性的风暴，持续 %d 回合。
-			 当符文生效时，风暴可以抵挡大于 %d 的任何伤害最多 %d 次。]])
+			当符文生效时，风暴可以抵挡大于 %d 的任何伤害最多 %d 次。]])
 				:format(t.getDur(self, t), t.getThreshold(self, t), t.getBlocks(self, t) )
 	end,
 	short_info = function(self, t)
@@ -314,8 +314,8 @@ registerInscriptionTranslation{
 	display_name = "符文：镜像",
 	info = function(self, t)
 		return ([[激活符文，最多召唤你的 3 个镜像，镜像会嘲讽周围的敌人。
-			 在半径 10 范围内每有一个敌人才能召唤一个镜像，第一个镜像会被召唤在最近的敌人旁边。
-			 镜像继承你的生命值、抗性、护甲、闪避和护甲硬度。]])
+			在半径 10 范围内每有一个敌人才能召唤一个镜像，第一个镜像会被召唤在最近的敌人旁边。
+			镜像继承你的生命值、抗性、护甲、闪避和护甲硬度。]])
 				:format(t.getInheritance(self, t)*100 )
 	end,
 	short_info = function(self, t)
@@ -328,8 +328,8 @@ registerInscriptionTranslation{
 	display_name = "符文: 粉碎痛苦",
 	info = function(self, t)
 		return ([[激活符文，立刻清除你身上的负面效果。
-			 清除所有 CT 效果，以及物理、精神和魔法负面效果各 1 个。
-			 每清除一个负面效果，你都会获得一个抵挡 %d 伤害的护盾，持续 3 回合。]]):format(t.getShield(self, t) * (100 + (self:attr("shield_factor") or 0)) / 100)
+			清除所有 CT 效果，以及物理、精神和魔法负面效果各 1 个。
+			每清除一个负面效果，你都会获得一个抵挡 %d 伤害的护盾，持续 3 回合。]]):format(t.getShield(self, t) * (100 + (self:attr("shield_factor") or 0)) / 100)
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
@@ -359,7 +359,7 @@ registerInscriptionTranslation{
 	display_name = "堕落印记：吞噬",
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[对目标激活此印记，移除其 %d 个效果并将其转化为治疗你每个效果 %d 生命值。 ]]):format(data.effects, data.heal + data.inc_stat)
+		return ([[对目标激活此印记，移除其 %d 个效果并将其转化为治疗你每个效果 %d 生命值。]]):format(data.effects, data.heal + data.inc_stat)
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
@@ -373,8 +373,8 @@ registerInscriptionTranslation{
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
 		return ([[激活这个堕落印记，清除你身上的物理效果，持续 %d 回合。
-		 每一回合，这个印记将会尝试从你的身上解除一个物理负面效果。
-		 如果它解除了一个负面效果，它的持续时间会增加 1 回合。]])
+		每一回合，这个印记将会尝试从你的身上解除一个物理负面效果。
+		如果它解除了一个负面效果，它的持续时间会增加 1 回合。]])
 				:format(t.getDur(self, t) )
 	end,
 	short_info = function(self, t)
@@ -393,7 +393,7 @@ registerInscriptionTranslation{
 		local data = self:getInscriptionData(t.short_name)
 		local apply = self:rescaleCombatStats((data.power + data.inc_stat))
 		return ([[激活这个纹身照亮 %d 区域和潜行单位，可能使潜行目标显形（降低 %d 潜行强度）。 %s
-		 同时区域内目标也有几率被致盲（ %d 等级），持续 %d 回合。 ]]):
+		同时区域内目标也有几率被致盲（ %d 等级），持续 %d 回合。]]):
 		format(data.range, apply/2, apply >= 19 and "\n 这光线是如此强烈，以至于能驱散魔法造成的黑暗 " or "", apply, data.turns)
 	end,
 	short_info = function(self, t)
@@ -408,7 +408,7 @@ registerInscriptionTranslation{
 	display_name = "堕落印记：感应",
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[解除你的精神束缚 %d 回合，感应 %d 码范围内的所有生物，减少 %d 精神豁免持续 10 回合并增加 %d 点精神强度。 ]]):format(data.dur, self:getTalentRange(t), 10, 35)
+		return ([[解除你的精神束缚 %d 回合，感应 %d 码范围内的所有生物，减少 %d 精神豁免持续 10 回合并增加 %d 点精神强度。]]):format(data.dur, self:getTalentRange(t), 10, 35)
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
@@ -422,7 +422,7 @@ registerInscriptionTranslation{
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
 		return ([[激活这个符文发射一束冰枪，造成 %0.2f 冰冻伤害并有一定几率冻结你的目标。 
-               	 寒冰同时会解除你受到的一个负面精神状态。 ]]):format(damDesc(self, DamageType.COLD, data.power + data.inc_stat))
+               	 寒冰同时会解除你受到的一个负面精神状态。]]):format(damDesc(self, DamageType.COLD, data.power + data.inc_stat))
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
@@ -436,7 +436,7 @@ registerInscriptionTranslation{
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
 		return ([[激活这个符文发射一束射线，造成 %0.2f 火焰伤害持续 5 回合。 
-		 高温同时会解除你受到的一个负面物理状态。 ]]):format(damDesc(self, DamageType.FIRE, data.power + data.inc_stat))
+		高温同时会解除你受到的一个负面物理状态。]]):format(damDesc(self, DamageType.FIRE, data.power + data.inc_stat))
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
@@ -449,7 +449,7 @@ registerInscriptionTranslation{
 	display_name = "符文：速度",
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[激活这个符文提高整体速度 %d%% 持续 %d 回合。 ]]):format(data.power + data.inc_stat, data.dur)
+		return ([[激活这个符文提高整体速度 %d%% 持续 %d 回合。]]):format(data.power + data.inc_stat, data.dur)
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
@@ -467,7 +467,7 @@ registerInscriptionTranslation{
 		local kind=data.esp or " 人形怪 "
                 kind=kind:gsub("demon"," 恶魔 "):gsub("animal"," 动物 "):gsub("undead"," 不死族 "):gsub("dragon"," 龙 "):gsub("horror"," 恐魔 "):gsub("humanoid","人形怪")
 		return ([[激活这个符文可以使你查看周围环境（ %d 有效范围）使你你查看隐形生物（ %d 侦测隐形等级）持续 %d 回合。 
-		 你的精神更加敏锐，能感知到周围的 %s  ，持续 %d 回合。 ]]):
+		你的精神更加敏锐，能感知到周围的 %s  ，持续 %d 回合。]]):
 		format(data.range, data.power + data.inc_stat, data.dur, kind, data.dur)
 
 	end,
@@ -486,7 +486,7 @@ registerInscriptionTranslation{
 		local data = self:getInscriptionData(t.short_name)
 		local power = (data.power or data.range) + data.inc_stat * 3
 		return ([[激活这个符文会使你在 %d 码范围内随机传送。 
-		 之后，你会出入现实空间 % d 回合，所有新的负面状态持续时间减少 %d%% ，闪避增加 %d ，全体伤害抗性增加 %d%%。 ]]):
+		之后，你会出入现实空间 % d 回合，所有新的负面状态持续时间减少 %d%% ，闪避增加 %d ，全体伤害抗性增加 %d%%。]]):
 		format(data.range + data.inc_stat, data.dur or 3, power, power, power)
 	end,
 	short_info = function(self, t)
@@ -501,7 +501,7 @@ registerInscriptionTranslation{
 	display_name = "符文：可控相位门",
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[激活这个符文，传送至 %d 码内的指定位置。 ]]):format(data.range + data.inc_stat)
+		return ([[激活这个符文，传送至 %d 码内的指定位置。]]):format(data.range + data.inc_stat)
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
@@ -516,7 +516,7 @@ registerInscriptionTranslation{
 		local data = self:getInscriptionData(t.short_name)
 		local dam = damDesc(self, DamageType.LIGHTNING, data.power + data.inc_stat)
 		return ([[激活这个符文发射一束闪电打击目标，造成 %0.2f 至 %0.2f 闪电伤害。 
-		 同时会让你进入闪电形态 %d 回合：受到伤害时你会瞬移到附近的一  格并防止此伤害，一回合只能触发一次。 ]]):
+		同时会让你进入闪电形态 %d 回合：受到伤害时你会瞬移到附近的一  格并防止此伤害，一回合只能触发一次。]]):
 		format(dam / 3, dam, 2)
 	end,
 	short_info = function(self, t)
@@ -531,7 +531,7 @@ registerInscriptionTranslation{
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
 		return ([[激活这个纹身会发射一个毒气弹造成每回合 %0.2f 自然伤害持续 7 回合，并降低目标治疗效果 %d%% 。
-		 突然涌动的自然力量会除去你受到的一个负面魔法效果。 ]]):format(damDesc(self, DamageType.NATURE, data.power + data.inc_stat) / 7, data.heal_factor)
+		突然涌动的自然力量会除去你受到的一个负面魔法效果。]]):format(damDesc(self, DamageType.NATURE, data.power + data.inc_stat) / 7, data.heal_factor)
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
@@ -545,7 +545,7 @@ registerInscriptionTranslation{
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
 		return ([[激活这个符文使你变得隐形（ %d 隐形等级）持续 %d 回合。 
-		 由于你的隐形使你从现实相位中脱离，你的所有伤害降低 40%%。 
+		由于你的隐形使你从现实相位中脱离，你的所有伤害降低 40%%。 
 		]]):format(data.power + data.inc_stat, data.dur)
 	end,
 	short_info = function(self, t)

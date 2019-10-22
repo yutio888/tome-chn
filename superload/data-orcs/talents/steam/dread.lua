@@ -35,7 +35,7 @@ registerTalentTranslation{
 	name = "无助深渊",
 	info = function(self, t)
 		return ([[操纵敌人的思维，让敌人失去战胜你的希望。
-		降低敌人 40%% 的全部伤害，持续 %d 回合。 ]]):
+		降低敌人 40%% 的全部伤害，持续 %d 回合。]]):
 		format(t.getDur(self, t))
 	end,}
 return _M

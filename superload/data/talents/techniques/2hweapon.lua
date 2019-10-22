@@ -57,7 +57,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		return ([[用你的武器攻击目标并造成 %d%% 伤害。如果此次攻击命中，则目标护甲和豁免会减少 %d 持续 %d 回合。 
 		同时，如果目标被临时伤害护盾保护，有 %d%% 几率使之破碎。
-		受物理强度影响，护甲减值有额外增加。 ]])
+		受物理强度影响，护甲减值有额外增加。]])
 		:format(100 * self:combatTalentWeaponDamage(t, 1, 1.5),t.getArmorReduc(self, t), t.getDuration(self, t), t.getShatter(self, t))
 	end,
 }
@@ -67,7 +67,7 @@ registerTalentTranslation{
 	name = "破刃",
 	info = function(self, t)
 		return ([[用你的武器攻击目标并造成 %d%% 伤害。如果此次攻击命中，则目标命中会减少 %d 持续 %d 回合。 
-		受物理强度影响，命中减值有额外加成。 ]])
+		受物理强度影响，命中减值有额外加成。]])
 		:format(
 			100 * self:combatTalentWeaponDamage(t, 1, 1.5), 3 * self:getTalentLevel(t), t.getDuration(self, t))
 	end,

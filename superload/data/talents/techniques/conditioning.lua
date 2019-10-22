@@ -40,7 +40,7 @@ registerTalentTranslation{
 		local penalty = t.getPenalty(self, t)
 		return ([[敌人因你的存在而恐惧。 
 		半径 %d 码范围内的敌人的物理强度，精神强度和法术强度会降低 %d 。
-		受物理强度影响，威胁效果有加成。 ]]):
+		受物理强度影响，威胁效果有加成。]]):
 		format(radius, penalty)
 	end,
 }

@@ -1618,7 +1618,7 @@ newEffect{
 newEffect{
 	name = "INVIGORATE", image = "talents/invigorate.png",
 	desc = "Invigorate",
-	long_desc = function(self, eff) return ("目标每回合回复 %d 体力值并且以两倍正常速度刷新技能。 "):format(eff.power) end,
+	long_desc = function(self, eff) return ("目标每回合回复 %d 体力值并且以两倍正常速度刷新技能。"):format(eff.power) end,
 	type = "magical",
 	subtype = { temporal=true, regeneration=true },
 	status = "beneficial",

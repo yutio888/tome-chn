@@ -51,7 +51,7 @@ newEntity{
 		who.energy.value = game.energy_to_act
 		game.paused = true
 		who:runStop()
-		engine.ui.Dialog:yesnoLongPopup("遭遇", "你脚下的大地在颤动，一只巨大的蠕虫突然出现，将你吞了进去 ! \n 你可以尝试使用回归之杖来逃离，或者接受你的命运。 ", 500, function(ret)
+		engine.ui.Dialog:yesnoLongPopup("遭遇", "你脚下的大地在颤动，一只巨大的蠕虫突然出现，将你吞了进去 ! \n 你可以尝试使用回归之杖来逃离，或者接受你的命运。", 500, function(ret)
 			if ret then
 				game:changeLevel(1, "cults+godfeaster")
 			else

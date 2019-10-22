@@ -40,8 +40,8 @@ registerTalentTranslation{
 	name = "爆尸",
 	info = function(self, t)
 		return ([[每次击杀敌人时，将爆炸物和榴弹封入尸体，引发一场半径 %d 的大爆炸。
-		 任何被击中的敌人将在 6  回合内受到 %0.2f 流血伤害。
-		 同时榴弹将损伤他们的发声器官，沉默 %d 回合。
+		任何被击中的敌人将在 6  回合内受到 %0.2f 流血伤害。
+		同时榴弹将损伤他们的发声器官，沉默 %d 回合。
 		#{italic}#使用战争技术的精华——榴弹。为了制造血和骚乱！#{normal}#]]):
 		format(self:getTalentRange(t), damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t) / 6), t.getDuration(self, t))
 	end,}

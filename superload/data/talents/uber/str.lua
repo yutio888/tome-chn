@@ -19,7 +19,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		return ([[对敌人进行一次猛击，造成 350％的武器伤害并击退目标 5 码，路径上的敌人都会被击中。
 		所有受影响的目标都会被震慑 3 回合。
-		体型超过  “Big”时，每增加一级，额外增加 80%% 武器伤害。 ]])
+		体型超过  “Big”时，每增加一级，额外增加 80%% 武器伤害。]])
 		:format()
 	end,
 }
@@ -68,7 +68,7 @@ registerTalentTranslation{
 		return ([[你是如此强壮，永不疲倦。 
 		疲劳值永久为 0 且负重上限增加 500 点。
 		你增加 50 点力量并且体型 +1 。
-		 ]])
+		]])
 		:format()
 	end,
 }
@@ -81,7 +81,7 @@ registerTalentTranslation{
 		local level = t.bonusLevel(self,t)
 		return ([[你站在萨拉苏尔一方并帮助他解决了厄库尔维斯克。你现在可以轻松的在水下呼吸。 
 	         同时，你能轻易学会如何使用三叉戟和其他异形武器（获得 %d 级异形武器掌握），并且可以像娜迦一样喷吐毒素（等级 %d ）。技能等级随人物等级增长。   
-		 此外，若萨拉苏尔仍然存活，他还会送你一份大礼…]])
+		此外，若萨拉苏尔仍然存活，他还会送你一份大礼…]])
 		:format(level, level)
 	end,
 }

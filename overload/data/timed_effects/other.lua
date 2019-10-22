@@ -1455,7 +1455,7 @@ newEffect{
 newEffect{
 	name = "SHROUD_OF_DEATH",
 	desc = "Shroud of Death",
-	long_desc = function(self, eff) return ("笼罩在一个屏障内使目标身形逐渐消失 (+%d%% 全抗 )。 "):format(eff.power) end,
+	long_desc = function(self, eff) return ("笼罩在一个屏障内使目标身形逐渐消失 (+%d%% 全抗 )。"):format(eff.power) end,
 	type = "other",
 	subtype = { time=true },
 	status = "beneficial",
@@ -2513,7 +2513,7 @@ newEffect{
 	name = "ZONE_AURA_BLIGHT",
 	desc = "Miasma",
 	no_stop_enter_worlmap = true,
-	long_desc = function(self, eff) return ("范围效果： +10% 枯萎伤害， -10% 枯萎抗性， -20% 治疗加成， -20% 疾病抗性。 ") end,
+	long_desc = function(self, eff) return ("范围效果： +10% 枯萎伤害， -10% 枯萎抗性， -20% 治疗加成， -20% 疾病抗性。") end,
 	decrease = 0, no_remove = true,
 	type = "other",
 	subtype = { aura=true },

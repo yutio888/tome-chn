@@ -6,7 +6,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		return ([[ 你用双手武器攻击敌人，造成 %d%% 武器伤害。
-		 如果攻击命中，半径 2 以内的敌人光系抗性下降 %d%% ，伤害下降 %d%%, 持续 5 回合。]]):
+		如果攻击命中，半径 2 以内的敌人光系抗性下降 %d%% ，伤害下降 %d%%, 持续 5 回合。]]):
 		format(100 * damage, t.getWeakness(self, t), t.getNumb(self, t))
 	end,
 }
@@ -36,8 +36,8 @@ registerTalentTranslation{
 	name = "闪光之刃",
 	info = function(self, t)
 		return ([[ 旋转一周，同时将光明之力充满武器。
-		 半径 1 以内的敌人将受到 %d%% 武器伤害，同时半径 2 以内的敌人将受到 %d%% 光系武器伤害。
-		 技能等级 4 或以上时，在旋转时你会制造一层护盾，吸收 1 回合内的所有攻击。]]):
+		半径 1 以内的敌人将受到 %d%% 武器伤害，同时半径 2 以内的敌人将受到 %d%% 光系武器伤害。
+		技能等级 4 或以上时，在旋转时你会制造一层护盾，吸收 1 回合内的所有攻击。]]):
 		format(t.get1Damage(self, t) * 100, t.get2Damage(self, t) * 100)
 	end,
 }

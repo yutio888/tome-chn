@@ -7,8 +7,8 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local radius = self:getTalentRadius(t)
 		return ([[发射一道射线，令物质归于尘土，造成 %0.2f 时空与 %0.2f 物理伤害。
-		 也可以以自己为目标，制造一个围绕自己 %d 码的领域，在 3 回合内造成伤害。
-		 伤害受法术强度加成。]]):
+		也可以以自己为目标，制造一个围绕自己 %d 码的领域，在 3 回合内造成伤害。
+		伤害受法术强度加成。]]):
 		format(damDesc(self, DamageType.TEMPORAL, damage / 2), damDesc(self, DamageType.PHYSICAL, damage / 2), radius)
 	end,
 }

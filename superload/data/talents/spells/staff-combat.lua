@@ -6,9 +6,9 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damagemod = t.getDamageMod(self, t)
 		return ([[引导冰冷的法力穿过你的法杖，发射出 1 道能造成 %d%% 法杖伤害的魔法箭。 
-		 这道魔法可以安全的穿过己方队友，只会对敌方目标造成伤害。 
-		 此攻击能 100%% 命中并无视目标护甲。
-		 法杖的伤害系数会增加 0.2 。]]):
+		这道魔法可以安全的穿过己方队友，只会对敌方目标造成伤害。 
+		此攻击能 100%% 命中并无视目标护甲。
+		法杖的伤害系数会增加 0.2 。]]):
 		format(damagemod * 100)
 	end,
 }
@@ -41,8 +41,8 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local dazedur = t.getDazeDuration(self, t)
 		return ([[挥动法杖对目标造成 %d%% 近程伤害并震慑目标 %d 回合。 
-		 受法术强度影响，震慑概率有额外加成。 
-		 在等级 5 时，此攻击必中。]]):
+		受法术强度影响，震慑概率有额外加成。 
+		在等级 5 时，此攻击必中。]]):
 		format(100 * damage, dazedur)
 	end,
 }

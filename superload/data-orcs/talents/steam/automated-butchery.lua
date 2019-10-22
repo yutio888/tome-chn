@@ -5,9 +5,9 @@ registerTalentTranslation{
 	name = "无尽屠戮",
 	info = function(self, t)
 		return ([[用链锯缠绕指定目标 5 回合。
-		 使用链锯对此目标造成伤害时，伤害增加 %d%% （其他链锯技能也可以加成）。
-		 当攻击其他目标时，伤害加成效果结束。
-		 #{italic}#切碎他们！！#{normal}#
+		使用链锯对此目标造成伤害时，伤害增加 %d%% （其他链锯技能也可以加成）。
+		当攻击其他目标时，伤害加成效果结束。
+		#{italic}#切碎他们！！#{normal}#
 		]]):
 		format(t.getInc(self, t))
 	end,}
@@ -42,7 +42,7 @@ registerTalentTranslation{
 		local talentcount = t.getTalentCount(self, t)
 		local maxlevel = t.getMaxLevel(self, t)
 		return ([[你开启全部插件的超频模式，清除最多 % d 个蒸汽科技技能（ %d 层级或以下）的 CD ，直接恢复 %d%% 蒸汽值。
-		 在 6 回合内，蒸汽值最大值翻倍，但是恢复值减半。
+		在 6 回合内，蒸汽值最大值翻倍，但是恢复值减半。
 		#{italic}#科技至尊、死亡之主！！#{normal}#]]):
 		format(talentcount, maxlevel, inc)
 	end,}

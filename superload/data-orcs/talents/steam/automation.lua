@@ -13,9 +13,9 @@ registerTalentTranslation{
 	name = "飞爪擒拿",
 	info = function(self, t)
 		return ([[向目标发射一枚自动制导的蒸汽动力无人机。
-		 命中目标后，无人机向 4 码内的所有方向发射金属飞爪。
-		 飞爪会抓住范围内任何敌人，并将它们向目标拉扯。
-		 如果拉扯过程中被其他生物阻挡，两者均受到 %0.2f 物理伤害。
+		命中目标后，无人机向 4 码内的所有方向发射金属飞爪。
+		飞爪会抓住范围内任何敌人，并将它们向目标拉扯。
+		如果拉扯过程中被其他生物阻挡，两者均受到 %0.2f 物理伤害。
 		]]):format(damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t)))
 	end,}
 

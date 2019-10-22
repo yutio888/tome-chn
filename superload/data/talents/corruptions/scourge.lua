@@ -15,7 +15,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local dam = damDesc(self, DamageType.BLIGHT, t.getDamage(self, t))
 		return ([[专注于你带来的瘟疫，每次近战攻击会造成 %0.2f 枯萎伤害（同时每击恢复你 %0.2f 生命值）。 
-		 受法术强度影响，伤害有额外加成。]]):
+		受法术强度影响，伤害有额外加成。]]):
 		format(dam, dam * 0.4)
 	end,
 }
@@ -25,9 +25,9 @@ registerTalentTranslation{
     name = "酸性打击",
 	info = function(self, t)
 		return ([[用每把武器打击目标，每次攻击造成 %d%% 酸性武器伤害。 
-		 如果有至少一次攻击命中目标，则会产生酸系溅射，对 %d 范围内的所有敌人造成 %0.2f 酸性伤害。 
-		 受法术强度影响，溅射伤害有额外加成。]]):
-		 format(100 * t.getDamage(self, t), self:getTalentRadius(t), damDesc(self, DamageType.ACID, t.getSplash(self, t)))
+		如果有至少一次攻击命中目标，则会产生酸系溅射，对 %d 范围内的所有敌人造成 %0.2f 酸性伤害。 
+		受法术强度影响，溅射伤害有额外加成。]]):
+		format(100 * t.getDamage(self, t), self:getTalentRadius(t), damDesc(self, DamageType.ACID, t.getSplash(self, t)))
 		end,
 }
 

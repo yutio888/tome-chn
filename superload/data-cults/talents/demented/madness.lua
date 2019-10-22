@@ -31,7 +31,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local dam = t.getDamage(self,t)
 		local radius = self:getTalentRadius(t)
-		return ([[每当幻象被消灭时，它将释放心灵冲击，对 %d 格内的敌人造成 %0.2f 暗影伤害。 ]]):
+		return ([[每当幻象被消灭时，它将释放心灵冲击，对 %d 格内的敌人造成 %0.2f 暗影伤害。]]):
 		format(radius,damDesc(self, DamageType.DARKNESS, dam))
 	end,
 }

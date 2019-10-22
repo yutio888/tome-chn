@@ -24,9 +24,9 @@ registerTalentTranslation{
 		-岩石傀儡：使周围的友方单位获得 %d 护甲值和 %d%%护甲强度，持续 5 回合。
 		-乌龟：给所有友方单位提供一个甲壳护盾，所有抗性提升 %d%% ，持续 5 回合。
 		-蜘蛛：将所有敌人击退 %d 格。
-		 此外，随机的某个召唤技能会冷却完毕。
-		 引爆产生的负面效果不会影响到你或你的召唤兽。
-		 效果受精神强度加成，可以暴击。]]):format(radius, t.explodeSecondary(self,t), t.hydraAffinity(self,t), t.hydraRegen(self,t), t.explodeSecondary(self,t), t.explodeFire(self,t), t.explodeBleed(self,t) / 6, t.explodeSecondary(self,t), t.jellySlow(self,t) * 100, t.minotaurConfuse(self,t), t.golemArmour(self,t), t.golemHardiness(self,t), t.shellShielding(self,t), t.spiderKnockback(self,t)) 
+		此外，随机的某个召唤技能会冷却完毕。
+		引爆产生的负面效果不会影响到你或你的召唤兽。
+		效果受精神强度加成，可以暴击。]]):format(radius, t.explodeSecondary(self,t), t.hydraAffinity(self,t), t.hydraRegen(self,t), t.explodeSecondary(self,t), t.explodeFire(self,t), t.explodeBleed(self,t) / 6, t.explodeSecondary(self,t), t.jellySlow(self,t) * 100, t.minotaurConfuse(self,t), t.golemArmour(self,t), t.golemHardiness(self,t), t.shellShielding(self,t), t.spiderKnockback(self,t)) 
 	end,
 }
 

@@ -87,9 +87,9 @@ registerTalentTranslation{
 	name = "暗影融合",
 	info = function(self, t)
 		return ([[每当你站在黑暗地形时，你能与黑暗融合，获得 %d 潜行强度。
-		 你的灯具不会计算在内，同时效果激活时灯具将自动关闭。
-		 移动会取消该效果。
-		 潜行强度受法术强度加成。]]):
+		你的灯具不会计算在内，同时效果激活时灯具将自动关闭。
+		移动会取消该效果。
+		潜行强度受法术强度加成。]]):
 		format(t.getStealth(self, t))
 	end,
 }
@@ -100,7 +100,7 @@ registerTalentTranslation{
 	name = "鲜血护盾",
 	info = function(self, t)
 		return ([[在盾牌中引导毁灭之力，使你受到的全体伤害减少 15%% 格挡值。
-		 每次你被近战攻击命中时，你的盾牌会自动反击，造成 %d%% 格挡值的火焰暗影混合伤害。]]):
+		每次你被近战攻击命中时，你的盾牌会自动反击，造成 %d%% 格挡值的火焰暗影混合伤害。]]):
 		format(0.35 * t.getPercent(self, t))
 	end,
 }
@@ -134,8 +134,8 @@ registerTalentTranslation{
 	name = "末日触须",
 	info = function(self, t)
 		return ([[你化身为末日之柱，在周围 2 码的范围内产生火焰触须。
-		 被火焰触须击中的敌人每回合受到 %0.2f 火焰伤害。
-		 受到伤害的生物同时会被定身。]]):
+		被火焰触须击中的敌人每回合受到 %0.2f 火焰伤害。
+		受到伤害的生物同时会被定身。]]):
 		format(t.getDamage(self, t))
 	end,
 }
@@ -147,8 +147,8 @@ registerTalentTranslation{
 	name = "自然末日",
 	info = function(self, t)
 		return ([[你诅咒目标 5 回合，割裂其与自然的联系。
-		 每次被诅咒的目标试图使用自然力量时，有 %d%% 几率失败并制造一个火球，对半径 1 内的生物造成 %0.2f 火焰伤害。
-		 伤害受你的意志加成。]]):
+		每次被诅咒的目标试图使用自然力量时，有 %d%% 几率失败并制造一个火球，对半径 1 内的生物造成 %0.2f 火焰伤害。
+		伤害受你的意志加成。]]):
 		format(t.getChance(self, t),  t.getDamage(self, t))
 	end,
 }
@@ -159,7 +159,7 @@ registerTalentTranslation{
 	name = "酸性爆发",
 	info = function(self, t)
 		return ([[每次你格挡攻击时，将释放少量酸性气体，在半径 3 的范围内造成持续 %d 回合的 %d 伤害。
-		 伤害受法术强度加成。]]):
+		伤害受法术强度加成。]]):
 		format( t.getDuration(self,t), t.getDamage(self,t))
 	end,
 }

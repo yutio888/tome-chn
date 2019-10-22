@@ -52,7 +52,7 @@ registerTalentTranslation{
 		local ressistpen = t.getResistPenalty(self, t)
 		local daze = t.getDaze(self, t)
 		return ([[在你周围生成一股风暴，增加你 %d%% 闪电伤害并无视目标 %d%% 闪电抵抗。 
-		 你的闪电术和连锁闪电同时会增加 %d%% 眩晕几率，并且闪电风暴也会增加 %d%% 眩晕几率。]])
+		你的闪电术和连锁闪电同时会增加 %d%% 眩晕几率，并且闪电风暴也会增加 %d%% 眩晕几率。]])
 		:format(damageinc, ressistpen, daze, daze / 2)
 	end,
 }

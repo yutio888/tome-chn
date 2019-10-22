@@ -35,7 +35,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local range = t.range(self, t)
 		return ([[你收起可怕的本质伪装成可怜虫。那些在 %d 码外看到你的敌人将忽略你。 
-		 当你攻击或使用技能时，它们会看穿你的本质，怜悯技能将失效。]]):format(range)
+		当你攻击或使用技能时，它们会看穿你的本质，怜悯技能将失效。]]):format(range)
 	end,
 }
 

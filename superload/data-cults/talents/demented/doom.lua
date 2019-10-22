@@ -22,7 +22,7 @@ registerTalentTranslation{
 	name = "疯狂预言",
 	info = function(self, t)
 		local cd = t.getCooldown(self,t)*100
-		return ([[对目标施加疯狂预言，增加 %d%% 技能冷却时间，持续 6 回合。 ]]):format(cd)
+		return ([[对目标施加疯狂预言，增加 %d%% 技能冷却时间，持续 6 回合。]]):format(cd)
 	end,
 }
 

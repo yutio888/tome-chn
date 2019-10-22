@@ -9,7 +9,7 @@ registerInscriptionTranslation = function(t)
 			local ret = t.extra_data.old_info(self, t)
 			local data = self:getInscriptionData(t.short_name)
 			if data.use_stat and data.use_stat_mod then
-				ret = ret..("\n受你的 %s 影响，此效果按比例加成。 "):format(s_stat_name[self.stats_def[data.use_stat].name] or self.stats_def[data.use_stat].name)
+				ret = ret..("\n受你的 %s 影响，此效果按比例加成。"):format(s_stat_name[self.stats_def[data.use_stat].name] or self.stats_def[data.use_stat].name)
 			end
 			return ret
 		end

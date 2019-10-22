@@ -33,8 +33,8 @@ registerTalentTranslation{
 	name = "屏蔽设备",
 	info = function(self, t)
 		return ([[在披风上布满细小的反射镜阵列，反射照射到你身上的所有光线，让你直接潜形。
-		 获得 %d 潜行强度，持续 10 回合。
-		 潜行强度随蒸汽强度提高增加。]]):
+		获得 %d 潜行强度，持续 10 回合。
+		潜行强度随蒸汽强度提高增加。]]):
 		format(t.getStealth(self, t))
 	end,}
 return _M

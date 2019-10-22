@@ -34,7 +34,7 @@ end
 local function aeryn_dead(npc, player) return not aeryn_alive(npc, player) end
 
 local function aeryn_comes(npc, player)
-	local x, y = util.findFreeGrid(player.x, player.y, 1, true, {[engine.Map.ACTOR]=true})
+	local x, y = util.findFreeGrid(player.x, player.y, 5, true, {[engine.Map.ACTOR]=true})
 	local aeryn = game.zone:makeEntityByName(game.level, "actor", "HIGH_SUN_PALADIN_AERYN")
 	if aeryn then
 		game.zone:addEntity(game.level, aeryn, "actor", x, y)

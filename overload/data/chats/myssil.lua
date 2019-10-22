@@ -59,8 +59,8 @@ newChat{ id="save-derth",
 
 newChat{ id="tempest-dead",
 	text = [[我已经听说了，@playername@。你已经证明了你训练的价值。愿自然赐福于你，伊格勇士 @playername@。
-	#LIGHT_GREEN#她将手放到你的身上，你感到自然的力量充斥着你的每个毛孔。
-	*#WHITE#这个应该会对你的旅途有所帮助。保重！]],
+#LIGHT_GREEN#她将手放到你的身上，你感到自然的力量充斥着你的每个毛孔。*#WHITE#
+这个应该会对你的旅途有所帮助。保重！]],
 	answers = {
 		{"Thank you, Protector.", action=function(npc, player)
 			player:hasQuest("lightning-overload"):create_entrance()

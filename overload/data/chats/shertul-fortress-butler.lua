@@ -152,7 +152,8 @@ newChat{ id="training",
 }
 
 newChat{ id="shimmer",
-	text = [[好的主人。反射之镜能满足您的需求，它需要10点能量激活。.]]..(profile:isDonator(1) and "" or "\n#{italic}##CRIMSON#这项特性只对捐赠用户有效。#{normal}#"),
+	text = [[好的主人。反射之镜能满足您的需求。它目前处于休眠状态，但可以重新激活。
+它需要10点能量激活。.]]..(profile:isDonator(1) and "" or "\n#{italic}##CRIMSON#这项特性只对捐赠用户有效。#{normal}#"),
 	answers = {
 		{"以后再说。"},
 		{"非常好，就这么做吧。", cond=function() return q.shertul_energy >= 10 end, action=function() q:open_shimmer() end},

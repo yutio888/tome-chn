@@ -76,20 +76,20 @@ local ans = {
 }
 
 newChat{ id="how_speak",
-	text = [[What's the good of immortality if you can't even speak? No archmage worth his salt is going to concoct some immoral life-after-death scheme without including some sort of capacity for making his opinions known. And, by the way, your energy manipulation techniques are on the same level as those of my average pair of shoes. Though I guess you are making up for it with your golem crafting skills.]],
+	text = [[如果你连说话都不能，就算得到永生还有什么乐趣？任何一个称职的大法师，在准备他们不道德的死后复活计划的时候，都一定会计划好确保在这种状况下也能让别人听到自己的声音。顺带一提，你操纵能量的技术连给我提鞋都不够。虽然我猜，我正在用你的傀儡制作技能来弥补它。]],
 	answers = ans
 }
 
 newChat{ id="name",
-	text = [[Change my name? I'm quite happy being 'Telos' thankyou. Though I wouldn't mind being 'Telos the Great and Powerful'. Do that actually. Yes!]],
+	text = [[改变我的名字？我的名字就是“泰勒斯”，谢谢。当然，如果你叫我“伟大的泰勒斯大人”我也不介意。对，赶紧这么做吧！]],
 	answers = ans
 }
 
 if golem.sentient_telos == 1 then
 
 newChat{ id="welcome",
-	text = [[I'm a golem. How droll!
-Oh, did you want something?]],
+	text = [[我是个傀儡。真可笑！
+哦，你想要点什么吗？]],
 	answers = ans
 }
 

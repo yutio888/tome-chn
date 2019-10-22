@@ -30,8 +30,8 @@ local function remove_materials(npc, player)
 end
 
 local function check_materials(npc, player)
-	local gem_o, gem_item, gem_inven_id = player:findInAllInventoriesBy("define_as","RESONATING_DIAMOND")
-	local athame_o, athame_item, athame_inven_id = player:findInAllInventoriesBy("define_as","ATHAME")
+	local gem_o, gem_item, gem_inven_id = player:findInAllInventories("Resonating Diamond")
+	local athame_o, athame_item, athame_inven_id = player:findInAllInventories("Blood-Runed Athame")
 	return gem_o and athame_o and player.money >= 100
 end
 

@@ -658,7 +658,7 @@ end
 }
 questCHN["Escort"] = {
 name = function(n)
-	n = n:gsub("Escort: "," 护送： "):gsub("lost warrior"," 迷路的战士 "):gsub("injured seer"," 受伤的先知 "):gsub("repented thief"," 忏悔的盗贼 "):gsub("lone alchemist"," 迷途的炼金术士 "):gsub("lost sun paladin"," 迷路的太阳骑士 "):gsub("lost anorithil"," 迷路的星月术士 "):gsub("worried loremaster"," 忧郁的博学者 "):gsub("temporal explorer","时空探索者")
+	n = n:gsub("Escort: "," 护送： "):gsub("lost warrior"," 迷路的战士 "):gsub("injured seer"," 受伤的先知 "):gsub("repented thief"," 忏悔的盗贼 "):gsub("lone alchemist"," 迷途的炼金术士 "):gsub("lost sun paladin"," 迷路的太阳骑士 "):gsub("lost anorithil"," 迷路的星月术士 "):gsub("worried loremaster"," 忧郁的博学者 "):gsub("temporal explorer","时空探索者"):gsub("lost defiler", "迷路的堕落者")
 	
 	local m = n:gsub(".+%(level %d+ of ",""):gsub("%)","")
 	local l = n:match("level (%d+) of ")
@@ -692,6 +692,7 @@ description = function(desc)
 	desc = string.gsub(desc,"lost anorithil"," 迷路的星月术士 ")
 	desc = string.gsub(desc,"worried loremaster"," 忧郁的博学者 ")
 	desc = desc:gsub("temporal explorer","时空探索者")
+	desc = desc:gsub("lost defiler"," 迷路的堕落者 ")
 	desc = string.gsub(desc,"As a reward you"," 作为报答你得到奖励： ")
 
 	if desc:find("improved .+ save by") then

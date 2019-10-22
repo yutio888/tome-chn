@@ -18,9 +18,8 @@
 -- darkgod@te4.org
 
 newChat{ id="welcome",
-	text = [[@playername@你为吾效力的时候到了。
-	附近那些不忠诚的异端们正在蠢蠢欲动。
-	你最好尽快过去，找到这一切的源头。]],
+	text = [[@playername@你效力的时候到了。附近混沌之沼中的怪物们正在蠢蠢欲动。
+你最好尽快过去，找到这一切的源头。]],
 	answers = {
 		{"我会的，伟大的守护者。", action=function() game:changeLevel(1, "unhallowed-morass") end},
 		{"抱歉，我不能这么做。", action=function(npc, player) player:setQuestStatus("start-point-zero", engine.Quest.FAILED) end},

@@ -52,7 +52,7 @@ local function intro(o)
 	}
 	cur_chat:triggerHook{"CommandStaff:SentientOptions", o=o, mode="intro", list=sentient_responses}
 	if o.no_command then
-		return [[在这根法杖上没有合适的位置镶嵌此物品。这样做会带来破坏。]]
+		return [[你无法对其释放掌控法杖。这样做会带来破坏。]]
 	end
 	if o.combat.sentient then
 		return sentient_responses[o.combat.sentient] or sentient_responses["default"]

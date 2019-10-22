@@ -67,7 +67,7 @@ newChat{ id="fool",
 
 newChat{ id="kill",
 	text = [[在爆炸之前，传送门同时把我们两个随机传送了一个地方。
-蠢货！你注定要碰到我们，我们 #{bold}#无所不在！#{normal}#
+蠢货！你把事情全搞砸了，#{bold}#谁也不知道#{normal}#我们被传送到哪里去了！
 死吧！]],
 	answers = {
 		{"……", action=function(npc, player) world:gainAchievement("SUNWALL_LOST", player) end},

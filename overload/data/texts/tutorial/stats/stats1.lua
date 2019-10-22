@@ -22,7 +22,7 @@ return [[
 这是本次教程的一个主题。
 首先两个 #GOLD#战斗属性#WHITE# 是：
 
-#LIGHT_GREEN#命中：#WHITE#决定了你的物理攻击是否可以击中目标。  
+#LIGHT_GREEN#命中：#WHITE#决定了你的物理攻击是否可以击中目标。
 #LIGHT_GREEN#闪避：#WHITE#你躲避攻击的能力。
 
 当你尝试攻击某个目标，你的 #LIGHT_GREEN#命中#WHITE# 等级会和目标的 #LIGHT_GREEN#闪避#WHITE# 等级进行一个计算得出成功击

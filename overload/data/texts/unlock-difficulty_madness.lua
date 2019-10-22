@@ -23,7 +23,7 @@ return "New game difficulty mode: #LIGHT_GREEN#Madness",
 
 欢迎来到绝望模式！
 
- 绝望模式的特点 :#YELLOW#
+绝望模式的特点 :#YELLOW#
 - 所有地区的怪物等级为基础的 150% + 6
 - 所有怪物的技能等级增加 170%
 - 稀有怪产生频率大幅增加，同时出现随机 Boss

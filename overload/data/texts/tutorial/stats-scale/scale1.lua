@@ -18,7 +18,7 @@
 -- darkgod@te4.org
 
 return [[
-你看到，#GOLD#战斗属性#WHITE# 显示为两列，攻击性 #GOLD#战斗属性#WHITE# 在左边，防御性 #GOLD#战斗属性#WHITE# 在右边。 
+你看到，#GOLD#战斗属性#WHITE# 显示为两列，攻击性 #GOLD#战斗属性#WHITE# 在左边，防御性 #GOLD#战斗属性#WHITE# 在右边。
 
 显示的值用不同颜色来区分。
 ]]

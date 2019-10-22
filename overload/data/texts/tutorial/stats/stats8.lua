@@ -36,5 +36,5 @@ return [[
 魔法效果则使用 #LIGHT_GREEN#魔法豁免#WHITE#。精神效果则使用 #LIGHT_GREEN#精神豁免#WHITE#。
 
 #GOLD#2)#WHITE#  大多数情况下，某种职业都使用单一的攻击性 #GOLD#战斗属性#WHITE#，所以也不太会混淆。
-狂战士只会用 #LIGHT_GREEN#物理强度#WHITE# 判定效果，而法师基本都使用 #LIGHT_GREEN#法术强度#WHITE#。 
+狂战士只会用 #LIGHT_GREEN#物理强度#WHITE# 判定效果，而法师基本都使用 #LIGHT_GREEN#法术强度#WHITE#。
 ]]

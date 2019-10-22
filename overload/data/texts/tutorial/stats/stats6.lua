@@ -26,5 +26,5 @@ return [[
 震慑是一个物理效果，所以我们使用目标的 #LIGHT_GREEN#物理豁免#WHITE# 来与攻击者的物理强度进行比
 较计算。
 
-看上去 #LIGHT_GREEN#物理强度#WHITE# 和 #LIGHT_GREEN#物理豁免#WHITE# 之间比较是非常自然的事情，但我们来看另一个例子。 
+看上去 #LIGHT_GREEN#物理强度#WHITE# 和 #LIGHT_GREEN#物理豁免#WHITE# 之间比较是非常自然的事情，但我们来看另一个例子。
 ]]

@@ -20,5 +20,5 @@
 return [[
 #LIGHT_GREEN# 欢迎来到 ToME 4#LAST#
 
-#GOLD# 地下城冒险启蒙版 #WHITE# 将要开始咯！ 
+#GOLD# 地下城冒险启蒙版 #WHITE# 将要开始咯！
 ]]

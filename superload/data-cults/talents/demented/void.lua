@@ -6,7 +6,7 @@ registerTalentTranslation{
 		local power = t.getReduction(self,t)*100
 		local regen = t.getRegen(self,t)
 		return ([[形成围绕你旋转, 为你抵御伤害的虚无之星。
-		每当受到超过 10%% 最大生命的伤害时，消耗一颗虚无之星，使受到的伤害减少 %d%%，自己受到等同于减免伤害 40%% 的熵能反冲。
+		每当受到超过 10%% 最大生命的伤害时，消耗一颗虚无之星，使受到的伤害减少 %d%% ，自己受到等同于减免伤害 40%% 的熵能反冲。
 		虚无之星每经过 %d 回合自动恢复一颗。
 		此技能只有装备轻甲时生效。]]):
 		format(power, regen)

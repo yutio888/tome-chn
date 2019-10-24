@@ -6,7 +6,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local restore = t.getNegative(self, t)
-		return ([[向目标方向射出一道宇宙能量. 直到碰到墙或者到达地图边缘, 对敌人造成 %0.2f 的暗影伤害并回复 %d 负能量. 负能量回复量最大为 %d, 每击中一个敌人将少回复 25%% 的负能量, 被击中的敌人将注意到你.]]):
+		return ([[向目标方向射出一道宇宙能量. 直到碰到墙或者到达地图边缘, 对敌人造成 %0.2f 的暗影伤害并回复 %d 负能量. 负能量回复量最大为 %d , 每击中一个敌人将少回复 25%% 的负能量, 被击中的敌人将注意到你.]]):
 		format(damDesc(self, DamageType.DARKNESS, damage), restore, restore * 4)
 	end,}
 

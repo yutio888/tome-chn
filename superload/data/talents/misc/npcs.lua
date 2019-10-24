@@ -434,7 +434,7 @@ registerTalentTranslation{
 		local range = t.radius(self,t)
 		local power = t.getPower(self,t) * 100
 		return ([[使 %d 码内的挖掘魔陷入狂乱 %d 回合。
-		狂乱会使其全体速度上升 %d%%, 物理暴击提升 %d%%, 生命值直至 -%d%% 才会死亡。]]):		
+		狂乱会使其全体速度上升 %d%% , 物理暴击提升 %d%% , 生命值直至 -%d%% 才会死亡。]]):		
 		format(range, t.getDuration(self, t), power, power, power)
 	end,
 }

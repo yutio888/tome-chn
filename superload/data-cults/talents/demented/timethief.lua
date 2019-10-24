@@ -7,7 +7,7 @@ registerTalentTranslation{
 		local dur = t.getDuration(self, t)
 		local speed = t.getSpeed(self, t)
 		return ([[扭曲周围时空，周围 7 码内敌人移动速度降低 50%% ，持续 %d 回合。
-		你使用偷取的速度强化自身，使自己获得一回合神速状态，移动速度提高 %d%%，每减速一个敌人，额外提高 %d%%，最大个数 4 个。
+		你使用偷取的速度强化自身，使自己获得一回合神速状态，移动速度提高 %d%% ，每减速一个敌人，额外提高 %d%%，最大个数 4 个。
 		移动外的任何行动将终止加速效果。]]):
 		format(dur, speed, speed/8)
 	end,

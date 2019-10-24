@@ -29,9 +29,13 @@ registerTalentTranslation{
 	id = "T_AETHER_AVATAR",
 	name = "以太之体",
 	info = function(self, t)
-		return ([[你的身体与以太能量相融，持续 %d 回合。 
-		当此技能激活时，你每回合第一次使用非持续，非奥术或以太系技能都会失去 50 点法力值。你的奥术系和以太系技能冷却时间除以 3 ，你的奥术伤害加成和抗性穿透增加 25%%，你的干扰护盾的半径增加到 10 ，你的最大法力值增加 33%%。]]):
-		format(t.getNb(self, t))
+		return ([[在你的身体中注入无羁的奥术能量，持续 %d 回合。
+		当此技能激活时，你的奥术系和以太系技能冷却时间除以 3 ，你的奥术伤害加成和抗性穿透增加 25%%，你的干扰护盾的半径增加到 10 ，你的最大法力值增加 33%%。
+		在这种状况下使用非奥术的法术是很困难的，你每次使用会失去 50 点法力值（每回合最多一次）。
+
+		不会扣减魔法的奥术法术如下所示：
+		%s]]):
+		format(t.getNb(self, t), t.getSpellsList(self, t))
 	end,
 }
 
@@ -42,8 +46,8 @@ registerTalentTranslation{
 		local damageinc = t.getDamageIncrease(self, t)
 		local ressistpen = t.getResistPenalty(self, t)
 		return ([[纯净的以太能量环绕着你，增加 %0.1f%% 奥术伤害并且无视目标 %d%% 奥术抵抗。 
-		在等级 4 时，允许你在以太之体的形态下使用防护系技能而不受任何惩罚。]])
-		:format(damageinc, ressistpen)
+		在等级 5 时，使用以太之体会移除 %d 个魔法或物理负面效果。]])
+		:format(damageinc, ressistpen, t.getNbRemove(self, t))
 	end,
 }
 

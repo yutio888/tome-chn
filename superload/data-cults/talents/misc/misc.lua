@@ -1,5 +1,14 @@
 local _M = loadPrevious(...)
 registerTalentTranslation{
+	id = "T_WTW_DESTRUCT",
+	name = "自爆",
+	info = function(self, t)
+		local rad = self:getTalentRadius(t)
+		return ([[自爆成一团血肉，对周围 %d 码半径内所有敌人造成 %0.2f 枯萎伤害。这个技能只有主人死亡时能够使用。]])
+			:format(rad, damDesc(self, DamageType.BLIGHT, 50 + 10 * self.level))
+	end,
+}
+registerTalentTranslation{
 	id = "T_TELEPORT_KROSHKKUR",
 	name = "传送: 克诺什库尔",
 	info = function(self, t) return ([[允许传送至克诺什库尔。
@@ -12,7 +21,17 @@ registerTalentTranslation{
 	id = "T_DREM_CALL_OF_AMAKTHEL",
 	name = "阿玛克塞尔的呼唤",
 	info = function(self, t)
-		return ([[将 10 格内的敌人朝你拉近 3 格。该法术会令他们选择你作为  目标。]])
+		return ([[将 10 格内的敌人朝你拉近 2 格。]])
+	end,
+}
+
+
+registerTalentTranslation{
+	id = "T_BLIGHTLASH",
+	name = "枯萎鞭挞",
+	info = function(self, t)
+		return ([[用触手打击 10 码范围内的一个敌人，造成 %d%% 枯萎伤害。]]):
+		format(t.getDamageTentacle(self, t) * 100)
 	end,
 }
 

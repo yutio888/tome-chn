@@ -37,7 +37,7 @@ newChat{ id="APE",
 			if not ape then
 				local base_list = require("mod.class.Object"):loadList("/data-orcs/general/objects/quest-artifacts.lua")
 				base_list.__real_type = "object"
-				local o = game.zone:makeEntityByName(game.level, base_list, "APE")
+				local o = game.zone:makeEntityByName(game.level, base_list, "APE", true)
 				if o then
 					o.auto_hotkey = 1
 					player:addObject(player.INVEN_INVEN, o)

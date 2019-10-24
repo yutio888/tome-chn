@@ -5,7 +5,7 @@ registerTalentTranslation{
 	name = "白骨之矛",
 		info = function(self, t)
 		return ([[ 释放一根骨矛，对一条线上的目标造成 %0.2f 物理伤害。这些目标每具有一个魔法负面效果，就额外受到 %d%% 的伤害。
-		受法术强度影响，伤害有额外加成。]]):format(damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t)), damDesc(self, DamageType.PHYSICAL, t.getBonus(self, t)*100))
+		受法术强度影响，伤害有额外加成。]]):format(damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t)), t.getBonus(self, t)*100)
 	end,
 }
 

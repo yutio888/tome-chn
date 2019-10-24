@@ -124,7 +124,7 @@ timeEffectCHN:newEffect{
 		id = "INNER_TENTACLES",
 		enName = "Inner Tentacles",
 		chName = "内部触手",
-		desc = function(self, eff) return ("20%% 吸血几率，%d%% 强度。"):format(eff.power) end,
+		desc = function(self, eff) return ("%d%% 吸血几率，%d%% 强度。"):format(eff.chance, eff.power) end,
 		type = "魔法",
 		subtype = " pain/ torture/ tentacles/ leech ",
 }
@@ -269,7 +269,7 @@ timeEffectCHN:newEffect{
 		id = "NIHIL",
 		enName = "Nihil",
 		chName = "虚无",
-		desc = function(self, eff) return ("目标被熵覆盖，缩短新有益状态并延长新负面状态 %d%% 持续时间。"):format(eff.power*100) end,
+		desc = function(self, eff) return ("目标被熵覆盖，缩短新有益状态并延长新负面状态 %d%% 持续时间。\n若目标脱离视野 2 回合，则该效果会消失。"):format(eff.power*100) end,
 		type = "其它",
 		subtype = " temporal/ darkness ",
 }
@@ -277,7 +277,7 @@ timeEffectCHN:newEffect{
 		id = "ATROPHY",
 		enName = "Atrophy",
 		chName = "衰亡",
-		desc = function(self, eff) return ("目标的身体和精神迅速老化、凋零，所有属性降低 %d 。"):format(eff.power*eff.charges) end,
+		desc = function(self, eff) return ("目标的身体和精神迅速老化、凋零，所有属性降低 %d 。\n若目标脱离视野 2 回合，则该效果会消失。"):format(eff.power*eff.charges) end,
 		type = "其它",
 		subtype = " temporal ",
 }
@@ -350,8 +350,8 @@ timeEffectCHN:newEffect{
 		enName = "Jinxed",
 		chName = "不幸",
 		desc = function(self, eff)
-		local desc = "目标豁免和闪避降低 %d , 暴击率降低 %d%%。"
-		if eff.stacks > 6 and eff.fail then desc = "目标豁免和闪避降低 %d , 暴击率降低 %d%%，使用技能有 %d%% 几率失败。" end
+		local desc = "目标豁免和闪避降低 %d , 暴击率降低 %d%%。\n若目标脱离视野 2 回合，则该效果会消失。"
+		if eff.stacks > 6 and eff.fail then desc = "目标豁免和闪避降低 %d , 暴击率降低 %d%%，使用技能有 %d%% 几率失败。\n若目标脱离视野 2 回合，则该效果会消失。" end
 		return desc:format(eff.power * eff.stacks, eff.crit * eff.stacks, (eff.stacks - 7) * eff.fail)
 	end,
 		type = "其它",
@@ -437,6 +437,15 @@ timeEffectCHN:newEffect{
 		type = "其它",
 		subtype = "book",
 }
+
+timeEffectCHN:newEffect{
+	id = "CULTS_BOOK_COOLDOWN",
+	enName = "Forbidden Tome Cooldown",
+	chName = "禁忌之书冷却",
+	desc = function(self, eff) return "无法进入禁忌之书。" end,
+	type = "其它",
+	subtype = "book",
+}
 timeEffectCHN:newEffect{
 		id = "KROG_WRATH",
 		enName = "Wrath of the Wilds",
@@ -457,7 +466,7 @@ timeEffectCHN:newEffect{
 		id = "HYPOSTASIS_AWAKEN",
 		enName = "Awoken",
 		chName = "觉醒",
-		desc = function(self, eff) return ("真正的力量正被揭示！") end,
+		desc = function(self, eff) return ("真正的力量正被揭示！\n\n移除所有负面效果，所有技能冷却时间被重置。\n\n每回合，一个半径 2 码的爆炸将会在周围的空间爆发， 造成 %0.2f 暗影和时空伤害，并摧毁所有可摧毁的墙。"):format(self:getStat("mag") * 5 / 2) end,
 		type = "其它",
 		subtype = " opness ",
 }

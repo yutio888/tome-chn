@@ -1099,7 +1099,7 @@ keyCHN["mindblast"] = "心灵爆炸"
 --totems-powers.lua
 -- ego " of healing" defined.
 egosCHN[" of stinging"] = "毒刺之"
---keyCHN["???"]
+keyCHN["stinging"] = "毒刺"
 egosCHN[" of thorny skin"] = "荆棘皮肤之"
 keyCHN["thorny"] = "荆棘皮肤"
 egosCHN[" of summon tentacle"] = "召唤触手之"

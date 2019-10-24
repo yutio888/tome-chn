@@ -39,7 +39,7 @@ registerTalentTranslation{
 	name = "自深渊吞噬万物",
 	info = function(self, t)
 		return ([[ 你同地下深处某物的联系让你能召唤一只饥饿大嘴。
-		每回合它将周围 10 格内生物朝自身拉近 3 格，并强制其攻击它。
+		每回合它将周围 10 格内生物朝自身拉近 2 格。
 		它有 %d 额外生命，存在 %d 回合，不造成伤害。 
 		它的额外生命取决于你的体质和技能等级。许多其他属性受等级影响。]]):
 		format(t.getLife(self, t), t.getTime(self, t))
@@ -51,8 +51,8 @@ registerTalentTranslation{
 	name = "自然之怒",
 	info = function(self, t)
 		return ([[你释放持续 5 回  合的自然的愤怒。
-		愤怒状态下，每当你造成伤害时有 %d%%（第一次攻击 100%% ）几率震慑 3 回合。
-		每个生物每轮只能被该效果影响一次。
+		愤怒状态下，每当你造成伤害时有 %d%%（每回合第一次攻击 100%% ）几率震慑 3 回合。
+		该效果每回合只能震慑一个敌人。
 		震慑几率受体质影响，强度由物理或精神强度中较高一项决定。]]):
 		format(t.getChance(self, t))
 	end,
@@ -89,7 +89,10 @@ registerTalentTranslation{
 		return ([[ 伊格除去了你身体内部肮脏的魔法符文，并改用龙血提供能量维持你的身体。
 		龙血强化了你，使你获得 %d%% 震慑抗性， %d%% %s 伤害抗性， %d %s 近战附加伤害。
 		你可以主动开启该技能来改变龙力类型，进而改变相应元素。
-		改变类型需要战斗经验，你必须杀死 100 生物后才能使用（当前 %d）。]]):
+		
+		改变类型需要战斗经验，你必须杀死 100 生物后才能使用（当前 %d）。
+		
+		当你学会该技能时，你变得如此强大，以至于能双持任何单手武器。]]):
 		format(t.getImmune(self, t),  resist,damname, damDesc(self, damtype, damage), damname, self.krog_kills or 0)
 	end,
 }
@@ -98,7 +101,7 @@ registerTalentTranslation{
 	id = "T_FUEL_PAIN",
 	name = "燃烧痛苦",
 	info = function(self, t)
-		return ([[你的身体习惯于痛苦。每次你受到超过 20%% 最大生命的伤害时，你的一个纹身将立刻冷却完毕。
+		return ([[你的身体习惯于痛苦。每次你受到超过 20%% 最大生命的伤害时，你的一个纹身将立刻冷却完毕，并移除符文饱和效果。
 		该效果冷却时间为 %d 回合。]]):
 		format(self:getTalentCooldown(t))
 	end,
@@ -109,9 +112,9 @@ registerTalentTranslation{
 	name = "为战争而生",
 	info = function(self, t)
 		return ([[ 你被伊格制造的唯一理由：对魔法作战！
-		5 回合内你受到的所有伤害降低 %d%%，同时你开启该技能时，自然之怒自动冷却完毕。
-		当你学会该技能时，你变得如此强大，以至于能双持任何单手武器。]]):
-		format(t.getResist(self, t))
+		打击你的敌人，造成%d%% %s 武器伤害，并沉默它们 %d 回合。
+		伤害类型根据龙血的类型而决定。
+		沉默的几率受物理强度或精神强度的最高值加成。]]):format(100 * t.getDamage(self, t), damname, t.getDuration(self, t))
 	end,
 }
 

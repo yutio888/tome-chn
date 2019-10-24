@@ -2402,6 +2402,11 @@ newEffect{
 		eff.tmpid = self:addTemporaryValue("counterstrike", 1)
 		eff.def = self:addTemporaryValue("combat_def", -eff.power)
 		eff.crit = self:addTemporaryValue("combat_crit_vulnerable", eff.crit_inc or 0)
+		local hx, hy = self:attachementSpot("head", true)
+		if not hx then hx, hy = -0.4, -0.4
+		else hx = hx - 0.4
+		end
+		self:effectParticles(eff, {type="circle", args={x=hx, y=hy, oversize=0.3, a=220, appear=12, img="counterstrike", speed=0, radius=0, base_rot=0}})
 	end,
 	deactivate = function(self, eff)
 		self:removeTemporaryValue("counterstrike", eff.tmpid)

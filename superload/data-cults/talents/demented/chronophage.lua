@@ -17,8 +17,7 @@ registerTalentTranslation{
 		local life = t.getLife(self,t)*100
 		local dur = t.getDuration(self,t)
 		local power = t.getPower(self,t)
-		return ([[当对不足 %d%% 最大生命值的目标释放衰亡时，你将尝试切断目标的生命线，立刻杀死目标。在接下来的 %d 回合中，你将会享用目标残余的生命线，增加你的生命回复 %0.1f 并使没有固定冷却时间的技能冷却速度  加倍。
-		这个技能的增益效果每 15 回合只能发动一次。]])
+		return ([[当对不足 %d%% 最大生命值的目标释放衰亡时，你将尝试切断目标的生命线，立刻杀死目标。在接下来的 %d 回合中，你将会享用目标残余的生命线，增加你的生命回复 %0.1f 并使没有固定冷却时间的技能冷却速度加倍。]])
 		:format(life, dur, power)
 	end
 }
@@ -30,7 +29,7 @@ registerTalentTranslation{
 		local speed = t.getSpeed(self,t)*100
 		local slow = t.getSlow(self,t)*100
 		return ([[你进一步榨取他人的时间线。每次使用衰亡时，目标身上的每层衰亡效果将使你获得 %0.1f%% 施法速度，同时目标将失去 %d%% 回合。
-			计算施法速度增加时，会使用你周围最高层数的衰亡效果。]])
+		计算施法速度增加时，会使用你周围最高层数的衰亡效果。]])
 		:format(speed, slow)
 	end
 }

@@ -292,7 +292,7 @@ timeEffectCHN:newEffect{
 	id = "BLEAK_OUTCOME",
 	enName = "Bleak Outcome",
 	chName = "悲惨结局",
-	desc = function(self, eff) return ("死亡后提供 %d 倍活力。"):format(eff.stacks) end,
+	desc = function(self, eff) return ("受害者为即将到来的死亡而痛苦。当它死时，将会使来源 （ %s ）获得 %d 于平常的活力值。"):format(eff.src and eff.src.name:capitalize() or "none", eff.stacks) end,
 	type = "魔法",
 	subtype = "活力/枯萎/诅咒",
 }

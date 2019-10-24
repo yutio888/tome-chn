@@ -19,7 +19,7 @@ registerTalentTranslation{
 	id = "T_DISSOLVED_FACE",
 	name = "溶解之脸",
 	info = function(self, t)
-		return ([[你用脸贴近敌人，让其部分融化为血肉，对锥形范围内敌人造成 %0.2f 暗影伤害，持续 5 回合（总伤害 %0.2f ）。
+		return ([[你的脸融化，爆炸喷射出一团血肉，对锥形范围内敌人造成 %0.2f 暗影伤害，持续 5 回合（总伤害 %0.2f ）。
 		每回合目标身上的每种疾病将使其受到额外 %0.2f 枯萎伤害。]])
 		:format(damDesc(self, DamageType.DARKNESS, t.getDamage(self, t) / 5), damDesc(self, DamageType.DARKNESS, t.getDamage(self, t)), damDesc(self, DamageType.BLIGHT, 0.7 * t.getDamage(self, t) / 5))
 	end,

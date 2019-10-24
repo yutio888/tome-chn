@@ -97,7 +97,7 @@ logCHN:newLog{
 	end,
 }
 logCHN:newLog{
-	log = "#Target#'s shakes his fear off.",
+	log = "#Target#'s shakes the fear off.",
 	fct = function(a)
 		a = npcCHN:getName(a)
 		return ("%s摆脱了恐惧。"):format(a)

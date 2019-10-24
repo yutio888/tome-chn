@@ -20,7 +20,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		return ([[你通过心灵利刃接触你的目标，将自然的怒火带给你的敌人。 
 		荆棘藤蔓会抓取目标，使其减速 %d%% ，并且每回合造成 %0.2f 自然伤害，持续 10 回合。 
-		受精神强度和灵晶强度影响，伤害有额外加成（需要 2 只灵晶，加成比例 %2.f ）。]]):
+		受精神强度和灵晶强度影响，伤害有额外加成（需要 2 只灵晶，加成比例 %0.2f ）。]]):
 		format(100*t.speedPenalty(self,t), damDesc(self, DamageType.NATURE, self:combatTalentMindDamage(t, 15, 250) / 10 * get_mindstar_power_mult(self)), get_mindstar_power_mult(self))
 	end,
 }

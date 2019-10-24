@@ -363,7 +363,7 @@ end
 ------------------------------------------------------------------------
 -- This updates talent and resource definitions to work with data for some AI functions
 -- use mod.class.interface.ActorAI.aiParseTalent(t) to parse any new talents defined later 
-mod.class.interface.ActorAI.AI_InitializeData()
+require("mod.class.interface.ActorAI").AI_InitializeData()
 engine.interface.ActorTalents.aiParseTalent = mod.class.interface.ActorAI.aiParseTalent
 print("[Tome:load] Updated AI tactics list:")
 --table.print(mod.class.interface.ActorAI.AI_TACTICS_BENEFIT)

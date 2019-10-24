@@ -220,8 +220,9 @@ registerInscriptionTranslation{
 	display_name = "符文：魔力",
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[激活这个符文对你自己释放法力回复，增加 %d%% 回复量持续 %d 回合，并立即回复 %d 法力值。 
-			同时，在你休息时增加每回合 0.5 的魔力回复。]]):format(data.mana + data.inc_stat, data.dur, (data.mana + data.inc_stat) / 20)
+		local total = (data.mana + data.inc_stat) / 100 * (self.mana_regen or 0) * 10
+		return ([[激活这个符文对你自己释放法力回复，增加 %d%% 回复量持续 %d 回合 （总计 %d ），并立即回复 %d 法力值。 
+			同时，在你休息时增加每回合 0.5 的魔力回复。]]):format(data.mana + data.inc_stat, data.dur, total, (data.mana + data.inc_stat) / 20)
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)

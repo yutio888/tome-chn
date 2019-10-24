@@ -465,8 +465,8 @@ timeEffectCHN:newEffect{
 
 timeEffectCHN:newEffect{
 	id = "ATTACK",
-	enName = "Attack",
-	chName = "攻击",
+	enName = "Perfect Accuracy",
+	chName = "完美命中",
 	type = "精神",
 	subtype = "专注",
 }

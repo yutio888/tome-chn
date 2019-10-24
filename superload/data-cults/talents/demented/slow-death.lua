@@ -4,9 +4,9 @@ registerTalentTranslation{
 	name = "消化",
 	info = function(self, t)
 		return ([[ 造成 %d%% 近战武器伤害并尝试消化生命在 %d%% 以下的敌人。
-		消化过程中你每回合获得 %d 疯狂值，同时获得 -%0.1f 生命底线。
+		消化过程中你每回合获得 %d 疯狂值。
 		精英消化时间为 5 0 回合，其他生物消化时间为2 5 回合。]]):
-		format(100 * t.getDamage(self, t), t.getMax(self, t), t.getInsanity(self, t), t.getLife(self, t))
+		format(100 * t.getDamage(self, t), t.getMax(self, t), t.getInsanity(self, t))
 	end,
 }
 
@@ -19,7 +19,7 @@ registerTalentTranslation{
 		技能等级 5 时，你可以指定窃取的技能。
 		你不能窃取你已知的技能。
 		窃取的技能使用时不消耗资源。
-		]]):format(self:getTalentLevelRaw(t))
+		]]):format(t.getTalentLevel(self, t))
 	end,
 }
 
@@ -38,7 +38,9 @@ registerTalentTranslation{
 	id = "T_CONSUME_WHOLE",
 	name = "完整消化",
 	info = function(self, t)
-		return ([[立刻消化掉当前目标，获得 %d 生命和 %d 疯狂值。生命回复受法术强度加成。]]):
+		return ([[立刻消化掉当前目标，获得 %d 生命和 %d 疯狂值。
+		使用该技能会立刻重置消化技能的冷却。
+		生命回复受法术强度加成。]]):
 		format(t.getHeal(self, t), t.getInsanity(self, t))
 	end,
 }

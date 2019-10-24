@@ -3059,6 +3059,16 @@ registerArtifactTranslation{
 	["use_power.name"] = "立刻融化并提炼仪器中所有道具（切换地图时自动执行）。",
 	}
 registerArtifactTranslation{
+	originName = "kruk cloak",
+	display_name = "克鲁克披风",
+	desc = "一件时髦的克鲁克风格披风，让你看起来很酷。",
+}
+registerArtifactTranslation{
+	originName = "Teleporter to the Tinker's Cave",
+	display_name = "前往工匠洞穴的传送器",
+	desc = "一种带有某种传送魔法的奇怪金属装置。",
+}
+registerArtifactTranslation{
 	originName = "Medical Urgency Vest",
 	display_name ="医疗急救背心",
 	unided_name="医疗装甲",
@@ -3318,12 +3328,6 @@ registerArtifactTranslation{
 		end
 }
 registerArtifactTranslation{
-	originName = "Sawrd",
-	display_name ="锯剑",
-	unided_name="锯齿般刀刃的剑",
-	desc="有无数刀刃的凶残武器。",
-}
-registerArtifactTranslation{
 	originName = "Deflector",
 	display_name ="偏转",
 	unided_name="颤动的盾牌",
@@ -3485,6 +3489,12 @@ registerArtifactTranslation{
 	unided_name = "漆黑的护目镜",
 	desc = "这玩意到底怎么用?",
 	}
+registerArtifactTranslation{
+	originName = "Laser Powered Giant Smasher",
+	display_name = "激光驱动巨型粉碎器",
+	unided_name = "光辉的锤子",
+	desc = [[激光驱动的巨型粉碎器，绰号“光锤”。你能感觉到它在你的手中以无穷的力量震动。]],
+}
 registerArtifactTranslation{
 	originName = "Yeti's Muscle Tissue (Behemoth)",
 	display_name = "雪人族巨大的肌肉组织",
@@ -3762,7 +3772,7 @@ registerArtifactTranslation{
 	},
 }
 registerArtifactTranslation{
-	originName = "Persistant Will",
+	originName = "Persistent Will",
 	display_name = "不息意志",
 	unided_name = "燃烧的木棍",
 	desc = [[在黄昏纪的魔法大爆炸后，纳格尔王国迅速爆发了反对法师的活动。民众包围那些使用魔法的人，将他们绑在木头上活活烧死。纳格尔王国镇压了这些肇事者，把他们的人头插在遍布首都的柱子上。
@@ -3780,7 +3790,7 @@ registerArtifactTranslation{
 registerArtifactTranslation{
 	originName = "Light of Revelation",
 	display_name = "揭示之光",
-	unided_name = "",
+	unided_name = "令人不安的灯笼",
 	desc = "这个“灯笼”似乎是一块发光的玻璃状物体的碎片。尽管它十分明亮，但它的光却让你深感不安。它照亮了身边的一切，包括你不愿意看到的东西。你内心的一部分想要把它扔掉，但另一部分却又渴望着它向你揭示的超自然的真相。",
 	special_desc = function(self) return "有时会揭示你不应该知道的隐藏真相。" end,
 }

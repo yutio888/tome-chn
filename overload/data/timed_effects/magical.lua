@@ -337,7 +337,7 @@ newEffect{
 	type = "magical",
 	subtype = { lightning=true, shield=true },
 	status = "beneficial",
-	charges = function(self, eff) return eff.blocks end,
+	charges = function(self, eff) return math.floor(eff.blocks) end,
 	parameters = {threshold = 1, blocks = 1,},
 	on_gain = function(self, err) return "#Target# summons a storm to protect him!", "+Stormshield" end,
 	on_lose = function(self, err) return "#Target#'s storm dissipates.", "-Stormshield" end,
@@ -2553,6 +2553,11 @@ newEffect{
 	activate = function(self, eff)
 		eff.tmpid = self:addTemporaryValue("global_speed_add", -eff.slow)
 		eff.prjid = self:addTemporaryValue("slow_projectiles_outgoing", eff.proj)
+		if core.shader.allow("distort") then
+			self:effectParticles(eff, {type="congeal_time"})
+		else
+			self:effectParticles(eff, {type="circle", args={oversize=0.5, a=80, base_rot=180, shader=true, appear=8, img="combination_kicks_2", speed=2, radius=0}})
+		end
 	end,
 	deactivate = function(self, eff)
 		self:removeTemporaryValue("global_speed_add", eff.tmpid)

@@ -6,8 +6,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local count = t.getRemoveCount(self, t)
 		return ([[驱散目标身上的 %d 种魔法效果（敌方单位的增益状态和友方单位的负面状态）。 
-		在等级 3 时可以选择目标。
-		在等级 7 时，使用该技能不需要时间。]]):
+		在等级 3 时可以选择目标。]]):
 		format(count)
 	end,
 }

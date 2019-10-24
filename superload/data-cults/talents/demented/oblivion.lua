@@ -5,7 +5,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local targetcount = t.getTargetCount(self, t)
 		local power = t.getPower(self, t)*100
-		return ([[将你身体上的熵能向周围辐射。每当你受到熵能反冲时，在你 1 0  码距离内随机的 %d 个可见敌人都  将被熵能侵蚀 4 回合。
+		return ([[将你身体上的熵能向周围辐射。每当你受到熵能反冲时，在你 1 0  码距离内随机的 %d 个可见敌人都  将被熵能侵蚀 8 回合。
 		增加 ( 减少 ) 它们受到的新的负面 ( 正面 ) 效果 %d%% 的持续时间。]]):
 		format(targetcount, power)
 	end,
@@ -17,7 +17,8 @@ registerTalentTranslation{
 	info = function(self, t)
 		local dur = t.getDuration(self,t)
 		return ([[虚无能解构目标的存在并通过熵能将其摧毁。
-		在熵能侵蚀效果结束之前，如果目标身上同时存在 6 个效果，将召唤出持续 %d 回合的湮灭使者。
+		在熵能侵蚀效果结束之前，如果目标身上被施加了 6 个负面魔法效果，将召唤出持续 %d 回合的湮灭使者。
+		之前已有的负面效果、法术冲击、被奥术之眼观察不会计入总数。刷新同一个效果会击入总数。
 		湮灭使者的全部属性点提升你魔法属性的相同数值。其他属性根据本身等级提升。
 		湮灭使者会继承你的伤害加成、伤害穿透、暴击几率和暴击倍率加成。]]):
 		format(dur)
@@ -30,7 +31,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local dam = t.getDamage(self, t)
 		local power = t.getNumb(self, t)
-		return ([[受到你虚无之力影响的生物逐渐被从现实中被抹除，造成的伤害降低 %d%% ，同时每具有一个负面魔法效果，每回合受到 %0.2f 时空伤害。 
+		return ([[受到你虚无之力影响的生物逐渐被从现实中被抹除，造成的伤害降低 %d%% 。同时目标每具有一个负面魔法效果，则每回合受到 %0.2f 时空伤害。 
 		伤害受到法术强度加成。]])
 		:format(power, damDesc(self, DamageType.TEMPORAL, dam))
 	end

@@ -28,11 +28,9 @@ registerTalentTranslation{
 	id = "T_SUSPEND",
 	name = "窃命凝固",
 	info = function(self, t)
-		local rad = self:getTalentRadius(t)
 		local dur = t.getDuration(self,t)
-		return ([[你和 %d 码内所有敌人在时间中凝固 %d 回合，无法行动但也无法被伤害。
-		自身的有害效果持续时间和技能 CD 会正常扣减，有益效果持续时间不变。
-		敌人的有害效果持续时间和技能 CD 不会扣减，有益效果持续时间正常扣减。]]):format(rad, dur)
+		return ([[你在时间中凝固 %d 回合，无法行动但也无法被伤害。
+		正面效果持续时间和技能 CD 会正常扣减，负面效果持续时间不变。]]):format(dur)
 	end,
 }
 

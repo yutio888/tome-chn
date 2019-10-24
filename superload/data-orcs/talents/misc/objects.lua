@@ -43,5 +43,12 @@ registerTalentTranslation{
 		这个攻击会造成 180% 武器伤害。
 		你必须突击至少 2 格。]])
 	end,}
-
+registerTalentTranslation{
+	id = "T_LASER_POWERED_SMASH",
+	name = "激光重击",
+	info = function(self, t)
+		return ([[释放光锤的终极力量，攻击半径 1 码范围内的所有敌人。
+		这一攻击会在每个受影响的目标身上引发半径为 1 的爆炸，造成 50% 武器伤害，并致盲他们 4 回合。]])
+	end,
+}
 return _M

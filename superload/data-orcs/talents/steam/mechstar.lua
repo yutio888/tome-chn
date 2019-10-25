@@ -4,7 +4,7 @@ registerTalentTranslation{
 	id = "T_METALSTAR",
 	name = "金属灵晶",
 	info = function(self, t)
-		return ([[迅速将金属粒子聚集在灵晶周围，并将灵能聚焦于  其中。
+		return ([[迅速将金属粒子聚集在灵晶周围，并将灵能聚焦于其中。
 		金属粒子将产生大爆炸，击退（ %d 码）并眩晕（ %d 回合）半径 %d 内所有敌人。
 		]])	
 		:format(t.getKnockback(self, t), t.getDur(self, t), self:getTalentRadius(t))
@@ -15,7 +15,7 @@ registerTalentTranslation{
 	name = "血液灵晶",
 	info = function(self, t)
 		local mt = self:getTalentFromId(self.T_METALSTAR)
-		return ([[每次你使用灵晶射击时，你将与灵晶碎片建立血液  超能力联系，持  续 %d 回合。
+		return ([[每次你使用灵晶射击时，你将与灵晶碎片建立血液超能力联系，持续 %d 回合。
 		每回合目标将受到 %0.2f 物理伤害，一半伤害值将转化为治疗。
 		每增加一名额外目标，其带来的治疗量进一步减半。
 		当目标距离超过金属灵晶范围（当前 %d ）的两倍时，效果中止。

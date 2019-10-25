@@ -9,7 +9,7 @@ registerTalentTranslation{
 		local radius = self:getTalentRadius(t)
 		return ([[在你的脚下创造一个 %d 码半径范围的阵法，它会提高你 %d 近身闪避和所有豁免，并对周围目标造成 %0.2f 暗影伤害。 
 		阵法持续 %d 回合。 
-		受法术强度影响，伤害有额外加成。  ]]):
+		受法术强度影响，伤害有额外加成。 ]]):
 		format(radius, damage, (damDesc (self, DamageType.DARKNESS, damage)), duration)
 	end,
 }
@@ -21,7 +21,7 @@ registerTalentTranslation{
 		local duration = t.getDuration(self, t)
 		local radius = self:getTalentRadius(t)
 		local damage = t.getDamage(self, t)
-		return ([[在你的脚下制造一个 %d 码半径范围的法阵，当你在法阵内，它会使你免疫沉默效果，沉默进入此范围内的敌人，并对其造成  %d 光系伤害。
+		return ([[在你的脚下制造一个 %d 码半径范围的法阵，当你在法阵内，它会使你免疫沉默效果，沉默进入此范围内的敌人，并对其造成 %d 光系伤害。
 		阵法持续 %d 回合。]]):
 		format(radius, damDesc(self, DamageType.LIGHT, damage), duration)
 	end,

@@ -50,8 +50,8 @@ registerTalentTranslation{
 	id = "T_CHOOSE_CURSED_SENTRY",
 	name = "选择诅咒守卫",
 	info = function(self, t) 
-        return [[选择你的诅咒护卫。]] 
-    end,
+    return [[选择你的诅咒护卫。]] 
+  end,
 }
 registerTalentTranslation{
 	id = "T_CURSED_SENTRY",

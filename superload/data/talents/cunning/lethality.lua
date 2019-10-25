@@ -18,8 +18,8 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local duration = t.getDuration(self, t)
 		return ([[集中精力试探目标，寻找其弱点 ,造成 %d%% 武器伤害。
-		在接下来的  %d  回合内，你获得  %d  护甲穿透， %d  命中， %d%%  所有伤害穿透。
-		学习这一技能还会使你的近战和弓箭攻击永久获得  %d  护甲穿透。
+		在接下来的 %d 回合内，你获得 %d 护甲穿透， %d 命中， %d%% 所有伤害穿透。
+		学习这一技能还会使你的近战和弓箭攻击永久获得 %d 护甲穿透。
 		护甲穿透和命中加成受灵巧加成。]]):
 		format(100 * damage, duration, t.getAPRBuff(self, t), t.getAccuracy(self, t), t.getPenetration(self, t), t.getAPR(self, t))
 	end,
@@ -29,7 +29,7 @@ registerTalentTranslation{
 	id = "T_BLADE_FLURRY",
 	name = "剑刃乱舞",
 	info = function (self,t)
-		return ([[如疾风般挥舞武器，攻击速度增加  %d%%  ，每次攻击追加一名目标，造成  %d%%  武器伤害。
+		return ([[如疾风般挥舞武器，攻击速度增加 %d%% ，每次攻击追加一名目标，造成 %d%% 武器伤害。
 该技能每回合抽取 4 点体力。]]):format(t.getSpeed(self, t)*100, t.getDamage(self,t)*100)
 	end,
 }

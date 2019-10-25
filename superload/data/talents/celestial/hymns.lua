@@ -19,7 +19,7 @@ registerTalentTranslation{
 		local invis = t.getSeeInvisible(self, t)
 		local stealth = t.getSeeStealth(self, t)
 		return ([[赞美月之荣耀，使你能察觉潜行单位（ +%d 侦测等级）和隐形单位（ +%d 侦测等级）。 
-		你攻击不可见目标时无惩  罚，同时暴击造成 %d%% 额外伤害。 
+		你攻击不可见目标时无惩罚，同时暴击造成 %d%% 额外伤害。 
 		同时只能激活 1 个圣诗。 
 		受法术强度影响，侦测等级和伤害有额外加成。]]):
 		format(stealth, invis, t.critPower(self, t))
@@ -67,7 +67,7 @@ registerTalentTranslation{
 			local t2 = self:getTalentFromId(self.T_HYMN_OF_DETECTION)
 			local t3 = self:getTalentFromId(self.T_HYMN_OF_PERSEVERANCE)
 			ret = ([[你学会了三种防御圣诗，以此咏唱对月亮的赞颂：
-		暗影圣诗：增加 %d%% 移动速度和 %d%%  施法速度。
+		暗影圣诗：增加 %d%% 移动速度和 %d%% 施法速度。
 		侦察圣诗：增加 %d 潜行侦察， %d 隐身侦察， %d%% 暴击伤害 
 		坚毅圣诗：增加 %d%% 震慑、混乱、致盲抗性。
 		你同时只能激活一种赞歌。]]):
@@ -83,7 +83,7 @@ registerTalentTranslation{
 	id = "T_HYMN_INCANTOR",
 	name = "暗影临近",
 	info = function (self,t)
-		return ([[圣诗让暗影集中在你身边，你的黑暗伤害增加  %d%% ，并对所有近战攻击你的敌人造成 %0.2f 暗属性伤害。
+		return ([[圣诗让暗影集中在你身边，你的黑暗伤害增加 %d%% ，并对所有近战攻击你的敌人造成 %0.2f 暗属性伤害。
 		效果受法术强度加成。]]):format(t.getDarkDamageIncrease(self, t), damDesc(self, DamageType.DARKNESS, t.getDamageOnMeleeHit(self, t)))
 	end,
 }
@@ -104,7 +104,7 @@ registerTalentTranslation{
 	name = "暗夜流光",
 	info = function (self,t)
 		return ([[咏唱圣诗歌颂月亮的热情达到了顶峰。
-		你的圣诗自动产生阴影射线攻击周围 5 格内至多 %d 个敌人，造成 1 到  %0.2f 伤害，同时有 20%% 几率触发  致盲效果。
+		你的圣诗自动产生阴影射线攻击周围 5 格内至多 %d 个敌人，造成 1 到 %0.2f 伤害，同时有 20%% 几率触发致盲效果。
 		这项效果每产生一发射线并击中至少一个目标将抽取 %0.1f 负能量，能量过低时无法产生射线。
 		效果受法术强度加成。]]):format(t.getTargetCount(self, t), damDesc(self, DamageType.DARKNESS, t.getDamage(self, t)), t.getNegativeDrain(self, t))
 	end,

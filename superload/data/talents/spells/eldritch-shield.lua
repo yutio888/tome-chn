@@ -12,14 +12,14 @@ registerTalentTranslation{
 	end,
 }
 
-    
+  
 registerTalentTranslation{
 	id = "T_ELDRITCH_INFUSION",
 	name = "奥术充能",
 	info = function(self, t)
 		local dam = t.getDamage(self, t)
 		return ([[用奥术能量给盾牌冲能，每次近战攻击附加 %0.1f 奥术伤害，同时每次受到近战攻击时反击 %0.1f 点奥术伤害。
-		当你不完全格挡时，也可以进行反击。 格挡技能的冷却时间降低 %d 回合。
+		当你不完全格挡时，也可以进行反击。格挡技能的冷却时间降低 %d 回合。
 		伤害受法术强度加成。]]):
 		format(damDesc(self, DamageType.ARCANE, dam), damDesc(self, DamageType.ARCANE, dam * 0.7), t.getBlockCD(self, t))
 	end,

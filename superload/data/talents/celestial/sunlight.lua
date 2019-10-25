@@ -22,11 +22,11 @@ registerTalentTranslation{
 		local resdur = t.getResDuration(self, t)
 		return ([[祈祷太阳之力，在 %d 码半径范围内致盲目标，持续 %d 回合并照亮你的周围区域。
 		范围内的敌人将会受到 %0.2f 光系伤害。
-		等级 3 时，你将获得 %d%% 光系、暗影和火焰伤害抗性，  持续 %d 回合。
+		等级 3 时，你将获得 %d%% 光系、暗影和火焰伤害抗性，持续 %d 回合。
 		受法术强度影响，伤害和抗性有额外加成。]]):
 		format(radius, duration, damDesc(self, DamageType.LIGHT, damage), res, resdur )
 
-   end,
+  end,
 }
 
 registerTalentTranslation{

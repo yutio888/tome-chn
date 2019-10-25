@@ -5,7 +5,7 @@ registerTalentTranslation{
 	name = "链锯轮滑",
 	info = function(self, t)
 		return ([[把链锯深深插入地面，作为履带，增强自己的行动能力（移动速度增加 %d%% ）。
-		在你移动路线两侧的敌人被链锯割断，  被击退 3 码。
+		在你移动路线两侧的敌人被链锯割断，被击退 3 码。
 		攻击或者使用其他技能的动作都会中断效果 , 同时冲击力对周围的敌人造成 %d%% 武器伤害。你需要至少移动五次来达到最高伤害，否则伤害会降低。若不移动则没有伤害。 
 		#{italic}#冲锋！死亡之轮！！#{normal}#]]):
 		format(t.getSpeed(self, t), self:combatTalentWeaponDamage(t, 1, 2) * 100)

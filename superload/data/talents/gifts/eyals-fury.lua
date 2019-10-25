@@ -41,7 +41,7 @@ registerTalentTranslation{
 	name = "埃亚尔之怒",
 	info = function(self, t)
 		local drain = t.getDrain(self, t)
-		return ([[  你在自己周围半径 %d 的范围内制造自然力量风暴，持续 %d 回合。
+		return ([[ 你在自己周围半径 %d 的范围内制造自然力量风暴，持续 %d 回合。
 		风暴会跟随你移动，每回合对每个敌人造成 %0.1f 点自然伤害，并抽取 %d 点法力， %d 点活力， %d 点正负能量。
 		同时你的失衡值会回复你抽取能量的 10%% 。
 		受精神强度影响，伤害和吸取量有额外加成。]]):

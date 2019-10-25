@@ -7,8 +7,8 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t) * 100
 		local poison = t.getPoisonDamage(self, t)
-		return ([[啃咬目标，造成 %d%% 武器伤害。  
-		如果攻击击中目标你会注入瘟疫病毒,  造成 %0.2f 枯萎伤害并在 4 回合内造成 %0.2f 枯萎伤害。
+		return ([[啃咬目标，造成 %d%% 武器伤害。 
+		如果攻击击中目标你会注入瘟疫病毒, 造成 %0.2f 枯萎伤害并在 4 回合内造成 %0.2f 枯萎伤害。
 		伤害受法术强度加成。]])
 		:format(damage, damDesc(self, DamageType.BLIGHT, poison/4), damDesc(self, DamageType.BLIGHT, poison) )
 	end,
@@ -39,7 +39,7 @@ registerTalentTranslation{
 		local vim = t.getVim(self, t)
 
 		return ([[你解体为蠕虫，并在目标处合并。（误差 %d ）
-如果对蠕虫团使用，你和它合体  ，治疗 %d 生命值 , 回复 %d 活力。]]):
+如果对蠕虫团使用，你和它合体，治疗 %d 生命值 , 回复 %d 活力。]]):
 format (radius, heal, vim)
 	end,
 }

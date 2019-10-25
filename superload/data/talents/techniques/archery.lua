@@ -43,7 +43,7 @@ registerTalentTranslation{
 		local dur = t.getDuration(self,t)
 		local speed = t.getSpeedPenalty(self,t)*100
 		local chance = t.getChance(self,t)
-		return ([[发射命中后爆裂成 %d 格半径球型范围碎片的弹药, 造成 %d%% 武器伤害并致残目标 %d 回合，降低  %d%% 攻击、施法和精神速度。
+		return ([[发射命中后爆裂成 %d 格半径球型范围碎片的弹药, 造成 %d%% 武器伤害并致残目标 %d 回合，降低 %d%% 攻击、施法和精神速度。
 		每个被击中的目标有 %d%% 几率被标记。
 		致残几率受命中加成。]])
 		:format(rad, dam, dur, speed, chance)
@@ -80,7 +80,7 @@ registerTalentTranslation{
 	info = function (self,t)
 		local rad = self:getTalentRadius(t)
 		local dam = t.getDamage(self,t)*100
-		return ([[你向天空发射无数弹药，如箭雨般落向目标，造成 %d%% 伤害，杀伤  半径 %d 格。
+		return ([[你向天空发射无数弹药，如箭雨般落向目标，造成 %d%% 伤害，杀伤半径 %d 格。
 如果中心目标被标记，你将消耗其标记，不消耗弹药发射额外齐射一轮，造成 %d%% 伤害。]])
 		:format(dam, rad, dam*0.75)
 	end,

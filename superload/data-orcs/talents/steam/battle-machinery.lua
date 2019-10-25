@@ -4,7 +4,7 @@ registerTalentTranslation{
 	id = "T_EXPLOSIVE_STEAM_ENGINE",
 	name = "引擎轰炸",
 	info = function(self, t)
-		return ([[在战场上投掷一枚两回合后爆炸的微型不  稳定蒸汽引擎。
+		return ([[在战场上投掷一枚两回合后爆炸的微型不稳定蒸汽引擎。
 		爆炸后在 %d 码范围内产生灼热的蒸汽云雾，对范围内敌人造成 %0.2f 的火焰伤害。
 		流血状态的敌人会受到 40%% 的额外火焰伤害。
 		伤害随蒸汽强度增加。
@@ -29,7 +29,7 @@ registerTalentTranslation{
 	name = "巨震引擎",
 	info = function(self, t)
 		return ([[在战场上投掷一枚两回合后触发的巨震引擎。
-		触发后 5 回合内，他  会持续的造成地面的小范围震动，震慑、定身或者缴械范围 %d 内任何生物 %d 回合。
+		触发后 5 回合内，他会持续的造成地面的小范围震动，震慑、定身或者缴械范围 %d 内任何生物 %d 回合。
 		#{italic}#你脚下是纸, 不是大地。颤抖吧！#{normal}#]])
 		:format(self:getTalentRadius(t), t.getDur(self, t))
 	end,}

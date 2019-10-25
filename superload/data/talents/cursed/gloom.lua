@@ -37,7 +37,7 @@ registerTalentTranslation{
 	id = "T_MINDROT",
 	name = "思维腐蚀",
 	info = function(self, t)
-		return ([[每当你行动时，所有在你黑暗光环内的敌人都会受到  %0.2f  精神伤害和  %0.2f  暗影伤害。
+		return ([[每当你行动时，所有在你黑暗光环内的敌人都会受到 %0.2f 精神伤害和 %0.2f 暗影伤害。
 		伤害受精神强度影响。
 		黑暗光环树下的每个技能都会增加你的精神强度（当前总计： %d）。]]):format(damDesc(self, DamageType.MIND, t.getDamage(self, t) * 0.5), damDesc(self, DamageType.DARKNESS, t.getDamage(self, t) * 0.5), gloomTalentsMindpower(self))
 	end,

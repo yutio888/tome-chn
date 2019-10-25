@@ -8,8 +8,8 @@ function _M:newDamageType(t)
 	t.type = t.type:upper()
 	t.name = getDamageTypeCHN(t.name)
 	t.projector = t.projector or self.defaultProjector
-    
-    if not t.color and type(t.text_color) == "string" then
+  
+  if not t.color and type(t.text_color) == "string" then
 		local ts = t.text_color:toTString()
 		if type(ts[2]) == "table" and ts[2][1] == "color" then
 			if type(ts[2][2]) == "string" then
@@ -19,7 +19,7 @@ function _M:newDamageType(t)
 			end
 		end
 	end
-    
+  
 	tdesc = getSpecialCombatDesc(t.type)
 	if tdesc then t.tdesc = tdesc end
 	

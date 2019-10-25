@@ -11,7 +11,7 @@ registerTalentTranslation{
 		每隔 %d 回合召唤另一条时空猎犬，直至最多 3 条。
 		当一条猎犬死去时，你将在 %d 回合内召唤一条新的猎犬。
 		你猎犬继承你的伤害加成，有 %d%% 物理和 %d%% 时空抗性，对传送效果免疫。
-		猎犬将拥有 %d  力量， %d 敏捷， %d 体质， %d 魔法和 %d 灵巧，基于你的魔法。]])
+		猎犬将拥有 %d 力量， %d 敏捷， %d 体质， %d 魔法和 %d 灵巧，基于你的魔法。]])
 		:format(cooldown, cooldown, resists/2, math.min(100, resists*2), incStats.str + 1, incStats.dex + 1, incStats.con + 1, incStats.mag + 1, incStats.wil +1, incStats.cun + 1)
 	end,
 }
@@ -38,7 +38,7 @@ registerTalentTranslation{
 		local haste = t.getHaste(self, t) * 100
 		local immunities = t.getImmunities(self, t) * 100
 		return ([[你的猎犬现在在生命值降至 1 以下后还能生存至多 %d 回合，免疫所有伤害但造成的伤害减少 50%% 。
-		闪烁命令将能让猎犬每回合回复 %d  生命并增加 %d%%  整体速度，持续 5 回合。生命 1 以下的猎犬将加倍该效果。
+		闪烁命令将能让猎犬每回合回复 %d 生命并增加 %d%% 整体速度，持续 5 回合。生命 1 以下的猎犬将加倍该效果。
 		当你学会该技能后，你的猎犬获得 %d%% 震慑致盲混乱定身免疫。
 		生命回复受法术强度加成。]]):format(duration, regen, haste, immunities)
 	end,

@@ -31,7 +31,7 @@ registerTalentTranslation{
 		local icedam = t.getIceDamage(self, t)
 		return ([[召唤一条长度 %d 的冰墙，持续 %d 回合。冰墙是透明的，但能阻挡抛射物和敌人。
 		冰墙会释放极度寒气，每格墙壁对半径 %d 内的敌人造成 %0.2f 伤害，并有 25%% 几率冻结。寒气不会伤害释放者及其召唤物。
-		每一点冰龙系技能同时也能增加你的寒冷抵抗 1%% 。]]):format(3 + math.floor(self:getTalentLevel(t) / 2) * 2, t.getDuration(self, t), damDesc(self, DamageType.COLD, icedam),  icerad)
+		每一点冰龙系技能同时也能增加你的寒冷抵抗 1%% 。]]):format(3 + math.floor(self:getTalentLevel(t) / 2) * 2, t.getDuration(self, t), damDesc(self, DamageType.COLD, icedam), icerad)
 	end,
 }
 

@@ -42,9 +42,9 @@ registerTalentTranslation{
 	info = function(self, t)
 		local radius = self:hasEffect(self.EFF_AETHER_AVATAR) and 10 or 3
 		return ([[你的身边充满奥术力量，阻止你受到的伤害，并将其改为扣减法力值。
-		你受到的伤害的  25%%  将会被改为扣减法力值，每点伤害扣减  %0.2f  点法力值。伤害护盾会降低这一消耗。
-		当你解除干扰护盾时，你会获得  100  点法力值，并在你周围产生半径为  %d  的致命的奥术风暴，持续  10  回合，每回合造成  10%%  的吸收的总伤害，共造成  %d  点伤害。
-		当你的法力值不足  10%%  时，你会自动解除这一技能。
+		你受到的伤害的 25%% 将会被改为扣减法力值，每点伤害扣减 %0.2f 点法力值。伤害护盾会降低这一消耗。
+		当你解除干扰护盾时，你会获得 100 点法力值，并在你周围产生半径为 %d 的致命的奥术风暴，持续 10 回合，每回合造成 10%% 的吸收的总伤害，共造成 %d 点伤害。
+		当你的法力值不足 10%% 时，你会自动解除这一技能。
 		伤害到魔法的比例受你的法术强度加成。]]):
 		format(t.getManaRatio(self, t), radius, damDesc(self, DamageType.ARCANE, t.getMaxDamage(self, t)))
 	end,

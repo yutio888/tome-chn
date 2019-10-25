@@ -30,7 +30,7 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)*100
 		local dur = t.getDuration(self,t)
 		local sdur = math.ceil(t.getDuration(self,t)/2)
-		return ([[每次在潜行状态下发起进攻时，你尝试绞杀目标。目标将被勒住 %d 回合，沉默 %d 回合。被勒住的目标不能移动，每回合受到一次 %d%% 伤害的徒手攻击。  
+		return ([[每次在潜行状态下发起进攻时，你尝试绞杀目标。目标将被勒住 %d 回合，沉默 %d 回合。被勒住的目标不能移动，每回合受到一次 %d%% 伤害的徒手攻击。 
 		勒住的几率受命中加成，你必须待在目标身边以保持该状态。
 		该技能有冷却时间。]])
 		:format(dur, sdur, damage)
@@ -43,7 +43,7 @@ registerTalentTranslation{
 		power = t.getPower(self,t)
 		perc = t.getPercent(self,t)
 		dam = t.getDamage(self,t)
-		return ([[你为目标打上死亡标记，持续 4 回合 , 使其受到的伤害增加 %d%% 。该效果结束时，额外造成  %0.2f 追加等于标记期间受到的伤害的 %d%% 的物理伤害。
+		return ([[你为目标打上死亡标记，持续 4 回合 , 使其受到的伤害增加 %d%% 。该效果结束时，额外造成 %0.2f 追加等于标记期间受到的伤害的 %d%% 的物理伤害。
 		目标在标记期间死亡时，该技能立刻冷却完成，同时返还消耗。
 		使用该技能不消耗潜行。
 		伤害受敏捷加成。]]):

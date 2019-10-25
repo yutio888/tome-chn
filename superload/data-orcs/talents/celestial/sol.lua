@@ -26,7 +26,7 @@ registerTalentTranslation{
 		local delay = t.getDelay(self, t)
 		local radius = self:getTalentRadius(t)
 		local damage = t.getDamage(self, t)
-		return ([[%d 回合后, 在 (范围 %d) 的目标区域发出一束激光, 造成  %0.2f 伤害并照明区域.]]):
+		return ([[%d 回合后, 在 (范围 %d) 的目标区域发出一束激光, 造成 %0.2f 伤害并照明区域.]]):
 		format(delay, radius, damDesc(self, DamageType.LIGHT, damage))
 		
 	end,}

@@ -24,7 +24,7 @@ registerTalentTranslation{
 	id = "T_PSIONIC_MIRROR",
 	name = "灵能之镜",
 	info = function(self, t)
-		return ([[解除 %d 项负面精神状态  ，并将每个状态随机转移至半径 5 以内的敌人上。]])
+		return ([[解除 %d 项负面精神状态，并将每个状态随机转移至半径 5 以内的敌人上。]])
 		:format(t.getNum(self, t))
 	end,}
 

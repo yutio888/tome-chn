@@ -9,7 +9,7 @@ registerTalentTranslation{
 		local numb = t.getMoonlightNumb(self, t)
 		local numbDur = t.getMoonlightNumbDur(self, t)
 		local dist = t.getTwilightKnockback(self, t)
-		return ([[每当你的法术暴击时，你消耗 5 点正能量和负能量，在范围 %d 内的随机目标  周围 1 码半径的区域内放置随机圣  印。
+		return ([[每当你的法术暴击时，你消耗 5 点正能量和负能量，在范围 %d 内的随机目标周围 1 码半径的区域内放置随机圣印。
 		圣印持续 %d 回合，当敌人踩上时，会对其产生特殊效果。
 		圣印只会在周围没有圣印的敌人周围产生，并且会尽可能在你的周围产生。
 		每 %d 游戏回合最多触发一次该效果。
@@ -34,7 +34,7 @@ registerTalentTranslation{
 		它们的持续时间延长 %d 回合，并在触发时造成额外伤害。
 		日光圣印：造成 %0.2f 光系伤害。
 		月光圣印：造成 %0.2f 暗影伤害。
-		暮光圣印：造成 %0.2f 光系和  %0.2f 暗影伤害。]]):format(t.getPersistentDuration(self, t), damDesc(self, DamageType.LIGHT, dam), damDesc(self, DamageType.DARKNESS, dam), damDesc(self, DamageType.LIGHT, dam/2), damDesc(self, DamageType.DARKNESS, dam/2))
+		暮光圣印：造成 %0.2f 光系和 %0.2f 暗影伤害。]]):format(t.getPersistentDuration(self, t), damDesc(self, DamageType.LIGHT, dam), damDesc(self, DamageType.DARKNESS, dam), damDesc(self, DamageType.LIGHT, dam/2), damDesc(self, DamageType.DARKNESS, dam/2))
 	end,
 }
 registerTalentTranslation{
@@ -50,7 +50,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local dam = t.getDamage(self, t)
 		return ([[你放置一枚临时的暮光之印，立刻造成 %d 光系或者 %d 暗影伤害并随之消散。伤害类型在光系和暗影之间轮流切换。
-		你可以连续使用  %d  次该技能而不会使该技能进入冷却，但每次使用都会增加其最终冷却时间 2 回合。当触发次数达到上限，或你在 1 回合内没有使用这个技能时，这个技能将会立刻进入冷却。]]):format(damDesc(self, DamageType.LIGHT, dam), damDesc(self, DamageType.DARKNESS, dam), t.getConsecutiveTurns(self, t))
+		你可以连续使用 %d 次该技能而不会使该技能进入冷却，但每次使用都会增加其最终冷却时间 2 回合。当触发次数达到上限，或你在 1 回合内没有使用这个技能时，这个技能将会立刻进入冷却。]]):format(damDesc(self, DamageType.LIGHT, dam), damDesc(self, DamageType.DARKNESS, dam), t.getConsecutiveTurns(self, t))
 	end,
 }
 return _M

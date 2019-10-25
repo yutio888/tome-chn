@@ -46,7 +46,7 @@ registerTalentTranslation{
 	name = "阴影幻象",
 	info = function(self, t)
 		local duration = t.getDuration(self, t)
-		return ([[用阴影复制一个敌对目标的幻象  。这个幻象会立刻攻击它的原型，持续 %d 回合。
+		return ([[用阴影复制一个敌对目标的幻象。这个幻象会立刻攻击它的原型，持续 %d 回合。
 		幻象拥有 %d%% 的目标生命， +50%% 暗影伤害抵抗， -50%% 光系伤害抵抗，造成 -50%% 的伤害。
 		持续时间和幻象生命受你的灵巧加成。]]):
 		format(duration, t.getPercent(self, t))

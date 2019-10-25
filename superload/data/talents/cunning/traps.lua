@@ -67,7 +67,7 @@ registerTalentTranslation{
 			trap_descs = trap_descs.."\n\t"..("%s材质等级 %d : %s#LAST#\n%s"):format(trap.known and "#YELLOW#" or "#YELLOW_GREEN#", trap.tier, trap.name, trap.info)
 		end
 		self.turn_procs.trap_mastery_tid = nil
-		return ([[该技能允许你准备 %d 个不同的陷阱，最高材质等  级为 %d 。（使用该技能选择需要准备  的陷阱。） 
+		return ([[该技能允许你准备 %d 个不同的陷阱，最高材质等级为 %d 。（使用该技能选择需要准备的陷阱。） 
 		已知陷阱：
 %s
 
@@ -85,7 +85,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local t2 = self:getTalentFromId(self.T_TAUNT)
 		local rad = t2.radius(self, t)	
-		return ([[抛出一个诱饵来吸引 %d 码半径内的敌人，持续 %d 回合  。
+		return ([[抛出一个诱饵来吸引 %d 码半径内的敌人，持续 %d 回合。
 		诱饵有 %d 生命 ( 基于灵巧)， %d 护甲和 %d%% 非物理伤害抗性。 
 		在等级 5 时，当诱饵被摧毁时，它会自动触发在它周围 2 码范围内的陷阱（可鉴定某些陷阱是否能被触发 )。 
 		此技能不会打断潜行状态。]]):format(rad, t.getDuration(self,t), t.getLife(self, t), t.getArmor(self, t), t.getResist(self, t))
@@ -134,7 +134,7 @@ registerTalentTranslation{
 		已学会的引爆方式 :
 %s 
 
-带有特殊启动机关的陷阱强度增加  %+d%% (取代陷阱专精的加成 )  ，有 %d%% 几率不破坏潜行。
+带有特殊启动机关的陷阱强度增加 %+d%% (取代陷阱专精的加成 ) ，有 %d%% 几率不破坏潜行。
 #YELLOW#当前选择的陷阱 : %s#LAST#]]):
 		format(self:getTalentLevelRaw(t), trap_descs, mastery, stealth_chance, instant)
 	end,
@@ -151,7 +151,7 @@ registerTalentTranslation{
 		format(damDesc(self, DamageType.PHYSICAL, dam), power, instant)
 	end,
 	short_info = function(self, t)
-		return ([[刀片（范围2）  %d 物理伤害, 减少命中、护甲和闪避  %d 。]]):
+		return ([[刀片（范围2） %d 物理伤害, 减少命中、护甲和闪避 %d 。]]):
 		format(damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t)), t.getPower(self,t))
 	end,
 }
@@ -184,7 +184,7 @@ registerTalentTranslation{
 	id = "T_PITFALL_TRAP",
 	name = "落穴陷阱",
 	info = function (self,t)
-		return ([[放置一个压力感应陷阱，目标经过时地面将坍塌，造成  %0.2f  物理伤害并将其埋在地下（暂时移出游戏） 5  回合。
+		return ([[放置一个压力感应陷阱，目标经过时地面将坍塌，造成 %0.2f 物理伤害并将其埋在地下（暂时移出游戏） 5 回合。
 如果目标抵抗被埋，那么他将被定身（无视 50%% 定身免疫）。]]):
 		format(damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t)))
 	end,
@@ -209,7 +209,7 @@ registerTalentTranslation{
 	id = "T_BLADESTORM_TRAP",
 	name = "剑刃风暴陷阱",
 	info = function (self,t)
-		return ([[放置一个陷阱，激活后产生致命的剑刃风暴，持续  %d 回合。这个临时的结构体非常坚韧，获得你的伤害加成，每回合自动攻击相邻敌人。]]):format(t.getDuration(self,t))
+		return ([[放置一个陷阱，激活后产生致命的剑刃风暴，持续 %d 回合。这个临时的结构体非常坚韧，获得你的伤害加成，每回合自动攻击相邻敌人。]]):format(t.getDuration(self,t))
 	end,
 		short_info = function(self, t)
 		return ([[每回合攻击周围生物，持续 %d 回合。]]):format(t.getDuration(self, t))
@@ -221,7 +221,7 @@ registerTalentTranslation{
 	info = function (self,t)
 		local dam = t.getDamage(self, t)
 		local dur = t.getDuration(self,t)
-		return ([[放置魔法陷阱，每回合朝 5 格内的随机敌人射出奥术射线，持续  %d  回合 ,  造成  %0.2f  奥术伤害。
+		return ([[放置魔法陷阱，每回合朝 5 格内的随机敌人射出奥术射线，持续 %d 回合 , 造成 %0.2f 奥术伤害。
 该陷阱需要 20 魔法才能准备，消失时不返还体力。
 #YELLOW#放置后立刻激活。#LAST#]]):format(dur, damDesc(self, DamageType.ARCANE, dam))
 	end,
@@ -250,14 +250,14 @@ registerTalentTranslation{
 	info = function (self,t)
 		local dam = damDesc(self, DamageType.COLD, t.getDamage(self, t))
 		local instant = self.trap_primed == t.id and "\n#YELLOW#设置完毕后立刻激活。#LAST#" or ""
-		return ([[放置一个陷阱，激活后产生半径 2 的冰冻气体，造成 %0.2f  寒冷伤害并定身  3  回合。
-		冰冻气体持续 5 回合，每回合造成  %0.2f  伤害，有 25%% 几率冻结。
+		return ([[放置一个陷阱，激活后产生半径 2 的冰冻气体，造成 %0.2f 寒冷伤害并定身 3 回合。
+		冰冻气体持续 5 回合，每回合造成 %0.2f 伤害，有 25%% 几率冻结。
 		该陷阱可以被设置为直接激活，也可以被诱饵激活。 %s]]):
 		format(dam, dam/3, instant)
 	end,
 	short_info = function(self, t)
 		local dam = damDesc(self, DamageType.COLD, t.getDamage(self, t))
-		return ([[爆炸 (范围 2):  %d 寒冷伤害并定身 3 回合。范围冻结 ( %d 寒冷伤害， 25%% 冻结几率) 5回合。]]):format(dam, dam/3)
+		return ([[爆炸 (范围 2): %d 寒冷伤害并定身 3 回合。范围冻结 ( %d 寒冷伤害， 25%% 冻结几率) 5回合。]]):format(dam, dam/3)
 	end,
 }
 registerTalentTranslation{
@@ -266,8 +266,8 @@ registerTalentTranslation{
 	info = function (self,t)
 		local instant = self.trap_primed == t.id and "\n#YELLOW#设置完毕后立刻激活。#LAST#" or ""
 		dam = damDesc(self, DamageType.FIRE, t.getDamage(self, t))
-		return ([[放置一个压力感应陷阱，激活后产生半径 2 的火云 ,震慑敌人  (每回合 %0.2f 火焰伤害  ) 3 回合。
-		火焰持续 5 回合，每回合燃烧造成  %0.2f  火焰伤害。
+		return ([[放置一个压力感应陷阱，激活后产生半径 2 的火云 ,震慑敌人 (每回合 %0.2f 火焰伤害 ) 3 回合。
+		火焰持续 5 回合，每回合燃烧造成 %0.2f 火焰伤害。
 	 	 该陷阱可以被设置为直接激活，也可以被诱饵激活。 %s]]):
 		format(dam/3, dam/2, instant)
 	end,
@@ -321,7 +321,7 @@ registerTalentTranslation{
 		local dur = t.getDuration(self,t)
 		local nb = t.getNb(self,t)
 		local instant = self.trap_primed == t.id and "\n#YELLOW#设置完毕后立刻激活。#LAST#" or ""
-		return ([[放置一个陷阱，触发后释放半径 2 的反魔能量波，吸取至多  %d  法力 , %d  活力 , %d  正能量和 %d  负能量 ,  并造成至多  %0.2f  奥术伤害（基于吸取能量），  沉默  %d  回合，并解除至多 %d 项正面魔法状态或者维持技能。
+		return ([[放置一个陷阱，触发后释放半径 2 的反魔能量波，吸取至多 %d 法力 , %d 活力 , %d 正能量和 %d 负能量 , 并造成至多 %0.2f 奥术伤害（基于吸取能量），沉默 %d 回合，并解除至多 %d 项正面魔法状态或者维持技能。
 		吸取效果受意志加成，你需要 25 点意志来使用该技能。
 		该陷阱可以被设置为直接激活，也可以被诱饵激活。 %s ]]):
 		format(mana, vim, positive, negative, damDesc(self, DamageType.ARCANE, base), dur, nb, instant)
@@ -340,7 +340,7 @@ registerTalentTranslation{
 	name = "爆炸陷阱",
 	info = function (self,t)
 		local instant = self.trap_primed == t.id and "\n#YELLOW#设置完毕后立刻激活。#LAST#" or ""
-		return ([[放置一个简单而有效的陷阱，激活后触发半径  2 的爆炸, 3 回合内造成 %0.2f 火焰伤害。
+		return ([[放置一个简单而有效的陷阱，激活后触发半径 2 的爆炸, 3 回合内造成 %0.2f 火焰伤害。
 		该陷阱可以被设置为直接激活，也可以被诱饵激活。 %s]]):
 		format(damDesc(self, DamageType.FIRE, t.getDamage(self, t)), instant)
 	end,

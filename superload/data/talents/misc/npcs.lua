@@ -712,7 +712,7 @@ registerTalentTranslation{
 		local range = self:getTalentRange(t)
 		local dam = damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t))
 		return ([[Use your telekinetic power to enhance your strength, allowing you to pick up an adjacent enemy and hurl it anywhere within radius %d. 
-		Upon landing, your target takes %0.1f Physical damage and is stunned for 4 turns.  All other creatures within radius 2 of the landing point take %0.1f Physical damage and are knocked away from you.
+		Upon landing, your target takes %0.1f Physical damage and is stunned for 4 turns. All other creatures within radius 2 of the landing point take %0.1f Physical damage and are knocked away from you.
 		This talent ignores %d%% of the knockback resistance of the thrown target, which takes half damage if it resists being thrown.
 		The damage improves with your Mindpower and the range increases with both Mindpower and Strength.]]):
 		format(range, dam, dam/2, t.getKBResistPen(self, t))
@@ -741,7 +741,7 @@ registerTalentTranslation{
 	id = "T_BONE_NOVA",
 	name = "白骨新星",
 	info = function(self, t)
-		return ([[向所有方向射出骨矛，对 %d 码范围内所有敌人造成 %0.2f 物理伤害,同时在 5 回合内造成 %0.2f 流血伤害。  
+		return ([[向所有方向射出骨矛，对 %d 码范围内所有敌人造成 %0.2f 物理伤害,同时在 5 回合内造成 %0.2f 流血伤害。 
 		受法术强度影响，伤害有额外加成。]]):format(self:getTalentRadius(t), damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t)), damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t)/2))
 	end,
 }

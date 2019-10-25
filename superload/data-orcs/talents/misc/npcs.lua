@@ -45,7 +45,7 @@ registerTalentTranslation{
 	end,}
 
 registerTalentTranslation{
-	id  = "T_AMAKTHEL_SLUMBER",
+	id = "T_AMAKTHEL_SLUMBER",
 	name = "沉睡中...",
 	info = function(self, t)
 		return ([[死神正在沉睡。起码现在是。]])

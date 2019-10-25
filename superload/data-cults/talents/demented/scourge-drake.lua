@@ -39,7 +39,7 @@ registerTalentTranslation{
 	name = "蛆虫吐息",
 	info = function(self, t)
 		return ([[你向半径为 %d 的锥形区域内吐出一道由蛆虫尸体组成的波浪。
-		任何在范围内的目标受到 %0.2f 枯萎伤害，  并被残废恶疾感染，持续 1 0 回合。
+		任何在范围内的目标受到 %0.2f 枯萎伤害，并被残废恶疾感染，持续 1 0 回合。
 		残废恶疾减慢目标 %d%% 速度，并且每回合造成 %0.2f 枯萎伤害。
 		伤害随法术强度增加而增加，暴击率基于法术暴击。]]):
 		format(self:getTalentRadius(t), damDesc(self, DamageType.BLIGHT, t.getDamage(self, t)), t.getSlow(self, t) * 100, damDesc(self, DamageType.BLIGHT, t.getDiseaseDamage(self, t)))

@@ -99,7 +99,7 @@ registerTalentTranslation{
 	name = "亲近自然",
 	info = function(self, t)
 		return ([[自然精灵对自然元素有亲和力，这让它们在受到伤害时可以获得一定的治疗。
-		获得  %d%%  自然和酸性伤害吸收。]]):
+		获得 %d%% 自然和酸性伤害吸收。]]):
 		format(t.getAffinity(self, t))
 	end,
 }
@@ -177,7 +177,7 @@ registerTalentTranslation{
 	name = "小不点的幸运",
 	info = function(self, t)
 		local params = t.getParams(self, t)
-		return ([[召唤小不点的幸运和机智来提高你 %d%%  暴击率和 %d  豁免 5 回合。 
+		return ([[召唤小不点的幸运和机智来提高你 %d%% 暴击率和 %d 豁免 5 回合。 
 		受灵巧影响，此效果有额外增益。]]):
 		format(params.crit, params.save)
 	end,
@@ -355,7 +355,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		return ([[立刻解除纹身紊乱和符文紊乱。
 		接下来 %d 回合内，你的纹身和符文冷却速度加倍。
-		技能等级 5 时，你能解锁一个新的纹身位  。]]):
+		技能等级 5 时，你能解锁一个新的纹身位。]]):
 		format(t.getDuration(self, t))
 	end,
 }

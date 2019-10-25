@@ -14,7 +14,7 @@ registerTalentTranslation{
 		副手空闲时，当使用普通攻击，触手会自动攻击目标以及目标同侧的其他单位。
 		物理强度提高 %d ，触手伤害提高 %d 。
 		每次触手攻击时，获得 %d 疯狂值。
-		附近有 #{italic}# 普通人 #{normal}# 时会自动生成微弱的心灵护盾  ，避免被他们发现你的恐魔形态。
+		附近有 #{italic}# 普通人 #{normal}# 时会自动生成微弱的心灵护盾，避免被他们发现你的恐魔形态。
 		你的触手当前属性为 %s :
 		%s]]):
 		format(damage, 100*inc, t.getInsanityBonus(self, t), allow_tcombat and "" or ", #CRIMSON# 由于副手非空闲当前无法使用。d#WHITE#", tostring(tcombatdesc))

@@ -47,7 +47,7 @@ registerTalentTranslation{
 		你的施法速度增加 %d%% ，法术冷却减少 %d%% ，同时一次攻击不能对你造成超过 %d%% 最大生命的伤害。
 		效果受法强加成。]]):
 		format(t.getHaste(self, t)*100, t.getCD(self, t)*100, t.getCap(self, t))
-   end,
+  end,
 }
 
 return _M

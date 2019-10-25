@@ -72,9 +72,9 @@ registerTalentTranslation{
 			local t2 = self:getTalentFromId(self.T_CHANT_OF_FORTRESS)
 			local t3 = self:getTalentFromId(self.T_CHANT_OF_RESISTANCE)
 			ret = ([[你学会了三种防御赞歌，以此咏唱对太阳的赞颂：
-		坚韧赞歌：增加 %d 精神豁免， %d%%  最大生命值 
-		堡垒赞歌：增加 %d 物理豁免， %d 物理抗性， %d 护甲， 15%%  护甲硬度 
-		元素赞歌：增加 %d 法术豁免， %d%%  火焰 /寒冷 /闪电 /酸性抗性，减少三格外敌人对你造成的伤害 %d%%  。
+		坚韧赞歌：增加 %d 精神豁免， %d%% 最大生命值 
+		堡垒赞歌：增加 %d 物理豁免， %d 物理抗性， %d 护甲， 15%% 护甲硬度 
+		元素赞歌：增加 %d 法术豁免， %d%% 火焰 /寒冷 /闪电 /酸性抗性，减少三格外敌人对你造成的伤害 %d%% 。
 		你同时只能激活一种赞歌。]]):
 			format(t1.getResists(self, t1), t1.getLifePct(self, t1)*100, t2.getResists(self, t2), t2.getPhysicalResistance(self, t2), t2.getPhysicalResistance(self, t2), t3.getSpellResists(self, t3), t3.getResists(self, t3), t3.getDamageChange(self, t3))
 		end)

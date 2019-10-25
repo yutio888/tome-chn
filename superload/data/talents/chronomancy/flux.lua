@@ -31,9 +31,9 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local duration = t.getDuration(self, t)
 		local radius = self:getTalentRadius(t)
-		return ([[对范围内所有单位造成 %0.2f 时空伤害，这些伤害会被分散到  %d 回合中。技能半径为 %d 格。
+		return ([[对范围内所有单位造成 %0.2f 时空伤害，这些伤害会被分散到 %d 回合中。技能半径为 %d 格。
 		带有弥散现实效果的单位不会受到伤害，并在四回合中回复 %d 生命值。
-		如果目标的生命值被减低到  20%% 以下，湮灭洪流将会立刻杀死目标。
+		如果目标的生命值被减低到 20%% 以下，湮灭洪流将会立刻杀死目标。
 		受到法术强度影响，伤害有额外加成。]]):format(damage, duration, radius, damage *0.4)
 	end,
 }
@@ -52,7 +52,7 @@ registerTalentTranslation{
 			t_name = talent.name
 			t_info = talent.info(self, talent)
 		end
-		return ([[当扭曲命运没有进入冷却时，微小异变将会被延后  %d  回合，允许你正常地使用法术。   你可以使用扭曲命运技能来选择指定的区域来触发被延后的异变。		如果在第一个异变被延后的回合中引发了第二个异变，那么第一个异变将会立刻触发，并且打断你当前的回合或行动。
+		return ([[当扭曲命运没有进入冷却时，微小异变将会被延后 %d 回合，允许你正常地使用法术。  你可以使用扭曲命运技能来选择指定的区域来触发被延后的异变。		如果在第一个异变被延后的回合中引发了第二个异变，那么第一个异变将会立刻触发，并且打断你当前的回合或行动。
 		当触发被延后的异变时，可以立即减少紊乱值。
 				
 		当前异变： %s 

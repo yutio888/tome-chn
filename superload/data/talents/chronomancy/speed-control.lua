@@ -6,7 +6,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local speed = t.getSpeed(self, t) * 100
 		local duration = t.getDuration(self, t)
-		return ([[当你移动时，你获得  %d%%  移动速度，持续  %d  回合。   这个效果可以叠加三次，每回合只能触发一次。]]):format(speed, duration)
+		return ([[当你移动时，你获得 %d%% 移动速度，持续 %d 回合。  这个效果可以叠加三次，每回合只能触发一次。]]):format(speed, duration)
 	end,
 }
 
@@ -16,7 +16,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local speed = t.getSpeed(self, t) * 100
 		local duration = t.getDuration(self, t)
-		return ([[当你使用非瞬发时空系法术，你获得 %d%% 战斗、施法和精神速度，持续  %d 回合。这个效果可以叠加三次，每回合只能触发一次。 
+		return ([[当你使用非瞬发时空系法术，你获得 %d%% 战斗、施法和精神速度，持续 %d 回合。这个效果可以叠加三次，每回合只能触发一次。 
 		]]):format(speed, duration)
 	end,
 }

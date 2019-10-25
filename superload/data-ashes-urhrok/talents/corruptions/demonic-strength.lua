@@ -17,7 +17,7 @@ registerTalentTranslation{
 	return ([[你使用体内蕴藏的活力强化自己的身体，恢复 %d%% 最大体力值（ %d 点）和 %d%% 最大生命值（ %d 点）。
 	同时让你在 -%d 生命时才会死亡，此效果持续 8 回合。
 	此技能瞬发，恢复值受法术强度加成。]]):
-	format(t.stamValue(self, t) * 100, t.stamValue(self, t) * self.max_stamina,  t.getHeal(self, t)*100, t.getHeal(self, t) * self.max_life, t.getPower(self, t))
+	format(t.stamValue(self, t) * 100, t.stamValue(self, t) * self.max_stamina, t.getHeal(self, t)*100, t.getHeal(self, t) * self.max_life, t.getPower(self, t))
 	end,
 }
 

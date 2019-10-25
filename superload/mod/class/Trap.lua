@@ -44,7 +44,7 @@ function _M:tooltip()
 							return ([[造成 %d 光系伤害，并治疗使用者 %d 生命]]):format(engine.interface.ActorTalents.damDesc(self, engine.DamageType.LIGHT, self.dam), self.heal)
 						end
 					elseif self.name == "glyph of moonlight" then
-						desc =  function(self)
+						desc = function(self)
 							return ([[造成 %d 暗影伤害并吸取敌方能量，降低其造成的伤害 %d%% ，效果持续 %d 回合。]]):format(engine.interface.ActorTalents.damDesc(self, engine.DamageType.DARKNESS, self.dam), self.numb, self.numbDur)
 						end
 					end

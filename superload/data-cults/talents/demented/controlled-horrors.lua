@@ -4,9 +4,9 @@ registerTalentTranslation{
 	id = "T_DECAYED_DEVOURERS",
 	name = "腐败吞噬者",
 	info = function(self, t)
-		return ([[你利用和恐魔的联系召唤三个持续 %d  轮的腐败吞噬者。
+		return ([[你利用和恐魔的联系召唤三个持续 %d 轮的腐败吞噬者。
 		腐败吞噬者不能移动，能攻击周围所有敌对生物。它们拥有浴血奋战、咬牙切齿和狂乱撕咬技能。
-		它们的所有主属性将设为  %d (基于你的魔法属性 )，  生命回复速度增加  %d  ，所有技能等级设为  %d  。  许多其他属性与技能等级相关。
+		它们的所有主属性将设为 %d (基于你的魔法属性 )，生命回复速度增加 %d ，所有技能等级设为 %d 。许多其他属性与技能等级相关。
 		它们将继承你的伤害加成、伤害抗性穿透、暴击几率和暴击伤害系数。]]):
 		format(t.getDur(self, t), t.getStats(self, t), t.getLifeRating(self, t), math.floor(self:getTalentLevel(t)))
 	end,
@@ -18,7 +18,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		return ([[你利用和恐魔的联系召唤一个持续 %d 回合的腐败浮肿恐魔。
 		腐败的恐魔不能移动，能攻击范围内的所有敌对生物。它拥有精神干扰和精神光束技能。
-		它们的所有主属性将设为  %d (基于你的魔法属性 )，  生命回复速度增加  %d  ，所有技能等级设为  %d  。  许多其他属性与技能等级相关。
+		它们的所有主属性将设为 %d (基于你的魔法属性 )，生命回复速度增加 %d ，所有技能等级设为 %d 。许多其他属性与技能等级相关。
 		它们将继承你的伤害加成、伤害抗性穿透、暴击几率和暴击伤害系数。、
 		]]):
 		format(t.getDur(self, t), t.getStats(self, t), t.getLifeRating(self, t), math.floor(self:getTalentLevel(t)))

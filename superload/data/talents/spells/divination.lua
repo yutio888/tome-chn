@@ -38,7 +38,7 @@ registerTalentTranslation{
 	name = "探测",
 	info = function(self, t)
 		local radius = t.getRadius(self, t)
-		return ([[通过意念探测周围地形，有效范围： %d  码。]]):
+		return ([[通过意念探测周围地形，有效范围： %d 码。]]):
 		format(radius)
 	end,
 }

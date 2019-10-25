@@ -29,7 +29,7 @@ registerTalentTranslation{
 	name = "吞噬之焰",
 	info = function(self, t)
 	return ([[恶魔之炎抚育你成长。每次你近战攻击命中时，你对目标施加诅咒，只要其处于燃烧状态，你每回合获得 %0.2f 生命与 %0.2f 活力。 
-	同时，在你周围 10 码范围内，所有被诅咒火焰燃烧的敌方生物会将诅咒传播至半径 1 内的燃烧生物上，并造成 %d 火焰伤害同时给予你等量治疗。]]):format(t.getHeal(self, t), t.getVim(self, t),  t.getDam(self, t))
+	同时，在你周围 10 码范围内，所有被诅咒火焰燃烧的敌方生物会将诅咒传播至半径 1 内的燃烧生物上，并造成 %d 火焰伤害同时给予你等量治疗。]]):format(t.getHeal(self, t), t.getVim(self, t), t.getDam(self, t))
 	end,
 }
 

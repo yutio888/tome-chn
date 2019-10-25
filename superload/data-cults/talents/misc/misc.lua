@@ -85,7 +85,7 @@ registerTalentTranslation{
 		local dam = t.getDamage(self,t)/2
 		local backlash = t.getBacklash(self,t)
 		return ([[用虚空之力攻击目标，造成 %0.2f 暗影 %0.2f 时空伤害并击退 8 格。 
-		该法术会产生熵能反冲，让你在 8 回合内受  到 %d 伤害。
+		该法术会产生熵能反冲，让你在 8 回合内受到 %d 伤害。
 		伤害受法术强度加成。]]):
 		format(damDesc(self, DamageType.DARKNESS, dam), damDesc(self, DamageType.TEMPORAL, dam), backlash)
 	end,

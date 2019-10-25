@@ -31,7 +31,7 @@ registerTalentTranslation{
 		local nb = t.getNb(self, t)
 		return ([[ 你集中精神于某块半径 2 的区域，制造出 %d 个腐蚀之种。 
 		第一个种子会产生于中心处，其他的会随机出现。
-         每个种子持续 %d 回合，
+     每个种子持续 %d 回合，
 		当一个生物走过腐蚀之种时，会在半径 1 的区域内引发一场爆炸，击退对方并造成 %0.1f 点酸性伤害。 
 		受精神强度影响，伤害有额外加成]]):
 		format(nb, t.getDuration(self, t), damDesc(self, DamageType.ACID, dam))

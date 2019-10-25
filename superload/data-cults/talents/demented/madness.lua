@@ -6,7 +6,7 @@ registerTalentTranslation{
 		local dam = t.getDamage(self,t)
 		local stat = t.getPowerLoss(self,t)
 		local rad = self:getTalentRadius(t)
-		return ([[令半径 %d 格内的敌人的心灵里充满可怕的幻觉和疯狂的低语， 5 回合内每回合受到 %0.2f 暗影伤害。同时，该效果将降低其物  理、  法术和精神强度 %d 点，该效果可叠加至最多 %d 点。
+		return ([[令半径 %d 格内的敌人的心灵里充满可怕的幻觉和疯狂的低语， 5 回合内每回合受到 %0.2f 暗影伤害。同时，该效果将降低其物理、法术和精神强度 %d 点，该效果可叠加至最多 %d 点。
 		技能效果受法术强度加成。]]):
 		format(rad, damDesc(self, DamageType.DARKNESS, dam), stat, stat*3)
 	end,
@@ -20,7 +20,7 @@ registerTalentTranslation{
 		local dur = t.getDuration(self,t)
 		local damage = t.getDamageReduction(self,t)
 		return ([[每次敌人受到黑暗低语的伤害时，有 %d%% 几率在视野内产生持续 %d 回合的幻象。幻象不能行动，但被影响的敌人在幻象结束前造成的伤害降低 %d%% 。
-		同一敌人同时只能产生  一个幻象。]]):
+		同一敌人同时只能产生一个幻象。]]):
 		format(chance, dur, damage)
 	end,
 }

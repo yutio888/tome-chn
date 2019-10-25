@@ -5,7 +5,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local targetcount = t.getTargetCount(self, t)
 		local power = t.getPower(self, t)*100
-		return ([[将你身体上的熵能向周围辐射。每当你受到熵能反冲时，在你 1 0  码距离内随机的 %d 个可见敌人都  将被熵能侵蚀 8 回合。
+		return ([[将你身体上的熵能向周围辐射。每当你受到熵能反冲时，在你 1 0 码距离内随机的 %d 个可见敌人都将被熵能侵蚀 8 回合。
 		增加 ( 减少 ) 它们受到的新的负面 ( 正面 ) 效果 %d%% 的持续时间。]]):
 		format(targetcount, power)
 	end,
@@ -46,7 +46,7 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		return ([[在目标区域召唤出范围 4 码、持续 %d 回合的湮灭风暴，使受到影响的物质化为虚无，每回合造成 %0.2f 暗影 %0.2f 时空伤害。
 		范围内的墙壁和部分其他地形将被粉粹。
-		每次受到风暴伤害时，敌  人身上不足 3 回合的负面魔法效果都将重置为 3 回合。风暴范围内敌人的投射物都将被扯碎。
+		每次受到风暴伤害时，敌人身上不足 3 回合的负面魔法效果都将重置为 3 回合。风暴范围内敌人的投射物都将被扯碎。
 		伤害受到法术强度加成。]]):format(duration, damDesc(self, DamageType.DARKNESS, damage), damDesc(self, DamageType.TEMPORAL, damage))
 	end,
 }
@@ -55,7 +55,7 @@ registerTalentTranslation{
 	id = "T_VOID_CRASH",
 	name = "虚空破碎",
 	info = function(self, t)
-		return ([[用武器撞击地面 ,   产生 2 码的虚空爆炸，造成 %d%% 虚空武器伤害（暗影时空各 50%% ）。]]):
+		return ([[用武器撞击地面 ,  产生 2 码的虚空爆炸，造成 %d%% 虚空武器伤害（暗影时空各 50%% ）。]]):
 		format(t.getDamage(self, t) * 100)
 	end,
 }

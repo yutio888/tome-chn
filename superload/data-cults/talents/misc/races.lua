@@ -5,7 +5,7 @@ registerTalentTranslation{
 	name = "狂热",
 	info = function(self, t)
 		return ([[进入杀戮狂热状态 3 回合。
-		狂热状态下，   你使用的第一个职业技能不进入冷却（再次使用将进入冷却。）
+		狂热状态下，  你使用的第一个职业技能不进入冷却（再次使用将进入冷却。）
 		该效果对纹身、符文、瞬间技能以及固定冷却时间技能无效。
 		]]):
 		format()
@@ -50,7 +50,7 @@ registerTalentTranslation{
 	id = "T_KROG_WRATH",
 	name = "自然之怒",
 	info = function(self, t)
-		return ([[你释放持续 5 回  合的自然的愤怒。
+		return ([[你释放持续 5 回合的自然的愤怒。
 		愤怒状态下，每当你造成伤害时有 %d%% （每回合第一次攻击 100%% ）几率震慑 3 回合。
 		该效果每回合只能震慑一个敌人。
 		震慑几率受体质影响，强度由物理或精神强度中较高一项决定。]]):
@@ -93,7 +93,7 @@ registerTalentTranslation{
 		改变类型需要战斗经验，你必须杀死 100 生物后才能使用（当前 %d）。
 		
 		当你学会该技能时，你变得如此强大，以至于能双持任何单手武器。]]):
-		format(t.getImmune(self, t),  resist,damname, damDesc(self, damtype, damage), damname, self.krog_kills or 0)
+		format(t.getImmune(self, t), resist,damname, damDesc(self, damtype, damage), damname, self.krog_kills or 0)
 	end,
 }
 
@@ -134,7 +134,7 @@ registerTalentTranslation{
 	id = "T_ULTRA_INSTINCT",
 	name = "终极本能",
 	info = function(self, t)
-		return ([[ 没有 #{bold}#思维#{normal}# 和 #{bold}#自我#{normal}# 的干扰，你的身体全凭本能行动，  反应速度更快。
+		return ([[ 没有 #{bold}#思维#{normal}# 和 #{bold}#自我#{normal}# 的干扰，你的身体全凭本能行动，反应速度更快。
 		整体速度增加 %d%% 。]]):
 		format(t.getSpeed(self, t) * 100)
 	end,
@@ -145,7 +145,7 @@ registerTalentTranslation{
 	name = "堕落影响",
 	info = function(self, t)
 		return ([[ 寄生在你身体里的堕落力量渗出了你的身体，给予你强化。
-		增加 %d%% 枯萎、黑暗、时空和  酸性伤害抗性，同时减少 %d%% 自然和光系伤害抗性。]]):format(t.getResist(self, t), t.getResist(self, t) / 3)
+		增加 %d%% 枯萎、黑暗、时空和酸性伤害抗性，同时减少 %d%% 自然和光系伤害抗性。]]):format(t.getResist(self, t), t.getResist(self, t) / 3)
 	end,
 }
 

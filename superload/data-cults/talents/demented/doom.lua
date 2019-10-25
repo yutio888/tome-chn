@@ -31,7 +31,7 @@ registerTalentTranslation{
 	name = "毁灭预言",
 	info = function(self, t)
 		local dam = t.getDamage(self,t)
-		return ([[对目标施加毁灭预言，  持续 6 回合。
+		return ([[对目标施加毁灭预言，持续 6 回合。
 		当生命值滑落至最大生命的 75%% ，50%% 或 25%% 下时，造成 %d 暗影伤害。
 		伤害受法术强度加成。]]):format(dam)
 	end,
@@ -42,7 +42,7 @@ registerTalentTranslation{
 	name = "背叛预言",
 	info = function(self, t)
 		local chance = t.getChance(self,t)
-		return ([[对目标施加背叛预言，  持续 6 回合。每回合有 %d%% 几率攻击友方单位或自身。]]):format(chance)
+		return ([[对目标施加背叛预言，持续 6 回合。每回合有 %d%% 几率攻击友方单位或自身。]]):format(chance)
 	end,
 }
 
@@ -83,7 +83,7 @@ registerTalentTranslation{
 		return ([[当你宣读预言时，来自虚空的回响将指引你带来敌人的末日。你选择的预言将提供 1 0 回合的加成。
 		疯狂预言：每次目标使用技能时，你的一个技能的冷却时间将减少 %d 。
 		毁灭预言：每次目标受到伤害时，你回复 %d%% 伤害值。
-		背叛预言 :  你受到的 %d%% 伤害将转移至周围随机目标。
+		背叛预言 : 你受到的 %d%% 伤害将转移至周围随机目标。
 		
 		同一种预言只能以一种方式进行强化，隆重演说，双重诅咒或者天启。
 		当前预言 : %s]]):

@@ -25,8 +25,8 @@ registerTalentTranslation{
 	id = "T_BLOOD_BOIL",
 	name = "鲜血沸腾",
 	info = function(self, t)
-		return ([[使你周围半径  %d  内生物的不纯净的血液沸腾。
-		被疾病、毒素或伤口影响的敌人将会随机移除一个上述效果，受到  %0.2f  枯萎伤害，使你恢复  %d  生命值，并被减速  %d%%  5  回合。
+		return ([[使你周围半径 %d 内生物的不纯净的血液沸腾。
+		被疾病、毒素或伤口影响的敌人将会随机移除一个上述效果，受到 %0.2f 枯萎伤害，使你恢复 %d 生命值，并被减速 %d%% 5 回合。
 		伤害受你的法术强度影响。]]):format(self:getTalentRadius(t), damDesc(self, DamageType.BLIGHT, t.getDamage(self, t)), t.getHeal(self, t), t.getSlow(self, t))
 	end,
 }

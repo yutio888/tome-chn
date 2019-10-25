@@ -3,7 +3,7 @@ registerTalentTranslation{
 	id = "T_APPLY_POISON",
 	name = "涂毒",
 	info = function (self,t)
-		return ([[学会如何在近战武器、飞刀、弹药上涂毒，命中后有  %d%%  几率使目标中毒，每回合受到 %d  自然伤害，持续 %d  回合。毒素效果可以叠加至 %d  伤害每回合。
+		return ([[学会如何在近战武器、飞刀、弹药上涂毒，命中后有 %d%% 几率使目标中毒，每回合受到 %d 自然伤害，持续 %d 回合。毒素效果可以叠加至 %d 伤害每回合。
 		伤害受灵巧加成。]]):
 		format(t.getChance(self,t), damDesc(self, DamageType.NATURE, t.getDamage(self, t)), t.getDuration(self, t), damDesc(self, DamageType.NATURE, t.getDamage(self, t)*4))
 	end,
@@ -54,7 +54,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local dam = 100 * t.getDamage(self,t)
 		local desc = t.effectsDescription(self, t)
-		return ([[你攻击目标，造成  %d%%  自然武器伤害，并基于目标当前毒素触发额外效果 :
+		return ([[你攻击目标，造成 %d%% 自然武器伤害，并基于目标当前毒素触发额外效果 :
 		
 		%s 
 		学习该技能后，你能学习剧毒飞刀，但使用该技能会使其进入冷却。
@@ -66,7 +66,7 @@ registerTalentTranslation{
 	id = "T_NUMBING_POISON",
 	name = "麻木毒剂",
 	info = function(self, t)
-		return ([[在你的武器上涂上麻木毒剂，  中毒目标造成的伤害降低 %d%% 。]]):
+		return ([[在你的武器上涂上麻木毒剂，中毒目标造成的伤害降低 %d%% 。]]):
 	format(t.getEffect(self, t))
 	end,
 }
@@ -74,7 +74,7 @@ registerTalentTranslation{
 	id = "T_INSIDIOUS_POISON",
 	name = "阴险毒剂",
 	info = function(self, t)
-		return ([[在你的武器上涂上阴险毒剂，  中毒目标受到的治疗效果减少 %d%% 。]]):
+		return ([[在你的武器上涂上阴险毒剂，中毒目标受到的治疗效果减少 %d%% 。]]):
 	format(t.getEffect(self, t))
 	end,
 }

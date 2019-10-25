@@ -7,7 +7,7 @@ registerTalentTranslation{
 		local posFactor = t.getPosFactor(self, t)
 		local negFactor = t.getNegFactor(self, t)
 		local cap = t.getCap(self, t)
-		return ([[每 1%% 的正能量增加 %0.2f%% 的移动速度, 每 1%% 的负能量增加 %0.2f%% 施法速度, 在 80%% 时达到最大值, 为  %0.2f%%. 持续能量仍然算向最大值.]]):
+		return ([[每 1%% 的正能量增加 %0.2f%% 的移动速度, 每 1%% 的负能量增加 %0.2f%% 施法速度, 在 80%% 时达到最大值, 为 %0.2f%%. 持续能量仍然算向最大值.]]):
 		format(posFactor * 100, negFactor * 100, cap * 100)
 	end,}
 
@@ -37,7 +37,7 @@ registerTalentTranslation{
 		local negpart = t.getNegPart(self, t)
 		local radius = self:getTalentRadius(t)
 		local slow = 100 * t.getSlow(self, t)
-		return ([[发射一道纯粹的能量, 在 %d 范围内造成  %0.2f 的光伤害和 %0.2f 的暗影伤害 , 并减速. 他们的移动速度减少 %d%% 并减少 %d%% 的攻击力、法术和精神攻击. 此能量将协调你当前的正负能量数值.]]):
+		return ([[发射一道纯粹的能量, 在 %d 范围内造成 %0.2f 的光伤害和 %0.2f 的暗影伤害 , 并减速. 他们的移动速度减少 %d%% 并减少 %d%% 的攻击力、法术和精神攻击. 此能量将协调你当前的正负能量数值.]]):
 		format(damDesc(self, DamageType.LIGHT, dam * (1 - negpart)), damDesc(self, DamageType.DARKNESS, dam * negpart), radius, slow * negpart, slow * 0.6 * (1 - negpart))
 	end,}
 	

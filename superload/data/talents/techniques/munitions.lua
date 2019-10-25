@@ -60,7 +60,7 @@ registerTalentTranslation{
 剧毒弹- %d%% 自然武器伤害。爆炸会形成半径 %d 的致残毒气云，持续 %d 回合, 每回合造成 %0.2f 自然伤害并使目标使用技能有 %d%% 几率失败。
 穿甲弹- %d%% 物理武器伤害，伤害半径 %d ，并移除有益的物理效果或持续技能。
 毒素伤害受物理强度加成, 状态触发几率受命中加成。]]):
-		format(dam, radius, dur, slow, fire, dam, radius, dur, damDesc(self, DamageType.NATURE, poison), fail,  dam,radius, nb)
+		format(dam, radius, dur, slow, fire, dam, radius, dur, damDesc(self, DamageType.NATURE, poison), fail, dam,radius, nb)
 	end,
 }
 registerTalentTranslation{

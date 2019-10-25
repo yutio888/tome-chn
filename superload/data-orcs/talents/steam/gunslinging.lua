@@ -18,7 +18,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		return ([[你故意朝目标射出偏离的子弹，令其惊讶 3 回合。
 		若目标未通过精神豁免检定，将后退 2 步。
-		惊讶状态下的目标在下一次攻  击中将受到额外 %d%% 伤害。]])
+		惊讶状态下的目标在下一次攻击中将受到额外 %d%% 伤害。]])
 		:format(100 * self:combatTalentWeaponDamage(t, 1.5, 3))
 	end,}
 
@@ -27,7 +27,7 @@ registerTalentTranslation{
 	name = "反击射击",
 	info = function(self, t)
 		return ([[开启引擎强化反射神经，你能进行反击射击 , 造成 %d%% 武器伤害。
-		反击射击是当你闪避或躲避近战、远程攻击时触发的自动  射击。
+		反击射击是当你闪避或躲避近战、远程攻击时触发的自动射击。
 		反击射击一回合只能触发一次，且照常消耗弹药。]])
 		:format(100 * self:combatTalentWeaponDamage(t, 0.4, 1.5))
 	end,}

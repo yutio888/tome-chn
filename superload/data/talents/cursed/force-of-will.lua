@@ -49,7 +49,7 @@ registerTalentTranslation{
 		local secondHitChance = t.getSecondHitChance(self, t)
 		local hits = 1 + math.floor(secondHitChance/100)
 		local chance = secondHitChance - math.floor(secondHitChance/100)*100
-		return ([[你的愤怒变成一股无形之力，猛烈鞭笞你附近的随机敌人。在 %d 回合内，你将攻击 %d （ %d%% 概率攻击 %d ）个半径 5  以内的敌人，造成 %d 点伤害并击退 %d 码。额外攻击的数目随技能等级增长。 
+		return ([[你的愤怒变成一股无形之力，猛烈鞭笞你附近的随机敌人。在 %d 回合内，你将攻击 %d （ %d%% 概率攻击 %d ）个半径 5 以内的敌人，造成 %d 点伤害并击退 %d 码。额外攻击的数目随技能等级增长。 
 		你灌注力量的能力使你增加 %d%% 所有暴击伤害。（当前： %d%% ） 
 		受精神强度影响，伤害有额外加成。]]):format(duration, hits, chance, hits+1, damDesc(self, DamageType.PHYSICAL, damage), knockback, t.critpower(self, t), self.combat_critical_power or 0)
 	end,

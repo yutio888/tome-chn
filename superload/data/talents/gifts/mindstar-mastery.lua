@@ -8,7 +8,7 @@ registerTalentTranslation{
 		local inc = t.getPercentInc(self, t)
 		return ([[将你的精神能量灌入你所装备的灵晶中，使其生成心灵利刃。 
 		灵晶所产生的心灵利刃会进行 %0.2f 伤害修正加成（从属性中获得的伤害值），增加 %0.2f 护甲穿透。
-		心灵利刃将使灵晶附加的精神强度、意志和灵巧变为 %0.2f 倍。  
+		心灵利刃将使灵晶附加的精神强度、意志和灵巧变为 %0.2f 倍。 
 		同时，还会在使用灵晶时增加 %d%% 武器伤害与 30 点物理强度。]]):
 		format(t.getStatmult(self, t), t.getAPRmult(self, t), t.getPowermult(self, t), 100 * inc) --I5
 		end,

@@ -14,7 +14,7 @@ registerTalentTranslation{
 	name = "精神鞭打",
 	info = function (self,t)
 		return ([[你在目标脑中投射空灵的手指。
-		持续 %d 回合总共造成 %0.2f 精神伤害并减少  %d 精神豁免。
+		持续 %d 回合总共造成 %0.2f 精神伤害并减少 %d 精神豁免。
 		这个强大的效果尝试使用 130%% 你的精神强度去对抗目标的精神豁免。
 		如果你没有双持灵晶，但是在副手栏里装备了，你会立刻自动切换。此技能与心灵利刃不兼容。]]):
 		format(t.getDur(self,t), damDesc(self, DamageType.MIND, t.getDam(self, t)), t.getReduct(self, t))

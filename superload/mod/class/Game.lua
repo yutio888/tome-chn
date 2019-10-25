@@ -21,7 +21,7 @@ function _M:getZoneName()
 		name = self.zone.display_name()
 		if name == "Maj'Eyal" then name = "马基埃亚尔"
 		else
-			name = name:gsub("Yiilkgur, the Sher'Tul Fortress","伊克格 夏·图尔堡垒"):gsub("Control Room","控制室"):gsub("Storage Room","储藏室"):gsub("Portal Room","传送室"):gsub("Exploratory Farportal","探险传送门"):gsub("Library of Lost Mysteries","失落的秘密图书馆")
+			name = name:gsub("Yiilkgur, the Sher'Tul Fortress","伊克格夏·图尔堡垒"):gsub("Control Room","控制室"):gsub("Storage Room","储藏室"):gsub("Portal Room","传送室"):gsub("Exploratory Farportal","探险传送门"):gsub("Library of Lost Mysteries","失落的秘密图书馆")
 		end
 	else
 		local lev = self.level.level
@@ -67,7 +67,7 @@ function _M:logMessage(source, srcSeen, target, tgtSeen, style, ...)
 	if source.name and source.name:find("maelstrom") then srcname ="灵能漩涡" end
 	--if logTableCHN[style] then style = logTableCHN[style].fct(...) end
 	
-    
+  
 	style = style:gsub("#source#", srcname)
 	style = style:gsub("#Source#", (Dstring or "")..srcname:capitalize())
 	if target then

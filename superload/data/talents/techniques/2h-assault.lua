@@ -33,7 +33,7 @@ registerTalentTranslation{
 	id = "T_EXECUTION",
 	name = "致命斩杀",
 	info = function(self, t)
-		return ([[试图斩杀目标。目标每损失 1%% 生命，你造成额外 %d%%  武器伤害。（剩余 30%% 生命时造成 %d%% 武器伤害）
+		return ([[试图斩杀目标。目标每损失 1%% 生命，你造成额外 %d%% 武器伤害。（剩余 30%% 生命时造成 %d%% 武器伤害）
 		该攻击必定暴击。
 		如果这一攻击杀死了敌人，你的两个技能的冷却时间减少两个回合，致命斩杀技能的冷却时间归零。]]):
 		format(t.getPower(self, t), 100 + t.getPower(self, t) * 70)

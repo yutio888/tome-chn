@@ -13,13 +13,13 @@ registerTalentTranslation{
 		return ([[设置自己的紊乱值。
 		休息或等待时，你每回合将自动调节 %d 点紊乱值趋向于你的设定值。
 		你的紊乱值会修正所有时空法术的持续时间和法术强度。
-		设定的紊乱值:  %d
-		紊乱值修正率:  %d%%
-		时空法术强度:  %d
+		设定的紊乱值: %d
+		紊乱值修正率: %d%%
+		时空法术强度: %d
 		意志修正数值: -%d
 		紊乱维持数值: +%d
-		修正后紊乱值:  %d
-		当前异常几率:  %d%%]]):format(tune, preference, sp_modifier, spellpower, will_modifier, sustain_modifier, after_will, anomaly)
+		修正后紊乱值: %d
+		当前异常几率: %d%%]]):format(tune, preference, sp_modifier, spellpower, will_modifier, sustain_modifier, after_will, anomaly)
 	end,
 }
 
@@ -44,7 +44,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local cooldown = t.cdred(self, t, 10)
 		local wormhole = t.cdred(self, t, 20)
-		return ([[你对时空的掌握让你减少空间跳跃、时空放逐、时空交换、时空觉醒的冷却时间 %d 个回合，减少虫洞跃迁的冷却时间 %d 个  回合。同时当你对目标使用可能造成连续紊乱的技能（时空放逐、时间跳跃）时增加 %d%% 的法术强度。]]):
+		return ([[你对时空的掌握让你减少空间跳跃、时空放逐、时空交换、时空觉醒的冷却时间 %d 个回合，减少虫洞跃迁的冷却时间 %d 个回合。同时当你对目标使用可能造成连续紊乱的技能（时空放逐、时间跳跃）时增加 %d%% 的法术强度。]]):
 		format(cooldown, wormhole, t.getPower(self, t)*100)
 
 	end,

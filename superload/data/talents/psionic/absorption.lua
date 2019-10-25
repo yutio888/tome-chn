@@ -23,7 +23,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local s_str = getShieldStrength(self, t)
 		local absorb = 100*getEfficiency(self,t)
-		return ([[用护盾环绕自己，吸收  %d%%  物理、酸性、自然、时空伤害，每次最多吸收 %d 伤害。
+		return ([[用护盾环绕自己，吸收 %d%% 物理、酸性、自然、时空伤害，每次最多吸收 %d 伤害。
 		每次你的护盾吸收伤害时，将部分伤害转化为能量，获得两点超能力值，每吸收 %0.1f 点伤害额外增加一点超能力值，每回合最多增加 %0.1f 点超能力值。
 		等级 3 时，当你关掉护盾，前 3 回合内吸收的全部伤害值的两倍将被释放成为一个完整的超能力护盾（吸收完整伤害）
 		护盾的吸收值和获得超能力值的效率随精神强度增强。]]):
@@ -37,7 +37,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local s_str = getShieldStrength(self, t)
 		local absorb = 100*getEfficiency(self,t)
-		return ([[用护盾环绕自己，吸收  %d%%  火焰、寒冷、光系、奥术伤害，每次最多吸收 %d 伤害。
+		return ([[用护盾环绕自己，吸收 %d%% 火焰、寒冷、光系、奥术伤害，每次最多吸收 %d 伤害。
 		每次你的护盾吸收伤害时，将部分伤害转化为能量，获得两点超能力值，每吸收 %0.1f 点伤害额外增加一点超能力值，每回合最多增加 %0.1f 点超能力值。
 		等级 3 时，当你关掉护盾，前 3 回合内吸收的全部伤害值的两倍将被释放成为一个完整的超能力护盾（吸收完整伤害）
 		护盾的吸收值和获得超能力值的效率随精神强度增强。]]):
@@ -51,7 +51,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local s_str = getShieldStrength(self, t)
 		local absorb = 100*getEfficiency(self,t)
-		return ([[用护盾环绕自己，吸收  %d%%  闪电、枯萎、暗影、精神伤害  , 每次最多吸收 %d 伤害。
+		return ([[用护盾环绕自己，吸收 %d%% 闪电、枯萎、暗影、精神伤害 , 每次最多吸收 %d 伤害。
 每次你的护盾吸收伤害，将其部分转化为能量，获得两点能量，每吸收 %0.1f 点伤害额外增加一点能量，每回合最多增加 %0.1f 点能量。
 等级 3 时，当你关掉护盾，前 3 回合内吸收的全部伤害两倍将被释放成为一个完整的超能力护盾（吸收完整伤害）
 护盾的吸收值和获得能量的效率随精神强度增强 .]]):

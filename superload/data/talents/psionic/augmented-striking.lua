@@ -29,7 +29,7 @@ registerTalentTranslation{
 	name = "电能打击",
 	info = function(self, t)
 		return ([[聚焦充能打击敌人造成 %d%% 闪电武器伤害。
-		之后，从武器释放一股能量，造成额外 %0.2f  闪电伤害并减半他们的震慑和定身免疫 %d 回合 
+		之后，从武器释放一股能量，造成额外 %0.2f 闪电伤害并减半他们的震慑和定身免疫 %d 回合 
 		如果电能护盾开启，并且目标已被定身，则护盾吸收量增加 %0.2f.
 		如果目标被冻结，冰块会粉碎，击退半径 2 以内的所有生物。
 		释放的伤害受精神强度加成 .]]):
@@ -41,7 +41,7 @@ registerTalentTranslation{
 	id = "T_PSI_TAP",
 	name = "能量吸取",
 	info = function(self, t)
-		return ([[用灵能强化武器，获得 %d 护甲穿透，同时吸取每次武器攻击中剩余的的能量，每次武器命中时获得 %0.1f  点超能力值。]]):format(t.getPsiRecover(self, t)*3, t.getPsiRecover(self, t))
+		return ([[用灵能强化武器，获得 %d 护甲穿透，同时吸取每次武器攻击中剩余的的能量，每次武器命中时获得 %0.1f 点超能力值。]]):format(t.getPsiRecover(self, t)*3, t.getPsiRecover(self, t))
 	end,
 }
 

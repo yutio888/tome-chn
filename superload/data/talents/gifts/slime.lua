@@ -4,7 +4,7 @@ registerTalentTranslation{
 	id = "T_SLIME_SPIT",
 	name = "史莱姆喷射",
 	info = function(self, t)
-		return ([[向你的目标喷吐酸液造成 %0.1f 自然伤害并减速目标 30%%  3 回合。 
+		return ([[向你的目标喷吐酸液造成 %0.1f 自然伤害并减速目标 30%% 3 回合。 
 		酸液球可弹射到附近的某个敌方单位 %d 次。 
 		弹射距离最多为 6 码，同时每弹一次会减少 %0.1f%% 伤害。
 		受精神强度影响，伤害有额外加成。]]):format(damDesc(self, DamageType.NATURE, self:combatTalentMindDamage(t, 30, 250)), t.getTargetCount(self, t), 100-t.bouncePercent(self, t))

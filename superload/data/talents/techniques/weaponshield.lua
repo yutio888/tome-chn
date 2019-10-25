@@ -64,7 +64,7 @@ registerTalentTranslation{
 	id = "T_REPULSION",
 	name = "盾牌猛击",
 	info = function(self, t)
-		return ([[用盾牌猛击周围  所有敌人，造成 %d%% 盾牌伤害并击退 %d 格。
+		return ([[用盾牌猛击周围所有敌人，造成 %d%% 盾牌伤害并击退 %d 格。
 		此外所有怪物被击退时也会被眩晕 %d 回合。 
 		该技能命中时将刷新冲锋的冷却。
 		击退距离受技能等级加成。

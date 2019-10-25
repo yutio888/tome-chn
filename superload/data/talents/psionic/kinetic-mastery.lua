@@ -29,7 +29,7 @@ registerTalentTranslation{
 		敌人落地时受到 %0.1f 物理伤害，并被震慑 %d 回合。落点周边半径 2 格内的所有其他单位受到 %0.1f 物理伤害并被从你身边被退。
 		这个技能无视被投掷目标 %d%% 的击退抵抗，如果目标抵抗击退，只受到一半伤害。
 		
-		对你自己使用时，击退线路上所有目标并造成  %0.1f 物理伤害。
+		对你自己使用时，击退线路上所有目标并造成 %0.1f 物理伤害。
 		同时能破坏至多 %d 面墙壁。
 		受精神强度影响，伤害和投掷距离有额外加成。]]):
 		format(range, dam, math.floor(range/2), dam/2, t.getKBResistPen(self, t), dam, math.floor(range/2))
@@ -55,7 +55,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local dur = t.getDuration(self, t)
 		local dam = t.getDamage(self, t)
-		return ([[用粉碎骨头的力量紧紧锁住目标，定身并减速目标 50%% ，持续  %d 回合，每回合造成 %0.1f 物理伤害。
+		return ([[用粉碎骨头的力量紧紧锁住目标，定身并减速目标 50%% ，持续 %d 回合，每回合造成 %0.1f 物理伤害。
 		受精神强度影响，持续时间和伤害有额外加成。]]):format(dur, damDesc(self, DamageType.PHYSICAL, dam))
 	end,
 }

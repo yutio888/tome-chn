@@ -4,7 +4,7 @@ registerTalentTranslation{
 	id = "T_FLEXIBLE_COMBAT",
 	name = "自由格斗",
 	info = function(self, t)
-		return ([[每当你进行近战攻击时，有 30％几率追加一次额外的徒手攻击。  ]])
+		return ([[每当你进行近战攻击时，有 30％几率追加一次额外的徒手攻击。 ]])
 		:format()
 	end,
 }
@@ -27,7 +27,7 @@ registerTalentTranslation{
 	id = "T_SWIFT_HANDS",
 	name = "疾影手",
 	info = function(self, t)
-		return ([[你的手指灵巧的超乎想象，切换主/ 副武器  ( 默认 Q 键 )、装备/ 卸下装备不再消耗回合。 
+		return ([[你的手指灵巧的超乎想象，切换主/ 副武器 ( 默认 Q 键 )、装备/ 卸下装备不再消耗回合。 
 		该效果一回合只能触发一次。
 		同时，当装备有附加技能的物品时，其附加技能也会冷却完毕。]])
 		:format()
@@ -39,7 +39,7 @@ registerTalentTranslation{
 	name = "剑刃风暴",
 	["require.special.desc"] = "曾使用双持武器造成超过50000点伤害",
 	info = function(self, t)
-		return ([[你挥动武器疯狂旋转，产生剑刃风暴，对 4 码范围内所有敌人造成 320％的武器伤害，并缴械它们 4 回合。  ]])
+		return ([[你挥动武器疯狂旋转，产生剑刃风暴，对 4 码范围内所有敌人造成 320％的武器伤害，并缴械它们 4 回合。 ]])
 		:format()
 	end,
 }

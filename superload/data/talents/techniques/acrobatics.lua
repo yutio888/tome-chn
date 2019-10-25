@@ -41,7 +41,7 @@ registerTalentTranslation{
 	name = "身轻如燕",
 	info = function(self, t)
 		return ([[你使用杂耍系技能更加得心应手，降低撑杆跳、翻滚和求生本能的冷却时间 %d 回合，降低技能的体力消耗 %0.1f 。
-		在等级 3 时，每当求生本能触发，你获得 10%%  的全局速度 1 回合。
+		在等级 3 时，每当求生本能触发，你获得 10%% 的全局速度 1 回合。
 		在等级 5 时，速度加成变为 20%% ，持续 2 回合。]])
 		:format(t.cooldown_bonus(self, t), t.stamina_bonus(self, t))
 	end,

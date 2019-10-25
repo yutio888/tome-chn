@@ -24,7 +24,7 @@ registerTalentTranslation{
 	name = "灵能复制",
 	info = function (self,t)
 		return ([[当你获得一个身体时复制 %d 个克隆体.
-		当你获得  稀有/史诗/Boss 或者更高阶级的身体时，复制的数量除以 3 (至少一个).]]):
+		当你获得稀有/史诗/Boss 或者更高阶级的身体时，复制的数量除以 3 (至少一个).]]):
 		format(t.getNb(self, t))
 	end,
 }

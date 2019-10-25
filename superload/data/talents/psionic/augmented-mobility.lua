@@ -6,7 +6,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		return ([[用念力使自己漂浮。
 		这使你能在战斗中快速滑行，增加你的移动速度 %d%% 。
-		它同样使你更容易被推开 (-%d%%  击退抗性 )。]]): 
+		它同样使你更容易被推开 (-%d%% 击退抗性 )。]]): 
 		format(t.getSpeed(self, t)*100, t.getKBVulnerable(self, t)*100) 
 	end,
 }
@@ -19,7 +19,7 @@ registerTalentTranslation{
 		local percentinc = 100 * inc
 		local boost = t.getBoost(self, t)
 		return ([[用灵能围绕你的躯体，通过思想直接高效控制身体，而不是通过神经和肌肉。
-		增加 %d 命中、 %0.1f%% 暴击率和 %d%% 攻击速度，持续  %d  回合。 
+		增加 %d 命中、 %0.1f%% 暴击率和 %d%% 攻击速度，持续 %d 回合。 
 		受精神强度影响，持续时间有额外加成。]]):
 		format(boost, 0.5*boost, percentinc, t.getDuration(self, t))
 	end,

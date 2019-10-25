@@ -69,7 +69,7 @@ registerTalentTranslation{
 		如果有任何伤害被成功格挡，此效果将在回合开始时移除。
 		如果盾牌对格挡伤害类型有伤害抗性，则格挡值增加50%% 。
 		
-		当前加成:  %s%s%s%s]]):
+		当前加成: %s%s%s%s]]):
 		format(t.getBlockValue(self, t), bt_string, sp_text, ref_text, br_text)
 end,
 }

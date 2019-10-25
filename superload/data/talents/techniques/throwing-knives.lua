@@ -52,7 +52,7 @@ registerTalentTranslation{
 		local combat = knives(self)
 		local atk = self:combatAttack(combat)
 		local talented = combat.talented or "knife"
-		local dmg =  self:combatDamage(combat)
+		local dmg = self:combatDamage(combat)
 		local apr = self:combatAPR(combat)
 		local damrange = combat.damrange or 1.1
 		local crit = self:combatCrit(combat)

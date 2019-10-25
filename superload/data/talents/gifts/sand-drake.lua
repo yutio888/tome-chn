@@ -12,12 +12,12 @@ registerTalentTranslation{
 		如果你装备了盾牌，这一技能也会用你的盾牌攻击。
 
 		基于你目前的体型，吞噬的生命值上限如下所示：
-		微小:  %d%%
-		矮小:  %d%%
-		中等:  %d%%
-		高大:  %d%%
-		庞大:  %d%%
-		巨型:  %d%%]]):
+		微小: %d%%
+		矮小: %d%%
+		中等: %d%%
+		高大: %d%%
+		庞大: %d%%
+		巨型: %d%%]]):
 		format(100 * t.getDamage(self, t), t.getPassiveCrit(self, t),
 			t.maxSwallow(self, t, 1),
 			t.maxSwallow(self, t, 2),
@@ -48,7 +48,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		return ([[允许你钻进墙里，持续 %d 回合。
 		你强大的挖掘能力让你能挖掘敌人的防御弱点；处于该状态下时你获得 %d 护甲穿透和 %d%% 物理抗性穿透。
-         在技能等级 5 时，这个技能变成瞬发。冷却时间随技能等级升高而降低。
+     在技能等级 5 时，这个技能变成瞬发。冷却时间随技能等级升高而降低。
 		每点土龙系的天赋可以使你增加物理抵抗 0.5%% 。]]):format(t.getDuration(self, t), t.getPenetration(self, t), t.getPenetration(self, t) / 2)
 	end,
 }

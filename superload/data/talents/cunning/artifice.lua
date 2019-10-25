@@ -16,7 +16,7 @@ registerTalentTranslation{
 	name = "二号工具",
 	info = function (self,t)
 		local descs = artifice_tools_get_descs(self, t)
-		return ([[你学会制造并装备一系列工具  (#YELLOW#等级 %d#WHITE#)（第二件）:
+		return ([[你学会制造并装备一系列工具 (#YELLOW#等级 %d#WHITE#)（第二件）:
 
 %s
 准备工具套件将重置其等级并使其进入冷却。
@@ -29,7 +29,7 @@ registerTalentTranslation{
 	name = "三号工具",
 	info = function (self,t)
 		local descs = artifice_tools_get_descs(self, t)
-		return ([[你学会制造并装备一系列工具  (#YELLOW#等级 %d#WHITE#)（第三件）:
+		return ([[你学会制造并装备一系列工具 (#YELLOW#等级 %d#WHITE#)（第三件）:
 
 %s
 准备工具套件将重置其等级并使其进入冷却。
@@ -118,8 +118,8 @@ registerTalentTranslation{
 	end
 	return ([[制造强效恢复药酒, 使用后回复 %d 生命, %d 体力并解除 %d 项物理负面效果。该效果受灵巧加成。
 	#YELLOW#准备于: %s#LAST#]]):format(heal, sta, cure, slot)
-   end,
-   	short_info = function(self, t, slot_talent)
+  end,
+  	short_info = function(self, t, slot_talent)
 		return ([[准备药剂，回复 %d 生命, %d 体力, 解除 %d 项物理负面状态。20 回合冷却。]]):format(t.getHeal(self, slot_talent), t.getStam(self, slot_talent), t.getCure(self, slot_talent))
 	end,
 }
@@ -154,11 +154,11 @@ registerTalentTranslation{
 	id = "T_SMOKESCREEN_MASTERY",
 	name = "强化烟雾弹",
 	info = function (self,t)
-		return ([[你的烟雾弹中加入了窒息粉尘。每回合烟雾中的敌人将受到  %0.2f  自然伤害并有  50%%  几率被沉默。]]):
+		return ([[你的烟雾弹中加入了窒息粉尘。每回合烟雾中的敌人将受到 %0.2f 自然伤害并有 50%% 几率被沉默。]]):
 		format(damDesc(self, DamageType.NATURE, t.getDamage(self,t)))
 	end,
 	short_info = function(self, t)
-		return ([[你的烟雾弹中加入了窒息粉尘。每回合烟雾中的敌人将受到  %0.2f  自然伤害并有  50%%  几率被沉默。]]):format(t.getDamage(self, t))
+		return ([[你的烟雾弹中加入了窒息粉尘。每回合烟雾中的敌人将受到 %0.2f 自然伤害并有 50%% 几率被沉默。]]):format(t.getDamage(self, t))
 	end,
 
 }
@@ -214,11 +214,11 @@ registerTalentTranslation{
 	id = "T_GRAPPLING_HOOK_MASTERY",
 	name = "钩爪强化",
 	info = function (self,t)
-		return ([[你的钩爪上涂有毒素且装有尖刺，被击中的生物受到  %d%%  徒手伤害 ,在 4 回合内受到  %0.2f  流血伤害和  %0.2f  自然毒素伤害。]]):
+		return ([[你的钩爪上涂有毒素且装有尖刺，被击中的生物受到 %d%% 徒手伤害 ,在 4 回合内受到 %0.2f 流血伤害和 %0.2f 自然毒素伤害。]]):
 		format(t.getDamage(self, t)*100, damDesc(self, DamageType.PHYSICAL, t.getSecondaryDamage(self,t)), damDesc(self, DamageType.NATURE, t.getSecondaryDamage(self,t)))
 	end,
 	short_info = function(self, t)
-		return ([[被钩爪击中的生物受到 %d%%  徒手伤害 ,在 4 回合内受到  %0.2f  流血伤害和  %0.2f  自然毒素伤害。]]):format(t.getDamage(self, t)*100, damDesc(self, DamageType.PHYSICAL, t.getSecondaryDamage(self,t)), damDesc(self, DamageType.NATURE, t.getSecondaryDamage(self,t)))
+		return ([[被钩爪击中的生物受到 %d%% 徒手伤害 ,在 4 回合内受到 %0.2f 流血伤害和 %0.2f 自然毒素伤害。]]):format(t.getDamage(self, t)*100, damDesc(self, DamageType.PHYSICAL, t.getSecondaryDamage(self,t)), damDesc(self, DamageType.NATURE, t.getSecondaryDamage(self,t)))
 	end,
 }
 

@@ -114,7 +114,7 @@ registerTalentTranslation{
 	name = "异常：时空气泡",
 	message = "@Source@ 将几名目标移出时间",
 	info = function(self, t)
-		return ([[将半径 %d  范围内最多五个单位从时光的流动中移出。]]):
+		return ([[将半径 %d 范围内最多五个单位从时光的流动中移出。]]):
 		format(self:getTalentRadius(t))
 	end,
 }
@@ -124,7 +124,7 @@ registerTalentTranslation{
 	name = "异常：时间盾",
 	message = "@Source@ 在几名目标周围制造了时间护盾",
 	info = function(self, t)
-		return ([[将半径 %d  范围内最多五个单位覆盖时光之盾。]]):
+		return ([[将半径 %d 范围内最多五个单位覆盖时光之盾。]]):
 		format(self:getTalentRadius(t))
 	end,
 }
@@ -134,7 +134,7 @@ registerTalentTranslation{
 	name = "异常：鼓舞",
 	message = "@Source@ 鼓舞了几名目标",
 	info = function(self, t)
-		return ([[鼓舞半径 %d  范围内最多五个单位。]]):
+		return ([[鼓舞半径 %d 范围内最多五个单位。]]):
 		format(self:getTalentRadius(t))
 	end,
 }
@@ -156,7 +156,7 @@ registerTalentTranslation{
 		local duration = self:combatScale(getParadoxSpellpower(self, t), 4, 10, 12, 100, 0.75)/2
 		local damage = self:combatScale(getParadoxSpellpower(self, t), 10, 10, 50, 100, 0.75)
 		return ([[召唤一场时空风暴 %d ~ %d 回合，每回合造成 %0.2f ~ %0.2f 时空伤害。]])
-		:format(duration/2, duration, damDesc(self, DamageType.TEMPORAL, damage/3),  damDesc(self, DamageType.TEMPORAL, damage))
+		:format(duration/2, duration, damDesc(self, DamageType.TEMPORAL, damage/3), damDesc(self, DamageType.TEMPORAL, damage))
 	end,
 }
 

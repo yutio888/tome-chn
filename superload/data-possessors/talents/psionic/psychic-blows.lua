@@ -37,7 +37,7 @@ registerTalentTranslation{
 	info = function (self,t)
 		return ([[你在地面上打碎你的武器，将一个心灵的冲击波投射在半径为 %d 的圆锥上。
 		范围内的所有敌人受到 %d%% 武器精神伤害。
-		任何被击中的灵能克隆体将立即破  碎，在半径 1 的范围内爆炸造成  %0.2f 物理伤害。
+		任何被击中的灵能克隆体将立即破碎，在半径 1 的范围内爆炸造成 %0.2f 物理伤害。
 		如果你没有装备双手武器，但是在副手栏里装备了，你会立刻自动切换。]]):
 		format(self:getTalentRadius(t), t.getDam(self, t) * 100, t.getExplosionDam(self, t))
 	end,

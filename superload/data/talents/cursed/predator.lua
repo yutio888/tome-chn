@@ -5,7 +5,7 @@ registerTalentTranslation{
 	id = "T_PREDATOR",
 	name = "猎杀者",
 	info = function(self, t)
-		return ([[你从过去的杀戮中汲取知识，强化你猎杀的能力。你过去每杀死过该类型的一个生物，就获得 %0.2f 命中和 %0.2f 护甲穿透，最多  %d 命中和 %d 护甲穿透。]]):format(t.getATK(self, t), t.getAPR(self, t), t.getATK(self, t) * t.getTypeKillMax(self, t), t.getAPR(self, t) * t.getTypeKillMax(self, t))
+		return ([[你从过去的杀戮中汲取知识，强化你猎杀的能力。你过去每杀死过该类型的一个生物，就获得 %0.2f 命中和 %0.2f 护甲穿透，最多 %d 命中和 %d 护甲穿透。]]):format(t.getATK(self, t), t.getAPR(self, t), t.getATK(self, t) * t.getTypeKillMax(self, t), t.getAPR(self, t) * t.getTypeKillMax(self, t))
 	end,
 }
 

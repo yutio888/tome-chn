@@ -18,7 +18,7 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t) * 100
 		return ([[当你闪避一次紧靠着你的对手的近战攻击时你有 %d%% 的概率对对方造成一次 %d%% 伤害的反击 , 每回合最多触发 %0.1f 次。 
 		徒手格斗时会尝试将敌人掀翻在地，眩晕两回合，如果处于抓取状态改为震慑。 
-		受灵巧影响，反击概率和反击数目有额外加成。]]):format(t.counterchance(self,t), damage,  t.getCounterAttacks(self, t))
+		受灵巧影响，反击概率和反击数目有额外加成。]]):format(t.counterchance(self,t), damage, t.getCounterAttacks(self, t))
 	end,
 }
 

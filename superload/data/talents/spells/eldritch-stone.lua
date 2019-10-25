@@ -17,7 +17,7 @@ registerTalentTranslation{
 		return ([[在半径 %d 的锥形范围内，从地下爆发岩石尖刺。
 		范围内的生物将 %s 在 6 回合内受到 %0.1f 物理伤害。
 		伤害受法术强度加成，负面状态附加几率受法术强度和物理强度较高一项影响。]])
-		:format(self:getTalentRadius(t), xs ~="" and xs.." 并 " or "",  t.getDamage(self, t))
+		:format(self:getTalentRadius(t), xs ~="" and xs.." 并 " or "", t.getDamage(self, t))
 	end,
 }
 
@@ -36,7 +36,7 @@ registerTalentTranslation{
 	name = "奥术尖刺",
 	info = function(self, t)
 		local dam = t.getDamage(self, t)
-		return ([[用奥术能量填充岩石尖刺，造成  %0.1f 奥术伤害，并沉默 %d 回合。]]):
+		return ([[用奥术能量填充岩石尖刺，造成 %0.1f 奥术伤害，并沉默 %d 回合。]]):
 		format( t.getDamage(self, t), t.getSilence(self, t))
 	end,
 }
@@ -45,7 +45,7 @@ registerTalentTranslation{
 	id = "T_IMPALING_SPIKES",
 	name = "穿透尖刺",
 	info = function(self, t)
-		return ([[强化你的岩石尖刺，造成  %0.1f 物理伤害，并缴械 %d 回合。]]):
+		return ([[强化你的岩石尖刺，造成 %0.1f 物理伤害，并缴械 %d 回合。]]):
 		format( t.getDamage(self, t), t.getDisarm(self, t))
 	end,
 }

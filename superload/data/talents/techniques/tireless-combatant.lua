@@ -42,7 +42,7 @@ registerTalentTranslation{
 		local cap = t.getResistCap(self, t)
 		local mult = (t.getMult(self, t, true) - 1) * 100
 		return ([[每回合使用体力后，你获得 %0.1f%% 全抗性加成和 %0.1f%% 全抗性上限，持续 %d 回合。加成效果最多叠加 %d 次，每次叠加都会刷新效果持续时间。
-		在第 5 级时，   喘息间隙和不屈底力效果提升 %d%%]])
+		在第 5 级时，  喘息间隙和不屈底力效果提升 %d%%]])
 			:format(resist, cap, duration, max, mult)
 	end,
 }

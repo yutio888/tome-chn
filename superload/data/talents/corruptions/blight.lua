@@ -25,7 +25,7 @@ registerTalentTranslation{
 	name = "腐蚀蠕虫",
 	info = function(self, t)
 		return ([[用腐蚀蠕虫感染目标 6 回合，降低目标 %d%% 酸性枯萎抗性。
-		效果结束或者目标死亡时会产生爆炸，在 4 码半径内造成 %d 酸性伤害。同时，感染期内目标受到的伤害将以 %d%% 比例增加至爆炸伤害  中。
+		效果结束或者目标死亡时会产生爆炸，在 4 码半径内造成 %d 酸性伤害。同时，感染期内目标受到的伤害将以 %d%% 比例增加至爆炸伤害中。
 		伤害受法术强度加成。]]):
 		format(t.getResist(self,t), t.getDamage(self, t), t.getPercent(self, t))
 	end,

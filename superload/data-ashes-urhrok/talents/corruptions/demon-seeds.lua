@@ -149,7 +149,7 @@ registerTalentTranslation{
 		return ([[你诅咒目标 5 回合，割裂其与自然的联系。
 		每次被诅咒的目标试图使用自然力量时，有 %d%% 几率失败并制造一个火球，对半径 1 内的生物造成 %0.2f 火焰伤害。
 		伤害受你的意志加成。]]):
-		format(t.getChance(self, t),  t.getDamage(self, t))
+		format(t.getChance(self, t), t.getDamage(self, t))
 	end,
 }
 

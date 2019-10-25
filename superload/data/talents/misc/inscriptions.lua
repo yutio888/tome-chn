@@ -188,7 +188,7 @@ registerInscriptionTranslation{
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
 		return ([[激活这个符文，形成一股锥形寒风，造成 %0.2f 寒冷伤害。
-			寒风会浸湿敌人，减半敌人的  震慑抗性  ，并试图冻结他们 %d 回合。
+			寒风会浸湿敌人，减半敌人的震慑抗性，并试图冻结他们 %d 回合。
 			效果可以被抵抗，但不能被豁免]]):
 			format(damDesc(self, DamageType.COLD, data.power + data.inc_stat), data.dur)
 	end,
@@ -221,7 +221,7 @@ registerInscriptionTranslation{
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
 		local total = (data.mana + data.inc_stat) / 100 * (self.mana_regen or 0) * 10
-		return ([[激活这个符文对你自己释放法力回复，增加 %d%% 回复量持续 %d 回合 （总计 %d ），并立即回复 %d 法力值。 
+		return ([[激活这个符文对你自己释放法力回复，增加 %d%% 回复量持续 %d 回合（总计 %d ），并立即回复 %d 法力值。 
 			同时，在你休息时增加每回合 0.5 的魔力回复。]]):format(data.mana + data.inc_stat, data.dur, total, (data.mana + data.inc_stat) / 20)
 	end,
 	short_info = function(self, t)
@@ -266,8 +266,8 @@ registerInscriptionTranslation{
 	display_name = "符文：虚幻",
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[启动符文，使你变得虚幻，持续  %d  回合。
-		在虚幻状态下，你造成的伤害减少 %d%% ，你获得 %d%% 全体伤害抗性，你的移动速度提升 %d%% ，你获得隐形 (强度  %d)。]]):
+		return ([[启动符文，使你变得虚幻，持续 %d 回合。
+		在虚幻状态下，你造成的伤害减少 %d%% ，你获得 %d%% 全体伤害抗性，你的移动速度提升 %d%% ，你获得隐形 (强度 %d)。]]):
 			format(t.getDur(self, t),t.getReduction(self, t) * 100, t.getResistance(self, t), t.getMove(self, t), t.getPower(self, t))
 	end,
 	short_info = function(self, t)
@@ -286,7 +286,7 @@ registerInscriptionTranslation{
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[阈值 %d; 次数 %d; 持续 %d; 冷却 %d]]):format(t.getThreshold(self, t), t.getBlocks(self, t), t.getDur(self, t), data.cooldown  )
+		return ([[阈值 %d; 次数 %d; 持续 %d; 冷却 %d]]):format(t.getThreshold(self, t), t.getBlocks(self, t), t.getDur(self, t), data.cooldown )
 	end,
 }
 
@@ -384,7 +384,7 @@ registerInscriptionTranslation{
 }
 
 -----------------------------------------------------------------------
--- Legacy:  These inscriptions aren't on the drop tables and are only kept for legacy compatibility and occasionally NPC use
+-- Legacy: These inscriptions aren't on the drop tables and are only kept for legacy compatibility and occasionally NPC use
 -----------------------------------------------------------------------
 
 registerInscriptionTranslation{
@@ -423,7 +423,7 @@ registerInscriptionTranslation{
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
 		return ([[激活这个符文发射一束冰枪，造成 %0.2f 冰冻伤害并有一定几率冻结你的目标。 
-               	 寒冰同时会解除你受到的一个负面精神状态。]]):format(damDesc(self, DamageType.COLD, data.power + data.inc_stat))
+        	 寒冰同时会解除你受到的一个负面精神状态。]]):format(damDesc(self, DamageType.COLD, data.power + data.inc_stat))
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
@@ -466,16 +466,16 @@ registerInscriptionTranslation{
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
 		local kind=data.esp or " 人形怪 "
-                kind=kind:gsub("demon"," 恶魔 "):gsub("animal"," 动物 "):gsub("undead"," 不死族 "):gsub("dragon"," 龙 "):gsub("horror"," 恐魔 "):gsub("humanoid","人形怪")
+        kind=kind:gsub("demon"," 恶魔 "):gsub("animal"," 动物 "):gsub("undead"," 不死族 "):gsub("dragon"," 龙 "):gsub("horror"," 恐魔 "):gsub("humanoid","人形怪")
 		return ([[激活这个符文可以使你查看周围环境（ %d 有效范围）使你你查看隐形生物（ %d 侦测隐形等级）持续 %d 回合。 
-		你的精神更加敏锐，能感知到周围的 %s  ，持续 %d 回合。]]):
+		你的精神更加敏锐，能感知到周围的 %s ，持续 %d 回合。]]):
 		format(data.range, data.power + data.inc_stat, data.dur, kind, data.dur)
 
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
 		local kind=data.esp or " 人形 "
-                kind=kind:gsub("demon"," 恶魔 "):gsub("animal"," 动物 "):gsub("undead"," 不死 "):gsub("dragon"," 龙 "):gsub("horror"," 恐魔 "):gsub("humanoid","人形怪")
+        kind=kind:gsub("demon"," 恶魔 "):gsub("animal"," 动物 "):gsub("undead"," 不死 "):gsub("dragon"," 龙 "):gsub("horror"," 恐魔 "):gsub("humanoid","人形怪")
 		return ([[范围 %d; 持续 %d; 感知 %s]]):format(data.range, data.dur, kind)
 	end,
 }
@@ -517,7 +517,7 @@ registerInscriptionTranslation{
 		local data = self:getInscriptionData(t.short_name)
 		local dam = damDesc(self, DamageType.LIGHTNING, data.power + data.inc_stat)
 		return ([[激活这个符文发射一束闪电打击目标，造成 %0.2f 至 %0.2f 闪电伤害。 
-		同时会让你进入闪电形态 %d 回合：受到伤害时你会瞬移到附近的一  格并防止此伤害，一回合只能触发一次。]]):
+		同时会让你进入闪电形态 %d 回合：受到伤害时你会瞬移到附近的一格并防止此伤害，一回合只能触发一次。]]):
 		format(dam / 3, dam, 2)
 	end,
 	short_info = function(self, t)

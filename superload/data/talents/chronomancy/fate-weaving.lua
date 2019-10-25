@@ -20,8 +20,8 @@ registerTalentTranslation{
 		local chance = t.getChance(self, t)
 		return ([[激活这个技能封印命运 %d 回合。
 		在这个技能激活期间，每当你对目标造成伤害，你获得一层命运之丝效果，并有 %d%% 几率延长目标的一个负面效果一回合。
-		每层命运之茧将使负面状态延长的概率增加 33%%  ( 三层效果时增加 %d%% 。 )
-		负面状态延长每回合只能触发  %d 次，该效果获得的命运之丝每回合最多一层。]]):format(duration, chance, chance * 2, procs)
+		每层命运之茧将使负面状态延长的概率增加 33%% ( 三层效果时增加 %d%% 。 )
+		负面状态延长每回合只能触发 %d 次，该效果获得的命运之丝每回合最多一层。]]):format(duration, chance, chance * 2, procs)
 	end,
 }
 

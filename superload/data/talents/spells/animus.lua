@@ -16,7 +16,7 @@ registerTalentTranslation{
 	name = "灵魂储存",
 	info = function(self, t)
 		local max, chance = t.getMax(self, t), t.getChance(self, t)
-		return ([[ 你对灵魂的渴望与日俱增。当你杀死一个生物时，你利用强大的力量抹去它的仇恨，有 %d%% 概率获得额外一个灵魂，同时你能获得的最大灵魂数增加  %d 。]]):
+		return ([[ 你对灵魂的渴望与日俱增。当你杀死一个生物时，你利用强大的力量抹去它的仇恨，有 %d%% 概率获得额外一个灵魂，同时你能获得的最大灵魂数增加 %d 。]]):
 		format(chance, max)
 	end,
 }
@@ -42,7 +42,7 @@ registerTalentTranslation{
 	name = "亡者精华",
 	info = function(self, t)
 		local nb = t.getnb(self, t)
-		return ([[  粉碎两个灵魂，接下来的 %d 个法术获得额外效果： 
+		return ([[ 粉碎两个灵魂，接下来的 %d 个法术获得额外效果： 
 		受影响的法术有：
 		亡灵分流：获得治疗量一半的护盾 
 		亡灵召唤：额外召唤两个不死族

@@ -4,7 +4,7 @@ function _M:Calendar_trans(datastring)
 
 	if not datastring then return end
 
-	if datastring:find("Maj'Eyal") then return "今天是 %s %s 第 %s 年 卓越纪，马基埃亚尔。\n现在时间是 %02d:%02d."  end
+	if datastring:find("Maj'Eyal") then return "今天是 %s %s 第 %s 年卓越纪，马基埃亚尔。\n现在时间是 %02d:%02d." end
 
 	return datastring 
 end

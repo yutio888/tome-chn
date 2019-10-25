@@ -5,8 +5,8 @@ registerTalentTranslation{
 	name = "疾如闪电",
 	info = function(self, t)
 		return ([[向同一方向连续以超过 800％速度至少移动 3 回合后，你可以无视障碍物移动。 
-		移动过程中  ，你有 50%% 几率通过换位无视攻击，每回合最多触发一次。
-		变换方向会打断此效果。  ]])
+		移动过程中，你有 50%% 几率通过换位无视攻击，每回合最多触发一次。
+		变换方向会打断此效果。 ]])
 		:format()
 	end,
 }
@@ -17,7 +17,7 @@ registerTalentTranslation{
 	["require.special.desc"] = "加入反魔神教",
 	info = function(self, t)
 		return ([[由于你精通欺诈和伪装，你的反魔护盾可以多吸收 %d 伤害。 
-		受灵巧影响，效果按比例加成。  ]])
+		受灵巧影响，效果按比例加成。 ]])
 		:format(t.shieldmult(self)*100)
 	end,
 }
@@ -40,11 +40,11 @@ registerTalentTranslation{
 		end
 		return ([[你被灾厄光环笼罩，存储你造成的元素伤害。
 		当你积累的元素伤害达到 %d 时，你会向一个随机的敌人发射一次强力的爆炸，在半径 %d 范围内造成 %d 的该类型伤害，并对敌人附加以下的附加效果：
-		#GREEN#酸性 :#LAST#   每回合受到  %d  酸性伤害，持续 5 回合。
-		#DARK_GREEN#枯萎 :#LAST#   每回合受到  %d  枯萎伤害，  力量、体质和敏捷减少  %d ，持续 5 回合	
-		#GREY#黑暗 :#LAST#   造成的所有伤害减少  %d%%  ，持续 5 回合。
-		#LIGHT_STEEL_BLUE#时空 :#LAST#   整体速度降低  %d%% ，持续 5 回合。	
-		#YELLOW#精神 :#LAST#   混乱  (强度  %d%% )  ，持续 5 回合。
+		#GREEN#酸性 :#LAST#  每回合受到 %d 酸性伤害，持续 5 回合。
+		#DARK_GREEN#枯萎 :#LAST#  每回合受到 %d 枯萎伤害，力量、体质和敏捷减少 %d ，持续 5 回合	
+		#GREY#黑暗 :#LAST#  造成的所有伤害减少 %d%% ，持续 5 回合。
+		#LIGHT_STEEL_BLUE#时空 :#LAST#  整体速度降低 %d%% ，持续 5 回合。	
+		#YELLOW#精神 :#LAST#  混乱 (强度 %d%% ) ，持续 5 回合。
 		同种效果最多每 12 回合触发一次。这不是普通的技能冷却。 
 		伤害和效果强度随你的灵巧值增加，伤害阈值随你的等级增加，施加附加效果的强度由你的精神强度和法术强度的最高值决定。
 		%s]])
@@ -58,7 +58,7 @@ registerTalentTranslation{
 	["require.special.desc"] = "找到泰勒斯法杖的上半部，下半部和宝石。",
 	info = function(self, t)
 		return ([[泰勒斯有三宝：又长、又粗、打怪好。 
-		通过对泰勒斯三宝的长期研究，你相信你可以使它们合为一体。  ]])
+		通过对泰勒斯三宝的长期研究，你相信你可以使它们合为一体。 ]])
 		:format()
 	end,
 }
@@ -93,7 +93,7 @@ registerTalentTranslation{
 		同种效果最多每 10 回合触发一次。这不是普通的技能冷却。
 		伤害和效果强度随你的灵巧值增加，伤害阈值随你的等级增加。
 		%s]])
-		:format(t.getThreshold(self, t), self:getTalentRadius(t),t.getDamage(self, t),  t.getFire(self, t), cold.armor, cold.dam, t.getLightning(self, t), str)
+		:format(t.getThreshold(self, t), self:getTalentRadius(t),t.getDamage(self, t), t.getFire(self, t), cold.armor, cold.dam, t.getLightning(self, t), str)
 	end,
 }
 
@@ -104,7 +104,7 @@ eye_of_the_tiger_data = {
 		reduce = 2,
 	},
 	spell = {
-		desc = "所有的法术暴击减少随机的 1 个冷却中的法术  技能 2 回合冷却时间。",
+		desc = "所有的法术暴击减少随机的 1 个冷却中的法术技能 2 回合冷却时间。",
 		types = { "^spell/", "^corruption/", "^celestial/", "^chronomancy/" },
 		reduce = 2,
 	},
@@ -202,7 +202,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		return ([[你结交了狐朋狗友，学到了一些下三滥的技巧。 
 		增加灵巧 / 潜行系 0.2 系数值（需习得该技能树，未解锁则会解锁此技能），同时增加灵巧 / 街头格斗系 0.1 系数值（未习得则以 0.9 的技能系数解锁此技能树）。
-		此外，你隐形时的伤害惩罚永久减半。  ]]):
+		此外，你隐形时的伤害惩罚永久减半。 ]]):
 		format()
 	end,
 }

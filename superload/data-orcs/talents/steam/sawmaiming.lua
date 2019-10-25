@@ -15,7 +15,7 @@ registerTalentTranslation{
 	id = "T_BLOODSTREAM",
 	name = "涌血",
 	info = function(self, t)
-		return ([[你 " 轻柔 " 地将链锯放在目标的伤口上，造成 %d%% 武器伤害并加深伤  口。
+		return ([[你 " 轻柔 " 地将链锯放在目标的伤口上，造成 %d%% 武器伤害并加深伤口。
 		所有流血伤口持续时间增加 %d 回合，伤害增加 %d%% （每项流血最多触发一次）。
 		效果触发时，血流将喷射而出，对 4 码锥形范围内所有生物造成 %0.2f 物理伤害。
 		伤害受蒸汽强度加成。 
@@ -40,7 +40,7 @@ registerTalentTranslation{
 	name = "爆尸",
 	info = function(self, t)
 		return ([[每次击杀敌人时，将爆炸物和榴弹封入尸体，引发一场半径 %d 的大爆炸。
-		任何被击中的敌人将在 6  回合内受到 %0.2f 流血伤害。
+		任何被击中的敌人将在 6 回合内受到 %0.2f 流血伤害。
 		同时榴弹将损伤他们的发声器官，沉默 %d 回合。
 		#{italic}#使用战争技术的精华——榴弹。为了制造血和骚乱！#{normal}#]]):
 		format(self:getTalentRange(t), damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t) / 6), t.getDuration(self, t))

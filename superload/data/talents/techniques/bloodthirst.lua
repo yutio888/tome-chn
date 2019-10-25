@@ -20,7 +20,7 @@ registerTalentTranslation{
 		local max_regen = t.getMax(self, t)
 		local max_health = t.getHealth(self,t)
 		return ([[沐浴着敌人的鲜血令你感到兴奋。 
-		在成功打出一次暴击后，会增加你 %d%% 的最大生命值、 %0.2f 每回合生命回复点数和 %0.2f 每回合体力回复点数持续 %d 回合。  
+		在成功打出一次暴击后，会增加你 %d%% 的最大生命值、 %0.2f 每回合生命回复点数和 %0.2f 每回合体力回复点数持续 %d 回合。 
 		生命与体力回复可以叠加 5 次直至 %0.2f 生命和 %0.2f 体力回复 / 回合。]]):
 		format(t.getHealth(self, t), regen, regen/5, t.getDuration(self, t),max_regen, max_regen/5)
 	end,

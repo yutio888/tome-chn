@@ -46,7 +46,7 @@ registerTalentTranslation{
 		如果因任何原因，敌人技能使用失败，对方将弄伤自己，造成 %0.2f 物理伤害。
 		如果敌人是因笨拙效果而技能使用失败，将会移除笨拙效果。
 		伤害受灵巧加成。
-	   ]]):format(stacks*3, damDesc(self, DamageType.PHYSICAL, dam))
+	  ]]):format(stacks*3, damDesc(self, DamageType.PHYSICAL, dam))
 	end,
 }
 

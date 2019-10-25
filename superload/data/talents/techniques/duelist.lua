@@ -6,8 +6,8 @@ registerTalentTranslation{
 		mult = t.getoffmult(self,t)*100
 		block = t.getDamageChange(self, t, true)
 		chance = t.getDeflectChance(self,t)
-		return ([[你的副手武器惩罚减少至  %d%% .
-		每回合最多 %0.1f 次，你有 %d%% 概率抵挡至多 %d 点伤害（基于副手伤害  ）。 
+		return ([[你的副手武器惩罚减少至 %d%% .
+		每回合最多 %0.1f 次，你有 %d%% 概率抵挡至多 %d 点伤害（基于副手伤害）。 
 		抵挡的减伤类似护甲，且被抵挡的攻击不会暴击。很难抵挡未发现的敌人的攻击，且不能使用灵晶抵挡攻击。
 		]]):
 		format(100 - mult, t.getDeflects(self, t, true), chance, block)

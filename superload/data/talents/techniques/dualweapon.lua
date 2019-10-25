@@ -69,7 +69,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		dam = t.getDamage(self,t)*100
 		crit = t.getCrit(self,t)
-		return ([[迅速跃向目标，用双手武器发动一次强力的突刺攻击，造成 %d%% 武器伤害，该次攻击暴击伤害系数增加 %d%% 。]]):
+		return ([[迅速跃向目标，用两把武器发动一次强力的突刺攻击，造成 %d%% 武器伤害，该次攻击暴击伤害系数增加 %d%% 。]]):
 		format(dam, crit)
 	end,
 }	

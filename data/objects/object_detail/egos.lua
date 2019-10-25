@@ -102,6 +102,7 @@ keyCHN["mastery"] = "精通"
 -- Immunity/Resist amulets
 egosCHN["insulating "] = "隔热的"
 keyCHN["insulating"] = "隔热"
+keyCHN["insulate"] = "隔热"
 egosCHN["grounding "] = "绝缘的"
 keyCHN["grounding"] = "绝缘"
 egosCHN["stabilizing "] = "稳定的"

@@ -67,7 +67,7 @@ registerTalentTranslation{
 		local chance = t.getChance(self,t)
 		return ([[使目标感染腐肉寄生幼虫持续 5 回合。每回合会移除目标一个物理增益效果并造成 %0.2f 酸系和 %0.2f 枯萎伤害。 
 		如果 5 回合后未被清除则幼虫会孵化造成 %0.2f 枯萎伤害，移除这个效果但是会在目标处成长为一条成熟的腐肉虫。
-		即使这个疾病被移除了，腐肉虫仍然有%d%%的几率腐化。
+		即使这个疾病被移除了，腐肉虫仍然有 %d%% 的几率腐化。
 		伤害受法术强度加成。]]):
 		format(damDesc(self, DamageType.ACID, (damage/2)), damDesc(self, DamageType.BLIGHT, (damage/2)), damDesc(self, DamageType.BLIGHT, (burst)), chance)
 	end,

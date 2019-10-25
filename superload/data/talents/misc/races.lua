@@ -4,7 +4,7 @@ registerTalentTranslation{
 	id = "T_HIGHER_HEAL",
 	name = "高等人类之怒",
 	info = function(self, t)
-		return ([[召唤高等人类的力量，增加所有伤害 %d%%，减少受到的所有伤害 %d%%，持续5回合。
+		return ([[召唤高等人类的力量，增加所有伤害 %d%% ，减少受到的所有伤害 %d%% ，持续5回合。
 		增益效果受魔法值加成。]]):
 		format(t.getPower(self, t), t.getPower(self, t))
 	end,
@@ -89,7 +89,7 @@ registerTalentTranslation{
 	id = "T_THALOREN_WRATH",
 	name = "森林的恩赐",
 	info = function(self, t)
-		return ([[召唤自然的力量，每回合恢复 %d 生命值，治疗系数增加 %d%%，持续 10 回合。
+		return ([[召唤自然的力量，每回合恢复 %d 生命值，治疗系数增加 %d%% ，持续 10 回合。
 		生命恢复量受意志值加成。]]):format(5 + self:getWil() * 0.5, t.getHealMod(self, t))
 	end,
 }
@@ -223,7 +223,7 @@ registerTalentTranslation{
 	name = "兽族之怒",
 	info = function(self, t)
 		return ([[激活你对杀戮和破坏的渴望，尤其是当你孤军奋战之时。
-		你视野中每有一个敌人，增加所有伤害 10 %% + %0.1f%%（最多5个敌人， %0.1f%% ），持续 3 回合。
+		你视野中每有一个敌人，增加所有伤害 10 %% + %0.1f%% （最多5个敌人， %0.1f%% ），持续 3 回合。
 		受体质影响，增益有额外加成。]]):
 		format(t.getPower(self, t), 10 + t.getPower(self, t) * 5)
 	end,
@@ -269,7 +269,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		return ([[粉碎目标的意志，使你可以完全控制它的行动 %s 回合。（受你的意志值加成） 
 		当技能结束时，你的意志会脱离而目标会因大脑崩溃而死亡。 
-		稀有等级即以上的目标必须要在其最大生命值的 80%%以下才能被控制，在持续时间内不会受到伤害，并且在 3 回合后不会死亡 ,而会脱离控制。
+		稀有等级即以上的目标必须要在其最大生命值的 80%% 以下才能被控制，在持续时间内不会受到伤害，并且在 3 回合后不会死亡 ,而会脱离控制。
 		这一效果无法被豁免，但需要通过即死免疫。]]):format(t.getduration(self))
 	end,
 }

@@ -147,7 +147,7 @@ registerTalentTranslation{
 		local power = t.getPower(self,t)
 		local instant = self.trap_primed == t.id and "\n#YELLOW#设置完毕后立刻激活。#LAST#" or ""
 		return ([[放置压力感应陷阱，触发后爆炸形成半径 2 格的刀片风暴 ,造成 %0.2f 物理伤害。被击中的目标的命中、护甲和闪避下降 %d 。
-		该陷阱可以被设置为直接激活，也可以被诱饵激活。%s]]):
+		该陷阱可以被设置为直接激活，也可以被诱饵激活。 %s]]):
 		format(damDesc(self, DamageType.PHYSICAL, dam), power, instant)
 	end,
 	short_info = function(self, t)
@@ -165,7 +165,7 @@ registerTalentTranslation{
 	end,
 	short_info = function(self, t)
 		local dam = damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t))
-		return ([[%d 物理伤害，定身、30%%减速, 5回合额外 %d 流血伤害。]]):format(dam, dam)
+		return ([[%d 物理伤害，定身、30%% 减速, 5回合额外 %d 流血伤害。]]):format(dam, dam)
 	end,
 }
 registerTalentTranslation{
@@ -185,7 +185,7 @@ registerTalentTranslation{
 	name = "落穴陷阱",
 	info = function (self,t)
 		return ([[放置一个压力感应陷阱，目标经过时地面将坍塌，造成  %0.2f  物理伤害并将其埋在地下（暂时移出游戏） 5  回合。
-如果目标抵抗被埋，那么他将被定身（无视 50%%定身免疫）。]]):
+如果目标抵抗被埋，那么他将被定身（无视 50%% 定身免疫）。]]):
 		format(damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t)))
 	end,
 	short_info = function(self, t)
@@ -198,7 +198,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local instant = self.trap_primed == t.id and "\n#YELLOW#设置完毕后立刻激活。#LAST#" or ""
 		return ([[放置一个闪光陷阱。产生一个 2 码范围的爆炸，造成 %0.2f 物理伤害，致盲或眩晕目标 %d 回合（各 50%% 几率）。
-		该陷阱可以被设置为直接激活，也可以被诱饵激活。%s]]):
+		该陷阱可以被设置为直接激活，也可以被诱饵激活。 %s]]):
 		format(damDesc(self, DamageType.PHYSICAL, t.getDamage(self, t)), t.getDuration(self, t), instant)
 	end,
 	short_info = function(self, t)
@@ -237,7 +237,7 @@ registerTalentTranslation{
 		local instant = self.trap_primed == t.id and "\n#YELLOW#设置完毕后立刻激活。#LAST#" or ""
 		return ([[ 放置一个毒气陷阱，在 3 码范围内产生毒云爆炸，持续 4 回合。 
 		每回合毒云对目标造成 %0.2f 自然伤害，持续 5 回合。有 25%% 几率毒素会被强化为致残、麻木或者阴险毒素。 
-		该陷阱可以被设置为直接激活，也可以被诱饵激活。%s]]):
+		该陷阱可以被设置为直接激活，也可以被诱饵激活。 %s]]):
 		format(damDesc(self, DamageType.POISON, t.getDamage(self, t)), instant)
 	end,
 	short_info = function(self, t)
@@ -252,7 +252,7 @@ registerTalentTranslation{
 		local instant = self.trap_primed == t.id and "\n#YELLOW#设置完毕后立刻激活。#LAST#" or ""
 		return ([[放置一个陷阱，激活后产生半径 2 的冰冻气体，造成 %0.2f  寒冷伤害并定身  3  回合。
 		冰冻气体持续 5 回合，每回合造成  %0.2f  伤害，有 25%% 几率冻结。
-		该陷阱可以被设置为直接激活，也可以被诱饵激活。%s]]):
+		该陷阱可以被设置为直接激活，也可以被诱饵激活。 %s]]):
 		format(dam, dam/3, instant)
 	end,
 	short_info = function(self, t)
@@ -268,7 +268,7 @@ registerTalentTranslation{
 		dam = damDesc(self, DamageType.FIRE, t.getDamage(self, t))
 		return ([[放置一个压力感应陷阱，激活后产生半径 2 的火云 ,震慑敌人  (每回合 %0.2f 火焰伤害  ) 3 回合。
 		火焰持续 5 回合，每回合燃烧造成  %0.2f  火焰伤害。
-	 	 该陷阱可以被设置为直接激活，也可以被诱饵激活。%s]]):
+	 	 该陷阱可以被设置为直接激活，也可以被诱饵激活。 %s]]):
 		format(dam/3, dam/2, instant)
 	end,
 	short_info = function(self, t)

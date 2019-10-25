@@ -9,7 +9,7 @@ registerTalentTranslation{
 		local tchance = t.getTreasonChance(self,t)
 		--local tdam = t.getTreasonDamage(self,t)
 		return ([[对目标释放熵能力量，你预言了它无可避免的末日。随着技能等级提升，你能解锁更多预言。同一目标不能同时处于两种预言下。		
-技能等级 1：毁灭预言。当生命值滑落至最大生命的 75%%，50%% 或 25%% 下时，造成 %d 伤害。
+技能等级 1：毁灭预言。当生命值滑落至最大生命的 75%% ，50%% 或 25%% 下时，造成 %d 伤害。
 技能等级 3：背叛预言。每回合有 %d%% 几率攻击友方单位或自身。
 技能等级 5：疯狂预言。增加 %d%% 技能冷却时间。]]):
 		format(mcd, rdam, tchance)
@@ -32,7 +32,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local dam = t.getDamage(self,t)
 		return ([[对目标施加毁灭预言，  持续 6 回合。
-		当生命值滑落至最大生命的 75%%，50%% 或 25%% 下时，造成 %d 暗影伤害。
+		当生命值滑落至最大生命的 75%% ，50%% 或 25%% 下时，造成 %d 暗影伤害。
 		伤害受法术强度加成。]]):format(dam)
 	end,
 }

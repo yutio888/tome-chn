@@ -44,7 +44,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local spellpower = t.getSpellpower(self, t)
 		local bonus = self:getCun()*spellpower/100
-		return ([[你额外增加相当于你 %d%% 灵巧值的法术强度。（当前加成：%d）]]):
+		return ([[增加相当于你 %d%% 灵巧的法术强度。目前的法术强度加成： %d]]):
 		format(spellpower, bonus)
 	end,
 }
@@ -64,7 +64,7 @@ registerTalentTranslation{
 		return ([[通过你的武器来传送原始的魔法伤害。增加相当于你 %d%% 魔法属性值的物理强度（当前值： %d ）。
 		每当你近战攻击暴击时，你会释放一个半径为 %d 码的奥术属性的魔法球，造成 %0.2f 的伤害。 
 		受法术强度影响，增益按比例加成。
-		当双持或持有盾牌时，只有50%%的几率触发。
+		当双持或持有盾牌时，只有50%% 的几率触发。
 		技能等级 5 时，魔法球的半径变成 2。]]):
 		format(t.getSPMult(self, t)*100, self:getMag() * t.getSPMult(self, t), self:getTalentRadius(t), damDesc(self, DamageType.ARCANE, t.getDamage(self, t)) )
 	end,

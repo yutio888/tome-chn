@@ -99,7 +99,7 @@ registerTalentTranslation{
 	id = "T_VOLATILE_POISON",
 	name = "传染毒素",
 	info = function (self,t)
-	return ([[在你的武器上涂上传染毒剂, 毒素造成额外 %d%% 伤害，且会对周围敌人造成 50%%的伤害。]]):
+	return ([[在你的武器上涂上传染毒剂, 毒素造成额外 %d%% 伤害，且会对周围敌人造成 50%% 的伤害。]]):
 	format(t.getEffect(self, t))
 	end,
 }

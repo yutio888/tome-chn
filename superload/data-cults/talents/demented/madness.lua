@@ -19,7 +19,7 @@ registerTalentTranslation{
 		local chance = t.getChance(self,t)
 		local dur = t.getDuration(self,t)
 		local damage = t.getDamageReduction(self,t)
-		return ([[每次敌人受到黑暗低语的伤害时，有 %d%% 几率在视野内产生持续 %d 回合的幻象。幻象不能行动，但被影响的敌人在幻象结束前造成的伤害降低 %d%%。
+		return ([[每次敌人受到黑暗低语的伤害时，有 %d%% 几率在视野内产生持续 %d 回合的幻象。幻象不能行动，但被影响的敌人在幻象结束前造成的伤害降低 %d%% 。
 		同一敌人同时只能产生  一个幻象。]]):
 		format(chance, dur, damage)
 	end,
@@ -44,7 +44,7 @@ registerTalentTranslation{
 		local dur = t.getDuration(self,t)
 		local dam = t.getDamage(self,t)*100
 		return ([[ 使 %d 格内的黑暗低语音量提升 %d 回合，达到震耳欲聋的地步，额外施加一层低语效果，同时干扰一切思考能力。
-		被黑暗低语影响的目标产生幻象的几率增加 20%%，每次受到黑暗低语或失智冲击的伤害时，会受到额外 %d%% 时空伤害。
+		被黑暗低语影响的目标产生幻象的几率增加 20%% ，每次受到黑暗低语或失智冲击的伤害时，会受到额外 %d%% 时空伤害。
 		伤害受法术强度加成。]]):format(rad, dur, dam)
 	end,
 }

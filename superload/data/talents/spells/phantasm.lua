@@ -30,7 +30,7 @@ registerTalentTranslation{
 	name = "幻象护盾",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
-		return ([[施法者被幻象护盾所包围，有10%%几率闪避武器攻击。若你受到近战打击，此护盾会对攻击者造成 %d 点光系伤害。 
+		return ([[施法者被幻象护盾所包围，有10%% 几率闪避武器攻击。若你受到近战打击，此护盾会对攻击者造成 %d 点光系伤害。 
 		受法术强度影响，伤害有额外加成。]]):
 		format(damDesc(self, DamageType.LIGHT, damage))
 	end,

@@ -6,7 +6,7 @@ registerTalentTranslation{
 		return ([[你学会了制造和装备专门的弹药:
 燃烧弹- 命中后，对目标附近的敌人造成 %d%% 火焰武器伤害，范围最大为 %d ，每回合最多一次。
 剧毒弹- 命中后，对目标造成 %0.2f 自然伤害并感染麻木毒素 , 在 5 回合内造成 %0.2f 自然伤害并削弱其 %d%% 的伤害。
-穿甲弹- 命中后，使目标的护甲和豁免减少 %d ，持续 3 回合, 你的物理穿透增加 %d%%。
+穿甲弹- 命中后，使目标的护甲和豁免减少 %d ，持续 3 回合, 你的物理穿透增加 %d%% 。
 同时只能装备一种弹药。
 毒素伤害、护甲和豁免削减受物理强度加成。]]):
 		format(t.getIncendiaryDamage(self, t)*100, t.getIncendiaryRadius(self,t), damDesc(self, DamageType.NATURE, t.getPoisonDamage(self, t)/5), damDesc(self, DamageType.NATURE, t.getPoisonDamage(self, t)), t.getNumb(self, t), t.getArmorSaveReduction(self, t), t.getResistPenalty(self,t))
@@ -39,7 +39,7 @@ registerTalentTranslation{
 	info = function (self,t)
 		local reduce = t.getArmorSaveReduction(self, t)
 		local resist = t.getResistPenalty(self,t)
-		return ([[装填穿甲弹, 使目标的护甲和豁免减少 %d 持续 3 回合, 你的物理穿透增加 %d%%。
+		return ([[装填穿甲弹, 使目标的护甲和豁免减少 %d 持续 3 回合, 你的物理穿透增加 %d%% 。
 		护甲和豁免削减随物理强度增加.]]):format(reduce, resist)
 	end,
 }

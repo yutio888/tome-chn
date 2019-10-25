@@ -39,7 +39,7 @@ registerInscriptionTranslation{
 	display_name = "植入物: 药物注射器",
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[该药物注射器注射药物效率为 %d%%，冷却时间修正为 %d%%。]])
+		return ([[该药物注射器注射药物效率为 %d%% ，冷却时间修正为 %d%% 。]])
 		:format(data.power + data.inc_stat, data.cooldown_mod)
 	end,
 	short_info = function(self, t)

@@ -5,7 +5,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local power = t.getPower(self,t)
 		return ([[你作为非自然的存在被现实抗拒。你受到的直接治疗的 25%% 将以熵能反冲的形式伤害自身，无视抗性和护盾，但不会致死。
-		你可以主动开启该技能，将你身上的熵转移给附近的一名敌人，除去所有熵能反冲并对其造成持续 4 回合的黑暗和时空伤害，伤害值等于你自身熵能的 %d%%。
+		你可以主动开启该技能，将你身上的熵转移给附近的一名敌人，除去所有熵能反冲并对其造成持续 4 回合的黑暗和时空伤害，伤害值等于你自身熵能的 %d%% 。
 		伤害受法术强度加成。]]):
 		format(power)
 	end,
@@ -17,7 +17,7 @@ registerTalentTranslation{
 	info = function(self, t)
 
 		return ([[你对熵的知识让你可以对抗物理定律，增强你对熵能的承受力。
-		你从熵能反冲中受到的伤害减少 %d%%。
+		你从熵能反冲中受到的伤害减少 %d%% 。
 		你可以主动开启该技能，瞬间减少当前的熵。]]):
 		format(t.getReduction(self, t))
 	end,

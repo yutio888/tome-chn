@@ -11,7 +11,7 @@ registerTalentTranslation{
 		local chance = t.getChance(self, t)
 		local duration = t.getDuration(self, t)
 		local mindpowerChange = gloomTalentsMindpower(self)
-		return ([[一个 3 码半径范围的可怕黑暗光环围绕你 , 影响附近的敌人。在每个回合结束时，光环内的每一个目标必须与你的精神强度进行豁免鉴定，未通过鉴定则有 %d%% 概率被减速30%%、震慑或混乱(30%%)，持续 %d 回合。 
+		return ([[一个 3 码半径范围的可怕黑暗光环围绕你 , 影响附近的敌人。在每个回合结束时，光环内的每一个目标必须与你的精神强度进行豁免鉴定，未通过鉴定则有 %d%% 概率被减速30%% 、震慑或混乱(30%%)，持续 %d 回合。 
 		几率受精神速度影响。
 		这个能力是与生俱来的，激活或停止不消耗任何能量。
 		黑暗光环树下的每个技能都会增加你的精神强度（当前总计： %d ）。]]):format(chance, duration, mindpowerChange)
@@ -39,7 +39,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		return ([[每当你行动时，所有在你黑暗光环内的敌人都会受到  %0.2f  精神伤害和  %0.2f  暗影伤害。
 		伤害受精神强度影响。
-		黑暗光环树下的每个技能都会增加你的精神强度（当前总计：%d）。]]):format(damDesc(self, DamageType.MIND, t.getDamage(self, t) * 0.5), damDesc(self, DamageType.DARKNESS, t.getDamage(self, t) * 0.5), gloomTalentsMindpower(self))
+		黑暗光环树下的每个技能都会增加你的精神强度（当前总计： %d）。]]):format(damDesc(self, DamageType.MIND, t.getDamage(self, t) * 0.5), damDesc(self, DamageType.DARKNESS, t.getDamage(self, t) * 0.5), gloomTalentsMindpower(self))
 	end,
 }
 

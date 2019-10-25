@@ -51,7 +51,7 @@ registerTalentTranslation{
 	name = "自然之怒",
 	info = function(self, t)
 		return ([[你释放持续 5 回  合的自然的愤怒。
-		愤怒状态下，每当你造成伤害时有 %d%%（每回合第一次攻击 100%% ）几率震慑 3 回合。
+		愤怒状态下，每当你造成伤害时有 %d%% （每回合第一次攻击 100%% ）几率震慑 3 回合。
 		该效果每回合只能震慑一个敌人。
 		震慑几率受体质影响，强度由物理或精神强度中较高一项决定。]]):
 		format(t.getChance(self, t))
@@ -112,7 +112,7 @@ registerTalentTranslation{
 	name = "为战争而生",
 	info = function(self, t)
 		return ([[ 你被伊格制造的唯一理由：对魔法作战！
-		打击你的敌人，造成%d%% %s 武器伤害，并沉默它们 %d 回合。
+		打击你的敌人，造成 %d%% %s 武器伤害，并沉默它们 %d 回合。
 		伤害类型根据龙血的类型而决定。
 		沉默的几率受物理强度或精神强度的最高值加成。]]):format(100 * t.getDamage(self, t), damname, t.getDuration(self, t))
 	end,
@@ -123,7 +123,7 @@ registerTalentTranslation{
 	name = "咬一口",
 	info = function(self, t)
 		return ([[ 你尝试用 #{italic}#头#{normal}# 咬你的敌人造成 %d%% 枯萎武器伤害。
-		如果目标被咬后生命不足 20%%，你有 %d%% 几率直接杀死它（对 boss 无效）。
+		如果目标被咬后生命不足 20%% ，你有 %d%% 几率直接杀死它（对 boss 无效）。
 		你咬中以后 5 回合内每回合回复 %0.1f 生命。
 		秒杀几率和生命回复受体质加成，武器伤害受力量敏捷魔法中最高值影响。]]):
 		format(t.getDam(self, t) * 100, t.getChance(self, t), t.getRegen(self, t))

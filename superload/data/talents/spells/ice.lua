@@ -6,7 +6,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		return ([[凝聚周围的水冻结目标 %d 回合并对其造成 %0.2f 伤害。 
-		如果目标为友好生物，冷却时间减少 33%% 。%s
+		如果目标为友好生物，冷却时间减少 33%% 。 %s
 		受法术强度影响，伤害有额外加成。]]):format(t.getDuration(self, t), damDesc(self, DamageType.COLD, damage), necroEssenceDead(self, true) and "\n影响半径2码范围内的所有目标。" or "")
 	end,
 }

@@ -64,7 +64,7 @@ registerTalentTranslation{
 	id = "T_TINKER_ROCKET_BOOTS",
 	name = "火箭靴", 
 	info = function(self, t)
-		return ([[激活火箭靴，从你的靴子上发射巨大的火焰，增加你的移动速度 %d%%。
+		return ([[激活火箭靴，从你的靴子上发射巨大的火焰，增加你的移动速度 %d%% 。
 每次移动都会留下一道火焰持续 4 回合的伤害为  %0.2f  的火焰。
 做任何其他行动都会打断效果。
 #{italic}#烧毁他们 !#{normal}#]]):

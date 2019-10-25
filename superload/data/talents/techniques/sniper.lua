@@ -34,7 +34,7 @@ registerTalentTranslation{
 		local speed = t.getSpeed(self,t)
 		local dam = t.getDamage(self,t)
 		local mark = t.getMarkChance(self,t)
-		return ([[进入一个平静, 专注的姿态, 增加 %d 物理强度和命中, 抛射物速度增加 %d%% 并且标记目标的几率增加 %d%%.
+		return ([[进入一个平静, 专注的姿态, 增加 %d 物理强度和命中, 抛射物速度增加 %d%% 并且标记目标的几率增加 %d%% 。
 这让你在射程内射击更有效：对三格外目标的距离每增加一格，伤害增加 %0.1f%% , 8 格距离时达到最大值（ %0.1f%% ）。
 物理强度和命中随敏捷增加.]]):
 		format(power, speed, mark, dam, dam*5)

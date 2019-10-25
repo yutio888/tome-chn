@@ -18,7 +18,7 @@ registerTalentTranslation{
 		if p then cur = math.min(p.nb_foes, t.getMax(self, t)) * 20 end
 		return ([[被猎杀的危险令你激动不已。
 		半径 %d 内每有一个敌人，你获得 20%% 移动速度（最多 %d%% ）。
-		当前加成： %d%%。]])
+		当前加成： %d%% 。]])
 		:format(self:getTalentRadius(t), t.getMax(self, t) * 20, cur)
 	end,}
 
@@ -29,7 +29,7 @@ registerTalentTranslation{
 		return ([[在惊人的灵巧和科技力量下，你将你的蒸汽枪翻转指向天空，持续旋转 3 回合。
 		每回合，蒸汽枪将随机射击 2 次，造成 %d%% 武器伤害。
 		效果持续期间，你视为被缴械，不能攻击。
-		这场表演如此引人注目，你的敌人都被吸引，使你的伤害抗性增加 %d%%。]])
+		这场表演如此引人注目，你的敌人都被吸引，使你的伤害抗性增加 %d%% 。]])
 		:format(100 * t.getMultiple(self, t), t.getResist(self, t))
 	end,}
 

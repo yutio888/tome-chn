@@ -5,7 +5,7 @@ registerTalentTranslation{
 	name = "影之格斗",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
-		return ([[在你的武器上注入一股黑暗的能量，每次攻击会造成 %.2f 暗影伤害。
+		return ([[在你的武器上注入一股黑暗的能量，每次攻击会造成 %0.2f 暗影伤害。
 		受法术强度影响，伤害有额外加成。]]):
 		format(damDesc(self, DamageType.DARKNESS, damage))
 	end,

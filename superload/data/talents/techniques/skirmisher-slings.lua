@@ -16,7 +16,7 @@ registerTalentTranslation{
 	id = "T_SKIRMISHER_SWIFT_SHOT",
 	name = "快速投射",
 	info = function(self, t)
-		return ([[发射一枚快速的石弹，造成 %d%% 伤害，攻击速度是你普通攻击的两倍。增加你攻击速度%d%%，持续5回合。
+		return ([[发射一枚快速的石弹，造成 %d%% 伤害，攻击速度是你普通攻击的两倍。增加你攻击速度 %d%% ，持续5回合。
 		移动将会降低技能冷却 1 回合。]])
 		:format(t.getDamage(self, t) * 100, t.getAttackSpeed(self,t))
 	end,

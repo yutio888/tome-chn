@@ -20,7 +20,7 @@ registerTalentTranslation{
 	info = function (self,t)
 		local bleed = t.getBleed(self,t)*100
 		local sta = t.getStamina(self,t)
-		return ([[你趁敌人尚未防备（90%% 血量以上）施展攻击，射击、稳固射击和爆头使敌人流血 5 回合造成额外 %d%% 伤害，标记概率增加 50%%。
+		return ([[你趁敌人尚未防备（90%% 血量以上）施展攻击，射击、稳固射击和爆头使敌人流血 5 回合造成额外 %d%% 伤害，标记概率增加 50%% 。
 此外，你的射击、稳固射击和爆头回复 %0.1f 体力。]])
 		:format(bleed, sta)
 	end,
@@ -45,7 +45,7 @@ registerTalentTranslation{
 		local dur = t.getDuration(self,t)
 		local speed = t.getSpeed(self,t)*100
 		local mark = t.getMarkChance(self,t)
-		return ([[进入专注状态 %d 回合，远程攻击速度增加 %d%% ，射击不消耗弹药，标记概率增加 %d%%。]]):
+		return ([[进入专注状态 %d 回合，远程攻击速度增加 %d%% ，射击不消耗弹药，标记概率增加 %d%% 。]]):
 		format(dur, speed, mark)
 	end,
 }

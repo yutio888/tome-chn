@@ -19,7 +19,7 @@ registerTalentTranslation{
 		local ev, spread = t.getEvasion(self, t)
 		local flat = t.getFlatMax(self, t)
 		return ([[围绕自身快速旋转链锯，形成一堵链锯齿形成的墙壁。
-		所有近战伤害降低 %d%%，有 %d%% 的概率回避投射物，并且受到的一击伤害不会超过最大生命值的 %d%%。
+		所有近战伤害降低 %d%% ，有 %d%% 的概率回避投射物，并且受到的一击伤害不会超过最大生命值的 %d%% 。
 		#{italic}#用死亡链锯拆了他们的骨头！！#{normal}#]])
 		:format(ev, ev, flat)
 	end,}

@@ -28,7 +28,7 @@ registerTalentTranslation{
 	name = "翻筋斗",
 	info = function (self,t)
 		return ([[你迅速地移动至范围内可见的位置，跃过路径上所有敌人。
-		该技能在身着重甲时不能使用，使用后你会进入疲劳状态，增加移动系技能消耗 %d%% （可以叠加），%d 回合后解除。]]):format(t.getExhaustion(self,t),t.getDuration(self,t))
+		该技能在身着重甲时不能使用，使用后你会进入疲劳状态，增加移动系技能消耗 %d%% （可以叠加）， %d 回合后解除。]]):format(t.getExhaustion(self,t),t.getDuration(self,t))
 	end,
 }
 

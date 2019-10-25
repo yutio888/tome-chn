@@ -106,7 +106,7 @@ registerInscriptionTranslation{
 		local bonus = 1 + (1 - self.life / self.max_life)
 		local bonus1 = data.die_at + data.inc_stat * 30 * bonus
 		local bonus2 = math.floor(data.dur * bonus)
-		return ([[激活这个纹身可以让你忍受致死的伤害，持续%d回合。
+		return ([[激活这个纹身可以让你忍受致死的伤害，持续 %d回合。
 		当应用纹身激活时，你的生命值只有在降低到 -%d 生命时才会死亡。
 		你每失去 1%% 生命值，持续时间和生命值下限就会增加 1%% 。（目前 %d 生命值， %d 持续时间）
 		效果结束时，如果你的生命值在 0 以下，会变为 1 点。]]):format(data.dur, data.die_at + data.inc_stat * 30, bonus1, bonus2)
@@ -251,7 +251,7 @@ registerInscriptionTranslation{
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
 		local power = data.power + data.inc_stat * 3
-		return ([[激活符文，传送到视野内 %d 格内的指定位置。之后，你会脱离相位 %d 回合。在这种状态下，所有新的负面效果的持续时间减少 %d%%，你的闪避增加 %d ，你的全体伤害抗性增加 %d%%。]]):
+		return ([[激活符文，传送到视野内 %d 格内的指定位置。之后，你会脱离相位 %d 回合。在这种状态下，所有新的负面效果的持续时间减少 %d%% ，你的闪避增加 %d ，你的全体伤害抗性增加 %d%% 。]]):
 			format(data.range + data.inc_stat, t.getDur(self, t), power, power, power)
 	end,
 	short_info = function(self, t)
@@ -267,7 +267,7 @@ registerInscriptionTranslation{
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
 		return ([[启动符文，使你变得虚幻，持续  %d  回合。
-		在虚幻状态下，你造成的伤害减少 %d%%，你获得 %d%% 全体伤害抗性，你的移动速度提升 %d%% ，你获得隐形 (强度  %d)。]]):
+		在虚幻状态下，你造成的伤害减少 %d%% ，你获得 %d%% 全体伤害抗性，你的移动速度提升 %d%% ，你获得隐形 (强度  %d)。]]):
 			format(t.getDur(self, t),t.getReduction(self, t) * 100, t.getResistance(self, t), t.getMove(self, t), t.getPower(self, t))
 	end,
 	short_info = function(self, t)
@@ -487,7 +487,7 @@ registerInscriptionTranslation{
 		local data = self:getInscriptionData(t.short_name)
 		local power = (data.power or data.range) + data.inc_stat * 3
 		return ([[激活这个符文会使你在 %d 码范围内随机传送。 
-		之后，你会出入现实空间 % d 回合，所有新的负面状态持续时间减少 %d%% ，闪避增加 %d ，全体伤害抗性增加 %d%%。]]):
+		之后，你会出入现实空间 % d 回合，所有新的负面状态持续时间减少 %d%% ，闪避增加 %d ，全体伤害抗性增加 %d%% 。]]):
 		format(data.range + data.inc_stat, data.dur or 3, power, power, power)
 	end,
 	short_info = function(self, t)
@@ -546,7 +546,7 @@ registerInscriptionTranslation{
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
 		return ([[激活这个符文使你变得隐形（ %d 隐形等级）持续 %d 回合。 
-		由于你的隐形使你从现实相位中脱离，你的所有伤害降低 40%%。 
+		由于你的隐形使你从现实相位中脱离，你的所有伤害降低 40%% 。 
 		]]):format(data.power + data.inc_stat, data.dur)
 	end,
 	short_info = function(self, t)

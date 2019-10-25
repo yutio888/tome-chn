@@ -19,7 +19,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local radius = self:getTalentRadius(t)
 		local power = 20 + 6 * self:getTalentLevel(t)
-		return ([[你发出一声咆哮使 %d 码半径范围内的敌人陷入彻底的混乱（强度 %d%%），持续 3 回合。 
+		return ([[你发出一声咆哮使 %d 码半径范围内的敌人陷入彻底的混乱（强度 %d%% ），持续 3 回合。 
 		如此强烈的咆哮使你的敌人受到 %0.2f 物理伤害。 
 		受力量影响，伤害有额外加成。 
 		每点火龙系的技能可以使你增加火焰抵抗 1%% 。]]):format(radius, power, self:combatTalentStatDamage(t, "str", 30, 380))

@@ -25,7 +25,7 @@ registerTalentTranslation{
 	name = "战争怒吼",
 	message = "@Source@使用了战争怒吼",
 	info = function(self, t)
-		return ([[在你的正前方大吼形成 %d 码半径的扇形战争怒吼。任何在其中的目标会被混乱（强度%d) %d 回合。]]):
+		return ([[在你的正前方大吼形成 %d 码半径的扇形战争怒吼。任何在其中的目标会被混乱（强度 %d) %d 回合。]]):
 		format(self:getTalentRadius(t),t.getConfusion(self, t), t.getDuration(self, t))
 	end,
 }

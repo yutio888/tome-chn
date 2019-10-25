@@ -53,7 +53,7 @@ registerTalentTranslation{
 	["require.special.desc"] = "曾造成50000点以上的光系或者火系伤害",
 	info = function(self, t)
 		local dam = (35 + self:getStr() * 1.3) / 3
-		return ([[你获得 8 回合的星之引力，将周围 5 码范围内的所有生物向你拉扯，并对所有敌人造成 %0.2f 火焰、 %0.2f 光系和 %0.2f 物理伤害。他们所造成的伤害减少30%%。 
+		return ([[你获得 8 回合的星之引力，将周围 5 码范围内的所有生物向你拉扯，并对所有敌人造成 %0.2f 火焰、 %0.2f 光系和 %0.2f 物理伤害。他们所造成的伤害减少30%% 。 
 		最靠近你的敌人受到额外的 150％伤害。 
 		受力量影响，伤害值有额外加成。  ]])
 		:format(damDesc(self, DamageType.FIRE, dam), damDesc(self, DamageType.LIGHT, dam), damDesc(self, DamageType.PHYSICAL, dam))

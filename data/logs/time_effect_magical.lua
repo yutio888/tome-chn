@@ -516,7 +516,13 @@ logCHN:newLog{
 		return ("%s 的时间被消耗！"):format(a)
 	end,
 }
-
+logCHN:newLog{
+	log = "#Target#'s is no longer wasting away.",
+	fct = function(a)
+		a = npcCHN:getName(a)
+		return ("%s 的时间不再被消耗。"):format(a)
+	end,
+}
 logCHN:newLog{
 	log = "#Target# stops wasting away.",
 	fct = function(a)

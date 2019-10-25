@@ -34,7 +34,7 @@ registerTalentTranslation{
 		local rad = t.getRadius(self, t)
 		return ([[召唤一个龙卷风，它会向着目标极为缓慢地移动，并在目标移动时跟随目标，最多移动20次。
 		每当它移动时，半径2范围内的所有敌人会受到 %0.2f 闪电伤害，并被击退2格。
-		当它碰到目标的时候，会在%d码范围内引发爆炸，击退目标，并造成 %0.2f 闪电和 %0.2f 物理伤害。
+		当它碰到目标的时候，会在 %d码范围内引发爆炸，击退目标，并造成 %0.2f 闪电和 %0.2f 物理伤害。
 		受精神强度影响，伤害有额外加成。 
 		每点雷龙系的天赋可以使你增加闪电抵抗 1%% 。]]):format(
 			damDesc(self, DamageType.LIGHTNING, t.getMoveDamage(self, t)),

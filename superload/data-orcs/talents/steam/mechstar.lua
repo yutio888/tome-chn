@@ -29,7 +29,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local mt = self:getTalentFromId(self.T_METALSTAR)
 		return ([[你的血液灵晶效果同时造成 %0.2f 火焰伤害。
-		火焰同时产生蒸汽，每回合提供 %d 蒸汽，从每个额外目标处获得的蒸汽数量减少 66%%。
+		火焰同时产生蒸汽，每回合提供 %d 蒸汽，从每个额外目标处获得的蒸汽数量减少 66%% 。
 		该伤害不会打断眩晕效果，受蒸汽强度加成。]])
 		:format(damDesc(self, DamageType.FIRE, t.getDamage(self, t)), t.getSteam(self, t))
 	end,}

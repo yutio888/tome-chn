@@ -359,3 +359,10 @@ logCHN:newLog{
 		return "#CRIMSON#这附近有一个不怀好意的生物阻止你使用这个传送门。"
 	end,
 }
+
+logCHN:newLog{
+	log = "#ORCHID#You can only gain insanity in combat!#LAST#",
+	fct = function()
+		return "#ORCHID#你只能在战斗中获得疯狂值！#LAST#"
+	end,
+}

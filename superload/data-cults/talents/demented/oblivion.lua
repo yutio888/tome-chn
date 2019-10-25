@@ -55,7 +55,7 @@ registerTalentTranslation{
 	id = "T_VOID_CRASH",
 	name = "虚空破碎",
 	info = function(self, t)
-		return ([[用武器撞击地面 ,   产生 2 码的虚空爆炸，造成 %d%% 虚空武器伤害（暗影时空各 50%%）。]]):
+		return ([[用武器撞击地面 ,   产生 2 码的虚空爆炸，造成 %d%% 虚空武器伤害（暗影时空各 50%% ）。]]):
 		format(t.getDamage(self, t) * 100)
 	end,
 }

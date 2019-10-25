@@ -179,7 +179,7 @@ damageSpecialDesc["ITEM_DARKNESS_NUMBING"] = function(dam, oldDam, src)
 				parens = (" (#RED#%d%%#LAST#)"):format(diff)
 			end
 		end
-		local val = src and math.floor(src:combatStatScale(src:combatMindpower(), 5, 40)) or 0
+		local val = src and math.floor(src:combatStatScale(src:combatMindpower(), 1, 35))+5 or 0
 		return ("* #LIGHT_GREEN#%d%%#LAST# 几率减少 #YELLOW#%d%%#LAST#伤害 %s  ")
 			:format(dam, val, parens)
 	end
@@ -195,7 +195,7 @@ damageSpecialDesc["ITEM_MIND_EXPOSE"] = function(dam, oldDam, src)
 				parens = (" (#RED#%d%%#LAST#)"):format(diff)
 			end
 		end
-		local val = src and math.floor(src:combatStatScale(src:combatMindpower(), 5, 50)) or 0
+		local val = src and math.floor(src:combatStatScale(src:combatMindpower(), 1, 45))+5 or 0
 		return ("* #LIGHT_GREEN#%d%%#LAST# 几率减少 #YELLOW#%d#LAST#%s 闪避和豁免")
 			:format(dam, val, parens)
 	end
@@ -226,7 +226,7 @@ damageSpecialDesc["ITEM_ACID_CORRODE"] = function(dam, oldDam, src)
 				parens = (" (#RED#%d%%#LAST#)"):format(diff)
 			end
 		end
-		local val = src and src:combatStatScale(src:combatSpellpower(), 15, 50) or 0
+		local val = src and src:combatStatScale(src:combatSpellpower(), 10, 45)+5 or 0
 		return ("* #LIGHT_GREEN#%d%%#LAST#几率减少 #VIOLET#%d%%#LAST#护甲%s ")
 			:format(dam, val, parens)
 	end
@@ -242,7 +242,7 @@ damageSpecialDesc["ITEM_BLIGHT_DISEASE"] = function(dam, oldDam, src)
 				parens = (" (#RED#%d%%#LAST#)"):format(diff)
 			end
 		end
-		local val = src and math.floor(src:combatStatScale(src:combatSpellpower(), 1, 40))
+		local val = src and math.floor(src:combatStatScale(src:combatSpellpower(), 1, 35))+5 or 0
 		return ("* #LIGHT_GREEN#%d%%#LAST#几率减少力量、体质和敏捷各 #VIOLET#%d#LAST# 点 %s ")
 			:format(dam, val, parens )
 	end
@@ -273,7 +273,7 @@ damageSpecialDesc["ITEM_NATURE_SLOW"] = function(dam, oldDam, src)
 				parens = (" (#RED#%d%%#LAST#)"):format(diff)
 			end
 		end
-		local val = src and math.floor(src:combatStatScale(src:combatMindpower(), 30, 80) ) or 0
+		local val = src and math.floor(src:combatStatScale(src:combatMindpower(), 20, 70))+10 or 0
 		return ("* #LIGHT_GREEN#%d%%#LAST#几率减速 #YELLOW#%d%%#LAST#%s")
 			:format(dam or 0, val, parens)
 	end

@@ -5,7 +5,8 @@ registerTalentTranslation{
 	name = "盾牌训练",
 	info = function(self, t)
 		local block = t.chance(self, t)
-		local armor = t.getHardiness(self, t)
+		local armour = t.getArmour(self,t)
+		local hardiness = t.getArmorHardiness(self, t)
 		return ([[允许你装备盾牌，使用灵巧作为属性需求。
 		当你受到近战攻击，你有 %d%% 的几率用盾牌使这次攻击偏斜，并完全躲避它。
 		另外，若你没有装备重甲，你获得 %d 护甲值和 %d%% 护甲硬度。

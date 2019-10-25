@@ -35,7 +35,7 @@ registerTalentTranslation{
 
 		不会扣减魔法的奥术法术如下所示：
 		%s]]):
-		format(t.getNb(self, t), t.getSpellsList(self, t))
+		format(t.getNb(self, t), t.getSpellsList(self, t):gsub("At level","技能等级"):gsub("and","和"))
 	end,
 }
 

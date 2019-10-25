@@ -1,4 +1,5 @@
 local _M = loadPrevious(...)
+local Object = require "mod.class.Object"
 
 registerTalentTranslation{
 	id = "T_DREAM_HAMMER",

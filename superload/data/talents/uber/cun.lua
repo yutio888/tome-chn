@@ -158,7 +158,7 @@ registerTalentTranslation{
 	id = "T_WORLDLY_KNOWLEDGE",
 	name = "渊博学识",
 	info = function(self, t)
-		return ([[以 0.9 的技能系数学会以下技能树中的一个。
+		return ([[获得 5 点通用技能点，以 1.0 的技能系数学会以下技能树中的一个。
 		分组 1 中的技能，所有职业都可学。
 		分组 2 中的技能，只适用于不学法术和符文的职业。
 		分组 3 中的技能，不适用于反魔神教的信徒。

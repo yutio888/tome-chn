@@ -46,6 +46,12 @@ registerTalentTranslation{
 	end,
 }
 
+local oldinfo_stone_fortress = Talents.talents_def.T_STONE_FORTRESS.info
+Talents.talents_def.T_STONE_FORTRESS.info = function(self, t)
+	local desc = oldinfo_stone_fortress(self, t)
+	return desc:gsub("\nFor Drems this effect activates as long as the hungering mouth summoned by From Below It Devours is alive.", "\n对于德瑞姆，这一技能效果将会在“自深渊吞噬万物”技能召唤的饥饿大嘴仍然存活时持续有效。")
+end
+
 registerTalentTranslation{
 	id = "T_KROG_WRATH",
 	name = "自然之怒",
@@ -109,7 +115,7 @@ registerTalentTranslation{
 
 registerTalentTranslation{
 	id = "T_WARBORN",
-	name = "为战争而生",
+	name = "龙血打击",
 	info = function(self, t)
 		return ([[ 你被伊格制造的唯一理由：对魔法作战！
 		打击你的敌人，造成 %d%% %s 武器伤害，并沉默它们 %d 回合。

@@ -5,7 +5,7 @@ registerTalentTranslation{
 	name = "寒冰箭",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
-		return ([[向指定地点的目标射出寒冰箭。每根寒冰箭 %s 并造成 %0.2f 冰系伤害，对目标附近单位同样造成伤害。 
+		return ([[朝指定地点所有目标射出寒冰箭。每根寒冰箭 %s 并造成 %0.2f 冰系伤害，有25%%几率使其冻结，未冻结时将使其湿润。
 		此法术不会伤害施法者。 
 		如果目标处于湿润状态，伤害增加 30%% ，同时冰冻率上升至 50%% 。
 		受法术强度影响，伤害有额外加成。]]):

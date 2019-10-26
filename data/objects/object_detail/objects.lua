@@ -69,9 +69,9 @@ function objects:getObjects(name,desc,subtype,short_name,is_ided,rare,unique)
 		end
 	else
 		if rare then
-			o.chName = "稀有" .. (objectSType[subtype] or subtype) .. "★" .. name .. "★"
+			o.chName = "稀有" .. (objectSType[subtype] or subtype or "") .. "★" .. name .. "★"
 		elseif unique then
-			o.chName = "传奇" .. (objectSType[subtype] or subtype) .. "★" .. name .. "★"
+			o.chName = "传奇" .. (objectSType[subtype] or subtype or "") .. "★" .. name .. "★"
 		elseif subtype == "white" or subtype == "red" or subtype == "yellow" or subtype == "green" or subtype == "blue" or subtype == "black" or subtype == "violet" then
 			if objectG[o.enName] then
 				o.chName = objectG[o.enName].chName

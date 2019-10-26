@@ -121,13 +121,10 @@ function objects:getObjects(name,desc,subtype,short_name,is_ided,rare,unique)
 					o.chName = "配方："..tinkerCHN:getname(name:gsub("schematic: ",""))
 					o.desc = "配方被工匠用于制作新的发明。"
 		else
-			if objectSP[subtype] then
-				if objectSP[subtype][name] then
-					o.chName = objectSP[subtype][name].chName
-					o.desc = objectSP[subtype][name].chDesc
-				end
-			end
-			if objectN[subtype] then
+			if objectSP[subtype]  and objectSP[subtype][name] then
+				o.chName = objectSP[subtype][name].chName or name
+				o.desc = objectSP[subtype][name].chDesc or desc
+			elseif objectN[subtype] then
 				if objectN[subtype][short_name] then
 					local enName = objectN[subtype][short_name].enName
 					local chName = objectN[subtype][short_name].chName

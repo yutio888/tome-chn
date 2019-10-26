@@ -1,12 +1,12 @@
 local _M = loadPrevious(...)
-
+-- Note: This is consistent with raw damage but is applied after damage multipliers
 local function getShieldStrength(self, t)
 	--return math.max(0, self:combatMindpower())
 	return self:combatTalentMindDamage(t, 20, 100)
 end
 
 local function getEfficiency(self, t)
-	return self:combatTalentLimit(t, 100, 20, 55)/100 -- Limit to <100%
+	return 0.4
 end
 
 local function maxPsiAbsorb(self, t) -- Max psi/turn to prevent runaway psi gains (solipsist randbosses)

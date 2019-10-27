@@ -1719,7 +1719,7 @@ function _M:selectTile()
 end
 
 function _M:isDonator()
-	return true
+	return profile:isDonator(1)
 end
 
 function _M:customizeOptions(cosmetic_actor, on_exit, title)

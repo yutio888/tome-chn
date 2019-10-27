@@ -409,3 +409,8 @@ simplePopDlg["Captive Krogs"] = function()
 	return "被俘的克罗格", [[被从时间牢笼里被解救的克罗格是非常脆弱的！]]
 end
 
+simplePopDlg["Tinker's Master"] = function(text)
+	text = text:gsub("She points a location on your map, to the far north.", "她给你指出了地图上的一个位置，在地图的北方。")
+	text = text:gsub("She gives you a strange metal contraption, explaining that using it will transport you to tinker's cave.", "他给了你一个奇怪的金属装置，告诉你使用它可以把你传送到工匠的洞穴。")
+	return "工匠大师", text
+end

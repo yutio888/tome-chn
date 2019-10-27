@@ -4,6 +4,7 @@ dofile("data-chn123/objects/change.lua")
 
 core.display.breakTextAllCharacter(true)
 
+require("data-chn123.escorts").bindHooks()
 
 local function talentstrans()
 	dofile("data-chn123/load_utils.lua")

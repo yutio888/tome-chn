@@ -150,7 +150,7 @@ function _M:init(title, actor, order, at_end, quickbirth, w, h)
 		on_drawitem=function(item, s, startx, h)
 			if not item.def or not item.def.display_entity32 then return startx end
 			local sc = item.def.display_entity32:getEntityFinalSurface(self.tiles, h, h)
-			s:merge(sc, startx, 0)
+			if sc then s:merge(sc, startx, 0) end
 			return startx + h
 		end,
 	}

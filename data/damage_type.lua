@@ -158,7 +158,7 @@ damageTypeCHN["item lightning daze"] = "眩晕"
 damageTypeCHN["item blight disease"] = "疾病"
 damageTypeCHN["item manaburn arcane"] = "法力燃烧"
 damageTypeCHN["item nature slow"] = "减速"
-
+damageTypeCHN["% chance of gloom effects"]="%几率黑暗光环"
 
 function getSpecialCombatDesc(type)
 	if not type then return end

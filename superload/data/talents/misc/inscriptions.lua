@@ -43,7 +43,7 @@ registerInscriptionTranslation{
 	display_name = "纹身：治疗",
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[激活纹身立即治疗你 %d 生命值，然后去除一个流血或毒素效果。]]):format(data.heal + data.inc_stat)
+		return ([[激活纹身立即治疗你 %d 生命值，然后去除一个流血、毒素和疾病效果。]]):format(data.heal + data.inc_stat)
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
@@ -56,8 +56,8 @@ registerInscriptionTranslation{
 	display_name = "纹身：狂暴",
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		local what = table.concatNice(table.keys(data.what), ", ", " 或者 ")
-		return ([[激活纹身解除你 %s 效果并减少所有伤害 %d%% 持续 %d 回合。 
+		local what = table.concatNice(table.keys(data.what), ", ", " 和 ")
+		return ([[激活纹身解除你随机一个 %s 效果并减少所有伤害 %d%% 持续 %d 回合。 
 同时除去对应类型的 CT 效果。		]]):format(change_infusion_eff(what), data.power+data.inc_stat, data.dur)
 	end,
 	short_info = function(self, t)

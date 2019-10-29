@@ -120,7 +120,7 @@ function _M:listPopup(title, text, list, w, h, fct, select_fct)
 		list[2].name=list[2].name:gsub("Galvanic Technomancy", "科技法术：放电系")
 		list[2].desc=list[2].desc:gsub([[These talents focus on fire and lightning damage, strategically placing galvanic rods to create fields of death and stuns.]], "这一系技能专注于火焰和闪电伤害，通过放置放电柱来创造电击力场，震慑并杀死敌人。")
 		list[3].name=list[3].name:gsub("Terrene Technomancy", "科技法术：寒岩系")
-		list[1].desc=list[1].desc:gsub([[These talents focus on cold and physical damage, summoning micro spiderbots to harass and pin their foes or protect themselves.]], "这一系技能专注于寒冷和物理伤害，召唤微型蜘蛛机器人，干扰并定身敌人，或是用于保护自己。")
+		list[3].desc=list[3].desc:gsub([[These talents focus on cold and physical damage, summoning micro spiderbots to harass and pin their foes or protect themselves.]], "这一系技能专注于寒冷和物理伤害，召唤微型蜘蛛机器人，干扰并定身敌人，或是用于保护自己。")
 	end
 	local d = new(title, 1, 1)
 	local desc = require("engine.ui.Textzone").new{width=w, auto_height=true, text=text, scrollbar=true}

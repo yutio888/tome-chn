@@ -40,7 +40,7 @@ registerTalentTranslation{
 		local trigger = t.getLifeTrigger(self, t)
 		local reduce = t.getReduction(self, t, true)*100
 		return ([[经过训练后，你脚步轻快，神经敏锐。
-		技能开启时，你会对任何将超过你 %d%% 最大生命值的伤害做出反应。
+		技能开启时，你会对超过你 %d%% 最大生命值的直接伤害做出反应（状态效果带来的伤害除外）。
 		消耗 %0.1f 体力，你将减少 %d%% 伤害。
 		身着重甲时无法使用。
 		伤害减免受闪避加成。]])

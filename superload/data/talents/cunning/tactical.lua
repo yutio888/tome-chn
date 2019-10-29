@@ -29,7 +29,7 @@ registerTalentTranslation{
 		local duration = t.getDuration(self, t)
 		local power = t.getPower(self, t)
 		local defense = t.getDefense(self, t)
-		return ([[增加 %d 点闪避，持续 %d 回合。当你闪避 1 次近战攻击时，你可以架起目标，有 %d%% 概率使你对目标进行 1 次暴击并减少它们 %d 点豁免。 
+		return ([[增加 %d 点闪避，持续 %d 回合。当你闪避 1 次近战攻击时，你可以架起目标，使你对其暴击的概率增加 %d%% 并减少它们 %d 点豁免。 
 		受灵巧影响，效果按比例加成。]])
 		:format(defense, duration, power, power)
 	end,

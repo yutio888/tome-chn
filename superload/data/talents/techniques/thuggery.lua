@@ -35,7 +35,7 @@ registerTalentTranslation{
 	name = "不择手段",
 	info = function(self, t)
 		return ([[你疯狂地杀戮，试图尽快击倒你的敌人。 
-		增加 %d%% 攻击速度， %d%% 暴击率和 %d%% 物理抵抗穿透，但是每次攻击消耗 6 点体力。
+		增加 %d%% 攻击速度， %d%% 暴击率和 %d%% 物理抵抗穿透，每回合消耗 6 点体力。
 		该效果在休息或者奔跑时自动解除。
 		]]):
 		format(t.getSpeed(self,t)*100, t.getCrit(self, t), t.getPen(self, t))

@@ -273,6 +273,23 @@ t_talent_type_description["Fire is your lifeblood; it revitalizes you as it burn
 t_talent_type_description["Infuse your body with the power of Demons."] = "使用恶魔之力强化自身。"
 t_talent_type_description["Make your blows terrify your foes and manipulate their fear."] = "你的攻击令敌人闻风丧胆。"
 
+t_talent_type_description["Take on the defining aspects of an Undead Drake."] = "化身成为亡灵龙形态使你能使用亡灵龙技能。"
+t_talent_type_description["Combine the power of steamtech and arcane forces to destroy your foes with fire and lightning."] = "结合蒸汽科技和奥术能量的力量，用火焰和闪电元素摧毁你的敌人。"
+t_talent_type_description["Combine the power of steamtech and arcane forces to destroy your foes with earth and water."] = "结合蒸汽科技和奥术能量的力量，用水和土元素摧毁你的敌人。"
+t_talent_type_description["Combine the power of steamtech and arcane forces to destroy your foes with arcane and time."] = "结合蒸汽科技和奥术能量的力量，用奥术和时间元素摧毁你的敌人。"
+t_talent_type_description["Combine the power of steamtech and arcane forces to destroy your foes."] = "结合蒸汽科技和奥术能量的力量，摧毁你的敌人。"
+
+t_talent_type_description["Use the power of electricity to supercharge your shield."] = "使用电力的力量超载你的盾牌。"
+t_talent_type_description["The use of high explosives."] = "使用高爆炸药的能力。"
+t_talent_type_description["Cunning devices to augment your combat skill."] = "用来增强你战斗能力的灵巧装置。"
+t_talent_type_description["Wield powerful steamtech tools of destruction."] = "装备用来毁灭的强大蒸汽科技工具"
+t_talent_type_description["Deploy steam powered turrets to assist you in combat."] = "部署蒸汽驱动的炮台，在战斗中为你提供协助。"
+t_talent_type_description["The various kinds of turrets."] = "各种类型的炮台。"
+t_talent_type_description["Advanced explosive weaponry."] = "高级爆炸武器。"
+t_talent_type_description["Build and deploy a powerful mechanical arachnid to assist you."] = "建造和部署强大的机械蜘蛛来帮助你。"
+t_talent_type_description["Unleash toxic steamtech weaponry on your enemies."] = "对你的敌人释放剧毒的蒸汽武器。"
+t_talent_type_description["Ranged combat mecharachnid abilities."] = "机械蜘蛛的远程战斗技能。"
+t_talent_type_description["Close combat mecharachnid abilities."] = "机械蜘蛛的近身战斗技能。"
 --possesor
 
 t_talent_type_description["Your mind hungers for pain and suffering! Feed it!"] = "你的精神渴望痛苦！满足它吧！"

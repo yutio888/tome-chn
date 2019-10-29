@@ -137,7 +137,7 @@ registerBirthDescriptorTranslation{
 		"- 流血免疫",
 		"- 恐惧免疫",
 		"- 不需要呼吸",
-		"- 特殊天赋: 亡者之皮，无生突袭，吸取精华。",
+		"- 特殊白蹄天赋: 亡者之皮，无生突袭，吸取精华。",
 		"#GOLD#属性修正 :",
 		"#LIGHT_BLUE# * +3 力量, -1 敏捷, +2 体质",
 		"#LIGHT_BLUE# * -2 魔法, -3 意志, +1 灵巧",
@@ -242,6 +242,25 @@ registerBirthDescriptorTranslation{
 		"#GOLD#每等级生命加值:#LIGHT_BLUE# -1",
 	},
 }
+
+registerBirthDescriptorTranslation{
+	type = "subclass",
+	name = "Annihilator",
+	display_name = "歼灭者",
+	locked_desc = "研究。制造。歼灭。",
+	desc = {
+		"歼灭者是破坏的大师，他们掌握着最具破坏力的蒸汽科技成果，可以给他们的敌人带来无尽的毁灭。",
+		"他们通常装备着装载着实验性弹药的蒸汽枪和一面电力充能的盾牌，但他们也可以装备像火焰喷射器那样的重装武器。",
+		"他们比其他的工匠更加精通科学技术，他们使用自动炮台、机械随从和各种各样的强大发明来充实自己的武器库。",		
+		"他们最重要的属性是：灵巧和敏捷",
+		"#GOLD#属性修正:",
+		"#LIGHT_BLUE# * +0 力量, +4 敏捷, +0 体质",
+		"#LIGHT_BLUE# * +0 魔法, +0 意志, +5 灵巧",
+		"#GOLD#每等级生命加值:#LIGHT_BLUE# -1",
+	},
+}
+
+
 registerBirthDescriptorTranslation{
 	type = "class",
 	name = "Demented",

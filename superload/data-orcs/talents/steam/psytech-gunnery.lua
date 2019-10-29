@@ -6,7 +6,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local inc = t.getPercentInc(self, t)
-		return ([[当使用蒸汽枪时，增加武器伤害 %d%% 。
+		return ([[当使用蒸汽枪时，增加 30 物理强度和 %d%% 武器伤害。
 		当你的子弹击中目标时，你利用动能将副手的灵晶射出，造成 %d%% 武器伤害（必定命中），
 		当开启心灵利刃时，灵晶无法被射出。
 		能主动使用，造成 %d%% 精神武器伤害。]]):format(inc * 100, t.mindstarMult(self, t) * 100, t.getShootDamage(self, t) * 100)

@@ -3470,7 +3470,12 @@ registerArtifactTranslation{
 	desc = [[毁灭者Grushgore发现蒸汽链锯时十分激动，他立刻抓了几个工程师，强迫他们为他做了这个。
 	他的取名技巧从没有得到提高。]],
 	}
-	
+registerArtifactTranslation{
+	originName = "Galen's Will",
+	display_name = "盖伦的意志",
+	unided_name = "苍白的灵晶",
+	desc = [[金属制作的链锯？挑剔的科技法师可不会满足于此，所以盖伦用纯奥术力量制造了一把链锯！]],
+}
 registerArtifactTranslation{
 	originName = "Eye of the Lost",
 	display_name = "迷失之眼",

@@ -868,6 +868,7 @@ end
 
 
 dofile("data-chn123/quests/amakthel.lua")
+dofile("data-chn123/quests/annihilator.lua")
 dofile("data-chn123/quests/destroy-sunwall.lua")
 dofile("data-chn123/quests/free-prides.lua")
 dofile("data-chn123/quests/gem.lua")

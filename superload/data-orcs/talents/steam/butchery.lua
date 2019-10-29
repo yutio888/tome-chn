@@ -6,7 +6,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local inc = t.getPercentInc(self, t)
-		return ([[使用链锯时，提高武器伤害 %d%% 。]])
+		return ([[使用链锯时，提高 %d%% 武器伤害和 30 物理强度。]])
 		:format(inc * 100)
 	end,}
 

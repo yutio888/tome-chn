@@ -1017,6 +1017,35 @@ timeEffectCHN:newEffect{
 	type = "魔法",
 	subtype ="亡灵",
 }
+
+timeEffectCHN:newEffect{
+	id = "ETHEREAL_STEAM",
+	enName = "Ethereal Steam",
+	chName = "虚幻蒸汽",
+	desc = function(self, eff) return ("每回合受到 %0.2f 超自然伤害，每当其使用一个技能，这一状态施加者随机一个技能减少一回合冷却。"):format(eff.dam) end,
+	type = "魔法",
+	subtype = "",
+}
+
+timeEffectCHN:newEffect{
+	id = "SPIDERBOT_SHIELD",
+	enName = "Spiderbots Shield",
+	chName = "蜘蛛机器人护盾",
+	desc = function(self, eff) return ("%d 个蜘蛛机器人正在保护你，每个具有 %d 生命值。目前顶上的蜘蛛机器人还有 %d 生命值。"):format(eff.nb, eff.life, eff.cur_life) end,
+	type = "魔法",
+	subtype = "",
+}
+
+timeEffectCHN:newEffect{
+	id = "ELECTRON_INCANTATION",
+	enName = "Electron Incantation",
+	chName = "电子充能",
+	desc = function(self, eff) return ("奥术发电机每消耗 10 法力值多产生 %d 蒸汽。"):format(eff.power) end,
+	type = "魔法",
+	subtype = "",
+}
+
+
 timeEffectCHN:newEffect{
 	id = "CAMPFIRE",
 	enName = "Warm",

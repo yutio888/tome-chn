@@ -7,7 +7,7 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local inc = t.getPercentInc(self, t)
 		local reloads = t.ammo_mastery_reload(self, t)
-		return ([[当你使用蒸汽枪时，增加武器伤害 %d%% 。
+		return ([[当你使用蒸汽枪时，增加 30 物理强度和 %d%% 武器伤害。
 		你的装填弹药速率增加 %d 。]]):format(inc * 100, reloads)
 	end,}
 

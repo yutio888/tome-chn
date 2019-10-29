@@ -10,6 +10,10 @@ tinkerCHN["Mana Coil"] = {
 		desc = "魔力线圈可以被安装在法杖上，增加法力回复并在法术暴击时施放闪电法术。",
 }
 
+tinkerCHN["Arcane Dynamo"] = {
+	name = "奥术发电机",
+	desc = "奥术发电机在奥术力量和蒸汽技术之间架起一座桥梁，在施法时产生蒸汽，并允许使用科技法术。",
+}
 
 tinkerCHN["Shocking Touch"] = {
 		name = "电击之触装置",

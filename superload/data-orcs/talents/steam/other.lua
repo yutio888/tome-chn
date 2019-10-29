@@ -397,5 +397,16 @@ registerTalentTranslation{
    伤害随蒸汽强度增加。]]):
 		format(dur*2, dur, damDesc(self, DamageType.NATURE, dam), t.getSlow(self, t), t.getPin(self, t))
 	end,}
-
+registerTalentTranslation{
+	id = "T_TINKER_ARCANE_DYNAMO",
+	name = "奥术发电机",
+	info = function(self, t)
+		return ([[允许使用科技法术，
+		获得一个魔法的蒸汽储备，每消耗10点法力值获得 %d 蒸汽。
+		根据当前蒸汽等级获得法术强度（目前 %d； 充满了 %d%% 蒸汽）
+		在战斗外，你放松了控制，蒸汽储备会逐渐消退。
+		#{italic}#金属奥术力量！#{normal}#]]):
+		format(self:attr("arcane_dynamo") or 1, t.getSpellpower(self, t), self:getSteam())
+	end,
+}
 return _M

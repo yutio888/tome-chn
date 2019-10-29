@@ -325,7 +325,7 @@ function _M:init()
 
 	local w, h = core.display.size()
 
-	-- Adjsut to account for resolution change
+	-- Adjust to account for resolution change
 	if config.settings.tome.uiset_minimalist and config.settings.tome.uiset_minimalist.save_size then
 		local ow, oh = config.settings.tome.uiset_minimalist.save_size.w, config.settings.tome.uiset_minimalist.save_size.h
 
@@ -581,7 +581,7 @@ end
 
 function _M:getMapSize()
 	local w, h = core.display.size()
-	return 0, 0, w, (self.map_h_stop or 80) - 16
+	return 0, 0, w, (self.map_h_stop or 80)
 end
 
 function _M:uiMoveResize(what, button, mx, my, xrel, yrel, bx, by, event, mode, on_change, add_text)
@@ -1153,24 +1153,13 @@ function _M:handleEffect(player, eff_id, e, p, x, y, hs, bx, by, is_first, scale
 	local charges = e.charges and tostring(e.charges(player, p)) or "0"
 
 	if not self.tbuff[eff_id..":"..dur..":"..charges] then
-		--local name = e.desc
-		local name
-		local save_chn = {}
-		save_chn["Mental save"] = "精神豁免"
-		save_chn["Physical save"] = "物理豁免"
-		save_chn["Spell save"] = "魔法豁免"
+		local name = e.desc
+		local desc = nil
+		local eff_subtype = table.concat(table.keys(e.subtype), "/")
+		if e.display_desc then name = e.display_desc(self, p) end
 		if effCHN[e.name] then
 			name = effCHN[e.name].chName
-		else name = e.desc
 		end
-		local desc = nil
-		--local eff_subtype = table.concat(table.keys(e.subtype), "/")
-		local eff_subtype
-		if effCHN[e.name] then
-			eff_subtype = effCHN[e.name].subtype
-		else eff_subtype = table.concat(table.keys(e.subtype), "/")
-		end
-		--if e.display_desc then name = e.display_desc(self, p) end
 		
 		local long_desc=e.long_desc
 		if effCHN[e.name] and effCHN[e.name].desc then long_desc = effCHN[e.name].desc end
@@ -1487,7 +1476,7 @@ function _M:displayParty(scale, bx, by)
 						p = (game.player == a) and portrait_lev or portrait_unsel_lev
 					end
 					p[1]:toScreenFull(x, y, p[6], p[7], p[2], p[3])
-					-- Display turns remaining on summon's portrait ?Marson
+					-- Display turns remaining on summon's portrait Marson
 					if a.summon_time and a.name ~= "shadow" then
 						local gtxt = self.party[a].txt_summon_time
 						if not gtxt or self.party[a].cur_summon_time ~= a.summon_time then

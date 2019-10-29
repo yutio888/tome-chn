@@ -522,7 +522,7 @@ special_t["smash the target with your shield crippling them"] = "盾击目标并
 special_t["reduce the cooldown of your ward talent by 1"] = "减少你的守护技能1回合冷却时间"
 special_t["Learn an unarmed attack talent or enable 'Always show glove combat' to see combat stats."] = "学习空手攻击技能，或者开启 '强制显示手套战斗数据' 选项来查看战斗数据"
 special_t["Learn shield attack talent or enable 'Always show shield combat' to see combat stats."] = "学习盾牌攻击技能，或者开启 '强制显示盾牌战斗数据' 选项来查看战斗数据"
-
+special_t["restore 7 stamina and equilibrium"] = "恢复7点体力值和失衡值。"
 --装备鼠标提示汉化替换
 function getObjectDescCHN(desc)
 	if not desc then return end

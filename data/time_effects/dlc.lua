@@ -397,6 +397,8 @@ timeEffectCHN:newEffect{
 	subtype = "大地/元素",
 }
 --Orc DLC
+
+--Orcs Physical
 timeEffectCHN:newEffect{
 	id = "STRAFING",
 	enName = "Strafing",
@@ -764,6 +766,114 @@ timeEffectCHN:newEffect{
 }
 
 timeEffectCHN:newEffect{
+	id = "STATIC_SHIELD",
+	enName = "Static Shield",
+	chName = "静电力场",
+	desc = function(self, eff) return ("目标被静电力场包围，增加所有抗性 %d%% ，对它们的攻击将会触发 %d%% 闪电护盾伤害的反击。"):format(eff.power, eff.dam*100) end,
+}
+
+timeEffectCHN:newEffect{
+	id = "LIGHTNING_WEB",
+	enName = "Lightning Web",
+	chName = "闪电之网",
+	desc = function(self, eff)
+		return ("目标被闪电之网覆盖，减少所受到的所有伤害 %d 。"):format(eff.power)
+	end,
+}
+
+timeEffectCHN:newEffect{
+	id = "INCENDIARY_GRENADE",
+	enName = "Incendiary Grenade",
+	chName = "燃烧榴弹",
+	desc = function(self, eff) return ("目标被点燃，每回合受到 %d 火焰伤害，所受到的所有伤害增加 %d%% 。"):format(eff.dam, eff.power) end,
+}
+
+timeEffectCHN:newEffect{
+	id = "HEALING_MIST",
+	enName = "Healing Mist",
+	chName = "治愈之雾",
+	desc = function(self, eff) return ("新加的负面效果的持续时间减少 %d%% 。"):format(eff.power) end,
+}
+
+timeEffectCHN:newEffect{
+	id = "OVERCLOCK",
+	enName = "Overclock",
+	chName = "炮台超载",
+	desc = function(self, eff) return ("目标被充能护盾覆盖，在破碎前可以吸收 %d/%d 伤害。当护盾存在时，他们每回合会朝 7 码范围内的随机敌人发射闪电弹，造成 %0.2f 闪电伤害。"):format(self.static_shield_absorb, eff.power, eff.dam) end,
+}
+
+timeEffectCHN:newEffect{
+	id = "HYPERVISION_GOGGLES",
+	enName = "Hypervision Goggles",
+	chName = "强化视觉护目镜",
+	desc = function(self, eff) return ("强化感知，侦测半径 %d 码范围内的所有敌人，增加抗性穿透 %d%% 。"):format(eff.range, eff.power) end,
+}
+
+timeEffectCHN:newEffect{
+	id = "AED",
+	enName = "AED",
+	chName = "电击除颤器",
+	desc = function(self, eff) return ("当你的生命之降低到 0 时，取消这一致死攻击，恢复 %d 生命值，并在 %d 码范围内造成 %0.2f 闪电伤害，眩晕他们 2 回合。"):format(eff.life, eff.rad, eff.damage) end,
+}
+
+timeEffectCHN:newEffect{
+	id = "BURNING_PHOSPHOROUS",
+	enName = "Burning Phosphorous",
+	chName = "易燃火焰",
+	desc = function(self, eff) return ("目标被燃烧的化学物质所覆盖，每回合受到 %0.2f 火焰伤害，降低 %d 护甲值。之后的设计将会造成 %0.2f 火焰伤害，若目标降低到 25%% 生命值以下，他们有 %d%% 的几率慌乱逃跑。"):format(self:damDesc(DamageType.FIRE, eff.dam), eff.apr, self:damDesc(DamageType.FIRE, eff.initdam), eff.fear) end,
+}
+
+timeEffectCHN:newEffect{
+	id = "SCORCHED",
+	enName = "Scorched",
+	chName = "灼烧",
+	desc = function(self, eff) return ("火焰伤害抗性降低 %d%% 。"):format(eff.resist) end,
+}
+
+timeEffectCHN:newEffect{
+	id = "PINCER_STRIKE",
+	enName = "Pincer Strike",
+	chName = "钢爪钳制",
+	desc = function(self, eff) return ("目标被 %s 抓取，被定身，降低战斗、法术和精神速度 %d%% ，并每回合受到一次自动的尾部链锯打击，造成 %d%% 伤害。"):format(eff.src.name, eff.power, eff.dam) end,
+}
+
+timeEffectCHN:newEffect{
+	id = "REACTIVE_ARMOR",
+	enName = "Reactive Armor",
+	chName = "反应式护甲",
+	desc = function(self, eff) return ("下一次收到的近战或远程伤害若大于最大生命值的 8%% ，则会降低 %d%% 伤害，并触发一次半径为 %d 的扇形爆炸，造成 %d%% 蒸汽枪伤害。 剩余 %d 层叠加。"):format(eff.reduce, eff.rad, eff.dam*100, eff.stacks) end,
+}
+
+timeEffectCHN:newEffect{
+	id = "GRENADE_BARRAGE",
+	enName = "Grenade Barrage",
+	chName = "榴弹轰炸",
+	desc = function(self, eff) return ("攻击速度增加 %d%% 。下 %d 次射击会触发榴弹射击。"):format(eff.power*100, eff.stacks) end,
+}
+
+timeEffectCHN:newEffect{
+	id = "MIASMA_ENGINE",
+	enName = "Miasma Engine",
+	chName = "瘴气引擎",
+	desc = function(self, eff) return ("目标被半径为 %d 的瘴气毒云包围。被困在其中的敌人会有 %d%% 的技能失败几率， 降低%d%% 治疗效果，并且在受到近战和远程攻击的时候受到 %0.2f 额外酸性伤害。"):format(eff.radius, eff.fail, eff.heal, eff.dam) end,
+}
+
+timeEffectCHN:newEffect{
+	id = "SMOGSCREEN",
+	enName = "Smogscreen",
+	chName = "蔽目毒云",
+	desc = function(self, eff) return ("%d%% 几率完全忽视一次伤害。"):format(eff.power) end,
+}
+timeEffectCHN:newEffect{
+	id = "MIASMA",
+	enName = "Miasma",
+	chName = "瘴气",
+	desc = function(self, eff) return ("被有毒化学物质影响。 %d%% 技能失败率，降低 %d%% 治疗效果，受到近战或远程攻击的时候受到额外 %0.2f 酸性伤害。"):format(eff.fail, eff.heal, eff.dam) end,
+}
+
+--Orcs other
+
+timeEffectCHN:newEffect{
 	id = "CELESTIAL_ACCELERATION",
 	enName = "Celestial Acceleration",
 	chName = "天体加速",
@@ -844,6 +954,8 @@ timeEffectCHN:newEffect{
 	type = "其他",
 	subtype = "其他",
 }
+
+-- Orcs mental
 
 timeEffectCHN:newEffect{
 	id = "GESTALT_STEAM",
@@ -934,6 +1046,8 @@ timeEffectCHN:newEffect{
 	type = "精神",
 	subtype ="超能/诅咒",
 }
+
+--Orcs magical
 
 timeEffectCHN:newEffect{
 	id = "TINKER_VIRAL",
@@ -1045,6 +1159,7 @@ timeEffectCHN:newEffect{
 	subtype = "",
 }
 
+--Orcs floor
 
 timeEffectCHN:newEffect{
 	id = "CAMPFIRE",
@@ -1056,9 +1171,9 @@ timeEffectCHN:newEffect{
 }
 
 timeEffectCHN:newEffect{
-	enName = "Sun Radiance",
 	id = "SUNWELL",
-	chNmae = "日光",
+	enName = "Sun Radiance",
+	chName = "日光",
 	desc = function(self, eff) return "目标处于阳光的效果下。增加 2 点照明和视野， 3 0 % 目盲免疫 , 2 0 看穿潜行能力和 3 0 % 光明抗性。"end,
 	type = "其他",
 	subtype = "地面",

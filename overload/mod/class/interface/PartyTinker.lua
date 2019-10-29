@@ -156,10 +156,9 @@ function _M:makeTinker(who, id, ml, silent)
 	print("!!aazdazdazd!!!", who.descriptor.subclass, who.level, (who:numberKnownTalentLevels("steamtech/physics") + who:numberKnownTalentLevels("steamtech/chemistry")))
 	if who.descriptor and who.descriptor.subclass == "Archmage" and who.level >= 10 and (who:numberKnownTalentLevels("steamtech/physics") + who:numberKnownTalentLevels("steamtech/chemistry")) >= 16 then
 		local chance = 10
-		if tdef.id == "MANA_COIL" then chance = chance + 90 end
+		if tdef.id == "MANA_COIL" then chance = chance + 40 end
 		print("!!!!!!!!CHANCE", chance)
 		if rng.percent(chance) then
-			print("!!!!ALLOW")
 			game:setAllowedBuild("mage_technomancer", true)
 		end
 	end

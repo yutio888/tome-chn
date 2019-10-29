@@ -6543,7 +6543,7 @@ function _M:getTalentFullDescription(t, addlevel, config, fake_mastery)
 	
 	local is_a = {}
 	for is, desc in pairs(engine.interface.ActorTalents.is_a_type) do
-		ddesc = desc:gsub("a spell", "一种法术"):gsub("a mind power", "一种精神力量"):gsub("a nature gift", "一种自然之赐"):gsub("an antimagic ability", "一种反魔法力量"):gsub("a summon power", "一种召唤能力"):gsub("a steamtech power", "一种蒸汽力量"):gsub("usable during Aether Avatar", "可在以太之体下使用")
+		ddesc = desc:gsub("a spell", "一种法术"):gsub("a mind power", "一种精神力量"):gsub("a nature gift", "一种自然之赐"):gsub("an antimagic ability", "一种反魔法力量"):gsub("a summon power", "一种召唤能力"):gsub("a steamtech power", "一种蒸汽力量"):gsub("a technomancy spell", "一种科技法术"):gsub("usable during Aether Avatar", "可在以太之体下使用")
 		if t[is] then is_a[#is_a+1] = ddesc end
 	end
 	if #is_a > 0 then

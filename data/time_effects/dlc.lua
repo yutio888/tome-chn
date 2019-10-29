@@ -427,15 +427,6 @@ timeEffectCHN:newEffect{
 }
 
 timeEffectCHN:newEffect{
-	id = "ENHANCED_BULLETS_OVERHEAT",
-	enName = "Bullet Mastery: Overheated",
-	chName = "子弹掌握：过热",
-	desc = function(self, eff) return ("子弹处于过热状态：在 5 回合内造成 %d 火焰伤害"):format(self:damDesc(DamageType.FIRE, eff.power)) end,
-	type = "物理",
-	subtype ="蒸汽科技",
-}
-
-timeEffectCHN:newEffect{
 	id = "ENHANCED_BULLETS_SUPERCHARGE",
 	enName = "Bullet Mastery: Supercharged",
 	chName = "子弹掌握：超速",
@@ -953,6 +944,114 @@ timeEffectCHN:newEffect{
 	desc = function(self, eff) return ("正瞄准发射强力激光。离开！") end,
 	type = "其他",
 	subtype = "其他",
+}
+
+timeEffectCHN:newEffect{
+	id = "CAPACITOR_DISCHARGE",
+	enName = "Capacitor Discharge",
+	chName = "电力放出",
+	desc = function(self, eff) return ("存储伤害，准备放出强力电击 （ %d/%d ）。"):format(eff.power, eff.max_power) end,
+}
+
+timeEffectCHN:newEffect{
+	id = "UPGRADE",
+	enName = "Upgrade",
+	chName = "炮台升级",
+	desc = function(self, eff) return ("这个炮台被强化了。") end,
+}
+
+timeEffectCHN:newEffect{
+	id = "GUARDIAN_SHIELD",
+	enName = "Guardian Shield",
+	chName = "守卫护盾",
+	desc = function(self, eff) return ("所受到的伤害的 %d%% 会转移到邻近的守卫炮台上。"):format(eff.power) end,
+}
+
+timeEffectCHN:newEffect{
+	id = "MISSILE_COUNTDOWN",
+	enName = "Countdown",
+	chName = "倒计时",
+	desc = function(self, eff) return ("导弹会在该效果到时间后爆炸！") end,
+}
+
+timeEffectCHN:newEffect{
+	id = "LOCK_ON_BEN",
+	enName = "Locked On",
+	chName = "目标锁定",
+	desc = function(self, eff) return ("自动朝目标发射火箭弹幕，伤害增加 %d%% 。"):format(eff.power) end,
+}
+
+timeEffectCHN:newEffect{
+	id = "LOCK_ON_DET",
+	enName = "Locked On",
+	chName = "被目标锁定",
+	desc = function(self, eff) return ("目标被火箭发射器锁定，降低闪避值 %d ，且闪避率效果失效。"):format(eff.power) end,
+}
+
+timeEffectCHN:newEffect{
+	id = "MECHARACHNID_OFS",
+	enName = "Mecharachnid out of sight",
+	chName = "视野外的机械蜘蛛",
+	desc = function(self, eff) return ("机械蜘蛛处于歼灭者的视野外，无法进行控制！") end,
+}
+
+timeEffectCHN:newEffect{
+	id = "HEAVY_AMMUNITION",
+	enName = "Heavy Ammunition",
+	chName = "重装武器",
+	desc = function(self, eff) return ("目前装载了 %d 枚重装武器弹药。如果弹药耗尽，会自动取下当前的重装武器。"):format(eff.stacks) end,
+}
+
+timeEffectCHN:newEffect{
+	id = "STORMSTRIKE",
+	enName = "Stormstrike",
+	chName = "暴风打击",
+	desc = function(self, eff) return ("目标站立不稳，造成的所有伤害降低 %d%% 。"):format(eff.power) end,
+}
+
+timeEffectCHN:newEffect{
+	id = "CHEM_FLECHETTE",
+	enName = "Catalyst",
+	chName = "催化剂",
+	desc = function(self, eff) return ("目标被化学药剂注射，降低所有豁免 %d 。"):format(eff.power) end,
+}
+
+timeEffectCHN:newEffect{
+	id = "AUTOMATED_REPAIR_SYSTEM",
+	enName = "Automated Repair System",
+	chName = "自动修复系统",
+	desc = function(self, eff) return ("进入自动修复模式，无法行动，但生命恢复速率增加 %d ，所有抗性提升 %d%% ，死亡生命下限为 -%d 。"):format(eff.heal, eff.resist, eff.life) end,
+}
+
+timeEffectCHN:newEffect{
+	id = "ENHANCED_BULLETS_OVERHEAT",
+	enName = "Bullet Mastery: Overheated",
+	chName = "子弹掌握：过热",
+	desc = function(self, eff) return ("子弹处于过热状态：在 5 回合内造成 %d 火焰伤害"):format(self:damDesc(DamageType.FIRE, eff.power)) end,
+	type = "物理",
+	subtype ="蒸汽科技",
+}
+
+timeEffectCHN:newEffect{
+	id = "DEMAGNETIZED",
+	enName = "Demagnetized",
+	chName = "消磁",
+	desc = function(self, eff) return ("失去磁性力场所给予的增益效果。"):format() end,
+}
+
+timeEffectCHN:newEffect{
+	id = "GALVANIC_ROD",
+	enName = "Galvanic Rods",
+	chName = "放电柱",
+	desc = function(self, eff)
+		local desc = "可用放电柱:\n"
+		for i, rod in ipairs(eff.rods) do
+			local ok, cd = self:callTalent(self.T_GALVANIC_ROD, "isRodUsable", eff, i)
+			if ok then desc = desc..("#LIGHT_GREEN#- 可用放电柱: (%d)\n"):format(i)
+			else desc = desc..("#LIGHT_RED#- 放电柱 (%d): 剩余 %d 回合。\n"):format(i, cd) end
+		end
+		return desc
+	end,
 }
 
 -- Orcs mental

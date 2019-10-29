@@ -28,7 +28,7 @@ registerTalentTranslation{
 	name = "目标锁定",
 	info = function(self, t)
 		return ([[让你的火箭发射器锁定目标 5 回合。
-当你锁定目标的时候，自动火箭发射将会被暂停。然而，每回合你会朝目标发射一股火箭弹幕，造成额外 %d%% 的上海。
+当你锁定目标的时候，自动火箭发射将会被暂停。然而，每回合你会朝目标发射火箭弹幕，造成额外 %d%% 的伤害。
 被锁定的目标也会失去 %d 闪避值，并且无法从隐匿和闪避效果中受益。
 闪避值降低效果受蒸汽强度加成。]]):
 		format(t.getDamage(self, t), t.getDefense(self,t))

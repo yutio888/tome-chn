@@ -61,7 +61,7 @@ registerTalentTranslation{
 	id = "T_INCENDIARY_GRENADE",
 	name = "燃烧榴弹",
 	info = function(self, t)
-		return ([[用高度易燃物质强化榴弹，烧蚀敌人护甲，3回合内造成火焰伤害，在目标燃烧时增阿基所受到的伤害 %d%% 。]]):
+		return ([[用高度易燃物质强化榴弹，烧蚀敌人护甲，3回合内造成火焰伤害，在目标燃烧时增加所受到的伤害 %d%% 。]]):
 		format(t.getEffect(self, t))
 	end,
 }

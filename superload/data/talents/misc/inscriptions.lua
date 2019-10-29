@@ -107,7 +107,7 @@ registerInscriptionTranslation{
 		local bonus1 = data.die_at + data.inc_stat * 30 * bonus
 		local bonus2 = math.floor(data.dur * bonus)
 		return ([[激活这个纹身可以让你忍受致死的伤害，持续 %d回合。
-		当应用纹身激活时，你的生命值只有在降低到 -%d 生命时才会死亡。
+		当英勇纹身激活时，你的生命值只有在降低到 -%d 生命时才会死亡。
 		你每失去 1%% 生命值，持续时间和生命值下限就会增加 1%% 。（目前 %d 生命值， %d 持续时间）
 		效果结束时，如果你的生命值在 0 以下，会变为 1 点。]]):format(data.dur, data.die_at + data.inc_stat * 30, bonus1, bonus2)
 	end,

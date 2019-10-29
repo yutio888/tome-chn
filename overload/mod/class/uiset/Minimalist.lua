@@ -1167,6 +1167,10 @@ function _M:handleEffect(player, eff_id, e, p, x, y, hs, bx, by, is_first, scale
 		if type(long_desc) == "string" then 
 			long_desc = function(a,b) return temp end
 		end
+		local save_chn = {}
+		save_chn["Mental save"] = "精神豁免"
+		save_chn["Physical save"] = "物理豁免"
+		save_chn["Spell save"] = "魔法豁免"
 		if p.save_string and p.amount_decreased and p.maximum and p.total_dur then
 			desc = ("#{bold}##GOLD#%s\n(%s: %s)#WHITE##{normal}#\n"):format(name, (effCHN[e.name] and effCHN[e.name].type) or e.type, eff_subtype)..long_desc(player, p).." "..("%s 降低该效果持续时间 %d 回合，从 %d 至 %d。"):format(save_chn[p.save_string] or p.save_string, p.amount_decreased, p.maximum, p.total_dur)
 		else

@@ -24,12 +24,12 @@ registerTalentTranslation{
 
 registerTalentTranslation{
 	id = "T_SET_UP",
-	name = "致命闪避",
+	name = "故卖破绽",
 	info = function(self, t)
 		local duration = t.getDuration(self, t)
 		local power = t.getPower(self, t)
 		local defense = t.getDefense(self, t)
-		return ([[增加 %d 点闪避，持续 %d 回合。当你闪避 1 次近战攻击时，你可以架起目标，使你对其暴击的概率增加 %d%% 并减少它们 %d 点豁免。 
+		return ([[增加 %d 点闪避，持续 %d 回合。当你闪避近战攻击时，你向对手的反击将更加有力，使你对其暴击的概率增加 %d%% 并减少它们 %d 点豁免。 
 		受灵巧影响，效果按比例加成。]])
 		:format(defense, duration, power, power)
 	end,

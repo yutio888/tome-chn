@@ -475,7 +475,7 @@ timeEffectCHN:newEffect{
 timeEffectCHN:newEffect{
 	id = "SET_UP",
 	enName = "Set Up",
-	chName = "中圈套",
+	chName = "上钩",
 	type = "物理",
 	subtype = "策略",
 }
@@ -945,7 +945,7 @@ timeEffectCHN:newEffect{
 timeEffectCHN:newEffect{
 	id = "SKIRMISHER_SUPERB_AGILITY",
 	enName = "Superb Agility",
-	chName = "卓绝灵巧",
+	chName = "身轻如燕",
 	type = "其他",
 	subtype = "冷却",
 }
@@ -1101,8 +1101,8 @@ timeEffectCHN:newEffect{
 timeEffectCHN:newEffect{
 	id = "MANA_CLASH",
 	enName = "Mana Clash",
-	chName = "法力损毁",
-	desc = function (self, eff) return ("你造成的所有伤害会触发一次相当于造成伤害 %d%% 的法力燃烧。"):format(eff.power * 100)  end,
+	chName = "奥术对撞",
+	desc = function (self, eff) return ("你造成的所有伤害会触发一次伤害值 %d%% 的法力燃烧。"):format(eff.power * 100)  end,
 	type = "物理",
 	subtype = "反魔",
 }

@@ -1086,7 +1086,7 @@ timeEffectCHN:newEffect{
 	id = "GHOULISH_LEAP",
 	enName = "Ghoulish Leap",
 	chName = "定向跳跃加速",
-	desc = function (self, eff) return ("目标的全局速度增加 %d%% 。"):format(eff.speed * 100)  end,
+	desc = function (self, eff) return ("目标的整体速度增加 %d%% 。"):format(eff.speed * 100)  end,
 	type = "物理",
 	subtype = "速度",
 }

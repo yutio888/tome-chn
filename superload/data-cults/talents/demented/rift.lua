@@ -37,7 +37,7 @@ registerTalentTranslation{
 		local dur = t.getDimensionalDuration(self,t)
 		return ([[向你的裂口注入能量，你将有 %d%% 概率让每一个裂口进化成为更强大的形态。
 #PURPLE#深渊裂隙 :#LAST# 向半径 10 内随机敌人发射光束，造成 %0.2f 点暗影伤害。
-#PURPLE#时空漩涡 :#LAST# 每回合对半径 4 内的敌人造成 %0.2f 点时空伤害，并且减少他们 30%% 的全局速度 .
+#PURPLE#时空漩涡 :#LAST# 每回合对半径 4 内的敌人造成 %0.2f 点时空伤害，并且减少他们 30%% 的整体速度 .
 #PURPLE#维度之门 :#LAST# 每回合有 50%% 概率召唤一个虚空造物，持续 %d 回合 , 是一个能传送的高速物理输出 
 你的虚空造物属性随你的等级和魔法属性提高而提高。]])
 		:format(chance, damDesc(self, DamageType.DARKNESS, ndam), damDesc(self, DamageType.TEMPORAL, tdam), dur)
@@ -62,7 +62,7 @@ registerTalentTranslation{
 #GREY#虚空裂口 :#LAST# 造成 %d%% 点额外伤害，并且投射物在半径 1 范围内爆炸。
 #PURPLE#深渊裂隙 :#LAST# 造成 %d%% 点额外伤害，并且连锁至 3 个额外目标。
 #PURPLE#时空漩涡 :#LAST# 造成 %d%% 点额外伤害，增加 1 效果半径 , 并且减速效果提高至 50%%.
-#PURPLE#维度之门 :#LAST# 虚空造物将会变得狂暴 , 增加他们 %d%% 的全局速度。]])
+#PURPLE#维度之门 :#LAST# 虚空造物将会变得狂暴 , 增加他们 %d%% 的整体速度。]])
 		:format(power, power, power, power)
 	end,
 }

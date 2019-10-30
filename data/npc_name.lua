@@ -536,11 +536,11 @@ npcNameCHN["void horror"] = "虚空靥魔"
 npcDescCHN["void horror"] = "它乍一看像是时空中的一道缝隙，但你对它的印象远远不止于此。"
 
 --堕落者(horror-corrupted)
-npcNameCHN["dremling"] = "德瑞姆矮人"
-npcDescCHN["dremling"] = "身材矮小且拥有部分矮人特征的人形怪物。它的战斧和盾牌看起来又锈又钝，几乎从未修理过。"
+npcNameCHN["dremling"] = "德瑞姆"
+npcDescCHN["dremling"] = "皮肤粗糙且长有角质骨刺的黑色巨人。它没有明显的脸部特征，眼神空旷而呆滞。"
 
-npcNameCHN["drem"] = "德瑞姆"
-npcDescCHN["drem"] = "皮肤粗糙且长有角质骨刺的黑色巨人。它没有明显的脸部特征，眼神空旷而呆滞。"
+npcNameCHN["drem"] = "德瑞姆矮人"
+npcDescCHN["drem"] = "身材矮小且拥有部分矮人特征的人形怪物。它的战斧和盾牌看起来又锈又钝，几乎从未修理过。"
 
 npcNameCHN["drem master"] = "德瑞姆领主"
 npcDescCHN["drem master"] = "丑陋且具有部分矮人特征的人形怪物，它装备了一件破烂不堪的重甲。尽管它无法说话，但是它却领导着其他矮人。"

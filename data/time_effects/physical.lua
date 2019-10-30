@@ -56,7 +56,7 @@ timeEffectCHN:newEffect{
 timeEffectCHN:newEffect{
 	id = "POISON",
 	enName = "Poison",
-	chName = "中毒",
+	chName = "毒药",
 	type = "物理",
 	subtype = "自然/毒素",
 }
@@ -184,7 +184,7 @@ timeEffectCHN:newEffect{
 timeEffectCHN:newEffect{
 	id = "DWARVEN_RESILIENCE",
 	enName = "Dwarven Resilience",
-	chName = "矮人防御",
+	chName = "矮人坚韧",
 	type = "物理",
 	subtype = "大地",
 }
@@ -208,7 +208,7 @@ timeEffectCHN:newEffect{
 timeEffectCHN:newEffect{
 	id = "FROZEN_FEET",
 	enName = "Frozen Feet",
-	chName = "冻结双脚",
+	chName = "冻足",
 	type = "物理",
 	subtype = "寒冰/定身",
 }
@@ -232,7 +232,7 @@ timeEffectCHN:newEffect{
 timeEffectCHN:newEffect{
 	id = "HIGHBORN_WRATH",
 	enName = "Wrath of the Highborn",
-	chName = "无尽愤怒",
+	chName = "高人愤怒",
 	type = "物理",
 	subtype = "自然",
 }
@@ -248,7 +248,7 @@ timeEffectCHN:newEffect{
 timeEffectCHN:newEffect{
 	id = "SERPENTINE_NATURE",
 	enName = "Serpentine Nature",
-	chName = "蛇似自然",
+	chName = "巨蟒特质",
 	desc = function(self, eff) 
 		return ("目标展现出多头蛇的特性，获得 %d%% 闪电、酸性和自然伤害吸收，每回合回复 %d 生命。"):format(eff.power, eff.regen)
 	end,
@@ -475,7 +475,7 @@ timeEffectCHN:newEffect{
 timeEffectCHN:newEffect{
 	id = "SET_UP",
 	enName = "Set Up",
-	chName = "失去平衡",
+	chName = "中圈套",
 	type = "物理",
 	subtype = "策略",
 }
@@ -714,7 +714,7 @@ timeEffectCHN:newEffect{
 timeEffectCHN:newEffect{
 	id = "DEFENSIVE_GRAPPLING",
 	enName = "Grappling Defensively",
-	chName = "防御姿态",
+	chName = "反击投技",
 	type = "物理",
 	subtype = "策略",
 }
@@ -785,7 +785,7 @@ timeEffectCHN:newEffect{
 timeEffectCHN:newEffect{
 	id = "SPINE_OF_THE_WORLD",
 	enName = "Spine of the World",
-	chName = "世纪漩涡",
+	chName = "世界之脊",
 	type = "物理",
 	subtype = "状态",
 }
@@ -845,7 +845,7 @@ timeEffectCHN:newEffect{
 timeEffectCHN:newEffect{
 	id = "CORRODE",
 	enName = "Corrode",
-	chName = "侵蚀",
+	chName = "腐蚀",
 	type = "物理",
 	subtype = "酸性",
 }
@@ -945,7 +945,7 @@ timeEffectCHN:newEffect{
 timeEffectCHN:newEffect{
 	id = "SKIRMISHER_SUPERB_AGILITY",
 	enName = "Superb Agility",
-	chName = "异常灵活",
+	chName = "卓绝灵巧",
 	type = "其他",
 	subtype = "冷却",
 }
@@ -1037,7 +1037,7 @@ timeEffectCHN:newEffect{
 timeEffectCHN:newEffect{
 	id = "SEDATED",
 	enName = "Sedated",
-	chName = "沉睡",
+	chName = "被镇静",
 	desc = function (self, eff) return ("目标进入沉睡状态，不能行动。每受到 %d 伤害，持续时间减少 1 回合。"):format(eff.power)  end,
 	type = "物理",
 	subtype = "睡眠/毒素",
@@ -1086,7 +1086,7 @@ timeEffectCHN:newEffect{
 	id = "GHOULISH_LEAP",
 	enName = "Ghoulish Leap",
 	chName = "定向跳跃加速",
-	desc = function (self, eff) return ("目标的整体速度增加 %d%% 。"):format(eff.speed * 100)  end,
+	desc = function (self, eff) return ("目标的全局速度增加 %d%% 。"):format(eff.speed * 100)  end,
 	type = "物理",
 	subtype = "速度",
 }
@@ -1101,8 +1101,8 @@ timeEffectCHN:newEffect{
 timeEffectCHN:newEffect{
 	id = "MANA_CLASH",
 	enName = "Mana Clash",
-	chName = "法力对撞",
-	desc = function (self, eff) return ("你造成的所有伤害也会触发一次 %d%% 伤害的法力对撞。"):format(eff.power * 100)  end,
+	chName = "法力损毁",
+	desc = function (self, eff) return ("你造成的所有伤害会触发一次相当于造成伤害 %d%% 的法力燃烧。"):format(eff.power * 100)  end,
 	type = "物理",
 	subtype = "反魔",
 }
@@ -1157,15 +1157,15 @@ timeEffectCHN:newEffect{
 timeEffectCHN:newEffect{
 	id = "PUNCTURED_ARMOUR",
 	enName = "Punctured Armour",
-	chName = "护甲削弱",
-	desc = function (self, eff) return ("目标的护甲被削弱了，受到的所有伤害增加 %d%%."):format(eff.power)  end,
+	chName = "护甲贯通",
+	desc = function (self, eff) return ("目标的护甲被刺穿了，受到的所有伤害增加 %d%%."):format(eff.power)  end,
 	type = "物理",
 	subtype = "分离",
 }
 timeEffectCHN:newEffect{
 	id = "LEECHING_POISON",
 	enName = "Leeching Poison",
-	chName = "水蛭毒素",
+	chName = "吸血毒素",
 	desc = function (self, eff) return ("目标中毒，每回合受到 %0.2f 自然伤害，并为施毒者提供等量治疗。"):format(eff.power)  end,
 	type = "物理",
 	subtype = "毒素/自然",

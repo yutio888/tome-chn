@@ -15,7 +15,9 @@ function logCHN:newLog(l)
 end
 
 function logCHN:trans(str,...)
-
+	 if type(str) ~= "string" then 
+		print("Error: logCHN:trans type not string, str:" .. str)
+	 end
 	 if not str then return end
 	 if logTableCHN[str] then
 		if logTableCHN[str].fct then   

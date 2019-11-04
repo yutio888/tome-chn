@@ -117,6 +117,8 @@ registerTalentTranslation{
 	id = "T_WARBORN",
 	name = "龙血打击",
 	info = function(self, t)
+		local damtype = self.drake_infused_blood_type or DamageType.FIRE
+		local damname = DamageType:get(damtype).text_color..DamageType:get(damtype).name.."#LAST#"
 		return ([[ 你被伊格制造的唯一理由：对魔法作战！
 		打击你的敌人，造成 %d%% %s 武器伤害，并沉默它们 %d 回合。
 		伤害类型根据龙血的类型而决定。

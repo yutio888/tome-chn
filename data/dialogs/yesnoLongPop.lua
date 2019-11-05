@@ -111,3 +111,7 @@ yesnoLongPopDlg["Cursed Fate"] = function(str)
 	str = str:gsub("The ", "地上的 ")
 	return "被诅咒的命运", str, "将你的憎恨释放到物品上", "压制你的憎恨之意"
 end
+
+yesnoLongPopDlg["#LIGHT_RED#Intense fight"] = function()
+	return "#LIGHT_RED#激烈的战斗", "当你向前走去，你看到了维网中的另外一位成员，并收到了一个清晰的灵能信号：\n#{italic}##UMBER#快跑！我已经死定了，但你还可以救你自己！#{normal}#", "紧急启动回归之杖", "留下来继续战斗！"
+end

@@ -34,7 +34,7 @@ registerTalentTranslation{
 		local threshold = t.getClarityThreshold(self, t)
 		local bonus = ""
 		if not self.max_level or self.max_level > 50 then
-			bonus = " Exceptional focus on this talent can suppress your solipsism threshold."
+			bonus = " 进一步提升这一技能可以降低你的唯我论阈值。"
 		end
 		return ([[当你的超能力值超过 %d%% 时，每超过 1 ％你增加 1 ％整体速度（最大值 %+d%% ）。 
 		学习此技能时，（高于基础值 10 的）每点意志会额外增加 0.5 点超能力值上限，而（高于基础值 10 的）每点体质会减少 0.25 点生命上限（若低于基础值 10 则增加生命上限），增加你 10 ％唯我临界点（当前 %d%% ）。]]):

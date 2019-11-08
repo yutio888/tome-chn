@@ -396,6 +396,14 @@ gridCHN["Way into a strange lush forest"] = "通向一片奇怪的葱郁森林�
 --spellblaze-scar
 gridCHN["spellblaze scar"] = "奥术之痕"
 gridsuffixCHN[" (spellblaze aura)"] = "（奥术之痕）"
+--sub-vaults
+gridCHN["hidden vault"] = "隐藏的宝库"
+gridCHN["Crumbling stairs lead down to something."] = "摇摇欲坠的楼梯，通向某个隐藏的宝库。"
+gridCHN["collapsing hidden vault"] = "快要坍塌的隐藏宝库"
+gridCHN["nearly collapsed hidden vault"] = "即将坍塌的隐藏宝库"
+gridCHN["collapsed hidden vault"] = "坍塌的隐藏宝库"
+gridCHN["A collapsed stairway, leading down"] = "向下的楼梯，已经坍塌了。"
+
 --tombstone
 --weird-pedestals
 gridCHN["weird pedestal"] = "奇怪的基座"

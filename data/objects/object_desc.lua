@@ -23,6 +23,7 @@ objectMType["lore"] = "文献"
 objectMType["corpse"] = "尸体"
 objectMType["seed"] = "种子"
 objectMType["tinker"] = "配件"
+objectMType["flesh"] = "肉"
 objectSType = {}
 objectSType["battleaxe"] = "战斧"
 objectSType["greatmaul"] = "巨槌"
@@ -101,6 +102,7 @@ objectSType["demonic"] = "恶魔道具"
 objectSType["injector"] = "注射器"
 objectSType["bomb"] = "炸弹"
 objectSType["power"] = "强力道具"
+objectSType["muscle"] = "肌肉"
 --------------------------------------------------------
 --鼠标信息
 --------------------------------------------------------

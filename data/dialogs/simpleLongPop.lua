@@ -277,3 +277,11 @@ simpleLongDlg["Urgent affair in Zigur"] = function()
 #{italic}#守护者米歇尔#{normal}#
 ]]
 end
+
+simpleLongDlg["Ritch Hive"] = function()
+	return "里奇巢穴", [[你到达了一片由沙子形成的不断变化的通道构成的迷宫。
+但是这一次，你有了科技的力量！你得到了一套#GOLD#蓝锆石掘沙者#LAST#。使用它，你可以在沙子里挖出一条前所未有的通道。
+#{italic}#只需要装备着掘沙者走向沙墙，这面沙墙就会在你面前坍塌！#{normal}#
+
+请不要被这样的事情分散太多精力，也不要忘了收集里奇虫卵！]]
+end

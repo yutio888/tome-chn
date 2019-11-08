@@ -3496,26 +3496,41 @@ registerArtifactTranslation{
 	desc = [[激光驱动的巨型粉碎器，绰号“光锤”。你能感觉到它在你的手中以无穷的力量震动。]],
 }
 registerArtifactTranslation{
+	originName = "Stralite Sand Shredder",
+	display_name = "蓝锆石掘沙者",
+	desc = "在你击中沙质墙壁的时候，会自动伸出一个巨大的旋转钻头，迅速在上面挖出一个大洞。"
+}
+registerArtifactTranslation{
+	originName = "Cave Detonator",
+	display_name = "洞穴炸弹",
+	desc = [[该炸弹用于摧毁蒸汽巨人侵略克鲁克部落的通道，220回合引爆。]],
+}
+registerArtifactTranslation{
+	originName = "Tower Detonator",
+	display_name = "塔楼炸弹",
+	desc = [[炸弹，需安置于结构薄弱处，100回合引爆时间。]],
+}
+registerArtifactTranslation{
 	originName = "Yeti's Muscle Tissue (Behemoth)",
-	display_name = "雪人族巨大的肌肉组织",
+	display_name = "雪人族肌肉组织（巨兽）",
 	unided_name = "肌肉",
 	desc = "巨大的肌肉，从一个强大的雪人身上取得。某时、某地、某物，正等你过去。",
 }
 registerArtifactTranslation{
 	originName = "Yeti's Muscle Tissue (Mech)",
-	display_name = "雪人族巨大的肌肉组织(机械化)",
+	display_name = "雪人族肌肉组织（机械）",
 	unided_name = "肌肉",
 	desc = "巨大的肌肉，从一个强大的雪人身上取得。某时、某地、某物，正等你过去。",
 }
 registerArtifactTranslation{
 	originName = "Yeti's Muscle Tissue (Astral)",
-	display_name = "雪人族巨大的肌肉组织(星界)",
+	display_name = "雪人族的肌肉组织（星界）",
 	unided_name = "肌肉",
 	desc = "巨大的肌肉，从一个强大的雪人身上取得。某时、某地、某物，正等你过去。",
 }
 registerArtifactTranslation{
 	originName = "Yeti's Muscle Tissue (Patriarch)",
-	display_name = "雪人族巨大的肌肉组织(族长)",
+	display_name = "雪人族的肌肉组织（族长）",
 	unided_name = "肌肉",
 	desc = "巨大的肌肉，从一个强大的雪人身上取得。某时、某地、某物，正等你过去。",
 }

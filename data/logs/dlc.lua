@@ -351,7 +351,12 @@ logCHN:newLog{
 		return("#{bold}#%s'的蒸汽工具造成了致命一击！#{normal}#"):format(a)
 	end,
 }
-
+logCHN:newLog{
+	log = "#OLIVE_DRAB#You carefully pickup the stack of herbs.",
+	fct = function()
+		return( "#OLIVE_DRAB#你小心地捡起了一堆草药。")
+	end,
+}
 logCHN:newLog{
 	log = "#PURPLE#As %s falls down you see %s reach to it, devour its essence and raise it back as a demonic husk.",
 	fct = function(a,b)

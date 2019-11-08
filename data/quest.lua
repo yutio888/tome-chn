@@ -114,7 +114,7 @@ description = function(desc)
 	desc = string.gsub(desc,"The volcano is attacked by orcs. A few Sun Paladins made it there with you. They will hold the line at the cost of their lives to buy you some time."," 火山受到了兽人的攻击，一些太阳骑士正顶在最前线用他们的生命来帮助你争取一些时间。")
 	desc = string.gsub(desc,"Honor their sacrifice; do not let the orcs finish their work!"," 向他们的献身精神致敬！不要让兽人们达成所愿。")
 	desc = string.gsub(desc,"You arrived too late. The place has been drained of its power and the sorcerers have left."," 你来的太晚了，这里的能量已经被吸干，而那些法师已经离开了。")
-	desc = string.gsub(desc,"Use the portal to go back to the Far East. You *MUST* stop them, no matter the cost."," 使用传送门到达远东大陆，你必须阻止他们，不惜一切代价！ ")
+	desc = string.gsub(desc,"Use the portal to go back to the Far East. You %*MUST%* stop them, no matter the cost."," 使用传送门到达远东大陆，你必须阻止他们，不惜一切代价！ ")
 	desc = string.gsub(desc,"You arrived in time and interrupted the ritual. The sorcerers have departed."," 你终于及时赶来阻止了仪式，法师们被驱散了。")
 	return desc
 end}

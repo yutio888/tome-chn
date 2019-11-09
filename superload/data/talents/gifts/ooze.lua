@@ -14,7 +14,7 @@ registerTalentTranslation{
 		浮肿软泥怪对非均摊的伤害的抗性很高（ %d%% 对全部伤害的抗性）,同时生命回复快。
 		受精神强度影响，最大生命值有额外加成。 
 		受灵巧影响，几率有额外加成。]]):
-		format(t.getMaxHP(self, t), t.getChance(self, t)*3/100, t.getMax(self, t), t.getSummonTime(self, t), t.getOozeResist(self, t))
+		format(t.getMaxHP(self, t), t.getChance(self, t)*3/100, t.getSummonTime(self, t),  t.getMax(self, t),t.getOozeResist(self, t))
 	end,
 }
 

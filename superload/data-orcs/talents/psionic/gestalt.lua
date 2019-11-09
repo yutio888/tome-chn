@@ -16,7 +16,7 @@ registerTalentTranslation{
 	name = "强化格式塔",
 	info = function(self, t)
 		local shield_power = t.getShieldPower(self, t)
-		return ([[每当你在格式塔激活状态中使用蒸汽技能时，你会吸取一些残留的力量	来形成一个精神护盾。
+		return ([[每当你在格式塔激活状态中使用蒸汽技能时，你会吸取一些残留的力量来形成一个精神护盾。
 		这个护盾持续 3 回合，并能吸收 %d 伤害。
 		效果会随着你的精神强度增加。]]):format(shield_power)
 	end,}

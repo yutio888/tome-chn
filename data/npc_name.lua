@@ -684,7 +684,7 @@ npcNameCHN["multi-hued drake"] = "七彩龙"
 npcDescCHN["multi-hued drake"] = "一只成年七彩龙，拥有许多致命的吐息和锋利的爪子。"
 
 npcNameCHN["greater multi-hued wyrm"] = "强化七彩巨龙"
-npcDescCHN["greater multi-hued wyrm"] = "一只年长且强大的火龙，拥有许多致命的吐息和锋利的爪子。"
+npcDescCHN["greater multi-hued wyrm"] = "一只年长且强大的七彩龙，拥有许多致命的吐息和锋利的爪子。"
 
 npcNameCHN["Ureslak the Prismatic"] = "七色闪光，乌瑞斯拉克"
 npcDescCHN["Ureslak the Prismatic"] = "一只巨大的七彩龙。它似乎在快速的变幻颜色。"

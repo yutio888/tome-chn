@@ -31,7 +31,7 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t) * 100
 		local shear = t.getShear(self, t)
 		local radius = self:getTalentRadius(t)
-		return ([[攻击至多三个相邻目标，造成 %d%% 武器伤害。任何一次攻击命中将会制造一次时空切变，造成 %0.2f 武器伤害，攻击半径为 %d 的锥形内的目标。		
+		return ([[攻击至多三个相邻目标，造成 %d%% 武器伤害。任何一次攻击命中将会制造一次时空切变，造成 %0.2f 时空伤害，攻击半径为 %d 的锥形内的目标。		
 		随后的每次命中都将增加切变的伤害 25%% 。  被切变将血量减少到最大值 20%% 以下的目标将会立刻死亡。
 		受法术强度影响，切变的伤害有额外加成。]])
 		:format(damage, damDesc(self, DamageType.TEMPORAL, shear), radius)

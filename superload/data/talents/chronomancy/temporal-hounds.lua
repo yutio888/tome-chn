@@ -55,7 +55,7 @@ registerTalentTranslation{
 		local affinity = t.getResists(self, t)
 		return ([[命令猎犬们使用时光吐息，锥形范围半径 %d 范围内造成 %0.2f 时空伤害并减少目标三项最高属性值 %d 点 %d 回合。
 		你免疫自己猎犬的吐息。自己的猎犬免疫其他猎犬的属性降低效果。
-		当你学会该技能后，猎犬们获得 %d%% 时空伤害吸收。]]):format(damDesc(self, DamageType.TEMPORAL, damage), radius, stat_damage, duration, affinity)
+		当你学会该技能后，猎犬们获得 %d%% 时空伤害吸收。]]):format(radius, damDesc(self, DamageType.TEMPORAL, damage),  stat_damage, duration, affinity)
 	end,
 }
 

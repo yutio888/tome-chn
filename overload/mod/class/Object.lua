@@ -1497,9 +1497,9 @@ function _M:getTextualDesc(compare_with, use_actor)
 		compare_table_fields(w, compare_with, field, "inc_damage_actor_type", "%+d%% ", "Damage against: ", function(item)
 				local _, _, t, st = item:find("^([^/]+)/?(.*)$")
 				if st and st ~= "" then
-					return st:gsub("humanoid","人形怪"):gsub("demon","恶魔"):gsub("animal","动物"):gsub("undead","不死族"):gsub("dragon","龙"):gsub("horror","恐魔")	
+					return st:gsub("humanoid","人形怪"):gsub("demon","恶魔"):gsub("animal","动物"):gsub("undead","不死族"):gsub("dragon","龙"):gsub("horror","恐魔"):gsub("summoned","召唤物")
 				else
-					return t:gsub("humanoid","人形怪"):gsub("demon","恶魔"):gsub("animal","动物"):gsub("undead","不死族"):gsub("dragon","龙"):gsub("horror","恐魔")	
+					return t:gsub("humanoid","人形怪"):gsub("demon","恶魔"):gsub("animal","动物"):gsub("undead","不死族"):gsub("dragon","龙"):gsub("horror","恐魔")	:gsub("summoned","召唤物")
 				end
 			end)
 

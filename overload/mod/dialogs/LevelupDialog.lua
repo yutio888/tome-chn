@@ -222,9 +222,9 @@ function _M:finish()
 		end
 	end
 
-	for t_id, _ in pairs(self.talents_learned) do
+	for t_id, level in pairs(self.talents_learned) do
 		local t = self.actor:getTalentFromId(t_id)
-		if t.on_levelup_close then
+		if level > 0 and t.on_levelup_close then
 			local lvl = self.actor:getTalentLevel(t_id)
 			local lvl_raw = self.actor:getTalentLevelRaw(t_id)
 			local old_lvl = self.actor_dup:getTalentLevel(t_id)
@@ -353,7 +353,7 @@ function _M:isUnlearnable(t, limit)
 	if limit then min = math.max(1, #list - (max - 1)) end
 	for i = #list, min, -1 do
 		if list[i] == t.id then
-			if not game.state.birth.force_town_respec or not self.in_combat or (game.level and game.level.data and game.level.data.allow_respec == "limited") then
+			if not self.actor.in_combat or (game.level and game.level.data and game.level.data.allow_respec == "limited") then
 				return i
 			else
 				return nil, i

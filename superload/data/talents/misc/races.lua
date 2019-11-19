@@ -14,7 +14,7 @@ registerTalentTranslation{
 	id = "T_OVERSEER_OF_NATIONS",
 	name = "远见卓识",
 	info = function(self, t)
-		return ([[虽然高贵血统并不意味着统治他人（当然也没有特别的意愿去那样做），但是他们经常承担更高的义务。 
+		return ([[虽然高等人类的高贵血统并不意味着统治他人——他们也没有特别的意愿去那样做——但是他们经常承担更高的义务。 
 		他们的本能使得他们比别人有更强的直觉。 
 		增加 %d%% 目盲免疫 , 提高 %d 点最大视野范围并提高 %d 光照、夜视及感应范围。
 		技能等级 5 时，每次你命中目标，你将获得 15 格范围内同类型生物感知能力，持续 5 回合。]]):
@@ -27,7 +27,7 @@ registerTalentTranslation{
 	name = "魔法亲和",
 	info = function(self, t)
 		local netpower = t.power(self, t)
-		return ([[高等人类们最初是在厄流纪前由红衣主神们创造的。他们天生具有魔法天赋。 
+		return ([[高等人类们最初是在厄流纪由孔克雷夫创造的。他们天生具有魔法天赋。 
 		提高 %d 点法术豁免和 %d%% 奥术抵抗。
 		每次释放伤害法术时， 5 回合内该伤害类型获得 20%% 伤害加成。（该效果有冷却时间。）]]):
 		format(t.getSave(self, t), netpower)
@@ -143,7 +143,7 @@ registerTalentTranslation{
 	name = "石化皮肤",
 	info = function(self, t)
 		return ([[矮人皮肤是一种复杂的结构，它可以在受到打击后自动硬化。 
-		当被击打时有 15%% 的概率增加 %d 点护甲值，持续 5 回合，同时无视触发该效果的攻击。
+		当你被近战攻击击中时有 15%% 的概率增加 %d 点护甲值，持续 5 回合，同时无视触发该效果的攻击。
 		该效果无冷却时间，可重复触发。]]):
 		format(t.armor(self, t))
 	end,

@@ -269,3 +269,7 @@ yesnoPopDlg["Challenge: #PURPLE#Headhunter"] = function(desc)
 	desc = desc:gsub("spawns of Urh'Rok on the level before killing any other elite %(or higher rank%) creatures, for an uncommon reward.", " 个乌鲁克的子嗣，获得稀有奖励。")
 	return "挑战： #PURPLE#猎头者", desc, "拒绝", "接受"
 end
+
+yesnoPopDlg["Antimagic Magic combo"] = function(desc)
+	return "反魔和魔法的组合", "你选择的种族/职业搭配同时具有魔法能力和反魔属性，这个结果恐怕会是很糟糕的。你确认要继续吗？", "不", "是的，我就是要这么干"
+end

@@ -6,7 +6,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		return ([[进入杀戮狂热状态 3 回合。
 		狂热状态下，  你使用的第一个职业技能不进入冷却（再次使用将进入冷却。）
-		该效果对纹身、符文、瞬间技能以及固定冷却时间技能无效。
+		该效果对纹身、符文、被动技能、瞬间技能以及固定冷却时间技能无效。
 		]]):
 		format()
 	end,
@@ -57,7 +57,7 @@ registerTalentTranslation{
 	name = "自然之怒",
 	info = function(self, t)
 		return ([[你释放持续 5 回合的自然的愤怒。
-		愤怒状态下，每当你造成伤害时有 %d%% （每回合第一次攻击 100%% ）几率震慑 3 回合。
+		愤怒状态下，每当你造成伤害时有 %d%% （每回合攻击的第一个生物 100%% ）几率震慑 3 回合。
 		该效果每回合只能震慑一个敌人。
 		震慑几率受体质影响，强度由物理或精神强度中较高一项决定。]]):
 		format(t.getChance(self, t))
@@ -95,7 +95,7 @@ registerTalentTranslation{
 		return ([[ 伊格除去了你身体内部肮脏的魔法符文，并改用龙血提供能量维持你的身体。
 		龙血强化了你，使你获得 %d%% 震慑抗性， %d%% %s 伤害抗性， %d %s 近战附加伤害。
 		你可以主动开启该技能来改变龙力类型，进而改变相应元素。
-		
+		抗性和附加伤害受意志值加成。
 		改变类型需要战斗经验，你必须杀死 100 生物后才能使用（当前 %d）。
 		
 		当你学会该技能时，你变得如此强大，以至于能双持任何单手武器。]]):
@@ -117,6 +117,8 @@ registerTalentTranslation{
 	id = "T_WARBORN",
 	name = "龙血打击",
 	info = function(self, t)
+		local damtype = self.drake_infused_blood_type or DamageType.FIRE
+		local damname = DamageType:get(damtype).text_color..DamageType:get(damtype).name.."#LAST#"
 		return ([[ 你被伊格制造的唯一理由：对魔法作战！
 		打击你的敌人，造成 %d%% %s 武器伤害，并沉默它们 %d 回合。
 		伤害类型根据龙血的类型而决定。

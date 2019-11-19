@@ -124,7 +124,7 @@ simplePopDlg["Hidden treasure"] = function()
 end
 
 simplePopDlg["Grand Corruptor"] = function()
-	return "高阶堕落者", "#LIGHT_GREEN#高阶堕落者注视着你。你感到知识在你的心中流淌。你现在可以控制一些堕落能量了。"
+	return "大堕落者", "#LIGHT_GREEN#大堕落者注视着你。你感到知识在你的心中流淌。你现在可以掌握一些堕落能力了。"
 end
 
 simplePopDlg["Not enough money"] = function(str)
@@ -144,13 +144,13 @@ end
 
 simplePopDlg["Lichform"] = function(str)
 	str = str:gsub("You have mastered the lesser arts of overcoming death, but your true goal is before you: the true immortality of Lichform!","你在对抗死亡的过程中初窥门径，但是你的真正目标还很遥远——成为一位不朽的巫妖！")
-	str = str:gsub("#GREY#You feel your life slip away, only to be replaced by pure arcane forces! Your flesh starts to rot on your bones, and your eyes fall apart as you are reborn into a Lich!","#GREY#你觉得你的生命在不断流失，取而代之的是纯粹的神秘力量！肉体腐烂的只剩骨头，眼睛也崩落不见，你终于转生成了巫妖！")
+	str = str:gsub("#GREY#You feel your life slip away, only to be replaced by pure arcane forces! Your flesh starts to rot on your bones, and your eyes fall apart as you are reborn into a Lich!","#GREY#你觉得你的生命在不断流失，取而代之的是纯粹的奥术力量！肉体腐烂的只剩骨头，眼睛也崩落不见，你终于转生成了巫妖！")
 	return "巫妖转生",str
 end
 
 simplePopDlg["Cursed Fate"] = function(str)
 	str = str:gsub("The","这个")
-	str = str:gsub("returns to normal and your hate subsides.","变回正常，你的仇恨消弭了。")
+	str = str:gsub("returns to normal and your hate subsides.","变回原样，你的仇恨消弭了。")
 	return "被诅咒的命运",str
 end
 
@@ -406,7 +406,7 @@ simplePopDlg["Illusory Castle"] = function(text)
 end
 
 simplePopDlg["Captive Krogs"] = function()
-	return "被俘的克罗格", [[被从时间牢笼里被解救的克罗格是非常脆弱的！]]
+	return "被俘的克罗格", [[克罗格身上的时间牢笼被解除了，它们现在非常脆弱！]]
 end
 
 simplePopDlg["Tinker's Master"] = function(text)

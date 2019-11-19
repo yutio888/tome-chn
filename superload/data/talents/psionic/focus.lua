@@ -5,7 +5,7 @@ registerTalentTranslation{
 	name = "心灵鞭笞",
 	info = function(self, t)
 		local dam = t.getDamage(self, t)
-		return ([[汇聚能量形成一道光束鞭笞敌人，造成 %d 点物理伤害并使他们失去平衡两轮（-15%% 全局速度）。
+		return ([[汇聚能量形成一道光束鞭笞敌人，造成 %d 点物理伤害并使他们失去平衡两轮（-15%% 整体速度）。
 		受精神强度影响，伤害有额外加成。]]):
 		format(damDesc(self, DamageType.PHYSICAL, dam))
 	end,

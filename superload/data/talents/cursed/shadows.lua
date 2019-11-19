@@ -83,7 +83,7 @@ registerTalentTranslation{
 		local dominateLevel = t.getDominateLevel(self, t)
 		local fadeCooldown = math.max(3, 8 - self:getTalentLevelRaw(t))
 		return ([[将仇恨注入你的阴影，强化他们的攻击。他们获得 %d%% 额外命中和 %d%% 额外伤害加成。 
-		他们疯狂的攻击可以令他们控制对手，提高控制目标的所有伤害 4 回合（等级 %d ， %d%% 几率 1 码范围）。 
+		他们疯狂的攻击可以令他们支配对手，提高被支配目标所受到的所有伤害 4 回合（等级 %d ， %d%% 几率 1 码范围）。 
 		它们同时拥有消隐的能力，免疫所有伤害直到下一回合开始（ %d 回合冷却时间）。]]):format(combatAtk, incDamage, dominateLevel, dominateChance, fadeCooldown)
 	end,
 }

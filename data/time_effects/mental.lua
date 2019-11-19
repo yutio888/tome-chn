@@ -415,45 +415,8 @@ timeEffectCHN:newEffect{
 	subtype = "疯狂",
 }
 
-timeEffectCHN:newEffect{
-	id = "PACIFICATION_HEX",
-	enName = "Pacification Hex",
-	chName = "宁神邪术",
-	type = "精神",
-	subtype = "邪术/支配",
-}
 
-timeEffectCHN:newEffect{
-	id = "BURNING_HEX",
-	enName = "Burning Hex",
-	chName = "燃烧邪术",
-	type = "精神",
-	subtype = "邪术/火焰",
-}
 
-timeEffectCHN:newEffect{
-	id = "EMPATHIC_HEX",
-	enName = "Empathic Hex",
-	chName = "转移邪术",
-	type = "精神",
-	subtype = "邪术/支配",
-}
-
-timeEffectCHN:newEffect{
-	id = "DOMINATION_HEX",
-	enName = "Domination Hex",
-	chName = "支配邪术",
-	type = "精神",
-	subtype = "邪术/支配",
-}
-
-timeEffectCHN:newEffect{
-	id = "DOMINATE_ENTHRALL",
-	enName = "Enthralled",
-	chName = "迷惑",
-	type = "精神",
-	subtype = "支配",
-}
 
 timeEffectCHN:newEffect{
 	id = "HALFLING_LUCK",

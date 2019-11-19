@@ -40,15 +40,20 @@ registerTalentTranslation{
 	id = "T_DISRUPTION_SHIELD",
 	name = "干扰护盾",
 	info = function(self, t)
-		local radius = self:hasEffect(self.EFF_AETHER_AVATAR) and 10 or 3
-		return ([[你的身边充满奥术力量，阻止你受到的伤害，并将其改为扣减法力值。
-		你受到的伤害的 25%% 将会被改为扣减法力值，每点伤害扣减 %0.2f 点法力值。伤害护盾会降低这一消耗。
-		当你解除干扰护盾时，你会获得 100 点法力值，并在你周围产生半径为 %d 的致命的奥术风暴，持续 10 回合，每回合造成 10%% 的吸收的总伤害，共造成 %d 点伤害。
-		当你的法力值不足 10%% 时，你会自动解除这一技能。
-		伤害到魔法的比例受你的法术强度加成。]]):
-		format(t.getManaRatio(self, t), radius, damDesc(self, DamageType.ARCANE, t.getMaxDamage(self, t)))
+		return ([[你的身边充满奥术力量，制造出一层能吸收%d伤害的护盾。
+		在战斗中你无法集中精力持续维持这层护盾，一旦护盾值消耗归零，则会使用你的法力值来吸收伤害，比例为%0.2f法力吸收一点伤害。
+		每当法力值被该效果消耗时，护盾会储存一定能量（最多%d）。当护盾关闭时，这些储存的能量将转化为在你身边%d格的奥术风暴，在5回合内造成累计等于能量值的奥术伤害。
+		战斗外该护盾每回合回复10%%，同时储存的能量迅速消散。
+		护盾值受法术强度加成。
+		最大储存能量受原始法力值上限加成。
+
+		当前护盾值：%d
+		当前储能: %d]]):
+		format(t.getMaxAbsorb(self, t), t.getManaRatio(self, t), t.getMaxDamage(self, t), self:getTalentRadius(t), self.disruption_shield_power or 0, self.disruption_shield_storage or 0)
 	end,
 }
+
+
 
 
 return _M

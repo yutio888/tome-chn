@@ -40,12 +40,13 @@ registerTalentTranslation{
 		end
 		return ([[你被灾厄光环笼罩，存储你造成的元素伤害。
 		当你积累的元素伤害达到 %d 时，你会向一个随机的敌人发射一次强力的爆炸，在半径 %d 范围内造成 %d 的该类型伤害，并对敌人附加以下的附加效果：
+		物理:		降低 20%% 攻击、施法和精神速度
 		#GREEN#酸性 :#LAST#  每回合受到 %d 酸性伤害，持续 5 回合。
 		#DARK_GREEN#枯萎 :#LAST#  每回合受到 %d 枯萎伤害，力量、体质和敏捷减少 %d ，持续 5 回合	
 		#GREY#黑暗 :#LAST#  造成的所有伤害减少 %d%% ，持续 5 回合。
 		#LIGHT_STEEL_BLUE#时空 :#LAST#  整体速度降低 %d%% ，持续 5 回合。	
-		#YELLOW#精神 :#LAST#  混乱 (强度 %d%% ) ，持续 5 回合。
-		同种效果最多每 12 回合触发一次。这不是普通的技能冷却。 
+		#ORANGE#精神 :#LAST#  混乱 (强度 %d%% ) ，持续 5 回合。
+		同种效果最多每 10 回合触发一次。这不是普通的技能冷却。 
 		伤害和效果强度随你的灵巧值增加，伤害阈值随你的等级增加，施加附加效果的强度由你的精神强度和法术强度的最高值决定。
 		%s]])
 		:format(t.getThreshold(self, t), self:getTalentRadius(t), t.getDamage(self, t), t.getAcid(self, t), blight_dam, blight_disease, t.getDarkness(self, t), t.getTemporal(self, t), t.getMind(self, t), str)

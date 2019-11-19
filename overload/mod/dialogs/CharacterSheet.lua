@@ -1184,7 +1184,7 @@ function _M:drawDialog(kind, actor_to_compare)
 		text = compare_fields(player, actor_to_compare, function(actor, ...) return actor:combatCritReduction()  end, "%d%%", "%+.0f%%")
 		self:mouseTooltip(self.TOOLTIP_CRIT_REDUCTION,s:drawColorStringBlended(self.font,           ("暴击减免      ： #00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
 		text = compare_fields(player, actor_to_compare, function(actor, ...) return actor:attr("ignore_direct_crits") or 0 end, "%d%%", "%+.0f%%")
-		self:mouseTooltip(self.TOOLTIP_CRIT_SHRUG,s:drawColorStringBlended(self.font,           ("暴击伤害减免    ： #00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
+		self:mouseTooltip(self.TOOLTIP_CRIT_SHRUG,s:drawColorStringBlended(self.font,           ("暴击摆脱    ： #00ff00#%s"):format(text), w, h, 255, 255, 255, true)) h = h + self.font_h
 
 		h = h + self.font_h
 		self:mouseTooltip(self.TOOLTIP_SAVES, s:drawColorStringBlended(self.font, "#LIGHT_BLUE#豁免:", w, h, 255, 255, 255, true)) h = h + self.font_h

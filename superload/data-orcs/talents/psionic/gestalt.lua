@@ -16,7 +16,7 @@ registerTalentTranslation{
 	name = "强化格式塔",
 	info = function(self, t)
 		local shield_power = t.getShieldPower(self, t)
-		return ([[每当你在格式塔激活状态中使用蒸汽技能时，你会吸取一些残留的力量	来形成一个精神护盾。
+		return ([[每当你在格式塔激活状态中使用蒸汽技能时，你会吸取一些残留的力量来形成一个精神护盾。
 		这个护盾持续 3 回合，并能吸收 %d 伤害。
 		效果会随着你的精神强度增加。]]):format(shield_power)
 	end,}
@@ -36,8 +36,8 @@ registerTalentTranslation{
 	name = "强力格式塔",
 	info = function(self, t)
 		return ([[暂时延伸你的心灵以使你的格式塔笼罩你周围半径 5 码内的敌人，最多可影响 %d 个敌人。
-		格式塔会吸收每个被影响敌人的力量（物理强度，精神强度，法术强度，蒸汽强度） %d 回合。
-		你自身的力量会增加所吸取的数额（效果每个额外的敌人都会衰减）。
+		格式塔会吸收每个被影响敌人的力量（物理强度，精神强度，法术强度，蒸汽强度） %d 点，持续 5 回合。
+		你自身的力量会增加所吸取的数额（每多吸收一个额外的敌人，效果都会衰减）。
 		除此之外，在 5 回合内你可以超脱视线的感知半径 %d 码内的生物。
 		效果会随着你的精神强度增加。]]):format(t.getNb(self, t), t.getPower(self, t), t.getSenseRadius(self, t))
 	end,}

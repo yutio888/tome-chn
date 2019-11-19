@@ -35,10 +35,10 @@ end}
 questCHN["The fall of Zigur"] = {
 name = " 伊格的陷落 ",
 description = function(desc)
-	desc = string.gsub(desc,"You decided to side with the Grand Corruptor and joined forces to assault the Ziguranth main base of power."," 你决定与“堕落者大师”并肩战斗，加入对伊格兰斯主力部队的攻击。")
-	desc = string.gsub(desc,"The Grand Corruptor died during the attack before he had time to teach you his ways."," “堕落者大师”在战斗中死了，不过战斗中你学会了他很多东西。")
-	desc = string.gsub(desc,"The defenders of Zigur were crushed, the Ziguranth scattered and weakened."," 伊格城的防御被击溃了，伊格兰斯的势力受到了分化和削弱。")
-	desc = string.gsub(desc,"In the aftermath you turned against the Grand Corruptor and dispatched him."," 最后，你背叛了堕落大师并杀死了他。")
+	desc = string.gsub(desc,"You decided to side with the Grand Corruptor and joined forces to assault the Ziguranth main base of power."," 你决定与大堕落者并肩战斗，加入对伊格兰斯的大本营的攻击。")
+	desc = string.gsub(desc,"The Grand Corruptor died during the attack before he had time to teach you his ways."," 大堕落者还没来得及教会你他的技巧，就在战斗中战死了")
+	desc = string.gsub(desc,"The defenders of Zigur were crushed, the Ziguranth scattered and weakened."," 伊格城的防御被击溃了，伊格兰斯的势力瓦解衰落了。")
+	desc = string.gsub(desc,"In the aftermath you turned against the Grand Corruptor and dispatched him."," 最后，你背叛了大堕落者并杀死了他。")
 	return desc
 end}
 
@@ -54,7 +54,7 @@ name = " 竞技场 ",
 description = function(desc)
 	desc = string.gsub(desc,"Seeking wealth, glory, and a great fight, you challenge the Arena!"," 寻找财富、荣耀和强大的对手，去挑战竞技场吧！ ")
 	desc = string.gsub(desc,"Can you defeat your foes and become Master of Arena%?"," 你能打败你的对手，甚至打败竞技场主宰么？ ")
-	desc = string.gsub(desc,"Well done! You have won the Arena: Challenge of the Master"," 干的好！你已经赢得了：竞技场主宰的荣誉！ ")
+	desc = string.gsub(desc,"Well done! You have won the Arena: Challenge of the Master"," 干的好！你已经赢得了竞技场：竞技之王的挑战战役！ ")
 	desc = string.gsub(desc,"You valiantly fought every creature the arena could throw at you and you emerged victorious!"," 你勇敢地战胜了竞技场里的所有生物并赢得了最终胜利！ ")
 	desc = string.gsub(desc,"Glory to you, you are now the new master and your future characters will challenge you."," 荣耀归于你，现在你是新的竞技场主宰，你可以用以后的角色来挑战你自己。")
 	return desc
@@ -63,7 +63,7 @@ end}
 questCHN["The agent of the arena"] = {
 name = " 竞技场代理人 ",
 description = function(desc)
-	desc = string.gsub(desc,"You were asked to prove your worth as a fighter by a rogue, in order to participate in the arena"," 你被要求用一个盗贼的角色进入竞技场证明你的实力。")
+	desc = string.gsub(desc,"You were asked to prove your worth as a fighter by a rogue, in order to participate in the arena"," 你被一个盗贼邀请，证明你作为一个斗士的能力，以获得进入竞技场的资格。")
 	desc = string.gsub(desc,"You succesfully defeated your adversaries and gained access to the arena!"," 你成功战胜了你的对手，你现在可以进入竞技场了！ ")
 	return desc
 end}
@@ -114,7 +114,7 @@ description = function(desc)
 	desc = string.gsub(desc,"The volcano is attacked by orcs. A few Sun Paladins made it there with you. They will hold the line at the cost of their lives to buy you some time."," 火山受到了兽人的攻击，一些太阳骑士正顶在最前线用他们的生命来帮助你争取一些时间。")
 	desc = string.gsub(desc,"Honor their sacrifice; do not let the orcs finish their work!"," 向他们的献身精神致敬！不要让兽人们达成所愿。")
 	desc = string.gsub(desc,"You arrived too late. The place has been drained of its power and the sorcerers have left."," 你来的太晚了，这里的能量已经被吸干，而那些法师已经离开了。")
-	desc = string.gsub(desc,"Use the portal to go back to the Far East. You *MUST* stop them, no matter the cost."," 使用传送门到达远东大陆，你必须阻止他们，不惜一切代价！ ")
+	desc = string.gsub(desc,"Use the portal to go back to the Far East. You %*MUST%* stop them, no matter the cost."," 使用传送门到达远东大陆，你必须阻止他们，不惜一切代价！ ")
 	desc = string.gsub(desc,"You arrived in time and interrupted the ritual. The sorcerers have departed."," 你终于及时赶来阻止了仪式，法师们被驱散了。")
 	return desc
 end}
@@ -443,10 +443,10 @@ end}
 questCHN["Spellblaze Fallouts"] = {
 name = " 魔法大爆炸的余波 ",
 description = function(desc)
-	desc = string.gsub(desc,"The Abashed Expanse is a part of Eyal torn apart by the Spellblaze and thrown into the void between the stars."," 次元浮岛是埃亚尔大陆的一部分，在魔法大爆炸中被撕裂并轰击到星辰之间的虚无之中 .")
+	desc = string.gsub(desc,"The Abashed Expanse is a part of Eyal torn apart by the Spellblaze and thrown into the void between the stars."," 次元浮岛曾是埃亚尔大陆的一部分，在魔法大爆炸中被撕裂并轰击到星辰之间的虚无之中 .")
 	desc = string.gsub(desc,"It has recently begun to destabilize, threatening to crash onto Eyal, destroying everything in its path."," 现在变的越来越不稳定，有与 Eyal 大陆发生碰撞的危险，摧毁一切它所碰到的东西。")
 	desc = string.gsub(desc,"You have entered it and must now stabilize three wormholes by firing any spell at them."," 你现在必须进入那里，对三个虫洞进行施法以稳定它们。")
-	desc = string.gsub(desc,"Remember, the floating islands are not stable and might teleport randomly. However, the disturbances also help you: your Phase Door spell is fully controllable even if not of high level yet."," 记住，浮岛上很不稳定，有可能将你随机传送，不过也有一个好处，你的传送之门技能会受到完全控制，就算你的技能等级不够高也没关系。")
+	desc = string.gsub(desc,"Remember, the floating islands are not stable and might teleport randomly. However, the disturbances also help you: your Phase Door spell is fully controllable even if not of high level yet."," 记住，浮岛上很不稳定，有可能将你随机传送，不过也有一个好处，你可以完全控制你的相位门技能，就算你的技能等级不够高也没关系。")
 	desc = string.gsub(desc,"You have explored the expanse and closed all three wormholes."," 你已经探索了整个浮岛并关闭了所有三个虫洞。")
 	desc = string.gsub(desc,"You have closed"," 你关闭了 ")
 	return desc
@@ -455,7 +455,7 @@ end}
 questCHN["Reknor is lost!"] = {
 name = " 在瑞克纳迷路了！ ",
 description = function(desc)
-	desc = string.gsub(desc,"You were part of a group of dwarves sent to investigate the situation of the kingdom of Reknor."," 你是被指派到瑞库纳国王大厅去调查情况的一个矮人小分队的一员。")
+	desc = string.gsub(desc,"You were part of a group of dwarves sent to investigate the situation of the kingdom of Reknor."," 你是被指派到瑞库纳王国去调查情况的一个矮人小分队的一员。")
 	desc = string.gsub(desc,"When you arrived there you found nothing but orcs, well organized and very powerful."," 当你到达那里时，你受到了大量有组织的强力兽人的阻击。")
 	desc = string.gsub(desc,"Most of your team was killed there and now you and Norgan %(the sole survivor besides you%) must hurry back to the Iron Council to bring the news."," 你队伍中大多数人被杀死，现在你和诺尔甘 ( 除你以外的唯一幸存者 ) 必须赶紧突围回到钢铁议会去汇报这里的情况。")
 	desc = string.gsub(desc,"Let nothing stop you."," 不惜一切代价冲出去。")
@@ -475,12 +475,12 @@ description = function(desc)
 	desc = string.gsub(desc,"You have explored the Old Forest and vanquished Shardskin."," 你已经探索了古老森林并杀死了水晶树精。")
 	desc = string.gsub(desc,"You must explore the Old Forest and find out what lurks there and what treasures are to be gained!"," 你已经探索了古老森林并查清了那里潜伏的危险，还获得了那里的宝藏。")
 	desc = string.gsub(desc,"You have explored the Maze and vanquished the Minotaur."," 你已经探索了迷宫并杀死了米诺陶。")
-        desc = string.gsub(desc,"You have explored the Maze and vanquished the Horned Horror"," 你已经探索了迷宫并杀死了长角恐魔。")
+	desc = string.gsub(desc,"You have explored the Maze and vanquished the Horned Horror"," 你已经探索了迷宫并杀死了长角恐魔。")
 	desc = string.gsub(desc,"You must explore the Maze and find out what lurks there and what treasures are to be gained!"," 你已经探索了迷宫并查清了那里潜伏的危险，还获得了那里的宝藏。")
 	desc = string.gsub(desc,"You have explored the Sandworm Lair and vanquished their Queen."," 你已经探索了沙虫巢穴并杀死了沙虫皇后。")
 	desc = string.gsub(desc,"You must explore the Sandworm Lair and find out what lurks there and what treasures are to be gained!"," 你已经探索了沙虫巢穴并查清了那里潜伏的危险，还获得了那里的宝藏。")
-	desc = string.gsub(desc,"You have explored the Daikara and vanquished the huge ice dragon that dwelled there."," 你已经探索了岱卡拉并杀死了冰龙。")
-	desc = string.gsub(desc,"You have explored the Daikara and vanquished the huge fire dragon that dwelled there."," 你已经探索了岱卡拉并杀死了火龙。")
+	desc = string.gsub(desc,"You have explored the Daikara and vanquished the huge ice dragon that dwelled there."," 你已经探索了岱卡拉并杀死了这里的冰龙。")
+	desc = string.gsub(desc,"You have explored the Daikara and vanquished the huge fire dragon that dwelled there."," 你已经探索了岱卡拉并杀死了这里的火龙。")
 	desc = string.gsub(desc,"You must explore the Daikara and find out what lurks there and what treasures are to be gained!"," 你已经探索了岱卡拉并查清了那里潜伏的危险，还获得了那里的宝藏。")
 	return desc
 end}
@@ -511,7 +511,7 @@ end}
 questCHN["Serpentine Invaders"] = {
 name = " 蛇形的侵略者 ",
 description = function(desc)
-	desc = string.gsub(desc,"Nagas are invading the slazish fens. The Sunwall cannot fight on two fronts; you need to stop the invaders before it is too late.\n Locate and destroy the invaders' portal."," 纳迦正在攻击斯拉伊什沼泽，太阳堡垒不能同时两线作战，你必须抓紧时间阻止那些侵略者以免来不及。 \n 找到并摧毁侵略者的传送门。")
+	desc = string.gsub(desc,"Nagas are invading the slazish fens. The Sunwall cannot fight on two fronts; you need to stop the invaders before it is too late.\n Locate and destroy the invaders' portal."," 纳迦正在攻击斯拉伊什沼泽，太阳堡垒不能同时两线作战，你必须抓紧时间阻止那些侵略者，以免为时过晚。 \n 找到并摧毁侵略者的传送门。")
 	desc = string.gsub(desc,"You have destroyed the naga portal. The invasion is stopped."," 你摧毁了纳迦的传送门，侵略者被阻止了。")
 	desc = string.gsub(desc,"You are back in Var'Eyal, the Far East as the people from the west call it."," 你回到了瓦 · 埃亚尔——来自西方的人称呼远东大陆的名字。")
 	desc = string.gsub(desc,"However, you were teleported to a distant land. You must find a way back to the Gates of Morning."," 然而，你被传送到了一个遥远的区域，你必须找到返回晨曦之门的方法。")
@@ -522,9 +522,9 @@ end}
 questCHN["Madness of the Ages"] = {
 name = " 疯狂的岁月 ",
 description = function(desc)
-	desc = string.gsub(desc,"The Thaloren forest is disrupted. Corruption is spreading. Norgos the guardian bear is said to have gone mad."," 自然精灵森林陷入了混乱，到处肆虐着堕落。听说诺尔格斯，守护巨熊，陷入了疯狂。")
+	desc = string.gsub(desc,"The Thaloren forest is disrupted. Corruption is spreading. Norgos the guardian bear is said to have gone mad."," 自然精灵森林陷入了混乱，到处肆虐着堕落。据说守护巨熊诺尔格斯已经陷入了疯狂。")
 	desc = string.gsub(desc,"On the western border of the forest a gloomy aura has been set up. Things inside are... twisted."," 在森林的西部边境被设置了一个黑暗光环，里面的东西已陷入了扭曲。")
-	desc = string.gsub(desc,"You have explored Norgos' Lair and put it to rest."," 你已经探索了诺尔格斯的巢穴并埋葬了他们。")
+	desc = string.gsub(desc,"You have explored Norgos' Lair and put it to rest."," 你已经探索了诺尔格斯的巢穴并埋葬了它。")
 	desc = string.gsub(desc,"You have explored Norgos' Lair and stopped the shivgoroth invasion."," 你已经探索了诺尔格斯的巢穴并阻止了寒冰元素的侵略。")
 	desc = string.gsub(desc,"You must explore Norgos' Lair."," 你必须调查诺尔格斯的巢穴。")
 	desc = string.gsub(desc,"You have explored the Heart of the Gloom and slain the Withering Thing."," 你已经探索了黑暗中心并杀死了凋零。")
@@ -545,7 +545,7 @@ end}
 questCHN["Following The Way"] = {
 name = " 保卫维网 ",
 description = function(desc)
-	desc = string.gsub(desc,"You have been tasked to remove two threats to the yeeks."," 你被派去清除对夺心魔的两大威胁。")
+	desc = string.gsub(desc,"You have been tasked to remove at leastg one of the threats to the yeeks.\n"," 你被派去清除对夺心魔的两大威胁。")
 	desc = string.gsub(desc,"Protect the Way, and vanquish your foes."," 守护维网，征服你的敌人。")
 	desc = string.gsub(desc,"You have explored the underwater zone and vanquished Murgol."," 你已经探索了水下区域并击败了穆格尔。")
 	desc = string.gsub(desc,"You must explore the underwater lair of Murgol."," 你必须调查一下穆格尔位于水下的巢穴。")

@@ -49,6 +49,7 @@ newChat{ id="activate",
 那个东西有着粗略的人形，但它没有脑袋，只有像触角一样的肢体。看上去似乎不像是敌人。#WHITE#*]],
 	answers = {
 		{"[离开]", action=function(npc, player)
+			if not player:hasQuest("shertul-fortress") then player:grantQuest("shertul-fortress") end
 			player:hasQuest("shertul-fortress"):spawn_butler()
 		end,},
 	}

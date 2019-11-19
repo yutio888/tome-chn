@@ -75,15 +75,15 @@ registerLoreTranslation{
 	name = "重伤的手",
 	lore = [[[i](你看到了一双被黑色皮手套包裹的腐烂的人手，手腕被切断了。它的手里拿着一个破碎的神器，样子就像是多元水晶球，水晶球和他的手掌之间夹着一张纸条。)[/i]
 
-"Drew the short straw" for the calibration [i]my entire ass.[/i]  That cheat used translocation magic and everyone there knew it.  If there's one thing I miss about the Ziguranth, it's that with them around, you only had to watch for sleight-of-hand and wear a mind-caging cap to avoid getting ripped off.
+“抽到签的人负责矫正传送门”[i]我的屁股[/i]。大家都知道，那个作弊的家伙肯定使用了换位魔法。如果说我有什么怀念伊格兰斯的地方的话，那就是如果他们还在，你只要能看穿那些家伙的手上功夫，戴上一顶抗精神攻击的帽子，就不会被人狠宰一通。
 
-Speaking of ripoffs, why are we trusting this corpse-lover anyway? I guess it WOULD cost more to make a fake this convincing than we paid for it, but...  why would Tannen have made a portal that only works on the living, then used it to pay off a necromancer, [i]the only type of person who'd call that a downside?[/i]
+说到宰人，我们干嘛要信任那个恋尸癖？我知道，如果真的是造假的话，以我们所付的代价，这造假的成本未免也太高了，但是……为什么泰恩在制作了一个只能用来传输活物的传送门之后，把它交给了一个死灵法师来偿债，[i]这是世界上唯一一个会把这件事看做致命缺陷的家伙？[/i]
 
-Well, I guess that's what made him a [i]mad[/i] alchemist, and not some rich potion-brewer living comfortably.  Not like anyone can ask him now, except for who we got this altar from.
+好吧，我知道，这就是为什么他是一个[i]疯狂炼金师[/i]，而不是一个安居乐业的普通药水贩子。而且，除了我们拿到传送祭坛的那个家伙，也没有人能亲自去问他。
 
-Anyway...  Korbek, if you're reading this, it means those crotch-heights screwed up again.  Send them back the orb, and hopefully it'll tell them what they need (well, as far as I'm concerned, [i]hopefully[/i] it'll blow them apart).  You got the calibration right on your end, and your poorly-disguised thugs are doing just fine (and stop with the illusions, it's just insulting, we don't care who or what you are as long as your gold glitters).  We just need to get the signal lock straight on our side, and we'll be able to fill the order you sent over, and then some.
+不管怎么样……库贝克，如果你读到这份信的话，说明那些缩头缩脑的死矮子又搞砸了。把水晶球交回给他们，希望这里面能够记录下他们所需要的信息（好吧，如果要我说的话，[i]希望这东西把他们全炸死[/i]）。你最终就能得到正确的校准，并且你那些伪装地很差的暴徒干的也不错（别再放幻术了，这简直是一种侮辱。只要你们肯出钱，我们根本不关心你是谁或者是什么。）我们只需要在你那边设置正确的信号锁，就可以完成你送过来的请求，甚至更多。
 
-Seriously, though, I'm writing this note so even if I get killed from this, I'm doing you a favor.  If I'm dead, I'd appreciate you showing your gratitude by making sure that ankle-biting son-of-a-ritch has played his last game of musical straws.
+不过，说真的，我写这份信，是为了确保即使我在这个过程中死了，我也能够为你做一些事。如果我真的死了，希望你确保那个里奇养的小瘪三，是最后一次在抽签的时候玩他有趣的出千游戏了。对此，我会非常感激的。
 ]],
 }
 

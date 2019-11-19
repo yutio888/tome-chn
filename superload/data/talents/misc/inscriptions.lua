@@ -58,7 +58,7 @@ registerInscriptionTranslation{
 		local data = self:getInscriptionData(t.short_name)
 		local what = table.concatNice(table.keys(data.what), ", ", " 和 ")
 		return ([[激活纹身解除你随机一个 %s 效果并减少所有伤害 %d%% 持续 %d 回合。 
-同时除去对应类型的 CT 效果。		]]):format(change_infusion_eff(what), data.power+data.inc_stat, data.dur)
+同时除去对应类型的 CT 效果（失去平衡、法术冲击和锁脑）。		]]):format(change_infusion_eff(what), data.power+data.inc_stat, data.dur)
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
@@ -107,7 +107,7 @@ registerInscriptionTranslation{
 		local bonus1 = data.die_at + data.inc_stat * 30 * bonus
 		local bonus2 = math.floor(data.dur * bonus)
 		return ([[激活这个纹身可以让你忍受致死的伤害，持续 %d回合。
-		当应用纹身激活时，你的生命值只有在降低到 -%d 生命时才会死亡。
+		当英勇纹身激活时，你的生命值只有在降低到 -%d 生命时才会死亡。
 		你每失去 1%% 生命值，持续时间和生命值下限就会增加 1%% 。（目前 %d 生命值， %d 持续时间）
 		效果结束时，如果你的生命值在 0 以下，会变为 1 点。]]):format(data.dur, data.die_at + data.inc_stat * 30, bonus1, bonus2)
 	end,
@@ -329,8 +329,9 @@ registerInscriptionTranslation{
 	display_name = "符文: 粉碎痛苦",
 	info = function(self, t)
 		return ([[激活符文，立刻清除你身上的负面效果。
-			清除所有 CT 效果，以及物理、精神和魔法负面效果各 1 个。
-			每清除一个负面效果，你都会获得一个抵挡 %d 伤害的护盾，持续 3 回合。]]):format(t.getShield(self, t) * (100 + (self:attr("shield_factor") or 0)) / 100)
+			清除所有 CT 效果（失去平衡、法术冲击和锁脑），以及物理、精神和魔法负面效果各 1 个。
+			每清除一个负面效果，你都会获得一个抵挡 %d 伤害的护盾，持续 3 回合。
+			如果只清除了CT效果，不会产生护盾且冷却时间减少75%%]]):format(t.getShield(self, t) * (100 + (self:attr("shield_factor") or 0)) / 100)
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)

@@ -4,7 +4,7 @@ registerTalentTranslation{
 	id = "T_FLEXIBLE_COMBAT",
 	name = "自由格斗",
 	info = function(self, t)
-		return ([[每当你进行近战攻击时，有 30％几率追加一次额外的徒手攻击。 ]])
+		return ([[每当你进行近战攻击时，有 50％几率追加一次额外的徒手攻击。 ]])
 		:format()
 	end,
 }

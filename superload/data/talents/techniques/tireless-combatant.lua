@@ -16,7 +16,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local slow = t.getSlow(self, t) * 100
 		local reduction = t.getReduction(self, t)
-		return ([[控制你的行动来节省体力。当这个技能激活时，你的全局速度降低 %0.1f%% ，你的疲劳值降低 %d%% （最多降至 0%% ）。]])
+		return ([[控制你的行动来节省体力。当这个技能激活时，你的整体速度降低 %0.1f%% ，你的疲劳值降低 %d%% （最多降至 0%% ）。]])
 		:format(slow, reduction)
 	end,
 }

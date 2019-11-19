@@ -87,3 +87,7 @@ bigNewsCHN:newLog{
 	log = "#CRIMSON#Interface unlocked, mouse disabled on the map",
 	translation = "#CRIMSON#界面布局解锁，你暂时不能用鼠标操作地图。",
 }
+bigNewsCHN:newLog{
+	log = "#YELLOW#You carefully collect some ritch eggs.",
+	translation = "#YELLOW#你小心地收集了一些里奇虫卵。"
+}

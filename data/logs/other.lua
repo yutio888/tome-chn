@@ -90,3 +90,13 @@ logCHN:newLog{
 	log = "The corrupted lava reanimates %s's corpse!",
 	fct = function(a) return("腐化熔岩重新支配了%s的尸体！"):format(npcCHN:getName(a)) end,
 }
+
+logCHN:newLog{
+	log = "#VIOLET# The decrepit stairs crumble some more as you climb them.",
+	fct = "#VIOLET# 当你爬上这些破旧的楼梯的时候，它摇摇欲坠，又更加破碎了一点。"
+}
+
+logCHN:newLog{
+	log = "#VIOLET# The stairway collapses completely as you ascend!",
+	fct = "#VIOLET# 当你爬上楼梯的时候，楼梯彻底坍塌了！"
+}

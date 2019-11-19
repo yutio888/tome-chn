@@ -52,7 +52,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		return ([[你在前方 %d 码锥形范围内喷出闪电。 
-		此范围内的目标会受到 %0.2f ～ %0.2f 闪电伤害（平均 %0.2f ）并被眩晕 3 回合。 
+		此范围内的目标会受到 %0.2f ～ %0.2f 闪电伤害（平均 %0.2f ）并被震慑 3 回合。 
 		受力量影响，伤害有额外加成。技能暴击率基于精神暴击值计算。
 		每点雷龙系的天赋可以使你增加闪电抵抗 1%% 。]]):format(
 			self:getTalentRadius(t),

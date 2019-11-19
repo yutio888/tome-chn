@@ -38,6 +38,6 @@ registerTalentTranslation{
 	name = "死灵吐息",
 	info = function(self, t)
 		return ([[你向半径 %d 的锥形内喷出致死瘴气。任何被喷到的目标将在 4 回合内受到 %0.2f 暗影伤害并被混乱灾祸或致盲灾祸影响。
-		伤害将会随着你的魔力增长，并且暴击率基于你的魔法暴击率。]]):format(self:getTalentRadius(t), damDesc(self, DamageType.DARKNESS, t.getDamage(self, t)))
+	伤害受魔力值加成，并且暴击率基于你的魔法暴击率。]]):format(self:getTalentRadius(t), damDesc(self, DamageType.DARKNESS, t.getDamage(self, t)))
 	end,}
 return _M

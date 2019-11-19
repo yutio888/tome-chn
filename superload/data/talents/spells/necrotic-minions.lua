@@ -25,7 +25,7 @@ registerTalentTranslation{
 		单位等级为你的等级 %+d.
 		每个单位有概率进阶为 %s:%s ]]):
 		format(nb, lev, mm, t.MinionChancesDesc(self, t)
-		:gsub("Degenerated skeleton warrior","堕落骷髅战士"):gsub("Skeleton warrior","骷髅战士"):gsub("Armoured skeleton warrior","装甲骷髅战士")
+		:gsub("Degenerated skeleton warrior","腐化骷髅战士"):gsub("Skeleton warrior","骷髅战士"):gsub("Armoured skeleton warrior","装甲骷髅战士")
 		:gsub("Skeleton archer","骷髅弓箭手"):gsub("Skeleton master archer","精英骷髅弓箭手"):gsub("Skeleton mage","骷髅法师")
 		:gsub("Ghoul","食尸鬼"):gsub("Ghast","妖鬼"):gsub("king","王"))
 		:gsub("Vampire","吸血鬼"):gsub("Master vampire","精英吸血鬼"):gsub("Grave wight","坟墓尸妖")

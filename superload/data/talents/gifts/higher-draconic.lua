@@ -33,8 +33,7 @@ registerTalentTranslation{
 	name = "龙之狡诈",
 	info = function(self, t)
 		return ([[你熟练掌握了巨龙的本性。 
-		你的力量和意志增加 %d 。
-		你获得 %d%% 击退抵抗和 %d%% 致盲、震慑抵抗。]]):format(t.getStat(self, t), 100*t.resistKnockback(self, t), 100*t.resistBlindStun(self, t))
+		你获得 %d%% 击退抵抗和 %d%% 致盲、震慑抵抗。]]):format(100*t.resistKnockback(self, t), 100*t.resistBlindStun(self, t))
 	end,
 }
 
@@ -45,7 +44,7 @@ registerTalentTranslation{
 		return ([[你获得了世界中数不清的龙的力量传承，你对物理、火焰、寒冷、酸性、自然、枯萎和暗影属性伤害的抵抗力和适应力增强了。
 		你对这些属性的 %0.1f%% ，使用这些属性的时候伤害提升 %0.1f%% ，获得 %0.1f%% 伤害穿透。
 
-		学习这一技能还会给你的吐息技能伤害增加意志值加成。若你的这两项属性相等，则这相当于加成值翻倍。]]) 
+		学习此技能后，你的龙息技能伤害将在原力量属性加成的基础上，额外增加同等比例的意志属性加成。举例而言，如果你的意志值和力量值相等，你的龙息技能伤害的属性加成将相当于学习此技能前的两倍。]]) 
 		:format(t.getResists(self, t), t.getDamageIncrease(self, t), t.getResistPen(self, t))
 	end,
 }

@@ -23,6 +23,7 @@ objectMType["lore"] = "文献"
 objectMType["corpse"] = "尸体"
 objectMType["seed"] = "种子"
 objectMType["tinker"] = "配件"
+objectMType["flesh"] = "肉"
 objectSType = {}
 objectSType["battleaxe"] = "战斧"
 objectSType["greatmaul"] = "巨槌"
@@ -101,6 +102,7 @@ objectSType["demonic"] = "恶魔道具"
 objectSType["injector"] = "注射器"
 objectSType["bomb"] = "炸弹"
 objectSType["power"] = "强力道具"
+objectSType["muscle"] = "肌肉"
 --------------------------------------------------------
 --鼠标信息
 --------------------------------------------------------
@@ -144,6 +146,7 @@ objDesc["Damage (ranged): "] = "远程附加伤害："
 objDesc["Damage against: "] = "伤害增幅："
 objDesc["#ORANGE#Attacks use: #LAST#"] ="#ORANGE#攻击消耗：#LAST#"
 objDesc["Reduced damage from: "] = "降低特定来源伤害："
+objDesc["Talent category bonus: "] = "技能树加成："
 objDesc["Armour Penetration: "] = "护甲穿透："
 objDesc["Armour penetration: "] = "护甲穿透："
 objDesc["Physical crit. chance: "] = "物理暴击率："
@@ -522,7 +525,7 @@ special_t["smash the target with your shield crippling them"] = "盾击目标并
 special_t["reduce the cooldown of your ward talent by 1"] = "减少你的守护技能1回合冷却时间"
 special_t["Learn an unarmed attack talent or enable 'Always show glove combat' to see combat stats."] = "学习空手攻击技能，或者开启 '强制显示手套战斗数据' 选项来查看战斗数据"
 special_t["Learn shield attack talent or enable 'Always show shield combat' to see combat stats."] = "学习盾牌攻击技能，或者开启 '强制显示盾牌战斗数据' 选项来查看战斗数据"
-
+special_t["restore 7 stamina and equilibrium"] = "恢复7点体力值和失衡值。"
 --装备鼠标提示汉化替换
 function getObjectDescCHN(desc)
 	if not desc then return end
@@ -695,6 +698,11 @@ function getObjectDescCHN(desc)
 					:gsub("Summoned","召唤物"):gsub("Animal","动物"):gsub("Humanoid","人形生物"):gsub("Orc","兽人")
 					:gsub("Horror","恐魔"):gsub("Dragon","龙"):gsub("Canine","犬类"):gsub("Living","活物"):gsub("Giant","巨人")
 					:gsub("Current Resistance:","当前抗性："):gsub("Blood Charges:","鲜血吸收:")
+					:gsub("unnatural","非自然生物"):gsub("undead","不死族"):gsub("demon","恶魔"):gsub("major","大型"):gsub("minor","小型")
+					:gsub("summoned","召唤物"):gsub("animal","动物"):gsub("humanoid","人形生物"):gsub("orc","兽人")
+					:gsub("horror","恐魔"):gsub("dragon","龙"):gsub("canine","犬类"):gsub("living","活物"):gsub("giant","巨人")
+					:gsub("water","水")
+					
 			--[[desc[i] =desc[i]:gsub("fire","火焰"):gsub("lightning","闪电"):gsub("arcane","奥术"):gsub("cold","寒冷")
 					:gsub("blight","枯萎"):gsub("darkness","暗影"):gsub("physical","物理"):gsub("temporal","时空")
 					:gsub("chance of gloom effects","黑暗光环")

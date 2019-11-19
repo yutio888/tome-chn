@@ -507,7 +507,7 @@ newEffect{
 		DamageType:get(DamageType.DARKNESS).projector(eff.src, self.x, self.y, DamageType.DARKNESS, eff.dam)
 	end,
 	activate = function(self, eff)
-		eff.power = util.bound(eff.power, 0, 50)
+		eff.power = math.floor(util.bound(eff.power, 0, 50))
 		eff.tmpid = self:addTemporaryValue("confused", eff.power)
 		if eff.power <= 0 then eff.dur = 0 end
 	end,
@@ -1369,7 +1369,7 @@ newEffect{
 
 newEffect{
 	name = "DIVINE_GLYPHS", image = "talents/glyph_of_explosion.png",
-	desc = "Divine Glyphs",
+	desc = "Empowered Glyphs",
 	long_desc = function(self, eff)
 		return ("A divine glyph recently triggered, providing %d%% light and darkness affinity and resistence."):format(eff.power)
 	end,
@@ -1379,18 +1379,22 @@ newEffect{
 	paramters ={},
 	activate = function(self, eff)
 		eff.power = math.min(eff.maxStacks, eff.glyphstacks or 1)*5
-		eff.aff = self:addTemporaryValue(eff, "damage_affinity", {[DamageType.LIGHT]=eff.power, [DamageType.DARKNESS]=eff.power})
-		eff.res = self:addTemporaryValue(eff, "resists", {[DamageType.LIGHT]=eff.power, [DamageType.DARKNESS]=eff.power})
+		eff.aff = self:addTemporaryValue("damage_affinity", {[DamageType.LIGHT]=eff.power, [DamageType.DARKNESS]=eff.power})
+		eff.res = self:addTemporaryValue("resists", {[DamageType.LIGHT]=eff.power, [DamageType.DARKNESS]=eff.power})
 	end,
 	on_merge = function(self, old_eff, new_eff)
 		self:removeTemporaryValue("damage_affinity", old_eff.aff)
 		self:removeTemporaryValue("resists", old_eff.res)
 		old_eff.glyphstacks = (old_eff.glyphstacks or 0) + 1
 		old_eff.power = math.min(old_eff.maxStacks, old_eff.glyphstacks or 1)*5
-		old_eff.aff = self:addTemporaryValue(eff, "damage_affinity", {[DamageType.LIGHT]=old_eff.power, [DamageType.DARKNESS]=old_eff.power})
-		old_eff.res = self:addTemporaryValue(eff, "resists", {[DamageType.LIGHT]=old_eff.power, [DamageType.DARKNESS]=old_eff.power})
+		old_eff.aff = self:addTemporaryValue("damage_affinity", {[DamageType.LIGHT]=old_eff.power, [DamageType.DARKNESS]=old_eff.power})
+		old_eff.res = self:addTemporaryValue("resists", {[DamageType.LIGHT]=old_eff.power, [DamageType.DARKNESS]=old_eff.power})
 		old_eff.dur = new_eff.dur
 		return old_eff
+	end,
+	deactivate = function(self, eff)
+		self:removeTemporaryValue("damage_affinity", eff.aff)
+		self:removeTemporaryValue("resists", eff.res)
 	end,
 }
 
@@ -2234,6 +2238,24 @@ newEffect{
 	activate = function(self, eff)
 	end,
 	deactivate = function(self, eff)
+	end,
+}
+
+
+newEffect{
+	name = "WOEFUL_CRIPPLE", image = "talents/cripple.png",
+	desc = "Woeful Cripple",
+	long_desc = function(self, eff) return ("The target is crippled, reducing melee, spellcasting and mind speed by %d%%."):format(eff.speed*100) end,
+	type = "magical",
+	subtype = { slow=true },
+	status = "detrimental",
+	parameters = { speed=0.2 },
+	on_gain = function(self, err) return "#Target# is crippled." end,
+	on_lose = function(self, err) return "#Target# is not crippled anymore." end,
+	activate = function(self, eff)
+		self:effectTemporaryValue(eff, "combat_physspeed", -eff.speed)
+		self:effectTemporaryValue(eff, "combat_spellspeed", -eff.speed)
+		self:effectTemporaryValue(eff, "combat_mindspeed", -eff.speed)
 	end,
 }
 

@@ -1012,4 +1012,32 @@ timeEffectCHN:newEffect{
 	type = "其他",
 	subtype = "",
 }
+timeEffectCHN:newEffect{
+	id = "PREDATOR",
+	enName = "Marked Prey",
+	chName = "标记猎物",
+	desc = function(self, eff)
+		local desc = "猎杀:"
+		local desc2 = ("\n%d%% 伤害减免:"):format(eff.power)
+		if not game.level then return desc..desc2 end
 
+		local preys = {}
+		for uid, e in pairs(game.level.entities) do if e.marked_prey then
+			preys[#preys+1] = e
+		end end
+		table.sort(preys, "rank")
+		for _, p in ripairs(preys) do
+			local mprank, mpcolour = p:TextRank()
+			desc = desc..("\n- %s%s#LAST#"):format(mpcolour, p.name:capitalize())
+		end
+
+		local subtypes_list = table.get(self, "mark_prey2", game.level.id)
+		for st, _ in pairs(subtypes_list) do
+			desc2 = desc2..("\n- #ffa0ff#%s#LAST#"):format(tostring(st):capitalize())
+		end
+
+		return desc..desc2
+	end,
+	type = "其他",
+	subtype = "猎杀",
+}

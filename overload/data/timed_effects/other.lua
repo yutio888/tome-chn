@@ -3892,7 +3892,6 @@ newEffect{
 		local target = eff.target
 
 		if source.dead or target.dead or not game.level:hasEntity(source) or not game.level:hasEntity(target) or not self:canProject(eff.tg, target.x, target.y) then
-		self.y, target.x, target.y) > (eff.range or 10) then
 			source:removeEffect(source.EFF_FEED)
 			if eff.particles then
 				game.level.map:removeParticleEmitter(eff.particles)

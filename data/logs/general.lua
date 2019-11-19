@@ -1321,6 +1321,6 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
-	log = "#RED#Malslek's hatred flows through you."，
-	fct = "#RED#马斯拉克的仇恨在你体内流淌。"
+	log = "#RED#Malslek's hatred flows through you.",
+	fct = "#RED#马斯拉克的仇恨在你体内流淌。",
 }

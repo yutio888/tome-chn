@@ -1015,7 +1015,7 @@ timeEffectCHN:newEffect{
 timeEffectCHN:newEffect{
 	id = "PREDATOR",
 	enName = "Marked Prey",
-	chName = "标记猎物"
+	chName = "标记猎物",
 	desc = function(self, eff)
 		local desc = "猎杀:"
 		local desc2 = ("\n%d%% 伤害减免:"):format(eff.power)

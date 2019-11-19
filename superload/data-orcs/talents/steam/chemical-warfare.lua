@@ -5,15 +5,16 @@ registerTalentTranslation{
 	name = "瘴气引擎",
 	info = function(self, t)
 		local rad = t.getMax(self, t)
-		local chance = 15 + (self:getTalentRadius(t) * 5)
+		local chance = t.getChance(self,t)
 		local heal = t.getHealing(self,t)
 		local dam = t.getDamage(self,t)
 		return ([[你使用你的蒸汽机，在你的周围产生一股有毒且有腐蚀性的化学物质形成的云雾。
-		每当你使用一个非瞬发的蒸汽科技技能的时候，你会在周围产生半径为 2 码的瘴气，持续 3 回合。所有被包裹入瘴气的敌人将会有 %d%% 的几率使用技能失败，且治疗效果减少 %d%% 。
+		每当你使用一个非瞬发的蒸汽科技技能的时候，你会在周围产生半径为 3 码的瘴气，持续 5 回合。所有被包裹入瘴气的敌人治疗效果减少 %d%% ，且会有 %d%% 的几率使用技能失败。
+		瘴气效果叠加的时候，这一技能使用失败的几率也会上升，最多叠加五次，达到 %d%% 。
 		当被瘴气影响的目标每回合第一次被近战或远程攻击击中的时候，瘴气会渗入他们的伤害，造成 %0.2f 额外的酸性伤害。
-		每一次重新造成瘴气效果的时候，瘴气将会向外扩散 1 码范围，最大扩散到 %d 码范围。
-		你和你的盟友免疫瘴气效果。]]):
-		format(chance, heal, damDesc(self, DamageType.ACID, dam), rad)
+		瘴气效果叠加的时候，持续时间不会叠加。
+		当一个生物在瘴气效果中存活下来后，它会免疫瘴气效果 9 回合。]]):
+		format(heal, chance / 5, chance, damDesc(self, DamageType.ACID, dam), rad)
 	end,
 }
 

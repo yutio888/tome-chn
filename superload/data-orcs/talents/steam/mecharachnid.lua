@@ -59,8 +59,8 @@ registerTalentTranslation{
 	name = "超速撞击",
 	info = function(self, t)
 		return ([[你冲向敌人，用尾部蒸汽链锯进行攻击，造成 %d%% 伤害，并嘲讽半径 %d 码内的所有敌人。
-		装备蒸汽链锯的时候，你使用敏捷代替力量值计算装备需求和计算武器伤害，并且增加你蒸汽链锯的伤害 %d%% 。]]):
-		format(t.getSawDamage(self,t)*100, self:getTalentRadius(t), t.getPercentInc(self,t))
+		装备蒸汽链锯的时候，你使用敏捷代替力量值计算装备需求和计算武器伤害，并且增加你蒸汽链锯的伤害 %d%% ，物理强度 %d 。]]):
+		format(t.getSawDamage(self,t)*100, self:getTalentRadius(t), t.getPercentInc(self,t)*100, t.getDamage(self, t))
 	end,
 }
 

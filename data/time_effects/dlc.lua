@@ -843,6 +843,13 @@ timeEffectCHN:newEffect{
 }
 
 timeEffectCHN:newEffect{
+	id = "MIASMA_ADAPTATION",
+	enName = "Miasma Adaptation",
+	chName = "适应瘴气",
+	desc = function(self, eff) return "免疫瘴气引擎效果。" end,
+}
+
+timeEffectCHN:newEffect{
 	id = "MIASMA_ENGINE",
 	enName = "Miasma Engine",
 	chName = "瘴气引擎",
@@ -1239,7 +1246,22 @@ timeEffectCHN:newEffect{
 	type = "魔法",
 	subtype = "",
 }
-
+timeEffectCHN:newEffect{
+	id = "ETHEREAL_LINK",
+	enName = "Ethereal Link",
+	chName = "虚幻连接",
+	desc = function(self, eff) return ("当虚幻蒸汽效果存在的时候，相位旋转技能冷却时间降低到6回合。"):format(eff.dam) end,
+	type = "魔法",
+	subtype = "",
+}
+timeEffectCHN:newEffect{
+	id = "METAPHASIC_ECHO",
+	enName = "Metaphasic Echoes",
+	chName = "相位回响",
+	desc = function(self, eff) return ("将你的链锯从裂缝中投影出去。"):format() end,
+	type = "魔法",
+	subtype = "",
+}
 timeEffectCHN:newEffect{
 	id = "SPIDERBOT_SHIELD",
 	enName = "Spiderbots Shield",
@@ -1257,6 +1279,23 @@ timeEffectCHN:newEffect{
 	type = "魔法",
 	subtype = "",
 }
+
+timeEffectCHN:newEffect{
+	id = "GALEN_DYNAMO",
+	enName = "防御电路：发电机强化",
+	desc = function(self, eff) return ("奥术发电机每消耗 10 法力值多产生 %d 蒸汽。"):format(eff.power) end,
+	type = "魔法",
+	subtype = "",
+}
+
+timeEffectCHN:newEffect{
+	id = "GALEN_PROTECTION",
+	enName = "防御电路：抗性强化",
+	desc = function(self, eff) return ("所有伤害抗性提升 %d 。"):format(eff.power) end,
+	type = "魔法",
+	subtype = "",
+}
+
 
 --Orcs floor
 

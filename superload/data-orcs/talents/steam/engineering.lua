@@ -4,9 +4,9 @@ registerTalentTranslation{
 	id = "T_EMERGENCY_STEAM_PURGE",
 	name = "紧急蒸汽净化",
 	info = function(self, t)
-		return ([[你打开所有蒸汽阀，释放半径 %d 的蒸汽冲击波，造成 %0.2f 火焰伤害。
-		若你有至少 50 点蒸汽，气体的温度将变得极高，能烧伤感知器官，令受影响的生物目盲 %d 回合。 
-		效果受当前蒸汽值加成。 1 点蒸汽值时，强度仅为 1 0 0 点蒸汽值的 15%% 。
+		return ([[你打开所有蒸汽阀，释放半径 %d 的蒸汽冲击波，造成 %0.2f 火焰伤害。（这一技能无法暴击）
+		若你有至少 35 点蒸汽，气体的温度将变得极高，能烧伤感知器官，令受影响的生物目盲 %d 回合。 
+		效果受当前蒸汽值加成。 1 点蒸汽值时，强度仅为 50 或更高点蒸汽值的 15%% 。
 		当前强度系数 %d%% 。]])
 		:format(self:getTalentRadius(t), damDesc(self, DamageType.FIRE, t.getDamage(self, t)), t.getDur(self, t), t.getFactor(self, t) * 100)
 	end,}

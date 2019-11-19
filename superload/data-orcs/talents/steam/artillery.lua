@@ -18,7 +18,7 @@ registerTalentTranslation{
 		local fear = t.getFear(self,t)
 		return ([[用高度易燃的物质强化你的火箭，让它们可以引燃目标，在 3 回合内造成 %0.2f 火焰伤害，并降低他们 %d 护甲值。继续击中被引燃的目标会刷新效果的持续时间，并造成 %0.2f 额外火焰伤害。
 被这一燃烧效果影响的目标若生命值降低到 25%% 以下，将会陷入恐慌的状态，他们每回合有 %d%% 的几率在恐慌中逃离你。
-火焰伤害和护甲降低效果受蒸汽强度加成。]]):
+火焰伤害受蒸汽强度加成。]]):
 		format(damDesc(self, DamageType.FIRE, dam), apr, damDesc(self, DamageType.FIRE, dam/2), fear)
 	end,
 }

@@ -3471,10 +3471,24 @@ registerArtifactTranslation{
 	他的取名技巧从没有得到提高。]],
 	}
 registerArtifactTranslation{
+	originName = "Galen's Flowing Robe",
+	display_name = "盖伦的科技法袍",
+	unided_name = "法袍",
+	desc = [[这身法袍是科技法师盖伦的创造，加入了科技法术的强化力量，可以对科技法术做出反应！]],
+	special_desc = function(self) return [[在释放科技法术时，有 20% 几率强化法袍中的内部防御电路。（释放普通法术时，几率为 10% ）
+		这一电路会触发以下的效果之一：
+		#AQUAMARINE#如果近战范围内有超过一个敌人#LAST#：将所有敌人传送走。
+		#AQUAMARINE#如果生命值低于 50%#LAST#：增加所有抗性20%，持续5回合。
+		#AQUAMARINE#如果蒸汽值低于 20#LAST#：强化奥术发电机，每消耗10点法力值额外生成4蒸汽，持续5回合。
+		#AQUAMARINE#其他情况#LAST#：目前冷却时间最长的法术，冷却时间重置。
+		]] end,
+}
+registerArtifactTranslation{
 	originName = "Galen's Will",
 	display_name = "盖伦的意志",
-	unided_name = "苍白的灵晶",
+	unided_name = "奥术灌注的链锯",
 	desc = [[金属制作的链锯？挑剔的科技法师可不会满足于此，所以盖伦用纯奥术力量制造了一把链锯！]],
+	special_desc = function() return "增加你奥术发电机生成的蒸汽，每消耗10点法力值额外生成2蒸汽。" end,
 }
 registerArtifactTranslation{
 	originName = "Eye of the Lost",

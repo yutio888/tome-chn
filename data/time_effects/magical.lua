@@ -368,8 +368,8 @@ timeEffectCHN:newEffect{
 
 timeEffectCHN:newEffect{
 	id = "DIVINE_GLYPHS", 
-	enName = "Divine Glyphs",
-	chName = "神圣印记",
+	enName = "Empowered Glyphs",
+	chName = "印记充能",
 	desc = function(self, eff)
 		return ("圣印最近被触发过，提供 %d%% 光系和暗影伤害吸收与抗性。"):format(eff.power)
 	end,
@@ -652,6 +652,16 @@ timeEffectCHN:newEffect{
 	type = "魔法",
 	subtype = "酸性",
 }
+
+timeEffectCHN:newEffect{
+	id = "WOEFUL_CRIPPLE", 
+	enName = "Woeful Cripple",
+	chName = "恐怖致残",
+	desc = function(self, eff) return ("目标被致残，降低20%攻击、施法和精神速度。") end,
+	type = "魔法",
+	subtype = "减速",
+}
+
 timeEffectCHN:newEffect{
 	id = "EPIDEMIC",
 	enName = "Epidemic",

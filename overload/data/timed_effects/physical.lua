@@ -846,7 +846,7 @@ newEffect{
 newEffect{
 	name = "SHELL_SHIELD", image = "talents/shell_shield.png",
 	desc = "Shell Shield",
-	long_desc = function(self, eff) return ("目标被甲壳覆盖，减少 %d%% 所受伤害。"):format(eff.power) end,
+	long_desc = function(self, eff) return ("目标被甲壳覆盖，全体伤害抗性增加%d%%。"):format(eff.power) end,
 	type = "physical",
 	subtype = { nature=true },
 	status = "beneficial",
@@ -900,7 +900,7 @@ newEffect{
 newEffect{
 	name = "PRIMAL_ATTUNEMENT", image = "talents/infusion__wild.png",
 	desc = "Primal Attunement",
-	long_desc = function(self, eff) return ("目标和自然协调 , 增加全体伤害吸收 %d%% ，减少随机负面效果的持续时间 %d%% 。"):format(eff.power, eff.reduce) end,
+	long_desc = function(self, eff) return ("目标和自然协调 , 增加全体伤害吸收 %d%% ，每回合随机减少一个负面状态 %d 回合持续时间 。"):format(eff.power, eff.reduce) end,
 	type = "physical",
 	subtype = { nature=true },
 	status = "beneficial",

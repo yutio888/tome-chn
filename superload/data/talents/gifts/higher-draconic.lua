@@ -33,8 +33,7 @@ registerTalentTranslation{
 	name = "龙之狡诈",
 	info = function(self, t)
 		return ([[你熟练掌握了巨龙的本性。 
-		你的力量和意志增加 %d 。
-		你获得 %d%% 击退抵抗和 %d%% 致盲、震慑抵抗。]]):format(t.getStat(self, t), 100*t.resistKnockback(self, t), 100*t.resistBlindStun(self, t))
+		你获得 %d%% 击退抵抗和 %d%% 致盲、震慑抵抗。]]):format(100*t.resistKnockback(self, t), 100*t.resistBlindStun(self, t))
 	end,
 }
 

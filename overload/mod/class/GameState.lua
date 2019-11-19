@@ -1482,7 +1482,7 @@ local standard_rnd_boss_adjust = function(b)
 		-- Damage reduction is applied in all cases, acknowledging the frontloaded strength of randbosses and the potential for players to lack tools early
 		b.inc_damage = b.inc_damage or {}
 		--local change =  (70 * (30 - b.level + 1) / 30) + 20
-		local change =  95 - b.level * 3
+		local change = math.max(0, 95 - b.level * 4)
 		b.inc_damage.all = math.max(-80, (b.inc_damage.all or 0) - change)  -- Minimum of 20% damage
 		
 		-- Things prone to binary outcomes (0 damage, 0 hit rate, ...) like armor and defense are only reduced if they exceed a cap per level regardless of source
@@ -1525,7 +1525,7 @@ local standard_rnd_boss_adjust = function(b)
 		end
 
 		-- Early game melee don't have much mobility which makes randbosses too good at running and pulling more enemies in or being generally frustrating
-		b.ai_tactic.escape = -1
+		b.ai_tactic.escape = 0
 		b.ai_tactic.safe_range = 1
 
 		-- Cap the talent level of crippling debuffs (stun, ...) at 1 + floor(level / 10)

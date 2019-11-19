@@ -221,7 +221,7 @@ timeEffectCHN:newEffect{
 		id = "ENTROPIC_WASTING",
 		enName = "Entropic Wasting",
 		chName = "熵能冲击",
-		desc = function(self, eff) return ("目标被熵能冲击中，每回合受到 %d 伤害。"):format(eff.power) end,
+		desc = function(self, eff) return ("目标被熵能冲击中，每回合受到 %0.2f 伤害。"):format(eff.power) end,
 		type = "其它",
 		subtype = " temporal/ darkness ", no_ct_effect = true,
 }
@@ -245,7 +245,7 @@ timeEffectCHN:newEffect{
 		id = "PROPHECY_OF_RUIN",
 		enName = "Prophecy of Ruin",
 		chName = "毁灭预言",
-		desc = function(self, eff) return ("目标被诅咒进入毁灭状态。当生命值下降至 75%%, 50%% 或 25%% life 时， %d 格内敌人将受到 %d 暗影伤害。"):format(eff.rad, eff.dam) end,
+		desc = function(self, eff) return ("目标被诅咒进入毁灭状态。当生命值下降至 75%%, 50%% 或 25%% life 时， %d 格内敌人将受到 %0.2f 暗影伤害。"):format(eff.rad, eff.dam) end,
 		type = "魔法",
 		subtype = " darkness/ prophecy ",
 }

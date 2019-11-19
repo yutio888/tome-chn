@@ -58,7 +58,8 @@ local imbue_ring = function(npc, player)
 				return false
 			end
 			
-			local price = 300 * (ring.material_level + gem.material_level) / 2
+			local price = 200 * (ring.material_level + gem.material_level) / 2
+			if gem.unique then price = price * 1.5 end
 			if price > player.money then require("engine.ui.Dialog"):simplePopup("Not enough money", "This costs "..price.." gold, you need more gold.") return end
 
 			require("engine.ui.Dialog"):yesnoPopup("Imbue cost", "This will cost you "..price.." gold, do you accept?", function(ret) if ret then

@@ -125,8 +125,8 @@ local reward_types = {
 				["psionic/augmented-mobility"] = 1.0,
 			},
 			talents = {
-				[Talents.T_DISENGAGE] = 1,
-				[Talents.T_EVASION] = 1,
+				[Talents.T_SKATE] = 1,
+				[Talents.T_TELEKINETIC_LEAP] = 1,
 			},
 			saves = { spell = 4, phys = 4 },
 			stats = {

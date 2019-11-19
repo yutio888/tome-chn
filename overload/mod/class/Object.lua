@@ -1497,9 +1497,9 @@ function _M:getTextualDesc(compare_with, use_actor)
 		compare_table_fields(w, compare_with, field, "inc_damage_actor_type", "%+d%% ", "Damage against: ", function(item)
 				local _, _, t, st = item:find("^([^/]+)/?(.*)$")
 				if st and st ~= "" then
-					return st:gsub("humanoid","人形怪"):gsub("demon","恶魔"):gsub("animal","动物"):gsub("undead","不死族"):gsub("dragon","龙"):gsub("horror","恐魔")	
+					return st:gsub("humanoid","人形怪"):gsub("demon","恶魔"):gsub("animal","动物"):gsub("undead","不死族"):gsub("dragon","龙"):gsub("horror","恐魔"):gsub("summoned","召唤物")
 				else
-					return t:gsub("humanoid","人形怪"):gsub("demon","恶魔"):gsub("animal","动物"):gsub("undead","不死族"):gsub("dragon","龙"):gsub("horror","恐魔")	
+					return t:gsub("humanoid","人形怪"):gsub("demon","恶魔"):gsub("animal","动物"):gsub("undead","不死族"):gsub("dragon","龙"):gsub("horror","恐魔")	:gsub("summoned","召唤物")
 				end
 			end)
 
@@ -2107,7 +2107,7 @@ function _M:getTextualDesc(compare_with, use_actor)
 		for _, data in ipairs(v[field] and (v[field].talent_on_mind or {})or {}) do if data.talent then
 			local tid = data.talent
 			if not talents[tid] or talents[tid][1]~=data.chance or talents[tid][2]~=data.level then
-				desc:add({"color","RED"}, ("技能（自然）命中后释放： %s (%d%% 几率 等级 %d)."):format(self:getTalentFromId(tid).name, data.chance, data.level), {"color","LAST"}, true)
+				desc:add({"color","RED"}, ("技能（精神力量）命中后释放： %s (%d%% 几率 等级 %d)."):format(self:getTalentFromId(tid).name, data.chance, data.level), {"color","LAST"}, true)
 			else
 				talents[tid][3] = true
 			end

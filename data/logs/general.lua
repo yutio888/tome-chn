@@ -1077,7 +1077,7 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
-	log = "#DBLUE#The skin seems pleased to be worn by the unliving, and grows silent.",
+	log = "#BLUE#The skin seems pleased to be worn by the unliving, and grows silent.",
 	fct = "#BLUE#这件人皮似乎很满意被亡灵穿着，沉默了下来。",
 }
 

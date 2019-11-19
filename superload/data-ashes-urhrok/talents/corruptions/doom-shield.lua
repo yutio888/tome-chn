@@ -19,8 +19,8 @@ registerTalentTranslation{
 	name = "硬化之核",
 	info = function(self, t)
 		return ([[从恶魔家乡中学习，强化自身。
-		增加 10 + %d%% 总护甲值 ,每点力量提供 %d%% 法术强度。]]):
-		format((self:combatTalentScale(t, 1.1, 1.6)-1) * 100, self:combatTalentScale(t, 20, 40, 0.75))
+		增加 10 + %d%% 总护甲值 ，获得 %d 法术强度。]]):
+		format((self:combatTalentScale(t, 1, 1.3)-1) * 100, self:combatTalentScale(t, 20, 40, 0.75))
 	end,
 }
 

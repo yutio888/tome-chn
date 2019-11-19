@@ -44,7 +44,7 @@ registerTalentTranslation{
 	name = "无情",
 	info = function(self, t)
 		return ([[你对目标的精神进行冲击。
-		他所有正在冷却中的技能冷却时间延长 %d 回合，所有负面魔法、物理、精神效果延长 %d 回合，所有正面魔法、物理、精神效果缩短 %d 回合。]]):
+		他所有正在冷却中的技能冷却时间延长 %d 回合，所有负面魔法、物理、精神效果延长 %d 回合（最多延长 4 倍），所有正面魔法、物理、精神效果缩短 %d 回合。]]):
 		format(t.getEffectGood(self, t), t.getEffectBad(self, t), t.getEffectGood(self, t))
 	end,
 }

@@ -14,10 +14,11 @@ registerTalentTranslation{
 	id = "T_SURGE_OF_POWER",
 	name = "力量之潮",
 	info = function(self, t)
-	return ([[你使用体内蕴藏的活力强化自己的身体，恢复 %d%% 最大体力值（ %d 点）和 %d%% 最大生命值（ %d 点）。
+	return ([[你使用体内蕴藏的活力强化自己的身体，恢复 %d 点体力值和 %d%% 点生命值。
 	同时让你在 -%d 生命时才会死亡，此效果持续 8 回合。
-	此技能瞬发，恢复值受法术强度加成。]]):
-	format(t.stamValue(self, t) * 100, t.stamValue(self, t) * self.max_stamina, t.getHeal(self, t)*100, t.getHeal(self, t) * self.max_life, t.getPower(self, t))
+	恢复值受法术强度加成。
+	法术暴击也会增加这一技能恢复的体力值。]]):
+	format( t.stamValue(self, t), t.getHeal(self, t), t.getPower(self, t))
 	end,
 }
 

@@ -50,7 +50,7 @@ registerTalentTranslation{
 		local chance = t.getChance(self,t)
 		return ([[你消耗所有瘴气引擎的叠加效果，并用你的蒸汽枪发射出毁灭性的腐蚀爆炸，在 %d 码范围的扇形区域内造成 %d%% 酸性武器伤害，并有 %d%% 的几率移除一个随机物理或精神效果。你瘴气引擎叠加的层数每超过一层，则增加 50%% 伤害，并有 %d%% 几率额外移除一个效果。
 		你至少需要有一层瘴气引擎效果才能使用这个技能。]])
-		:format(dam, rad, chance, chance)
+		:format(rad, dam, chance, chance)
 	end,
 }
 

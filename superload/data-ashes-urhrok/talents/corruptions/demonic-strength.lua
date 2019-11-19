@@ -14,7 +14,7 @@ registerTalentTranslation{
 	id = "T_SURGE_OF_POWER",
 	name = "力量之潮",
 	info = function(self, t)
-	return ([[你使用体内蕴藏的活力强化自己的身体，恢复 %d 点体力值和 %d%% 点生命值。
+	return ([[你使用体内蕴藏的活力强化自己的身体，恢复 %d 点体力值和 %d 点生命值。
 	同时让你在 -%d 生命时才会死亡，此效果持续 8 回合。
 	恢复值受法术强度加成。
 	法术暴击也会增加这一技能恢复的体力值。]]):

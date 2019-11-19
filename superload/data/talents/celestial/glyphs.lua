@@ -39,18 +39,21 @@ registerTalentTranslation{
 }
 registerTalentTranslation{
 	id = "T_DIVINE_GLYPHS",
-	name = "神圣之印",
+	name = "充能之印",
 	info = function(self, t)
 		return ([[当你的圣印触发时，天空能量的涌动让你获得暗影、光系抗性和伤害吸收各 5%% ，持续 %d 回合，最多叠加 %d 次。该效果每回合最多触发 3 次。]]):format(t.getTurns(self, t), t.getMaxStacks(self, t))
 	end,
 }
 registerTalentTranslation{
 	id = "T_TWILIGHT_GLYPH",
-	name = "暮光之印",
-	info = function(self, t)
+	name = "激发圣印",
+		info = function(self, t)
 		local dam = t.getDamage(self, t)
-		return ([[你放置一枚临时的暮光之印，立刻造成 %d 光系或者 %d 暗影伤害并随之消散。伤害类型在光系和暗影之间轮流切换。
-		你可以连续使用 %d 次该技能而不会使该技能进入冷却，但每次使用都会增加其最终冷却时间 2 回合。当触发次数达到上限，或你在 1 回合内没有使用这个技能时，这个技能将会立刻进入冷却。]]):format(damDesc(self, DamageType.LIGHT, dam), damDesc(self, DamageType.DARKNESS, dam), t.getConsecutiveTurns(self, t))
+		return ([[激发所有圣印，10格内所有上方站着敌人的圣印将被触发。
+		技能等级2时，该效果触发的圣印将在地面遗留能量，在%d回合内持续造成伤害。
+		#ffd700#日光圣印#LAST#:  %0.2f 光系伤害。
+		#7f7f7f#月光圣印#LAST#:  %0.2f 暗影伤害。
+		#9D9DC9#暮光圣印#LAST#:  %0.2f 光系和 %0.2f 暗影伤害。]]):format(t.getDuration(self, t), damDesc(self, DamageType.LIGHT, dam), damDesc(self, DamageType.DARKNESS, dam), damDesc(self, DamageType.LIGHT, dam/2), damDesc(self, DamageType.DARKNESS, dam/2))
 	end,
 }
 return _M

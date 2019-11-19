@@ -215,7 +215,7 @@ function _M:onEnterLevelEnd(zone, level)
 	if level._player_enter_scatter then return end
 	level._player_enter_scatter = true
 
-	if level.data.generator and level.data.generator.map and level.data.generator.map.class == "engine.generator.map.Static" and not level.data.static_force_scatter then return end
+	if level.data.generator and level.data.generator.map and (level.data.generator.map.class == "engine.generator.map.MapScript" or level.data.generator.map.class == "engine.generator.map.Static") and not level.data.static_force_scatter then return end
 
 	self:project({type="ball", radius=5}, self.x, self.y, function(px, py)
 		local a = level.map(px, py, Map.ACTOR)
@@ -379,6 +379,15 @@ function _M:act()
 
 	-- Funky shader things !
 	self:updateMainShader()
+
+	if config.settings.tome.life_lost_warning and self.shader_old_life then
+		local perc = (self.shader_old_life - self.life) / self.max_life
+		if perc > (config.settings.tome.life_lost_warning / 100) then
+			game.bignews:say(100, "#LIGHT_RED#LIFE LOST WARNING!")
+			game.key.disable_until = core.game.getTime() + 2000
+			game.mouse.disable_until = core.game.getTime() + 2000
+		end
+	end
 
 	self.shader_old_life = self.life
 	self.old_air = self.air
@@ -616,25 +625,27 @@ function _M:playerFOV()
 	end
 
 	--Handle Mark Prey Vision
-	if self:knowTalent(self.T_MARK_PREY) then
-		local t = self:getTalentFromId(self.T_MARK_PREY)
-		for i = 1, t.getCount(self, t) do
-			if self.mark_prey and self.mark_prey[game.level.id] and self.mark_prey[game.level.id][i] then
-				game.level.map.seens(self.mark_prey[game.level.id][i].x, self.mark_prey[game.level.id][i].y, 0.6)
+	if self:hasEffect(self.EFF_PREDATOR) then
+		local uid, e = next(game.level.entities)
+		while uid do
+			if e.marked_prey then
+				game.level.map.seens(e.x, e.y, 0.6)
 			end
+			uid, e = next(game.level.entities, uid)
 		end
 	end
-
 
 	if self:knowTalent(self.T_SHADOW_SENSES) then
 		local t = self:getTalentFromId(self.T_SHADOW_SENSES)
 		local range = self:getTalentRange(t)
 		local sqsense = range * range
 
-		for shadow, _ in pairs(game.party.members) do if shadow.is_doomed_shadow and not shadow.dead then
+		for shadow, _ in pairs(game.party.members) do if shadow.is_doomed_shadow and not shadow.dead and shadow.x then
 			local arr = shadow.fov.actors_dist
 			local tbl = shadow.fov.actors
 			local act
+			game.level.map:apply(shadow.x, shadow.y, 0.6)
+			game.level.map:applyExtraLite(shadow.x, shadow.y)
 			for i = 1, #arr do
 				act = arr[i]
 				if act and not act.dead and act.x and tbl[act] and shadow:canSee(act) and tbl[act].sqdist <= sqsense then

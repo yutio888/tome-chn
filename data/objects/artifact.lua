@@ -631,7 +631,7 @@ registerArtifactTranslation{
 	display_name = "火龙之盾",
 	unided_name = "龙盾",
 	desc = "这个巨大的盾牌使用了很多生活在塔·埃亚尔失落之地的火龙的鳞片打造而成。",
-	["on_block.desc"] = "30% 几率对6格内的攻击者发射具有震慑效果的火焰吐息",
+	["on_block.desc"] = "30% 几率对6格内的攻击者发射火焰吐息",
 
 }
 

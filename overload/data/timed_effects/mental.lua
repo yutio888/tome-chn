@@ -135,7 +135,7 @@ newEffect{
 	on_gain = function(self, err) return "#Target# wanders around!.", "+Confused" end,
 	on_lose = function(self, err) return "#Target# seems more focused.", "-Confused" end,
 	activate = function(self, eff)
-		eff.power = util.bound(eff.power, 0, 50)
+		eff.power = math.floor(util.bound(eff.power, 0, 50))
 		eff.tmpid = self:addTemporaryValue("confused", eff.power)
 		if eff.power <= 0 then eff.dur = 0 end
 	end,
@@ -187,6 +187,7 @@ newEffect{
 				end,
 				leave_level = function(self, party_def) -- Cancel control and restore previous actor status.
 					local eff = self:hasEffect(self.EFF_DOMINANT_WILL)
+					if not eff then return end
 					local uid = self.uid
 					eff.survive_domination = true
 					self:removeTemporaryValue("inc_damage", eff.pid)
@@ -388,7 +389,7 @@ newEffect{
 	on_lose = function(self, err) return "#Target# overcomes the gloom", "-Confused" end,
 	activate = function(self, eff)
 		eff.particle = self:addParticles(Particles.new("gloom_confused", 1))
-		eff.power = util.bound(eff.power, 0, 50)
+		eff.power = math.floor(util.bound(eff.power, 0, 50))
 		eff.tmpid = self:addTemporaryValue("confused", eff.power)
 		if eff.power <= 0 then eff.dur = 0 end
 	end,
@@ -737,7 +738,7 @@ newEffect{
 
 		if eff.particle then self:removeParticles(eff.particle) end
 		eff.particle = nil
-		eff.particle = self:addParticles(Particles.new("agony", 1, { power = 10 * eff.turn / eff.duration }))
+		eff.particle = self:addParticles(Particles.new("agony", 1, { power = 5 * eff.turn / eff.duration }))
 	end,
 }
 
@@ -902,7 +903,7 @@ newEffect{
 	activate = function(self, eff)
 		eff.particle = self:addParticles(Particles.new("gloom_confused", 1))
 		eff.mindResistChangeId = self:addTemporaryValue("resists", { [DamageType.MIND]=eff.mindResistChange })
-		eff.power = util.bound(eff.power, 0, 50)
+		eff.power = math.floor(util.bound(eff.power, 0, 50))
 		eff.tmpid = self:addTemporaryValue("confused", eff.power)
 	end,
 	deactivate = function(self, eff)

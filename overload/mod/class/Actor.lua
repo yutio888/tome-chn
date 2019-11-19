@@ -1528,6 +1528,16 @@ function _M:pull(srcx, srcy, dist, recursive)
 	end
 end
 
+--- Force move to a place, with animation
+function _M:forceMoveAnim(x, y)
+	local ox, oy = self.x, self.y
+	self:move(x, y, true)
+	if config.settings.tome.smooth_move > 0 then
+		self:resetMoveAnim()
+		self:setMoveAnim(ox, oy, 8, 5)
+	end
+end
+
 --- Get the "path string" for this actor
 -- See Map:addPathString() for more info
 function _M:getPathString()
@@ -2066,7 +2076,7 @@ function _M:tooltip(x, y, seen_by)
 		else	ts:add(self.desc, true)
 		end
 	end
-	if config.settings.cheat and self.descriptor and self.descriptor.classes then
+	if self.descriptor and self.descriptor.classes then
 		local classes = {}
 		for i, v in ipairs(self.descriptor.classes) do
 			classes[i] = s_stat_name[v] or v
@@ -2964,7 +2974,7 @@ end
 function _M:unlearnTalentsOnClone()
 	local todel = {}
 	for tid, lev in pairs(self.talents) do
-		if _M.talents_def[tid].unlearn_on_clone then
+		if _M.talents_def[tid] and _M.talents_def[tid].unlearn_on_clone then
 			todel[#todel+1] = tid
 		end
 	end
@@ -4914,6 +4924,7 @@ end
 -- @param t_id the id of the talent to learn
 -- @return true if the talent was learnt, nil and an error message otherwise
 function _M:learnTalent(t_id, force, nb, extra)
+	if nb then nb = math.floor(nb) end
 	local just_learnt = not self:knowTalent(t_id)
 	local old_lvl = self:getTalentLevel(t_id)
 	local old_lvl_raw = self:getTalentLevelRaw(t_id)
@@ -5074,6 +5085,7 @@ end
 -- @param t_id the id of the talent to learn
 -- @return true if the talent was unlearnt, nil and an error message otherwise
 function _M:unlearnTalent(t_id, nb, no_unsustain, extra)
+	if nb then nb = math.floor(nb) end
 	local oldnb = self.talents[t_id] or 0
 	if not engine.interface.ActorTalents.unlearnTalent(self, t_id, nb) then return false end
 
@@ -5114,7 +5126,6 @@ function _M:unlearnTalent(t_id, nb, no_unsustain, extra)
 	if #todel > 0 then for _, eff_id in ipairs(todel) do self:removeEffect(eff_id) end end
 
 	self:recomputeRegenResources()
-
 	if t.is_spell then self:attr("has_arcane_knowledge", -nb) end
 	if t.is_antimagic then self:attr("forbid_arcane", -nb) end
 	if t.type[1]:find("^chronomancy/bow") or t.type[1]:find("^chronomancy/blade") then self:attr("warden_swap", -nb) end
@@ -5944,7 +5955,7 @@ function _M:fireTalentCheck(event, ...)
 	if self[store] then upgradeStore(self[store], store) end
 	if self[store] and next(self[store].__priorities) then
 		local old_ps = self.__project_source
-		for _, info in ipairs(self[store].__sorted) do
+		for _, info in ipairsclone(self[store].__sorted) do
 			local priority, kind, stringId, tid = unpack(info)
 			if kind == "effect" then
 				self.__project_source = self.tmp[tid]
@@ -6297,7 +6308,7 @@ function _M:postUseTalent(ab, ret, silent)
 	end
 
 	if self.shimmer_sustains_hide and self.shimmer_sustains_hide[ab.id] then
-		local ShimmerRemoveSustains = require "mod.dialogs.ShimmerRemoveSustains"
+		local ShimmerRemoveSustains = require "mod.dialogs.shimmer.ShimmerRemoveSustains"
 		ShimmerRemoveSustains:removeAura(self, ab.id, ret)
 	end
 
@@ -7007,6 +7018,10 @@ function _M:canSeeNoCache(actor, def, def_pct)
 		end
 	end
 
+	if actor.is_doomed_shadow and self:knowTalent(self.T_SHADOW_SENSES) then
+		return true, 100
+	end
+
 	-- Blindness means can't see anything
 	if self:attr("blind") then
 
@@ -7437,7 +7452,7 @@ function _M:addedToLevel(level, x, y)
 	if not self._rst_full then self:resetToFull() self._rst_full = true end -- Only do it once, the first time we come into being
 	local summoner = self.summoner
 	if summoner then summoner:attr("summoned_times", 1) end -- Count summons times (bonus summoned_times dealt with individually)
-	if summoner and summoner:knowTalent(summoner.T_BLIGHTED_SUMMONING) then -- apply blighted summoning
+	if summoner and summoner:knowTalent(summoner.T_BLIGHTED_SUMMONING) and not self.escort_quest then -- apply blighted summoning
 		summoner:callTalent(summoner.T_BLIGHTED_SUMMONING, "doBlightedSummon", self)
 	end
 

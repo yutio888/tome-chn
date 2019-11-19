@@ -480,6 +480,18 @@ function _M:generateListGameplay()
 		end, 1))
 	end,}
 
+	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"当你在一回合内损失了超过该百分比的生命时，将弹出提醒并暂时关闭鼠标、键盘操作2秒。#WHITE#"}
+	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#生命损失提醒#WHITE##{normal}#", status=function(item)
+		return (not config.settings.tome.life_lost_warning or config.settings.tome.life_lost_warning == 100) and "disabled" or tostring(config.settings.tome.life_lost_warning).."%"
+	end, fct=function(item)
+		game:registerDialog(GetQuantity.new("生命损失百分比提醒" , "从 1 到 99 (100 则关闭)", config.settings.tome.life_lost_warning or 100, 100, function(qty)
+			qty = util.bound(qty, 1, 100)
+			game:saveSettings("tome.life_lost_warning", ("tome.life_lost_warning = %d\n"):format(qty))
+			config.settings.tome.life_lost_warning = qty
+			self.c_list:drawItem(item)
+		end, 1))
+	end,}
+	
 	local zone = Textzone.new{width=self.c_desc.w, height=self.c_desc.h, text=string.toTString"开启/关闭天气效果。\n关闭它可能提升性能。不影响已经去过的区域。#WHITE#"}
 	list[#list+1] = { zone=zone, name=string.toTString"#GOLD##{bold}#天气效果#WHITE##{normal}#", status=function(item)
 		return tostring(config.settings.tome.weather_effects and "开启" or "关闭")

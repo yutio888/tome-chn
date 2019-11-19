@@ -43,13 +43,12 @@ registerTalentTranslation{
 	name = "守护印记",
 	info = function(self, t)
 		local shield = t.getShield(self, t)
-		local disruption = (self.disruption_shield_absorb or 0) * t.getDisruption(self, t) / 100
 		return ([[释放奥术能量充满当前保护你的魔法护盾，进一步强化它。
 		它会影响最多 %d 种护盾效果。 
 		伤害护盾，时间护盾，转移护盾：提高 %d%% 最大伤害吸收值。 
-		干扰护盾：获得吸收的伤害的 %d%% + 50点魔法值（ %d ）
+		干扰护盾：将储存的能量转化为护盾值（比例为2:1）。剩余能量将以%0.2f的比例转化为法力值。
 		受法术强度影响，充能强度有额外加成。]]):
-		format(t.getNumEffects(self, t), shield, t.getDisruption(self, t), disruption + 50)
+		format(t.getNumEffects(self, t), shield, t.getDisruption(self, t), 100 / t.getDisruption(self, t))
 	end,
 }
 

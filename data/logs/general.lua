@@ -1077,8 +1077,8 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
-	log = "#DARK_BLUE#The skin seems pleased to be worn by the unliving, and grows silent.",
-	fct = "#DARK_BLUE#这件人皮似乎很满意被亡灵穿着，沉默了下来。",
+	log = "#DBLUE#The skin seems pleased to be worn by the unliving, and grows silent.",
+	fct = "#BLUE#这件人皮似乎很满意被亡灵穿着，沉默了下来。",
 }
 
 logCHN:newLog{
@@ -1271,8 +1271,8 @@ logCHN:newLog{
 }
 
 logCHN:newLog{
-	log = "#DARK_BLUE#You feel a kindred spirit in this bow...",
-	fct = "#DARK_BLUE#你感受到弓内类似的灵魂……",
+	log = "#BLUE#You feel a kindred spirit in this bow...",
+	fct = "#BLUE#你感受到弓内类似的灵魂……",
 }
 
 logCHN:newLog{
@@ -1318,4 +1318,9 @@ logCHN:newLog{
 	fct = function(a)
 		return("#AQUAMARINE#当 %s 被消灭时，所有眼睛都落在了地上！ "):format(npcCHN:getName(a))
 		end,
+}
+
+logCHN:newLog{
+	log = "#RED#Malslek's hatred flows through you."，
+	fct = "#RED#马斯拉克的仇恨在你体内流淌。"
 }

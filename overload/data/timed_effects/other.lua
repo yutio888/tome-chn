@@ -1511,12 +1511,13 @@ newEffect{
 #CRIMSON# 强度 1+: %s 从现实消失： %+d 物理抵抗， %+d 物理抵抗上限 
 #CRIMSON# 强度 2+: %s%+d 幸运， %+d 意志 
 #CRIMSON# 强度 3+: %s 折磨 : 当敌人试图对你造成负面效果时，你的折磨光环会对 10 范围内的一个随机敌人进行报复，造成 %d 精神和 %d 黑暗伤害。
-#CRIMSON# 强度 4+: %s 噩梦: 每次受到目标攻击有概率 (当前 %d%%) 触发一个范围为 %d 码的噩梦（有减速效果、憎恨私语和召唤梦魇）持续 8 回合。  触发几率  在每次你受到打击时提高，同时随时间下降。]]):format(
+#CRIMSON# 强度 4+: %s 噩梦: 每次受到目标攻击有概率 (当前 %d%%) 触发一个范围为 %d 码的噩梦（有减速、召唤梦魇和直接造成%d精神、%d暗影伤害的效果）持续 8 回合。  触发几率  在每次你受到打击时提高，同时随时间下降。]]):format(
 		def.getVisionsReduction(eff, level),
 		bonusLevel >= 1 and "#WHITE#" or "#GREY#", def.getResistsPhysicalChange(math.max(level, 1)), def.getResistsCapPhysicalChange(math.max(level, 1)),
 		bonusLevel >= 2 and "#WHITE#" or "#GREY#", def.getLckChange(eff, math.max(level, 2)), def.getWilChange(math.max(level, 2)),
 		bonusLevel >= 3 and "#WHITE#" or "#GREY#", self:damDesc(DamageType.MIND, def.getHarrowDam(self, math.max(level, 3))), self:damDesc(DamageType.DARKNESS,  def.getHarrowDam(self, math.max(level, 3))),
-		bonusLevel >= 4 and "#WHITE#" or "#GREY#", eff.nightmareChance or 0, def.getNightmareRadius(math.max(level, 4)), def.getNightmareChance(math.max(level, 4)))
+		bonusLevel >= 4 and "#WHITE#" or "#GREY#", eff.nightmareChance or 0, def.getNightmareRadius(math.max(level, 4)), self:damDesc(DamageType.MIND, 10+self:combatMindpower()), self:damDesc(DamageType.DARKNESS, 10+self:combatMindpower())
+	)
 	end,
 	activate = function(self, eff)
 		local def, level, bonusLevel = self.tempeffect_def[self.EFF_CURSE_OF_NIGHTMARES], eff.level, math.min(eff.unlockLevel, eff.level)
@@ -1546,6 +1547,7 @@ newEffect{
 
 	--Harrow
 	callbackOnTemporaryEffect = function(self, eff, eff_id, e, p)
+		if self.turn_procs.curse_of_nightmare_3 then return end
 		if self.__curse_nightmare_recurse then return end
 		self.__curse_nightmare_recurse = true
 		(function()
@@ -1556,10 +1558,11 @@ newEffect{
 				if e.status ~= "detrimental" or e.type == "other" or e.subtype["cross tier"] then return end
 				local harrowDam = def.getHarrowDam(self, level)
 				if p.src and p.src._is_actor then
-					DamageType:get(DamageType.MIND).projector(self, p.src.x, p.src.y, DamageType.MIND, dam)
-					DamageType:get(DamageType.MIND).projector(self, p.src.x, p.src.y, DamageType.DARKNESS, dam)
+					DamageType:get(DamageType.MIND).projector(self, p.src.x, p.src.y, DamageType.MIND, harrowDam)
+					DamageType:get(DamageType.MIND).projector(self, p.src.x, p.src.y, DamageType.DARKNESS, harrowDam)
 					--game.logSeen(self, "#F53CBE#%s harrows '%s'!", self.name:capitalize(), p.src.name)
 					game.logSeen(self, "#F53CBE#%s harrows %s!", self.name:capitalize(), target.name)
+					self.turn_procs.curse_of_nightmare_3 = true
 				else
 					local tgts = {}
 					self:project({type="ball", radius=10}, self.x, self.y, function(px, py)
@@ -1573,6 +1576,7 @@ newEffect{
 						DamageType:get(DamageType.MIND).projector(self, target.x, target.y, DamageType.DARKNESS, harrowDam)
 						--self:logCombat(target, "#F53CBE##Source# harrows #Target#!", self.name:capitalize(), target.name)
 						game.logSeen(self, "#F53CBE#%s harrows %s!", self.name:capitalize(), target.name)
+						self.turn_procs.curse_of_nightmare_3 = true
 					end
 				end
 			end
@@ -1626,13 +1630,12 @@ newEffect{
 		if math.min(eff.unlockLevel, eff.level) >= 4 then
 			-- build chance for a nightmare
 			local def = self.tempeffect_def[self.EFF_CURSE_OF_NIGHTMARES]
-			if not self.turn_procs.CoNightmare then --don't build chance on turn nightmare triggered
+			if not self.turn_procs.curse_of_nightmare_4 then --don't build chance on turn nightmare triggered
 				eff.nightmareChance = (eff.nightmareChance or 0) + def.getNightmareChance(eff.level)
 			end
 
-
 			-- invoke the nightmare, one per turn
-			if not self.turn_procs.CoNightmare and rng.percent(eff.nightmareChance) then
+			if not self.turn_procs.curse_of_nightmare_4 and rng.percent(eff.nightmareChance) then
 				local radius = def.getNightmareRadius(eff.level)
 
 				-- make sure there is at least one creature to torment
@@ -1646,10 +1649,11 @@ newEffect{
 				if not seen then return false end
 
 				-- start the nightmare: slow, hateful whisper, random Terrors (minor horrors)
+				local dam = (10+self:combatMindpower())
 				eff.nightmareChance = 0
 				game.level.map:addEffect(self,
 					self.x, self.y, 8,
-					DamageType.NIGHTMARE, 1,
+					DamageType.NIGHTMARE, dam,
 					radius,
 					5, nil,
 					engine.MapEffect.new{alpha=93, color_br=134, color_bg=60, color_bb=134, effect_shader="shader_images/darkness_effect.png"},
@@ -1690,7 +1694,7 @@ newEffect{
 					end end,
 					false, false)
 
-				self.turn_procs.CoNightmare = true
+				self.turn_procs.curse_of_nightmare_4 = true
 
 				game.logSeen(self, "#F53CBE#The air around %s grows cold and terrifying shapes begin to coalesce. A nightmare has begun.", self.name:capitalize())
 				game:playSoundNear(self, "talents/cloud")
@@ -1907,33 +1911,31 @@ newEffect{
 
 -- Predator is purely for the player's information
 newEffect{
-	name = "PREDATOR", image = "effects/predator.png",
-	desc = "Predator",
+	name = "PREDATOR", image = "talents/mark_prey.png",
+	desc = "Marked Prey",
 	no_stop_enter_worlmap = true,
 	decrease = 0,
 	cancel_on_level_change = true,
 	long_desc = function(self, eff)
-		local desc = ("Hunting:")
-		local desc2 = ("\n%d%% Received damage reduction against SubType:"):format(eff.power)
-		if not game.level then return desc..desc2
-		else for i = 1, eff.count do
-			if self.mark_prey[game.level.id] and self.mark_prey[game.level.id][i] and self.mark_prey[game.level.id][i].name and not self.mark_prey[game.level.id][i].dead then
-				local mprank, mpcolour = self.mark_prey[game.level.id][i]:TextRank()
-				desc = desc..("\n%s%s.#LAST#"):format(mpcolour, self.mark_prey[game.level.id][i].name:capitalize())
-			end
-			if self.mark_prey[game.level.id] and self.mark_prey[game.level.id][i] and self.mark_prey[game.level.id][i].subtype then
-				for j = 1, i do
-					if self.mark_prey[game.level.id][j] and self.mark_prey[game.level.id][j].subtype and j ~= i and self.mark_prey[game.level.id][i].subtype == self.mark_prey[game.level.id][j].subtype then
-						eff.unique_subtype = false break
-					else
-						eff.unique_subtype = true
-					end
-				end
-				if eff.unique_subtype and eff.unique_subtype == true then
-					desc2 = desc2..("\n#ffa0ff#%s.#LAST#"):format(self.mark_prey[game.level.id][i].subtype:capitalize())
-				end
-			end
+		local desc = "Hunting:"
+		local desc2 = ("\n%d%% Received damage reduction against:"):format(eff.power)
+		if not game.level then return desc..desc2 end
+
+		local preys = {}
+		for uid, e in pairs(game.level.entities) do if e.marked_prey then
+			preys[#preys+1] = e
 		end end
+		table.sort(preys, "rank")
+		for _, p in ripairs(preys) do
+			local mprank, mpcolour = p:TextRank()
+			desc = desc..("\n- %s%s#LAST#"):format(mpcolour, p.name:capitalize())
+		end
+
+		local subtypes_list = table.get(self, "mark_prey2", game.level.id)
+		for st, _ in pairs(subtypes_list) do
+			desc2 = desc2..("\n- #ffa0ff#%s#LAST#"):format(tostring(st):capitalize())
+		end
+
 		return desc..desc2
 	end,
 	type = "other",
@@ -3117,7 +3119,7 @@ newEffect{
 newEffect{
 	name = "2H_PENALTY", image = "talents/unstoppable.png",
 	desc = "Hit Penalty",
-	long_desc = function(self, eff) return ("目标单手使用双手武器，物理、法术、精神强度下降 %d%% ( 受体型影响 )；同时副手附  加伤害减少 50%%。"):format(20 - math.min(self.size_category - 4, 4) * 5) end,
+	long_desc = function(self, eff) return ("目标单手使用双手武器，命中、物理、法术、精神强度下降 %d%% ( 受体型影响 )；同时副手附  加伤害减少 50%%。"):format(20 - math.min(self.size_category - 4, 4) * 5) end,
 	type = "other", decrease = 0, no_remove = true,
 	subtype = { combat=true, penalty=true },
 	status = "detrimental",
@@ -3889,7 +3891,8 @@ newEffect{
 		local source = eff.src
 		local target = eff.target
 
-		if source.dead or target.dead or not game.level:hasEntity(source) or not game.level:hasEntity(target) or not source:hasLOS(target.x, target.y) or core.fov.distance(self.x, self.y, target.x, target.y) > (eff.range or 10) then
+		if source.dead or target.dead or not game.level:hasEntity(source) or not game.level:hasEntity(target) or not self:canProject(eff.tg, target.x, target.y) then
+		self.y, target.x, target.y) > (eff.range or 10) then
 			source:removeEffect(source.EFF_FEED)
 			if eff.particles then
 				game.level.map:removeParticleEmitter(eff.particles)

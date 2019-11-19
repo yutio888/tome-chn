@@ -68,6 +68,10 @@ function _M:on_register()
 	game:onTickEnd(function() self.key:unicodeInput(true) end)
 end
 
+function _M:ignoreUnlocks()
+	return false
+end
+
 function _M:generateList()
 
 	-- Makes up the list
@@ -78,7 +82,7 @@ function _M:generateList()
 		if t.uber and not t.not_listed then
 			if 
 			    (not t.is_class_evolution or (self.actor.descriptor and self.actor.descriptor.subclass == t.is_class_evolution)) and
-			    (not t.requires_unlock or profile.mod.allow_build[t.requires_unlock])
+			    (not t.requires_unlock or profile.mod.allow_build[t.requires_unlock] or self:ignoreUnlocks())
 			    then
 				cols[t.type[1]] = cols[t.type[1]] or {}
 				local c = cols[t.type[1]]

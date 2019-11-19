@@ -545,7 +545,7 @@ end}
 questCHN["Following The Way"] = {
 name = " 保卫维网 ",
 description = function(desc)
-	desc = string.gsub(desc,"You have been tasked to remove two threats to the yeeks."," 你被派去清除对夺心魔的两大威胁。")
+	desc = string.gsub(desc,"You have been tasked to remove at leastg one of the threats to the yeeks.\n"," 你被派去清除对夺心魔的两大威胁。")
 	desc = string.gsub(desc,"Protect the Way, and vanquish your foes."," 守护维网，征服你的敌人。")
 	desc = string.gsub(desc,"You have explored the underwater zone and vanquished Murgol."," 你已经探索了水下区域并击败了穆格尔。")
 	desc = string.gsub(desc,"You must explore the underwater lair of Murgol."," 你必须调查一下穆格尔位于水下的巢穴。")

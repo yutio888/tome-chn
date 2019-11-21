@@ -1242,7 +1242,7 @@ timeEffectCHN:newEffect{
 	id = "ETHEREAL_STEAM",
 	enName = "Ethereal Steam",
 	chName = "虚幻蒸汽",
-	desc = function(self, eff) return ("每回合受到 %0.2f 超自然伤害，每当其使用一个技能，这一状态施加者随机一个技能减少一回合冷却。"):format(eff.dam) end,
+	desc = function(self, eff) return ("每回合受到 %0.2f 玄机伤害，每当其使用一个技能，这一状态施加者随机一个技能减少一回合冷却。"):format(eff.dam) end,
 	type = "魔法",
 	subtype = "",
 }

@@ -115,7 +115,7 @@ function _M:listPopup(title, text, list, w, h, fct, select_fct)
 	elseif title == "Technomancer" then
 		title = "科技法师"
 		text = "选择你免费的科技法术解锁？"
-		list[1].name=list[1].name:gsub("Occult Technomancy", "科技法术：超自然系")
+		list[1].name=list[1].name:gsub("Occult Technomancy", "科技法术：玄机系")
 		list[1].desc=list[1].desc:gsub([[These talents focus on arcane and temporal damage, using a super%-spinned steamsaw to rip holes in reality.]], "这一系技能专注于奥术和时空伤害，使用超高速旋转的蒸汽链锯切裂现实。")
 		list[2].name=list[2].name:gsub("Galvanic Technomancy", "科技法术：放电系")
 		list[2].desc=list[2].desc:gsub([[These talents focus on fire and lightning damage, strategically placing galvanic rods to create fields of death and stuns.]], "这一系技能专注于火焰和闪电伤害，通过放置放电柱来创造电击力场，震慑并杀死敌人。")

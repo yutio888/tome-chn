@@ -214,7 +214,7 @@ registerTalentTranslation{
 		local binc = t.getBoltDamageIncrease(self,t)
 		local bdur = t.getBoltDuration(self,t)
 		return ([[突破你重装武器的潜能，触发一个强大的效果。这会立刻使你停止使用重装武器，并消耗掉所有的弹药。
-#AQUAMARINE#喷火器#LAST#: 引爆你的油箱，在指定 %d 码内的某格内产生一场半径为 4 的爆炸。被爆炸击中的敌人将会受到 %0.2f 火焰伤害，并且在不稳定的油料的助燃下，额外受到相当于当前燃烧伤害 %d%% 的伤害。
+#AQUAMARINE#喷火器#LAST#: 引爆你的油箱，产生一场半径为 4 的爆炸，将你推到指定 %d 码内的某格内。被爆炸击中的敌人将会受到 %0.2f 火焰伤害，并且在不稳定的油料的助燃下，额外受到相当于当前燃烧伤害 %d%% 的伤害。
 #AQUAMARINE#电击棒#LAST#: 用电击棒重击地面，释放所有的电力，在 %d 码范围内造成 %d%% 闪电武器伤害。被击中的目标会被击退 %d 码，如果他们被击退到墙上，这会产生一个静电脉冲，在半径 1 码范围内造成 %0.2f 闪电伤害，并被眩晕 2 回合。
 #AQUAMARINE#爆矢枪#LAST#: 超载你的爆矢枪，发射一枚致命的弹药，穿透一条直线造成 %d%% 武器伤害。被击中的目标身上每有一个物理或精神负面效果，就会额外受到 %d%% 伤害（最多 %d%% ），并且它们身上的负面效果的持续时间会增加 %d 回合。]]):
 		format(frange, damDesc(self, DamageType.FIRE, fdam), fburn*100, srad, sdam*100, sknockback, damDesc(self, DamageType.LIGHTNING, spulse), bdam*100, binc, binc*5, bdur)

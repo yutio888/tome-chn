@@ -45,9 +45,11 @@ if PartyLore.lore_defs["destructicus"] ~= nil then
     load("data-chn123/lore/orcs/krimbul.lua")
     load("data-chn123/lore/orcs/misc.lua")
     load("data-chn123/lore/orcs/orcs.lua")
+    load("data-chn123/lore/orcs/palace-fume.lua")
     load("data-chn123/lore/orcs/primal-forest.lua")
     load("data-chn123/lore/orcs/quarry.lua")
     load("data-chn123/lore/orcs/sunwall.lua")
+    load("data-chn123/lore/orcs/weissi.lua")
     load("data-chn123/lore/orcs/yeti.lua")
 end
 if PartyLore.lore_defs["cults-lost-merchant-glyph"] ~= nil then

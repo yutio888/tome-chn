@@ -7,11 +7,11 @@ questCHN["No Fumes Without Fire"] = {
 		desc = desc:gsub("For Kruk!","为了克鲁克！")
 		desc = desc:gsub("For the Prides!","为了部落！")
 		desc = desc:gsub("For the Garkul!","为了加库尔！")
-		desc = desc:gsub("Council Member Nashal is dead.","议会成员Nashal死了。")
-		desc = desc:gsub("Council Member Tormak is dead.","议会成员Tormak死了。")
-		desc = desc:gsub("Council Member Pendor is dead.","议会成员Pendor死了。")
-		desc = desc:gsub("Council Member Palaquie is dead.","议会成员Palaquie死了。")
-		desc = desc:gsub("Council Member Tantalos is dead.","议会成员Tantalos死了。")
+		desc = desc:gsub("Council Member Nashal is dead.","议会成员纳沙尔死了。")
+		desc = desc:gsub("Council Member Tormak is dead.","议会成员托马克死了。")
+		desc = desc:gsub("Council Member Pendor is dead.","议会成员潘多尔死了。")
+		desc = desc:gsub("Council Member Palaquie is dead.","议会成员帕拉奎死了。")
+		desc = desc:gsub("Council Member Tantalos is dead.","议会成员坦塔洛斯死了。")
 		desc = desc:gsub("You have destroyed the Council and shattered the Tribe.","你摧毁了他们的议会，气之部族分崩离析！")
 
 		return desc

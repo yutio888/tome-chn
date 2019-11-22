@@ -247,7 +247,7 @@ ActorStats:defineStat("Strength",	"str", 10, 1, 100, [[力量属性影响你的�
 ActorStats:defineStat("Dexterity",	"dex", 10, 1, 100, [[敏捷属性影响你的灵巧和警觉能力，提升敏捷
 可以提升精准，提升闪避，提升使用轻武器造
 成的伤害。]])
-ActorStats:defineStat("Magic",		"mag", 10, 1, 100, [[魔法属性影响你驾奴魔法能量的能力，提升魔
+ActorStats:defineStat("Magic",		"mag", 10, 1, 100, [[魔法属性影响你驾驭魔法能量的能力，提升魔
 法可以提高你的法术强度，提升法术豁免和提
 高其他魔法物品的使用效果。]])
 ActorStats:defineStat("Willpower",	"wil", 10, 1, 100, [[意志属性是你的专注能力，提升意志可以提升

@@ -83,7 +83,7 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local inc = t.getPercentInc(self, t)
 		return ([[使用特殊武器时，增加 %d%% 伤害，增加 30 物理强度。]]):
-		format(damage, 100*inc)
+		format(100*inc)
 	end,
 }
 

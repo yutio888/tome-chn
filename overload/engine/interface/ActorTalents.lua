@@ -714,6 +714,13 @@ function _M:updateTalentPassives(tid)
 	t.passives(self, t, self.talents_learn_vals[t.id])
 end
 
+--- Force all known passives to update
+function _M:updateAllTalentsPassives()
+	for tid, _ in pairs(self.talents) do
+		self:updateTalentPassives(tid)
+	end
+end
+
 --- Checks if the talent can be learned
 -- @param t the talent to check
 -- @param offset the level offset to check, defaults to 1

@@ -104,7 +104,7 @@ function _M:listPopup(title, text, list, w, h, fct, select_fct)
 		list[1].name=list[1].name:gsub("The importance of power","力量的重要性"):gsub("spell critical chance","法术暴击率")
 		list[2].name=list[2].name:gsub("The importance of thought","思考的重要性"):gsub("spell save","法术豁免")
 		list[3].name=list[3].name:gsub("The importance of magic","魔法的重要性"):gsub("magic","魔法")
-		list[4].name=list[4].name:gsub("The importance of wisdom","智慧的重要性"):gsub("willpower","毅力")
+		list[4].name=list[4].name:gsub("The importance of wisdom","智慧的重要性"):gsub("willpower","意志")
 	elseif title == "A View From The Gallery" then
 		title = "画廊一瞥"
 		text = "本书教会教会你一些生存技巧，你学到了什么吗？"

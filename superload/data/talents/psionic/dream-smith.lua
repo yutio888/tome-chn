@@ -31,8 +31,8 @@ registerTalentTranslation{
 	id = "T_DREAM_CRUSHER",
 	name = "雷霆一击",
 	info = function(self, t)
-		local damage = t.getDamage(self, t)
-		local power = t.getMasteryDamage(self, t)
+		local damage = t.getWeaponDamage(self, t)
+		local power = t.getDamage(self, t)
 		local percent = t.getPercentInc(self, t)
 		local stun = t.getStun(self, t)		
 		return ([[用你的梦之巨锤碾碎敌人，造成 %d%% 武器伤害。如果攻击命中，则目标会被震慑 %d 回合。 

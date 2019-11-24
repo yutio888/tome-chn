@@ -1149,7 +1149,7 @@ function _M:descCombat(use_actor, combat, compare_with, field, add_table, is_fak
 		true)
 
 	self:triggerHook{"Object:descCombat", compare_with=compare_with, compare_fields=compare_fields, compare_scaled=compare_scaled, compare_scaled=compare_scaled, compare_table_fields=compare_table_fields, desc=desc, combat=combat}
-	return desc
+	return getObjectDescCHN(desc)
 end
 
 --- Gets the full textual desc of the object without the name and requirements

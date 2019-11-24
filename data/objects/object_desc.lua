@@ -559,7 +559,7 @@ function getObjectDescCHN(desc)
 					desc[i] = string.gsub(desc[i],stype:gsub("%-","%%-"),checkObjSubType(stype))
 					desc[i] = string.gsub(desc[i],type:gsub("%-","%%-"),checkObjMainType(type))
 				elseif string.find(desc[i],"Base power: ") then
-					desc[i] = string.gsub(desc[i],"Base power: ","基础伤害：")
+					desc[i] = string.gsub(desc[i],"Base power: ","基础伤害： ")
 				elseif string.find(desc[i],"Uses stat") then
 					desc[i] = string.gsub(desc[i],"Uses stats","伤害受属性加成")
 					desc[i] = string.gsub(desc[i],"Uses stat","伤害受属性加成")

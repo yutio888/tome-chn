@@ -350,10 +350,10 @@ timeEffectCHN:newEffect{
 		enName = "Jinxed",
 		chName = "不幸",
 		desc = function(self, eff)
-		local desc = "目标豁免和闪避降低 %d , 暴击率降低 %d%%。\n若目标脱离视野 2 回合，则该效果会消失。"
-		if eff.stacks > 6 and eff.fail then desc = "目标豁免和闪避降低 %d , 暴击率降低 %d%%，使用技能有 %d%% 几率失败。\n若目标脱离视野 2 回合，则该效果会消失。" end
-		return desc:format(eff.power * eff.stacks, eff.crit * eff.stacks, (eff.stacks - 7) * eff.fail)
-	end,
+			local desc = "目标豁免和闪避降低 %d , 暴击率降低 %d%%。\n若目标脱离视野 2 回合，则该效果会消失。"
+			if eff.stacks > 6 and eff.fail then desc = "目标豁免和闪避降低 %d , 暴击率降低 %d%%，使用技能有 %d%% 几率失败。\n若目标脱离视野 2 回合，则该效果会消失。" end
+			return desc:format(eff.power * eff.stacks, eff.crit * eff.stacks, (eff.stacks - 6) * eff.fail)
+		end,
 		type = "其它",
 		subtype = " temporal ",
 }
@@ -361,7 +361,11 @@ timeEffectCHN:newEffect{
 		id = "FORTUNE",
 		enName = "Fortune",
 		chName = "幸运",
-		desc = function(self, eff) return ("目标豁免和闪避增加 %d , 暴击率增加 %d%%."):format(eff.power * eff.stacks, eff.crit * eff.stacks) end,
+		desc = function(self, eff)
+			local desc =  "目标豁免和闪避增加 %d , 暴击率增加 %d%%."
+			if eff.stacks > 6 and eff.avoid then desc = "目标豁免和闪避增加 %d ，暴击率增加 %d%% ，有 %d%% 几率闪避所有伤害。" end
+			return desc:format(eff.power * eff.stacks, eff.crit * eff.stacks, (eff.stacks - 6) * eff.avoid)
+		end,
 		type = "其它",
 		subtype = " temporal ",
 }

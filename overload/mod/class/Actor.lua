@@ -3407,6 +3407,10 @@ function _M:levelupClass(c_data)
 
 	c_data.last_level = c_data.last_level or 0
 	c_data.start_level = c_data.start_level or 1
+	c_data.max_talent_types = c_data.max_talent_types or 2
+	c_data.learned_talent_types = c_data.learned_talent_types or 0
+	c_data.banned_talents = c_data.banned_talents or {}
+
 	if c_data.calculate_tactical then self.ai_calculate_tactical = true end
 
 	local new_level = math.ceil((self.level - c_data.start_level + 1)*difficulty_adjusted_level_rate/100)
@@ -3589,10 +3593,11 @@ function _M:levelupClass(c_data)
 					print("\t *** auto_levelup IMPROVING TALENT TYPE", tt.tt)
 					local ml = self:getTalentTypeMastery(tt.tt) or 1
 					self:setTalentTypeMastery(tt.tt, ml + (ml <= 1 and 0.2 or 0.1)) -- 0.2 for 1st then 0.1 thereafter
-				else
+				elseif c_data.learned_talent_types < c_data.max_talent_types then
 					print("\t *** auto_levelup LEARNING TALENT TYPE", tt.tt)
 					self:learnTalentType(tt.tt, true)
 					tt.rarity = tt.rarity/2  -- makes talents within an unlocked talent tree more likely to be learned
+					c_data.learned_talent_types = c_data.learned_talent_types + 1
 				end
 				--print("\t *** talent type mastery:", tt, self:getTalentTypeMastery(tt))
 				self.unused_talents_types = self.unused_talents_types - 1
@@ -3619,7 +3624,7 @@ function _M:levelupClass(c_data)
 				local nb_known = self:numberKnownTalent(tt)
 				-- update talent choices with each talent in the tree that can be learned
 				for i, t in ipairs(tt_def.talents) do
-					if t.no_npc_use or t.not_on_random_boss then
+					if t.no_npc_use or t.not_on_random_boss or c_data.banned_talents[t.id] then
 						nb_known = nb_known + 1 -- treat as known to allow later talents to be learned
 					elseif t.type[2] and nb_known >= t.type[2] - 1 and (not t.random_boss_rarity or rng.percent(t.random_boss_rarity)) then -- check category talents known
 						table.insert(t_choices, t)
@@ -7282,7 +7287,9 @@ function _M:on_set_temporary_effect(eff_id, e, p)
 		p.dur = math.ceil(p.dur * (1 - util.bound(t.getWoundReduction(self, t), 0, 1)))
 	end
 	if e.status == "detrimental" and e.type ~= "other" and self:attr("negative_status_effect_immune") then
-		p.dur = 0
+		if not (self:attr("negative_status_effect_immune_frozen") and (eff_id == self.EFF_WET or eff_id == self.EFF_FROZEN_FEET)) then
+			p.dur = 0
+		end
 	end
 	if e.status == "detrimental" and e.type == "mental" and self:attr("clear_mind_immune") and not e.subtype["cross tier"] then
 		p.dur = 0

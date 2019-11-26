@@ -7,7 +7,7 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		return ([[你在死亡中狂欢，吞噬你受害者们的灵魂。每当你对一个目标造成伤害时，你造成 %0.2f 额外暗影伤害。
 		除此之外，每当你杀死敌人时你获得 %d 个灵魂。
-		伤害将会随你法术强度和心灵强度中较高者变化，且每回合最多触发十五次。]]):
+		伤害将会随你法术强度和心灵强度中较高者变化，且每回合最多触发 25 次。]]):
 		format(damDesc(self, DamageType.DARKNESS, damage), t.soulBonus(self,t))
 	end,}
 

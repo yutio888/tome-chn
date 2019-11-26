@@ -748,7 +748,7 @@ newEffect{
 newEffect{
 	name = "FROZEN", image = "talents/freeze.png",
 	desc = "Frozen",
-	long_desc = function(self, eff) return ("目标被冻结在冰块中，对其造成的所有伤害有 40％被冰块吸收，目标则受到余下的 60％伤害。冰冻状态下你的闪避无效，你只能攻击冰块，但同时你也不会受到其他不良法术影响。目标被冻结时无法传送也不能回复生命。冰块剩余 %d HP。"):format(eff.hp) end,
+	long_desc = function(self, eff) return ("目标被冻结在冰块中，对其造成的所有伤害有 40％被冰块吸收，目标则受到余下的 60％伤害。冰冻状态下你的闪避无效，你只能攻击冰块，但同时你也不会受到其他负面状态影响（潮湿和冻结双脚除外）。目标被冻结时无法传送也不能回复生命。冰块剩余 %d HP。"):format(eff.hp) end,
 	type = "physical", -- Frozen has some serious effects beyond just being frozen, no healing, no teleport, etc.  But it can be applied by clearly non-magical sources i.e. Ice Breath
 	subtype = { cold=true, stun=true },
 	status = "detrimental",
@@ -779,6 +779,7 @@ newEffect{
 		eff.defid = self:addTemporaryValue("combat_def", -self:combatDefenseBase()-10)
 		eff.rdefid = self:addTemporaryValue("combat_def_ranged", -self:combatDefenseBase()-10)
 		eff.sefid = self:addTemporaryValue("negative_status_effect_immune", 1)
+		eff.seffid = self:addTemporaryValue("negative_status_effect_immune_frozen", 1)
 
 		self:setTarget(self)
 	end,
@@ -793,6 +794,7 @@ newEffect{
 		self:removeTemporaryValue("combat_def", eff.defid)
 		self:removeTemporaryValue("combat_def_ranged", eff.rdefid)
 		self:removeTemporaryValue("negative_status_effect_immune", eff.sefid)
+		if eff.seffid then self:removeTemporaryValue("negative_status_effect_immune_frozen", eff.seffid) end
 		self.color_r = eff.old_r
 		self.color_g = eff.old_g
 		self.color_b = eff.old_b
@@ -2364,7 +2366,7 @@ newEffect{
 			end
 		end
 		eff.did_block = true
-		self:fireTalentCheck("callbackOnBlock", eff, dam, type, src)
+		self:fireTalentCheck("callbackOnBlock", eff, dam, type, src, blocked)
 
 		return amt
 	end,

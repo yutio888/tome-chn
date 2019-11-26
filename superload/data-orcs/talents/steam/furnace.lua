@@ -10,7 +10,7 @@ registerTalentTranslation{
 		熔炉激活时，你的物理和火焰伤害增加 %d%% ，物理和火焰抗性穿透增加 %d%% 。
 		#{italic}#用蒸汽烧尽一切！#{normal}#
 		]]):
-		format(damageinc, damageinc, ressistpen, ressistpen)
+		format(damageinc, ressistpen)
 	end,}
 
 registerTalentTranslation{

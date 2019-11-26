@@ -7,12 +7,23 @@ registerTalentTranslation{
 }
 
 registerTalentTranslation{
+	id = "T_MECHARACHNID_DESTRUCTION",
+	name = "自爆",
+	info = function(self, t)
+		local rad = self:getTalentRadius(t)
+		return ([[机械蜘蛛引爆自己，摧毁机械蜘蛛并在 %d 码范围内产生一个火焰爆炸，造成 %0.2f 火焰伤害。 
+		这个技能只有机械蜘蛛的主人死亡时能够使用。]]):format(rad, damDesc(self, DamageType.FIRE, 50 + 10 * self.level))
+	end,
+}
+
+registerTalentTranslation{
 	id = "T_MECHARACHNID",
 	name = "机械蜘蛛",
 	info = function(self, t)
 		return ([[你建造一台强大的机械蜘蛛，和你并肩作战。你可以给机械蜘蛛装备 2 把蒸汽枪，弹药，以及任何你喜欢的护甲。
-如果机械蜘蛛死了，这一技能会重建它，并恢复它 %d%% 的最大生命值。
-你的机械蜘蛛获得 %d 级蒸汽枪掌握、蒸汽链锯掌握、强化命中和重甲训练技能。]]):
+如果机械蜘蛛死了，这一技能会重建它，并恢复它 %d%% 的最大生命值。你的机械蜘蛛会在战斗结束后快速重建，恢复全部生命值。
+你的机械蜘蛛获得 %d 级蒸汽枪掌握、强化命中和重甲训练技能。机械蜘蛛使用敏捷代替力量装备护甲。
+机械蜘蛛带有一个内置的传送装置，如果在战斗结束后它不在你的附近，会自动传送到你的身边。]]):
 		format(t.getPower(self,t), self:getTalentLevelRaw(t))
 	end,
 }

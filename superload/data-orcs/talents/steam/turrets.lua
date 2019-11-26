@@ -6,11 +6,14 @@ registerTalentTranslation{
 	info = function(self, t)
 		return ([[你学会了部署炮台的能力。炮台是固定的建筑物，可以帮助你作战。炮台持续 10 回合，部署任何一个炮台，都会让其他炮台技能进入 5 回合冷却时间。
 学习该技能还会让你学会新的炮台类型。
-技能等级 1 时，你可以使用蒸汽枪炮台。
-技能等级 3 时，你可以使用火焰炮台。
-技能等级 5 时，你可以使用医疗炮台。
-这一技能同时会增加你所有炮台 %d 的敏捷、体质和灵巧值。额外属性值受蒸汽强度加成。]]):
-		format(t.getStatBonus(self,t))
+技能等级 1 时，你可以使用蒸汽枪炮台，会向周围的随机敌人开火，造成 %d%% 蒸汽枪伤害。这一射击可以穿过友军。
+技能等级 3 时，你可以使用火焰炮台，会喷出半径 3 码的扇形火焰，并嘲讽敌人。火焰炮台具有 %d 额外护甲值，并对所有伤害有 30%% 抗性。
+技能等级 5 时，你可以使用医疗炮台，会放出治疗雾气，恢复所有友军 %d 生命值，并降低新获得的负面效果的持续时间 %d%% 。
+这一技能同时会增加你所有炮台 %d 的敏捷、体质和灵巧值。
+所有炮台会获得相当于你等级 1/2 的额外护甲，免疫所有异常状态，继承你的伤害加成和伤害穿透属性。
+属性值加成、火焰炮台的伤害和医疗炮台的治疗受蒸汽强度加成。
+]]):
+	format(t.getSteamgunDamage(self,t)*100, t.getFlameArmor(self,t), t.getHeal(self,t), t.getEffectReduce(self,t), t.getStatBonus(self,t))
 end,
 }
 
@@ -19,8 +22,9 @@ registerTalentTranslation{
 	name = "蒸汽枪炮台",
 	info = function(self, t)
 		local stat = t.getStatBonus(self,t)
-		return ([[部署一个装备蒸汽枪的炮台，会自动射击射程内的敌人。炮台具有 +%d 额外敏捷、体质和灵巧值。]]):
-		format(stat)
+		local dam = t.getDamage(self,t)*100
+		return ([[部署一个装备蒸汽枪的炮台，会自动射击射程内的敌人，造成 %d%% 蒸汽枪伤害。炮台具有 +%d 额外敏捷、体质和灵巧值。]]):
+		format(dam, stat)
 	end,
 }
 
@@ -38,8 +42,8 @@ registerTalentTranslation{
 	id = "T_TURRET_DUAL_STEAMGUN",
 	name = "炮台双枪",
 	info = function(self, t)
-		return ([[获得第二把蒸汽枪，可以用平常两倍的速度射击。]]):
-		format()
+		return ([[获得第二把蒸汽枪，这把枪可以造成 %d%% 伤害。]]):
+		format(t.getDamage(self,t)*100)
 	end,
 }
 
@@ -108,7 +112,7 @@ registerTalentTranslation{
 		蒸汽枪炮台: 获得第二把造成 %d%% 伤害的蒸汽枪，每 3 回合会发射一枚火箭，在 2 码半径内造成 %d%% 蒸汽枪伤害。
 		火焰炮台: 增加 %d%% 伤害和 %d 射程，每过 3 回合，会在 %d 码范围内喷出灼热蒸汽的漩涡，将所有敌人拉向炮台，并造成标准喷火伤害。
 		医疗炮台: 增加对目标的治疗量 %d%% ，且每回合有 %d%% 几率清除目标身上一个负面效果。]]):
-		format(power, power/2, power*3, power/2, range/2, range, power/2, power/3)
+		format(power, power/2, 100 + (power*3), power/2, range/2, range, power/2, power/3)
 	end,
 }
 

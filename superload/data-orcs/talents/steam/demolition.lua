@@ -37,9 +37,9 @@ registerTalentTranslation{
 		local spower=t.getLightningPower(self,t)
 		return ([[你往你的发射器内装入高级榴弹。
 		燃烧榴弹：在 3 回合内造成火焰伤害，增加所受到的伤害 %d%% 。
-		化学榴弹：造成酸性伤害，减速目标 %d%% ，持续 6 回合。
+		化学榴弹：造成酸性伤害，减速目标 %d%% ，持续 3 回合。
 		震荡榴弹：造成闪电伤害，震撼目标 %d 回合，使目标震慑和定身抗性减半。
-		你只能同时激活一种榴弹类型。]]):
+		你只能同时激活一种榴弹类型，反应式装甲不会触发高级榴弹。]]):
 		format(ipower, cpower, spower)
 	end,
 }

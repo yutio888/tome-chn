@@ -107,7 +107,7 @@ registerTalentTranslation{
 	id = "T_STORMSTRIKE",
 	name = "暴风打击",
 	info = function(self, t)
-		return ([[挥舞电击棒，攻击前方扇形区域的敌人，造成 100%% 闪电武器伤害，降低他们所造成的伤害 %d%% ，持续 2 回合。
+		return ([[挥舞电击棒，攻击正面所有敌人，造成 100%% 闪电武器伤害，降低他们所造成的伤害 %d%% ，持续 2 回合。
 		当你装备电击棒时，这一技能取代普通近战攻击。
 		你可以使用这一攻击冲向 5 码范围内的目标。]]):
 		format(t.getNumb(self,t))

@@ -1003,6 +1003,20 @@ timeEffectCHN:newEffect{
 }
 
 timeEffectCHN:newEffect{
+	id = "MECHARACHNID_PILOTING",
+	enName = "Piloted",
+	chName = "正在驾驶",
+	desc = function(self, eff) return ("正在驾驶机械蜘蛛。"):format(eff.damage, eff.resist) end,
+}
+
+timeEffectCHN:newEffect{
+	id = "MECHARACHNID_PILOTING_BUFF",
+	enName = "Direct Control",
+	chName = "直接控制",
+	desc = function(self, eff) return ("机械蜘蛛被驾驶员直接控制，增加伤害 %d%% ，增加伤害抗性 %d%% 。"):format(eff.damage, eff.resist) end,
+}
+
+timeEffectCHN:newEffect{
 	id = "HEAVY_AMMUNITION",
 	enName = "Heavy Ammunition",
 	chName = "重装武器",

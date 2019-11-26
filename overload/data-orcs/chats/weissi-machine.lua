@@ -80,7 +80,7 @@ local talents = {
 		Talents.T_UNFLINCHING_RESOLVE,
 		Talents.T_EXOTIC_WEAPONS_MASTERY,
 		Talents.T_HEIGHTENED_SENSES,
-		Talents.T_CHARM_MASTERY,
+		Talents.T_DEVICE_MASTERY,
 		Talents.T_PIERCING_SIGHT,
 		Talents.T_HACK_N_BACK,
 		Talents.T_LIGHT_OF_FOOT,

@@ -410,7 +410,7 @@ simplePopDlg["Captive Krogs"] = function()
 end
 
 simplePopDlg["Tinker's Master"] = function(text)
-	text = text:gsub("She points a location on your map, in a remote area.", "她给你指出了地图上的一个位置，在某个遥远的地方。")
+	text = text:gsub("She points a location on your map, in a remote area to the north.", "她给你指出了地图上的一个位置，在遥远的北方。")
 	text = text:gsub("She gives you a strange metal contraption, explaining that using it will transport you to tinker's cave.", "他给了你一个奇怪的金属装置，告诉你使用它可以把你传送到工匠的洞穴。")
 	return "工匠大师", text
 end

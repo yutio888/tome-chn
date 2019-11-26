@@ -7,7 +7,7 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		return ([[你在死亡中狂欢，吞噬你受害者们的灵魂。每当你对一个目标造成伤害时，你造成 %0.2f 额外暗影伤害。
 		除此之外，每当你杀死敌人时你获得 %d 个灵魂。
-		伤害将会随你法术强度和心灵强度中较高者变化，且每回合最多触发 25 次。]]):
+		伤害将会随你法术强度和精神强度中较高者变化，且每回合最多触发 25 次。]]):
 		format(damDesc(self, DamageType.DARKNESS, damage), t.soulBonus(self,t))
 	end,}
 
@@ -17,7 +17,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		return ([[在目标区域释放一个致命的瘴气云团，对其中所有的目标造成 %0.2f 暗影伤害并有 20%% 几率使其感染一个持续 %d 回合的疾病。疾病将造成枯萎伤害并降低体质，力量，或敏捷。
-		伤害将会随你法术强度和心灵强度中较高者变化。]]):
+		伤害将会随你法术强度和精神强度中较高者变化。]]):
 		format(damDesc(self, DamageType.DARKNESS, damage), t.getBaneDur(self,t))
 	end,}
 

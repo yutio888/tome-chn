@@ -20,7 +20,7 @@
 long_name = "CHN Addons for ToME"
 short_name = "chn123"
 for_module = "tome"
-version = {1,6,0}
+version = {1,6,4}
 addon_version = {1,1,0}
 tags = {'Chinese','translation'}
 weight = 15

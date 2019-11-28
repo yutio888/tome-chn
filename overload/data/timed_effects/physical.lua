@@ -1452,7 +1452,7 @@ newEffect{
 newEffect{
 	name = "GRAPPLED", image = "talents/grab.png",
 	desc = "Grappled",
-	long_desc = function(self, eff) return ("目标被抓取，不能移动，并限制他的攻击能力。\n#RED#沉默\n定身\n%s\n%s\n%s#LAST#"):format("物理强度减少 " .. math.ceil(eff.reduce), "减速 " .. math.floor(eff.slow * 100).."%", "每回合造成 " .. math.ceil(eff.power) .. " 伤害 " ) end,
+	long_desc = function(self, eff) return ("目标被抓取，不能移动，并限制他的攻击能力。\n#RED#%s定身\n%s\n%s\n%s#LAST#"):format(eff.silence > 0 and "沉默\n" or "", "物理强度降低 " .. math.ceil(eff.reduce), "减速 " .. math.floor(eff.slow * 100).."%", "每回合受到 " .. math.ceil(eff.power) .. " 伤害 " ) end,
 	type = "physical",
 	subtype = { grapple=true, pin=true },
 	status = "detrimental",

@@ -21,14 +21,15 @@ long_name = "CHN Addons for ToME"
 short_name = "chn123"
 for_module = "tome"
 version = {1,6,4}
-addon_version = {1,1,0}
+addon_version = {1,2,0}
 tags = {'Chinese','translation'}
 weight = 15
-author = { "Grammier&Marblezls&Yutio888", "Grammier@3DMGAME","Marblezls@3DMGAME","Yutio888@mail.qq.com"}
+author = { "Grammier&Marblezls&Yutio888&starsapphire", "Grammier@3DMGAME","Marblezls@3DMGAME","yutio888@mail.qq.com"}
 homepage = "http://tome.te4.org/"
 description = [[The chinese translation addon of tome4.
 For limited technical support or bug report, please visit http://tieba.baidu.com/p/2908849201 .
-Author & main maintainers: Grammier, Marblezls, Yutio888
+Current Maintainer: yutio888, starsapphire
+Original Author: Grammier, Marblezls,
 Original publication notes from 3DMGAME:
 负责人：Marblezls、Grammier
 翻译： Marblezls,Grammier,马达哦,林大彤,风中脚步,大菠萝

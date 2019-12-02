@@ -12,9 +12,9 @@ Currently this project is actively maintained by me (Flyingclouds) and other mem
 
 ### 使用方法 How to use
 
-你可以在[官网](https://te4.org/games/addons/tome/chn123)或[Steam创意工坊](https://steamcommunity.com/sharedfiles/filedetails/?id=1391844744)订阅该补丁。
+你可以在[官网](https://te4.org/games/addons/tome/chn123)或[Steam创意工坊](https://steamcommunity.com/sharedfiles/filedetails/?id=1926617880)订阅该补丁。
 
-You can subscribe this addon in [offical website](https://te4.org/games/addons/tome/chn123) or [Steam workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=1391844744).
+You can subscribe this addon in [offical website](https://te4.org/games/addons/tome/chn123) or [Steam workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=1926617880).
 
 你也可以在 [Release](https://github.com/yutio888/tome-chn/releases) 页面下载最新的稳定版，稳定版的发布内容较开发版稍慢。
 

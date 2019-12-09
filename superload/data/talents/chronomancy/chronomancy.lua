@@ -18,7 +18,7 @@ registerTalentTranslation{
 		local defense = t.getDefense(self, t)
 		local crits = t.getCritDefense(self, t)
 		return ([[获得 %d 闪避  和 %d%% 暴击减免。
-		如果你激活了预知未来或者命运歧路，那么这些技能也会拥有同样的加成，使你获得额外的闪避和暴击减免。		
+		如果你激活了预知未来或者命运螺旋，那么这些技能也会拥有同样的加成，使你获得额外的闪避和暴击减免。		
 		受魔法影响，增益效果有额外加成。]]):
 		format(defense, crits)
 	end,

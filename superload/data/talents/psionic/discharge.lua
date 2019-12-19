@@ -46,9 +46,9 @@ registerTalentTranslation{
 		local penetration = t.getResistPenalty(self, t)
 		local duration = t.getDuration(self, t)
 		local crit_bonus = t.getCritBonus(self, t)
-		return ([[将注意力集中于单体目标，将所有攻击性灵能脉冲系技能射向目标，持续 %d 回合。当此技能激活时，所有灵能脉冲系技能增加 %d%% 暴击伤害， 并且你可以获得%d%%精神抗性穿透。 
+		return ([[将注意力集中于单体目标，将所有攻击性灵能脉冲系技能射向目标，持续 %d 回合。当此技能激活时，所有灵能脉冲系技能增加 %d%% 暴击伤害， 并且你可以获得 %d%% 精神抗性穿透。 
 		如果目标死亡，则该技能提前中断。 
-		受精神强度影响，暴击增益效果按比例加成。]]):format(duration, crit_bonus)
+		受精神强度影响，暴击增益效果按比例加成。]]):format(duration, crit_bonus, penetration)
 	end,
 }
 

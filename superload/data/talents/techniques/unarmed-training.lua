@@ -18,7 +18,7 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		local inc = t.getPercentInc(self, t)
 		return ([[增加 %d%% 所有徒手伤害，提高 30 物理强度（包括抓取 / 徒手技）。 
-		注意：徒手战斗时格斗家随等级每级增加 0.5 物理强度。（当前提高 %0.1f 物理强度）你的攻击速度提高 20%% 。]]):
+		注意：徒手战斗时，格斗家具有随等级每级增加 0.5 物理强度。（当前提高 %0.1f 物理强度）和攻击速度提高 20%% 的固有属性。]]):
 		format(100*inc, self.level * 0.5)
 	end,
 }

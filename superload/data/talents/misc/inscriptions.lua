@@ -361,7 +361,7 @@ registerInscriptionTranslation{
 	display_name = "堕落印记：吞噬",
 	info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)
-		return ([[对目标激活此印记，移除其 %d 个效果并将其转化为治疗你每个效果 %d 生命值。]]):format(data.effects, data.heal + data.inc_stat)
+		return ([[对目标激活此印记，移除其 %d 魔法或物理效果，或是持续技能，每移除一个治疗 %d 生命值。]]):format(data.effects, data.heal + data.inc_stat)
 	end,
 	short_info = function(self, t)
 		local data = self:getInscriptionData(t.short_name)

@@ -1082,6 +1082,7 @@ newEffect{
 	name = "DISPAIR", image = "effects/despair.png",
 	desc = "Despair",
 	long_desc = function(self, eff) return ("目标陷入绝望，护甲，闪避，精神豁免和精神抵抗降低 %d%% 。"):format(-eff.statChange) end,
+	charges = function(self, eff) return math.floor(-eff.statChange) end,	
 	type = "mental",
 	subtype = { fear=true },
 	status = "detrimental",
@@ -1112,6 +1113,7 @@ newEffect{
 	name = "TERRIFIED", image = "effects/terrified.png",
 	desc = "Terrified",
 	long_desc = function(self, eff) return ("目标陷入惊恐，每回合受到 %d 点精神和黑暗伤害，所有冷却时间增加 %d%% 。"):format(eff.damage, eff.cooldownPower * 100) end,
+	charges = function(self, eff) return (tostring(math.floor(eff.cooldownPower * 100)).."%") end,
 	type = "mental",
 	subtype = { fear=true },
 	status = "detrimental",
@@ -1168,6 +1170,7 @@ newEffect{
 	name = "HAUNTED", image = "effects/haunted.png",
 	desc = "Haunted",
 	long_desc = function(self, eff) return ("目标被死亡的恐惧纠缠，所有精神负面效果每回合造成 %d 精神和黑暗伤害。"):format(eff.damage) end, --perhaps add total.
+	charges = function(self, eff) return (math.floor(eff.damage)) end,	
 	type = "mental",
 	subtype = { fear=true },
 	status = "detrimental",
@@ -2255,13 +2258,16 @@ newEffect{
 newEffect{
 	name = "FOCUSED_WRATH", image = "talents/focused_wrath.png",
 	desc = "Focused Wrath",
-	long_desc = function(self, eff) return ("目标的潜意识集中在 %s 。"):format(eff.target.name:capitalize()) end,
+	long_desc = function(self, eff) return ("目标的潜意识集中在 %s ，增加%d%%精神抗性穿透。"):format(eff.target.name:capitalize(), eff.pen) end,
 	type = "mental",
 	subtype = { psionic=true },
 	status = "beneficial",
 	parameters = { power = 1 },
 	on_gain = function(self, err) return "#Target#'s subconscious has been focused.", "+Focused Wrath" end,
 	on_lose = function(self, err) return "#Target#'s subconscious has returned to normal.", "-Focused Wrath" end,
+	activate = function(self, eff)
+			self:effectTemporaryValue(eff, "resists_pen", {[DamageType.MIND]=eff.pen})
+		end,
 	on_timeout = function(self, eff)
 		if not eff.target or eff.target.dead or not game.level:hasEntity(eff.target) then
 			self:removeEffect(self.EFF_FOCUSED_WRATH)

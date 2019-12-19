@@ -105,7 +105,7 @@ eye_of_the_tiger_data = {
 		reduce = 2,
 	},
 	spell = {
-		desc = "所有的法术暴击减少随机的 1 个冷却中的法术技能 2 回合冷却时间。",
+		desc = "所有的法术暴击减少随机的 1 个冷却中的法术/ 堕落/ 天空/时空系技能 2 回合冷却时间。",
 		types = { "^spell/", "^corruption/", "^celestial/", "^chronomancy/" },
 		reduce = 2,
 	},

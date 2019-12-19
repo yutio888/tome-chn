@@ -156,6 +156,7 @@ newEffect{
 	name = "DEEP_WOUND", image = "talents/bleeding_edge.png",
 	desc = "Deep Wound",
 	long_desc = function(self, eff) return ("巨大的伤口使你流失血液，造成每回合 %0.2f 物理伤害并降低 %d%% 所有治疗效果。"):format(eff.power, eff.heal_factor) end,
+	charges = function(self, eff) return (math.floor(eff.power)) end,	
 	type = "physical",
 	subtype = { wound=true, cut=true, bleed=true },
 	status = "detrimental",
@@ -577,6 +578,10 @@ newEffect{
 		return ("目标有 %d%% 概率躲避近战和远程攻击 "):format(eff.chance) .. ((eff.defense>0 and (" 并增加 %d 点闪避。"):format(eff.defense)) or "") .. "." 
 	end,
 	type = "physical",
+	charges = function(self, eff)
+		if self:attr("no_evasion") then return 0 end
+		return math.floor(eff.chance).."%"
+	end,
 	subtype = { evade=true },
 	status = "beneficial",
 	parameters = { chance=10, defense=0 },
@@ -750,6 +755,7 @@ newEffect{
 	desc = "Frozen",
 	long_desc = function(self, eff) return ("目标被冻结在冰块中，对其造成的所有伤害有 40％被冰块吸收，目标则受到余下的 60％伤害。冰冻状态下你的闪避无效，你只能攻击冰块，但同时你也不会受到其他负面状态影响（潮湿和冻结双脚除外）。目标被冻结时无法传送也不能回复生命。冰块剩余 %d HP。"):format(eff.hp) end,
 	type = "physical", -- Frozen has some serious effects beyond just being frozen, no healing, no teleport, etc.  But it can be applied by clearly non-magical sources i.e. Ice Breath
+	charges = function(self, eff) return math.floor(eff.hp) end,	
 	subtype = { cold=true, stun=true },
 	status = "detrimental",
 	parameters = {},
@@ -3320,7 +3326,7 @@ newEffect{
 	on_gain = function(self, err) return "#Target# is poisoned!", "+Deadly Poison" end,
 	on_lose = function(self, err) return "#Target# is no longer poisoned.", "-Deadly Poison" end,
 	-- Damage each turn
-	on_timeout = function(self, eff)
+	on_timeout = function(self, eff, p, ed)
 		if self:attr("purify_poison") then 
 			self:heal(eff.power, eff.src)
 		elseif self.x and self.y then
@@ -3331,7 +3337,7 @@ newEffect{
 			end
 			if dam > 0 and eff.leeching > 0 then
 				local src = eff.src.resolveSource and eff.src:resolveSource()
-				if src then src:heal(dam*eff.leeching/100, eff) end
+				if src then src:heal(dam*eff.leeching/100, ed) end
 			end
 		end
 	end,
@@ -3518,6 +3524,7 @@ newEffect{
 	desc = "Rogue's Brew",
 	long_desc = function(self, eff) return ("The target will not die until falling below -%d life."):format(eff.power) end,
 	type = "physical",
+	charges = function(self, eff) return math.floor(eff.power) end,	
 	subtype = { nature=true },
 	status = "beneficial",
 	parameters = { power=1 },
@@ -4290,5 +4297,22 @@ newEffect{
 		if o.name and o.name == "Yaldan Baoth" then
 			self:removeEffect(self.EFF_FORGONE_VISION)
 		end
+	end,
+}
+
+
+newEffect{
+	name = "GIFT_WOODS", image = "talents/thaloren_wrath.png",
+	desc = "Gift of the Woods",
+	long_desc = function(self, eff) return ("Increases the effectiveness of all healing the target receives by %d%%."):format(eff.power * 100) end,
+	type = "physical",
+	subtype = { nature=true },
+	status = "beneficial",
+	parameters = { power = 0.1 },
+	activate = function(self, eff)
+		eff.tmpid = self:addTemporaryValue("healing_factor", eff.power)
+	end,
+	deactivate = function(self, eff)
+		self:removeTemporaryValue("healing_factor", eff.tmpid)
 	end,
 }

@@ -20,7 +20,7 @@ registerTalentTranslation{
 		local arm = t.armorBoost(self, t)
 		local fat = t.fatigueBoost(self, t)
 		return ([[操纵力量从分子层面重组、平衡、磨砺你的装备。
-		你装备的每一件武器都会提升 %d 的命中和伤害。灵晶不能被调整，因为他们已经是完美的自然形态。
+		你装备的每一件武器都会提升 %d 的命中和强度。灵晶不能被调整，因为他们已经是完美的自然形态。
 		你每件身上的护甲和盾牌增加你 %d 护甲，同时减少 %d 疲劳。
 		该技能效果受精神强度影响。]]):
 		format(weapon_boost, arm, fat)

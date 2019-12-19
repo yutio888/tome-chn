@@ -28,13 +28,14 @@ local imbueEgo = function(gem, ring)
 		wielder = table.clone(gem.imbue_powers, true),
 		been_imbued = true,
 		egoed = true,
+		shop_gem_imbue=true,
 	}
 	if gem.talent_on_spell then ego.talent_on_spell = table.clone(gem.talent_on_spell, true) end  -- Its really weird that this table structure is different for one property
 	game.zone:applyEgo(ring, ego, "object", true)
 end
 
 local imbue_ring = function(npc, player)
-	player:showInventory("镶嵌哪颗戒指？", player:getInven("INVEN"), function(o) return o.type == "jewelry" and o.subtype == "ring" and o.material_level and not o.unique and not o.plot and not o.special and not o.tinker end, function(ring, ring_item)
+	player:showInventory("镶嵌哪颗戒指？", player:getInven("INVEN"), function(o) return o.type == "jewelry" and o.subtype == "ring" and o.material_level and not o.unique and not o.plot and not o.special and not o.tinker and not o.shop_gem_imbue end, function(ring, ring_item)
 		player:showInventory("使用哪颗宝石？", player:getInven("INVEN"), function(gem) return gem.type == "gem" and gem.imbue_powers and gem.material_level end, function(gem, gem_item)
 			local lev = (ring.material_level + gem.material_level) / 2 * 10 + 10  -- Average the material level then add a bonus so we guarantee greater ego level range
 			local new_ring

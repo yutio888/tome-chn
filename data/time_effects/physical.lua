@@ -1279,3 +1279,12 @@ timeEffectCHN:newEffect{
 	type = "其他",
 	subtype = "",
 }
+
+timeEffectCHN:newEffect{
+	id = "GIFT_WOODS", 
+	enName = "Gift of the Woods",
+	chName = "森林的恩赐",
+	desc = function(self, eff) return ("治疗系数增加%d%%"):format(eff.power * 100) end,
+	type = "物理",
+	subtype = "自然",
+}

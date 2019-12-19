@@ -2058,6 +2058,27 @@ function _M:tooltip(x, y, seen_by)
 			ts:add(true)
 		end
 	end
+	if self:isUnarmed() then
+		if self:getInven("HANDS") then
+			-- Gloves merge to the Actor.combat table so we have to special case this to display the object but look at self.combat for the damage
+			for i, o in ipairs(self:getInven("HANDS")) do
+				local tst = ("#LIGHT_BLUE#空手:#LAST#"..o:getShortName({force_id=true, do_color=true, no_add_name=true})):toTString()
+				tst = tst:splitLines(game.tooltip.max-1, game.tooltip.font, 2)
+				tst = tst:extractLines(true)[1]
+				tst:add(" ("..math.floor(self:combatDamage(self.combat))..") ")
+				table.append(ts, tst)
+				ts:add(true)
+			end
+		else
+			-- We have no gloves, just list the damage
+			local tst = ("#LIGHT_BLUE#空手:#LAST#"):toTString()
+			tst = tst:splitLines(game.tooltip.max-1, game.tooltip.font, 2)
+			tst = tst:extractLines(true)[1]
+			tst:add(" ("..math.floor(self:combatDamage(self.combat))..") ")
+			table.append(ts, tst)
+			ts:add(true)
+		end
+	end
 
 	ts:add({"color", "WHITE"})
 	local retal = 0
@@ -7851,7 +7872,7 @@ function _M:doWearTinker(wear_inven, wear_item, wear_o, base_inven, base_item, b
 		if wear_inven and wear_item then self:removeObject(wear_inven, wear_item) end
 
 		self:fireTalentCheck("callbackOnWearTinker", wear_o, base_o)
-
+		self:useEnergy()
 		return true, base_o
 	else
 		game.logPlayer(self, "You fail to attach %s to %s.", wear_o:getName{do_color=true}, base_o:getName{do_color=true})

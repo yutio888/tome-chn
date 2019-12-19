@@ -20,6 +20,7 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)
 		return ([[撕裂位面，暂时产生通往以太空间的裂隙，在目标区域造成 %d 个随机魔法爆炸。 
 		每个爆炸在 2 码范围内造成 %0.2f 奥术伤害，并且每回合只能触发一次爆炸。 
+		在上一次爆炸尚未完全结束时，再次释放该技能将累计爆炸次数并相应更改爆炸区域。
 		受法术强度影响，伤害有额外加成。]]):
 		format(t.getNb(self, t), damDesc(self, DamageType.ARCANE, damage))
 	end,

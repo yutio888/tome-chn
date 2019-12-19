@@ -899,7 +899,7 @@ newEffect{
 			self:doFOV() -- update actors seen
 			for i = 1, #self.fov.actors_dist do
 				act = self.fov.actors_dist[i]
-				if act and self:reactionToward(act) < 0 and not act.dead and act:isNear(eff.x, eff.y, maxdist) then
+				if act and self:reactionToward(act) < 0 and not act.dead and eff.x and act:isNear(eff.x, eff.y, maxdist) then
 					local sx, sy = util.findFreeGrid(act.x, act.y, 1, true, {[engine.Map.ACTOR]=true})
 					if sx then acts[#acts+1] = {act, sx, sy} end
 				end

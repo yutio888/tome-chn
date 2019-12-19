@@ -89,8 +89,8 @@ registerTalentTranslation{
 	id = "T_THALOREN_WRATH",
 	name = "森林的恩赐",
 	info = function(self, t)
-		return ([[召唤自然的力量，每回合恢复 %d 生命值，治疗系数增加 %d%% ，持续 10 回合。
-		生命恢复量受意志值加成。]]):format(5 + self:getWil() * 0.5, t.getHealMod(self, t))
+		return ([[召唤自然的力量，每回合恢复 %d 生命值，治疗系数增加 %d%% ，持续 8 回合。
+		生命恢复量受意志值或体质值中较高一项加成。]]):format(t.getHealing(self,  t), t.getHealMod(self, t))
 	end,
 }
 
@@ -234,9 +234,9 @@ registerTalentTranslation{
 	name = "兽族忍耐",
 	info = function(self, t)
 		return ([[其他种族对兽族的猎杀持续了上千年，不管是否正义。他们已经学会忍受那些会摧毁弱小种族的灾难。 
-		当你的生命值降低到 50%% 以下，你强大的意志移除你身上最多 %d 个精神状态（基于技能等级和意志）。该效果每 12 回合最多触发一次。
+		当你的生命值降低到 50%% 以下，你强大的意志移除你身上最多 %d 个精神状态（基于技能等级和意志）。该效果每 %d 回合最多触发一次。
 		额外增加 %d 物理和精神豁免。]]):
-		format(t.getDebuff(self, t), t.getSaves(self, t))
+		format(t.getDebuff(self, t), t.getSaves(self, t), self:getTalentCooldown(t))
 	end,
 }
 

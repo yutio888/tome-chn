@@ -6,7 +6,6 @@ local ffi_new = ffi.new
 local ffi_sizeof = ffi.sizeof
 local ffi_cast = ffi.cast
 local ffi_fill = ffi.fill
-local ngx_now = ngx.now
 local uintptr_t = ffi.typeof("uintptr_t")
 local setmetatable = setmetatable
 local tonumber = tonumber
@@ -21,10 +20,10 @@ do
 end
 
 
-if string.find(jit.version, " 2.0", 1, true) then
-    ngx.log(ngx.ALERT, "use of lua-resty-lrucache with LuaJIT 2.0 is ",
-            "not recommended; use LuaJIT 2.1+ instead")
-end
+--if string.find(jit.version, " 2.0", 1, true) then
+--    ngx.log(ngx.ALERT, "use of lua-resty-lrucache with LuaJIT 2.0 is ",
+--            "not recommended; use LuaJIT 2.1+ instead")
+--end
 
 
 local ok, tb_clear = pcall(require, "table.clear")
@@ -193,7 +192,7 @@ function _M.get(self, key)
     queue_remove(node)
     queue_insert_head(cache_queue, node)
 
-    if node.expire >= 0 and node.expire < ngx_now() then
+    if node.expire >= 0 and node.expire < os.time() then
         -- print("expired: ", node.expire, " > ", ngx_now())
         return nil, val, node.user_flags
     end
@@ -261,7 +260,7 @@ function _M.set(self, key, value, ttl, flags)
     queue_insert_head(self.cache_queue, node)
 
     if ttl then
-        node.expire = ngx_now() + ttl
+        node.expire = os.time() + ttl
     else
         node.expire = -1
     end

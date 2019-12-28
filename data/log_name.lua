@@ -4,7 +4,10 @@ local cache = lruCache.new(100)
 
 function logCHN:getName(name)
 	local hit = cache:get(name)
-	if(hit) then return hit end
+	if(hit) then
+		return hit
+	end
+
 	local oldName = name
 	name = npcCHN:getNameOld(name)
     if name:find(" from ") then
@@ -17,11 +20,11 @@ function logCHN:getName(name)
         else
             local tnamet = tname
             tname = npcCHN:getNameOld(tname)
-            cache.set(tnamet, tname)
+            cache:set(tnamet, tname)
         end
 		tname = trapCHN:getName(tname)
 		teffect = timeEffectCHN:getName(teffect)
-        if teffect.equals(teffectt) and tname.equals(tnamet) then
+        if teffect == teffectt and tname == tnamet then
             name = oldName
         else
             name = tname  .."的" .. teffect .."效果"
@@ -35,11 +38,11 @@ function logCHN:getName(name)
         local hit2 = cache:get(tname)
         if hit2 then tname = hit2 else
             tname = npcCHN:getNameOld(tname)
-            cache.set(tnamet, tname)
+            cache:set(tnamet, tname)
         end
 		ename = projectileCHN:getName(ename)
 		ename = trapCHN:getName(ename)
-		if ename.equals(enamet) and tname.equals(tnamet) then
+		if ename == enamet and tname == tnamet then
 			name = oldName
 		else
 			name = tname.."的"..ename

@@ -653,7 +653,7 @@ TOOLTIP_VISION_INVISIBLE = [[#GOLD#隐形#LAST#
 TOOLTIP_VISION_SEE_INVISIBLE = [[#GOLD#侦测隐形#LAST#
 你发现隐形生物的能力，该值越高你发现
 的几率也越高（受目标自身隐形等级的影
-响）。
+响）。]]
 TOOLTIP_SEE_TRAPS = [[#GOLD#侦察陷阱#LAST#
 你侦察陷阱的能力，该属性越高，你就越
 容易发现陷阱。

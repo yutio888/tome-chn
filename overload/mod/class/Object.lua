@@ -432,7 +432,7 @@ function _M:descAttribute(attr)
 		return power(c) ..", "..(c.apr or 0).." 穿透"
 	elseif attr == "COMBAT_AMMO" then
 		local c = self.combat
-		return c.shots_left.."/"..math.floor(c.capacity)..", "..power(c).." 伤害, "..(c.apr or 0).." 穿透"
+		return c.shots_left.."/"..math.floor(c.capacity)..", "..power(c)..", "..(c.apr or 0).." 穿透"
 	elseif attr == "COMBAT_DAMTYPE" then
 		local c = self.combat
 		return power(c)..", "..("%d"):format((c.apr or 0)).." 穿透, "..DamageType:get(c.damtype).name.." 伤害"

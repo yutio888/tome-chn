@@ -53,7 +53,7 @@ registerTalentTranslation{
 		return ([[你搜索周围地格的陷阱（ %d 侦察强度），并尝试解除 ( %d 解除强度，基于技能 %s)。
 		解除陷阱有最低技能等级需求，且你必须能够移动到陷阱的所在格，尽管你仍然留在你的当前位置。
 		解除陷阱失败可能会触发陷阱。
-		Your skill improves with your your Cunning.]]):format(t_det, t_dis, tdm.name)
+		解除能力随灵巧值提升。]]):format(t_det, t_dis, tdm.name)
 	end,
 }
 return _M

@@ -5,7 +5,7 @@ registerTalentTranslation{
 	name = "火箭发射器",
 	info = function(self, t)
 		return ([[你装备着一款全自动的，肩抗式的火箭发射器。每个回合，他会自动向武器范围内的 %d 个敌人发射火箭，造成 %d%% 的火焰蒸汽枪伤害。
-		火箭可以安全地穿过盟友。]]):format(t.getNb(self,t), t.getDamage(self,t)*100)
+		火箭可以安全地穿过盟友。火箭触发的武器命中效果只造成50%%的伤害。]]):format(t.getNb(self,t), t.getDamage(self,t)*100)
 	end,
 }
 
@@ -16,10 +16,10 @@ registerTalentTranslation{
 		local dam = t.getDamage(self,t)
 		local apr = t.getApr(self,t)
 		local fear = t.getFear(self,t)
-		return ([[用高度易燃的物质强化你的火箭，让它们可以引燃目标，在 3 回合内造成 %0.2f 火焰伤害，并降低他们 %d 护甲值。继续击中被引燃的目标会刷新效果的持续时间，并造成 %0.2f 额外火焰伤害。
+		return ([[用高度易燃的物质强化你的火箭，让它们可以引燃目标，在 3 回合内造成 %0.2f 火焰伤害。继续击中被引燃的目标会刷新效果的持续时间（但不能叠加），并造成 %0.2f 额外火焰伤害。
 被这一燃烧效果影响的目标若生命值降低到 25%% 以下，将会陷入恐慌的状态，他们每回合有 %d%% 的几率在恐慌中逃离你。
 火焰伤害受蒸汽强度加成。]]):
-		format(damDesc(self, DamageType.FIRE, dam), apr, damDesc(self, DamageType.FIRE, dam/2), fear)
+		format(damDesc(self, DamageType.FIRE, dam), damDesc(self, DamageType.FIRE, dam/2), fear)
 	end,
 }
 
@@ -37,24 +37,19 @@ registerTalentTranslation{
 
 registerTalentTranslation{
 	id = "T_SEEKER_WARHEAD",
-	name = "制导弹头",
+	name = "死亡天降",
 	info = function(self, t)
-		local rad = self:getTalentRadius(t)
-		local dam = t.getDamage(self,t)
-		local dur = t.getDuration(self,t)
-		return ([[发射一枚强大的制导导弹，你可以直接控制它。这颗导弹持续 2 回合，拥有 1000%% 的移动速度，并且可以闪避任何负面效果。
-在它遭受攻击或者你手动激活它的时候，导弹会立刻引爆。这会在半径 %d 码范围内造成一次毁灭性的爆炸，震慑范围内的目标 %d 回合，并在持续时间内共造成 %0.2f 火焰伤害。爆炸还会点燃地面，每回合造成 %0.2f 火焰伤害，持续 5回合。
-当你操控导弹的时候，你的注意力完全集中在目标上，这会让你无法进行任何行动，处于脆弱的状态。
-警告——爆炸可能会对你造成伤害！]]):
-		format(rad, dur, damDesc(self, DamageType.FIRE, dam), damDesc(self, DamageType.FIRE, dam/5))
+		return ([[你启动火箭发射器，将自己发射到天空中，持续 3 回合，同时发射范围为 2 的火箭弹幕，在 2 码半径内造成 %d%% 火焰蒸汽枪伤害。
+		当处在飞行状态的时候，你获得 %d%% 移动速度， %d%% 几率躲避近战和远程攻击，并且可以重新激活这个技能，再次发射火箭弹幕。使用任何火箭弹幕之外的技能都会提前终止这一效果。]]):
+		format(t.getDamage(self,t)*100, t.getSpeed(self,t), t.getEvasion(self,t))
 	end,
 }
 
 registerTalentTranslation{
-	id = "T_DETONATE_MISSILE",
-	name = "引爆",
+	id = "T_ROCKET_BARRAGE",
+	name = "火箭弹幕",
 	info = function(self, t)
-		return ([[引爆导弹！]]):format()
+		return ([[发射火箭弹幕，在 2 码半径内造成 %d%% 火焰蒸汽枪伤害。]]):format()
 	end,
 }
 

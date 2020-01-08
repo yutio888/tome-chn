@@ -7,7 +7,7 @@ newChat{ id="welcome",
 			npc.store:loadup(game.level, game.zone)
 			npc.store:interact(player, npc.name)
 		end},
-		{"[改写程序，令其迁移至克鲁克部落]", jump="relocate", cond=function() return game.zone.short_name ~= "orcs+town-kruk" and game.state.birth.campaign_name == "orcs" end},
+		{"[改写程序，令其迁移至克鲁克部落]", jump="relocate", cond=function()  return game.zone.short_name ~= "orcs+town-kruk" and game:isCampaign("Orcs") end},
 		{"[离开]"},
 	}
 }

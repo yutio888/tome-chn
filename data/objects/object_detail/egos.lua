@@ -1230,6 +1230,18 @@ keyCHN["sentry"] = "警卫"
 -- ego "psion's " defined.
 -- ego "mindwoven " defined.
 -- ego "spellwoven " defined.
+
+egosCHN[" of tinkering "] = "工匠之"
+keyCHN["tinker"] = "工匠"
+egosCHN["gunslinger's "] = "快枪手的"
+keyCHN["gunslinger"] = "快枪手"
+egosCHN["strafer's "] = "扫射的"
+keyCHN["strafer"] = "扫射"
+egosCHN[" of life draining"] = "吸血之"
+keyCHN["draining"] = "吸血"
+egosCHN["overgrown "] = "茂盛的"
+keyCHN["draining"] = "茂盛"
+
 itemShortCHN = {}
 
 itemShortCHN["mossy"] = "青苔"

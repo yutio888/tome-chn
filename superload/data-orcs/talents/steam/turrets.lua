@@ -7,10 +7,10 @@ registerTalentTranslation{
 		return ([[你学会了部署炮台的能力。炮台是固定的建筑物，可以帮助你作战。炮台持续 10 回合，部署任何一个炮台，都会让其他炮台技能进入 5 回合冷却时间。
 学习该技能还会让你学会新的炮台类型。
 技能等级 1 时，你可以使用蒸汽枪炮台，会向周围的随机敌人开火，造成 %d%% 蒸汽枪伤害。这一射击可以穿过友军。
-技能等级 3 时，你可以使用火焰炮台，会喷出半径 3 码的扇形火焰，并嘲讽敌人。火焰炮台具有 %d 额外护甲值，并对所有伤害有 30%% 抗性。
+技能等级 3 时，你可以使用火焰炮台，会喷出半径 3 码的扇形火焰。火焰炮台具有 %d 额外护甲值，并对所有伤害有 30%% 抗性。
 技能等级 5 时，你可以使用医疗炮台，会放出治疗雾气，恢复所有友军 %d 生命值，并降低新获得的负面效果的持续时间 %d%% 。
 这一技能同时会增加你所有炮台 %d 的敏捷、体质和灵巧值。
-所有炮台会获得相当于你等级 1/2 的额外护甲，免疫所有异常状态，继承你的伤害加成和伤害穿透属性。
+所有炮台会获得相当于你等级 1/2 的额外护甲，免疫所有异常状态，继承你的伤害加成、伤害穿透、蒸汽强度、物理强度和命中率。
 属性值加成、火焰炮台的伤害和医疗炮台的治疗受蒸汽强度加成。
 ]]):
 	format(t.getSteamgunDamage(self,t)*100, t.getFlameArmor(self,t), t.getHeal(self,t), t.getEffectReduce(self,t), t.getStatBonus(self,t))
@@ -23,8 +23,8 @@ registerTalentTranslation{
 	info = function(self, t)
 		local stat = t.getStatBonus(self,t)
 		local dam = t.getDamage(self,t)*100
-		return ([[部署一个装备蒸汽枪的炮台，会自动射击射程内的敌人，造成 %d%% 蒸汽枪伤害。炮台具有 +%d 额外敏捷、体质和灵巧值。]]):
-		format(dam, stat)
+		return ([[部署一个装备蒸汽枪的炮台，会自动射击射程内的敌人，造成 %d%% 蒸汽枪伤害。炮台具有 +%d 额外敏捷、体质、灵巧值和 %0.2f 蒸汽枪精通。]]):
+		format(dam, stat, self:getTalentLevel(self.T_DEPLOY_TURRET))
 	end,
 }
 
@@ -53,7 +53,7 @@ registerTalentTranslation{
 	name = "火焰炮台",
 	info = function(self, t)
 		local stat = t.getStatBonus(self,t)
-		return ([[部署一个装备喷火器的炮台，会灼烧和嘲讽周围的敌人。炮台具有 +%d 额外敏捷、体质和灵巧值。]]):
+		return ([[部署一个装备喷火器的炮台，会灼烧周围的敌人。炮台具有 +%d 额外敏捷、体质和灵巧值。]]):
 		format(stat)
 	end,
 }
@@ -64,7 +64,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getDamage(self, t)
 		local radius = self:getTalentRadius(t)
-		return ([[喷射出半径 %d 码扇形的火焰，造成 %0.2f 火焰伤害，并嘲讽敌人。
+		return ([[喷射出半径 %d 码扇形的火焰，造成 %0.2f 火焰伤害。
 		伤害受蒸汽强度加成。]]):
 		format(radius, damDesc(self, DamageType.FIRE, damage))
 	end,
@@ -122,8 +122,9 @@ registerTalentTranslation{
 	info = function(self, t)
 		local dam = t.getPower(self,t)
 		local dur = t.getDuration(self,t)
-		return ([[进入守备模式，在身边召唤 2 个守卫炮台，持续 %d 回合。守卫炮台会将身边盟友（不包括其他守卫炮台）所受到所有伤害的 %d%% 转移到自己身上，并且它们装备有强力的电磁炮，可以发射贯穿敌人的子弹。]]):
-		format(dur, dam)
+		return ([[进入守备模式，在身边召唤 2 个守卫炮台，持续 %d 回合。守卫炮台会将身边盟友（不包括其他守卫炮台）所受到所有伤害的 %d%% 转移到自己身上，并且它们装备有强力的电磁炮，可以发射贯穿敌人的子弹。
+		守卫炮台具有 %0.2f 蒸汽枪精通技能，技能等级取决于你炮台守卫技能等级]]):
+		format(dur, dam, self:getTalentLevel(self.T_HUNKER_DOWN))
 	end,
 }
 

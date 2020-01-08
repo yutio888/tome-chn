@@ -115,7 +115,7 @@ registerTalentTranslation{
 	id = "T_GAUSS_CANNON",
 	name = "电磁炮",
 	info = function(self, t)
-		return ([[用尾部蒸汽枪发射充能射击，击穿所有敌人，无视护甲，造成 %d%% 闪电武器伤害。
+		return ([[用尾部蒸汽枪发射充能射击，攻击离你最远的敌人，击穿路径上所有敌人，无视护甲，造成 %d%% 闪电武器伤害。
 		使用这一技能不需要消耗时间。]]):
 		format(t.getDamage(self,t)*100)
 	end,

@@ -9,9 +9,10 @@ registerTalentTranslation{
 		local ammo = t.getReload(self,t)
 		local dam = t.getDamage(self,t)
 		local perc = t.getPercentInc(self,t)*100
-		return ([[你将武器连接到蒸汽机，使用它们来为你的武器填充弹药，并强化武器的能力。
+		return ([[你将武器和盾牌连接到蒸汽机，使用它们来为你的武器填充弹药，并强化武器的能力。
 		每当你使用蒸汽枪射击的时候，有 %d%% 的几率填充一枚重装武器的弹药。
 		每当你使用重装武器射击的时候，会填充 %d 枚弹药。
+		每当你使用盾牌格挡的时候，会填充一枚重装武器的弹药。
 		这一技能也会在你使用蒸汽枪或重装武器的时候提升武器伤害 %d%% ，提升物理强度 30 。
 		另外，你的蒸汽枪和重装武器射击可以安全地穿过友方目标。]]):
 		format(chance, ammo, perc)
@@ -49,7 +50,7 @@ registerTalentTranslation{
 		local rad = self:getTalentRadius(t)
 		local life = t.getLife(self,t)
 		local dam = t.getDamage(self,t)
-		return ([[准备好一个防御性的设备，其电力可以持续 5 回合。
+		return ([[准备好一个防御性的设备，其电力可以持续 8 回合。
 当你的生命值降到 0 点以下的时候，电击除颤器会启动，把你救活，取消这一致死的攻击，恢复 %d 点生命值，并在半径 %d 码范围内造成 %0.2f 闪电伤害，震慑目标 3 回合。
 如果电击除颤器没有启动，其冷却时间会减少 15 回合。
 生命值恢复量和伤害受蒸汽强度加成。]]):format(life, rad, damDesc(self, DamageType.LIGHTNING, dam))

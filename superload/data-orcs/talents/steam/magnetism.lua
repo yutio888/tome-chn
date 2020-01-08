@@ -6,7 +6,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local resist = t.getResists(self,t)
 		local damage = t.getDamage(self, t)
-		return ([[当你使用格挡技能的时候，你会在身边产生一个静电屏障，增加所有抗性 %d%% ，持续 4 回合。如果有敌人此时攻击你，屏障会电击它们，造成 %d%% 盾牌伤害。
+		return ([[当你使用格挡技能的时候，你会在自己和召唤物身边产生一个静电屏障，增加所有抗性 %d%% ，持续 4 回合。如果有敌人此时攻击你或召唤物，屏障会电击它们，造成 %d%% 你的盾牌伤害。
 		这一效果每回合最多只能对一个目标伤害一次，并且不会消耗反击效果。
 你装备盾牌和计算盾牌攻击伤害的时候，用灵巧代替力量要求。]]):format(resist, damage*100)
 	end,

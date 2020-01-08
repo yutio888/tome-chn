@@ -811,7 +811,7 @@ timeEffectCHN:newEffect{
 	id = "BURNING_PHOSPHOROUS",
 	enName = "Burning Phosphorous",
 	chName = "易燃火焰",
-	desc = function(self, eff) return ("目标被燃烧的化学物质所覆盖，每回合受到 %0.2f 火焰伤害，降低 %d 护甲值。之后的设计将会造成 %0.2f 火焰伤害，若目标降低到 25%% 生命值以下，他们有 %d%% 的几率慌乱逃跑。"):format(self:damDesc(DamageType.FIRE, eff.dam), eff.apr, self:damDesc(DamageType.FIRE, eff.initdam), eff.fear) end,
+	desc = function(self, eff) return ("目标被燃烧的化学物质所覆盖，每回合受到 %0.2f 火焰伤害。之后的射击将会造成 %0.2f 火焰伤害，若目标降低到 25%% 生命值以下，他们有 %d%% 的几率慌乱逃跑。"):format(self:damDesc(DamageType.FIRE, eff.dam), self:damDesc(DamageType.FIRE, eff.initdam), eff.fear) end,
 }
 
 timeEffectCHN:newEffect{
@@ -867,6 +867,20 @@ timeEffectCHN:newEffect{
 	enName = "Miasma",
 	chName = "瘴气",
 	desc = function(self, eff) return ("被有毒化学物质影响。 %d%% 技能失败率，降低 %d%% 治疗效果，受到近战或远程攻击的时候受到额外 %0.2f 酸性伤害。"):format(eff.fail, eff.heal, eff.dam) end,
+}
+
+timeEffectCHN:newEffect{
+	id = "DEATH_FROM_ABOVE",
+	enName = "Death From Above",
+	chName = "死亡天降",
+	desc = function(self, eff) return ("目标悬浮在空中，获得 %d%% 闪避率， %d%% 移动速度，每回合可以发射强力的火箭弹幕。"):format(eff.evasion, eff.speed*100) end,
+}
+
+timeEffectCHN:newEffect{
+	id = "CORROSIVE_FLECHETTE",
+	enName = "Corrosive Flechette",
+	chName = "腐蚀性毒镖",
+	desc = function(self, eff) return ("目标身上插着 %d 枚腐蚀性毒镖。任何近战或物理攻击都会引发毒镖爆炸，造成 %0.2f 酸性伤害。"):format(eff.nb, eff.power) end,
 }
 
 --Orcs other

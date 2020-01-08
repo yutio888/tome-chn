@@ -43,7 +43,7 @@ registerBirthDescriptorTranslation{
 		"#LIGHT_BLUE# * -2 力量, +1 敏捷, +1 体质",
 		"#LIGHT_BLUE# * +3 魔法, +2 意志, +0 灵巧",
 		"#GOLD#每等级生命加值：#LIGHT_BLUE# +9",
-		"#GOLD#经验惩罚： #LIGHT_BLUE# 25%",
+		"#GOLD#经验惩罚： #LIGHT_BLUE# 12%",
 	}
 }
 registerBirthDescriptorTranslation{
@@ -109,7 +109,7 @@ registerBirthDescriptorTranslation{
 		"#LIGHT_BLUE# * +2 力量, +1 敏捷, +1 体质",
 		"#LIGHT_BLUE# * -1 魔法, +1 意志, +1 灵巧",
 		"#GOLD#每等级生命加值:#LIGHT_BLUE# 12",
-		"#GOLD#经验惩罚 :#LIGHT_BLUE# 25%",
+		"#GOLD#经验惩罚 :#LIGHT_BLUE# 12%",
 	}
 }
 
@@ -143,7 +143,7 @@ registerBirthDescriptorTranslation{
 		"#LIGHT_BLUE# * +3 力量, -1 敏捷, +2 体质",
 		"#LIGHT_BLUE# * -2 魔法, -3 意志, +1 灵巧",
 		"#GOLD#每等级生命加值:#LIGHT_BLUE# 14",
-		"#GOLD#经验惩罚 :#LIGHT_BLUE# 30%",
+		"#GOLD#经验惩罚 :#LIGHT_BLUE# 15%",
 	},
 }
 
@@ -171,7 +171,7 @@ registerBirthDescriptorTranslation{
 		"#LIGHT_BLUE# * +5 力量, -3 敏捷, +4 体质",
 		"#LIGHT_BLUE# * +0 魔法, +1 意志, -1 灵巧",
 		"#GOLD#每等级生命加值:#LIGHT_BLUE# 13",
-		"#GOLD#经验惩罚 :#LIGHT_BLUE# 25%",
+		"#GOLD#经验惩罚 :#LIGHT_BLUE# 12%",
 	},
 }
 
@@ -314,7 +314,7 @@ registerBirthDescriptorTranslation{
 		"#LIGHT_BLUE# * +3 力量, +1 敏捷, +1 体质",
 		"#LIGHT_BLUE# * +2 魔法, -1 意志, +0 灵巧",
 		"#GOLD#每等级生命加值:#LIGHT_BLUE# 12",
-		"#GOLD#经验惩罚 :#LIGHT_BLUE# 25%",
+		"#GOLD#经验惩罚 :#LIGHT_BLUE# 12%",
 	},
 }
 registerBirthDescriptorTranslation{
@@ -329,6 +329,6 @@ registerBirthDescriptorTranslation{
 		"#LIGHT_BLUE# * +3 力量, -1 敏捷, +2 体质",
 		"#LIGHT_BLUE# * -2 魔法, +2 意志, +0 灵巧",
 		"#GOLD#每等级生命加值:#LIGHT_BLUE# 13",
-		"#GOLD#经验惩罚 :#LIGHT_BLUE# 30%",
+		"#GOLD#经验惩罚 :#LIGHT_BLUE# 15%",
 	},
 }

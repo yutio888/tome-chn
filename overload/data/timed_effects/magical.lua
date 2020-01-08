@@ -227,9 +227,11 @@ newEffect{
 	on_lose = function(self, err) return "#Target#'s skin returns to normal.", "-Reflective Skin" end,
 	activate = function(self, eff)
 		eff.tmpid = self:addTemporaryValue("reflect_damage", eff.power)
+		self:addShaderAura("reflective_skin", "awesomeaura", {time_factor=5500, alpha=0.6, flame_scale=0.6}, "particles_images/arcaneshockwave.png")
 	end,
 	deactivate = function(self, eff)
 		self:removeTemporaryValue("reflect_damage", eff.tmpid)
+		self:removeShaderAura("reflective_skin")
 	end,
 }
 
@@ -342,6 +344,11 @@ newEffect{
 	on_gain = function(self, err) return "#Target# summons a storm to protect him!", "+Stormshield" end,
 	on_lose = function(self, err) return "#Target#'s storm dissipates.", "-Stormshield" end,
 	activate = function(self, eff)
+	if core.shader.active(4) then
+			self:effectParticles(eff, {type="shader_ring_rotating", args={rotation=0, radius=1.0, img="lightningshield"}, shader={type="lightningshield"}})
+		else
+			self:effectParticles(eff, {type = "stormshield"})
+		end
 	end,
 	deactivate = function(self, eff)
 	end,

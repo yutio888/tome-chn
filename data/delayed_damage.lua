@@ -2,7 +2,7 @@ function delayed_damage_trans(desc)
 	if not desc then return desc end
 	
 	desc = desc:gsub("essence drain","精华吸取"):gsub("warded","守护"):gsub("blocked","格挡")
-	     :gsub("to psi shield","超能盾"):gsub("antimagic","反魔"):gsub("resist armour","减免"):gsub("orc summon chance","几率召唤兽人")
+	     :gsub("to psi shield","超能盾"):gsub("antimagic","反魔"):gsub("flat reduction","直接伤害减免"):gsub("orc summon chance","几率召唤兽人")
 	     :gsub("orc summon","召唤兽人"):gsub("terror chance","恐惧几率"):gsub("blinding powder","致盲粉"):gsub("smoke","烟雾")
 	     :gsub("dismissed","豁免"):gsub("reacted","反应"):gsub("deflected","偏移"):gsub("decoy","诱饵"):gsub("converted","转化")
 	     :gsub("dissipated","驱散"):gsub("shared","共享"):gsub("smeared","时空转化"):gsub("STATIC","静电"):gsub("braided","编织")

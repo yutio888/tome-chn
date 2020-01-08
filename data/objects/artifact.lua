@@ -516,6 +516,14 @@ registerArtifactTranslation{
 	desc = "当你带着这个项链，似乎整个世界都轻飘飘的。",
 }
 
+
+registerArtifactTranslation{
+	originName = "The Far-Hand",
+	display_name = "远距之手",
+	unided_name = "奇怪的金属手",
+	desc = "你能感受到这个奇怪的金属手在扭动着，似乎周围的空间被扭曲了。",
+}
+
 registerArtifactTranslation{
 	originName = "Daneth's Neckguard",
 	display_name = "丹纳斯的护颈",

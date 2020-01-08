@@ -447,7 +447,7 @@ function _M:descAttribute(attr)
 			return c.block.." 格挡"
 		end
 	elseif attr == "ARMOR" then
-		return (self.wielder and self.wielder.combat_def or 0).." 闪避, "..(self.wielder and self.wielder.combat_armor or 0).." 护甲值"
+		return (self.wielder and self.wielder.combat_def and math.round(self.wielder.combat_def) or 0).." 闪避, "..(self.wielder and self.wielder.combat_armor and math.round(self.wielder.combat_armor) or 0).." 护甲值"
 	elseif attr == "ATTACK" then
 		return (self.wielder and self.wielder.combat_atk or 0).." 命中, "..(self.wielder and self.wielder.combat_apr or 0).." 穿透, "..(self.wielder and self.wielder.combat_dam or 0).." 伤害"
 	elseif attr == "MONEY" then

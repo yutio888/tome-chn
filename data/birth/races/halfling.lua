@@ -25,6 +25,6 @@ registerBirthDescriptorTranslation
 		"#LIGHT_BLUE# * +0 魔法， +0 意志， +3 灵巧 ",
 		"#LIGHT_BLUE# * +5 幸运 ",
 		"#GOLD# 每等级增加生命值： #LIGHT_BLUE# 12",
-		"#GOLD# 经验惩罚： #LIGHT_BLUE# 20%",
+		"#GOLD# 经验惩罚： #LIGHT_BLUE# 10%",
 	},
 }

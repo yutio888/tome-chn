@@ -56,7 +56,7 @@ registerTalentTranslation{
 	id = "T_SPELL_SHIELD",
 	name = "法术抵抗",
 	info = function(self, t)
-		return ([[严格的训练使得你对某些法术效果具有更高的抗性（ +%d 法术豁免）。]]):format(self:getTalentLevel(t) * 9)
+		return ([[严格的训练使得你对某些法术效果具有更高的抗性（ +%d 法术豁免）。]]):format(t.getSaves(self,t))
 	end,
 }
 

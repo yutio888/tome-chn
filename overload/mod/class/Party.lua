@@ -394,6 +394,12 @@ function _M:giveOrder(actor, order)
 		end)
 		local ok, err = coroutine.resume(co)
 		if not ok and err then print(debug.traceback(co)) error(err) end
+	elseif order == "rename" then
+		local scheme = self.members[actor].orders[order]
+		local d = require("engine.dialogs.GetText").new(("Change name of: %s"):format(actor.name), "Name", 2, 25, function(name) if name then
+				actor.name = scheme(actor, name)
+		end end)
+		game:registerDialog(d)
 	elseif order == "behavior" then
 		game:registerDialog(require("mod.dialogs.orders."..order:capitalize()).new(actor, def))
 	elseif order == "talents" then

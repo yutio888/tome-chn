@@ -93,6 +93,9 @@ function _M:use(item)
 				end
 			end
 		end
+		game.player:setEffect(game.player.EFF_OMNIVISION, 100, {
+			range = 200,
+		})
 	elseif act == "change_level" then
 		game:registerDialog(GetQuantity.new("地图: "..game.zone.name, "楼层 1-"..game.zone.max_level, game.level.level, game.zone.max_level, function(qty)
 			game:changeLevel(qty)

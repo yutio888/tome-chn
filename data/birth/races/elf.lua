@@ -22,7 +22,7 @@ registerBirthDescriptorTranslation{
 		"#LIGHT_BLUE# * -2 力量， +1 敏捷， +0 体质 ",
 		"#LIGHT_BLUE# * +2 魔法， +3 意志， +1 灵巧 ",
 		"#GOLD# 每等级增加生命值： #LIGHT_BLUE# 9",
-		"#GOLD# 经验惩罚： #LIGHT_BLUE# 25%",
+		"#GOLD# 经验惩罚： #LIGHT_BLUE# 12%",
 	},
 }
 

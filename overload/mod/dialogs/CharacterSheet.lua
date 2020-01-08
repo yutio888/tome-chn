@@ -898,67 +898,15 @@ function _M:drawDialog(kind, actor_to_compare)
 		h = 0
 		w = 0
 
-		-- get the combat stats for weapon by inventory and slot
-		local function get_combat_stats(actor, type, inven_id, item)
-			local o = table.get(actor:getInven(inven_id), item)
-			local mean
-			local ammo
-			local atk
-			local dmg
-			local apr
-			local crit
-			local crit_power = 0
-			local aspeed
-			local range
-			local mspeed
-			local dam, archery
-			ammo = table.get(actor:getInven("QUIVER"), 1)
-			archery = o and o.archery and ammo and ammo.archery_ammo == o.archery and ammo.combat and (type ~= "offhand" or actor:attr("can_offshoot")) and (type ~= "psionic" or actor:attr("psi_focus_combat")) -- ranged combat
-			if type == "psionic" then
-				if not o or o.archery and not archery then return end
-				actor:attr("use_psi_combat", 1)
-			end
-			if not o or (o.archery and not archery) or actor:attr("disarmed") then -- unarmed
-				mean = actor.combat
-				dmg = actor:combatDamage(mean) * (mean.dam_mult or 1)
-				atk = actor:combatAttack(mean)
-				apr = actor:combatAPR(mean)
-				crit = actor:combatCrit(mean)
-				crit_power = mean.crit_power
-				aspeed = 1/actor:combatSpeed(mean)
-				archery = false
-			else -- weapon combat
-				mean = o and (o.special_combat and (o.slot == actor.inven[inven_id].name or actor:knowTalent(actor.T_STONESHIELD)) and o.special_combat) or actor:getObjectCombat(o, type == "psionic" and "mainhand" or type) or actor.combat -- handles stone wardens
-				if archery then -- ranged combat
-					dam = ammo.combat
-					atk = actor:combatAttackRanged(mean, dam)
-					dmg = actor:combatDamage(mean, nil, dam) * (mean.dam_mult or 1)
-					apr = actor:combatAPR(mean) + (dam.apr or 0)
-					crit_power = (mean.crit_power or 0) + (dam.crit_power or 0)
-					range = math.max(mean.range or 6, actor:attr("archery_range_override") or 1)
-					mspeed = 10 + (actor.combat.travel_speed or 0) + (mean.travel_speed or 0) + (dam.travel_speed or 0)
-				else -- melee combat
-					dam = o.combat
-					atk = actor:combatAttack(mean)
-					dmg = actor:combatDamage(mean) * (type == "offhand" and mean.talented ~= "shield" and actor:getOffHandMult(dam) or 1) * (mean.dam_mult or 1)
-					apr = actor:combatAPR(mean)
-					crit_power = mean.crit_power
-				end
-				crit = actor:combatCrit(dam)
-				aspeed = 1/actor:combatSpeed(mean)
-			end
-			if type == "psionic" then actor:attr("use_psi_combat", -1) end
-			return {obj=o, atk=atk, dmg=dmg, apr=apr, crit=crit, crit_power=crit_power or 0, aspeed=aspeed, range=range, mspeed=mspeed, archery=archery, mean=mean, ammo=ammo, block=mean.block, talented=mean.talented}
-		end
 		local function getCHNweaptype(weap_type)
 			weap_type=weap_type:gsub("knife","匕首"):gsub("staff","法杖"):gsub("axe","斧头"):gsub("sword","剑"):gsub("bow","弓"):gsub("mace","狼牙棒"):gsub("sling","投石索"):gsub("mindstar","灵晶"):gsub("whip","鞭子"):gsub("trident","三叉戟"):gsub("unarmed","空手")
 			return weap_type
 		end
 		-- display the combat (comparison) stats for a combat slot
 		local function display_combat_stats(text, player, actor_to_compare, inven_id, type, item)
-			local combat = get_combat_stats(player, type, inven_id, item)
+			local combat = player:getCombatStats(type, inven_id, item)
 			if not combat then return end
-			local combatc = actor_to_compare and get_combat_stats(actor_to_compare, type, inven_id, item) or {}
+			local combatc = actor_to_compare and actor_to_compare:getCombatStats(type, inven_id, item) or {}
 			local color
 			local weap_type = combat.talented or table.get(combat.mean, "talented")
 			local text2 = (combat.obj and combat.obj.slot_forbid == "OFFHAND" and "双手, " or "")..(weap_type and getCHNweaptype(weap_type) or "")

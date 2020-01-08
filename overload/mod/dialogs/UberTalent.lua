@@ -73,7 +73,6 @@ function _M:ignoreUnlocks()
 end
 
 function _M:generateList()
-
 	-- Makes up the list
 	local max = 0
 	local cols = {}
@@ -81,7 +80,16 @@ function _M:generateList()
 	for tid, t in pairs(self.actor.talents_def) do
 		if t.uber and not t.not_listed then
 			if 
-			    (not t.is_class_evolution or (self.actor.descriptor and self.actor.descriptor.subclass == t.is_class_evolution)) and
+			    (
+			    	not t.is_class_evolution or
+			    	((type(t.is_class_evolution) == "string" and self.actor:hasDescriptor("subclass", t.is_class_evolution))) or
+			    	((type(t.is_class_evolution) == "function" and t.is_class_evolution(self.actor, t)))
+			    ) and
+			    (
+			    	not t.is_race_evolution or
+			    	((type(t.is_race_evolution) == "string" and self.actor:hasDescriptor("subrace", t.is_race_evolution))) or
+			    	((type(t.is_race_evolution) == "function" and t.is_race_evolution(self.actor, t)))
+			    ) and
 			    (not t.requires_unlock or profile.mod.allow_build[t.requires_unlock] or self:ignoreUnlocks())
 			    then
 				cols[t.type[1]] = cols[t.type[1]] or {}
@@ -97,6 +105,8 @@ function _M:generateList()
 		table.sort(cols[s], function(a,b)
 			if a.is_class_evolution ~= b.is_class_evolution then
 				return b.is_class_evolution and true or false
+			elseif a.is_race_evolution ~= b.is_race_evolution then
+				return b.is_race_evolution and true or false
 			else
 				return a.name < b.name
 			end

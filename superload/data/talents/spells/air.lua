@@ -51,7 +51,7 @@ registerTalentTranslation{
 		local targetcount = t.getTargetCount(self, t)
 		local damage = t.getDamage(self, t)
 		return ([[当此技能激活时，在 6 码半径范围内召唤一阵强烈的闪电风暴跟随你。 
-		每回合闪电风暴会随机伤害 %d 个敌方单位，对 1 码半径范围造成 1 ～ %0.2f 伤害（平均 %0.2f ）。 
+		每回合闪电风暴会随机伤害 %d 个敌方单位，对 1 码半径范围造成 1.00 ～ %0.2f 伤害（平均 %0.2f ）。 
 		受法术强度影响，伤害有额外加成。]]):
 		format(targetcount, damDesc(self, DamageType.LIGHTNING, damage), damDesc(self, DamageType.LIGHTNING, damage / 2))
 	end,

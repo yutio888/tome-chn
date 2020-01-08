@@ -100,3 +100,13 @@ logCHN:newLog{
 	log = "#VIOLET# The stairway collapses completely as you ascend!",
 	fct = "#VIOLET# 当你爬上楼梯的时候，楼梯彻底坍塌了！"
 }
+
+logCHN:newLog{
+	log = "The dragons here are asleep. You may try to steal their treasure... at your own risk.",
+	fct = "这些巨龙正在沉睡之中。你可以试着偷走他们的财宝…但是后果自负。"
+}
+
+logCHN:newLog{
+	log = "#CRIMSON#The dragons awaken from their slumber detecting their loot being stolen!",
+	fct = "#CRIMSON#那些巨龙从沉睡中醒来，它们发现自己的财宝被偷了！"
+}

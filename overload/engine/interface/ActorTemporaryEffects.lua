@@ -117,6 +117,8 @@ function _M:setEffect(eff_id, dur, p, silent)
 	if dur <= 0 then return self:removeEffect(eff_id) end
 	dur = math.floor(dur)
 
+	p.__orig_params = table.clone(p, true)
+
 	local ed = _M.tempeffect_def[eff_id]
 	for k, e in pairs(ed.parameters) do
 		if not p[k] then p[k] = e end
@@ -256,6 +258,18 @@ function _M:copyEffect(eff_id)
 	param.__tmpvals = nil
 	--param.__tmpparticles = nil
 	return param
+end
+
+--- Clone the given effect on the given target
+function _M:cloneEffect(eff_id, target, alter)
+	local p = self:hasEffect(eff_id)
+	if not p then return end
+	local param = table.clone(p.__orig_params or {}, true)
+	for k, e in pairs(alter or {}) do param[k] = e end
+	target:setEffect(eff_id, p.dur, param)
+
+	local ed = target:getEffectFromId(eff_id)
+	if ed.on_clone then ed.on_clone(target, target.tmp[eff_id], ed, self) end
 end
 
 --- Reduces time remaining

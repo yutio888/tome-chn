@@ -937,7 +937,7 @@ function _M:getTalentDesc(item)
 
 	if item.type then
 		text:add({"color",0x00,0xFF,0xFF}, "技能树", true)
-		text:add({"color",0x00,0xFF,0xFF}, "一个技能树包括一些你可以学习的技能。你分别在等级达到 10、 20、 36 级时可以获得一个技能分类点数，你也能在游戏中找到技能训练师来学习更多技能。每一点技能分类点数可以解锁一个未知的技能树或者强化一个已知的技能树。", true, true, {"color", "WHITE"})
+		text:add({"color",0x00,0xFF,0xFF}, "一个技能树包括一些你可以学习的技能。你分别在等级达到 10、 20、 34 级时可以获得一个技能分类点数，你也能在游戏中找到技能训练师来学习更多技能。每一点技能分类点数可以解锁一个未知的技能树或者强化一个已知的技能树。", true, true, {"color", "WHITE"})
 
 		if self.actor.talents_types_def[item.type].generic then
 			text:add({"color",0x00,0xFF,0xFF}, "通用技能树", true)
@@ -960,7 +960,7 @@ function _M:getTalentDesc(item)
 			text:add({"color","YELLOW"}, "本技能会永久性的影响这个游戏世界，所以学习之后无法移除。", {"color","LAST"}, true, true)
 		elseif could_unlearn then
 			local max = tostring(self.actor:lastLearntTalentsMax(t.generic and "generic" or "class"))
-			text:add({"color","LIGHT_BLUE"}, "你刚在此技能上加点，你还可以在  #{bold}# 城市 #{normal}# 这样安全的地方遗忘它。", true, "The last ", max, t.generic and " generic" or " class", " talents you learnt are always unlearnable.", {"color","LAST"}, true, true)
+			text:add({"color","LIGHT_BLUE"}, "你刚在此技能上加点，你还可以在战斗外或者  #{bold}# 城市 #{normal}# 这样安全的地方遗忘它。", true, "The last ", max, t.generic and " generic" or " class", " talents you learnt are always unlearnable.", {"color","LAST"}, true, true)
 		end
 
 		local traw = self.actor:getTalentLevelRaw(t.id)

@@ -825,7 +825,11 @@ function _M:spawnWorldAmbush(enc, dx, dy, kind)
 		},
 
 		reload_lists = false,
-		npc_list = mod.class.NPC:loadList("/data/general/npcs/all.lua", nil, nil, function(e) e.make_escort=nil end),
+		npc_list = mod.class.NPC:loadList("/data/general/npcs/all.lua", nil, nil, 
+			function(e) 
+				e.make_escort=nil
+				e.instakill_immune = 1
+			end),
 		grid_list = terrains,
 		object_list = mod.class.Object:loadList("/data/general/objects/objects.lua"),
 		trap_list = {},
@@ -978,6 +982,12 @@ function _M:dayNightCycle()
 
 	local hour, minute = game.calendar:getTimeOfDay(game.turn)
 	hour = hour + (minute / 60)
+	
+	local player = game:getPlayer(true)
+	if player and player.visual_force_day_time then
+		hour = player.visual_force_day_time
+	end
+
 	local tint = {r = 0.1, g = 0.1, b = 0.1}
 	local startTint = {r = 0.1, g = 0.1, b = 0.1}
 	local endTint = {r = 0.1, g = 0.1, b = 0.1}
@@ -1548,7 +1558,7 @@ local standard_rnd_boss_adjust = function(b)
 				end
 			end
 		end
-	print("[entityFilterPost]:  Done nerfing randboss")
+	_G.print("[entityFilterPost]:  Done nerfing randboss")
 	end
 end  -- End of standard_rnd_boss_adjust
 
@@ -2038,6 +2048,24 @@ function _M:applyRandomClass(b, data, instant)
 		end
 		if not mclass then return end
 
+		-- THE MOTHER OF ALL HACKS!
+		-- Make sure brawlers rares dont get absurdly powerful
+		if class.npc_class_use_default_combat_table then
+			b.combat_old = table.clone(b.combat or {}, true)
+			b.combat = {
+				dam=1,
+				atk=1, apr=0,
+				physcrit=0,
+				physspeed =1,
+				dammod = { str=1 },
+				damrange=1.1,
+				talented = "unarmed",
+				npc_brawler_combat_hack_enabled = true,
+			}
+			if b.combat_old.sound then b.combat.sound = b.combat_old.sound end
+			if b.combat_old.sound_miss then b.combat.sound_miss = b.combat_old.sound_miss end
+		end
+
 		print("[applyRandomClass]", b.uid, b.name, "Adding class", class.name, mclass.name)
 		-- add class to list and build inherent power sources
 		b.descriptor = b.descriptor or {}
@@ -2261,6 +2289,7 @@ end
 --	@param data.ai = ai_type <"tactical" if rank>3 or base.ai>
 --	@param data.ai_tactic = tactical weights table for the tactical ai <nil - generated based on talents>
 --	@param data.no_loot_randart set true to not drop a randart <nil>
+--  @param data.loot_fixedart set true to drop a fixedart <nil>
 --	@param data.on_die set true to run base.rng_boss_on_die and base.rng_boss_on_die_custom on death <nil>
 --	@param data.name_scheme <randart_name_rules.default>
 --	@param data.post = function(b, data) to run last to finish generation
@@ -2354,6 +2383,7 @@ function _M:createRandomBoss(base, data)
 	-- Boss worthy drops
 	b[#b+1] = resolvers.drops{chance=100, nb=data.loot_quantity or 3, {tome_drops=data.loot_quality or "boss"} }
 	if not data.no_loot_randart then b[#b+1] = resolvers.drop_randart{} end
+	if data.loot_unique then b[#b+1] = resolvers.drops{chance=100, nb=1, {unique=true, not_properties={"lore"}} } end
 
 	-- On die
 	if data.on_die then
@@ -2478,6 +2508,24 @@ function _M:applyRandomClassNew(b, data, instant)
 		if not mclass then
 			print("[applyRandomClassNew] ### ABORTING ###", b.uid, b.name, "No main class type for", class.name)
 			return
+		end
+
+		-- THE MOTHER OF ALL HACKS!
+		-- Make sure brawlers rares dont get absurdly powerful
+		if class.npc_class_use_default_combat_table then
+			b.combat_old = table.clone(b.combat or {}, true)
+			b.combat = {
+				dam=1,
+				atk=1, apr=0,
+				physcrit=0,
+				physspeed =1,
+				dammod = { str=1 },
+				damrange=1.1,
+				talented = "unarmed",
+				npc_brawler_combat_hack_enabled = true,
+			}
+			if b.combat_old.sound then b.combat.sound = b.combat_old.sound end
+			if b.combat_old.sound_miss then b.combat.sound_miss = b.combat_old.sound_miss end
 		end
 
 		print("[applyRandomClassNew]", b.uid, b.name, "Adding class", class.name, mclass.name, "level_rate", level_rate)
@@ -2620,6 +2668,7 @@ end
 --	@field data.ai = ai_type <"tactical" if rank>3 or base.ai>
 --	@field data.ai_tactic = tactical weights table for the tactical ai <nil - generated based on talents>
 --	@field data.no_loot_randart set true to not drop a randart <nil>
+--  @field data.loot_fixedart set true to drop a fixedart <nil>
 --	@field data.on_die set true to run base.rng_boss_on_die and base.rng_boss_on_die_custom on death <nil>
 --	@field data.name_scheme <randart_name_rules.default>
 --	@field data.post = function(b, data) to run last to finish generation
@@ -2708,7 +2757,8 @@ function _M:createRandomBossNew(base, data)
 	-- Boss worthy drops
 	b[#b+1] = resolvers.drops{chance=100, nb=data.loot_quantity or 3, {tome_drops=data.loot_quality or "boss"} }
 	if not data.no_loot_randart then b[#b+1] = resolvers.drop_randart{} end
-
+	if data.loot_unique then b[#b+1] = resolvers.drops{chance=100, nb=1, {unique=true, not_properties={"lore"}} } end
+	
 	-- On die
 	if data.on_die then
 		b.rng_boss_on_die = b.on_die
@@ -3041,6 +3091,78 @@ function _M:startEvents()
 		game.zone.assigned_events[game.level.level] = {}
 		if game.zone.events_by_level then game.zone.assigned_events = nil end
 	end
+end
+
+function _M:dynamicZoneEntry(g, id, zone_def, zone_lists, zone_alter)
+	if zone_alter and config.settings.cheat then
+		if util.has_upvalues(zone_alter) then
+			error("Zone alter method has upvalues. This will explode upon save reload! Fix it!")
+		end
+	end
+
+	id = id.."-"..game.turn.."-"..core.game.getTime()
+
+	local g = g:clone()
+	g.name = zone_def.name
+	g.always_remember = true
+	g.change_level = 1
+	g.change_zone = id
+	g.glow = true
+	g:removeAllMOs()
+	g:altered()
+	g:initGlow()
+	g.dynamic_zone = { id=id, def=zone_def, lists=zone_lists, alter=zone_alter }
+	g.real_change = function(self)
+		local def = self.dynamic_zone.def
+
+		-- Dynamic zones ALWAYS embed their lists
+		def.reload_lists = true
+
+		def.__embed_lists_def = self.dynamic_zone.lists
+		if self.dynamic_zone.alter then
+			def.__alter_back_def = {short_name=game.zone.short_name, name=game.zone.name}
+			def.__alter_back_fct = function(backdef, name, base_terrain)
+				base_terrain.change_level_shift_back = true
+				base_terrain.change_zone_auto_stairs = true
+				base_terrain.name = name:format(backdef.name)
+				base_terrain.change_zone = backdef.short_name
+			end
+			def.__alter_back_custom = self.dynamic_zone.alter
+		end
+		def.embed_lists = function(zone)
+			-- A few default lists
+			zone.npc_list = {}
+			zone.object_list = {}
+			zone.trap_list = {}
+			zone.grid_list = {}
+
+			-- Now load the ones we are given, either with default classes or custom ones
+			for list, listdef in pairs(zone.__embed_lists_def) do
+				local entries = listdef
+				local class = "engine.Entity"
+				if entries.class_name then class = entries.class_name
+				elseif list == "npc_list" then class = "mod.class.NPC"
+				elseif list == "object_list" then class = "mod.class.Object"
+				elseif list == "trap_list" then class = "mod.class.Trap"
+				elseif list == "grid_list" then class = "mod.class.Grid"
+				end
+				zone[list] = require(class):loadList(entries)
+			end
+
+			-- Alter whatever we need. Most likely the exit, so we provide an easy function for that
+			if zone.__alter_back_fct then
+				zone.__alter_back_custom(zone, function(name, base_terrain) zone.__alter_back_fct(zone.__alter_back_def, name, base_terrain) end)
+			end
+		end
+		return mod.class.Zone.new(self.dynamic_zone.id, def)
+	end
+	g.change_level_check = function(self)
+		game:changeLevel(1, self:real_change(), {temporary_zone_shift=true, direct_switch=true})
+		self.change_level_check = nil
+		self.real_change = nil
+		return true
+	end
+	return g
 end
 
 function _M:alternateZone(short_name, ...)

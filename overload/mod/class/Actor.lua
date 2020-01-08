@@ -143,6 +143,7 @@ _M.temporary_values_conf.ai_move = "last"
 
 -- Misc
 _M.temporary_values_conf.death_dialog = "last"
+_M.temporary_values_conf.visual_force_day_time = "last"
 
 _M.projectile_class = "mod.class.Projectile"
 
@@ -360,6 +361,12 @@ end
 -- Dummy
 function _M:runStop() end
 function _M:restStop() end
+
+function _M:hasDescriptor(kind, value)
+	if not self.descriptor then return false end
+	if self.descriptor[kind] ~= value then return false end
+	return true
+end
 
 function _M:getSpeed(speed_type)
 	if type(speed_type) == "number" then return speed_type end
@@ -1755,6 +1762,19 @@ function _M:incMoney(v)
 	end
 end
 
+function _M:getRankTalkativeAdjust()
+	if self.rank == 1 then return 1
+	elseif self.rank == 2 then return 15
+	elseif self.rank == 3 then return 15
+	elseif self.rank == 3.2 then return 15
+	elseif self.rank == 3.5 then return 30
+	elseif self.rank == 4 then return 30
+	elseif self.rank == 5 then return 50
+	elseif self.rank >= 10 then return 100
+	else return 0
+	end
+end
+
 function _M:getRankStatAdjust()
 	if self.rank == 1 then return -1
 	elseif self.rank == 2 then return -0.5
@@ -1889,6 +1909,59 @@ function _M:colorStats(stat)
 	end
 end
 
+-- Get the combat stats for weapon by inventory and slot
+function _M:getCombatStats(type, inven_id, item)
+	local o = table.get(self:getInven(inven_id), item)
+	local mean
+	local ammo
+	local atk
+	local dmg
+	local apr
+	local crit
+	local crit_power = 0
+	local aspeed
+	local range
+	local mspeed
+	local dam, archery
+	ammo = table.get(self:getInven("QUIVER"), 1)
+	archery = o and o.archery and ammo and ammo.archery_ammo == o.archery and ammo.combat and (type ~= "offhand" or self:attr("can_offshoot")) and (type ~= "psionic" or self:attr("psi_focus_combat")) -- ranged combat
+	if type == "psionic" then
+		if not o or o.archery and not archery then return end
+		self:attr("use_psi_combat", 1)
+	end
+	if not o or (o.archery and not archery) or self:attr("disarmed") then -- unarmed
+		mean = self.combat
+		dmg = self:combatDamage(mean) * (mean.dam_mult or 1)
+		atk = self:combatAttack(mean)
+		apr = self:combatAPR(mean)
+		crit = self:combatCrit(mean)
+		crit_power = mean.crit_power
+		aspeed = 1/self:combatSpeed(mean)
+		archery = false
+	else -- weapon combat
+		mean = o and (o.special_combat and (o.slot == self.inven[inven_id].name or self:knowTalent(self.T_STONESHIELD)) and o.special_combat) or self:getObjectCombat(o, type == "psionic" and "mainhand" or type) or self.combat -- handles stone wardens
+		if archery then -- ranged combat
+			dam = ammo.combat
+			atk = self:combatAttackRanged(mean, dam)
+			dmg = self:combatDamage(mean, nil, dam) * (mean.dam_mult or 1)
+			apr = self:combatAPR(mean) + (dam.apr or 0)
+			crit_power = (mean.crit_power or 0) + (dam.crit_power or 0)
+			range = math.max(mean.range or 6, self:attr("archery_range_override") or 1)
+			mspeed = 10 + (self.combat.travel_speed or 0) + (mean.travel_speed or 0) + (dam.travel_speed or 0)
+		else -- melee combat
+			dam = o.combat
+			atk = self:combatAttack(mean)
+			dmg = self:combatDamage(mean) * (type == "offhand" and mean.talented ~= "shield" and self:getOffHandMult(dam) or 1) * (mean.dam_mult or 1)
+			apr = self:combatAPR(mean)
+			crit_power = mean.crit_power
+		end
+		crit = self:combatCrit(dam)
+		aspeed = 1/self:combatSpeed(mean)
+	end
+	if type == "psionic" then self:attr("use_psi_combat", -1) end
+	return {obj=o, atk=atk, dmg=dmg, apr=apr, crit=crit, crit_power=crit_power or 0, aspeed=aspeed, range=range, mspeed=mspeed, archery=archery, mean=mean, ammo=ammo, block=mean.block, talented=mean.talented}
+end
+
 function _M:tooltip(x, y, seen_by)
 	if seen_by and not seen_by:canSee(self) then return end
 	local factcolor, factstate, factlevel = "#ANTIQUE_WHITE#", "neutral", Faction:factionReaction(self.faction, game.player.faction)
@@ -2008,6 +2081,8 @@ function _M:tooltip(x, y, seen_by)
 	ts:add("#0080FF#S. save#FFFFFF#:  ", self:colorStats("combatSpellResist"), true)
 	ts:add("#FFD700#M. power#FFFFFF#: ", self:colorStats("combatMindpower"), "  ")
 	ts:add("#0080FF#M. save#FFFFFF#:  ", self:colorStats("combatMentalResist"), true)
+	self:triggerHook{"Actor:tooltip", ts=ts, x=x, y=y, seen_by=seen_by}
+
 	ts:add({"color", "WHITE"})
 
 	if (150 + (self.combat_critical_power or 0) ) > 150 then
@@ -2023,7 +2098,8 @@ function _M:tooltip(x, y, seen_by)
 			local tst = ("#LIGHT_BLUE#主手:#LAST#"..o:getShortName({force_id=true, do_color=true, no_add_name=true})):toTString()
 			tst = tst:splitLines(game.tooltip.max-1, game.tooltip.font, 2)
 			tst = tst:extractLines(true)[1]
-			tst:add(" ("..math.floor(self:combatDamage(o.combat))..")")
+			local stats = self:getCombatStats("mainhand", self.INVEN_MAINHAND, i )
+			tst:add(" (#RED#"..math.floor(stats.dmg).."#LAST#)")
 			table.append(ts, tst)
 			ts:add(true)
 		end
@@ -2032,8 +2108,9 @@ function _M:tooltip(x, y, seen_by)
 		for i, o in ipairs(self:getInven("OFFHAND")) do
 			local tst = ("#LIGHT_BLUE#副手:#LAST#"..o:getShortName({force_id=true, do_color=true, no_add_name=true})):toTString()
 			tst = tst:splitLines(game.tooltip.max-1, game.tooltip.font, 2)
-			tst = tst:extractLines(true)[1]
-			tst:add(" ("..math.floor(self:combatDamage(o.combat))..")")
+			tst = tst:extractLines(true)[1]			
+			local stats = self:getCombatStats("offhand", self.INVEN_OFFHAND, i)
+			tst:add(" (#RED#"..math.floor(stats.dmg).."#LAST#)")
 			table.append(ts, tst)
 			ts:add(true)
 		end
@@ -2043,7 +2120,8 @@ function _M:tooltip(x, y, seen_by)
 			local tst = ("#LIGHT_BLUE#念力:#LAST#"..o:getShortName({force_id=true, do_color=true, no_add_name=true})):toTString()
 			tst = tst:splitLines(game.tooltip.max-1, game.tooltip.font, 2)
 			tst = tst:extractLines(true)[1]
-			tst:add(" ("..math.floor(self:combatDamage(o.combat))..")")
+			local stats = self:getCombatStats("psionic", self.INVEN_PSIONIC_FOCUS, i)
+			tst:add(" (#RED#"..math.floor(stats.dmg).."#LAST#)")
 			table.append(ts, tst)
 			ts:add(true)
 		end
@@ -2053,7 +2131,6 @@ function _M:tooltip(x, y, seen_by)
 			local tst = ("#LIGHT_BLUE#弹药:#LAST#"..o:getShortName({force_id=true, do_color=true, no_add_name=true})):toTString()
 			tst = tst:splitLines(game.tooltip.max-1, game.tooltip.font, 2)
 			tst = tst:extractLines(true)[1]
-			tst:add(" ("..math.floor(self:combatDamage(o.combat))..")")
 			table.append(ts, tst)
 			ts:add(true)
 		end
@@ -2065,7 +2142,8 @@ function _M:tooltip(x, y, seen_by)
 				local tst = ("#LIGHT_BLUE#空手:#LAST#"..o:getShortName({force_id=true, do_color=true, no_add_name=true})):toTString()
 				tst = tst:splitLines(game.tooltip.max-1, game.tooltip.font, 2)
 				tst = tst:extractLines(true)[1]
-				tst:add(" ("..math.floor(self:combatDamage(self.combat))..") ")
+				local stats = self:getCombatStats("barehand", self.INVEN_MAINHAND, i)
+				tst:add(" (#RED#"..math.floor(stats.dmg).."#LAST#)")
 				table.append(ts, tst)
 				ts:add(true)
 			end
@@ -2074,7 +2152,8 @@ function _M:tooltip(x, y, seen_by)
 			local tst = ("#LIGHT_BLUE#空手:#LAST#"):toTString()
 			tst = tst:splitLines(game.tooltip.max-1, game.tooltip.font, 2)
 			tst = tst:extractLines(true)[1]
-			tst:add(" ("..math.floor(self:combatDamage(self.combat))..") ")
+			local stats = self:getCombatStats("barehand", self.INVEN_MAINHAND, i)
+			tst:add(" (#RED#"..math.floor(stats.dmg).."#LAST#)")
 			table.append(ts, tst)
 			ts:add(true)
 		end
@@ -2373,7 +2452,7 @@ function _M:onTakeHit(value, src, death_note)
 	if value > 0 and self:knowTalent(self.T_MITOSIS) and self:isTalentActive(self.T_MITOSIS) then
 		local t = self:getTalentFromId(self.T_MITOSIS)
 		local chance = t.getChance(self, t)
-		local perc = math.min(1, 3 * value / self.life)
+		local perc = math.min(1, 3 * value / math.max(self.life, 1))
 		if rng.percent(chance * perc) then
 			t.spawn(self, t, value * 2)
 		end
@@ -3580,11 +3659,11 @@ function _M:levelupClass(c_data)
 			if self.extra_talent_point_every and c_data.last_level % self.extra_talent_point_every == 0 then self.unused_talents = self.unused_talents + 1 end
 			if self.extra_generic_point_every and c_data.last_level % self.extra_generic_point_every == 0 then self.unused_generics = self.unused_generics + 1 end
 
-			-- At levels 10, 20 and 36 and then every 30 levels, we gain a new talent type
-			if c_data.last_level == 10 or c_data.last_level == 20 or c_data.last_level == 36 or (c_data.last_level > 50 and (c_data.last_level - 6) % 30 == 0) then
+			-- At levels 10, 20 and 34 and then every 30 levels, we gain a new talent type
+			if c_data.last_level == 10 or c_data.last_level == 20 or c_data.last_level == 34 or (c_data.last_level > 50 and (c_data.last_level - 4) % 30 == 0) then
 				self.unused_talents_types = self.unused_talents_types + 1
 			end
-			-- if c_data.last_level == 30 or c_data.last_level == 42 then self.unused_prodigies = self.unused_prodigies + 1 end
+			-- if c_data.last_level == 25 or c_data.last_level == 42 then self.unused_prodigies = self.unused_prodigies + 1 end
 		elseif type(self.no_points_on_levelup) == "function" then
 			self:no_points_on_levelup()
 		end
@@ -3836,8 +3915,8 @@ function _M:levelup()
 		if self.extra_talent_point_every and self.level % self.extra_talent_point_every == 0 then self.unused_talents = self.unused_talents + 1 end
 		if self.extra_generic_point_every and self.level % self.extra_generic_point_every == 0 then self.unused_generics = self.unused_generics + 1 end
 
-		-- At levels 10, 20 and 36 and then every 30 levels, we gain a new talent type
-		if self.level == 10 or self.level == 20 or self.level == 34 or (self.level > 50 and (self.level - 6) % 30 == 0) then
+		-- At levels 10, 20 and 34 and then every 30 levels, we gain a new talent type
+		if self.level == 10 or self.level == 20 or self.level == 34 or (self.level > 50 and (self.level - 4) % 30 == 0) then
 			self.unused_talents_types = self.unused_talents_types + 1
 		end
 		if self.level == 25 or self.level == 42 then
@@ -5325,6 +5404,16 @@ function _M:paradoxDoAnomaly(chance, paradox, def)
 	end
 end
 
+-- Overwrite incMana for DS
+local previous_incMana = _M.incMana
+function _M:incMana(mana)
+	if mana < 0 and self:isTalentActive(self.T_DISRUPTION_SHIELD) then
+		self:callTalent(self.T_DISRUPTION_SHIELD, "doLostMana", mana)
+	end
+
+	return previous_incMana(self, mana)
+end
+
 -- Overwrite incParadox to set up threshold log messages
 local previous_incParadox = _M.incParadox
 
@@ -5850,6 +5939,7 @@ local sustainCallbackCheck = {
 	callbackOnSummonDeath = "talents_on_summon_death",
 	callbackOnDie = "talents_on_die",
 	callbackOnKill = "talents_on_kill",
+	callbackOnCombatAttack = "talents_on_combat_attack",
 	callbackOMeleeAttackBonuses = "talents_on_melee_attack_bonus",
 	callbackOnMeleeAttack = "talents_on_melee_attack",
 	callbackOnMeleeHit = "talents_on_melee_hit",
@@ -7717,7 +7807,7 @@ function _M:getEncumberTitleUpdator(title)
 end
 
 function _M:transmoPricemod(o) if o.type == "gem" then return 0.40 else return 0.05 end end
-function _M:transmoFilter(o) if o:getPrice() <= 0 or o.quest then return false end return true end
+function _M:transmoFilter(o) if o:getPrice() <= 0 or o.quest or o.plot or o.no_transmo then return false end return true end
 function _M:transmoInven(inven, idx, o, transmo_source)
 	local price = 0
 	o:forAllStack(function(so) price = price + math.min(so:getPrice() * self:transmoPricemod(so), 25) end)  -- handle stacked objects individually
@@ -7783,7 +7873,6 @@ function _M:doTakeoffTinker(base_o, oldo, only_remove)
 
 	local _, base_inven
 	local mustwear = base_o.wielded
-	print("!!!!!!!!!!!!!!!!!!!!!!!!!!", mustwear)
 	if mustwear then
 		_, _, base_inven = self:findInAllInventoriesByObject(base_o)
 		self:onTakeoff(base_o, base_inven, true)
@@ -7857,7 +7946,7 @@ function _M:doWearTinker(wear_inven, wear_item, wear_o, base_inven, base_item, b
 
 	wear_o.tinkered = {}
 	local forbid = wear_o:check("on_tinker", base_o, self)
-	if wear_o.object_tinker then
+	if not forbid and wear_o.object_tinker then
 		for k, e in pairs(wear_o.object_tinker) do
 			wear_o.tinkered[k] = base_o:addTemporaryValue(k, e)
 		end
@@ -7872,7 +7961,8 @@ function _M:doWearTinker(wear_inven, wear_item, wear_o, base_inven, base_item, b
 		if wear_inven and wear_item then self:removeObject(wear_inven, wear_item) end
 
 		self:fireTalentCheck("callbackOnWearTinker", wear_o, base_o)
-		self:useEnergy()
+		if not self:attr("quick_wear_takeoff") or self:attr("quick_wear_takeoff_disable") then self:useEnergy() end
+		if self:attr("quick_wear_takeoff") then self:setEffect(self.EFF_SWIFT_HANDS_CD, 1, {}) self.tmp[self.EFF_SWIFT_HANDS_CD].dur = 0 end
 		return true, base_o
 	else
 		game.logPlayer(self, "You fail to attach %s to %s.", wear_o:getName{do_color=true}, base_o:getName{do_color=true})
@@ -7943,6 +8033,7 @@ function _M:checkStillInCombat()
 
 	-- Ok no more in combat!
 	self.in_combat = nil
+	self:checkSustainDeactivate("no_combat")
 	self:updateInCombatStatus()
 end
 
@@ -7994,6 +8085,21 @@ function _M:projectDoAct(typ, tg, damtype, dam, particles, px, py, tmp)
 				game.level.map:particleEmitter(px, py, 1, particles.type, particles.args)
 			end
 			DamageType:projectingFor(self, nil)
+		end
+	end
+end
+
+function _M:checkSustainDeactivate(check)
+	for tid, _ in pairsclone(self.sustain_talents) do
+		local t = self:getTalentFromId(tid)
+		if t.deactivate_on and t.deactivate_on[check] then
+			local ok = false
+			if type(t.deactivate_on[check]) == "function" then
+				ok = t.deactivate_on[check](self, t)
+			else
+				ok = true
+			end
+			if ok then self:forceUseTalent(tid, {ignore_energy=true, ignore_cd=true}) end
 		end
 	end
 end

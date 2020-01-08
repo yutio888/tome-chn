@@ -13,12 +13,12 @@ registerBirthDescriptorTranslation{
 	type = "subrace",
 	name = "Ogre",
 	display_name = " 食人魔 ",
-	locked_desc = [[Forged in the hatred of ages long passed,
-made for a war that they've come to outlast.
-Their forgotten birthplace lies deep underground,
-its tunnels ruined so it wouldn't be found.
-Past burglars have failed, but their data's immortal;
-to start, look where halflings once tinkered with portals...]],
+	locked_desc = [[他们铸造于数千年的仇恨之中，
+为一场现在已经结束的战争而造。
+他们被遗忘的诞生地深埋于地下，
+那些隧道已经腐朽，无处寻觅。
+过去的窃贼失败了，但他们的数据将永远保存；
+要想找到他们，请寻找那些摆弄传送门的半身人……]],
 	desc = {
 		"食人魔是变种人类，在厄流纪被孔克雷夫作为工人和战士而制造。",
 		"符文给他们超过自然界限的强大力量，但他们对符文魔法的依赖使之成为猎魔行动绝佳的目标，而不得不依附于永恒精灵。",
@@ -28,6 +28,6 @@ to start, look where halflings once tinkered with portals...]],
 		"#LIGHT_BLUE# * +3 力量, -1 敏捷, +0 体质",
 		"#LIGHT_BLUE# * +2 魔法, -2 意志, +2 灵巧",
 		"#GOLD#生命加值:#LIGHT_BLUE# 13",
-		"#GOLD#经验惩罚:#LIGHT_BLUE# 30%",
+		"#GOLD#经验惩罚:#LIGHT_BLUE# 15%",
 	},
 }

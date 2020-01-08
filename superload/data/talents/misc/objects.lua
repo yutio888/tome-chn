@@ -11,6 +11,18 @@ registerTalentTranslation{
 }
 
 registerTalentTranslation{
+	id = "T_ATTUNE_MINDSTAR",
+	name = "灵晶调谐",
+	message = function(self, t)
+		return ("@Source@ 重新汇集 %s 灵晶中的能量。"):format(self:his_her())
+	end,
+	info = function(self, t)
+		return ([[改变灵晶中流动的能量性质，将伤害类型在自然伤害和精神伤害间切换。]])
+	end,
+}
+
+
+registerTalentTranslation{
 	id = "T_COMMAND_STAFF",
 	name = "法杖掌控",
 	message = function(self, t)

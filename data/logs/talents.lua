@@ -3238,6 +3238,18 @@ logCHN:newLog{
 
 --misc/object
 logCHN:newLog{
+	log = "You attune your %s to deal #ORANGE#mind#LAST# damage.",
+	fct = "你调谐了你的 %s ，使其造成#ORANGE#精神#LAST#伤害。",
+}
+
+
+logCHN:newLog{
+	log = "You attune your %s to deal #LIGHT_GREEN#nature#LAST# damage.",
+	fct = "你调谐了你的 %s ，使其造成#ORANGE#自然#LAST#伤害。",
+}
+
+
+logCHN:newLog{
 	log = "You must be holding a staff.",
 	fct = "你必须持有法杖。",
 }

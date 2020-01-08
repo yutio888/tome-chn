@@ -1126,6 +1126,7 @@ newEffect{
 		eff.dig = self:addTemporaryValue("move_project", {[DamageType.DIG]=1})
 		self:effectTemporaryValue(eff, "combat_apr", eff.power)
 		self:effectTemporaryValue(eff, "resists_pen", {[DamageType.PHYSICAL]=eff.power / 2 })
+		self:effectTemporaryValue(eff, "ai_spread_add", 5)  -- Reduce accuracy of AI position guesses so we don't track straight to players that moved out of LOS
 	end,
 	deactivate = function(self, eff)
 		self:removeTemporaryValue("can_pass", eff.pass)
@@ -1217,6 +1218,8 @@ newEffect{
 		eff.tmpid = self:addTemporaryValue("wild_speed", 1)
 		eff.moveid = self:addTemporaryValue("movement_speed", eff.power/100)
 
+		self:effectTemporaryValue(eff, "ai_spread_add", 5)  -- Reduce accuracy of AI position guesses so we don't track straight to players that moved out of LOS
+		
 		-- should change priorities rather than forbid all talents
 		if self.ai_state and eff.no_talents ~= 0 then eff.aiid = self:addTemporaryValue("ai_state", {no_talents=eff.no_talents}) end -- Makes the AI not use talents while active
 		eff.stun = self:addTemporaryValue("stun_immune", 1)
@@ -2379,6 +2382,7 @@ newEffect{
 	activate = function(self, eff)
 		eff.tmpid = self:addTemporaryValue("block", eff.power)
 		if eff.properties.sp then eff.spell = self:addTemporaryValue("combat_spellresist", eff.power) end
+		self:effectParticles(eff, {type="block"})
 	end,
 	deactivate = function(self, eff)
 		self:removeTemporaryValue("block", eff.tmpid)

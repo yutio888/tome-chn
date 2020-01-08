@@ -265,7 +265,7 @@ function _M:describeFloor(x, y, force)
 				obj.__transmo_pre = true
 				if self:pickupFloor(i, true) then
 					desc = false
-					if not obj.quest and not obj.plot then obj.__transmo = true end
+					if self:transmoFilter(obj, self) then obj.__transmo = true end
 				end
 				obj.__transmo_pre = nil
 			end
@@ -569,6 +569,25 @@ function _M:playerFOV()
 
 			if ok then
 				if self.detect_function then self.detect_function(self, x, y) end
+				game.level.map.seens(x, y, 0.6)
+			end
+		end, true, true, true)
+	end
+
+	-- See everything and ignore all forms of blocking, dev mode feature
+	if self:attr("omnivision") then
+		self:computeFOV(self:attr("omnivision"), "we_need_useless_string_not_nil", function(x, y)
+			local ok = false
+			if game.level.map(x, y, game.level.map.ACTOR) then ok = true end
+			if game.level.map(x, y, game.level.map.OBJECT) then ok = true end
+			if game.level.map(x, y, game.level.map.TRAP) then
+				game.level.map(x, y, game.level.map.TRAP):setKnown(self, true, x, y)
+				game.level.map.remembers(x, y, true)
+				game.level.map:updateMap(x, y)
+				ok = true
+			end
+
+			if ok then
 				game.level.map.seens(x, y, 0.6)
 			end
 		end, true, true, true)
@@ -1142,6 +1161,10 @@ function _M:restStep()
 		self:useEnergy()
 		self.resting.cnt = self.resting.cnt + 1
 		self:fireTalentCheck("callbackOnWait")
+
+		-- Disable sustains that deactivate on rest
+		self:checkSustainDeactivate("rest")
+
 		return true
 	end
 end
@@ -1227,8 +1250,11 @@ function _M:runCheck(ignore_memory)
 		if game.level.map:checkAllEntities(x, y, "store") then noticed = "发现商店入口" ; return false, noticed end
 	end)
 	if noticed then return false, noticed end
-
-	return engine.interface.PlayerRun.runCheck(self)
+	local can, noticed = engine.interface.PlayerRun.runCheck(self)
+	if can then
+		self:checkSustainDeactivate("run")
+	end
+	return can, noticed
 end
 
 --- Move with the mouse

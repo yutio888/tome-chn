@@ -489,10 +489,15 @@ end
 function _M:randomName()
 	if not self.descriptors_by_type.sex or not self.descriptors_by_type.subrace then return end
 	local sex_def = self.birth_descriptor_def.sex[self.descriptors_by_type.sex]
-	local race_def = self.birth_descriptor_def.subrace[self.descriptors_by_type.subrace]
-	if race_def.copy.random_name_def then
-		local namegen = NameGenerator2.new("/data/languages/names/"..race_def.copy.random_name_def:gsub("#sex#", sex_def.copy.female and "female" or "male")..".txt")
-		self.c_name:setText(namegen:generate(nil, race_def.copy.random_name_min_syllables, race_def.copy.random_name_max_syllables))
+	local race_def = self.birth_descriptor_def.race[self.descriptors_by_type.race]
+	local subrace_def = self.birth_descriptor_def.subrace[self.descriptors_by_type.subrace]
+	local name_def = nil
+	if subrace_def.copy and subrace_def.copy.random_name_def then name_def = subrace_def
+	elseif race_def.copy and race_def.copy.random_name_def then name_def = race_def end
+
+	if name_def then
+		local namegen = NameGenerator2.new("/data/languages/names/"..name_def.copy.random_name_def:gsub("#sex#", sex_def.copy.female and "female" or "male")..".txt")
+		self.c_name:setText(namegen:generate(nil, name_def.copy.random_name_min_syllables, name_def.copy.random_name_max_syllables))
 	else
 		local namegen = NameGenerator.new((not sex_def.copy.female) and {
 			phonemesVocals = "a, e, i, o, u, y",

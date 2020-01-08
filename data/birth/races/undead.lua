@@ -28,7 +28,7 @@ registerBirthDescriptorTranslation
 		"#LIGHT_BLUE# * +3 力量， +1 敏捷， +5 体质 ",
 		"#LIGHT_BLUE# * +0 魔法， -2 意志， -2 灵巧 ",
 		"#GOLD# 每等级增加生命值： #LIGHT_BLUE# 14",
-		"#GOLD# 经验惩罚： #LIGHT_BLUE# 25%",
+		"#GOLD# 经验惩罚： #LIGHT_BLUE# 12%",
 		"#GOLD# 速度惩罚： #LIGHT_BLUE# -20%",
 	},
 }
@@ -51,6 +51,6 @@ registerBirthDescriptorTranslation
 		"#LIGHT_BLUE# * +3 力量， +4 敏捷， +0 体质 ",
 		"#LIGHT_BLUE# * +0 魔法， +0 意志， +0 灵巧 ",
 		"#GOLD# 每等级增加生命值： #LIGHT_BLUE# 12",
-		"#GOLD# 经验惩罚： #LIGHT_BLUE# 40%",
+		"#GOLD# 经验惩罚： #LIGHT_BLUE# 20%",
 	},
 }

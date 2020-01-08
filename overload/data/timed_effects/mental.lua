@@ -91,33 +91,32 @@ newEffect{
 newEffect{
 	name = "SUMMON_CONTROL", image = "talents/summon_control.png", --Backwards compatibility
 	desc = "Pheromones",
-	long_desc = function(self, eff) return ("目标被半径 %d 内所有召唤物集火。"):format(eff.range) end,
+	long_desc = function(self, eff) return ("目标被半径 %d 内所有自然召唤物集火，从自然召唤物那里受到的伤害增加 %d%% 。"):format(eff.range, eff.power) end,
 	type = "mental",
 	subtype = { focus=true },
 	status = "detrimental",
-	parameters = { },
+	parameters = { power = 10 },
 	on_gain = function(self, err) return "Summons flock towards #Target#.", true end,
 	on_lose = function(self, err) return "#Target# is no longer being targeted by summons.", true end,
 	on_timeout = function(self, eff)
-
-			self:project({type="ball", range=0, friendlyfire=false, radius=eff.range}, self.x, self.y, function(px, py)
-			local target = game.level.map(px, py, Map.ACTOR)
-			if not target then return end
-			if target.summoner == eff.src then
-				target:setTarget(self)
-			end
-			end)
-
+		self:project({type="ball", range=0, friendlyfire=false, radius=eff.range}, self.x, self.y, function(px, py)
+		local target = game.level.map(px, py, Map.ACTOR)
+		if not target then return end
+		if target.summoner == eff.src then
+			target:setTarget(self)
+		end
+		end)
 	end,
 	activate = function(self, eff)
-			self:project({type="ball", range=0, friendlyfire=false, radius=eff.range}, self.x, self.y, function(px, py)
-			local target = game.level.map(px, py, Map.ACTOR)
-			if not target then return end
-			if target.summoner == eff.src then
-				target:setTarget(self)
-			end
-			end)
+		self:effectTemporaryValue(eff, "inc_nature_summon", eff.power)
 
+		self:project({type="ball", range=0, friendlyfire=false, radius=eff.range}, self.x, self.y, function(px, py)
+		local target = game.level.map(px, py, Map.ACTOR)
+		if not target then return end
+		if target.summoner == eff.src then
+			target:setTarget(self)
+		end
+		end)
 	end,
 	deactivate = function(self, eff)
 	end,

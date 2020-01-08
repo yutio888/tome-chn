@@ -72,16 +72,106 @@ newChat{ id="prides-dead",
 	text = [[我的确已经得到了消息，真令人难以置信，我们和兽人已经战斗的太久了。
 他们现在都死了么？仅凭一个 @playerdescriptor.race@ 的力量？我对你的力量非常惊奇。
 当你忙于解决那些兽人的时候，我们设法从那个兽人俘虏那里获得了一些线索。
-他提起了有关巅峰保护罩的事。似乎那个护罩是受“指令水晶”操控的，那些指令水晶就在兽人各大部落首领的手中。
-去把它们都找回来。
+他提起了有关巅峰保护罩的事。似乎那个护罩是受“指令水晶球”操控的，那些指令水晶就在兽人各大部落首领的手中。
 他还说想要进入顶层并关闭护罩的唯一通道是“史莱姆通道”，位于某一个兽人部落内，有可能是格鲁希纳克的部落。
 ]],
 	answers = {
-		{"谢谢你，我的女士。我会找到那个隧道并设法进去巅峰。", action=function(npc, player)
+		{"谢谢，我的女士。我没能找到所有的指令水晶球T；请问你可以让你们的人来帮我寻找一下吗？",
+		jump="prides-dead-orbs-missing",
+		cond=function(npc, player) return not (game.party:findInAllPartyInventoriesBy("define_as", "ORB_DRAGON") and game.party:findInAllPartyInventoriesBy("define_as", "ORB_DESTRUCTION") and game.party:findInAllPartyInventoriesBy("define_as", "ORB_UNDEATH") and game.party:findInAllPartyInventoriesBy("define_as", "ORB_ELEMENTS")) end
+		},
+		{"谢谢，我的女士，我会寻找史莱姆通道，探寻前往巅峰的道路。", 
+		cond=function(npc, player) return (game.party:findInAllPartyInventoriesBy("define_as", "ORB_DRAGON") and game.party:findInAllPartyInventoriesBy("define_as", "ORB_DESTRUCTION") and game.party:findInAllPartyInventoriesBy("define_as", "ORB_UNDEATH") and game.party:findInAllPartyInventoriesBy("define_as", "ORB_ELEMENTS")) end,
+		action=function(npc, player)
 			player:setQuestStatus("orc-pride", engine.Quest.DONE)
 			player:grantQuest("high-peak")
 		end},
 	},
+}
+
+newChat{ id="prides-dead-orbs-missing", 
+	text = [[我们已经派出部队，清理那些被你所击溃的部落的残军。我命令他们仔细搜查，确保找到可能落下的任何指令水晶球的踪影。
+	你缺少了什么水晶球？我会去问问他们，看看他们有没有找到什么线索。我们得到情报，应该有四颗指令水晶球：亡灵水晶球，毁灭水晶球，巨龙水晶球，元素水晶球]],
+	answers = {
+				{"亡灵水晶球。",
+		jump="prides-dead-orbs-missing-undeath",
+		cond=function(npc, player) return not (game.party:findInAllPartyInventoriesBy("define_as", "ORB_UNDEATH")) end
+		},
+				{"毁灭水晶球。",
+		jump="prides-dead-orbs-missing-destruction",
+		cond=function(npc, player) return not (game.party:findInAllPartyInventoriesBy("define_as", "ORB_DESTRUCTION")) end
+		},
+				{"巨龙水晶球。",
+		jump="prides-dead-orbs-missing-dragon",
+		cond=function(npc, player) return not (game.party:findInAllPartyInventoriesBy("define_as", "ORB_DRAGON")) end
+		},
+				{"元素水晶球。",
+		jump="prides-dead-orbs-missing-elements",
+		cond=function(npc, player) return not (game.party:findInAllPartyInventoriesBy("define_as", "ORB_ELEMENTS")) end
+		},
+				{"谢谢你，我的女士，看来我已经集齐了所有的水晶球。我会寻找史莱姆通道，打开通向巅峰的道路。", 
+		cond=function(npc, player) return (game.party:findInAllPartyInventoriesBy("define_as", "ORB_DRAGON") and game.party:findInAllPartyInventoriesBy("define_as", "ORB_DESTRUCTION") and game.party:findInAllPartyInventoriesBy("define_as", "ORB_UNDEATH") and game.party:findInAllPartyInventoriesBy("define_as", "ORB_ELEMENTS")) end,
+		action=function(npc, player)
+			player:setQuestStatus("orc-pride", engine.Quest.DONE)
+			player:grantQuest("high-peak")
+		end},
+	},
+}
+
+newChat{ id="prides-dead-orbs-missing-undeath",
+	text = [[啊，是的，我们的人在拉克·肖部落找到了这个水晶球。给你：]],
+	answers = {
+		{"谢谢你，女士。", 
+		jump="prides-dead-orbs-missing",
+		action = function(npc, player)
+			local orb = game.zone:makeEntityByName(game.level, "object", "ORB_UNDEATH", true)
+			orb:identify(true)
+			game.zone:addEntity(game.level, orb, "object")
+			player:addObject(player:getInven("INVEN"), orb)
+		end},
+	}
+}
+
+newChat{ id="prides-dead-orbs-missing-elements",
+	text = [[啊，是的，我们的人在沃尔部落找到了这个水晶球。给你：]],
+	answers = {
+		{"谢谢你，女士。", 
+		jump="prides-dead-orbs-missing",
+		action = function(npc, player)
+			local orb = game.zone:makeEntityByName(game.level, "object", "ORB_ELEMENTS", true)
+			orb:identify(true)
+			game.zone:addEntity(game.level, orb, "object")
+			player:addObject(player:getInven("INVEN"), orb)
+		end},
+	}
+}
+
+newChat{ id="prides-dead-orbs-missing-destruction",
+	text = [[啊，是的，我们的人在格鲁希纳克找到了这个水晶球。给你：]],
+	answers = {
+		{"谢谢你，女士。", 
+		jump="prides-dead-orbs-missing",
+		action = function(npc, player)
+			local orb = game.zone:makeEntityByName(game.level, "object", "ORB_DESTRUCTION", true)
+			orb:identify(true)
+			game.zone:addEntity(game.level, orb, "object")
+			player:addObject(player:getInven("INVEN"), orb)
+		end},
+	}
+}
+
+newChat{ id="prides-dead-orbs-missing-dragon",
+	text = [[啊，是的，我们的人在加伯特部落找到了这个水晶球。给你：]],
+	answers = {
+		{"谢谢你，女士。", 
+		jump="prides-dead-orbs-missing",
+		action = function(npc, player)
+			local orb = game.zone:makeEntityByName(game.level, "object", "ORB_DRAGON", true)
+			orb:identify(true)
+			game.zone:addEntity(game.level, orb, "object")
+			player:addObject(player:getInven("INVEN"), orb)
+		end},
+	}
 }
 
 newChat{ id="clues",

@@ -3632,8 +3632,8 @@ newEffect{
 
 newEffect{
 	name = "DEMI_GODMODE",
-	desc = "Demigod Mode", --image = "",
-	long_desc = function(self, eff) return ("半神模式 : 目标获得 10000 额外生命，每回合回复 2000 点生命值。造成 +500%% 伤害，超能力值全满。"):format() end,
+	desc = "Demigod Mode", image = "effects/darkgod.png",
+	long_desc = function(self, eff) return ("半神模式 : 目标获得 10000 额外生命，每回合回复 2000 点生命值。造成 +500%% 伤害，感应所有生物。"):format() end,
 	type = "other",
 	subtype = { cheat=true },
 	status = "beneficial",
@@ -3663,8 +3663,8 @@ newEffect{
 
 newEffect{
 	name = "GODMODE",
-	desc = "God Mode", --image = "",
-	long_desc = function(self, eff) return ("天神模式：目标不会受到伤害，不会受到负面状态的影响，造成 +10000%% 伤害 (100%% 抗性穿透 ) ，不需要呼吸，超能力值全满。"):format() end,
+	desc = "God Mode", image = "effects/darkgod.png",
+	long_desc = function(self, eff) return ("天神模式：目标不会受到伤害，不会受到负面状态的影响，造成 +10000%% 伤害 (100%% 抗性穿透 ) ，不需要呼吸，感应所有生物。"):format() end,
 	type = "other",
 	subtype = { cheat=true },
 	status = "beneficial",
@@ -3825,7 +3825,8 @@ newEffect{
 	desc = "Feeding",
 	long_desc = function(self, eff) return ("%s is feeding from %s."):format(self.name:capitalize(), eff.target.name) end,
 	type = "other",
-	subtype = { psychic_drain=true },
+	subtype = { },
+	no_stop_enter_worlmap = true, cancel_on_level_change = true,
 	status = "beneficial",
 	parameters = { },
 	activate = function(self, eff, ed)
@@ -3925,6 +3926,7 @@ newEffect{
 	subtype = { psychic_drain=true },
 	status = "detrimental",
 	remove_on_clone = true,
+	no_stop_enter_worlmap = true, cancel_on_level_change = true,
 	no_remove = true,
 	parameters = { },
 	activate = function(self, eff)
@@ -3973,5 +3975,37 @@ newEffect{
 		if eff.dur <= 0 or eff.src.dead then
 			self:removeEffect(eff.src.EFF_FED_UPON, false, true)
 		end
+	end,
+}
+
+newEffect{
+	name = "OMNIVISION", image = "talents/track.png",
+	desc = "Sensing Everything",
+	long_desc = function(self, eff) return "Improves senses, allowing the detection of everything." end,
+	type = "other",
+	subtype = { sense=true },
+	status = "beneficial",
+	parameters = { range=10,},
+	activate = function(self, eff)
+		self:effectTemporaryValue(eff, "omnivision", eff.range)
+		game.level.map.changed = true
+	end,
+	deactivate = function(self, eff)
+
+	end,
+}
+
+newEffect{
+	name = "DOZING", image = "talents/sleep.png",
+	desc = "Dozing",
+	long_desc = function(self, eff) return "The target is completely asleep, unable to act." end,
+	type = "other",
+	subtype = { sleep=true },
+	status = "detrimental",
+	parameters = { },
+	activate = function(self, eff)
+		self:effectTemporaryValue(eff, "dont_act", 1)
+	end,
+	deactivate = function(self, eff)
 	end,
 }

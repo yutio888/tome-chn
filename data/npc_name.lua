@@ -77,6 +77,12 @@ function npcCHN:getNameOld(name)
 		end
 	elseif name:find("shade of ") and npcNameCHN[name:gsub("shade of ","")] then 
 		name = npcNameCHN[name:gsub("shade of ","")] .. "之影"
+	elseif name:find("Poltergeist ") then
+		name = name:gsub("Poltergeist ", "作祟的")
+	elseif name:find("Animated ") then
+		name = name:gsub("Animated ", "活化的")
+	elseif name:find("Moving ") then
+		name = name:gsub("Moving ", "活动的")
 	end
 
 	return name

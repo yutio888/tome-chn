@@ -2312,7 +2312,11 @@ function _M:createRandomBoss(base, data)
 		name = ngd:generate()
 	end
 	if data.name_scheme then
-		b.name = data.name_scheme:gsub("#rng#", name):gsub("#base#", b.name)
+		local name_scheme = data.name_scheme
+		if randomboss_name_scheme[name_scheme] then
+			name_scheme = randomboss_name_scheme[name_scheme]
+		end
+		b.name = name_scheme:gsub("#rng#", name):gsub("#base#", b.name)
 	else
 		b.name = b.name.." : "..name
 	end
@@ -2690,7 +2694,11 @@ function _M:createRandomBossNew(base, data)
 		name = ngd:generate()
 	end
 	if data.name_scheme then
-		b.name = data.name_scheme:gsub("#rng#", name):gsub("#base#", b.name)
+		local name_scheme = data.name_scheme
+		if randomboss_name_scheme[name_scheme] then
+			name_scheme = randomboss_name_scheme[name_scheme]
+		end
+		b.name = name_scheme:gsub("#rng#", name):gsub("#base#", b.name)
 	else
 		b.name = name.." the "..b.name
 	end

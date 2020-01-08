@@ -43,7 +43,7 @@ registerTalentTranslation{
 		震荡榴弹：造成闪电伤害，震撼目标 %d 回合，使目标震慑和定身抗性减半。
 		另外，你的炮台被摧毁的时候会引发爆炸，对半径 3 码内的敌人造成 %0.2f 物理伤害。
 		你只能同时激活一种榴弹类型。]]):
-		format(ipower, cpower, spower)
+		format(ipower, cpower, spower, tpower)
 	end,
 }
 

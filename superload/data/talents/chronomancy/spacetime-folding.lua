@@ -52,14 +52,14 @@ registerTalentTranslation{
 
 registerTalentTranslation{
 	id = "T_SPATIAL_TETHER",
-	name = "时空束缚",
+	name = "时空系绳",
 	info = function(self, t)
 		local duration = t.getDuration(self, t)
 		local chance = t.getChance(self, t)
 		local damage = t.getDamage(self, t)/2
 		local radius = self:getTalentRadius(t)
-		return ([[将目标束缚于某处 %d 回合。
-		每回合，目标每离开该处 1 格，便有 %d%% 几率传送回去，并在传送点周围造成 %0.2f 物理 %0.2f 时空伤害的 %d 半径的爆炸。
+		return ([[将目标系于某处 %d 回合。
+		每回合，目标每离开该处 1 格，便有 %d%% 几率传送回去，并在传送点周围造成 %0.2f 物理 %0.2f 时空伤害的 %d 半径的大爆炸。
 		伤害受法术强度加成。]])
 		:format(duration, chance, damDesc(self, DamageType.PHYSICAL, damage), damDesc(self, DamageType.TEMPORAL, damage), radius)
 	end,
@@ -71,7 +71,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local range = t.getTeleport(self, t)
 		local duration = t.getDuration(self, t)
-		return ([[将半径 3 以内的敌人随机传送。
+		return ([[将半径 3 格范围内的敌人随机传送。
 		敌人将会传送至距离你 %d 至 %d 码的范围内，并被震慑、致盲、混乱或者定身 %d 回合。
 		传送几率与法术强度相关。]]):format(range / 2, range, duration)
 	end,
@@ -79,11 +79,11 @@ registerTalentTranslation{
 
 registerTalentTranslation{
 	id = "T_DIMENSIONAL_ANCHOR",
-	name = "禁传区",
+	name = "时空锚",
 	info = function(self, t)
 		local damage = t.getDamage(self, t)/2
 		local duration = t.getDuration(self, t)
-		return ([[制造一个半径 3 的禁传区，持续 %d 轮，并眩晕其中所有目标 2 回合。
+		return ([[制造一个半径 3 的时空锚，持续 %d 轮，并眩晕其中所有目标 2 回合。
 		试图传送的敌人将受到 %0.2f 物理 %0.2f 时空伤害。
 		伤害受法术强度加成。]]):format(duration, damDesc(self, DamageType.PHYSICAL, damage), damDesc(self, DamageType.TEMPORAL, damage))
 	end,

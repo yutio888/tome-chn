@@ -30,7 +30,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local dur = t.getDuration(self,t)
 		return ([[你在时间中凝固 %d 回合，无法行动但也无法被伤害。
-		正面效果持续时间和技能 CD 会正常扣减，负面效果持续时间不变。]]):format(dur)
+		正面效果持续时间和技能冷却时间会正常扣减，负面效果持续时间不变。]]):format(dur)
 	end,
 }
 

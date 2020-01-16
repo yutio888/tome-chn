@@ -108,7 +108,7 @@ registerTalentTranslation{
 		local critreduce = t.getCriticalChanceReduction(self, t)
 		local dir = self:getTalentLevelRaw(t) >= 3 and "In" or "De"
 		return ([[傀儡学会重新组装重甲和板甲，以便更加适用于傀儡。 
-		当装备重甲或板甲时， %s 增加护甲强度 %d 点 , 护甲韧性 %d%% ，并且减少 %d%% 暴击伤害。]]):
+		当装备重甲或板甲时， %s 增加护甲强度 %d 点 , 护甲韧性 %d%% ，并且减少 %d%% 被暴击几率。]]):
 		format(dir, armor, hardiness, critreduce)
 	end,
 }

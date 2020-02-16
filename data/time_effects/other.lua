@@ -1032,7 +1032,7 @@ timeEffectCHN:newEffect{
 		end
 
 		local subtypes_list = table.get(self, "mark_prey2", game.level.id)
-		for st, _ in pairs(subtypes_list) do
+		for st, _ in pairs(subtypes_list or {}) do
 			desc2 = desc2..("\n- #ffa0ff#%s#LAST#"):format(tostring(st):capitalize())
 		end
 

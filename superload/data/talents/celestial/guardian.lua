@@ -51,7 +51,7 @@ registerTalentTranslation{
 		local cooldown = t.getCooldownReduction(self, t)
 		local cleanse = t.getDebuff(self, t)
 		return ([[你用武器攻击造成 %d%% 光系伤害，再用盾牌攻击造成 %d%% 光系伤害。
-			如果第一次攻击命中，随机 %d 个技能冷却时间减 1 。
+			如果第一次攻击命中，随机 %d 个技能 cd 时间减 1 。
 			如果第二次攻击命中，除去你身上至多 %d 个 debuff。]]):
 		format(weapon, shield, cooldown, cleanse)
 	end,

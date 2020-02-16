@@ -588,7 +588,7 @@ timeEffectCHN:newEffect{
 timeEffectCHN:newEffect{
 	id = "SPIN_FATE",
 	enName = "Spin Fate",
-	chName = "命运编织",
+	chName = "命运之网",
 	type = "魔法",
 	subtype = "时空",
 }
@@ -1002,14 +1002,14 @@ timeEffectCHN:newEffect{
 timeEffectCHN:newEffect{
 	id = "DET_TETHER",
 	enName = "Spatial Tether",
-	chName = "时空系绳",
+	chName = "时空锁链",
 	type = "魔法",
 	subtype = "传送/时空",
 }
 timeEffectCHN:newEffect{
 	id = "BEN_TETHER",
 	enName = "Spatial Tether",
-	chName = "时空系绳",
+	chName = "时空锁链",
 	type = "魔法",
 	subtype = "传送/时空",
 }
@@ -1107,7 +1107,7 @@ timeEffectCHN:newEffect{
 timeEffectCHN:newEffect{
 	id = "DIMENSIONAL_ANCHOR",
 	enName = "Dimensional Anchor",
-	chName = "时空锚",
+	chName = "禁止传送",
 	type = "魔法",
 	subtype = "时空",
 }

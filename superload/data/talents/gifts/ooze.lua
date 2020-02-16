@@ -46,7 +46,7 @@ registerTalentTranslation{
 	name = "奇异骨骼",
 	info = function(self, t)
 		return ([[ 你身体里的内脏全都融化在一起，隐藏了你的要害部位。 
-		你有 %d%% 几率摆脱暴击伤害。
+		你有 %d%% 几率摆脱任何（物理，精神，法术）暴击。
 		你将额外获得 %d%% 的疾病、毒素、切割和目盲免疫。]]):
 		format(t.critResist(self, t), 100*t.immunities(self, t))
 	end,

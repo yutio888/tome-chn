@@ -33,7 +33,7 @@ registerTalentTranslation{
 	info = function(self, t)
 		local damage = t.getShieldDamage(self, t)*100
 		return ([[用盾牌拍击目标 3 次，造成 %d%% 武器伤害，然后迅速进入格挡状态。
-		该格挡不占用盾牌的格挡技能冷却时间。]])
+		该格挡不占用盾牌的格挡技能 CD。]])
 		:format(damage)
 	end,
 }

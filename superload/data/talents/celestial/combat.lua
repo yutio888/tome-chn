@@ -33,7 +33,7 @@ registerTalentTranslation{
 		local martyr = t.getMartyrDamage(self, t)
 		local damagepct = t.getLifeDamage(self, t)
 		local damage = t.getDamage(self, t)
-		return ([[你使用武器攻击时，造成相当于 %d%% 你已损失的生命值的火焰伤害，至多 %d 点，当前 %d 点。
+		return ([[你使用武器攻击时，造成相当于 %d%% 你已损失的生命值的火焰伤害 , 至多 %d 点,当前 %d 点 
 		然后令目标进入殉难状态，受到 %d%% 自己造成的伤害，持续 4 回合。
 		每回合最多触发一次额外伤害。]]):
 		format(damagepct*100, t.getMaxDamage(self, t, 10, 400), damage, martyr)
@@ -44,7 +44,7 @@ registerTalentTranslation{
 	id = "T_SECOND_LIFE",
 	name = "第二生命",
 	info = function(self, t)
-		return ([[任何使你生命值降到 1 点以下的攻击都会激活第二生命，自动中断此技能并将你的生命值设置到 1 点，然后受到 %d 点治疗。]]):
+		return ([[任何使你生命值降到 1 点以下的攻击都会激活第二生命，自动中断此技能并将你的生命值恢复到 1 点,然后受到 %d 点治疗。]]):
 		format(t.getLife(self, t))
 	end,
 }

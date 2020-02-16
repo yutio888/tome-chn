@@ -41,7 +41,7 @@ registerTalentTranslation{
 		local inc = t.getIncrease(self, t)
 		local talentcount = t.getTalentCount(self, t)
 		local maxlevel = t.getMaxLevel(self, t)
-		return ([[你开启全部插件的超频模式，清除最多 %d 个蒸汽科技技能（ %d 层级或以下）的冷却时间 ，直接恢复 %d%% 蒸汽值。
+		return ([[你开启全部插件的超频模式，清除最多 % d 个蒸汽科技技能（ %d 层级或以下）的 CD ，直接恢复 %d%% 蒸汽值。
 		在 6 回合内，蒸汽值最大值翻倍，但是恢复值减半。
 		#{italic}#科技至尊、死亡之主！！#{normal}#]]):
 		format(talentcount, maxlevel, inc)

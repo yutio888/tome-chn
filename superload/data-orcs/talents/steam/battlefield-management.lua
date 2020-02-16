@@ -43,7 +43,7 @@ registerTalentTranslation{
 		return ([[你是一名坚毅的老兵，经历了大量战争仍然能够幸存，有着丰富的战斗经验。
 		链锯轮滑的伤害增加 %d%% 。
 		利齿护盾让你超越生存下限，在 -%d 的生命下仍然生存。
-		惩戒有 %d%% 的概率触发：对象每具备一个效果，就降低惩戒 1 回合冷却时间。
+		惩戒有 %d%% 的概率触发：对象每具备一个效果，就降低惩戒 1 回合 CD。
 		#{italic}#一切尽在掌控！！#{normal}#]]):
 		format(t.getSawwheelDamage(self, t), t.getLife(self, t), t.getChance(self, t))
 	end,}

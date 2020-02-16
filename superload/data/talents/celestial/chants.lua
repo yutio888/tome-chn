@@ -97,7 +97,7 @@ registerTalentTranslation{
 	name = "赞歌专家",
 	info = function (self,t)
 		return ([[咏唱赞歌的娴熟技艺让光明得以扩散，增加 %d 光照半径。
-		每次你咏唱新的赞歌时，你将解除自身的失去平衡、法术冲击以及锁脑效果，并额外解除 %d 项相应类型的负面状态。
+		每次你咏唱新的赞歌时，你将解除自身所有 CT 效果，并解除 %d 项相应类型的负面状态。
 		坚韧赞歌：解除精神负面状态 
 		堡垒赞歌：解除物理负面状态 
 		元素赞歌：解除魔法负面状态 ]]):format(t.getBonusLight(self, t), t.getDebuffCures(self, t))

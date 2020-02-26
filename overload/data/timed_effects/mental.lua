@@ -233,6 +233,7 @@ newEffect{
 		self.faction = eff.src.faction
 		self:effectTemporaryValue(eff, "never_anger", 1)
 		self:effectTemporaryValue(eff, "invulnerable", 1)
+		self:effectTemporaryValue(eff, "hostile_for_level_change", 1)
 	end,
 	deactivate = function(self, eff)
 		if eff.particle then self:removeParticles(eff.particle) end
@@ -1626,6 +1627,11 @@ newEffect{
 	parameters = {chance=0},
 	on_gain = function(self, err) return "#F53CBE##Target# is plagued by inner demons!", "+Inner Demons" end,
 	on_lose = function(self, err) return "#Target# is freed from the demons.", "-Inner Demons" end,
+	activate = function(self, eff)
+		if core.shader.active() then
+			self:effectParticles(eff, {type="shader_shield", args={size_factor=1.5, img="inner_demons_tentacle_shader"}, shader={type="tentacles", wobblingType=0, appearTime=0.8, time_factor=2000, noup=0.0}})
+		end
+	end,
 	on_timeout = function(self, eff)
 		if eff.src.dead or not game.level:hasEntity(eff.src) then eff.dur = 0 return true end
 		local t = eff.src:getTalentFromId(eff.src.T_INNER_DEMONS)

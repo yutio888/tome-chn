@@ -49,9 +49,12 @@ registerTalentTranslation{
 		local damage = t.getDamage(self, t)*100
 		local duration = t.getDuration(self, t)
 		local block = t.getBlock(self,t)
-		return ([[从你的盾牌中发射出一个半径为 3 的电网，持续 %d 回合。所有被电网覆盖的敌人将会每回合受到一次自动的盾牌攻击，造成 %d 闪电伤害。而被覆盖的队友会获得相当于 %d%% 格挡值的直接伤害减免。
+		local base = self:combatShieldBlock()
+		local block2 = 0
+		if base then block2 = base * t.getBlock(self,t)/100 end
+		return ([[从你的盾牌中发射出一个半径为 3 的电网，持续 %d 回合。所有被电网覆盖的敌人将会每回合受到一次自动的盾牌攻击，造成 %d 闪电伤害。而被覆盖的队友会获得相当于 %d%% 格挡值(%d)的直接伤害减免。
 		所有被这一效果减免的伤害会被计入电力放出技能所存储的伤害。]]):
-		format(duration, damage, block)
+		format(duration, damage, block, block2)
 	end,
 }
 

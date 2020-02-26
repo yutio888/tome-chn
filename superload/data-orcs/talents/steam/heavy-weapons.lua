@@ -108,7 +108,7 @@ registerTalentTranslation{
 		-- local arad = t.getAcidRadius(self,t)
 		return ([[你通过特殊训练解锁了新的的重装武器战技。你现在可以消耗 1 重装武器弹药，根据你现在装备的重装武器类型，触发以下的效果。
 #AQUAMARINE#喷火器#LAST#: 用喷火器扫射地面，造成 %d%% 火焰蒸汽枪伤害，并产生一道长度为 7 的火墙，持续 5 回合。在火墙内的敌人会受到 %0.2f 的火焰伤害，且它们的火焰伤害抗性会降低 %d%% ，持续 2 回合。
-#AQUAMARINE#电击棒#LAST#: 用电棒猛击目标，在 3 码范围内产生冲击波，造成 %d%% 闪电蒸汽枪伤害，并震慑敌人 %d 回合。
+#AQUAMARINE#电击棒#LAST#: 用电棒猛击目标，在 3 码范围内产生冲击波，造成 %d%% 闪电电击棒伤害，并震慑敌人 %d 回合。
 #AQUAMARINE#爆矢枪#LAST#: 发射 %d 枚爆炸弹药，造成 %d%% 酸性武器伤害，并缴械敌人 5 回合。
 火墙造成的伤害，以及造成异常状态的几率，受蒸汽强度加成。]])
 		:format(ftdam, fdam, fresist, sdam, sdur, bcount, bdam)

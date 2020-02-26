@@ -37,7 +37,7 @@ function _M:init(actor)
 
 	self:generateList()
 	if self.dont_show then return end
-	if not config.settings.cheat then game:saveGame() end
+	if not config.settings.cheat then game:onTickEnd(function() game:saveGame() end) end
 
 	local text = [[你已经 #LIGHT_RED# 死亡 #LAST#!
 在 ToME 里死亡是永久的，但是如果你有某种复活的方法它会在菜单上显示出来...
@@ -189,7 +189,7 @@ function _M:eidolonPlane()
 
 		game.log("#LIGHT_RED#在死亡的边缘，你被拉入了另一个位面。")
 		game.player:updateMainShader()
-		if not config.settings.cheat then game:saveGame() end
+		if not config.settings.cheat then game:onTickEnd(function() game:saveGame() end) end
 
 		self.actor:checkTwoHandedPenalty()
 	end)

@@ -18,7 +18,7 @@ registerTalentTranslation{
 	name = "虚空护甲",
 	info = function(self, t)
 		local armor = t.getArmor(self, t)
-		local power = t.getAbsorb(self, t)
+		local power = t.getAbsorb(self, t) * (100 + (self:attr("shield_factor") or 0)) / 100
 		return ([[用无数微小的虚无之星强化护甲，护甲值提高 %d .
 		每次虚无之星完全消耗后，生成一个持续 4 回合吸收 %d 伤害的护盾。在虚无之星完全恢复前无法再次生成护盾。]]):
 		format(armor, power)

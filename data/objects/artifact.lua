@@ -397,7 +397,10 @@ registerArtifactTranslation{
 	display_name = "时光扭曲之刃",
 	unided_name = "扭曲时间的剑",
 	desc = "这把剑由一段损坏的时间线构成，它在不断的出入相位现实。",
-	["combat.special_on_hit.desc"] = "造成额外时空伤害并减速目标 ",
+	["combat.special_on_hit.desc"] = function(self, who, special)
+		local dam, slow = special.proc_values(who)
+		return ("造成%d时空伤害，并减速范围6码内的敌人%d%%（基于魔法）"):format(dam, slow*100)
+	end,
 }
 
 registerArtifactTranslation{

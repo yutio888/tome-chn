@@ -37,9 +37,9 @@ registerTalentTranslation{
 	id = "T_HEALING_INVERSION",
 	name = "治疗逆转",
 	info = function(self, t)
-		return ([[你操控目标的活力，临时将所有治疗转化为伤害。 
+		return ([[你操控%d码范围内所有敌人的活力，临时将所有治疗转化为伤害。（生命值自然回复除外）	
 		5 回合内目标受到的所有治疗将变成 %d%% 治疗量的枯萎伤害。
-		效果受法术强度加成。]]):format(t.getPower(self,t))
+		效果受法术强度加成。]]):format(self:getTalentRadius(t), t.getPower(self,t))
 	end,
 }
 
@@ -47,10 +47,10 @@ registerTalentTranslation{
 	id = "T_VILE_TRANSPLANT",
 	name = "邪恶移植",
 	info = function(self, t)
-		return ([[你将至多 %d 个物理与魔法负面状态转移给附近的一个生物。
-		每转移一个负面状态，你将失去 %0.1f%% 剩余生命值，该生物将受到等量治疗。
+		return ([[你将至多 %d 个物理与魔法负面状态转移给附近的一个生物，每转移一个消耗%d活力值。
+		状态免疫不会阻止转移。
 		转移成功率受法术强度影响。]]):
-		format(t.getNb(self, t), t.getDam(self, t))
+		format(t.getNb(self, t), t.getVim(self, t))
 	end,
 }
 

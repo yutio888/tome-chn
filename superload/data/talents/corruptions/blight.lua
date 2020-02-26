@@ -14,9 +14,9 @@ registerTalentTranslation{
 	id = "T_CORRUPTED_NEGATION",
 	name = "能量腐蚀",
 	info = function(self, t)
-		return ([[在 3 码球形范围内制造一个堕落能量球，造成 %0.2f 枯萎伤害并移除范围内任意怪物至多 %d 种魔法或物理效果或持续技能。 
+		return ([[在 3 码球形范围内制造一个堕落能量球，移除范围内任意怪物至多 %d 种魔法或物理效果或持续技能，并造成 %0.2f 枯萎伤害。 
 		每除去一个效果时，基于法术豁免，目标都有一定概率抵抗。 
-		受法术强度影响，伤害有额外加成。]]):format(damDesc(self, DamageType.BLIGHT, self:combatTalentSpellDamage(t, 28, 120)), t.getRemoveCount(self, t))
+		受法术强度影响，伤害有额外加成。]]):format(t.getRemoveCount(self, t), damDesc(self, DamageType.BLIGHT, self:combatTalentSpellDamage(t, 28, 120)))
 	end,
 }
 

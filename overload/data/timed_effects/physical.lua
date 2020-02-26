@@ -1101,7 +1101,7 @@ newEffect{
 	desc = "Cripple",
 	long_desc = function(self, eff) return ("目标被致残，降低 %d%% 近战、施法和精神速度。"):format(eff.speed*100) end,
 	type = "physical",
-	subtype = { wound=true, cripple=true },
+	subtype = { wound=true, cripple=true, slow=true },
 	status = "detrimental",
 	parameters = { speed=0.3 },
 	on_gain = function(self, err) return "#Target# is crippled." end,

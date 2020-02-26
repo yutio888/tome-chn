@@ -3,7 +3,7 @@ registerTalentTranslation{
 	id = "T_SHED_SKIN",
 	name = "蜕皮",
 	info = function(self, t)
-		return ([[你蜕去表层变异皮肤，同时增加它的强度，令其在 7 回合内吸收 %d 伤害。]]):format(t.getAbsorb(self, t))
+		return ([[你蜕去表层变异皮肤，同时增加它的强度，令其在 7 回合内吸收 %d 伤害。]]):format(t.getAbsorb(self, t) * (100 + (self:attr("shield_factor") or 0)) / 100)
 	end,
 }
 

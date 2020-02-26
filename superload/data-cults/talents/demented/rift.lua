@@ -20,7 +20,7 @@ registerTalentTranslation{
 	name = "量子隧道",
 	info = function(self, t)
 		local range = self:getTalentRange(t)
-		local power = t.getPower(self,t)
+		local power = t.getPower(self,t) * (100 + (self:attr("shield_factor") or 0)) / 100
 		return ([[你短暂地在时空中打开一个通道 , 传送到范围 %d 内的一个虚空裂口。这将摧毁那个虚空裂口，使你获得一个护盾，吸收 %d 点伤害，持续 4 回合。
 		护盾吸收的伤害随法术强度提高而提高。]]):
 		format(range, power)

@@ -1259,6 +1259,7 @@ newEffect{
 		eff.defid = self:addTemporaryValue("combat_def", eff.def)
 		eff.armid = self:addTemporaryValue("combat_armor", eff.armor)
 		self:effectTemporaryValue(eff, "no_breath", 1)
+		self:effectTemporaryValue(eff, "ai_spread_add", 10)  -- Reduce accuracy of AI position guesses so we don't track straight to players that moved out of LOS
 		if not self.shader then
 			eff.set_shader = true
 			self.shader = "moving_transparency"
@@ -2527,9 +2528,9 @@ newEffect{
 		eff.particle = self:addParticles(Particles.new("phantasm_shield", 1))
 	end,
 	on_merge = function(self, old_eff, new_eff)
-		old_eff.defense = math.min(40, math.max(old_eff.defense, new_eff.defense)) or 0
-		old_eff.resists = math.min(40, math.max(old_eff.resists, new_eff.resists)) or 0
-		old_eff.effect_reduction = math.min(40, math.max(old_eff.effect_reduction, new_eff.effect_reduction)) or 0
+		old_eff.defense = math.min(40, math.max(old_eff.defense, new_eff.defense + (self:attr("defense_on_teleport") or 0)))
+		old_eff.resists = math.min(40, math.max(old_eff.resists, new_eff.resists + (self:attr("resist_all_on_teleport") or 0)))
+		old_eff.effect_reduction = math.min(40, math.max(old_eff.effect_reduction, new_eff.effect_reduction + (self:attr("effect_reduction_on_teleport") or 0)))
 
 		self:removeTemporaryValue("combat_def", old_eff.defid)
 		self:removeTemporaryValue("resists", old_eff.resid)
@@ -4438,6 +4439,7 @@ newEffect{
 		self:setTarget() -- clear ai target
 		eff.olf_faction = self.faction
 		self.faction = eff.src.faction
+		self:effectTemporaryValue(eff, "hostile_for_level_change", 1)
 		if core.shader.active() then
 			local h1x, h1y = self:attachementSpot("head", true) if h1x then eff.particle = self:addParticles(Particles.new("circle", 1, {shader=true, oversize=1, a=225, appear=8, speed=0, img="domination_hex_debuff_aura", base_rot=0, radius=0, x=h1x, y=h1y})) end
 		end

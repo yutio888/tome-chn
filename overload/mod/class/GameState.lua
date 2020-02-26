@@ -3129,11 +3129,15 @@ function _M:dynamicZoneEntry(g, id, zone_def, zone_lists, zone_alter)
 		def.__embed_lists_def = self.dynamic_zone.lists
 		if self.dynamic_zone.alter then
 			def.__alter_back_def = {short_name=game.zone.short_name, name=game.zone.name}
-			def.__alter_back_fct = function(backdef, name, base_terrain)
-				base_terrain.change_level_shift_back = true
-				base_terrain.change_zone_auto_stairs = true
-				base_terrain.name = name:format(backdef.name)
-				base_terrain.change_zone = backdef.short_name
+			def.__alter_back_fct = function(zone, backdef, name, base_terrain)
+				local terrain = base_terrain:cloneFull()
+				terrain.change_level_shift_back = true
+				terrain.change_zone_auto_stairs = true
+				terrain.name = name:format(backdef.name)
+				terrain.change_zone = backdef.short_name
+				terrain.define_as = "DYNAMIC_ZONE_EXIT"
+				terrain:altered()
+				zone.grid_list.DYNAMIC_ZONE_EXIT = terrain
 			end
 			def.__alter_back_custom = self.dynamic_zone.alter
 		end
@@ -3159,7 +3163,7 @@ function _M:dynamicZoneEntry(g, id, zone_def, zone_lists, zone_alter)
 
 			-- Alter whatever we need. Most likely the exit, so we provide an easy function for that
 			if zone.__alter_back_fct then
-				zone.__alter_back_custom(zone, function(name, base_terrain) zone.__alter_back_fct(zone.__alter_back_def, name, base_terrain) end)
+				zone.__alter_back_custom(zone, function(name, base_terrain) zone:__alter_back_fct(zone.__alter_back_def, name, base_terrain) end)
 			end
 		end
 		return mod.class.Zone.new(self.dynamic_zone.id, def)

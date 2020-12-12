@@ -1,7 +1,0 @@
-关于#Target#\#Source#的汉化：
-状态效果的log显示是ActorTemporaryEffext中的setEffect()函数采用直接将#Target#替换为人物名称的方法
-通过mod\class\Game.lua里的logseen()函数进而调用logDisplay.lua中的call()主函数来显示的，因此可以换掉#Target#，也可以不换。
-
-其他log显示大部分是通过调用Game.lua里的logMessage()函数生成一个string再利用logDisplay()来显示，因此汉化时请保留#Target##Source#。
-
-1.6b1加入颜色代码后Talent的message翻译作废，改为superload里翻译，其他情况在mod/class/Actor里处理。部分特殊情况考虑在data/messages里处理

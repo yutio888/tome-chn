@@ -20,10 +20,10 @@
 long_name = "CHN Addons for ToME"
 short_name = "chn123"
 for_module = "tome"
-version = {1,6,7}
-addon_version = {1,2,6}
+version = {1,7,2}
+addon_version = {1,2,7}
 tags = {'Chinese','translation'}
-weight = 15
+weight = 1
 author = { "Grammier&Marblezls&Yutio888&starsapphire", "Grammier@3DMGAME","Marblezls@3DMGAME","yutio888@mail.qq.com"}
 homepage = "http://tome.te4.org/"
 description = [[The chinese translation addon of tome4.
@@ -39,7 +39,5 @@ Original publication notes from 3DMGAME:
 测试： Tome4讨论群的诸位网友
 特别感谢： 乐♂神,feihuxia,wenxiao,nosoul,kinodar
 ]]
-overload = true
 superload = true
 data = true
-hooks = true
